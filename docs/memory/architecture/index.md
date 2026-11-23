@@ -11,4 +11,4 @@ description: "Two-half local Python pipeline and read-only Next.js web applicati
 
 | File | Description |
 |------|-------------|
-| [overview](overview.md) | Two-half local Python pipeline and read-only Next.js web application architecture, repository layout, open-data governance, CLI contract, and Rules R1–R9. |
+| [overview](overview.md) | Two-half local Python pipeline and read-only Next.js dg2n web application architecture, repository layout, open-data governance, CLI contract, Rules R1–R14, multi-layer geospatial pipeline, and Release 1.0.0. |
