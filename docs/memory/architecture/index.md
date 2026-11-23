@@ -11,4 +11,4 @@ description: "Two-half local Python pipeline and read-only Next.js web applicati
 
 | File | Description |
 |------|-------------|
-| [overview](overview.md) | Two-half local Python pipeline and read-only Next.js web application architecture, repository layout, mandatory --jurisdiction CLI contract, and Rules R1–R6. |
+| [overview](overview.md) | Two-half local Python pipeline and read-only Next.js web application architecture, repository layout, open-data governance, CLI contract, and Rules R1–R9. |

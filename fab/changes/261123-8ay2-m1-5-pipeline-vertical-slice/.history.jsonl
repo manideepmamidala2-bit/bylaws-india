@@ -8,3 +8,5 @@
 {"cmd":"fab-continue","event":"command","ts":"2026-11-23T16:05:46Z"}
 {"action":"enter","driver":"fab-continue","event":"stage-transition","stage":"hydrate","ts":"2026-11-23T16:09:21Z"}
 {"event":"review","result":"passed","ts":"2026-11-23T16:09:21Z"}
+{"cmd":"fab-continue","event":"command","ts":"2026-11-23T16:09:50Z"}
+{"action":"enter","driver":"fab-continue","event":"stage-transition","stage":"ship","ts":"2026-11-23T16:15:22Z"}
