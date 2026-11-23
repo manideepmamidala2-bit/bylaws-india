@@ -1,5 +1,5 @@
 import React from "react";
-import type { ClauseNode } from "@/lib/data";
+import type { ClauseNode, DisplayLegalStatus } from "@/lib/data";
 import { StatusBadge } from "./StatusBadge";
 
 interface ClausePanelProps {
@@ -46,17 +46,30 @@ export function ClausePanel({
           </p>
         ) : (
           visibleClauses.map((clause) => {
-            const firstPage = clause.pages[0] ?? 1;
-            const status = clause.legal_status ?? "in_force";
+            const status: DisplayLegalStatus = clause.superseded_by
+              ? "superseded"
+              : (clause.legal_status ?? "status_unknown");
+            const validPages = Array.from(
+              new Set(
+                (clause.citations ?? [])
+                  .map((citation) => citation.page)
+                  .filter(
+                    (page): page is number =>
+                      typeof page === "number" && Number.isInteger(page) && page >= 1
+                  )
+              )
+            );
+            const firstPage = validPages[0] ?? null;
+
             return (
               <article
-                key={clause.clause_id}
+                key={clause.record_id ?? clause.clause_id}
                 className="rounded border border-slate-200 p-3 text-sm"
               >
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <span className="font-mono font-semibold text-slate-900">
                     Clause {clause.number}
-                    {clause.title ? ` — ${clause.title}` : ""}
+                    {clause.title ? `: ${clause.title}` : ""}
                   </span>
                   <StatusBadge status={status} />
                 </div>
@@ -64,16 +77,22 @@ export function ClausePanel({
                   {clause.text}
                 </p>
                 <div className="mt-2 flex items-center justify-between text-xs text-slate-500">
-                  <span>Pages: {clause.pages.join(", ")}</span>
-                  {clause.source_url && (
-                    <a
-                      href={`${clause.source_url}#page=${firstPage}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-medium text-blue-700 underline"
-                    >
-                      View source (p. {firstPage})
-                    </a>
+                  {firstPage === null ? (
+                    <span>No source page recorded</span>
+                  ) : (
+                    <>
+                      <span>Pages: {validPages.join(", ")}</span>
+                      {clause.source_url && (
+                        <a
+                          href={`${clause.source_url}#page=${firstPage}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-medium text-blue-700 underline"
+                        >
+                          View source (p. {firstPage})
+                        </a>
+                      )}
+                    </>
                   )}
                 </div>
               </article>

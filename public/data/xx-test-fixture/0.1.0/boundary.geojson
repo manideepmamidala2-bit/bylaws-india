@@ -1,0 +1,39 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Synthetic District One",
+        "district_code": "FIX-01"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              10.0,
+              10.0
+            ],
+            [
+              10.02,
+              10.0
+            ],
+            [
+              10.02,
+              10.02
+            ],
+            [
+              10.0,
+              10.02
+            ],
+            [
+              10.0,
+              10.0
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

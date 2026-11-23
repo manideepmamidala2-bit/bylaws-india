@@ -45,12 +45,12 @@ export function ReviewPanel({ zones }: ReviewPanelProps) {
         ) : (
           zones.map((zone) => (
             <div
-              key={zone.properties.zone_id}
+              key={zone.properties.record_id ?? zone.properties.zone_id}
               className="flex items-center justify-between py-2"
             >
               <span>
                 <strong className="font-mono">{zone.properties.zone_code}</strong>{" "}
-                ({zone.properties.zone_id}) — {zone.properties.zone_label}
+                ({zone.properties.zone_id}): {zone.properties.zone_label}
               </span>
               <span className="rounded bg-slate-100 px-2 py-0.5 text-xs">
                 {zone.properties.verification}

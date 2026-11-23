@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bylaws-india.local/schemas/jurisdiction.schema.json",
   "title": "JurisdictionConfig",
-  "description": "Configuration contract for a jurisdiction in jurisdictions/<id>.yaml (Phase 1 Plan §7.1).",
+  "description": "Configuration contract for a jurisdiction in jurisdictions/<id>.yaml (Schema v1.1).",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -18,12 +18,20 @@
   "properties": {
     "id": {
       "type": "string",
-      "pattern": "^(_fixture-test|[a-z0-9]+(-[a-z0-9]+)*)$",
-      "description": "Lowercase hyphenated hierarchical jurisdiction ID (or _fixture-test for synthetic tests)."
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Lowercase hyphenated hierarchical jurisdiction ID (e.g. xx-test-fixture)."
     },
     "name": {
       "type": "string",
       "minLength": 1
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Optional alternative display or search names for the jurisdiction."
     },
     "country": {
       "type": "string",
@@ -48,8 +56,23 @@
       "type": "array",
       "items": {
         "type": "string",
-        "pattern": "^(_fixture-test|[a-z0-9]+(-[a-z0-9]+)*)$"
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
       }
+    },
+    "not_modelled": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Regulatory domains or layers intentionally excluded from this jurisdiction dataset."
+    },
+    "unread_documents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/unreadDocumentConfig"
+      },
+      "description": "Known documents or circulars not yet ingested in this release."
     },
     "documents": {
       "type": "array",
@@ -60,6 +83,7 @@
     },
     "maps": {
       "type": "object",
+      "title": "MapsConfig",
       "additionalProperties": false,
       "required": ["boundaries", "zoning"],
       "properties": {
@@ -79,8 +103,44 @@
     }
   },
   "$defs": {
+    "statusEvidenceConfig": {
+      "type": "object",
+      "title": "StatusEvidenceConfig",
+      "additionalProperties": false,
+      "required": ["url", "description"],
+      "properties": {
+        "url": {
+          "type": ["string", "null"]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "unreadDocumentConfig": {
+      "type": "object",
+      "title": "UnreadDocumentConfig",
+      "additionalProperties": false,
+      "required": ["title", "source_url", "reason"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
     "documentConfig": {
       "type": "object",
+      "title": "DocumentConfig",
       "additionalProperties": false,
       "required": [
         "id",
@@ -88,6 +148,8 @@
         "issuing_authority",
         "layer",
         "legal_status",
+        "status_evidence",
+        "licence_or_terms",
         "role",
         "source_url"
       ],
@@ -111,6 +173,13 @@
         "legal_status": {
           "type": "string",
           "enum": ["in_force", "draft", "superseded", "withdrawn"]
+        },
+        "status_evidence": {
+          "$ref": "#/$defs/statusEvidenceConfig"
+        },
+        "licence_or_terms": {
+          "type": "string",
+          "minLength": 1
         },
         "role": {
           "type": "string",
@@ -146,6 +215,7 @@
     },
     "boundaryMapConfig": {
       "type": "object",
+      "title": "BoundaryMapConfig",
       "additionalProperties": false,
       "required": ["id", "source_url", "select"],
       "properties": {
@@ -159,6 +229,7 @@
         },
         "select": {
           "type": "object",
+          "title": "BoundarySelectRule",
           "additionalProperties": false,
           "required": ["property", "equals"],
           "properties": {
@@ -174,11 +245,13 @@
         }
       }
     },
-    "zoningMapConfig": {
+    "tracedZoningMapConfig": {
       "type": "object",
+      "title": "TracedZoningMapConfig",
       "additionalProperties": false,
       "required": [
         "id",
+        "kind",
         "document",
         "page",
         "planning_district",
@@ -188,6 +261,10 @@
         "id": {
           "type": "string",
           "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "type": "string",
+          "const": "traced"
         },
         "document": {
           "type": "string",
@@ -205,6 +282,56 @@
           "minimum": 1
         }
       }
+    },
+    "importedZoningMapConfig": {
+      "type": "object",
+      "title": "ImportedZoningMapConfig",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "source_url",
+        "zone_code_field",
+        "zone_label_field",
+        "source_attribution"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "type": "string",
+          "const": "imported"
+        },
+        "source_url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "zone_code_field": {
+          "type": "string",
+          "minLength": 1
+        },
+        "zone_label_field": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_attribution": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "zoningMapConfig": {
+      "title": "ZoningMapConfig",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/tracedZoningMapConfig"
+        },
+        {
+          "$ref": "#/$defs/importedZoningMapConfig"
+        }
+      ]
     }
   }
 }

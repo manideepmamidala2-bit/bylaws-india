@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bylaws-india.local/schemas/declarations.schema.json",
+  "title": "JurisdictionDeclarations",
+  "description": "Self-declared coverage scope, known extraction gaps, and unread documents for a jurisdiction release (Schema v1.1).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "jurisdiction",
+    "not_modelled",
+    "known_gaps",
+    "unread_documents"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.1"
+    },
+    "jurisdiction": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "not_modelled": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "known_gaps": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/knownGap"
+      }
+    },
+    "unread_documents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/unreadDocument"
+      }
+    }
+  },
+  "$defs": {
+    "knownGap": {
+      "type": "object",
+      "title": "KnownGap",
+      "additionalProperties": false,
+      "required": ["doc_id", "description"],
+      "properties": {
+        "doc_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "unreadDocument": {
+      "type": "object",
+      "title": "UnreadDocument",
+      "additionalProperties": false,
+      "required": ["title", "source_url", "reason"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

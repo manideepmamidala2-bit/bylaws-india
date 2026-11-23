@@ -1,8 +1,8 @@
-schema_version: '1.0'
+schema_version: '1.1'
 clause_fixes:
 - clause_id: fixture-base-2020:2.1
   field: title
-  value: Residential Setbacks
+  value: Residential Setback Norms
   reason: Normalize heading punctuation
 zone_tags:
 - clause_id: fixture-base-2020:2.1

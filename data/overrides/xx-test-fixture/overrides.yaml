@@ -1,0 +1,44 @@
+schema_version: "1.1"
+clause_fixes:
+  - clause_id: fixture-base-2020:2.1
+    field: title
+    value: Residential Setback Norms
+    reason: Normalize heading title on machine_checked clause (in-place update)
+  - clause_id: fixture-base-2020:1.1
+    field: verification
+    value: human_verified
+    reason: Verified clause 1.1 text and citation against synthetic gazette page 1
+  - clause_id: fixture-base-2020:1.1
+    field: title
+    value: Short Title, Extent and Commencement
+    reason: Refine heading on human_verified clause (triggers R9 supersede @v2)
+zone_tags:
+  - clause_id: fixture-base-2020:1.1
+    zones:
+      - Z1
+      - Z2
+    reason: General residential provisions apply to Z1 and Z2
+  - clause_id: fixture-base-2020:2.1
+    zones:
+      - Z1
+      - Z2
+    reason: Setback norms explicitly reference Z1 and Z2
+  - clause_id: fixture-base-2020:2.2
+    zones:
+      - Z1
+    reason: Building height limit applies to Z1
+  - clause_id: fixture-draft-2026:D1.1
+    zones:
+      - Z2
+    reason: Draft transit overlay applies to Z2
+zone_fixes:
+  - zone_id: fixture-pd-01:z0002
+    reason: Mark imported Z2 polygon as human_verified after inspection
+    set:
+      verification: human_verified
+      notes: Verified against synthetic planning atlas.
+  - zone_id: fixture-pd-01:z0002
+    reason: Refine zone label on human_verified polygon (triggers R9 supersede @v2)
+    set:
+      zone_label: Commercial and Mixed Use
+      notes: Updated label after human verification (supersedes @v1).

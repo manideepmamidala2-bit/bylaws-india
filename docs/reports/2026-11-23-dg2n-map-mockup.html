@@ -1,0 +1,97 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f5f3ed;--paper2:#efeee8;--ink:#080909;--ink2:#171917;--muted:#5b5e56;--muted2:#959b90;--rule:#c8ccc0;--rule2:#e5e6de;--accent:#ff6b52;
+--display:'Inter Tight',sans-serif;--serif:'Source Serif 4',serif;--mono:'JetBrains Mono',monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--display);width:1280px;height:800px;overflow:hidden}
+.mono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.15em;font-size:10.5px;color:var(--muted)}
+.top{display:flex;justify-content:space-between;align-items:center;height:44px;padding:0 28px;border-bottom:1px solid var(--ink)}
+.top .brand{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink)}
+.top nav{display:flex;gap:26px}
+.top nav span.on{color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:2px}
+.strip{height:28px;display:flex;align-items:center;gap:10px;padding:0 28px;border-bottom:1px solid var(--rule)}
+.strip i{width:6px;height:6px;background:var(--accent);border-radius:50%;display:inline-block}
+.main{display:grid;grid-template-columns:1fr 440px;height:728px}
+.left{border-right:1px solid var(--ink);display:flex;flex-direction:column}
+.head{padding:22px 28px 16px;border-bottom:1px solid var(--rule)}
+.head h1{font-size:40px;font-weight:600;letter-spacing:-.05em;line-height:1}
+.head .meta{display:flex;gap:28px;margin-top:12px}
+.head .meta b{color:var(--ink);font-weight:500}
+.map{flex:1;position:relative;background:var(--paper2)}
+.map svg{position:absolute;inset:0;width:100%;height:100%}
+.legend{position:absolute;left:20px;bottom:20px;background:var(--paper);border:1px solid var(--ink);padding:12px 14px;width:290px}
+.legend div{display:flex;align-items:center;gap:10px;margin-top:7px;font-size:12.5px}
+.legend s{width:14px;height:14px;border:1px solid var(--ink);display:inline-block}
+.legend .code{font-family:var(--mono);font-size:11px;width:22px}
+.ctl{position:absolute;right:20px;top:20px;display:flex;gap:8px}
+.pill{border:1px solid var(--ink);border-radius:999px;padding:6px 14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;background:var(--paper)}
+.pill.dark{background:var(--ink);color:var(--paper)}
+.right{overflow:hidden;display:flex;flex-direction:column}
+.rhead{padding:22px 26px 14px;border-bottom:1px solid var(--rule)}
+.rhead h2{font-size:26px;font-weight:600;letter-spacing:-.045em;margin-top:8px}
+.rhead p{font-family:var(--serif);font-size:14px;color:var(--muted);margin-top:4px}
+.clause{padding:16px 26px;border-bottom:1px solid var(--rule)}
+.clause .row{display:flex;justify-content:space-between;align-items:baseline}
+.clause .num{font-family:var(--mono);font-size:12px;color:var(--ink);letter-spacing:.06em}
+.clause h3{font-size:16px;font-weight:600;letter-spacing:-.02em;margin:5px 0 6px}
+.clause p{font-family:var(--serif);font-size:14px;line-height:1.5;color:var(--ink2)}
+.tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;padding:2px 6px;border:1px solid var(--ink)}
+.tag.draft{border-color:var(--accent);color:#c2412c}
+.src{display:flex;justify-content:space-between;margin-top:10px}
+.src a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.amend{margin-top:10px;padding-left:12px;border-left:2px solid var(--ink)}
+.amend p{font-size:13px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:12.5px}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:400;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:5px 0}
+td{border-bottom:1px solid var(--rule2);padding:5px 0}
+td.v{font-family:var(--mono);text-align:right}
+</style></head><body>
+<div class="top"><span class="brand">Bylaws · Structured</span>
+<nav class="mono"><span class="on">Map</span><span>Clauses</span><span>Review</span><span>Releases</span></nav>
+<span class="mono">Release 0.1.0 · 23 Nov 2026</span></div>
+<div class="strip mono"><i></i>Prototype · zone boundaries are approximate, traced from scanned maps · confirm with the planning authority</div>
+<div class="main">
+<div class="left">
+ <div class="head"><div class="mono">§ 01 · Jurisdiction</div>
+  <h1>Synthetic Test Jurisdiction</h1>
+  <div class="meta mono"><span>ID <b>_fixture-test</b></span><span>Documents <b>3 in force · 1 draft</b></span><span>Zones <b>12</b></span><span>Verified <b>8 / 12</b></span></div></div>
+ <div class="map">
+  <svg viewBox="0 0 840 540" preserveAspectRatio="xMidYMid slice">
+   <defs><pattern id="h" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#5b5e56" stroke-width="1.2"/></pattern>
+   <pattern id="d" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1" fill="#5b5e56"/></pattern></defs>
+   <g stroke="#c8ccc0" stroke-width="1" fill="none">
+    <path d="M0 120 L840 90"/><path d="M0 300 L840 330"/><path d="M0 460 L840 430"/><path d="M180 0 L210 540"/><path d="M420 0 L400 540"/><path d="M640 0 L670 540"/></g>
+   <path d="M60 40 L780 30 L800 500 L50 510 Z" fill="none" stroke="#080909" stroke-width="1.6" stroke-dasharray="6 4"/>
+   <g stroke="#080909" stroke-width="1">
+    <path d="M70 50 L400 45 L410 290 L80 295 Z" fill="#e5e6de"/>
+    <path d="M410 45 L640 40 L650 200 L412 205 Z" fill="url(#h)"/>
+    <path d="M412 210 L650 205 L660 320 L410 325 Z" fill="#ff6b52" fill-opacity=".28" stroke="#ff6b52" stroke-width="2.2"/>
+    <path d="M650 38 L780 35 L790 320 L660 322 Z" fill="#c8ccc0"/>
+    <path d="M80 300 L405 296 L400 500 L60 505 Z" fill="#e5e6de"/>
+    <path d="M405 330 L790 326 L798 495 L402 500 Z" fill="url(#d)"/>
+   </g>
+   <g font-family="JetBrains Mono" font-size="13" fill="#080909">
+    <text x="220" y="175">R</text><text x="510" y="130">C1</text><text x="520" y="270" font-weight="600">R2</text><text x="705" y="180">PS</text><text x="220" y="405">R</text><text x="580" y="420">I</text></g>
+  </svg>
+  <div class="ctl"><span class="pill dark">Zones</span><span class="pill">Source map</span><span class="pill">Drafts off</span></div>
+  <div class="legend"><div class="mono" style="margin:0">Legend · from source map</div>
+   <div><s style="background:#e5e6de"></s><span class="code">R</span>Residential (main)</div>
+   <div><s style="background:#ff6b5247;border-color:#ff6b52"></s><span class="code">R2</span>Residential (mixed) · selected</div>
+   <div><s style="background:url(#h);background:repeating-linear-gradient(45deg,#5b5e56 0 1px,transparent 1px 5px)"></s><span class="code">C1</span>Commercial (central)</div>
+   <div><s style="background:#c8ccc0"></s><span class="code">PS</span>Public &amp; semi-public</div></div>
+ </div>
+</div>
+<div class="right">
+ <div class="rhead"><div class="mono">Zone R2 · 4 clauses · 2 documents</div><h2>Residential (mixed)</h2><p>Clauses tagged to this zone code, grouped by document.</p></div>
+ <div class="clause"><div class="row"><span class="num">FIXTURE-BASE-2020 · 4.2.1</span><span class="tag">In force</span></div>
+  <h3>Setbacks</h3><p>The minimum front setback for plots abutting roads of the widths specified shall be as given in the table below.</p>
+  <table><tr><th>Road width</th><th style="text-align:right">Front setback</th></tr><tr><td>up to 9 m</td><td class="v">1.0 m</td></tr><tr><td>9 to 12 m</td><td class="v">1.5 m</td></tr></table>
+  <div class="amend"><div class="mono" style="font-size:9.5px">Amended by FIXTURE-AMEND-2024 · 3 · substitute</div><p>For "1.5 m" the figure "2.0 m" shall be substituted.</p></div>
+  <div class="src mono"><span>p. 2 · machine checked</span><a>View source p. 2</a></div></div>
+ <div class="clause"><div class="row"><span class="num">FIXTURE-DRAFT-2026 · 2.1</span><span class="tag draft">Draft</span></div>
+  <h3>Permissible height</h3><p>The maximum height of buildings in mixed residential zones shall not exceed fifteen metres.</p></div>
+</div>
+</div>
+</body></html>

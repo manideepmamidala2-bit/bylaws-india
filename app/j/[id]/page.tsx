@@ -20,11 +20,11 @@ export default function JurisdictionMapPage({
     <div className="flex min-h-screen flex-col">
       <div
         role="region"
-        aria-label="Prototype disclaimer"
-        className="border-b border-amber-300 bg-amber-50 px-6 py-2.5 text-xs font-medium text-amber-950"
+        aria-label="Zone boundary accuracy notice"
+        className="border-b border-amber-300 bg-amber-50 px-6 py-2.5 font-mono text-xs font-medium text-amber-950"
       >
-        Prototype. Zone boundaries are approximate and traced from scanned maps.
-        Confirm with the planning authority.
+        ZONE BOUNDARIES ARE TRACED FROM SCANNED MASTER PLAN MAPS AND ARE
+        APPROXIMATE. CONFIRM A PLOT&apos;S ZONE WITH THE PLANNING AUTHORITY.
       </div>
 
       <header className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 bg-white px-6 py-4">

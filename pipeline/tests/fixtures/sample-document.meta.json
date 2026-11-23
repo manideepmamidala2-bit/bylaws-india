@@ -1,11 +1,16 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "doc_id": "fixture-base-2020",
   "title": "Synthetic Municipal Building Regulations 2020",
   "issuing_authority": "Synthetic Civic Authority",
   "layer": "municipal",
   "role": "base",
   "legal_status": "in_force",
+  "status_evidence": {
+    "url": "https://example.org/gazette/2020-01-15",
+    "description": "Synthetic Municipal Gazette Notification No. 10/2020"
+  },
+  "licence_or_terms": "CC0-1.0",
   "notified_date": "2020-01-15",
   "effective_from": "2020-02-01",
   "amends": [],

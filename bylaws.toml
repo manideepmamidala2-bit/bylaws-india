@@ -1,0 +1,8 @@
+# Project root marker for Structured Building Bylaws (resolved by pipeline/bylaws/root.py)
+[project]
+name = "bylaws-india"
+schema_version = "1.1"
+schemas_dir = "schemas"
+jurisdictions_dir = "jurisdictions"
+data_dir = "data"
+public_data_dir = "public/data"

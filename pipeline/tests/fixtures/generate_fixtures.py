@@ -1,4 +1,4 @@
-"""Deterministic generator for synthetic fixture PDFs, KML, and sample schema payloads."""
+"""Deterministic generator for synthetic fixture PDFs, KML, imported GeoJSON, and sample v1.1 payloads."""
 
 from __future__ import annotations
 
@@ -246,20 +246,73 @@ def build_fixture_boundary_kml(output_path: Path) -> None:
     output_path.write_text(kml_content, encoding="utf-8")
 
 
+def build_fixture_imported_zones_geojson(output_path: Path) -> None:
+    """Write a deterministic synthetic GeoJSON file for the `imported` zoning map path."""
+    imported_geojson = {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "properties": {
+                    "ZONE_CD": "Z1",
+                    "ZONE_NAME": "Residential",
+                },
+                "geometry": {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [10.001, 10.001],
+                            [10.009, 10.001],
+                            [10.009, 10.019],
+                            [10.001, 10.019],
+                            [10.001, 10.001],
+                        ]
+                    ],
+                },
+            },
+            {
+                "type": "Feature",
+                "properties": {
+                    "ZONE_CD": "Z2",
+                    "ZONE_NAME": "Mixed Use",
+                },
+                "geometry": {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [10.010, 10.001],
+                            [10.022, 10.001],
+                            [10.022, 10.019],
+                            [10.010, 10.019],
+                            [10.010, 10.001],
+                        ]
+                    ],
+                },
+            },
+        ],
+    }
+    output_path.write_text(json.dumps(imported_geojson, indent=2) + "\n", encoding="utf-8")
+
+
 def build_sample_payloads(fixtures_dir: Path) -> None:
-    """Write sample valid payloads for document, clause-tree, zones, overrides, and manifest."""
+    """Write sample valid Schema v1.1 payloads for all schemas."""
     base_pdf = fixtures_dir / "fixture-base.pdf"
     sha256_hex = hashlib.sha256(base_pdf.read_bytes()).hexdigest()
     size_bytes = base_pdf.stat().st_size
 
     sample_document = {
-        "schema_version": "1.0",
+        "schema_version": "1.1",
         "doc_id": "fixture-base-2020",
         "title": "Synthetic Municipal Building Regulations 2020",
         "issuing_authority": "Synthetic Civic Authority",
         "layer": "municipal",
         "role": "base",
         "legal_status": "in_force",
+        "status_evidence": {
+            "url": "https://example.org/gazette/2020-01-15",
+            "description": "Synthetic Municipal Gazette Notification No. 10/2020",
+        },
+        "licence_or_terms": "CC0-1.0",
         "notified_date": "2020-01-15",
         "effective_from": "2020-02-01",
         "amends": [],
@@ -276,19 +329,23 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
     )
 
     sample_clause_tree = {
-        "schema_version": "1.0",
+        "schema_version": "1.1",
         "doc_id": "fixture-base-2020",
-        "jurisdiction": "_fixture-test",
+        "jurisdiction": "xx-test-fixture",
         "legal_status": "in_force",
         "generated": {
-            "parser": "docling",
-            "parser_version": "2.0.0",
+            "parser": "pypdfium2",
+            "parser_version": "5.0.0",
             "pipeline_version": "0.1.0",
             "generated_at": "2026-11-23T00:00:00Z",
         },
         "clauses": [
             {
                 "clause_id": "fixture-base-2020:1.1",
+                "record_id": "fixture-base-2020:1.1@v1",
+                "supersedes": None,
+                "superseded_by": None,
+                "legal_status": "in_force",
                 "number": "1.1",
                 "title": "Short Title and Commencement",
                 "level": 2,
@@ -296,7 +353,14 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
                 "order": 1,
                 "text": "These regulations apply to all residential plots within the synthetic planning area.",
                 "tables": [],
-                "pages": [1],
+                "citations": [
+                    {
+                        "doc_id": "fixture-base-2020",
+                        "page": 1,
+                        "bbox": [0.05, 0.12, 0.90, 0.18],
+                        "text_excerpt": "1.1 Short Title and Commencement: These regulations apply to all residential plots",
+                    }
+                ],
                 "cross_references": [],
                 "amended_by": [],
                 "applies_to_zones": ["Z1", "Z2"],
@@ -304,6 +368,10 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
             },
             {
                 "clause_id": "fixture-base-2020:2.1",
+                "record_id": "fixture-base-2020:2.1@v1",
+                "supersedes": None,
+                "superseded_by": None,
+                "legal_status": "in_force",
                 "number": "2.1",
                 "title": "Residential Setbacks",
                 "level": 2,
@@ -328,7 +396,14 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
                         "page": 1,
                     }
                 ],
-                "pages": [1],
+                "citations": [
+                    {
+                        "doc_id": "fixture-base-2020",
+                        "page": 1,
+                        "bbox": [0.05, 0.30, 0.90, 0.38],
+                        "text_excerpt": "2.1 Residential Setbacks: Every residential building in zone Z1 or Z2 shall",
+                    }
+                ],
                 "cross_references": ["fixture-base-2020:1.1"],
                 "amended_by": [],
                 "applies_to_zones": ["Z1", "Z2"],
@@ -342,7 +417,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
 
     sample_zones = {
         "type": "FeatureCollection",
-        "schema_version": "1.0",
+        "schema_version": "1.1",
         "features": [
             {
                 "type": "Feature",
@@ -360,11 +435,15 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
                 },
                 "properties": {
                     "zone_id": "fixture-pd-01:z0001",
+                    "record_id": "fixture-pd-01:z0001@v1",
+                    "supersedes": None,
+                    "superseded_by": None,
                     "zone_code": "Z1",
                     "zone_label": "Residential",
                     "source_map": "fixture-pd-01",
-                    "georef_run": "georef-run-001",
-                    "extraction_method": "colour_segmentation",
+                    "georef_run": "imported-v1",
+                    "extraction_method": "imported",
+                    "source_attribution": "Synthetic Planning Board Open GIS Portal (CC BY 4.0)",
                     "area_sq_m": 14250.5,
                     "verification": "machine_checked",
                     "notes": None,
@@ -386,11 +465,15 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
                 },
                 "properties": {
                     "zone_id": "fixture-pd-01:z0002",
+                    "record_id": "fixture-pd-01:z0002@v1",
+                    "supersedes": None,
+                    "superseded_by": None,
                     "zone_code": "Z2",
                     "zone_label": "Mixed Use",
                     "source_map": "fixture-pd-01",
-                    "georef_run": "georef-run-001",
-                    "extraction_method": "colour_segmentation",
+                    "georef_run": "imported-v1",
+                    "extraction_method": "imported",
+                    "source_attribution": "Synthetic Planning Board Open GIS Portal (CC BY 4.0)",
                     "area_sq_m": 15800.0,
                     "verification": "human_verified",
                     "notes": "Verified against synthetic atlas.",
@@ -403,12 +486,12 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
     )
 
     sample_overrides = {
-        "schema_version": "1.0",
+        "schema_version": "1.1",
         "clause_fixes": [
             {
                 "clause_id": "fixture-base-2020:2.1",
                 "field": "title",
-                "value": "Residential Setbacks",
+                "value": "Residential Setback Norms",
                 "reason": "Normalize heading punctuation",
             }
         ],
@@ -461,33 +544,75 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
         yaml.safe_dump(sample_overrides, sort_keys=False), encoding="utf-8"
     )
 
+    sample_declarations = {
+        "schema_version": "1.1",
+        "jurisdiction": "xx-test-fixture",
+        "not_modelled": ["Fire safety requirements of the National Building Code"],
+        "known_gaps": [
+            {
+                "doc_id": "fixture-base-2020",
+                "description": "Tables not extracted by pypdfium2 baseline adapter",
+            }
+        ],
+        "unread_documents": [
+            {
+                "title": "Draft Circular 2026",
+                "source_url": "https://example.org/circular.pdf",
+                "reason": "Published after this release",
+            }
+        ],
+    }
+    (fixtures_dir / "sample-declarations.json").write_text(
+        json.dumps(sample_declarations, indent=2) + "\n", encoding="utf-8"
+    )
+
+    sample_amendments = {
+        "schema_version": "1.1",
+        "jurisdiction": "xx-test-fixture",
+        "links": [
+            {
+                "amending_clause": "fixture-amend-2024:2",
+                "target_clause": "fixture-base-2020:1.2",
+                "action": "substitute",
+                "confidence": "high",
+                "verification": "unverified",
+            }
+        ],
+    }
+    (fixtures_dir / "sample-amendments.json").write_text(
+        json.dumps(sample_amendments, indent=2) + "\n", encoding="utf-8"
+    )
+
     sample_manifest = {
-        "schema_version": "1.0",
+        "schema_version": "1.1",
         "jurisdictions": [
             {
-                "id": "_fixture-test",
+                "id": "xx-test-fixture",
                 "name": "Synthetic Test Jurisdiction",
+                "aliases": ["Synthetic Fixture", "Test City"],
                 "latest_release": "0.1.0",
                 "releases": [
                     {
                         "version": "0.1.0",
                         "released_at": "2026-11-23T00:00:00Z",
+                        "licence": "CC-BY-4.0",
+                        "download_zip": "/data/xx-test-fixture/0.1.0/xx-test-fixture-0.1.0.zip",
+                        "sha256sums": "/data/xx-test-fixture/0.1.0/SHA256SUMS",
+                        "declarations": "/data/xx-test-fixture/0.1.0/declarations.json",
                         "files": {
-                            "documents": "/data/_fixture-test/0.1.0/documents.json",
+                            "documents": "/data/xx-test-fixture/0.1.0/documents.json",
                             "clauses": [
-                                "/data/_fixture-test/0.1.0/fixture-base-2020.clauses.json",
-                                "/data/_fixture-test/0.1.0/fixture-amend-2024.clauses.json",
+                                "/data/xx-test-fixture/0.1.0/fixture-base-2020.clauses.json",
+                                "/data/xx-test-fixture/0.1.0/fixture-amend-2024.clauses.json",
                             ],
-                            "amendments": "/data/_fixture-test/0.1.0/amendments.json",
-                            "zones": "/data/_fixture-test/0.1.0/zones.geojson",
-                            "boundary": "/data/_fixture-test/0.1.0/boundary.geojson",
-                            "review_images": [
-                                "/data/_fixture-test/0.1.0/fixture-pd-01-source.png"
-                            ],
+                            "amendments": "/data/xx-test-fixture/0.1.0/amendments.json",
+                            "zones": "/data/xx-test-fixture/0.1.0/zones.geojson",
+                            "boundary": "/data/xx-test-fixture/0.1.0/boundary.geojson",
+                            "review_images": [],
                         },
                         "drafts": {
                             "clauses": [
-                                "/data/_fixture-test/0.1.0/fixture-draft-2026.clauses.json"
+                                "/data/xx-test-fixture/0.1.0/fixture-draft-2026.clauses.json"
                             ]
                         },
                         "changelog": "Initial synthetic test dataset release.",
@@ -510,6 +635,7 @@ def generate_all_fixtures(fixtures_dir: Path | None = None) -> None:
     build_fixture_draft_pdf(target_dir / "fixture-draft.pdf")
     build_fixture_map_pdf(target_dir / "fixture-map.pdf")
     build_fixture_boundary_kml(target_dir / "fixture-boundary.kml")
+    build_fixture_imported_zones_geojson(target_dir / "fixture-imported-zones.geojson")
     build_sample_payloads(target_dir)
 
 
