@@ -14,6 +14,8 @@ export function ZoneMap({
   selectedZoneCode,
   onSelectZone,
 }: ZoneMapProps) {
+  const activeZones = zones.filter((feature) => !feature.properties.superseded_by);
+
   return (
     <section
       aria-label="Zoning map"
@@ -27,19 +29,19 @@ export function ZoneMap({
           Select a zone polygon below to inspect applicable building bylaw clauses.
         </p>
 
-        {zones.length === 0 ? (
+        {activeZones.length === 0 ? (
           <p className="mt-6 text-sm text-slate-500">
             No zone polygons loaded for this jurisdiction release.
           </p>
         ) : (
           <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
-            {zones.map((feature) => {
-              const { zone_id, zone_code, zone_label, verification } =
+            {activeZones.map((feature) => {
+              const { zone_id, record_id, zone_code, zone_label, verification } =
                 feature.properties;
               const isSelected = selectedZoneCode === zone_code;
               return (
                 <button
-                  key={zone_id}
+                  key={record_id ?? zone_id}
                   type="button"
                   onClick={() => onSelectZone(zone_code)}
                   className={`flex items-center justify-between rounded border px-3 py-2 text-left text-sm transition ${
@@ -49,7 +51,7 @@ export function ZoneMap({
                   }`}
                 >
                   <span>
-                    <strong className="font-mono">{zone_code}</strong> —{" "}
+                    <strong className="font-mono">{zone_code}</strong>:{" "}
                     {zone_label}
                   </span>
                   <span className="ml-2 text-xs opacity-75">{verification}</span>

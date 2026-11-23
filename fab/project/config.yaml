@@ -30,6 +30,15 @@ source_paths:
     - eslint.config.mjs
     - vitest.config.ts
     - vitest.setup.ts
+    - scripts/
+    - Makefile
+    - bylaws.toml
+    - .python-version
+    - LICENSE
+    - LICENSE-DATA.md
+    - CONTRIBUTING.md
+    - CODE_OF_CONDUCT.md
+    - CITATION.cff
 
 test_paths:
     - pipeline/tests/

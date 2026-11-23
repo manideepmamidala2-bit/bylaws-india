@@ -2,14 +2,14 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bylaws-india.local/schemas/overrides.schema.json",
   "title": "JurisdictionOverrides",
-  "description": "Versioned manual corrections, zone tags, and map curations in data/overrides/<jurisdiction>/*.yaml (Phase 1 Plan §7.6).",
+  "description": "Versioned manual corrections, zone tags, and map curations in data/overrides/<jurisdiction>/*.yaml (Schema v1.1).",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version"],
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "1.0"
+      "const": "1.1"
     },
     "clause_fixes": {
       "type": "array",
@@ -39,6 +39,7 @@
   "$defs": {
     "clauseFix": {
       "type": "object",
+      "title": "ClauseFix",
       "additionalProperties": false,
       "required": ["clause_id", "field", "value", "reason"],
       "properties": {
@@ -67,6 +68,7 @@
     },
     "zoneTag": {
       "type": "object",
+      "title": "ZoneTag",
       "additionalProperties": false,
       "required": ["clause_id", "zones", "reason"],
       "properties": {
@@ -91,6 +93,7 @@
     },
     "zoneFix": {
       "type": "object",
+      "title": "ZoneFix",
       "additionalProperties": false,
       "required": ["zone_id", "set"],
       "properties": {
@@ -103,6 +106,7 @@
         },
         "set": {
           "type": "object",
+          "title": "ZoneFixSet",
           "additionalProperties": false,
           "minProperties": 1,
           "properties": {
@@ -132,6 +136,7 @@
     },
     "mapCuration": {
       "type": "object",
+      "title": "MapCuration",
       "additionalProperties": false,
       "required": ["map_id"],
       "properties": {
@@ -143,6 +148,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "title": "MapLegendEntry",
             "additionalProperties": false,
             "required": ["zone_code", "zone_label", "rgb"],
             "properties": {
@@ -171,6 +177,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "title": "MapGcp",
             "additionalProperties": false,
             "required": ["id", "label", "pixel_x", "pixel_y"],
             "properties": {

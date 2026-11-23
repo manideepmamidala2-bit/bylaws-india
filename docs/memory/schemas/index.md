@@ -11,4 +11,4 @@ description: "Versioned Draft 2020-12 JSON Schema contracts for jurisdiction con
 
 | File | Description |
 |------|-------------|
-| [data-contracts](data-contracts.md) | Six versioned Draft 2020-12 JSON Schemas (jurisdiction, document, clause-tree, zones, overrides, manifest), provenance invariants, and config validation. |
+| [data-contracts](data-contracts.md) | Eight Schema v1.1 Draft 2020-12 JSON Schema contracts, bbox citations, Rule R9 record immutability, imported zoning maps, and single-source Pydantic/TypeScript codegen. |

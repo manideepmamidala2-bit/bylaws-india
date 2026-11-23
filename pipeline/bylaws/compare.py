@@ -9,4 +9,5 @@ from bylaws.config import JurisdictionConfig
 
 def run_compare(config: JurisdictionConfig) -> None:
     """Generate a side-by-side parser comparison report for a jurisdiction."""
-    click.echo(f"[compare] Configured for jurisdiction '{config.id}'.")
+    _ = config
+    raise click.ClickException("not implemented: compare")

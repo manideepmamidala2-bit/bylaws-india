@@ -1,4 +1,4 @@
-"""Parser adapter interface and structured parse result models (Plan §8.2)."""
+"""Parser adapter interface and structured parse result models (Plan v1.1 §S2 / §8)."""
 
 from __future__ import annotations
 
@@ -21,12 +21,13 @@ class ParsedTable(BaseModel):
 
 
 class ParsedBlock(BaseModel):
-    """A contiguous block of extracted Markdown text with page provenance."""
+    """A contiguous line/block of extracted text with page and normalized bbox provenance."""
 
     model_config = ConfigDict(extra="forbid")
 
     text: str
     page: int
+    bbox: list[float] | None = None
 
 
 class ParseResult(BaseModel):
@@ -39,6 +40,8 @@ class ParseResult(BaseModel):
     markdown: str
     blocks: list[ParsedBlock] = Field(default_factory=list)
     tables: list[ParsedTable] = Field(default_factory=list)
+    tables_supported: bool = True
+    notes: list[str] = Field(default_factory=list)
     page_count: int
     is_scanned: bool = False
 
@@ -50,4 +53,4 @@ class ParserAdapter(ABC):
 
     @abstractmethod
     def parse(self, pdf_path: Path) -> ParseResult:
-        """Parse a PDF file into Markdown, structured tables, and page numbers."""
+        """Parse a PDF file into Markdown, structured blocks with bbox, and page numbers."""

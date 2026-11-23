@@ -1,30 +1,36 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "jurisdictions": [
     {
-      "id": "_fixture-test",
+      "id": "xx-test-fixture",
       "name": "Synthetic Test Jurisdiction",
+      "aliases": [
+        "Synthetic Fixture",
+        "Test City"
+      ],
       "latest_release": "0.1.0",
       "releases": [
         {
           "version": "0.1.0",
           "released_at": "2026-11-23T00:00:00Z",
+          "licence": "CC-BY-4.0",
+          "download_zip": "/data/xx-test-fixture/0.1.0/xx-test-fixture-0.1.0.zip",
+          "sha256sums": "/data/xx-test-fixture/0.1.0/SHA256SUMS",
+          "declarations": "/data/xx-test-fixture/0.1.0/declarations.json",
           "files": {
-            "documents": "/data/_fixture-test/0.1.0/documents.json",
+            "documents": "/data/xx-test-fixture/0.1.0/documents.json",
             "clauses": [
-              "/data/_fixture-test/0.1.0/fixture-base-2020.clauses.json",
-              "/data/_fixture-test/0.1.0/fixture-amend-2024.clauses.json"
+              "/data/xx-test-fixture/0.1.0/fixture-base-2020.clauses.json",
+              "/data/xx-test-fixture/0.1.0/fixture-amend-2024.clauses.json"
             ],
-            "amendments": "/data/_fixture-test/0.1.0/amendments.json",
-            "zones": "/data/_fixture-test/0.1.0/zones.geojson",
-            "boundary": "/data/_fixture-test/0.1.0/boundary.geojson",
-            "review_images": [
-              "/data/_fixture-test/0.1.0/fixture-pd-01-source.png"
-            ]
+            "amendments": "/data/xx-test-fixture/0.1.0/amendments.json",
+            "zones": "/data/xx-test-fixture/0.1.0/zones.geojson",
+            "boundary": "/data/xx-test-fixture/0.1.0/boundary.geojson",
+            "review_images": []
           },
           "drafts": {
             "clauses": [
-              "/data/_fixture-test/0.1.0/fixture-draft-2026.clauses.json"
+              "/data/xx-test-fixture/0.1.0/fixture-draft-2026.clauses.json"
             ]
           },
           "changelog": "Initial synthetic test dataset release."

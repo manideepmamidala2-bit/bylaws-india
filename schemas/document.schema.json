@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bylaws-india.local/schemas/document.schema.json",
   "title": "DocumentMetadata",
-  "description": "Metadata and provenance record for an acquired raw document in data/raw/<jurisdiction>/<doc_id>.meta.json (Phase 1 Plan §7.2).",
+  "description": "Metadata and provenance record for an acquired raw document in data/raw/<jurisdiction>/<doc_id>.meta.json (Schema v1.1).",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -13,6 +13,8 @@
     "layer",
     "role",
     "legal_status",
+    "status_evidence",
+    "licence_or_terms",
     "notified_date",
     "effective_from",
     "amends",
@@ -27,7 +29,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "1.0"
+      "const": "1.1"
     },
     "doc_id": {
       "type": "string",
@@ -52,6 +54,25 @@
     "legal_status": {
       "type": "string",
       "enum": ["in_force", "draft", "superseded", "withdrawn"]
+    },
+    "status_evidence": {
+      "type": "object",
+      "title": "DocumentStatusEvidence",
+      "additionalProperties": false,
+      "required": ["url", "description"],
+      "properties": {
+        "url": {
+          "type": ["string", "null"]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "licence_or_terms": {
+      "type": "string",
+      "minLength": 1
     },
     "notified_date": {
       "type": ["string", "null"],

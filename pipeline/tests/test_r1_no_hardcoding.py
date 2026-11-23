@@ -1,4 +1,4 @@
-"""Static check enforcing Rule R1: no jurisdiction is hard-coded in source code (Plan §2 & §11)."""
+"""Static check enforcing Rule R1 (no hard-coded jurisdictions) and D3 (no 'prototype' or '(example)')."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ import yaml
 
 from bylaws.schema_validator import REPO_ROOT
 
-# Baseline sentinel terms from Plan §4 so the R1 check catches violations even before
+# Baseline sentinel terms from Plan §4 / §7 so the R1 check catches violations even before
 # non-fixture jurisdiction YAML files are added in Milestone M2.
 SENTINEL_TERMS: tuple[str, ...] = (
     "bengaluru",
@@ -46,6 +46,8 @@ GENERIC_CONFIG_VALUES: frozenset[str] = frozenset(
         "regulation",
         "boundary",
         "reference",
+        "imported",
+        "traced",
     }
 )
 
@@ -91,23 +93,23 @@ def _extract_strings_from_yaml_value(value: Any) -> set[str]:
 
 
 def collect_prohibited_terms(jurisdictions_dir: Path | None = None) -> set[str]:
-    """Collect prohibited strings from all non-fixture jurisdiction configs plus sentinels."""
+    """Collect prohibited strings from all non-fixture jurisdiction configs (country != 'XX') plus sentinels."""
     terms: set[str] = {term.lower() for term in SENTINEL_TERMS}
     base_dir = jurisdictions_dir or (REPO_ROOT / "jurisdictions")
     if not base_dir.is_dir():
         return terms
 
     for yaml_path in sorted(base_dir.glob("*.yaml")):
-        if yaml_path.name.startswith("_fixture"):
-            continue
         raw = yaml.safe_load(yaml_path.read_text(encoding="utf-8"))
+        if not isinstance(raw, dict) or raw.get("country") == "XX":
+            continue
         for extracted in _extract_strings_from_yaml_value(raw):
             terms.add(extracted.lower())
     return terms
 
 
 def iter_source_files(root_dirs: list[Path]) -> list[Path]:
-    """Return all non-ignored source files under `pipeline/bylaws/` and the root Next.js app."""
+    """Return all non-ignored source files under given root directories."""
     collected: list[Path] = []
     for root_dir in root_dirs:
         if not root_dir.exists():
@@ -151,6 +153,36 @@ def test_r1_no_jurisdiction_constants_in_pipeline_or_web_source() -> None:
             violations.append(f"{rel_path}: found prohibited jurisdiction terms {matched}")
 
     assert not violations, "Rule R1 violation(s) detected:\n" + "\n".join(violations)
+
+
+def test_d3_no_prototype_or_example_wording_in_web_or_jurisdiction_names() -> None:
+    """Enforce Plan v1.1 D3 / S4: no 'prototype' or '(example)' in web source or jurisdiction names."""
+    web_files = iter_source_files(
+        [
+            REPO_ROOT / "app",
+            REPO_ROOT / "components",
+            REPO_ROOT / "lib",
+        ]
+    )
+    violations: list[str] = []
+    for file_path in web_files:
+        content_lower = file_path.read_text(encoding="utf-8").lower()
+        rel_path = file_path.relative_to(REPO_ROOT)
+        if "prototype" in content_lower:
+            violations.append(f"{rel_path}: contains prohibited string 'prototype'")
+        if "(example)" in content_lower:
+            violations.append(f"{rel_path}: contains prohibited string '(example)'")
+
+    jurisdictions_dir = REPO_ROOT / "jurisdictions"
+    for yaml_path in sorted(jurisdictions_dir.glob("*.yaml")):
+        raw = yaml.safe_load(yaml_path.read_text(encoding="utf-8"))
+        name_val = str(raw.get("name", "")).lower()
+        if "prototype" in name_val or "(example)" in name_val:
+            violations.append(
+                f"jurisdictions/{yaml_path.name}: display name {raw.get('name')!r} contains prohibited wording"
+            )
+
+    assert not violations, "Plan v1.1 D3 violation(s) detected:\n" + "\n".join(violations)
 
 
 def test_r1_scanner_detects_synthetic_violation(tmp_path: Path) -> None:

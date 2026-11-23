@@ -5,22 +5,27 @@ import JurisdictionPickerPage from "@/app/page";
 import type { ReleaseManifest } from "@/lib/data";
 
 const FIXTURE_MANIFEST: ReleaseManifest = {
-  schema_version: "1.0",
+  schema_version: "1.1",
   jurisdictions: [
     {
-      id: "_fixture-test",
+      id: "xx-test-fixture",
       name: "Synthetic Test Jurisdiction Alpha",
+      aliases: ["Synthetic Fixture", "Test City"],
       latest_release: "0.1.0",
       releases: [
         {
           version: "0.1.0",
           released_at: "2026-11-23T00:00:00Z",
+          licence: "CC-BY-4.0",
+          download_zip: "/data/xx-test-fixture/0.1.0/xx-test-fixture-0.1.0.zip",
+          sha256sums: "/data/xx-test-fixture/0.1.0/SHA256SUMS",
+          declarations: "/data/xx-test-fixture/0.1.0/declarations.json",
           files: {
-            documents: "/data/_fixture-test/0.1.0/documents.json",
-            clauses: ["/data/_fixture-test/0.1.0/clauses.json"],
-            amendments: "/data/_fixture-test/0.1.0/amendments.json",
-            zones: "/data/_fixture-test/0.1.0/zones.geojson",
-            boundary: "/data/_fixture-test/0.1.0/boundary.geojson",
+            documents: "/data/xx-test-fixture/0.1.0/documents.json",
+            clauses: ["/data/xx-test-fixture/0.1.0/fixture-base-2020.clauses.json"],
+            amendments: "/data/xx-test-fixture/0.1.0/amendments.json",
+            zones: "/data/xx-test-fixture/0.1.0/zones.geojson",
+            boundary: "/data/xx-test-fixture/0.1.0/boundary.geojson",
             review_images: [],
           },
           drafts: {
@@ -38,6 +43,10 @@ const FIXTURE_MANIFEST: ReleaseManifest = {
         {
           version: "0.2.0",
           released_at: "2026-11-23T00:00:00Z",
+          licence: "CC-BY-4.0",
+          download_zip: "/data/xx-yy-synthetic-beta/0.2.0/xx-yy-synthetic-beta-0.2.0.zip",
+          sha256sums: "/data/xx-yy-synthetic-beta/0.2.0/SHA256SUMS",
+          declarations: "/data/xx-yy-synthetic-beta/0.2.0/declarations.json",
           files: {
             documents: "/data/xx-yy-synthetic-beta/0.2.0/documents.json",
             clauses: [],
@@ -87,7 +96,7 @@ describe("JurisdictionPickerPage smoke tests", () => {
     vi.spyOn(globalThis, "fetch").mockResolvedValue({
       ok: true,
       status: 200,
-      json: async () => ({ schema_version: "1.0", jurisdictions: [] }),
+      json: async () => ({ schema_version: "1.1", jurisdictions: [] }),
     } as Response);
 
     render(<JurisdictionPickerPage />);

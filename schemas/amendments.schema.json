@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bylaws-india.local/schemas/amendments.schema.json",
+  "title": "JurisdictionAmendments",
+  "description": "Linked amendment instructions between amending clauses and target base clauses (Schema v1.1).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "jurisdiction", "links"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.1"
+    },
+    "jurisdiction": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/amendmentLink"
+      }
+    }
+  },
+  "$defs": {
+    "amendmentLink": {
+      "type": "object",
+      "title": "AmendmentLink",
+      "additionalProperties": false,
+      "required": [
+        "amending_clause",
+        "target_clause",
+        "action",
+        "confidence",
+        "verification"
+      ],
+      "properties": {
+        "amending_clause": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*:.+$"
+        },
+        "target_clause": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*:.+$"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "substitute",
+            "insert_after",
+            "insert_before",
+            "omit",
+            "modify"
+          ]
+        },
+        "confidence": {
+          "type": "string",
+          "enum": ["high", "medium", "low"]
+        },
+        "verification": {
+          "type": "string",
+          "enum": ["unverified", "machine_checked", "human_verified"]
+        },
+        "note": {
+          "type": ["string", "null"]
+        }
+      }
+    }
+  }
+}

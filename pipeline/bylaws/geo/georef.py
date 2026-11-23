@@ -4,5 +4,6 @@ from __future__ import annotations
 
 
 def compute_loo_rmse(gcps: list[dict]) -> dict[str, float]:
-    """Placeholder interface for leave-one-out georeferencing error metrics."""
-    raise NotImplementedError("Implemented in Milestone M6.")
+    """Placeholder interface for leave-one-out georeferencing error metrics (Milestone M6)."""
+    _ = gcps
+    raise NotImplementedError("not implemented: geo.georef")

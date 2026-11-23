@@ -1,16 +1,29 @@
-id: _fixture-test
+id: xx-test-fixture
 name: Synthetic Test Jurisdiction
+aliases:
+  - Synthetic Fixture
+  - Test City
 country: XX
 state: YY
 building_types:
   - residential
 parents: []
+not_modelled:
+  - Fire safety requirements of the National Building Code
+unread_documents:
+  - title: Draft Circular 2026
+    source_url: https://example.org/circular.pdf
+    reason: Published after this release
 documents:
   - id: fixture-base-2020
     title: Synthetic Municipal Building Regulations 2020
     issuing_authority: Synthetic Civic Authority
     layer: municipal
     legal_status: in_force
+    status_evidence:
+      url: https://example.org/gazette/2020-01-15
+      description: Synthetic Municipal Gazette Notification No. 10/2020 bringing base regulations into force
+    licence_or_terms: CC0-1.0
     role: base
     notified_date: "2020-01-15"
     effective_from: "2020-02-01"
@@ -20,6 +33,10 @@ documents:
     issuing_authority: Synthetic Civic Authority
     layer: municipal
     legal_status: in_force
+    status_evidence:
+      url: https://example.org/gazette/2024-06-01
+      description: Synthetic Municipal Gazette Final Notification No. 42/2024
+    licence_or_terms: CC0-1.0
     role: amendment
     amends:
       - fixture-base-2020
@@ -31,6 +48,10 @@ documents:
     issuing_authority: Synthetic Planning Board
     layer: planning
     legal_status: draft
+    status_evidence:
+      url: https://example.org/planning/draft-2026
+      description: Public consultation draft notice inviting objections and suggestions
+    licence_or_terms: CC0-1.0
     role: regulation
     notified_date: "2026-03-01"
     effective_from: null
@@ -40,7 +61,11 @@ documents:
     issuing_authority: Synthetic Planning Board
     layer: planning
     legal_status: in_force
-    role: regulation
+    status_evidence:
+      url: https://example.org/planning/atlas-2020
+      description: Approved Master Plan Land Use Atlas notification
+    licence_or_terms: CC0-1.0
+    role: reference
     notified_date: "2020-01-15"
     effective_from: "2020-02-01"
     source_url: pipeline/tests/fixtures/fixture-map.pdf
@@ -53,7 +78,8 @@ maps:
         equals: FIX-01
   zoning:
     - id: fixture-pd-01
-      document: fixture-map-atlas
-      page: 1
-      planning_district: 1
-      legend_page: 1
+      kind: imported
+      source_url: pipeline/tests/fixtures/fixture-imported-zones.geojson
+      zone_code_field: ZONE_CD
+      zone_label_field: ZONE_NAME
+      source_attribution: Synthetic Planning Board Open GIS Portal (CC BY 4.0)
