@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "jurisdictions": [
     {
       "id": "xx-test-fixture",
@@ -8,12 +8,13 @@
         "Synthetic Fixture",
         "Test City"
       ],
+      "visibility": "test",
       "latest_release": "0.1.0",
       "releases": [
         {
           "version": "0.1.0",
           "released_at": "2026-11-23T00:00:00Z",
-          "licence": "CC-BY-4.0",
+          "licence": "CC BY 4.0",
           "download_zip": "/data/xx-test-fixture/0.1.0/xx-test-fixture-0.1.0.zip",
           "sha256sums": "/data/xx-test-fixture/0.1.0/SHA256SUMS",
           "declarations": "/data/xx-test-fixture/0.1.0/declarations.json",
@@ -26,14 +27,19 @@
             "amendments": "/data/xx-test-fixture/0.1.0/amendments.json",
             "zones": "/data/xx-test-fixture/0.1.0/zones.geojson",
             "boundary": "/data/xx-test-fixture/0.1.0/boundary.geojson",
-            "review_images": []
+            "sources_json": "/data/xx-test-fixture/0.1.0/sources.json",
+            "sources_csv": "/data/xx-test-fixture/0.1.0/sources.csv",
+            "review_images": [],
+            "consolidated": "/data/xx-test-fixture/0.1.0/consolidated.json",
+            "geo_layers": "/data/xx-test-fixture/0.1.0/geo-layers.json",
+            "clause_zone_tags": "/data/xx-test-fixture/0.1.0/clause-zone-tags.json"
           },
           "drafts": {
             "clauses": [
               "/data/xx-test-fixture/0.1.0/fixture-draft-2026.clauses.json"
             ]
           },
-          "changelog": "Initial synthetic test dataset release."
+          "changelog": "Release 0.1.0 for Synthetic Test Jurisdiction."
         }
       ]
     }

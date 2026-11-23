@@ -1,18 +1,24 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "jurisdiction": "xx-test-fixture",
   "links": [
     {
       "amending_clause": "fixture-amend-2024:2",
       "target_clause": "fixture-base-2020:1.2",
+      "amending_doc_id": "fixture-amend-2024",
+      "target_doc_id": "fixture-base-2020",
       "action": "substitute",
+      "effective_date": "2024-06-15",
       "confidence": "high",
       "verification": "unverified"
     },
     {
       "amending_clause": "fixture-amend-2024:3",
       "target_clause": "fixture-base-2020:2.2",
+      "amending_doc_id": "fixture-amend-2024",
+      "target_doc_id": "fixture-base-2020",
       "action": "insert_after",
+      "effective_date": "2024-06-15",
       "confidence": "high",
       "verification": "unverified"
     }

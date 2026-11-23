@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bylaws-india.local/schemas/clause-tree.schema.json",
   "title": "ClauseTree",
-  "description": "Structured clause tree for a document in data/processed/<jurisdiction>/documents/<doc_id>.clauses.json (Schema v1.1).",
+  "description": "Structured clause tree for a document in data/processed/<jurisdiction>/documents/<doc_id>.clauses.json (Schema v1.2).",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -16,7 +16,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "1.1"
+      "const": "1.2"
     },
     "doc_id": {
       "type": "string",
@@ -28,7 +28,13 @@
     },
     "legal_status": {
       "type": "string",
-      "enum": ["in_force", "draft", "superseded", "withdrawn"]
+      "enum": [
+        "in_force",
+        "draft",
+        "superseded",
+        "withdrawn",
+        "status_unknown"
+      ]
     },
     "generated": {
       "type": "object",
@@ -125,9 +131,26 @@
           "type": "string",
           "pattern": "^[a-z0-9]+(-[a-z0-9]+)*:.+$"
         },
+        "record_version": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 1
+        },
         "record_id": {
           "type": "string",
           "pattern": "^[a-z0-9]+(-[a-z0-9]+)*:.+@v[0-9]+$"
+        },
+        "record_supersedes": {
+          "type": ["string", "null"],
+          "default": null
+        },
+        "record_superseded_by": {
+          "type": ["string", "null"],
+          "default": null
+        },
+        "record_change_reason": {
+          "type": ["string", "null"],
+          "default": null
         },
         "supersedes": {
           "type": ["string", "null"]
@@ -137,7 +160,17 @@
         },
         "legal_status": {
           "type": "string",
-          "enum": ["in_force", "draft", "superseded", "withdrawn"]
+          "enum": [
+            "in_force",
+            "draft",
+            "superseded",
+            "withdrawn",
+            "status_unknown"
+          ]
+        },
+        "effective_from": {
+          "type": ["string", "null"],
+          "default": null
         },
         "number": {
           "type": "string",
@@ -160,6 +193,11 @@
         "text": {
           "type": "string",
           "minLength": 1
+        },
+        "language": {
+          "type": "string",
+          "enum": ["en", "kn"],
+          "default": "en"
         },
         "tables": {
           "type": "array",
@@ -198,6 +236,10 @@
         "verification": {
           "type": "string",
           "enum": ["unverified", "machine_checked", "human_verified"]
+        },
+        "verified_by": {
+          "type": ["string", "null"],
+          "default": null
         }
       }
     },

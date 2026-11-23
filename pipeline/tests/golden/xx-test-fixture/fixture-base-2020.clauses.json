@@ -1,27 +1,33 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "doc_id": "fixture-base-2020",
   "jurisdiction": "xx-test-fixture",
   "legal_status": "in_force",
   "generated": {
     "parser": "pypdfium2",
-    "parser_version": "5.0.0",
+    "parser_version": "5.15.2",
     "pipeline_version": "0.1.0",
     "generated_at": "2026-11-23T00:00:00Z"
   },
   "clauses": [
     {
       "clause_id": "fixture-base-2020:1",
+      "record_version": 1,
       "record_id": "fixture-base-2020:1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
       "supersedes": null,
       "superseded_by": null,
       "legal_status": "in_force",
+      "effective_from": "2020-02-01",
       "number": "1",
       "title": "General Provisions",
       "level": 1,
       "parent_id": null,
       "order": 0,
       "text": "General Provisions",
+      "language": "en",
       "tables": [],
       "citations": [
         {
@@ -39,20 +45,27 @@
       "cross_references": [],
       "amended_by": [],
       "applies_to_zones": [],
-      "verification": "machine_checked"
+      "verification": "machine_checked",
+      "verified_by": null
     },
     {
       "clause_id": "fixture-base-2020:1.1",
+      "record_version": 1,
       "record_id": "fixture-base-2020:1.1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": "fixture-base-2020:1.1@v2",
+      "record_change_reason": null,
       "supersedes": null,
       "superseded_by": "fixture-base-2020:1.1@v2",
       "legal_status": "in_force",
+      "effective_from": "2020-02-01",
       "number": "1.1",
       "title": "Short Title and Commencement",
       "level": 2,
       "parent_id": "fixture-base-2020:1",
       "order": 1,
       "text": "These regulations apply to all residential plots within the synthetic planning area.",
+      "language": "en",
       "tables": [],
       "citations": [
         {
@@ -73,20 +86,27 @@
         "Z1",
         "Z2"
       ],
-      "verification": "human_verified"
+      "verification": "human_verified",
+      "verified_by": null
     },
     {
       "clause_id": "fixture-base-2020:1.2",
+      "record_version": 1,
       "record_id": "fixture-base-2020:1.2@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
       "supersedes": null,
       "superseded_by": null,
       "legal_status": "in_force",
+      "effective_from": "2020-02-01",
       "number": "1.2",
       "title": "Definitions",
       "level": 2,
       "parent_id": "fixture-base-2020:1",
       "order": 2,
       "text": "Floor Area Ratio (FAR) means the quotient obtained by dividing the total covered area on all floors by the plot area.",
+      "language": "en",
       "tables": [],
       "citations": [
         {
@@ -106,20 +126,27 @@
         "fixture-amend-2024:2"
       ],
       "applies_to_zones": [],
-      "verification": "machine_checked"
+      "verification": "machine_checked",
+      "verified_by": null
     },
     {
       "clause_id": "fixture-base-2020:2",
+      "record_version": 1,
       "record_id": "fixture-base-2020:2@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
       "supersedes": null,
       "superseded_by": null,
       "legal_status": "in_force",
+      "effective_from": "2020-02-01",
       "number": "2",
       "title": "Setbacks and Height Norms",
       "level": 1,
       "parent_id": null,
       "order": 3,
       "text": "Setbacks and Height Norms",
+      "language": "en",
       "tables": [],
       "citations": [
         {
@@ -137,30 +164,69 @@
       "cross_references": [],
       "amended_by": [],
       "applies_to_zones": [],
-      "verification": "machine_checked"
+      "verification": "machine_checked",
+      "verified_by": null
     },
     {
       "clause_id": "fixture-base-2020:2.1",
+      "record_version": 1,
       "record_id": "fixture-base-2020:2.1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
       "supersedes": null,
       "superseded_by": null,
       "legal_status": "in_force",
+      "effective_from": "2020-02-01",
       "number": "2.1",
       "title": "Residential Setback Norms",
       "level": 2,
       "parent_id": "fixture-base-2020:2",
       "order": 4,
-      "text": "Every residential building in zone Z1 or Z2 shall provide minimum setbacks as per clause 1.1 and Table 2.1 below. Table 2.1: Minimum Setbacks by Plot Size Zone Code Plot Area (sq.m) Front Setback (m) Max FAR Z1 Up to 240 1.5 1.75 Z1 Above 240 3.0 2.25 Z2 All plots 3.0 2.50",
-      "tables": [],
+      "text": "Every residential building in zone Z1 or Z2 shall provide minimum setbacks as per clause 1.1 and Table 2.1 below.",
+      "language": "en",
+      "tables": [
+        {
+          "table_id": "fixture-base-2020:2.1:t1",
+          "caption": "Table 2.1: Minimum Setbacks by Plot Size",
+          "headers": [
+            "Zone Code",
+            "Plot Area (sq.m)",
+            "Front Setback (m)",
+            "Max FAR"
+          ],
+          "rows": [
+            [
+              "Z1",
+              "Up to 240",
+              "1.5",
+              "1.75"
+            ],
+            [
+              "Z1",
+              "Above 240",
+              "3.0",
+              "2.25"
+            ],
+            [
+              "Z2",
+              "All plots",
+              "3.0",
+              "2.50"
+            ]
+          ],
+          "page": 1
+        }
+      ],
       "citations": [
         {
           "doc_id": "fixture-base-2020",
           "page": 1,
           "bbox": [
-            0.0526,
-            0.2333,
+            0.0529,
+            0.2334,
             0.9476,
-            0.3915
+            0.2633
           ],
           "text_excerpt": "2.1 Residential Setbacks: Every residential building in zone Z1 or Z2 shall"
         }
@@ -173,20 +239,27 @@
         "Z1",
         "Z2"
       ],
-      "verification": "machine_checked"
+      "verification": "machine_checked",
+      "verified_by": null
     },
     {
       "clause_id": "fixture-base-2020:2.2",
+      "record_version": 1,
       "record_id": "fixture-base-2020:2.2@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
       "supersedes": null,
       "superseded_by": null,
       "legal_status": "in_force",
+      "effective_from": "2020-02-01",
       "number": "2.2",
       "title": "Maximum Building Height",
       "level": 2,
       "parent_id": "fixture-base-2020:2",
       "order": 5,
       "text": "No residential building in zone Z1 shall exceed 11.5 metres in height, subject to road width norms under clause 2.1.",
+      "language": "en",
       "tables": [],
       "citations": [
         {
@@ -210,20 +283,27 @@
       "applies_to_zones": [
         "Z1"
       ],
-      "verification": "machine_checked"
+      "verification": "machine_checked",
+      "verified_by": null
     },
     {
       "clause_id": "fixture-base-2020:1.1",
+      "record_version": 2,
       "record_id": "fixture-base-2020:1.1@v2",
+      "record_supersedes": "fixture-base-2020:1.1@v1",
+      "record_superseded_by": null,
+      "record_change_reason": "Refine heading on human_verified clause (triggers R9 supersede @v2)",
       "supersedes": "fixture-base-2020:1.1@v1",
       "superseded_by": null,
       "legal_status": "in_force",
+      "effective_from": "2020-02-01",
       "number": "1.1",
       "title": "Short Title, Extent and Commencement",
       "level": 2,
       "parent_id": "fixture-base-2020:1",
       "order": 1,
       "text": "These regulations apply to all residential plots within the synthetic planning area.",
+      "language": "en",
       "tables": [],
       "citations": [
         {
@@ -244,7 +324,8 @@
         "Z1",
         "Z2"
       ],
-      "verification": "human_verified"
+      "verification": "human_verified",
+      "verified_by": null
     }
   ]
 }

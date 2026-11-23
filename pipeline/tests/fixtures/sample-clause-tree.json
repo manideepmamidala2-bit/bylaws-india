@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "doc_id": "fixture-base-2020",
   "jurisdiction": "xx-test-fixture",
   "legal_status": "in_force",
@@ -12,16 +12,22 @@
   "clauses": [
     {
       "clause_id": "fixture-base-2020:1.1",
+      "record_version": 1,
       "record_id": "fixture-base-2020:1.1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
       "supersedes": null,
       "superseded_by": null,
       "legal_status": "in_force",
+      "effective_from": "2020-02-01",
       "number": "1.1",
       "title": "Short Title and Commencement",
       "level": 2,
       "parent_id": "fixture-base-2020:1",
       "order": 1,
       "text": "These regulations apply to all residential plots within the synthetic planning area.",
+      "language": "en",
       "tables": [],
       "citations": [
         {
@@ -42,20 +48,27 @@
         "Z1",
         "Z2"
       ],
-      "verification": "machine_checked"
+      "verification": "machine_checked",
+      "verified_by": null
     },
     {
       "clause_id": "fixture-base-2020:2.1",
+      "record_version": 1,
       "record_id": "fixture-base-2020:2.1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
       "supersedes": null,
       "superseded_by": null,
       "legal_status": "in_force",
+      "effective_from": "2020-02-01",
       "number": "2.1",
       "title": "Residential Setbacks",
       "level": 2,
       "parent_id": "fixture-base-2020:2",
       "order": 2,
       "text": "Every residential building in zone Z1 or Z2 shall provide minimum setbacks as per clause 1.1 and Table 2.1 below.",
+      "language": "en",
       "tables": [
         {
           "table_id": "fixture-base-2020:2.1:t1",
@@ -110,7 +123,8 @@
         "Z1",
         "Z2"
       ],
-      "verification": "machine_checked"
+      "verification": "machine_checked",
+      "verified_by": null
     }
   ]
 }

@@ -16,6 +16,7 @@ dependencies = [
     "pypdfium2>=4.30.0",
     "pillow>=10.3.0",
     "shapely>=2.0.4",
+    "pyproj>=3.8.0",
 ]
 
 [project.optional-dependencies]

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bylaws-india.local/schemas/document.schema.json",
   "title": "DocumentMetadata",
-  "description": "Metadata and provenance record for an acquired raw document in data/raw/<jurisdiction>/<doc_id>.meta.json (Schema v1.1).",
+  "description": "Metadata and provenance record for an acquired raw document in data/raw/<jurisdiction>/<doc_id>.meta.json (Schema v1.2).",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -29,7 +29,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "1.1"
+      "const": "1.2"
     },
     "doc_id": {
       "type": "string",
@@ -43,9 +43,33 @@
       "type": "string",
       "minLength": 1
     },
+    "doc_type": {
+      "type": "string",
+      "enum": [
+        "act",
+        "rules",
+        "regulations",
+        "bye_laws",
+        "amendment",
+        "notification",
+        "government_order",
+        "circular",
+        "map",
+        "standard_reference"
+      ]
+    },
     "layer": {
       "type": "string",
-      "enum": ["national", "state", "planning", "municipal"]
+      "enum": [
+        "statute",
+        "state_rules",
+        "planning",
+        "municipal",
+        "orders",
+        "overlay",
+        "national_reference",
+        "boundary"
+      ]
     },
     "role": {
       "type": "string",
@@ -53,26 +77,76 @@
     },
     "legal_status": {
       "type": "string",
-      "enum": ["in_force", "draft", "superseded", "withdrawn"]
+      "enum": [
+        "in_force",
+        "draft",
+        "superseded",
+        "withdrawn",
+        "status_unknown"
+      ]
     },
     "status_evidence": {
       "type": "object",
       "title": "DocumentStatusEvidence",
       "additionalProperties": false,
-      "required": ["url", "description"],
+      "required": ["url"],
       "properties": {
         "url": {
           "type": ["string", "null"]
         },
+        "quoted_line": {
+          "type": ["string", "null"]
+        },
         "description": {
-          "type": "string",
-          "minLength": 1
+          "type": ["string", "null"]
         }
       }
+    },
+    "notification_number": {
+      "type": ["string", "null"]
+    },
+    "gazette_reference": {
+      "type": ["string", "null"]
+    },
+    "superseded_by_document": {
+      "type": ["string", "null"]
     },
     "licence_or_terms": {
       "type": "string",
       "minLength": 1
+    },
+    "text_rights": {
+      "$ref": "#/$defs/documentTextRights"
+    },
+    "languages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": ["en", "kn"]
+      }
+    },
+    "official_url": {
+      "type": ["string", "null"]
+    },
+    "mirror_urls": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "copies": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/documentCopy"
+      }
+    },
+    "cited_provisions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/documentCitedProvision"
+      }
     },
     "notified_date": {
       "type": ["string", "null"],
@@ -105,11 +179,11 @@
       "minLength": 10
     },
     "sha256": {
-      "type": "string",
+      "type": ["string", "null"],
       "pattern": "^[a-f0-9]{64}$"
     },
     "bytes": {
-      "type": "integer",
+      "type": ["integer", "null"],
       "minimum": 0
     },
     "page_count": {
@@ -117,7 +191,77 @@
       "minimum": 1
     },
     "is_scanned": {
-      "type": "boolean"
+      "type": ["boolean", "null"]
+    }
+  },
+  "$defs": {
+    "documentTextRights": {
+      "type": "object",
+      "title": "DocumentTextRights",
+      "additionalProperties": false,
+      "required": ["mode", "reason"],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["full_text", "reference_only"]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "documentCopy": {
+      "type": "object",
+      "title": "DocumentCopy",
+      "additionalProperties": false,
+      "required": ["url", "path", "sha256", "retrieved_at"],
+      "properties": {
+        "url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "retrieved_at": {
+          "type": "string",
+          "minLength": 10
+        }
+      }
+    },
+    "documentCitedProvision": {
+      "type": "object",
+      "title": "DocumentCitedProvision",
+      "additionalProperties": false,
+      "required": ["clause", "cited_by"],
+      "properties": {
+        "part": {
+          "type": ["string", "null"]
+        },
+        "clause": {
+          "type": "string",
+          "minLength": 1
+        },
+        "topic": {
+          "type": ["string", "null"]
+        },
+        "cited_by": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "where_to_obtain": {
+          "type": ["string", "null"]
+        }
+      }
     }
   }
 }

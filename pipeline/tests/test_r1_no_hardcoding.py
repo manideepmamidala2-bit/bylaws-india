@@ -26,28 +26,63 @@ SENTINEL_TERMS: tuple[str, ...] = (
 
 GENERIC_CONFIG_VALUES: frozenset[str] = frozenset(
     {
+        "1.2",
         "in",
         "ka",
         "xx",
         "yy",
+        "en",
+        "kn",
+        "public",
+        "test",
+        "cc by 4.0",
+        "cc-by-4.0",
+        "cc0-1.0",
+        "odbl-1.0",
         "residential",
         "commercial",
         "industrial",
         "municipal",
         "planning",
         "state",
+        "state_rules",
+        "statute",
+        "orders",
+        "overlay",
         "national",
+        "national_reference",
         "in_force",
         "draft",
         "superseded",
         "withdrawn",
+        "status_unknown",
+        "full_text",
+        "reference_only",
         "base",
         "amendment",
         "regulation",
+        "regulations",
+        "act",
+        "rules",
+        "bye_laws",
+        "notification",
+        "government_order",
+        "circular",
+        "map",
+        "standard_reference",
         "boundary",
         "reference",
         "imported",
         "traced",
+        "vector_pdf",
+        "grid_georeferenced_raster",
+        "osm_gcp_raster",
+        "corporation",
+        "gba_zones",
+        "wards",
+        "official_boundary",
+        "master_plan_zone",
+        "derived_overlay",
     }
 )
 
@@ -93,7 +128,7 @@ def _extract_strings_from_yaml_value(value: Any) -> set[str]:
 
 
 def collect_prohibited_terms(jurisdictions_dir: Path | None = None) -> set[str]:
-    """Collect prohibited strings from all non-fixture jurisdiction configs (country != 'XX') plus sentinels."""
+    """Collect prohibited strings from all public jurisdiction configs (visibility != 'test') plus sentinels."""
     terms: set[str] = {term.lower() for term in SENTINEL_TERMS}
     base_dir = jurisdictions_dir or (REPO_ROOT / "jurisdictions")
     if not base_dir.is_dir():
@@ -101,7 +136,7 @@ def collect_prohibited_terms(jurisdictions_dir: Path | None = None) -> set[str]:
 
     for yaml_path in sorted(base_dir.glob("*.yaml")):
         raw = yaml.safe_load(yaml_path.read_text(encoding="utf-8"))
-        if not isinstance(raw, dict) or raw.get("country") == "XX":
+        if not isinstance(raw, dict) or raw.get("visibility") == "test":
             continue
         for extracted in _extract_strings_from_yaml_value(raw):
             terms.add(extracted.lower())

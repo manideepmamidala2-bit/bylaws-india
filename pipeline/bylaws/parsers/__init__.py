@@ -46,7 +46,9 @@ def run_parse_stage(
 
     parsed_count = 0
     for doc in config.documents:
-        if doc.role in {"boundary", "reference"}:
+        if doc.role in {"boundary", "reference"} or doc.doc_type in {"map", "standard_reference"}:
+            continue
+        if doc.text_rights is not None and doc.text_rights.mode == "reference_only":
             continue
         pdf_path = raw_dir / f"{doc.id}.pdf"
         if not pdf_path.is_file():

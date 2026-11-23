@@ -54,6 +54,9 @@ SCHEMA_FILES: tuple[str, ...] = (
     "declarations.schema.json",
     "amendments.schema.json",
     "manifest.schema.json",
+    "consolidated.schema.json",
+    "geo-layers.schema.json",
+    "clause-zone-tags.schema.json",
 )
 
 

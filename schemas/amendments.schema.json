@@ -2,14 +2,14 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bylaws-india.local/schemas/amendments.schema.json",
   "title": "JurisdictionAmendments",
-  "description": "Linked amendment instructions between amending clauses and target base clauses (Schema v1.1).",
+  "description": "Linked amendment instructions between amending clauses and target base clauses (Schema v1.2).",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "jurisdiction", "links"],
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "1.1"
+      "const": "1.2"
     },
     "jurisdiction": {
       "type": "string",
@@ -43,6 +43,12 @@
           "type": "string",
           "pattern": "^[a-z0-9]+(-[a-z0-9]+)*:.+$"
         },
+        "amending_doc_id": {
+          "type": ["string", "null"]
+        },
+        "target_doc_id": {
+          "type": ["string", "null"]
+        },
         "action": {
           "type": "string",
           "enum": [
@@ -50,8 +56,13 @@
             "insert_after",
             "insert_before",
             "omit",
-            "modify"
+            "modify",
+            "renumber"
           ]
+        },
+        "effective_date": {
+          "type": ["string", "null"],
+          "default": null
         },
         "confidence": {
           "type": "string",
@@ -62,6 +73,9 @@
           "enum": ["unverified", "machine_checked", "human_verified"]
         },
         "note": {
+          "type": ["string", "null"]
+        },
+        "summary": {
           "type": ["string", "null"]
         }
       }

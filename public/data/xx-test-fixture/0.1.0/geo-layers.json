@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.2",
+  "jurisdiction": "xx-test-fixture",
+  "layers": [
+    {
+      "layer_id": "fixture-corp-boundary",
+      "title": "Synthetic Test Jurisdiction Official Boundary (fixture-corp-boundary)",
+      "kind": "official_boundary",
+      "source": "pipeline/tests/fixtures/fixture-boundary.kml",
+      "method": "Official boundary polygon extraction (EPSG:4326)",
+      "accuracy_m": 1.0,
+      "derived": false,
+      "file": "boundary.geojson",
+      "external_url": null,
+      "feature_count": 1,
+      "notes": null
+    },
+    {
+      "layer_id": "master-plan-zones",
+      "title": "Synthetic Test Jurisdiction Master Plan Land Use Zones",
+      "kind": "master_plan_zone",
+      "source": "pipeline/tests/fixtures/fixture-imported-zones.geojson",
+      "method": "Master plan land-use zone extraction clipped to corporation boundary (EPSG:4326)",
+      "accuracy_m": 5.0,
+      "derived": true,
+      "file": "zones.geojson",
+      "external_url": null,
+      "feature_count": 2,
+      "notes": "Derived by this project from official master plan sheets/layers."
+    }
+  ]
+}

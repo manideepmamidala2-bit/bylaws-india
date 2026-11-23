@@ -2,14 +2,14 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bylaws-india.local/schemas/manifest.schema.json",
   "title": "ReleaseManifest",
-  "description": "Published release manifest at Blob/static root manifest.json (Schema v1.1).",
+  "description": "Published release manifest at Blob/static root manifest.json (Schema v1.2).",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "jurisdictions"],
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "1.1"
+      "const": "1.2"
     },
     "jurisdictions": {
       "type": "array",
@@ -39,6 +39,11 @@
             "type": "string",
             "minLength": 1
           }
+        },
+        "visibility": {
+          "type": "string",
+          "enum": ["public", "test"],
+          "default": "public"
         },
         "latest_release": {
           "type": "string",
@@ -81,6 +86,9 @@
           "type": "string",
           "minLength": 1
         },
+        "consolidated": {
+          "type": ["string", "null"]
+        },
         "zones": {
           "type": "string",
           "minLength": 1
@@ -88,6 +96,30 @@
         "boundary": {
           "type": "string",
           "minLength": 1
+        },
+        "gba_zones": {
+          "type": ["string", "null"]
+        },
+        "wards": {
+          "type": ["string", "null"]
+        },
+        "planning_districts": {
+          "type": ["string", "null"]
+        },
+        "overlays": {
+          "type": ["string", "null"]
+        },
+        "geo_layers": {
+          "type": ["string", "null"]
+        },
+        "clause_zone_tags": {
+          "type": ["string", "null"]
+        },
+        "sources_json": {
+          "type": ["string", "null"]
+        },
+        "sources_csv": {
+          "type": ["string", "null"]
         },
         "review_images": {
           "type": "array",

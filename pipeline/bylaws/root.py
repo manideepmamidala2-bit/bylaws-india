@@ -4,14 +4,42 @@ from __future__ import annotations
 
 import os
 import urllib.parse
+from datetime import UTC, datetime
 from pathlib import Path
 
 import click
 
 ROOT_MARKER = "bylaws.toml"
 PACKAGE_REPO_ROOT = Path(__file__).resolve().parents[2]
+DEFAULT_SOURCE_DATE_EPOCH = 1795392000  # 2026-11-23T00:00:00Z
 
 _CLI_ROOT: Path | None = None
+
+
+def _resolve_epoch_datetime() -> datetime:
+    raw_epoch = os.environ.get("SOURCE_DATE_EPOCH", "").strip()
+    if raw_epoch:
+        try:
+            epoch_val = int(raw_epoch)
+        except ValueError as exc:
+            raise click.ClickException(
+                f"Invalid SOURCE_DATE_EPOCH={raw_epoch!r}: expected integer Unix timestamp."
+            ) from exc
+    else:
+        epoch_val = DEFAULT_SOURCE_DATE_EPOCH
+    return datetime.fromtimestamp(epoch_val, tz=UTC)
+
+
+def get_deterministic_timestamp() -> str:
+    """Return an ISO-8601 UTC timestamp derived from `SOURCE_DATE_EPOCH` (Rule R6)."""
+    return _resolve_epoch_datetime().strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def get_deterministic_zip_date_time() -> tuple[int, int, int, int, int, int]:
+    """Return a 6-tuple `(Y, M, D, H, M, S)` for deterministic ZIP archives from `SOURCE_DATE_EPOCH`."""
+    dt = _resolve_epoch_datetime()
+    year = max(1980, dt.year)
+    return (year, dt.month, dt.day, dt.hour, dt.minute, dt.second)
 
 
 def set_cli_root(root: Path | str | None) -> None:
