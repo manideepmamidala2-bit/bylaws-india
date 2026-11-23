@@ -1,6 +1,6 @@
 {
   "type": "FeatureCollection",
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "features": [
     {
       "type": "Feature",
@@ -33,11 +33,15 @@
       },
       "properties": {
         "zone_id": "fixture-pd-01:z0001",
+        "record_id": "fixture-pd-01:z0001@v1",
+        "supersedes": null,
+        "superseded_by": null,
         "zone_code": "Z1",
         "zone_label": "Residential",
         "source_map": "fixture-pd-01",
-        "georef_run": "georef-run-001",
-        "extraction_method": "colour_segmentation",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Synthetic Planning Board Open GIS Portal (CC BY 4.0)",
         "area_sq_m": 14250.5,
         "verification": "machine_checked",
         "notes": null
@@ -74,11 +78,15 @@
       },
       "properties": {
         "zone_id": "fixture-pd-01:z0002",
+        "record_id": "fixture-pd-01:z0002@v1",
+        "supersedes": null,
+        "superseded_by": null,
         "zone_code": "Z2",
         "zone_label": "Mixed Use",
         "source_map": "fixture-pd-01",
-        "georef_run": "georef-run-001",
-        "extraction_method": "colour_segmentation",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Synthetic Planning Board Open GIS Portal (CC BY 4.0)",
         "area_sq_m": 15800.0,
         "verification": "human_verified",
         "notes": "Verified against synthetic atlas."

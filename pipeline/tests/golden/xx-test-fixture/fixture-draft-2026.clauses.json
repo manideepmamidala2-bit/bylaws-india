@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.1",
+  "doc_id": "fixture-draft-2026",
+  "jurisdiction": "xx-test-fixture",
+  "legal_status": "draft",
+  "generated": {
+    "parser": "pypdfium2",
+    "parser_version": "5.0.0",
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "clauses": [
+    {
+      "clause_id": "fixture-draft-2026:D1.1",
+      "record_id": "fixture-draft-2026:D1.1@v1",
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "draft",
+      "number": "D1.1",
+      "title": "Proposed Transit Overlay",
+      "level": 2,
+      "parent_id": null,
+      "order": 0,
+      "text": "Plots in zone Z2 within 200 metres of a transit corridor are proposed to receive an additional 0.50 FAR bonus (draft for public comment).",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "fixture-draft-2026",
+          "page": 1,
+          "bbox": [
+            0.0538,
+            0.0818,
+            0.947,
+            0.1144
+          ],
+          "text_excerpt": "D1.1 Proposed Transit Overlay: Plots in zone Z2 within 200 metres of"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [
+        "Z2"
+      ],
+      "verification": "machine_checked"
+    }
+  ]
+}

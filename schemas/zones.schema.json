@@ -2,10 +2,10 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bylaws-india.local/schemas/zones.schema.json",
   "title": "ZonesFeatureCollection",
-  "description": "GeoJSON FeatureCollection of zoning polygons in data/processed/<jurisdiction>/zones.geojson (Phase 1 Plan §7.4).",
+  "description": "GeoJSON FeatureCollection of zoning polygons in data/processed/<jurisdiction>/zones.geojson (Schema v1.1).",
   "type": "object",
   "additionalProperties": false,
-  "required": ["type", "features"],
+  "required": ["type", "schema_version", "features"],
   "properties": {
     "type": {
       "type": "string",
@@ -13,7 +13,7 @@
     },
     "schema_version": {
       "type": "string",
-      "const": "1.0"
+      "const": "1.1"
     },
     "bbox": {
       "type": "array",
@@ -31,8 +31,105 @@
     }
   },
   "$defs": {
+    "zoneFeatureProperties": {
+      "type": "object",
+      "title": "ZoneFeatureProperties",
+      "additionalProperties": false,
+      "required": [
+        "zone_id",
+        "record_id",
+        "supersedes",
+        "superseded_by",
+        "zone_code",
+        "zone_label",
+        "source_map",
+        "georef_run",
+        "extraction_method",
+        "source_attribution",
+        "area_sq_m",
+        "verification",
+        "notes"
+      ],
+      "properties": {
+        "zone_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*:z[0-9a-zA-Z_-]+$"
+        },
+        "record_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*:z[0-9a-zA-Z_-]+@v[0-9]+$"
+        },
+        "supersedes": {
+          "type": ["string", "null"]
+        },
+        "superseded_by": {
+          "type": ["string", "null"]
+        },
+        "zone_code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "zone_label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_map": {
+          "type": "string",
+          "minLength": 1
+        },
+        "georef_run": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extraction_method": {
+          "type": "string",
+          "enum": [
+            "colour_segmentation",
+            "road_outline_fallback",
+            "manual",
+            "imported"
+          ]
+        },
+        "source_attribution": {
+          "type": ["string", "null"]
+        },
+        "area_sq_m": {
+          "type": "number",
+          "minimum": 0
+        },
+        "verification": {
+          "type": "string",
+          "enum": [
+            "unverified",
+            "machine_checked",
+            "human_verified",
+            "rejected"
+          ]
+        },
+        "notes": {
+          "type": ["string", "null"]
+        }
+      },
+      "if": {
+        "properties": {
+          "extraction_method": {
+            "const": "imported"
+          }
+        },
+        "required": ["extraction_method"]
+      },
+      "then": {
+        "properties": {
+          "source_attribution": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
     "zoneFeature": {
       "type": "object",
+      "title": "ZoneFeature",
       "additionalProperties": false,
       "required": ["type", "geometry", "properties"],
       "properties": {
@@ -47,65 +144,7 @@
           "$ref": "#/$defs/polygonOrMultiPolygon"
         },
         "properties": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": [
-            "zone_id",
-            "zone_code",
-            "zone_label",
-            "source_map",
-            "georef_run",
-            "extraction_method",
-            "area_sq_m",
-            "verification",
-            "notes"
-          ],
-          "properties": {
-            "zone_id": {
-              "type": "string",
-              "pattern": "^[a-z0-9]+(-[a-z0-9]+)*:z[0-9a-zA-Z_-]+$"
-            },
-            "zone_code": {
-              "type": "string",
-              "minLength": 1
-            },
-            "zone_label": {
-              "type": "string",
-              "minLength": 1
-            },
-            "source_map": {
-              "type": "string",
-              "minLength": 1
-            },
-            "georef_run": {
-              "type": "string",
-              "minLength": 1
-            },
-            "extraction_method": {
-              "type": "string",
-              "enum": [
-                "colour_segmentation",
-                "road_outline_fallback",
-                "manual"
-              ]
-            },
-            "area_sq_m": {
-              "type": "number",
-              "minimum": 0
-            },
-            "verification": {
-              "type": "string",
-              "enum": [
-                "unverified",
-                "machine_checked",
-                "human_verified",
-                "rejected"
-              ]
-            },
-            "notes": {
-              "type": ["string", "null"]
-            }
-          }
+          "$ref": "#/$defs/zoneFeatureProperties"
         }
       }
     },
@@ -124,47 +163,56 @@
         "$ref": "#/$defs/position"
       }
     },
+    "polygonGeometry": {
+      "type": "object",
+      "title": "PolygonGeometry",
+      "additionalProperties": false,
+      "required": ["type", "coordinates"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "Polygon"
+        },
+        "coordinates": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/linearRing"
+          }
+        }
+      }
+    },
+    "multiPolygonGeometry": {
+      "type": "object",
+      "title": "MultiPolygonGeometry",
+      "additionalProperties": false,
+      "required": ["type", "coordinates"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "MultiPolygon"
+        },
+        "coordinates": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/linearRing"
+            }
+          }
+        }
+      }
+    },
     "polygonOrMultiPolygon": {
+      "title": "ZoneGeometry",
       "oneOf": [
         {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["type", "coordinates"],
-          "properties": {
-            "type": {
-              "type": "string",
-              "const": "Polygon"
-            },
-            "coordinates": {
-              "type": "array",
-              "minItems": 1,
-              "items": {
-                "$ref": "#/$defs/linearRing"
-              }
-            }
-          }
+          "$ref": "#/$defs/polygonGeometry"
         },
         {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["type", "coordinates"],
-          "properties": {
-            "type": {
-              "type": "string",
-              "const": "MultiPolygon"
-            },
-            "coordinates": {
-              "type": "array",
-              "minItems": 1,
-              "items": {
-                "type": "array",
-                "minItems": 1,
-                "items": {
-                  "$ref": "#/$defs/linearRing"
-                }
-              }
-            }
-          }
+          "$ref": "#/$defs/multiPolygonGeometry"
         }
       ]
     }

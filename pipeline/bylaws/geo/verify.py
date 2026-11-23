@@ -6,5 +6,6 @@ from pathlib import Path
 
 
 def generate_map_verification_report(jurisdiction_id: str, output_path: Path) -> None:
-    """Placeholder interface for generating map-verification.md."""
-    raise NotImplementedError("Implemented in Milestone M6.")
+    """Placeholder interface for generating map-verification.md (Milestone M6)."""
+    _ = (jurisdiction_id, output_path)
+    raise NotImplementedError("not implemented: geo.verify")

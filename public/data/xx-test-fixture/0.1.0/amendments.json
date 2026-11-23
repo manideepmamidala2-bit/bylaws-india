@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.1",
+  "jurisdiction": "xx-test-fixture",
+  "links": [
+    {
+      "amending_clause": "fixture-amend-2024:2",
+      "target_clause": "fixture-base-2020:1.2",
+      "action": "substitute",
+      "confidence": "high",
+      "verification": "unverified"
+    },
+    {
+      "amending_clause": "fixture-amend-2024:3",
+      "target_clause": "fixture-base-2020:2.2",
+      "action": "insert_after",
+      "confidence": "high",
+      "verification": "unverified"
+    }
+  ]
+}

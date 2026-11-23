@@ -9,7 +9,9 @@ from typing import Any
 import yaml
 from jsonschema import Draft202012Validator
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+from bylaws.root import resolve_repo_root
+
+REPO_ROOT = resolve_repo_root()
 SCHEMAS_DIR = REPO_ROOT / "schemas"
 
 SCHEMA_NAMES: tuple[str, ...] = (
@@ -19,6 +21,8 @@ SCHEMA_NAMES: tuple[str, ...] = (
     "zones",
     "overrides",
     "manifest",
+    "declarations",
+    "amendments",
 )
 
 
@@ -36,7 +40,7 @@ class SchemaValidationError(ValueError):
 
 def load_schema(schema_name: str, schemas_dir: Path | None = None) -> dict[str, Any]:
     """Load a JSON schema dictionary by short name (e.g. 'jurisdiction')."""
-    base_dir = schemas_dir or SCHEMAS_DIR
+    base_dir = schemas_dir or (resolve_repo_root() / "schemas")
     filename = (
         schema_name if schema_name.endswith(".schema.json") else f"{schema_name}.schema.json"
     )

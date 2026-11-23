@@ -1,0 +1,73 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "ZONE_CD": "Z1",
+        "ZONE_NAME": "Residential"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              10.001,
+              10.001
+            ],
+            [
+              10.009,
+              10.001
+            ],
+            [
+              10.009,
+              10.019
+            ],
+            [
+              10.001,
+              10.019
+            ],
+            [
+              10.001,
+              10.001
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ZONE_CD": "Z2",
+        "ZONE_NAME": "Mixed Use"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              10.01,
+              10.001
+            ],
+            [
+              10.022,
+              10.001
+            ],
+            [
+              10.022,
+              10.019
+            ],
+            [
+              10.01,
+              10.019
+            ],
+            [
+              10.01,
+              10.001
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

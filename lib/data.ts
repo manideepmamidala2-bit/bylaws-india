@@ -1,122 +1,78 @@
 /**
- * Centralized data client for published building bylaws datasets (Plan §10).
+ * Centralized data client for published building bylaws datasets (Plan v1.1 §S1b / §S3).
  *
- * All components and pages read manifest and dataset files exclusively through
- * this module. No jurisdiction ID, city name, or storage URL is hard-coded here.
+ * Types are generated from `schemas/*.schema.json` into `lib/types/generated.ts`
+ * and re-exported here with view-level helpers.
  */
 
-export type LegalStatus = "in_force" | "draft" | "superseded" | "withdrawn";
+import type {
+  AmendmentLink,
+  ClauseCitation,
+  ClauseNode as GeneratedClauseNode,
+  ClauseTable,
+  ClauseTree as ClauseTreeDocument,
+  DocumentMetadata,
+  JurisdictionAmendments,
+  JurisdictionDeclarations,
+  JurisdictionManifest as JurisdictionSummary,
+  ReleaseDrafts,
+  ReleaseEntry,
+  ReleaseFiles,
+  ReleaseManifest,
+  ZoneFeature,
+  ZoneFeatureProperties,
+  ZonesFeatureCollection,
+} from "@/lib/types/generated";
 
-export type VerificationStatus =
-  | "unverified"
-  | "machine_checked"
-  | "human_verified"
-  | "rejected";
+export type {
+  AmendmentLink,
+  ClauseCitation,
+  ClauseTable,
+  ClauseTreeDocument,
+  DocumentMetadata,
+  JurisdictionAmendments,
+  JurisdictionDeclarations,
+  JurisdictionSummary,
+  ReleaseDrafts,
+  ReleaseEntry,
+  ReleaseFiles,
+  ReleaseManifest,
+  ZoneFeature,
+  ZoneFeatureProperties,
+  ZonesFeatureCollection,
+};
 
-export interface ReleaseFiles {
-  documents: string;
-  clauses: string[];
-  amendments: string;
-  zones: string;
-  boundary: string;
-  review_images: string[];
-}
+export type LegalStatus = GeneratedClauseNode["legal_status"];
+export type DisplayLegalStatus = LegalStatus | "status_unknown";
+export type VerificationStatus = ZoneFeatureProperties["verification"];
 
-export interface ReleaseEntry {
-  version: string;
-  released_at: string;
-  files: ReleaseFiles;
-  drafts: {
-    clauses: string[];
-  };
-  changelog: string;
-}
-
-export interface JurisdictionSummary {
-  id: string;
-  name: string;
-  latest_release: string;
-  releases: ReleaseEntry[];
-}
-
-export interface ReleaseManifest {
-  schema_version: string;
-  jurisdictions: JurisdictionSummary[];
-}
-
-export interface ClauseTable {
-  table_id: string;
-  caption: string | null;
-  headers: string[];
-  rows: string[][];
-  page: number;
-}
-
-export interface ClauseNode {
-  clause_id: string;
-  number: string;
-  title: string | null;
-  level: number;
-  parent_id: string | null;
-  order: number;
-  text: string;
-  tables: ClauseTable[];
-  pages: number[];
-  cross_references: string[];
-  amended_by: string[];
-  applies_to_zones: string[];
-  verification: Exclude<VerificationStatus, "rejected">;
+/**
+ * ClauseNode with optional UI-Hydrated document source URL and partial tolerance
+ * for defensive R8 rendering when inspecting incomplete records.
+ */
+export type ClauseNode = Omit<GeneratedClauseNode, "legal_status" | "citations"> & {
+  legal_status?: LegalStatus | null;
+  citations?: ClauseCitation[];
   source_url?: string;
   doc_id?: string;
-  legal_status?: LegalStatus;
-}
+};
 
-export interface ClauseTreeDocument {
-  schema_version: string;
-  doc_id: string;
-  jurisdiction: string;
-  legal_status: LegalStatus;
-  generated: {
-    parser: string;
-    parser_version: string;
-    pipeline_version: string;
-    generated_at: string;
-  };
-  clauses: ClauseNode[];
-}
+const DEFAULT_DATA_BASE_URL = "/data";
 
-export interface ZoneFeatureProperties {
-  zone_id: string;
-  zone_code: string;
-  zone_label: string;
-  source_map: string;
-  georef_run: string;
-  extraction_method: "colour_segmentation" | "road_outline_fallback" | "manual";
-  area_sq_m: number;
-  verification: VerificationStatus;
-  notes: string | null;
+export function getDataBaseUrl(): string {
+  const configured = process.env.NEXT_PUBLIC_DATA_BASE_URL?.trim();
+  if (configured && configured.length > 0) {
+    return configured.replace(/\/+$/, "");
+  }
+  return DEFAULT_DATA_BASE_URL;
 }
-
-export interface ZoneFeature {
-  type: "Feature";
-  geometry: {
-    type: "Polygon" | "MultiPolygon";
-    coordinates: number[][][] | number[][][][];
-  };
-  properties: ZoneFeatureProperties;
-}
-
-export interface ZonesFeatureCollection {
-  type: "FeatureCollection";
-  schema_version?: string;
-  features: ZoneFeature[];
-}
-
-const DEFAULT_MANIFEST_PATH = "/data/manifest.json";
 
 export function getManifestUrl(): string {
-  const configured = process.env.NEXT_PUBLIC_MANIFEST_URL?.trim();
-  return configured && configured.length > 0 ? configured : DEFAULT_MANIFEST_PATH;
+  const explicitManifest = process.env.NEXT_PUBLIC_MANIFEST_URL?.trim();
+  if (explicitManifest && explicitManifest.length > 0) {
+    return explicitManifest;
+  }
+  return `${getDataBaseUrl()}/manifest.json`;
 }
 
 export async function fetchManifest(
