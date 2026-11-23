@@ -1,0 +1,88 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f5f3ed;--paper2:#efeee8;--ink:#080909;--ink2:#171917;--muted:#5b5e56;--rule:#c8ccc0;--rule2:#e5e6de;--accent:#ff6b52;
+--display:'Inter Tight',sans-serif;--serif:'Source Serif 4',serif;--mono:'JetBrains Mono',monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--display);width:1280px;height:800px;overflow:hidden}
+.mono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.15em;font-size:10.5px;color:var(--muted)}
+.top{display:flex;justify-content:space-between;align-items:center;height:44px;padding:0 28px;border-bottom:1px solid var(--ink)}
+.top .brand{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase}
+.top nav{display:flex;gap:26px}.top nav span.on{color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:2px}
+.strip{height:28px;display:flex;align-items:center;gap:10px;padding:0 28px;border-bottom:1px solid var(--rule);color:var(--ink)}
+.strip i{width:6px;height:6px;background:var(--accent);border-radius:50%;display:inline-block}
+.main{display:grid;grid-template-columns:1fr 450px;height:728px}
+.left{border-right:1px solid var(--ink);display:flex;flex-direction:column}
+.head{padding:20px 28px 14px;border-bottom:1px solid var(--rule)}
+.head h1{font-size:38px;font-weight:600;letter-spacing:-.05em;line-height:1}
+.head .meta{display:flex;gap:26px;margin-top:11px}.head .meta b{color:var(--ink);font-weight:500}
+.cov{padding:9px 28px;border-bottom:1px solid var(--rule);font-family:var(--serif);font-size:13px;color:var(--muted)}
+.cov b{font-family:var(--mono);font-weight:400;font-size:10px;letter-spacing:.14em;color:var(--ink);margin-right:8px}
+.map{flex:1;position:relative;background:var(--paper2)}
+.map svg{position:absolute;inset:0;width:100%;height:100%}
+.legend{position:absolute;left:20px;bottom:20px;background:var(--paper);border:1px solid var(--ink);padding:12px 14px;width:300px}
+.legend div{display:flex;align-items:center;gap:10px;margin-top:7px;font-size:12.5px}
+.legend s{width:14px;height:14px;border:1px solid var(--ink);display:inline-block}
+.legend .code{font-family:var(--mono);font-size:11px;width:22px}
+.ctl{position:absolute;right:20px;top:20px;display:flex;gap:8px}
+.pill{border:1px solid var(--ink);border-radius:999px;padding:6px 14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;background:var(--paper)}
+.pill.dark{background:var(--ink);color:var(--paper)}
+.right{overflow:hidden}
+.rhead{padding:20px 26px 13px;border-bottom:1px solid var(--rule)}
+.rhead h2{font-size:26px;font-weight:600;letter-spacing:-.045em;margin-top:8px}
+.rhead p{font-family:var(--serif);font-size:14px;color:var(--muted);margin-top:3px}
+.grp{padding:9px 26px;border-bottom:1px solid var(--rule);background:var(--paper2)}
+.clause{padding:14px 26px;border-bottom:1px solid var(--rule)}
+.clause.sel{box-shadow:inset 3px 0 0 var(--accent)}
+.clause .row{display:flex;justify-content:space-between;align-items:baseline}
+.clause .num{font-family:var(--mono);font-size:12px;letter-spacing:.06em}
+.clause h3{font-size:16px;font-weight:600;letter-spacing:-.02em;margin:4px 0 5px}
+.clause p{font-family:var(--serif);font-size:14px;line-height:1.48;color:var(--ink2)}
+.tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;padding:2px 6px;border:1px solid var(--ink);color:var(--ink)}
+.src{display:flex;justify-content:space-between;margin-top:8px}
+.src a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.amend{margin-top:9px;padding-left:12px;border-left:2px solid var(--ink)}
+.amend p{font-size:13px;color:var(--muted)}
+</style></head><body>
+<div class="top"><span class="brand">Structured Building Bylaws</span>
+<nav class="mono"><span class="on">Area</span><span>Clauses</span><span>Review</span><span>Data</span></nav>
+<span class="mono">Release 0.1.0 · CC BY 4.0</span></div>
+<div class="strip mono"><i></i>Zones imported from Synthetic Planning Board Open GIS Portal (CC BY 4.0) · confirm a plot's zone with the planning authority</div>
+<div class="main">
+<div class="left">
+ <div class="head"><div class="mono">xx-test-fixture · Synthetic Fixture · Test City</div>
+  <h1>Synthetic Test Jurisdiction</h1>
+  <div class="meta mono"><span>Documents <b>3 in force · 1 draft</b></span><span>Clauses <b>10</b></span><span>Zones <b>2</b></span><span>Amendment links <b>2</b></span></div></div>
+ <div class="cov"><b>COVERAGE</b>Municipal regulations and their 2024 amendment. Not modelled: fire safety requirements of the National Building Code. Tables not yet extracted.</div>
+ <div class="map">
+  <svg viewBox="0 0 830 470" preserveAspectRatio="xMidYMid meet">
+   <defs><pattern id="h" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#5b5e56" stroke-width="1.3"/></pattern></defs>
+   <g stroke="#c8ccc0"><path d="M0 60 L830 70"/><path d="M0 410 L830 400"/><path d="M140 0 L150 470"/><path d="M690 0 L680 470"/></g>
+   <rect x="215" y="35" width="400" height="400" fill="none" stroke="#080909" stroke-width="1.6" stroke-dasharray="6 4"/>
+   <rect x="225" y="45" width="160" height="380" fill="#ff6b52" fill-opacity=".26" stroke="#ff6b52" stroke-width="2.4"/>
+   <rect x="415" y="45" width="190" height="380" fill="url(#h)" stroke="#080909" stroke-width="1"/>
+   <g font-family="JetBrains Mono" font-size="15" fill="#080909"><text x="292" y="240" font-weight="600">Z1</text><text x="495" y="240">Z2</text></g>
+   <text x="222" y="28" font-family="JetBrains Mono" font-size="10" letter-spacing="1.5" fill="#5b5e56">SYNTHETIC DISTRICT ONE · FIX-01</text>
+  </svg>
+  <div class="ctl"><span class="pill dark">Zones</span><span class="pill">Drafts off</span></div>
+  <div class="legend"><div class="mono" style="margin:0">Legend · from imported layer</div>
+   <div><s style="background:#ff6b5242;border-color:#ff6b52"></s><span class="code">Z1</span>Residential · selected</div>
+   <div><s style="background:repeating-linear-gradient(45deg,#5b5e56 0 1px,transparent 1px 5px)"></s><span class="code">Z2</span>Commercial and Mixed Use · v2</div></div>
+ </div>
+</div>
+<div class="right">
+ <div class="rhead"><div class="mono">Zone Z1 · 3 clauses · 1 document</div><h2>Residential</h2><p>Clauses tagged to this zone code, grouped by document.</p></div>
+ <div class="grp mono">Municipal · fixture-base-2020 · in force</div>
+ <div class="clause sel"><div class="row"><span class="num">1.1</span><span class="tag">In force</span></div>
+  <h3>Short Title, Extent and Commencement</h3><p>These regulations apply to all residential plots within the synthetic planning area.</p>
+  <div class="src mono"><span>p. 1 · human verified · v2</span><a>View source p. 1</a></div></div>
+ <div class="clause"><div class="row"><span class="num">2.2</span><span class="tag">In force</span></div>
+  <h3>Maximum Building Height</h3><p>No residential building in zone Z1 shall exceed 11.5 metres in height, subject to road width norms under clause 2.1.</p>
+  <div class="amend"><div class="mono" style="font-size:9.5px">fixture-amend-2024 · 3 · insert after</div><p>After clause 2.2, insert the following note on solar rooftop exemptions up to 1.8 metres.</p></div>
+  <div class="src mono"><span>p. 2 · machine checked</span><a>View source p. 2</a></div></div>
+ <div class="clause"><div class="row"><span class="num">2.1</span><span class="tag">In force</span></div>
+  <h3>Residential Setback Norms</h3><p>Every residential building in zone Z1 or Z2 shall provide minimum setbacks as per clause 1.1 and Table 2.1 below.</p></div>
+</div>
+</div>
+</body></html>
