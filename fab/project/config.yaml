@@ -9,18 +9,31 @@ project:
 
 source_paths:
     - pipeline/
-    - web/
+    - app/
+    - components/
+    - lib/
+    - public/
+    - __tests__/
     - schemas/
     - jurisdictions/
     - data/
     - .github/
     - .gitignore
+    - .vercelignore
     - .env.example
     - .envrc
+    - package.json
+    - package-lock.json
+    - tsconfig.json
+    - next.config.ts
+    - postcss.config.mjs
+    - eslint.config.mjs
+    - vitest.config.ts
+    - vitest.setup.ts
 
 test_paths:
     - pipeline/tests/
-    - web/__tests__/
+    - __tests__/
 
 # >>> fab reference (kit 2.31.0) >>> ---------------------------------------
 # Overridable fields you have NOT overridden, with current defaults.

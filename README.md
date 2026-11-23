@@ -7,7 +7,7 @@ A curated, versioned, machine-readable dataset and web viewer for Indian buildin
 The project is split into two strictly separated halves:
 
 1. **Local Pipeline (`pipeline/`)**: A `uv`-managed Python CLI (`bylaws <command> --jurisdiction <id>`) that acquires source documents, parses PDFs through swappable adapters, structures clause trees, detects amendments, extracts georeferenced zoning polygons, validates outputs against versioned JSON Schemas (`schemas/`), and publishes releases.
-2. **Read-Only Web App (`web/`)**: A Next.js (App Router, TypeScript, Tailwind CSS, Leaflet) application that reads published datasets via `manifest.json` (from Vercel Blob or local `/data/` static assets) with zero jurisdiction-specific constants in code.
+2. **Read-Only Web App (Repo Root: `app/`, `components/`, `lib/`)**: A Next.js (App Router, TypeScript, Tailwind CSS, Leaflet) application at the repository root (with `.vercelignore` excluding `pipeline/`) that reads published datasets via `manifest.json` (from Vercel Blob or local `/data/` static assets) with zero jurisdiction-specific constants in code.
 
 ## Non-Negotiable Rules (R1–R6)
 
@@ -29,10 +29,9 @@ uv run bylaws --help
 uv run pytest
 ```
 
-### Web Application (`web/`)
+### Web Application (Repo Root)
 
 ```bash
-cd web
 npm install
 npm run lint
 npm run typecheck

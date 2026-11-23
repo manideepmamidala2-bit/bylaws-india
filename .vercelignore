@@ -1,0 +1,14 @@
+# Local Python pipeline and non-web directories ignored by Vercel
+pipeline/
+data/
+docs/
+fab/
+schemas/
+jurisdictions/
+.opencode/
+.agents/
+.claude/
+.github/
+__tests__/
+vitest.config.ts
+vitest.setup.ts

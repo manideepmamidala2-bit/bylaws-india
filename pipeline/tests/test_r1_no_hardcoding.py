@@ -107,7 +107,7 @@ def collect_prohibited_terms(jurisdictions_dir: Path | None = None) -> set[str]:
 
 
 def iter_source_files(root_dirs: list[Path]) -> list[Path]:
-    """Return all non-ignored source files under `pipeline/bylaws/` and `web/`."""
+    """Return all non-ignored source files under `pipeline/bylaws/` and the root Next.js app."""
     collected: list[Path] = []
     for root_dir in root_dirs:
         if not root_dir.exists():
@@ -135,10 +135,12 @@ def test_r1_no_jurisdiction_constants_in_pipeline_or_web_source() -> None:
     source_files = iter_source_files(
         [
             REPO_ROOT / "pipeline" / "bylaws",
-            REPO_ROOT / "web",
+            REPO_ROOT / "app",
+            REPO_ROOT / "components",
+            REPO_ROOT / "lib",
         ]
     )
-    assert len(source_files) > 0, "Expected source files in pipeline/bylaws/ and web/"
+    assert len(source_files) > 0, "Expected source files in pipeline/bylaws/ and app/components/lib/"
 
     violations: list[str] = []
     for file_path in source_files:

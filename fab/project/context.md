@@ -5,14 +5,14 @@
 `bylaws-india` is a curated, versioned, machine-readable dataset and web viewer for Indian building and municipal bylaws. It follows a strict two-half architecture (see `docs/plan.md`):
 
 1. **Local Pipeline (`pipeline/`)**: A `uv`-managed Python CLI (`bylaws <command> --jurisdiction <id>`) that acquires source PDFs/maps, parses documents via swappable adapters, structures hierarchical clause trees, links amendments, georeferences zoning maps, applies committed YAML overrides, validates outputs against versioned JSON Schemas, and publishes releases.
-2. **Read-Only Web Application (`web/`)**: A Next.js (App Router, TypeScript, Tailwind CSS, Leaflet / `react-leaflet`) frontend that reads published JSON/GeoJSON datasets from `manifest.json` (via `NEXT_PUBLIC_MANIFEST_URL` or local `/data/manifest.json` fallback) with zero server-side processing or hard-coded jurisdictions.
+2. **Read-Only Web Application (Repo Root: `app/`, `components/`, `lib/`)**: A Next.js (App Router, TypeScript, Tailwind CSS, Leaflet / `react-leaflet`) frontend at the repository root (with `.vercelignore` excluding `pipeline/`) so Vercel deploys a single `bylaws-india` project. Reads published JSON/GeoJSON datasets from `manifest.json` (via `NEXT_PUBLIC_MANIFEST_URL` or local `/data/manifest.json` fallback) with zero server-side processing or hard-coded jurisdictions.
 
 ## Repository Layout
 
 - `schemas/` — Versioned JSON Schema (Draft 2020-12) contracts (`jurisdiction`, `document`, `clause-tree`, `zones`, `overrides`, `manifest`).
 - `jurisdictions/` — Per-jurisdiction declarative YAML configs (`_fixture-test.yaml` for tests; real jurisdictions such as `in-ka-bengaluru-south.yaml` added as data configs).
 - `pipeline/` — Python package (`bylaws`) managed with `uv` (`pyproject.toml`, `uv.lock`) and tested with `pytest`.
-- `web/` — Next.js TypeScript web app tested with `vitest`, ESLint, and `tsc --noEmit`.
+- `app/`, `components/`, `lib/`, `public/`, `__tests__/` — Root Next.js TypeScript web app tested with `vitest`, ESLint, and `tsc --noEmit`.
 - `data/overrides/<jurisdiction>/` — Committed YAML corrections, zone tags, and map curations (R6).
 - `data/reports/<jurisdiction>/` — Committed parser comparison, QA, and map verification reports.
 - `data/raw/`, `data/interim/`, `data/processed/` — Gitignored local pipeline working directories.
