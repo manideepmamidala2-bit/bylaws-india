@@ -217,51 +217,56 @@ Automated `axe-core` WCAG AA checks MUST run in `npm test` (and CI) across rende
 
 ### Functional Completeness
 
-- [ ] A-001 R1: All schemas in `schemas/` are at `schema_version: "1.2"` covering all Plan v2.0 §4 fields, and `make generate` produces `pipeline/bylaws/models/_generated.py` and `lib/types/generated.ts` with zero drift.
-- [ ] A-002 R2: `bylaws apply-overrides` is idempotent across repeated runs, preserves YAML order, applies `zone_fixes` and `map_curations` (or rejects unknown `map_id` curations loudly), and maintains R12 record version fields without mutating `legal_status`.
-- [ ] A-003 R3: `bylaws publish` fails on an unreadable `manifest.json`, preserves all existing jurisdictions and prior releases in `releases[]`, reads `licence` from config, exports `sources.json` and `sources.csv`, and contains no fixture literals.
-- [ ] A-004 R4: Zero `country == "XX"` branches exist in `pipeline/bylaws/`, timestamps derive deterministically from `SOURCE_DATE_EPOCH`, and parsed page artifacts record real installed parser package versions.
-- [ ] A-005 R5: `bylaws geo` reprojects geospatial sources with a declared CRS (such as `EPSG:32643`) to `EPSG:4326`, computes `area_sq_m` in UTM, and rejects sources without a declared CRS.
-- [ ] A-006 R6: `pipeline/tests/test_r4_licences.py` enforces an explicit permissive licence allowlist across Python and direct + transitive npm packages and rejects `GPLv3` and `UNKNOWN`.
-- [ ] A-007 R7: `structure.py` contains no fixture-only branches, accurately structures two-column pages, Roman-numeral chapters, scoped sub-items (`2.1(a)`), and tables (removed from prose), and matches hand-written golden files for `xx-test-fixture`.
-- [ ] A-008 R8: `jurisdictions/in-ka-bengaluru-south.yaml`, `docs/sources/in-ka-bengaluru-south.md`, and `data/reports/in-ka-bengaluru-south/source-discovery.md` cover the complete Bengaluru South source register across all 7 regulatory layers + reference data, with checksummed raw files or honest `unobtainable_documents` declarations.
-- [ ] A-009 R9: `recon.md`, `parser-comparison.md`, and `qa.md` exist in `data/reports/in-ka-bengaluru-south/`, every full-text source is structured with citations/bboxes, Kannada text is preserved verbatim (`language: "kn"`), and `nbc-2016` / `aai-cczm` are recorded as `reference_only`.
-- [ ] A-010 R10: `amendments.json` and `consolidated.json` link the `bbl-2003` and `rmp2015-zr` amendment chains and provide consolidated "as amended" clause records marked `derived: true` with applied amendment lists.
-- [ ] A-011 R11: `boundary.geojson`, `gba-zones.geojson`, `wards.geojson`, `planning-districts.geojson`, `zones.geojson`, `overlays.geojson`, `geo-layers.json`, and `map-verification.md` are published for `in-ka-bengaluru-south` with derived overlays labelled approximate.
-- [ ] A-012 R12: `clause-zone-tags.json` and clause `applies_to_zones` link every zone code, overlay, and `ALL` rule to applicable clauses with quoted reasons and `verification: "machine_checked"`.
-- [ ] A-013 R13: All 8 web routes (`/`, `/j/[id]`, `/j/[id]/sources`, `/j/[id]/documents/[doc]`, `/j/[id]/timeline`, `/j/[id]/review`, `/data`, `/about`, plus `/j/[id]/clauses`) render real data in the dg2n visual idiom with Leaflet polygons, R12 version disclosures, and R14 derived labels.
-- [ ] A-014 R14: Release `1.0.0` for `in-ka-bengaluru-south` is published in `public/data/`, production hides `visibility: "test"` jurisdictions while previews show them, and `axe-core` WCAG AA checks pass in CI.
+- [x] A-001 R1: All schemas in `schemas/` are at `schema_version: "1.2"` covering all Plan v2.0 §4 fields, and `make generate` produces `pipeline/bylaws/models/_generated.py` and `lib/types/generated.ts` with zero drift.
+- [x] A-002 R2: `bylaws apply-overrides` is idempotent across repeated runs, preserves YAML order, applies `zone_fixes` and `map_curations` (or rejects unknown `map_id` curations loudly), and maintains R12 record version fields without mutating `legal_status`.
+- [x] A-003 R3: `bylaws publish` fails on an unreadable `manifest.json`, preserves all existing jurisdictions and prior releases in `releases[]`, reads `licence` from config, exports `sources.json` and `sources.csv`, and contains no fixture literals.
+- [x] A-004 R4: Zero `country == "XX"` branches exist in `pipeline/bylaws/`, timestamps derive deterministically from `SOURCE_DATE_EPOCH`, and parsed page artifacts record real installed parser package versions.
+- [x] A-005 R5: `bylaws geo` reprojects geospatial sources with a declared CRS (such as `EPSG:32643`) to `EPSG:4326`, computes `area_sq_m` in UTM, and rejects sources without a declared CRS.
+- [x] A-006 R6: `pipeline/tests/test_r4_licences.py` enforces an explicit permissive licence allowlist across Python and direct + transitive npm packages and rejects `GPLv3` and `UNKNOWN`.
+- [x] A-007 R7: `structure.py` contains no fixture-only branches, accurately structures two-column pages, Roman-numeral chapters, scoped sub-items (`2.1(a)`), and tables (removed from prose), and matches hand-written golden files for `xx-test-fixture`.
+- [x] A-008 R8: `jurisdictions/in-ka-bengaluru-south.yaml`, `docs/sources/in-ka-bengaluru-south.md`, and `data/reports/in-ka-bengaluru-south/source-discovery.md` cover the complete Bengaluru South source register across all 7 regulatory layers + reference data, with checksummed raw files or honest `unobtainable_documents` declarations.
+- [x] A-009 R9: `recon.md`, `parser-comparison.md`, and `qa.md` exist in `data/reports/in-ka-bengaluru-south/`, every full-text source is structured with citations/bboxes, Kannada text is preserved verbatim (`language: "kn"`), and `nbc-2016` / `aai-cczm` are recorded as `reference_only`.
+- [x] A-010 R10: `amendments.json` and `consolidated.json` link the `bbl-2003` and `rmp2015-zr` amendment chains and provide consolidated "as amended" clause records marked `derived: true` with applied amendment lists.
+- [x] A-011 R11: `boundary.geojson`, `gba-zones.geojson`, `wards.geojson`, `planning-districts.geojson`, `zones.geojson`, `overlays.geojson`, `geo-layers.json`, and `map-verification.md` are published for `in-ka-bengaluru-south` with derived overlays labelled approximate.
+- [x] A-012 R12: `clause-zone-tags.json` and clause `applies_to_zones` link every zone code, overlay, and `ALL` rule to applicable clauses with quoted reasons and `verification: "machine_checked"`.
+- [x] A-013 R13: All 8 web routes (`/`, `/j/[id]`, `/j/[id]/sources`, `/j/[id]/documents/[doc]`, `/j/[id]/timeline`, `/j/[id]/review`, `/data`, `/about`, plus `/j/[id]/clauses`) render real data in the dg2n visual idiom with Leaflet polygons, R12 version disclosures, and R14 derived labels.
+- [x] A-014 R14: Release `1.0.0` for `in-ka-bengaluru-south` is published in `public/data/`, production hides `visibility: "test"` jurisdictions while previews show them, and `axe-core` WCAG AA checks pass in CI.
 
 ### Behavioral Correctness
 
-- [ ] A-015 R2: Running `bylaws apply-overrides` twice in a row on `xx-test-fixture` and `in-ka-bengaluru-south` leaves all output files byte-identical (no `@v1` -> `@v5` version inflation).
-- [ ] A-016 R4: Running `bylaws run-all` twice in a row produces identical SHA-256 checksums for every file including `.zip` bundles.
-- [ ] A-017 R13: Clauses with a newer `@v2` record version display only the current `@v2` record with `"v2 · corrected from v1"` expandable history and are never tagged with the `SUPERSEDED` legal status badge unless the clause itself was legally repealed.
+- [x] A-015 R2: Running `bylaws apply-overrides` twice in a row on `xx-test-fixture` and `in-ka-bengaluru-south` leaves all output files byte-identical (no `@v1` -> `@v5` version inflation).
+- [x] A-016 R4: Running `bylaws run-all` twice in a row produces identical SHA-256 checksums for every file including `.zip` bundles.
+- [x] A-017 R13: Clauses with a newer `@v2` record version display only the current `@v2` record with `"v2 · corrected from v1"` expandable history and are never tagged with the `SUPERSEDED` legal status badge unless the clause itself was legally repealed.
 
 ### Scenario Coverage
 
-- [ ] A-018 R6: Unit tests in `pipeline/tests/test_r4_licences.py` verify that planted `GPLv3`, `UNKNOWN`, and disallowed transitive npm licences fail the check.
-- [ ] A-019 R7: Unit tests in `pipeline/tests/test_structure.py` verify that mid-sentence measurements (`"3.5 m front setback"`) and years (`"2020 amendments"`) do not create false clauses, two-column text is read column-by-column, and tables are extracted out of prose.
-- [ ] A-020 R14: Frontend tests in `__tests__/` verify data rendering across the pages and run `axe-core` accessibility audits with zero violations.
+- [x] A-018 R6: Unit tests in `pipeline/tests/test_r4_licences.py` verify that planted `GPLv3`, `UNKNOWN`, and disallowed transitive npm licences fail the check.
+- [x] A-019 R7: Unit tests in `pipeline/tests/test_structure.py` verify that mid-sentence measurements (`"3.5 m front setback"`) and years (`"2020 amendments"`) do not create false clauses, two-column text is read column-by-column, and tables are extracted out of prose.
+- [x] A-020 R14: Frontend tests in `__tests__/` verify data rendering across the pages and run `axe-core` accessibility audits with zero violations.
 
 ### Edge Cases & Error Handling
 
-- [ ] A-021 R3: `bylaws publish` raises `ClickException` when `manifest.json` contains malformed JSON instead of silently overwriting it.
-- [ ] A-022 R5: `bylaws geo` raises `ClickException` or `ValueError` when a geospatial input file has no CRS metadata.
-- [ ] A-023 R2: `bylaws apply-overrides` raises `ClickException` when a `map_curation` references a `map_id` not present in the jurisdiction config.
+- [x] A-021 R3: `bylaws publish` raises `ClickException` when `manifest.json` contains malformed JSON instead of silently overwriting it.
+- [x] A-022 R5: `bylaws geo` raises `ClickException` or `ValueError` when a geospatial input file has no CRS metadata.
+- [x] A-023 R2: `bylaws apply-overrides` raises `ClickException` when a `map_curation` references a `map_id` not present in the jurisdiction config.
 
 ### Code Quality
 
-- [ ] A-024 Pattern consistency: New code follows naming and structural patterns of surrounding code
-- [ ] A-025 No unnecessary duplication: Existing utilities reused where applicable
-- [ ] A-026 Readability and maintainability: Code prioritizes clarity over cleverness and prefers composition over inheritance (`fab/project/code-quality.md` § Principles)
-- [ ] A-027 No god functions or magic literals: Functions remain focused and modular, and no jurisdiction/fixture magic literals leak into pipeline or web code (`fab/project/code-quality.md` § Anti-Patterns)
+- [x] A-024 Pattern consistency: New code follows naming and structural patterns of surrounding code
+- [x] A-025 No unnecessary duplication: Existing utilities reused where applicable
+- [x] A-026 Readability and maintainability: Code prioritizes clarity over cleverness and prefers composition over inheritance (`fab/project/code-quality.md` § Principles)
+- [x] A-027 No god functions or magic literals: Functions remain focused and modular, and no jurisdiction/fixture magic literals leak into pipeline or web code (`fab/project/code-quality.md` § Anti-Patterns)
 
 ## Notes
 
 - Check items as you review: `- [x]`
 - All acceptance items must pass before `/fab-continue` (hydrate)
 - If an item is not applicable, mark checked and prefix with **N/A**: `- [x] A-NNN **N/A**: {reason}`
+
+## Deletion Candidates
+
+- `pipeline/bylaws/geo/verify.py:16` (`generate_map_verification_report`) — Legacy M0/M1.5 stub superseded by `write_jurisdiction_map_verification_report` in the same module (currently retained only for the legacy stub assertion in `pipeline/tests/test_cli.py:106`).
+- `docs/plan.md` and `docs/plan-v1.1.md` — Superseded earlier planning specifications now replaced by `docs/plan-v2.md` (marked under `## Superseded Specifications` in `docs/specs/index.md`).
 
 ## Assumptions
 
