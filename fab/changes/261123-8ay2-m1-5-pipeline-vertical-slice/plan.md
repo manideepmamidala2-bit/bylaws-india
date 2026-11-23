@@ -156,48 +156,53 @@ The pipeline MUST implement:
 
 ### Functional Completeness
 
-- [ ] A-001 R1: `docs/plan-v1.1.md`, `LICENSE`, `LICENSE-DATA.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `CITATION.cff`, `docs/dependencies.md`, `docs/data-sources.md`, and `docs/decisions/002-open-data-and-indicodes-practices.md` exist and are complete
-- [ ] A-002 R2: Unimplemented CLI commands (`compare`, `parse --parser docling`, `geo` with `kind: "traced"`) exit non-zero with `not implemented:`, and `ClausePanel` / `ClauseTree` / `StatusBadge` have no `"in_force"` or page `1` fallbacks
-- [ ] A-003 R3: `bylaws.toml` and `pipeline/bylaws/root.py` resolve the repository root via `--root`, `BYLAWS_ROOT`, or upward walk; Python is pinned to `3.12`; and `jurisdictions/xx-test-fixture.yaml` replaces `_fixture-test.yaml`
-- [ ] A-004 R4: All 8 JSON Schemas (`jurisdiction`, `document`, `clause-tree`, `zones`, `overrides`, `manifest`, `declarations`, `amendments`) are at `schema_version: "1.1"` and documented in `docs/schema.md`
-- [ ] A-005 R5: `make generate` / `npm run generate` deterministically produces `pipeline/bylaws/models/_generated.py` and `lib/types/generated.ts` with zero `git diff`, and `pipeline/tests/test_r4_licences.py` passes
-- [ ] A-006 R6: `acquire`, `parse` (`pypdfium2`), `structure`, and `amendments` stages produce schema-valid outputs with normalized bbox citations and amendment links for `xx-test-fixture`
-- [ ] A-007 R7: `geo` (`imported` path) clips zones to `boundary.geojson` and computes `area_sq_m`, and `apply-overrides` enforces Rule R9 immutability by creating `@v2` superseding records for `human_verified` targets
-- [ ] A-008 R8: `validate` runs schema and QA checks, writes `data/processed/xx-test-fixture/declarations.json`, and commits `data/reports/xx-test-fixture/qa.md`
-- [ ] A-009 R9: `bylaws run-all --jurisdiction xx-test-fixture` executes all stages offline, populates `public/data/xx-test-fixture/0.1.0/` (including `.zip` and `SHA256SUMS`) and `public/data/manifest.json`, and passes `pipeline/tests/test_golden_fixture.py`
+- [x] A-001 R1: `docs/plan-v1.1.md`, `LICENSE`, `LICENSE-DATA.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `CITATION.cff`, `docs/dependencies.md`, `docs/data-sources.md`, and `docs/decisions/002-open-data-and-indicodes-practices.md` exist and are complete
+- [x] A-002 R2: Unimplemented CLI commands (`compare`, `parse --parser docling`, `geo` with `kind: "traced"`) exit non-zero with `not implemented:`, and `ClausePanel` / `ClauseTree` / `StatusBadge` have no `"in_force"` or page `1` fallbacks
+- [x] A-003 R3: `bylaws.toml` and `pipeline/bylaws/root.py` resolve the repository root via `--root`, `BYLAWS_ROOT`, or upward walk; Python is pinned to `3.12`; and `jurisdictions/xx-test-fixture.yaml` replaces `_fixture-test.yaml`
+- [x] A-004 R4: All 8 JSON Schemas (`jurisdiction`, `document`, `clause-tree`, `zones`, `overrides`, `manifest`, `declarations`, `amendments`) are at `schema_version: "1.1"` and documented in `docs/schema.md`
+- [x] A-005 R5: `make generate` / `npm run generate` deterministically produces `pipeline/bylaws/models/_generated.py` and `lib/types/generated.ts` with zero `git diff`, and `pipeline/tests/test_r4_licences.py` passes
+- [x] A-006 R6: `acquire`, `parse` (`pypdfium2`), `structure`, and `amendments` stages produce schema-valid outputs with normalized bbox citations and amendment links for `xx-test-fixture`
+- [x] A-007 R7: `geo` (`imported` path) clips zones to `boundary.geojson` and computes `area_sq_m`, and `apply-overrides` enforces Rule R9 immutability by creating `@v2` superseding records for `human_verified` targets
+- [x] A-008 R8: `validate` runs schema and QA checks, writes `data/processed/xx-test-fixture/declarations.json`, and commits `data/reports/xx-test-fixture/qa.md`
+- [x] A-009 R9: `bylaws run-all --jurisdiction xx-test-fixture` executes all stages offline, populates `public/data/xx-test-fixture/0.1.0/` (including `.zip` and `SHA256SUMS`) and `public/data/manifest.json`, and passes `pipeline/tests/test_golden_fixture.py`
 
 ### Behavioral Correctness
 
-- [ ] A-010 R2: Rendering `ClausePanel` or `ClauseTree` with a clause lacking `legal_status` displays `STATUS UNKNOWN`, and a clause with empty `citations` displays `"No source page recorded"` without an `<a>` element
-- [ ] A-011 R3: `pipeline/tests/test_r1_no_hardcoding.py` skips fixtures by `country == "XX"` (with no `_fixture-test` special case in schemas) and verifies zero occurrences of `"prototype"` or `"(example)"` in web source and jurisdiction names
-- [ ] A-012 R7: Applying a `clause_fix` or `zone_fix` to a `human_verified` record preserves the `@v1` record with `superseded_by` populated and appends a `@v2` record with `supersedes` populated
+- [x] A-010 R2: Rendering `ClausePanel` or `ClauseTree` with a clause lacking `legal_status` displays `STATUS UNKNOWN`, and a clause with empty `citations` displays `"No source page recorded"` without an `<a>` element
+- [x] A-011 R3: `pipeline/tests/test_r1_no_hardcoding.py` skips fixtures by `country == "XX"` (with no `_fixture-test` special case in schemas) and verifies zero occurrences of `"prototype"` or `"(example)"` in web source and jurisdiction names
+- [x] A-012 R7: Applying a `clause_fix` or `zone_fix` to a `human_verified` record preserves the `@v1` record with `superseded_by` populated and appends a `@v2` record with `supersedes` populated
 
 ### Removal Verification
 
-- [ ] A-013 R3: `jurisdictions/_fixture-test.yaml` is removed and `_fixture-test` no longer appears in `schemas/*.schema.json`
+- [x] A-013 R3: `jurisdictions/_fixture-test.yaml` is removed and `_fixture-test` no longer appears in `schemas/*.schema.json`
 
 ### Scenario Coverage
 
-- [ ] A-014 R4: `pipeline/tests/test_config_and_schemas.py` tests positive and negative validation across all 8 v1.1 schemas
-- [ ] A-015 R9: `pipeline/tests/test_golden_fixture.py` runs `run-all` in an isolated root and compares `clauses.json`, `amendments.json`, `zones.geojson`, and `declarations.json` against golden snapshots using `pytest.approx` for floating-point values
+- [x] A-014 R4: `pipeline/tests/test_config_and_schemas.py` tests positive and negative validation across all 8 v1.1 schemas
+- [x] A-015 R9: `pipeline/tests/test_golden_fixture.py` runs `run-all` in an isolated root and compares `clauses.json`, `amendments.json`, `zones.geojson`, and `declarations.json` against golden snapshots using `pytest.approx` for floating-point values
 
 ### Edge Cases & Error Handling
 
-- [ ] A-016 R3: `resolve_repo_root` raises a clear `ClickException` when invoked outside a directory tree containing `bylaws.toml` and without `--root` or `BYLAWS_ROOT`
-- [ ] A-017 R7: `apply-overrides` fails with `ClickException` when an override references a non-existent `clause_id` or `zone_id`
-- [ ] A-018 R8: `validate` fails with `ClickException` when required processed files are missing or when a clause has empty text or references a draft from an `in_force` document
+- [x] A-016 R3: `resolve_repo_root` raises a clear `ClickException` when invoked outside a directory tree containing `bylaws.toml` and without `--root` or `BYLAWS_ROOT`
+- [x] A-017 R7: `apply-overrides` fails with `ClickException` when an override references a non-existent `clause_id` or `zone_id`
+- [x] A-018 R8: `validate` fails with `ClickException` when required processed files are missing or when a clause has empty text or references a draft from an `in_force` document
 
 ### Code Quality
 
-- [ ] A-019 Pattern consistency: New Python and TypeScript modules follow existing project naming, typing, and error-handling conventions
-- [ ] A-020 No unnecessary duplication: Shared schema validation, root resolution, and generated models are reused across stages without duplicate definitions
-- [ ] A-021 Readability and maintainability: Pipeline stage functions are decomposed into focused helper functions with clear type annotations and no magic constants
+- [x] A-019 Pattern consistency: New Python and TypeScript modules follow existing project naming, typing, and error-handling conventions
+- [x] A-020 No unnecessary duplication: Shared schema validation, root resolution, and generated models are reused across stages without duplicate definitions
+- [x] A-021 Readability and maintainability: Pipeline stage functions are decomposed into focused helper functions with clear type annotations and no magic constants
 
 ## Notes
 
 - Check items as you review: `- [x]`
 - All acceptance items must pass before `/fab-continue` (hydrate)
 - If an item is not applicable, mark checked and prefix with **N/A**: `- [x] A-NNN **N/A**: {reason}`
+
+## Deletion Candidates
+
+- `pipeline/bylaws/schema_validator.py:15` (`SCHEMAS_DIR`) and `pipeline/bylaws/config.py:29` (`JURISDICTIONS_DIR`) — module-level path constants retained from M1 that are superseded by dynamic `resolve_repo_root()` lookups inside `load_schema()` and `load_jurisdiction_config()`
+- `pipeline/bylaws/publish.py:196` (`"_fixture-test"` in `manifest.json` filter) — one-time migration guard for the retired `_fixture-test` ID, redundant now that `public/data/manifest.json` uses `xx-test-fixture`
 
 ## Assumptions
 
