@@ -135,41 +135,45 @@ The `web/` directory MUST contain a Next.js (App Router, TypeScript, Tailwind CS
 
 ### Functional Completeness
 
-- [ ] A-001 R1: `docs/plan.md`, `docs/schema.md`, `docs/decisions/001-parsers-and-licences.md`, `docs/progress.md`, `.env.example`, and `.gitignore` exist and match the Phase 1 Plan specifications
-- [ ] A-002 R2: All 6 Draft 2020-12 JSON Schemas (`jurisdiction`, `document`, `clause-tree`, `zones`, `overrides`, `manifest`) exist in `schemas/` and validate their corresponding data models
-- [ ] A-003 R3: `bylaws --help` succeeds and all 9 subcommands (`acquire`, `parse`, `compare`, `structure`, `amendments`, `apply-overrides`, `validate`, `geo`, `publish`) require `--jurisdiction` with no default value
-- [ ] A-004 R4: `pipeline/bylaws/config.py` loads `jurisdictions/_fixture-test.yaml`, validates it against `schemas/jurisdiction.schema.json`, and returns a typed `JurisdictionConfig`
-- [ ] A-005 R5: `jurisdictions/_fixture-test.yaml` and `pipeline/tests/fixtures/` contain synthetic PDFs, KML boundary, and sample payloads for offline testing
-- [ ] A-006 R6: `pipeline/tests/test_r1_no_hardcoding.py` passes and verifies zero jurisdiction-specific constants in `pipeline/bylaws/` and `web/`
-- [ ] A-007 R7: `web/` contains the Next.js App Router skeleton, `web/lib/data.ts`, all 4 page routes, all 5 components, and passes `lint`, `typecheck`, `test`, and `build`
-- [ ] A-008 R8: `.github/workflows/ci.yml` defines Python and Web CI jobs running on `push` and `pull_request`
+- [x] A-001 R1: `docs/plan.md`, `docs/schema.md`, `docs/decisions/001-parsers-and-licences.md`, `docs/progress.md`, `.env.example`, and `.gitignore` exist and match the Phase 1 Plan specifications
+- [x] A-002 R2: All 6 Draft 2020-12 JSON Schemas (`jurisdiction`, `document`, `clause-tree`, `zones`, `overrides`, `manifest`) exist in `schemas/` and validate their corresponding data models
+- [x] A-003 R3: `bylaws --help` succeeds and all 9 subcommands (`acquire`, `parse`, `compare`, `structure`, `amendments`, `apply-overrides`, `validate`, `geo`, `publish`) require `--jurisdiction` with no default value
+- [x] A-004 R4: `pipeline/bylaws/config.py` loads `jurisdictions/_fixture-test.yaml`, validates it against `schemas/jurisdiction.schema.json`, and returns a typed `JurisdictionConfig`
+- [x] A-005 R5: `jurisdictions/_fixture-test.yaml` and `pipeline/tests/fixtures/` contain synthetic PDFs, KML boundary, and sample payloads for offline testing
+- [x] A-006 R6: `pipeline/tests/test_r1_no_hardcoding.py` passes and verifies zero jurisdiction-specific constants in `pipeline/bylaws/` and `web/`
+- [x] A-007 R7: `web/` contains the Next.js App Router skeleton, `web/lib/data.ts`, all 4 page routes, all 5 components, and passes `lint`, `typecheck`, `test`, and `build`
+- [x] A-008 R8: `.github/workflows/ci.yml` defines Python and Web CI jobs running on `push` and `pull_request`
 
 ### Behavioral Correctness
 
-- [ ] A-009 R3: Invoking any `bylaws <subcommand>` without `--jurisdiction` exits non-zero and prints a missing-option error message
-- [ ] A-010 R7: `/j/[id]` displays the persistent prototype disclaimer banner ("Prototype. Zone boundaries are approximate and traced from scanned maps. Confirm with the planning authority.") and draft toggle (off by default)
+- [x] A-009 R3: Invoking any `bylaws <subcommand>` without `--jurisdiction` exits non-zero and prints a missing-option error message
+- [x] A-010 R7: `/j/[id]` displays the persistent prototype disclaimer banner ("Prototype. Zone boundaries are approximate and traced from scanned maps. Confirm with the planning authority.") and draft toggle (off by default)
 
 ### Scenario Coverage
 
-- [ ] A-011 R2: `pipeline/tests/test_config_and_schemas.py` exercises both valid sample payloads and invalid/malformed payloads for all 6 JSON schemas
-- [ ] A-012 R6: `pipeline/tests/test_r1_no_hardcoding.py` tests both the live codebase and a synthetic violation snippet to prove detection works
-- [ ] A-013 R7: `web/__tests__/picker.test.tsx` verifies that the jurisdiction picker renders multiple synthetic jurisdictions dynamically from a fixture manifest
+- [x] A-011 R2: `pipeline/tests/test_config_and_schemas.py` exercises both valid sample payloads and invalid/malformed payloads for all 6 JSON schemas
+- [x] A-012 R6: `pipeline/tests/test_r1_no_hardcoding.py` tests both the live codebase and a synthetic violation snippet to prove detection works
+- [x] A-013 R7: `web/__tests__/picker.test.tsx` verifies that the jurisdiction picker renders multiple synthetic jurisdictions dynamically from a fixture manifest
 
 ### Edge Cases & Error Handling
 
-- [ ] A-014 R4: `load_jurisdiction_config` raises `ConfigValidationError` with field-level details when required fields are missing or invalid, and when a jurisdiction YAML file does not exist
+- [x] A-014 R4: `load_jurisdiction_config` raises `ConfigValidationError` with field-level details when required fields are missing or invalid, and when a jurisdiction YAML file does not exist
 
 ### Code Quality
 
-- [ ] A-015 Pattern consistency: Python and TypeScript modules follow consistent naming, typing, and module boundary conventions across `pipeline/` and `web/`
-- [ ] A-016 No unnecessary duplication: Schema validation is centralized in `pipeline/bylaws/schema_validator.py` and web data fetching is centralized in `web/lib/data.ts`
-- [ ] A-017 Readability and maintainability: Functions are concise (<50 lines where practical), clearly typed, and free of magic strings
+- [x] A-015 Pattern consistency: Python and TypeScript modules follow consistent naming, typing, and module boundary conventions across `pipeline/` and `web/`
+- [x] A-016 No unnecessary duplication: Schema validation is centralized in `pipeline/bylaws/schema_validator.py` and web data fetching is centralized in `web/lib/data.ts`
+- [x] A-017 Readability and maintainability: Functions are concise (<50 lines where practical), clearly typed, and free of magic strings
 
 ## Notes
 
 - Check items as you review: `- [x]`
 - All acceptance items must pass before `/fab-continue` (hydrate)
 - If an item is not applicable, mark checked and prefix with **N/A**: `- [x] A-NNN **N/A**: {reason}`
+
+## Deletion Candidates
+
+- None — this change adds new functionality without making existing code redundant
 
 ## Assumptions
 
