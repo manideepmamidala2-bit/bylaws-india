@@ -1,0 +1,210 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bylaws-india.local/schemas/jurisdiction.schema.json",
+  "title": "JurisdictionConfig",
+  "description": "Configuration contract for a jurisdiction in jurisdictions/<id>.yaml (Phase 1 Plan §7.1).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "country",
+    "state",
+    "building_types",
+    "parents",
+    "documents",
+    "maps"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^(_fixture-test|[a-z0-9]+(-[a-z0-9]+)*)$",
+      "description": "Lowercase hyphenated hierarchical jurisdiction ID (or _fixture-test for synthetic tests)."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "country": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}$",
+      "description": "Two-letter uppercase country code."
+    },
+    "state": {
+      "type": "string",
+      "pattern": "^[A-Z0-9]{2,4}$",
+      "description": "Uppercase state or territory code."
+    },
+    "building_types": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "parents": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(_fixture-test|[a-z0-9]+(-[a-z0-9]+)*)$"
+      }
+    },
+    "documents": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/documentConfig"
+      }
+    },
+    "maps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["boundaries", "zoning"],
+      "properties": {
+        "boundaries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/boundaryMapConfig"
+          }
+        },
+        "zoning": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/zoningMapConfig"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "documentConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "issuing_authority",
+        "layer",
+        "legal_status",
+        "role",
+        "source_url"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issuing_authority": {
+          "type": "string",
+          "minLength": 1
+        },
+        "layer": {
+          "type": "string",
+          "enum": ["national", "state", "planning", "municipal"]
+        },
+        "legal_status": {
+          "type": "string",
+          "enum": ["in_force", "draft", "superseded", "withdrawn"]
+        },
+        "role": {
+          "type": "string",
+          "enum": ["base", "amendment", "regulation", "boundary", "reference"]
+        },
+        "source_url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notified_date": {
+          "type": ["string", "null"],
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "effective_from": {
+          "type": ["string", "null"],
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "amends": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "supersedes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "boundaryMapConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "source_url", "select"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "source_url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "select": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["property", "equals"],
+          "properties": {
+            "property": {
+              "type": "string",
+              "minLength": 1
+            },
+            "equals": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "zoningMapConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "document",
+        "page",
+        "planning_district",
+        "legend_page"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "document": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "page": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "planning_district": {
+          "type": ["integer", "string"]
+        },
+        "legend_page": {
+          "type": ["integer", "null"],
+          "minimum": 1
+        }
+      }
+    }
+  }
+}

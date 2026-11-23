@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "jurisdictions": [
+    {
+      "id": "_fixture-test",
+      "name": "Synthetic Test Jurisdiction",
+      "latest_release": "0.1.0",
+      "releases": [
+        {
+          "version": "0.1.0",
+          "released_at": "2026-11-23T00:00:00Z",
+          "files": {
+            "documents": "/data/_fixture-test/0.1.0/documents.json",
+            "clauses": [
+              "/data/_fixture-test/0.1.0/fixture-base-2020.clauses.json",
+              "/data/_fixture-test/0.1.0/fixture-amend-2024.clauses.json"
+            ],
+            "amendments": "/data/_fixture-test/0.1.0/amendments.json",
+            "zones": "/data/_fixture-test/0.1.0/zones.geojson",
+            "boundary": "/data/_fixture-test/0.1.0/boundary.geojson",
+            "review_images": [
+              "/data/_fixture-test/0.1.0/fixture-pd-01-source.png"
+            ]
+          },
+          "drafts": {
+            "clauses": [
+              "/data/_fixture-test/0.1.0/fixture-draft-2026.clauses.json"
+            ]
+          },
+          "changelog": "Initial synthetic test dataset release."
+        }
+      ]
+    }
+  ]
+}
