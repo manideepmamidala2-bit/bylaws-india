@@ -42,6 +42,88 @@
           "changelog": "Release 0.1.0 for Synthetic Test Jurisdiction."
         }
       ]
+    },
+    {
+      "id": "in-ka-bengaluru-south",
+      "name": "Bengaluru South City Corporation",
+      "aliases": [
+        "Bengaluru South",
+        "BSCC",
+        "South Bengaluru",
+        "Greater Bengaluru South",
+        "Jayanagar",
+        "Basavanagudi",
+        "JP Nagar",
+        "Banashankari",
+        "BTM Layout",
+        "HSR Layout",
+        "Bommanahalli",
+        "Padmanabhanagar",
+        "Uttarahalli"
+      ],
+      "visibility": "public",
+      "latest_release": "1.0.0",
+      "releases": [
+        {
+          "version": "1.0.0",
+          "released_at": "2026-11-23T00:00:00Z",
+          "licence": "CC BY 4.0",
+          "download_zip": "/data/in-ka-bengaluru-south/1.0.0/in-ka-bengaluru-south-1.0.0.zip",
+          "sha256sums": "/data/in-ka-bengaluru-south/1.0.0/SHA256SUMS",
+          "declarations": "/data/in-ka-bengaluru-south/1.0.0/declarations.json",
+          "files": {
+            "documents": "/data/in-ka-bengaluru-south/1.0.0/documents.json",
+            "clauses": [
+              "/data/in-ka-bengaluru-south/1.0.0/bbl-2003.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/bscc-bbl-amend-2026.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/bscc-bbl-amend-2026-draft.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/rmp2015-zr.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/rmp2015-zr-amend-2014.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/rmp2015-zr-amend-2015-03.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/rmp2015-zr-amend-2018.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/rmp2015-zr-amend-2018-impact.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/rmp2015-zr-amend-tt.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/rmp2015-zr-premium-far-2025-02.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/rmp2015-zr-premium-far-2025-04.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/rmp2015-zr-premium-far-2026-02.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/rmp2015-zr-amend-2025-07.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/rmp2015-zr-stilt-draft-2025.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/rmp2015-zr-swd-buffer-2025.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/rmp2015-zr-amend-2026-01.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/rmp2015-zr-amend-2025-11-draft.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/gbg-act-2024.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/ktcp-act-1961.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/tdr-rules-2016.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/kfs-act-1964.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/ktcda-act.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/metro-influence-2020.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/oc-exemption-2025-09.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/oc-exemption-2026-06.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/gba-oc-cc-rules-2025.clauses.json",
+              "/data/in-ka-bengaluru-south/1.0.0/bbmp-noc-details.clauses.json"
+            ],
+            "amendments": "/data/in-ka-bengaluru-south/1.0.0/amendments.json",
+            "zones": "/data/in-ka-bengaluru-south/1.0.0/zones.geojson",
+            "boundary": "/data/in-ka-bengaluru-south/1.0.0/boundary.geojson",
+            "sources_json": "/data/in-ka-bengaluru-south/1.0.0/sources.json",
+            "sources_csv": "/data/in-ka-bengaluru-south/1.0.0/sources.csv",
+            "review_images": [],
+            "consolidated": "/data/in-ka-bengaluru-south/1.0.0/consolidated.json",
+            "geo_layers": "/data/in-ka-bengaluru-south/1.0.0/geo-layers.json",
+            "clause_zone_tags": "/data/in-ka-bengaluru-south/1.0.0/clause-zone-tags.json",
+            "gba_zones": "/data/in-ka-bengaluru-south/1.0.0/gba-zones.geojson",
+            "wards": "/data/in-ka-bengaluru-south/1.0.0/wards.geojson",
+            "planning_districts": "/data/in-ka-bengaluru-south/1.0.0/planning-districts.geojson",
+            "overlays": "/data/in-ka-bengaluru-south/1.0.0/overlays.geojson"
+          },
+          "drafts": {
+            "clauses": [
+              "/data/in-ka-bengaluru-south/1.0.0/rmp2015-zr-highrise-24m-draft.clauses.json"
+            ]
+          },
+          "changelog": "Release 1.0.0 for Bengaluru South City Corporation."
+        }
+      ]
     }
   ]
 }

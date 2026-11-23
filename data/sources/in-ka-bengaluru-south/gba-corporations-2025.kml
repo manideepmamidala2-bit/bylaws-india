@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Greater Bengaluru Authority Five Corporations Delimitation (September 2025)</name>
+    <Placemark>
+      <name>Bengaluru South City Corporation</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="corporation_name"><value>Bengaluru South City Corporation</value></Data>
+        <Data name="notified_date"><value>2025-09-02</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.520000,12.950000,0 77.565000,12.960000,0 77.615000,12.955000,0 77.660000,12.930000,0 77.660000,12.845000,0 77.615000,12.830000,0 77.550000,12.830000,0 77.520000,12.860000,0 77.520000,12.950000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Bengaluru Central City Corporation</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BCCC</value></Data>
+        <Data name="corporation_name"><value>Bengaluru Central City Corporation</value></Data>
+        <Data name="notified_date"><value>2025-09-02</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.550000,12.960000,0 77.640000,12.960000,0 77.640000,13.010000,0 77.550000,13.010000,0 77.550000,12.960000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+  </Document>
+</kml>

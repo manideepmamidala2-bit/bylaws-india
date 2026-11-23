@@ -1,0 +1,128 @@
+{
+  "schema_version": "1.2",
+  "doc_id": "rmp2015-zr-premium-far-2025-04",
+  "jurisdiction": "in-ka-bengaluru-south",
+  "legal_status": "superseded",
+  "generated": {
+    "parser": "pypdfium2",
+    "parser_version": "5.15.2",
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "clauses": [
+    {
+      "clause_id": "rmp2015-zr-premium-far-2025-04:CHAPTER I",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-premium-far-2025-04:CHAPTER I@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "superseded",
+      "effective_from": "2025-04-02",
+      "number": "CHAPTER I",
+      "title": "INITIAL ROAD WIDTH SCHEDULE FOR CHAPTER 11 (SUPERSEDED)",
+      "level": 1,
+      "parent_id": null,
+      "order": 0,
+      "text": "INITIAL ROAD WIDTH SCHEDULE FOR CHAPTER 11 (SUPERSEDED)",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-premium-far-2025-04",
+          "page": 1,
+          "bbox": [
+            0.0532,
+            0.0785,
+            0.7683,
+            0.0908
+          ],
+          "text_excerpt": "CHAPTER I: INITIAL ROAD WIDTH SCHEDULE FOR CHAPTER 11 (SUPERSEDED)"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "rmp2015-zr-premium-far-2025-04:1.1",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-premium-far-2025-04:1.1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "superseded",
+      "effective_from": "2025-04-02",
+      "number": "1.1",
+      "title": "Notification Details",
+      "level": 2,
+      "parent_id": "rmp2015-zr-premium-far-2025-04:CHAPTER I",
+      "order": 1,
+      "text": "Notification No. UDD 78 MNJ 2024(P-1) dated 2 April 2025 specifying initial road-width slabs for",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-premium-far-2025-04",
+          "page": 1,
+          "bbox": [
+            0.0541,
+            0.1051,
+            0.9476,
+            0.1164
+          ],
+          "text_excerpt": "1.1 Notification Details: Notification No. UDD 78 MNJ 2024(P-1) dated 2 April"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "rmp2015-zr-premium-far-2025-04:CHAPTER 11",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-premium-far-2025-04:CHAPTER 11@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "superseded",
+      "effective_from": "2025-04-02",
+      "number": "CHAPTER 11",
+      "title": "; subsequently superseded by Notification No. UDD 18 MNJ 2026(E) dated 10 February 2026.",
+      "level": 1,
+      "parent_id": null,
+      "order": 2,
+      "text": "; subsequently superseded by Notification No. UDD 18 MNJ 2026(E) dated 10 February 2026.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-premium-far-2025-04",
+          "page": 1,
+          "bbox": [
+            0.0531,
+            0.1236,
+            0.8324,
+            0.1349
+          ],
+          "text_excerpt": "Chapter 11; subsequently superseded by Notification No. UDD 18 MNJ 2026(E) dated"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    }
+  ]
+}

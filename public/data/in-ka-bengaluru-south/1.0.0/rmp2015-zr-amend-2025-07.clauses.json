@@ -1,0 +1,135 @@
+{
+  "schema_version": "1.2",
+  "doc_id": "rmp2015-zr-amend-2025-07",
+  "jurisdiction": "in-ka-bengaluru-south",
+  "legal_status": "in_force",
+  "generated": {
+    "parser": "pypdfium2",
+    "parser_version": "5.15.2",
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "clauses": [
+    {
+      "clause_id": "rmp2015-zr-amend-2025-07:CHAPTER I",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2025-07:CHAPTER I@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-07-18",
+      "number": "CHAPTER I",
+      "title": "BUILDING HEIGHT AND STILT FLOOR PARKING AMENDMENTS",
+      "level": 1,
+      "parent_id": null,
+      "order": 0,
+      "text": "BUILDING HEIGHT AND STILT FLOOR PARKING AMENDMENTS",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2025-07",
+          "page": 1,
+          "bbox": [
+            0.0532,
+            0.0785,
+            0.7261,
+            0.0883
+          ],
+          "text_excerpt": "CHAPTER I: BUILDING HEIGHT AND STILT FLOOR PARKING AMENDMENTS"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "rmp2015-zr-amend-2025-07:1.1",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2025-07:1.1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-07-18",
+      "number": "1.1",
+      "title": "Short Title and Commencement",
+      "level": 2,
+      "parent_id": "rmp2015-zr-amend-2025-07:CHAPTER I",
+      "order": 1,
+      "text": "These Regulations may be called the Zonal Regulations of the RMP 2015 of Local Planning Area of Bengaluru (Amendment) Regulations 2025, notified on 18 July 2025.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2025-07",
+          "page": 1,
+          "bbox": [
+            0.0538,
+            0.1051,
+            0.9465,
+            0.135
+          ],
+          "text_excerpt": "1.1 Short Title and Commencement: These Regulations may be called the Zonal"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "rmp2015-zr-amend-2025-07:2.1",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2025-07:2.1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-07-18",
+      "number": "2.1",
+      "title": "Substitution of Regulation 3.12",
+      "level": 2,
+      "parent_id": "rmp2015-zr-amend-2025-07:CHAPTER I",
+      "order": 2,
+      "text": "For regulation 3.12, the following shall be substituted: '3.12 Building Height and Stilt Floor Exemption: Building height shall be measured from the average level of the abutting street to the terrace slab. One or two stilt floors used exclusively for vehicle parking up to a cumulative height of 4.5 metres shall be exempt from FAR computation and included in total building height for setback and fire safety classification.'",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2025-07",
+          "page": 1,
+          "bbox": [
+            0.0528,
+            0.1472,
+            0.9473,
+            0.2141
+          ],
+          "text_excerpt": "2.1 Substitution of Regulation 3.12: For regulation 3.12, the following shall be"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [
+        "ALL",
+        "R-Main",
+        "R-Mixed",
+        "C-Central",
+        "C-Business",
+        "C-Mutation"
+      ],
+      "verification": "machine_checked",
+      "verified_by": null
+    }
+  ]
+}

@@ -33,7 +33,7 @@ DECIMAL_CLAUSE_RE = re.compile(
 )
 
 INT_CLAUSE_RE = re.compile(
-    r"^(?P<number>\d{1,3})\.\s+(?P<rest>[A-Z'\"(\u0c80-\u0cff].+)$"
+    r"^(?P<number>\d{1,3}(?:-[A-Z])?)\.\s+(?P<rest>[A-Z'\"(\u0c80-\u0cff].+)$"
 )
 
 SUB_ITEM_RE = re.compile(

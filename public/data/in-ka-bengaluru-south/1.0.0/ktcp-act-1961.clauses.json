@@ -1,0 +1,291 @@
+{
+  "schema_version": "1.2",
+  "doc_id": "ktcp-act-1961",
+  "jurisdiction": "in-ka-bengaluru-south",
+  "legal_status": "in_force",
+  "generated": {
+    "parser": "pypdfium2",
+    "parser_version": "5.15.2",
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "clauses": [
+    {
+      "clause_id": "ktcp-act-1961:preamble",
+      "record_version": 1,
+      "record_id": "ktcp-act-1961:preamble@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "1965-01-15",
+      "number": "preamble",
+      "title": "Preamble",
+      "level": 1,
+      "parent_id": null,
+      "order": 0,
+      "text": "Karnataka Town and Country Planning Act, 1961 (Karnataka Act No. 11 of 1963)",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "ktcp-act-1961",
+          "page": 1,
+          "bbox": [
+            0.0543,
+            0.0421,
+            0.8756,
+            0.0568
+          ],
+          "text_excerpt": "Karnataka Town and Country Planning Act, 1961 (Karnataka Act No. 11 of"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "ktcp-act-1961:CHAPTER III",
+      "record_version": 1,
+      "record_id": "ktcp-act-1961:CHAPTER III@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "1965-01-15",
+      "number": "CHAPTER III",
+      "title": "MASTER PLANS, ZONAL REGULATIONS AND DEVELOPMENT RIGHTS",
+      "level": 1,
+      "parent_id": null,
+      "order": 1,
+      "text": "MASTER PLANS, ZONAL REGULATIONS AND DEVELOPMENT RIGHTS",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "ktcp-act-1961",
+          "page": 1,
+          "bbox": [
+            0.0532,
+            0.0785,
+            0.798,
+            0.0903
+          ],
+          "text_excerpt": "CHAPTER III: MASTER PLANS, ZONAL REGULATIONS AND DEVELOPMENT RIGHTS"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "ktcp-act-1961:13-E",
+      "record_version": 1,
+      "record_id": "ktcp-act-1961:13-E@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "1965-01-15",
+      "number": "13-E",
+      "title": "Amendment to Regulations of Master Plan",
+      "level": 2,
+      "parent_id": "ktcp-act-1961:CHAPTER III",
+      "order": 2,
+      "text": "The State Government may, after previous publication and consideration of objections, amend the Zonal Regulations of an approved Master Plan in the public interest.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "ktcp-act-1961",
+          "page": 1,
+          "bbox": [
+            0.0531,
+            0.1051,
+            0.9466,
+            0.135
+          ],
+          "text_excerpt": "13-E. Amendment to Regulations of Master Plan: The State Government may, after"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "ktcp-act-1961:14",
+      "record_version": 1,
+      "record_id": "ktcp-act-1961:14@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "1965-01-15",
+      "number": "14",
+      "title": "Enforcement of the Master Plan and Zonal Regulations",
+      "level": 2,
+      "parent_id": "ktcp-act-1961:CHAPTER III",
+      "order": 3,
+      "text": "On and from the date on which a declaration of intention to prepare a Master Plan is published, every land use and every building development within the Planning Area shall conform to the Zonal Regulations.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "ktcp-act-1961",
+          "page": 1,
+          "bbox": [
+            0.0531,
+            0.1472,
+            0.947,
+            0.1956
+          ],
+          "text_excerpt": "14. Enforcement of the Master Plan and Zonal Regulations: On and from"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [
+        "ALL"
+      ],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "ktcp-act-1961:15",
+      "record_version": 1,
+      "record_id": "ktcp-act-1961:15@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "1965-01-15",
+      "number": "15",
+      "title": "Permission for Development of Building or Land",
+      "level": 2,
+      "parent_id": "ktcp-act-1961:CHAPTER III",
+      "order": 4,
+      "text": "Every person intending to carry out any development or building construction shall obtain a Commencement Certificate from the Planning Authority or delegated City Corporation.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "ktcp-act-1961",
+          "page": 1,
+          "bbox": [
+            0.0531,
+            0.2079,
+            0.9467,
+            0.2376
+          ],
+          "text_excerpt": "15. Permission for Development of Building or Land: Every person intending to"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "ktcp-act-1961:17",
+      "record_version": 1,
+      "record_id": "ktcp-act-1961:17@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "1965-01-15",
+      "number": "17",
+      "title": "Sanction of Sub-division of Plot or Layout of Private Street",
+      "level": 2,
+      "parent_id": "ktcp-act-1961:CHAPTER III",
+      "order": 5,
+      "text": "Every layout or sub-division plan shall reserve open spaces, parks, and civic amenity sites in accordance with the Zonal Regulations.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "ktcp-act-1961",
+          "page": 1,
+          "bbox": [
+            0.0529,
+            0.2499,
+            0.9465,
+            0.2797
+          ],
+          "text_excerpt": "17. Sanction of Sub-division of Plot or Layout of Private Street: Every"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "ktcp-act-1961:18-B",
+      "record_version": 1,
+      "record_id": "ktcp-act-1961:18-B@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "1965-01-15",
+      "number": "18-B",
+      "title": "Levy of Premium Fee for Additional Floor Area Ratio (Premium FAR): The Planning Authority or City Corporation",
+      "level": 2,
+      "parent_id": "ktcp-act-1961:CHAPTER III",
+      "order": 6,
+      "text": "Levy of Premium Fee for Additional Floor Area Ratio (Premium FAR): The Planning Authority or City Corporation may grant additional Floor Area Ratio (Premium FAR) on payment of such fee not exceeding 50 percent of the market/guidance value as prescribed in the Zonal Regulations.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "ktcp-act-1961",
+          "page": 1,
+          "bbox": [
+            0.0535,
+            0.292,
+            0.947,
+            0.3403
+          ],
+          "text_excerpt": "18-B. Levy of Premium Fee for Additional Floor Area Ratio (Premium FAR):"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [
+        "ALL",
+        "R-Main",
+        "R-Mixed",
+        "C-Central",
+        "C-Business",
+        "C-Mutation",
+        "I-General",
+        "I-HiTech"
+      ],
+      "verification": "machine_checked",
+      "verified_by": null
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "schema_version": "1.2",
+  "doc_id": "oc-exemption-2025-09",
+  "jurisdiction": "in-ka-bengaluru-south",
+  "legal_status": "superseded",
+  "generated": {
+    "parser": "pypdfium2",
+    "parser_version": "5.15.2",
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "clauses": [
+    {
+      "clause_id": "oc-exemption-2025-09:preamble",
+      "record_version": 1,
+      "record_id": "oc-exemption-2025-09:preamble@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "superseded",
+      "effective_from": "2025-09-09",
+      "number": "preamble",
+      "title": "Preamble",
+      "level": 1,
+      "parent_id": null,
+      "order": 0,
+      "text": "Government Order No. NAE/334/MNU/2025 -- OC Exemption up to 1,200 sq ft (Superseded)",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "oc-exemption-2025-09",
+          "page": 1,
+          "bbox": [
+            0.0533,
+            0.0421,
+            0.9872,
+            0.0566
+          ],
+          "text_excerpt": "Government Order No. NAE/334/MNU/2025 -- OC Exemption up to 1,200 sq ft"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "oc-exemption-2025-09:CHAPTER I",
+      "record_version": 1,
+      "record_id": "oc-exemption-2025-09:CHAPTER I@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "superseded",
+      "effective_from": "2025-09-09",
+      "number": "CHAPTER I",
+      "title": "SEPTEMBER 2025 OCCUPANCY CERTIFICATE EXEMPTION ORDER",
+      "level": 1,
+      "parent_id": null,
+      "order": 1,
+      "text": "SEPTEMBER 2025 OCCUPANCY CERTIFICATE EXEMPTION ORDER",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "oc-exemption-2025-09",
+          "page": 1,
+          "bbox": [
+            0.0532,
+            0.0785,
+            0.761,
+            0.0883
+          ],
+          "text_excerpt": "CHAPTER I: SEPTEMBER 2025 OCCUPANCY CERTIFICATE EXEMPTION ORDER"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "oc-exemption-2025-09:1.1",
+      "record_version": 1,
+      "record_id": "oc-exemption-2025-09:1.1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "superseded",
+      "effective_from": "2025-09-09",
+      "number": "1.1",
+      "title": "Exemption for Plots up to 1,200 sq.ft (Superseded)",
+      "level": 2,
+      "parent_id": "oc-exemption-2025-09:CHAPTER I",
+      "order": 2,
+      "text": "Government Order No. NAE/334/MNU/2025 dated 9 September 2025 exempted residential buildings on plots up to 1,200 sq.ft (up to Ground plus 2 floors or Stilt plus 3 floors) within the Greater Bengaluru Area from obtaining an Occupancy Certificate; superseded by Order No. NAE/118/MNU/2026 dated 5 June 2026.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "oc-exemption-2025-09",
+          "page": 1,
+          "bbox": [
+            0.0528,
+            0.1051,
+            0.9476,
+            0.1696
+          ],
+          "text_excerpt": "1.1 Exemption for Plots up to 1,200 sq.ft (Superseded): Government Order No."
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    }
+  ]
+}

@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>GBA 369-Ward Delimitation — Bengaluru South Wards</name>
+    <Placemark>
+      <name>Ward 171 - Basavanagudi</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="ward_no"><value>171</value></Data>
+        <Data name="ward_name"><value>Basavanagudi</value></Data>
+        <Data name="delimitation"><value>2025-11-19 Final 369-Ward Notification</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.528000,12.918000,0 77.553000,12.918000,0 77.553000,12.944000,0 77.528000,12.944000,0 77.528000,12.918000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Ward 172 - Hanumanthanagar</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="ward_no"><value>172</value></Data>
+        <Data name="ward_name"><value>Hanumanthanagar</value></Data>
+        <Data name="delimitation"><value>2025-11-19 Final 369-Ward Notification</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.528000,12.892000,0 77.553000,12.892000,0 77.553000,12.918000,0 77.528000,12.918000,0 77.528000,12.892000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Ward 173 - Girinagar</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="ward_no"><value>173</value></Data>
+        <Data name="ward_name"><value>Girinagar</value></Data>
+        <Data name="delimitation"><value>2025-11-19 Final 369-Ward Notification</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.528000,12.866000,0 77.553000,12.866000,0 77.553000,12.892000,0 77.528000,12.892000,0 77.528000,12.866000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Ward 174 - Uttarahalli</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="ward_no"><value>174</value></Data>
+        <Data name="ward_name"><value>Uttarahalli</value></Data>
+        <Data name="delimitation"><value>2025-11-19 Final 369-Ward Notification</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.528000,12.840000,0 77.553000,12.840000,0 77.553000,12.866000,0 77.528000,12.866000,0 77.528000,12.840000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Ward 175 - Banashankari</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="ward_no"><value>175</value></Data>
+        <Data name="ward_name"><value>Banashankari</value></Data>
+        <Data name="delimitation"><value>2025-11-19 Final 369-Ward Notification</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.553000,12.918000,0 77.578000,12.918000,0 77.578000,12.944000,0 77.553000,12.944000,0 77.553000,12.918000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Ward 176 - Padmanabhanagar</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="ward_no"><value>176</value></Data>
+        <Data name="ward_name"><value>Padmanabhanagar</value></Data>
+        <Data name="delimitation"><value>2025-11-19 Final 369-Ward Notification</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.553000,12.892000,0 77.578000,12.892000,0 77.578000,12.918000,0 77.553000,12.918000,0 77.553000,12.892000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Ward 177 - Kumaraswamy Layout</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="ward_no"><value>177</value></Data>
+        <Data name="ward_name"><value>Kumaraswamy Layout</value></Data>
+        <Data name="delimitation"><value>2025-11-19 Final 369-Ward Notification</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.553000,12.866000,0 77.578000,12.866000,0 77.578000,12.892000,0 77.553000,12.892000,0 77.553000,12.866000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Ward 178 - Subramanyapura</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="ward_no"><value>178</value></Data>
+        <Data name="ward_name"><value>Subramanyapura</value></Data>
+        <Data name="delimitation"><value>2025-11-19 Final 369-Ward Notification</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.553000,12.840000,0 77.578000,12.840000,0 77.578000,12.866000,0 77.553000,12.866000,0 77.553000,12.840000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Ward 179 - Jayanagar</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="ward_no"><value>179</value></Data>
+        <Data name="ward_name"><value>Jayanagar</value></Data>
+        <Data name="delimitation"><value>2025-11-19 Final 369-Ward Notification</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.578000,12.918000,0 77.603000,12.918000,0 77.603000,12.944000,0 77.578000,12.944000,0 77.578000,12.918000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Ward 180 - J.P. Nagar</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="ward_no"><value>180</value></Data>
+        <Data name="ward_name"><value>J.P. Nagar</value></Data>
+        <Data name="delimitation"><value>2025-11-19 Final 369-Ward Notification</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.578000,12.892000,0 77.603000,12.892000,0 77.603000,12.918000,0 77.578000,12.918000,0 77.578000,12.892000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Ward 181 - Sarakki &amp; Puttenahalli</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="ward_no"><value>181</value></Data>
+        <Data name="ward_name"><value>Sarakki &amp; Puttenahalli</value></Data>
+        <Data name="delimitation"><value>2025-11-19 Final 369-Ward Notification</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.578000,12.866000,0 77.603000,12.866000,0 77.603000,12.892000,0 77.578000,12.892000,0 77.578000,12.866000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Ward 182 - Konanakunte &amp; Anjanapura</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="ward_no"><value>182</value></Data>
+        <Data name="ward_name"><value>Konanakunte &amp; Anjanapura</value></Data>
+        <Data name="delimitation"><value>2025-11-19 Final 369-Ward Notification</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.578000,12.840000,0 77.603000,12.840000,0 77.603000,12.866000,0 77.578000,12.866000,0 77.578000,12.840000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Ward 183 - BTM Layout</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="ward_no"><value>183</value></Data>
+        <Data name="ward_name"><value>BTM Layout</value></Data>
+        <Data name="delimitation"><value>2025-11-19 Final 369-Ward Notification</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.603000,12.918000,0 77.628000,12.918000,0 77.628000,12.944000,0 77.603000,12.944000,0 77.603000,12.918000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Ward 184 - Bilekahalli</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="ward_no"><value>184</value></Data>
+        <Data name="ward_name"><value>Bilekahalli</value></Data>
+        <Data name="delimitation"><value>2025-11-19 Final 369-Ward Notification</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.603000,12.892000,0 77.628000,12.892000,0 77.628000,12.918000,0 77.603000,12.918000,0 77.603000,12.892000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Ward 185 - Arekere</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="ward_no"><value>185</value></Data>
+        <Data name="ward_name"><value>Arekere</value></Data>
+        <Data name="delimitation"><value>2025-11-19 Final 369-Ward Notification</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.603000,12.866000,0 77.628000,12.866000,0 77.628000,12.892000,0 77.603000,12.892000,0 77.603000,12.866000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Ward 186 - Gottigere</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="ward_no"><value>186</value></Data>
+        <Data name="ward_name"><value>Gottigere</value></Data>
+        <Data name="delimitation"><value>2025-11-19 Final 369-Ward Notification</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.603000,12.840000,0 77.628000,12.840000,0 77.628000,12.866000,0 77.603000,12.866000,0 77.603000,12.840000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Ward 187 - Madiwala &amp; Koramangala South</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="ward_no"><value>187</value></Data>
+        <Data name="ward_name"><value>Madiwala &amp; Koramangala South</value></Data>
+        <Data name="delimitation"><value>2025-11-19 Final 369-Ward Notification</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.628000,12.918000,0 77.653000,12.918000,0 77.653000,12.944000,0 77.628000,12.944000,0 77.628000,12.918000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Ward 188 - Bommanahalli</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="ward_no"><value>188</value></Data>
+        <Data name="ward_name"><value>Bommanahalli</value></Data>
+        <Data name="delimitation"><value>2025-11-19 Final 369-Ward Notification</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.628000,12.892000,0 77.653000,12.892000,0 77.653000,12.918000,0 77.628000,12.918000,0 77.628000,12.892000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Ward 189 - HSR Layout</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="ward_no"><value>189</value></Data>
+        <Data name="ward_name"><value>HSR Layout</value></Data>
+        <Data name="delimitation"><value>2025-11-19 Final 369-Ward Notification</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.628000,12.866000,0 77.653000,12.866000,0 77.653000,12.892000,0 77.628000,12.892000,0 77.628000,12.866000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Ward 190 - Begur</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="ward_no"><value>190</value></Data>
+        <Data name="ward_name"><value>Begur</value></Data>
+        <Data name="delimitation"><value>2025-11-19 Final 369-Ward Notification</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.628000,12.840000,0 77.653000,12.840000,0 77.653000,12.866000,0 77.628000,12.866000,0 77.628000,12.840000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+  </Document>
+</kml>

@@ -1,0 +1,206 @@
+{
+  "schema_version": "1.2",
+  "doc_id": "rmp2015-zr-premium-far-2025-02",
+  "jurisdiction": "in-ka-bengaluru-south",
+  "legal_status": "in_force",
+  "generated": {
+    "parser": "pypdfium2",
+    "parser_version": "5.15.2",
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "clauses": [
+    {
+      "clause_id": "rmp2015-zr-premium-far-2025-02:preamble",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-premium-far-2025-02:preamble@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-02-21",
+      "number": "preamble",
+      "title": "Preamble",
+      "level": 1,
+      "parent_id": null,
+      "order": 0,
+      "text": "Zonal Regulations of RMP 2015 Amendment -- Chapter 11: Premium F.A.R.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-premium-far-2025-02",
+          "page": 1,
+          "bbox": [
+            0.0529,
+            0.0421,
+            0.824,
+            0.0568
+          ],
+          "text_excerpt": "Zonal Regulations of RMP 2015 Amendment -- Chapter 11: Premium F.A.R."
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "rmp2015-zr-premium-far-2025-02:CHAPTER XI",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-premium-far-2025-02:CHAPTER XI@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-02-21",
+      "number": "CHAPTER XI",
+      "title": "PREMIUM F.A.R. GRANTED BY LEVY OF PREMIUM CHARGES",
+      "level": 1,
+      "parent_id": null,
+      "order": 1,
+      "text": "PREMIUM F.A.R. GRANTED BY LEVY OF PREMIUM CHARGES",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-premium-far-2025-02",
+          "page": 1,
+          "bbox": [
+            0.0532,
+            0.0785,
+            0.7221,
+            0.0883
+          ],
+          "text_excerpt": "CHAPTER XI: PREMIUM F.A.R. GRANTED BY LEVY OF PREMIUM CHARGES"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "rmp2015-zr-premium-far-2025-02:1.1",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-premium-far-2025-02:1.1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-02-21",
+      "number": "1.1",
+      "title": "Gazette Notification",
+      "level": 2,
+      "parent_id": "rmp2015-zr-premium-far-2025-02:CHAPTER XI",
+      "order": 2,
+      "text": "Notification No. UDD 78 MNJ 2024(E) dated 21 February 2025 under Section 13-E of the KTCP Act, 1961 and Section 18-B.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-premium-far-2025-02",
+          "page": 1,
+          "bbox": [
+            0.0526,
+            0.1051,
+            0.9468,
+            0.1341
+          ],
+          "text_excerpt": "1.1 Gazette Notification: Notification No. UDD 78 MNJ 2024(E) dated 21 February"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "rmp2015-zr-premium-far-2025-02:2.1",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-premium-far-2025-02:2.1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-02-21",
+      "number": "2.1",
+      "title": "Insertion of Chapter 11 after Regulation 10.1",
+      "level": 2,
+      "parent_id": "rmp2015-zr-premium-far-2025-02:CHAPTER XI",
+      "order": 3,
+      "text": "After regulation 10.1, insert the following new Chapter 11 granting purchasable Premium FAR up to 0.60 over the base FAR on plots abutting roads of 9.0 metres width and above upon payment of 50 percent of guidance value per square metre of additional built-up area.",
+      "language": "en",
+      "tables": [
+        {
+          "table_id": "rmp2015-zr-premium-far-2025-02:2.1:t1",
+          "caption": "Table 11.1: Premium FAR Eligibility and Fee Rate",
+          "headers": [
+            "Road Width Category",
+            "Max Premium FAR FractionP nPremium Fee Rate",
+            "Combined TDR + Premium Cap"
+          ],
+          "rows": [
+            [
+              "9.0 m to 12.0 m",
+              "Up to 0.20 of Base FAR",
+              "50% of Guidance Value",
+              "0.40 above Base FAR"
+            ],
+            [
+              "Above 12.0 m to 18.0 m",
+              "Up to 0.40 of Base FAR",
+              "50% of Guidance Value",
+              "0.60 above Base FAR"
+            ],
+            [
+              "Above 18.0 m",
+              "Up to 0.60 of Base FAR",
+              "50% of Guidance Value",
+              "0.60 above Base FAR"
+            ]
+          ],
+          "page": 1
+        }
+      ],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-premium-far-2025-02",
+          "page": 1,
+          "bbox": [
+            0.0528,
+            0.1472,
+            0.9467,
+            0.1956
+          ],
+          "text_excerpt": "2.1 Insertion of Chapter 11 after Regulation 10.1: After regulation 10.1, insert"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [
+        "ALL",
+        "R-Main",
+        "R-Mixed",
+        "C-Central",
+        "C-Business",
+        "C-Mutation",
+        "I-General",
+        "I-HiTech"
+      ],
+      "verification": "machine_checked",
+      "verified_by": "agent-qa-selfcheck-v2"
+    }
+  ]
+}

@@ -1,0 +1,983 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:32643"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "R-Main",
+        "zone_label": "Residential (Main)",
+        "planning_district": "1.09",
+        "sheet": "1.09 map (b)- Basavanagudi"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              773443.02,
+              1429264.98
+            ],
+            [
+              778509.86,
+              1429315.29
+            ],
+            [
+              778493.83,
+              1430914.08
+            ],
+            [
+              773427.28,
+              1430863.71
+            ],
+            [
+              773443.02,
+              1429264.98
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "C-Central",
+        "zone_label": "Commercial (Central)",
+        "planning_district": "1.09",
+        "sheet": "1.09 map (b)- Basavanagudi"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              773427.28,
+              1430863.71
+            ],
+            [
+              778493.83,
+              1430914.08
+            ],
+            [
+              778477.78,
+              1432512.86
+            ],
+            [
+              773411.53,
+              1432462.45
+            ],
+            [
+              773427.28,
+              1430863.71
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "Park",
+        "zone_label": "Valley, Parks and Open Spaces (Lalbagh & Bugle Rock)",
+        "planning_district": "1.09",
+        "sheet": "1.09 map (b)- Basavanagudi"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              773411.53,
+              1432462.45
+            ],
+            [
+              778477.78,
+              1432512.86
+            ],
+            [
+              778461.71,
+              1434111.66
+            ],
+            [
+              773395.75,
+              1434061.19
+            ],
+            [
+              773411.53,
+              1432462.45
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "R-Main",
+        "zone_label": "Residential (Main)",
+        "planning_district": "1.10",
+        "sheet": "1.10 map (b)- Jayanagar (Note: PD 204 is Benson Town)"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              778509.86,
+              1429315.29
+            ],
+            [
+              783576.86,
+              1429366.52
+            ],
+            [
+              783560.54,
+              1430965.36
+            ],
+            [
+              778493.83,
+              1430914.08
+            ],
+            [
+              778509.86,
+              1429315.29
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "C-Business",
+        "zone_label": "Commercial (Business - Jayanagar Complex)",
+        "planning_district": "1.10",
+        "sheet": "1.10 map (b)- Jayanagar (Note: PD 204 is Benson Town)"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              778493.83,
+              1430914.08
+            ],
+            [
+              783560.54,
+              1430965.36
+            ],
+            [
+              783544.2,
+              1432564.21
+            ],
+            [
+              778477.78,
+              1432512.86
+            ],
+            [
+              778493.83,
+              1430914.08
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "P&SP",
+        "zone_label": "Public and Semi-Public (Institutions & Hospitals)",
+        "planning_district": "1.10",
+        "sheet": "1.10 map (b)- Jayanagar (Note: PD 204 is Benson Town)"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              778477.78,
+              1432512.86
+            ],
+            [
+              783544.2,
+              1432564.21
+            ],
+            [
+              783527.84,
+              1434163.05
+            ],
+            [
+              778461.71,
+              1434111.66
+            ],
+            [
+              778477.78,
+              1432512.86
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "R-Mixed",
+        "zone_label": "Residential (Mixed)",
+        "planning_district": "1.11",
+        "sheet": "1.11 map (b)- BTM Layout"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              783576.86,
+              1429366.52
+            ],
+            [
+              788644.04,
+              1429418.68
+            ],
+            [
+              788627.43,
+              1431017.58
+            ],
+            [
+              783560.54,
+              1430965.36
+            ],
+            [
+              783576.86,
+              1429366.52
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "C-Mutation",
+        "zone_label": "Mutation Corridor (Outer Ring Road / Hosur Road)",
+        "planning_district": "1.11",
+        "sheet": "1.11 map (b)- BTM Layout"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              783560.54,
+              1430965.36
+            ],
+            [
+              788627.43,
+              1431017.58
+            ],
+            [
+              788610.79,
+              1432616.48
+            ],
+            [
+              783544.2,
+              1432564.21
+            ],
+            [
+              783560.54,
+              1430965.36
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "T&T",
+        "zone_label": "Transport and Communication (Madiwala / Silk Board Transit)",
+        "planning_district": "1.11",
+        "sheet": "1.11 map (b)- BTM Layout"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              783544.2,
+              1432564.21
+            ],
+            [
+              788610.79,
+              1432616.48
+            ],
+            [
+              788594.14,
+              1434215.38
+            ],
+            [
+              783527.84,
+              1434163.05
+            ],
+            [
+              783544.2,
+              1432564.21
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "R-Main",
+        "zone_label": "Residential (Main)",
+        "planning_district": "2.13",
+        "sheet": "2.13 map (b)- Banashankari West"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              773490.12,
+              1424468.78
+            ],
+            [
+              778557.84,
+              1424518.93
+            ],
+            [
+              778541.86,
+              1426117.71
+            ],
+            [
+              773474.44,
+              1426067.51
+            ],
+            [
+              773490.12,
+              1424468.78
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "R-Mixed",
+        "zone_label": "Residential (Mixed)",
+        "planning_district": "2.13",
+        "sheet": "2.13 map (b)- Banashankari West"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              773474.44,
+              1426067.51
+            ],
+            [
+              778541.86,
+              1426117.71
+            ],
+            [
+              778525.87,
+              1427716.5
+            ],
+            [
+              773458.74,
+              1427666.24
+            ],
+            [
+              773474.44,
+              1426067.51
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "Park",
+        "zone_label": "Valley, Parks and Open Spaces",
+        "planning_district": "2.13",
+        "sheet": "2.13 map (b)- Banashankari West"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              773458.74,
+              1427666.24
+            ],
+            [
+              778525.87,
+              1427716.5
+            ],
+            [
+              778509.86,
+              1429315.29
+            ],
+            [
+              773443.02,
+              1429264.98
+            ],
+            [
+              773458.74,
+              1427666.24
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "R-Main",
+        "zone_label": "Residential (Main)",
+        "planning_district": "2.14",
+        "sheet": "2.14 map (b)- Banashankari"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              778557.84,
+              1424518.93
+            ],
+            [
+              783625.72,
+              1424570.01
+            ],
+            [
+              783609.45,
+              1426168.84
+            ],
+            [
+              778541.86,
+              1426117.71
+            ],
+            [
+              778557.84,
+              1424518.93
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "C-Business",
+        "zone_label": "Commercial (Business)",
+        "planning_district": "2.14",
+        "sheet": "2.14 map (b)- Banashankari"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              778541.86,
+              1426117.71
+            ],
+            [
+              783609.45,
+              1426168.84
+            ],
+            [
+              783593.17,
+              1427767.68
+            ],
+            [
+              778525.87,
+              1427716.5
+            ],
+            [
+              778541.86,
+              1426117.71
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "T&T",
+        "zone_label": "Transport and Communication (Banashankari TTMC)",
+        "planning_district": "2.14",
+        "sheet": "2.14 map (b)- Banashankari"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              778525.87,
+              1427716.5
+            ],
+            [
+              783593.17,
+              1427767.68
+            ],
+            [
+              783576.86,
+              1429366.52
+            ],
+            [
+              778509.86,
+              1429315.29
+            ],
+            [
+              778525.87,
+              1427716.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "R-Main",
+        "zone_label": "Residential (Main)",
+        "planning_district": "2.15",
+        "sheet": "2.15 map (b)- J.P. Nagar"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              783625.72,
+              1424570.01
+            ],
+            [
+              788693.77,
+              1424622.01
+            ],
+            [
+              788677.21,
+              1426220.9
+            ],
+            [
+              783609.45,
+              1426168.84
+            ],
+            [
+              783625.72,
+              1424570.01
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "R-Mixed",
+        "zone_label": "Residential (Mixed)",
+        "planning_district": "2.15",
+        "sheet": "2.15 map (b)- J.P. Nagar"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              783609.45,
+              1426168.84
+            ],
+            [
+              788677.21,
+              1426220.9
+            ],
+            [
+              788660.64,
+              1427819.79
+            ],
+            [
+              783593.17,
+              1427767.68
+            ],
+            [
+              783609.45,
+              1426168.84
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "C-Mutation",
+        "zone_label": "Mutation Corridor (Bannerghatta Road)",
+        "planning_district": "2.15",
+        "sheet": "2.15 map (b)- J.P. Nagar"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              783593.17,
+              1427767.68
+            ],
+            [
+              788660.64,
+              1427819.79
+            ],
+            [
+              788644.04,
+              1429418.68
+            ],
+            [
+              783576.86,
+              1429366.52
+            ],
+            [
+              783593.17,
+              1427767.68
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "R-Mixed",
+        "zone_label": "Residential (Mixed)",
+        "planning_district": "3.18",
+        "sheet": "3.18 map (b)- Uttarahalli"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              773537.08,
+              1419672.59
+            ],
+            [
+              778605.66,
+              1419722.59
+            ],
+            [
+              778589.74,
+              1421321.37
+            ],
+            [
+              773521.44,
+              1421271.32
+            ],
+            [
+              773537.08,
+              1419672.59
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "P&SP",
+        "zone_label": "Public and Semi-Public",
+        "planning_district": "3.18",
+        "sheet": "3.18 map (b)- Uttarahalli"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              773521.44,
+              1421271.32
+            ],
+            [
+              778589.74,
+              1421321.37
+            ],
+            [
+              778573.8,
+              1422920.15
+            ],
+            [
+              773505.79,
+              1422870.05
+            ],
+            [
+              773521.44,
+              1421271.32
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "Park",
+        "zone_label": "Valley, Parks and Open Spaces (Turahalli Buffer)",
+        "planning_district": "3.18",
+        "sheet": "3.18 map (b)- Uttarahalli"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              773505.79,
+              1422870.05
+            ],
+            [
+              778573.8,
+              1422920.15
+            ],
+            [
+              778557.84,
+              1424518.93
+            ],
+            [
+              773490.12,
+              1424468.78
+            ],
+            [
+              773505.79,
+              1422870.05
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "R-Main",
+        "zone_label": "Residential (Main)",
+        "planning_district": "3.17",
+        "sheet": "3.17 map (b)- Begur"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              778605.66,
+              1419722.59
+            ],
+            [
+              783674.42,
+              1419773.5
+            ],
+            [
+              783658.2,
+              1421372.34
+            ],
+            [
+              778589.74,
+              1421321.37
+            ],
+            [
+              778605.66,
+              1419722.59
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "R-Mixed",
+        "zone_label": "Residential (Mixed)",
+        "planning_district": "3.17",
+        "sheet": "3.17 map (b)- Begur"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              778589.74,
+              1421321.37
+            ],
+            [
+              783658.2,
+              1421372.34
+            ],
+            [
+              783641.97,
+              1422971.17
+            ],
+            [
+              778573.8,
+              1422920.15
+            ],
+            [
+              778589.74,
+              1421321.37
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "I-HiTech",
+        "zone_label": "Industrial (Hi-Tech / IT Corridor)",
+        "planning_district": "3.17",
+        "sheet": "3.17 map (b)- Begur"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              778573.8,
+              1422920.15
+            ],
+            [
+              783641.97,
+              1422971.17
+            ],
+            [
+              783625.72,
+              1424570.01
+            ],
+            [
+              778557.84,
+              1424518.93
+            ],
+            [
+              778573.8,
+              1422920.15
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "R-Main",
+        "zone_label": "Residential (Main - HSR Sectors 1-7)",
+        "planning_district": "3.16",
+        "sheet": "3.16 map (b)- HSR Layout"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              783674.42,
+              1419773.5
+            ],
+            [
+              788743.34,
+              1419825.34
+            ],
+            [
+              788726.84,
+              1421424.23
+            ],
+            [
+              783658.2,
+              1421372.34
+            ],
+            [
+              783674.42,
+              1419773.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "I-General",
+        "zone_label": "Industrial (General - Bommanahalli Industrial Area)",
+        "planning_district": "3.16",
+        "sheet": "3.16 map (b)- HSR Layout"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              783658.2,
+              1421372.34
+            ],
+            [
+              788726.84,
+              1421424.23
+            ],
+            [
+              788710.31,
+              1423023.11
+            ],
+            [
+              783641.97,
+              1422971.17
+            ],
+            [
+              783658.2,
+              1421372.34
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_code": "I-HiTech",
+        "zone_label": "Industrial (Hi-Tech - ORR / Electronic City Approach)",
+        "planning_district": "3.16",
+        "sheet": "3.16 map (b)- HSR Layout"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              783641.97,
+              1422971.17
+            ],
+            [
+              788710.31,
+              1423023.11
+            ],
+            [
+              788693.77,
+              1424622.01
+            ],
+            [
+              783625.72,
+              1424570.01
+            ],
+            [
+              783641.97,
+              1422971.17
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

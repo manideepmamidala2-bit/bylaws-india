@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.2",
+  "jurisdiction": "in-ka-bengaluru-south",
+  "not_modelled": [
+    "Full copyrighted text of the National Building Code of India 2016 (BIS SP 7:2016) \u2014 recorded as reference_only citations per Rule R13",
+    "Airport obstacle limitation surfaces and Colour Coded Zoning Map (CCZM) height polygons \u2014 accessed via AAI NOCAS portal per Rule R13",
+    "Structural engineering load calculations (IS 456, IS 1893 seismic zones) and electrical/HVAC installation codes",
+    "Lake buffer polygons under the 2025 KTCDA Amendment Bill due to contested assent/notification status (declared status_unknown per Plan v2.0 \u00a75.C4)",
+    "Storm water drain (Rajakaluve) primary/secondary/tertiary buffer polygons pending official classified drain centreline GIS publication from GBA"
+  ],
+  "known_gaps": [],
+  "unread_documents": [
+    {
+      "title": "Administrative Circular on BPAS Online Fee Challan Reconciliation (2024)",
+      "source_url": "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx",
+      "reason": "Purely internal accounting procedure; does not alter building parameters or development controls (Plan v2.0 \u00a73.6)"
+    }
+  ],
+  "unobtainable_documents": [
+    {
+      "id": "rmp2015-zr-amend-tt-gazette-scan",
+      "title": "Original 2019 Gazette Scan for Transport & Telecommunication (T&T) Zone Uses Amendment",
+      "searched_sources": [
+        "https://gazette.kar.nic.in",
+        "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx",
+        "https://site.bbmp.gov.in/townplanning.html",
+        "https://data.opencity.in/organization/bangalore-development-authority"
+      ],
+      "reason": "BPAS circulars portal link returns HTTP 404; structured from the verified BPAS/BDA consolidated circular text on T&T permissible uses"
+    }
+  ],
+  "contested_status": [
+    {
+      "doc_id": "ktcda-act",
+      "title": "Karnataka Tank Conservation and Development Authority (Amendment) Bill / Act, 2025 (Size-Based Lake Buffers)",
+      "declared_status": "status_unknown",
+      "conflicting_evidence": [
+        "Passed by Karnataka Legislative Assembly and Legislative Council in August 2025 proposing tiered lake buffers (0 m for <0.05 ha, 3 m for 0.05-0.4 ha, 6 m for 0.4-2 ha, 12 m for 2-10 ha, 24 m for 10-40 ha, 30 m for >40 ha).",
+        "Conflicting public reports on Governor assent and final Part IV-A Karnataka Gazette notification date alongside pending NGT/High Court challenges to buffer reductions vs NGT 30 m / 75 m norms; declared status_unknown per Plan v2.0 \u00a73.5 and \u00a75.C4."
+      ]
+    }
+  ],
+  "building_relevant_sections": {
+    "gbg-act-2024": [
+      "1",
+      "240",
+      "241",
+      "248",
+      "252"
+    ],
+    "ktcp-act-1961": [
+      "13-E",
+      "14",
+      "15",
+      "17",
+      "18-B"
+    ],
+    "kfs-act-1964": [
+      "13",
+      "13-A",
+      "13-B"
+    ]
+  }
+}

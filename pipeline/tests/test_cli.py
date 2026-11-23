@@ -50,21 +50,22 @@ def test_subcommand_has_no_default_for_jurisdiction(subcommand: str) -> None:
     assert param.default is None or "UNSET" in repr(param.default)
 
 
-def test_unimplemented_compare_exits_nonzero_with_not_implemented() -> None:
+def test_compare_generates_recon_and_parser_comparison_reports(tmp_path: Path) -> None:
     runner = CliRunner()
     result = runner.invoke(main, ["compare", "--jurisdiction", "xx-test-fixture"])
-    assert result.exit_code != 0
-    assert "not implemented: compare" in result.output
+    assert result.exit_code == 0, result.output
+    assert (REPO_ROOT / "data" / "reports" / "xx-test-fixture" / "recon.md").is_file()
+    assert (REPO_ROOT / "data" / "reports" / "xx-test-fixture" / "parser-comparison.md").is_file()
 
 
-def test_unimplemented_docling_parser_exits_nonzero_with_not_implemented() -> None:
+def test_unimplemented_unknown_parser_exits_nonzero_with_not_implemented() -> None:
     runner = CliRunner()
     result = runner.invoke(
         main,
-        ["parse", "--jurisdiction", "xx-test-fixture", "--parser", "docling"],
+        ["parse", "--jurisdiction", "xx-test-fixture", "--parser", "unknown-parser"],
     )
     assert result.exit_code != 0
-    assert "not implemented: parse (docling)" in result.output
+    assert "not implemented: parse (unknown-parser)" in result.output
 
 
 def test_unimplemented_traced_geo_exits_nonzero_with_not_implemented(tmp_path: Path) -> None:

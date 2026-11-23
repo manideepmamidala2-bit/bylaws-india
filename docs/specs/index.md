@@ -20,3 +20,4 @@
 | [`../decisions/001-parsers-and-licences.md`](../decisions/001-parsers-and-licences.md) | ADR-001: Permissive PDF parser and geospatial library selection (R4 licensing hygiene) |
 | [`../decisions/002-open-data-and-indicodes-practices.md`](../decisions/002-open-data-and-indicodes-practices.md) | ADR-002: Open data licensing (Apache-2.0 / CC BY 4.0), strict permissive dependency policy, and Indicodes Rules practices |
 | [`../decisions/003-plan-v2-schema-1-2-and-text-rights.md`](../decisions/003-plan-v2-schema-1-2-and-text-rights.md) | ADR-003: Plan v2.0 Schema v1.2, R12 record version separation, R13 text rights, and R14 derived work provenance |
+| [`../decisions/004-bengaluru-south-parser-and-map-decisions.md`](../decisions/004-bengaluru-south-parser-and-map-decisions.md) | ADR-004: Bengaluru South parser selection, bilingual Kannada preservation, statutory numbering, and UTM 43N map decisions |
