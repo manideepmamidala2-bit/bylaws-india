@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bylaws-india.local/schemas/manifest.schema.json",
+  "title": "ReleaseManifest",
+  "description": "Published release manifest at Blob/static root manifest.json (Phase 1 Plan §7.7).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "jurisdictions"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "jurisdictions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/jurisdictionManifest"
+      }
+    }
+  },
+  "$defs": {
+    "jurisdictionManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "latest_release", "releases"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(_fixture-test|[a-z0-9]+(-[a-z0-9]+)*)$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "latest_release": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "releases": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/releaseEntry"
+          }
+        }
+      }
+    },
+    "releaseEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "released_at", "files", "drafts", "changelog"],
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "released_at": {
+          "type": "string",
+          "minLength": 10
+        },
+        "files": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "documents",
+            "clauses",
+            "amendments",
+            "zones",
+            "boundary",
+            "review_images"
+          ],
+          "properties": {
+            "documents": {
+              "type": "string",
+              "minLength": 1
+            },
+            "clauses": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "amendments": {
+              "type": "string",
+              "minLength": 1
+            },
+            "zones": {
+              "type": "string",
+              "minLength": 1
+            },
+            "boundary": {
+              "type": "string",
+              "minLength": 1
+            },
+            "review_images": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "drafts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["clauses"],
+          "properties": {
+            "clauses": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "changelog": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

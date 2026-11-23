@@ -1,0 +1,46 @@
+schema_version: '1.0'
+clause_fixes:
+- clause_id: fixture-base-2020:2.1
+  field: title
+  value: Residential Setbacks
+  reason: Normalize heading punctuation
+zone_tags:
+- clause_id: fixture-base-2020:2.1
+  zones:
+  - Z1
+  - Z2
+  reason: Applies to residential and mixed-use zones
+zone_fixes:
+- zone_id: fixture-pd-01:z0002
+  set:
+    zone_code: Z2
+    verification: human_verified
+    notes: Verified against synthetic atlas.
+map_curations:
+- map_id: fixture-pd-01
+  legend_entries:
+  - zone_code: Z1
+    zone_label: Residential
+    rgb:
+    - 250
+    - 215
+    - 100
+  - zone_code: Z2
+    zone_label: Mixed Use
+    rgb:
+    - 230
+    - 110
+    - 95
+  gcps:
+  - id: gcp-nw
+    label: Northwest Synthetic Corner
+    pixel_x: 100
+    pixel_y: 100
+    lon: 10.001
+    lat: 10.019
+  - id: gcp-se
+    label: Southeast Synthetic Corner
+    pixel_x: 500
+    pixel_y: 500
+    lon: 10.019
+    lat: 10.001

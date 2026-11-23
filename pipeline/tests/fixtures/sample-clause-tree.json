@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "doc_id": "fixture-base-2020",
+  "jurisdiction": "_fixture-test",
+  "legal_status": "in_force",
+  "generated": {
+    "parser": "docling",
+    "parser_version": "2.0.0",
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "clauses": [
+    {
+      "clause_id": "fixture-base-2020:1.1",
+      "number": "1.1",
+      "title": "Short Title and Commencement",
+      "level": 2,
+      "parent_id": "fixture-base-2020:1",
+      "order": 1,
+      "text": "These regulations apply to all residential plots within the synthetic planning area.",
+      "tables": [],
+      "pages": [
+        1
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [
+        "Z1",
+        "Z2"
+      ],
+      "verification": "machine_checked"
+    },
+    {
+      "clause_id": "fixture-base-2020:2.1",
+      "number": "2.1",
+      "title": "Residential Setbacks",
+      "level": 2,
+      "parent_id": "fixture-base-2020:2",
+      "order": 2,
+      "text": "Every residential building in zone Z1 or Z2 shall provide minimum setbacks as per clause 1.1 and Table 2.1 below.",
+      "tables": [
+        {
+          "table_id": "fixture-base-2020:2.1:t1",
+          "caption": "Table 2.1: Minimum Setbacks by Plot Size",
+          "headers": [
+            "Zone Code",
+            "Plot Area (sq.m)",
+            "Front Setback (m)",
+            "Max FAR"
+          ],
+          "rows": [
+            [
+              "Z1",
+              "Up to 240",
+              "1.5",
+              "1.75"
+            ],
+            [
+              "Z1",
+              "Above 240",
+              "3.0",
+              "2.25"
+            ],
+            [
+              "Z2",
+              "All plots",
+              "3.0",
+              "2.50"
+            ]
+          ],
+          "page": 1
+        }
+      ],
+      "pages": [
+        1
+      ],
+      "cross_references": [
+        "fixture-base-2020:1.1"
+      ],
+      "amended_by": [],
+      "applies_to_zones": [
+        "Z1",
+        "Z2"
+      ],
+      "verification": "machine_checked"
+    }
+  ]
+}

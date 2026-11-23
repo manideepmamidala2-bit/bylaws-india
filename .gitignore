@@ -1,0 +1,40 @@
+.fab-*
+
+!fab/.fab-version
+
+.status.yaml.lock
+
+/.claude/settings.local.json
+
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+
+# Pipeline generated data (only data/overrides/ and data/reports/ are committed)
+data/raw/
+data/interim/
+data/processed/
+
+# Python / uv
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+pipeline/.venv/
+*.egg-info/
+dist/
+build/
+
+# Node / Next.js
+node_modules/
+web/node_modules/
+web/.next/
+web/out/
+web/coverage/
+.next/
+*.tsbuildinfo
+next-env.d.ts

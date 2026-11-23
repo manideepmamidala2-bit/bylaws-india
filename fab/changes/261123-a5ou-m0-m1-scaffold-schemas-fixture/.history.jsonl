@@ -1,0 +1,6 @@
+{"action":"enter","driver":"fab-new","event":"stage-transition","stage":"intake","ts":"2026-11-23T10:35:19Z"}
+{"args":"M0 \u0026 M1: Scaffold repository, JSON schemas, config loader, synthetic fixture jurisdiction, and R1 static check","cmd":"fab-new","event":"command","ts":"2026-11-23T10:35:19Z"}
+{"delta":"+5.0","event":"confidence","score":5,"trigger":"calc-score","ts":"2026-11-23T10:37:43Z"}
+{"cmd":"fab-continue","event":"command","ts":"2026-11-23T10:39:05Z"}
+{"action":"enter","driver":"fab-continue","event":"stage-transition","stage":"apply","ts":"2026-11-23T10:39:14Z"}
+{"action":"enter","driver":"fab-continue","event":"stage-transition","stage":"review","ts":"2026-11-23T11:02:23Z"}

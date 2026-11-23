@@ -1,0 +1,208 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bylaws-india.local/schemas/overrides.schema.json",
+  "title": "JurisdictionOverrides",
+  "description": "Versioned manual corrections, zone tags, and map curations in data/overrides/<jurisdiction>/*.yaml (Phase 1 Plan §7.6).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "clause_fixes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/clauseFix"
+      }
+    },
+    "zone_tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/zoneTag"
+      }
+    },
+    "zone_fixes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/zoneFix"
+      }
+    },
+    "map_curations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/mapCuration"
+      }
+    }
+  },
+  "$defs": {
+    "clauseFix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["clause_id", "field", "value", "reason"],
+      "properties": {
+        "clause_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*:.+$"
+        },
+        "field": {
+          "type": "string",
+          "enum": [
+            "title",
+            "number",
+            "text",
+            "level",
+            "parent_id",
+            "verification",
+            "cross_references"
+          ]
+        },
+        "value": {},
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "zoneTag": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["clause_id", "zones", "reason"],
+      "properties": {
+        "clause_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*:.+$"
+        },
+        "zones": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "zoneFix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["zone_id", "set"],
+      "properties": {
+        "zone_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*:z[0-9a-zA-Z_-]+$"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "set": {
+          "type": "object",
+          "additionalProperties": false,
+          "minProperties": 1,
+          "properties": {
+            "zone_code": {
+              "type": "string",
+              "minLength": 1
+            },
+            "zone_label": {
+              "type": "string",
+              "minLength": 1
+            },
+            "verification": {
+              "type": "string",
+              "enum": [
+                "unverified",
+                "machine_checked",
+                "human_verified",
+                "rejected"
+              ]
+            },
+            "notes": {
+              "type": ["string", "null"]
+            }
+          }
+        }
+      }
+    },
+    "mapCuration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["map_id"],
+      "properties": {
+        "map_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "legend_entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["zone_code", "zone_label", "rgb"],
+            "properties": {
+              "zone_code": {
+                "type": "string",
+                "minLength": 1
+              },
+              "zone_label": {
+                "type": "string",
+                "minLength": 1
+              },
+              "rgb": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "items": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 255
+                }
+              }
+            }
+          }
+        },
+        "gcps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "label", "pixel_x", "pixel_y"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1
+              },
+              "pixel_x": {
+                "type": "number",
+                "minimum": 0
+              },
+              "pixel_y": {
+                "type": "number",
+                "minimum": 0
+              },
+              "lon": {
+                "type": "number"
+              },
+              "lat": {
+                "type": "number"
+              },
+              "osm_query": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

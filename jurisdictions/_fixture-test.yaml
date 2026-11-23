@@ -1,0 +1,59 @@
+id: _fixture-test
+name: Synthetic Test Jurisdiction
+country: XX
+state: YY
+building_types:
+  - residential
+parents: []
+documents:
+  - id: fixture-base-2020
+    title: Synthetic Municipal Building Regulations 2020
+    issuing_authority: Synthetic Civic Authority
+    layer: municipal
+    legal_status: in_force
+    role: base
+    notified_date: "2020-01-15"
+    effective_from: "2020-02-01"
+    source_url: pipeline/tests/fixtures/fixture-base.pdf
+  - id: fixture-amend-2024
+    title: Synthetic Municipal Building (Amendment) Regulations 2024
+    issuing_authority: Synthetic Civic Authority
+    layer: municipal
+    legal_status: in_force
+    role: amendment
+    amends:
+      - fixture-base-2020
+    notified_date: "2024-06-01"
+    effective_from: "2024-06-15"
+    source_url: pipeline/tests/fixtures/fixture-amend.pdf
+  - id: fixture-draft-2026
+    title: Draft Synthetic Zoning Revisions 2026
+    issuing_authority: Synthetic Planning Board
+    layer: planning
+    legal_status: draft
+    role: regulation
+    notified_date: "2026-03-01"
+    effective_from: null
+    source_url: pipeline/tests/fixtures/fixture-draft.pdf
+  - id: fixture-map-atlas
+    title: Synthetic Planning District Land Use Atlas
+    issuing_authority: Synthetic Planning Board
+    layer: planning
+    legal_status: in_force
+    role: regulation
+    notified_date: "2020-01-15"
+    effective_from: "2020-02-01"
+    source_url: pipeline/tests/fixtures/fixture-map.pdf
+maps:
+  boundaries:
+    - id: fixture-corp-boundary
+      source_url: pipeline/tests/fixtures/fixture-boundary.kml
+      select:
+        property: district_code
+        equals: FIX-01
+  zoning:
+    - id: fixture-pd-01
+      document: fixture-map-atlas
+      page: 1
+      planning_district: 1
+      legend_page: 1

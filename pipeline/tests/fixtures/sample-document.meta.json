@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "doc_id": "fixture-base-2020",
+  "title": "Synthetic Municipal Building Regulations 2020",
+  "issuing_authority": "Synthetic Civic Authority",
+  "layer": "municipal",
+  "role": "base",
+  "legal_status": "in_force",
+  "notified_date": "2020-01-15",
+  "effective_from": "2020-02-01",
+  "amends": [],
+  "supersedes": [],
+  "source_url": "pipeline/tests/fixtures/fixture-base.pdf",
+  "retrieved_at": "2026-11-23T00:00:00Z",
+  "sha256": "36f32618ee3ceaf70c3a0cf840f0fef402123a78aa0d5dc73ab4aab966168dda",
+  "bytes": 2437,
+  "page_count": 2,
+  "is_scanned": false
+}

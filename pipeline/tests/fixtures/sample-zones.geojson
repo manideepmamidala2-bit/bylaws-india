@@ -1,0 +1,88 @@
+{
+  "type": "FeatureCollection",
+  "schema_version": "1.0",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              10.001,
+              10.001
+            ],
+            [
+              10.009,
+              10.001
+            ],
+            [
+              10.009,
+              10.019
+            ],
+            [
+              10.001,
+              10.019
+            ],
+            [
+              10.001,
+              10.001
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "fixture-pd-01:z0001",
+        "zone_code": "Z1",
+        "zone_label": "Residential",
+        "source_map": "fixture-pd-01",
+        "georef_run": "georef-run-001",
+        "extraction_method": "colour_segmentation",
+        "area_sq_m": 14250.5,
+        "verification": "machine_checked",
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              10.01,
+              10.001
+            ],
+            [
+              10.019,
+              10.001
+            ],
+            [
+              10.019,
+              10.019
+            ],
+            [
+              10.01,
+              10.019
+            ],
+            [
+              10.01,
+              10.001
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "fixture-pd-01:z0002",
+        "zone_code": "Z2",
+        "zone_label": "Mixed Use",
+        "source_map": "fixture-pd-01",
+        "georef_run": "georef-run-001",
+        "extraction_method": "colour_segmentation",
+        "area_sq_m": 15800.0,
+        "verification": "human_verified",
+        "notes": "Verified against synthetic atlas."
+      }
+    }
+  ]
+}
