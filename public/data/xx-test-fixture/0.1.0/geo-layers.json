@@ -20,7 +20,7 @@
       "title": "Synthetic Test Jurisdiction Master Plan Land Use Zones",
       "kind": "master_plan_zone",
       "source": "pipeline/tests/fixtures/fixture-imported-zones.geojson",
-      "method": "Master plan land-use zone extraction clipped to corporation boundary (EPSG:4326)",
+      "method": "Master plan land-use zone extraction reprojected from UTM 43N (EPSG:32643) and clipped to corporation boundary (EPSG:4326)",
       "accuracy_m": 5.0,
       "derived": true,
       "file": "zones.geojson",

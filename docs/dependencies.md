@@ -51,6 +51,7 @@ Per **Rule R4 (Permissive Licensing)**, every direct dependency in `pipeline/pyp
 | `@types/react` | `MIT` | TypeScript definitions for React |
 | `@types/react-dom` | `MIT` | TypeScript definitions for React DOM |
 | `@vitejs/plugin-react` | `MIT` | Vite React plugin for Vitest |
+| `axe-core` | `MPL-2.0` | Automated WCAG AA accessibility engine for blocking CI tests |
 | `eslint` | `MIT` | JavaScript/TypeScript linter |
 | `eslint-config-next` | `MIT` | Next.js ESLint ruleset |
 | `jsdom` | `MIT` | DOM environment for Vitest component tests |

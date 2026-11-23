@@ -1,33 +1,120 @@
-"use client";
-
-import React, { use } from "react";
+import React from "react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import {
+  fetchJurisdictionDataset,
+  fetchManifest,
+  type ClauseNode,
+} from "@/lib/data";
+import { TopNav } from "@/components/TopNav";
+import { StatusBadge } from "@/components/StatusBadge";
 import { ClauseTree } from "@/components/ClauseTree";
 
 interface ClausesPageProps {
   params: Promise<{ id: string }>;
 }
 
-export default function ClausesPage({ params }: ClausesPageProps) {
-  const { id } = use(params);
+export async function generateStaticParams() {
+  const manifest = await fetchManifest();
+  return manifest.jurisdictions.map((j) => ({ id: j.id }));
+}
+
+export default async function ClausesPage({ params }: ClausesPageProps) {
+  const { id } = await params;
+  const dataset = await fetchJurisdictionDataset(id);
+  if (!dataset) {
+    notFound();
+  }
+
+  const {
+    jurisdiction,
+    release,
+    documents,
+    clauses,
+    amendments,
+    consolidated,
+  } = dataset;
+
+  const allClausesLookup: Record<string, ClauseNode> = {};
+  for (const c of clauses) {
+    if (!c.superseded_by && !c.record_superseded_by) {
+      allClausesLookup[c.clause_id] = c;
+    }
+  }
 
   return (
-    <main className="mx-auto max-w-5xl px-6 py-8">
-      <header className="mb-6 flex items-center justify-between border-b border-slate-200 pb-4">
-        <div>
-          <Link
-            href={`/j/${id}`}
-            className="text-xs font-medium text-slate-500 underline"
-          >
-            ← Back to Map ({id})
-          </Link>
-          <h1 className="mt-1 text-xl font-bold text-slate-900">
-            Clause Tree Browser — <span className="font-mono">{id}</span>
-          </h1>
-        </div>
-      </header>
+    <div className="min-h-screen bg-[#f5f3ed] text-[#080909]">
+      <TopNav
+        jurisdictionId={jurisdiction.id}
+        jurisdictionName={jurisdiction.name}
+        active="documents"
+        releaseVersion={release.version}
+        licence={release.licence}
+      />
 
-      <ClauseTree clauses={[]} />
-    </main>
+      <main className="mx-auto max-w-6xl px-6 py-8">
+        <header className="mb-6 border-b border-[#080909] pb-6">
+          <div className="dg-mono">
+            Structured Documents &amp; Clauses · {jurisdiction.id}
+          </div>
+          <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909]">
+            {jurisdiction.name} — Documents &amp; Clause Browser
+          </h1>
+          <p className="dg-serif mt-2 max-w-3xl text-base text-[#171917]">
+            Select any legal instrument below to read its complete structured
+            document (with Original vs. As-Amended derived toggle), or filter
+            across all structured clauses below.
+          </p>
+        </header>
+
+        <section
+          aria-label="Structured document directory"
+          className="mb-8 border border-[#080909] bg-[#efeee8] p-5"
+        >
+          <div className="dg-mono mb-3">
+            Instruments in Release v{release.version} ({documents.length})
+          </div>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {documents.map((doc) => {
+              const isRef = doc.text_rights?.mode === "reference_only";
+              return (
+                <Link
+                  key={doc.doc_id}
+                  href={`/j/${jurisdiction.id}/documents/${doc.doc_id}`}
+                  className="flex flex-col justify-between border border-[#080909] bg-[#f5f3ed] p-3.5 no-underline hover:bg-[#e5e6de]"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-mono text-xs font-semibold text-[#080909]">
+                        {doc.doc_id}
+                      </span>
+                      <StatusBadge status={doc.legal_status} />
+                    </div>
+                    <div className="mt-1 text-sm font-medium text-[#080909]">
+                      {doc.title}
+                    </div>
+                  </div>
+                  <div className="mt-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.12em] text-[#5b5e56]">
+                    <span>{doc.layer}</span>
+                    <span>{isRef ? "Reference only →" : "Full text →"}</span>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+
+        <ClauseTree
+          clauses={clauses}
+          consolidatedRecords={consolidated?.records ?? []}
+          unconsolidatedRecords={consolidated?.unconsolidated ?? []}
+          amendmentLinks={amendments.links}
+          allClausesLookup={allClausesLookup}
+          allowConsolidatedToggle={Boolean(
+            consolidated && consolidated.records.length > 0
+          )}
+        />
+      </main>
+    </div>
   );
 }
