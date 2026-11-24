@@ -68,6 +68,7 @@ export function AreaExplorerClient({
     <div className="grid flex-1 grid-cols-1 lg:grid-cols-[1fr_460px]">
       <div className="flex flex-col">
         <ZoneMap
+          jurisdictionId={jurisdictionId}
           zones={zones}
           selectedZoneCode={selectedZoneCode}
           onSelectZone={handleSelectZone}

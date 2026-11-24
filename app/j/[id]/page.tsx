@@ -89,13 +89,18 @@ export default async function JurisdictionMapPage({
   const masterPlanLayer = geoLayers?.layers.find(
     (l) => l.kind === "master_plan_zone"
   );
+  const officialBoundaryLayer =
+    geoLayers?.layers.find((l) => l.layer_id === "wards") ??
+    geoLayers?.layers.find((l) => l.kind === "official_boundary");
   const accuracyMessage = masterPlanLayer
     ? `${masterPlanLayer.method}${
         masterPlanLayer.accuracy_m !== null
           ? ` (±${masterPlanLayer.accuracy_m} m)`
           : ""
       } · Source: ${masterPlanLayer.source} · Confirm a plot's zone with the planning authority.`
-    : "Zones loaded from published master plan layer · Confirm a plot's zone with the planning authority.";
+    : officialBoundaryLayer
+      ? `Boundaries from ${officialBoundaryLayer.source} · Confirm a plot's ward and zone with the planning authority.`
+      : "Zones loaded from published master plan layer · Confirm a plot's zone with the planning authority.";
 
   return (
     <div className="flex min-h-screen flex-col bg-[#f5f3ed] text-[#080909]">

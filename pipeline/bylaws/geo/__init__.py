@@ -153,19 +153,21 @@ def run_geo_pipeline(config: JurisdictionConfig, *, repo_root: Path | None = Non
         if b_file_path.is_file():
             b_data = json.loads(b_file_path.read_text(encoding="utf-8"))
             feat_count = len(b_data.get("features") or [])
+        src_display = getattr(b_cfg, "source_label", None) or b_cfg.source_url
+        ret_date = getattr(b_cfg, "retrieved_date", None)
         layers.append(
             {
                 "layer_id": b_cfg.id,
                 "title": b_cfg.title or f"{config.name} Official Boundary ({b_cfg.id})",
                 "kind": "official_boundary",
-                "source": b_cfg.source_url,
+                "source": str(src_display),
                 "method": "Official boundary polygon extraction (EPSG:4326)",
                 "accuracy_m": 1.0,
                 "derived": False,
                 "file": out_file,
-                "external_url": None,
+                "external_url": b_cfg.source_url,
                 "feature_count": feat_count,
-                "notes": None,
+                "notes": f"Retrieved {ret_date}" if ret_date else None,
             }
         )
 

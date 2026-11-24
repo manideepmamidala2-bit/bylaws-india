@@ -10,6 +10,8 @@ from typing import Any
 import click
 from pyproj import Transformer
 from pyproj.exceptions import CRSError
+from shapely.geometry import MultiPolygon, Polygon, mapping, shape
+from shapely.validation import explain_validity, make_valid
 
 WGS84_CRS_NAMES: frozenset[str] = frozenset(
     {
@@ -262,7 +264,45 @@ def extract_boundary_feature(
             f"{property_name}={equals_value!r}."
         )
 
+    validated_features: list[dict[str, Any]] = []
+    for feat in matched:
+        new_feat = dict(feat)
+        props = dict(new_feat.get("properties") or {})
+        geom_dict = new_feat.get("geometry")
+        if geom_dict:
+            geom = shape(geom_dict)
+            if not geom.is_valid:
+                reason = explain_validity(geom)
+                repaired = make_valid(geom)
+                if repaired.geom_type == "GeometryCollection":
+                    polys = [
+                        p
+                        for p in repaired.geoms
+                        if isinstance(p, (Polygon, MultiPolygon))
+                    ]
+                    flat_polys = [
+                        p
+                        for sub in polys
+                        for p in (sub.geoms if isinstance(sub, MultiPolygon) else [sub])
+                    ]
+                    repaired = (
+                        flat_polys[0]
+                        if len(flat_polys) == 1
+                        else MultiPolygon(flat_polys)
+                    )
+                mapped = mapping(repaired)
+                new_feat["geometry"] = {
+                    "type": mapped["type"],
+                    "coordinates": json.loads(json.dumps(mapped["coordinates"])),
+                }
+                props["geometry_repaired"] = True
+                props["geometry_repair_reason"] = reason
+            else:
+                props["geometry_repaired"] = False
+        new_feat["properties"] = props
+        validated_features.append(new_feat)
+
     return {
         "type": "FeatureCollection",
-        "features": matched,
+        "features": validated_features,
     }

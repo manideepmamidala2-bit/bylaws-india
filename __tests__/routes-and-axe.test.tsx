@@ -195,7 +195,7 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     async () => {
     const homeUi = await JurisdictionPickerPage();
     const { container: homeContainer, unmount: uHome } = render(homeUi);
-    expect(screen.getAllByText(/v2\.0\.0/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/v2\.\d+\.\d+/i).length).toBeGreaterThan(0);
     expect(
       screen.getByText(/Synthetic demonstration data, not the law of Bengaluru South/i)
     ).toBeInTheDocument();
@@ -266,14 +266,40 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     await assertNoAxeViolations(unstructContainer);
     uUnstruct();
 
+    // Map page renders official GBA Corporation (1), GBA Zones (2), and Wards (72), with Corporation and Wards checked by default and interactive ward inspector
+    const mapUi = await JurisdictionMapPage({
+      params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
+    });
+    const { container: mapContainer, unmount: uMap } = render(mapUi);
+    expect(
+      screen.getByText(/© OpenStreetMap contributors · Protomaps/i)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        /No master plan land-use zones are published yet; showing official corporation, GBA zone, and ward boundaries\./i
+      )
+    ).toBeInTheDocument();
+    const corpCheckbox = screen.getByRole("checkbox", {
+      name: /Corporation \(1\)/i,
+    });
+    const wardsCheckbox = screen.getByRole("checkbox", {
+      name: /Wards \(72\)/i,
+    });
+    expect(corpCheckbox).toBeChecked();
+    expect(wardsCheckbox).toBeChecked();
+    const wardSelect = screen.getByLabelText(
+      /Inspect Official Ward \(72 Wards in Corporation\)/i
+    );
+    fireEvent.change(wardSelect, { target: { value: "11" } });
+    expect(screen.getAllByText(/Jayanagar East/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Zone1 · Jayanagar/i).length).toBeGreaterThan(0);
+    assertCleanPublicCopy(mapContainer.textContent ?? "", "Map", {
+      allowDataEmDash: true,
+    });
+    await assertNoAxeViolations(mapContainer);
+    uMap();
+
     const routes: Array<{ label: string; renderFn: () => Promise<React.ReactElement> }> = [
-      {
-        label: "Map",
-        renderFn: () =>
-          JurisdictionMapPage({
-            params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
-          }),
-      },
       {
         label: "Clauses",
         renderFn: () =>
@@ -308,7 +334,7 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     }
   });
 
-  it("shows release 1.0.0 as withdrawn and release 2.0.0 as published on Data page, and renders honest About page", async () => {
+  it("shows release 1.0.0 as withdrawn and release 2.1.0 as published on Data page, and renders honest About page", async () => {
     const dataUi = await DataReleasesPage();
     const { container: dataContainer, unmount: uData } = render(dataUi);
 
@@ -317,13 +343,13 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
         /Withdrawn: Synthetic demonstration data, not the law of Bengaluru South/i
       )
     ).toBeInTheDocument();
-    expect(screen.getByText(/Latest: v2\.0\.0/i)).toBeInTheDocument();
+    expect(screen.getByText(/Latest: v2\.1\.0/i)).toBeInTheDocument();
     expect(
-      screen.getByRole("link", { name: /Download Bundle/i })
-    ).toBeInTheDocument();
+      screen.getAllByRole("link", { name: /Download Bundle/i }).length
+    ).toBeGreaterThan(0);
     expect(
-      screen.getByRole("link", { name: /SHA256SUMS/i })
-    ).toBeInTheDocument();
+      screen.getAllByRole("link", { name: /SHA256SUMS/i }).length
+    ).toBeGreaterThan(0);
     assertCleanPublicCopy(dataContainer.textContent ?? "", "Data", {
       allowDataEmDash: true,
     });

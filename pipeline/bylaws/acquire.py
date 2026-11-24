@@ -371,7 +371,38 @@ def run_acquire(config: JurisdictionConfig, *, repo_root: Path | None = None) ->
         b_status = getattr(boundary_cfg, "acquisition_status", None) or "acquired"
         if b_status in {"pending", "not_found"}:
             continue
-        source_path = resolve_local_source_path(boundary_cfg.source_url, root)
+        if is_remote_http_url(boundary_cfg.source_url):
+            ext = ".kml" if "kml" in boundary_cfg.source_url.lower() else ".geojson"
+            raw_b_path = raw_dir / f"boundary_{boundary_cfg.id}{ext}"
+            b_ret = getattr(boundary_cfg, "retrieval", None)
+            if raw_b_path.is_file() and b_ret is not None:
+                existing_b_sha = hashlib.sha256(raw_b_path.read_bytes()).hexdigest()
+                if b_ret.sha256 and b_ret.sha256 != existing_b_sha:
+                    raise click.ClickException(
+                        f"Rule R5 violation: existing boundary file '{raw_b_path}' SHA-256 "
+                        f"({existing_b_sha}) does not match retrieval record ({b_ret.sha256})."
+                    )
+            else:
+                b_bytes, _ = fetch_remote_with_retrieval(boundary_cfg.source_url)
+                if raw_b_path.is_file():
+                    existing_b_sha = hashlib.sha256(raw_b_path.read_bytes()).hexdigest()
+                    fetched_b_sha = hashlib.sha256(b_bytes).hexdigest()
+                    if existing_b_sha != fetched_b_sha:
+                        raise click.ClickException(
+                            f"Rule R5 violation: existing boundary file '{raw_b_path}' SHA-256 "
+                            f"({existing_b_sha}) does not match source ({fetched_b_sha})."
+                        )
+                else:
+                    raw_b_path.write_bytes(b_bytes)
+            source_path = raw_b_path
+        else:
+            if not is_test_jur:
+                raise ProvenanceGateError(
+                    f"Rule R15 violation ({config.id}:maps.boundaries.{boundary_cfg.id}): "
+                    f"non-test boundary source must be http(s), got {boundary_cfg.source_url!r}."
+                )
+            source_path = resolve_local_source_path(boundary_cfg.source_url, root)
+
         fc = extract_boundary_feature(
             source_path,
             boundary_cfg.select.property,

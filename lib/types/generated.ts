@@ -195,6 +195,9 @@ export interface MapsConfig {
 export interface BoundaryMapConfig {
   id: string;
   title?: string;
+  source_label?: string | null;
+  retrieved_date?: string | null;
+  verification_note?: string | null;
   layer_role?: "corporation" | "gba_zones" | "wards";
   output_file?: string;
   source_url: string;

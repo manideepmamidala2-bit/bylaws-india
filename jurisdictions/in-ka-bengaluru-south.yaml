@@ -17,7 +17,7 @@ aliases:
   - Uttarahalli
 visibility: public
 licence: CC BY 4.0
-release_version: "2.0.0"
+release_version: "2.1.0"
 country: IN
 state: KA
 building_types:
@@ -555,5 +555,89 @@ documents:
     mirror_urls: []
     source_url: "https://data.opencity.in/dataset/bbmp-building-byelaws/resource/d37c7718-8c24-4da7-86a0-d19b974fb8a9/download/bscc-10125.pdf"
 maps:
-  boundaries: []
+  boundaries:
+    - id: corporation
+      title: "Bengaluru South City Corporation Official Boundary"
+      source_label: "Greater Bengaluru Authority delimitation maps, September 2025 (gba.karnataka.gov.in / gisapps.bbmp.gov.in)"
+      retrieved_date: "2026-11-24"
+      layer_role: corporation
+      output_file: "boundary.geojson"
+      source_url: "https://gisapps.bbmp.gov.in/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=gba_boundary:gba_corporation_boundary&outputFormat=application/vnd.google-earth.kml+xml&srsName=EPSG:4326"
+      acquisition_status: acquired
+      retrieval:
+        fetched_at: "2026-11-23T00:00:00Z"
+        requested_url: "https://gisapps.bbmp.gov.in/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=gba_boundary:gba_corporation_boundary&outputFormat=application/vnd.google-earth.kml+xml&srsName=EPSG:4326"
+        final_url: "https://gisapps.bbmp.gov.in/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=gba_boundary:gba_corporation_boundary&outputFormat=application/vnd.google-earth.kml+xml&srsName=EPSG:4326"
+        http_status: 200
+        content_type: "application/vnd.google-earth.kml+xml"
+        content_length: 790813
+        response_headers:
+          etag: null
+          last_modified: null
+          server: null
+          date: "Tue, 24 Nov 2026 13:24:34 GMT"
+        sha256: "535075101e49274311ee18d0b7b92a9e8f220393401ef795b2bd907005cd5cc9"
+        archive_url: null
+        archive_failure_reason: "Wayback Machine Save Page Now failed: The read operation timed out"
+        fetched_by: "agent"
+      select:
+        property: Corporation
+        equals: South
+
+    - id: gba_zones
+      title: "Bengaluru South City Corporation GBA Zones (Zone 1 Jayanagar & Zone 2 Bommanahalli)"
+      source_label: "Greater Bengaluru Authority delimitation maps, September 2025 (gba.karnataka.gov.in / gisapps.bbmp.gov.in)"
+      retrieved_date: "2026-11-24"
+      layer_role: gba_zones
+      output_file: "gba-zones.geojson"
+      source_url: "https://gisapps.bbmp.gov.in/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=gba_boundary:gba_zone_boundary&outputFormat=application/vnd.google-earth.kml+xml&srsName=EPSG:4326"
+      acquisition_status: acquired
+      retrieval:
+        fetched_at: "2026-11-23T00:00:00Z"
+        requested_url: "https://gisapps.bbmp.gov.in/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=gba_boundary:gba_zone_boundary&outputFormat=application/vnd.google-earth.kml+xml&srsName=EPSG:4326"
+        final_url: "https://gisapps.bbmp.gov.in/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=gba_boundary:gba_zone_boundary&outputFormat=application/vnd.google-earth.kml+xml&srsName=EPSG:4326"
+        http_status: 200
+        content_type: "application/vnd.google-earth.kml+xml"
+        content_length: 1429400
+        response_headers:
+          etag: null
+          last_modified: null
+          server: null
+          date: "Tue, 24 Nov 2026 13:24:58 GMT"
+        sha256: "697f071030c5e7ccb9f615ac228ae4dfb339e0f0604969bb5745f9169f7e1daf"
+        archive_url: null
+        archive_failure_reason: "Wayback Machine Save Page Now failed: The read operation timed out"
+        fetched_by: "agent"
+      select:
+        property: Corporation
+        equals: South
+
+    - id: wards
+      title: "Bengaluru South City Corporation Official Wards (72 Wards)"
+      source_label: "Greater Bengaluru Authority delimitation maps, November 2025 (gba.karnataka.gov.in / gisapps.bbmp.gov.in)"
+      retrieved_date: "2026-11-24"
+      verification_note: "Cross-checked against the 8 official Assembly-wise GBA Ward Delimitation & Population Notification PDFs on gba.karnataka.gov.in/gba-corporations-delimitation-2025/ (Padmanabanagar, Jayanagar, B.T.M Layout, Anekal, Mahadevapura, Bangalore South, Yeshwanthapura, Bommanahalli): all 72 out of 72 ward numbers (1–72) match; 71 out of 72 English ward names match verbatim; Ward 19 is named 'Tavarekere' in the official GIS layer (gba_boundary:ward_369_final) and 'New Tavarekere' in the Assembly 172 (B.T.M Layout) population table PDF."
+      layer_role: wards
+      output_file: "wards.geojson"
+      source_url: "https://gisapps.bbmp.gov.in/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=gba_boundary:ward_369_final&outputFormat=application/vnd.google-earth.kml+xml&srsName=EPSG:4326"
+      acquisition_status: acquired
+      retrieval:
+        fetched_at: "2026-11-23T00:00:00Z"
+        requested_url: "https://gisapps.bbmp.gov.in/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=gba_boundary:ward_369_final&outputFormat=application/vnd.google-earth.kml+xml&srsName=EPSG:4326"
+        final_url: "https://gisapps.bbmp.gov.in/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=gba_boundary:ward_369_final&outputFormat=application/vnd.google-earth.kml+xml&srsName=EPSG:4326"
+        http_status: 200
+        content_type: "application/vnd.google-earth.kml+xml"
+        content_length: 4620950
+        response_headers:
+          etag: null
+          last_modified: null
+          server: null
+          date: "Tue, 24 Nov 2026 13:25:21 GMT"
+        sha256: "5e124ded2ac68b346553a702c404a284ebe34d5371034a8d90f7e457ad0e1d3f"
+        archive_url: null
+        archive_failure_reason: "Wayback Machine Save Page Now failed: The read operation timed out"
+        fetched_by: "agent"
+      select:
+        property: Corporation
+        equals: South
   zoning: []
