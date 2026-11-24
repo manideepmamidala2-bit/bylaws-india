@@ -23,7 +23,7 @@ The `schemas/` directory MUST define eleven JSON Schema (Draft 2020-12) contract
 8. `schemas/consolidated.schema.json`: Validates `data/processed/<jurisdiction>/consolidated.json` (`schema_version: "1.2"`, `jurisdiction`, `generated`, `derived: true`, `clauses[]` with `{ clause_id, doc_id, number, title, as_of_date, text, tables[], amendments_applied[], derived: true, method, confidence: "high" }`, and `unconsolidated[]` recording clauses omitted from consolidation when any applicable amendment link is not high-confidence) (izxl).
 9. `schemas/geo-layers.schema.json`: Validates `data/processed/<jurisdiction>/geo-layers.json` (`schema_version: "1.2"`, `jurisdiction`, and `layers[]` with `{ layer_id, title, kind: "official_boundary" | "master_plan_zone" | "derived_overlay" | "reference", source, method, accuracy_m, derived, file, external_url? }`) (izxl).
 10. `schemas/clause-zone-tags.schema.json`: Validates `data/processed/<jurisdiction>/clause-zone-tags.json` (`schema_version: "1.2"`, `jurisdiction`, and `tags[]` with `{ clause_id, doc_id, zone_code, reason, verification }`) (izxl).
-11. `schemas/manifest.schema.json`: Validates `public/data/manifest.json` (`schema_version: "1.2"`, `jurisdictions[]` with `id`, `name`, optional `visibility` (`"public" | "test"`), optional `aliases[]`, `latest_release`, and `releases[]` containing `version`, `released_at`, `licence`, `download_zip`, `sha256sums`, `declarations`, `changelog`, `files`, and `drafts`) (a5ou, 8ay2, izxl).
+11. `schemas/manifest.schema.json`: Validates `public/data/manifest.json` (`schema_version: "1.2"`, `jurisdictions[]` with `id`, `name`, optional `visibility` (`"public" | "test"`), optional `aliases[]`, nullable `latest_release` (`string | null`), and `releases[]` containing `version`, optional `status` (`"published" | "withdrawn"`, default `"published"`), optional `withdrawn_reason` (`string | null`), `released_at`, `licence`, and nullable `download_zip`, `sha256sums`, `declarations`, `files`, and `drafts`, plus `changelog`) (a5ou, 8ay2, izxl, tuou).
 
 #### Scenario: Valid and Invalid Schema v1.2 Payload Validation
 - **GIVEN** the eleven schema files in `schemas/` and `pipeline/bylaws/schema_validator.py`
@@ -89,3 +89,9 @@ The Schema v1.2 contracts MUST enforce provenance, record version separation, te
 **Why**: Government statutes, rules, regulations, bye-laws, and gazette notifications may be republished in full under Indian copyright law (Section 52(1)(q) Copyright Act, 1957), whereas BIS standards (NBC 2016) are copyrighted commercial publications and consolidated "as amended" text / buffer polygons are editorial derivations rather than official gazettes.
 **Rejected**: Publishing scraped NBC 2016 text (copyright violation) or presenting consolidated text without an explicit derived disclaimer (regulatory traceability violation).
 *Introduced by*: 261123-izxl-plan-v2-bengaluru-south-complete
+
+### Explicit `withdrawn` Release Status in `manifest.schema.json`
+**Decision**: Add `status: "published" | "withdrawn"` and `withdrawn_reason: string | null` to `releaseEntry` in `schemas/manifest.schema.json`, make `latest_release` nullable on `jurisdictionManifest`, and allow `download_zip`, `sha256sums`, `declarations`, `files`, and `drafts` to be `null` when `status == "withdrawn"`.
+**Why**: Allows `public/data/manifest.json` to record withdrawn releases (`1.0.0`) with their withdrawal reason while guaranteeing zero downloadable links and maintaining strict JSON Schema validation.
+**Rejected**: Deleting `1.0.0` from `manifest.json` entirely and hard-coding the withdrawal notice in `app/data/page.tsx` (violates R1 data-driven architecture).
+*Introduced by*: 261124-tuou-pr-01-contain-production

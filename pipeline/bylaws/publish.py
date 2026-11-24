@@ -248,6 +248,7 @@ def run_publish(
 
     release_entry: dict[str, Any] = {
         "version": release_version,
+        "status": "published",
         "released_at": released_at,
         "licence": str(config.licence or "CC BY 4.0"),
         "download_zip": f"{url_prefix}/{zip_filename}",

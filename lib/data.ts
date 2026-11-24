@@ -1,8 +1,8 @@
 /**
- * Centralized data client for published building bylaws datasets (Plan v2.0 §4 & §5.A2).
+ * Centralized data client for published building bylaws datasets.
  *
  * Types are generated from `schemas/*.schema.json` into `lib/types/generated.ts`
- * and re-exported here with typed loaders for every Schema v1.2 artifact.
+ * and re-exported here with typed loaders for every published artifact.
  */
 
 import type {
@@ -93,7 +93,7 @@ export interface GenericFeatureCollection {
 }
 
 /**
- * ClauseNode with optional UI-hydrated document metadata and defensive R8 tolerance.
+ * ClauseNode with optional UI-hydrated document metadata and defensive null tolerance.
  */
 export type ClauseNode = Omit<GeneratedClauseNode, "legal_status" | "citations"> & {
   legal_status?: LegalStatus | null;
@@ -107,7 +107,7 @@ export type ClauseNode = Omit<GeneratedClauseNode, "legal_status" | "citations">
 
 export interface JurisdictionDatasetBundle {
   jurisdiction: JurisdictionSummary;
-  release: ReleaseEntry;
+  release: ReleaseEntry | null;
   documents: DocumentMetadata[];
   clauseTrees: ClauseTreeDocument[];
   draftClauseTrees: ClauseTreeDocument[];
@@ -143,30 +143,49 @@ export function getManifestUrl(): string {
   return `${getDataBaseUrl()}/manifest.json`;
 }
 
+/**
+ * Server-only environment check for including `visibility: "test"` jurisdictions.
+ * False unless `SHOW_TEST_JURISDICTIONS` is explicitly set to `"true"` or `"1"`.
+ */
+export function shouldShowTestJurisdictions(): boolean {
+  const flag = process.env.SHOW_TEST_JURISDICTIONS?.trim().toLowerCase();
+  return flag === "true" || flag === "1";
+}
+
 export function isProductionEnvironment(): boolean {
-  return (
-    process.env.NODE_ENV === "production" &&
-    process.env.VERCEL_ENV === "production"
-  );
+  return !shouldShowTestJurisdictions();
+}
+
+export function isWithdrawnRelease(release: ReleaseEntry): boolean {
+  return release.status === "withdrawn" || !release.files;
 }
 
 /**
  * Return visible jurisdictions from the manifest.
- * Production hides `visibility: "test"` jurisdictions; previews, dev, and tests show them,
- * ordered so `visibility: "public"` jurisdictions come first.
+ * Excludes `visibility: "test"` jurisdictions unless `SHOW_TEST_JURISDICTIONS` is enabled,
+ * and orders `visibility: "public"` jurisdictions first.
  */
 export function getVisibleJurisdictions(
   manifest: ReleaseManifest
 ): JurisdictionSummary[] {
-  const hideTest = isProductionEnvironment();
+  const showTest = shouldShowTestJurisdictions();
   const filtered = manifest.jurisdictions.filter((item) =>
-    hideTest ? item.visibility !== "test" : true
+    showTest ? true : item.visibility !== "test"
   );
   return [...filtered].sort((a, b) => {
     const aPub = a.visibility !== "test" ? 0 : 1;
     const bPub = b.visibility !== "test" ? 0 : 1;
     return aPub - bPub;
   });
+}
+
+export function filterManifestForServer(
+  manifest: ReleaseManifest
+): ReleaseManifest {
+  return {
+    ...manifest,
+    jurisdictions: getVisibleJurisdictions(manifest),
+  };
 }
 
 function isMockedGlobalFetch(): boolean {
@@ -207,32 +226,48 @@ export async function readPublishedJson<T>(
   return (await response.json()) as T;
 }
 
-export async function fetchManifest(
+export async function fetchRawManifest(
   customFetch?: typeof fetch
 ): Promise<ReleaseManifest> {
   const url = getManifestUrl();
   return readPublishedJson<ReleaseManifest>(url, customFetch);
 }
 
+/**
+ * Load the manifest on the server, already filtered so `visibility: "test"`
+ * jurisdictions are removed unless `SHOW_TEST_JURISDICTIONS` is enabled.
+ */
+export async function fetchManifest(
+  customFetch?: typeof fetch
+): Promise<ReleaseManifest> {
+  const raw = await fetchRawManifest(customFetch);
+  return filterManifestForServer(raw);
+}
+
 export function findJurisdictionRelease(
   manifest: ReleaseManifest,
   jurisdictionId: string,
   version?: string
-): { jurisdiction: JurisdictionSummary; release: ReleaseEntry } | null {
-  const jurisdiction = manifest.jurisdictions.find(
-    (item) => item.id === jurisdictionId
-  );
+): { jurisdiction: JurisdictionSummary; release: ReleaseEntry | null } | null {
+  const visible = getVisibleJurisdictions(manifest);
+  const jurisdiction = visible.find((item) => item.id === jurisdictionId);
   if (!jurisdiction) {
     return null;
   }
+  const publishedReleases = jurisdiction.releases.filter(
+    (rel) => !isWithdrawnRelease(rel)
+  );
+  if (publishedReleases.length === 0) {
+    return { jurisdiction, release: null };
+  }
   const targetVersion = version ?? jurisdiction.latest_release;
   const release =
-    jurisdiction.releases.find((rel) => rel.version === targetVersion) ??
-    jurisdiction.releases[jurisdiction.releases.length - 1] ??
-    jurisdiction.releases[0];
-  if (!release) {
-    return null;
-  }
+    (targetVersion
+      ? publishedReleases.find((rel) => rel.version === targetVersion)
+      : undefined) ??
+    publishedReleases[publishedReleases.length - 1] ??
+    publishedReleases[0] ??
+    null;
   return { jurisdiction, release };
 }
 
@@ -242,7 +277,7 @@ export async function fetchDocuments(
 ): Promise<DocumentMetadata[]> {
   const manifest = await fetchManifest();
   const found = findJurisdictionRelease(manifest, jurisdictionId, version);
-  if (!found) {
+  if (!found || !found.release || !found.release.files) {
     return [];
   }
   return readPublishedJson<DocumentMetadata[]>(found.release.files.documents);
@@ -258,12 +293,14 @@ export async function fetchClauseTrees(
     jurisdictionId,
     options?.version
   );
-  if (!found) {
+  if (!found || !found.release || !found.release.files) {
     return [];
   }
   const paths = [
     ...found.release.files.clauses,
-    ...(options?.includeDrafts ? found.release.drafts.clauses : []),
+    ...(options?.includeDrafts && found.release.drafts
+      ? found.release.drafts.clauses
+      : []),
   ];
   return Promise.all(
     paths.map((p) => readPublishedJson<ClauseTreeDocument>(p))
@@ -277,12 +314,12 @@ export async function fetchDocumentClauseTree(
 ): Promise<ClauseTreeDocument | null> {
   const manifest = await fetchManifest();
   const found = findJurisdictionRelease(manifest, jurisdictionId, version);
-  if (!found) {
+  if (!found || !found.release || !found.release.files) {
     return null;
   }
   const allPaths = [
     ...found.release.files.clauses,
-    ...found.release.drafts.clauses,
+    ...(found.release.drafts ? found.release.drafts.clauses : []),
   ];
   const suffix = `/${docId}.clauses.json`;
   const matchedPath = allPaths.find((p) => p.endsWith(suffix));
@@ -298,7 +335,7 @@ export async function fetchAmendments(
 ): Promise<JurisdictionAmendments> {
   const manifest = await fetchManifest();
   const found = findJurisdictionRelease(manifest, jurisdictionId, version);
-  if (!found) {
+  if (!found || !found.release || !found.release.files) {
     return { schema_version: "1.2", jurisdiction: jurisdictionId, links: [] };
   }
   return readPublishedJson<JurisdictionAmendments>(
@@ -312,7 +349,12 @@ export async function fetchConsolidated(
 ): Promise<JurisdictionConsolidated | null> {
   const manifest = await fetchManifest();
   const found = findJurisdictionRelease(manifest, jurisdictionId, version);
-  if (!found || !found.release.files.consolidated) {
+  if (
+    !found ||
+    !found.release ||
+    !found.release.files ||
+    !found.release.files.consolidated
+  ) {
     return null;
   }
   return readPublishedJson<JurisdictionConsolidated>(
@@ -326,7 +368,7 @@ export async function fetchZones(
 ): Promise<ZonesFeatureCollection> {
   const manifest = await fetchManifest();
   const found = findJurisdictionRelease(manifest, jurisdictionId, version);
-  if (!found) {
+  if (!found || !found.release || !found.release.files) {
     return {
       type: "FeatureCollection",
       schema_version: "1.2",
@@ -342,7 +384,7 @@ export async function fetchBoundary(
 ): Promise<GenericFeatureCollection> {
   const manifest = await fetchManifest();
   const found = findJurisdictionRelease(manifest, jurisdictionId, version);
-  if (!found) {
+  if (!found || !found.release || !found.release.files) {
     return { type: "FeatureCollection", features: [] };
   }
   return readPublishedJson<GenericFeatureCollection>(
@@ -365,7 +407,12 @@ export async function fetchGeoLayers(
 ): Promise<JurisdictionGeoLayers | null> {
   const manifest = await fetchManifest();
   const found = findJurisdictionRelease(manifest, jurisdictionId, version);
-  if (!found || !found.release.files.geo_layers) {
+  if (
+    !found ||
+    !found.release ||
+    !found.release.files ||
+    !found.release.files.geo_layers
+  ) {
     return null;
   }
   return readPublishedJson<JurisdictionGeoLayers>(
@@ -379,7 +426,12 @@ export async function fetchClauseZoneTags(
 ): Promise<JurisdictionClauseZoneTags | null> {
   const manifest = await fetchManifest();
   const found = findJurisdictionRelease(manifest, jurisdictionId, version);
-  if (!found || !found.release.files.clause_zone_tags) {
+  if (
+    !found ||
+    !found.release ||
+    !found.release.files ||
+    !found.release.files.clause_zone_tags
+  ) {
     return null;
   }
   return readPublishedJson<JurisdictionClauseZoneTags>(
@@ -393,7 +445,7 @@ export async function fetchDeclarations(
 ): Promise<JurisdictionDeclarations> {
   const manifest = await fetchManifest();
   const found = findJurisdictionRelease(manifest, jurisdictionId, version);
-  if (!found) {
+  if (!found || !found.release || !found.release.declarations) {
     return {
       schema_version: "1.2",
       jurisdiction: jurisdictionId,
@@ -419,6 +471,42 @@ export async function fetchJurisdictionDataset(
     return null;
   }
   const { jurisdiction, release } = found;
+  if (!release || !release.files || !release.declarations) {
+    return {
+      jurisdiction,
+      release: null,
+      documents: [],
+      clauseTrees: [],
+      draftClauseTrees: [],
+      clauses: [],
+      amendments: { schema_version: "1.2", jurisdiction: jurisdictionId, links: [] },
+      consolidated: null,
+      zones: {
+        type: "FeatureCollection",
+        schema_version: "1.2",
+        features: [],
+      },
+      boundary: { type: "FeatureCollection", features: [] },
+      gbaZones: null,
+      wards: null,
+      planningDistricts: null,
+      overlays: null,
+      geoLayers: null,
+      clauseZoneTags: null,
+      declarations: {
+        schema_version: "1.2",
+        jurisdiction: jurisdictionId,
+        not_modelled: [],
+        known_gaps: [],
+        unread_documents: [],
+        unobtainable_documents: [],
+        contested_status: [],
+      },
+    };
+  }
+
+  const releaseFiles = release.files;
+  const releaseDrafts = release.drafts;
 
   const [
     documents,
@@ -436,29 +524,31 @@ export async function fetchJurisdictionDataset(
     clauseZoneTags,
     declarations,
   ] = await Promise.all([
-    readPublishedJson<DocumentMetadata[]>(release.files.documents),
+    readPublishedJson<DocumentMetadata[]>(releaseFiles.documents),
     Promise.all(
-      release.files.clauses.map((p) => readPublishedJson<ClauseTreeDocument>(p))
+      releaseFiles.clauses.map((p) => readPublishedJson<ClauseTreeDocument>(p))
     ),
     Promise.all(
-      release.drafts.clauses.map((p) => readPublishedJson<ClauseTreeDocument>(p))
+      (releaseDrafts?.clauses ?? []).map((p) =>
+        readPublishedJson<ClauseTreeDocument>(p)
+      )
     ),
-    readPublishedJson<JurisdictionAmendments>(release.files.amendments),
-    release.files.consolidated
-      ? readPublishedJson<JurisdictionConsolidated>(release.files.consolidated)
+    readPublishedJson<JurisdictionAmendments>(releaseFiles.amendments),
+    releaseFiles.consolidated
+      ? readPublishedJson<JurisdictionConsolidated>(releaseFiles.consolidated)
       : Promise.resolve(null),
-    readPublishedJson<ZonesFeatureCollection>(release.files.zones),
-    readPublishedJson<GenericFeatureCollection>(release.files.boundary),
-    fetchOptionalFeatureCollection(release.files.gba_zones),
-    fetchOptionalFeatureCollection(release.files.wards),
-    fetchOptionalFeatureCollection(release.files.planning_districts),
-    fetchOptionalFeatureCollection(release.files.overlays),
-    release.files.geo_layers
-      ? readPublishedJson<JurisdictionGeoLayers>(release.files.geo_layers)
+    readPublishedJson<ZonesFeatureCollection>(releaseFiles.zones),
+    readPublishedJson<GenericFeatureCollection>(releaseFiles.boundary),
+    fetchOptionalFeatureCollection(releaseFiles.gba_zones),
+    fetchOptionalFeatureCollection(releaseFiles.wards),
+    fetchOptionalFeatureCollection(releaseFiles.planning_districts),
+    fetchOptionalFeatureCollection(releaseFiles.overlays),
+    releaseFiles.geo_layers
+      ? readPublishedJson<JurisdictionGeoLayers>(releaseFiles.geo_layers)
       : Promise.resolve(null),
-    release.files.clause_zone_tags
+    releaseFiles.clause_zone_tags
       ? readPublishedJson<JurisdictionClauseZoneTags>(
-          release.files.clause_zone_tags
+          releaseFiles.clause_zone_tags
         )
       : Promise.resolve(null),
     readPublishedJson<JurisdictionDeclarations>(release.declarations),
@@ -511,7 +601,7 @@ export async function fetchJurisdictionDataset(
 }
 
 /**
- * Filter a list of ClauseNode records into active records vs historical record versions (Rule R12).
+ * Filter a list of ClauseNode records into active records vs historical record versions.
  */
 export function partitionClauseVersions(clauses: ClauseNode[]): {
   activeClauses: ClauseNode[];

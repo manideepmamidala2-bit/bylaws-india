@@ -43,7 +43,7 @@ export function ReviewPanel({ zones, geoLayers = [] }: ReviewPanelProps) {
           </h2>
           <p className="dg-serif mt-1 text-sm text-[#5b5e56]">
             Inspect source sheet provenance, adjust overlay opacity, and export
-            committed YAML overrides (Rule R6 &amp; R9).
+            YAML overrides.
           </p>
         </div>
 
@@ -86,13 +86,15 @@ export function ReviewPanel({ zones, geoLayers = [] }: ReviewPanelProps) {
                   <td className="font-mono text-xs">{lyr.kind}</td>
                   <td>{lyr.method}</td>
                   <td className="font-mono text-xs">
-                    {lyr.accuracy_m !== null ? `±${lyr.accuracy_m} m` : "—"}
+                    {lyr.accuracy_m !== null
+                      ? `±${lyr.accuracy_m} m`
+                      : "Not measured"}
                   </td>
                   <td className="font-mono text-xs">
                     {lyr.derived ? "Yes (Derived)" : "Official"}
                   </td>
                   <td className="font-mono text-xs">
-                    {lyr.feature_count ?? "—"}
+                    {lyr.feature_count ?? "0"}
                   </td>
                 </tr>
               ))}
@@ -182,7 +184,7 @@ export function ReviewPanel({ zones, geoLayers = [] }: ReviewPanelProps) {
 
               <div>
                 <div className="dg-mono mb-1 text-[10px]">
-                  Override YAML Snippet (data/overrides/&lt;jurisdiction&gt;/overrides.yaml)
+                  Override YAML Snippet
                 </div>
                 <pre className="overflow-x-auto border border-[#080909] bg-[#f5f3ed] p-3 font-mono text-xs text-[#080909]">
                   {yamlSnippet}

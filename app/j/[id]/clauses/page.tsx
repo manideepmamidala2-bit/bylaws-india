@@ -35,6 +35,40 @@ export default async function ClausesPage({ params }: ClausesPageProps) {
     consolidated,
   } = dataset;
 
+  if (!release) {
+    return (
+      <div className="min-h-screen bg-[#f5f3ed] text-[#080909]">
+        <TopNav
+          jurisdictionId={jurisdiction.id}
+          jurisdictionName={jurisdiction.name}
+          active="documents"
+        />
+        <main className="mx-auto max-w-6xl px-6 py-10">
+          <header className="border-b border-[#080909] pb-6">
+            <div className="dg-mono">
+              Structured Documents · {jurisdiction.id}
+            </div>
+            <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909]">
+              {jurisdiction.name}: Documents &amp; Clauses
+            </h1>
+          </header>
+          <section
+            aria-label="Publication status"
+            className="mt-8 border border-[#080909] bg-[#efeee8] p-6"
+          >
+            <h2 className="text-lg font-semibold text-[#080909]">
+              No data published yet
+            </h2>
+            <p className="dg-serif mt-2 max-w-2xl text-sm text-[#171917]">
+              Structured regulatory documents for {jurisdiction.name} are not
+              published yet.
+            </p>
+          </section>
+        </main>
+      </div>
+    );
+  }
+
   const allClausesLookup: Record<string, ClauseNode> = {};
   for (const c of clauses) {
     if (!c.superseded_by && !c.record_superseded_by) {
@@ -58,11 +92,11 @@ export default async function ClausesPage({ params }: ClausesPageProps) {
             Structured Documents &amp; Clauses · {jurisdiction.id}
           </div>
           <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909]">
-            {jurisdiction.name} — Documents &amp; Clause Browser
+            {jurisdiction.name}: Documents &amp; Clauses
           </h1>
           <p className="dg-serif mt-2 max-w-3xl text-base text-[#171917]">
             Select any legal instrument below to read its complete structured
-            document (with Original vs. As-Amended derived toggle), or filter
+            document (with Original and As-Amended derived views), or filter
             across all structured clauses below.
           </p>
         </header>
@@ -96,7 +130,7 @@ export default async function ClausesPage({ params }: ClausesPageProps) {
                   </div>
                   <div className="mt-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.12em] text-[#5b5e56]">
                     <span>{doc.layer}</span>
-                    <span>{isRef ? "Reference only →" : "Full text →"}</span>
+                    <span>{isRef ? "Reference only" : "Full text"}</span>
                   </div>
                 </Link>
               );

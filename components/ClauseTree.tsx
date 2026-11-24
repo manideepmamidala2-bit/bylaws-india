@@ -125,7 +125,7 @@ export function ClauseTree({
           <span className="dg-accent-dot mt-1" />
           <div>
             <strong className="font-mono uppercase tracking-[0.12em]">
-              Derived by this project, not an official publication (Rule R14):
+              Derived by this project, not an official publication:
             </strong>{" "}
             <span className="dg-serif text-sm">
               Consolidated clauses are produced deterministically only where all
@@ -139,7 +139,6 @@ export function ClauseTree({
 
       <div className="divide-y divide-[#c8ccc0] border border-[#080909] bg-[#f5f3ed]">
         {filtered.map((clause) => {
-          // Rule R12: legal_status is strictly legislative status, never conflated with record_version
           const status: DisplayLegalStatus =
             clause.legal_status ?? "status_unknown";
           const validPages = Array.from(

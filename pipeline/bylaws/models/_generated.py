@@ -685,13 +685,15 @@ class ReleaseEntry(BaseModel):
         extra="forbid",
     )
     version: constr(pattern=r"^\d+\.\d+\.\d+$")
+    status: Literal["published", "withdrawn"] | None = "published"
+    withdrawn_reason: str | None = None
     released_at: constr(min_length=10)
     licence: constr(min_length=1)
-    download_zip: constr(min_length=1)
-    sha256sums: constr(min_length=1)
-    declarations: constr(min_length=1)
-    files: ReleaseFiles
-    drafts: ReleaseDrafts
+    download_zip: constr(min_length=1) | None
+    sha256sums: constr(min_length=1) | None
+    declarations: constr(min_length=1) | None
+    files: ReleaseFiles | None
+    drafts: ReleaseDrafts | None
     changelog: str
 
 
@@ -874,7 +876,7 @@ class JurisdictionManifest(BaseModel):
     name: constr(min_length=1)
     aliases: list[constr(min_length=1)] | None = None
     visibility: Literal["public", "test"] | None = "public"
-    latest_release: constr(pattern=r"^\d+\.\d+\.\d+$")
+    latest_release: constr(pattern=r"^\d+\.\d+\.\d+$") | None
     releases: list[ReleaseEntry] = Field(..., min_length=1)
 
 

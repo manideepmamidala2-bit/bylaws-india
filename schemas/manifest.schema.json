@@ -46,7 +46,7 @@
           "default": "public"
         },
         "latest_release": {
-          "type": "string",
+          "type": ["string", "null"],
           "pattern": "^\\d+\\.\\d+\\.\\d+$"
         },
         "releases": {
@@ -165,6 +165,14 @@
           "type": "string",
           "pattern": "^\\d+\\.\\d+\\.\\d+$"
         },
+        "status": {
+          "type": "string",
+          "enum": ["published", "withdrawn"],
+          "default": "published"
+        },
+        "withdrawn_reason": {
+          "type": ["string", "null"]
+        },
         "released_at": {
           "type": "string",
           "minLength": 10
@@ -174,22 +182,28 @@
           "minLength": 1
         },
         "download_zip": {
-          "type": "string",
+          "type": ["string", "null"],
           "minLength": 1
         },
         "sha256sums": {
-          "type": "string",
+          "type": ["string", "null"],
           "minLength": 1
         },
         "declarations": {
-          "type": "string",
+          "type": ["string", "null"],
           "minLength": 1
         },
         "files": {
-          "$ref": "#/$defs/releaseFiles"
+          "anyOf": [
+            { "$ref": "#/$defs/releaseFiles" },
+            { "type": "null" }
+          ]
         },
         "drafts": {
-          "$ref": "#/$defs/releaseDrafts"
+          "anyOf": [
+            { "$ref": "#/$defs/releaseDrafts" },
+            { "type": "null" }
+          ]
         },
         "changelog": {
           "type": "string"

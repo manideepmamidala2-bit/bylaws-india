@@ -236,7 +236,7 @@ export function ZoneMap({
             aria-pressed={showZonesLayer}
             className={`dg-pill ${showZonesLayer ? "dg-pill-active" : ""}`}
           >
-            Master Plan Zones ({activeZones.length})
+            Zones ({activeZones.length})
           </button>
           {boundary && boundary.features.length > 0 && (
             <button
@@ -275,7 +275,7 @@ export function ZoneMap({
               aria-pressed={showPlanningDistrictsLayer}
               className={`dg-pill ${showPlanningDistrictsLayer ? "dg-pill-active" : ""}`}
             >
-              Planning Districts ({planningDistricts.features.length})
+              Districts ({planningDistricts.features.length})
             </button>
           )}
           {overlays && overlays.features.length > 0 && (
@@ -307,7 +307,7 @@ export function ZoneMap({
             aria-pressed={useLeafletTiles}
             className={`dg-pill ${useLeafletTiles ? "dg-pill-active" : ""}`}
           >
-            {useLeafletTiles ? "Leaflet Street Tiles" : "Vector Sheet View"}
+            {useLeafletTiles ? "Street Tiles" : "Sheet View"}
           </button>
         </div>
       </div>
@@ -471,7 +471,7 @@ export function ZoneMap({
                 }
               )}
 
-            {/* Derived Overlays (Rule R14) */}
+            {/* Derived Overlays */}
             {showOverlaysLayer &&
               (overlays?.features ?? []).map(
                 (ov: GenericGeoJSONFeature, idx: number) => {

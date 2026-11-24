@@ -161,7 +161,7 @@ export function SourcesFilterClient({
 
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="border border-[#080909] bg-[#efeee8] px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#080909]">
-                    {isRefOnly ? "REFERENCE ONLY (R13)" : "FULL TEXT"}
+                    {isRefOnly ? "REFERENCE ONLY" : "FULL TEXT"}
                   </span>
                   <StatusBadge status={doc.legal_status} />
                 </div>
@@ -179,7 +179,7 @@ export function SourcesFilterClient({
                 <div>
                   <dt className="dg-mono text-[10px]">Notification / Ref</dt>
                   <dd className="font-mono text-[#080909]">
-                    {doc.notification_number ?? "—"}
+                    {doc.notification_number ?? "Not recorded"}
                   </dd>
                 </div>
                 <div>
@@ -187,7 +187,7 @@ export function SourcesFilterClient({
                     Notified / Effective
                   </dt>
                   <dd className="font-mono text-[#080909]">
-                    {doc.notified_date ?? "—"} /{" "}
+                    {doc.notified_date ?? "Not recorded"} /{" "}
                     {doc.effective_from ?? "Not in force"}
                   </dd>
                 </div>
