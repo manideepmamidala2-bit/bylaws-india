@@ -1,11 +1,10 @@
-"""Stage 8.1: Acquire raw documents and boundary layers with SHA-256 verification."""
+"""Stage 8.1: Acquire raw documents and boundary layers with SHA-256 verification and R15 retrieval records."""
 
 from __future__ import annotations
 
 import hashlib
 import json
 import urllib.parse
-import urllib.request
 from pathlib import Path
 from typing import Any
 
@@ -14,6 +13,13 @@ import pypdfium2 as pdfium
 
 from bylaws.config import DocumentConfig, JurisdictionConfig
 from bylaws.geo.boundaries import extract_boundary_feature
+from bylaws.provenance import (
+    ProvenanceGateError,
+    assert_pdf_not_denylisted,
+    fetch_remote_with_retrieval,
+    is_remote_http_url,
+    load_pdf_denylist,
+)
 from bylaws.root import (
     PACKAGE_REPO_ROOT,
     get_deterministic_timestamp,
@@ -21,8 +27,6 @@ from bylaws.root import (
     resolve_repo_root,
 )
 from bylaws.schema_validator import validate_payload
-
-USER_AGENT = "StructuredBuildingBylaws-Pipeline/1.2 (+https://bylaws-india.vercel.app; CC-BY-4.0)"
 
 DOC_TYPE_TO_ROLE: dict[str, str] = {
     "act": "base",
@@ -38,33 +42,35 @@ DOC_TYPE_TO_ROLE: dict[str, str] = {
 }
 
 
-def resolve_local_or_remote_bytes(source_url: str, repo_root: Path) -> bytes:
-    """Read bytes from a repo-relative path, `file://` URL, or `http(s)://` URL."""
+def resolve_local_or_remote_bytes(
+    source_url: str,
+    repo_root: Path,
+    *,
+    allow_local: bool = True,
+) -> tuple[bytes, dict[str, Any] | None]:
+    """Read bytes from a local path (when `allow_local=True`) or `http(s)://` URL with R15 retrieval metadata."""
+    if source_url.startswith(("http://", "https://")):
+        return fetch_remote_with_retrieval(source_url)
+
+    if not allow_local:
+        raise ProvenanceGateError(
+            f"Rule R15 violation: non-test jurisdiction cannot acquire from local source_url {source_url!r}."
+        )
+
     if source_url.startswith("file://"):
         parsed = urllib.parse.urlparse(source_url)
         file_path = Path(urllib.parse.unquote(parsed.path))
         if not file_path.is_file():
             raise click.ClickException(f"Source file not found: {file_path}")
-        return file_path.read_bytes()
-
-    if source_url.startswith(("http://", "https://")):
-        req = urllib.request.Request(source_url, headers={"User-Agent": USER_AGENT})
-        try:
-            with urllib.request.urlopen(req, timeout=60) as response:
-                data: bytes = response.read()
-                return data
-        except Exception as exc:
-            raise click.ClickException(
-                f"Failed to download '{source_url}': {exc}"
-            ) from exc
+        return file_path.read_bytes(), None
 
     candidate = (repo_root / source_url).resolve()
     if candidate.is_file():
-        return candidate.read_bytes()
+        return candidate.read_bytes(), None
 
     fallback = (PACKAGE_REPO_ROOT / source_url).resolve()
     if fallback.is_file():
-        return fallback.read_bytes()
+        return fallback.read_bytes(), None
 
     raise click.ClickException(
         f"Source file '{source_url}' not found under '{repo_root}'."
@@ -103,19 +109,43 @@ def _acquire_single_document(
     doc: DocumentConfig,
     raw_dir: Path,
     repo_root: Path,
-) -> dict[str, Any]:
+    *,
+    is_test_jurisdiction: bool = False,
+) -> dict[str, Any] | None:
+    acq_status = getattr(doc, "acquisition_status", None) or "acquired"
+    if acq_status in {"pending", "not_found"}:
+        return None
+
     meta_path = raw_dir / f"{doc.id}.meta.json"
     retrieved_at = get_deterministic_timestamp()
     is_ref_only = doc.text_rights is not None and doc.text_rights.mode == "reference_only"
+
+    if not is_test_jurisdiction and not is_remote_http_url(doc.source_url):
+        raise ProvenanceGateError(
+            f"Rule R15 violation ({doc.id}): non-test source_url must be http(s), got {doc.source_url!r}."
+        )
 
     sha256_hex: str | None = None
     byte_count: int | None = None
     page_count: int | None = None
     is_scanned: bool | None = None
     copies: list[dict[str, Any]] = []
+    retrieval_record: dict[str, Any] | None = (
+        doc.retrieval.model_dump(mode="json")
+        if getattr(doc, "retrieval", None) is not None and doc.retrieval is not None
+        else None
+    )
 
     if not is_ref_only:
-        raw_bytes = resolve_local_or_remote_bytes(doc.source_url, repo_root)
+        raw_bytes, fetched_retrieval = resolve_local_or_remote_bytes(
+            doc.source_url,
+            repo_root,
+            allow_local=is_test_jurisdiction,
+        )
+        if fetched_retrieval is not None:
+            retrieval_record = fetched_retrieval
+            retrieved_at = str(fetched_retrieval["fetched_at"])
+
         sha256_hex = hashlib.sha256(raw_bytes).hexdigest()
         byte_count = len(raw_bytes)
         pdf_path = raw_dir / f"{doc.id}.pdf"
@@ -138,16 +168,20 @@ def _acquire_single_document(
         else:
             pdf_path.write_bytes(raw_bytes)
 
+        if not is_test_jurisdiction:
+            assert_pdf_not_denylisted(pdf_path, load_pdf_denylist(repo_root))
+
         page_count, is_scanned = _inspect_pdf(pdf_path)
         rel_pdf_path = str(pdf_path.relative_to(repo_root))
-        copies.append(
-            {
-                "url": doc.source_url,
-                "path": rel_pdf_path,
-                "sha256": sha256_hex,
-                "retrieved_at": retrieved_at,
-            }
-        )
+        copy_entry: dict[str, Any] = {
+            "url": doc.source_url,
+            "path": rel_pdf_path,
+            "sha256": sha256_hex,
+            "retrieved_at": retrieved_at,
+        }
+        if retrieval_record is not None:
+            copy_entry["retrieval"] = retrieval_record
+        copies.append(copy_entry)
 
     evidence_payload: dict[str, Any] = {
         "url": doc.status_evidence.url,
@@ -165,6 +199,7 @@ def _acquire_single_document(
         "layer": doc.layer,
         "role": _resolve_doc_role(doc),
         "legal_status": doc.legal_status,
+        "acquisition_status": "reference_only" if is_ref_only else acq_status,
         "status_evidence": evidence_payload,
         "licence_or_terms": doc.licence_or_terms,
         "notified_date": doc.notified_date,
@@ -178,6 +213,8 @@ def _acquire_single_document(
         "page_count": page_count,
         "is_scanned": is_scanned,
     }
+    if retrieval_record is not None:
+        meta_payload["retrieval"] = retrieval_record
     if doc.doc_type is not None:
         meta_payload["doc_type"] = doc.doc_type
     if doc.notification_number is not None:
@@ -217,11 +254,23 @@ def run_acquire(config: JurisdictionConfig, *, repo_root: Path | None = None) ->
     raw_dir.mkdir(parents=True, exist_ok=True)
     processed_dir.mkdir(parents=True, exist_ok=True)
 
+    is_test_jur = config.visibility == "test"
+    acquired_count = 0
     for doc in config.documents:
-        _acquire_single_document(doc, raw_dir, root)
+        res = _acquire_single_document(
+            doc,
+            raw_dir,
+            root,
+            is_test_jurisdiction=is_test_jur,
+        )
+        if res is not None:
+            acquired_count += 1
 
     all_boundary_features: list[dict[str, Any]] = []
     for boundary_cfg in config.maps.boundaries:
+        b_status = getattr(boundary_cfg, "acquisition_status", None) or "acquired"
+        if b_status in {"pending", "not_found"}:
+            continue
         source_path = resolve_local_source_path(boundary_cfg.source_url, root)
         fc = extract_boundary_feature(
             source_path,
@@ -248,6 +297,6 @@ def run_acquire(config: JurisdictionConfig, *, repo_root: Path | None = None) ->
         encoding="utf-8",
     )
     click.echo(
-        f"[acquire] Acquired {len(config.documents)} document(s) and "
+        f"[acquire] Acquired {acquired_count} document(s) and "
         f"{len(all_boundary_features)} boundary feature(s) for '{config.id}'."
     )

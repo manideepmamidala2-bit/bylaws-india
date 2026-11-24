@@ -7,7 +7,7 @@ Tracks the 11-PR remediation series defined in [`docs/plans/pr-series/00-overvie
 | PR | Title | Depends on | Status | Change | Date |
 |----|-------|------------|--------|--------|------|
 | **01** | Contain production | — | ✅ Complete | `261124-tuou-pr-01-contain-production` | 2026-11-24 |
-| **02** | Provenance gate and repository sync | 01 | Pending | — | — |
+| **02** | Provenance gate and repository sync | 01 | ✅ Complete | `261124-fcwm-pr-02-provenance-gate-repo-sync` | 2026-11-24 |
 | **03** | Schema 1.3: three layers | 02 | Pending | — | — |
 | **04** | Acquire core documents and reconnaissance (Checkpoint 1) | 03 | Pending | — | — |
 | **05** | Structure the two anchor documents (Checkpoint 2) | 04 | Pending | — | — |
@@ -20,5 +20,6 @@ Tracks the 11-PR remediation series defined in [`docs/plans/pr-series/00-overvie
 
 ## Release Status (`in-ka-bengaluru-south`)
 
-- **Release `1.0.0`**: **Withdrawn** ("Synthetic demonstration data, not the law of Bengaluru South"; downloadable files removed from `public/data/` in PR 01).
+- **Release `1.0.0`**: **Withdrawn** ("Synthetic demonstration data, not the law of Bengaluru South"; downloadable files removed from `public/data/` in PR 01, and all generated source/override/report files removed from `data/` in PR 02).
+- **Provenance Gate (`R15`, `R16`)**: Active in CI (`bylaws check-provenance`) and scheduled weekly (`bylaws verify-sources` in `.github/workflows/verify-sources.yml`).
 - **Current public status**: `"No data published yet"` — real documents and official maps will be published starting at Release `2.0.0` (PR 05).

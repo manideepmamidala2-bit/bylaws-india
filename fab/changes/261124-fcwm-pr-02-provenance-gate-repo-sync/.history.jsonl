@@ -1,0 +1,9 @@
+{"action":"enter","driver":"fab-new","event":"stage-transition","stage":"intake","ts":"2026-11-24T06:31:12Z"}
+{"args":"Implement PR 02 (Provenance Gate and Repository Sync) per docs/plans/pr-series/00-overview.md and docs/plans/pr-series/02-provenance-gate-and-repo-sync.md: add retrieval block to schemas and bylaws acquire with Wayback snapshot archiving, add CI provenance gate (R15/R16) and weekly bylaws verify-sources workflow, move scripts/build_bengaluru_south_sources.py to pipeline/tests/fixtures/build_synthetic_jurisdiction.py (xx-synthetic-city), delete all generated Bengaluru South files from data/ and public/data/, reset jurisdictions/in-ka-bengaluru-south.yaml to pending real URLs, wire real Docling and Tesseract adapters without aliases or invented bboxes, sync Python/Web dependencies with make setup, and rewrite README.md and docs/ (provenance.md, architecture.md, scope.md, decisions/2026-11-24-audit-3.md, progress.md).","cmd":"fab-new","event":"command","ts":"2026-11-24T06:31:12Z"}
+{"delta":"+5.0","event":"confidence","score":5,"trigger":"calc-score","ts":"2026-11-24T06:33:08Z"}
+{"cmd":"fab-fff","event":"command","ts":"2026-11-24T06:35:13Z"}
+{"action":"enter","driver":"fab-fff","event":"stage-transition","stage":"apply","ts":"2026-11-24T06:35:13Z"}
+{"action":"enter","driver":"fab-fff","event":"stage-transition","stage":"review","ts":"2026-11-24T07:06:09Z"}
+{"action":"enter","driver":"fab-fff","event":"stage-transition","stage":"hydrate","ts":"2026-11-24T07:16:25Z"}
+{"event":"review","result":"passed","ts":"2026-11-24T07:16:25Z"}
+{"action":"enter","driver":"fab-fff","event":"stage-transition","stage":"ship","ts":"2026-11-24T07:18:10Z"}

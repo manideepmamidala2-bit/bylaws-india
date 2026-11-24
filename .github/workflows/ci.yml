@@ -8,7 +8,7 @@ on:
 
 jobs:
   pipeline:
-    name: Python Pipeline (codegen + R4 licences + ruff + pytest + vertical slice)
+    name: Python Pipeline (codegen + R4 licences + provenance gate + ruff + pytest + Docling)
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -16,6 +16,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Install system packages (Tesseract OCR & GDAL)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends tesseract-ocr tesseract-ocr-eng gdal-bin libgdal-dev
 
       - name: Set up Node.js (for TypeScript codegen verification)
         uses: actions/setup-node@v4
@@ -37,25 +42,40 @@ jobs:
       - name: Set up Python 3.12
         run: uv python install 3.12
 
+      - name: Cache Docling & Hugging Face models
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/huggingface
+            ~/.cache/docling
+          key: docling-models-${{ runner.os }}-${{ hashFiles('pipeline/uv.lock') }}
+          restore-keys: |
+            docling-models-${{ runner.os }}-
+
       - name: Sync dependencies
         run: uv sync --frozen --extra dev
 
-      - name: Verify single-source codegen freshness (S1b)
+      - name: Verify single-source codegen freshness
         working-directory: .
         run: |
-          python3 scripts/generate_models.py --check
+          (cd pipeline && uv run python ../scripts/generate_models.py --check)
           git diff --exit-code pipeline/bylaws/models/_generated.py lib/types/generated.ts
 
       - name: Run Ruff lint check
         run: uv run ruff check .
 
+      - name: Run R15/R16 Provenance Gate
+        run: uv run bylaws check-provenance
+
       - name: Run Rule R4 permissive licence & dependencies check
         run: uv run pytest tests/test_r4_licences.py -v
 
-      - name: Run fixture end-to-end vertical slice (S2)
-        run: uv run bylaws run-all --jurisdiction xx-test-fixture
+      - name: Run fixture end-to-end vertical slice and Docling parser
+        run: |
+          uv run bylaws run-all --jurisdiction xx-test-fixture
+          uv run bylaws parse --jurisdiction xx-test-fixture --parser docling
 
-      - name: Run full pytest suite (schemas, CLI, R1, R4, golden snapshots)
+      - name: Run full pytest suite (schemas, CLI, R1, R4, provenance, golden snapshots)
         run: uv run pytest -v
 
   web:

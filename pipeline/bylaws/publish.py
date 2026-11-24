@@ -193,10 +193,20 @@ def run_publish(
     *,
     dry_run: bool = False,
     target: str | None = None,
-    release_version: str = "0.1.0",
+    release_version: str | None = None,
     repo_root: Path | None = None,
 ) -> None:
     """Publish processed jurisdiction datasets and update manifest.json safely."""
+    resolved_version = (
+        release_version
+        or getattr(config, "release_version", None)
+        or ""
+    ).strip()
+    if not resolved_version:
+        raise click.ClickException(
+            f"Cannot publish '{config.id}': 'release_version' is absent in jurisdiction configuration."
+        )
+    release_version = resolved_version
     root = repo_root or resolve_repo_root()
     resolved_target = (target or os.environ.get("DATA_TARGET") or "local").strip().lower()
     if resolved_target not in {"local", "blob"}:
