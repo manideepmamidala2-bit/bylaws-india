@@ -86,33 +86,39 @@
 
 ### Functional Completeness
 
-- [ ] A-001 R1: `schemas/clause-tree.schema.json` and `pipeline/bylaws/structure.py` produce Layer 1 nodes with Akoma Ntoso `eid`s, `native_number`, 22 node types, `intro`/`content`/`wrap_up`, `children`, `defines`/`defines_normalised`, hierarchical `table` + `table_row` nodes, and `versions`
-- [ ] A-002 R2: `schemas/annotations.schema.json` and `pipeline/bylaws/annotations.py` produce `<doc_id>.annotations.json` with `cross_reference`, `defined_term_use`, and `provision_type` annotations whose character spans validate against the target field text
-- [ ] A-003 R3: `schemas/amendments.schema.json`, `pipeline/bylaws/amendments.py`, and `pipeline/bylaws/consolidate.py` produce Layer 3 `effects` (`substitute`, `insert_after`, `insert_before`, `omit`, `renumber`, `modify_text`), update node `versions`, and compute derived consolidated views for any date
-- [ ] A-004 R4: Extended synthetic fixture produces the hand-written expected tree, annotations, effects, and versions, and the web Document page renders all node types, annotations, and version toggle with `axe-core` passing
-- [ ] A-005 R4: `docs/schema.md` explains all three layers in plain English with a worked example, prefix table, and Akoma Ntoso element mapping table
+- [x] A-001 R1: `schemas/clause-tree.schema.json` and `pipeline/bylaws/structure.py` produce Layer 1 nodes with Akoma Ntoso `eid`s, `native_number`, 22 node types, `intro`/`content`/`wrap_up`, `children`, `defines`/`defines_normalised`, hierarchical `table` + `table_row` nodes, and `versions`
+- [x] A-002 R2: `schemas/annotations.schema.json` and `pipeline/bylaws/annotations.py` produce `<doc_id>.annotations.json` with `cross_reference`, `defined_term_use`, and `provision_type` annotations whose character spans validate against the target field text
+- [x] A-003 R3: `schemas/amendments.schema.json`, `pipeline/bylaws/amendments.py`, and `pipeline/bylaws/consolidate.py` produce Layer 3 `effects` (`substitute`, `insert_after`, `insert_before`, `omit`, `renumber`, `modify_text`), update node `versions`, and compute derived consolidated views for any date
+- [x] A-004 R4: Extended synthetic fixture produces the hand-written expected tree, annotations, effects, and versions, and the web Document page renders all node types, annotations, and version toggle with `axe-core` passing
+- [x] A-005 R4: `docs/schema.md` explains all three layers in plain English with a worked example, prefix table, and Akoma Ntoso element mapping table
 
 ### Behavioral Correctness
 
-- [ ] A-006 R1: Repeated sub-items `(a)` under different parents never collide, and `intro` and `wrap_up` text land on the parent node
-- [ ] A-007 R3: Consolidated view on a date after the fixture amendment shows substituted, inserted, and omitted text correctly; on a date before the amendment, it shows the original text
-- [ ] A-008 R2: Every annotation span validates against its target field text, and a planted invalid span fails validation
+- [x] A-006 R1: Repeated sub-items `(a)` under different parents never collide, and `intro` and `wrap_up` text land on the parent node
+- [x] A-007 R3: Consolidated view on a date after the fixture amendment shows substituted, inserted, and omitted text correctly; on a date before the amendment, it shows the original text
+- [x] A-008 R2: Every annotation span validates against its target field text, and a planted invalid span fails validation
 
 ### Scenario Coverage
 
-- [ ] A-009 R1: `make generate` produces zero git diff on `pipeline/bylaws/models/_generated.py` and `lib/types/generated.ts`, and `bylaws run-all --jurisdiction xx-test-fixture` matches hand-written golden files
-- [ ] A-010 R4: All Vitest and `axe-core` accessibility tests pass on the updated Document page
+- [x] A-009 R1: `make generate` produces zero git diff on `pipeline/bylaws/models/_generated.py` and `lib/types/generated.ts`, and `bylaws run-all --jurisdiction xx-test-fixture` matches hand-written golden files
+- [x] A-010 R4: All Vitest and `axe-core` accessibility tests pass on the updated Document page
 
 ### Code Quality
 
-- [ ] A-011 Pattern consistency: New code follows existing pipeline and Next.js TypeScript conventions
-- [ ] A-012 No unnecessary duplication: Shared tree traversal, span validation, and version-selection utilities are reused
+- [x] A-011 Pattern consistency: New code follows existing pipeline and Next.js TypeScript conventions
+- [x] A-012 No unnecessary duplication: Shared tree traversal, span validation, and version-selection utilities are reused
 
 ## Notes
 
 - Check items as you review: `- [x]`
 - All acceptance items must pass before `/fab-continue` (hydrate)
 - If an item is not applicable, mark checked and prefix with **N/A**: `- [x] A-NNN **N/A**: {reason}`
+
+## Deletion Candidates
+
+- `pipeline/bylaws/consolidate.py:18-21,91-109` (`SUBSTITUTED_QUOTE_RE` / `_extract_substituted_text`) — Overlaps with `QUOTED_TEXT_RE` and `_parse_quoted_node_payload` in `pipeline/bylaws/amendments.py:73-143` now that Layer 3 effects extract structured replacement nodes during `bylaws amendments`.
+- `schemas/clause-tree.schema.json:497-530` (`$defs.clauseTable` / `ClauseNode.tables`) — Legacy inline table array retained alongside Layer 1 `table` and `table_row` nodes; candidate for removal once all consumers read Layer 1 `table` nodes exclusively.
+- `schemas/amendments.schema.json:142-199` (`$defs.amendmentLink` / `JurisdictionAmendments.links`) — Legacy link entries retained alongside Layer 3 `effects[]`; candidate for removal once all consumers read `effects[]` exclusively.
 
 ## Assumptions
 

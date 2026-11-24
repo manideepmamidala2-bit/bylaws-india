@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bylaws-india.local/schemas/overrides.schema.json",
   "title": "JurisdictionOverrides",
-  "description": "Versioned manual corrections, zone tags, and map curations in data/overrides/<jurisdiction>/*.yaml (Schema v1.2).",
+  "description": "Versioned manual corrections, annotation fixes, zone tags, and map curations in data/overrides/<jurisdiction>/*.yaml (Schema v1.3).",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version"],
@@ -57,7 +57,7 @@
       "properties": {
         "clause_id": {
           "type": "string",
-          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*:.+$"
+          "minLength": 1
         },
         "field": {
           "type": "string",
@@ -118,7 +118,7 @@
       "properties": {
         "clause_id": {
           "type": "string",
-          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*:.+$"
+          "minLength": 1
         },
         "zones": {
           "type": "array",
@@ -281,9 +281,9 @@
         "verification"
       ],
       "properties": {
-        "amending_clause": {
+        "clause_id": {
           "type": "string",
-          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*:.+$"
+          "minLength": 1
         },
         "target_clause": {
           "type": "string",

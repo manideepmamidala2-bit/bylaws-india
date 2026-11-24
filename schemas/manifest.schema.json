@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bylaws-india.local/schemas/manifest.schema.json",
   "title": "ReleaseManifest",
-  "description": "Published release manifest at Blob/static root manifest.json (Schema v1.2).",
+  "description": "Published release manifest at Blob/static root manifest.json (Schema v1.3).",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "jurisdictions"],

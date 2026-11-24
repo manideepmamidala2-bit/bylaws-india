@@ -152,3 +152,80 @@ def test_docs_schema_md_documents_three_layers_and_akoma_ntoso_mapping() -> None
     assert "Akoma Ntoso" in schema_doc
     assert "subcl_" in schema_doc
     assert "prov_" in schema_doc
+
+
+def test_overrides_support_bare_eid_and_annotation_fixes_idempotently(tmp_path) -> None:
+    """`apply-overrides` supports bare `eid` targets and `annotation_fixes` idempotently."""
+    import json
+    import shutil
+
+    import yaml
+
+    from bylaws.config import load_jurisdiction_config
+    from bylaws.overrides import run_apply_overrides
+
+    isolated = tmp_path / "workspace"
+    isolated.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(REPO_ROOT / "bylaws.toml", isolated / "bylaws.toml")
+    shutil.copytree(REPO_ROOT / "schemas", isolated / "schemas")
+    shutil.copytree(REPO_ROOT / "jurisdictions", isolated / "jurisdictions")
+    docs_dir = isolated / "data" / "processed" / "xx-test-fixture" / "documents"
+    docs_dir.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(
+        GOLDEN_DIR / "fixture-base-2020.clauses.json",
+        docs_dir / "fixture-base-2020.clauses.json",
+    )
+    shutil.copy2(
+        GOLDEN_DIR / "fixture-base-2020.annotations.json",
+        docs_dir / "fixture-base-2020.annotations.json",
+    )
+
+    overrides_dir = isolated / "data" / "overrides" / "xx-test-fixture"
+    overrides_dir.mkdir(parents=True, exist_ok=True)
+    (overrides_dir / "overrides.yaml").write_text(
+        yaml.safe_dump(
+            {
+                "schema_version": "1.3",
+                "clause_fixes": [
+                    {
+                        "clause_id": "chp_II__cl_2.1__prov_1",
+                        "field": "heading",
+                        "value": "Sunshade Projection Proviso",
+                        "reason": "Clarify proviso heading by bare eid",
+                    }
+                ],
+                "annotation_fixes": [
+                    {
+                        "annotation_id": "fixture-base-2020:ann_1",
+                        "field": "verification",
+                        "value": "human_verified",
+                        "reason": "Verified first annotation against source page 1",
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    config = load_jurisdiction_config(
+        "xx-test-fixture",
+        jurisdictions_dir=isolated / "jurisdictions",
+        schemas_dir=isolated / "schemas",
+    )
+    run_apply_overrides(config, repo_root=isolated)
+    first_clauses = (docs_dir / "fixture-base-2020.clauses.json").read_bytes()
+    first_anns = (docs_dir / "fixture-base-2020.annotations.json").read_bytes()
+
+    # Running a second time must be byte-identical (idempotent)
+    run_apply_overrides(config, repo_root=isolated)
+    assert (docs_dir / "fixture-base-2020.clauses.json").read_bytes() == first_clauses
+    assert (docs_dir / "fixture-base-2020.annotations.json").read_bytes() == first_anns
+
+    updated_tree = json.loads(first_clauses.decode("utf-8"))
+    prov_node = next(n for n in updated_tree["clauses"] if n["eid"] == "chp_II__cl_2.1__prov_1")
+    assert prov_node["heading"] == "Sunshade Projection Proviso"
+
+    updated_anns = json.loads(first_anns.decode("utf-8"))
+    ann_1 = next(a for a in updated_anns["annotations"] if a["annotation_id"] == "fixture-base-2020:ann_1")
+    assert ann_1["verification"] == "human_verified"
+

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bylaws-india.local/schemas/consolidated.schema.json",
   "title": "JurisdictionConsolidated",
-  "description": "Derived consolidated 'as amended' clause records and unconsolidated clause explanations (Schema v1.2, Rule R14).",
+  "description": "Derived consolidated 'as amended' clause records and unconsolidated clause explanations (Schema v1.3, Rule R14).",
   "type": "object",
   "additionalProperties": false,
   "required": [

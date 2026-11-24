@@ -595,7 +595,7 @@ export interface ZoneFeatureProperties {
 }
 
 /**
- * Versioned manual corrections, zone tags, and map curations in data/overrides/<jurisdiction>/*.yaml (Schema v1.2).
+ * Versioned manual corrections, annotation fixes, zone tags, and map curations in data/overrides/<jurisdiction>/*.yaml (Schema v1.3).
  */
 
 export interface JurisdictionOverrides {
@@ -693,7 +693,7 @@ export interface MapGcp {
 }
 
 export interface AmendmentLinkOverride {
-  amending_clause: string;
+  clause_id?: string;
   target_clause: string;
   action: "substitute" | "insert_after" | "insert_before" | "omit" | "modify" | "renumber";
   effective_date?: string | null;
@@ -802,7 +802,7 @@ export interface AmendmentLink {
 }
 
 /**
- * Published release manifest at Blob/static root manifest.json (Schema v1.2).
+ * Published release manifest at Blob/static root manifest.json (Schema v1.3).
  */
 
 export interface ReleaseManifest {
@@ -860,7 +860,7 @@ export interface ReleaseDrafts {
 }
 
 /**
- * Derived consolidated 'as amended' clause records and unconsolidated clause explanations (Schema v1.2, Rule R14).
+ * Derived consolidated 'as amended' clause records and unconsolidated clause explanations (Schema v1.3, Rule R14).
  */
 
 export interface JurisdictionConsolidated {

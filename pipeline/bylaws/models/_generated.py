@@ -599,7 +599,7 @@ class ClauseFix(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    clause_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:.+$")
+    clause_id: constr(min_length=1)
     field: Literal[
         "title",
         "heading",
@@ -638,7 +638,7 @@ class ZoneTag(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    clause_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:.+$")
+    clause_id: constr(min_length=1)
     zones: list[constr(min_length=1)] = Field(..., min_length=1)
     reason: constr(min_length=1)
     verification: Literal["unverified", "machine_checked", "human_verified"] | None = (
@@ -705,7 +705,7 @@ class AmendmentLinkOverride(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    amending_clause: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:.+$")
+    clause_id: constr(min_length=1) | None = None
     target_clause: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:.+$")
     action: Literal[
         "substitute", "insert_after", "insert_before", "omit", "modify", "renumber"

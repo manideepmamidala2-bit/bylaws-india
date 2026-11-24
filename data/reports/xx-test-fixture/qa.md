@@ -1,6 +1,6 @@
 # Quality Assurance Report — `xx-test-fixture` (Synthetic Test Jurisdiction)
 
-## 1. Schema v1.2 Validation
+## 1. Schema v1.3 Validation
 
 - `data/raw/xx-test-fixture/fixture-base-2020.meta.json` against `document.schema.json`: PASS
 - `data/raw/xx-test-fixture/fixture-amend-2024.meta.json` against `document.schema.json`: PASS

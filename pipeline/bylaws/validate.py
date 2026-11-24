@@ -1,4 +1,4 @@
-"""Stage 8.7: Schema v1.2 validation, 9-point QA suite, declarations.json, and qa.md report."""
+"""Stage 8.7: Schema v1.3 validation, 9-point QA suite, declarations.json, and qa.md report."""
 
 from __future__ import annotations
 
@@ -392,7 +392,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
     qa_lines = [
         f"# Quality Assurance Report — `{config.id}` ({config.name})",
         "",
-        "## 1. Schema v1.2 Validation",
+        "## 1. Schema v1.3 Validation",
         "",
         *[f"- {line}" for line in schema_checks_run],
         "",
