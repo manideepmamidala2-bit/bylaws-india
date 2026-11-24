@@ -1,25 +1,36 @@
 import type { Metadata } from "next";
-import { Inter_Tight, JetBrains_Mono, Source_Serif_4 } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const interTight = Inter_Tight({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+const interTight = localFont({
+  src: "./fonts/inter-tight-latin.woff2",
+  weight: "400 700",
+  style: "normal",
   variable: "--font-display",
   display: "swap",
 });
 
-const sourceSerif = Source_Serif_4({
-  subsets: ["latin"],
-  weight: ["400", "600"],
-  style: ["normal", "italic"],
+const sourceSerif = localFont({
+  src: [
+    {
+      path: "./fonts/source-serif-4-latin-normal.woff2",
+      weight: "400 600",
+      style: "normal",
+    },
+    {
+      path: "./fonts/source-serif-4-latin-italic.woff2",
+      weight: "400 600",
+      style: "italic",
+    },
+  ],
   variable: "--font-serif",
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
+const jetbrainsMono = localFont({
+  src: "./fonts/jetbrains-mono-latin.woff2",
+  weight: "400 500",
+  style: "normal",
   variable: "--font-mono",
   display: "swap",
 });
