@@ -128,6 +128,59 @@
         "$ref": "#/$defs/documentConfig"
       }
     },
+    "amendment_links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "title": "JurisdictionAmendmentLinkConfig",
+        "additionalProperties": false,
+        "required": [
+          "amending_clause",
+          "target_clause",
+          "action",
+          "confidence",
+          "verification"
+        ],
+        "properties": {
+          "amending_clause": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*:.+$"
+          },
+          "target_clause": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*:.+$"
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "substitute",
+              "insert_after",
+              "insert_before",
+              "omit",
+              "modify",
+              "renumber"
+            ]
+          },
+          "effective_date": {
+            "type": ["string", "null"]
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["high", "medium", "low"]
+          },
+          "verification": {
+            "type": "string",
+            "enum": ["unverified", "machine_checked", "human_verified"]
+          },
+          "note": {
+            "type": ["string", "null"]
+          },
+          "replacement_text": {
+            "type": ["string", "null"]
+          }
+        }
+      }
+    },
     "maps": {
       "type": "object",
       "title": "MapsConfig",

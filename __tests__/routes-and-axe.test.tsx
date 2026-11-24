@@ -213,8 +213,8 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
       screen.getByText("BANGALORE MAHANAGARA PALIKE BUILDING BYE-LAWS 2003")
     ).toBeInTheDocument();
     expect(
-      screen.getAllByRole("link", { name: /Read Structured Document/i })
-    ).toHaveLength(2);
+      screen.getAllByRole("link", { name: /Read Structured Document/i }).length
+    ).toBeGreaterThanOrEqual(4);
     expect(screen.getAllByText(/Not yet structured/i).length).toBeGreaterThan(1);
     assertCleanPublicCopy(
       sourcesContainer.textContent ?? "",
@@ -224,7 +224,7 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     await assertNoAxeViolations(sourcesContainer);
     uSources();
 
-    // Document page for bbl-2003 renders prominent "Amendments not yet applied" notice and side-by-side View source + Archive links
+    // Document page for bbl-2003 renders Original / As Amended (Derived) toggle, Changed by links, and no "Amendments not yet applied" notice
     const docUi = await DocumentViewerPage({
       params: Promise.resolve({
         id: "in-ka-bengaluru-south",
@@ -233,10 +233,19 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     });
     const { container: docContainer, unmount: uDoc } = render(docUi);
     expect(
-      screen.getByText(
-        /Two base documents published\. Amendments not yet applied: the text shown is the original wording, which may have been changed since\./i
-      )
-    ).toBeInTheDocument();
+      screen.queryByText(/Amendments not yet applied/i)
+    ).not.toBeInTheDocument();
+    const asAmendedBtn = screen.getByRole("button", {
+      name: /As Amended \(Derived\)/i,
+    });
+    fireEvent.click(asAmendedBtn);
+    expect(
+      screen.getAllByText(/Derived by this project, not an official publication/i)
+        .length
+    ).toBeGreaterThan(0);
+    expect(
+      screen.getAllByText(/Changed by/i).length
+    ).toBeGreaterThan(0);
     expect(
       screen.getAllByRole("link", { name: /View source p\. 1/i }).length
     ).toBeGreaterThan(0);
@@ -250,6 +259,21 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     );
     await assertNoAxeViolations(docContainer);
     uDoc();
+
+    // Document page for rmp2015-zr still renders "Amendments not yet applied" until PR 09
+    const zrDocUi = await DocumentViewerPage({
+      params: Promise.resolve({
+        id: "in-ka-bengaluru-south",
+        doc: "rmp2015-zr",
+      }),
+    });
+    const { unmount: uZrDoc } = render(zrDocUi);
+    expect(
+      screen.getByText(
+        /Amendments not yet applied: the text shown is the original wording, which may have been changed since\./i
+      )
+    ).toBeInTheDocument();
+    uZrDoc();
 
     // Unstructured amendment document renders "Not yet structured"
     const unstructUi = await DocumentViewerPage({
@@ -342,7 +366,7 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     }
   });
 
-  it("shows release 1.0.0 as withdrawn and release 2.2.0 as published on Data page, and renders honest About page", async () => {
+  it("shows release 1.0.0 as withdrawn and release 2.3.0 as published on Data page, and renders honest About page", async () => {
     const dataUi = await DataReleasesPage();
     const { container: dataContainer, unmount: uData } = render(dataUi);
 
@@ -351,7 +375,7 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
         /Withdrawn: Synthetic demonstration data, not the law of Bengaluru South/i
       )
     ).toBeInTheDocument();
-    expect(screen.getByText(/Latest: v2\.2\.0/i)).toBeInTheDocument();
+    expect(screen.getByText(/Latest: v2\.3\.0/i)).toBeInTheDocument();
     expect(
       screen.getAllByRole("link", { name: /Download Bundle/i }).length
     ).toBeGreaterThan(0);

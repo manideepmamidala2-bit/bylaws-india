@@ -57,8 +57,8 @@ UNNUMBERED_SECTION_RE = re.compile(
 TOC_LEADER_RE = re.compile(r"(?:\.\s*){4,}\d*$")
 
 SECTION_PREFIX_RE = re.compile(
-    r"^(?P<prefix>Section|Clause|Regulation|Bye-law|Byelaw|Rule)\s+"
-    r"(?P<number>[A-Z]?\d+(?:[.-]\d+)*[A-Z]?)"
+    r"^(?P<prefix>Section|Clause|Regulation|Bye[-{]?[l1J]aw|Byelaw|Rule)\s+(?:No\.?\s*)?"
+    r"(?P<number>[A-Za-z]?\d+(?:[.-][0-9A-Za-z()]+)*[A-Za-z]?)"
     r"(?:\s*[:.\-\u2013\u2014]\s*(?P<rest>[A-Za-z'\"\u201c\u2018(\u0c80-\u0cff].*))?$",
     re.IGNORECASE,
 )
@@ -1205,6 +1205,8 @@ def is_structurable_document(doc: DocumentConfig) -> bool:
         return False
     if doc.languages and list(doc.languages) == ["kn"]:
         return False
+    if getattr(doc, "structured", None) is True:
+        return True
     return not (
         doc.role in {"boundary", "reference"}
         or doc.doc_type in {"map", "standard_reference"}

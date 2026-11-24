@@ -14,6 +14,7 @@ import { partitionClauseVersions } from "@/lib/data";
 import { StatusBadge } from "./StatusBadge";
 
 interface ClauseTreeProps {
+  jurisdictionId?: string;
   clauses: ClauseNode[];
   annotations?: AnnotationEntry[];
   amendmentEffects?: AmendmentEffect[];
@@ -28,6 +29,7 @@ const INITIAL_VISIBLE_COUNT = 40;
 const MAX_INLINE_ANNOTATIONS = 12;
 
 export function ClauseTree({
+  jurisdictionId = "",
   clauses,
   annotations = [],
   amendmentEffects = [],
@@ -42,6 +44,14 @@ export function ClauseTree({
   const [viewMode, setViewMode] = useState<"original" | "consolidated">(
     "original"
   );
+  const availableDates = Array.from(
+    new Set(
+      amendmentEffects
+        .filter((e) => e.applied && e.valid_from)
+        .map((e) => String(e.valid_from))
+    )
+  ).sort();
+  const [asOfDate, setAsOfDate] = useState<string>("latest");
 
   const { activeClauses, historyByClauseId } = partitionClauseVersions(clauses);
   const baseClauses = activeClauses.length > 0 ? activeClauses : clauses;
@@ -93,9 +103,13 @@ export function ClauseTree({
     if (node.type === "table_row") {
       return false;
     }
+    const firstVer = node.versions?.[0];
     if (viewMode === "original") {
-      const firstVer = node.versions?.[0];
       if (firstVer && firstVer.effect_id) {
+        return false;
+      }
+    } else if (asOfDate !== "latest" && firstVer?.valid_from) {
+      if (String(firstVer.valid_from) > asOfDate) {
         return false;
       }
     }
@@ -151,7 +165,7 @@ export function ClauseTree({
           <div
             role="group"
             aria-label="Document text view mode"
-            className="flex items-center gap-2"
+            className="flex flex-wrap items-center gap-2"
           >
             <button
               type="button"
@@ -169,6 +183,29 @@ export function ClauseTree({
             >
               As Amended (Derived)
             </button>
+            {viewMode === "consolidated" && availableDates.length > 0 && (
+              <div className="flex items-center gap-1.5 pl-1">
+                <label
+                  htmlFor="consolidated-as-of-date"
+                  className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#5b5e56]"
+                >
+                  As of:
+                </label>
+                <select
+                  id="consolidated-as-of-date"
+                  value={asOfDate}
+                  onChange={(e) => setAsOfDate(e.target.value)}
+                  className="border border-[#080909] bg-[#f5f3ed] px-2 py-1 font-mono text-xs text-[#080909]"
+                >
+                  <option value="latest">Today (Latest Consolidated)</option>
+                  {availableDates.map((dt) => (
+                    <option key={dt} value={dt}>
+                      {dt} Amendment
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -203,7 +240,13 @@ export function ClauseTree({
           const versions = clause.versions ?? [];
           const activeVer =
             viewMode === "consolidated" && versions.length > 0
-              ? versions[versions.length - 1]
+              ? asOfDate === "latest"
+                ? versions[versions.length - 1]
+                : versions.find(
+                    (v) =>
+                      (!v.valid_from || String(v.valid_from) <= asOfDate) &&
+                      (!v.valid_to || asOfDate < String(v.valid_to))
+                  ) ?? versions[versions.length - 1]
               : versions[0];
 
           const consRecord =
@@ -512,10 +555,31 @@ export function ClauseTree({
               {isAmendedVersion && (
                 <div className="mt-2 border-l-2 border-[#080909] bg-[#efeee8] px-3 py-2 text-xs">
                   <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#080909]">
-                    Derived by this project, not an official publication ·{" "}
-                    {activeVer?.effect_id
-                      ? `Effect applied: ${activeVer.effect_id} (${activeVer.source_doc})`
-                      : `Amendments applied: ${consRecord?.amendments_applied.join(", ")}`}
+                    Changed by{" "}
+                    {activeVer?.source_doc ? (
+                      jurisdictionId ? (
+                        <a
+                          href={`/j/${jurisdictionId}/documents/${activeVer.source_doc}#node-${activeVer.source_eid ?? ""}`}
+                          className="font-semibold underline"
+                        >
+                          {activeVer.source_doc}:{activeVer.source_eid}
+                        </a>
+                      ) : (
+                        `${activeVer.source_doc}:${activeVer.source_eid}`
+                      )
+                    ) : (
+                      consRecord?.amendments_applied.join(", ")
+                    )}
+                    , from {activeVer?.valid_from ?? consRecord?.as_of_date} ·{" "}
+                    Derived by this project, not an official publication
+                    {activeVer?.citations?.[0]?.page ? (
+                      <>
+                        {" · "}
+                        <span>
+                          Amending source p. {activeVer.citations[0].page}
+                        </span>
+                      </>
+                    ) : null}
                   </div>
                   {versions.length > 1 && versions[0]?.content && (
                     <div className="mt-1 text-xs text-[#5b5e56]">

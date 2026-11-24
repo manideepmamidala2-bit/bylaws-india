@@ -310,6 +310,7 @@ export default async function DocumentViewerPage({
           </section>
         ) : (
           <ClauseTree
+            jurisdictionId={jurisdiction.id}
             clauses={docClauses}
             annotations={annotationsByDocId[doc] ?? []}
             amendmentEffects={(amendments.effects ?? []).filter(
