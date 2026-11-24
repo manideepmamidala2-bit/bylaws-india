@@ -1468,78 +1468,6 @@
         "version_id": "v1",
         "field": "content",
         "span": [
-          1472,
-          1488
-        ],
-        "span_text": "Development Plan"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_16",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_83",
-      "target": {
-        "eid": "pref_TOC",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          1529,
-          1545
-        ],
-        "span_text": "Development Plan"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_16",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_84",
-      "target": {
-        "eid": "pref_TOC",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          3383,
-          3399
-        ],
-        "span_text": "Development Plan"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_16",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_85",
-      "target": {
-        "eid": "pref_TOC",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          3488,
-          3504
-        ],
-        "span_text": "Development Plan"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_16",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_86",
-      "target": {
-        "eid": "pref_TOC",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
           1143,
           1147
         ],
@@ -1552,7 +1480,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_87",
+      "annotation_id": "rmp2015-zr:ann_83",
       "target": {
         "eid": "chp_1__cl_1.1",
         "version_id": "v1",
@@ -1570,7 +1498,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_88",
+      "annotation_id": "rmp2015-zr:ann_84",
       "target": {
         "eid": "chp_1__cl_1.2",
         "version_id": "v1",
@@ -1588,7 +1516,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_89",
+      "annotation_id": "rmp2015-zr:ann_85",
       "target": {
         "eid": "chp_1__cl_1.3",
         "version_id": "v1",
@@ -1606,7 +1534,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_90",
+      "annotation_id": "rmp2015-zr:ann_86",
       "target": {
         "eid": "chp_1__cl_1.3",
         "version_id": "v1",
@@ -1624,7 +1552,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_91",
+      "annotation_id": "rmp2015-zr:ann_87",
       "target": {
         "eid": "chp_2",
         "version_id": "v1",
@@ -1642,7 +1570,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_92",
+      "annotation_id": "rmp2015-zr:ann_88",
       "target": {
         "eid": "chp_2__note_1",
         "version_id": "v1",
@@ -1660,7 +1588,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_93",
+      "annotation_id": "rmp2015-zr:ann_89",
       "target": {
         "eid": "chp_2__note_1",
         "version_id": "v1",
@@ -1678,7 +1606,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_94",
+      "annotation_id": "rmp2015-zr:ann_90",
       "target": {
         "eid": "chp_2__note_1",
         "version_id": "v1",
@@ -1696,7 +1624,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_95",
+      "annotation_id": "rmp2015-zr:ann_91",
       "target": {
         "eid": "chp_2__note_1",
         "version_id": "v1",
@@ -1714,7 +1642,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_96",
+      "annotation_id": "rmp2015-zr:ann_92",
       "target": {
         "eid": "chp_2__note_1",
         "version_id": "v1",
@@ -1732,7 +1660,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_97",
+      "annotation_id": "rmp2015-zr:ann_93",
       "target": {
         "eid": "chp_2__cl_13",
         "version_id": "v1",
@@ -1750,7 +1678,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_98",
+      "annotation_id": "rmp2015-zr:ann_94",
       "target": {
         "eid": "chp_2__cl_13",
         "version_id": "v1",
@@ -1768,7 +1696,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_99",
+      "annotation_id": "rmp2015-zr:ann_95",
       "target": {
         "eid": "chp_3",
         "version_id": "v1",
@@ -1786,7 +1714,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_100",
+      "annotation_id": "rmp2015-zr:ann_96",
       "target": {
         "eid": "chp_3__cl_3.1",
         "version_id": "v1",
@@ -1804,7 +1732,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_101",
+      "annotation_id": "rmp2015-zr:ann_97",
       "target": {
         "eid": "chp_3__cl_3.1",
         "version_id": "v1",
@@ -1822,7 +1750,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_102",
+      "annotation_id": "rmp2015-zr:ann_98",
       "target": {
         "eid": "chp_3__cl_3.1",
         "version_id": "v1",
@@ -1840,7 +1768,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_103",
+      "annotation_id": "rmp2015-zr:ann_99",
       "target": {
         "eid": "chp_3__cl_3.1",
         "version_id": "v1",
@@ -1858,25 +1786,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_104",
-      "target": {
-        "eid": "chp_3__cl_3.1",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          1024,
-          1037
-        ],
-        "span_text": "building line"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_9",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_105",
+      "annotation_id": "rmp2015-zr:ann_100",
       "target": {
         "eid": "chp_3__cl_3.1",
         "version_id": "v1",
@@ -1894,7 +1804,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_106",
+      "annotation_id": "rmp2015-zr:ann_101",
       "target": {
         "eid": "chp_3__cl_3.2",
         "version_id": "v1",
@@ -1912,7 +1822,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_107",
+      "annotation_id": "rmp2015-zr:ann_102",
       "target": {
         "eid": "chp_3__cl_3.2",
         "version_id": "v1",
@@ -1930,7 +1840,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_108",
+      "annotation_id": "rmp2015-zr:ann_103",
       "target": {
         "eid": "chp_3__cl_3.2",
         "version_id": "v1",
@@ -1948,7 +1858,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_109",
+      "annotation_id": "rmp2015-zr:ann_104",
       "target": {
         "eid": "chp_3__cl_3.4__item_i__item_ii",
         "version_id": "v1",
@@ -1966,7 +1876,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_110",
+      "annotation_id": "rmp2015-zr:ann_105",
       "target": {
         "eid": "chp_3__cl_3.4__item_i__item_iii",
         "version_id": "v1",
@@ -1984,7 +1894,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_111",
+      "annotation_id": "rmp2015-zr:ann_106",
       "target": {
         "eid": "chp_3__cl_3.4__item_i__item_iv",
         "version_id": "v1",
@@ -2002,7 +1912,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_112",
+      "annotation_id": "rmp2015-zr:ann_107",
       "target": {
         "eid": "chp_3__cl_3.6",
         "version_id": "v1",
@@ -2020,7 +1930,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_113",
+      "annotation_id": "rmp2015-zr:ann_108",
       "target": {
         "eid": "chp_3__cl_3.7",
         "version_id": "v1",
@@ -2038,7 +1948,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_114",
+      "annotation_id": "rmp2015-zr:ann_109",
       "target": {
         "eid": "chp_3__cl_3.8",
         "version_id": "v1",
@@ -2056,7 +1966,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_115",
+      "annotation_id": "rmp2015-zr:ann_110",
       "target": {
         "eid": "chp_3__cl_3.9",
         "version_id": "v1",
@@ -2074,7 +1984,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_116",
+      "annotation_id": "rmp2015-zr:ann_111",
       "target": {
         "eid": "chp_3__cl_3.9",
         "version_id": "v1",
@@ -2092,7 +2002,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_117",
+      "annotation_id": "rmp2015-zr:ann_112",
       "target": {
         "eid": "chp_3__cl_3.9",
         "version_id": "v1",
@@ -2110,25 +2020,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_118",
-      "target": {
-        "eid": "chp_3__cl_3.9",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          2426,
-          2435
-        ],
-        "span_text": "authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_119",
+      "annotation_id": "rmp2015-zr:ann_113",
       "target": {
         "eid": "chp_3__cl_3.9",
         "version_id": "v1",
@@ -2146,7 +2038,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_120",
+      "annotation_id": "rmp2015-zr:ann_114",
       "target": {
         "eid": "chp_3__cl_3.9",
         "version_id": "v1",
@@ -2164,7 +2056,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_121",
+      "annotation_id": "rmp2015-zr:ann_115",
       "target": {
         "eid": "chp_3__cl_3.10__item_i",
         "version_id": "v1",
@@ -2182,7 +2074,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_122",
+      "annotation_id": "rmp2015-zr:ann_116",
       "target": {
         "eid": "chp_3__cl_3.10__item_i__item_ii",
         "version_id": "v1",
@@ -2200,7 +2092,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_123",
+      "annotation_id": "rmp2015-zr:ann_117",
       "target": {
         "eid": "chp_3__cl_3.11",
         "version_id": "v1",
@@ -2218,7 +2110,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_124",
+      "annotation_id": "rmp2015-zr:ann_118",
       "target": {
         "eid": "chp_3__cl_3.12",
         "version_id": "v1",
@@ -2236,7 +2128,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_125",
+      "annotation_id": "rmp2015-zr:ann_119",
       "target": {
         "eid": "chp_3__cl_3.12",
         "version_id": "v1",
@@ -2254,7 +2146,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_126",
+      "annotation_id": "rmp2015-zr:ann_120",
       "target": {
         "eid": "chp_3__cl_3.12",
         "version_id": "v1",
@@ -2272,7 +2164,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_127",
+      "annotation_id": "rmp2015-zr:ann_121",
       "target": {
         "eid": "chp_3__cl_3.13",
         "version_id": "v1",
@@ -2290,7 +2182,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_128",
+      "annotation_id": "rmp2015-zr:ann_122",
       "target": {
         "eid": "chp_3__cl_3.14",
         "version_id": "v1",
@@ -2308,7 +2200,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_129",
+      "annotation_id": "rmp2015-zr:ann_123",
       "target": {
         "eid": "chp_3__cl_3.14",
         "version_id": "v1",
@@ -2326,7 +2218,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_130",
+      "annotation_id": "rmp2015-zr:ann_124",
       "target": {
         "eid": "chp_3__cl_3.14",
         "version_id": "v1",
@@ -2344,7 +2236,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_131",
+      "annotation_id": "rmp2015-zr:ann_125",
       "target": {
         "eid": "chp_3__cl_3.15",
         "version_id": "v1",
@@ -2362,7 +2254,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_132",
+      "annotation_id": "rmp2015-zr:ann_126",
       "target": {
         "eid": "chp_3__cl_3.16",
         "version_id": "v1",
@@ -2380,7 +2272,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_133",
+      "annotation_id": "rmp2015-zr:ann_127",
       "target": {
         "eid": "chp_3__cl_3.16",
         "version_id": "v1",
@@ -2398,7 +2290,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_134",
+      "annotation_id": "rmp2015-zr:ann_128",
       "target": {
         "eid": "chp_3__cl_3.16",
         "version_id": "v1",
@@ -2416,25 +2308,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_135",
-      "target": {
-        "eid": "chp_3__cl_3.16",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          774,
-          783
-        ],
-        "span_text": "authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_136",
+      "annotation_id": "rmp2015-zr:ann_129",
       "target": {
         "eid": "chp_3__cl_3.16",
         "version_id": "v1",
@@ -2452,7 +2326,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_137",
+      "annotation_id": "rmp2015-zr:ann_130",
       "target": {
         "eid": "chp_3__cl_3.16",
         "version_id": "v1",
@@ -2470,7 +2344,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_138",
+      "annotation_id": "rmp2015-zr:ann_131",
       "target": {
         "eid": "chp_4__cl_4.1__cl_4.1.2__item_i",
         "version_id": "v1",
@@ -2488,7 +2362,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_139",
+      "annotation_id": "rmp2015-zr:ann_132",
       "target": {
         "eid": "chp_4__cl_4.1__cl_4.1.2__item_i",
         "version_id": "v1",
@@ -2506,7 +2380,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_140",
+      "annotation_id": "rmp2015-zr:ann_133",
       "target": {
         "eid": "chp_4__cl_4.1__cl_4.1.2__item_a",
         "version_id": "v1",
@@ -2524,7 +2398,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_141",
+      "annotation_id": "rmp2015-zr:ann_134",
       "target": {
         "eid": "chp_4__cl_4.1__cl_4.1.2__item_c",
         "version_id": "v1",
@@ -2542,7 +2416,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_142",
+      "annotation_id": "rmp2015-zr:ann_135",
       "target": {
         "eid": "chp_4__cl_4.2__cl_4.2.2__item_i",
         "version_id": "v1",
@@ -2560,7 +2434,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_143",
+      "annotation_id": "rmp2015-zr:ann_136",
       "target": {
         "eid": "chp_4__cl_4.2__cl_4.2.2__item_a",
         "version_id": "v1",
@@ -2578,7 +2452,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_144",
+      "annotation_id": "rmp2015-zr:ann_137",
       "target": {
         "eid": "chp_4__cl_4.2__cl_4.2.2__item_a",
         "version_id": "v1",
@@ -2596,7 +2470,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_145",
+      "annotation_id": "rmp2015-zr:ann_138",
       "target": {
         "eid": "chp_4__cl_4.2__cl_4.2.2__item_a",
         "version_id": "v1",
@@ -2614,7 +2488,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_146",
+      "annotation_id": "rmp2015-zr:ann_139",
       "target": {
         "eid": "chp_4__cl_4.2__cl_4.2.3__item_a",
         "version_id": "v1",
@@ -2632,7 +2506,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_147",
+      "annotation_id": "rmp2015-zr:ann_140",
       "target": {
         "eid": "chp_4__cl_4.2__cl_4.2.3__item_a",
         "version_id": "v1",
@@ -2650,7 +2524,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_148",
+      "annotation_id": "rmp2015-zr:ann_141",
       "target": {
         "eid": "chp_4__cl_4.3__cl_4.3.2__item_i",
         "version_id": "v1",
@@ -2668,7 +2542,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_149",
+      "annotation_id": "rmp2015-zr:ann_142",
       "target": {
         "eid": "chp_4__cl_4.3__cl_4.3.2__item_i__item_ii",
         "version_id": "v1",
@@ -2686,7 +2560,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_150",
+      "annotation_id": "rmp2015-zr:ann_143",
       "target": {
         "eid": "chp_4__cl_4.3__cl_4.3.3",
         "version_id": "v1",
@@ -2704,7 +2578,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_151",
+      "annotation_id": "rmp2015-zr:ann_144",
       "target": {
         "eid": "chp_4__cl_4.3__cl_4.3.3",
         "version_id": "v1",
@@ -2722,7 +2596,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_152",
+      "annotation_id": "rmp2015-zr:ann_145",
       "target": {
         "eid": "chp_4__cl_4.4__cl_4.4.2__item_i",
         "version_id": "v1",
@@ -2740,7 +2614,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_153",
+      "annotation_id": "rmp2015-zr:ann_146",
       "target": {
         "eid": "chp_4__cl_4.4__cl_4.4.2__item_b",
         "version_id": "v1",
@@ -2758,7 +2632,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_154",
+      "annotation_id": "rmp2015-zr:ann_147",
       "target": {
         "eid": "chp_4__cl_4.4__cl_4.4.2__item_b",
         "version_id": "v1",
@@ -2776,7 +2650,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_155",
+      "annotation_id": "rmp2015-zr:ann_148",
       "target": {
         "eid": "chp_4__cl_4.4__cl_4.4.2__item_b",
         "version_id": "v1",
@@ -2794,7 +2668,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_156",
+      "annotation_id": "rmp2015-zr:ann_149",
       "target": {
         "eid": "chp_4__cl_4.5__cl_4.5.2__item_i",
         "version_id": "v1",
@@ -2812,7 +2686,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_157",
+      "annotation_id": "rmp2015-zr:ann_150",
       "target": {
         "eid": "chp_4__cl_4.5__cl_4.5.2__item_i",
         "version_id": "v1",
@@ -2830,25 +2704,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_158",
-      "target": {
-        "eid": "chp_4__cl_4.5__cl_4.5.2__item_i",
-        "version_id": "v1",
-        "field": "intro",
-        "span": [
-          807,
-          816
-        ],
-        "span_text": "authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_159",
+      "annotation_id": "rmp2015-zr:ann_151",
       "target": {
         "eid": "chp_4__cl_4.5__cl_4.5.2__item_i",
         "version_id": "v1",
@@ -2866,7 +2722,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_160",
+      "annotation_id": "rmp2015-zr:ann_152",
       "target": {
         "eid": "chp_4__cl_4.5__cl_4.5.2__item_i__item_ii",
         "version_id": "v1",
@@ -2884,7 +2740,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_161",
+      "annotation_id": "rmp2015-zr:ann_153",
       "target": {
         "eid": "chp_4__cl_4.5__cl_4.5.2__item_a",
         "version_id": "v1",
@@ -2902,7 +2758,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_162",
+      "annotation_id": "rmp2015-zr:ann_154",
       "target": {
         "eid": "chp_4__cl_4.6__cl_4.6.1",
         "version_id": "v1",
@@ -2920,7 +2776,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_163",
+      "annotation_id": "rmp2015-zr:ann_155",
       "target": {
         "eid": "chp_4__cl_4.6__cl_4.6.2__item_i__item_ii",
         "version_id": "v1",
@@ -2938,7 +2794,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_164",
+      "annotation_id": "rmp2015-zr:ann_156",
       "target": {
         "eid": "chp_4__cl_4.6__cl_4.6.2__item_a",
         "version_id": "v1",
@@ -2956,7 +2812,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_165",
+      "annotation_id": "rmp2015-zr:ann_157",
       "target": {
         "eid": "chp_4__cl_4.7__cl_4.7.2__item_i",
         "version_id": "v1",
@@ -2974,7 +2830,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_166",
+      "annotation_id": "rmp2015-zr:ann_158",
       "target": {
         "eid": "chp_4__cl_4.7__cl_4.7.2__item_a",
         "version_id": "v1",
@@ -2992,7 +2848,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_167",
+      "annotation_id": "rmp2015-zr:ann_159",
       "target": {
         "eid": "chp_4__cl_4.7__cl_4.7.2__item_a",
         "version_id": "v1",
@@ -3010,7 +2866,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_168",
+      "annotation_id": "rmp2015-zr:ann_160",
       "target": {
         "eid": "chp_4__cl_4.7__cl_4.7.2__item_a",
         "version_id": "v1",
@@ -3028,7 +2884,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_169",
+      "annotation_id": "rmp2015-zr:ann_161",
       "target": {
         "eid": "chp_4__cl_4.7__cl_4.7.2__item_b",
         "version_id": "v1",
@@ -3046,7 +2902,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_170",
+      "annotation_id": "rmp2015-zr:ann_162",
       "target": {
         "eid": "chp_4__cl_4.8__cl_4.8.2__item_i",
         "version_id": "v1",
@@ -3064,7 +2920,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_171",
+      "annotation_id": "rmp2015-zr:ann_163",
       "target": {
         "eid": "chp_4__cl_4.8__cl_4.8.2__item_a",
         "version_id": "v1",
@@ -3082,7 +2938,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_172",
+      "annotation_id": "rmp2015-zr:ann_164",
       "target": {
         "eid": "chp_4__cl_4.9__cl_4.9.1",
         "version_id": "v1",
@@ -3100,7 +2956,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_173",
+      "annotation_id": "rmp2015-zr:ann_165",
       "target": {
         "eid": "chp_4__cl_4.9__cl_4.9.2__item_i",
         "version_id": "v1",
@@ -3118,7 +2974,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_174",
+      "annotation_id": "rmp2015-zr:ann_166",
       "target": {
         "eid": "chp_4__cl_4.9__cl_4.9.2__item_i",
         "version_id": "v1",
@@ -3136,7 +2992,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_175",
+      "annotation_id": "rmp2015-zr:ann_167",
       "target": {
         "eid": "chp_4__cl_4.9__cl_4.9.2__item_i__item_i",
         "version_id": "v1",
@@ -3154,7 +3010,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_176",
+      "annotation_id": "rmp2015-zr:ann_168",
       "target": {
         "eid": "chp_4__cl_4.9__cl_4.9.2__item_i__item_i",
         "version_id": "v1",
@@ -3172,7 +3028,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_177",
+      "annotation_id": "rmp2015-zr:ann_169",
       "target": {
         "eid": "chp_4__cl_4.10__cl_4.10.2__item_i",
         "version_id": "v1",
@@ -3190,7 +3046,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_178",
+      "annotation_id": "rmp2015-zr:ann_170",
       "target": {
         "eid": "chp_4__cl_4.10__cl_4.10.2__item_i",
         "version_id": "v1",
@@ -3208,7 +3064,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_179",
+      "annotation_id": "rmp2015-zr:ann_171",
       "target": {
         "eid": "chp_4__cl_4.10__cl_4.10.2__item_i",
         "version_id": "v1",
@@ -3226,7 +3082,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_180",
+      "annotation_id": "rmp2015-zr:ann_172",
       "target": {
         "eid": "chp_4__cl_4.10__cl_4.10.2__item_i",
         "version_id": "v1",
@@ -3244,7 +3100,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_181",
+      "annotation_id": "rmp2015-zr:ann_173",
       "target": {
         "eid": "chp_4__cl_4.11__cl_4.11.2__def_1",
         "version_id": "v1",
@@ -3262,7 +3118,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_182",
+      "annotation_id": "rmp2015-zr:ann_174",
       "target": {
         "eid": "chp_4__cl_4.11__cl_4.11.2__cl_2",
         "version_id": "v1",
@@ -3280,7 +3136,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_183",
+      "annotation_id": "rmp2015-zr:ann_175",
       "target": {
         "eid": "chp_4__cl_4.11__cl_4.11.2__cl_3",
         "version_id": "v1",
@@ -3298,7 +3154,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_184",
+      "annotation_id": "rmp2015-zr:ann_176",
       "target": {
         "eid": "chp_4__cl_4.12",
         "version_id": "v1",
@@ -3316,7 +3172,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_185",
+      "annotation_id": "rmp2015-zr:ann_177",
       "target": {
         "eid": "chp_4__cl_4.12__cl_4.12.1",
         "version_id": "v1",
@@ -3334,7 +3190,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_186",
+      "annotation_id": "rmp2015-zr:ann_178",
       "target": {
         "eid": "chp_4__cl_4.12__cl_4.12.2__item_i",
         "version_id": "v1",
@@ -3352,7 +3208,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_187",
+      "annotation_id": "rmp2015-zr:ann_179",
       "target": {
         "eid": "chp_4__cl_4.12__cl_4.12.2__item_i",
         "version_id": "v1",
@@ -3370,25 +3226,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_188",
-      "target": {
-        "eid": "chp_4__cl_4.12__cl_4.12.2__item_i",
-        "version_id": "v1",
-        "field": "intro",
-        "span": [
-          479,
-          488
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_189",
+      "annotation_id": "rmp2015-zr:ann_180",
       "target": {
         "eid": "chp_4__cl_4.12__cl_4.12.2__item_i__item_ii",
         "version_id": "v1",
@@ -3406,7 +3244,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_190",
+      "annotation_id": "rmp2015-zr:ann_181",
       "target": {
         "eid": "chp_4__cl_4.12__cl_4.12.2__item_i__item_ii",
         "version_id": "v1",
@@ -3424,7 +3262,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_191",
+      "annotation_id": "rmp2015-zr:ann_182",
       "target": {
         "eid": "chp_4__cl_4.12__cl_4.12.2__item_i__item_ii",
         "version_id": "v1",
@@ -3442,25 +3280,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_192",
-      "target": {
-        "eid": "chp_4__cl_4.12__cl_4.12.2__item_i__item_ii",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          1850,
-          1859
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_193",
+      "annotation_id": "rmp2015-zr:ann_183",
       "target": {
         "eid": "chp_4__cl_4.12__cl_4.12.2__item_i__item_ii",
         "version_id": "v1",
@@ -3478,25 +3298,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_194",
-      "target": {
-        "eid": "chp_4__cl_4.12__cl_4.12.2__item_i__item_ii",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          725,
-          741
-        ],
-        "span_text": "development plan"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_16",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_195",
+      "annotation_id": "rmp2015-zr:ann_184",
       "target": {
         "eid": "chp_4__cl_4.12__cl_4.12.2__item_i__item_ii",
         "version_id": "v1",
@@ -3514,97 +3316,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_196",
-      "target": {
-        "eid": "chp_4__cl_4.12__cl_4.12.2__item_i__item_ii",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          1152,
-          1158
-        ],
-        "span_text": "Drains"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_18",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_197",
-      "target": {
-        "eid": "chp_4__cl_4.12__cl_4.12.2__item_i__item_ii",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          1164,
-          1170
-        ],
-        "span_text": "drains"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_18",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_198",
-      "target": {
-        "eid": "chp_4__cl_4.12__cl_4.12.2__item_i__item_ii",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          1252,
-          1258
-        ],
-        "span_text": "drains"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_18",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_199",
-      "target": {
-        "eid": "chp_4__cl_4.12__cl_4.12.2__item_i__item_ii",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          1410,
-          1416
-        ],
-        "span_text": "drains"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_18",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_200",
-      "target": {
-        "eid": "chp_4__cl_4.12__cl_4.12.2__item_i__item_ii",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          1562,
-          1568
-        ],
-        "span_text": "drains"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_18",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_201",
+      "annotation_id": "rmp2015-zr:ann_185",
       "target": {
         "eid": "chp_4__cl_4.12__cl_4.12.2__item_i__item_ii",
         "version_id": "v1",
@@ -3622,7 +3334,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_202",
+      "annotation_id": "rmp2015-zr:ann_186",
       "target": {
         "eid": "chp_4__cl_4.12__cl_4.12.2__item_i__item_ii",
         "version_id": "v1",
@@ -3640,97 +3352,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_203",
-      "target": {
-        "eid": "chp_4__cl_4.12__cl_4.12.2__item_i__item_ii",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          311,
-          317
-        ],
-        "span_text": "buffer"
-      },
-      "kind": "defined_term_use",
-      "value": "chp_4__cl_4.11__cl_4.11.2__def_1",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_204",
-      "target": {
-        "eid": "chp_4__cl_4.12__cl_4.12.2__item_i__item_ii",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          463,
-          469
-        ],
-        "span_text": "buffer"
-      },
-      "kind": "defined_term_use",
-      "value": "chp_4__cl_4.11__cl_4.11.2__def_1",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_205",
-      "target": {
-        "eid": "chp_4__cl_4.12__cl_4.12.2__item_i__item_ii",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          1271,
-          1277
-        ],
-        "span_text": "buffer"
-      },
-      "kind": "defined_term_use",
-      "value": "chp_4__cl_4.11__cl_4.11.2__def_1",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_206",
-      "target": {
-        "eid": "chp_4__cl_4.12__cl_4.12.2__item_i__item_ii",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          1477,
-          1483
-        ],
-        "span_text": "buffer"
-      },
-      "kind": "defined_term_use",
-      "value": "chp_4__cl_4.11__cl_4.11.2__def_1",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_207",
-      "target": {
-        "eid": "chp_4__cl_4.12__cl_4.12.2__item_i__item_ii",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          1604,
-          1610
-        ],
-        "span_text": "buffer"
-      },
-      "kind": "defined_term_use",
-      "value": "chp_4__cl_4.11__cl_4.11.2__def_1",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_208",
+      "annotation_id": "rmp2015-zr:ann_187",
       "target": {
         "eid": "chp_4__cl_4.13__cl_4.13.2__item_i",
         "version_id": "v1",
@@ -3748,25 +3370,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_209",
-      "target": {
-        "eid": "chp_4__cl_4.13__cl_4.13.2__item_i",
-        "version_id": "v1",
-        "field": "intro",
-        "span": [
-          365,
-          374
-        ],
-        "span_text": "amenities"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_2",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_210",
+      "annotation_id": "rmp2015-zr:ann_188",
       "target": {
         "eid": "chp_4__cl_4.13__cl_4.13.2__item_i__item_ii",
         "version_id": "v1",
@@ -3784,7 +3388,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_211",
+      "annotation_id": "rmp2015-zr:ann_189",
       "target": {
         "eid": "chp_4__cl_4.13__cl_4.13.2__item_i__item_ii",
         "version_id": "v1",
@@ -3802,7 +3406,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_212",
+      "annotation_id": "rmp2015-zr:ann_190",
       "target": {
         "eid": "chp_4__cl_4.13__cl_4.13.2__item_i__item_iii",
         "version_id": "v1",
@@ -3820,7 +3424,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_213",
+      "annotation_id": "rmp2015-zr:ann_191",
       "target": {
         "eid": "chp_4__cl_4.13__cl_4.13.2__item_a",
         "version_id": "v1",
@@ -3838,7 +3442,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_214",
+      "annotation_id": "rmp2015-zr:ann_192",
       "target": {
         "eid": "chp_4__cl_4.14__item_i",
         "version_id": "v1",
@@ -3856,7 +3460,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_215",
+      "annotation_id": "rmp2015-zr:ann_193",
       "target": {
         "eid": "chp_4__cl_4.14__item_i",
         "version_id": "v1",
@@ -3874,7 +3478,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_216",
+      "annotation_id": "rmp2015-zr:ann_194",
       "target": {
         "eid": "chp_4__cl_4.14__item_i__item_ii",
         "version_id": "v1",
@@ -3892,7 +3496,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_217",
+      "annotation_id": "rmp2015-zr:ann_195",
       "target": {
         "eid": "chp_4__cl_4.14__item_i__item_ii",
         "version_id": "v1",
@@ -3910,7 +3514,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_218",
+      "annotation_id": "rmp2015-zr:ann_196",
       "target": {
         "eid": "chp_5__cl_5.1__item_i",
         "version_id": "v1",
@@ -3928,7 +3532,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_219",
+      "annotation_id": "rmp2015-zr:ann_197",
       "target": {
         "eid": "chp_5__cl_5.1__item_i",
         "version_id": "v1",
@@ -3946,43 +3550,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_220",
-      "target": {
-        "eid": "chp_5__cl_5.1__item_i",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          589,
-          598
-        ],
-        "span_text": "authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_221",
-      "target": {
-        "eid": "chp_5__cl_5.1__item_i",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          768,
-          777
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_222",
+      "annotation_id": "rmp2015-zr:ann_198",
       "target": {
         "eid": "chp_5__cl_5.3",
         "version_id": "v1",
@@ -4000,7 +3568,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_223",
+      "annotation_id": "rmp2015-zr:ann_199",
       "target": {
         "eid": "chp_5__cl_5.3",
         "version_id": "v1",
@@ -4018,7 +3586,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_224",
+      "annotation_id": "rmp2015-zr:ann_200",
       "target": {
         "eid": "chp_5__cl_5.3__note_1",
         "version_id": "v1",
@@ -4036,7 +3604,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_225",
+      "annotation_id": "rmp2015-zr:ann_201",
       "target": {
         "eid": "chp_5__cl_5.3__note_1",
         "version_id": "v1",
@@ -4054,7 +3622,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_226",
+      "annotation_id": "rmp2015-zr:ann_202",
       "target": {
         "eid": "chp_6__cl_6.1",
         "version_id": "v1",
@@ -4072,7 +3640,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_227",
+      "annotation_id": "rmp2015-zr:ann_203",
       "target": {
         "eid": "chp_6__cl_6.1",
         "version_id": "v1",
@@ -4090,7 +3658,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_228",
+      "annotation_id": "rmp2015-zr:ann_204",
       "target": {
         "eid": "chp_6__cl_6.1__item_c",
         "version_id": "v1",
@@ -4108,7 +3676,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_229",
+      "annotation_id": "rmp2015-zr:ann_205",
       "target": {
         "eid": "chp_6__cl_6.1__item_c",
         "version_id": "v1",
@@ -4126,79 +3694,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_230",
-      "target": {
-        "eid": "chp_6__cl_6.1__item_c",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          192,
-          201
-        ],
-        "span_text": "authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_231",
-      "target": {
-        "eid": "chp_6__cl_6.1__item_c",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          339,
-          348
-        ],
-        "span_text": "authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_232",
-      "target": {
-        "eid": "chp_6__cl_6.1__item_c",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          382,
-          391
-        ],
-        "span_text": "authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_233",
-      "target": {
-        "eid": "chp_6__cl_6.1__item_d",
-        "version_id": "v1",
-        "field": "heading",
-        "span": [
-          6,
-          15
-        ],
-        "span_text": "amenities"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_2",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_234",
+      "annotation_id": "rmp2015-zr:ann_206",
       "target": {
         "eid": "chp_6__cl_6.1__item_d__item_i",
         "version_id": "v1",
@@ -4216,7 +3712,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_235",
+      "annotation_id": "rmp2015-zr:ann_207",
       "target": {
         "eid": "chp_6__cl_6.1__item_d__item_ii",
         "version_id": "v1",
@@ -4234,7 +3730,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_236",
+      "annotation_id": "rmp2015-zr:ann_208",
       "target": {
         "eid": "chp_6__cl_6.1__item_d__item_ii",
         "version_id": "v1",
@@ -4252,7 +3748,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_237",
+      "annotation_id": "rmp2015-zr:ann_209",
       "target": {
         "eid": "chp_6__cl_6.1__item_d__item_ii",
         "version_id": "v1",
@@ -4270,25 +3766,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_238",
-      "target": {
-        "eid": "chp_6__cl_6.1__item_d__item_ii",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          155,
-          159
-        ],
-        "span_text": "park"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_34",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_239",
+      "annotation_id": "rmp2015-zr:ann_210",
       "target": {
         "eid": "chp_6__cl_6.1__item_d__item_iii",
         "version_id": "v1",
@@ -4306,7 +3784,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_240",
+      "annotation_id": "rmp2015-zr:ann_211",
       "target": {
         "eid": "chp_6__cl_6.1__item_d__item_iii",
         "version_id": "v1",
@@ -4324,7 +3802,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_241",
+      "annotation_id": "rmp2015-zr:ann_212",
       "target": {
         "eid": "chp_6__cl_6.1__item_d__item_iii",
         "version_id": "v1",
@@ -4342,7 +3820,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_242",
+      "annotation_id": "rmp2015-zr:ann_213",
       "target": {
         "eid": "chp_6__cl_6.1__item_d__item_iv",
         "version_id": "v1",
@@ -4360,7 +3838,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_243",
+      "annotation_id": "rmp2015-zr:ann_214",
       "target": {
         "eid": "chp_6__cl_6.1__item_d__item_iv",
         "version_id": "v1",
@@ -4378,7 +3856,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_244",
+      "annotation_id": "rmp2015-zr:ann_215",
       "target": {
         "eid": "chp_6__cl_6.1__item_d__item_iv",
         "version_id": "v1",
@@ -4396,25 +3874,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_245",
-      "target": {
-        "eid": "chp_6__cl_6.1__item_d__item_iv",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          228,
-          237
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_246",
+      "annotation_id": "rmp2015-zr:ann_216",
       "target": {
         "eid": "chp_6__cl_6.1__item_e",
         "version_id": "v1",
@@ -4432,7 +3892,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_247",
+      "annotation_id": "rmp2015-zr:ann_217",
       "target": {
         "eid": "chp_6__cl_6.1__item_e",
         "version_id": "v1",
@@ -4450,7 +3910,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_248",
+      "annotation_id": "rmp2015-zr:ann_218",
       "target": {
         "eid": "chp_6__cl_6.1__item_e",
         "version_id": "v1",
@@ -4468,25 +3928,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_249",
-      "target": {
-        "eid": "chp_6__cl_6.1__item_e",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          985,
-          994
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_250",
+      "annotation_id": "rmp2015-zr:ann_219",
       "target": {
         "eid": "chp_6__cl_6.2",
         "version_id": "v1",
@@ -4504,7 +3946,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_251",
+      "annotation_id": "rmp2015-zr:ann_220",
       "target": {
         "eid": "chp_6__cl_6.2",
         "version_id": "v1",
@@ -4522,7 +3964,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_252",
+      "annotation_id": "rmp2015-zr:ann_221",
       "target": {
         "eid": "chp_6__cl_6.2",
         "version_id": "v1",
@@ -4540,7 +3982,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_253",
+      "annotation_id": "rmp2015-zr:ann_222",
       "target": {
         "eid": "chp_6__cl_6.2",
         "version_id": "v1",
@@ -4558,61 +4000,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_254",
-      "target": {
-        "eid": "chp_6__cl_6.2",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          1049,
-          1061
-        ],
-        "span_text": "Amalgamation"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_1",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_255",
-      "target": {
-        "eid": "chp_6__cl_6.2",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          1079,
-          1091
-        ],
-        "span_text": "amalgamation"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_1",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_256",
-      "target": {
-        "eid": "chp_6__cl_6.2",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          1245,
-          1257
-        ],
-        "span_text": "amalgamation"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_1",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_257",
+      "annotation_id": "rmp2015-zr:ann_223",
       "target": {
         "eid": "chp_6__cl_6.2",
         "version_id": "v1",
@@ -4630,61 +4018,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_258",
-      "target": {
-        "eid": "chp_6__cl_6.2",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          591,
-          600
-        ],
-        "span_text": "authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_259",
-      "target": {
-        "eid": "chp_6__cl_6.2",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          1738,
-          1747
-        ],
-        "span_text": "authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_260",
-      "target": {
-        "eid": "chp_6__cl_6.2",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          1798,
-          1807
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_261",
+      "annotation_id": "rmp2015-zr:ann_224",
       "target": {
         "eid": "chp_6__cl_6.2",
         "version_id": "v1",
@@ -4702,25 +4036,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_262",
-      "target": {
-        "eid": "chp_6__cl_6.2",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          1418,
-          1429
-        ],
-        "span_text": "Bifurcation"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_7",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_263",
+      "annotation_id": "rmp2015-zr:ann_225",
       "target": {
         "eid": "chp_6__cl_6.2",
         "version_id": "v1",
@@ -4738,7 +4054,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_264",
+      "annotation_id": "rmp2015-zr:ann_226",
       "target": {
         "eid": "chp_6__cl_6.2",
         "version_id": "v1",
@@ -4756,7 +4072,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_265",
+      "annotation_id": "rmp2015-zr:ann_227",
       "target": {
         "eid": "chp_6__cl_6.3",
         "version_id": "v1",
@@ -4774,7 +4090,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_266",
+      "annotation_id": "rmp2015-zr:ann_228",
       "target": {
         "eid": "chp_6__cl_6.3",
         "version_id": "v1",
@@ -4792,7 +4108,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_267",
+      "annotation_id": "rmp2015-zr:ann_229",
       "target": {
         "eid": "chp_6__cl_6.3",
         "version_id": "v1",
@@ -4810,7 +4126,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_268",
+      "annotation_id": "rmp2015-zr:ann_230",
       "target": {
         "eid": "chp_6__cl_6.3",
         "version_id": "v1",
@@ -4828,25 +4144,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_269",
-      "target": {
-        "eid": "chp_6__cl_6.3",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          376,
-          385
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_270",
+      "annotation_id": "rmp2015-zr:ann_231",
       "target": {
         "eid": "chp_6__cl_6.3",
         "version_id": "v1",
@@ -4864,7 +4162,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_271",
+      "annotation_id": "rmp2015-zr:ann_232",
       "target": {
         "eid": "chp_7__cl_7.1",
         "version_id": "v1",
@@ -4882,7 +4180,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_272",
+      "annotation_id": "rmp2015-zr:ann_233",
       "target": {
         "eid": "chp_7__cl_7.1",
         "version_id": "v1",
@@ -4900,25 +4198,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_273",
-      "target": {
-        "eid": "chp_7__cl_7.1",
-        "version_id": "v1",
-        "field": "intro",
-        "span": [
-          236,
-          245
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_274",
+      "annotation_id": "rmp2015-zr:ann_234",
       "target": {
         "eid": "chp_7__cl_7.1",
         "version_id": "v1",
@@ -4936,25 +4216,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_275",
-      "target": {
-        "eid": "chp_7__cl_7.1",
-        "version_id": "v1",
-        "field": "intro",
-        "span": [
-          77,
-          81
-        ],
-        "span_text": "park"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_34",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_276",
+      "annotation_id": "rmp2015-zr:ann_235",
       "target": {
         "eid": "chp_7__cl_7.1__cl_2",
         "version_id": "v1",
@@ -4972,7 +4234,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_277",
+      "annotation_id": "rmp2015-zr:ann_236",
       "target": {
         "eid": "chp_7__cl_7.1__cl_2",
         "version_id": "v1",
@@ -4990,25 +4252,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_278",
-      "target": {
-        "eid": "chp_7__cl_7.1__cl_2",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          123,
-          132
-        ],
-        "span_text": "amenities"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_2",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_279",
+      "annotation_id": "rmp2015-zr:ann_237",
       "target": {
         "eid": "chp_7__cl_7.1__cl_2",
         "version_id": "v1",
@@ -5026,7 +4270,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_280",
+      "annotation_id": "rmp2015-zr:ann_238",
       "target": {
         "eid": "chp_7__cl_7.1__cl_5",
         "version_id": "v1",
@@ -5044,7 +4288,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_281",
+      "annotation_id": "rmp2015-zr:ann_239",
       "target": {
         "eid": "chp_7__cl_7.1__cl_5",
         "version_id": "v1",
@@ -5062,7 +4306,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_282",
+      "annotation_id": "rmp2015-zr:ann_240",
       "target": {
         "eid": "chp_7__cl_7.1__cl_5",
         "version_id": "v1",
@@ -5080,43 +4324,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_283",
-      "target": {
-        "eid": "chp_7__cl_7.1__cl_5",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          549,
-          558
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_284",
-      "target": {
-        "eid": "chp_7__cl_7.1__cl_5",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          922,
-          931
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_285",
+      "annotation_id": "rmp2015-zr:ann_241",
       "target": {
         "eid": "chp_7__cl_7.1__cl_5",
         "version_id": "v1",
@@ -5134,61 +4342,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_286",
-      "target": {
-        "eid": "chp_7__cl_7.1__cl_5",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          272,
-          288
-        ],
-        "span_text": "Development Plan"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_16",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_287",
-      "target": {
-        "eid": "chp_7__cl_7.1__cl_5",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          331,
-          347
-        ],
-        "span_text": "development plan"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_16",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_288",
-      "target": {
-        "eid": "chp_7__cl_7.1__cl_5",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          1059,
-          1075
-        ],
-        "span_text": "development Plan"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_16",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_289",
+      "annotation_id": "rmp2015-zr:ann_242",
       "target": {
         "eid": "chp_7__cl_7.1__cl_5",
         "version_id": "v1",
@@ -5206,7 +4360,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_290",
+      "annotation_id": "rmp2015-zr:ann_243",
       "target": {
         "eid": "chp_7__cl_7.1__item_e",
         "version_id": "v1",
@@ -5224,7 +4378,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_291",
+      "annotation_id": "rmp2015-zr:ann_244",
       "target": {
         "eid": "chp_7__cl_7.1__item_e",
         "version_id": "v1",
@@ -5242,7 +4396,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_292",
+      "annotation_id": "rmp2015-zr:ann_245",
       "target": {
         "eid": "chp_7__cl_7.1__item_e",
         "version_id": "v1",
@@ -5260,79 +4414,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_293",
-      "target": {
-        "eid": "chp_7__cl_7.1__item_e",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          242,
-          251
-        ],
-        "span_text": "authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_294",
-      "target": {
-        "eid": "chp_7__cl_7.1__item_e",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          365,
-          374
-        ],
-        "span_text": "authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_295",
-      "target": {
-        "eid": "chp_7__cl_7.1__item_e",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          410,
-          419
-        ],
-        "span_text": "authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_296",
-      "target": {
-        "eid": "chp_7__cl_7.1__item_e",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          696,
-          705
-        ],
-        "span_text": "authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_297",
+      "annotation_id": "rmp2015-zr:ann_246",
       "target": {
         "eid": "chp_8",
         "version_id": "v1",
@@ -5350,7 +4432,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_298",
+      "annotation_id": "rmp2015-zr:ann_247",
       "target": {
         "eid": "chp_8__note_1",
         "version_id": "v1",
@@ -5368,7 +4450,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_299",
+      "annotation_id": "rmp2015-zr:ann_248",
       "target": {
         "eid": "chp_8__cl_8.1__item_a__item_i",
         "version_id": "v1",
@@ -5386,7 +4468,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_300",
+      "annotation_id": "rmp2015-zr:ann_249",
       "target": {
         "eid": "chp_8__cl_8.1__item_a__item_ii",
         "version_id": "v1",
@@ -5404,7 +4486,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_301",
+      "annotation_id": "rmp2015-zr:ann_250",
       "target": {
         "eid": "chp_8__cl_8.1__item_a__item_ii",
         "version_id": "v1",
@@ -5422,7 +4504,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_302",
+      "annotation_id": "rmp2015-zr:ann_251",
       "target": {
         "eid": "chp_8__cl_8.1__item_a__item_iii",
         "version_id": "v1",
@@ -5440,7 +4522,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_303",
+      "annotation_id": "rmp2015-zr:ann_252",
       "target": {
         "eid": "chp_8__cl_8.1__item_a__item_iii",
         "version_id": "v1",
@@ -5458,7 +4540,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_304",
+      "annotation_id": "rmp2015-zr:ann_253",
       "target": {
         "eid": "chp_8__cl_8.1__item_a__item_v",
         "version_id": "v1",
@@ -5476,7 +4558,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_305",
+      "annotation_id": "rmp2015-zr:ann_254",
       "target": {
         "eid": "chp_8__cl_8.1__item_b__item_i",
         "version_id": "v1",
@@ -5494,7 +4576,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_306",
+      "annotation_id": "rmp2015-zr:ann_255",
       "target": {
         "eid": "chp_8__cl_8.1__item_b__item_ii",
         "version_id": "v1",
@@ -5512,7 +4594,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_307",
+      "annotation_id": "rmp2015-zr:ann_256",
       "target": {
         "eid": "chp_8__cl_8.1__item_b__item_iii",
         "version_id": "v1",
@@ -5530,7 +4612,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_308",
+      "annotation_id": "rmp2015-zr:ann_257",
       "target": {
         "eid": "chp_8__cl_8.1__item_b__item_iii",
         "version_id": "v1",
@@ -5548,7 +4630,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_309",
+      "annotation_id": "rmp2015-zr:ann_258",
       "target": {
         "eid": "chp_8__cl_8.1__item_b__item_iii",
         "version_id": "v1",
@@ -5566,7 +4648,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_310",
+      "annotation_id": "rmp2015-zr:ann_259",
       "target": {
         "eid": "chp_9__cl_9.1",
         "version_id": "v1",
@@ -5584,7 +4666,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_311",
+      "annotation_id": "rmp2015-zr:ann_260",
       "target": {
         "eid": "chp_9__cl_9.1",
         "version_id": "v1",
@@ -5602,7 +4684,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_312",
+      "annotation_id": "rmp2015-zr:ann_261",
       "target": {
         "eid": "chp_9__cl_9.1",
         "version_id": "v1",
@@ -5620,7 +4702,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_313",
+      "annotation_id": "rmp2015-zr:ann_262",
       "target": {
         "eid": "chp_9__cl_9.2",
         "version_id": "v1",
@@ -5638,7 +4720,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_314",
+      "annotation_id": "rmp2015-zr:ann_263",
       "target": {
         "eid": "chp_9__cl_9.2__note_1",
         "version_id": "v1",
@@ -5656,7 +4738,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_315",
+      "annotation_id": "rmp2015-zr:ann_264",
       "target": {
         "eid": "chp_9__cl_9.2__prov_1",
         "version_id": "v1",
@@ -5674,7 +4756,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_316",
+      "annotation_id": "rmp2015-zr:ann_265",
       "target": {
         "eid": "chp_9__cl_9.2__item_iii",
         "version_id": "v1",
@@ -5692,7 +4774,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_317",
+      "annotation_id": "rmp2015-zr:ann_266",
       "target": {
         "eid": "chp_9__cl_9.2__item_iii",
         "version_id": "v1",
@@ -5710,7 +4792,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_318",
+      "annotation_id": "rmp2015-zr:ann_267",
       "target": {
         "eid": "chp_9__cl_9.2__item_iii",
         "version_id": "v1",
@@ -5728,7 +4810,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_319",
+      "annotation_id": "rmp2015-zr:ann_268",
       "target": {
         "eid": "chp_9__cl_9.3",
         "version_id": "v1",
@@ -5746,7 +4828,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_320",
+      "annotation_id": "rmp2015-zr:ann_269",
       "target": {
         "eid": "chp_9__cl_9.3",
         "version_id": "v1",
@@ -5764,7 +4846,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_321",
+      "annotation_id": "rmp2015-zr:ann_270",
       "target": {
         "eid": "chp_9__cl_9.3__note_1",
         "version_id": "v1",
@@ -5782,7 +4864,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_322",
+      "annotation_id": "rmp2015-zr:ann_271",
       "target": {
         "eid": "chp_10",
         "version_id": "v1",
@@ -5800,7 +4882,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_323",
+      "annotation_id": "rmp2015-zr:ann_272",
       "target": {
         "eid": "chp_10",
         "version_id": "v1",
@@ -5818,61 +4900,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_324",
-      "target": {
-        "eid": "chp_10",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          315,
-          324
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_325",
-      "target": {
-        "eid": "chp_10",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          368,
-          377
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_326",
-      "target": {
-        "eid": "chp_10",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          386,
-          395
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_327",
+      "annotation_id": "rmp2015-zr:ann_273",
       "target": {
         "eid": "chp_10__cl_10.1__cl_1",
         "version_id": "v1",
@@ -5890,7 +4918,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_328",
+      "annotation_id": "rmp2015-zr:ann_274",
       "target": {
         "eid": "chp_10__cl_10.1__cl_1",
         "version_id": "v1",
@@ -5908,7 +4936,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_329",
+      "annotation_id": "rmp2015-zr:ann_275",
       "target": {
         "eid": "chp_10__cl_10.1__cl_1",
         "version_id": "v1",
@@ -5926,7 +4954,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_330",
+      "annotation_id": "rmp2015-zr:ann_276",
       "target": {
         "eid": "chp_10__cl_10.1__cl_2",
         "version_id": "v1",
@@ -5944,7 +4972,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_331",
+      "annotation_id": "rmp2015-zr:ann_277",
       "target": {
         "eid": "chp_10__cl_10.1__cl_2",
         "version_id": "v1",
@@ -5962,7 +4990,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_332",
+      "annotation_id": "rmp2015-zr:ann_278",
       "target": {
         "eid": "chp_10__cl_10.1__cl_3",
         "version_id": "v1",
@@ -5980,7 +5008,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_333",
+      "annotation_id": "rmp2015-zr:ann_279",
       "target": {
         "eid": "chp_10__cl_10.1__cl_3",
         "version_id": "v1",
@@ -5998,25 +5026,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_334",
-      "target": {
-        "eid": "chp_10__cl_10.1__cl_3",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          267,
-          276
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_335",
+      "annotation_id": "rmp2015-zr:ann_280",
       "target": {
         "eid": "chp_10__cl_10.1__cl_4",
         "version_id": "v1",
@@ -6034,7 +5044,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_336",
+      "annotation_id": "rmp2015-zr:ann_281",
       "target": {
         "eid": "chp_10__cl_10.1__cl_4",
         "version_id": "v1",
@@ -6052,25 +5062,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_337",
-      "target": {
-        "eid": "chp_10__cl_10.1__cl_4",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          141,
-          150
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_338",
+      "annotation_id": "rmp2015-zr:ann_282",
       "target": {
         "eid": "chp_10__cl_10.1__cl_5",
         "version_id": "v1",
@@ -6088,7 +5080,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_339",
+      "annotation_id": "rmp2015-zr:ann_283",
       "target": {
         "eid": "chp_10__cl_10.1__cl_6",
         "version_id": "v1",
@@ -6106,7 +5098,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_340",
+      "annotation_id": "rmp2015-zr:ann_284",
       "target": {
         "eid": "chp_10__cl_10.1__cl_7",
         "version_id": "v1",
@@ -6124,7 +5116,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_341",
+      "annotation_id": "rmp2015-zr:ann_285",
       "target": {
         "eid": "chp_10__cl_10.1__cl_8",
         "version_id": "v1",
@@ -6142,7 +5134,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_342",
+      "annotation_id": "rmp2015-zr:ann_286",
       "target": {
         "eid": "chp_10__cl_10.1__cl_9",
         "version_id": "v1",
@@ -6160,7 +5152,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_343",
+      "annotation_id": "rmp2015-zr:ann_287",
       "target": {
         "eid": "chp_10__cl_10.1__cl_9",
         "version_id": "v1",
@@ -6178,25 +5170,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_344",
-      "target": {
-        "eid": "chp_10__cl_10.1__cl_9",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          1041,
-          1050
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_345",
+      "annotation_id": "rmp2015-zr:ann_288",
       "target": {
         "eid": "chp_10__cl_10.1__cl_9",
         "version_id": "v1",
@@ -6214,25 +5188,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_346",
-      "target": {
-        "eid": "chp_10__cl_10.1__cl_9",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          1292,
-          1305
-        ],
-        "span_text": "building line"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_9",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_347",
+      "annotation_id": "rmp2015-zr:ann_289",
       "target": {
         "eid": "chp_10__cl_10.1__cl_12",
         "version_id": "v1",
@@ -6250,7 +5206,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_348",
+      "annotation_id": "rmp2015-zr:ann_290",
       "target": {
         "eid": "chp_10__cl_10.1__cl_13",
         "version_id": "v1",
@@ -6268,7 +5224,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_349",
+      "annotation_id": "rmp2015-zr:ann_291",
       "target": {
         "eid": "chp_10__cl_10.1__cl_13",
         "version_id": "v1",
@@ -6286,7 +5242,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_350",
+      "annotation_id": "rmp2015-zr:ann_292",
       "target": {
         "eid": "chp_10__cl_10.1__cl_14",
         "version_id": "v1",
@@ -6304,7 +5260,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_351",
+      "annotation_id": "rmp2015-zr:ann_293",
       "target": {
         "eid": "chp_10__cl_10.1__cl_14",
         "version_id": "v1",
@@ -6322,25 +5278,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_352",
-      "target": {
-        "eid": "chp_10__cl_10.1__cl_14",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          235,
-          244
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_353",
+      "annotation_id": "rmp2015-zr:ann_294",
       "target": {
         "eid": "chp_10__cl_10.1__cl_15",
         "version_id": "v1",
@@ -6358,7 +5296,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_354",
+      "annotation_id": "rmp2015-zr:ann_295",
       "target": {
         "eid": "chp_10__cl_10.1__cl_15",
         "version_id": "v1",
@@ -6376,7 +5314,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_355",
+      "annotation_id": "rmp2015-zr:ann_296",
       "target": {
         "eid": "chp_10__cl_10.1__cl_16",
         "version_id": "v1",
@@ -6394,7 +5332,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_356",
+      "annotation_id": "rmp2015-zr:ann_297",
       "target": {
         "eid": "chp_10__cl_10.1__cl_17",
         "version_id": "v1",
@@ -6412,7 +5350,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_357",
+      "annotation_id": "rmp2015-zr:ann_298",
       "target": {
         "eid": "chp_10__cl_10.1__cl_18",
         "version_id": "v1",
@@ -6430,7 +5368,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_358",
+      "annotation_id": "rmp2015-zr:ann_299",
       "target": {
         "eid": "chp_10__cl_10.1__cl_18",
         "version_id": "v1",
@@ -6448,79 +5386,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_359",
-      "target": {
-        "eid": "chp_10__cl_10.1__cl_18",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          190,
-          199
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_360",
-      "target": {
-        "eid": "chp_10__cl_10.1__cl_18",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          290,
-          299
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_361",
-      "target": {
-        "eid": "chp_10__cl_10.1__cl_18",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          316,
-          325
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_362",
-      "target": {
-        "eid": "chp_10__cl_10.1__cl_18",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          437,
-          446
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_363",
+      "annotation_id": "rmp2015-zr:ann_300",
       "target": {
         "eid": "chp_10__cl_10.1__cl_20",
         "version_id": "v1",
@@ -6538,7 +5404,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_364",
+      "annotation_id": "rmp2015-zr:ann_301",
       "target": {
         "eid": "chp_10__cl_10.1__cl_20",
         "version_id": "v1",
@@ -6556,25 +5422,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_365",
-      "target": {
-        "eid": "chp_10__cl_10.1__cl_20",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          143,
-          152
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_366",
+      "annotation_id": "rmp2015-zr:ann_302",
       "target": {
         "eid": "chp_10__cl_10.1__cl_21",
         "version_id": "v1",
@@ -6592,7 +5440,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_367",
+      "annotation_id": "rmp2015-zr:ann_303",
       "target": {
         "eid": "chp_10__cl_10.1__cl_21",
         "version_id": "v1",
@@ -6610,7 +5458,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_368",
+      "annotation_id": "rmp2015-zr:ann_304",
       "target": {
         "eid": "chp_10__cl_10.1__cl_22",
         "version_id": "v1",
@@ -6628,7 +5476,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_369",
+      "annotation_id": "rmp2015-zr:ann_305",
       "target": {
         "eid": "chp_10__cl_10.1__cl_23",
         "version_id": "v1",
@@ -6646,7 +5494,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_370",
+      "annotation_id": "rmp2015-zr:ann_306",
       "target": {
         "eid": "chp_10__cl_10.1__cl_24",
         "version_id": "v1",
@@ -6664,7 +5512,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_371",
+      "annotation_id": "rmp2015-zr:ann_307",
       "target": {
         "eid": "chp_10__cl_10.1__cl_24",
         "version_id": "v1",
@@ -6682,25 +5530,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_372",
-      "target": {
-        "eid": "chp_10__cl_10.1__cl_24",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          280,
-          289
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_373",
+      "annotation_id": "rmp2015-zr:ann_308",
       "target": {
         "eid": "chp_10__cl_10.1__cl_25",
         "version_id": "v1",
@@ -6718,7 +5548,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_374",
+      "annotation_id": "rmp2015-zr:ann_309",
       "target": {
         "eid": "chp_10__cl_10.1__cl_25",
         "version_id": "v1",
@@ -6736,7 +5566,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_375",
+      "annotation_id": "rmp2015-zr:ann_310",
       "target": {
         "eid": "chp_10__cl_10.1__cl_26",
         "version_id": "v1",
@@ -6754,7 +5584,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_376",
+      "annotation_id": "rmp2015-zr:ann_311",
       "target": {
         "eid": "chp_10__cl_10.1__cl_26",
         "version_id": "v1",
@@ -6772,25 +5602,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_377",
-      "target": {
-        "eid": "chp_10__cl_10.1__cl_26",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          317,
-          326
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_378",
+      "annotation_id": "rmp2015-zr:ann_312",
       "target": {
         "eid": "chp_10__cl_10.1__cl_27",
         "version_id": "v1",
@@ -6808,7 +5620,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_379",
+      "annotation_id": "rmp2015-zr:ann_313",
       "target": {
         "eid": "chp_10__cl_10.1__cl_27",
         "version_id": "v1",
@@ -6826,7 +5638,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_380",
+      "annotation_id": "rmp2015-zr:ann_314",
       "target": {
         "eid": "app_1",
         "version_id": "v1",
@@ -6844,7 +5656,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_381",
+      "annotation_id": "rmp2015-zr:ann_315",
       "target": {
         "eid": "app_1",
         "version_id": "v1",
@@ -6862,7 +5674,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_382",
+      "annotation_id": "rmp2015-zr:ann_316",
       "target": {
         "eid": "app_II",
         "version_id": "v1",
@@ -6880,7 +5692,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_383",
+      "annotation_id": "rmp2015-zr:ann_317",
       "target": {
         "eid": "app_II",
         "version_id": "v1",
@@ -6898,25 +5710,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_384",
-      "target": {
-        "eid": "app_II",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          1173,
-          1182
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_385",
+      "annotation_id": "rmp2015-zr:ann_318",
       "target": {
         "eid": "app_III",
         "version_id": "v1",
@@ -6934,7 +5728,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_386",
+      "annotation_id": "rmp2015-zr:ann_319",
       "target": {
         "eid": "app_III",
         "version_id": "v1",
@@ -6952,7 +5746,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_387",
+      "annotation_id": "rmp2015-zr:ann_320",
       "target": {
         "eid": "app_IV",
         "version_id": "v1",
@@ -6970,7 +5764,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_388",
+      "annotation_id": "rmp2015-zr:ann_321",
       "target": {
         "eid": "app_V",
         "version_id": "v1",
@@ -6988,7 +5782,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_389",
+      "annotation_id": "rmp2015-zr:ann_322",
       "target": {
         "eid": "app_V",
         "version_id": "v1",
@@ -7006,25 +5800,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_390",
-      "target": {
-        "eid": "app_V",
-        "version_id": "v1",
-        "field": "intro",
-        "span": [
-          684,
-          693
-        ],
-        "span_text": "Authority"
-      },
-      "kind": "defined_term_use",
-      "value": "sec_DEFINITIONS__def_5",
-      "method": "rule",
-      "confidence": 0.95,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "rmp2015-zr:ann_391",
+      "annotation_id": "rmp2015-zr:ann_323",
       "target": {
         "eid": "app_V__item_1",
         "version_id": "v1",
@@ -7042,7 +5818,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_392",
+      "annotation_id": "rmp2015-zr:ann_324",
       "target": {
         "eid": "app_VI",
         "version_id": "v1",
@@ -7060,7 +5836,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_393",
+      "annotation_id": "rmp2015-zr:ann_325",
       "target": {
         "eid": "app_VI",
         "version_id": "v1",
@@ -7078,7 +5854,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_394",
+      "annotation_id": "rmp2015-zr:ann_326",
       "target": {
         "eid": "app_VI",
         "version_id": "v1",
@@ -7096,7 +5872,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_395",
+      "annotation_id": "rmp2015-zr:ann_327",
       "target": {
         "eid": "app_VII",
         "version_id": "v1",
@@ -7114,7 +5890,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_396",
+      "annotation_id": "rmp2015-zr:ann_328",
       "target": {
         "eid": "app_VIII",
         "version_id": "v1",
@@ -7132,7 +5908,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_397",
+      "annotation_id": "rmp2015-zr:ann_329",
       "target": {
         "eid": "app_VIII",
         "version_id": "v1",
@@ -7150,7 +5926,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_398",
+      "annotation_id": "rmp2015-zr:ann_330",
       "target": {
         "eid": "app_VIII__item_1__item_a__item_b",
         "version_id": "v1",
@@ -7168,7 +5944,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_399",
+      "annotation_id": "rmp2015-zr:ann_331",
       "target": {
         "eid": "chp_2__tbl_1",
         "version_id": "v1",
@@ -7186,7 +5962,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_400",
+      "annotation_id": "rmp2015-zr:ann_332",
       "target": {
         "eid": "chp_2__tbl_1__row_3",
         "version_id": "v1",
@@ -7204,7 +5980,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_401",
+      "annotation_id": "rmp2015-zr:ann_333",
       "target": {
         "eid": "chp_2__tbl_2",
         "version_id": "v1",
@@ -7222,7 +5998,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_402",
+      "annotation_id": "rmp2015-zr:ann_334",
       "target": {
         "eid": "chp_2__tbl_3",
         "version_id": "v1",
@@ -7240,7 +6016,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_403",
+      "annotation_id": "rmp2015-zr:ann_335",
       "target": {
         "eid": "chp_2__tbl_3__row_3",
         "version_id": "v1",
@@ -7258,7 +6034,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_404",
+      "annotation_id": "rmp2015-zr:ann_336",
       "target": {
         "eid": "chp_2__tbl_3__row_11",
         "version_id": "v1",
@@ -7276,7 +6052,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_405",
+      "annotation_id": "rmp2015-zr:ann_337",
       "target": {
         "eid": "chp_2__tbl_4",
         "version_id": "v1",
@@ -7294,7 +6070,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_406",
+      "annotation_id": "rmp2015-zr:ann_338",
       "target": {
         "eid": "chp_2__tbl_4__row_3",
         "version_id": "v1",
@@ -7312,7 +6088,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_407",
+      "annotation_id": "rmp2015-zr:ann_339",
       "target": {
         "eid": "chp_2__tbl_4__row_12",
         "version_id": "v1",
@@ -7330,7 +6106,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_408",
+      "annotation_id": "rmp2015-zr:ann_340",
       "target": {
         "eid": "chp_2__tbl_5",
         "version_id": "v1",
@@ -7348,7 +6124,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_409",
+      "annotation_id": "rmp2015-zr:ann_341",
       "target": {
         "eid": "chp_2__tbl_5__row_3",
         "version_id": "v1",
@@ -7366,7 +6142,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_410",
+      "annotation_id": "rmp2015-zr:ann_342",
       "target": {
         "eid": "chp_2__tbl_5__row_4",
         "version_id": "v1",
@@ -7384,7 +6160,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_411",
+      "annotation_id": "rmp2015-zr:ann_343",
       "target": {
         "eid": "chp_2__tbl_6",
         "version_id": "v1",
@@ -7402,7 +6178,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_412",
+      "annotation_id": "rmp2015-zr:ann_344",
       "target": {
         "eid": "chp_2__tbl_6__row_4",
         "version_id": "v1",
@@ -7420,7 +6196,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_413",
+      "annotation_id": "rmp2015-zr:ann_345",
       "target": {
         "eid": "chp_2__tbl_7",
         "version_id": "v1",
@@ -7438,7 +6214,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_414",
+      "annotation_id": "rmp2015-zr:ann_346",
       "target": {
         "eid": "chp_2__tbl_7__row_2",
         "version_id": "v1",
@@ -7456,7 +6232,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_415",
+      "annotation_id": "rmp2015-zr:ann_347",
       "target": {
         "eid": "chp_2__tbl_8",
         "version_id": "v1",
@@ -7474,7 +6250,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_416",
+      "annotation_id": "rmp2015-zr:ann_348",
       "target": {
         "eid": "chp_2__tbl_9",
         "version_id": "v1",
@@ -7492,7 +6268,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_417",
+      "annotation_id": "rmp2015-zr:ann_349",
       "target": {
         "eid": "chp_2__tbl_10",
         "version_id": "v1",
@@ -7510,7 +6286,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_418",
+      "annotation_id": "rmp2015-zr:ann_350",
       "target": {
         "eid": "chp_2__tbl_10__row_3",
         "version_id": "v1",
@@ -7528,7 +6304,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_419",
+      "annotation_id": "rmp2015-zr:ann_351",
       "target": {
         "eid": "chp_2__tbl_11",
         "version_id": "v1",
@@ -7546,7 +6322,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_420",
+      "annotation_id": "rmp2015-zr:ann_352",
       "target": {
         "eid": "chp_2__cl_13__tbl_1",
         "version_id": "v1",
@@ -7564,7 +6340,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_421",
+      "annotation_id": "rmp2015-zr:ann_353",
       "target": {
         "eid": "chp_2__cl_13__tbl_2",
         "version_id": "v1",
@@ -7582,7 +6358,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_422",
+      "annotation_id": "rmp2015-zr:ann_354",
       "target": {
         "eid": "chp_2__cl_13__tbl_2__row_3",
         "version_id": "v1",
@@ -7600,7 +6376,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_423",
+      "annotation_id": "rmp2015-zr:ann_355",
       "target": {
         "eid": "chp_2__cl_13__tbl_3",
         "version_id": "v1",
@@ -7618,7 +6394,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_424",
+      "annotation_id": "rmp2015-zr:ann_356",
       "target": {
         "eid": "chp_2__cl_13__tbl_3__row_4",
         "version_id": "v1",
@@ -7636,7 +6412,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_425",
+      "annotation_id": "rmp2015-zr:ann_357",
       "target": {
         "eid": "chp_2__cl_13__tbl_4",
         "version_id": "v1",
@@ -7654,7 +6430,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_426",
+      "annotation_id": "rmp2015-zr:ann_358",
       "target": {
         "eid": "chp_2__cl_13__tbl_4__row_5",
         "version_id": "v1",
@@ -7672,7 +6448,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_427",
+      "annotation_id": "rmp2015-zr:ann_359",
       "target": {
         "eid": "chp_2__cl_13__tbl_4__row_5",
         "version_id": "v1",
@@ -7690,7 +6466,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_428",
+      "annotation_id": "rmp2015-zr:ann_360",
       "target": {
         "eid": "chp_2__cl_13__tbl_4__row_6",
         "version_id": "v1",
@@ -7708,7 +6484,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_429",
+      "annotation_id": "rmp2015-zr:ann_361",
       "target": {
         "eid": "chp_2__cl_13__tbl_5",
         "version_id": "v1",
@@ -7726,7 +6502,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_430",
+      "annotation_id": "rmp2015-zr:ann_362",
       "target": {
         "eid": "chp_2__cl_13__tbl_5__row_12",
         "version_id": "v1",
@@ -7744,7 +6520,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_431",
+      "annotation_id": "rmp2015-zr:ann_363",
       "target": {
         "eid": "chp_2__cl_13__tbl_6",
         "version_id": "v1",
@@ -7762,7 +6538,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_432",
+      "annotation_id": "rmp2015-zr:ann_364",
       "target": {
         "eid": "chp_2__cl_13__tbl_7",
         "version_id": "v1",
@@ -7780,7 +6556,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_433",
+      "annotation_id": "rmp2015-zr:ann_365",
       "target": {
         "eid": "chp_2__cl_13__tbl_7__row_2",
         "version_id": "v1",
@@ -7798,7 +6574,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_434",
+      "annotation_id": "rmp2015-zr:ann_366",
       "target": {
         "eid": "chp_2__cl_13__tbl_7__row_3",
         "version_id": "v1",
@@ -7816,7 +6592,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_435",
+      "annotation_id": "rmp2015-zr:ann_367",
       "target": {
         "eid": "chp_2__cl_13__tbl_8",
         "version_id": "v1",
@@ -7834,7 +6610,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_436",
+      "annotation_id": "rmp2015-zr:ann_368",
       "target": {
         "eid": "chp_2__cl_13__tbl_9",
         "version_id": "v1",
@@ -7852,7 +6628,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_437",
+      "annotation_id": "rmp2015-zr:ann_369",
       "target": {
         "eid": "chp_2__cl_13__tbl_9__row_3",
         "version_id": "v1",
@@ -7870,7 +6646,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_438",
+      "annotation_id": "rmp2015-zr:ann_370",
       "target": {
         "eid": "chp_2__cl_13__tbl_9__row_10",
         "version_id": "v1",
@@ -7888,7 +6664,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_439",
+      "annotation_id": "rmp2015-zr:ann_371",
       "target": {
         "eid": "chp_2__cl_13__tbl_9__row_16",
         "version_id": "v1",
@@ -7906,7 +6682,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_440",
+      "annotation_id": "rmp2015-zr:ann_372",
       "target": {
         "eid": "chp_2__cl_13__tbl_9__row_18",
         "version_id": "v1",
@@ -7924,7 +6700,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_441",
+      "annotation_id": "rmp2015-zr:ann_373",
       "target": {
         "eid": "chp_2__cl_13__tbl_9__row_19",
         "version_id": "v1",
@@ -7942,7 +6718,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_442",
+      "annotation_id": "rmp2015-zr:ann_374",
       "target": {
         "eid": "chp_2__cl_13__tbl_9__row_20",
         "version_id": "v1",
@@ -7960,7 +6736,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_443",
+      "annotation_id": "rmp2015-zr:ann_375",
       "target": {
         "eid": "chp_3__cl_3.1__tbl_1",
         "version_id": "v1",
@@ -7978,7 +6754,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_444",
+      "annotation_id": "rmp2015-zr:ann_376",
       "target": {
         "eid": "chp_3__cl_3.4__tbl_1",
         "version_id": "v1",
@@ -7996,7 +6772,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_445",
+      "annotation_id": "rmp2015-zr:ann_377",
       "target": {
         "eid": "chp_3__cl_3.7__tbl_1",
         "version_id": "v1",
@@ -8014,7 +6790,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_446",
+      "annotation_id": "rmp2015-zr:ann_378",
       "target": {
         "eid": "chp_4__cl_4.1__cl_4.1.3__tbl_1",
         "version_id": "v1",
@@ -8032,7 +6808,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_447",
+      "annotation_id": "rmp2015-zr:ann_379",
       "target": {
         "eid": "chp_4__cl_4.2__cl_4.2.2__tbl_1",
         "version_id": "v1",
@@ -8050,7 +6826,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_448",
+      "annotation_id": "rmp2015-zr:ann_380",
       "target": {
         "eid": "chp_4__cl_4.2__cl_4.2.2__tbl_2",
         "version_id": "v1",
@@ -8068,7 +6844,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_449",
+      "annotation_id": "rmp2015-zr:ann_381",
       "target": {
         "eid": "chp_4__cl_4.3__cl_4.3.3__tbl_1",
         "version_id": "v1",
@@ -8086,7 +6862,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_450",
+      "annotation_id": "rmp2015-zr:ann_382",
       "target": {
         "eid": "chp_4__cl_4.4__cl_4.4.3__tbl_1",
         "version_id": "v1",
@@ -8104,7 +6880,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_451",
+      "annotation_id": "rmp2015-zr:ann_383",
       "target": {
         "eid": "chp_4__cl_4.5__cl_4.5.3__tbl_1",
         "version_id": "v1",
@@ -8122,7 +6898,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_452",
+      "annotation_id": "rmp2015-zr:ann_384",
       "target": {
         "eid": "chp_4__cl_4.7__cl_4.7.3__tbl_1",
         "version_id": "v1",
@@ -8140,7 +6916,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_453",
+      "annotation_id": "rmp2015-zr:ann_385",
       "target": {
         "eid": "chp_4__cl_4.8__cl_4.8.3__tbl_1",
         "version_id": "v1",
@@ -8158,7 +6934,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_454",
+      "annotation_id": "rmp2015-zr:ann_386",
       "target": {
         "eid": "chp_4__cl_4.9__cl_4.9.3__tbl_1",
         "version_id": "v1",
@@ -8176,7 +6952,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_455",
+      "annotation_id": "rmp2015-zr:ann_387",
       "target": {
         "eid": "chp_4__cl_4.10__cl_4.10.3__tbl_1",
         "version_id": "v1",
@@ -8194,7 +6970,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_456",
+      "annotation_id": "rmp2015-zr:ann_388",
       "target": {
         "eid": "chp_7__cl_7.1__cl_5__tbl_1",
         "version_id": "v1",
@@ -8212,7 +6988,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_457",
+      "annotation_id": "rmp2015-zr:ann_389",
       "target": {
         "eid": "chp_7__cl_7.1__cl_5__tbl_2",
         "version_id": "v1",
@@ -8230,7 +7006,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_458",
+      "annotation_id": "rmp2015-zr:ann_390",
       "target": {
         "eid": "chp_7__cl_7.1__cl_5__tbl_3",
         "version_id": "v1",
@@ -8248,7 +7024,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_459",
+      "annotation_id": "rmp2015-zr:ann_391",
       "target": {
         "eid": "chp_8__tbl_1",
         "version_id": "v1",
@@ -8266,7 +7042,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_460",
+      "annotation_id": "rmp2015-zr:ann_392",
       "target": {
         "eid": "chp_8__tbl_1__row_5",
         "version_id": "v1",
@@ -8284,7 +7060,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_461",
+      "annotation_id": "rmp2015-zr:ann_393",
       "target": {
         "eid": "chp_8__tbl_1__row_6",
         "version_id": "v1",
@@ -8302,7 +7078,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_462",
+      "annotation_id": "rmp2015-zr:ann_394",
       "target": {
         "eid": "chp_8__tbl_1__row_7",
         "version_id": "v1",
@@ -8320,7 +7096,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_463",
+      "annotation_id": "rmp2015-zr:ann_395",
       "target": {
         "eid": "chp_8__tbl_1__row_7",
         "version_id": "v1",
@@ -8338,7 +7114,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_464",
+      "annotation_id": "rmp2015-zr:ann_396",
       "target": {
         "eid": "chp_8__tbl_1__row_13",
         "version_id": "v1",
@@ -8356,7 +7132,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_465",
+      "annotation_id": "rmp2015-zr:ann_397",
       "target": {
         "eid": "chp_8__tbl_1__row_13",
         "version_id": "v1",
@@ -8374,7 +7150,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_466",
+      "annotation_id": "rmp2015-zr:ann_398",
       "target": {
         "eid": "chp_8__tbl_1__row_13",
         "version_id": "v1",
@@ -8392,7 +7168,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_467",
+      "annotation_id": "rmp2015-zr:ann_399",
       "target": {
         "eid": "chp_9__cl_9.3__tbl_1",
         "version_id": "v1",
@@ -8410,7 +7186,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_468",
+      "annotation_id": "rmp2015-zr:ann_400",
       "target": {
         "eid": "chp_9__cl_9.3__tbl_1__row_2",
         "version_id": "v1",
@@ -8428,7 +7204,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_469",
+      "annotation_id": "rmp2015-zr:ann_401",
       "target": {
         "eid": "chp_10__cl_10.1__cl_12__tbl_1",
         "version_id": "v1",
@@ -8446,7 +7222,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_470",
+      "annotation_id": "rmp2015-zr:ann_402",
       "target": {
         "eid": "app_1__tbl_1",
         "version_id": "v1",
@@ -8464,7 +7240,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_471",
+      "annotation_id": "rmp2015-zr:ann_403",
       "target": {
         "eid": "app_1__tbl_1__row_22",
         "version_id": "v1",
@@ -8482,7 +7258,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_472",
+      "annotation_id": "rmp2015-zr:ann_404",
       "target": {
         "eid": "app_1__tbl_2",
         "version_id": "v1",
@@ -8500,7 +7276,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_473",
+      "annotation_id": "rmp2015-zr:ann_405",
       "target": {
         "eid": "app_1__tbl_2__row_6",
         "version_id": "v1",
@@ -8518,7 +7294,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_474",
+      "annotation_id": "rmp2015-zr:ann_406",
       "target": {
         "eid": "app_1__tbl_3",
         "version_id": "v1",
@@ -8536,7 +7312,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_475",
+      "annotation_id": "rmp2015-zr:ann_407",
       "target": {
         "eid": "app_1__tbl_3__row_9",
         "version_id": "v1",
@@ -8554,7 +7330,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "rmp2015-zr:ann_476",
+      "annotation_id": "rmp2015-zr:ann_408",
       "target": {
         "eid": "app_IV__tbl_1",
         "version_id": "v1",

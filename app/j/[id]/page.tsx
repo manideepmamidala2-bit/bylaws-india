@@ -12,6 +12,8 @@ interface JurisdictionMapPageProps {
   params: Promise<{ id: string }>;
 }
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const manifest = await fetchManifest();
   return manifest.jurisdictions.map((j) => ({ id: j.id }));
@@ -76,6 +78,18 @@ export default async function JurisdictionMapPage({
   }
 
   const { activeClauses } = partitionClauseVersions(clauses);
+  const taggedIds = new Set(
+    (clauseZoneTags?.tags ?? []).map((t) => t.clause_id)
+  );
+  for (const lnk of amendments.links) {
+    taggedIds.add(lnk.amending_clause);
+    taggedIds.add(lnk.target_clause);
+  }
+  const explorerClauses = clauses.filter(
+    (c) =>
+      (c.applies_to_zones && c.applies_to_zones.length > 0) ||
+      taggedIds.has(c.clause_id)
+  );
   const inForceDocsCount = documents.filter(
     (d) => d.legal_status === "in_force"
   ).length;
@@ -182,7 +196,7 @@ export default async function JurisdictionMapPage({
         <AreaExplorerClient
           jurisdictionId={jurisdiction.id}
           zones={zones.features}
-          clauses={clauses}
+          clauses={explorerClauses}
           amendmentLinks={amendments.links}
           clauseZoneTags={clauseZoneTags?.tags ?? []}
           boundary={boundary}

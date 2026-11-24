@@ -61,70 +61,70 @@
 | # | `eid` | Type | Page | Native No. | Page Image Dim (px @ 150 DPI) | Excerpt Verified Against Rendered Page | Result |
 |---:|---|---|---:|---|---|---|---|
 | 1 | `part_I__sec_1.0__cl_1.3` | `clause` | 1 | `1.3` | `1275x1651` | `These Bye-laws shall come into operation from 5 th of June 2004 .` | PASS |
-| 2 | `part_I__sec_2.0__def_2.11` | `definition` | 2 | `2.11` | `1275x1651` | `'building line' means the line upto which the plinth of buildings` | PASS |
-| 3 | `part_I__sec_2.0__def_2.15__item_c` | `item` | 3 | `(c)` | `1275x1651` | `any such 'common' or 'dividing' wall shall be considered for the ` | PASS |
-| 4 | `part_I__sec_2.0__def_2.19__item_a` | `item` | 3 | `(a)` | `1275x1651` | `court yard at the ground level, garden, rocky area, well and well` | PASS |
-| 5 | `part_I__sec_2.0__def_2.20` | `definition` | 3 | `2.20` | `1275x1651` | `' cross wall' means an internal wall within the building upto the` | PASS |
-| 6 | `part_I__sec_2.0__def_2.28` | `definition` | 4 | `2.28` | `1275x1651` | `' exit' means a passage, channel or means of egress from any floo` | PASS |
-| 7 | `part_I__sec_2.0__def_2.46` | `definition` | 5 | `2.46` | `1275x1651` | `' high-rise building' means a building with ground floor plus fou` | PASS |
-| 8 | `part_I__sec_2.0__def_2.78` | `definition` | 7 | `2.78` | `1275x1651` | `' storey' means the space between the surface of one floor and th` | PASS |
-| 9 | `part_II` | `part` | 9 | `PART II` | `1275x1651` | `PART II ADMINISTRATION` | PASS |
-| 10 | `part_II__sec_3.0__cl_3.2__item_b_2` | `item` | 10 | `(b)` | `1275x1651` | `use or occupancy of all parts of the building;` | PASS |
-| 11 | `part_II__sec_3.0__cl_3.2__item_j_2` | `item` | 10 | `(j)` | `1275x1651` | `in case of basement floor, position of the ramp with respect to t` | PASS |
-| 12 | `part_II__sec_3.0__cl_3.9` | `clause` | 14 | `3.9` | `1275x1651` | `High rise buildings are not exempted from payment of ground rent ` | PASS |
-| 13 | `part_II__sec_5.0__cl_5.6__def_b` | `definition` | 17 | `(b)` | `1275x1651` | `Physical inspection means the Authority shall find out whether th` | PASS |
-| 14 | `part_III__sec_9.0__cl_9.2__note_3` | `note` | 25 | `3` | `1275x1651` | `(a) The front and rear set backs shall be with reference to the d` | PASS |
-| 15 | `part_III__sec_9.0__cl_9.10__cl_9.10.1__note_3` | `note` | 28 | `—` | `1275x1651` | `(3) When two sides of the same road are included in two different` | PASS |
-| 16 | `part_III__sec_9.0__cl_9.10__cl_9.10.2__note_1` | `note` | 28 | `—` | `1275x1651` | `One penthouse only is permissible for a building. The area of the` | PASS |
-| 17 | `part_III__sec_14__cl_14.3` | `clause` | 33 | `14.3` | `1275x1651` | `Balcony - The projection of the balcony shall be measured perpend` | PASS |
-| 18 | `part_III__sec_20.0__cl_20.6__item_c` | `item` | 40 | `(c)` | `1275x1651` | `Assembly building like auditoria, theatres and cinemas 1.5 mtr.` | PASS |
-| 19 | `part_III__sec_21.0__cl_21.1__cl_21.1.3` | `clause` | 42 | `21.1.3` | `1275x1651` | `All exits shall be free of obstructions.` | PASS |
-| 20 | `part_III__sec_21.0__cl_21.1__def_21.1.9` | `definition` | 42 | `21.1.9` | `1275x1651` | `All exits shall provide continuous means of egress to the exterio` | PASS |
-| 21 | `part_IV__sec_28.0__cl_28.2` | `clause` | 48 | `28.2` | `1275x1651` | `The Authority may approve any such alternative, provided it is fo` | PASS |
-| 22 | `sch_I__cl_1.2__cl_1.2.8__cl_1.2.8.1` | `clause` | 55 | `1.2.8.1` | `1275x1651` | `Uses that are permissible - Sports grounds, stadium, playgrounds,` | PASS |
-| 23 | `sch_IV__item_i__item_i_2` | `item` | 65 | `(i)` | `1275x1651` | `All plans and related information with necessary certificates con` | PASS |
-| 24 | `sch_XI` | `schedule` | 78 | `SCHEDULE XI` | `1275x1651` | `(Bye-law 31) Facilities for physically handicapped persons` | PASS |
-| 25 | `part_III__sec_8.0__cl_8.4__tbl_1` | `table` | 20 | `Table 1` | `1275x1651` | `Table 1` | PASS |
-| 26 | `part_III__sec_17.0__tbl_1__row_12` | `table_row` | 36 | `12` | `1275x1651` | `11 / Kalyana mandiras / 10 sq.mtr. of auditorium floor area` | PASS |
-| 27 | `part_III__sec_21.0__cl_21.5__tbl_2__row_1` | `table_row` | 43 | `1` | `1275x1651` | `1 / Residential / 25 / 50 / 75` | PASS |
-| 28 | `sch_1-A__tbl_1__row_31` | `table_row` | 57 | `31` | `1275x1651` | `31 / STD/ISD counters` | PASS |
-| 29 | `sch_1-B__tbl_1__row_28` | `table_row` | 58 | `28` | `1275x1651` | `28 / Cards board box and paper products including paper` | PASS |
-| 30 | `sch_X__tbl_4__row_24` | `table_row` | 77 | `24` | `1275x1651` | `127 / Gavipuram Guttahalli Main Rd / 2 m from the edge of the roa` | PASS |
+| 2 | `part_I__sec_2.0__def_2.2` | `definition` | 2 | `2.2` | `1275x1651` | `'agriculture' includes horticulture, farming, growing of crops, f` | PASS |
+| 3 | `part_I__sec_2.0__def_2.4` | `definition` | 2 | `2.4` | `1275x1651` | `'apartment' means a part of the property intended for any type of` | PASS |
+| 4 | `part_I__sec_2.0__def_2.21` | `definition` | 3 | `2.21` | `1275x1651` | `' density' means concentration of population expressed in terms o` | PASS |
+| 5 | `part_I__sec_2.0__def_2.46` | `definition` | 5 | `2.46` | `1275x1651` | `' high-rise building' means a building with ground floor plus fou` | PASS |
+| 6 | `part_I__sec_2.0__def_2.60` | `definition` | 6 | `2.60` | `1275x1651` | `' parking space' means an area enclosed or unenclosed, covered or` | PASS |
+| 7 | `part_I__sec_2.0__def_2.62` | `definition` | 6 | `2.62` | `1275x1651` | `' person' includes any body of persons corporate or incorporate.` | PASS |
+| 8 | `part_I__sec_2.0__def_2.67` | `definition` | 7 | `2.67` | `1275x1651` | `'porch or portico' means a roof cover supported on pillars or can` | PASS |
+| 9 | `part_II__sec_3.0__cl_3.2__item_j_2` | `item` | 10 | `(j)` | `1275x1651` | `in case of basement floor, position of the ramp with respect to t` | PASS |
+| 10 | `part_II__sec_3.0__cl_3.2__cl_3.210.1__item_e` | `item` | 11 | `(e)` | `1275x1651` | `In case of civic amenity site, leased out by the Bangalore Develo` | PASS |
+| 11 | `part_II__sec_3.0__cl_3.2_2__cl_3.210.6` | `clause` | 11 | `3.2(10.6)` | `1275x1651` | `Telecommunication Department N.O.C in case of high rise building ` | PASS |
+| 12 | `part_II__sec_3.0__cl_3.8__note_3` | `note` | 14 | `—` | `1275x1651` | `(iii) If the public land is utilised for storing of excavated mat` | PASS |
+| 13 | `part_II__sec_5.0__cl_5.5__item_i` | `item` | 17 | `(i)` | `1275x1651` | `The owner/builder/contractor shall during the construction, displ` | PASS |
+| 14 | `part_III__sec_9.0__cl_9.2__note_1` | `note` | 25 | `1` | `1275x1651` | `The dimensions in British system if any, adopted for the dimensio` | PASS |
+| 15 | `part_III__sec_9.0__cl_9.6__cl_9.6.1` | `clause` | 27 | `9.6.1` | `1275x1651` | `Where the nomenclature of a road differs from the one mentioned i` | PASS |
+| 16 | `part_III__sec_15.0__cl_15.3` | `clause` | 33 | `15.3` | `1275x1651` | `For buildings within the landing and take off zones of air craft ` | PASS |
+| 17 | `part_III__sec_16.0__item_a` | `item` | 35 | `(a)` | `1275x1651` | `Each off street car parking space provided for motor vehicles sha` | PASS |
+| 18 | `part_III__sec_18.0__cl_18.6` | `clause` | 37 | `18.6` | `1275x1651` | `Access to the basement shall floor used other than for parking pu` | PASS |
+| 19 | `part_III__sec_20.0__cl_20.4` | `clause` | 39 | `20.4` | `1275x1651` | `Mezzanine floor - (1) Not more than one mezzanine floor shall be ` | PASS |
+| 20 | `part_III__sec_20.0__cl_20.4__item_10` | `item` | 40 | `(10)` | `1275x1651` | `In no case, a mezzanine floor shall be closed so as to make it li` | PASS |
+| 21 | `part_III__sec_21.0__cl_21.6__item_c` | `item` | 44 | `(c)` | `1275x1651` | `Exit doorways shall open outwards i.e., away from the room. But s` | PASS |
+| 22 | `sch_1-B__note_1` | `note` | 60 | `—` | `1275x1651` | `Conditions to be fulfilled:` | PASS |
+| 23 | `sch_II__cl_8` | `clause` | 61 | `8` | `1275x1651` | `Affidavit and Indemnity Bond as prescribed.` | PASS |
+| 24 | `sch_V-A__cl_2` | `clause` | 68 | `2` | `1275x1651` | `A note book should be maintained in the workspot and should invar` | PASS |
+| 25 | `sch_1-A__tbl_1__row_2` | `table_row` | 57 | `2` | `1275x1651` | `2 / Confectionery, candies and sweets` | PASS |
+| 26 | `sch_1-B__tbl_1__row_17` | `table_row` | 58 | `17` | `1275x1651` | `17 / Webbing (narrow fabrics, embroidery lace manufacturing)` | PASS |
+| 27 | `sch_X__tbl_1__row_22` | `table_row` | 74 | `22` | `1275x1651` | `22 / Kengal Hanumanthaiah Road / 3 m from the edge of the road / ` | PASS |
+| 28 | `sch_X__tbl_1__row_25` | `table_row` | 74 | `25` | `1275x1651` | `25 / H.Siddaiah Road / 3 m from the edge of the road / 9` | PASS |
+| 29 | `sch_X__tbl_3__row_35` | `table_row` | 76 | `35` | `1275x1651` | `101 / Mysore Road / 5 m up to REMCO from the edge of the road / 1` | PASS |
+| 30 | `sch_X__tbl_4__row_14` | `table_row` | 77 | `14` | `1275x1651` | `117 / Ibrahim Saheb Street / 2 m from the edge of the road / 10` | PASS |
 
 ### Document: `ka-model-bbl-2017` (30 Stratified Nodes Verified Against Rendered Page Images)
 
 | # | `eid` | Type | Page | Native No. | Page Image Dim (px @ 150 DPI) | Excerpt Verified Against Rendered Page | Result |
 |---:|---|---|---:|---|---|---|---|
-| 1 | `app_VII__cl_3.12.1` | `clause` | 15 | `3.12.1` | `1240x1755` | `Signing the Building Plans.- All plans for submission to the Auth` | PASS |
-| 2 | `chp_11__cl_11.2__cl_11.2.3__note_1` | `note` | 58 | `—` | `1240x1755` | `‘Available roof space’ = 70% of total area of roof / terrace, con` | PASS |
-| 3 | `app_XIII__cl_1__note_1__note_1__note_1__note_1` | `note` | 115 | `—` | `1240x1755` | `4:` | PASS |
-| 4 | `chp_2_2__cl_15.07.2017__def_11` | `definition` | 129 | `(11)` | `1240x1755` | `‘Appendix’ means Appendix appended to these bye-laws.` | PASS |
-| 5 | `chp_2_2__cl_15.07.2017__def_29` | `definition` | 131 | `(29)` | `1240x1755` | `‘Chimney’ means a structure usually vertical containing a pa ssag` | PASS |
-| 6 | `chp_2_2__cl_15.07.2017__def_32` | `definition` | 131 | `(32)` | `1240x1755` | `‘Construction’ means; Any erection of a structure or a building, ` | PASS |
-| 7 | `chp_2_2__cl_15.07.2017__def_33` | `definition` | 131 | `(33)` | `1240x1755` | `‘Contractor’ means the agency executing the works of any of the c` | PASS |
-| 8 | `chp_2_2__cl_15.07.2017__def_47` | `definition` | 132 | `(47)` | `1240x1755` | `‘Duplex’ means a dwelling unit in two levels connected with an in` | PASS |
-| 9 | `chp_2_2__cl_15.07.2017__def_55` | `definition` | 132 | `(55)` | `1240x1755` | `‘First floor’ means the floor immediately above the ground floor ` | PASS |
-| 10 | `chp_2_2__cl_15.07.2017__def_85` | `definition` | 134 | `(85)` | `1240x1755` | `‘Heritage building’ means a building possessing architectural aes` | PASS |
-| 11 | `chp_5__cl_5.3__cl_5.3.2_2__cl_5.3.2.6__item_5` | `item` | 167 | `(5)` | `1240x1755` | `(6) (7) (8) 1 for up to 12 1 per 50 1 per 50 2 for 13 to 25 (Min ` | PASS |
-| 12 | `chp_12_3` | `chapter` | 169 | `CHAPTER 12` | `1240x1755` | `lifts shall have a vent at the top of area not less than 0.2Sq.m` | PASS |
-| 13 | `chp_6__cl_6.4__cl_6.4.6_2` | `clause` | 171 | `6.4.6` | `1240x1755` | `Compartmentation The building shall be suitably compartmentalized` | PASS |
-| 14 | `chp_12__cl_6.5__cl_6.5.4_2__item_h` | `item` | 172 | `(h)` | `1240x1755` | `Air ducts serving main floor areas, corridors, etc. shall not pas` | PASS |
-| 15 | `chp_9__cl_9.7__cl_9.7.5_2__item_e` | `item` | 182 | `(e)` | `1240x1755` | `Immediately in front of an entrance/exit and the la nding. 9.9 Dr` | PASS |
-| 16 | `chp_10_2__cl_3` | `clause` | 184 | `3` | `1240x1755` | `Set an example in the city by ensuring that Rai n water is harves` | PASS |
-| 17 | `chp_11__cl_11.2__cl_11.2.6_2` | `clause` | 187 | `11.2.6` | `1240x1755` | `Sustainability of Building Materials Sustainability of natural re` | PASS |
-| 18 | `part_4_5__cl_12.9__cl_12.9.1_2__item_l` | `item` | 190 | `(l)` | `1240x1755` | `Suitable arrangements such as providing slope in th e floor of th` | PASS |
-| 19 | `part_4_10__cl_12.29` | `clause` | 199 | `12.29` | `1240x1755` | `Fire prevention In addition to the measures recommended above, th` | PASS |
-| 20 | `ann_C_2__cl_3` | `clause` | 225 | `3` | `1240x1755` | `Water Storage Tanks (as notified by the Governm ent) Under Ground` | PASS |
-| 21 | `ann_C_2__cl_23` | `clause` | 225 | `23` | `1240x1755` | `Buildings above 15 m in height not to be permitted for Group H Gr` | PASS |
-| 22 | `app_II_2__item_a__item_b__item_c__item_d` | `item` | 229 | `(d)` | `1240x1755` | `Location / Alignment of sewerage system of ULB;` | PASS |
-| 23 | `app_VI_2__item_a__item_b__item_c__item_d__item_e__item_f__item_g__item_h__item_i__item_j__item_k__item_l__item_m` | `item` | 238 | `(m)` | `1240x1755` | `Photo and other identity proof of the applicant ;` | PASS |
-| 24 | `app_VIII_5__note_1` | `note` | 242 | `—` | `1240x1755` | `Additional time of 15 days shall be provided to the Environment c` | PASS |
-| 25 | `chp_5__cl_5.3__cl_5.3.2__cl_2__tbl_6` | `table` | 30 | `Table 6` | `1240x1755` | `Table 6` | PASS |
-| 26 | `chp_13__cl_13.2__tbl_1` | `table` | 73 | `Table 1` | `1240x1755` | `Table 1` | PASS |
-| 27 | `app_VIII_2__tbl_1__row_1` | `table_row` | 79 | `1` | `1240x1755` | `in all floors (Sq.m) / to 2000m 2 / 2000m 2` | PASS |
-| 28 | `chp_5__cl_5.3__cl_5.3.2_2__cl_5.3.2.3__cl_3_3__tbl_1__row_1` | `table_row` | 163 | `1` | `1240x1755` | `Over 400 add / Over 200 / 3 for 36 to 65 / 3 for 26 to 40` | PASS |
-| 29 | `chp_13_2__cl_13_2__tbl_3__row_4` | `table_row` | 203 | `4` | `1240x1755` | `Conservation Committee to be / Conservation Committee / Governmen` | PASS |
-| 30 | `chp_13_2__cl_13_2__tbl_4__row_3` | `table_row` | 203 | `3` | `1240x1755` | `shall be regulated and / grandeur of , or view from / grandeur of` | PASS |
+| 1 | `chp_2__item_2__item_3__item_ii__note_1` | `note` | 5 | `—` | `1240x1755` | `All unsafe buildings /structure will require be restoring by repa` | PASS |
+| 2 | `app_VII__cl_3.12.1` | `clause` | 15 | `3.12.1` | `1240x1755` | `Signing the Building Plans.- All plans for submission to the Auth` | PASS |
+| 3 | `app_VII__cl_3.13.1__item_j` | `item` | 16 | `(j)` | `1240x1755` | `Erection or re-erection of internal partitions (wit hin the speci` | PASS |
+| 4 | `chp_5__cl_5.3__cl_5.3.2__item_v__item_vii` | `item` | 33 | `(vii)` | `1240x1755` | `Showers/ As per requirements bathing rooms` | PASS |
+| 5 | `chp_6__cl_6.4__cl_6.4.3__item_5` | `item` | 41 | `(5)` | `1240x1755` | `Access to main staircase shall be gained throug h adequate fire r` | PASS |
+| 6 | `chp_13__cl_13.2__prov_1` | `proviso` | 72 | `—` | `1240x1755` | `Provided that before the list is so declared, objec tions and sug` | PASS |
+| 7 | `ann_C__cl_2__item_1__item_2__item_3__item_4__item_5__item_1__item_2__item_3__item_4__item_5__item_7__item_8__item_1__item_2__item_3` | `item` | 96 | `(3)` | `1240x1755` | `Jockey pump shall be selected to give minimum 3% an d maximum 5% ` | PASS |
+| 8 | `chp_2_2__cl_15.07.2017__def_3` | `definition` | 128 | `(3)` | `1240x1755` | `‘Addition and/or Alteration’‘Addition and/or Alteration’ ‘Additio` | PASS |
+| 9 | `chp_2_2__cl_15.07.2017__def_36` | `definition` | 131 | `(36)` | `1240x1755` | `‘Corridor’ means a Model passage or circulation space connect ing` | PASS |
+| 10 | `chp_2_2__cl_15.07.2017__def_39` | `definition` | 131 | `(39)` | `1240x1755` | `‘Cultural buildings’ means a building built by a Trust, Society, ` | PASS |
+| 11 | `chp_2_2__cl_15.07.2017__def_49` | `definition` | 132 | `(49)` | `1240x1755` | `‘Empanelled Professional’ means professionals such as Architects,` | PASS |
+| 12 | `chp_2_2__cl_15.07.2017__def_110` | `definition` | 135 | `(110)` | `1240x1755` | `‘Open space in a plot’ means an area forming an integral part of ` | PASS |
+| 13 | `chp_2_2__cl_15.07.2017__def_138` | `definition` | 137 | `(138)` | `1240x1755` | `‘Road Width or Width of Road/Street’ means the right of way/dista` | PASS |
+| 14 | `chp_2_2__cl_15.07.2017__def_147` | `definition` | 137 | `(147)` | `1240x1755` | `‘Staircase room’ means a room accommodating the stair and for pur` | PASS |
+| 15 | `chp_3_2` | `chapter` | 138 | `CHAPTER 3` | `1240x1755` | `CHAPTER 3 3. JURISDICTION, APPLICABILITY AND PROCEDURAL REQUIREM ` | PASS |
+| 16 | `chp_5_2__cl_5.1.4__cl_5.1.4.4` | `clause` | 148 | `5.1.4.4` | `1240x1755` | `No room containing water closets shall be used for any purpose ex` | PASS |
+| 17 | `chp_5__cl_5.3__cl_5.3.2_2__cl_5.3.2.3__item_b__item_vi` | `item` | 156 | `(vi)` | `1240x1755` | `Hostels` | PASS |
+| 18 | `chp_6__cl_6.4__cl_6.4.7_2` | `clause` | 171 | `6.4.7` | `1240x1755` | `Ramps Ramps shall be provided as prescribed in Clause 5.2.5` | PASS |
+| 19 | `chp_10_2__cl_3` | `clause` | 184 | `3` | `1240x1755` | `Set an example in the city by ensuring that Rai n water is harves` | PASS |
+| 20 | `part_4_10__cl_12.29` | `clause` | 199 | `12.29` | `1240x1755` | `Fire prevention In addition to the measures recommended above, th` | PASS |
+| 21 | `chp_13_2__cl_10_2` | `clause` | 201 | `10` | `1240x1755` | `Representative of two NGO’s in existence for more t han 3 years M` | PASS |
+| 22 | `chp_13_2__cl_13.12__prov_1` | `proviso` | 205 | `—` | `1240x1755` | `Provided that if the heritage building is not maint ained suitabl` | PASS |
+| 23 | `ann_C_2__cl_1` | `clause` | 225 | `1` | `1240x1755` | `Unless otherwise specified in Annexure B, water requirement for f` | PASS |
+| 24 | `app_I_2__item_1` | `item` | 226 | `(1)` | `1240x1755` | `The Stake holders shall register themselves with th e Authority b` | PASS |
+| 25 | `chp_5__cl_5.3__cl_5.3.2__cl_2_3__tbl_1__row_1` | `table_row` | 32 | `1` | `1240x1755` | `400 / 200 / 2 for 16 to 35 / 2 for 13 to 25` | PASS |
+| 26 | `chp_5__cl_5.3__cl_5.3.2__cl_4__tbl_1` | `table` | 33 | `Table 1` | `1240x1755` | `Table 1` | PASS |
+| 27 | `chp_5__cl_5.3__cl_5.3.2__cl_2_6__tbl_2__row_2` | `table_row` | 35 | `2` | `1240x1755` | `thereof / at 1 per 100 / 4 for 66 to 100 / 4 for 41 to 57` | PASS |
+| 28 | `chp_5__cl_5.3__cl_5.3.2__cl_2_6__tbl_3__row_2` | `table_row` | 36 | `2` | `1240x1755` | `thereof / or part thereof / 4 for 66 to / 4 for 41 to 57` | PASS |
+| 29 | `chp_5__cl_5.3__cl_5.3.2_2__cl_5.3.2.3__cl_2_8__tbl_1__row_1` | `table_row` | 162 | `1` | `1240x1755` | `(viii) / Kitchen sink / 1 per floor, Min.` | PASS |
+| 30 | `chp_14_2__cl_3.11_2__tbl_1` | `table` | 208 | `Table 1` | `1240x1755` | `Table 1` | PASS |
 
 ### Document: `rmp2015-zr` (30 Stratified Nodes Verified Against Rendered Page Images)
 

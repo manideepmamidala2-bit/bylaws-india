@@ -16398,7 +16398,7 @@
       "wrap_up": null,
       "children": [
         "part_II__sec_5.0__cl_5.6__item_a",
-        "part_II__sec_5.0__cl_5.6__def_b",
+        "part_II__sec_5.0__cl_5.6__item_b",
         "part_II__sec_5.0__cl_5.6__item_c",
         "part_II__sec_5.0__cl_5.6__cl_5.6.2"
       ],
@@ -16558,17 +16558,17 @@
       "verified_by": null
     },
     {
-      "eid": "part_II__sec_5.0__cl_5.6__def_b",
+      "eid": "part_II__sec_5.0__cl_5.6__item_b",
       "native_number": "(b)",
-      "type": "definition",
+      "type": "item",
       "heading": null,
       "intro": null,
       "content": "Physical inspection means the Authority shall find out whether the building has been constructed in all respects as per the sanctioned plan and requirement of building byelaws, and includes inspections by the Fire Service Department wherever necessary.",
       "wrap_up": null,
       "children": [],
       "parent_eid": "part_II__sec_5.0__cl_5.6",
-      "defines": "\"Physical inspection\"",
-      "defines_normalised": "physical inspection",
+      "defines": null,
+      "defines_normalised": null,
       "table_meta": null,
       "cells": null,
       "versions": [
@@ -16582,7 +16582,7 @@
           "wrap_up": null,
           "cells": null,
           "source_doc": "bbl-2003",
-          "source_eid": "part_II__sec_5.0__cl_5.6__def_b",
+          "source_eid": "part_II__sec_5.0__cl_5.6__item_b",
           "effect_id": null,
           "citations": [
             {
@@ -18718,13 +18718,13 @@
       "content": "Means of access.",
       "wrap_up": null,
       "children": [
-        "part_III__sec_8.0__def_8.1",
+        "part_III__sec_8.0__cl_8.1",
         "part_III__sec_8.0__cl_8.2",
         "part_III__sec_8.0__cl_8.3",
         "part_III__sec_8.0__cl_8.4",
-        "part_III__sec_8.0__def_8.5",
-        "part_III__sec_8.0__def_8.6",
-        "part_III__sec_8.0__def_8.7"
+        "part_III__sec_8.0__cl_8.5",
+        "part_III__sec_8.0__cl_8.6",
+        "part_III__sec_8.0__cl_8.7"
       ],
       "parent_eid": "part_III",
       "defines": null,
@@ -18799,17 +18799,17 @@
       "verified_by": null
     },
     {
-      "eid": "part_III__sec_8.0__def_8.1",
+      "eid": "part_III__sec_8.0__cl_8.1",
       "native_number": "8.1",
-      "type": "definition",
+      "type": "clause",
       "heading": "The means of exclusive access other than thorough public roads and streets, shall not be of more than 30 meters in length from a public road or street. The minimum width of such access shall be 3.5 meters. F.A.R. and height of buildings coming up on such plots connected by means of exclusive access shall be regulated according to the width of public street or road. If the means of access exceeds 30.00 mtrs in length, FAR shall be regulated with reference to the width of such access road. Construction of buildings on plots with common access / lanes from the public road / street shall be regulated according to the width of such common access roads / lanes.",
       "intro": null,
       "content": "The means of exclusive access other than thorough public roads and streets, shall not be of more than 30 meters in length from a public road or street. The minimum width of such access shall be 3.5 meters. F.A.R. and height of buildings coming up on such plots connected by means of exclusive access shall be regulated according to the width of public street or road. If the means of access exceeds 30.00 mtrs in length, FAR shall be regulated with reference to the width of such access road. Construction of buildings on plots with common access / lanes from the public road / street shall be regulated according to the width of such common access roads / lanes.",
       "wrap_up": null,
       "children": [],
       "parent_eid": "part_III__sec_8.0",
-      "defines": "\"The\"",
-      "defines_normalised": "the",
+      "defines": null,
+      "defines_normalised": null,
       "table_meta": null,
       "cells": null,
       "versions": [
@@ -18823,7 +18823,7 @@
           "wrap_up": null,
           "cells": null,
           "source_doc": "bbl-2003",
-          "source_eid": "part_III__sec_8.0__def_8.1",
+          "source_eid": "part_III__sec_8.0__cl_8.1",
           "effect_id": null,
           "citations": [
             {
@@ -19049,9 +19049,7 @@
       "intro": null,
       "content": "No person shall erect a building so as to encroach upon the means of access.",
       "wrap_up": null,
-      "children": [
-        "part_III__sec_8.0__cl_8.4__tbl_1"
-      ],
+      "children": [],
       "parent_eid": "part_III__sec_8.0",
       "defines": null,
       "defines_normalised": null,
@@ -19104,39 +19102,7 @@
       "order": 228,
       "text": "No person shall erect a building so as to encroach upon the means of access.",
       "language": "en",
-      "tables": [
-        {
-          "table_id": "bbl-2003:8.4:t1",
-          "caption": null,
-          "headers": [
-            "Sl. No.",
-            "Electrical Lines",
-            "Vertical clearance in Meters",
-            "Horizontal clearance in Meters"
-          ],
-          "rows": [
-            [
-              "a)",
-              "Low and medium voltage lines service lines upto 11 KV",
-              "2.5",
-              "1.2"
-            ],
-            [
-              "b)",
-              "High voltage lines upto and including 11 KV",
-              "3.7",
-              "1.2"
-            ],
-            [
-              "c)",
-              "High voltage line above 11 and upto and including 33 KV",
-              "3.7",
-              "2.0"
-            ]
-          ],
-          "page": 20
-        }
-      ],
+      "tables": [],
       "citations": [
         {
           "doc_id": "bbl-2003",
@@ -19157,17 +19123,17 @@
       "verified_by": null
     },
     {
-      "eid": "part_III__sec_8.0__def_8.5",
+      "eid": "part_III__sec_8.0__cl_8.5",
       "native_number": "8.5",
-      "type": "definition",
+      "type": "clause",
       "heading": "The means of access shall be clearly shown in the plans submitted indicating the width, length from the public road, width of the public road from which the access is taken etc.",
       "intro": null,
       "content": "The means of access shall be clearly shown in the plans submitted indicating the width, length from the public road, width of the public road from which the access is taken etc.",
       "wrap_up": null,
       "children": [],
       "parent_eid": "part_III__sec_8.0",
-      "defines": "\"The\"",
-      "defines_normalised": "the",
+      "defines": null,
+      "defines_normalised": null,
       "table_meta": null,
       "cells": null,
       "versions": [
@@ -19181,7 +19147,7 @@
           "wrap_up": null,
           "cells": null,
           "source_doc": "bbl-2003",
-          "source_eid": "part_III__sec_8.0__def_8.5",
+          "source_eid": "part_III__sec_8.0__cl_8.5",
           "effect_id": null,
           "citations": [
             {
@@ -19238,17 +19204,17 @@
       "verified_by": null
     },
     {
-      "eid": "part_III__sec_8.0__def_8.6",
+      "eid": "part_III__sec_8.0__cl_8.6",
       "native_number": "8.6",
-      "type": "definition",
+      "type": "clause",
       "heading": "Every such means of access shall be drained and lighted to the satisfaction of the Authority and manhole covers or other drainage, water or any other fittings, laid in such means of access shall flush with the finished surface level so as not to obstruct the safe movement.",
       "intro": null,
       "content": "Every such means of access shall be drained and lighted to the satisfaction of the Authority and manhole covers or other drainage, water or any other fittings, laid in such means of access shall flush with the finished surface level so as not to obstruct the safe movement.",
       "wrap_up": null,
       "children": [],
       "parent_eid": "part_III__sec_8.0",
-      "defines": "\"Every such\"",
-      "defines_normalised": "every such",
+      "defines": null,
+      "defines_normalised": null,
       "table_meta": null,
       "cells": null,
       "versions": [
@@ -19262,7 +19228,7 @@
           "wrap_up": null,
           "cells": null,
           "source_doc": "bbl-2003",
-          "source_eid": "part_III__sec_8.0__def_8.6",
+          "source_eid": "part_III__sec_8.0__cl_8.6",
           "effect_id": null,
           "citations": [
             {
@@ -19319,17 +19285,19 @@
       "verified_by": null
     },
     {
-      "eid": "part_III__sec_8.0__def_8.7",
+      "eid": "part_III__sec_8.0__cl_8.7",
       "native_number": "8.7",
-      "type": "definition",
+      "type": "clause",
       "heading": "The existing width of the means of access shall not be reduced in any case.",
       "intro": null,
       "content": "The existing width of the means of access shall not be reduced in any case.",
       "wrap_up": null,
-      "children": [],
+      "children": [
+        "part_III__sec_8.0__cl_8.7__tbl_1"
+      ],
       "parent_eid": "part_III__sec_8.0",
-      "defines": "\"The existing width of the\"",
-      "defines_normalised": "the existing width of the",
+      "defines": null,
+      "defines_normalised": null,
       "table_meta": null,
       "cells": null,
       "versions": [
@@ -19343,7 +19311,7 @@
           "wrap_up": null,
           "cells": null,
           "source_doc": "bbl-2003",
-          "source_eid": "part_III__sec_8.0__def_8.7",
+          "source_eid": "part_III__sec_8.0__cl_8.7",
           "effect_id": null,
           "citations": [
             {
@@ -19379,7 +19347,39 @@
       "order": 231,
       "text": "The existing width of the means of access shall not be reduced in any case.",
       "language": "en",
-      "tables": [],
+      "tables": [
+        {
+          "table_id": "bbl-2003:8.7:t1",
+          "caption": null,
+          "headers": [
+            "Sl. No.",
+            "Electrical Lines",
+            "Vertical clearance in Meters",
+            "Horizontal clearance in Meters"
+          ],
+          "rows": [
+            [
+              "a)",
+              "Low and medium voltage lines service lines upto 11 KV",
+              "2.5",
+              "1.2"
+            ],
+            [
+              "b)",
+              "High voltage lines upto and including 11 KV",
+              "3.7",
+              "1.2"
+            ],
+            [
+              "c)",
+              "High voltage line above 11 and upto and including 33 KV",
+              "3.7",
+              "2.0"
+            ]
+          ],
+          "page": 20
+        }
+      ],
       "citations": [
         {
           "doc_id": "bbl-2003",
@@ -26199,7 +26199,7 @@
         "part_III__sec_12.0__cl_12.1__item_i__item_iv",
         "part_III__sec_12.0__cl_12.1__item_i__item_v",
         "part_III__sec_12.0__cl_12.1__item_i__item_vi",
-        "part_III__sec_12.0__cl_12.1__item_i__def_vii"
+        "part_III__sec_12.0__cl_12.1__item_i__item_vii"
       ],
       "parent_eid": "part_III__sec_12.0__cl_12.1",
       "defines": null,
@@ -26679,17 +26679,17 @@
       "verified_by": null
     },
     {
-      "eid": "part_III__sec_12.0__cl_12.1__item_i__def_vii",
+      "eid": "part_III__sec_12.0__cl_12.1__item_i__item_vii",
       "native_number": "(vii)",
-      "type": "definition",
+      "type": "item",
       "heading": null,
       "intro": null,
       "content": "The means of access to the building blocks in the area of group housing shall be as follows: Access length in mtrs. Min. width",
       "wrap_up": null,
       "children": [],
       "parent_eid": "part_III__sec_12.0__cl_12.1__item_i",
-      "defines": "\"The\"",
-      "defines_normalised": "the",
+      "defines": null,
+      "defines_normalised": null,
       "table_meta": null,
       "cells": null,
       "versions": [
@@ -26703,7 +26703,7 @@
           "wrap_up": null,
           "cells": null,
           "source_doc": "bbl-2003",
-          "source_eid": "part_III__sec_12.0__cl_12.1__item_i__def_vii",
+          "source_eid": "part_III__sec_12.0__cl_12.1__item_i__item_vii",
           "effect_id": null,
           "citations": [
             {
@@ -29858,7 +29858,7 @@
         "part_III__sec_16.0__item_c",
         "part_III__sec_16.0__item_d",
         "part_III__sec_16.0__item_e",
-        "part_III__sec_16.0__def_f",
+        "part_III__sec_16.0__item_f",
         "part_III__sec_16.0__item_g",
         "part_III__sec_16.0__item_h",
         "part_III__sec_16.0__note_1"
@@ -30371,17 +30371,17 @@
       "verified_by": null
     },
     {
-      "eid": "part_III__sec_16.0__def_f",
+      "eid": "part_III__sec_16.0__item_f",
       "native_number": "(f)",
-      "type": "definition",
+      "type": "item",
       "heading": null,
       "intro": null,
       "content": "Alternate means of parking such as terrace parking, multi stage parking, parking silos may be permitted, subject to production of NOC's from the Authorities (in case of high rise buildings). In such cases, a clear height of 3.6 Meters in the basement floor has to be provided, and the space to be earmarked per unit of Car parking may be determined by the authority.",
       "wrap_up": null,
       "children": [],
       "parent_eid": "part_III__sec_16.0",
-      "defines": "\"Alternate\"",
-      "defines_normalised": "alternate",
+      "defines": null,
+      "defines_normalised": null,
       "table_meta": null,
       "cells": null,
       "versions": [
@@ -30395,7 +30395,7 @@
           "wrap_up": null,
           "cells": null,
           "source_doc": "bbl-2003",
-          "source_eid": "part_III__sec_16.0__def_f",
+          "source_eid": "part_III__sec_16.0__item_f",
           "effect_id": null,
           "citations": [
             {
@@ -37691,7 +37691,7 @@
         "part_III__sec_21.0__cl_21.1__cl_21.1.6",
         "part_III__sec_21.0__cl_21.1__cl_21.1.7",
         "part_III__sec_21.0__cl_21.1__cl_21.1.8",
-        "part_III__sec_21.0__cl_21.1__def_21.1.9",
+        "part_III__sec_21.0__cl_21.1__cl_21.1.9",
         "part_III__sec_21.0__cl_21.1__cl_21.1.10"
       ],
       "parent_eid": "part_III__sec_21.0",
@@ -38415,17 +38415,17 @@
       "verified_by": null
     },
     {
-      "eid": "part_III__sec_21.0__cl_21.1__def_21.1.9",
+      "eid": "part_III__sec_21.0__cl_21.1__cl_21.1.9",
       "native_number": "21.1.9",
-      "type": "definition",
+      "type": "clause",
       "heading": "All exits shall provide continuous means of egress to the exterior of buildings or to the exterior open space leading to a street.",
       "intro": null,
       "content": "All exits shall provide continuous means of egress to the exterior of buildings or to the exterior open space leading to a street.",
       "wrap_up": null,
       "children": [],
       "parent_eid": "part_III__sec_21.0__cl_21.1",
-      "defines": "\"All exits shall provide continuous\"",
-      "defines_normalised": "all exits shall provide continuous",
+      "defines": null,
+      "defines_normalised": null,
       "table_meta": null,
       "cells": null,
       "versions": [
@@ -38439,7 +38439,7 @@
           "wrap_up": null,
           "cells": null,
           "source_doc": "bbl-2003",
-          "source_eid": "part_III__sec_21.0__cl_21.1__def_21.1.9",
+          "source_eid": "part_III__sec_21.0__cl_21.1__cl_21.1.9",
           "effect_id": null,
           "citations": [
             {
@@ -63252,7 +63252,7 @@
       "verified_by": null
     },
     {
-      "eid": "part_III__sec_8.0__cl_8.4__tbl_1",
+      "eid": "part_III__sec_8.0__cl_8.7__tbl_1",
       "native_number": "Table 1",
       "type": "table",
       "heading": "Table 1",
@@ -63260,11 +63260,11 @@
       "content": "Table 1",
       "wrap_up": null,
       "children": [
-        "part_III__sec_8.0__cl_8.4__tbl_1__row_1",
-        "part_III__sec_8.0__cl_8.4__tbl_1__row_2",
-        "part_III__sec_8.0__cl_8.4__tbl_1__row_3"
+        "part_III__sec_8.0__cl_8.7__tbl_1__row_1",
+        "part_III__sec_8.0__cl_8.7__tbl_1__row_2",
+        "part_III__sec_8.0__cl_8.7__tbl_1__row_3"
       ],
-      "parent_eid": "part_III__sec_8.0__cl_8.4",
+      "parent_eid": "part_III__sec_8.0__cl_8.7",
       "defines": null,
       "defines_normalised": null,
       "table_meta": {
@@ -63287,9 +63287,9 @@
           }
         ],
         "rows": [
-          "part_III__sec_8.0__cl_8.4__tbl_1__row_1",
-          "part_III__sec_8.0__cl_8.4__tbl_1__row_2",
-          "part_III__sec_8.0__cl_8.4__tbl_1__row_3"
+          "part_III__sec_8.0__cl_8.7__tbl_1__row_1",
+          "part_III__sec_8.0__cl_8.7__tbl_1__row_2",
+          "part_III__sec_8.0__cl_8.7__tbl_1__row_3"
         ],
         "footnotes": [],
         "extraction": "complete",
@@ -63308,7 +63308,7 @@
           "wrap_up": null,
           "cells": null,
           "source_doc": "bbl-2003",
-          "source_eid": "part_III__sec_8.0__cl_8.4__tbl_1",
+          "source_eid": "part_III__sec_8.0__cl_8.7__tbl_1",
           "effect_id": null,
           "citations": [
             {
@@ -63316,9 +63316,9 @@
               "page": 20,
               "bbox": [
                 0.1471,
-                0.7102,
-                0.7724,
-                0.7214
+                0.8497,
+                0.7572,
+                0.8609
               ],
               "text_excerpt": "Electrical Lines Vertical clearance in Meters Horizontal clearance in Meters"
             }
@@ -63327,9 +63327,9 @@
           "omitted": false
         }
       ],
-      "clause_id": "bbl-2003:part_III__sec_8.0__cl_8.4__tbl_1",
+      "clause_id": "bbl-2003:part_III__sec_8.0__cl_8.7__tbl_1",
       "record_version": 1,
-      "record_id": "bbl-2003:part_III__sec_8.0__cl_8.4__tbl_1@v1",
+      "record_id": "bbl-2003:part_III__sec_8.0__cl_8.7__tbl_1@v1",
       "record_supersedes": null,
       "record_superseded_by": null,
       "record_change_reason": null,
@@ -63337,10 +63337,10 @@
       "superseded_by": null,
       "legal_status": "in_force",
       "effective_from": "2004-06-05",
-      "number": "part_III__sec_8.0__cl_8.4__tbl_1",
+      "number": "part_III__sec_8.0__cl_8.7__tbl_1",
       "title": "Table 1",
       "level": 4,
-      "parent_id": "bbl-2003:8.4",
+      "parent_id": "bbl-2003:8.7",
       "order": 725,
       "text": "Table 1",
       "language": "en",
@@ -63351,9 +63351,9 @@
           "page": 20,
           "bbox": [
             0.1471,
-            0.7102,
-            0.7724,
-            0.7214
+            0.8497,
+            0.7572,
+            0.8609
           ],
           "text_excerpt": "Electrical Lines Vertical clearance in Meters Horizontal clearance in Meters"
         }
@@ -63365,7 +63365,7 @@
       "verified_by": null
     },
     {
-      "eid": "part_III__sec_8.0__cl_8.4__tbl_1__row_1",
+      "eid": "part_III__sec_8.0__cl_8.7__tbl_1__row_1",
       "native_number": "1",
       "type": "table_row",
       "heading": null,
@@ -63373,7 +63373,7 @@
       "content": "a) | Low and medium voltage lines service lines upto 11 KV | 2.5 | 1.2",
       "wrap_up": null,
       "children": [],
-      "parent_eid": "part_III__sec_8.0__cl_8.4__tbl_1",
+      "parent_eid": "part_III__sec_8.0__cl_8.7__tbl_1",
       "defines": null,
       "defines_normalised": null,
       "table_meta": null,
@@ -63399,7 +63399,7 @@
             "1.2"
           ],
           "source_doc": "bbl-2003",
-          "source_eid": "part_III__sec_8.0__cl_8.4__tbl_1__row_1",
+          "source_eid": "part_III__sec_8.0__cl_8.7__tbl_1__row_1",
           "effect_id": null,
           "citations": [
             {
@@ -63407,9 +63407,9 @@
               "page": 20,
               "bbox": [
                 0.1471,
-                0.7102,
-                0.7724,
-                0.7214
+                0.8497,
+                0.7572,
+                0.8609
               ],
               "text_excerpt": "Electrical Lines Vertical clearance in Meters Horizontal clearance in Meters"
             }
@@ -63418,9 +63418,9 @@
           "omitted": false
         }
       ],
-      "clause_id": "bbl-2003:part_III__sec_8.0__cl_8.4__tbl_1__row_1",
+      "clause_id": "bbl-2003:part_III__sec_8.0__cl_8.7__tbl_1__row_1",
       "record_version": 1,
-      "record_id": "bbl-2003:part_III__sec_8.0__cl_8.4__tbl_1__row_1@v1",
+      "record_id": "bbl-2003:part_III__sec_8.0__cl_8.7__tbl_1__row_1@v1",
       "record_supersedes": null,
       "record_superseded_by": null,
       "record_change_reason": null,
@@ -63428,10 +63428,10 @@
       "superseded_by": null,
       "legal_status": "in_force",
       "effective_from": "2004-06-05",
-      "number": "part_III__sec_8.0__cl_8.4__tbl_1__row_1",
+      "number": "part_III__sec_8.0__cl_8.7__tbl_1__row_1",
       "title": "Row 1",
       "level": 5,
-      "parent_id": "bbl-2003:part_III__sec_8.0__cl_8.4__tbl_1",
+      "parent_id": "bbl-2003:part_III__sec_8.0__cl_8.7__tbl_1",
       "order": 726,
       "text": "a) | Low and medium voltage lines service lines upto 11 KV | 2.5 | 1.2",
       "language": "en",
@@ -63442,9 +63442,9 @@
           "page": 20,
           "bbox": [
             0.1471,
-            0.7102,
-            0.7724,
-            0.7214
+            0.8497,
+            0.7572,
+            0.8609
           ],
           "text_excerpt": "Electrical Lines Vertical clearance in Meters Horizontal clearance in Meters"
         }
@@ -63456,7 +63456,7 @@
       "verified_by": null
     },
     {
-      "eid": "part_III__sec_8.0__cl_8.4__tbl_1__row_2",
+      "eid": "part_III__sec_8.0__cl_8.7__tbl_1__row_2",
       "native_number": "2",
       "type": "table_row",
       "heading": null,
@@ -63464,7 +63464,7 @@
       "content": "b) | High voltage lines upto and including 11 KV | 3.7 | 1.2",
       "wrap_up": null,
       "children": [],
-      "parent_eid": "part_III__sec_8.0__cl_8.4__tbl_1",
+      "parent_eid": "part_III__sec_8.0__cl_8.7__tbl_1",
       "defines": null,
       "defines_normalised": null,
       "table_meta": null,
@@ -63490,7 +63490,7 @@
             "1.2"
           ],
           "source_doc": "bbl-2003",
-          "source_eid": "part_III__sec_8.0__cl_8.4__tbl_1__row_2",
+          "source_eid": "part_III__sec_8.0__cl_8.7__tbl_1__row_2",
           "effect_id": null,
           "citations": [
             {
@@ -63498,9 +63498,9 @@
               "page": 20,
               "bbox": [
                 0.1471,
-                0.7102,
-                0.7724,
-                0.7214
+                0.8497,
+                0.7572,
+                0.8609
               ],
               "text_excerpt": "Electrical Lines Vertical clearance in Meters Horizontal clearance in Meters"
             }
@@ -63509,9 +63509,9 @@
           "omitted": false
         }
       ],
-      "clause_id": "bbl-2003:part_III__sec_8.0__cl_8.4__tbl_1__row_2",
+      "clause_id": "bbl-2003:part_III__sec_8.0__cl_8.7__tbl_1__row_2",
       "record_version": 1,
-      "record_id": "bbl-2003:part_III__sec_8.0__cl_8.4__tbl_1__row_2@v1",
+      "record_id": "bbl-2003:part_III__sec_8.0__cl_8.7__tbl_1__row_2@v1",
       "record_supersedes": null,
       "record_superseded_by": null,
       "record_change_reason": null,
@@ -63519,10 +63519,10 @@
       "superseded_by": null,
       "legal_status": "in_force",
       "effective_from": "2004-06-05",
-      "number": "part_III__sec_8.0__cl_8.4__tbl_1__row_2",
+      "number": "part_III__sec_8.0__cl_8.7__tbl_1__row_2",
       "title": "Row 2",
       "level": 5,
-      "parent_id": "bbl-2003:part_III__sec_8.0__cl_8.4__tbl_1",
+      "parent_id": "bbl-2003:part_III__sec_8.0__cl_8.7__tbl_1",
       "order": 727,
       "text": "b) | High voltage lines upto and including 11 KV | 3.7 | 1.2",
       "language": "en",
@@ -63533,9 +63533,9 @@
           "page": 20,
           "bbox": [
             0.1471,
-            0.7102,
-            0.7724,
-            0.7214
+            0.8497,
+            0.7572,
+            0.8609
           ],
           "text_excerpt": "Electrical Lines Vertical clearance in Meters Horizontal clearance in Meters"
         }
@@ -63547,7 +63547,7 @@
       "verified_by": null
     },
     {
-      "eid": "part_III__sec_8.0__cl_8.4__tbl_1__row_3",
+      "eid": "part_III__sec_8.0__cl_8.7__tbl_1__row_3",
       "native_number": "3",
       "type": "table_row",
       "heading": null,
@@ -63555,7 +63555,7 @@
       "content": "c) | High voltage line above 11 and upto and including 33 KV | 3.7 | 2.0",
       "wrap_up": null,
       "children": [],
-      "parent_eid": "part_III__sec_8.0__cl_8.4__tbl_1",
+      "parent_eid": "part_III__sec_8.0__cl_8.7__tbl_1",
       "defines": null,
       "defines_normalised": null,
       "table_meta": null,
@@ -63581,7 +63581,7 @@
             "2.0"
           ],
           "source_doc": "bbl-2003",
-          "source_eid": "part_III__sec_8.0__cl_8.4__tbl_1__row_3",
+          "source_eid": "part_III__sec_8.0__cl_8.7__tbl_1__row_3",
           "effect_id": null,
           "citations": [
             {
@@ -63589,9 +63589,9 @@
               "page": 20,
               "bbox": [
                 0.1471,
-                0.7102,
-                0.7724,
-                0.7214
+                0.8497,
+                0.7572,
+                0.8609
               ],
               "text_excerpt": "Electrical Lines Vertical clearance in Meters Horizontal clearance in Meters"
             }
@@ -63600,9 +63600,9 @@
           "omitted": false
         }
       ],
-      "clause_id": "bbl-2003:part_III__sec_8.0__cl_8.4__tbl_1__row_3",
+      "clause_id": "bbl-2003:part_III__sec_8.0__cl_8.7__tbl_1__row_3",
       "record_version": 1,
-      "record_id": "bbl-2003:part_III__sec_8.0__cl_8.4__tbl_1__row_3@v1",
+      "record_id": "bbl-2003:part_III__sec_8.0__cl_8.7__tbl_1__row_3@v1",
       "record_supersedes": null,
       "record_superseded_by": null,
       "record_change_reason": null,
@@ -63610,10 +63610,10 @@
       "superseded_by": null,
       "legal_status": "in_force",
       "effective_from": "2004-06-05",
-      "number": "part_III__sec_8.0__cl_8.4__tbl_1__row_3",
+      "number": "part_III__sec_8.0__cl_8.7__tbl_1__row_3",
       "title": "Row 3",
       "level": 5,
-      "parent_id": "bbl-2003:part_III__sec_8.0__cl_8.4__tbl_1",
+      "parent_id": "bbl-2003:part_III__sec_8.0__cl_8.7__tbl_1",
       "order": 728,
       "text": "c) | High voltage line above 11 and upto and including 33 KV | 3.7 | 2.0",
       "language": "en",
@@ -63624,9 +63624,9 @@
           "page": 20,
           "bbox": [
             0.1471,
-            0.7102,
-            0.7724,
-            0.7214
+            0.8497,
+            0.7572,
+            0.8609
           ],
           "text_excerpt": "Electrical Lines Vertical clearance in Meters Horizontal clearance in Meters"
         }

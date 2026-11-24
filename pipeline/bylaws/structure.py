@@ -167,6 +167,67 @@ def _detect_language(text: str) -> str:
     return "kn" if KANNADA_CHAR_RE.search(text) else "en"
 
 
+STOPWORD_DEFINED_TERMS: frozenset[str] = frozenset(
+    {
+        "a",
+        "an",
+        "the",
+        "in",
+        "of",
+        "to",
+        "for",
+        "and",
+        "or",
+        "by",
+        "on",
+        "at",
+        "as",
+        "is",
+        "be",
+        "it",
+        "that",
+        "this",
+        "with",
+        "from",
+        "all",
+        "any",
+        "no",
+        "not",
+        "such",
+        "every",
+        "each",
+        "other",
+        "under",
+        "within",
+        "where",
+        "when",
+        "which",
+        "who",
+        "note",
+        "explanation",
+        "provided",
+        "section",
+        "clause",
+        "chapter",
+        "part",
+        "schedule",
+        "table",
+    }
+)
+
+
+def _is_valid_defined_term(raw_term: str) -> bool:
+    cleaned = raw_term.strip().strip("'\"\u2018\u2019\u201c\u201d()[]{}:;.,-–— ")
+    if len(cleaned) < 2:
+        return False
+    norm = " ".join(cleaned.lower().split())
+    if norm in STOPWORD_DEFINED_TERMS:
+        return False
+    if not any(ch.isalpha() for ch in norm):
+        return False
+    return not norm.isdigit()
+
+
 def _extract_defined_term(
     text: str,
     heading: str | None = None,
@@ -178,23 +239,25 @@ def _extract_defined_term(
     if m:
         if m.group("term"):
             raw_term = m.group("term").strip()
-            return f'"{raw_term}"', raw_term.lower()
-        if m.group("bare_term"):
+            if _is_valid_defined_term(raw_term):
+                return f'"{raw_term}"', " ".join(raw_term.lower().split())
+        if in_definitions_section and m.group("bare_term"):
             raw_term = m.group("bare_term").strip()
             if heading and raw_term.lower().startswith(heading.lower()):
                 raw_term = raw_term[len(heading) :].strip(": ") or raw_term
-            return f'"{raw_term}"', raw_term.lower()
+            if _is_valid_defined_term(raw_term):
+                return f'"{raw_term}"', " ".join(raw_term.lower().split())
 
     if in_definitions_section:
         mq = LEADING_QUOTED_TERM_RE.match(text.strip())
         if mq:
             raw_term = mq.group("term").strip()
-            if raw_term:
-                return f'"{raw_term}"', raw_term.lower()
+            if _is_valid_defined_term(raw_term):
+                return f'"{raw_term}"', " ".join(raw_term.lower().split())
         if heading and heading.strip() and heading.strip() != text.strip():
             raw_term = heading.strip().strip(":-–— ")
-            if 1 <= len(raw_term.split()) <= 8 and any(ch.isalpha() for ch in raw_term):
-                return f'"{raw_term}"', raw_term.lower()
+            if 1 <= len(raw_term.split()) <= 6 and _is_valid_defined_term(raw_term):
+                return f'"{raw_term}"', " ".join(raw_term.lower().split())
 
     return None
 

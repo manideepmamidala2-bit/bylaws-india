@@ -15,6 +15,8 @@ interface DocumentPageProps {
   params: Promise<{ id: string; doc: string }>;
 }
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const manifest = await fetchManifest();
   const paramsList: Array<{ id: string; doc: string }> = [];
@@ -85,7 +87,31 @@ export default async function DocumentViewerPage({
   }
 
   const isReferenceOnly = docMeta.text_rights?.mode === "reference_only";
-  const docClauses = clauses.filter((c) => c.doc_id === doc);
+  const docClauses: ClauseNode[] = clauses
+    .filter((c) => c.doc_id === doc)
+    .map((c) => ({
+      ...c,
+      title: c.title === c.heading ? null : c.title,
+      content: !c.intro && !c.wrap_up && c.content === c.text ? null : c.content,
+      citations: (c.citations ?? []).slice(0, 1).map((cit) => ({
+        doc_id: cit.doc_id,
+        page: cit.page,
+        bbox: null,
+        text_excerpt: "",
+      })),
+      versions:
+        (c.versions?.length ?? 0) > 1 || c.versions?.[0]?.effect_id
+          ? c.versions
+          : undefined,
+    }));
+  const rawDocAnns = annotationsByDocId[doc] ?? [];
+  const annCountByEid = new Map<string, number>();
+  const slimDocAnns = rawDocAnns.filter((ann) => {
+    const cnt = annCountByEid.get(ann.target.eid) ?? 0;
+    if (cnt >= 4) return false;
+    annCountByEid.set(ann.target.eid, cnt + 1);
+    return true;
+  });
   const docConsolidated = (consolidated?.records ?? []).filter(
     (r) => r.doc_id === doc
   );
@@ -93,10 +119,17 @@ export default async function DocumentViewerPage({
     (u) => u.doc_id === doc
   );
 
+  const referencedAmendingIds = new Set(
+    amendments.links.map((l) => l.amending_clause)
+  );
   const allClausesLookup: Record<string, ClauseNode> = {};
   for (const c of clauses) {
-    if (!c.superseded_by && !c.record_superseded_by) {
-      allClausesLookup[c.clause_id] = c;
+    if (
+      !c.superseded_by &&
+      !c.record_superseded_by &&
+      referencedAmendingIds.has(c.clause_id)
+    ) {
+      allClausesLookup[c.clause_id] = { ...c, versions: undefined };
     }
   }
 
@@ -312,7 +345,7 @@ export default async function DocumentViewerPage({
           <ClauseTree
             jurisdictionId={jurisdiction.id}
             clauses={docClauses}
-            annotations={annotationsByDocId[doc] ?? []}
+            annotations={slimDocAnns}
             amendmentEffects={(amendments.effects ?? []).filter(
               (e) => e.target_doc === doc
             )}
