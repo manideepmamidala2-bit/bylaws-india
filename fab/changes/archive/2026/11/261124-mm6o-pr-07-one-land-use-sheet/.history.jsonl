@@ -1,0 +1,13 @@
+{"action":"enter","driver":"fab-new","event":"stage-transition","stage":"intake","ts":"2026-11-24T14:15:10Z"}
+{"args":"Implement PR 07 (One Land-Use Sheet) per docs/plans/pr-series/00-overview.md and docs/plans/pr-series/07-one-land-use-sheet.md","cmd":"fab-new","event":"command","ts":"2026-11-24T14:15:10Z"}
+{"delta":"+5.0","event":"confidence","score":5,"trigger":"calc-score","ts":"2026-11-24T14:16:03Z"}
+{"cmd":"fab-fff","event":"command","ts":"2026-11-24T14:17:38Z"}
+{"action":"enter","driver":"/fab-fff","event":"stage-transition","stage":"apply","ts":"2026-11-24T14:17:38Z"}
+{"action":"enter","driver":"/fab-fff","event":"stage-transition","stage":"review","ts":"2026-11-24T15:23:16Z"}
+{"event":"review","result":"failed","ts":"2026-11-24T15:30:38Z"}
+{"action":"re-entry","driver":"/fab-fff","event":"stage-transition","stage":"apply","ts":"2026-11-24T15:30:38Z"}
+{"action":"re-entry","driver":"/fab-fff","event":"stage-transition","stage":"review","ts":"2026-11-24T15:34:46Z"}
+{"action":"enter","driver":"/fab-fff","event":"stage-transition","stage":"hydrate","ts":"2026-11-24T15:42:08Z"}
+{"event":"review","result":"passed","ts":"2026-11-24T15:42:08Z"}
+{"action":"enter","driver":"/fab-fff","event":"stage-transition","stage":"ship","ts":"2026-11-24T15:42:08Z"}
+{"cmd":"fab-archive","event":"command","ts":"2026-11-24T15:48:06Z"}
