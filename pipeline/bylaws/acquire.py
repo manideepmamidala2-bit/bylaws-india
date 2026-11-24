@@ -86,7 +86,7 @@ def _inspect_pdf(pdf_path: Path) -> tuple[int, bool]:
         for idx in range(page_count):
             page = doc[idx]
             textpage = page.get_textpage()
-            total_chars += len(textpage.get_text_range().strip())
+            total_chars += len(textpage.get_text_bounded().strip())
             textpage.close()
             page.close()
         is_scanned = total_chars == 0
@@ -137,36 +137,62 @@ def _acquire_single_document(
     )
 
     if not is_ref_only:
-        raw_bytes, fetched_retrieval = resolve_local_or_remote_bytes(
-            doc.source_url,
-            repo_root,
-            allow_local=is_test_jurisdiction,
-        )
-        if fetched_retrieval is not None:
-            retrieval_record = fetched_retrieval
-            retrieved_at = str(fetched_retrieval["fetched_at"])
-
-        sha256_hex = hashlib.sha256(raw_bytes).hexdigest()
-        byte_count = len(raw_bytes)
         pdf_path = raw_dir / f"{doc.id}.pdf"
+        existing_meta: dict[str, Any] | None = None
+        if meta_path.is_file():
+            existing_meta = json.loads(meta_path.read_text(encoding="utf-8"))
+            if retrieval_record is None and isinstance(existing_meta.get("retrieval"), dict):
+                retrieval_record = existing_meta["retrieval"]
 
-        if pdf_path.is_file():
-            existing_sha = hashlib.sha256(pdf_path.read_bytes()).hexdigest()
-            if existing_sha != sha256_hex:
-                raise click.ClickException(
-                    f"Rule R5 violation: existing raw file '{pdf_path}' SHA-256 "
-                    f"({existing_sha}) does not match source ({sha256_hex})."
-                )
-            if meta_path.is_file():
-                existing_meta = json.loads(meta_path.read_text(encoding="utf-8"))
-                if existing_meta.get("sha256") != existing_sha:
+        if pdf_path.is_file() and (is_test_jurisdiction or retrieval_record is not None):
+            raw_bytes = pdf_path.read_bytes()
+            sha256_hex = hashlib.sha256(raw_bytes).hexdigest()
+            byte_count = len(raw_bytes)
+            if retrieval_record is not None:
+                expected_sha = retrieval_record.get("sha256")
+                if expected_sha and expected_sha != sha256_hex:
+                    raise click.ClickException(
+                        f"Rule R5 violation: existing raw file '{pdf_path}' SHA-256 "
+                        f"({sha256_hex}) does not match retrieval record ({expected_sha})."
+                    )
+                if isinstance(retrieval_record.get("fetched_at"), str):
+                    retrieved_at = str(retrieval_record["fetched_at"])
+            if existing_meta is not None:
+                if existing_meta.get("sha256") and existing_meta.get("sha256") != sha256_hex:
                     raise click.ClickException(
                         f"Rule R5 violation: '{meta_path}' sha256 does not match '{pdf_path}'."
                     )
                 if isinstance(existing_meta.get("retrieved_at"), str):
                     retrieved_at = existing_meta["retrieved_at"]
         else:
-            pdf_path.write_bytes(raw_bytes)
+            raw_bytes, fetched_retrieval = resolve_local_or_remote_bytes(
+                doc.source_url,
+                repo_root,
+                allow_local=is_test_jurisdiction,
+            )
+            if fetched_retrieval is not None:
+                if (
+                    retrieval_record is not None
+                    and retrieval_record.get("archive_url")
+                    and not fetched_retrieval.get("archive_url")
+                ):
+                    fetched_retrieval["archive_url"] = retrieval_record["archive_url"]
+                    fetched_retrieval["archive_failure_reason"] = None
+                retrieval_record = fetched_retrieval
+                retrieved_at = str(fetched_retrieval["fetched_at"])
+
+            sha256_hex = hashlib.sha256(raw_bytes).hexdigest()
+            byte_count = len(raw_bytes)
+
+            if pdf_path.is_file():
+                existing_sha = hashlib.sha256(pdf_path.read_bytes()).hexdigest()
+                if existing_sha != sha256_hex:
+                    raise click.ClickException(
+                        f"Rule R5 violation: existing raw file '{pdf_path}' SHA-256 "
+                        f"({existing_sha}) does not match source ({sha256_hex})."
+                    )
+            else:
+                pdf_path.write_bytes(raw_bytes)
 
         if not is_test_jurisdiction:
             assert_pdf_not_denylisted(pdf_path, load_pdf_denylist(repo_root))
@@ -246,6 +272,66 @@ def _acquire_single_document(
     return meta_payload
 
 
+def _build_unacquired_document_payload(doc: DocumentConfig) -> dict[str, Any]:
+    """Build a schema-valid `DocumentMetadata` record for a `pending` or `not_found` document."""
+    acq_status = getattr(doc, "acquisition_status", None) or "pending"
+    evidence_payload: dict[str, Any] = {
+        "url": doc.status_evidence.url,
+    }
+    if doc.status_evidence.quoted_line is not None:
+        evidence_payload["quoted_line"] = doc.status_evidence.quoted_line
+    if doc.status_evidence.description is not None:
+        evidence_payload["description"] = doc.status_evidence.description
+
+    payload: dict[str, Any] = {
+        "schema_version": "1.3",
+        "doc_id": doc.id,
+        "title": doc.title,
+        "issuing_authority": doc.issuing_authority,
+        "layer": doc.layer,
+        "role": _resolve_doc_role(doc),
+        "legal_status": doc.legal_status,
+        "acquisition_status": acq_status,
+        "status_evidence": evidence_payload,
+        "licence_or_terms": doc.licence_or_terms,
+        "notified_date": doc.notified_date,
+        "effective_from": doc.effective_from,
+        "amends": list(doc.amends or []),
+        "supersedes": list(doc.supersedes or []),
+        "source_url": doc.source_url,
+        "retrieved_at": get_deterministic_timestamp(),
+        "sha256": None,
+        "bytes": None,
+        "page_count": None,
+        "is_scanned": None,
+    }
+    if doc.doc_type is not None:
+        payload["doc_type"] = doc.doc_type
+    if doc.notification_number is not None:
+        payload["notification_number"] = doc.notification_number
+    if doc.gazette_reference is not None:
+        payload["gazette_reference"] = doc.gazette_reference
+    if doc.superseded_by_document is not None:
+        payload["superseded_by_document"] = doc.superseded_by_document
+    if doc.text_rights is not None:
+        payload["text_rights"] = {
+            "mode": doc.text_rights.mode,
+            "reason": doc.text_rights.reason,
+        }
+    if doc.languages is not None:
+        payload["languages"] = list(doc.languages)
+    if doc.official_url is not None:
+        payload["official_url"] = doc.official_url
+    if doc.mirror_urls is not None:
+        payload["mirror_urls"] = list(doc.mirror_urls)
+    if doc.cited_provisions is not None:
+        payload["cited_provisions"] = [
+            cp.model_dump(exclude_none=True) for cp in doc.cited_provisions
+        ]
+    validate_payload(payload, "document", source=f"register:{doc.id}")
+    return payload
+
+
 def run_acquire(config: JurisdictionConfig, *, repo_root: Path | None = None) -> None:
     """Acquire documents and boundary files for a validated jurisdiction config."""
     root = repo_root or resolve_repo_root()
@@ -256,6 +342,7 @@ def run_acquire(config: JurisdictionConfig, *, repo_root: Path | None = None) ->
 
     is_test_jur = config.visibility == "test"
     acquired_count = 0
+    register_entries: list[dict[str, Any]] = []
     for doc in config.documents:
         res = _acquire_single_document(
             doc,
@@ -265,6 +352,19 @@ def run_acquire(config: JurisdictionConfig, *, repo_root: Path | None = None) ->
         )
         if res is not None:
             acquired_count += 1
+            register_entries.append(res)
+        else:
+            register_entries.append(_build_unacquired_document_payload(doc))
+
+    public_data_dir = root / "public" / "data"
+    if not is_test_jur and public_data_dir.is_dir():
+        reg_dir = public_data_dir / config.id / "register"
+        reg_dir.mkdir(parents=True, exist_ok=True)
+        reg_file = reg_dir / "documents.json"
+        reg_file.write_text(
+            json.dumps(register_entries, indent=2) + "\n",
+            encoding="utf-8",
+        )
 
     all_boundary_features: list[dict[str, Any]] = []
     for boundary_cfg in config.maps.boundaries:

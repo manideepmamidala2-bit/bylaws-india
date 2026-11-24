@@ -135,6 +135,8 @@ export function SourcesFilterClient({
           const hasStructuredPage =
             structuredSet.has(doc.doc_id) || isRefOnly;
           const originUrl = doc.official_url || doc.source_url;
+          const archiveUrl = doc.retrieval?.archive_url ?? null;
+          const acqStatus = doc.acquisition_status ?? "acquired";
 
           return (
             <article key={doc.doc_id} className="p-5">
@@ -160,6 +162,14 @@ export function SourcesFilterClient({
                 </div>
 
                 <div className="flex flex-wrap items-center gap-2">
+                  <span className="border border-[#080909] bg-[#efeee8] px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#080909]">
+                    {acqStatus.replace("_", " ")}
+                  </span>
+                  {!hasStructuredPage && (
+                    <span className="border border-[#080909] bg-[#f5f3ed] px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#5b5e56]">
+                      Not yet structured
+                    </span>
+                  )}
                   <span className="border border-[#080909] bg-[#efeee8] px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#080909]">
                     {isRefOnly ? "REFERENCE ONLY" : "FULL TEXT"}
                   </span>
@@ -195,11 +205,13 @@ export function SourcesFilterClient({
                   <dt className="dg-mono text-[10px]">SHA-256 Checksum</dt>
                   <dd
                     className="truncate font-mono text-[11px] text-[#5b5e56]"
-                    title={doc.sha256 ?? "Reference-only external standard"}
+                    title={doc.sha256 ?? "Reference-only or unacquired source"}
                   >
                     {doc.sha256
                       ? `${doc.sha256.slice(0, 16)}…`
-                      : "External reference (no file)"}
+                      : acqStatus === "not_found"
+                        ? "Not found (HTTP 403 / unarchived)"
+                        : "External reference (no file)"}
                   </dd>
                 </div>
               </dl>
@@ -246,6 +258,16 @@ export function SourcesFilterClient({
                       className="text-[#5b5e56] underline underline-offset-3 hover:text-[#080909]"
                     >
                       Official Origin ↗
+                    </a>
+                  )}
+                  {archiveUrl && archiveUrl.startsWith("http") && (
+                    <a
+                      href={archiveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#5b5e56] underline underline-offset-3 hover:text-[#080909]"
+                    >
+                      Wayback Snapshot ↗
                     </a>
                   )}
                   {(doc.mirror_urls ?? []).map((mUrl, mIdx) => (

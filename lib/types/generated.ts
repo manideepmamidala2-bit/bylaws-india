@@ -817,6 +817,10 @@ export interface JurisdictionManifest {
   visibility?: "public" | "test";
   latest_release: string | null;
   /**
+   * Optional web path to pre-release source register JSON (e.g. /data/<id>/register/documents.json).
+   */
+  register_documents?: string | null;
+  /**
    * @minItems 1
    */
   releases: [ReleaseEntry, ...ReleaseEntry[]];

@@ -21,6 +21,7 @@
       ],
       "visibility": "public",
       "latest_release": null,
+      "register_documents": "/data/in-ka-bengaluru-south/register/documents.json",
       "releases": [
         {
           "version": "1.0.0",

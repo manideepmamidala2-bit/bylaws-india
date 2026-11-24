@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import {
   fetchDeclarations,
   fetchManifest,
@@ -79,6 +80,39 @@ export default async function DataReleasesPage() {
                 </div>
 
                 <div className="mt-4 space-y-4">
+                  {j.register_documents && !hasActiveRelease && (
+                    <div className="border border-[#080909] bg-[#efeee8] p-4">
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <span className="font-mono text-sm font-semibold text-[#080909]">
+                          Core Source Register
+                        </span>
+                        <span className="border border-[#080909] bg-[#f5f3ed] px-2 py-0.5 font-mono text-xs uppercase text-[#080909]">
+                          Not yet structured
+                        </span>
+                      </div>
+                      <p className="dg-serif mt-1.5 text-sm text-[#171917]">
+                        Core building bye-laws, master plan zoning regulations,
+                        and amendment notifications acquired with SHA-256
+                        checksums, quoted status evidence, and Wayback Machine
+                        snapshots. Clause structuring is in progress.
+                      </p>
+                      <div className="mt-3 flex flex-wrap gap-3 font-mono text-[11px] uppercase tracking-[0.12em]">
+                        <Link
+                          href={`/j/${j.id}/sources`}
+                          className="border border-[#080909] bg-[#080909] px-3 py-1.5 text-[#f5f3ed] no-underline"
+                        >
+                          Browse Source Register →
+                        </Link>
+                        <a
+                          href={j.register_documents}
+                          className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 text-[#080909] no-underline"
+                        >
+                          Core Source Register (.json)
+                        </a>
+                      </div>
+                    </div>
+                  )}
+
                   {j.releases.map((rel) => {
                     const withdrawn = isWithdrawnRelease(rel);
                     const withdrawnReason =

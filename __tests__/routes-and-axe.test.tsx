@@ -60,11 +60,45 @@ function assertCleanPublicCopy(
 
 function validateNonTestManifestSources(manifest: ReleaseManifest): string[] {
   const errors: string[] = [];
-  for (const jur of manifest.jurisdictions) {
-    if (jur.visibility === "test") {
-      continue;
-    }
-    for (const rel of jur.releases) {
+    for (const jur of manifest.jurisdictions) {
+      if (jur.visibility === "test") {
+        continue;
+      }
+      if (jur.register_documents) {
+        const regDiskPath = path.join(
+          process.cwd(),
+          "public",
+          jur.register_documents.replace(/^\/+/, "")
+        );
+        if (!fs.existsSync(regDiskPath)) {
+          errors.push(
+            `${jur.id}@register: missing published file ${jur.register_documents}`
+          );
+        } else {
+          const regDocs = JSON.parse(
+            fs.readFileSync(regDiskPath, "utf8")
+          ) as Array<{
+            doc_id?: string;
+            source_url?: string | null;
+          }>;
+          for (const doc of regDocs) {
+            const src = (doc.source_url ?? "").trim();
+            if (
+              !src ||
+              src.startsWith("file://") ||
+              src.startsWith("/") ||
+              src.startsWith(".") ||
+              src.startsWith("data/") ||
+              (!src.startsWith("http://") && !src.startsWith("https://"))
+            ) {
+              errors.push(
+                `${jur.id}@register:${doc.doc_id ?? "unknown"} has local or non-http(s) source_url '${src}'`
+              );
+            }
+          }
+        }
+      }
+      for (const rel of jur.releases) {
       if (isWithdrawnRelease(rel)) {
         if (
           rel.download_zip ||
@@ -166,18 +200,32 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     await assertNoAxeViolations(homeContainer);
     uHome();
 
+    // Sources page renders the pre-release core source register with "Not yet structured"
+    const sourcesUi = await SourcesPage({
+      params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
+    });
+    const { container: sourcesContainer, unmount: uSources } =
+      render(sourcesUi);
+    expect(
+      screen.getByText(/Pre-Release Source Register · Not yet structured/i)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("BANGALORE MAHANAGARA PALIKE BUILDING BYE-LAWS 2003")
+    ).toBeInTheDocument();
+    expect(screen.getAllByText(/Not yet structured/i).length).toBeGreaterThan(1);
+    assertCleanPublicCopy(
+      sourcesContainer.textContent ?? "",
+      "Bengaluru South Sources",
+      { allowDataEmDash: true }
+    );
+    await assertNoAxeViolations(sourcesContainer);
+    uSources();
+
     const routes: Array<{ label: string; renderFn: () => Promise<React.ReactElement> }> = [
       {
         label: "Map",
         renderFn: () =>
           JurisdictionMapPage({
-            params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
-          }),
-      },
-      {
-        label: "Sources",
-        renderFn: () =>
-          SourcesPage({
             params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
           }),
       },
@@ -332,12 +380,13 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     const raw = await fetchRawManifest();
     expect(validateNonTestManifestSources(raw)).toEqual([]);
 
-    // Confirm public/data/in-ka-bengaluru-south does not exist on disk
+    // Confirm withdrawn release directory public/data/in-ka-bengaluru-south/1.0.0 does not exist on disk
     const removedDir = path.join(
       process.cwd(),
       "public",
       "data",
-      "in-ka-bengaluru-south"
+      "in-ka-bengaluru-south",
+      "1.0.0"
     );
     expect(fs.existsSync(removedDir)).toBe(false);
 

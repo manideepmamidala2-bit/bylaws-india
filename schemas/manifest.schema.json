@@ -49,6 +49,11 @@
           "type": ["string", "null"],
           "pattern": "^\\d+\\.\\d+\\.\\d+$"
         },
+        "register_documents": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "description": "Optional web path to pre-release source register JSON (e.g. /data/<id>/register/documents.json)."
+        },
         "releases": {
           "type": "array",
           "minItems": 1,

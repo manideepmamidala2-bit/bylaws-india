@@ -69,6 +69,23 @@ def inspect_pdf_creator_producer(pdf_path: Path) -> tuple[str, str]:
     for match in PRODUCER_RE.finditer(raw_bytes):
         producer_parts.append(match.group(1).decode("latin-1", errors="ignore"))
 
+    if raw_bytes.startswith(b"%PDF"):
+        import pypdfium2 as pdfium
+
+        try:
+            doc = pdfium.PdfDocument(str(pdf_path))
+            try:
+                pdf_creator = doc.get_metadata_value("Creator") or ""
+                pdf_producer = doc.get_metadata_value("Producer") or ""
+                if pdf_creator and pdf_creator not in creator_parts:
+                    creator_parts.append(pdf_creator)
+                if pdf_producer and pdf_producer not in producer_parts:
+                    producer_parts.append(pdf_producer)
+            finally:
+                doc.close()
+        except (OSError, RuntimeError, ValueError, pdfium.PdfiumError) as exc:
+            _ = exc
+
     return " ".join(creator_parts).strip(), " ".join(producer_parts).strip()
 
 
@@ -160,7 +177,21 @@ def validate_retrieval_record(retrieval: Any, context: str) -> None:
 
 
 def request_wayback_snapshot(target_url: str, timeout: int = 20) -> tuple[str | None, str | None]:
-    """Request a Wayback Machine Save Page Now snapshot and return `(archive_url, archive_failure_reason)`."""
+    """Resolve or request a Wayback Machine snapshot and return `(archive_url, archive_failure_reason)`."""
+    if target_url.startswith(("https://web.archive.org/web/", "http://web.archive.org/web/")):
+        return target_url, None
+
+    avail_url = f"https://archive.org/wayback/available?url={urllib.parse.quote(target_url, safe='')}"
+    avail_req = urllib.request.Request(avail_url, headers={"User-Agent": USER_AGENT}, method="GET")
+    try:
+        with urllib.request.urlopen(avail_req, timeout=timeout) as avail_resp:
+            avail_data = json.loads(avail_resp.read().decode("utf-8", errors="ignore"))
+            closest = (avail_data.get("archived_snapshots") or {}).get("closest") or {}
+            if closest.get("available") and closest.get("url"):
+                return str(closest["url"]), None
+    except (OSError, urllib.error.URLError, ValueError, json.JSONDecodeError):
+        pass
+
     save_url = f"https://web.archive.org/save/{target_url}"
     req = urllib.request.Request(
         save_url,
