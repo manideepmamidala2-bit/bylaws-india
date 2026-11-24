@@ -1,14 +1,18 @@
-# Local Python pipeline and non-web directories ignored by Vercel
-pipeline/
-data/
-docs/
-fab/
-schemas/
-jurisdictions/
-.opencode/
-.agents/
-.claude/
-.github/
-__tests__/
-vitest.config.ts
-vitest.setup.ts
+# Local Python pipeline and non-web root directories ignored by Vercel
+# Leading slashes anchor to the repository root so /public/data/ and /app/data/ are preserved.
+/pipeline/
+/data/
+/docs/
+/fab/
+/schemas/
+/jurisdictions/
+/scripts/
+/.opencode/
+/.agents/
+/.claude/
+/.github/
+/__tests__/
+/vitest.config.ts
+/vitest.setup.ts
+!/public/data/
+!/app/data/
