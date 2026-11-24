@@ -1,6 +1,6 @@
 # Dependency & Licence Inventory (Rule R4)
 
-Per **Rule R4 (Permissive Licensing)**, every direct dependency in `pipeline/pyproject.toml` and `package.json` is listed here with its SPDX licence identifier, and all direct and transitive Python and npm packages are checked in CI (`pipeline/tests/test_r4_licences.py`) against the explicit permissive licence allowlist (`MIT`, `Apache-2.0`, `BSD-2-Clause`, `BSD-3-Clause`, `BSD`, `ISC`, `PSF-2.0`, `0BSD`, `CC0-1.0`, `CC-BY-4.0`, `Unlicense`, `OFL-1.1`, `MPL-2.0`, `BlueOak-1.0.0`, `Zlib`, `Python-2.0`).
+Per **Rule R4 (Permissive Licensing)**, every direct dependency in `pipeline/pyproject.toml` and `package.json` is listed here with its SPDX licence identifier, and all direct and transitive Python and npm packages are checked in CI (`pipeline/tests/test_r4_licences.py`) against the explicit permissive licence allowlist (`MIT`, `Apache-2.0`, `BSD-2-Clause`, `BSD-3-Clause`, `BSD`, `ISC`, `PSF-2.0`, `0BSD`, `BSL-1.0`, `CC0-1.0`, `CC-BY-4.0`, `Unlicense`, `OFL-1.1`, `MPL-2.0`, `BlueOak-1.0.0`, `Zlib`, `Python-2.0`).
 
 ## 1. Python Pipeline Dependencies (`pipeline/pyproject.toml`)
 
@@ -13,18 +13,36 @@ Per **Rule R4 (Permissive Licensing)**, every direct dependency in `pipeline/pyp
 | `jsonschema` | `MIT` | Draft 2020-12 JSON Schema validation |
 | `pydantic` | `MIT` | Typed data validation and generated schema models |
 | `pypdfium2` | `Apache-2.0 OR BSD-3-Clause` | Baseline PDF text/bbox extraction and page rasterization |
+| `pdfplumber` | `MIT` | PDF path, vector fill, and table extraction |
+| `docling` | `MIT` | Layout-aware document parsing and table structure extraction (`docling-ibm-models` under MIT / Apache-2.0) |
+| `pytesseract` | `Apache-2.0` | Python wrapper for Tesseract OCR on scanned PDF pages |
+| `httpx` | `BSD-3-Clause` | HTTP client for source acquisition and verification |
 | `pillow` | `MIT-CMU` | Image I/O for PDF page rendering and map inspection |
 | `shapely` | `BSD-3-Clause` | Polygon clipping, geometry validation, and area calculation |
 | `pyproj` | `MIT` | Coordinate Reference System (CRS) inspection and UTM/WGS84 reprojection |
+| `geopandas` | `BSD-3-Clause` | Vector geospatial dataframe processing and reprojection |
+| `rasterio` | `BSD-3-Clause` | Georeferenced raster I/O and affine/GCP coordinate transforms |
+| `opencv-python-headless` | `Apache-2.0` | Headless image processing and colour segmentation for map sheets |
+| `scikit-image` | `BSD-3-Clause` | Perceptual colour-space conversion and morphological cleanup |
+| `torch` | `BSD-3-Clause` | CPU tensor runtime for Docling layout and table models |
+| `torchvision` | `BSD-3-Clause` | CPU vision utilities for Docling layout and table models |
 
 ### Development Dependencies (`[project.optional-dependencies].dev`)
 
 | Package | SPDX Licence | Purpose |
 |---------|--------------|---------|
-| `pytest` | `MIT` | Python unit, schema, licence, and golden test runner |
+| `pytest` | `MIT` | Python unit, schema, licence, provenance, and golden test runner |
 | `ruff` | `MIT` | Fast Python linter and formatter |
 | `fpdf2` | `LGPL-3.0-only` | Synthetic test fixture PDF generation only (see §3 written exception) |
 | `datamodel-code-generator` | `MIT` | Single-source Pydantic v2 model code generation from `schemas/*.schema.json` |
+
+### System Packages & Models
+
+| Component | SPDX Licence | Purpose |
+|-----------|--------------|---------|
+| `tesseract-ocr` + `tesseract-ocr-eng` | `Apache-2.0` | System OCR engine and English language data for scanned PDF pages |
+| `gdal-bin` + `libgdal-dev` | `MIT` | Geospatial Data Abstraction Library for KML/GeoJSON/raster operations |
+| Docling layout & TableFormer models (`ds4sd/docling-models`) | `Apache-2.0` | Pre-trained document layout and table-structure weights used by Docling |
 
 ## 2. Web Application Dependencies (`package.json`)
 
@@ -32,11 +50,11 @@ Per **Rule R4 (Permissive Licensing)**, every direct dependency in `pipeline/pyp
 
 | Package | SPDX Licence | Purpose |
 |---------|--------------|---------|
-| `leaflet` | `BSD-2-Clause` | Interactive map rendering engine |
+| `leaflet` | `BSD-2-Clause` | Interactive map rendering engine (replaced by MapLibre GL JS in PR 06) |
 | `next` | `MIT` | React App Router framework |
 | `react` | `MIT` | UI component library |
 | `react-dom` | `MIT` | DOM renderer for React |
-| `react-leaflet` | `Hippocratic-2.1` | React components for Leaflet maps (Plan v2.0 §5.A2 / §6; see §3 exception) |
+| `react-leaflet` | `Hippocratic-2.1` | React components for Leaflet maps (see §3 exception) |
 
 ### Development Dependencies (`devDependencies`)
 
@@ -63,11 +81,12 @@ Per **Rule R4 (Permissive Licensing)**, every direct dependency in `pipeline/pyp
 
 ## 3. Written LGPL & Transitive Exceptions (Rule R4)
 
-Per Plan v2.0 §2 Rule R4 ("LGPL only with a written exception"), the following runtime/dev library imports are explicitly approved with written rationale:
+Per Rule R4 ("LGPL only with a written exception"), the following runtime/dev library imports are explicitly approved with written rationale:
 
 | Package | Licence | Written Exception Rationale |
 |---------|---------|-----------------------------|
-| `fpdf2` | `LGPL-3.0-only` | Dev-only library import used exclusively in `pipeline/tests/fixtures/generate_fixtures.py` to generate synthetic test PDFs; no `fpdf2` code is copied or shipped in runtime builds or data releases. |
+| `fpdf2` | `LGPL-3.0-only` | Dev-only library import used exclusively in `pipeline/tests/fixtures/` to generate synthetic test PDFs; no `fpdf2` code is copied or shipped in runtime builds or data releases. |
+| `python-bidi` | `LGPL` | Unmodified transitive library pulled by `easyocr`/`docling` for bidirectional text layout; imported at runtime without modification. |
 | `@img/sharp-libvips-darwin-arm64` | `LGPL-3.0-or-later` | Unmodified transitive `libvips` shared library binary pulled by Next.js `sharp` image optimizer; dynamically linked at build/runtime without modification. |
 | `@img/sharp-libvips-darwin-x64` | `LGPL-3.0-or-later` | Unmodified transitive `libvips` shared library binary pulled by Next.js `sharp` image optimizer. |
 | `@img/sharp-libvips-linux-arm` | `LGPL-3.0-or-later` | Unmodified transitive `libvips` shared library binary pulled by Next.js `sharp` image optimizer. |
@@ -82,5 +101,5 @@ Per Plan v2.0 §2 Rule R4 ("LGPL only with a written exception"), the following 
 | `@img/sharp-win32-arm64` | `Apache-2.0 AND LGPL-3.0-or-later` | Unmodified transitive `libvips` shared library binary pulled by Next.js `sharp`. |
 | `@img/sharp-win32-ia32` | `Apache-2.0 AND LGPL-3.0-or-later` | Unmodified transitive `libvips` shared library binary pulled by Next.js `sharp`. |
 | `@img/sharp-win32-x64` | `Apache-2.0 AND LGPL-3.0-or-later` | Unmodified transitive `libvips` shared library binary pulled by Next.js `sharp`. |
-| `react-leaflet` | `Hippocratic-2.1` | Explicitly specified in Plan v2.0 §5.A2 & §6 as the React wrapper for Leaflet (`BSD-2-Clause`). |
-| `@react-leaflet/core` | `Hippocratic-2.1` | Direct internal core package of `react-leaflet` (Plan v2.0 §5.A2 & §6). |
+| `react-leaflet` | `Hippocratic-2.1` | React wrapper for Leaflet (`BSD-2-Clause`); scheduled for replacement by MapLibre GL JS (`BSD-3-Clause`) in PR 06. |
+| `@react-leaflet/core` | `Hippocratic-2.1` | Direct internal core package of `react-leaflet`. |

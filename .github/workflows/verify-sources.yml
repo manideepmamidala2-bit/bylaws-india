@@ -1,0 +1,47 @@
+name: Verify Sources
+
+on:
+  schedule:
+    - cron: "0 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  verify-sources:
+    name: Refetch and verify source SHA-256 checksums
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: pipeline
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: "pipeline/uv.lock"
+
+      - name: Set up Python 3.12
+        run: uv python install 3.12
+
+      - name: Sync dependencies
+        run: uv sync --frozen
+
+      - name: Run bylaws verify-sources
+        id: verify
+        run: uv run bylaws verify-sources --jurisdiction in-ka-bengaluru-south
+
+      - name: Open issue on source mismatch or dead link
+        if: failure()
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "Source verification failed for in-ka-bengaluru-south" \
+            --body "Weekly scheduled \`bylaws verify-sources --jurisdiction in-ka-bengaluru-south\` failed in workflow run ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}. Inspect the workflow logs for dead links or SHA-256 checksum mismatches."

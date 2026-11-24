@@ -19,6 +19,33 @@ class StatusEvidenceConfig(BaseModel):
     description: str | None = None
 
 
+class RetrievalResponseHeaders(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    etag: str | None = None
+    last_modified: str | None = None
+    server: str | None = None
+    date: str | None = None
+
+
+class RetrievalRecord(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    fetched_at: constr(min_length=10)
+    requested_url: constr(pattern=r"^https?://")
+    final_url: constr(pattern=r"^https?://")
+    http_status: conint(ge=100, le=599)
+    content_type: str | None
+    content_length: conint(ge=0) | None
+    response_headers: RetrievalResponseHeaders
+    sha256: constr(pattern=r"^[a-f0-9]{64}$")
+    archive_url: str | None = None
+    archive_failure_reason: str | None = None
+    fetched_by: constr(min_length=1)
+
+
 class TextRightsConfig(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -102,6 +129,10 @@ class DocumentConfig(BaseModel):
     legal_status: Literal[
         "in_force", "draft", "superseded", "withdrawn", "status_unknown"
     ]
+    acquisition_status: (
+        Literal["acquired", "pending", "not_found", "reference_only"] | None
+    ) = "acquired"
+    retrieval: RetrievalRecord | None = None
     status_evidence: StatusEvidenceConfig
     notification_number: str | None = None
     gazette_reference: str | None = None
@@ -139,6 +170,10 @@ class BoundaryMapConfig(BaseModel):
     layer_role: Literal["corporation", "gba_zones", "wards"] | None = None
     output_file: str | None = None
     source_url: constr(min_length=1)
+    acquisition_status: (
+        Literal["acquired", "pending", "not_found", "reference_only"] | None
+    ) = "acquired"
+    retrieval: RetrievalRecord | None = None
     select: BoundarySelectRule = Field(..., title="BoundarySelectRule")
 
 
@@ -231,6 +266,10 @@ class JurisdictionConfig(BaseModel):
         "CC BY 4.0",
         description="Open data licence identifier for published releases of this jurisdiction.",
     )
+    release_version: constr(pattern=r"^\d+\.\d+\.\d+$") | None = Field(
+        None,
+        description="Semantic version for the published release of this jurisdiction.",
+    )
     country: constr(pattern=r"^[A-Z]{2}$") = Field(
         ..., description="Two-letter uppercase country code."
     )
@@ -279,6 +318,7 @@ class DocumentCopy(BaseModel):
     path: constr(min_length=1)
     sha256: constr(pattern=r"^[a-f0-9]{64}$")
     retrieved_at: constr(min_length=10)
+    retrieval: RetrievalRecord | None = None
 
 
 class DocumentCitedProvision(BaseModel):
@@ -338,6 +378,10 @@ class DocumentMetadata(BaseModel):
     legal_status: Literal[
         "in_force", "draft", "superseded", "withdrawn", "status_unknown"
     ]
+    acquisition_status: (
+        Literal["acquired", "pending", "not_found", "reference_only"] | None
+    ) = "acquired"
+    retrieval: RetrievalRecord | None = None
     status_evidence: DocumentStatusEvidence = Field(..., title="DocumentStatusEvidence")
     notification_number: str | None = None
     gazette_reference: str | None = None

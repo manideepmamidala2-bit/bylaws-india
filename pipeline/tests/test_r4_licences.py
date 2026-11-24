@@ -19,17 +19,26 @@ ALLOWED_PERMISSIVE_TOKENS: frozenset[str] = frozenset(
         "mit license",
         "mit-0",
         "mit-cmu",
+        "apache",
         "apache-2.0",
+        "apache-2.0 with llvm-exception",
         "apache software license",
+        "apache license 2.0",
+        "apache 2.0 license",
         "apache 2.0",
         "bsd",
         "bsd license",
+        "bsd 3-clause license",
         "bsd-2-clause",
         "bsd-3-clause",
         "0bsd",
+        "bsl-1.0",
         "isc",
+        "isc license",
         "isc license (iscl)",
         "psf-2.0",
+        "psfl",
+        "cnri-python",
         "python-2.0",
         "python software foundation license",
         "cc0-1.0",
@@ -46,6 +55,7 @@ ALLOWED_PERMISSIVE_TOKENS: frozenset[str] = frozenset(
         "hpnd",
         "historical permission notice and disclaimer (hpnd)",
         "artistic-2.0",
+        "licenseref-pdfiumthirdparty",
     }
 )
 
@@ -70,7 +80,11 @@ def _extract_dist_licence(dist: importlib.metadata.Distribution) -> str:
         val = meta.get(key)
         if val and val.strip() and val.strip().upper() != "UNKNOWN":
             first_line = val.strip().splitlines()[0].strip()
-            if len(first_line) <= 120 and not first_line.startswith("Copyright"):
+            if (
+                len(first_line) <= 120
+                and not first_line.startswith("Copyright")
+                and not first_line.startswith("Files:")
+            ):
                 return first_line
     classifiers = [
         c.split("::")[-1].strip()
@@ -128,11 +142,18 @@ def is_licence_allowed(
     if normalized.startswith("(") and normalized.endswith(")"):
         normalized = normalized[1:-1].strip()
     normalized = re.sub(r",\s*dependency licenses$", "", normalized, flags=re.IGNORECASE)
-    tokens = [
-        tok.strip().lower()
+    raw_tokens = [
+        tok.strip()
         for tok in re.split(r"\s+(?:OR|AND|/)\s+|,\s*", normalized, flags=re.IGNORECASE)
         if tok.strip()
     ]
+    tokens: list[str] = []
+    for tok in raw_tokens:
+        if tok.startswith("(") and ")" not in tok:
+            tok = tok[1:].strip()
+        elif tok.endswith(")") and "(" not in tok:
+            tok = tok[:-1].strip()
+        tokens.append(tok.lower())
     if not tokens:
         return False, f"{package_name}: empty licence expression '{cleaned}'"
 

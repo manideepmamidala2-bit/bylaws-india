@@ -50,6 +50,11 @@
       "default": "CC BY 4.0",
       "description": "Open data licence identifier for published releases of this jurisdiction."
     },
+    "release_version": {
+      "type": ["string", "null"],
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version for the published release of this jurisdiction."
+    },
     "country": {
       "type": "string",
       "pattern": "^[A-Z]{2}$",
@@ -171,6 +176,84 @@
         },
         "description": {
           "type": ["string", "null"]
+        }
+      }
+    },
+    "retrievalResponseHeaders": {
+      "type": "object",
+      "title": "RetrievalResponseHeaders",
+      "additionalProperties": false,
+      "properties": {
+        "etag": {
+          "type": ["string", "null"]
+        },
+        "last_modified": {
+          "type": ["string", "null"]
+        },
+        "server": {
+          "type": ["string", "null"]
+        },
+        "date": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "retrievalRecord": {
+      "type": "object",
+      "title": "RetrievalRecord",
+      "additionalProperties": false,
+      "required": [
+        "fetched_at",
+        "requested_url",
+        "final_url",
+        "http_status",
+        "content_type",
+        "content_length",
+        "response_headers",
+        "sha256",
+        "fetched_by"
+      ],
+      "properties": {
+        "fetched_at": {
+          "type": "string",
+          "minLength": 10
+        },
+        "requested_url": {
+          "type": "string",
+          "pattern": "^https?://"
+        },
+        "final_url": {
+          "type": "string",
+          "pattern": "^https?://"
+        },
+        "http_status": {
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 599
+        },
+        "content_type": {
+          "type": ["string", "null"]
+        },
+        "content_length": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "response_headers": {
+          "$ref": "#/$defs/retrievalResponseHeaders"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "archive_url": {
+          "type": ["string", "null"]
+        },
+        "archive_failure_reason": {
+          "type": ["string", "null"]
+        },
+        "fetched_by": {
+          "type": "string",
+          "minLength": 1
         }
       }
     },
@@ -359,6 +442,17 @@
             "status_unknown"
           ]
         },
+        "acquisition_status": {
+          "type": "string",
+          "enum": ["acquired", "pending", "not_found", "reference_only"],
+          "default": "acquired"
+        },
+        "retrieval": {
+          "anyOf": [
+            { "$ref": "#/$defs/retrievalRecord" },
+            { "type": "null" }
+          ]
+        },
         "status_evidence": {
           "$ref": "#/$defs/statusEvidenceConfig"
         },
@@ -457,6 +551,17 @@
         "source_url": {
           "type": "string",
           "minLength": 1
+        },
+        "acquisition_status": {
+          "type": "string",
+          "enum": ["acquired", "pending", "not_found", "reference_only"],
+          "default": "acquired"
+        },
+        "retrieval": {
+          "anyOf": [
+            { "$ref": "#/$defs/retrievalRecord" },
+            { "type": "null" }
+          ]
         },
         "select": {
           "type": "object",

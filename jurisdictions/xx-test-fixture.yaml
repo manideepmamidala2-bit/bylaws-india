@@ -6,6 +6,7 @@ aliases:
   - Test City
 visibility: test
 licence: CC BY 4.0
+release_version: "0.1.0"
 country: XX
 state: YY
 building_types:

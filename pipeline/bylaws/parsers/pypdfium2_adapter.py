@@ -41,8 +41,8 @@ def _pdf_rect_to_top_left_bbox(
 def _get_pypdfium2_version() -> str:
     try:
         return version("pypdfium2")
-    except PackageNotFoundError:
-        return "unknown"
+    except PackageNotFoundError as exc:
+        raise RuntimeError("Required parser package 'pypdfium2' is not installed.") from exc
 
 
 def _group_rects_into_rows(

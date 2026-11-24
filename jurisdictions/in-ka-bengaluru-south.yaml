@@ -17,1010 +17,252 @@ aliases:
   - Uttarahalli
 visibility: public
 licence: CC BY 4.0
+release_version: null
 country: IN
 state: KA
 building_types:
   - residential
   - commercial
   - industrial
-  - institutional
-  - mixed_use
-  - assembly
-  - educational
-parents:
-  - in-ka
-  - in
+  - public_and_semi_public
+  - transport_and_communication
+parents: []
 not_modelled:
-  - Full copyrighted text of the National Building Code of India 2016 (BIS SP 7:2016) — recorded as reference_only citations per Rule R13
-  - Airport obstacle limitation surfaces and Colour Coded Zoning Map (CCZM) height polygons — accessed via AAI NOCAS portal per Rule R13
-  - Structural engineering load calculations (IS 456, IS 1893 seismic zones) and electrical/HVAC installation codes
-  - Lake buffer polygons under the 2025 KTCDA Amendment Bill due to contested assent/notification status (declared status_unknown per Plan v2.0 §5.C4)
-  - Storm water drain (Rajakaluve) primary/secondary/tertiary buffer polygons pending official classified drain centreline GIS publication from GBA
-unread_documents:
-  - title: Administrative Circular on BPAS Online Fee Challan Reconciliation (2024)
-    source_url: https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx
-    reason: Purely internal accounting procedure; does not alter building parameters or development controls (Plan v2.0 §3.6)
-unobtainable_documents:
-  - id: rmp2015-zr-amend-tt-gazette-scan
-    title: Original 2019 Gazette Scan for Transport & Telecommunication (T&T) Zone Uses Amendment
-    searched_sources:
-      - https://gazette.kar.nic.in
-      - https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx
-      - https://site.bbmp.gov.in/townplanning.html
-      - https://data.opencity.in/organization/bangalore-development-authority
-    reason: BPAS circulars portal link returns HTTP 404; structured from the verified BPAS/BDA consolidated circular text on T&T permissible uses
-contested_status:
-  - doc_id: ktcda-act
-    title: Karnataka Tank Conservation and Development Authority (Amendment) Bill / Act, 2025 (Size-Based Lake Buffers)
-    declared_status: status_unknown
-    conflicting_evidence:
-      - "Passed by Karnataka Legislative Assembly and Legislative Council in August 2025 proposing tiered lake buffers (0 m for <0.05 ha, 3 m for 0.05-0.4 ha, 6 m for 0.4-2 ha, 12 m for 2-10 ha, 24 m for 10-40 ha, 30 m for >40 ha)."
-      - "Conflicting public reports on Governor assent and final Part IV-A Karnataka Gazette notification date alongside pending NGT/High Court challenges to buffer reductions vs NGT 30 m / 75 m norms; declared status_unknown per Plan v2.0 §3.5 and §5.C4."
-building_relevant_sections:
-  gbg-act-2024:
-    - "1"
-    - "240"
-    - "241"
-    - "248"
-    - "252"
-  ktcp-act-1961:
-    - "13-E"
-    - "14"
-    - "15"
-    - "17"
-    - "18-B"
-  kfs-act-1964:
-    - "13"
-    - "13-A"
-    - "13-B"
+  - National Building Code of India 2016 (copyrighted by BIS; listed as reference only)
+  - Airports Authority of India NOCAS colour-coded zoning map (external aviation portal; reference only)
+unread_documents: []
+unobtainable_documents: []
+contested_status: []
 documents:
-  # 3.1 Layer: Municipal bye-laws (Bengaluru South City Corporation)
   - id: bbl-2003
-    title: Bangalore Mahanagara Palike Building Bye-laws 2003 (Bengaluru City Corporation Building Bye-laws 2003)
-    issuing_authority: Bengaluru South City Corporation / Bruhat Bengaluru Mahanagara Palike (Approved by UDD, Government of Karnataka)
+    title: Bangalore Mahanagara Palike Building Bye-laws 2003
+    issuing_authority: Bruhat Bengaluru Mahanagara Palike (BBMP) / Urban Development Department, Government of Karnataka
     doc_type: bye_laws
     layer: municipal
     role: base
     legal_status: in_force
+    acquisition_status: pending
     status_evidence:
       url: https://site.bbmp.gov.in/PDF/Bangalore-Building-Byelaws-%202003.pdf
-      quoted_line: "Approved by Government Order No. UDD/223/MNU/2001 dated 21-02-2004; in operation from 5 June 2004."
-      description: Official BBMP/BSCC Building Bye-laws 2003 in force as amended by the 2026 Amendment Bye-laws
-    notification_number: "G.O. No. UDD/223/MNU/2001"
-    gazette_reference: "Karnataka Gazette Extraordinary Part IV-A dated 2004-02-21"
-    licence_or_terms: Government of Karnataka public municipal subordinate legislation (Section 52(1)(q) Copyright Act 1957)
+      description: Pending verification from fetched source document in PR 04 (R17).
+    licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public municipal bye-laws)
     text_rights:
       mode: full_text
-      reason: Municipal bye-laws approved by Government Order; free to republish as full text per Rule R13
+      reason: Public municipal building bye-laws notified by the Government of Karnataka
     languages:
       - en
     official_url: https://site.bbmp.gov.in/PDF/Bangalore-Building-Byelaws-%202003.pdf
     mirror_urls:
       - https://data.opencity.in/dataset/bbmp-building-bye-laws-2003
-      - https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx
-    notified_date: "2004-02-21"
-    effective_from: "2004-06-05"
-    source_url: data/sources/in-ka-bengaluru-south/bbl-2003.pdf
+    source_url: https://site.bbmp.gov.in/PDF/Bangalore-Building-Byelaws-%202003.pdf
 
   - id: bscc-bbl-amend-2026
-    title: Bengaluru City Corporation Building (Amendment) Bye-laws 2026 (Bengaluru South City Corporation)
-    issuing_authority: Bengaluru South City Corporation / Greater Bengaluru Authority
+    title: Bengaluru South City Corporation Building (Amendment) Bye-laws, 2026
+    issuing_authority: Greater Bengaluru Authority / Bengaluru South City Corporation
     doc_type: amendment
     layer: municipal
     role: amendment
     legal_status: in_force
+    acquisition_status: pending
     status_evidence:
       url: https://data.opencity.in/dataset/bengaluru-city-corporations-bye-laws-2026
-      quoted_line: "Final notification bringing the Bengaluru City Corporation Building (Amendment) Bye-laws 2026 into force from 14.05.2026."
-      description: Final 2026 Amendment Bye-laws amending Bye-law 6.0 deviation limits (Table 2B) and omitting ground-rent Bye-laws 3.8 to 3.10
-    notification_number: "BSCC/TP/BBL-AMEND/01/2026"
-    gazette_reference: "Karnataka Gazette Extraordinary dated 2026-05-14"
-    licence_or_terms: Government of Karnataka / GBA public notification (Section 52(1)(q) Copyright Act 1957)
+      description: Pending verification from fetched source document in PR 04 (R17).
+    licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public municipal amendment notification)
     text_rights:
       mode: full_text
-      reason: Municipal bye-law amendment notification; free to republish per Rule R13
+      reason: Public municipal bye-law amendment notification
     languages:
       - en
-    official_url: https://gba.karnataka.gov.in
-    mirror_urls:
-      - https://data.opencity.in/dataset/bengaluru-city-corporations-bye-laws-2026
     amends:
       - bbl-2003
-    supersedes:
-      - bscc-bbl-amend-2026-draft
-    notified_date: "2026-05-14"
-    effective_from: "2026-05-14"
-    source_url: data/sources/in-ka-bengaluru-south/bscc-bbl-amend-2026.pdf
+    official_url: https://gba.karnataka.gov.in/
+    mirror_urls:
+      - https://data.opencity.in/dataset/bengaluru-city-corporations-bye-laws-2026
+    source_url: https://data.opencity.in/dataset/bengaluru-city-corporations-bye-laws-2026
 
   - id: bscc-bbl-amend-2026-draft
-    title: Draft Bengaluru City Corporation Building (Amendment) Bye-laws 2026
-    issuing_authority: Bengaluru South City Corporation / Greater Bengaluru Authority
+    title: Draft Bengaluru South City Corporation Building (Amendment) Bye-laws, 2026
+    issuing_authority: Greater Bengaluru Authority / Bengaluru South City Corporation
     doc_type: amendment
     layer: municipal
     role: amendment
-    legal_status: superseded
+    legal_status: draft
+    acquisition_status: pending
     status_evidence:
       url: https://data.opencity.in/dataset/bengaluru-city-corporations-bye-laws-2026
-      quoted_line: "Draft notification dated 01.04.2026 superseded by final notification dated 14.05.2026."
-      description: Public consultation draft superseded by final bscc-bbl-amend-2026 on 2026-05-14
-    notification_number: "BSCC/TP/BBL-DRAFT/01/2026"
-    gazette_reference: "Karnataka Gazette Draft Notification dated 2026-04-01"
-    superseded_by_document: bscc-bbl-amend-2026
-    licence_or_terms: Government of Karnataka / GBA public notification
+      description: Pending verification from fetched source document in PR 04 (R17).
+    licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public draft notification)
     text_rights:
       mode: full_text
-      reason: Public gazette draft notification; free to republish per Rule R13
+      reason: Public draft notification
     languages:
       - en
-    official_url: https://gba.karnataka.gov.in
-    mirror_urls:
-      - https://data.opencity.in/dataset/bengaluru-city-corporations-bye-laws-2026
     amends:
       - bbl-2003
-    notified_date: "2026-04-01"
-    effective_from: null
-    source_url: data/sources/in-ka-bengaluru-south/bscc-bbl-amend-2026-draft.pdf
+    official_url: https://gba.karnataka.gov.in/
+    mirror_urls:
+      - https://data.opencity.in/dataset/bengaluru-city-corporations-bye-laws-2026
+    source_url: https://data.opencity.in/dataset/bengaluru-city-corporations-bye-laws-2026
 
-  # 3.2 Layer: Master plan zoning (RMP 2015, BDA Local Planning Area)
   - id: rmp2015-zr
-    title: Zoning Regulations of the Revised Master Plan 2015 (Local Planning Area of Bengaluru)
-    issuing_authority: Bangalore Development Authority (Approved by Urban Development Department, Government of Karnataka)
+    title: Zoning Regulations — Revised Master Plan 2015 (Bengaluru Local Planning Area)
+    issuing_authority: Bangalore Development Authority (BDA) / Urban Development Department, Government of Karnataka
     doc_type: regulations
     layer: planning
     role: base
     legal_status: in_force
+    acquisition_status: pending
     status_evidence:
       url: https://upload.indiacode.nic.in/showfile?actid=AC_KA_71_402_00001_11_1552283484255&filename=zoning_regulations_rmp2015f.pdf&type=rule
-      quoted_line: "Approved by Government of Karnataka Notification No. UDD 540 BEMAASE 2004 dated 25.06.2007 under Section 13(1) of the KTCP Act, 1961."
-      description: Master Plan Zoning Regulations in force across the Bengaluru Local Planning Area (RMP 2031 withdrawn; RMP 2041 in preparation)
-    notification_number: "UDD 540 BEMAASE 2004"
-    gazette_reference: "Karnataka Gazette Extraordinary dated 2007-06-25"
-    licence_or_terms: Government of Karnataka statutory planning regulation published on India Code (Section 52(1)(q) Copyright Act 1957)
+      description: Pending verification from fetched source document in PR 04 (R17).
+    licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public statutory master plan zoning regulations)
     text_rights:
       mode: full_text
-      reason: Statutory master plan zoning regulations; free to republish per Rule R13
+      reason: Public master plan zoning regulations published on India Code
     languages:
       - en
     official_url: https://upload.indiacode.nic.in/showfile?actid=AC_KA_71_402_00001_11_1552283484255&filename=zoning_regulations_rmp2015f.pdf&type=rule
     mirror_urls:
-      - https://site.bbmp.gov.in/townplanning.html
       - https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/DocumentCloud/bda-zoning-regulations-rmp2015.pdf
-    notified_date: "2007-06-25"
-    effective_from: "2007-06-25"
-    source_url: data/sources/in-ka-bengaluru-south/rmp2015-zr.pdf
+    source_url: https://upload.indiacode.nic.in/showfile?actid=AC_KA_71_402_00001_11_1552283484255&filename=zoning_regulations_rmp2015f.pdf&type=rule
 
   - id: rmp2015-zr-amend-2014
-    title: Zoning Regulations of Bangalore of RMP 2015 (Amendment) Regulations 2014
+    title: Revised Master Plan 2015 Zoning (Amendment) Regulations, 2014
     issuing_authority: Urban Development Department, Government of Karnataka
     doc_type: amendment
     layer: planning
     role: amendment
     legal_status: in_force
+    acquisition_status: pending
     status_evidence:
       url: https://site.bbmp.gov.in/townplanning.html
-      quoted_line: "Notification No. UDD 93 MNJ 2012 dated 09-12-2014 amending ancillary commercial uses in residential zones and TDR road-width rules."
-      description: 2014 RMP 2015 Amendment Regulations listed on BBMP Town Planning portal
-    notification_number: "UDD 93 MNJ 2012"
-    gazette_reference: "Karnataka Gazette Extraordinary dated 2014-12-09"
-    licence_or_terms: Government of Karnataka statutory notification
+      description: Pending verification from fetched source document in PR 04 (R17).
+    licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public gazette notification)
     text_rights:
       mode: full_text
-      reason: Statutory gazette amendment notification; free to republish per Rule R13
+      reason: Public gazette notification
     languages:
       - en
-    official_url: https://site.bbmp.gov.in/townplanning.html
-    mirror_urls:
-      - https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx
     amends:
       - rmp2015-zr
-    notified_date: "2014-12-09"
-    effective_from: "2014-12-09"
-    source_url: data/sources/in-ka-bengaluru-south/rmp2015-zr-amend-2014.pdf
+    official_url: https://site.bbmp.gov.in/townplanning.html
+    mirror_urls: []
+    source_url: https://site.bbmp.gov.in/townplanning.html
 
   - id: rmp2015-zr-amend-2015-03
-    title: RMP 2015 Zoning Regulations Amendment Notification No. UDD 105 MNJ 2008
+    title: Notification No. UDD 105 MNJ 2008 dated 20-03-2015 (Zoning Regulations Amendment)
     issuing_authority: Urban Development Department, Government of Karnataka
     doc_type: notification
     layer: planning
     role: amendment
     legal_status: in_force
+    acquisition_status: pending
     status_evidence:
       url: https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx
-      quoted_line: "Notification No. UDD 105 MNJ 2008 dated 20-03-2015 amending mutation corridor commercial depth and Villa/Villament sub-division norms."
-      description: March 2015 amendment notification on BPAS circulars register
-    notification_number: "UDD 105 MNJ 2008"
-    gazette_reference: "Karnataka Gazette Part IV-A dated 2015-03-20"
-    licence_or_terms: Government of Karnataka statutory notification
+      description: Pending verification from fetched source document in PR 04 (R17).
+    licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public gazette notification)
     text_rights:
       mode: full_text
-      reason: Statutory gazette notification; free to republish per Rule R13
+      reason: Public gazette notification
     languages:
       - en
-    official_url: https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx
-    mirror_urls: []
     amends:
       - rmp2015-zr
-    notified_date: "2015-03-20"
-    effective_from: "2015-03-20"
-    source_url: data/sources/in-ka-bengaluru-south/rmp2015-zr-amend-2015-03.pdf
-
-  - id: rmp2015-zr-amend-2018
-    title: RMP 2015 Zoning Regulations Amendment Notification No. UDD 255 MNJ 2018
-    issuing_authority: Urban Development Department, Government of Karnataka
-    doc_type: notification
-    layer: planning
-    role: amendment
-    legal_status: in_force
-    status_evidence:
-      url: https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx
-      quoted_line: "Notification No. UDD 255 MNJ 2018 dated 14-08-2018 clarifying road-width thresholds for commercial activities in Residential (Mixed) zones."
-      description: August 2018 amendment notification on BPAS circulars register
-    notification_number: "UDD 255 MNJ 2018"
-    gazette_reference: "Karnataka Gazette Part IV-A dated 2018-08-14"
-    licence_or_terms: Government of Karnataka statutory notification
-    text_rights:
-      mode: full_text
-      reason: Statutory gazette notification; free to republish per Rule R13
-    languages:
-      - en
     official_url: https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx
     mirror_urls: []
-    amends:
-      - rmp2015-zr
-    notified_date: "2018-08-14"
-    effective_from: "2018-08-14"
-    source_url: data/sources/in-ka-bengaluru-south/rmp2015-zr-amend-2018.pdf
+    source_url: https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx
 
   - id: rmp2015-zr-amend-2018-impact
-    title: Zoning Regulations of Bengaluru of RMP 2015 (Amendment) Regulations 2018 — Impact Zone Premium FAR
+    title: Impact Zone Premium FAR Notification No. UDD 112 MNJ 2015 dated 29-09-2018
     issuing_authority: Urban Development Department, Government of Karnataka
-    doc_type: amendment
+    doc_type: notification
     layer: planning
     role: amendment
     legal_status: in_force
+    acquisition_status: pending
     status_evidence:
       url: https://site.bbmp.gov.in/PDF/townplanning/ImpactZone%20Premium%20FAR%20Notifi29.09.18.pdf
-      quoted_line: "Notification No. UDD 112 MNJ 2015 dated 29.09.2018 — Transit Oriented Development / Metro Impact Zone FAR provisions."
-      description: September 2018 Impact Zone notification; general Premium FAR schedule superseded by Chapter 11 (2025), while Transit Impact Zone site-plan review norms remain referenced
-    notification_number: "UDD 112 MNJ 2015"
-    gazette_reference: "Karnataka Gazette Extraordinary dated 2018-09-29"
-    licence_or_terms: Government of Karnataka statutory notification
+      description: Pending verification from fetched source document in PR 04 (R17).
+    licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public gazette notification)
     text_rights:
       mode: full_text
-      reason: Statutory gazette notification; free to republish per Rule R13
+      reason: Public gazette notification
     languages:
       - en
+    amends:
+      - rmp2015-zr
     official_url: https://site.bbmp.gov.in/PDF/townplanning/ImpactZone%20Premium%20FAR%20Notifi29.09.18.pdf
-    mirror_urls:
-      - https://site.bbmp.gov.in/townplanning.html
-    amends:
-      - rmp2015-zr
-    notified_date: "2018-09-29"
-    effective_from: "2018-09-29"
-    source_url: data/sources/in-ka-bengaluru-south/rmp2015-zr-amend-2018-impact.pdf
-
-  - id: rmp2015-zr-amend-tt
-    title: RMP 2015 Zoning Regulations Amendment — Transport & Telecommunication (T&T) Zone Uses
-    issuing_authority: Urban Development Department, Government of Karnataka
-    doc_type: notification
-    layer: planning
-    role: amendment
-    legal_status: in_force
-    status_evidence:
-      url: https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx
-      quoted_line: "Amendment to Chapter 4.9 Transport and Communication (T&T) Zone permissible and ancillary commercial/multi-modal transit hub uses."
-      description: T&T zone uses amendment notification listed on BPAS circulars register
-    notification_number: "UDD 44 MNJ 2019"
-    gazette_reference: "Karnataka Gazette Part IV-A dated 2019-06-15"
-    licence_or_terms: Government of Karnataka statutory notification
-    text_rights:
-      mode: full_text
-      reason: Statutory gazette notification; free to republish per Rule R13
-    languages:
-      - en
-    official_url: https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx
     mirror_urls: []
-    amends:
-      - rmp2015-zr
-    notified_date: "2019-06-15"
-    effective_from: "2019-06-15"
-    source_url: data/sources/in-ka-bengaluru-south/rmp2015-zr-amend-tt.pdf
+    source_url: https://site.bbmp.gov.in/PDF/townplanning/ImpactZone%20Premium%20FAR%20Notifi29.09.18.pdf
 
   - id: rmp2015-zr-premium-far-2025-02
-    title: "Zonal Regulations of RMP 2015 Amendment — Chapter 11: Premium F.A.R. Granted by Levy of Premium Charges"
+    title: Premium FAR Gazette Notification No. UDD 78 MNJ 2024(E) dated 21-02-2025
     issuing_authority: Urban Development Department, Government of Karnataka
     doc_type: notification
     layer: planning
     role: amendment
     legal_status: in_force
+    acquisition_status: pending
     status_evidence:
       url: https://data.opencity.in/dataset/3877072d-adef-4923-890d-1de96e72faeb/resource/886578b2-3419-40f0-9f51-21b78fefbac7/download/premium-far-gazette.pdf
-      quoted_line: "Notification No. UDD 78 MNJ 2024(E) dated 21.02.2025 inserting Chapter 11 'Premium F.A.R. Granted by Levy of Premium Charges' after Chapter 10."
-      description: Final Gazette notification inserting Chapter 11 Premium FAR (upheld by the High Court of Karnataka)
-    notification_number: "UDD 78 MNJ 2024(E)"
-    gazette_reference: "Karnataka Gazette Extraordinary Part IV-A dated 2025-02-21"
-    licence_or_terms: Government of Karnataka statutory notification
+      description: Pending verification from fetched source document in PR 04 (R17).
+    licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public gazette notification)
     text_rights:
       mode: full_text
-      reason: Statutory gazette notification; free to republish per Rule R13
+      reason: Public gazette notification
     languages:
       - en
+    amends:
+      - rmp2015-zr
     official_url: https://data.opencity.in/dataset/3877072d-adef-4923-890d-1de96e72faeb/resource/886578b2-3419-40f0-9f51-21b78fefbac7/download/premium-far-gazette.pdf
-    mirror_urls:
-      - https://gazette.kar.nic.in
-    amends:
-      - rmp2015-zr
-    notified_date: "2025-02-21"
-    effective_from: "2025-02-21"
-    source_url: data/sources/in-ka-bengaluru-south/rmp2015-zr-premium-far-2025-02.pdf
-
-  - id: rmp2015-zr-premium-far-2025-04
-    title: Notification Setting Maximum Additional Premium FAR by Road Width (Chapter 11 Schedule, April 2025)
-    issuing_authority: Urban Development Department, Government of Karnataka
-    doc_type: notification
-    layer: planning
-    role: amendment
-    legal_status: superseded
-    status_evidence:
-      url: https://gazette.kar.nic.in
-      quoted_line: "Notification dated 02.04.2025 specifying road-width slabs for Chapter 11 Premium FAR; superseded by revised February 2026 schedule."
-      description: April 2025 road-width schedule superseded by rmp2015-zr-premium-far-2026-02
-    notification_number: "UDD 78 MNJ 2024(P-1)"
-    gazette_reference: "Karnataka Gazette Extraordinary dated 2025-04-02"
-    superseded_by_document: rmp2015-zr-premium-far-2026-02
-    licence_or_terms: Government of Karnataka statutory notification
-    text_rights:
-      mode: full_text
-      reason: Statutory gazette notification; free to republish per Rule R13
-    languages:
-      - en
-    official_url: https://gazette.kar.nic.in
     mirror_urls: []
-    amends:
-      - rmp2015-zr
-    notified_date: "2025-04-02"
-    effective_from: "2025-04-02"
-    source_url: data/sources/in-ka-bengaluru-south/rmp2015-zr-premium-far-2025-04.pdf
-
-  - id: rmp2015-zr-premium-far-2026-02
-    title: Revised Schedule of Maximum Additional Premium FAR by Road Width (February 2026)
-    issuing_authority: Urban Development Department, Government of Karnataka
-    doc_type: notification
-    layer: planning
-    role: amendment
-    legal_status: in_force
-    status_evidence:
-      url: https://gazette.kar.nic.in
-      quoted_line: "Notification dated 10.02.2026 revising Table 11.1 maximum additional Premium FAR slabs (0.20 for 9-12 m roads, 0.40 for 12-18 m, 0.60 for >18 m)."
-      description: In-force February 2026 revision of the Chapter 11 Premium FAR road-width schedule
-    notification_number: "UDD 18 MNJ 2026(E)"
-    gazette_reference: "Karnataka Gazette Extraordinary dated 2026-02-10"
-    licence_or_terms: Government of Karnataka statutory notification
-    text_rights:
-      mode: full_text
-      reason: Statutory gazette notification; free to republish per Rule R13
-    languages:
-      - en
-    official_url: https://gazette.kar.nic.in
-    mirror_urls: []
-    amends:
-      - rmp2015-zr
-    supersedes:
-      - rmp2015-zr-premium-far-2025-04
-    notified_date: "2026-02-10"
-    effective_from: "2026-02-10"
-    source_url: data/sources/in-ka-bengaluru-south/rmp2015-zr-premium-far-2026-02.pdf
+    source_url: https://data.opencity.in/dataset/3877072d-adef-4923-890d-1de96e72faeb/resource/886578b2-3419-40f0-9f51-21b78fefbac7/download/premium-far-gazette.pdf
 
   - id: rmp2015-zr-amend-2025-07
-    title: Zonal Regulations of the RMP 2015 of Local Planning Area of Bengaluru (Amendment) Regulations 2025 (Building Height & Stilt Parking)
+    title: Zonal Regulations of the RMP-2015 of Local Planning Area of Bengaluru (Amendment) Regulations, 2025
     issuing_authority: Urban Development Department, Government of Karnataka
     doc_type: amendment
     layer: planning
     role: amendment
     legal_status: in_force
+    acquisition_status: pending
     status_evidence:
       url: https://data.opencity.in/dataset/zonal-regulations-of-the-rmp-2015-of-local-planning-area-of-bengaluru-amendment-regulations-2025
-      quoted_line: "Final notification dated 18.07.2025 amending Regulation 3.12 building height measurement and exempting stilt floor parking up to 4.5 m from FAR."
-      description: Final July 2025 RMP 2015 Amendment Regulations on stilt parking and building height
-    notification_number: "UDD 142 MNJ 2025(E)"
-    gazette_reference: "Karnataka Gazette Extraordinary dated 2025-07-18"
-    licence_or_terms: Government of Karnataka statutory notification
+      description: Pending verification from fetched source document in PR 04 (R17).
+    licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public gazette notification)
     text_rights:
       mode: full_text
-      reason: Statutory gazette notification; free to republish per Rule R13
+      reason: Public gazette notification
     languages:
       - en
+    amends:
+      - rmp2015-zr
     official_url: https://data.opencity.in/dataset/zonal-regulations-of-the-rmp-2015-of-local-planning-area-of-bengaluru-amendment-regulations-2025
     mirror_urls: []
-    amends:
-      - rmp2015-zr
-    supersedes:
-      - rmp2015-zr-stilt-draft-2025
-    notified_date: "2025-07-18"
-    effective_from: "2025-07-18"
-    source_url: data/sources/in-ka-bengaluru-south/rmp2015-zr-amend-2025-07.pdf
-
-  - id: rmp2015-zr-stilt-draft-2025
-    title: Draft Regulations for Stilt Parking and Building Height 2025
-    issuing_authority: Urban Development Department, Government of Karnataka
-    doc_type: amendment
-    layer: planning
-    role: amendment
-    legal_status: superseded
-    status_evidence:
-      url: https://data.opencity.in/dataset/zonal-regulations-of-the-rmp-2015-of-local-planning-area-of-bengaluru-amendment-regulations-2025
-      quoted_line: "Draft notification dated 12.05.2025 superseded by final notification dated 18.07.2025."
-      description: May 2025 draft stilt parking regulations superseded by final July 2025 regulations
-    notification_number: "UDD 142 MNJ 2025(D)"
-    gazette_reference: "Karnataka Gazette Draft Notification dated 2025-05-12"
-    superseded_by_document: rmp2015-zr-amend-2025-07
-    licence_or_terms: Government of Karnataka statutory notification
-    text_rights:
-      mode: full_text
-      reason: Public gazette draft notification; free to republish per Rule R13
-    languages:
-      - en
-    official_url: https://data.opencity.in/dataset/zonal-regulations-of-the-rmp-2015-of-local-planning-area-of-bengaluru-amendment-regulations-2025
-    mirror_urls: []
-    amends:
-      - rmp2015-zr
-    notified_date: "2025-05-12"
-    effective_from: null
-    source_url: data/sources/in-ka-bengaluru-south/rmp2015-zr-stilt-draft-2025.pdf
-
-  - id: rmp2015-zr-swd-buffer-2025
-    title: Notification Revising Storm Water Drain (Rajakaluve) Buffer Zones in Bengaluru Metropolitan Region under Section 13-E KTCP Act
-    issuing_authority: Urban Development Department, Government of Karnataka
-    doc_type: notification
-    layer: planning
-    role: amendment
-    legal_status: in_force
-    status_evidence:
-      url: https://gazette.kar.nic.in
-      quoted_line: "Final Notification No. UDD 198 MNJ 2025(E) dated 15.10.2025 under Section 13-E of the KTCP Act amending Regulation 4.12.2 drain buffer norms."
-      description: Final 2025 notification revising SWD buffer zones (following 02.09.2025 draft)
-    notification_number: "UDD 198 MNJ 2025(E)"
-    gazette_reference: "Karnataka Gazette Extraordinary dated 2025-10-15"
-    licence_or_terms: Government of Karnataka statutory notification
-    text_rights:
-      mode: full_text
-      reason: Statutory gazette notification; free to republish per Rule R13
-    languages:
-      - en
-    official_url: https://gazette.kar.nic.in
-    mirror_urls: []
-    amends:
-      - rmp2015-zr
-    notified_date: "2025-10-15"
-    effective_from: "2025-10-15"
-    source_url: data/sources/in-ka-bengaluru-south/rmp2015-zr-swd-buffer-2025.pdf
+    source_url: https://data.opencity.in/dataset/zonal-regulations-of-the-rmp-2015-of-local-planning-area-of-bengaluru-amendment-regulations-2025
 
   - id: rmp2015-zr-amend-2026-01
-    title: Zonal Regulations of the Revised Master Plan-2015 (Amendment) Regulations 2025 (Setbacks, Parking & Related Provisions)
+    title: Greater Bengaluru Amendment Regulations, 2025 (No. UDD/235/MNJ 2025(E), dated 05-01-2026)
     issuing_authority: Urban Development Department, Government of Karnataka
     doc_type: amendment
     layer: planning
     role: amendment
     legal_status: in_force
+    acquisition_status: pending
     status_evidence:
       url: https://data.opencity.in/dataset/greater-bengaluru-amendment-regulations-2025
-      quoted_line: "Final Notification No. UDD/235/MNJ 2025(E) dated 05.01.2026 substituting Table 8 (Building Line / Setbacks) and revising Chapter 8 parking norms."
-      description: Final 05.01.2026 bilingual (English & Kannada) notification superseding the 11.11.2025 draft
-    notification_number: "UDD/235/MNJ 2025(E)"
-    gazette_reference: "Karnataka Gazette Extraordinary Part IV-A dated 2026-01-05"
-    licence_or_terms: Government of Karnataka statutory notification
+      description: Pending verification from fetched source document in PR 04 (R17).
+    licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public gazette notification)
     text_rights:
       mode: full_text
-      reason: Statutory bilingual gazette notification; free to republish per Rule R13
+      reason: Public gazette notification
     languages:
       - en
-      - kn
-    official_url: https://data.opencity.in/dataset/greater-bengaluru-amendment-regulations-2025
-    mirror_urls:
-      - https://gazette.kar.nic.in
     amends:
       - rmp2015-zr
-    supersedes:
-      - rmp2015-zr-amend-2025-11-draft
-    notified_date: "2026-01-05"
-    effective_from: "2026-01-05"
-    source_url: data/sources/in-ka-bengaluru-south/rmp2015-zr-amend-2026-01.pdf
-
-  - id: rmp2015-zr-amend-2025-11-draft
-    title: Draft Zonal Regulations of the Revised Master Plan-2015 (Amendment) Regulations 2025 (Setbacks Draft)
-    issuing_authority: Urban Development Department, Government of Karnataka
-    doc_type: amendment
-    layer: planning
-    role: amendment
-    legal_status: superseded
-    status_evidence:
-      url: https://data.opencity.in/dataset/greater-bengaluru-amendment-regulations-2025
-      quoted_line: "Draft Notification No. UDD/235/MNJ 2025 dated 11.11.2025 superseded by final Notification No. UDD/235/MNJ 2025(E) dated 05.01.2026."
-      description: November 2025 draft setback revision superseded by the 05.01.2026 final notification (Plan v2.0 §3.2)
-    notification_number: "UDD/235/MNJ 2025"
-    gazette_reference: "Karnataka Gazette Draft Notification dated 2025-11-11"
-    superseded_by_document: rmp2015-zr-amend-2026-01
-    licence_or_terms: Government of Karnataka statutory notification
-    text_rights:
-      mode: full_text
-      reason: Public gazette draft notification; free to republish per Rule R13
-    languages:
-      - en
     official_url: https://data.opencity.in/dataset/greater-bengaluru-amendment-regulations-2025
     mirror_urls: []
-    amends:
-      - rmp2015-zr
-    notified_date: "2025-11-11"
-    effective_from: null
-    source_url: data/sources/in-ka-bengaluru-south/rmp2015-zr-amend-2025-11-draft.pdf
-
-  - id: rmp2015-zr-highrise-24m-draft
-    title: Draft Amendment Proposing to Raise High-Rise Building Height Reference in Zonal Regulations from 21 m to 24 m
-    issuing_authority: Urban Development Department, Government of Karnataka
-    doc_type: notification
-    layer: planning
-    role: regulation
-    legal_status: draft
-    status_evidence:
-      url: https://gazette.kar.nic.in
-      quoted_line: "Draft Notification No. UDD 165 MNJ 2025 dated 20.08.2025 inviting public objections on raising high-rise threshold to 24 m; final notification not yet issued."
-      description: Draft proposal under Section 13-E KTCP Act; remains a draft and not in force (Rule R3)
-    notification_number: "UDD 165 MNJ 2025"
-    gazette_reference: "Karnataka Gazette Draft Notification dated 2025-08-20"
-    licence_or_terms: Government of Karnataka draft notification
-    text_rights:
-      mode: full_text
-      reason: Public gazette draft notification; free to republish per Rule R13
-    languages:
-      - en
-    official_url: https://gazette.kar.nic.in
-    mirror_urls: []
-    notified_date: "2025-08-20"
-    effective_from: null
-    source_url: data/sources/in-ka-bengaluru-south/rmp2015-zr-highrise-24m-draft.pdf
-
-  # 3.5 Layer: State Acts and rules (enabling law)
-  - id: gbg-act-2024
-    title: Greater Bengaluru Governance Act, 2024
-    issuing_authority: Karnataka Legislature / Department of Parliamentary Affairs and Legislation
-    doc_type: act
-    layer: statute
-    role: base
-    legal_status: in_force
-    status_evidence:
-      url: https://indiacode.nic.in
-      quoted_line: "Karnataka Act No. 36 of 2024 — An Act to provide for the governance of the Greater Bengaluru Area through the Greater Bengaluru Authority and City Corporations, in force from 15 May 2025."
-      description: Enabling statute constituting Greater Bengaluru Authority and Bengaluru South City Corporation (2 September 2025)
-    notification_number: "Karnataka Act No. 36 of 2024"
-    gazette_reference: "Karnataka Gazette Extraordinary Part IV-A dated 2025-05-15"
-    licence_or_terms: State Legislative Act (Section 52(1)(q) Copyright Act 1957)
-    text_rights:
-      mode: full_text
-      reason: State Act published in the official Gazette and India Code; free to republish per Rule R13
-    languages:
-      - en
-    official_url: https://indiacode.nic.in
-    mirror_urls:
-      - https://data.opencity.in/dataset/greater-bengaluru-authority-corporations-delimitation-2025
-    notified_date: "2025-05-15"
-    effective_from: "2025-05-15"
-    source_url: data/sources/in-ka-bengaluru-south/gbg-act-2024.pdf
-
-  - id: ktcp-act-1961
-    title: Karnataka Town and Country Planning Act, 1961
-    issuing_authority: Karnataka Legislature
-    doc_type: act
-    layer: statute
-    role: base
-    legal_status: in_force
-    status_evidence:
-      url: https://indiacode.nic.in
-      quoted_line: "Karnataka Act No. 11 of 1963 — Sections 13-E, 14, 15, 17, and 18-B governing Master Plans, Zonal Regulations, Change of Land Use, and TDR."
-      description: Principal town planning statute governing RMP 2015 and zonal regulation amendments
-    notification_number: "Karnataka Act No. 11 of 1963"
-    gazette_reference: "Mysore/Karnataka Gazette Extraordinary dated 1963-02-01"
-    licence_or_terms: State Legislative Act (Section 52(1)(q) Copyright Act 1957)
-    text_rights:
-      mode: full_text
-      reason: State Act published on India Code; free to republish per Rule R13
-    languages:
-      - en
-    official_url: https://indiacode.nic.in
-    mirror_urls: []
-    notified_date: "1963-02-01"
-    effective_from: "1965-01-15"
-    source_url: data/sources/in-ka-bengaluru-south/ktcp-act-1961.pdf
-
-  - id: tdr-rules-2016
-    title: Karnataka Town and Country Planning (Benefit of Development Rights) Rules, 2016
-    issuing_authority: Urban Development Department, Government of Karnataka
-    doc_type: rules
-    layer: state_rules
-    role: regulation
-    legal_status: in_force
-    status_evidence:
-      url: https://indiacode.nic.in
-      quoted_line: "Notification No. UDD 283 BEMRUPRA 2015 dated 04.04.2017 under Section 14-B and Section 74 of the KTCP Act, 1961."
-      description: State rules governing generation, valuation, and loading of Transferable Development Rights (TDR) certificates
-    notification_number: "UDD 283 BEMRUPRA 2015"
-    gazette_reference: "Karnataka Gazette Extraordinary dated 2017-04-04"
-    licence_or_terms: State statutory rules (Section 52(1)(q) Copyright Act 1957)
-    text_rights:
-      mode: full_text
-      reason: State statutory rules published in the Karnataka Gazette; free to republish per Rule R13
-    languages:
-      - en
-    official_url: https://indiacode.nic.in
-    mirror_urls: []
-    notified_date: "2017-04-04"
-    effective_from: "2017-04-04"
-    source_url: data/sources/in-ka-bengaluru-south/tdr-rules-2016.pdf
-
-  - id: kfs-act-1964
-    title: Karnataka Fire Force Act, 1964 (as Amended by the 2023 and 2025 Amendment Acts)
-    issuing_authority: Karnataka Legislature / Home Department
-    doc_type: act
-    layer: statute
-    role: base
-    legal_status: in_force
-    status_evidence:
-      url: https://prsindia.org/files/bills_acts/bills_states/karnataka/2023/Bill3of2023Karnataka.pdf
-      quoted_line: "Karnataka Act No. 12 of 2023 (deemed in force from 24 March 2023, requiring Fire NOC for high-rise buildings of 21 m or more) and 2025 Amendment Act (Bill 42 of 2025, fire safety cess)."
-      description: Fire safety statute governing high-rise NOC thresholds (21 m) and fire safety cess
-    notification_number: "Karnataka Act No. 42 of 1964 (Amended 2023 & 2025)"
-    gazette_reference: "Karnataka Gazette Extraordinary dated 2023-03-24 & 2025-08-22"
-    licence_or_terms: State Legislative Act (Section 52(1)(q) Copyright Act 1957)
-    text_rights:
-      mode: full_text
-      reason: State Act; free to republish per Rule R13
-    languages:
-      - en
-    official_url: https://prsindia.org/files/bills_acts/bills_states/karnataka/2023/Bill3of2023Karnataka.pdf
-    mirror_urls:
-      - https://prsindia.org/files/bills_acts/bills_states/karnataka/2025/Bill42of2025KA.pdf
-    notified_date: "1964-11-05"
-    effective_from: "2023-03-24"
-    source_url: data/sources/in-ka-bengaluru-south/kfs-act-1964.pdf
-
-  - id: ktcda-act
-    title: Karnataka Tank Conservation and Development Authority Act, 2014 and 2025 Lake Buffer Amendment
-    issuing_authority: Karnataka Legislature / Minor Irrigation Department
-    doc_type: act
-    layer: statute
-    role: regulation
-    legal_status: status_unknown
-    status_evidence:
-      url: https://indiacode.nic.in
-      quoted_line: "2025 Amendment proposing size-based lake buffers passed legislature in August 2025; Governor assent and effective Gazette notification status remain contested."
-      description: Contested legal status of the 2025 tiered lake buffer amendment; recorded as status_unknown per Plan v2.0 §3.5 and §5.B1
-    notification_number: "Karnataka Act No. 32 of 2015 / 2025 Amendment Bill"
-    gazette_reference: "Karnataka Gazette dated 2015-03-05 (2025 Amendment notification status contested)"
-    licence_or_terms: State Legislative Act (Section 52(1)(q) Copyright Act 1957)
-    text_rights:
-      mode: full_text
-      reason: State Act / Bill text; free to republish per Rule R13
-    languages:
-      - en
-    official_url: https://indiacode.nic.in
-    mirror_urls: []
-    notified_date: "2015-03-05"
-    effective_from: "2015-03-05"
-    source_url: data/sources/in-ka-bengaluru-south/ktcda-act.pdf
-
-  - id: metro-influence-2020
-    title: Notification No. UDD 110 PRJ 2020 — Namma Metro 11 m Underground Influence Zone
-    issuing_authority: Urban Development Department, Government of Karnataka / Bangalore Metro Rail Corporation Limited (BMRCL)
-    doc_type: notification
-    layer: overlay
-    role: regulation
-    legal_status: in_force
-    status_evidence:
-      url: https://gazette.kar.nic.in
-      quoted_line: "Notification No. UDD 110 PRJ 2020 dated 11 May 2020 declaring 11 metres on either side of Namma Metro underground structures as the Metro Influence Zone requiring BMRCL NOC."
-      description: Statutory overlay notification requiring BMRCL NOC within 11 m of underground metro tunnels/stations
-    notification_number: "UDD 110 PRJ 2020"
-    gazette_reference: "Karnataka Gazette Part IV-A dated 2020-05-11"
-    licence_or_terms: Government of Karnataka statutory notification
-    text_rights:
-      mode: full_text
-      reason: Statutory gazette notification; free to republish per Rule R13
-    languages:
-      - en
-    official_url: https://gazette.kar.nic.in
-    mirror_urls: []
-    notified_date: "2020-05-11"
-    effective_from: "2020-05-11"
-    source_url: data/sources/in-ka-bengaluru-south/metro-influence-2020.pdf
-
-  # 3.6 Layer: Government orders and procedures that change building requirements
-  - id: oc-exemption-2025-09
-    title: Government Order No. NAE/334/MNU/2025 — Occupancy Certificate Exemption for Residential Buildings up to 1,200 sq ft within GBA
-    issuing_authority: Urban Development Department, Government of Karnataka
-    doc_type: government_order
-    layer: orders
-    role: regulation
-    legal_status: superseded
-    status_evidence:
-      url: https://gba.karnataka.gov.in
-      quoted_line: "Government Order No. NAE/334/MNU of 2025 dated 09.09.2025 exempting residential buildings on plots up to 1,200 sq ft (up to G+2 or Stilt+3) from Occupancy Certificate; superseded by Order dated 05.06.2026."
-      description: September 2025 OC exemption order superseded by the expanded 5 June 2026 order
-    notification_number: "G.O. No. NAE/334/MNU/2025"
-    gazette_reference: "Government Order dated 2025-09-09"
-    superseded_by_document: oc-exemption-2026-06
-    licence_or_terms: Government of Karnataka executive order
-    text_rights:
-      mode: full_text
-      reason: Government Order; free to republish per Rule R13
-    languages:
-      - en
-    official_url: https://gba.karnataka.gov.in
-    mirror_urls: []
-    notified_date: "2025-09-09"
-    effective_from: "2025-09-09"
-    source_url: data/sources/in-ka-bengaluru-south/oc-exemption-2025-09.pdf
-
-  - id: oc-exemption-2026-06
-    title: Government Order Extending Occupancy Certificate Exemption to Residential Plots up to 2,400 sq ft (+20%, up to Ground + 3) within GBA
-    issuing_authority: Urban Development Department, Government of Karnataka / Greater Bengaluru Authority
-    doc_type: government_order
-    layer: orders
-    role: regulation
-    legal_status: in_force
-    status_evidence:
-      url: https://gba.karnataka.gov.in
-      quoted_line: "Government Order dated 05.06.2026 extending Occupancy Certificate exemption to residential buildings on plots up to 2,400 sq ft (+20% tolerance), up to Ground + 3 floors or Stilt + 3 floors within GBA."
-      description: In-force June 2026 Government Order expanding residential OC exemption within GBA
-    notification_number: "G.O. No. NAE/118/MNU/2026"
-    gazette_reference: "Government Order dated 2026-06-05"
-    licence_or_terms: Government of Karnataka executive order
-    text_rights:
-      mode: full_text
-      reason: Government Order; free to republish per Rule R13
-    languages:
-      - en
-    official_url: https://gba.karnataka.gov.in
-    mirror_urls: []
-    supersedes:
-      - oc-exemption-2025-09
-    notified_date: "2026-06-05"
-    effective_from: "2026-06-05"
-    source_url: data/sources/in-ka-bengaluru-south/oc-exemption-2026-06.pdf
-
-  - id: gba-oc-cc-rules-2025
-    title: GBA Rules on Occupancy and Commencement Certificates, 2025
-    issuing_authority: Greater Bengaluru Authority
-    doc_type: rules
-    layer: orders
-    role: regulation
-    legal_status: in_force
-    status_evidence:
-      url: https://data.opencity.in/organization/greater-bengaluru-authority
-      quoted_line: "GBA Rules on Occupancy and Commencement Certificates, 2025 prescribing inspection timelines, plinth-level Commencement Certificate verification, and compounded deviation limits."
-      description: GBA 2025 rules governing CC and OC issuance across the five city corporations
-    notification_number: "GBA/TP/OC-CC/01/2025"
-    gazette_reference: "GBA Notification dated 2025-10-01"
-    licence_or_terms: Greater Bengaluru Authority public rules
-    text_rights:
-      mode: full_text
-      reason: Public municipal rules; free to republish per Rule R13
-    languages:
-      - en
-    official_url: https://data.opencity.in/organization/greater-bengaluru-authority
-    mirror_urls: []
-    notified_date: "2025-10-01"
-    effective_from: "2025-10-01"
-    source_url: data/sources/in-ka-bengaluru-south/gba-oc-cc-rules-2025.pdf
-
-  - id: bbmp-noc-details
-    title: BBMP / GBA Schedule of NOCs Required by Building Parameter and Nambike Nakshe / e-Khata Approval Circular
-    issuing_authority: Bruhat Bengaluru Mahanagara Palike / Bengaluru South City Corporation
-    doc_type: circular
-    layer: orders
-    role: regulation
-    legal_status: in_force
-    status_evidence:
-      url: https://site.bbmp.gov.in/PDF/buildingplanapproval/NOC%20Details.pdf
-      quoted_line: "Schedule of No Objection Certificates (KSPCB, BWSSB, BESCOM, KSFES, AAI, BMRCL) by building height/built-up area, Nambike Nakshe self-certification up to 50x80 ft, and mandatory final e-Khata."
-      description: Official BBMP/BSCC NOC matrix and Nambike Nakshe / e-Khata building plan approval requirements
-    notification_number: "BBMP/TP/NOC-NN/2024"
-    gazette_reference: "BBMP Town Planning Circular dated 2024-07-01"
-    licence_or_terms: Public municipal circular
-    text_rights:
-      mode: full_text
-      reason: Public municipal circular; free to republish per Rule R13
-    languages:
-      - en
-    official_url: https://site.bbmp.gov.in/PDF/buildingplanapproval/NOC%20Details.pdf
-    mirror_urls:
-      - https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx
-    notified_date: "2024-07-01"
-    effective_from: "2024-07-01"
-    source_url: data/sources/in-ka-bengaluru-south/bbmp-noc-details.pdf
-
-  # 3.7 Layer: National references (reference_only per Rule R13)
-  - id: nbc-2016
-    title: National Building Code of India 2016 (Bureau of Indian Standards, SP 7:2016)
-    issuing_authority: Bureau of Indian Standards (BIS)
-    doc_type: standard_reference
-    layer: national_reference
-    role: reference
-    legal_status: in_force
-    status_evidence:
-      url: https://www.bis.gov.in/standards/technical-department/civil-engineering/national-building-code/
-      quoted_line: "SP 7:2016 National Building Code of India 2016 (Volumes 1 & 2) — cited by Karnataka Fire Force Act 1964 and Bengaluru Building Bye-laws 2003."
-      description: Copyrighted BIS standard recorded as reference_only metadata and cited provision pointers per Rule R13
-    notification_number: "BIS SP 7:2016"
-    gazette_reference: "Bureau of Indian Standards Special Publication SP 7:2016"
-    licence_or_terms: Copyright Bureau of Indian Standards (all rights reserved; reference metadata only per Rule R13)
-    text_rights:
-      mode: reference_only
-      reason: Copyrighted standard published and sold by the Bureau of Indian Standards (BIS). Recorded as reference metadata and cited clause pointers only per Rule R13; no text reproduced.
-    languages:
-      - en
-    official_url: https://www.bis.gov.in/standards/technical-department/civil-engineering/national-building-code/
-    mirror_urls: []
-    notified_date: "2017-03-15"
-    effective_from: "2017-03-15"
-    source_url: https://www.bis.gov.in/standards/technical-department/civil-engineering/national-building-code/
-    cited_provisions:
-      - part: "Part 3"
-        clause: "Part 3, Clauses 4 to 12"
-        topic: "Development Control Rules and General Building Requirements (ventilation shafts, room sizes, exit widths)"
-        cited_by:
-          - "bbl-2003:11.1"
-          - "bbl-2003:14.2"
-        where_to_obtain: "Bureau of Indian Standards Standards Portal (https://www.standardsbis.in) — SP 7:2016 Vol. 1"
-      - part: "Part 4"
-        clause: "Part 4, Clause 1.2 & Table 7"
-        topic: "Fire and Life Safety — High-rise definition, occupant load, travel distance, staircase width, refuge area, and fire tender access"
-        cited_by:
-          - "kfs-act-1964:13"
-          - "bbl-2003:18.1"
-          - "rmp2015-zr:3.12"
-        where_to_obtain: "Bureau of Indian Standards Standards Portal (https://www.standardsbis.in) — SP 7:2016 Vol. 1"
-      - part: "Part 6"
-        clause: "Part 6, Sections 1 to 7"
-        topic: "Structural Design — Loads, forces, soil & foundations, concrete and steel structural safety certification"
-        cited_by:
-          - "bbl-2003:19.1"
-        where_to_obtain: "Bureau of Indian Standards Standards Portal (https://www.standardsbis.in) — SP 7:2016 Vol. 1"
-      - part: "Part 8 & Part 9"
-        clause: "Part 8 Section 5 (Lifts/Escalators) & Part 9 Section 1 (Plumbing & Rainwater Harvesting)"
-        topic: "Building Services, Lifts in buildings exceeding 15 m, Dual Piping, and Rainwater Harvesting"
-        cited_by:
-          - "bbl-2003:22.1"
-          - "bbl-2003:32.1"
-        where_to_obtain: "Bureau of Indian Standards Standards Portal (https://www.standardsbis.in) — SP 7:2016 Vol. 2"
-
-  - id: aai-cczm
-    title: Airports Authority of India Colour Coded Zoning Maps (CCZM) & Ministry of Civil Aviation Height Restriction Rules, 2015 (HAL, Kempegowda, Jakkur & Yelahanka Aerodromes)
-    issuing_authority: Ministry of Civil Aviation / Airports Authority of India (AAI)
-    doc_type: standard_reference
-    layer: national_reference
-    role: reference
-    legal_status: in_force
-    status_evidence:
-      url: http://nocas2.aai.aero/nocas
-      quoted_line: "G.S.R. 751(E) Ministry of Civil Aviation (Height Restrictions for Safeguarding of Aircraft Operations) Rules, 2015 and AAI NOCAS Colour Coded Zoning Maps."
-      description: Aviation height restriction rules and NOCAS portal reference; CCZM height polygons are not redistributed per Plan v2.0 §3.7 and Rule R13
-    notification_number: "G.S.R. 751(E)"
-    gazette_reference: "Gazette of India Extraordinary Part II Section 3(i) dated 2015-09-30"
-    licence_or_terms: Official CCZM access is via AAI NOCAS portal; map surfaces not redistributed per Plan v2.0 §3.7
-    text_rights:
-      mode: reference_only
-      reason: Official CCZM height surfaces are accessed via the AAI NOCAS portal (http://nocas2.aai.aero/nocas) and not redistributed per Plan v2.0 §3.7 and Rule R13.
-    languages:
-      - en
-    official_url: http://nocas2.aai.aero/nocas
-    mirror_urls: []
-    notified_date: "2015-09-30"
-    effective_from: "2015-09-30"
-    source_url: http://nocas2.aai.aero/nocas
-    cited_provisions:
-      - part: "G.S.R. 751(E)"
-        clause: "Rule 4 & Schedule II (HAL & Kempegowda Aerodrome Funnel / Inner Horizontal Surface)"
-        topic: "Requirement for AAI NOC where proposed building top elevation (AMSL) exceeds the CCZM permissible elevation for the grid cell"
-        cited_by:
-          - "bbl-2003:3.2"
-          - "bbmp-noc-details:1.6"
-        where_to_obtain: "AAI NOCAS Online Portal (http://nocas2.aai.aero/nocas)"
-
-  - id: model-bbl-2017
-    title: Karnataka Model Building Bye-laws 2017 (Notification No. UDD 14 TTP 2017 (P-4))
-    issuing_authority: Urban Development Department, Government of Karnataka (Directorate of Town and Country Planning)
-    doc_type: standard_reference
-    layer: national_reference
-    role: reference
-    legal_status: in_force
-    status_evidence:
-      url: https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx
-      quoted_line: "Notification No. UDD 14 TTP 2017 (P-4) dated 28-10-2017 issuing Model Building Bye-laws for Urban Local Bodies in Karnataka."
-      description: Recorded as reference_only because within GBA / Bengaluru South City Corporation, the adopted Bengaluru City Corporation Building Bye-laws 2003 (as amended in 2026) govern directly
-    notification_number: "UDD 14 TTP 2017 (P-4)"
-    gazette_reference: "Karnataka Gazette dated 2017-10-28"
-    licence_or_terms: Government of Karnataka reference framework
-    text_rights:
-      mode: reference_only
-      reason: Model framework for other Urban Local Bodies in Karnataka; within Bengaluru South City Corporation, the adopted Bengaluru City Corporation Building Bye-laws 2003 (as amended in 2026 under Section 240 of the GBG Act 2024) govern directly (Plan v2.0 §3.7).
-    languages:
-      - en
-    official_url: https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx
-    mirror_urls: []
-    notified_date: "2017-10-28"
-    effective_from: "2017-10-28"
-    source_url: https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx
-    cited_provisions:
-      - part: "Chapter 3"
-        clause: "Model Bye-law 3.4"
-        topic: "Reference definition of high-density mixed-use development and green building incentives"
-        cited_by:
-          - "bscc-bbl-amend-2026:1.1"
-        where_to_obtain: "BBMP BPAS Circulars Portal (https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx)"
-
+    source_url: https://data.opencity.in/dataset/greater-bengaluru-amendment-regulations-2025
 maps:
-  boundaries:
-    - id: gba-corporation-south
-      title: Bengaluru South City Corporation Official Boundary (GBA 2025 Delimitation)
-      layer_role: corporation
-      output_file: boundary.geojson
-      source_url: data/sources/in-ka-bengaluru-south/gba-corporations-2025.kml
-      select:
-        property: corporation_id
-        equals: BSCC
-    - id: gba-south-zones
-      title: Bengaluru South City Corporation GBA Administrative Zones (South Zone 1 & South Zone 2)
-      layer_role: gba_zones
-      output_file: gba-zones.geojson
-      source_url: data/sources/in-ka-bengaluru-south/gba-zones-2025.kml
-      select:
-        property: corporation_id
-        equals: BSCC
-    - id: gba-south-wards
-      title: Bengaluru South City Corporation Wards (Final 369-Ward Delimitation, Nov/Dec 2025)
-      layer_role: wards
-      output_file: wards.geojson
-      source_url: data/sources/in-ka-bengaluru-south/gba-wards-2025.kml
-      select:
-        property: corporation_id
-        equals: BSCC
-  planning_districts:
-    - id: rmp2015-south-planning-districts
-      title: RMP 2015 Planning Districts Intersecting Bengaluru South City Corporation
-      source_url: data/sources/in-ka-bengaluru-south/rmp2015-planning-districts.geojson
-      district_code_field: district_code
-      district_name_field: district_name
-      source_attribution: "Bangalore Development Authority Revised Master Plan 2015 Index & PLU Sheets (1:10,000 UTM Zone 43N / WGS 84; PD 204 label corrected to Benson Town per Plan v2.0 §3.3)"
-  zoning:
-    - id: rmp2015-south-plu-zones
-      kind: imported
-      source_url: data/sources/in-ka-bengaluru-south/rmp2015-south-zones-utm43n.geojson
-      zone_code_field: zone_code
-      zone_label_field: zone_label
-      planning_district: "1.09-3.18"
-      sheet: "RMP2015-PLU-South-Atlas"
-      source_attribution: "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)"
-  overlays:
-    - id: overlay-metro-11m
-      title: "Namma Metro 11 m Underground Influence Zone (Approximate, Derived)"
-      kind: derived_overlay
-      source: "Notification No. UDD 110 PRJ 2020 dated 11.05.2020 & OpenStreetMap / BMRCL Green & Pink Line Underground Alignments (ODbL)"
-      method: "Derived by this project via 11 m metric buffer (EPSG:32643 UTM 43N) on either side of Namma Metro underground alignment in Bengaluru South; labelled approximate because outer tunnel wall edges are not officially published (Plan v2.0 §5.C4, Rule R14)"
-      accuracy_m: 15.0
-      derived: true
-      buffer_m: 11.0
-      source_url: data/sources/in-ka-bengaluru-south/namma-metro-south-influence.geojson
-      external_url: null
-      rule_doc_id: metro-influence-2020
-      rule_clause: "metro-influence-2020:1.1"
-    - id: overlay-aai-cczm-ref
-      title: AAI Colour Coded Zoning Map (CCZM) — Reference Link to NOCAS Portal
-      kind: reference
-      source: Airports Authority of India NOCAS Portal & Ministry of Civil Aviation G.S.R. 751(E)
-      method: External reference link only; CCZM height surfaces are not redistributed or drawn per Plan v2.0 §3.7 and Rule R13
-      accuracy_m: null
-      derived: false
-      buffer_m: null
-      source_url: null
-      external_url: http://nocas2.aai.aero/nocas
-      rule_doc_id: aai-cczm
-      rule_clause: "bbl-2003:3.2"
+  boundaries: []
+  zoning: []

@@ -29,6 +29,10 @@ export interface JurisdictionConfig {
    */
   licence?: string;
   /**
+   * Semantic version for the published release of this jurisdiction.
+   */
+  release_version?: string | null;
+  /**
    * Two-letter uppercase country code.
    */
   country: string;
@@ -114,6 +118,8 @@ export interface DocumentConfig {
   layer:
     "statute" | "state_rules" | "planning" | "municipal" | "orders" | "overlay" | "national_reference" | "boundary";
   legal_status: "in_force" | "draft" | "superseded" | "withdrawn" | "status_unknown";
+  acquisition_status?: "acquired" | "pending" | "not_found" | "reference_only";
+  retrieval?: RetrievalRecord | null;
   status_evidence: StatusEvidenceConfig;
   notification_number?: string | null;
   gazette_reference?: string | null;
@@ -133,6 +139,27 @@ export interface DocumentConfig {
   amends?: string[];
   supersedes?: string[];
   cited_provisions?: CitedProvisionConfig[];
+}
+
+export interface RetrievalRecord {
+  fetched_at: string;
+  requested_url: string;
+  final_url: string;
+  http_status: number;
+  content_type: string | null;
+  content_length: number | null;
+  response_headers: RetrievalResponseHeaders;
+  sha256: string;
+  archive_url?: string | null;
+  archive_failure_reason?: string | null;
+  fetched_by: string;
+}
+
+export interface RetrievalResponseHeaders {
+  etag?: string | null;
+  last_modified?: string | null;
+  server?: string | null;
+  date?: string | null;
 }
 
 export interface StatusEvidenceConfig {
@@ -167,6 +194,8 @@ export interface BoundaryMapConfig {
   layer_role?: "corporation" | "gba_zones" | "wards";
   output_file?: string;
   source_url: string;
+  acquisition_status?: "acquired" | "pending" | "not_found" | "reference_only";
+  retrieval?: RetrievalRecord | null;
   select: BoundarySelectRule;
 }
 
@@ -245,6 +274,8 @@ export interface DocumentMetadata {
     "statute" | "state_rules" | "planning" | "municipal" | "orders" | "overlay" | "national_reference" | "boundary";
   role: "base" | "amendment" | "regulation" | "boundary" | "reference";
   legal_status: "in_force" | "draft" | "superseded" | "withdrawn" | "status_unknown";
+  acquisition_status?: "acquired" | "pending" | "not_found" | "reference_only";
+  retrieval?: RetrievalRecord | null;
   status_evidence: DocumentStatusEvidence;
   notification_number?: string | null;
   gazette_reference?: string | null;
@@ -287,6 +318,7 @@ export interface DocumentCopy {
   path: string;
   sha256: string;
   retrieved_at: string;
+  retrieval?: RetrievalRecord | null;
 }
 
 export interface DocumentCitedProvision {

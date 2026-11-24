@@ -22,6 +22,9 @@ from bylaws import (
     overrides as overrides_mod,
 )
 from bylaws import (
+    provenance as provenance_mod,
+)
+from bylaws import (
     publish as publish_mod,
 )
 from bylaws import (
@@ -49,6 +52,7 @@ SUBCOMMANDS: tuple[str, ...] = (
     "geo",
     "publish",
     "run-all",
+    "verify-sources",
 )
 
 
@@ -90,6 +94,24 @@ def acquire_cmd(jurisdiction: str) -> None:
     """Download raw documents and boundary layers with SHA-256 verification."""
     config = _load_or_abort(jurisdiction)
     acquire_mod.run_acquire(config)
+
+
+@main.command("verify-sources")
+@require_jurisdiction_option
+def verify_sources_cmd(jurisdiction: str) -> None:
+    """Refetch each acquired source for a jurisdiction and verify SHA-256 checksums."""
+    config = _load_or_abort(jurisdiction)
+    results = provenance_mod.verify_jurisdiction_sources(config)
+    click.echo(
+        f"[verify-sources] Checked {len(results)} source(s) for '{config.id}'."
+    )
+
+
+@main.command("check-provenance")
+def check_provenance_cmd() -> None:
+    """Run the R15/R16 provenance gate across all repository jurisdictions and files."""
+    provenance_mod.check_repository_provenance()
+    click.echo("[check-provenance] All non-test jurisdictions and files passed R15/R16 provenance checks.")
 
 
 @main.command("parse")
@@ -167,9 +189,8 @@ def geo_cmd(jurisdiction: str) -> None:
 @click.option(
     "--version",
     "release_version",
-    default="0.1.0",
-    show_default=True,
-    help="Semantic version for the published release.",
+    default=None,
+    help="Optional semantic version override (defaults to release_version in jurisdiction YAML).",
 )
 @click.option(
     "--dry-run",
@@ -180,7 +201,7 @@ def geo_cmd(jurisdiction: str) -> None:
 def publish_cmd(
     jurisdiction: str,
     target: str | None,
-    release_version: str,
+    release_version: str | None,
     dry_run: bool,
 ) -> None:
     """Build release manifest and publish processed dataset to storage."""
@@ -212,15 +233,14 @@ def publish_cmd(
 @click.option(
     "--version",
     "release_version",
-    default="0.1.0",
-    show_default=True,
-    help="Semantic version for the published release.",
+    default=None,
+    help="Optional semantic version override (defaults to release_version in jurisdiction YAML).",
 )
 def run_all_cmd(
     jurisdiction: str,
     parser_name: str,
     target: str | None,
-    release_version: str,
+    release_version: str | None,
 ) -> None:
     """Run all pipeline stages in sequence (acquire -> parse -> structure -> amendments -> geo -> apply-overrides -> validate -> publish)."""
     config = _load_or_abort(jurisdiction)
