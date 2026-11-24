@@ -45,6 +45,38 @@ export default async function DocumentViewerPage({
     consolidated,
   } = dataset;
 
+  if (!release) {
+    return (
+      <div className="min-h-screen bg-[#f5f3ed] text-[#080909]">
+        <TopNav
+          jurisdictionId={jurisdiction.id}
+          jurisdictionName={jurisdiction.name}
+          active="documents"
+        />
+        <main className="mx-auto max-w-5xl px-6 py-10">
+          <header className="border-b border-[#080909] pb-6">
+            <div className="dg-mono">Document · {jurisdiction.id}</div>
+            <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909]">
+              {jurisdiction.name}
+            </h1>
+          </header>
+          <section
+            aria-label="Publication status"
+            className="mt-8 border border-[#080909] bg-[#efeee8] p-6"
+          >
+            <h2 className="text-lg font-semibold text-[#080909]">
+              No data published yet
+            </h2>
+            <p className="dg-serif mt-2 max-w-2xl text-sm text-[#171917]">
+              Structured regulatory documents for {jurisdiction.name} are not
+              published yet.
+            </p>
+          </section>
+        </main>
+      </div>
+    );
+  }
+
   const docMeta = documents.find((d) => d.doc_id === doc);
   if (!docMeta) {
     notFound();
@@ -84,7 +116,7 @@ export default async function DocumentViewerPage({
             href={`/j/${jurisdiction.id}/sources`}
             className="font-mono text-xs uppercase tracking-[0.12em] text-[#5b5e56] underline hover:text-[#080909]"
           >
-            ← Back to Source Register ({jurisdiction.name})
+            Back to Source Register ({jurisdiction.name})
           </Link>
         </div>
 
@@ -96,7 +128,7 @@ export default async function DocumentViewerPage({
             </span>
             <div className="flex items-center gap-2">
               <span className="border border-[#080909] bg-[#f5f3ed] px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-[#080909]">
-                {isReferenceOnly ? "REFERENCE ONLY (R13)" : "FULL TEXT"}
+                {isReferenceOnly ? "REFERENCE ONLY" : "FULL TEXT"}
               </span>
               <StatusBadge status={docMeta.legal_status} />
             </div>
@@ -114,13 +146,13 @@ export default async function DocumentViewerPage({
             <div>
               <dt className="dg-mono text-[10px]">Notification / Gazette</dt>
               <dd className="font-mono text-[#080909]">
-                {docMeta.notification_number ?? "—"}
+                {docMeta.notification_number ?? "Not recorded"}
               </dd>
             </div>
             <div>
               <dt className="dg-mono text-[10px]">Notified / Effective</dt>
               <dd className="font-mono text-[#080909]">
-                {docMeta.notified_date ?? "—"} /{" "}
+                {docMeta.notified_date ?? "Not recorded"} /{" "}
                 {docMeta.effective_from ?? "Not in force"}
               </dd>
             </div>
@@ -152,7 +184,7 @@ export default async function DocumentViewerPage({
           >
             <div className="border-l-2 border-[#080909] bg-[#efeee8] p-4">
               <div className="dg-mono text-[#080909]">
-                Rule R13 — Text Rights Notice (Reference Only)
+                Text Rights Notice (Reference Only)
               </div>
               <p className="dg-serif mt-1 text-base text-[#171917]">
                 {docMeta.text_rights?.reason}
@@ -196,11 +228,13 @@ export default async function DocumentViewerPage({
                   <tbody>
                     {(docMeta.cited_provisions ?? []).map((cp, idx) => (
                       <tr key={idx}>
-                        <td className="font-mono text-xs">{cp.part ?? "—"}</td>
+                        <td className="font-mono text-xs">
+                          {cp.part ?? "Not specified"}
+                        </td>
                         <td className="font-mono text-xs font-medium">
                           {cp.clause}
                         </td>
-                        <td>{cp.topic ?? "—"}</td>
+                        <td>{cp.topic ?? "Not specified"}</td>
                         <td className="font-mono text-xs">
                           <div className="flex flex-wrap gap-2">
                             {cp.cited_by.map((cid) => {
@@ -217,7 +251,9 @@ export default async function DocumentViewerPage({
                             })}
                           </div>
                         </td>
-                        <td className="text-xs">{cp.where_to_obtain ?? "—"}</td>
+                        <td className="text-xs">
+                          {cp.where_to_obtain ?? "Not specified"}
+                        </td>
                       </tr>
                     ))}
                   </tbody>

@@ -102,7 +102,6 @@ export function ClausePanel({
           </p>
         ) : (
           visibleClauses.map((clause, idx) => {
-            // Rule R12: legal_status is strictly legislative status, never conflated with record_version
             const status: DisplayLegalStatus =
               clause.legal_status ?? "status_unknown";
             const validPages = Array.from(

@@ -23,6 +23,38 @@ export default async function TimelinePage({ params }: TimelinePageProps) {
 
   const { jurisdiction, release, documents, amendments } = dataset;
 
+  if (!release) {
+    return (
+      <div className="min-h-screen bg-[#f5f3ed] text-[#080909]">
+        <TopNav
+          jurisdictionId={jurisdiction.id}
+          jurisdictionName={jurisdiction.name}
+          active="timeline"
+        />
+        <main className="mx-auto max-w-5xl px-6 py-10">
+          <header className="border-b border-[#080909] pb-6">
+            <div className="dg-mono">Timeline · {jurisdiction.id}</div>
+            <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909]">
+              {jurisdiction.name}: Regulatory Timeline
+            </h1>
+          </header>
+          <section
+            aria-label="Publication status"
+            className="mt-8 border border-[#080909] bg-[#efeee8] p-6"
+          >
+            <h2 className="text-lg font-semibold text-[#080909]">
+              No data published yet
+            </h2>
+            <p className="dg-serif mt-2 max-w-2xl text-sm text-[#171917]">
+              Chronological regulatory history for {jurisdiction.name} is not
+              published yet.
+            </p>
+          </section>
+        </main>
+      </div>
+    );
+  }
+
   const sortedDocs = [...documents].sort((a, b) => {
     const dateA = a.notified_date || a.effective_from || "0000-00-00";
     const dateB = b.notified_date || b.effective_from || "0000-00-00";
@@ -55,7 +87,7 @@ export default async function TimelinePage({ params }: TimelinePageProps) {
             Instrument(s)
           </div>
           <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909]">
-            {jurisdiction.name} — Regulatory Timeline
+            {jurisdiction.name}: Regulatory Timeline
           </h1>
           <p className="dg-serif mt-2 max-w-3xl text-base text-[#171917]">
             Every enabling statute, master plan zoning regulation, municipal

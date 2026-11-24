@@ -3,6 +3,7 @@ import {
   fetchJurisdictionDataset,
   fetchManifest,
   getVisibleJurisdictions,
+  isWithdrawnRelease,
 } from "@/lib/data";
 import { TopNav } from "@/components/TopNav";
 
@@ -10,6 +11,9 @@ export default async function AboutPage() {
   const manifest = await fetchManifest();
   const visible = getVisibleJurisdictions(manifest);
   const primary = visible[0];
+  const withdrawnRelease = primary?.releases.find((rel) =>
+    isWithdrawnRelease(rel)
+  );
   const dataset = primary
     ? await fetchJurisdictionDataset(primary.id)
     : null;
@@ -24,13 +28,13 @@ export default async function AboutPage() {
         jurisdictionId={primary?.id}
         jurisdictionName={primary?.name}
         active="about"
-        releaseVersion={primary?.latest_release}
+        releaseVersion={primary?.latest_release ?? undefined}
       />
 
       <main className="mx-auto max-w-5xl space-y-8 px-6 py-8">
         <header className="border-b border-[#080909] pb-6">
           <div className="dg-mono">
-            Methodology · Verification · Provenance · Open Licences
+            Methodology · Provenance · Open Licences
           </div>
           <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909]">
             About Structured Building Bylaws
@@ -44,12 +48,29 @@ export default async function AboutPage() {
         </header>
 
         <section
-          aria-label="Pipeline methodology and rules"
+          aria-label="Current project status"
+          className="border border-[#080909] bg-[#efeee8] p-6"
+        >
+          <div className="dg-mono text-[#080909]">Current Status</div>
+          <h2 className="mt-1 text-lg font-semibold text-[#080909]">
+            {withdrawnRelease
+              ? `Release ${withdrawnRelease.version} withdrawn; real acquisition under way`
+              : "Real source acquisition and verification under way"}
+          </h2>
+          <p className="dg-serif mt-2 text-sm leading-relaxed text-[#171917]">
+            {primary && withdrawnRelease
+              ? `The initial release (${withdrawnRelease.version}) for ${primary.name} has been withdrawn (${withdrawnRelease.withdrawn_reason}). Real source PDFs, amendment notifications, and official maps are now being acquired with HTTP retrieval records and archive snapshots, and will be published as each stage is verified.`
+              : "Real source PDFs, amendment notifications, and official maps are being acquired with HTTP retrieval records and archive snapshots, and will be published as each stage is verified."}
+          </p>
+        </section>
+
+        <section
+          aria-label="Pipeline methodology"
           className="grid grid-cols-1 gap-6 md:grid-cols-2"
         >
           <div className="border border-[#080909] bg-[#efeee8] p-5">
             <div className="dg-mono text-[#080909]">
-              1. Mandatory Provenance &amp; Verification (Rules R2, R9, R10)
+              1. Provenance &amp; Verification States
             </div>
             <h2 className="mt-1 text-lg font-semibold text-[#080909]">
               Verification Levels
@@ -59,53 +80,46 @@ export default async function AboutPage() {
                 <strong className="font-mono text-xs uppercase">
                   unverified
                 </strong>
-                : Raw automated extraction prior to QA verification.
+                : Raw automated extraction prior to quality checks.
               </li>
               <li>
                 <strong className="font-mono text-xs uppercase">
                   machine_checked
                 </strong>
-                : Verified by automated 9-point QA and clause-to-page self-check
-                with page and bounding-box citations.
+                : Checked by automated quality thresholds and page-image
+                self-checks with page and bounding-box citations.
               </li>
               <li>
                 <strong className="font-mono text-xs uppercase">
                   human_verified
                 </strong>
-                : Reserved strictly for human reviewers (never assigned by
-                automated agents, Rule R10). Corrections create immutable
-                record versions (`@v1` → `@v2`, Rule R9 &amp; R12).
+                : Reserved strictly for records checked directly by a person
+                against the source document. Data corrections create new record
+                versions rather than editing verified records in place.
               </li>
             </ul>
           </div>
 
           <div className="border border-[#080909] bg-[#efeee8] p-5">
             <div className="dg-mono text-[#080909]">
-              2. Derived Work &amp; Text Rights (Rules R13 &amp; R14)
+              2. Derived Work &amp; Text Rights
             </div>
             <h2 className="mt-1 text-lg font-semibold text-[#080909]">
-              What &ldquo;Derived by This Project&rdquo; Means
+              What Derived by This Project Means
             </h2>
             <p className="dg-serif mt-2 text-sm text-[#171917]">
-              Under <strong>Rule R14</strong>, any consolidated &ldquo;as
-              amended&rdquo; clause text, georeferenced master plan zone polygon,
-              or buffered influence-zone overlay computed by our pipeline carries{" "}
-              <code className="font-mono text-xs">derived: true</code>, is
-              labelled{" "}
-              <em>
-                &ldquo;derived by this project, not an official
-                publication&rdquo;
-              </em>
-              , states its exact method and accuracy estimate, and links back to
-              the underlying official gazettes.
+              Any consolidated &ldquo;as amended&rdquo; text, georeferenced
+              master plan zone polygon, or buffered influence-zone overlay
+              computed by our pipeline is explicitly marked as derived by this
+              project, not an official publication, states the method and
+              measured accuracy, and links back to the underlying source
+              documents.
             </p>
             <p className="dg-serif mt-2 text-sm text-[#171917]">
-              Under <strong>Rule R13</strong>, government statutes, rules,
-              regulations, bye-laws, and gazette notifications are published as{" "}
-              <code className="font-mono text-xs">full_text</code>, whereas
-              copyrighted standards and restricted aviation portals are recorded
-              as <code className="font-mono text-xs">reference_only</code>{" "}
-              citations without reproducing their text or height surfaces.
+              Government statutes, rules, regulations, bye-laws, and gazette
+              notifications are published as full text where available, whereas
+              copyrighted standards (such as the National Building Code) are
+              listed as references only without reproducing their text.
             </p>
           </div>
         </section>
@@ -119,13 +133,11 @@ export default async function AboutPage() {
             Open Licences &amp; Upstream Sources
           </h2>
           <p className="dg-serif mt-2 text-sm text-[#171917]">
-            <strong>Code Licence</strong>: Apache License 2.0 (
-            <code className="font-mono text-xs">Apache-2.0</code>).{" "}
+            <strong>Code Licence</strong>: Apache License 2.0 (Apache-2.0).{" "}
             <strong>Data Licence</strong>: Creative Commons Attribution 4.0
-            International (<code className="font-mono text-xs">CC BY 4.0</code>
-            ).{" "}
+            International (CC BY 4.0).{" "}
             <strong>Disclaimer</strong>: This platform is an informational and
-            research dataset, not legal or architectural advice; always verify
+            research dataset, not legal or architectural advice; always confirm
             plot boundaries and applicable rules with the competent planning and
             municipal authorities.
           </p>
@@ -136,9 +148,8 @@ export default async function AboutPage() {
             </h3>
             <ul className="dg-serif mt-2 list-disc space-y-1 pl-5 text-sm text-[#171917]">
               <li>
-                OpenStreetMap contributors (Open Database License,{" "}
-                <code className="font-mono text-xs">ODbL 1.0</code>) for base
-                map tiles and transit alignment references.
+                OpenStreetMap contributors (Open Database License, ODbL 1.0) for
+                base map tiles and transit alignment references.
               </li>
               {issuingAuthorities.map((auth, idx) => (
                 <li key={idx}>{auth}</li>

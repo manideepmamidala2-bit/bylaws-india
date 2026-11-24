@@ -627,7 +627,7 @@ export interface JurisdictionManifest {
   name: string;
   aliases?: string[];
   visibility?: "public" | "test";
-  latest_release: string;
+  latest_release: string | null;
   /**
    * @minItems 1
    */
@@ -636,13 +636,15 @@ export interface JurisdictionManifest {
 
 export interface ReleaseEntry {
   version: string;
+  status?: "published" | "withdrawn";
+  withdrawn_reason?: string | null;
   released_at: string;
   licence: string;
-  download_zip: string;
-  sha256sums: string;
-  declarations: string;
-  files: ReleaseFiles;
-  drafts: ReleaseDrafts;
+  download_zip: string | null;
+  sha256sums: string | null;
+  declarations: string | null;
+  files: ReleaseFiles | null;
+  drafts: ReleaseDrafts | null;
   changelog: string;
 }
 

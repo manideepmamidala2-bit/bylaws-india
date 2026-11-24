@@ -43,6 +43,38 @@ export default async function JurisdictionMapPage({
     declarations,
   } = dataset;
 
+  if (!release) {
+    return (
+      <div className="flex min-h-screen flex-col bg-[#f5f3ed] text-[#080909]">
+        <TopNav
+          jurisdictionId={jurisdiction.id}
+          jurisdictionName={jurisdiction.name}
+          active="map"
+        />
+        <main className="mx-auto w-full max-w-6xl px-6 py-10">
+          <header className="border-b border-[#080909] pb-6">
+            <div className="dg-mono">{jurisdiction.id} · Map</div>
+            <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909]">
+              {jurisdiction.name}
+            </h1>
+          </header>
+          <section
+            aria-label="Publication status"
+            className="mt-8 border border-[#080909] bg-[#efeee8] p-6"
+          >
+            <h2 className="text-lg font-semibold text-[#080909]">
+              No data published yet
+            </h2>
+            <p className="dg-serif mt-2 max-w-2xl text-sm text-[#171917]">
+              Official boundaries and land-use zones for {jurisdiction.name} are
+              being acquired and verified. No map layers are published yet.
+            </p>
+          </section>
+        </main>
+      </div>
+    );
+  }
+
   const { activeClauses } = partitionClauseVersions(clauses);
   const inForceDocsCount = documents.filter(
     (d) => d.legal_status === "in_force"
@@ -75,7 +107,6 @@ export default async function JurisdictionMapPage({
         licence={release.licence}
       />
 
-      {/* Dynamic Accuracy Note Strip */}
       <div
         role="region"
         aria-label="Zone boundary accuracy notice"
@@ -85,7 +116,6 @@ export default async function JurisdictionMapPage({
         <span>{accuracyMessage}</span>
       </div>
 
-      {/* Jurisdiction Header & Coverage Strip */}
       <div className="border-b border-[#080909] bg-[#f5f3ed] px-6 py-5">
         <div className="dg-mono">
           {jurisdiction.id}

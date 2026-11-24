@@ -3,6 +3,7 @@ import {
   fetchDeclarations,
   fetchManifest,
   getVisibleJurisdictions,
+  isWithdrawnRelease,
 } from "@/lib/data";
 import { TopNav } from "@/components/TopNav";
 
@@ -12,22 +13,19 @@ export default async function DataReleasesPage() {
   const primary = visibleJurisdictions[0];
 
   const declarationsByJurisdiction = await Promise.all(
-    visibleJurisdictions.map(async (j) => ({
-      id: j.id,
-      declarations: await fetchDeclarations(j.id),
-    }))
+    visibleJurisdictions.map(async (j) => {
+      const hasActiveRelease =
+        Boolean(j.latest_release) &&
+        j.releases.some((rel) => !isWithdrawnRelease(rel));
+      return {
+        id: j.id,
+        declarations: hasActiveRelease ? await fetchDeclarations(j.id) : null,
+      };
+    })
   );
   const declMap = new Map(
     declarationsByJurisdiction.map((item) => [item.id, item.declarations])
   );
-
-  const bibtexSnippet = `@dataset{structured_building_bylaws_2026,
-  title     = {Structured Building Bylaws — Versioned Open Regulatory Dataset},
-  year      = {2026},
-  version   = {${primary?.latest_release ?? "1.0.0"}},
-  license   = {CC-BY-4.0},
-  url       = {https://bylaws-india.vercel.app/data}
-}`;
 
   return (
     <div className="min-h-screen bg-[#f5f3ed] text-[#080909]">
@@ -35,7 +33,7 @@ export default async function DataReleasesPage() {
         jurisdictionId={primary?.id}
         jurisdictionName={primary?.name}
         active="data"
-        releaseVersion={primary?.latest_release}
+        releaseVersion={primary?.latest_release ?? undefined}
       />
 
       <main className="mx-auto max-w-6xl px-6 py-8">
@@ -47,16 +45,19 @@ export default async function DataReleasesPage() {
             Dataset Releases, Checksums &amp; Declarations
           </h1>
           <p className="dg-serif mt-2 max-w-3xl text-base text-[#171917]">
-            Download complete versioned regulatory bundles (`.zip`), verify file
-            integrity against `SHA256SUMS`, download machine-readable source
-            registers (`CSV` and `JSON`), and inspect self-declared scope and
-            contested-status notes (`declarations.json`).
+            Download versioned regulatory bundles, verify file integrity against
+            published SHA-256 checksums, download machine-readable source
+            registers in CSV and JSON, and inspect declared coverage and gaps.
           </p>
         </header>
 
         <div className="space-y-8">
           {visibleJurisdictions.map((j) => {
             const decl = declMap.get(j.id);
+            const hasActiveRelease =
+              Boolean(j.latest_release) &&
+              j.releases.some((rel) => !isWithdrawnRelease(rel));
+
             return (
               <section
                 key={j.id}
@@ -71,66 +72,90 @@ export default async function DataReleasesPage() {
                     </h2>
                   </div>
                   <span className="border border-[#080909] bg-[#efeee8] px-2.5 py-1 font-mono text-xs uppercase">
-                    Latest: v{j.latest_release}
+                    {hasActiveRelease
+                      ? `Latest: v${j.latest_release}`
+                      : "No data published yet"}
                   </span>
                 </div>
 
                 <div className="mt-4 space-y-4">
-                  {j.releases.map((rel) => (
-                    <div
-                      key={rel.version}
-                      className="border border-[#c8ccc0] bg-[#efeee8] p-4"
-                    >
-                      <div className="flex flex-wrap items-center justify-between gap-2">
-                        <span className="font-mono text-sm font-semibold text-[#080909]">
-                          Release v{rel.version} · {rel.released_at}
-                        </span>
-                        <span className="font-mono text-xs text-[#5b5e56]">
-                          Licence: {rel.licence}
-                        </span>
-                      </div>
-                      <p className="dg-serif mt-1 text-sm text-[#171917]">
-                        {rel.changelog}
-                      </p>
+                  {j.releases.map((rel) => {
+                    const withdrawn = isWithdrawnRelease(rel);
+                    const withdrawnReason =
+                      rel.withdrawn_reason ||
+                      `Synthetic demonstration data, not the law of ${j.name}`;
 
-                      <div className="mt-3 flex flex-wrap gap-3 font-mono text-[11px] uppercase tracking-[0.12em]">
-                        <a
-                          href={rel.download_zip}
-                          className="border border-[#080909] bg-[#080909] px-3 py-1.5 text-[#f5f3ed] no-underline"
-                        >
-                          Download Bundle (.zip) ↓
-                        </a>
-                        <a
-                          href={rel.sha256sums}
-                          className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 text-[#080909] no-underline"
-                        >
-                          SHA256SUMS
-                        </a>
-                        {rel.files.sources_csv && (
-                          <a
-                            href={rel.files.sources_csv}
-                            className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 text-[#080909] no-underline"
-                          >
-                            Source Register (.csv)
-                          </a>
+                    return (
+                      <div
+                        key={rel.version}
+                        className="border border-[#c8ccc0] bg-[#efeee8] p-4"
+                      >
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <span className="font-mono text-sm font-semibold text-[#080909]">
+                            Release v{rel.version} · {rel.released_at}
+                          </span>
+                          <span className="border border-[#080909] bg-[#f5f3ed] px-2 py-0.5 font-mono text-xs uppercase text-[#080909]">
+                            {withdrawn ? "Withdrawn" : `Licence: ${rel.licence}`}
+                          </span>
+                        </div>
+
+                        {withdrawn ? (
+                          <p className="dg-serif mt-2 text-sm text-[#171917]">
+                            Withdrawn: {withdrawnReason}
+                          </p>
+                        ) : (
+                          <>
+                            <p className="dg-serif mt-1 text-sm text-[#171917]">
+                              {rel.changelog}
+                            </p>
+
+                            <div className="mt-3 flex flex-wrap gap-3 font-mono text-[11px] uppercase tracking-[0.12em]">
+                              {rel.download_zip && (
+                                <a
+                                  href={rel.download_zip}
+                                  className="border border-[#080909] bg-[#080909] px-3 py-1.5 text-[#f5f3ed] no-underline"
+                                >
+                                  Download Bundle (.zip)
+                                </a>
+                              )}
+                              {rel.sha256sums && (
+                                <a
+                                  href={rel.sha256sums}
+                                  className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 text-[#080909] no-underline"
+                                >
+                                  SHA256SUMS
+                                </a>
+                              )}
+                              {rel.files?.sources_csv && (
+                                <a
+                                  href={rel.files.sources_csv}
+                                  className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 text-[#080909] no-underline"
+                                >
+                                  Source Register (.csv)
+                                </a>
+                              )}
+                              {rel.files?.sources_json && (
+                                <a
+                                  href={rel.files.sources_json}
+                                  className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 text-[#080909] no-underline"
+                                >
+                                  Source Register (.json)
+                                </a>
+                              )}
+                              {rel.declarations && (
+                                <a
+                                  href={rel.declarations}
+                                  className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 text-[#080909] no-underline"
+                                >
+                                  Declarations (.json)
+                                </a>
+                              )}
+                            </div>
+                          </>
                         )}
-                        {rel.files.sources_json && (
-                          <a
-                            href={rel.files.sources_json}
-                            className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 text-[#080909] no-underline"
-                          >
-                            Source Register (.json)
-                          </a>
-                        )}
-                        <a
-                          href={rel.declarations}
-                          className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 text-[#080909] no-underline"
-                        >
-                          declarations.json
-                        </a>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 {decl && (
@@ -198,21 +223,20 @@ export default async function DataReleasesPage() {
           >
             <div className="dg-mono">Licence &amp; Citation</div>
             <h2 className="mt-1 text-xl font-semibold text-[#080909]">
-              How to Cite This Dataset (CC BY 4.0)
+              Open Licences (CC BY 4.0 &amp; Apache-2.0)
             </h2>
             <p className="dg-serif mt-2 text-sm text-[#171917]">
-              All structured clause trees, amendment links, consolidated views,
-              georeferenced zoning layers, and reports are licensed under{" "}
+              Structured regulatory data, consolidated views, georeferenced
+              zoning layers, and reports are published under{" "}
               <strong>
                 Creative Commons Attribution 4.0 International (CC BY 4.0)
               </strong>
-              . Underlying statutes, rules, regulations, bye-laws, and gazette
-              notifications are public government publications under Section
-              52(1)(q) of the Indian Copyright Act, 1957.
+              . Source code is licensed under{" "}
+              <strong>Apache License 2.0 (Apache-2.0)</strong>. Underlying
+              statutes, rules, regulations, bye-laws, and gazette notifications
+              are public government publications under Section 52(1)(q) of the
+              Indian Copyright Act, 1957.
             </p>
-            <pre className="mt-3 overflow-x-auto border border-[#080909] bg-[#f5f3ed] p-3 font-mono text-xs text-[#080909]">
-              {bibtexSnippet}
-            </pre>
           </section>
         </div>
       </main>
