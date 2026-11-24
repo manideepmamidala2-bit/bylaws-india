@@ -41,6 +41,8 @@ export function ClauseTree({
 }: ClauseTreeProps) {
   const [query, setQuery] = useState("");
   const [showAll, setShowAll] = useState(false);
+  const [showAnnotations, setShowAnnotations] = useState(false);
+  const [showOutline, setShowOutline] = useState(true);
   const [viewMode, setViewMode] = useState<"original" | "consolidated">(
     "original"
   );
@@ -141,6 +143,16 @@ export function ClauseTree({
     );
   });
 
+  const outlineNodes = displayClauses.filter(
+    (c) =>
+      c.type === "part" ||
+      c.type === "chapter" ||
+      c.type === "section" ||
+      c.type === "schedule" ||
+      c.type === "appendix" ||
+      c.type === "annexure"
+  );
+
   return (
     <section aria-label="Clause tree browser" className="space-y-4">
       <div className="flex flex-wrap items-end justify-between gap-4 border-b border-[#c8ccc0] pb-4">
@@ -160,6 +172,29 @@ export function ClauseTree({
             className="mt-1.5 w-full border border-[#080909] bg-[#f5f3ed] px-3 py-2 text-sm text-[#080909]"
           />
         </div>
+
+        <div className="flex flex-wrap items-center gap-3">
+          <label className="flex cursor-pointer items-center gap-1.5 border border-[#080909] bg-[#efeee8] px-2.5 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.12em] text-[#080909]">
+            <input
+              type="checkbox"
+              checked={showAnnotations}
+              onChange={(e) => setShowAnnotations(e.target.checked)}
+              className="h-3.5 w-3.5 accent-[#080909]"
+            />
+            <span>Show annotations</span>
+          </label>
+
+          {outlineNodes.length > 0 && (
+            <label className="flex cursor-pointer items-center gap-1.5 border border-[#080909] bg-[#efeee8] px-2.5 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.12em] text-[#080909]">
+              <input
+                type="checkbox"
+                checked={showOutline}
+                onChange={(e) => setShowOutline(e.target.checked)}
+                className="h-3.5 w-3.5 accent-[#080909]"
+              />
+              <span>Outline ({outlineNodes.length})</span>
+            </label>
+          )}
 
         {hasVersionedAmendments && (
           <div
@@ -208,6 +243,7 @@ export function ClauseTree({
             )}
           </div>
         )}
+        </div>
       </div>
 
       {viewMode === "consolidated" && (
@@ -230,6 +266,47 @@ export function ClauseTree({
         </div>
       )}
 
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+        {showOutline && outlineNodes.length > 0 && (
+          <aside
+            aria-label="Document outline navigation"
+            className="max-h-[680px] overflow-y-auto border border-[#080909] bg-[#efeee8] p-3 lg:col-span-3"
+          >
+            <div className="dg-mono mb-2 border-b border-[#c8ccc0] pb-1.5 text-[10px] text-[#080909]">
+              Document Outline ({outlineNodes.length})
+            </div>
+            <ul className="space-y-1 font-mono text-xs">
+              {outlineNodes.slice(0, 80).map((onode) => {
+                const oeid = onode.eid ?? onode.number;
+                const oIndent =
+                  onode.type === "part" || onode.type === "schedule"
+                    ? "font-semibold"
+                    : "pl-2 text-[11px]";
+                return (
+                  <li key={oeid} className={oIndent}>
+                    <a
+                      href={`#node-${oeid}`}
+                      className="block truncate py-0.5 text-[#080909] no-underline hover:underline"
+                    >
+                      {onode.native_number ?? onode.number}{" "}
+                      {onode.heading && onode.heading !== onode.native_number
+                        ? `· ${onode.heading}`
+                        : ""}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </aside>
+        )}
+
+        <div
+          className={
+            showOutline && outlineNodes.length > 0
+              ? "lg:col-span-9"
+              : "lg:col-span-12"
+          }
+        >
       <div className="divide-y divide-[#c8ccc0] border border-[#080909] bg-[#f5f3ed]">
         {(showAll || normalizedQuery.length > 0
           ? filtered
@@ -514,24 +591,35 @@ export function ClauseTree({
                   </div>
                 ))}
 
-              {/* Layer 2 Stand-Off Annotation Links */}
-              {linkAnns.length > 0 && (
+              {/* Layer 2 Stand-Off Annotation Links (shown when Show annotations is enabled) */}
+              {showAnnotations && linkAnns.length > 0 && (
                 <div className="mt-2 flex flex-wrap items-center gap-2 font-mono text-[10.5px]">
                   <span className="uppercase tracking-[0.12em] text-[#5b5e56]">
                     Annotations ({linkAnns.length}):
                   </span>
                   {linkAnns.slice(0, MAX_INLINE_ANNOTATIONS).map((ann) => {
                     const isUnresolved = ann.value.startsWith("unresolved:");
-                    const targetHref = isUnresolved
-                      ? undefined
-                      : `#node-${ann.value}`;
+                    const isExternal = ann.value.startsWith("external:");
+                    const targetHref =
+                      isUnresolved || isExternal
+                        ? undefined
+                        : `#node-${ann.value}`;
+                    const defNode =
+                      ann.kind === "defined_term_use"
+                        ? byEid.get(ann.value)
+                        : undefined;
+                    const tooltipText = defNode
+                      ? `Definition (${defNode.defines ?? ann.target.span_text}): ${defNode.text ?? defNode.content ?? ""}`
+                      : undefined;
                     const labelPrefix =
                       ann.kind === "defined_term_use" ? "Term" : "Ref";
                     return targetHref ? (
                       <a
                         key={ann.annotation_id}
                         href={targetHref}
-                        className="border border-[#080909] bg-[#efeee8] px-2 py-0.5 text-[#080909] underline"
+                        title={tooltipText}
+                        data-refers-to={ann.value}
+                        className="akn-ref border border-[#080909] bg-[#efeee8] px-2 py-0.5 text-[#080909] underline decoration-dotted"
                       >
                         {labelPrefix}: {ann.target.span_text} → {ann.value}
                       </a>
@@ -540,7 +628,11 @@ export function ClauseTree({
                         key={ann.annotation_id}
                         className="border border-dashed border-[#5b5e56] px-2 py-0.5 text-[#5b5e56]"
                       >
-                        {labelPrefix}: {ann.target.span_text} (unresolved)
+                        {labelPrefix}: {ann.target.span_text} (
+                        {isExternal
+                          ? ann.value.replace("external:", "")
+                          : "unresolved"}
+                        )
                       </span>
                     );
                   })}
@@ -711,6 +803,8 @@ export function ClauseTree({
             </details>
           );
         })}
+      </div>
+        </div>
       </div>
       {!showAll &&
         normalizedQuery.length === 0 &&

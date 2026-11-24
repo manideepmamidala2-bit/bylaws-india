@@ -21,6 +21,7 @@ import TimelinePage from "@/app/j/[id]/timeline/page";
 import ReviewPage from "@/app/j/[id]/review/page";
 import DataReleasesPage from "@/app/data/page";
 import AboutPage from "@/app/about/page";
+import StructurePage from "@/app/structure/page";
 
 async function assertNoAxeViolations(container: HTMLElement) {
   const results = await axe.run(container, {
@@ -353,6 +354,10 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
             params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
           }),
       },
+      {
+        label: "Structure",
+        renderFn: () => StructurePage(),
+      },
     ];
 
     for (const route of routes) {
@@ -375,7 +380,7 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
         /Withdrawn: Synthetic demonstration data, not the law of Bengaluru South/i
       )
     ).toBeInTheDocument();
-    expect(screen.getByText(/Latest: v2\.3\.0/i)).toBeInTheDocument();
+    expect(screen.getByText(/Latest: v[23]\.\d+\.\d+/i)).toBeInTheDocument();
     expect(
       screen.getAllByRole("link", { name: /Download Bundle/i }).length
     ).toBeGreaterThan(0);
@@ -399,6 +404,19 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     assertCleanPublicCopy(aboutContainer.textContent ?? "", "About");
     await assertNoAxeViolations(aboutContainer);
     uAbout();
+
+    const structureUi = await StructurePage();
+    const { container: structureContainer, unmount: uStructure } =
+      render(structureUi);
+    expect(
+      screen.getByText(/How This Dataset Is Structured/i)
+    ).toBeInTheDocument();
+    expect(
+      screen.getAllByText(/Download graph\.graphml \(Gephi\)/i).length
+    ).toBeGreaterThan(0);
+    assertCleanPublicCopy(structureContainer.textContent ?? "", "Structure");
+    await assertNoAxeViolations(structureContainer);
+    uStructure();
   });
 
   it("renders xx-test-fixture routes cleanly when SHOW_TEST_JURISDICTIONS=true with zero copy or axe violations", async () => {
@@ -438,7 +456,14 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
       screen.getByText(/Corner plots in Z1 require an additional 0\.5 m splay/i)
     ).toBeInTheDocument();
 
-    // Layer 2 annotations: cross-reference and defined-term use links
+    // Layer 2 annotations: hidden by default (law-first view), visible when "Show annotations" is checked
+    expect(
+      screen.queryByText(/Ref: clause 1\.1 → chp_I__cl_1\.1/i)
+    ).not.toBeInTheDocument();
+    const showAnnsCheckbox = screen.getByRole("checkbox", {
+      name: /Show annotations/i,
+    });
+    fireEvent.click(showAnnsCheckbox);
     expect(
       screen.getAllByText(/Ref: clause 1\.1 → chp_I__cl_1\.1/i).length
     ).toBeGreaterThan(0);

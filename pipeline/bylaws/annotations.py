@@ -8,18 +8,20 @@ from typing import Any
 from bylaws.schema_validator import validate_payload
 
 CROSS_REF_SPAN_RE = re.compile(
-    r"\b(?P<kind>clause|bye-?law|regulation|section|rule|table|schedule|appendix|annexure|part)\s*[-–]?\s*"
-    r"(?P<num>(?:[IVXLCDM]+|\d+)(?:\s*-\s*[A-Za-z0-9]+|(?:\.\d+)*[A-Za-z]?)?)\b",
+    r"\b(?P<kind>clause|sub-?clause|bye-?law|regulation|section|rule|table|schedule|appendix|annexure|chapter)\s*[-–.]?\s*"
+    r"(?P<num>(?:\([a-z0-9]+\)|[IVXLCDM]+|\d+)(?:\s*-\s*[A-Za-z0-9]+|(?:\.\d+)*[A-Za-z]?(?:\([a-z0-9]+\))?)?)"
+    r"(?:\s+of\s+(?:the\s+)?(?P<ext>Act|Karnataka\s+[A-Za-z\s]+Act(?:,\s*\d{4})?|National\s+Building\s+Code|Zoning\s+Regulations))?\b",
     re.IGNORECASE,
 )
 
 PROVISION_RULES: tuple[tuple[str, re.Pattern[str]], ...] = (
-    ("exception", re.compile(r"\bProvided\s+(?:further\s+)?that\b", re.IGNORECASE)),
-    ("commencement", re.compile(r"\b(?:come\s+into\s+force|commencement)\b", re.IGNORECASE)),
-    ("scope", re.compile(r"\b(?:apply\s+to|applicable\s+to)\b", re.IGNORECASE)),
-    ("prohibition", re.compile(r"\b(?:shall\s+not|No\s+[a-z]+\s+building|prohibited)\b")),
+    ("commencement", re.compile(r"\b(?:come\s+into\s+(?:force|operation)|commencement)\b", re.IGNORECASE)),
+    ("scope", re.compile(r"\b(?:short\s+title|shall\s+be\s+called|apply\s+to|applicable\s+(?:to|within))\b", re.IGNORECASE)),
+    ("exception", re.compile(r"\bProvided\s+(?:further\s+|also\s+)?that\b", re.IGNORECASE)),
+    ("prohibition", re.compile(r"\b(?:shall\s+not|no\s+person\s+shall|no\s+[a-z]+\s+building\s+shall|prohibited)\b", re.IGNORECASE)),
+    ("permission", re.compile(r"\b(?:(?:Authority|Commissioner|Corporation|Government)\s+may|may\s+be\s+permitted|is\s+permissible)\b", re.IGNORECASE)),
     ("obligation", re.compile(r"\b(?:shall|must)\b", re.IGNORECASE)),
-    ("permission", re.compile(r"\b(?:may|permitted)\b", re.IGNORECASE)),
+    ("fee", re.compile(r"\b(?:licence\s+fee|scrutiny\s+fee|security\s+deposit|ground\s+rent|cess|Rs\.\s*\d+)\b", re.IGNORECASE)),
 )
 
 
@@ -177,28 +179,103 @@ def build_document_annotations(tree_payload: dict[str, Any]) -> dict[str, Any]:
     annotations: list[dict[str, Any]] = []
     seq = 0
 
+    node_by_eid: dict[str, dict[str, Any]] = {}
+    for node in active_nodes:
+        eid = str(node.get("eid") or "")
+        if eid:
+            node_by_eid[eid] = node
+
+    def _has_definition_ancestor(node: dict[str, Any]) -> bool:
+        curr_p = node.get("parent_eid")
+        visited: set[str] = set()
+        while curr_p and curr_p in node_by_eid and curr_p not in visited:
+            visited.add(curr_p)
+            p_node = node_by_eid[curr_p]
+            if p_node.get("type") == "definition":
+                return True
+            curr_p = p_node.get("parent_eid")
+        return False
+
     for node in active_nodes:
         eid = str(node.get("eid") or "")
         node_type = str(node.get("type") or "clause")
         versions = node.get("versions") or []
         version_id = str(versions[-1]["version_id"]) if versions else "v1"
 
-        # Inspect text fields present on the node
+        # Inspect body text fields present on the node (never annotate heading field)
         candidate_fields: list[tuple[str, str]] = []
         for field_name in ("intro", "content", "wrap_up"):
             f_val = node.get(field_name)
             if isinstance(f_val, str) and f_val.strip():
                 candidate_fields.append((field_name, f_val))
-        if not candidate_fields:
-            h_val = node.get("heading")
-            if isinstance(h_val, str) and h_val.strip():
-                candidate_fields.append(("heading", h_val))
 
-        # 1. Provision type annotation (one per node if matched)
+        is_def_or_child = node_type == "definition" or _has_definition_ancestor(node)
+
+        # 1. Provision type annotation (explicit rule order from 08b §2)
         prov_recorded = False
-        if node_type == "definition":
+        for field_name, f_text in candidate_fields:
+            for p_val, p_re in PROVISION_RULES:
+                if p_val in {"commencement", "scope"}:
+                    m_prov = p_re.search(f_text)
+                    if m_prov:
+                        s, e = m_prov.start(), m_prov.end()
+                        seq += 1
+                        annotations.append(
+                            {
+                                "annotation_id": f"{doc_id}:ann_{seq}",
+                                "target": {
+                                    "eid": eid,
+                                    "version_id": version_id,
+                                    "field": field_name,
+                                    "span": [s, e],
+                                    "span_text": f_text[s:e],
+                                },
+                                "kind": "provision_type",
+                                "value": p_val,
+                                "method": "rule",
+                                "confidence": 0.95,
+                                "verification": "machine_checked",
+                            }
+                        )
+                        prov_recorded = True
+                        break
+            if prov_recorded:
+                break
+
+        if not prov_recorded and is_def_or_child:
+            # Nodes inside a definition inherit `definition` unless they state an explicit exception or prohibition
             for field_name, f_text in candidate_fields:
-                m_means = re.search(r"\bmeans\b", f_text, re.IGNORECASE)
+                for p_val, p_re in PROVISION_RULES:
+                    if p_val not in {"exception", "prohibition"}:
+                        continue
+                    m_prov = p_re.search(f_text)
+                    if m_prov:
+                        s, e = m_prov.start(), m_prov.end()
+                        seq += 1
+                        annotations.append(
+                            {
+                                "annotation_id": f"{doc_id}:ann_{seq}",
+                                "target": {
+                                    "eid": eid,
+                                    "version_id": version_id,
+                                    "field": field_name,
+                                    "span": [s, e],
+                                    "span_text": f_text[s:e],
+                                },
+                                "kind": "provision_type",
+                                "value": p_val,
+                                "method": "rule",
+                                "confidence": 0.95,
+                                "verification": "machine_checked",
+                            }
+                        )
+                        prov_recorded = True
+                        break
+                if prov_recorded:
+                    break
+            if not prov_recorded and candidate_fields:
+                field_name, f_text = candidate_fields[0]
+                m_means = re.search(r"\b(?:means|includes)\b", f_text, re.IGNORECASE)
                 span_pair = (
                     [m_means.start(), m_means.end()]
                     if m_means
@@ -223,7 +300,6 @@ def build_document_annotations(tree_payload: dict[str, Any]) -> dict[str, Any]:
                     }
                 )
                 prov_recorded = True
-                break
 
         if not prov_recorded:
             for field_name, f_text in candidate_fields:
@@ -257,29 +333,34 @@ def build_document_annotations(tree_payload: dict[str, Any]) -> dict[str, Any]:
         # 2. Cross-reference annotations (only in body fields, never in headings)
         own_native = str(node.get("native_number") or "").lower()
         for field_name, f_text in candidate_fields:
-            if field_name == "heading":
-                continue
             for m_ref in CROSS_REF_SPAN_RE.finditer(f_text):
                 ref_kind = m_ref.group("kind").lower()
                 ref_num = re.sub(r"\s+", "", m_ref.group("num")).lower()
-                if ref_num == own_native and ref_kind not in {"table", "schedule", "appendix", "annexure", "part"}:
-                    continue
-                if ref_kind in {"table", "schedule", "appendix", "annexure", "part"}:
-                    lookup_keys = [f"{ref_kind} {ref_num}", ref_num]
-                elif "." not in ref_num and ref_num.isdigit():
-                    lookup_keys = [ref_num, f"{ref_num}.0"]
+                ext_inst = (m_ref.group("ext") or "").strip()
+                if ext_inst:
+                    val_str = f"external:{ext_inst}:{ref_kind}_{ref_num}"
+                    resolved_eid = None
                 else:
-                    lookup_keys = [ref_num]
-                resolved_eid: str | None = None
-                for lk in lookup_keys:
-                    if lk in eid_by_native:
-                        resolved_eid = eid_by_native[lk]
-                        break
-                val_str = (
-                    resolved_eid
-                    if resolved_eid and resolved_eid != eid
-                    else f"unresolved:{m_ref.group(0)}"
-                )
+                    if ref_num == own_native and ref_kind not in {"table", "schedule", "appendix", "annexure", "chapter"}:
+                        continue
+                    if ref_kind in {"table", "schedule", "appendix", "annexure", "chapter"}:
+                        lookup_keys = [f"{ref_kind} {ref_num}", ref_num]
+                    elif "." not in ref_num and ref_num.isdigit():
+                        lookup_keys = [ref_num, f"{ref_num}.0"]
+                    else:
+                        lookup_keys = [ref_num]
+                    resolved_eid = None
+                    for lk in lookup_keys:
+                        if lk in eid_by_native:
+                            resolved_eid = eid_by_native[lk]
+                            break
+                    if resolved_eid == eid:
+                        continue
+                    val_str = (
+                        resolved_eid
+                        if resolved_eid
+                        else f"unresolved:{m_ref.group(0)}"
+                    )
                 s, e = m_ref.start(), m_ref.end()
                 seq += 1
                 annotations.append(
@@ -295,17 +376,15 @@ def build_document_annotations(tree_payload: dict[str, Any]) -> dict[str, Any]:
                         "kind": "cross_reference",
                         "value": val_str,
                         "method": "rule",
-                        "confidence": 0.95 if resolved_eid else 0.6,
+                        "confidence": 0.95 if (resolved_eid or ext_inst) else 0.6,
                         "verification": "machine_checked",
                     }
                 )
 
         # 3. Defined-term use annotations (within-document; at most 1 per term per provision, never in headings or definitions)
-        if node_type != "definition" and compiled_defined_terms:
+        if not is_def_or_child and compiled_defined_terms:
             matched_defs_in_node: set[str] = set()
             for field_name, f_text in candidate_fields:
-                if field_name == "heading":
-                    continue
                 for _norm_term, def_eid, term_re in compiled_defined_terms:
                     if def_eid in matched_defs_in_node:
                         continue

@@ -96,70 +96,70 @@
 | # | `eid` | Type | Page | Native No. | Page Image Dim (px @ 150 DPI) | Excerpt Verified Against Rendered Page | Result |
 |---:|---|---|---:|---|---|---|---|
 | 1 | `chp_2__item_2__item_3__item_ii__note_1` | `note` | 5 | `—` | `1240x1755` | `All unsafe buildings /structure will require be restoring by repa` | PASS |
-| 2 | `app_VII__cl_3.12.1` | `clause` | 15 | `3.12.1` | `1240x1755` | `Signing the Building Plans.- All plans for submission to the Auth` | PASS |
-| 3 | `app_VII__cl_3.13.1__item_j` | `item` | 16 | `(j)` | `1240x1755` | `Erection or re-erection of internal partitions (wit hin the speci` | PASS |
-| 4 | `chp_5__cl_5.3__cl_5.3.2__item_v__item_vii` | `item` | 33 | `(vii)` | `1240x1755` | `Showers/ As per requirements bathing rooms` | PASS |
-| 5 | `chp_6__cl_6.4__cl_6.4.3__item_5` | `item` | 41 | `(5)` | `1240x1755` | `Access to main staircase shall be gained throug h adequate fire r` | PASS |
-| 6 | `chp_13__cl_13.2__prov_1` | `proviso` | 72 | `—` | `1240x1755` | `Provided that before the list is so declared, objec tions and sug` | PASS |
-| 7 | `ann_C__cl_2__item_1__item_2__item_3__item_4__item_5__item_1__item_2__item_3__item_4__item_5__item_7__item_8__item_1__item_2__item_3` | `item` | 96 | `(3)` | `1240x1755` | `Jockey pump shall be selected to give minimum 3% an d maximum 5% ` | PASS |
-| 8 | `chp_2_2__cl_15.07.2017__def_3` | `definition` | 128 | `(3)` | `1240x1755` | `‘Addition and/or Alteration’‘Addition and/or Alteration’ ‘Additio` | PASS |
-| 9 | `chp_2_2__cl_15.07.2017__def_36` | `definition` | 131 | `(36)` | `1240x1755` | `‘Corridor’ means a Model passage or circulation space connect ing` | PASS |
-| 10 | `chp_2_2__cl_15.07.2017__def_39` | `definition` | 131 | `(39)` | `1240x1755` | `‘Cultural buildings’ means a building built by a Trust, Society, ` | PASS |
-| 11 | `chp_2_2__cl_15.07.2017__def_49` | `definition` | 132 | `(49)` | `1240x1755` | `‘Empanelled Professional’ means professionals such as Architects,` | PASS |
-| 12 | `chp_2_2__cl_15.07.2017__def_110` | `definition` | 135 | `(110)` | `1240x1755` | `‘Open space in a plot’ means an area forming an integral part of ` | PASS |
-| 13 | `chp_2_2__cl_15.07.2017__def_138` | `definition` | 137 | `(138)` | `1240x1755` | `‘Road Width or Width of Road/Street’ means the right of way/dista` | PASS |
-| 14 | `chp_2_2__cl_15.07.2017__def_147` | `definition` | 137 | `(147)` | `1240x1755` | `‘Staircase room’ means a room accommodating the stair and for pur` | PASS |
-| 15 | `chp_3_2` | `chapter` | 138 | `CHAPTER 3` | `1240x1755` | `CHAPTER 3 3. JURISDICTION, APPLICABILITY AND PROCEDURAL REQUIREM ` | PASS |
-| 16 | `chp_5_2__cl_5.1.4__cl_5.1.4.4` | `clause` | 148 | `5.1.4.4` | `1240x1755` | `No room containing water closets shall be used for any purpose ex` | PASS |
-| 17 | `chp_5__cl_5.3__cl_5.3.2_2__cl_5.3.2.3__item_b__item_vi` | `item` | 156 | `(vi)` | `1240x1755` | `Hostels` | PASS |
-| 18 | `chp_6__cl_6.4__cl_6.4.7_2` | `clause` | 171 | `6.4.7` | `1240x1755` | `Ramps Ramps shall be provided as prescribed in Clause 5.2.5` | PASS |
-| 19 | `chp_10_2__cl_3` | `clause` | 184 | `3` | `1240x1755` | `Set an example in the city by ensuring that Rai n water is harves` | PASS |
-| 20 | `part_4_10__cl_12.29` | `clause` | 199 | `12.29` | `1240x1755` | `Fire prevention In addition to the measures recommended above, th` | PASS |
-| 21 | `chp_13_2__cl_10_2` | `clause` | 201 | `10` | `1240x1755` | `Representative of two NGO’s in existence for more t han 3 years M` | PASS |
-| 22 | `chp_13_2__cl_13.12__prov_1` | `proviso` | 205 | `—` | `1240x1755` | `Provided that if the heritage building is not maint ained suitabl` | PASS |
-| 23 | `ann_C_2__cl_1` | `clause` | 225 | `1` | `1240x1755` | `Unless otherwise specified in Annexure B, water requirement for f` | PASS |
-| 24 | `app_I_2__item_1` | `item` | 226 | `(1)` | `1240x1755` | `The Stake holders shall register themselves with th e Authority b` | PASS |
-| 25 | `chp_5__cl_5.3__cl_5.3.2__cl_2_3__tbl_1__row_1` | `table_row` | 32 | `1` | `1240x1755` | `400 / 200 / 2 for 16 to 35 / 2 for 13 to 25` | PASS |
-| 26 | `chp_5__cl_5.3__cl_5.3.2__cl_4__tbl_1` | `table` | 33 | `Table 1` | `1240x1755` | `Table 1` | PASS |
-| 27 | `chp_5__cl_5.3__cl_5.3.2__cl_2_6__tbl_2__row_2` | `table_row` | 35 | `2` | `1240x1755` | `thereof / at 1 per 100 / 4 for 66 to 100 / 4 for 41 to 57` | PASS |
-| 28 | `chp_5__cl_5.3__cl_5.3.2__cl_2_6__tbl_3__row_2` | `table_row` | 36 | `2` | `1240x1755` | `thereof / or part thereof / 4 for 66 to / 4 for 41 to 57` | PASS |
-| 29 | `chp_5__cl_5.3__cl_5.3.2_2__cl_5.3.2.3__cl_2_8__tbl_1__row_1` | `table_row` | 162 | `1` | `1240x1755` | `(viii) / Kitchen sink / 1 per floor, Min.` | PASS |
-| 30 | `chp_14_2__cl_3.11_2__tbl_1` | `table` | 208 | `Table 1` | `1240x1755` | `Table 1` | PASS |
+| 2 | `chp_2__item_2__item_3__def_iii__item_a__item_b__item_ii_2__def_126__def_130__def_131__def_132__def_133__def_134__def_135__def_136__def_137` | `definition` | 11 | `(137)` | `1240x1755` | `‘Road/Street Line’ means the line defining the side limits of a r` | PASS |
+| 3 | `chp_2__item_2__item_3__def_iii__item_a__item_b__item_ii_2__def_126__def_130__def_131__def_132__def_133__def_134__def_135__def_136__def_137__def_138__def_139__def_140__def_141__def_142__def_143__def_144__def_145__def_146` | `definition` | 11 | `(146)` | `1240x1755` | `‘Spiral Staircase’ means a staircase forming continuous winding c` | PASS |
+| 4 | `chp_3__cl_3.6__cl_3.6.4__item_a` | `item` | 13 | `(a)` | `1240x1755` | `if the site is not drained properly or is incapable of being well` | PASS |
+| 5 | `app_VII__cl_3.12.1` | `clause` | 15 | `3.12.1` | `1240x1755` | `Signing the Building Plans.- All plans for submission to the Auth` | PASS |
+| 6 | `part_4_2__cl_15__item_16__item_17__item_18__item_19` | `item` | 47 | `(19)` | `1240x1755` | `13935-2009 ‘Seismic Evaluation, Repair and Seismic Strengthening ` | PASS |
+| 7 | `chp_9__cl_9.7__item_d` | `item` | 53 | `(d)` | `1240x1755` | `The W.C. seat shall be 500mm from the floor.` | PASS |
+| 8 | `app_III__item_1__item_3__item_4__item_5__item_6__item_7__item_8__item_1__item_3__item_4__item_5__item_6__item_7__item_a__item_b__item_c` | `item` | 106 | `(c)` | `1240x1755` | `Extent to be surrendered for P and OS and CA, if ap plicable.` | PASS |
+| 9 | `chp_2_2__cl_15.07.2017__def_h` | `definition` | 130 | `(h)` | `1240x1755` | `‘ Storage Building’ - means a building or part thereof used prima` | PASS |
+| 10 | `chp_2_2__cl_15.07.2017__def_25` | `definition` | 131 | `(25)` | `1240x1755` | `‘Bus Terminal’ means a premise used by public transport agency to` | PASS |
+| 11 | `chp_2_2__cl_15.07.2017__def_111` | `definition` | 135 | `(111)` | `1240x1755` | `‘Owner’ means a person who for the time being is receiving or is ` | PASS |
+| 12 | `chp_2_2__cl_15.07.2017__def_138` | `definition` | 137 | `(138)` | `1240x1755` | `‘Road Width or Width of Road/Street’ means the right of way/dista` | PASS |
+| 13 | `chp_2_2__cl_15.07.2017__def_144` | `definition` | 137 | `(144)` | `1240x1755` | `‘Site Plan’ means a detailed Plan showing the proposed placemen t` | PASS |
+| 14 | `chp_3_2` | `chapter` | 138 | `CHAPTER 3` | `1240x1755` | `CHAPTER 3 3. JURISDICTION, APPLICABILITY AND PROCEDURAL REQUIREM ` | PASS |
+| 15 | `chp_3_2__cl_3.10__cl_3.10.4__item_2` | `item` | 140 | `(2)` | `1240x1755` | `In case the noting of discrepancy is accepted by th e Commissione` | PASS |
+| 16 | `chp_5_2__cl_5.1.2__cl_5.1.2.2` | `clause` | 148 | `5.1.2.2` | `1240x1755` | `The requirements of clause 5.1.2.1 shall apply to residential, bu` | PASS |
+| 17 | `chp_5__cl_5.3__cl_5.3.2_2__cl_5.3.2.3__cl_1_6` | `clause` | 161 | `1` | `1240x1755` | `Some WCs may be of Indian style, if desired. to be decided by the` | PASS |
+| 18 | `chp_5__cl_5.3__cl_5.3.2_2__cl_5.3.2.3__cl_2_5` | `clause` | 161 | `2` | `1240x1755` | `Male population may be assumed as two-third and fem ale populatio` | PASS |
+| 19 | `chp_6__cl_6.4__cl_6.4.6_2` | `clause` | 171 | `6.4.6` | `1240x1755` | `Compartmentation The building shall be suitably compartmentalized` | PASS |
+| 20 | `chp_10_2__cl_2` | `clause` | 184 | `2` | `1240x1755` | `The Authority shall include inspection of Rain water Harvesting S` | PASS |
+| 21 | `part_4_10__cl_12.18__note_1` | `note` | 195 | `—` | `1240x1755` | `The sub-station installations shall be carried ou t in conformity` | PASS |
+| 22 | `part_4_10__cl_12.28` | `clause` | 198 | `12.28` | `1240x1755` | `House keeping A high standard of housekeeping must be insisted up` | PASS |
+| 23 | `chp_11__cl_11.2__cl_11.2.3_8__note_1` | `note` | 219 | `—` | `1240x1755` | `The solid waste management system and waste water m anagement sys` | PASS |
+| 24 | `app_III_2__item_1__item_2__item_3__item_4__item_5__item_6__item_7` | `item` | 235 | `(7)` | `1240x1755` | `Existing and proposed width of roads abutting the p lot` | PASS |
+| 25 | `chp_5__cl_5.3__cl_5.3.2__cl_4__tbl_2__row_1` | `table_row` | 34 | `1` | `1240x1755` | `viii) / Kitchen sink / 1 per floor, Min.` | PASS |
+| 26 | `chp_5__cl_5.3__cl_5.3.2__cl_3_2__tbl_9__row_1` | `table_row` | 38 | `1` | `1240x1755` | `additional / per / additional / additional / For 800: 16 / For 80` | PASS |
+| 27 | `chp_5__cl_5.3__cl_5.3.2_2__cl_5.3.2.3__cl_2_13__tbl_3__row_2` | `table_row` | 166 | `2` | `1240x1755` | `1000 or / addition / 1000 or / addition / For 1000: 18 / For 1000` | PASS |
+| 28 | `chp_5__cl_5.3__cl_5.3.2_2__cl_5.3.2.3__cl_2_13__tbl_4` | `table` | 166 | `Table 4` | `1240x1755` | `Table 4` | PASS |
+| 29 | `chp_11_2__tbl_11.1ProvisionsandapplicabilityforvariousplotsizesResidentialandNon-Residential__row_1` | `table_row` | 185 | `1` | `1240x1755` | `plot area / construction / Provisions for Residential` | PASS |
+| 30 | `chp_11__cl_11.2__cl_11.2.3_8__cl_4__tbl_2__row_1` | `table_row` | 221 | `1` | `1240x1755` | `No / to D-6 (see Note 22 and / (see Note 22) / Mercantile F-1,` | PASS |
 
 ### Document: `rmp2015-zr` (30 Stratified Nodes Verified Against Rendered Page Images)
 
 | # | `eid` | Type | Page | Native No. | Page Image Dim (px @ 150 DPI) | Excerpt Verified Against Rendered Page | Result |
 |---:|---|---|---:|---|---|---|---|
-| 1 | `sec_DEFINITIONS__def_11` | `definition` | 3 | `11` | `1275x1651` | `A premises used by public transport agency to park the buses for ` | PASS |
-| 2 | `sec_DEFINITIONS__def_17` | `definition` | 4 | `17` | `1275x1651` | `is a premise where temporary accommodation for short duration is ` | PASS |
-| 3 | `sec_DEFINITIONS__def_19` | `definition` | 4 | `19` | `1275x1651` | `Used primarily to describe the equivalent household in buildings.` | PASS |
-| 4 | `sec_DEFINITIONS__def_24` | `definition` | 4 | `24` | `1275x1651` | `Means the vertical distance measured, in the case of flat roofs, ` | PASS |
-| 5 | `sec_DEFINITIONS__def_37` | `definition` | 5 | `37` | `1275x1651` | `A premises similar to retail shop for carrying out repair of hous` | PASS |
-| 6 | `sec_DEFINITIONS__def_39` | `definition` | 5 | `39` | `1275x1651` | `A premises used for serving food items on commercial basis includ` | PASS |
-| 7 | `chp_4__cl_4.2__cl_4.2.1` | `clause` | 29 | `4.2.1` | `1275x1651` | `Description Main features of 'Mixed Land Use' areas are those whe` | PASS |
-| 8 | `chp_4__cl_4.4__cl_4.4.2__item_i` | `item` | 32 | `(i)` | `1275x1651` | ` Main land use category: C3  Other land uses permissible (as ma` | PASS |
-| 9 | `chp_4__cl_4.5__cl_4.5.2` | `clause` | 33 | `4.5.2` | `1275x1651` | `Regulations` | PASS |
-| 10 | `chp_4__cl_4.6__cl_4.6.1` | `clause` | 34 | `4.6.1` | `1275x1651` | `Description The major and minor roads which have commercial activ` | PASS |
-| 11 | `chp_4__cl_4.6__cl_4.6.2` | `clause` | 34 | `4.6.2` | `1275x1651` | `Regulations` | PASS |
-| 12 | `chp_4__cl_4.8__cl_4.8.2__item_a` | `item` | 36 | `(a)` | `1275x1651` | `Setbacks shall be in accordance with Table.8 or Table.9 depending` | PASS |
-| 13 | `chp_4__cl_4.10__cl_4.10.2__item_i` | `item` | 38 | `(i)` | `1275x1651` | `Permissible land uses Main land use category : T4 (for MLCP, refe` | PASS |
-| 14 | `chp_4__cl_4.11__cl_4.11.2__def_1` | `definition` | 39 | `1` | `1275x1651` | `The buffer created for accommodating the utilities such as Power,` | PASS |
-| 15 | `chp_4__cl_4.11__cl_4.11.2__cl_4` | `clause` | 39 | `4` | `1275x1651` | `For electrical networks, KPTCL standards are followed.` | PASS |
-| 16 | `chp_6__cl_6.1__item_d__item_ii` | `item` | 44 | `(ii)` | `1275x1651` | `If the area that remains after making provision for road and park` | PASS |
-| 17 | `chp_8__note_1` | `note` | 49 | `—` | `1275x1651` | `Additional parking for part area shall be provided when the part ` | PASS |
-| 18 | `chp_8__cl_8.1__item_b__item_iii` | `item` | 50 | `(iii)` | `1275x1651` | `When Multi Level Car Parking (MLCP) is proposed on a plot as inde` | PASS |
-| 19 | `chp_9__cl_9.2__prov_1` | `proviso` | 52 | `—` | `1275x1651` | `Provided that for all multi-Storeyed high rise and special buildi` | PASS |
-| 20 | `chp_9__cl_9.2__item_iii` | `item` | 52 | `(iii)` | `1275x1651` | `Number and width of exits - The width of an exit, stairway / corr` | PASS |
-| 21 | `chp_9__cl_9.3__note_1` | `note` | 53 | `—` | `1275x1651` | `No deductions shall be made in the gross area of the corridors, c` | PASS |
-| 22 | `chp_10__cl_10.1__cl_14` | `clause` | 56 | `14` | `1275x1651` | `Whenever the remaining portion of the plot or land after surrende` | PASS |
-| 23 | `chp_10__cl_10.1__cl_15` | `clause` | 56 | `15` | `1275x1651` | `The Authority may charge a fee of Rupees one hundred for grant / ` | PASS |
-| 24 | `chp_10__cl_10.1__cl_19` | `clause` | 56 | `19` | `1275x1651` | `The utilisation of D.R.C. in favour of Non-Resident of India and ` | PASS |
-| 25 | `chp_2__tbl_3__row_9` | `table_row` | 13 | `9` | `1651x1275` | `10 / Hospitals and specialty hospitals` | PASS |
-| 26 | `chp_4__cl_4.2__cl_4.2.2__tbl_2__row_4` | `table_row` | 29 | `4` | `1275x1651` | `4 / Up to 55% / 3.00 / Above 24.0 mup to 30m` | PASS |
-| 27 | `chp_4__cl_4.10__cl_4.10.3__tbl_1` | `table` | 38 | `Table 1` | `1275x1651` | `Table 1` | PASS |
-| 28 | `app_1__tbl_1__row_7` | `table_row` | 58 | `7` | `1275x1651` | `7. / 80 ft road, Rajajinagar / 3.0 mfrom the edge of road` | PASS |
-| 29 | `app_1__tbl_2__row_24` | `table_row` | 59 | `24` | `1275x1651` | `63. / Hennur road / 3.0 mup to Salem railway line level crossing` | PASS |
-| 30 | `app_1__tbl_2__row_37` | `table_row` | 59 | `37` | `1275x1651` | `76. / Thoppa mudaliar road / 2.0 mfrom the edge of road` | PASS |
+| 1 | `sec_DEFINITIONS__cl_6` | `clause` | 3 | `6` | `1275x1651` | `is a premise in which rooms are let out on a long term basis as c` | PASS |
+| 2 | `chp_2__note_1` | `note` | 12 | `—` | `1275x1651` | `When service apartments are permitted, fee under section 18 of KT` | PASS |
+| 3 | `chp_4__cl_4.1` | `clause` | 28 | `4.1` | `1275x1651` | `RESIDENTIAL (MAIN)` | PASS |
+| 4 | `chp_4__cl_4.3__cl_4.3.2__item_i` | `item` | 31 | `(i)` | `1275x1651` | ` Main Land use category: C4  Other land uses permissible (as ma` | PASS |
+| 5 | `chp_4__cl_4.8__cl_4.8.2` | `clause` | 36 | `4.8.2` | `1275x1651` | `Regulations` | PASS |
+| 6 | `chp_4__cl_4.8__cl_4.8.2__item_b` | `item` | 36 | `(b)` | `1275x1651` | `TDR is applicable as per rules.` | PASS |
+| 7 | `chp_4__cl_4.10__cl_4.10.1` | `clause` | 38 | `4.10.1` | `1275x1651` | `Description Transportation zones are reserved for Transport and T` | PASS |
+| 8 | `chp_4__cl_4.11__cl_4.11.2__def_1` | `definition` | 39 | `1` | `1275x1651` | `The buffer created for accommodating the utilities such as Power,` | PASS |
+| 9 | `chp_4__cl_4.11__cl_4.11.2__cl_4` | `clause` | 39 | `4` | `1275x1651` | `For electrical networks, KPTCL standards are followed.` | PASS |
+| 10 | `chp_4__cl_4.13__cl_4.13.2__item_i__item_ii` | `item` | 41 | `(ii)` | `1275x1651` | ` 20 % of the sital area of the land may be used for educational ` | PASS |
+| 11 | `chp_5__cl_5.1__item_i` | `item` | 43 | `(i)` | `1275x1651` | `These are identified areas which require detailed planning and de` | PASS |
+| 12 | `chp_5__cl_5.2` | `clause` | 43 | `5.2` | `1275x1651` | `The Co-ordinated planning schemes are the zones where the BDA int` | PASS |
+| 13 | `chp_6__cl_6.1` | `clause` | 44 | `6.1` | `1275x1651` | `RESIDENTIAL a. Road widths: The minimum width of road shall not b` | PASS |
+| 14 | `chp_6__cl_6.1__item_c` | `item` | 44 | `(c)` | `1275x1651` | `Parks / Open spaces and Playgrounds shall not be less than 15 % o` | PASS |
+| 15 | `chp_8__note_1` | `note` | 49 | `—` | `1275x1651` | `Additional parking for part area shall be provided when the part ` | PASS |
+| 16 | `chp_8__cl_8.1__item_a__item_i` | `item` | 50 | `(i)` | `1275x1651` | `Parking provided on the ground floor with the building on stilts,` | PASS |
+| 17 | `chp_9__cl_9.2__cl_1` | `clause` | 51 | `1` | `1275x1651` | `22.5mtrs.` | PASS |
+| 18 | `chp_9__cl_9.2__note_1` | `note` | 52 | `—` | `1275x1651` | `The travel distance to an exit from the dead end of a corridor sh` | PASS |
+| 19 | `chp_10__cl_10.1__cl_15` | `clause` | 56 | `15` | `1275x1651` | `The Authority may charge a fee of Rupees one hundred for grant / ` | PASS |
+| 20 | `chp_10__cl_10.1__cl_18` | `clause` | 56 | `18` | `1275x1651` | `The Authority may reject or cancel the grant of D.R.C. in the fol` | PASS |
+| 21 | `app_VIII__item_1__item_a__item_b` | `item` | 69 | `(b)` | `1275x1651` | `Land handed over the Authority / Govt. Vide Possession Receipt No` | PASS |
+| 22 | `chp_2__tbl_5__row_2` | `table_row` | 13 | `2` | `1651x1275` | `2 / Warehouses and storage areas for goods` | PASS |
+| 23 | `chp_2__tbl_11__row_1` | `table_row` | 15 | `1` | `1651x1275` | `1) Food products / 5) Other works such as` | PASS |
+| 24 | `chp_2__cl_13__tbl_1` | `table` | 17 | `Table 1` | `1651x1275` | `Table 1` | PASS |
+| 25 | `chp_2__cl_13__tbl_2` | `table` | 17 | `Table 2` | `1651x1275` | `Table 2` | PASS |
+| 26 | `chp_2__cl_13__tbl_5__row_2` | `table_row` | 18 | `2` | `1651x1275` | `2 / Police stations, post offices` | PASS |
+| 27 | `chp_7__cl_7.1__cl_5__tbl_3__row_1` | `table_row` | 48 | `1` | `1275x1651` | `Above 18m < 24m / 55% / 2.5` | PASS |
+| 28 | `app_1__tbl_1__row_12` | `table_row` | 58 | `12` | `1275x1651` | `12. / Triveni Road, Yashwanthpur / 12.0 mbeyond C.M.T.I Quarter r` | PASS |
+| 29 | `app_1__tbl_1__row_30` | `table_row` | 58 | `30` | `1275x1651` | `30. / Brigade road / 3.0 mfrom the edge of the road` | PASS |
+| 30 | `app_1__tbl_2__row_5` | `table_row` | 59 | `5` | `1275x1651` | `44. / Narasimharaja road / 3.0 mfrom the edge of the road` | PASS |
 
 ## 5. Applied Amendment Effect Verification (Page-Image Self-Check)
 
@@ -173,3 +173,12 @@
 | 6 | `ka-model-bbl-2017:eff_6` | `ka-model-bbl-2017:chp_2__item_2__item_3` | p. 2 (`1240x1755`) | `bbl-2003:part_I__sec_1.0__cl_1.3` | `insert_after` | `2017-10-28` | `Yes` | `Pursuant to Clause 1(3) of Notification No. UDD 14 TTP 2017 (P-4) date` | PASS |
 | 7 | `ka-model-bbl-2017:eff_7` | `ka-model-bbl-2017:chp_1` | p. 2 (`1240x1755`) | `bbl-2003:part_II__sec_3.0` | `modify_text` | `2017-10-28` | `No` | `Karnataka Municipal Corporations Model Building Bye-Laws, 2017 (Notifi` | PASS |
 | 8 | `udd-1107-mnu-2018-draft:eff_8` | `udd-1107-mnu-2018-draft:cl_4` | p. 5 (`1240x1765`) | `bbl-2003:part_II__sec_4.0` | `modify_text` | `2018-11-28` | `No` | `Amending instrument 'udd-1107-mnu-2018-draft' has status 'draft'.` | PASS |
+
+## 6. Annotation Quality Summary (`08b` §2)
+
+| Document | Definitions Found | Rejected Stopword/Unquoted Terms | Term Uses per Provision (Median / Max) | References (Resolved / External / Unresolved) | Provision Types by Kind |
+|---|---:|---:|---|---|---|
+| `bbl-2003` | 82 | 0 | `1.0` / `8` | `121` / `8` / `30` | `commencement`: 14, `definition`: 90, `exception`: 3, `fee`: 9, `obligation`: 221, `permission`: 21, `prohibition`: 59, `scope`: 15 |
+| `ka-model-bbl-2017` | 177 | 0 | `2.0` / `50` | `602` / `22` / `192` | `commencement`: 35, `definition`: 184, `exception`: 28, `fee`: 8, `obligation`: 1127, `permission`: 19, `prohibition`: 173, `scope`: 20 |
+| `rmp2015-zr` | 1 | 0 | `1.0` / `1` | `155` / `3` / `4` | `definition`: 1, `exception`: 1, `obligation`: 68, `permission`: 12, `prohibition`: 25, `scope`: 5 |
+| `udd-1107-mnu-2018-draft` | 0 | 0 | `0.0` / `0` | `3` / `2` / `3` | `commencement`: 2, `fee`: 2, `obligation`: 1 |

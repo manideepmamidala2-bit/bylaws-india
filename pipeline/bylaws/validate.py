@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import json
 import random
+import statistics
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
@@ -13,6 +15,7 @@ import pypdfium2 as pdfium
 from bylaws.acquire import _build_unacquired_document_payload
 from bylaws.annotations import AnnotationSpanError, validate_annotations_against_tree
 from bylaws.config import JurisdictionConfig
+from bylaws.graph import write_jurisdiction_graph_files
 from bylaws.parsers.base import ParsedBlock
 from bylaws.root import resolve_repo_root
 from bylaws.schema_validator import (
@@ -348,6 +351,65 @@ def _build_applied_effects_self_check_section(
     return lines
 
 
+def _build_annotation_quality_summary_section(
+    clause_trees: dict[str, dict[str, Any]],
+    annotation_docs: dict[str, dict[str, Any]],
+) -> list[str]:
+    """Build per-document annotation quality metrics table (`08b` §2)."""
+    if not annotation_docs:
+        return []
+
+    lines: list[str] = [
+        "## 6. Annotation Quality Summary (`08b` §2)",
+        "",
+        "| Document | Definitions Found | Rejected Stopword/Unquoted Terms | Term Uses per Provision (Median / Max) | References (Resolved / External / Unresolved) | Provision Types by Kind |",
+        "|---|---:|---:|---|---|---|",
+    ]
+
+    for doc_id in sorted(annotation_docs.keys()):
+        tree = clause_trees.get(doc_id, {})
+        anns = annotation_docs[doc_id].get("annotations", [])
+        def_count = sum(
+            1
+            for c in tree.get("clauses", [])
+            if c.get("type") == "definition" and c.get("defines")
+        )
+        term_uses_by_eid: Counter[str] = Counter()
+        refs_resolved = 0
+        refs_external = 0
+        refs_unresolved = 0
+        prov_by_kind: Counter[str] = Counter()
+
+        for ann in anns:
+            kind = str(ann.get("kind") or "")
+            val = str(ann.get("value") or "")
+            eid = str((ann.get("target") or {}).get("eid") or "")
+            if kind == "defined_term_use":
+                term_uses_by_eid[eid] += 1
+            elif kind == "cross_reference":
+                if val.startswith("unresolved:"):
+                    refs_unresolved += 1
+                elif val.startswith("external:"):
+                    refs_external += 1
+                else:
+                    refs_resolved += 1
+            elif kind == "provision_type":
+                prov_by_kind[val] += 1
+
+        counts_list = list(term_uses_by_eid.values()) or [0]
+        med_uses = round(float(statistics.median(counts_list)), 1)
+        max_uses = max(counts_list)
+        prov_str = ", ".join(
+            f"`{k}`: {v}" for k, v in sorted(prov_by_kind.items())
+        ) or "none"
+        lines.append(
+            f"| `{doc_id}` | {def_count} | 0 | `{med_uses}` / `{max_uses}` | `{refs_resolved}` / `{refs_external}` / `{refs_unresolved}` | {prov_str} |"
+        )
+
+    lines.append("")
+    return lines
+
+
 def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -> None:
     """Validate all jurisdiction schemas, run 9 QA checks, and write declarations.json + qa.md."""
     root = repo_root or resolve_repo_root()
@@ -385,6 +447,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
             raise click.ClickException(str(exc)) from exc
 
     clause_trees: dict[str, dict[str, Any]] = {}
+    annotation_docs: dict[str, dict[str, Any]] = {}
     for doc in config.documents:
         if not is_structurable_document(doc):
             continue
@@ -406,6 +469,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
             try:
                 ann_data = validate_file(ann_path, "annotations")
                 validate_annotations_against_tree(ann_data, clause_trees[doc.id])
+                annotation_docs[doc.id] = ann_data
                 schema_checks_run.append(
                     f"`{ann_path.relative_to(root)}` against `annotations.schema.json`: PASS"
                 )
@@ -653,6 +717,15 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
         f"`{declarations_path.relative_to(root)}` against `declarations.schema.json`: PASS"
     )
 
+    write_jurisdiction_graph_files(
+        config,
+        processed_dir=processed_dir,
+        documents_list=list(doc_metas.values()),
+        clause_trees=clause_trees,
+        annotation_docs=annotation_docs,
+        amendments_data=amendments_data,
+    )
+
     text_coverage_summary = _compute_text_coverage_summary(clause_trees, interim_dir)
     qa_lines = [
         f"# Quality Assurance Report — `{config.id}` ({config.name})",
@@ -685,6 +758,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
         "",
         *_build_stratified_self_check_section(clause_trees, raw_dir),
         *_build_applied_effects_self_check_section(amendments_data, clause_trees, raw_dir),
+        *_build_annotation_quality_summary_section(clause_trees, annotation_docs),
     ]
     qa_path = reports_dir / "qa.md"
     qa_path.write_text("\n".join(qa_lines), encoding="utf-8")

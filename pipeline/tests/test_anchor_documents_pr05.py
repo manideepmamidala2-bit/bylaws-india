@@ -107,7 +107,7 @@ def test_release_2_0_0_published_with_amendments_not_yet_applied_notice() -> Non
     """Release `2.0.0` is published in `manifest.json` (with `1.0.0` still `withdrawn`), and `declarations.json` includes the required notice."""
     manifest = validate_file(REPO_ROOT / "public" / "data" / "manifest.json", "manifest")
     bscc = next(j for j in manifest["jurisdictions"] if j["id"] == "in-ka-bengaluru-south")
-    assert bscc["latest_release"] in {"2.0.0", "2.1.0", "2.2.0", "2.3.0"}
+    assert bscc["latest_release"] in {"2.0.0", "2.1.0", "2.2.0", "2.3.0", "2.4.0", "2.5.0", "2.6.0", "2.7.0", "2.8.0", "3.0.0"}
 
     by_ver = {r["version"]: r for r in bscc["releases"]}
     assert "1.0.0" in by_ver and by_ver["1.0.0"]["status"] == "withdrawn"

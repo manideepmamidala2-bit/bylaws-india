@@ -67,7 +67,7 @@
         "Uttarahalli"
       ],
       "visibility": "public",
-      "latest_release": "2.3.0",
+      "latest_release": "2.4.0",
       "releases": [
         {
           "version": "1.0.0",
@@ -225,6 +225,46 @@
             ]
           },
           "changelog": "Release 2.3.0 for Bengaluru South City Corporation."
+        },
+        {
+          "version": "2.4.0",
+          "status": "published",
+          "released_at": "2026-11-23T00:00:00Z",
+          "licence": "CC BY 4.0",
+          "download_zip": "/data/in-ka-bengaluru-south/2.4.0/in-ka-bengaluru-south-2.4.0.zip",
+          "sha256sums": "/data/in-ka-bengaluru-south/2.4.0/SHA256SUMS",
+          "declarations": "/data/in-ka-bengaluru-south/2.4.0/declarations.json",
+          "files": {
+            "documents": "/data/in-ka-bengaluru-south/2.4.0/documents.json",
+            "clauses": [
+              "/data/in-ka-bengaluru-south/2.4.0/bbl-2003.clauses.json",
+              "/data/in-ka-bengaluru-south/2.4.0/ka-model-bbl-2017.clauses.json",
+              "/data/in-ka-bengaluru-south/2.4.0/rmp2015-zr.clauses.json"
+            ],
+            "annotations": [
+              "/data/in-ka-bengaluru-south/2.4.0/bbl-2003.annotations.json",
+              "/data/in-ka-bengaluru-south/2.4.0/ka-model-bbl-2017.annotations.json",
+              "/data/in-ka-bengaluru-south/2.4.0/rmp2015-zr.annotations.json"
+            ],
+            "amendments": "/data/in-ka-bengaluru-south/2.4.0/amendments.json",
+            "zones": "/data/in-ka-bengaluru-south/2.4.0/zones.geojson",
+            "boundary": "/data/in-ka-bengaluru-south/2.4.0/boundary.geojson",
+            "sources_json": "/data/in-ka-bengaluru-south/2.4.0/sources.json",
+            "sources_csv": "/data/in-ka-bengaluru-south/2.4.0/sources.csv",
+            "review_images": [],
+            "consolidated": "/data/in-ka-bengaluru-south/2.4.0/consolidated.json",
+            "geo_layers": "/data/in-ka-bengaluru-south/2.4.0/geo-layers.json",
+            "clause_zone_tags": "/data/in-ka-bengaluru-south/2.4.0/clause-zone-tags.json",
+            "gba_zones": "/data/in-ka-bengaluru-south/2.4.0/gba-zones.geojson",
+            "wards": "/data/in-ka-bengaluru-south/2.4.0/wards.geojson",
+            "planning_districts": "/data/in-ka-bengaluru-south/2.4.0/planning-districts.geojson"
+          },
+          "drafts": {
+            "clauses": [
+              "/data/in-ka-bengaluru-south/2.4.0/udd-1107-mnu-2018-draft.clauses.json"
+            ]
+          },
+          "changelog": "Release 2.4.0 for Bengaluru South City Corporation."
         }
       ],
       "register_documents": "/data/in-ka-bengaluru-south/register/documents.json"

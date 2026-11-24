@@ -234,30 +234,19 @@ def _extract_defined_term(
     *,
     in_definitions_section: bool = False,
 ) -> tuple[str, str] | None:
-    """Return `(defines_printed, defines_normalised)` if `text` defines a term."""
+    """Return `(defines_printed, defines_normalised)` if `text` defines a quoted term."""
+    _ = (heading, in_definitions_section)
     m = DEFINED_TERM_RE.search(text)
-    if m:
-        if m.group("term"):
-            raw_term = m.group("term").strip()
-            if _is_valid_defined_term(raw_term):
-                return f'"{raw_term}"', " ".join(raw_term.lower().split())
-        if in_definitions_section and m.group("bare_term"):
-            raw_term = m.group("bare_term").strip()
-            if heading and raw_term.lower().startswith(heading.lower()):
-                raw_term = raw_term[len(heading) :].strip(": ") or raw_term
-            if _is_valid_defined_term(raw_term):
-                return f'"{raw_term}"', " ".join(raw_term.lower().split())
+    if m and m.group("term"):
+        raw_term = m.group("term").strip()
+        if _is_valid_defined_term(raw_term):
+            return f'"{raw_term}"', " ".join(raw_term.lower().split())
 
-    if in_definitions_section:
-        mq = LEADING_QUOTED_TERM_RE.match(text.strip())
-        if mq:
-            raw_term = mq.group("term").strip()
-            if _is_valid_defined_term(raw_term):
-                return f'"{raw_term}"', " ".join(raw_term.lower().split())
-        if heading and heading.strip() and heading.strip() != text.strip():
-            raw_term = heading.strip().strip(":-–— ")
-            if 1 <= len(raw_term.split()) <= 6 and _is_valid_defined_term(raw_term):
-                return f'"{raw_term}"', " ".join(raw_term.lower().split())
+    mq = LEADING_QUOTED_TERM_RE.match(text.strip())
+    if mq:
+        raw_term = mq.group("term").strip()
+        if _is_valid_defined_term(raw_term):
+            return f'"{raw_term}"', " ".join(raw_term.lower().split())
 
     return None
 

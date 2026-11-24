@@ -162,6 +162,9 @@ def _collect_release_artifacts(
         "wards.geojson",
         "planning-districts.geojson",
         "overlays.geojson",
+        "graph.json",
+        "graph.graphml",
+        "relations.json",
     ):
         opt_path = processed_dir / optional_name
         if opt_path.is_file():

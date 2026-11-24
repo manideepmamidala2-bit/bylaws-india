@@ -14,7 +14,7 @@ The vector street basemap for Bengaluru South City Corporation (`in-ka-bengaluru
 pmtiles extract \
   https://build.protomaps.com/20261124.pmtiles \
   public/data/in-ka-bengaluru-south/basemap.pmtiles \
-  --bbox=77.469,12.813,77.723,12.972 \
+  --bbox=77.440,12.813,77.804,13.163 \
   --maxzoom=15
 ```
 
@@ -25,21 +25,34 @@ pmtiles extract \
 | **Source Build** | `https://build.protomaps.com/20261124.pmtiles` |
 | **Protomaps Basemap Version** | `4.15.2` (`planetiler:version = 0.10.2`) |
 | **OSM Replication Timestamp** | `2026-11-24T04:00:00Z` (`seq = 124461`) |
-| **Official Corporation Bounds (`EPSG:4326`)** | `[77.489302, 12.833491, 77.702887, 12.951664]` |
-| **Extracted Bounding Box (~2 km margin)** | `[77.469000, 12.813000, 77.723000, 12.972000]` |
-| **Zoom Range** | `0` – `15` (`520` addressed MVT tiles, `clustered: true`, `gzip`) |
+| **Official GBA 5-Corporation Bounds (`EPSG:4326`)** | `[77.459880, 12.833491, 77.784064, 13.142620]` (South: `[77.489302, 12.833491, 77.702887, 12.951664]`) |
+| **Extracted Bounding Box (~2 km margin)** | `[77.440000, 12.813000, 77.804000, 13.163000]` |
+| **Zoom Range** | `0` – `15` (`1,540` addressed MVT tiles, `clustered: true`, `gzip`) |
 | **Vector Layers Included** | `earth`, `water`, `landcover`, `landuse`, `buildings`, `roads`, `boundaries`, `places`, `pois` |
 | **File Path** | `public/data/in-ka-bengaluru-south/basemap.pmtiles` (web path: `/data/in-ka-bengaluru-south/basemap.pmtiles`) |
-| **File Size** | `15,830,444` bytes (`15.1 MiB`) |
-| **SHA-256 Checksum** | `cd8084fcec28305374a49b8ab2266ce8f9cfbd54f6413e0e5d0e8b6393052448` |
+| **File Size** | `35,060,827` bytes (`33.4 MiB`) |
+| **SHA-256 Checksum** | `c5abca853cee8e29e4ffc518f2b07e7d5f49223709a18938bb3a791e3fba5135` |
 | **Basemap Licence & Attribution** | OpenStreetMap data under ODbL; Protomaps basemap schema under BSD-3-Clause. Attribution displayed on map: **`© OpenStreetMap contributors · Protomaps`** |
 
 ### 2.2 Hosting & HTTP `Range` Request Verification
 
-- **Hosting Decision**: Because `VERCEL_BLOB_READ_WRITE_TOKEN` is not configured in the repository environment and the extracted `basemap.pmtiles` archive is only **15.1 MiB** (`15,830,444` bytes), the file is committed directly under `public/data/in-ka-bengaluru-south/basemap.pmtiles` and served from the Next.js / Vercel CDN static asset root (`/data/in-ka-bengaluru-south/basemap.pmtiles`), with optional override via `NEXT_PUBLIC_PMTILES_URL` when a custom Vercel Blob or CDN URL is configured.
+- **Hosting Decision**: Because `VERCEL_BLOB_READ_WRITE_TOKEN` is not configured in the repository environment and the extracted city-wide `basemap.pmtiles` archive is **33.4 MiB** (`35,060,827` bytes), the file is committed directly under `public/data/in-ka-bengaluru-south/basemap.pmtiles` and served from the Next.js / Vercel CDN static asset root (`/data/in-ka-bengaluru-south/basemap.pmtiles`), with optional override via `NEXT_PUBLIC_PMTILES_URL` when a custom Vercel Blob or CDN URL is configured.
 - **HTTP `Range` Verification**:
-  - Verified with `pmtiles verify public/data/in-ka-bengaluru-south/basemap.pmtiles` (`Completed verify in 136.626µs`) and partial HTTP byte-range requests (`Range: bytes=0-511` and `Range: bytes=0-16383` for the PMTiles v3 header and root directory).
-  - Byte-range requests for `bytes=0-511` return `HTTP 206 Partial Content` with `Accept-Ranges: bytes`, `Content-Range: bytes 0-511/15830444`, `Content-Length: 512`, and the 8-byte PMTiles v3 magic header `b"PMTiles\x03"` (`4d 50 54 69 6c 65 73 03`).
+  - Verified with `pmtiles verify public/data/in-ka-bengaluru-south/basemap.pmtiles` and partial HTTP byte-range requests (`Range: bytes=0-511` and `Range: bytes=0-16383` for the PMTiles v3 header and root directory).
+  - Byte-range requests for `bytes=0-511` return `HTTP 206 Partial Content` with `Accept-Ranges: bytes`, `Content-Range: bytes 0-511/35060827`, `Content-Length: 512`, and the 8-byte PMTiles v3 magic header `b"PMTiles\x03"` (`4d 50 54 69 6c 65 73 03`).
+
+### 2.3 Blank Map Diagnosis & Fix (PR 12 Part 1 / `08b` §1)
+
+- **Symptom Observed**: On the Map page (`/j/in-ka-bengaluru-south`), the map container rendered as an empty white area and the browser DevTools Console reported:
+  - `Error: Worker failed to load. Check that the worker URL is correct.`
+  - `Failed to load module script: The server responded with a non-JavaScript MIME type of "text/html". Strict MIME type checking is enforced for module scripts per HTML spec.`
+- **Root Cause**:
+  - In `maplibre-gl` v5 (`dist/maplibre-gl.mjs`), the internal default worker URL resolver (`kl()`) inspects `import.meta.url` and returns `""` (empty string) whenever `import.meta.url` does not start with `https?:`.
+  - When Next.js 15 webpack bundles `maplibre-gl.mjs` into a client chunk, `import.meta.url` is rewritten to a non-HTTP module reference, so `kl()` returned `""`. Calling `new Worker("", { type: "module" })` caused the browser to resolve `""` relative to the current HTML page URL (`/j/in-ka-bengaluru-south`), which returned `Content-Type: text/html` and aborted MapLibre tile decoding.
+- **Fixes Applied**:
+  1. **Self-Hosted Worker Script (`/maplibre-gl-worker.js`)**: Copied `node_modules/maplibre-gl/dist/maplibre-gl-worker.mjs` to `public/maplibre-gl-worker.js` (served with `Content-Type: application/javascript`) and configured `maplibregl.setWorkerUrl("/maplibre-gl-worker.js")` in `components/ZoneMap.tsx` prior to `new maplibregl.Map(...)`.
+  2. **WebGL Fallback Banner**: Added explicit WebGL capability detection and error handling in `components/ZoneMap.tsx` so environments without WebGL display a clear fallback message with direct links to the published `boundary.geojson`, `wards.geojson`, and `zones.geojson` files rather than a blank area.
+  3. **Playwright Automated Browser Verification (`e2e/map.spec.ts`)**: Added a Playwright test running on desktop (`1280x800`) and mobile (`390x844`) viewports that loads `/j/in-ka-bengaluru-south`, asserts `.pmtiles` HTTP `206 Partial Content` responses, waits for the map canvas to render, and verifies that sampled canvas pixels are non-blank.
 
 ---
 
