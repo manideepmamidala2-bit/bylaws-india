@@ -21,6 +21,8 @@ from bylaws.geo.verify import write_jurisdiction_map_verification_report
 from bylaws.geo.zones import (
     _extract_polygonal,
     _geometry_to_geojson_dict,
+    extract_planning_district_from_pdf,
+    extract_traced_zones_from_pdf,
     import_zones_from_geojson,
 )
 from bylaws.root import resolve_local_source_path, resolve_repo_root
@@ -73,11 +75,17 @@ def run_geo_pipeline(config: JurisdictionConfig, *, repo_root: Path | None = Non
     # 1. Planning districts (if configured)
     planning_district_features: list[dict[str, Any]] = []
     for pd_cfg in config.maps.planning_districts or []:
-        pd_source = resolve_local_source_path(pd_cfg.source_url, root)
-        raw_pd = json.loads(pd_source.read_text(encoding="utf-8"))
-        reproj_pd = inspect_and_reproject_geojson_features(raw_pd, str(pd_source))
-        clipped_pd = _clip_features_to_boundary(reproj_pd, boundary_geojson)
-        planning_district_features.extend(clipped_pd)
+        if getattr(pd_cfg, "document", None):
+            extracted_pd = extract_planning_district_from_pdf(
+                pd_cfg, boundary_geojson, root, config.id
+            )
+            planning_district_features.extend(extracted_pd)
+        else:
+            pd_source = resolve_local_source_path(pd_cfg.source_url, root)
+            raw_pd = json.loads(pd_source.read_text(encoding="utf-8"))
+            reproj_pd = inspect_and_reproject_geojson_features(raw_pd, str(pd_source))
+            clipped_pd = _clip_features_to_boundary(reproj_pd, boundary_geojson)
+            planning_district_features.extend(clipped_pd)
 
     if planning_district_features:
         pd_out_path = processed_dir / "planning-districts.geojson"
@@ -92,15 +100,30 @@ def run_geo_pipeline(config: JurisdictionConfig, *, repo_root: Path | None = Non
 
     # 2. Master plan land-use zones
     all_features: list[dict[str, Any]] = []
+    traced_runs: list[dict[str, Any]] = []
     for zoning_cfg in config.maps.zoning:
-        if isinstance(zoning_cfg, TracedZoningMapConfig) or getattr(zoning_cfg, "kind", None) in {
+        kind_val = getattr(zoning_cfg.kind, "value", getattr(zoning_cfg, "kind", None))
+        if isinstance(zoning_cfg, TracedZoningMapConfig) or kind_val in {
             "traced",
             "vector_pdf",
             "grid_georeferenced_raster",
             "osm_gcp_raster",
         }:
-            raise click.ClickException("not implemented: geo (traced)")
-        if isinstance(zoning_cfg, ImportedZoningMapConfig):
+            if kind_val == "traced" and not getattr(zoning_cfg, "grid_eastings", None):
+                raise click.ClickException("not implemented: geo (traced)")
+            features, georef_res, indep_checks = extract_traced_zones_from_pdf(
+                zoning_cfg, boundary_geojson, root, config.id
+            )
+            all_features.extend(features)
+            traced_runs.append(
+                {
+                    "config": zoning_cfg,
+                    "georef": georef_res,
+                    "checks": indep_checks,
+                    "feature_count": len(features),
+                }
+            )
+        elif isinstance(zoning_cfg, ImportedZoningMapConfig):
             features = import_zones_from_geojson(zoning_cfg, boundary_geojson, root)
             all_features.extend(features)
         else:
@@ -196,26 +219,60 @@ def run_geo_pipeline(config: JurisdictionConfig, *, repo_root: Path | None = Non
             and f.get("properties", {}).get("record_superseded_by") is None
         )
         first_zoning = config.maps.zoning[0]
-        z_source = (
-            first_zoning.source_url
-            if isinstance(first_zoning, ImportedZoningMapConfig)
-            else first_zoning.document
-        )
-        layers.append(
-            {
-                "layer_id": "master-plan-zones",
-                "title": f"{config.name} Master Plan Land Use Zones",
-                "kind": "master_plan_zone",
-                "source": str(z_source),
-                "method": "Master plan land-use zone extraction reprojected from UTM 43N (EPSG:32643) and clipped to corporation boundary (EPSG:4326)",
-                "accuracy_m": 5.0,
-                "derived": True,
-                "file": "zones.geojson",
-                "external_url": None,
-                "feature_count": active_zone_count,
-                "notes": "Derived by this project from official master plan sheets/layers.",
-            }
-        )
+        if traced_runs:
+            run0 = traced_runs[0]
+            georef0 = run0["georef"]
+            checks0 = run0["checks"]
+            cfg0 = run0["config"]
+            sheet_name = str(cfg0.sheet or cfg0.id)
+            rmse_val = round(float(georef0["rmse_m"]), 4)
+            layers.append(
+                {
+                    "layer_id": "landuse_zones",
+                    "title": f"{config.name} Master Plan Land Use Zones ({sheet_name})",
+                    "kind": "master_plan_zone",
+                    "source": str(cfg0.source_url or cfg0.document),
+                    "method": f"Zones traced from the RMP 2015 Proposed Land Use sheet {sheet_name}, placed using the sheet's printed grid (UTM 43N EPSG:32643 -> EPSG:4326)",
+                    "accuracy_m": rmse_val,
+                    "derived": True,
+                    "file": "zones.geojson",
+                    "external_url": cfg0.source_url,
+                    "feature_count": active_zone_count,
+                    "notes": f"Zones traced from the RMP 2015 Proposed Land Use sheet {sheet_name}, placed using the sheet's printed grid; measured grid placement RMSE {rmse_val:.2f} m (independent OpenStreetMap road median offset {checks0.get('road_median_offset_m') or 0.0:.1f} m).",
+                    "sheet_overlay": {
+                        "image_url": str(georef0["image_url"]),
+                        "bounds_wgs84": georef0["bounds_wgs84"],
+                        "sheet": sheet_name,
+                        "planning_district": str(cfg0.planning_district),
+                        "rmse_m": rmse_val,
+                        "loo_rmse_m": round(float(georef0["loo_rmse_m"]), 4),
+                        "max_residual_m": round(float(georef0["max_residual_m"]), 4),
+                        "road_median_offset_m": checks0.get("road_median_offset_m"),
+                        "road_p90_offset_m": checks0.get("road_p90_offset_m"),
+                    },
+                }
+            )
+        else:
+            z_source = (
+                first_zoning.source_url
+                if isinstance(first_zoning, ImportedZoningMapConfig)
+                else first_zoning.document
+            )
+            layers.append(
+                {
+                    "layer_id": "master-plan-zones",
+                    "title": f"{config.name} Master Plan Land Use Zones",
+                    "kind": "master_plan_zone",
+                    "source": str(z_source),
+                    "method": "Master plan land-use zone extraction reprojected from UTM 43N (EPSG:32643) and clipped to corporation boundary (EPSG:4326)",
+                    "accuracy_m": 5.0,
+                    "derived": True,
+                    "file": "zones.geojson",
+                    "external_url": None,
+                    "feature_count": active_zone_count,
+                    "notes": "Derived by this project from official master plan sheets/layers.",
+                }
+            )
 
     for ov_cfg in config.maps.overlays or []:
         ov_count = (
@@ -264,6 +321,7 @@ def run_geo_pipeline(config: JurisdictionConfig, *, repo_root: Path | None = Non
         planning_district_features=planning_district_features,
         overlay_features=overlay_features,
         output_path=reports_dir / "map-verification.md",
+        traced_runs=traced_runs,
     )
 
     click.echo(

@@ -31,6 +31,40 @@
     }
   },
   "$defs": {
+    "georefRunSummary": {
+      "type": "object",
+      "title": "GeorefRunSummary",
+      "additionalProperties": false,
+      "required": [
+        "target_crs",
+        "gcp_count",
+        "rmse_m",
+        "loo_rmse_m",
+        "max_residual_m"
+      ],
+      "properties": {
+        "target_crs": {
+          "type": "string",
+          "minLength": 1
+        },
+        "gcp_count": {
+          "type": "integer",
+          "minimum": 3
+        },
+        "rmse_m": {
+          "type": "number",
+          "minimum": 0
+        },
+        "loo_rmse_m": {
+          "type": "number",
+          "minimum": 0
+        },
+        "max_residual_m": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
     "zoneFeatureProperties": {
       "type": "object",
       "title": "ZoneFeatureProperties",
@@ -103,8 +137,15 @@
           "minLength": 1
         },
         "georef_run": {
-          "type": "string",
-          "minLength": 1
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "$ref": "#/$defs/georefRunSummary"
+            }
+          ]
         },
         "extraction_method": {
           "type": "string",
@@ -124,6 +165,14 @@
         "area_sq_m": {
           "type": "number",
           "minimum": 0
+        },
+        "accuracy_m": {
+          "type": ["number", "null"],
+          "default": null
+        },
+        "derived": {
+          "type": "boolean",
+          "default": true
         },
         "verification": {
           "type": "string",

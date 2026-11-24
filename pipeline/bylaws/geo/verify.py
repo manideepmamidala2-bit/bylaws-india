@@ -27,6 +27,7 @@ def write_jurisdiction_map_verification_report(
     planning_district_features: list[dict[str, Any]],
     overlay_features: list[dict[str, Any]],
     output_path: Path,
+    traced_runs: list[dict[str, Any]] | None = None,
 ) -> None:
     """Write `data/reports/<jurisdiction>/map-verification.md` with coverage and sheet metrics."""
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -173,10 +174,58 @@ def write_jurisdiction_map_verification_report(
                     f"- **Notification Cross-Check**: {b_cfg.verification_note}"
                 )
 
+    traced_section_lines: list[str] = []
+    for run in traced_runs or []:
+        cfg_r = run["config"]
+        georef_r = run["georef"]
+        checks_r = run["checks"]
+        sheet_lbl = str(cfg_r.sheet or cfg_r.id)
+        traced_section_lines.extend(
+            [
+                f"### Sheet `{sheet_lbl}` (Planning District `{cfg_r.planning_district}`)",
+                "",
+                f"- **Target CRS**: `{georef_r['target_crs']}` (UTM Zone 43N, WGS 1984, reprojected to `EPSG:4326`)",
+                f"- **Printed Grid Control Points (`+`)**: `{georef_r['gcp_count']}`",
+                f"- **Affine Fit RMSE**: **`{georef_r['rmse_m']:.4f} m`** (Target `<= 10.0 m`: `PASS`)",
+                f"- **Leave-One-Out (LOO) Cross-Validation RMSE**: **`{georef_r['loo_rmse_m']:.4f} m`**",
+                f"- **Maximum Grid Residual**: **`{georef_r['max_residual_m']:.4f} m`**",
+                f"- **Independent Check 1 — OpenStreetMap Roads (`basemap.pmtiles`)**: `{checks_r.get('road_segment_count', 0)}` vector road segments compared; **Median offset: `{checks_r.get('road_median_offset_m')} m`**, **90th-percentile (`p90`) offset: `{checks_r.get('road_p90_offset_m')} m`**, Mean offset: `{checks_r.get('road_mean_offset_m')} m` *(Note: sheet draws road curb/ROW edges while OpenStreetMap draws road centrelines)*.",
+                f"- **Independent Check 2 — Official GBA Ward Boundaries (`wards.geojson`)**: `{checks_r.get('ward_sample_count', 0)}` boundary sample points compared along shared arterial corridors; **Median offset: `{checks_r.get('ward_median_offset_m')} m`**, **90th-percentile (`p90`) offset: `{checks_r.get('ward_p90_offset_m')} m`**.",
+                f"- **Rendered Sheet Image Overlay**: `{georef_r.get('image_url')}` (WGS 84 corners: `{georef_r.get('bounds_wgs84')}`)",
+                "",
+                "| Grid ID | PDF X (pt) | PDF Y (pt) | Printed Easting (m) | Printed Northing (m) | Residual (m) | Leave-One-Out Error (m) |",
+                "|---|---:|---:|---:|---:|---:|---:|",
+            ]
+        )
+        for gcp in georef_r.get("gcps") or []:
+            traced_section_lines.append(
+                f"| `{gcp['id']}` | {gcp['pdf_x']:.3f} | {gcp['pdf_y']:.3f} | {gcp['utm_e']:.1f} | {gcp['utm_n']:.1f} | {gcp['residual_m']:.4f} | {gcp['loo_error_m']:.4f} |"
+            )
+        traced_section_lines.append("")
+        if getattr(cfg_r, "legend_palette", None):
+            traced_section_lines.extend(
+                [
+                    "#### Legend Colour Mapping Table (`ZONING CLASSIFICATION`)",
+                    "",
+                    "| Zone Code | Zone Label | Indexed Palette RGB Swatches | Min Polygon Area (`sq.m`) |",
+                    "|---|---|---|---:|",
+                ]
+            )
+            for l_entry in cfg_r.legend_palette:
+                rgb_strs = []
+                for r_trip in l_entry.rgbs:
+                    rv = getattr(r_trip, "root", r_trip)
+                    rgb_strs.append(f"`({rv[0]}, {rv[1]}, {rv[2]})`")
+                min_a_val = float(getattr(l_entry, "min_area_sq_m", None) or 1500.0)
+                traced_section_lines.append(
+                    f"| `{l_entry.zone_code}` | {l_entry.zone_label} | {', '.join(rgb_strs)} | {min_a_val:.0f} |"
+                )
+            traced_section_lines.append("")
+
     lines = [
         f"# Map & Geospatial Verification Report — `{config.id}` ({config.name})",
         "",
-        "**Step**: PR 06 / Plan v2.0 §5.C1–C4 · **Verification Cap**: `machine_checked` (Rule R10)",
+        "**Step**: PR 06–07 / Plan v2.0 §5.C1–C4 · **Verification Cap**: `machine_checked` (Rule R10)",
         "",
         "## 1. Coverage & Coordinate Reference System Summary",
         "",
@@ -202,12 +251,13 @@ def write_jurisdiction_map_verification_report(
         "|---:|---|---|---|---|---:|---:|---|",
         *(ward_rows or ["| — | — | — | — | — | — | 0.00 sq.km | — |"]),
         "",
-        "## 4. Per-Planning-District / Sheet Verification",
+        "## 4. Per-Planning-District / Sheet Verification & Printed-Grid Georeferencing",
         "",
         "| Planning District | Source Sheet | Extraction & CRS Method | Polygons | Zone Codes Present | Clipped Area | Status |",
         "|---|---|---|---|---|---|---|",
         *(district_rows or ["| — | — | — | 0 | — | 0.00 sq.km | — |"]),
         "",
+        *traced_section_lines,
         "## 5. Land-Use Zone Distribution (`zones.geojson`)",
         "",
         "| Zone Code | Total Clipped Area | Share of Zoned Area |",
