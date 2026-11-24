@@ -71,6 +71,7 @@ export interface JurisdictionConfig {
    * @minItems 1
    */
   documents: [DocumentConfig, ...DocumentConfig[]];
+  amendment_links?: JurisdictionAmendmentLinkConfig[];
   maps: MapsConfig;
 }
 
@@ -183,6 +184,17 @@ export interface CitedProvisionConfig {
   topic?: string | null;
   cited_by: string[];
   where_to_obtain?: string | null;
+}
+
+export interface JurisdictionAmendmentLinkConfig {
+  amending_clause: string;
+  target_clause: string;
+  action: "substitute" | "insert_after" | "insert_before" | "omit" | "modify" | "renumber";
+  effective_date?: string | null;
+  confidence: "high" | "medium" | "low";
+  verification: "unverified" | "machine_checked" | "human_verified";
+  note?: string | null;
+  replacement_text?: string | null;
 }
 
 export interface MapsConfig {
@@ -741,6 +753,7 @@ export interface MapGcp {
 }
 
 export interface AmendmentLinkOverride {
+  amending_clause: string;
   clause_id?: string;
   target_clause: string;
   action: "substitute" | "insert_after" | "insert_before" | "omit" | "modify" | "renumber";

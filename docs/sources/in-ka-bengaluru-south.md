@@ -5,7 +5,7 @@
 - **Jurisdiction ID**: `in-ka-bengaluru-south`
 - **Name**: Bengaluru South City Corporation (constituted under the *Greater Bengaluru Governance Act, 2024*, formerly part of Bruhat Bengaluru Mahanagara Palike)
 - **Planning Authority**: Bangalore Development Authority (BDA) / Greater Bengaluru Authority (GBA)
-- **Current Pipeline Stage**: **PR 04 (Owner Checkpoint 1 — Core Documents Acquired & Verified; Not Yet Structured)**
+- **Current Pipeline Stage**: **PR 08 (Building Bye-laws 2003 Amendment Chain & Consolidated Views — Release `2.3.0`)**
 
 ---
 
@@ -49,4 +49,5 @@ Building construction and land development in Bengaluru South City Corporation a
 | `rmp2015-zr-amend-2025-02` | `in_force` | `acquired` | `2025-02-21` | `2025-02-21` | 16 | 1,282,141 | `d305dbdf8a42ee7ae104f515e0b795cbf5d1d4d8b7aa6493e4ef84a4f860a330` | [Wayback (`data.opencity.in`)](https://web.archive.org/web/20250307075721id_/https://data.opencity.in/dataset/3877072d-adef-4923-890d-1de96e72faeb/resource/886578b2-3419-40f0-9f51-21b78fefbac7/download/premium-far-gazette.pdf) |
 | `rmp2015-zr-amend-2026-01` | `in_force` | `acquired` | `2026-01-05` | `2026-01-05` | 7 | 344,161 | `a3672d169c20b77ef3978dfad956c16a8fd6a0209266d553e16ddb7d3522e60e` | [Wayback (`data.opencity.in`)](https://web.archive.org/web/20260216195827id_/https://data.opencity.in/dataset/31a482fe-4ffd-4929-a61d-2fdcca90be91/resource/36f1c5e6-5f5d-4356-bfba-00c5fe1020e2/download/udd-235-mnj-2025e-05.01.2026.pdf) |
 | `rmp2015-zr-amend-2025-07` | `in_force` | `not_found` | `2025-07-01` | — | — | — | — | [OpenCity (`HTTP 403`)](https://data.opencity.in/dataset/31a482fe-4ffd-4929-a61d-2fdcca90be91/resource/3f2685b8-5e27-44e5-9222-8f6dbff9445f/download/d7b00660-a3bc-49cf-b35a-3d70283ace0a.pdf) |
+| `udd-1107-mnu-2018-draft` | `draft` | `acquired` | `2018-11-27` | `2018-11-28` | 6 | 2,417,618 | `a0f29c055256201115811cf2c3cfa25c1de1e41d2bafcf3025192747157700f2` | [BPAS Live](https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Government%20Notifications/No.UDD%2011O7%20MNU%202015,%20Beagaluru,%20Dated%2027-11-2018%20.pdf) |
 | `bscc-bbl-amend-2026` | `draft` | `not_found` | `2026-03-04` | — | — | — | — | [OpenCity (`HTTP 403`)](https://data.opencity.in/dataset/bbmp-building-byelaws/resource/d37c7718-8c24-4da7-86a0-d19b974fb8a9/download/bscc-10125.pdf) |

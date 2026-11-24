@@ -77,7 +77,7 @@ def test_bengaluru_south_release_1_0_0_is_withdrawn_and_files_removed() -> None:
 
     bscc = by_id["in-ka-bengaluru-south"]
     assert bscc["visibility"] == "public"
-    assert bscc["latest_release"] in {"2.0.0", "2.1.0", "2.2.0"}
+    assert bscc["latest_release"] in {"2.0.0", "2.1.0", "2.2.0", "2.3.0"}
 
     rel = next(r for r in bscc["releases"] if r["version"] == "1.0.0")
     assert rel["version"] == "1.0.0"

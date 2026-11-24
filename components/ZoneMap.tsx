@@ -268,6 +268,9 @@ export function ZoneMap({
 
     try {
       if (!pmtilesProtocolRegistered) {
+        if (typeof maplibregl.setWorkerUrl === "function") {
+          maplibregl.setWorkerUrl("/maplibre-gl-worker.js");
+        }
         const protocol = new Protocol();
         maplibregl.addProtocol("pmtiles", protocol.tile);
         pmtilesProtocolRegistered = true;

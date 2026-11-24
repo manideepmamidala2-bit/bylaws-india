@@ -101,7 +101,9 @@
     "licence_or_terms": "Section 52(1)(q) Indian Copyright Act, 1957 (public state gazette notification)",
     "notified_date": "2017-10-28",
     "effective_from": "2017-10-28",
-    "amends": [],
+    "amends": [
+      "bbl-2003"
+    ],
     "supersedes": [],
     "source_url": "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/Model%20Building%20Byelaws%20Notification%20No.%20UDD%2014%20TTP%202017%20(P-4)%20Bengaluru,%20Dated%2028-10-2017%20.pdf",
     "retrieved_at": "2026-11-23T00:00:00Z",
@@ -926,6 +928,92 @@
     ],
     "official_url": "https://data.opencity.in/dataset/bbmp-building-byelaws/resource/d37c7718-8c24-4da7-86a0-d19b974fb8a9/download/bscc-10125.pdf",
     "mirror_urls": []
+  },
+  {
+    "schema_version": "1.3",
+    "doc_id": "udd-1107-mnu-2018-draft",
+    "title": "Draft Notification No. UDD 1107 MNU 2015 \u2014 Punishments under Section 321-B of K.M.C. Act, 1976 and Building Bye-laws, 2003",
+    "issuing_authority": "URBAN DEVELOPMENT SECRETARIAT, Government of Karnataka",
+    "layer": "municipal",
+    "role": "amendment",
+    "legal_status": "draft",
+    "acquisition_status": "acquired",
+    "status_evidence": {
+      "url": "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx",
+      "quoted_line": "URBAN DEVELOPMENT SECRETARIAT DRAFT NOTIFICATION NO. UDD 1107 MNU 2015, Bengaluru, Dated: 27.11.2018 ... Therefore, punishments for various offences under Chapter XV of the Karnataka Municipal Corporations Act, 1976 and under the Building Bye-laws, 2003 which has to be prescribed under Section 321-B of K.M.C. Act, 1976 have been listed as below",
+      "description": "Listed on the official GBA/BBMP Building Plan Approval System (bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx) under 'Government Notifications' and 'Corporation Act 1976 and Amendments'; invites objections within 30 days (extended by Notification dated 28-12-2018)."
+    },
+    "licence_or_terms": "Section 52(1)(q) Indian Copyright Act, 1957 (public state gazette notification)",
+    "notified_date": "2018-11-27",
+    "effective_from": "2018-11-28",
+    "amends": [
+      "bbl-2003"
+    ],
+    "supersedes": [],
+    "source_url": "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Government%20Notifications/No.UDD%2011O7%20MNU%202015,%20Beagaluru,%20Dated%2027-11-2018%20.pdf",
+    "retrieved_at": "2026-11-23T00:00:00Z",
+    "sha256": "a0f29c055256201115811cf2c3cfa25c1de1e41d2bafcf3025192747157700f2",
+    "bytes": 2417618,
+    "page_count": 6,
+    "is_scanned": false,
+    "retrieval": {
+      "fetched_at": "2026-11-23T00:00:00Z",
+      "requested_url": "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Government%20Notifications/No.UDD%2011O7%20MNU%202015,%20Beagaluru,%20Dated%2027-11-2018%20.pdf",
+      "final_url": "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Government%20Notifications/No.UDD%2011O7%20MNU%202015,%20Beagaluru,%20Dated%2027-11-2018%20.pdf",
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "content_length": 2417618,
+      "response_headers": {
+        "etag": "\"8edb92da64dad51:0\"",
+        "last_modified": "Mon, 03 Feb 2020 07:37:57 GMT",
+        "server": null,
+        "date": "Tue, 24 Nov 2026 16:11:09 GMT"
+      },
+      "sha256": "a0f29c055256201115811cf2c3cfa25c1de1e41d2bafcf3025192747157700f2",
+      "archive_url": "https://web.archive.org/web/20220813121043id_/https://site.bbmp.gov.in/PDF/townplanning/Amendments%20to%20Sec%20321%20of%20KMC%20Act%201976.pdf",
+      "archive_failure_reason": null,
+      "fetched_by": "agent"
+    },
+    "doc_type": "amendment",
+    "notification_number": "No. UDD 1107 MNU 2015",
+    "gazette_reference": "Part-IVA Karnataka Extraordinary Gazette, Wednesday, November 28, 2018 (extended December 28, 2018)",
+    "text_rights": {
+      "mode": "full_text",
+      "reason": "Official Karnataka Extraordinary Gazette notification"
+    },
+    "languages": [
+      "en"
+    ],
+    "official_url": "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Government%20Notifications/No.UDD%2011O7%20MNU%202015,%20Beagaluru,%20Dated%2027-11-2018%20.pdf",
+    "mirror_urls": [
+      "https://web.archive.org/web/20220813121043id_/https://site.bbmp.gov.in/PDF/townplanning/Amendments%20to%20Sec%20321%20of%20KMC%20Act%201976.pdf"
+    ],
+    "copies": [
+      {
+        "url": "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Government%20Notifications/No.UDD%2011O7%20MNU%202015,%20Beagaluru,%20Dated%2027-11-2018%20.pdf",
+        "path": "data/raw/in-ka-bengaluru-south/udd-1107-mnu-2018-draft.pdf",
+        "sha256": "a0f29c055256201115811cf2c3cfa25c1de1e41d2bafcf3025192747157700f2",
+        "retrieved_at": "2026-11-23T00:00:00Z",
+        "retrieval": {
+          "fetched_at": "2026-11-23T00:00:00Z",
+          "requested_url": "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Government%20Notifications/No.UDD%2011O7%20MNU%202015,%20Beagaluru,%20Dated%2027-11-2018%20.pdf",
+          "final_url": "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Government%20Notifications/No.UDD%2011O7%20MNU%202015,%20Beagaluru,%20Dated%2027-11-2018%20.pdf",
+          "http_status": 200,
+          "content_type": "application/pdf",
+          "content_length": 2417618,
+          "response_headers": {
+            "etag": "\"8edb92da64dad51:0\"",
+            "last_modified": "Mon, 03 Feb 2020 07:37:57 GMT",
+            "server": null,
+            "date": "Tue, 24 Nov 2026 16:11:09 GMT"
+          },
+          "sha256": "a0f29c055256201115811cf2c3cfa25c1de1e41d2bafcf3025192747157700f2",
+          "archive_url": "https://web.archive.org/web/20220813121043id_/https://site.bbmp.gov.in/PDF/townplanning/Amendments%20to%20Sec%20321%20of%20KMC%20Act%201976.pdf",
+          "archive_failure_reason": null,
+          "fetched_by": "agent"
+        }
+      }
+    ]
   },
   {
     "schema_version": "1.3",

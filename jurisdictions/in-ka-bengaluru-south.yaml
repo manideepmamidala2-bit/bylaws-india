@@ -17,7 +17,7 @@ aliases:
   - Uttarahalli
 visibility: public
 licence: CC BY 4.0
-release_version: "2.2.0"
+release_version: "2.3.0"
 country: IN
 state: KA
 building_types:
@@ -107,10 +107,13 @@ documents:
     role: reference
     legal_status: in_force
     acquisition_status: acquired
+    structured: true
     notification_number: "No. UDD 14 TTP 2017 (P-4)"
     gazette_reference: "Karnataka Extra-Ordinary Gazette Part-IVA"
     notified_date: "2017-10-28"
     effective_from: "2017-10-28"
+    amends:
+      - bbl-2003
     status_evidence:
       url: "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx"
       quoted_line: "Now, therefore, in exercise of the powers conferred by section 325 of the Karnataka Municipalities Act, 1964 (Karnataka Act 22 of 1964) the Government of Karnataka hereby makes the following building bye-laws namely: 1. Title, commencement and application.- (1) These bye-laws may be called the Karnataka Municipalities Model Building Bye-laws, 2017."
@@ -556,6 +559,52 @@ documents:
     mirror_urls: []
     source_url: "https://data.opencity.in/dataset/bbmp-building-byelaws/resource/d37c7718-8c24-4da7-86a0-d19b974fb8a9/download/bscc-10125.pdf"
 
+  - id: udd-1107-mnu-2018-draft
+    title: "Draft Notification No. UDD 1107 MNU 2015 — Punishments under Section 321-B of K.M.C. Act, 1976 and Building Bye-laws, 2003"
+    issuing_authority: "URBAN DEVELOPMENT SECRETARIAT, Government of Karnataka"
+    doc_type: amendment
+    layer: municipal
+    role: amendment
+    legal_status: draft
+    acquisition_status: acquired
+    structured: true
+    notification_number: "No. UDD 1107 MNU 2015"
+    gazette_reference: "Part-IVA Karnataka Extraordinary Gazette, Wednesday, November 28, 2018 (extended December 28, 2018)"
+    notified_date: "2018-11-27"
+    effective_from: "2018-11-28"
+    amends:
+      - bbl-2003
+    status_evidence:
+      url: "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx"
+      quoted_line: "URBAN DEVELOPMENT SECRETARIAT DRAFT NOTIFICATION NO. UDD 1107 MNU 2015, Bengaluru, Dated: 27.11.2018 ... Therefore, punishments for various offences under Chapter XV of the Karnataka Municipal Corporations Act, 1976 and under the Building Bye-laws, 2003 which has to be prescribed under Section 321-B of K.M.C. Act, 1976 have been listed as below"
+      description: "Listed on the official GBA/BBMP Building Plan Approval System (bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx) under 'Government Notifications' and 'Corporation Act 1976 and Amendments'; invites objections within 30 days (extended by Notification dated 28-12-2018)."
+    licence_or_terms: "Section 52(1)(q) Indian Copyright Act, 1957 (public state gazette notification)"
+    text_rights:
+      mode: full_text
+      reason: "Official Karnataka Extraordinary Gazette notification"
+    languages:
+      - en
+    official_url: "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Government%20Notifications/No.UDD%2011O7%20MNU%202015,%20Beagaluru,%20Dated%2027-11-2018%20.pdf"
+    mirror_urls:
+      - "https://web.archive.org/web/20220813121043id_/https://site.bbmp.gov.in/PDF/townplanning/Amendments%20to%20Sec%20321%20of%20KMC%20Act%201976.pdf"
+    source_url: "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Government%20Notifications/No.UDD%2011O7%20MNU%202015,%20Beagaluru,%20Dated%2027-11-2018%20.pdf"
+    retrieval:
+      fetched_at: "2026-11-23T00:00:00Z"
+      requested_url: "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Government%20Notifications/No.UDD%2011O7%20MNU%202015,%20Beagaluru,%20Dated%2027-11-2018%20.pdf"
+      final_url: "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Government%20Notifications/No.UDD%2011O7%20MNU%202015,%20Beagaluru,%20Dated%2027-11-2018%20.pdf"
+      http_status: 200
+      content_type: "application/pdf"
+      content_length: 2417618
+      response_headers:
+        etag: "\"8edb92da64dad51:0\""
+        last_modified: "Mon, 03 Feb 2020 07:37:57 GMT"
+        server: null
+        date: "Tue, 24 Nov 2026 16:11:09 GMT"
+      sha256: "a0f29c055256201115811cf2c3cfa25c1de1e41d2bafcf3025192747157700f2"
+      archive_url: "https://web.archive.org/web/20220813121043id_/https://site.bbmp.gov.in/PDF/townplanning/Amendments%20to%20Sec%20321%20of%20KMC%20Act%201976.pdf"
+      archive_failure_reason: null
+      fetched_by: "agent"
+
   - id: rmp2015-pd-index
     title: "BDA Revised Master Plan 2015 — Planning Districts Index Map (47 Planning Districts)"
     issuing_authority: "Bangalore Development Authority (BDA)"
@@ -641,6 +690,78 @@ documents:
       archive_url: "http://web.archive.org/web/20221222113106/https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_210-Jayanagar.pdf"
       archive_failure_reason: null
       fetched_by: "agent"
+
+amendment_links:
+  - amending_clause: "rmp2015-zr:chp_3__cl_3.1"
+    target_clause: "bbl-2003:part_III__sec_9.0__cl_9.2"
+    action: substitute
+    effective_date: "2007-06-25"
+    confidence: high
+    verification: machine_checked
+    note: "Revised Master Plan 2015 Volume III Zoning Regulations (G.O. No. UDD 540 BEM AA SE 2004, effective 25-06-2007) Chapter 3, Regulation 3.1 (Table 8 & Table 9, pp. 23–24) supersedes the 1995 CDP exterior setback tables (Tables 4 & 5) in Clause 9.2 of the 2003 Building Bye-laws."
+    replacement_text: "9.2 Exterior open spaces / setbacks, coverage, floor area ratio, numbers of floors and heights: Under Section 76M of the Karnataka Town and Country Planning Act, 1961 and Revised Master Plan 2015 Volume III Zoning Regulations (G.O. No. UDD 540 BEM AA SE 2004, effective 25-06-2007), the setbacks required on all sides of buildings up to 11.5 m height (plots up to 4000 sq.m) and high-rise buildings above 11.5 m height are governed by Chapter 3, Regulation 3.1 (Table 8: Exterior open spaces / setbacks in percentage of width/depth of plot, and Table 9: All-around setbacks for buildings above 11.5 m height) of the RMP 2015 Zoning Regulations, superseding Tables 4 and 5 of the 2003 Bye-laws."
+
+  - amending_clause: "rmp2015-zr:chp_3__cl_3.1"
+    target_clause: "bbl-2003:part_III__sec_9.0__cl_9.3__cl_9.3.1"
+    action: substitute
+    effective_date: "2007-06-25"
+    confidence: high
+    verification: machine_checked
+    note: "RMP 2015 Volume III Zoning Regulations Regulation 3.1 (Table 9, p. 24, effective 25-06-2007) defines high-rise buildings as 11.5 m and above and prescribes progressive all-around setbacks (5.0 m to 16.0 m), superseding Clause 9.3.1 and Table 5 of the 2003 Building Bye-laws."
+    replacement_text: "9.3.1 High-rise buildings (11.5 m height and above): In the case of high-rise buildings (11.5 m height and above), the minimum all-around front, rear, and side setbacks shall be as specified in Chapter 3, Regulation 3.1, Table 9 of the Revised Master Plan 2015 Zoning Regulations (effective 25-06-2007), starting at 5.0 m all-around for buildings above 11.5 m up to 15.0 m height and increasing progressively up to 16.0 m for buildings above 50.0 m height."
+
+  - amending_clause: "rmp2015-zr:chp_1__cl_1.2"
+    target_clause: "bbl-2003:part_III__sec_9.0__cl_9.10__cl_9.10.1"
+    action: substitute
+    effective_date: "2007-06-25"
+    confidence: high
+    verification: machine_checked
+    note: "RMP 2015 Volume III Zoning Regulations Chapter 1, Clause 1.2 (p. 15) and Chapter 4 (Tables 10–19) supersede the 1995 CDP A, B & C area classification and Table 6 in Clause 9.10.1 of the 2003 Building Bye-laws."
+    replacement_text: "9.10.1 Limitations of floor area and covered area: Under Revised Master Plan 2015 Volume III Zoning Regulations (effective 25-06-2007), the Local Planning Area of Bengaluru is organized into three main Rings (Ring I: Core Area within Core Ring Road; Ring II: Developed Area between Core Ring Road and Outer Ring Road; Ring III: Developing Area beyond Outer Ring Road) and zone-specific land-use categories in Chapter 4 (Tables 10–19), which govern maximum plot coverage and Floor Area Ratio (FAR) with reference to plot size and existing road width, superseding the 1995 CDP A, B and C areas and Table 6 of the 2003 Bye-laws."
+
+  - amending_clause: "rmp2015-zr:chp_8"
+    target_clause: "bbl-2003:part_III__sec_16.0"
+    action: substitute
+    effective_date: "2007-06-25"
+    confidence: high
+    verification: machine_checked
+    note: "RMP 2015 Volume III Zoning Regulations Chapter 8 (Table 23, pp. 46–49, effective 25-06-2007) supersedes the parking space standards in Clause 16.0 and Table 13 of the 2003 Building Bye-laws."
+    replacement_text: "16.0 Parking space: Adequate space for the parking of vehicles shall be provided in the sites in accordance with the parking norms and stipulations set out in Chapter 8, Table 23 of the Revised Master Plan 2015 Volume III Zoning Regulations (effective 25-06-2007), superseding Table 13 of the 2003 Bye-laws."
+
+  - amending_clause: "rmp2015-zr:chp_9__cl_9.3"
+    target_clause: "bbl-2003:part_IV__sec_30.0"
+    action: modify
+    effective_date: "2007-06-25"
+    confidence: high
+    verification: machine_checked
+    note: "RMP 2015 Volume III Zoning Regulations Chapter 9, Clause 9.3 (p. 50, effective 25-06-2007) reinforces earthquake-resistant structural design certification for buildings above 15.0 m height alongside Clause 30.0 of the 2003 Building Bye-laws."
+    replacement_text: "30.0 SAFETY MEASURES AGAINST EARTHQUAKE IN BUILDING CONSTRUCTION: Buildings with ground plus three floors and above or height of 11.5 m / 15.0 m and above shall be designed and constructed in accordance with the Indian Standard codes for earthquake-resistant design (IS 1893, IS 13920, IS 4326) and certified by a Registered Structural Engineer under Clause 30.0 and Chapter 9, Clause 9.3 of the RMP 2015 Zoning Regulations."
+
+  - amending_clause: "ka-model-bbl-2017:chp_2__item_2__item_3"
+    target_clause: "bbl-2003:part_I__sec_1.0__cl_1.3"
+    action: insert_after
+    effective_date: "2017-10-28"
+    confidence: high
+    verification: machine_checked
+    note: "Karnataka Municipal Corporations Model Building Bye-Laws, 2017 (Notification No. UDD 14 TTP 2017 (P-4), dated 28-10-2017, Clause 1(3), pp. 2 & 128) incorporates all mandatory Master Plan / Zonal Regulations and their amendments mutatis mutandis into the municipal building bye-laws."
+    replacement_text: "1.4 Mutatis mutandis application of Master Plan and Zonal Regulations: Pursuant to Clause 1(3) of Notification No. UDD 14 TTP 2017 (P-4) dated 28-10-2017 (published on the official GBA/BBMP Building Plan Approval System under Bye laws and Zoning Regulations), all mandatory Master Plan or Zonal Regulations regarding use, land use, coverage, FAR, setback or open space, height, number of stories, number of dwelling units, and parking standards for various categories of buildings, including all amendments or modifications made therein from time to time, apply mutatis mutandis as part of these Bye-laws."
+
+  - amending_clause: "ka-model-bbl-2017:chp_1"
+    target_clause: "bbl-2003:part_II__sec_3.0"
+    action: modify
+    effective_date: "2017-10-28"
+    confidence: low
+    verification: unverified
+    note: "Karnataka Municipal Corporations Model Building Bye-Laws, 2017 (Notification No. UDD 14 TTP 2017 (P-4), dated 28-10-2017) sets out a state model procedural framework; recorded with low confidence (not applied to in-force text) because Bangalore Mahanagara Palike Building Bye-laws 2003 remain listed as the operative principal municipal bye-laws on bpas.bbmpgov.in pending formal corporation-specific bye-law adoption."
+
+  - amending_clause: "udd-1107-mnu-2018-draft:cl_4"
+    target_clause: "bbl-2003:part_II__sec_4.0"
+    action: modify
+    effective_date: "2018-11-28"
+    confidence: high
+    verification: unverified
+    note: "Draft Notification No. UDD 1107 MNU 2015 dated 27-11-2018 (extended 28-12-2018) proposes statutory penalties under Section 321-B of the KMC Act, 1976 for violations of Bye-laws 4, 4.1.5(2), 5.1–5.7, 6, 7.1, 7.4, and 8; not applied to in-force text because the notification has legal_status 'draft'."
+
 maps:
   boundaries:
     - id: corporation

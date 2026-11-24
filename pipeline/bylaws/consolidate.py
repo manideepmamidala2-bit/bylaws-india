@@ -126,10 +126,12 @@ def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None
 
     clause_lookup: dict[str, dict[str, Any]] = {}
     doc_effective_dates: dict[str, str] = {}
+    doc_legal_status: dict[str, str] = {}
     for doc in config.documents:
         doc_effective_dates[doc.id] = (
             doc.effective_from or doc.notified_date or get_deterministic_timestamp()[:10]
         )
+        doc_legal_status[doc.id] = str(doc.legal_status)
         tree_path = docs_dir / f"{doc.id}.clauses.json"
         if tree_path.is_file():
             tree_data: dict[str, Any] = json.loads(tree_path.read_text(encoding="utf-8"))
@@ -158,14 +160,33 @@ def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None
             )
             continue
 
-        non_high = [lnk for lnk in target_links if lnk.get("confidence") != "high"]
+        draft_links = [
+            lnk
+            for lnk in target_links
+            if doc_legal_status.get(
+                str(lnk.get("amending_doc_id") or str(lnk["amending_clause"]).split(":", 1)[0])
+            )
+            == "draft"
+        ]
+        in_force_links = [lnk for lnk in target_links if lnk not in draft_links]
+        if not in_force_links:
+            unconsolidated.append(
+                {
+                    "clause_id": target_cid,
+                    "doc_id": target_doc_id,
+                    "reason": "Applicable amendment link(s) originate from a 'draft' instrument; draft instruments never produce effects on in-force text.",
+                }
+            )
+            continue
+
+        non_high = [lnk for lnk in in_force_links if lnk.get("confidence") != "high"]
         if non_high:
             unconsolidated.append(
                 {
                     "clause_id": target_cid,
                     "doc_id": target_doc_id,
                     "reason": (
-                        f"{len(non_high)} of {len(target_links)} applicable amendment link(s) "
+                        f"{len(non_high)} of {len(in_force_links)} applicable amendment link(s) "
                         "have confidence below 'high'; showing original plus amendments side by side."
                     ),
                 }
@@ -178,7 +199,7 @@ def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None
             amending_doc = str(lnk["amending_clause"]).split(":", 1)[0]
             return doc_effective_dates.get(amending_doc, "9999-12-31")
 
-        ordered_links = sorted(target_links, key=_link_date)
+        ordered_links = sorted(in_force_links, key=_link_date)
         current_title: str | None = target_clause.get("title")
         current_text: str = str(target_clause.get("text", ""))
         current_tables: list[dict[str, Any]] = copy.deepcopy(target_clause.get("tables") or [])
@@ -190,9 +211,13 @@ def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None
             amending_cid = str(lnk["amending_clause"])
             amending_clause = clause_lookup.get(amending_cid)
             amending_text = (
-                str(amending_clause.get("text", ""))
-                if amending_clause is not None
-                else str(lnk.get("note") or "")
+                str(lnk["note"])
+                if lnk.get("note")
+                else (
+                    str(amending_clause.get("text", ""))
+                    if amending_clause is not None
+                    else ""
+                )
             )
             action = str(lnk["action"])
             as_of_date = _link_date(lnk)

@@ -281,6 +281,10 @@
         "verification"
       ],
       "properties": {
+        "amending_clause": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*:.+$"
+        },
         "clause_id": {
           "type": "string",
           "minLength": 1

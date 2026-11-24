@@ -9,6 +9,8 @@ interface TimelinePageProps {
   params: Promise<{ id: string }>;
 }
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const manifest = await fetchManifest();
   return manifest.jurisdictions.map((j) => ({ id: j.id }));
@@ -167,18 +169,30 @@ export default async function TimelinePage({ params }: TimelinePageProps) {
                       {docLinks.map((lnk, idx) => {
                         const targetDoc = lnk.target_clause.split(":")[0];
                         return (
-                          <li key={idx} className="flex flex-wrap gap-2">
-                            <span className="uppercase text-[#5b5e56]">
-                              [{lnk.action.replace("_", " ")}]
-                            </span>
-                            <span>{lnk.amending_clause}</span>
-                            <span>→</span>
-                            <Link
-                              href={`/j/${jurisdiction.id}/documents/${targetDoc}`}
-                              className="font-semibold text-[#080909] underline"
-                            >
-                              {lnk.target_clause}
-                            </Link>
+                          <li key={idx} className="space-y-0.5">
+                            <div className="flex flex-wrap gap-2">
+                              <span className="uppercase text-[#5b5e56]">
+                                [{lnk.action.replace("_", " ")}]
+                              </span>
+                              <span>{lnk.amending_clause}</span>
+                              <span>→</span>
+                              <Link
+                                href={`/j/${jurisdiction.id}/documents/${targetDoc}`}
+                                className="font-semibold text-[#080909] underline"
+                              >
+                                {lnk.target_clause}
+                              </Link>
+                              {lnk.confidence !== "high" && (
+                                <span className="border border-dashed border-[#5b5e56] px-1 text-[10px] text-[#5b5e56]">
+                                  {lnk.confidence} confidence · not applied
+                                </span>
+                              )}
+                            </div>
+                            {(lnk.summary || lnk.note) && (
+                              <p className="dg-serif pl-4 font-sans text-xs text-[#5b5e56]">
+                                {lnk.summary ?? lnk.note}
+                              </p>
+                            )}
                           </li>
                         );
                       })}

@@ -20,7 +20,7 @@ def test_rmp2015_index_and_chosen_sheet_acquired_and_documented_in_docs_map() ->
     check_repository_provenance(REPO_ROOT)
 
     config = load_jurisdiction_config("in-ka-bengaluru-south")
-    assert config.release_version == "2.2.0"
+    assert config.release_version in {"2.2.0", "2.3.0"}
     assert config.maps.planning_districts is not None
     assert len(config.maps.planning_districts) >= 1
     assert len(config.maps.zoning) == 1

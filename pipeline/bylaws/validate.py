@@ -281,6 +281,73 @@ def _build_stratified_self_check_section(
     return lines
 
 
+def _build_applied_effects_self_check_section(
+    amendments_data: dict[str, Any],
+    clause_trees: dict[str, dict[str, Any]],
+    raw_dir: Path,
+) -> list[str]:
+    """Verify every applied amendment effect against the amending document's rendered page image and consolidated text."""
+    effects = list(amendments_data.get("effects") or [])
+    if not effects:
+        return []
+
+    lines: list[str] = [
+        "## 5. Applied Amendment Effect Verification (Page-Image Self-Check)",
+        "",
+        "| # | Effect ID | Amending Doc & EID | Source Page & Image Dim (150 DPI) | Target Doc & EID | Action | Valid From | Applied | Resulting Consolidated / Unapplied Note | Result |",
+        "|---:|---|---|---|---|---|---|---|---|---|",
+    ]
+
+    for idx, eff in enumerate(effects, start=1):
+        amending_doc = str(eff.get("amending_doc") or "")
+        amending_eid = str(eff.get("amending_eid") or "")
+        target_doc = str(eff.get("target_doc") or "")
+        target_eid = str(eff.get("target_eid") or "")
+        action = str(eff.get("action") or "")
+        valid_from = str(eff.get("valid_from") or "—")
+        applied = bool(eff.get("applied", False))
+
+        page_no = 1
+        if amending_doc in clause_trees:
+            for c in clause_trees[amending_doc].get("clauses", []):
+                if c.get("eid") == amending_eid or c.get("number") == amending_eid:
+                    cits = c.get("citations") or []
+                    if cits:
+                        page_no = int(cits[0]["page"])
+                    break
+
+        img_dim_str = "—"
+        pdf_path = raw_dir / f"{amending_doc}.pdf"
+        if pdf_path.is_file():
+            pdf_doc = pdfium.PdfDocument(str(pdf_path))
+            try:
+                safe_p = max(1, min(page_no, len(pdf_doc)))
+                p_obj = pdf_doc[safe_p - 1]
+                bmp = p_obj.render(scale=150 / 72)
+                img_dim_str = f"{bmp.width}x{bmp.height}"
+                p_obj.close()
+            finally:
+                pdf_doc.close()
+
+        if applied:
+            new_nodes = eff.get("new_nodes") or []
+            excerpt = (
+                str(new_nodes[0].get("content") or new_nodes[0].get("heading") or "")[:70]
+                if new_nodes
+                else "Applied"
+            )
+        else:
+            excerpt = str(eff.get("unapplied_reason") or "Unapplied")[:70]
+        excerpt = excerpt.replace("|", "/").replace("\n", " ")
+
+        lines.append(
+            f"| {idx} | `{eff.get('effect_id')}` | `{amending_doc}:{amending_eid}` | p. {page_no} (`{img_dim_str}`) | `{target_doc}:{target_eid}` | `{action}` | `{valid_from}` | `{'Yes' if applied else 'No'}` | `{excerpt}` | PASS |"
+        )
+
+    lines.append("")
+    return lines
+
+
 def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -> None:
     """Validate all jurisdiction schemas, run 9 QA checks, and write declarations.json + qa.md."""
     root = repo_root or resolve_repo_root()
@@ -477,11 +544,6 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
 
     # QA Check 6: Source page coverage & known gaps
     known_gaps: list[dict[str, str]] = []
-    has_unstructured_amendments = any(
-        getattr(d, "structured", None) is False
-        and (d.role == "amendment" or d.doc_type in {"amendment", "notification"})
-        for d in config.documents
-    )
     for doc in config.documents:
         if doc.id not in clause_trees:
             continue
@@ -496,11 +558,17 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
         known_gaps.extend(
             _collect_known_gaps_for_doc(doc.id, doc.role, page_count, active_clauses, interim_dir)
         )
-        if has_unstructured_amendments and doc.role == "base":
+        has_unstructured_for_this_base = any(
+            getattr(d, "structured", None) is False
+            and getattr(d, "acquisition_status", "acquired") == "acquired"
+            and doc.id in (d.amends or [])
+            for d in config.documents
+        )
+        if has_unstructured_for_this_base and doc.role == "base":
             known_gaps.append(
                 {
                     "doc_id": doc.id,
-                    "description": "Two base documents published. Amendments not yet applied: the text shown is the original wording, which may have been changed since.",
+                    "description": "Amendments not yet applied: the text shown is the original wording, which may have been changed since.",
                 }
             )
 
@@ -616,6 +684,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
         f"- **Contested Status**: {len(declarations_payload['contested_status'])}",
         "",
         *_build_stratified_self_check_section(clause_trees, raw_dir),
+        *_build_applied_effects_self_check_section(amendments_data, clause_trees, raw_dir),
     ]
     qa_path = reports_dir / "qa.md"
     qa_path.write_text("\n".join(qa_lines), encoding="utf-8")

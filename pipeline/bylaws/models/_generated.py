@@ -269,6 +269,22 @@ class OverlayMapConfig(BaseModel):
     rule_clause: str | None = None
 
 
+class JurisdictionAmendmentLinkConfig(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    amending_clause: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:.+$")
+    target_clause: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:.+$")
+    action: Literal[
+        "substitute", "insert_after", "insert_before", "omit", "modify", "renumber"
+    ]
+    effective_date: str | None = None
+    confidence: Literal["high", "medium", "low"]
+    verification: Literal["unverified", "machine_checked", "human_verified"]
+    note: str | None = None
+    replacement_text: str | None = None
+
+
 class MapsConfig(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -333,6 +349,7 @@ class JurisdictionConfig(BaseModel):
         description="Map of doc_id to building-relevant section or chapter numbers.",
     )
     documents: list[DocumentConfig] = Field(..., min_length=1)
+    amendment_links: list[JurisdictionAmendmentLinkConfig] | None = None
     maps: MapsConfig = Field(..., title="MapsConfig")
 
 
@@ -752,6 +769,7 @@ class AmendmentLinkOverride(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
+    amending_clause: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:.+$")
     clause_id: constr(min_length=1) | None = None
     target_clause: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:.+$")
     action: Literal[

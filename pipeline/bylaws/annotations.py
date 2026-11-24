@@ -113,6 +113,43 @@ def build_document_annotations(tree_payload: dict[str, Any]) -> dict[str, Any]:
 
     eid_by_native: dict[str, str] = {}
     compiled_defined_terms: list[tuple[str, str, re.Pattern[str]]] = []
+    seen_norm_terms: set[str] = set()
+    stopword_terms = {
+        "a",
+        "an",
+        "the",
+        "in",
+        "of",
+        "to",
+        "for",
+        "and",
+        "or",
+        "by",
+        "on",
+        "at",
+        "as",
+        "is",
+        "be",
+        "it",
+        "that",
+        "this",
+        "with",
+        "from",
+        "all",
+        "any",
+        "no",
+        "not",
+        "such",
+        "every",
+        "each",
+        "other",
+        "under",
+        "within",
+        "where",
+        "when",
+        "which",
+        "who",
+    }
     for node in active_nodes:
         eid = str(node.get("eid") or "")
         native = str(node.get("native_number") or node.get("number") or "").strip()
@@ -120,8 +157,15 @@ def build_document_annotations(tree_payload: dict[str, Any]) -> dict[str, Any]:
             eid_by_native[native.lower()] = eid
             eid_by_native[re.sub(r"\s+", " ", native.lower())] = eid
         if node.get("type") == "definition":
-            norm_term = str(node.get("defines_normalised") or "").strip()
-            if norm_term and len(norm_term) >= 3 and eid:
+            norm_term = str(node.get("defines_normalised") or "").strip().lower()
+            if (
+                norm_term
+                and len(norm_term) >= 3
+                and norm_term not in stopword_terms
+                and norm_term not in seen_norm_terms
+                and eid
+            ):
+                seen_norm_terms.add(norm_term)
                 compiled_defined_terms.append(
                     (
                         norm_term,
@@ -210,9 +254,11 @@ def build_document_annotations(tree_payload: dict[str, Any]) -> dict[str, Any]:
                 if prov_recorded:
                     break
 
-        # 2. Cross-reference annotations
+        # 2. Cross-reference annotations (only in body fields, never in headings)
         own_native = str(node.get("native_number") or "").lower()
         for field_name, f_text in candidate_fields:
+            if field_name == "heading":
+                continue
             for m_ref in CROSS_REF_SPAN_RE.finditer(f_text):
                 ref_kind = m_ref.group("kind").lower()
                 ref_num = re.sub(r"\s+", "", m_ref.group("num")).lower()
@@ -254,11 +300,18 @@ def build_document_annotations(tree_payload: dict[str, Any]) -> dict[str, Any]:
                     }
                 )
 
-        # 3. Defined-term use annotations (within-document)
+        # 3. Defined-term use annotations (within-document; at most 1 per term per provision, never in headings or definitions)
         if node_type != "definition" and compiled_defined_terms:
+            matched_defs_in_node: set[str] = set()
             for field_name, f_text in candidate_fields:
+                if field_name == "heading":
+                    continue
                 for _norm_term, def_eid, term_re in compiled_defined_terms:
-                    for m_term in term_re.finditer(f_text):
+                    if def_eid in matched_defs_in_node:
+                        continue
+                    m_term = term_re.search(f_text)
+                    if m_term:
+                        matched_defs_in_node.add(def_eid)
                         s, e = m_term.start(), m_term.end()
                         seq += 1
                         annotations.append(

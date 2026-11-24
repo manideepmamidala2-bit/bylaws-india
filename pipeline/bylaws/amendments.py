@@ -9,11 +9,13 @@ from pathlib import Path
 from typing import Any
 
 import click
+import yaml
 
+from bylaws.annotations import build_document_annotations
 from bylaws.config import JurisdictionConfig
 from bylaws.consolidate import run_consolidate
 from bylaws.root import resolve_repo_root
-from bylaws.schema_validator import validate_payload
+from bylaws.schema_validator import validate_file, validate_payload
 from bylaws.structure import build_eid, sanitise_native_token
 
 CLAUSE_NUM_PATTERN = r"([A-Za-z]?\d+(?:\.\d+)*[A-Za-z]?)"
@@ -464,11 +466,196 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
                 }
             )
 
+    # Also process declarative amendment_links from config.amendment_links and data/overrides/<jurisdiction>/*.yaml
+    overrides_dir = root / "data" / "overrides" / config.id
+    doc_by_id = {d.id: d for d in config.documents}
+    declarative_links: list[dict[str, Any]] = []
+    for cfg_lnk in getattr(config, "amendment_links", None) or []:
+        declarative_links.append(cfg_lnk.model_dump() if hasattr(cfg_lnk, "model_dump") else dict(cfg_lnk))
+    if overrides_dir.is_dir():
+        override_files = sorted(overrides_dir.glob("*.yaml")) + sorted(overrides_dir.glob("*.yml"))
+        for ov_path in override_files:
+            raw_ov = yaml.safe_load(ov_path.read_text(encoding="utf-8"))
+            if not raw_ov:
+                continue
+            validate_file(ov_path, "overrides")
+            declarative_links.extend(raw_ov.get("amendment_links") or [])
+
+    if declarative_links:
+        for ov_link in declarative_links:
+                amending_ref = str(ov_link.get("amending_clause") or ov_link.get("clause_id") or "")
+                target_ref = str(ov_link["target_clause"])
+                if ":" not in amending_ref or ":" not in target_ref:
+                    raise click.ClickException(
+                        "amendment_links must use '<doc_id>:<clause_or_eid>' format."
+                    )
+                amending_doc_id, amending_token = amending_ref.split(":", 1)
+                target_doc_id, target_token = target_ref.split(":", 1)
+                if amending_doc_id not in loaded_trees:
+                    loaded_trees[amending_doc_id] = _load_clause_tree(docs_dir, amending_doc_id)
+                if target_doc_id not in loaded_trees:
+                    loaded_trees[target_doc_id] = _load_clause_tree(docs_dir, target_doc_id)
+
+                amend_tree_ov = loaded_trees[amending_doc_id]
+                target_tree_ov = loaded_trees[target_doc_id]
+
+                amending_node_ov = next(
+                    (
+                        c
+                        for c in amend_tree_ov.get("clauses", [])
+                        if (
+                            c.get("clause_id") == amending_ref
+                            or c.get("eid") == amending_token
+                            or c.get("native_number") == amending_token
+                            or c.get("number") == amending_token
+                        )
+                        and c.get("superseded_by") is None
+                        and c.get("record_superseded_by") is None
+                    ),
+                    None,
+                )
+                if amending_node_ov is None:
+                    raise click.ClickException(
+                        f"Amending clause '{amending_ref}' not found in '{amending_doc_id}'."
+                    )
+
+                target_node_ov = next(
+                    (
+                        c
+                        for c in target_tree_ov.get("clauses", [])
+                        if (
+                            c.get("clause_id") == target_ref
+                            or c.get("eid") == target_token
+                            or c.get("native_number") == target_token
+                            or c.get("number") == target_token
+                        )
+                        and c.get("superseded_by") is None
+                        and c.get("record_superseded_by") is None
+                    ),
+                    None,
+                )
+
+                raw_action = str(ov_link["action"])
+                eff_action = "modify_text" if raw_action == "modify" else raw_action
+                lbl_conf_ov = str(ov_link["confidence"])
+                num_conf_ov = (
+                    0.95
+                    if lbl_conf_ov == "high"
+                    else (0.65 if lbl_conf_ov == "medium" else 0.40)
+                )
+                amending_doc_cfg = doc_by_id.get(amending_doc_id)
+                amending_status = (
+                    str(amending_doc_cfg.legal_status)
+                    if amending_doc_cfg is not None
+                    else "in_force"
+                )
+                valid_from_ov = (
+                    ov_link.get("effective_date")
+                    or (amending_doc_cfg.effective_from if amending_doc_cfg else None)
+                    or (amending_doc_cfg.notified_date if amending_doc_cfg else None)
+                )
+                amending_cid_ov = str(amending_node_ov["clause_id"])
+                amending_eid_ov = str(amending_node_ov.get("eid") or amending_token)
+
+                if target_node_ov is None:
+                    matched_target_cid_ov = target_ref
+                    matched_target_eid_ov = build_eid(None, "clause", target_token)
+                    should_apply_ov = False
+                    unapplied_reason_ov: str | None = (
+                        f"Target provision '{target_token}' not found in '{target_doc_id}'."
+                    )
+                else:
+                    matched_target_cid_ov = str(target_node_ov["clause_id"])
+                    matched_target_eid_ov = str(target_node_ov.get("eid") or target_token)
+                    should_apply_ov = (
+                        num_conf_ov >= 0.8 and amending_status == "in_force"
+                    )
+                    if should_apply_ov:
+                        unapplied_reason_ov = None
+                        amended_by_ov: list[str] = list(target_node_ov.get("amended_by", []))
+                        if amending_cid_ov not in amended_by_ov:
+                            amended_by_ov.append(amending_cid_ov)
+                            target_node_ov["amended_by"] = amended_by_ov
+                            modified_doc_ids.add(target_doc_id)
+                    elif amending_status != "in_force":
+                        unapplied_reason_ov = (
+                            f"Amending instrument '{amending_doc_id}' has status '{amending_status}'."
+                        )
+                    else:
+                        unapplied_reason_ov = (
+                            str(ov_link.get("note"))
+                            if ov_link.get("note")
+                            else f"Effect confidence ({lbl_conf_ov}) is below high threshold."
+                        )
+
+                effect_seq += 1
+                effect_id_ov = f"{amending_doc_id}:eff_{effect_seq}"
+                replacement_txt = str(
+                    ov_link.get("replacement_text")
+                    or ov_link.get("note")
+                    or amending_node_ov.get("text")
+                    or ""
+                )
+                new_nodes_ov: list[dict[str, Any]] = []
+                if eff_action in {"substitute", "insert_after", "insert_before", "modify_text"}:
+                    new_nodes_ov.append(
+                        _parse_quoted_node_payload(
+                            replacement_txt,
+                            action=eff_action,
+                            target_node=target_node_ov,
+                        )
+                    )
+
+                effect_entry_ov: dict[str, Any] = {
+                    "effect_id": effect_id_ov,
+                    "amending_doc": amending_doc_id,
+                    "amending_eid": amending_eid_ov,
+                    "target_doc": target_doc_id,
+                    "target_eid": matched_target_eid_ov,
+                    "action": eff_action,
+                    "new_nodes": new_nodes_ov,
+                    "valid_from": valid_from_ov,
+                    "confidence": num_conf_ov,
+                    "applied": should_apply_ov,
+                    "unapplied_reason": unapplied_reason_ov,
+                    "verification": str(ov_link.get("verification") or ("machine_checked" if should_apply_ov else "unverified")),
+                }
+                effects.append(effect_entry_ov)
+
+                if should_apply_ov and target_node_ov is not None:
+                    _apply_effect_to_target_tree(
+                        target_tree_ov,
+                        target_node_ov,
+                        effect_entry_ov,
+                        amending_node_ov,
+                    )
+                    modified_doc_ids.add(target_doc_id)
+
+                compat_action_ov = "modify" if eff_action == "modify_text" else eff_action
+                links.append(
+                    {
+                        "amending_clause": amending_cid_ov,
+                        "target_clause": matched_target_cid_ov,
+                        "amending_doc_id": amending_doc_id,
+                        "target_doc_id": target_doc_id,
+                        "action": compat_action_ov,
+                        "effective_date": valid_from_ov,
+                        "confidence": lbl_conf_ov,
+                        "verification": str(ov_link.get("verification") or ("machine_checked" if should_apply_ov else "unverified")),
+                        "note": ov_link.get("replacement_text") or ov_link.get("note"),
+                        "summary": ov_link.get("note"),
+                    }
+                )
+
     for doc_id in sorted(modified_doc_ids):
         tree_payload = loaded_trees[doc_id]
         tree_path = docs_dir / f"{doc_id}.clauses.json"
         validate_payload(tree_payload, "clause-tree", source=str(tree_path))
         tree_path.write_text(json.dumps(tree_payload, indent=2) + "\n", encoding="utf-8")
+        ann_payload = build_document_annotations(tree_payload)
+        ann_path = docs_dir / f"{doc_id}.annotations.json"
+        validate_payload(ann_payload, "annotations", source=str(ann_path))
+        ann_path.write_text(json.dumps(ann_payload, indent=2) + "\n", encoding="utf-8")
 
     amendments_payload: dict[str, Any] = {
         "schema_version": "1.3",

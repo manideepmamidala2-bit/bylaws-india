@@ -54,11 +54,11 @@ def run_parse_stage(
     interim_dir = root / "data" / "interim" / config.id
     interim_dir.mkdir(parents=True, exist_ok=True)
 
+    from bylaws.structure import is_structurable_document
+
     parsed_count = 0
     for doc in config.documents:
-        if doc.role in {"boundary", "reference"} or doc.doc_type in {"map", "standard_reference"}:
-            continue
-        if doc.text_rights is not None and doc.text_rights.mode == "reference_only":
+        if not is_structurable_document(doc):
             continue
         pdf_path = raw_dir / f"{doc.id}.pdf"
         if not pdf_path.is_file():

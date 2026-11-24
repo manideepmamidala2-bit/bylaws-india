@@ -14,6 +14,8 @@ interface ClausesPageProps {
   params: Promise<{ id: string }>;
 }
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const manifest = await fetchManifest();
   return manifest.jurisdictions.map((j) => ({ id: j.id }));
@@ -71,12 +73,39 @@ export default async function ClausesPage({ params }: ClausesPageProps) {
     );
   }
 
+  const referencedAmendingIds = new Set(
+    amendments.links.map((l) => l.amending_clause)
+  );
   const allClausesLookup: Record<string, ClauseNode> = {};
   for (const c of clauses) {
-    if (!c.superseded_by && !c.record_superseded_by) {
-      allClausesLookup[c.clause_id] = c;
+    if (
+      !c.superseded_by &&
+      !c.record_superseded_by &&
+      referencedAmendingIds.has(c.clause_id)
+    ) {
+      allClausesLookup[c.clause_id] = { ...c, versions: undefined };
     }
   }
+  const referenceDocIds = new Set(
+    documents.filter((d) => d.role === "reference").map((d) => d.doc_id)
+  );
+  const slimmedClauses: ClauseNode[] = clauses
+    .filter((c) => !referenceDocIds.has(c.doc_id ?? "") || c.level <= 2)
+    .map((c) => ({
+      ...c,
+      title: c.title === c.heading ? null : c.title,
+      content: !c.intro && !c.wrap_up && c.content === c.text ? null : c.content,
+      citations: (c.citations ?? []).slice(0, 1).map((cit) => ({
+        doc_id: cit.doc_id,
+        page: cit.page,
+        bbox: null,
+        text_excerpt: "",
+      })),
+      versions:
+        (c.versions?.length ?? 0) > 1 || c.versions?.[0]?.effect_id
+          ? c.versions
+          : undefined,
+    }));
 
   return (
     <div className="min-h-screen bg-[#f5f3ed] text-[#080909]">
@@ -155,8 +184,10 @@ export default async function ClausesPage({ params }: ClausesPageProps) {
         </section>
 
         <ClauseTree
-          clauses={clauses}
-          annotations={Object.values(annotationsByDocId).flat()}
+          clauses={slimmedClauses}
+          annotations={Object.entries(annotationsByDocId)
+            .filter(([docKey]) => !referenceDocIds.has(docKey))
+            .flatMap(([, anns]) => anns)}
           amendmentEffects={amendments.effects ?? []}
           consolidatedRecords={consolidated?.records ?? []}
           unconsolidatedRecords={consolidated?.unconsolidated ?? []}

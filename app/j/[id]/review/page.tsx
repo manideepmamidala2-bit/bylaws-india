@@ -8,6 +8,8 @@ interface ReviewPageProps {
   params: Promise<{ id: string }>;
 }
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const manifest = await fetchManifest();
   return manifest.jurisdictions.map((j) => ({ id: j.id }));
