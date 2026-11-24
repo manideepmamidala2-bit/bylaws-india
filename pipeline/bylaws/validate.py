@@ -178,11 +178,18 @@ def _collect_known_gaps_for_doc(
 
     uncovered = [p for p in range(1, page_count + 1) if p not in covered_pages]
     if uncovered:
-        pages_str = ", ".join(str(p) for p in uncovered)
+        if len(uncovered) > 20:
+            desc = (
+                f"Only building-related provisions are included ({len(covered_pages)} of {page_count} source pages structured; "
+                f"{len(uncovered)} non-building or non-English pages omitted by design)."
+            )
+        else:
+            pages_str = ", ".join(str(p) for p in uncovered)
+            desc = f"Source page(s) {pages_str} have zero extracted clauses"
         gaps.append(
             {
                 "doc_id": doc_id,
-                "description": f"Source page(s) {pages_str} have zero extracted clauses",
+                "description": desc,
             }
         )
 

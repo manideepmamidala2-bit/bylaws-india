@@ -8,9 +8,9 @@
 | `definition_differs` | 59 | 59 | 0 |
 | `numeric_differs` | 22 | 0 | 22 |
 | `cross_document_reference` | 43 | 43 | 0 |
-| `precedence` | 13 | 13 | 0 |
+| `precedence` | 19 | 19 | 0 |
 | `corporation_differs` | 16 | 16 | 0 |
-| **Total** | **202** | **180** | **22** |
+| **Total** | **208** | **186** | **22** |
 
 ## 2. Statutory Precedence Relations (Quoted Law Spans)
 
@@ -21,14 +21,20 @@
 | `rel_176` | `bbl-2003:part_III__sec_9.0__cl_9.10__cl_9.10.6` | `rmp2015-zr:chp_10__cl_10.1__cl_9` | `ground_coverage` | subject to the provision of minimum set backs prescribed in Tables 4 and 5, whichever is applicable |
 | `rel_177` | `bbl-2003:part_II__sec_4.0__cl_4.1__cl_4.1.1` | `rmp2015-zr:part_II__sec_4.0__cl_4.1__cl_4.1.1` | `general` | Subject to sections 303 and 304 of the Act, the Authority, after having examined the application for licence, may either grant the licence as per the proposal |
 | `rel_178` | `bbl-2003:part_V__sec_34` | `rmp2015-zr:part_V__sec_34` | `general` | On these bye-laws coming into force, 'The City of Bangalore Municipal Corporation Building Bye-laws, 1983' (approved by the Govt |
-| `rel_179` | `rmp2015-zr:app_VIII` | `bbl-2003:part_III__sec_10.0` | `far` | subject to the provision of Section 14-B of the Karnataka Town and Country planing Act, 1961 and Rules thereunder: |
-| `rel_180` | `rmp2015-zr:chp_10__cl_10.1__cl_8` | `bbl-2003:part_I__sec_1.0` | `general` | subject to condition No |
-| `rel_181` | `rmp2015-zr:chp_2__note_1` | `bbl-2003:part_III__sec_13.0__cl_13.1` | `land_use` | subject to condition that the zone permits the extent of the area and power consumption, the activity follows the required space standard, performance character |
-| `rel_182` | `rmp2015-zr:chp_2__tbl_10__row_3` | `bbl-2003:part_I__sec_1.0` | `general` | subject to condition that the zone permits the extent of the area and installed power and performance characteristics such as Noise, Vibration, Dust , Odour, Ef |
-| `rel_183` | `rmp2015-zr:chp_2__tbl_7__row_2` | `bbl-2003:part_I__sec_1.0` | `general` | subject to condition that the zone permits the extent of area and the power consumption does not exceed 5 KW |
-| `rel_184` | `rmp2015-zr:chp_4__cl_4.10__cl_4.10.2__item_i` | `bbl-2003:part_III__sec_13.0__cl_13.2__note_1` | `building_height` | subject to condition that it satisfies fire and airport authority restrictions where ever applicable |
-| `rel_185` | `rmp2015-zr:chp_8__cl_8.1__item_b__item_iii` | `bbl-2003:part_III__sec_13.0__cl_13.2__note_1` | `building_height` | subject to condition that they satisfy fire and airport authority restrictions where ever applicable |
-| `rel_186` | `rmp2015-zr-amend-2009-03:chp_3__cl_4.10__cl_4.10.2` | `bbl-2003:part_III__sec_13.0__cl_13.2__note_1` | `building_height` | subject to condition that it satisfies fire and airport authority restrictions wherever applicable |
+| `rel_179` | `gbga-2024:chp_XVIII__cl_316__item_2__item_3__item_4__item_b__item_5` | `bbl-2003:part_I__sec_1.0` | `general` | notwithstanding anything contained in section 318 |
+| `rel_180` | `gbga-2024:chp_XVII__cl_223` | `bbl-2003:part_I__sec_1.0` | `general` | Notwithstanding anything contained in this Act, a Corporation or any officer or other authority required by or under this Act to exercise any power, or perform any function or d |
+| `rel_181` | `gbga-2024:chp_XVII__cl_230__item_2__item_3__item_4__item_5__item_6__item_7__item_8__item_9__item_10` | `bbl-2003:part_I__sec_1.0` | `general` | Notwithstanding anything contained in this chapter, the Commissioner shall have the power to order for the stoppage of any construction which in his opinion endangers the public |
+| `rel_182` | `gbga-2024:chp_XVII__cl_234__prov_1` | `bbl-2003:part_I__sec_1.0` | `general` | Notwithstanding anything contained in this act no licence or permission shall be necessary for the Bengaluru Metropolitan Transport City Corporation in respect of the fixation o |
+| `rel_183` | `gbga-2024:chp_XVII__cl_238` | `bbl-2003:part_I__sec_1.0` | `general` | Notwithstanding anything contained in this Act or any rule or bye-law made there under, the construction of, or any addition to any building of public entertainment or any addit |
+| `rel_184` | `gbga-2024:chp_XVII__cl_249` | `bbl-2003:part_II__sec_3.0__cl_3.10__note_1` | `deviations_regularisation` | Notwithstanding anything contained in this Act, when construction of any building is completed in contravention of the provisions of this Chapter and the building bye-laws, the |
+| `rel_185` | `rmp2015-zr:app_VIII` | `bbl-2003:part_III__sec_10.0` | `far` | subject to the provision of Section 14-B of the Karnataka Town and Country planing Act, 1961 and Rules thereunder: |
+| `rel_186` | `rmp2015-zr:chp_10__cl_10.1__cl_8` | `bbl-2003:part_I__sec_1.0` | `general` | subject to condition No |
+| `rel_187` | `rmp2015-zr:chp_2__note_1` | `bbl-2003:part_III__sec_13.0__cl_13.1` | `land_use` | subject to condition that the zone permits the extent of the area and power consumption, the activity follows the required space standard, performance character |
+| `rel_188` | `rmp2015-zr:chp_2__tbl_10__row_3` | `bbl-2003:part_I__sec_1.0` | `general` | subject to condition that the zone permits the extent of the area and installed power and performance characteristics such as Noise, Vibration, Dust , Odour, Ef |
+| `rel_189` | `rmp2015-zr:chp_2__tbl_7__row_2` | `bbl-2003:part_I__sec_1.0` | `general` | subject to condition that the zone permits the extent of area and the power consumption does not exceed 5 KW |
+| `rel_190` | `rmp2015-zr:chp_4__cl_4.10__cl_4.10.2__item_i` | `bbl-2003:part_III__sec_13.0__cl_13.2__note_1` | `building_height` | subject to condition that it satisfies fire and airport authority restrictions where ever applicable |
+| `rel_191` | `rmp2015-zr:chp_8__cl_8.1__item_b__item_iii` | `bbl-2003:part_III__sec_13.0__cl_13.2__note_1` | `building_height` | subject to condition that they satisfy fire and airport authority restrictions where ever applicable |
+| `rel_192` | `rmp2015-zr-amend-2009-03:chp_3__cl_4.10__cl_4.10.2` | `bbl-2003:part_III__sec_13.0__cl_13.2__note_1` | `building_height` | subject to condition that it satisfies fire and airport authority restrictions wherever applicable |
 
 ## 3. Sampled Relations Verification Against Source Texts (30 Samples)
 

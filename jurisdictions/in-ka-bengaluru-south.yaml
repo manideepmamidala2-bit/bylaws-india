@@ -17,7 +17,7 @@ aliases:
 - Uttarahalli
 visibility: public
 licence: CC BY 4.0
-release_version: 2.7.0
+release_version: 3.0.0
 country: IN
 state: KA
 building_types:
@@ -68,7 +68,17 @@ unobtainable_documents:
   reason: Draft notification dated 04-03-2026 inviting comments within 30 days; direct
     PDF download on data.opencity.in returns HTTP 403 (Cloudflare Turnstile challenge)
     and no Wayback Machine snapshot or official mirror copy exists.
-contested_status: []
+contested_status:
+- doc_id: ktcda-amend-bill-2025
+  title: The Karnataka Tank Conservation and Development Authority (Amendment) Bill,
+    2025 (L.A. Bill No. 33 of 2025)
+  declared_status: status_unknown
+  conflicting_evidence:
+  - Published under GBA Town Planning Notifications on updates.bbmp.gov.in/public
+    (ROW 70) proposing graded lake buffers (0m to 30m by tank area).
+  - The uploaded PDF is Legislative Assembly Bill No. 33 of 2025 without a verified
+    Governor assent or Gazette commencement notification; RMP 2015 Regulation 4.12.2
+    (30.0m Lake No-Development Buffer) remains the verified in-force rule.
 documents:
 - id: bbl-2003
   title: BANGALORE MAHANAGARA PALIKE BUILDING BYE-LAWS 2003
@@ -1017,6 +1027,208 @@ documents:
     archive_url: null
     archive_failure_reason: Wayback Machine Save Page Now timed out on updates.bbmp.gov.in
     fetched_by: agent
+- id: gbga-2024
+  title: The Greater Bengaluru Governance Act, 2024 (Karnataka Act No. 36 of 2025)
+    — Building & Bye-law Provisions (Chapter XVII & Chapter XXII)
+  issuing_authority: Department of Parliamentary Affairs and Legislation Secretariat,
+    Government of Karnataka
+  doc_type: act
+  layer: statute
+  role: regulation
+  legal_status: in_force
+  acquisition_status: acquired
+  structured: true
+  notification_number: No. DPAL 45 Shasana 2024 (Karnataka Act 36 of 2025)
+  gazette_reference: Karnataka Extra-Ordinary Gazette Part-IVA, dated 24-04-2025 (effective
+    15-05-2025)
+  notified_date: '2025-04-24'
+  effective_from: '2025-05-15'
+  status_evidence:
+    url: https://updates.bbmp.gov.in/public
+    quoted_line: THE GREATER BENGALURU GOVERNANCE ACT, 2024 (Karnataka Act No. 36
+      of 2025) ... CHAPTER XVII REGULATION OF BUILDINGS ... 224. Prohibition of erection
+      without permission ... 241. Regularization of certain unlawful buildings ...
+      317. Power to make bye-laws.
+    description: Published on updates.bbmp.gov.in/public under Acts (GBA); came into
+      force on 15-05-2025. Only the building-relevant provisions (Chapter XVII Sections
+      224–253 and Chapter XXII Sections 317–318) are structured per PR 10.
+  licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public state statute)
+  text_rights:
+    mode: full_text
+    reason: Public state Act enacted by the Karnataka Legislature
+  languages:
+  - en
+  - kn
+  official_url: https://updates.bbmp.gov.in/v1/api/file/120330573287-THE%20GREATER%20BENGALURU%20GOVERNANCE%20ACT,%202024%20Gazzet%20copy%20GBGA.pdf
+  mirror_urls:
+  - https://updates.bbmp.gov.in/public
+  source_url: https://updates.bbmp.gov.in/v1/api/file/120330573287-THE%20GREATER%20BENGALURU%20GOVERNANCE%20ACT,%202024%20Gazzet%20copy%20GBGA.pdf
+  retrieval:
+    fetched_at: '2026-11-23T00:00:00Z'
+    requested_url: https://updates.bbmp.gov.in/v1/api/file/120330573287-THE%20GREATER%20BENGALURU%20GOVERNANCE%20ACT,%202024%20Gazzet%20copy%20GBGA.pdf
+    final_url: https://updates.bbmp.gov.in/v1/api/file/120330573287-THE%20GREATER%20BENGALURU%20GOVERNANCE%20ACT,%202024%20Gazzet%20copy%20GBGA.pdf
+    http_status: 200
+    content_type: application/pdf
+    content_length: 4532411
+    response_headers:
+      etag: null
+      last_modified: null
+      server: nginx/1.24.0 (Ubuntu)
+      date: Tue, 24 Nov 2026 20:43:19 GMT
+    sha256: 69650c8b61d9be228054e5e76a03f0087f7d5f9cfb1b63d749e3eb4f49fabed7
+    archive_url: null
+    archive_failure_reason: Wayback Machine Save Page Now timed out on large PDF
+    fetched_by: agent
+- id: udd-200-mnu-2025-khata
+  title: Government Order No. UDD 200 MNU 2025 (25-07-2025) — Regulation of Issuance
+    of A and B Khata and Building Plan Approvals in Greater Bengaluru Area
+  issuing_authority: Government of Karnataka, Urban Development Department
+  doc_type: government_order
+  layer: orders
+  role: regulation
+  legal_status: in_force
+  acquisition_status: acquired
+  structured: true
+  notification_number: No. UDD 200 MNU 2025
+  gazette_reference: Government Order dated 25-07-2025
+  notified_date: '2025-07-25'
+  effective_from: '2025-07-25'
+  status_evidence:
+    url: https://updates.bbmp.gov.in/public
+    quoted_line: The land shall be converted to non-agricultural purpose under Section
+      95 of the Karnataka Land Revenue Act 1964 ... Building plan approval and Occupancy
+      Certificate conditions within the Greater Bengaluru Area.
+    description: 'Published on updates.bbmp.gov.in/public under GBA Town Planning
+      notifications (ROW 65: Regarding the regulation of issuance of A and B Khata
+      for properties within the Greater Bengaluru Area).'
+  licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public government
+    order)
+  text_rights:
+    mode: full_text
+    reason: Public government order issued by the Urban Development Department, Government
+      of Karnataka
+  languages:
+  - en
+  - kn
+  official_url: https://updates.bbmp.gov.in/v1/api/file/226670106906-udd%20200%20mnu%202025%20Dt%2025-07-2025%20(A%20&%20B%20Khatha)%20.pdf
+  mirror_urls:
+  - https://updates.bbmp.gov.in/public
+  source_url: https://updates.bbmp.gov.in/v1/api/file/226670106906-udd%20200%20mnu%202025%20Dt%2025-07-2025%20(A%20&%20B%20Khatha)%20.pdf
+  retrieval:
+    fetched_at: '2026-11-23T00:00:00Z'
+    requested_url: https://updates.bbmp.gov.in/v1/api/file/226670106906-udd%20200%20mnu%202025%20Dt%2025-07-2025%20(A%20&%20B%20Khatha)%20.pdf
+    final_url: https://updates.bbmp.gov.in/v1/api/file/226670106906-udd%20200%20mnu%202025%20Dt%2025-07-2025%20(A%20&%20B%20Khatha)%20.pdf
+    http_status: 200
+    content_type: application/pdf
+    content_length: 6255697
+    response_headers:
+      etag: null
+      last_modified: null
+      server: nginx/1.24.0 (Ubuntu)
+      date: Tue, 24 Nov 2026 20:43:21 GMT
+    sha256: 184e07570e6e6dbb87aea9339835d4f31a2c2d2f84c24fedea058967965324d8
+    archive_url: null
+    archive_failure_reason: Wayback Machine Save Page Now timed out on large PDF
+    fetched_by: agent
+- id: ktcda-amend-bill-2025
+  title: The Karnataka Tank Conservation and Development Authority (Amendment) Bill,
+    2025 (L.A. Bill No. 33 of 2025 — Graded Lake Buffer Zones)
+  issuing_authority: Karnataka Legislative Assembly
+  doc_type: act
+  layer: overlay
+  role: regulation
+  legal_status: status_unknown
+  acquisition_status: acquired
+  structured: false
+  notification_number: L.A. Bill No. 33 of 2025
+  gazette_reference: Sixteenth Karnataka Legislative Assembly, Seventh Session (2025)
+  notified_date: '2025-08-01'
+  effective_from: null
+  status_evidence:
+    url: https://updates.bbmp.gov.in/public
+    quoted_line: THE KARNATAKA TANK CONSERVATION AND DEVELOPMENT AUTHORITY (AMENDMENT)
+      BILL, 2025 (LA Bill No. 33 of 2025) A Bill further to amend the Karnataka Tank
+      Conservation and Development Authority Act, 2014 (Karnataka Act 32 of 2014).
+    description: Published on updates.bbmp.gov.in/public under GBA Town Planning Notifications
+      (ROW 70), but the PDF is the Legislative Assembly Bill (LA Bill No. 33 of 2025)
+      without a verified Governor assent or Gazette commencement notification; recorded
+      as status_unknown per PR 10.
+  licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public legislative
+    bill)
+  text_rights:
+    mode: full_text
+    reason: Public Legislative Assembly Bill published by GBA
+  languages:
+  - en
+  - kn
+  official_url: https://updates.bbmp.gov.in/v1/api/file/526899671364-THE%20KARNATAKA%20TANK%20CONSERVATION%20AND%20DEVELOPMENT%20AUTHORITY%20(AMENDMENT)%20BILL,%202025%20.pdf
+  mirror_urls:
+  - https://updates.bbmp.gov.in/public
+  source_url: https://updates.bbmp.gov.in/v1/api/file/526899671364-THE%20KARNATAKA%20TANK%20CONSERVATION%20AND%20DEVELOPMENT%20AUTHORITY%20(AMENDMENT)%20BILL,%202025%20.pdf
+  retrieval:
+    fetched_at: '2026-11-23T00:00:00Z'
+    requested_url: https://updates.bbmp.gov.in/v1/api/file/526899671364-THE%20KARNATAKA%20TANK%20CONSERVATION%20AND%20DEVELOPMENT%20AUTHORITY%20(AMENDMENT)%20BILL,%202025%20.pdf
+    final_url: https://updates.bbmp.gov.in/v1/api/file/526899671364-THE%20KARNATAKA%20TANK%20CONSERVATION%20AND%20DEVELOPMENT%20AUTHORITY%20(AMENDMENT)%20BILL,%202025%20.pdf
+    http_status: 200
+    content_type: application/pdf
+    content_length: 1569816
+    response_headers:
+      etag: null
+      last_modified: null
+      server: nginx/1.24.0 (Ubuntu)
+      date: Tue, 24 Nov 2026 20:43:22 GMT
+    sha256: 9350271e2e0e742c2d2e83a256ecbd0775d1918c71b79116870fc6cb3c231302
+    archive_url: null
+    archive_failure_reason: Wayback Machine Save Page Now timed out on large PDF
+    fetched_by: agent
+- id: rmp2015-plu-pd-211
+  title: BDA Revised Master Plan 2015 — Proposed Land Use Map for Planning District
+    2.11 (Banashankari), maps (a) and (b)
+  issuing_authority: Bangalore Development Authority (BDA)
+  doc_type: map
+  layer: planning
+  role: reference
+  legal_status: in_force
+  acquisition_status: acquired
+  structured: false
+  notification_number: RMP 2015 PD 2.11
+  gazette_reference: Approved by Government of Karnataka on 25-06-2007
+  notified_date: '2007-06-25'
+  effective_from: '2007-06-25'
+  status_evidence:
+    url: https://gba.karnataka.gov.in/
+    quoted_line: PROPOSED LAND USE MAP OF PLANNING DISTRICT NO. 2.11 BANASHANKARI
+      — REVISED MASTER PLAN 2015 (1:5000, WGS 1984, UTM ZONE 43N)
+    description: Published on gba.karnataka.gov.in (/LandUseMaps/Series-2Maps/2.11
+      map(a)-Banashankari.pdf & map(b)) and OpenCity DigitalOcean mirror.
+  licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public statutory
+    master plan map)
+  text_rights:
+    mode: full_text
+    reason: Public statutory master plan land-use map published under the KTCP Act,
+      1961
+  languages:
+  - en
+  official_url: https://gba.karnataka.gov.in/LandUseMaps/Series-2Maps/2.11%20map(a)-Banashankari.pdf
+  mirror_urls:
+  - https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_211-Banashankari.pdf
+  source_url: https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_211-Banashankari.pdf
+  retrieval:
+    fetched_at: '2026-11-23T00:00:00Z'
+    requested_url: https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_211-Banashankari.pdf
+    final_url: https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_211-Banashankari.pdf
+    http_status: 200
+    content_type: application/pdf
+    content_length: 9851234
+    response_headers:
+      etag: '"e1289a82ac24b035dbb24ae1eac235ab"'
+      last_modified: Tue, 19 May 2020 14:40:06 GMT
+      server: cloudflare
+      date: Tue, 24 Nov 2026 20:43:23 GMT
+    sha256: e31a3a4c9ad2ff1cb8706e52b879a0250fb46cc4105b5cbd0e21d71d3445cf5d
+    archive_url: null
+    archive_failure_reason: Wayback Machine Save Page Now timed out on large PDF
+    fetched_by: agent
 amendment_links:
 - amending_clause: rmp2015-zr:chp_3__cl_3.1
   target_clause: bbl-2003:part_III__sec_9.0__cl_9.2
@@ -1727,4 +1939,514 @@ maps:
         - 127
       min_area_sq_m: 2000
       morph_open_px: 18
+  - id: rmp2015-pd-210-a
+    kind: grid_georeferenced_raster
+    document: rmp2015-plu-pd-210
+    page: 1
+    planning_district: '2.10'
+    sheet: 2.10 Jayanagar map (a)
+    legend_page: 2
+    source_url: https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_210-Jayanagar.pdf
+    source_attribution: Bangalore Development Authority (BDA) Revised Master Plan
+      2015 Proposed Land Use Map — Planning District 2.10 Jayanagar map (a) (1:5,000,
+      UTM Zone 43N, WGS 1984).
+    target_crs: EPSG:32643
+    grid_eastings:
+    - 780000
+    - 781000
+    - 782000
+    - 783000
+    - 784000
+    grid_northings:
+    - 1434000
+    - 1433000
+    - 1432000
+    - 1431000
+    legend_palette:
+    - zone_code: R-MAIN
+      zone_label: Residential (Main)
+      rgbs:
+      - - 255
+        - 255
+        - 153
+      - - 255
+        - 255
+        - 204
+      - - 255
+        - 255
+        - 224
+      - - 206
+        - 206
+        - 155
+      min_area_sq_m: 2000
+    - zone_code: R-MIX
+      zone_label: Residential (Mixed)
+      rgbs:
+      - - 255
+        - 224
+        - 38
+      - - 255
+        - 239
+        - 146
+      - - 206
+        - 190
+        - 97
+      min_area_sq_m: 2000
+    - zone_code: C-BIZ
+      zone_label: Commercial (Business)
+      rgbs:
+      - - 153
+        - 204
+        - 255
+      - - 102
+        - 179
+        - 255
+      - - 204
+        - 229
+        - 255
+      - - 155
+        - 180
+        - 206
+      - - 129
+        - 168
+        - 206
+      - - 178
+        - 217
+        - 255
+      min_area_sq_m: 400
+    - zone_code: C-AXES
+      zone_label: Commercial Axes
+      rgbs:
+      - - 0
+        - 224
+        - 255
+      - - 127
+        - 239
+        - 255
+      - - 78
+        - 190
+        - 206
+      min_area_sq_m: 400
+    - zone_code: I-GEN
+      zone_label: Industrial
+      rgbs:
+      - - 163
+        - 102
+        - 179
+      - - 209
+        - 178
+        - 217
+      - - 160
+        - 129
+        - 168
+      min_area_sq_m: 1500
+    - zone_code: I-HITECH
+      zone_label: High Tech
+      rgbs:
+      - - 191
+        - 166
+        - 255
+      - - 223
+        - 210
+        - 255
+      - - 174
+        - 161
+        - 206
+      min_area_sq_m: 1500
+    - zone_code: PSP
+      zone_label: Public and Semi-public
+      rgbs:
+      - - 224
+        - 0
+        - 0
+      - - 239
+        - 127
+        - 127
+      - - 190
+        - 78
+        - 78
+      min_area_sq_m: 1500
+    - zone_code: G-PARK
+      zone_label: Green (Parks and Open Spaces)
+      rgbs:
+      - - 163
+        - 240
+        - 36
+      - - 209
+        - 247
+        - 145
+      - - 160
+        - 198
+        - 96
+      min_area_sq_m: 1500
+    - zone_code: G-LAKE
+      zone_label: Lake / tank
+      rgbs:
+      - - 224
+        - 240
+        - 255
+      - - 239
+        - 247
+        - 255
+      min_area_sq_m: 400
+    - zone_code: T-TRANS
+      zone_label: Traffic and Transportation
+      rgbs:
+      - - 102
+        - 102
+        - 102
+      - - 129
+        - 129
+        - 129
+      - - 127
+        - 127
+        - 127
+      min_area_sq_m: 2000
+      morph_open_px: 18
+  - id: rmp2015-pd-211-a
+    kind: grid_georeferenced_raster
+    document: rmp2015-plu-pd-211
+    page: 1
+    planning_district: '2.11'
+    sheet: 2.11 Banashankari map (a)
+    legend_page: 2
+    source_url: https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_211-Banashankari.pdf
+    source_attribution: Bangalore Development Authority (BDA) Revised Master Plan
+      2015 Proposed Land Use Map — Planning District 2.11 Banashankari map (a) (1:5,000,
+      UTM Zone 43N, WGS 1984).
+    target_crs: EPSG:32643
+    grid_eastings:
+    - 776000
+    - 777000
+    - 778000
+    - 779000
+    - 780000
+    grid_northings:
+    - 1434000
+    - 1433000
+    - 1432000
+    - 1431000
+    legend_palette:
+    - zone_code: R-MAIN
+      zone_label: Residential (Main)
+      rgbs:
+      - - 255
+        - 255
+        - 153
+      - - 255
+        - 255
+        - 204
+      - - 255
+        - 255
+        - 224
+      - - 206
+        - 206
+        - 155
+      min_area_sq_m: 2000
+    - zone_code: R-MIX
+      zone_label: Residential (Mixed)
+      rgbs:
+      - - 255
+        - 224
+        - 38
+      - - 255
+        - 239
+        - 146
+      - - 206
+        - 190
+        - 97
+      min_area_sq_m: 2000
+    - zone_code: C-BIZ
+      zone_label: Commercial (Business)
+      rgbs:
+      - - 153
+        - 204
+        - 255
+      - - 102
+        - 179
+        - 255
+      - - 204
+        - 229
+        - 255
+      - - 155
+        - 180
+        - 206
+      - - 129
+        - 168
+        - 206
+      - - 178
+        - 217
+        - 255
+      min_area_sq_m: 400
+    - zone_code: C-AXES
+      zone_label: Commercial Axes
+      rgbs:
+      - - 0
+        - 224
+        - 255
+      - - 127
+        - 239
+        - 255
+      - - 78
+        - 190
+        - 206
+      min_area_sq_m: 400
+    - zone_code: I-GEN
+      zone_label: Industrial
+      rgbs:
+      - - 163
+        - 102
+        - 179
+      - - 209
+        - 178
+        - 217
+      - - 160
+        - 129
+        - 168
+      min_area_sq_m: 1500
+    - zone_code: I-HITECH
+      zone_label: High Tech
+      rgbs:
+      - - 191
+        - 166
+        - 255
+      - - 223
+        - 210
+        - 255
+      - - 174
+        - 161
+        - 206
+      min_area_sq_m: 1500
+    - zone_code: PSP
+      zone_label: Public and Semi-public
+      rgbs:
+      - - 224
+        - 0
+        - 0
+      - - 239
+        - 127
+        - 127
+      - - 190
+        - 78
+        - 78
+      min_area_sq_m: 1500
+    - zone_code: G-PARK
+      zone_label: Green (Parks and Open Spaces)
+      rgbs:
+      - - 163
+        - 240
+        - 36
+      - - 209
+        - 247
+        - 145
+      - - 160
+        - 198
+        - 96
+      min_area_sq_m: 1500
+    - zone_code: G-LAKE
+      zone_label: Lake / tank
+      rgbs:
+      - - 224
+        - 240
+        - 255
+      - - 239
+        - 247
+        - 255
+      min_area_sq_m: 400
+    - zone_code: T-TRANS
+      zone_label: Traffic and Transportation
+      rgbs:
+      - - 102
+        - 102
+        - 102
+      - - 129
+        - 129
+        - 129
+      - - 127
+        - 127
+        - 127
+      min_area_sq_m: 2000
+      morph_open_px: 18
+  - id: rmp2015-pd-211-b
+    kind: grid_georeferenced_raster
+    document: rmp2015-plu-pd-211
+    page: 2
+    planning_district: '2.11'
+    sheet: 2.11 Banashankari map (b)
+    legend_page: 2
+    source_url: https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_211-Banashankari.pdf
+    source_attribution: Bangalore Development Authority (BDA) Revised Master Plan
+      2015 Proposed Land Use Map — Planning District 2.11 Banashankari map (b) (1:5,000,
+      UTM Zone 43N, WGS 1984).
+    target_crs: EPSG:32643
+    grid_eastings:
+    - 776000
+    - 777000
+    - 778000
+    - 779000
+    - 780000
+    grid_northings:
+    - 1431000
+    - 1430000
+    - 1429000
+    - 1428000
+    legend_palette:
+    - zone_code: R-MAIN
+      zone_label: Residential (Main)
+      rgbs:
+      - - 255
+        - 255
+        - 153
+      - - 255
+        - 255
+        - 204
+      - - 255
+        - 255
+        - 224
+      - - 206
+        - 206
+        - 155
+      min_area_sq_m: 2000
+    - zone_code: R-MIX
+      zone_label: Residential (Mixed)
+      rgbs:
+      - - 255
+        - 224
+        - 38
+      - - 255
+        - 239
+        - 146
+      - - 206
+        - 190
+        - 97
+      min_area_sq_m: 2000
+    - zone_code: C-BIZ
+      zone_label: Commercial (Business)
+      rgbs:
+      - - 153
+        - 204
+        - 255
+      - - 102
+        - 179
+        - 255
+      - - 204
+        - 229
+        - 255
+      - - 155
+        - 180
+        - 206
+      - - 129
+        - 168
+        - 206
+      - - 178
+        - 217
+        - 255
+      min_area_sq_m: 400
+    - zone_code: C-AXES
+      zone_label: Commercial Axes
+      rgbs:
+      - - 0
+        - 224
+        - 255
+      - - 127
+        - 239
+        - 255
+      - - 78
+        - 190
+        - 206
+      min_area_sq_m: 400
+    - zone_code: I-GEN
+      zone_label: Industrial
+      rgbs:
+      - - 163
+        - 102
+        - 179
+      - - 209
+        - 178
+        - 217
+      - - 160
+        - 129
+        - 168
+      min_area_sq_m: 1500
+    - zone_code: I-HITECH
+      zone_label: High Tech
+      rgbs:
+      - - 191
+        - 166
+        - 255
+      - - 223
+        - 210
+        - 255
+      - - 174
+        - 161
+        - 206
+      min_area_sq_m: 1500
+    - zone_code: PSP
+      zone_label: Public and Semi-public
+      rgbs:
+      - - 224
+        - 0
+        - 0
+      - - 239
+        - 127
+        - 127
+      - - 190
+        - 78
+        - 78
+      min_area_sq_m: 1500
+    - zone_code: G-PARK
+      zone_label: Green (Parks and Open Spaces)
+      rgbs:
+      - - 163
+        - 240
+        - 36
+      - - 209
+        - 247
+        - 145
+      - - 160
+        - 198
+        - 96
+      min_area_sq_m: 1500
+    - zone_code: G-LAKE
+      zone_label: Lake / tank
+      rgbs:
+      - - 224
+        - 240
+        - 255
+      - - 239
+        - 247
+        - 255
+      min_area_sq_m: 400
+    - zone_code: T-TRANS
+      zone_label: Traffic and Transportation
+      rgbs:
+      - - 102
+        - 102
+        - 102
+      - - 129
+        - 129
+        - 129
+      - - 127
+        - 127
+        - 127
+      min_area_sq_m: 2000
+      morph_open_px: 18
+  overlays:
+  - id: lake-buffer-30m
+    title: RMP 2015 Regulation 4.12.2 Verified 30.0 m Lake No-Development Buffer (Derived
+      & Approximate)
+    kind: derived_overlay
+    source: RMP 2015 Zoning Regulations Clause 4.12.2 & Notification No. UDD 468 MNJ
+      2025(E) dated 15-10-2025 applied to extracted G-LAKE water bodies
+    method: 30.0 m Euclidean buffer in UTM Zone 43N (EPSG:32643) around extracted
+      G-LAKE water-body polygons, reprojected to WGS 84 (EPSG:4326); approximate.
+    accuracy_m: 5.0
+    derived: true
+    buffer_m: 30.0
+    rule_doc_id: rmp2015-zr
+    rule_clause: rmp2015-zr:4.12.2
 parent: in-ka-bengaluru
+building_relevant_sections:
+  gbga-2024:
+  - Chapter XVII — Regulation of Buildings (Sections 224–253)
+  - Chapter XXII — Power to Make Building Bye-laws (Sections 317–318)

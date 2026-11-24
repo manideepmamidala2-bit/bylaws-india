@@ -226,3 +226,66 @@ def test_part4_schema_1_4_topics_relations_precedence_succession_and_applicabili
     )
     assert "Statutory Precedence Relations" in rel_md
     assert "corporation_differs" in rel_md
+
+
+def test_part5_and_6_supporting_provisions_verified_overlays_4_sheets_and_zone_applicability_links() -> None:
+    """Parts 5 & 6 (`10-supporting-provisions.md` & `11-all-sheets-zone-links-release.md`): Supporting instruments (`gbga-2024`, `udd-200-mnu-2025-khata`) are structured with `building_relevant_sections`, `ktcda-amend-bill-2025` is `status_unknown` in `contested_status`, `overlays.geojson` is published (`derived: true`), 4 RMP 2015 land-use sheets (`1,276` zone polygons) are extracted with RMSE <= 10m, and `zone_applicability` annotations + `clause-zone-tags.json` never link preamble/title/definition/commencement nodes."""
+    rel_dir = _get_latest_south_release_dir()
+    assert rel_dir.name == "3.0.0"
+
+    # Supporting provisions & contested KTCDA Bill
+    for sup_id in ("gbga-2024", "udd-200-mnu-2025-khata"):
+        tree = validate_file(rel_dir / f"{sup_id}.clauses.json", "clause-tree")
+        assert len(tree["clauses"]) >= 5
+
+    decls = validate_file(rel_dir / "declarations.json", "declarations")
+    assert "gbga-2024" in (decls.get("building_relevant_sections") or {})
+    contested_ids = {c["doc_id"] for c in (decls.get("contested_status") or [])}
+    assert "ktcda-amend-bill-2025" in contested_ids
+
+    # Verified overlays (`overlays.geojson`, derived: true)
+    overlays_fc = json.loads((rel_dir / "overlays.geojson").read_text(encoding="utf-8"))
+    assert len(overlays_fc["features"]) >= 1
+    for feat in overlays_fc["features"]:
+        props = feat["properties"]
+        assert props["derived"] is True
+        assert props["approximate"] is True
+
+    # 4 RMP 2015 sheets in zones.geojson (`rmp2015-pd-210-b`, `rmp2015-pd-210-a`, `rmp2015-pd-211-a`, `rmp2015-pd-211-b`)
+    zones_fc = validate_file(rel_dir / "zones.geojson", "zones")
+    assert len(zones_fc["features"]) >= 1200
+    sheets_found = {f["properties"]["source_map"] for f in zones_fc["features"]}
+    for s_id in ("rmp2015-pd-210-b", "rmp2015-pd-210-a", "rmp2015-pd-211-a", "rmp2015-pd-211-b"):
+        assert s_id in sheets_found
+
+    # `zone_applicability` annotations and `clause-zone-tags.json`
+    tags_payload = validate_file(rel_dir / "clause-zone-tags.json", "clause-zone-tags")
+    assert len(tags_payload["tags"]) >= 150
+
+    for doc_id in ("bbl-2003", "rmp2015-zr"):
+        tree = validate_file(rel_dir / f"{doc_id}.clauses.json", "clause-tree")
+        node_by_eid = {c["eid"]: c for c in tree["clauses"]}
+        ann_doc = validate_file(rel_dir / f"{doc_id}.annotations.json", "annotations")
+        prov_by_eid = {
+            a["target"]["eid"]: a["value"]
+            for a in ann_doc["annotations"]
+            if a["kind"] == "provision_type"
+        }
+        zone_anns = [a for a in ann_doc["annotations"] if a["kind"] == "zone_applicability"]
+        assert len(zone_anns) >= 15
+        for za in zone_anns:
+            t_eid = str(za["target"]["eid"])
+            node = node_by_eid[t_eid]
+            assert node["type"] not in {"preamble", "definition"}, (
+                f"zone_applicability on {doc_id}:{t_eid} ({node['type']}) is forbidden"
+            )
+            assert not node.get("defines"), (
+                f"zone_applicability on definition {doc_id}:{t_eid} is forbidden"
+            )
+            assert prov_by_eid.get(t_eid) not in {"commencement", "scope", "definition"}, (
+                f"zone_applicability on {prov_by_eid.get(t_eid)} node {doc_id}:{t_eid} is forbidden"
+            )
+            assert len(str(za["target"]["span_text"]).strip()) >= 2
+
+    docs_map = (REPO_ROOT / "docs" / "map.md").read_text(encoding="utf-8")
+    assert "Legend-to-Regulation Zone Mapping Table" in docs_map

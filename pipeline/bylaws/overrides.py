@@ -372,6 +372,54 @@ def run_apply_overrides(config: JurisdictionConfig, *, repo_root: Path | None = 
                 modified_ann_docs.add(doc_id)
                 applied_count += 1
 
+    # 6. Populate `applies_to_zones` and `clause-zone-tags.json` from `zone_applicability` annotations (PR 11 §2)
+    if config.visibility != "test":
+        seen_tagged_pairs = {
+            (str(t["clause_id"]), str(t.get("zone_code") or ""))
+            for t in zone_tag_entries
+        }
+        for doc_id, ann_doc in sorted(annotation_docs.items()):
+            if doc_id not in clause_trees:
+                continue
+            tree = clause_trees[doc_id]
+            node_by_eid = {
+                str(c.get("eid")): c
+                for c in tree.get("clauses", [])
+                if c.get("superseded_by") is None and c.get("record_superseded_by") is None
+            }
+            zones_by_eid: dict[str, list[tuple[str, str]]] = {}
+            for ann in ann_doc.get("annotations", []):
+                if ann.get("kind") == "zone_applicability":
+                    target = ann.get("target") or {}
+                    t_eid = str(target.get("eid") or "")
+                    z_val = str(ann.get("value") or "")
+                    s_txt = str(target.get("span_text") or "")
+                    if t_eid and z_val:
+                        zones_by_eid.setdefault(t_eid, []).append((z_val, s_txt))
+            for t_eid, z_pairs in sorted(zones_by_eid.items()):
+                node = node_by_eid.get(t_eid)
+                if node is None:
+                    continue
+                cid = str(node["clause_id"])
+                z_codes = list(dict.fromkeys(zp[0] for zp in z_pairs))
+                existing_z = list(node.get("applies_to_zones") or [])
+                merged_z = list(dict.fromkeys([*existing_z, *z_codes]))
+                if merged_z != existing_z:
+                    node["applies_to_zones"] = merged_z
+                    modified_docs.add(doc_id)
+                for z_code, span_txt in z_pairs:
+                    if (cid, z_code) not in seen_tagged_pairs:
+                        seen_tagged_pairs.add((cid, z_code))
+                        zone_tag_entries.append(
+                            {
+                                "clause_id": cid,
+                                "doc_id": doc_id,
+                                "zone_code": z_code,
+                                "reason": f"Matched zone_applicability evidence: '{span_txt[:150]}'",
+                                "verification": "machine_checked",
+                            }
+                        )
+
     for doc_id in sorted(modified_docs):
         tree_payload = clause_trees[doc_id]
         out_path = docs_dir / f"{doc_id}.clauses.json"

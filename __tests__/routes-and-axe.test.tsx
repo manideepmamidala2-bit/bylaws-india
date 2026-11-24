@@ -203,7 +203,7 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     async () => {
     const homeUi = await JurisdictionPickerPage();
     const { container: homeContainer, unmount: uHome } = render(homeUi);
-    expect(screen.getAllByText(/v2\.\d+\.\d+/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/v[23]\.\d+\.\d+/i).length).toBeGreaterThan(0);
     expect(
       screen.getByText(/Synthetic demonstration data, not the law of Bengaluru South/i)
     ).toBeInTheDocument();

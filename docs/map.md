@@ -143,3 +143,34 @@ Five candidate Proposed Land Use PDFs inside Bengaluru South were inspected acro
 2. **Vector-Exact Printed UTM 43N Grid (`RMSE = 0.0032 m`)**: All `20` printed `1,000 m` grid intersections (`5 Eastings: 780000..784000` $\times$ `4 Northings: 1428000..1431000`) are present as exact vector crosshair primitives in the PDF, yielding an affine fit with **`RMSE = 0.0032 m`** and **`Leave-One-Out (LOO) RMSE = 0.0038 m`** (well below the `≤ 10 m` target).
 3. **Lossless 8-Bit/4-Bit `Indexed` Palette Strips Below Vector Text**: Because BDA exported the land-use colour fills as lossless `Indexed` palette raster strips underneath the vector road network and text labels, reading the raw palette streams directly from the PDF avoids text/hatching occlusion while mapping 1-to-1 to the sheet's `ZONING CLASSIFICATION` legend swatches (`R-MAIN`, `R-MIX`, `C-BIZ`, `C-AXES`, `I-GEN`, `I-HITECH`, `PSP`, `G-PARK`, `G-LAKE`, `T-TRANS`).
 4. **Rich Independent Verification Features**: The sheet contains `654` vector road segments and `364` administrative boundary sample points for independent comparison against OpenStreetMap roads (`median offset = 8.02 m`, `90th-percentile offset = 21.11 m`) and official GBA ward boundaries (`median offset = 28.20 m`, `90th-percentile offset = 51.89 m`).
+
+---
+
+## 7. Legend-to-Regulation Zone Mapping Table (PR 11 §2)
+
+Every land-use zone polygon extracted from the RMP 2015 Proposed Land Use sheets carries a printed legend `zone_code` and `zone_label`, which maps to its governing section in `rmp2015-zr` (*Revised Master Plan 2015 Volume III: Zoning of Landuse and Regulations*) via the following evidence-backed mapping table:
+
+| Printed Legend `zone_code` | Printed Legend `zone_label` | Governing Regulation (`rmp2015-zr`) | Quoted Statutory Evidence from `rmp2015-zr` |
+|---|---|---|---|
+| `R-MAIN` | Residential (Main) | `chp_4__cl_4.1` (`4.1 RESIDENTIAL (MAIN)`) | `"4.1 RESIDENTIAL (MAIN) — 4.1.1 Description: The areas of the city which have predominantly residential land use pattern are considered for the Residential (Main) zone."` |
+| `R-MIX` | Residential (Mixed) | `chp_4__cl_4.2` (`4.2 RESIDENTIAL (MIXED)`) | `"4.2 RESIDENTIAL (MIXED) — 4.2.1 Description: Main feature of mixed land use is that of blending of residential use with other uses such as commercial, retail, service and institutional."` |
+| `C-BIZ` | Commercial (Business) / Commercial (Central) | `chp_4__cl_4.3` & `chp_4__cl_4.4` (`4.3 COMMERCIAL (CENTRAL)` & `4.4 COMMERCIAL (BUSINESS)`) | `"4.4 COMMERCIAL (BUSINESS) — 4.4.2 Regulations: Permissible land uses: Any trade or business of C-3 category..."` |
+| `C-AXES` | Commercial Axes / Mutation Corridors | `chp_4__cl_4.5` & `chp_4__cl_4.6` (`4.5 MUTATION CORRIDORS` & `4.6 COMMERCIAL AXES`) | `"4.5 MUTATION CORRIDORS ... 4.6 COMMERCIAL AXES — The major and minor roads in residential and other zones having commercial activities along them are recognized as commercial axes."` |
+| `I-GEN` | Industrial | `chp_4__cl_4.7` (`4.7 INDUSTRIAL [I (General)]`) | `"4.7 INDUSTRIAL [I (General)] — 4.7.1 Description: This zone supports the establishment of all types of industries."` |
+| `I-HITECH` | High Tech | `chp_4__cl_4.8` (`4.8 INDUSTRIAL (HI-TECH)`) | `"4.8 INDUSTRIAL (HI-TECH) — 4.8.1 Description: This is a priority area for establishment of activities staging IT, BT, Telecom, electronics and other high-tech industries."` |
+| `PSP` | Public and Semi-public | `chp_4__cl_4.9` (`4.9 PUBLIC AND SEMI-PUBLIC (P&SP)`) | `"4.9 PUBLIC AND SEMI-PUBLIC (P&SP) — 4.9.1 Description: This zone includes government administrative centres, educational, medical, cultural and religious institutions."` |
+| `T-TRANS` | Traffic and Transportation | `chp_4__cl_4.10` (`4.10 TRAFFIC AND TRANSPORTATION (T&T)`) | `"4.10 TRAFFIC AND TRANSPORTATION (T&T) — 4.10.1 Description: Transportation zones are reserved for Transport and Allied activities such as Railway yards, Bus terminals, Depots, Airport."` |
+| `G-PARK` | Green (Parks and Open Spaces) | `chp_4__cl_4.12` (`4.12 PARK AND OPEN SPACE (P)`) | `"4.12 PARK AND OPEN SPACE (P) — 4.12.1 Description: The natural and man-made features of the city such as parks, playgrounds, burial grounds, valleys, and lakes."` |
+| `G-LAKE` | Lake / tank | `chp_4__cl_4.12__cl_4.12.2` (`4.12.2(ii) Water bodies & Valley/Nala Buffer`) | `"In case of water bodies a 30.0 m buffer of 'No Development Zone' is to be maintained around the lake (as per revenue records)."` |
+| `ALL` | All Zones | `chp_3`, `chp_8`, `chp_9`, `chp_10`, `chp_11.0`, `bbl-2003` (`part_II`–`part_IV`) | `"3.0 REGULATIONS APPLICABLE TO ALL ZONES: The following regulations shall apply to all zones in the Local Planning Area."` |
+
+---
+
+## 8. PR 12 Extracted Sheets & Measured Placement Accuracy (`in-ka-bengaluru-south`)
+
+| Sheet ID | Planning District & Sheet | Printed UTM 43N Grid Crosshairs | Grid Fit `RMSE` (`m`) | Leave-One-Out `RMSE` (`m`) | OSM Road Median Offset (`m`) | Official Ward Boundary Median Offset (`m`) |
+|---|---|---:|---:|---:|---:|---:|
+| `rmp2015-pd-210-b` | `2.10 Jayanagar map (b)` (`rmp2015-plu-pd-210` p. 2) | `20` (`E 780000..784000`, `N 1428000..1431000`) | `0.0032 m` | `0.0038 m` | `8.02 m` | `28.20 m` |
+| `rmp2015-pd-210-a` | `2.10 Jayanagar map (a)` (`rmp2015-plu-pd-210` p. 1) | `20` (`E 780000..784000`, `N 1431000..1434000`) | `0.0028 m` | `0.0032 m` | `8.93 m` | `31.18 m` |
+| `rmp2015-pd-211-a` | `2.11 Banashankari map (a)` (`rmp2015-plu-pd-211` p. 1) | `20` (`E 776000..780000`, `N 1431000..1434000`) | `0.0023 m` | `0.0026 m` | `7.76 m` | `22.81 m` |
+| `rmp2015-pd-211-b` | `2.11 Banashankari map (b)` (`rmp2015-plu-pd-211` p. 2) | `20` (`E 776000..780000`, `N 1428000..1431000`) | `0.0002 m` | `0.0003 m` | `8.67 m` | `26.82 m` |

@@ -14,7 +14,7 @@ aliases:
 - Chamarajpet
 visibility: public
 licence: CC BY 4.0
-release_version: 2.7.0
+release_version: 3.0.0
 country: IN
 state: KA
 building_types:
@@ -34,7 +34,17 @@ not_modelled:
   5-corporation boundary are out of scope.
 unread_documents: []
 unobtainable_documents: []
-contested_status: []
+contested_status:
+- doc_id: ktcda-amend-bill-2025
+  title: The Karnataka Tank Conservation and Development Authority (Amendment) Bill,
+    2025 (L.A. Bill No. 33 of 2025)
+  declared_status: status_unknown
+  conflicting_evidence:
+  - Published under GBA Town Planning Notifications on updates.bbmp.gov.in/public
+    (ROW 70) proposing graded lake buffers (0m to 30m by tank area).
+  - The uploaded PDF is Legislative Assembly Bill No. 33 of 2025 without a verified
+    Governor assent or Gazette commencement notification; RMP 2015 Regulation 4.12.2
+    (30.0m Lake No-Development Buffer) remains the verified in-force rule.
 documents:
 - id: bccc-bbl-amend-2026-05
   title: Bengaluru Central City Corporation — Bengaluru City Corporation Building
@@ -308,3 +318,7 @@ maps:
       equals: Central
   planning_districts: []
   zoning: []
+building_relevant_sections:
+  gbga-2024:
+  - Chapter XVII — Regulation of Buildings (Sections 224–253)
+  - Chapter XXII — Power to Make Building Bye-laws (Sections 317–318)

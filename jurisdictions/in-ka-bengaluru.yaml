@@ -10,7 +10,7 @@ aliases:
 - BDA Local Planning Area
 visibility: public
 licence: CC BY 4.0
-release_version: 2.7.0
+release_version: 3.0.0
 country: IN
 state: KA
 building_types:
@@ -47,7 +47,17 @@ unobtainable_documents:
   reason: Listed on the archived OpenCity dataset page for Bengaluru BDA RMP 2015
     Zoning Regulation Amendments; direct PDF download returns HTTP 403 (Cloudflare
     Turnstile challenge) and no Wayback Machine snapshot exists.
-contested_status: []
+contested_status:
+- doc_id: ktcda-amend-bill-2025
+  title: The Karnataka Tank Conservation and Development Authority (Amendment) Bill,
+    2025 (L.A. Bill No. 33 of 2025)
+  declared_status: status_unknown
+  conflicting_evidence:
+  - Published under GBA Town Planning Notifications on updates.bbmp.gov.in/public
+    (ROW 70) proposing graded lake buffers (0m to 30m by tank area).
+  - The uploaded PDF is Legislative Assembly Bill No. 33 of 2025 without a verified
+    Governor assent or Gazette commencement notification; RMP 2015 Regulation 4.12.2
+    (30.0m Lake No-Development Buffer) remains the verified in-force rule.
 documents:
 - id: bbl-2003
   title: BANGALORE MAHANAGARA PALIKE BUILDING BYE-LAWS 2003
@@ -1383,6 +1393,160 @@ documents:
     archive_url: null
     archive_failure_reason: Wayback Machine Save Page Now timed out on updates.bbmp.gov.in
     fetched_by: agent
+- id: gbga-2024
+  title: The Greater Bengaluru Governance Act, 2024 (Karnataka Act No. 36 of 2025)
+    — Building & Bye-law Provisions (Chapter XVII & Chapter XXII)
+  issuing_authority: Department of Parliamentary Affairs and Legislation Secretariat,
+    Government of Karnataka
+  doc_type: act
+  layer: statute
+  role: regulation
+  legal_status: in_force
+  acquisition_status: acquired
+  structured: true
+  notification_number: No. DPAL 45 Shasana 2024 (Karnataka Act 36 of 2025)
+  gazette_reference: Karnataka Extra-Ordinary Gazette Part-IVA, dated 24-04-2025 (effective
+    15-05-2025)
+  notified_date: '2025-04-24'
+  effective_from: '2025-05-15'
+  status_evidence:
+    url: https://updates.bbmp.gov.in/public
+    quoted_line: THE GREATER BENGALURU GOVERNANCE ACT, 2024 (Karnataka Act No. 36
+      of 2025) ... CHAPTER XVII REGULATION OF BUILDINGS ... 224. Prohibition of erection
+      without permission ... 241. Regularization of certain unlawful buildings ...
+      317. Power to make bye-laws.
+    description: Published on updates.bbmp.gov.in/public under Acts (GBA); came into
+      force on 15-05-2025. Only the building-relevant provisions (Chapter XVII Sections
+      224–253 and Chapter XXII Sections 317–318) are structured per PR 10.
+  licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public state statute)
+  text_rights:
+    mode: full_text
+    reason: Public state Act enacted by the Karnataka Legislature
+  languages:
+  - en
+  - kn
+  official_url: https://updates.bbmp.gov.in/v1/api/file/120330573287-THE%20GREATER%20BENGALURU%20GOVERNANCE%20ACT,%202024%20Gazzet%20copy%20GBGA.pdf
+  mirror_urls:
+  - https://updates.bbmp.gov.in/public
+  source_url: https://updates.bbmp.gov.in/v1/api/file/120330573287-THE%20GREATER%20BENGALURU%20GOVERNANCE%20ACT,%202024%20Gazzet%20copy%20GBGA.pdf
+  retrieval:
+    fetched_at: '2026-11-23T00:00:00Z'
+    requested_url: https://updates.bbmp.gov.in/v1/api/file/120330573287-THE%20GREATER%20BENGALURU%20GOVERNANCE%20ACT,%202024%20Gazzet%20copy%20GBGA.pdf
+    final_url: https://updates.bbmp.gov.in/v1/api/file/120330573287-THE%20GREATER%20BENGALURU%20GOVERNANCE%20ACT,%202024%20Gazzet%20copy%20GBGA.pdf
+    http_status: 200
+    content_type: application/pdf
+    content_length: 4532411
+    response_headers:
+      etag: null
+      last_modified: null
+      server: nginx/1.24.0 (Ubuntu)
+      date: Tue, 24 Nov 2026 20:43:19 GMT
+    sha256: 69650c8b61d9be228054e5e76a03f0087f7d5f9cfb1b63d749e3eb4f49fabed7
+    archive_url: null
+    archive_failure_reason: Wayback Machine Save Page Now timed out on large PDF
+    fetched_by: agent
+- id: udd-200-mnu-2025-khata
+  title: Government Order No. UDD 200 MNU 2025 (25-07-2025) — Regulation of Issuance
+    of A and B Khata and Building Plan Approvals in Greater Bengaluru Area
+  issuing_authority: Government of Karnataka, Urban Development Department
+  doc_type: government_order
+  layer: orders
+  role: regulation
+  legal_status: in_force
+  acquisition_status: acquired
+  structured: true
+  notification_number: No. UDD 200 MNU 2025
+  gazette_reference: Government Order dated 25-07-2025
+  notified_date: '2025-07-25'
+  effective_from: '2025-07-25'
+  status_evidence:
+    url: https://updates.bbmp.gov.in/public
+    quoted_line: The land shall be converted to non-agricultural purpose under Section
+      95 of the Karnataka Land Revenue Act 1964 ... Building plan approval and Occupancy
+      Certificate conditions within the Greater Bengaluru Area.
+    description: 'Published on updates.bbmp.gov.in/public under GBA Town Planning
+      notifications (ROW 65: Regarding the regulation of issuance of A and B Khata
+      for properties within the Greater Bengaluru Area).'
+  licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public government
+    order)
+  text_rights:
+    mode: full_text
+    reason: Public government order issued by the Urban Development Department, Government
+      of Karnataka
+  languages:
+  - en
+  - kn
+  official_url: https://updates.bbmp.gov.in/v1/api/file/226670106906-udd%20200%20mnu%202025%20Dt%2025-07-2025%20(A%20&%20B%20Khatha)%20.pdf
+  mirror_urls:
+  - https://updates.bbmp.gov.in/public
+  source_url: https://updates.bbmp.gov.in/v1/api/file/226670106906-udd%20200%20mnu%202025%20Dt%2025-07-2025%20(A%20&%20B%20Khatha)%20.pdf
+  retrieval:
+    fetched_at: '2026-11-23T00:00:00Z'
+    requested_url: https://updates.bbmp.gov.in/v1/api/file/226670106906-udd%20200%20mnu%202025%20Dt%2025-07-2025%20(A%20&%20B%20Khatha)%20.pdf
+    final_url: https://updates.bbmp.gov.in/v1/api/file/226670106906-udd%20200%20mnu%202025%20Dt%2025-07-2025%20(A%20&%20B%20Khatha)%20.pdf
+    http_status: 200
+    content_type: application/pdf
+    content_length: 6255697
+    response_headers:
+      etag: null
+      last_modified: null
+      server: nginx/1.24.0 (Ubuntu)
+      date: Tue, 24 Nov 2026 20:43:21 GMT
+    sha256: 184e07570e6e6dbb87aea9339835d4f31a2c2d2f84c24fedea058967965324d8
+    archive_url: null
+    archive_failure_reason: Wayback Machine Save Page Now timed out on large PDF
+    fetched_by: agent
+- id: ktcda-amend-bill-2025
+  title: The Karnataka Tank Conservation and Development Authority (Amendment) Bill,
+    2025 (L.A. Bill No. 33 of 2025 — Graded Lake Buffer Zones)
+  issuing_authority: Karnataka Legislative Assembly
+  doc_type: act
+  layer: overlay
+  role: regulation
+  legal_status: status_unknown
+  acquisition_status: acquired
+  structured: false
+  notification_number: L.A. Bill No. 33 of 2025
+  gazette_reference: Sixteenth Karnataka Legislative Assembly, Seventh Session (2025)
+  notified_date: '2025-08-01'
+  effective_from: null
+  status_evidence:
+    url: https://updates.bbmp.gov.in/public
+    quoted_line: THE KARNATAKA TANK CONSERVATION AND DEVELOPMENT AUTHORITY (AMENDMENT)
+      BILL, 2025 (LA Bill No. 33 of 2025) A Bill further to amend the Karnataka Tank
+      Conservation and Development Authority Act, 2014 (Karnataka Act 32 of 2014).
+    description: Published on updates.bbmp.gov.in/public under GBA Town Planning Notifications
+      (ROW 70), but the PDF is the Legislative Assembly Bill (LA Bill No. 33 of 2025)
+      without a verified Governor assent or Gazette commencement notification; recorded
+      as status_unknown per PR 10.
+  licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public legislative
+    bill)
+  text_rights:
+    mode: full_text
+    reason: Public Legislative Assembly Bill published by GBA
+  languages:
+  - en
+  - kn
+  official_url: https://updates.bbmp.gov.in/v1/api/file/526899671364-THE%20KARNATAKA%20TANK%20CONSERVATION%20AND%20DEVELOPMENT%20AUTHORITY%20(AMENDMENT)%20BILL,%202025%20.pdf
+  mirror_urls:
+  - https://updates.bbmp.gov.in/public
+  source_url: https://updates.bbmp.gov.in/v1/api/file/526899671364-THE%20KARNATAKA%20TANK%20CONSERVATION%20AND%20DEVELOPMENT%20AUTHORITY%20(AMENDMENT)%20BILL,%202025%20.pdf
+  retrieval:
+    fetched_at: '2026-11-23T00:00:00Z'
+    requested_url: https://updates.bbmp.gov.in/v1/api/file/526899671364-THE%20KARNATAKA%20TANK%20CONSERVATION%20AND%20DEVELOPMENT%20AUTHORITY%20(AMENDMENT)%20BILL,%202025%20.pdf
+    final_url: https://updates.bbmp.gov.in/v1/api/file/526899671364-THE%20KARNATAKA%20TANK%20CONSERVATION%20AND%20DEVELOPMENT%20AUTHORITY%20(AMENDMENT)%20BILL,%202025%20.pdf
+    http_status: 200
+    content_type: application/pdf
+    content_length: 1569816
+    response_headers:
+      etag: null
+      last_modified: null
+      server: nginx/1.24.0 (Ubuntu)
+      date: Tue, 24 Nov 2026 20:43:22 GMT
+    sha256: 9350271e2e0e742c2d2e83a256ecbd0775d1918c71b79116870fc6cb3c231302
+    archive_url: null
+    archive_failure_reason: Wayback Machine Save Page Now timed out on large PDF
+    fetched_by: agent
 amendment_links:
 - amending_clause: rmp2015-zr:chp_3__cl_3.1
   target_clause: bbl-2003:part_III__sec_9.0__cl_9.2
@@ -2167,3 +2331,7 @@ maps:
       2015 — 47 Planning Districts Index Map, clipped to Bengaluru South City Corporation
       boundary.
   zoning: []
+building_relevant_sections:
+  gbga-2024:
+  - Chapter XVII — Regulation of Buildings (Sections 224–253)
+  - Chapter XXII — Power to Make Building Bye-laws (Sections 317–318)

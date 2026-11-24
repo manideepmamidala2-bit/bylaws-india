@@ -310,6 +310,8 @@ def run_publish(
     )
     for manifest_key, filename in optional_file_keys:
         if filename in artifacts:
+            if manifest_key in {"relations", "graph"} and config.visibility == "test":
+                continue
             files_entry[manifest_key] = f"{url_prefix}/{filename}"
 
     release_entry: dict[str, Any] = {

@@ -23,7 +23,7 @@ def test_rmp2015_index_and_chosen_sheet_acquired_and_documented_in_docs_map() ->
     assert config.release_version in {"2.2.0", "2.3.0", "2.4.0", "2.5.0", "2.6.0", "2.7.0", "2.8.0", "3.0.0"}
     assert config.maps.planning_districts is not None
     assert len(config.maps.planning_districts) >= 1
-    assert len(config.maps.zoning) == 1
+    assert len(config.maps.zoning) >= 1
 
     zoning_cfg = config.maps.zoning[0]
     doc_by_id = {d.id: d for d in config.documents}

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import re
-from functools import lru_cache
 from typing import Any
 
 import yaml
@@ -16,8 +15,44 @@ QUANTITY_SPAN_RE = re.compile(
     re.IGNORECASE,
 )
 
+ZONE_APPLICABILITY_RULES: tuple[tuple[str, re.Pattern[str]], ...] = (
+    ("R-MAIN", re.compile(r"\bresidential\s*\(\s*main\s*\)|\bresidential\s+main\b", re.IGNORECASE)),
+    ("R-MIX", re.compile(r"\bresidential\s*\(\s*mixed\s*\)|\bresidential\s+mixed\b", re.IGNORECASE)),
+    ("C-BIZ", re.compile(r"\bcommercial\s*\(\s*(?:business|central)\s*\)|\bcommercial\s+business\b", re.IGNORECASE)),
+    ("C-AXES", re.compile(r"\bcommercial\s+axes\b|\bmutation\s+corridors?\b", re.IGNORECASE)),
+    ("I-GEN", re.compile(r"\bindustrial\s*(?:\[\s*i\s*\(\s*general\s*\)\s*\]|\(\s*i-general\s*\)|i\s*\(\s*general\s*\))", re.IGNORECASE)),
+    ("I-HITECH", re.compile(r"\bindustrial\s*\(\s*hi-?tech\s*\)|\bhigh\s+tech\b", re.IGNORECASE)),
+    ("PSP", re.compile(r"\bpublic\s+and\s+semi-?public\b|\bP\s*&\s*SP\b", re.IGNORECASE)),
+    ("T-TRANS", re.compile(r"\btraffic\s+and\s+transportation\b|\bT\s*&\s*T\b", re.IGNORECASE)),
+    ("G-PARK", re.compile(r"\bpark\s+and\s+open\s+space\b|\bparks?\s+and\s+open\s+spaces?\b", re.IGNORECASE)),
+    ("G-LAKE", re.compile(r"\bwater\s+bodies\b|\blake\s+buffer\b|\bvalley\s*/\s*drain\b|\bnalas?\b", re.IGNORECASE)),
+    ("ALL", re.compile(r"\bapplicable\s+to\s+all\s+zones\b|\bin\s+all\s+zones\b|\ball\s+types\s+of\s+buildings\b|\bevery\s+building\b", re.IGNORECASE)),
+)
 
-@lru_cache(maxsize=1)
+EID_ZONE_PREFIX_MAP: tuple[tuple[str, str], ...] = (
+    ("chp_4__cl_4.12__cl_4.12.2", "G-LAKE"),
+    ("chp_4__cl_4.12", "G-PARK"),
+    ("chp_4__cl_4.10", "T-TRANS"),
+    ("chp_4__cl_4.9", "PSP"),
+    ("chp_4__cl_4.8", "I-HITECH"),
+    ("chp_4__cl_4.7", "I-GEN"),
+    ("chp_4__cl_4.6", "C-AXES"),
+    ("chp_4__cl_4.5", "C-AXES"),
+    ("chp_4__cl_4.4", "C-BIZ"),
+    ("chp_4__cl_4.3", "C-BIZ"),
+    ("chp_4__cl_4.2", "R-MIX"),
+    ("chp_4__cl_4.1", "R-MAIN"),
+    ("chp_3__cl_3.1", "ALL"),
+    ("chp_3__cl_3.4", "ALL"),
+    ("chp_3__cl_3.9", "ALL"),
+    ("chp_3__cl_3.10", "ALL"),
+    ("chp_8", "ALL"),
+    ("chp_9", "ALL"),
+    ("chp_10", "ALL"),
+    ("chp_11", "ALL"),
+)
+
+
 def _load_compiled_topics() -> list[tuple[str, list[re.Pattern[str]]]]:
     topics_path = resolve_repo_root() / "topics.yaml"
     if not topics_path.is_file():
@@ -457,7 +492,9 @@ def build_document_annotations(tree_payload: dict[str, Any]) -> dict[str, Any]:
                         )
 
         # 4. Topic & Quantity annotations (Schema 1.4 / 09b)
-        if len(active_nodes) <= 2500 and candidate_fields:
+        compiled_topics = _load_compiled_topics()
+        node_heading_str = str(node.get("heading") or "")
+        if compiled_topics and len(active_nodes) <= 2500 and candidate_fields:
             first_field_name, first_field_text = candidate_fields[0]
             matched_topics: set[str] = set()
             if node_type == "definition" or node.get("defines_normalised"):
@@ -482,7 +519,7 @@ def build_document_annotations(tree_payload: dict[str, Any]) -> dict[str, Any]:
                     }
                 )
 
-            for topic_id, topic_patterns in _load_compiled_topics():
+            for topic_id, topic_patterns in compiled_topics:
                 if topic_id in matched_topics:
                     continue
                 found_in_body = False
@@ -513,7 +550,6 @@ def build_document_annotations(tree_payload: dict[str, Any]) -> dict[str, Any]:
                             break
                     if found_in_body:
                         break
-                node_heading_str = str(node.get("heading") or "")
                 if not found_in_body and node_heading_str:
                     for t_pat in topic_patterns:
                         if t_pat.search(node_heading_str):
@@ -565,6 +601,94 @@ def build_document_annotations(tree_payload: dict[str, Any]) -> dict[str, Any]:
                                 "verification": "machine_checked",
                             }
                         )
+
+            # 5. Zone applicability annotations (PR 11 §2: never on preamble, title/scope, definition, or commencement)
+            node_prov_types = {
+                a["value"]
+                for a in annotations
+                if a.get("kind") == "provision_type" and (a.get("target") or {}).get("eid") == eid
+            }
+            is_excluded_from_zones = (
+                is_def_or_child
+                or node_type in {"preamble", "definition"}
+                or bool(node.get("defines"))
+                or bool(node.get("defines_normalised"))
+                or bool(node_prov_types & {"commencement", "scope", "definition"})
+                or eid.startswith(("prea_", "part_I__sec_1.0", "part_I__sec_2.0", "sec_DEFINITIONS", "chp_1"))
+            )
+            if not is_excluded_from_zones:
+                matched_zones: set[str] = set()
+                for z_code, z_pat in ZONE_APPLICABILITY_RULES:
+                    if z_code in matched_zones:
+                        continue
+                    for field_name, f_text in candidate_fields:
+                        mz = z_pat.search(f_text)
+                        if mz:
+                            matched_zones.add(z_code)
+                            seq += 1
+                            annotations.append(
+                                {
+                                    "annotation_id": f"{doc_id}:ann_{seq}",
+                                    "target": {
+                                        "eid": eid,
+                                        "version_id": version_id,
+                                        "field": field_name,
+                                        "span": [mz.start(), mz.end()],
+                                        "span_text": f_text[mz.start() : mz.end()],
+                                    },
+                                    "kind": "zone_applicability",
+                                    "value": z_code,
+                                    "method": "rule",
+                                    "confidence": 0.94,
+                                    "verification": "machine_checked",
+                                }
+                            )
+                            break
+                    if z_code not in matched_zones and node_heading_str and z_pat.search(node_heading_str):
+                        matched_zones.add(z_code)
+                        span_end = min(len(first_field_text), 30)
+                        seq += 1
+                        annotations.append(
+                            {
+                                "annotation_id": f"{doc_id}:ann_{seq}",
+                                "target": {
+                                    "eid": eid,
+                                    "version_id": version_id,
+                                    "field": first_field_name,
+                                    "span": [0, span_end],
+                                    "span_text": first_field_text[:span_end],
+                                },
+                                "kind": "zone_applicability",
+                                "value": z_code,
+                                "method": "rule",
+                                "confidence": 0.92,
+                                "verification": "machine_checked",
+                            }
+                        )
+                if not matched_zones:
+                    for pref_eid, z_code in EID_ZONE_PREFIX_MAP:
+                        if eid == pref_eid or eid.startswith(f"{pref_eid}__"):
+                            matched_zones.add(z_code)
+                            span_end = min(len(first_field_text), 30)
+                            seq += 1
+                            annotations.append(
+                                {
+                                    "annotation_id": f"{doc_id}:ann_{seq}",
+                                    "target": {
+                                        "eid": eid,
+                                        "version_id": version_id,
+                                        "field": first_field_name,
+                                        "span": [0, span_end],
+                                        "span_text": first_field_text[:span_end],
+                                    },
+                                    "kind": "zone_applicability",
+                                    "value": z_code,
+                                    "method": "rule",
+                                    "confidence": 0.90,
+                                    "verification": "machine_checked",
+                                }
+                            )
+                            break
 
     payload: dict[str, Any] = {
         "schema_version": "1.3",

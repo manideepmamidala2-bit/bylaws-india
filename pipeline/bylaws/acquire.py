@@ -307,9 +307,10 @@ def _acquire_single_document(
         meta_payload["superseded_by_document"] = doc.superseded_by_document
     if getattr(doc, "applies_in", None):
         meta_payload["applies_in"] = list(doc.applies_in or [])
-    meta_payload["applies_to_jurisdiction"] = _resolve_applies_to_jurisdiction(
-        doc, jurisdiction_id or raw_dir.name
-    )
+    if not is_test_jurisdiction:
+        meta_payload["applies_to_jurisdiction"] = _resolve_applies_to_jurisdiction(
+            doc, jurisdiction_id or raw_dir.name
+        )
     if doc.text_rights is not None:
         meta_payload["text_rights"] = {
             "mode": doc.text_rights.mode,
