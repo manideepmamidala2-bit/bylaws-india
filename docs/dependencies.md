@@ -61,6 +61,7 @@ Per **Rule R4 (Permissive Licensing)**, every direct dependency in `pipeline/pyp
 | Package | SPDX Licence | Purpose |
 |---------|--------------|---------|
 | `@eslint/eslintrc` | `MIT` | ESLint compatibility configuration helper |
+| `@playwright/test` | `Apache-2.0` | Headless Chromium end-to-end browser test runner (`e2e/map.spec.ts`) |
 | `@tailwindcss/postcss` | `MIT` | Tailwind CSS v4 PostCSS integration |
 | `@testing-library/jest-dom` | `MIT` | DOM assertion matchers for Vitest |
 | `@testing-library/react` | `MIT` | React component testing utilities |

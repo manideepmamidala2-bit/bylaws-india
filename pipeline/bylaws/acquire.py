@@ -144,6 +144,18 @@ def _acquire_single_document(
             if retrieval_record is None and isinstance(existing_meta.get("retrieval"), dict):
                 retrieval_record = existing_meta["retrieval"]
 
+        if not pdf_path.is_file() and retrieval_record is not None and retrieval_record.get("sha256"):
+            expected_sha = str(retrieval_record["sha256"])
+            raw_root = repo_root / "data" / "raw"
+            if raw_root.is_dir():
+                for cand_dir in sorted(raw_root.iterdir()):
+                    cand_pdf = cand_dir / f"{doc.id}.pdf"
+                    if cand_pdf.is_file():
+                        cand_bytes = cand_pdf.read_bytes()
+                        if hashlib.sha256(cand_bytes).hexdigest() == expected_sha:
+                            pdf_path.write_bytes(cand_bytes)
+                            break
+
         if pdf_path.is_file() and (is_test_jurisdiction or retrieval_record is not None):
             raw_bytes = pdf_path.read_bytes()
             sha256_hex = hashlib.sha256(raw_bytes).hexdigest()
@@ -249,6 +261,8 @@ def _acquire_single_document(
         meta_payload["gazette_reference"] = doc.gazette_reference
     if doc.superseded_by_document is not None:
         meta_payload["superseded_by_document"] = doc.superseded_by_document
+    if getattr(doc, "applies_in", None):
+        meta_payload["applies_in"] = list(doc.applies_in or [])
     if doc.text_rights is not None:
         meta_payload["text_rights"] = {
             "mode": doc.text_rights.mode,
@@ -313,6 +327,8 @@ def _build_unacquired_document_payload(doc: DocumentConfig) -> dict[str, Any]:
         payload["gazette_reference"] = doc.gazette_reference
     if doc.superseded_by_document is not None:
         payload["superseded_by_document"] = doc.superseded_by_document
+    if getattr(doc, "applies_in", None):
+        payload["applies_in"] = list(doc.applies_in or [])
     if doc.text_rights is not None:
         payload["text_rights"] = {
             "mode": doc.text_rights.mode,
@@ -375,6 +391,16 @@ def run_acquire(config: JurisdictionConfig, *, repo_root: Path | None = None) ->
             ext = ".kml" if "kml" in boundary_cfg.source_url.lower() else ".geojson"
             raw_b_path = raw_dir / f"boundary_{boundary_cfg.id}{ext}"
             b_ret = getattr(boundary_cfg, "retrieval", None)
+            if not raw_b_path.is_file() and b_ret is not None and b_ret.sha256:
+                raw_root = root / "data" / "raw"
+                if raw_root.is_dir():
+                    for cand_dir in sorted(raw_root.iterdir()):
+                        cand_b = cand_dir / f"boundary_{boundary_cfg.id}{ext}"
+                        if cand_b.is_file():
+                            cand_bytes = cand_b.read_bytes()
+                            if hashlib.sha256(cand_bytes).hexdigest() == b_ret.sha256:
+                                raw_b_path.write_bytes(cand_bytes)
+                                break
             if raw_b_path.is_file() and b_ret is not None:
                 existing_b_sha = hashlib.sha256(raw_b_path.read_bytes()).hexdigest()
                 if b_ret.sha256 and b_ret.sha256 != existing_b_sha:

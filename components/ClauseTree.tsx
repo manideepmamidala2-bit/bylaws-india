@@ -15,6 +15,7 @@ import { StatusBadge } from "./StatusBadge";
 
 interface ClauseTreeProps {
   jurisdictionId?: string;
+  jurisdictionName?: string;
   clauses: ClauseNode[];
   annotations?: AnnotationEntry[];
   amendmentEffects?: AmendmentEffect[];
@@ -30,6 +31,7 @@ const MAX_INLINE_ANNOTATIONS = 12;
 
 export function ClauseTree({
   jurisdictionId = "",
+  jurisdictionName = "",
   clauses,
   annotations = [],
   amendmentEffects = [],
@@ -454,7 +456,9 @@ export function ClauseTree({
                   )}
                   {isAmendedVersion && (
                     <span className="border border-[#080909] bg-[#efeee8] px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#080909]">
-                      Derived · From{" "}
+                      {jurisdictionName
+                        ? `As amended in ${jurisdictionName} · Derived · From `
+                        : "Derived · From "}
                       {activeVer?.valid_from ?? consRecord?.as_of_date}
                     </span>
                   )}

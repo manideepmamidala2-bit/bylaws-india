@@ -66,7 +66,7 @@
 
 ### Phase 2: Part 2 — City Foundation (`in-ka-bengaluru` + 5 City Corporations, 369 Wards & 2026 Corporation Bye-law Amendments)
 
-- [ ] T002 Implement Part 2: create `jurisdictions/in-ka-bengaluru.yaml` (parent) and `in-ka-bengaluru-central.yaml`, `in-ka-bengaluru-north.yaml`, `in-ka-bengaluru-south.yaml`, `in-ka-bengaluru-east.yaml`, `in-ka-bengaluru-west.yaml` (children with `parent: "in-ka-bengaluru"`), import all 5 corporation boundaries, 10 GBA zones, and 369 wards with R15 `retrieval` records and ward count verification in `map-verification.md`, discover/acquire/structure/apply the 2026 Building (Amendment) Bye-laws of Central, North, East, and West with `applies_in` and per-corporation consolidated views, update Home/Map/Document pages with the Corporation Picker, publish Release `2.5.0`, and commit + push <!-- R2 -->
+- [x] T002 Implement Part 2: create `jurisdictions/in-ka-bengaluru.yaml` (parent) and `in-ka-bengaluru-central.yaml`, `in-ka-bengaluru-north.yaml`, `in-ka-bengaluru-south.yaml`, `in-ka-bengaluru-east.yaml`, `in-ka-bengaluru-west.yaml` (children with `parent: "in-ka-bengaluru"`), import all 5 corporation boundaries, 10 GBA zones, and 369 wards with R15 `retrieval` records and ward count verification in `map-verification.md`, discover/acquire/structure/apply the 2026 Building (Amendment) Bye-laws of Central, North, East, and West with `applies_in` and per-corporation consolidated views, update Home/Map/Document pages with the Corporation Picker, publish Release `2.5.0`, and commit + push <!-- R2 -->
 
 ### Phase 3: Part 3 (`09`) — RMP 2015 Zoning Regulations Amendment Chain
 

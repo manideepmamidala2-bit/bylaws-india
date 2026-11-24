@@ -316,14 +316,24 @@ def write_jurisdiction_graph_files(
     amendments_data: dict[str, Any],
 ) -> None:
     """Write `graph.json` and `graph.graphml` into `processed_dir`."""
+    filtered_trees = dict(clause_trees)
+    filtered_anns = dict(annotation_docs)
+    if getattr(config, "parent", None) and not config.maps.zoning:
+        ref_doc_ids = {
+            d.id for d in config.documents if d.role == "reference"
+        }
+        for r_id in ref_doc_ids:
+            filtered_trees.pop(r_id, None)
+            filtered_anns.pop(r_id, None)
+
     graph_json, graphml_str = build_jurisdiction_graph(
         config,
         documents_list=documents_list,
-        clause_trees=clause_trees,
-        annotation_docs=annotation_docs,
+        clause_trees=filtered_trees,
+        annotation_docs=filtered_anns,
         amendments_data=amendments_data,
     )
     (processed_dir / "graph.json").write_text(
-        json.dumps(graph_json, indent=2) + "\n", encoding="utf-8"
+        json.dumps(graph_json, separators=(",", ":")) + "\n", encoding="utf-8"
     )
     (processed_dir / "graph.graphml").write_text(graphml_str, encoding="utf-8")

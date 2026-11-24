@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.3",
+  "jurisdiction": "in-ka-bengaluru-north",
+  "not_modelled": [
+    "National Building Code of India 2016 (copyrighted by BIS; listed as reference only)",
+    "Airports Authority of India NOCAS colour-coded zoning map (external aviation portal; reference only)",
+    "Parts of the BDA Local Planning Area outside the Greater Bengaluru Authority (GBA) 5-corporation boundary are out of scope."
+  ],
+  "known_gaps": [
+    {
+      "doc_id": "ka-model-bbl-2017",
+      "description": "Source page(s) 1 have zero extracted clauses"
+    },
+    {
+      "doc_id": "rmp2015-zr",
+      "description": "Amendments not yet applied: the text shown is the original wording, which may have been changed since."
+    }
+  ],
+  "unread_documents": [
+    {
+      "title": "Revising the amendments in the regulations in BBMP revised Mahayojane 2015 (Kannada Compilation)",
+      "source_url": "https://web.archive.org/web/20250325225145id_/https://site.bbmp.gov.in/PDF/townplanning/KM_266_160102035827-pages-deleted_29102024.pdf",
+      "reason": "Published in Kannada only (languages: ['kn']); per the English-only language policy in 00-overview.md, it is recorded in the register with full provenance and declared as a language gap rather than structured."
+    }
+  ],
+  "unobtainable_documents": [
+    {
+      "id": "rmp2015-zr-amend-2025-07",
+      "title": "Gazette Notification (July 2025) - Bengaluru Master Plan 2015 Zoning Regulations Amendments",
+      "searched_sources": [
+        "https://data.opencity.in/dataset/31a482fe-4ffd-4929-a61d-2fdcca90be91/resource/3f2685b8-5e27-44e5-9222-8f6dbff9445f/download/d7b00660-a3bc-49cf-b35a-3d70283ace0a.pdf",
+        "https://web.archive.org/cdx/search/cdx?url=data.opencity.in/*",
+        "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx",
+        "https://erajyapatra.karnataka.gov.in/"
+      ],
+      "reason": "Listed on the archived OpenCity dataset page for Bengaluru BDA RMP 2015 Zoning Regulation Amendments; direct PDF download returns HTTP 403 (Cloudflare Turnstile challenge) and no Wayback Machine snapshot exists."
+    }
+  ],
+  "contested_status": []
+}

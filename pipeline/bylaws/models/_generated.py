@@ -141,6 +141,7 @@ class DocumentConfig(BaseModel):
     notification_number: str | None = None
     gazette_reference: str | None = None
     superseded_by_document: str | None = None
+    applies_in: list[constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")] | None = None
     licence_or_terms: constr(min_length=1)
     text_rights: TextRightsConfig | None = None
     languages: list[Literal["en", "kn"]] | None = Field(None, min_length=1)
@@ -283,6 +284,7 @@ class JurisdictionAmendmentLinkConfig(BaseModel):
     verification: Literal["unverified", "machine_checked", "human_verified"]
     note: str | None = None
     replacement_text: str | None = None
+    applies_in: list[constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")] | None = None
 
 
 class MapsConfig(BaseModel):
@@ -327,6 +329,10 @@ class JurisdictionConfig(BaseModel):
         ..., description="Uppercase state or territory code."
     )
     building_types: list[constr(min_length=1)] = Field(..., min_length=1)
+    parent: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$") | None = Field(
+        None,
+        description="Optional parent jurisdiction ID for a child municipal corporation.",
+    )
     parents: list[constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")]
     not_modelled: list[constr(min_length=1)] | None = Field(
         None,
@@ -436,6 +442,7 @@ class DocumentMetadata(BaseModel):
     status_evidence: DocumentStatusEvidence = Field(..., title="DocumentStatusEvidence")
     notification_number: str | None = None
     gazette_reference: str | None = None
+    applies_in: list[constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")] | None = None
     superseded_by_document: str | None = None
     licence_or_terms: constr(min_length=1)
     text_rights: DocumentTextRights | None = None
@@ -880,6 +887,7 @@ class AmendmentEffect(BaseModel):
     applied: bool
     unapplied_reason: str | None = None
     verification: Literal["unverified", "machine_checked", "human_verified"]
+    applies_in: list[constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")] | None = None
 
 
 class AmendmentLink(BaseModel):
@@ -904,6 +912,7 @@ class AmendmentLink(BaseModel):
     verification: Literal["unverified", "machine_checked", "human_verified"]
     note: str | None = None
     summary: str | None = None
+    applies_in: list[constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")] | None = None
 
 
 class JurisdictionAmendments(BaseModel):
@@ -1199,6 +1208,7 @@ class JurisdictionManifest(BaseModel):
     )
     id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     name: constr(min_length=1)
+    parent: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$") | None = None
     aliases: list[constr(min_length=1)] | None = None
     visibility: Literal["public", "test"] | None = "public"
     latest_release: constr(pattern=r"^\d+\.\d+\.\d+$") | None

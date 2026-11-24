@@ -141,6 +141,9 @@ def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None
 
     links_by_target: dict[str, list[dict[str, Any]]] = {}
     for link in links:
+        link_applies_in = link.get("applies_in")
+        if isinstance(link_applies_in, list) and link_applies_in and config.id not in link_applies_in:
+            continue
         target_cid = str(link["target_clause"])
         links_by_target.setdefault(target_cid, []).append(link)
 

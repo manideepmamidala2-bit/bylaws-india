@@ -11,9 +11,9 @@ export default async function AboutPage() {
   const manifest = await fetchManifest();
   const visible = getVisibleJurisdictions(manifest);
   const primary = visible[0];
-  const withdrawnRelease = primary?.releases.find((rel) =>
-    isWithdrawnRelease(rel)
-  );
+  const withdrawnRelease = visible
+    .flatMap((j) => j.releases)
+    .find((rel) => isWithdrawnRelease(rel));
   const dataset = primary
     ? await fetchJurisdictionDataset(primary.id)
     : null;

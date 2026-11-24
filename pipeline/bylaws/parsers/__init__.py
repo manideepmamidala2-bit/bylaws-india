@@ -66,14 +66,26 @@ def run_parse_stage(
                 f"Raw PDF not found for document '{doc.id}': {pdf_path}. "
                 "Run `bylaws acquire` first."
             )
-        result = adapter.parse(pdf_path)
         json_out = interim_dir / f"{doc.id}.{adapter.name}.json"
         md_out = interim_dir / f"{doc.id}.{adapter.name}.md"
-        json_out.write_text(
-            json.dumps(result.model_dump(mode="json"), indent=2) + "\n",
-            encoding="utf-8",
-        )
-        md_out.write_text(result.markdown, encoding="utf-8")
+        if not json_out.is_file():
+            interim_root = root / "data" / "interim"
+            if interim_root.is_dir():
+                for cand_dir in sorted(interim_root.iterdir()):
+                    cand_json = cand_dir / f"{doc.id}.{adapter.name}.json"
+                    cand_md = cand_dir / f"{doc.id}.{adapter.name}.md"
+                    if cand_json.is_file():
+                        json_out.write_bytes(cand_json.read_bytes())
+                        if cand_md.is_file():
+                            md_out.write_bytes(cand_md.read_bytes())
+                        break
+        if not json_out.is_file():
+            result = adapter.parse(pdf_path)
+            json_out.write_text(
+                json.dumps(result.model_dump(mode="json"), indent=2) + "\n",
+                encoding="utf-8",
+            )
+            md_out.write_text(result.markdown, encoding="utf-8")
         parsed_count += 1
 
     click.echo(

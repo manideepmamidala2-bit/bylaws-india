@@ -44,6 +44,10 @@ export interface JurisdictionConfig {
    * @minItems 1
    */
   building_types: [string, ...string[]];
+  /**
+   * Optional parent jurisdiction ID for a child municipal corporation.
+   */
+  parent?: string | null;
   parents: string[];
   /**
    * Regulatory domains or layers intentionally excluded from this jurisdiction dataset.
@@ -129,6 +133,7 @@ export interface DocumentConfig {
   notification_number?: string | null;
   gazette_reference?: string | null;
   superseded_by_document?: string | null;
+  applies_in?: string[];
   licence_or_terms: string;
   text_rights?: TextRightsConfig;
   /**
@@ -195,6 +200,7 @@ export interface JurisdictionAmendmentLinkConfig {
   verification: "unverified" | "machine_checked" | "human_verified";
   note?: string | null;
   replacement_text?: string | null;
+  applies_in?: string[];
 }
 
 export interface MapsConfig {
@@ -329,6 +335,7 @@ export interface DocumentMetadata {
   status_evidence: DocumentStatusEvidence;
   notification_number?: string | null;
   gazette_reference?: string | null;
+  applies_in?: string[];
   superseded_by_document?: string | null;
   licence_or_terms: string;
   text_rights?: DocumentTextRights;
@@ -836,6 +843,7 @@ export interface AmendmentEffect {
   applied: boolean;
   unapplied_reason?: string | null;
   verification: "unverified" | "machine_checked" | "human_verified";
+  applies_in?: string[];
 }
 
 export interface EffectNodePayload {
@@ -860,6 +868,7 @@ export interface AmendmentLink {
   verification: "unverified" | "machine_checked" | "human_verified";
   note?: string | null;
   summary?: string | null;
+  applies_in?: string[];
 }
 
 /**
@@ -874,6 +883,7 @@ export interface ReleaseManifest {
 export interface JurisdictionManifest {
   id: string;
   name: string;
+  parent?: string | null;
   aliases?: string[];
   visibility?: "public" | "test";
   latest_release: string | null;

@@ -83,3 +83,51 @@ def test_part1_graph_json_and_graphml_and_map_diagnosis_published() -> None:
 
     assert (REPO_ROOT / "app" / "structure" / "page.tsx").is_file()
     assert (REPO_ROOT / "e2e" / "map.spec.ts").is_file()
+
+
+def test_part2_five_city_corporations_369_wards_and_2026_consolidated_views() -> None:
+    """Part 2 (`12-bengaluru-city-overnight.md` §3 Part 2): Parent `in-ka-bengaluru` and 5 child City Corporations exist with 369 total wards, R15 retrieval records, and per-corporation 2026 Building (Amendment) Bye-laws consolidated views."""
+    parent_cfg = load_jurisdiction_config("in-ka-bengaluru")
+    assert parent_cfg.release_version is not None
+    parent_rel_dir = REPO_ROOT / "public" / "data" / "in-ka-bengaluru" / parent_cfg.release_version
+    parent_boundary = json.loads((parent_rel_dir / "boundary.geojson").read_text(encoding="utf-8"))
+    parent_zones = json.loads((parent_rel_dir / "gba-zones.geojson").read_text(encoding="utf-8"))
+    parent_wards = json.loads((parent_rel_dir / "wards.geojson").read_text(encoding="utf-8"))
+    assert len(parent_boundary["features"]) == 5
+    assert len(parent_zones["features"]) == 10
+    assert len(parent_wards["features"]) == 369
+
+    expected_wards = {
+        "in-ka-bengaluru-central": (63, "bccc-bbl-amend-2026-05", "Bengaluru Central City Corporation"),
+        "in-ka-bengaluru-north": (72, "bncc-bbl-amend-2026-05", "Bengaluru North City Corporation"),
+        "in-ka-bengaluru-south": (72, "bscc-bbl-amend-2026-05", "Bengaluru South City Corporation"),
+        "in-ka-bengaluru-east": (50, "becc-bbl-amend-2026-05", "Bengaluru East City Corporation"),
+        "in-ka-bengaluru-west": (112, "bwcc-bbl-amend-2026-05", "Bengaluru West City Corporation"),
+    }
+    total_child_wards = 0
+    clause_6_texts: dict[str, str] = {}
+
+    for corp_id, (exp_ward_cnt, final_doc_id, corp_label) in expected_wards.items():
+        cfg = load_jurisdiction_config(corp_id)
+        assert cfg.parent == "in-ka-bengaluru"
+        assert cfg.release_version is not None
+        rel_dir = REPO_ROOT / "public" / "data" / corp_id / cfg.release_version
+        wards_fc = json.loads((rel_dir / "wards.geojson").read_text(encoding="utf-8"))
+        assert len(wards_fc["features"]) == exp_ward_cnt
+        total_child_wards += len(wards_fc["features"])
+
+        cons = validate_file(rel_dir / "consolidated.json", "consolidated")
+        rec_by_id = {r["clause_id"]: r for r in cons["records"]}
+        assert "bbl-2003:3.8" in rec_by_id and rec_by_id["bbl-2003:3.8"]["omitted"] is True
+        assert "bbl-2003:3.9" in rec_by_id and rec_by_id["bbl-2003:3.9"]["omitted"] is True
+        assert "bbl-2003:3.10" in rec_by_id and rec_by_id["bbl-2003:3.10"]["omitted"] is True
+        assert "bbl-2003:6.0(i)" in rec_by_id
+        c6_text = str(rec_by_id["bbl-2003:6.0(i)"]["text"])
+        assert corp_label in c6_text
+        assert final_doc_id in ",".join(rec_by_id["bbl-2003:6.0(i)"]["amendments_applied"])
+        clause_6_texts[corp_id] = c6_text
+
+    assert total_child_wards == 369
+    assert len(set(clause_6_texts.values())) == 5, (
+        "Each of the 5 City Corporations must have its own distinct consolidated text for Bye-law 6.0(i)"
+    )

@@ -119,6 +119,13 @@
     "gazette_reference": {
       "type": ["string", "null"]
     },
+    "applies_in": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+      }
+    },
     "superseded_by_document": {
       "type": ["string", "null"]
     },

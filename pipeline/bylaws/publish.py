@@ -89,6 +89,7 @@ def _build_sources_exports(documents_list: list[dict[str, Any]]) -> tuple[bytes,
 def _collect_release_artifacts(
     config: JurisdictionConfig,
     root: Path,
+    release_version: str = "",
 ) -> tuple[dict[str, bytes], list[str], list[str], list[str]]:
     """Collect release file bytes and return `(artifact_bytes, in_force_clause_files, in_force_annotation_files, draft_clause_files)`."""
     raw_dir = root / "data" / "raw" / config.id
@@ -120,6 +121,19 @@ def _collect_release_artifacts(
     in_force_annotation_files: list[str] = []
     draft_clause_files: list[str] = []
 
+    parent_id = getattr(config, "parent", None)
+    ver_str = release_version or str(getattr(config, "release_version", None) or "")
+    parent_release_dir = (
+        root / "public" / "data" / parent_id / ver_str
+        if parent_id and ver_str and not config.maps.zoning
+        else None
+    )
+    child_amended_targets = {
+        str(getattr(lnk, "target_clause", "") or "").split(":", 1)[0]
+        for lnk in (getattr(config, "amendment_links", None) or [])
+        if getattr(lnk, "applies_in", None) and config.id in (lnk.applies_in or [])
+    }
+
     for doc in config.documents:
         if not is_structurable_document(doc):
             continue
@@ -129,13 +143,23 @@ def _collect_release_artifacts(
             raise click.ClickException(
                 f"Cannot publish '{config.id}': missing '{clause_path}'."
             )
-        artifacts[clause_filename] = clause_path.read_bytes()
         ann_filename = f"{doc.id}.annotations.json"
         ann_path = docs_dir / ann_filename
-        if ann_path.is_file():
-            artifacts[ann_filename] = ann_path.read_bytes()
-            if doc.legal_status != "draft":
-                in_force_annotation_files.append(ann_filename)
+
+        # Reuse parent's published clause/annotation URL for unamended shared parent docs
+        is_shared_unamended = (
+            parent_release_dir is not None
+            and doc.id not in child_amended_targets
+            and not getattr(doc, "applies_in", None)
+            and (parent_release_dir / clause_filename).is_file()
+        )
+        if not is_shared_unamended:
+            artifacts[clause_filename] = clause_path.read_bytes()
+            if ann_path.is_file():
+                artifacts[ann_filename] = ann_path.read_bytes()
+
+        if ann_path.is_file() and doc.legal_status != "draft":
+            in_force_annotation_files.append(ann_filename)
         if doc.legal_status == "draft":
             draft_clause_files.append(clause_filename)
         else:
@@ -235,7 +259,7 @@ def run_publish(
         )
 
     artifacts, in_force_clauses, in_force_annotations, draft_clauses = (
-        _collect_release_artifacts(config, root)
+        _collect_release_artifacts(config, root, release_version)
     )
 
     zip_filename = f"{config.id}-{release_version}.zip"
@@ -252,13 +276,20 @@ def run_publish(
     all_release_files["SHA256SUMS"] = ("\n".join(sha_lines) + "\n").encode("utf-8")
 
     url_prefix = f"/data/{config.id}/{release_version}"
+    parent_id = getattr(config, "parent", None)
+    parent_prefix = f"/data/{parent_id}/{release_version}" if parent_id else url_prefix
     released_at = get_deterministic_timestamp()
     changelog = f"Release {release_version} for {config.name}."
 
+    def _resolve_file_url(fname: str) -> str:
+        if fname in artifacts:
+            return f"{url_prefix}/{fname}"
+        return f"{parent_prefix}/{fname}"
+
     files_entry: dict[str, Any] = {
         "documents": f"{url_prefix}/documents.json",
-        "clauses": [f"{url_prefix}/{fname}" for fname in in_force_clauses],
-        "annotations": [f"{url_prefix}/{fname}" for fname in in_force_annotations],
+        "clauses": [_resolve_file_url(fname) for fname in in_force_clauses],
+        "annotations": [_resolve_file_url(fname) for fname in in_force_annotations],
         "amendments": f"{url_prefix}/amendments.json",
         "zones": f"{url_prefix}/zones.geojson",
         "boundary": f"{url_prefix}/boundary.geojson",
@@ -289,7 +320,7 @@ def run_publish(
         "declarations": f"{url_prefix}/declarations.json",
         "files": files_entry,
         "drafts": {
-            "clauses": [f"{url_prefix}/{fname}" for fname in draft_clauses],
+            "clauses": [_resolve_file_url(fname) for fname in draft_clauses],
         },
         "changelog": changelog,
     }
@@ -341,6 +372,8 @@ def run_publish(
         "latest_release": release_version,
         "releases": [*existing_releases_for_current, release_entry],
     }
+    if getattr(config, "parent", None):
+        jurisdiction_manifest_entry["parent"] = str(config.parent)
     if existing_register_docs:
         jurisdiction_manifest_entry["register_documents"] = existing_register_docs
 

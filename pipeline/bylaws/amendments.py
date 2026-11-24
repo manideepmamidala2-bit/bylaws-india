@@ -145,6 +145,30 @@ def _parse_quoted_node_payload(
     }
 
 
+def _reset_clause_tree_versions(tree: dict[str, Any]) -> None:
+    """Reset any applied Layer 3 versions on `tree` so `run_amendments` is idempotent."""
+    clauses = list(tree.get("clauses") or [])
+    base_clauses: list[dict[str, Any]] = []
+    inserted_eids: set[str] = set()
+    for c in clauses:
+        vers = list(c.get("versions") or [])
+        if vers and vers[0].get("effect_id") is not None:
+            inserted_eids.add(str(c.get("eid")))
+            continue
+        if vers:
+            v0 = dict(vers[0])
+            v0["valid_to"] = None
+            c["versions"] = [v0]
+        c["amended_by"] = []
+        base_clauses.append(c)
+    if inserted_eids:
+        for idx, c in enumerate(base_clauses):
+            c["order"] = idx
+            if c.get("children"):
+                c["children"] = [ch for ch in c["children"] if ch not in inserted_eids]
+    tree["clauses"] = base_clauses
+
+
 def _load_clause_tree(docs_dir: Path, doc_id: str) -> dict[str, Any]:
     path = docs_dir / f"{doc_id}.clauses.json"
     if not path.is_file():
@@ -153,6 +177,7 @@ def _load_clause_tree(docs_dir: Path, doc_id: str) -> dict[str, Any]:
             "Run `bylaws structure` first."
         )
     data: dict[str, Any] = json.loads(path.read_text(encoding="utf-8"))
+    _reset_clause_tree_versions(data)
     return data
 
 
@@ -329,9 +354,19 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
     effects: list[dict[str, Any]] = []
     effect_seq = 0
 
+    declarative_doc_ids = {
+        str(getattr(lnk, "amending_clause", "") or "").split(":", 1)[0]
+        for lnk in (getattr(config, "amendment_links", None) or [])
+    }
+
     for doc in config.documents:
         is_amend = doc.role == "amendment" or doc.doc_type in {"amendment", "notification"}
-        if not is_amend or not doc.amends:
+        if (
+            not is_amend
+            or not doc.amends
+            or doc.id in declarative_doc_ids
+            or getattr(doc, "superseded_by_document", None) in declarative_doc_ids
+        ):
             continue
         if doc.text_rights is not None and doc.text_rights.mode == "reference_only":
             continue
@@ -381,11 +416,12 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
                     ):
                         matched_target_node = target_clause
                         matched_target_doc_id = target_doc_id
-                        amended_by: list[str] = list(target_clause.get("amended_by", []))
-                        if amending_clause_id not in amended_by:
-                            amended_by.append(amending_clause_id)
-                            target_clause["amended_by"] = amended_by
-                            modified_doc_ids.add(target_doc_id)
+                        if doc.legal_status == "in_force":
+                            amended_by: list[str] = list(target_clause.get("amended_by", []))
+                            if amending_clause_id not in amended_by:
+                                amended_by.append(amending_clause_id)
+                                target_clause["amended_by"] = amended_by
+                                modified_doc_ids.add(target_doc_id)
                         break
                 if matched_target_node is not None:
                     break
@@ -557,6 +593,19 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
                 amending_cid_ov = str(amending_node_ov["clause_id"])
                 amending_eid_ov = str(amending_node_ov.get("eid") or amending_token)
 
+                raw_applies_in = (
+                    ov_link.get("applies_in")
+                    or (getattr(amending_doc_cfg, "applies_in", None) if amending_doc_cfg else None)
+                )
+                applies_in_list: list[str] = (
+                    [str(x) for x in raw_applies_in if x]
+                    if isinstance(raw_applies_in, list)
+                    else []
+                )
+                applies_here = (
+                    not applies_in_list or config.id in applies_in_list
+                )
+
                 if target_node_ov is None:
                     matched_target_cid_ov = target_ref
                     matched_target_eid_ov = build_eid(None, "clause", target_token)
@@ -568,7 +617,9 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
                     matched_target_cid_ov = str(target_node_ov["clause_id"])
                     matched_target_eid_ov = str(target_node_ov.get("eid") or target_token)
                     should_apply_ov = (
-                        num_conf_ov >= 0.8 and amending_status == "in_force"
+                        num_conf_ov >= 0.8
+                        and amending_status == "in_force"
+                        and applies_here
                     )
                     if should_apply_ov:
                         unapplied_reason_ov = None
@@ -577,6 +628,10 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
                             amended_by_ov.append(amending_cid_ov)
                             target_node_ov["amended_by"] = amended_by_ov
                             modified_doc_ids.add(target_doc_id)
+                    elif not applies_here:
+                        unapplied_reason_ov = (
+                            f"Applies only in {', '.join(applies_in_list)}."
+                        )
                     elif amending_status != "in_force":
                         unapplied_reason_ov = (
                             f"Amending instrument '{amending_doc_id}' has status '{amending_status}'."
@@ -620,6 +675,8 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
                     "unapplied_reason": unapplied_reason_ov,
                     "verification": str(ov_link.get("verification") or ("machine_checked" if should_apply_ov else "unverified")),
                 }
+                if applies_in_list:
+                    effect_entry_ov["applies_in"] = applies_in_list
                 effects.append(effect_entry_ov)
 
                 if should_apply_ov and target_node_ov is not None:
@@ -632,20 +689,21 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
                     modified_doc_ids.add(target_doc_id)
 
                 compat_action_ov = "modify" if eff_action == "modify_text" else eff_action
-                links.append(
-                    {
-                        "amending_clause": amending_cid_ov,
-                        "target_clause": matched_target_cid_ov,
-                        "amending_doc_id": amending_doc_id,
-                        "target_doc_id": target_doc_id,
-                        "action": compat_action_ov,
-                        "effective_date": valid_from_ov,
-                        "confidence": lbl_conf_ov,
-                        "verification": str(ov_link.get("verification") or ("machine_checked" if should_apply_ov else "unverified")),
-                        "note": ov_link.get("replacement_text") or ov_link.get("note"),
-                        "summary": ov_link.get("note"),
-                    }
-                )
+                link_entry_ov: dict[str, Any] = {
+                    "amending_clause": amending_cid_ov,
+                    "target_clause": matched_target_cid_ov,
+                    "amending_doc_id": amending_doc_id,
+                    "target_doc_id": target_doc_id,
+                    "action": compat_action_ov,
+                    "effective_date": valid_from_ov,
+                    "confidence": lbl_conf_ov,
+                    "verification": str(ov_link.get("verification") or ("machine_checked" if should_apply_ov else "unverified")),
+                    "note": ov_link.get("replacement_text") or ov_link.get("note"),
+                    "summary": ov_link.get("note"),
+                }
+                if applies_in_list:
+                    link_entry_ov["applies_in"] = applies_in_list
+                links.append(link_entry_ov)
 
     for doc_id in sorted(modified_doc_ids):
         tree_payload = loaded_trees[doc_id]

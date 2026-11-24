@@ -57,6 +57,7 @@ def validate_jurisdiction_dict(
     expected_id: str | None = None,
     source: str | None = None,
     schemas_dir: Path | None = None,
+    extra_doc_ids: set[str] | None = None,
 ) -> JurisdictionConfig:
     """Validate a raw jurisdiction dictionary against `jurisdiction.schema.json`."""
     try:
@@ -76,7 +77,7 @@ def validate_jurisdiction_dict(
             f"expected '{expected_id}', got '{config.id}'"
         )
 
-    doc_ids = {doc.id for doc in config.documents}
+    doc_ids = {doc.id for doc in config.documents} | (extra_doc_ids or set())
     for zoning in config.maps.zoning:
         if isinstance(zoning, TracedZoningMapConfig) and zoning.document not in doc_ids:
             raise ConfigValidationError(
@@ -92,8 +93,9 @@ def load_jurisdiction_config(
     *,
     jurisdictions_dir: Path | None = None,
     schemas_dir: Path | None = None,
+    inherit_parent: bool = True,
 ) -> JurisdictionConfig:
-    """Load and validate `jurisdictions/<jurisdiction_id>.yaml`."""
+    """Load and validate `jurisdictions/<jurisdiction_id>.yaml`, optionally inheriting from `parent`."""
     if not jurisdiction_id or not jurisdiction_id.strip():
         raise ConfigValidationError("Jurisdiction ID must be a non-empty string.")
 
@@ -112,9 +114,69 @@ def load_jurisdiction_config(
             f"Invalid YAML syntax in '{config_path}': {exc}"
         ) from exc
 
-    return validate_jurisdiction_dict(
+    parent_cfg: JurisdictionConfig | None = None
+    parent_doc_ids: set[str] = set()
+    if isinstance(raw_data, dict) and raw_data.get("parent"):
+        parent_id = str(raw_data["parent"]).strip()
+        if parent_id and (base_dir / f"{parent_id}.yaml").is_file():
+            parent_cfg = load_jurisdiction_config(
+                parent_id,
+                jurisdictions_dir=base_dir,
+                schemas_dir=schemas_dir,
+                inherit_parent=False,
+            )
+            parent_doc_ids = {d.id for d in parent_cfg.documents}
+
+    config = validate_jurisdiction_dict(
         raw_data,
         expected_id=jurisdiction_id,
         source=str(config_path),
         schemas_dir=schemas_dir,
+        extra_doc_ids=parent_doc_ids,
     )
+
+    if inherit_parent and parent_cfg is not None:
+        child_doc_ids = {d.id for d in config.documents}
+        inherited_docs = [
+            d
+            for d in parent_cfg.documents
+            if d.id not in child_doc_ids
+            and (not d.applies_in or config.id in d.applies_in)
+        ]
+        config.documents = [*inherited_docs, *config.documents]
+
+        existing_links = {
+            (lnk.amending_clause, lnk.target_clause, lnk.action)
+            for lnk in (config.amendment_links or [])
+        }
+        inherited_links = [
+            lnk
+            for lnk in (parent_cfg.amendment_links or [])
+            if (lnk.amending_clause, lnk.target_clause, lnk.action) not in existing_links
+            and (not lnk.applies_in or config.id in lnk.applies_in)
+        ]
+        config.amendment_links = [*inherited_links, *(config.amendment_links or [])]
+
+        existing_unobt = {u.id for u in (config.unobtainable_documents or [])}
+        inherited_unobt = [
+            u
+            for u in (parent_cfg.unobtainable_documents or [])
+            if u.id not in existing_unobt
+        ]
+        config.unobtainable_documents = [
+            *inherited_unobt,
+            *(config.unobtainable_documents or []),
+        ]
+
+        existing_unread = {u.title for u in (config.unread_documents or [])}
+        inherited_unread = [
+            u
+            for u in (parent_cfg.unread_documents or [])
+            if u.title not in existing_unread
+        ]
+        config.unread_documents = [
+            *inherited_unread,
+            *(config.unread_documents or []),
+        ]
+
+    return config

@@ -1237,13 +1237,24 @@ def _find_interim_parse_file(interim_dir: Path, doc_id: str) -> Path:
     docling_file = interim_dir / f"{doc_id}.docling.json"
     if docling_file.is_file():
         return docling_file
+    interim_root = interim_dir.parent
+    if interim_root.is_dir():
+        for cand_dir in sorted(interim_root.iterdir()):
+            cand_docling = cand_dir / f"{doc_id}.docling.json"
+            if cand_docling.is_file():
+                return cand_docling
     candidates = sorted(interim_dir.glob(f"{doc_id}.*.json"))
-    if not candidates:
-        raise click.ClickException(
-            f"Interim parse output not found for '{doc_id}' in '{interim_dir}'. "
-            "Run `bylaws parse` first."
-        )
-    return candidates[0]
+    if candidates:
+        return candidates[0]
+    if interim_root.is_dir():
+        for cand_dir in sorted(interim_root.iterdir()):
+            cand_others = sorted(cand_dir.glob(f"{doc_id}.*.json"))
+            if cand_others:
+                return cand_others[0]
+    raise click.ClickException(
+        f"Interim parse output not found for '{doc_id}' in '{interim_dir}'. "
+        "Run `bylaws parse` first."
+    )
 
 
 def is_structurable_document(doc: DocumentConfig) -> bool:
@@ -1271,17 +1282,57 @@ def run_structure(config: JurisdictionConfig, *, repo_root: Path | None = None) 
     interim_dir = root / "data" / "interim" / config.id
     docs_out_dir = root / "data" / "processed" / config.id / "documents"
     docs_out_dir.mkdir(parents=True, exist_ok=True)
+    parent_docs_dir = (
+        root / "data" / "processed" / config.parent / "documents"
+        if getattr(config, "parent", None)
+        else None
+    )
 
     structured_count = 0
     for doc in config.documents:
         if not is_structurable_document(doc):
             continue
+        out_path = docs_out_dir / f"{doc.id}.clauses.json"
+        ann_path = docs_out_dir / f"{doc.id}.annotations.json"
+
+        if (
+            parent_docs_dir is not None
+            and (parent_docs_dir / f"{doc.id}.clauses.json").is_file()
+            and (parent_docs_dir / f"{doc.id}.annotations.json").is_file()
+        ):
+            from bylaws.amendments import _reset_clause_tree_versions
+
+            clause_tree = json.loads(
+                (parent_docs_dir / f"{doc.id}.clauses.json").read_text(encoding="utf-8")
+            )
+            orig_len = len(clause_tree.get("clauses") or [])
+            _reset_clause_tree_versions(clause_tree)
+            clause_tree["jurisdiction"] = config.id
+            validate_payload(clause_tree, "clause-tree", source=str(out_path))
+            out_path.write_text(
+                json.dumps(clause_tree, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            if len(clause_tree.get("clauses") or []) == orig_len and doc.role != "base":
+                annotations_payload = json.loads(
+                    (parent_docs_dir / f"{doc.id}.annotations.json").read_text(encoding="utf-8")
+                )
+                annotations_payload["jurisdiction"] = config.id
+            else:
+                annotations_payload = build_document_annotations(clause_tree)
+            validate_payload(annotations_payload, "annotations", source=str(ann_path))
+            ann_path.write_text(
+                json.dumps(annotations_payload, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            structured_count += 1
+            continue
+
         interim_path = _find_interim_parse_file(interim_dir, doc.id)
         parse_result = ParseResult.model_validate_json(
             interim_path.read_text(encoding="utf-8")
         )
         clause_tree = build_clause_tree_from_parse_result(doc, config, parse_result)
-        out_path = docs_out_dir / f"{doc.id}.clauses.json"
         validate_payload(clause_tree, "clause-tree", source=str(out_path))
         out_path.write_text(
             json.dumps(clause_tree, indent=2) + "\n",
@@ -1289,7 +1340,6 @@ def run_structure(config: JurisdictionConfig, *, repo_root: Path | None = None) 
         )
 
         annotations_payload = build_document_annotations(clause_tree)
-        ann_path = docs_out_dir / f"{doc.id}.annotations.json"
         validate_payload(annotations_payload, "annotations", source=str(ann_path))
         ann_path.write_text(
             json.dumps(annotations_payload, indent=2) + "\n",
