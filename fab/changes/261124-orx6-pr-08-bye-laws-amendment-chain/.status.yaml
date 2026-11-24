@@ -9,7 +9,7 @@ progress:
     apply: done
     review: done
     hydrate: done
-    ship: active
+    ship: done
     review-pr: pending
 plan:
     generated: true
@@ -33,21 +33,21 @@ stage_metrics:
     apply: {started_at: "2026-11-24T15:54:30Z", driver: /fab-fff, iterations: 1, completed_at: "2026-11-24T16:49:45Z"}
     review: {started_at: "2026-11-24T16:49:45Z", driver: /fab-fff, iterations: 1, completed_at: "2026-11-24T16:58:58Z"}
     hydrate: {started_at: "2026-11-24T16:58:58Z", driver: /fab-fff, iterations: 1, completed_at: "2026-11-24T16:58:58Z"}
-    ship: {started_at: "2026-11-24T16:58:58Z", driver: /fab-fff, iterations: 1}
+    ship: {started_at: "2026-11-24T16:58:58Z", driver: /fab-fff, iterations: 1, completed_at: "2026-11-24T16:59:03Z"}
 prs:
     - https://github.com/manideepmamidala2-bit/bylaws-india/pull/13
 base_branch: main
 change_type_source: explicit
 true_impact:
-    added: 1286771
-    deleted: 72
-    net: 1286699
+    added: 1287146
+    deleted: 82
+    net: 1287064
     tests:
         added: 203
         deleted: 12
         net: 191
-    computed_at: "2026-11-24T16:58:58Z"
-    computed_at_stage: hydrate
+    computed_at: "2026-11-24T16:59:03Z"
+    computed_at_stage: ship
 # base_branch: written by /git-branch or /fab-new when the change's branch is created (no placeholder here).
 # true_impact: lazily created on first stage-finish that computes it (no placeholder here).
-last_updated: 2026-11-24T16:58:58Z
+last_updated: 2026-11-24T16:59:03Z
