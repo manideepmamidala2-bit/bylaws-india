@@ -188,12 +188,34 @@ class PlanningDistrictMapConfig(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    id: constr(pattern=r"^[a-z0-9]+([_-][a-z0-9]+)*$")
     title: str | None = None
     source_url: constr(min_length=1)
     district_code_field: str | None = None
     district_name_field: str | None = None
+    document: str | None = None
+    page: conint(ge=1) | None = 1
+    district_code: str | None = None
+    district_name: str | None = None
+    scale_m_per_pt: float | None = None
+    anchor_pdf_pt: list[float] | None = Field(None, max_length=2, min_length=2)
+    anchor_utm_pt: list[float] | None = Field(None, max_length=2, min_length=2)
     source_attribution: str | None = None
+
+
+class Rgb(RootModel[list[conint(ge=0, le=255)]]):
+    root: list[conint(ge=0, le=255)] = Field(..., max_length=3, min_length=3)
+
+
+class TracedLegendPaletteEntry(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    zone_code: constr(min_length=1)
+    zone_label: constr(min_length=1)
+    rgbs: list[Rgb] = Field(..., min_length=1)
+    min_area_sq_m: confloat(ge=0.0) | None = 1500
+    morph_open_px: conint(ge=0) | None = 0
 
 
 class TracedZoningMapConfig(BaseModel):
@@ -208,6 +230,11 @@ class TracedZoningMapConfig(BaseModel):
     sheet: str | None = None
     legend_page: conint(ge=1) | None
     source_url: str | None = None
+    source_attribution: str | None = None
+    target_crs: str | None = "EPSG:32643"
+    grid_eastings: list[float] | None = None
+    grid_northings: list[float] | None = None
+    legend_palette: list[TracedLegendPaletteEntry] | None = None
 
 
 class ImportedZoningMapConfig(BaseModel):
@@ -540,6 +567,17 @@ class DocumentAnnotations(BaseModel):
     annotations: list[AnnotationEntry]
 
 
+class GeorefRunSummary(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    target_crs: constr(min_length=1)
+    gcp_count: conint(ge=3)
+    rmse_m: confloat(ge=0.0)
+    loo_rmse_m: confloat(ge=0.0)
+    max_residual_m: confloat(ge=0.0)
+
+
 class ZoneFeatureProperties(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -557,7 +595,7 @@ class ZoneFeatureProperties(BaseModel):
     planning_district: str | None = None
     sheet: str | None = None
     source_map: constr(min_length=1)
-    georef_run: constr(min_length=1)
+    georef_run: constr(min_length=1) | GeorefRunSummary
     extraction_method: Literal[
         "vector_pdf",
         "grid_georeferenced_raster",
@@ -569,6 +607,8 @@ class ZoneFeatureProperties(BaseModel):
     ]
     source_attribution: str | None
     area_sq_m: confloat(ge=0.0)
+    accuracy_m: float | None = None
+    derived: bool | None = True
     verification: Literal["unverified", "machine_checked", "human_verified", "rejected"]
     verified_by: str | None = None
     notes: str | None
@@ -961,6 +1001,25 @@ class JurisdictionConsolidated(BaseModel):
     unconsolidated: list[UnconsolidatedClauseRecord]
 
 
+class BoundsWgs84Item(RootModel[list[float]]):
+    root: list[float] = Field(..., max_length=2, min_length=2)
+
+
+class SheetOverlayConfig(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    image_url: constr(min_length=1)
+    bounds_wgs84: list[BoundsWgs84Item] = Field(..., max_length=4, min_length=4)
+    sheet: constr(min_length=1)
+    planning_district: constr(min_length=1)
+    rmse_m: confloat(ge=0.0)
+    loo_rmse_m: float | None = None
+    max_residual_m: float | None = None
+    road_median_offset_m: float | None = None
+    road_p90_offset_m: float | None = None
+
+
 class GeoLayerEntry(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -978,6 +1037,7 @@ class GeoLayerEntry(BaseModel):
     external_url: str | None
     feature_count: conint(ge=0) | None = None
     notes: str | None = None
+    sheet_overlay: SheetOverlayConfig | None = None
 
 
 class JurisdictionGeoLayers(BaseModel):

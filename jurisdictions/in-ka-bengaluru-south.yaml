@@ -17,7 +17,7 @@ aliases:
   - Uttarahalli
 visibility: public
 licence: CC BY 4.0
-release_version: "2.1.0"
+release_version: "2.2.0"
 country: IN
 state: KA
 building_types:
@@ -30,6 +30,7 @@ parents: []
 not_modelled:
   - National Building Code of India 2016 (copyrighted by BIS; listed as reference only)
   - Airports Authority of India NOCAS colour-coded zoning map (external aviation portal; reference only)
+  - "RMP 2015 Proposed Land Use sheets: 1 of 10 Planning Districts intersecting Bengaluru South (Planning District 2.10 Jayanagar, sheet 2.10 Jayanagar map (b)) has extracted land-use zones in Release 2.2.0; the remaining 20 sheets across the 10 intersecting Planning Districts (2.08 Koramangala, 2.09 Shanti Nagar, 2.10 Jayanagar map (a), 2.11 Banashankari, 3.01 Kengeri, 3.16 Varthur, 3.18 Begur, 3.19 Electronic City, 3.20 Bannerghatta, and 3.21 Anjanapura) are pending in PR 11."
 unread_documents:
   - title: "Revising the amendments in the regulations in BBMP revised Mahayojane 2015 (Kannada Compilation)"
     source_url: "https://web.archive.org/web/20250325225145id_/https://site.bbmp.gov.in/PDF/townplanning/KM_266_160102035827-pages-deleted_29102024.pdf"
@@ -554,6 +555,92 @@ documents:
     official_url: "https://data.opencity.in/dataset/bbmp-building-byelaws/resource/d37c7718-8c24-4da7-86a0-d19b974fb8a9/download/bscc-10125.pdf"
     mirror_urls: []
     source_url: "https://data.opencity.in/dataset/bbmp-building-byelaws/resource/d37c7718-8c24-4da7-86a0-d19b974fb8a9/download/bscc-10125.pdf"
+
+  - id: rmp2015-pd-index
+    title: "BDA Revised Master Plan 2015 — Planning Districts Index Map (47 Planning Districts)"
+    issuing_authority: "Bangalore Development Authority (BDA)"
+    doc_type: regulations
+    layer: planning
+    role: boundary
+    legal_status: in_force
+    acquisition_status: acquired
+    structured: false
+    notification_number: "No. UDD 540 BEMAASE 2004"
+    notified_date: "2007-06-25"
+    effective_from: "2007-06-25"
+    status_evidence:
+      url: "https://web.archive.org/web/20250224114910id_/https://site.bbmp.gov.in/revised%20masterplan%20(1).html"
+      quoted_line: "REVISED MASTER PLAN - 2015 Bangalore 47 Planning Districts ... 210 Jayanagar 211 Banashankari ... 318 Begur 319 Electronic City 320 Banerghatta 321 Anjanapura"
+      description: "Published as the official RMP 2015 47 Planning Districts Index Map by BDA and mirrored on BBMP Town Planning and OpenCity."
+    licence_or_terms: "Section 52(1)(q) Indian Copyright Act, 1957 (official statutory master plan index map)"
+    text_rights:
+      mode: full_text
+      reason: "Official BDA statutory master plan index map"
+    languages:
+      - en
+    official_url: "https://site.bbmp.gov.in/revised%20masterplan%20(1).html"
+    mirror_urls:
+      - "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PD-IndexMap.pdf"
+    source_url: "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PD-IndexMap.pdf"
+    retrieval:
+      fetched_at: "2026-11-23T00:00:00Z"
+      requested_url: "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PD-IndexMap.pdf"
+      final_url: "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PD-IndexMap.pdf"
+      http_status: 200
+      content_type: "application/pdf"
+      content_length: 1994640
+      response_headers:
+        etag: "\"169dc03dec653125b4f1ebde15feffc3\""
+        last_modified: "Tue, 19 May 2020 14:37:57 GMT"
+        server: "cloudflare"
+        date: "Tue, 24 Nov 2026 14:55:50 GMT"
+      sha256: "a545231e0a3a6298f070951eb0ee556369fdf680d638dc5c37825ed42391d91b"
+      archive_url: "http://web.archive.org/web/20221222112943/https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PD-IndexMap.pdf"
+      archive_failure_reason: null
+      fetched_by: "agent"
+
+  - id: rmp2015-plu-pd-210
+    title: "BDA Revised Master Plan 2015 — Proposed Land Use Map: Planning District 2.10 (Jayanagar, Maps a & b)"
+    issuing_authority: "Bangalore Development Authority (BDA)"
+    doc_type: regulations
+    layer: planning
+    role: regulation
+    legal_status: in_force
+    acquisition_status: acquired
+    structured: false
+    notification_number: "No. UDD 540 BEMAASE 2004"
+    notified_date: "2007-06-25"
+    effective_from: "2007-06-25"
+    status_evidence:
+      url: "https://web.archive.org/web/20250224114910id_/https://site.bbmp.gov.in/revised%20masterplan%20(1).html"
+      quoted_line: "BANGALORE Revised Master Plan 2015 Proposed Land Use Map 2.10 Jayanagar map (b) ... Scale: 1 : 5 000 Coordinate system: UTM zone 43N Reference ellipsoid: WGS 1984 Unit: meters"
+      description: "Listed on the official BBMP Revised Master Plan 2015 page under '2.10 map(a)-Jayanagar.pdf' and '2.10 map(b)-Jayanagar.pdf'."
+    licence_or_terms: "Section 52(1)(q) Indian Copyright Act, 1957 (official statutory master plan land-use map)"
+    text_rights:
+      mode: full_text
+      reason: "Official BDA statutory master plan land-use map"
+    languages:
+      - en
+    official_url: "https://site.bbmp.gov.in/documents/2.10%20map(b)-Jayanagar.pdf"
+    mirror_urls:
+      - "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_210-Jayanagar.pdf"
+    source_url: "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_210-Jayanagar.pdf"
+    retrieval:
+      fetched_at: "2026-11-23T00:00:00Z"
+      requested_url: "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_210-Jayanagar.pdf"
+      final_url: "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_210-Jayanagar.pdf"
+      http_status: 200
+      content_type: "application/pdf"
+      content_length: 8823501
+      response_headers:
+        etag: "\"677cee79484186f064243aaa70ad6735\""
+        last_modified: "Tue, 19 May 2020 14:39:57 GMT"
+        server: "cloudflare"
+        date: "Tue, 24 Nov 2026 14:55:53 GMT"
+      sha256: "9aa3cd4d1c7eea3e41cd19a4ce243618f69610bbefd582dafb94de379762b318"
+      archive_url: "http://web.archive.org/web/20221222113106/https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_210-Jayanagar.pdf"
+      archive_failure_reason: null
+      fetched_by: "agent"
 maps:
   boundaries:
     - id: corporation
@@ -640,4 +727,103 @@ maps:
       select:
         property: Corporation
         equals: South
-  zoning: []
+  planning_districts:
+    - id: planning_districts
+      title: "RMP 2015 Planning District 2.10 (Jayanagar) Outline"
+      source_url: "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PD-IndexMap.pdf"
+      document: rmp2015-pd-index
+      page: 1
+      district_code: "210"
+      district_name: "2.10 Jayanagar"
+      scale_m_per_pt: 113.0006
+      anchor_pdf_pt: [229.518, 319.426]
+      anchor_utm_pt: [779275.0, 1434401.8]
+      source_attribution: "Bangalore Development Authority (BDA) Revised Master Plan 2015 — 47 Planning Districts Index Map, clipped to Bengaluru South City Corporation boundary."
+  zoning:
+    - id: rmp2015-pd-210-b
+      kind: grid_georeferenced_raster
+      document: rmp2015-plu-pd-210
+      page: 2
+      planning_district: "2.10"
+      sheet: "2.10 Jayanagar map (b)"
+      legend_page: 2
+      source_url: "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_210-Jayanagar.pdf"
+      source_attribution: "Bangalore Development Authority (BDA) Revised Master Plan 2015 Proposed Land Use Map — Planning District 2.10 Jayanagar map (b) (1:5,000, UTM Zone 43N, WGS 1984)."
+      target_crs: "EPSG:32643"
+      grid_eastings: [780000, 781000, 782000, 783000, 784000]
+      grid_northings: [1431000, 1430000, 1429000, 1428000]
+      legend_palette:
+        - zone_code: R-MAIN
+          zone_label: "Residential (Main)"
+          rgbs:
+            - [255, 255, 153]
+            - [255, 255, 204]
+            - [255, 255, 224]
+            - [206, 206, 155]
+          min_area_sq_m: 2000
+        - zone_code: R-MIX
+          zone_label: "Residential (Mixed)"
+          rgbs:
+            - [255, 224, 38]
+            - [255, 239, 146]
+            - [206, 190, 97]
+          min_area_sq_m: 2000
+        - zone_code: C-BIZ
+          zone_label: "Commercial (Business)"
+          rgbs:
+            - [153, 204, 255]
+            - [102, 179, 255]
+            - [204, 229, 255]
+            - [155, 180, 206]
+            - [129, 168, 206]
+            - [178, 217, 255]
+          min_area_sq_m: 400
+        - zone_code: C-AXES
+          zone_label: "Commercial Axes"
+          rgbs:
+            - [0, 224, 255]
+            - [127, 239, 255]
+            - [78, 190, 206]
+          min_area_sq_m: 400
+        - zone_code: I-GEN
+          zone_label: "Industrial"
+          rgbs:
+            - [163, 102, 179]
+            - [209, 178, 217]
+            - [160, 129, 168]
+          min_area_sq_m: 1500
+        - zone_code: I-HITECH
+          zone_label: "High Tech"
+          rgbs:
+            - [191, 166, 255]
+            - [223, 210, 255]
+            - [174, 161, 206]
+          min_area_sq_m: 1500
+        - zone_code: PSP
+          zone_label: "Public and Semi-public"
+          rgbs:
+            - [224, 0, 0]
+            - [239, 127, 127]
+            - [190, 78, 78]
+          min_area_sq_m: 1500
+        - zone_code: G-PARK
+          zone_label: "Green (Parks and Open Spaces)"
+          rgbs:
+            - [163, 240, 36]
+            - [209, 247, 145]
+            - [160, 198, 96]
+          min_area_sq_m: 1500
+        - zone_code: G-LAKE
+          zone_label: "Lake / tank"
+          rgbs:
+            - [224, 240, 255]
+            - [239, 247, 255]
+          min_area_sq_m: 400
+        - zone_code: T-TRANS
+          zone_label: "Traffic and Transportation"
+          rgbs:
+            - [102, 102, 102]
+            - [129, 129, 129]
+            - [127, 127, 127]
+          min_area_sq_m: 2000
+          morph_open_px: 18

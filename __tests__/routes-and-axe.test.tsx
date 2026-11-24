@@ -266,7 +266,7 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     await assertNoAxeViolations(unstructContainer);
     uUnstruct();
 
-    // Map page renders official GBA Corporation (1), GBA Zones (2), and Wards (72), with Corporation and Wards checked by default and interactive ward inspector
+    // Map page renders official GBA Corporation (1), GBA Zones (2), Wards (72), Planning Districts (1), Land-Use Zones (868), and Sheet Overlay toggle + plain-words accuracy notice
     const mapUi = await JurisdictionMapPage({
       params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
     });
@@ -275,9 +275,17 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
       screen.getByText(/© OpenStreetMap contributors · Protomaps/i)
     ).toBeInTheDocument();
     expect(
-      screen.getByText(
-        /No master plan land-use zones are published yet; showing official corporation, GBA zone, and ward boundaries\./i
-      )
+      screen.getAllByText(
+        /Zones traced from the RMP 2015 Proposed Land Use sheet/i
+      ).length
+    ).toBeGreaterThan(0);
+    expect(
+      screen.getByRole("checkbox", {
+        name: /Sheet Overlay: 2\.10 Jayanagar map \(b\)/i,
+      })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText(/Sheet Opacity: 65%/i)
     ).toBeInTheDocument();
     const corpCheckbox = screen.getByRole("checkbox", {
       name: /Corporation \(1\)/i,
@@ -334,7 +342,7 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     }
   });
 
-  it("shows release 1.0.0 as withdrawn and release 2.1.0 as published on Data page, and renders honest About page", async () => {
+  it("shows release 1.0.0 as withdrawn and release 2.2.0 as published on Data page, and renders honest About page", async () => {
     const dataUi = await DataReleasesPage();
     const { container: dataContainer, unmount: uData } = render(dataUi);
 
@@ -343,7 +351,7 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
         /Withdrawn: Synthetic demonstration data, not the law of Bengaluru South/i
       )
     ).toBeInTheDocument();
-    expect(screen.getByText(/Latest: v2\.1\.0/i)).toBeInTheDocument();
+    expect(screen.getByText(/Latest: v2\.2\.0/i)).toBeInTheDocument();
     expect(
       screen.getAllByRole("link", { name: /Download Bundle/i }).length
     ).toBeGreaterThan(0);

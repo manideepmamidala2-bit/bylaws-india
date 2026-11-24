@@ -603,7 +603,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          "pattern": "^[a-z0-9]+([_-][a-z0-9]+)*$"
         },
         "title": {
           "type": "string"
@@ -617,6 +617,39 @@
         },
         "district_name_field": {
           "type": "string"
+        },
+        "document": {
+          "type": ["string", "null"]
+        },
+        "page": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 1
+        },
+        "district_code": {
+          "type": ["string", "null"]
+        },
+        "district_name": {
+          "type": ["string", "null"]
+        },
+        "scale_m_per_pt": {
+          "type": ["number", "null"]
+        },
+        "anchor_pdf_pt": {
+          "type": ["array", "null"],
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number"
+          }
+        },
+        "anchor_utm_pt": {
+          "type": ["array", "null"],
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number"
+          }
         },
         "source_attribution": {
           "type": "string"
@@ -669,6 +702,68 @@
         },
         "source_url": {
           "type": ["string", "null"]
+        },
+        "source_attribution": {
+          "type": ["string", "null"]
+        },
+        "target_crs": {
+          "type": "string",
+          "default": "EPSG:32643"
+        },
+        "grid_eastings": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "number"
+          }
+        },
+        "grid_northings": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "number"
+          }
+        },
+        "legend_palette": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "object",
+            "title": "TracedLegendPaletteEntry",
+            "additionalProperties": false,
+            "required": ["zone_code", "zone_label", "rgbs"],
+            "properties": {
+              "zone_code": {
+                "type": "string",
+                "minLength": 1
+              },
+              "zone_label": {
+                "type": "string",
+                "minLength": 1
+              },
+              "rgbs": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "items": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 255
+                  }
+                }
+              },
+              "min_area_sq_m": {
+                "type": "number",
+                "minimum": 0,
+                "default": 1500
+              },
+              "morph_open_px": {
+                "type": "integer",
+                "minimum": 0,
+                "default": 0
+              }
+            }
+          }
         }
       }
     },

@@ -75,3 +75,58 @@ All three official boundary layers are acquired via `bylaws acquire --jurisdicti
    - WFS layer: `gba_boundary:ward_369_final` (369 final delimitation wards, November 2025).
    - Declarative selector: `property: Corporation`, `equals: South`.
    - Extracted features: **72 Wards** (`ward_id` `1` through `72`), cross-checked against the 8 official Assembly-wise GBA Ward Delimitation & Population Notification PDFs on `gba.karnataka.gov.in/gba-corporations-delimitation-2025/` in [`data/reports/in-ka-bengaluru-south/map-verification.md`](../data/reports/in-ka-bengaluru-south/map-verification.md).
+
+---
+
+## 5. RMP 2015 Index Map & Planning Districts Intersecting Bengaluru South (PR 07)
+
+### 5.1 Index Map Provenance & PD 204 Mislabelling Note
+
+The BDA **Revised Master Plan 2015 (RMP 2015)** divides the Bangalore Metropolitan Area (`1,214.8 sq.km`) into **47 Planning Districts** across three concentric rings (`101`–`107`, `201`–`218`, and `301`–`322`):
+
+- **Official BBMP Listing Page**: `https://site.bbmp.gov.in/revised%20masterplan%20(1).html` (archived at `https://web.archive.org/web/20250224114910id_/https://site.bbmp.gov.in/revised%20masterplan%20(1).html`)
+- **RMP 2015 Planning Districts Index Map (`rmp2015-pd-index`)**: `https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PD-IndexMap.pdf` (`1,994,640` bytes, SHA-256 `a545231e0a3a6298f070951eb0ee556369fdf680d638dc5c37825ed42391d91b`, Wayback `http://web.archive.org/web/20221222112943/https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PD-IndexMap.pdf`)
+- **Mislabelling Note on Planning District `204` ("Benson Town", not "Jayanagar")**:
+  - Both the printed table on `Bengaluru-BDA-RMP-2015-PD-IndexMap.pdf` and OpenCity's index listing erroneously label Planning District `204` (`2.04`) as `"Jayanagar"`.
+  - Inspecting the actual BBMP/BDA Proposed Land Use map sheet (`documents/2.04-Benson Town.pdf` / `Bengaluru-BDA-RMP-2015-PLU_PD_204-Benson_Town.pdf`) and the geographic polygon on the Index Map confirms that **Planning District `204` (`2.04`) is Benson Town** (located in north-central Bengaluru between `203 Malleshwaram`, `104 Vasant Nagar`, `105 Shivaji Nagar`, and `216 Kaval Byrasandra`, completely outside Bengaluru South), whereas **Planning District `210` (`2.10`) is Jayanagar** (`documents/2.10 map(a)-Jayanagar.pdf` and `documents/2.10 map(b)-Jayanagar.pdf`).
+
+### 5.2 Complete List of RMP 2015 Planning Districts Intersecting Bengaluru South
+
+Intersecting the 47 vector planning district polygons from `rmp2015-pd-index` (calibrated to `EPSG:32643` UTM Zone 43N at `113.0006 m/pt`) with the official Bengaluru South City Corporation boundary (`boundary.geojson`, `152.28 sq.km`) identifies **10 intersecting Planning Districts** (comprising **21 individual map sheets** on `site.bbmp.gov.in` / **10 combined PDF files** on OpenCity):
+
+| PD Code | District Name (Verified from Map Sheet) | Official BBMP Sheet Path(s) (`site.bbmp.gov.in/documents/`) | OpenCity Mirror PDF (`data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/`) | Total PD Area (`sq.km`) | Area Inside Bengaluru South (`sq.km`) | Share of PD Inside South | Extraction Status |
+|---|---|---|---|---:|---:|---:|---|
+| **`2.08`** (`208`) | **Koramangala** *(combined sheet with `2.07 Unclassified`)* | `2.07 Unclassified & 2.08 Koramangala-map (a).pdf`, `map (b).pdf` | `Bengaluru-BDA-RMP-2015-PLU_PD_207-208-Unclassified-Koramangala.pdf` | 7.65 | 4.32 | 56.4% | Pending (**PR 11**) |
+| **`2.09`** (`209`) | **Shanti Nagar** | `2.09 map (a)-Shanti Nagar.pdf`, `2.09 map (b)-Shanti Nagar.pdf` | `Bengaluru-BDA-RMP-2015-PLU_PD_209-Shanti_Nagar.pdf` | 14.00 | 5.39 | 38.5% | Pending (**PR 11**) |
+| **`2.10`** (`210`) | **Jayanagar** | `2.10 map(a)-Jayanagar.pdf`, `2.10 map(b)-Jayanagar.pdf` | `Bengaluru-BDA-RMP-2015-PLU_PD_210-Jayanagar.pdf` | 13.48 | 8.74 | 64.8% | **Extracted in PR 07** (`2.10 map (b)`); `2.10 map (a)` in **PR 11** |
+| **`2.11`** (`211`) | **Banashankari** | `2.11 map(a)-Banashankari.pdf`, `2.11 map(b)-Banashankari.pdf` | `Bengaluru-BDA-RMP-2015-PLU_PD_211-Banashankari.pdf` | 18.51 | 2.66 | 14.4% | Pending (**PR 11**) |
+| **`3.01`** (`301`) | **Kengeri** | `3.01 map(a)`–`map(d)-Kengeri.pdf` (4 sheets) | `Bengaluru-BDA-RMP-2015-PLU_PD_301-Kengeri.pdf` | 126.16 | 4.15 | 3.3% | Pending (**PR 11**) |
+| **`3.16`** (`316`) | **Varthur** | `3.16 map(a)-Varthur.pdf`, `3.16 map(b)-Varthur.pdf` | `Bengaluru-BDA-RMP-2015-PLU_PD_316-Varthur.pdf` | 52.00 | 0.28 | 0.5% | Pending (**PR 11**) |
+| **`3.18`** (`318`) | **Begur** | `3.18 map(a)- Begur.pdf`, `3.18 map(b)- Begur.pdf` | `Bengaluru-BDA-RMP-2015-PLU_PD_318-Begur.pdf` | 73.30 | 50.44 | 68.8% | Pending (**PR 11**) |
+| **`3.19`** (`319`) | **Electronic City** | `3.19 -Electronic City.pdf` (1 sheet) | `Bengaluru-BDA-RMP-2015-PLU_PD_319-Electronic_City.pdf` | 36.61 | 1.89 | 5.2% | Pending (**PR 11**) |
+| **`3.20`** (`320`) | **Bannerghatta** | `3.20 map(a)`–`map(d)-Bannerghatta.pdf` (4 sheets) | `Bengaluru-BDA-RMP-2015-PLU_PD_320-Bannerghatta.pdf` | 117.38 | 6.65 | 5.7% | Pending (**PR 11**) |
+| **`3.21`** (`321`) | **Anjanapura** | `3.21 map(a)-Anjanapura.pdf`, `3.21 map(b)-Anjanapura.pdf` | `Bengaluru-BDA-RMP-2015-PLU_PD_321-Anjanapura.pdf` | 71.08 | 67.76 | 95.3% | Pending (**PR 11**) |
+| **Total** | **10 Intersecting Planning Districts** | **21 sheets** | **10 PDFs** | **530.17** | **152.28** | **100.0% of Corp** | **1 sheet in PR 07 · 20 sheets in PR 11** |
+
+---
+
+## 6. Candidate Sheet Inspection & Selection of `2.10 Jayanagar map (b)` (PR 07)
+
+### 6.1 Candidate Inspection Summary
+
+Five candidate Proposed Land Use PDFs inside Bengaluru South were inspected across vector/raster structure, printed coordinate grid readability, legend readability, and corporation overlap:
+
+| Candidate Sheet | Scale & Printed CRS | Vector vs. Raster Structure | Printed Grid Crosshairs (`+`) | Legend Readability | Map Frame Overlap with Bengaluru South |
+|---|---|---|---|---|---|
+| **`2.10 Jayanagar map (a)`** (`rmp2015-plu-pd-210` p. 1) | `1 : 5,000` · `UTM zone 43N, WGS 1984` | Hybrid: `3,719` vector curves + `844` vector lines (roads, boundaries, grid crosshairs) over `25` lossless 8-bit `Indexed` palette raster strips (`4276 x 123` px) | **20 exact vector `+` crosshairs** (`E 779000–783000`, `N 1431000–1434000`) | Readable (`ZONING CLASSIFICATION` + area table) | `24.9%` (northern half lies in Bengaluru Central) |
+| **`2.10 Jayanagar map (b)`** (`rmp2015-plu-pd-210` p. 2) — **CHOSEN** | `1 : 5,000` · `UTM zone 43N, WGS 1984` | Hybrid: `3,390` vector curves + `1,648` vector lines (roads, boundaries, grid crosshairs) over `26` lossless 8-bit/4-bit `Indexed` palette raster strips (`4276 x 123` px) | **20 exact vector `+` crosshairs** (`E 780000–784000`, `N 1428000–1431000`) | Readable (`ZONING CLASSIFICATION` + area table) | **`86.7%` of map frame (`~95%` of PD 2.10 south half)** |
+| **`2.11 Banashankari map (a)/(b)`** (`PD 211`) | `1 : 5,000` · `UTM zone 43N, WGS 1984` | Hybrid: vector roads/grid over `25` `Indexed` palette raster strips | `20` vector `+` crosshairs per page | Readable | `14.4%` of PD lies inside Bengaluru South (most lies in West) |
+| **`2.07 & 2.08 Koramangala map (a)/(b)`** (`PD 208`) | `1 : 5,000` · `UTM zone 43N, WGS 1984` | Hybrid: vector roads/grid over `28` `Indexed` palette raster strips | `20` vector `+` crosshairs per page | Readable | `56.4%` of PD 208 lies inside Bengaluru South |
+| **`3.18 Begur` / `3.21 Anjanapura`** (`PD 318`, `PD 321`) | `1 : 10,000` · `UTM zone 43N, WGS 1984` | Hybrid: vector roads/grid over `25`–`29` `Indexed` palette raster strips | `80`–`88` vector `+` crosshairs per page | Readable | `68.8%` (`3.18`) / `95.3%` (`3.21`), but `1:10,000` scale has half the linear resolution of `2.10` |
+
+### 6.2 Why `2.10 Jayanagar map (b)` (`rmp2015-plu-pd-210` Page 2) Was Selected
+
+1. **Highest `1 : 5,000` Coverage Inside Bengaluru South**: `86.7%` of the map frame (`~95%` of the coloured PD 2.10 area on `map (b)`) lies inside the Bengaluru South City Corporation boundary, covering Jayanagar 4th Block, 4th T Block, 5th–9th Blocks, Tilak Nagar, BTM Layout I & II Stage, JP Nagar I–III Phase, and Sarakki.
+2. **Vector-Exact Printed UTM 43N Grid (`RMSE = 0.0032 m`)**: All `20` printed `1,000 m` grid intersections (`5 Eastings: 780000..784000` $\times$ `4 Northings: 1428000..1431000`) are present as exact vector crosshair primitives in the PDF, yielding an affine fit with **`RMSE = 0.0032 m`** and **`Leave-One-Out (LOO) RMSE = 0.0038 m`** (well below the `≤ 10 m` target).
+3. **Lossless 8-Bit/4-Bit `Indexed` Palette Strips Below Vector Text**: Because BDA exported the land-use colour fills as lossless `Indexed` palette raster strips underneath the vector road network and text labels, reading the raw palette streams directly from the PDF avoids text/hatching occlusion while mapping 1-to-1 to the sheet's `ZONING CLASSIFICATION` legend swatches (`R-MAIN`, `R-MIX`, `C-BIZ`, `C-AXES`, `I-GEN`, `I-HITECH`, `PSP`, `G-PARK`, `G-LAKE`, `T-TRANS`).
+4. **Rich Independent Verification Features**: The sheet contains `654` vector road segments and `364` administrative boundary sample points for independent comparison against OpenStreetMap roads (`median offset = 8.02 m`, `90th-percentile offset = 21.11 m`) and official GBA ward boundaries (`median offset = 28.20 m`, `90th-percentile offset = 51.89 m`).

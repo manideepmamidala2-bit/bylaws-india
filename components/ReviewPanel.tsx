@@ -1,15 +1,34 @@
 "use client";
 
 import React, { useState } from "react";
-import type { GeoLayerEntry, ZoneFeature } from "@/lib/data";
+import type {
+  GenericFeatureCollection,
+  GeoLayerEntry,
+  ZoneFeature,
+} from "@/lib/data";
+import { ZoneMap } from "@/components/ZoneMap";
 
 interface ReviewPanelProps {
+  jurisdictionId?: string;
   zones: ZoneFeature[];
+  boundary?: GenericFeatureCollection | null;
+  gbaZones?: GenericFeatureCollection | null;
+  wards?: GenericFeatureCollection | null;
+  planningDistricts?: GenericFeatureCollection | null;
   geoLayers?: GeoLayerEntry[];
 }
 
-export function ReviewPanel({ zones, geoLayers = [] }: ReviewPanelProps) {
+export function ReviewPanel({
+  jurisdictionId = "",
+  zones,
+  boundary = null,
+  gbaZones = null,
+  wards = null,
+  planningDistricts = null,
+  geoLayers = [],
+}: ReviewPanelProps) {
   const [opacity, setOpacity] = useState(65);
+  const [selectedZoneCode, setSelectedZoneCode] = useState<string | null>(null);
   const [selectedZoneId, setSelectedZoneId] = useState<string | null>(
     zones[0]?.properties.zone_id ?? null
   );
@@ -65,6 +84,23 @@ export function ReviewPanel({ zones, geoLayers = [] }: ReviewPanelProps) {
         </div>
       </div>
 
+      <div className="border border-[#080909]">
+        <ZoneMap
+          jurisdictionId={jurisdictionId}
+          zones={displayZones}
+          selectedZoneCode={selectedZoneCode}
+          onSelectZone={setSelectedZoneCode}
+          boundary={boundary}
+          gbaZones={gbaZones}
+          wards={wards}
+          planningDistricts={planningDistricts}
+          geoLayers={geoLayers}
+          initialShowSheetOverlay={true}
+          sheetOverlayOpacity={opacity}
+          onChangeSheetOverlayOpacity={setOpacity}
+        />
+      </div>
+
       {geoLayers.length > 0 && (
         <div className="overflow-x-auto">
           <div className="dg-mono mb-2">Registered Geospatial Layers</div>
@@ -110,7 +146,7 @@ export function ReviewPanel({ zones, geoLayers = [] }: ReviewPanelProps) {
       ) : (
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <div className="max-h-[420px] divide-y divide-[#c8ccc0] overflow-y-auto border border-[#080909]">
-            {displayZones.map((zone) => {
+            {displayZones.slice(0, 60).map((zone) => {
               const props = zone.properties;
               const isSelected =
                 selectedFeature?.properties.zone_id === props.zone_id;
@@ -177,7 +213,9 @@ export function ReviewPanel({ zones, geoLayers = [] }: ReviewPanelProps) {
                 <div>
                   <dt className="dg-mono text-[10px]">Georef Run</dt>
                   <dd className="font-mono text-[#080909]">
-                    {selectedFeature.properties.georef_run}
+                    {typeof selectedFeature.properties.georef_run === "string"
+                      ? selectedFeature.properties.georef_run
+                      : `${selectedFeature.properties.georef_run.target_crs} (${selectedFeature.properties.georef_run.gcp_count} GCPs · RMSE ${selectedFeature.properties.georef_run.rmse_m} m · LOO ${selectedFeature.properties.georef_run.loo_rmse_m} m)`}
                   </dd>
                 </div>
               </dl>

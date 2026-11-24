@@ -926,5 +926,171 @@
     ],
     "official_url": "https://data.opencity.in/dataset/bbmp-building-byelaws/resource/d37c7718-8c24-4da7-86a0-d19b974fb8a9/download/bscc-10125.pdf",
     "mirror_urls": []
+  },
+  {
+    "schema_version": "1.3",
+    "doc_id": "rmp2015-pd-index",
+    "title": "BDA Revised Master Plan 2015 \u2014 Planning Districts Index Map (47 Planning Districts)",
+    "issuing_authority": "Bangalore Development Authority (BDA)",
+    "layer": "planning",
+    "role": "boundary",
+    "legal_status": "in_force",
+    "acquisition_status": "acquired",
+    "status_evidence": {
+      "url": "https://web.archive.org/web/20250224114910id_/https://site.bbmp.gov.in/revised%20masterplan%20(1).html",
+      "quoted_line": "REVISED MASTER PLAN - 2015 Bangalore 47 Planning Districts ... 210 Jayanagar 211 Banashankari ... 318 Begur 319 Electronic City 320 Banerghatta 321 Anjanapura",
+      "description": "Published as the official RMP 2015 47 Planning Districts Index Map by BDA and mirrored on BBMP Town Planning and OpenCity."
+    },
+    "licence_or_terms": "Section 52(1)(q) Indian Copyright Act, 1957 (official statutory master plan index map)",
+    "notified_date": "2007-06-25",
+    "effective_from": "2007-06-25",
+    "amends": [],
+    "supersedes": [],
+    "source_url": "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PD-IndexMap.pdf",
+    "retrieved_at": "2026-11-23T00:00:00Z",
+    "sha256": "a545231e0a3a6298f070951eb0ee556369fdf680d638dc5c37825ed42391d91b",
+    "bytes": 1994640,
+    "page_count": 1,
+    "is_scanned": false,
+    "retrieval": {
+      "fetched_at": "2026-11-23T00:00:00Z",
+      "requested_url": "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PD-IndexMap.pdf",
+      "final_url": "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PD-IndexMap.pdf",
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "content_length": 1994640,
+      "response_headers": {
+        "etag": "\"169dc03dec653125b4f1ebde15feffc3\"",
+        "last_modified": "Tue, 19 May 2020 14:37:57 GMT",
+        "server": "cloudflare",
+        "date": "Tue, 24 Nov 2026 14:55:50 GMT"
+      },
+      "sha256": "a545231e0a3a6298f070951eb0ee556369fdf680d638dc5c37825ed42391d91b",
+      "archive_url": "http://web.archive.org/web/20221222112943/https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PD-IndexMap.pdf",
+      "archive_failure_reason": null,
+      "fetched_by": "agent"
+    },
+    "doc_type": "regulations",
+    "notification_number": "No. UDD 540 BEMAASE 2004",
+    "text_rights": {
+      "mode": "full_text",
+      "reason": "Official BDA statutory master plan index map"
+    },
+    "languages": [
+      "en"
+    ],
+    "official_url": "https://site.bbmp.gov.in/revised%20masterplan%20(1).html",
+    "mirror_urls": [
+      "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PD-IndexMap.pdf"
+    ],
+    "copies": [
+      {
+        "url": "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PD-IndexMap.pdf",
+        "path": "data/raw/in-ka-bengaluru-south/rmp2015-pd-index.pdf",
+        "sha256": "a545231e0a3a6298f070951eb0ee556369fdf680d638dc5c37825ed42391d91b",
+        "retrieved_at": "2026-11-23T00:00:00Z",
+        "retrieval": {
+          "fetched_at": "2026-11-23T00:00:00Z",
+          "requested_url": "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PD-IndexMap.pdf",
+          "final_url": "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PD-IndexMap.pdf",
+          "http_status": 200,
+          "content_type": "application/pdf",
+          "content_length": 1994640,
+          "response_headers": {
+            "etag": "\"169dc03dec653125b4f1ebde15feffc3\"",
+            "last_modified": "Tue, 19 May 2020 14:37:57 GMT",
+            "server": "cloudflare",
+            "date": "Tue, 24 Nov 2026 14:55:50 GMT"
+          },
+          "sha256": "a545231e0a3a6298f070951eb0ee556369fdf680d638dc5c37825ed42391d91b",
+          "archive_url": "http://web.archive.org/web/20221222112943/https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PD-IndexMap.pdf",
+          "archive_failure_reason": null,
+          "fetched_by": "agent"
+        }
+      }
+    ]
+  },
+  {
+    "schema_version": "1.3",
+    "doc_id": "rmp2015-plu-pd-210",
+    "title": "BDA Revised Master Plan 2015 \u2014 Proposed Land Use Map: Planning District 2.10 (Jayanagar, Maps a & b)",
+    "issuing_authority": "Bangalore Development Authority (BDA)",
+    "layer": "planning",
+    "role": "regulation",
+    "legal_status": "in_force",
+    "acquisition_status": "acquired",
+    "status_evidence": {
+      "url": "https://web.archive.org/web/20250224114910id_/https://site.bbmp.gov.in/revised%20masterplan%20(1).html",
+      "quoted_line": "BANGALORE Revised Master Plan 2015 Proposed Land Use Map 2.10 Jayanagar map (b) ... Scale: 1 : 5 000 Coordinate system: UTM zone 43N Reference ellipsoid: WGS 1984 Unit: meters",
+      "description": "Listed on the official BBMP Revised Master Plan 2015 page under '2.10 map(a)-Jayanagar.pdf' and '2.10 map(b)-Jayanagar.pdf'."
+    },
+    "licence_or_terms": "Section 52(1)(q) Indian Copyright Act, 1957 (official statutory master plan land-use map)",
+    "notified_date": "2007-06-25",
+    "effective_from": "2007-06-25",
+    "amends": [],
+    "supersedes": [],
+    "source_url": "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_210-Jayanagar.pdf",
+    "retrieved_at": "2026-11-23T00:00:00Z",
+    "sha256": "9aa3cd4d1c7eea3e41cd19a4ce243618f69610bbefd582dafb94de379762b318",
+    "bytes": 8823501,
+    "page_count": 2,
+    "is_scanned": false,
+    "retrieval": {
+      "fetched_at": "2026-11-23T00:00:00Z",
+      "requested_url": "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_210-Jayanagar.pdf",
+      "final_url": "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_210-Jayanagar.pdf",
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "content_length": 8823501,
+      "response_headers": {
+        "etag": "\"677cee79484186f064243aaa70ad6735\"",
+        "last_modified": "Tue, 19 May 2020 14:39:57 GMT",
+        "server": "cloudflare",
+        "date": "Tue, 24 Nov 2026 14:55:53 GMT"
+      },
+      "sha256": "9aa3cd4d1c7eea3e41cd19a4ce243618f69610bbefd582dafb94de379762b318",
+      "archive_url": "http://web.archive.org/web/20221222113106/https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_210-Jayanagar.pdf",
+      "archive_failure_reason": null,
+      "fetched_by": "agent"
+    },
+    "doc_type": "regulations",
+    "notification_number": "No. UDD 540 BEMAASE 2004",
+    "text_rights": {
+      "mode": "full_text",
+      "reason": "Official BDA statutory master plan land-use map"
+    },
+    "languages": [
+      "en"
+    ],
+    "official_url": "https://site.bbmp.gov.in/documents/2.10%20map(b)-Jayanagar.pdf",
+    "mirror_urls": [
+      "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_210-Jayanagar.pdf"
+    ],
+    "copies": [
+      {
+        "url": "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_210-Jayanagar.pdf",
+        "path": "data/raw/in-ka-bengaluru-south/rmp2015-plu-pd-210.pdf",
+        "sha256": "9aa3cd4d1c7eea3e41cd19a4ce243618f69610bbefd582dafb94de379762b318",
+        "retrieved_at": "2026-11-23T00:00:00Z",
+        "retrieval": {
+          "fetched_at": "2026-11-23T00:00:00Z",
+          "requested_url": "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_210-Jayanagar.pdf",
+          "final_url": "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_210-Jayanagar.pdf",
+          "http_status": 200,
+          "content_type": "application/pdf",
+          "content_length": 8823501,
+          "response_headers": {
+            "etag": "\"677cee79484186f064243aaa70ad6735\"",
+            "last_modified": "Tue, 19 May 2020 14:39:57 GMT",
+            "server": "cloudflare",
+            "date": "Tue, 24 Nov 2026 14:55:53 GMT"
+          },
+          "sha256": "9aa3cd4d1c7eea3e41cd19a4ce243618f69610bbefd582dafb94de379762b318",
+          "archive_url": "http://web.archive.org/web/20221222113106/https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_210-Jayanagar.pdf",
+          "archive_failure_reason": null,
+          "fetched_by": "agent"
+        }
+      }
+    ]
   }
 ]

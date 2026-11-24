@@ -1,15 +1,15 @@
 # Map & Geospatial Verification Report — `in-ka-bengaluru-south` (Bengaluru South City Corporation)
 
-**Step**: PR 06 / Plan v2.0 §5.C1–C4 · **Verification Cap**: `machine_checked` (Rule R10)
+**Step**: PR 06–07 / Plan v2.0 §5.C1–C4 · **Verification Cap**: `machine_checked` (Rule R10)
 
 ## 1. Coverage & Coordinate Reference System Summary
 
 - **Corporation Boundary Area (`boundary.geojson`)**: 152.28 sq.km (Bounds `EPSG:4326`: `[77.489302, 12.833491, 77.702887, 12.951664]`; Geometry: Repaired via `make_valid` (Ring Self-intersection[77.672328 12.88465]))
 - **GBA Zones Within Corporation (`gba-zones.geojson`)**: 2
 - **Official Wards Within Corporation (`wards.geojson`)**: 72 (61 valid in source, 11 repaired via `shapely.make_valid`)
-- **Intersecting Planning Districts (`planning-districts.geojson`)**: 0
-- **Active Master Plan Zone Polygons (`zones.geojson`)**: 0
-- **Zoned Area Coverage Within Corporation**: **0.0%**
+- **Intersecting Planning Districts (`planning-districts.geojson`)**: 1
+- **Active Master Plan Zone Polygons (`zones.geojson`)**: 868
+- **Zoned Area Coverage Within Corporation**: **5.0%**
 - **Derived Overlay Features (`overlays.geojson`)**: 0
 
 ## 2. Official GBA Zones (`gba-zones.geojson`)
@@ -99,19 +99,63 @@
 | `71` | Agara | ಅಗರ | Zone2 (Bommanahalli) | 175 - Bommanahalli | 18836.0 | 1.86 sq.km | Valid (`is_valid=True`) |
 | `72` | HSR Layout | ಎಚ್‌ಎಸ್‌ಆರ್ ಲೇಔಟ್ | Zone2 (Bommanahalli) | 175 - Bommanahalli | 18787.0 | 2.67 sq.km | Valid (`is_valid=True`) |
 
-## 4. Per-Planning-District / Sheet Verification
+## 4. Per-Planning-District / Sheet Verification & Printed-Grid Georeferencing
 
 | Planning District | Source Sheet | Extraction & CRS Method | Polygons | Zone Codes Present | Clipped Area | Status |
 |---|---|---|---|---|---|---|
-| — | — | — | 0 | — | 0.00 sq.km | — |
+| `2.10` | `2.10 Jayanagar map (b)` | `grid_georeferenced_raster` (UTM 43N `EPSG:32643` -> `EPSG:4326`) | 868 | `C-AXES, C-BIZ, G-LAKE, G-PARK, I-GEN, I-HITECH, PSP, R-MAIN, R-MIX, T-TRANS` | 7.65 sq.km | PASS (`machine_checked`) |
+
+### Sheet `2.10 Jayanagar map (b)` (Planning District `2.10`)
+
+- **Target CRS**: `EPSG:32643` (UTM Zone 43N, WGS 1984, reprojected to `EPSG:4326`)
+- **Printed Grid Control Points (`+`)**: `20`
+- **Affine Fit RMSE**: **`0.0032 m`** (Target `<= 10.0 m`: `PASS`)
+- **Leave-One-Out (LOO) Cross-Validation RMSE**: **`0.0038 m`**
+- **Maximum Grid Residual**: **`0.0046 m`**
+- **Independent Check 1 — OpenStreetMap Roads (`basemap.pmtiles`)**: `654` vector road segments compared; **Median offset: `8.02 m`**, **90th-percentile (`p90`) offset: `21.11 m`**, Mean offset: `10.36 m` *(Note: sheet draws road curb/ROW edges while OpenStreetMap draws road centrelines)*.
+- **Independent Check 2 — Official GBA Ward Boundaries (`wards.geojson`)**: `364` boundary sample points compared along shared arterial corridors; **Median offset: `28.2 m`**, **90th-percentile (`p90`) offset: `51.9 m`**.
+- **Rendered Sheet Image Overlay**: `/data/in-ka-bengaluru-south/sheets/rmp2015-pd-210-b.png` (WGS 84 corners: `[[77.572798, 12.938434], [77.623007, 12.937934], [77.622634, 12.902208], [77.572432, 12.902707]]`)
+
+| Grid ID | PDF X (pt) | PDF Y (pt) | Printed Easting (m) | Printed Northing (m) | Residual (m) | Leave-One-Out Error (m) |
+|---|---:|---:|---:|---:|---:|---:|
+| `grid_780000_1431000` | 551.679 | 487.389 | 780000.0 | 1431000.0 | 0.0038 | 0.0049 |
+| `grid_781000_1431000` | 1118.283 | 487.389 | 781000.0 | 1431000.0 | 0.0037 | 0.0044 |
+| `grid_782000_1431000` | 1684.891 | 487.389 | 782000.0 | 1431000.0 | 0.0022 | 0.0026 |
+| `grid_783000_1431000` | 2251.500 | 487.389 | 783000.0 | 1431000.0 | 0.0007 | 0.0008 |
+| `grid_784000_1431000` | 2818.108 | 487.389 | 784000.0 | 1431000.0 | 0.0019 | 0.0025 |
+| `grid_780000_1430000` | 551.679 | 1054.012 | 780000.0 | 1430000.0 | 0.0044 | 0.0052 |
+| `grid_781000_1430000` | 1118.283 | 1054.012 | 781000.0 | 1430000.0 | 0.0043 | 0.0047 |
+| `grid_782000_1430000` | 1684.891 | 1054.012 | 782000.0 | 1430000.0 | 0.0031 | 0.0033 |
+| `grid_783000_1430000` | 2251.500 | 1054.012 | 783000.0 | 1430000.0 | 0.0023 | 0.0025 |
+| `grid_784000_1430000` | 2818.108 | 1054.012 | 784000.0 | 1430000.0 | 0.0029 | 0.0034 |
+| `grid_780000_1429000` | 551.679 | 1620.638 | 780000.0 | 1429000.0 | 0.0046 | 0.0055 |
+| `grid_781000_1429000` | 1118.283 | 1620.638 | 781000.0 | 1429000.0 | 0.0045 | 0.0050 |
+| `grid_782000_1429000` | 1684.891 | 1620.638 | 782000.0 | 1429000.0 | 0.0035 | 0.0037 |
+| `grid_783000_1429000` | 2251.500 | 1620.638 | 783000.0 | 1429000.0 | 0.0027 | 0.0030 |
+| `grid_784000_1429000` | 2818.108 | 1620.638 | 784000.0 | 1429000.0 | 0.0033 | 0.0039 |
+| `grid_780000_1428000` | 551.679 | 2187.260 | 780000.0 | 1428000.0 | 0.0039 | 0.0051 |
+| `grid_781000_1428000` | 1118.283 | 2187.260 | 781000.0 | 1428000.0 | 0.0038 | 0.0045 |
+| `grid_782000_1428000` | 1684.891 | 2187.260 | 782000.0 | 1428000.0 | 0.0024 | 0.0028 |
+| `grid_783000_1428000` | 2251.500 | 2187.260 | 783000.0 | 1428000.0 | 0.0011 | 0.0013 |
+| `grid_784000_1428000` | 2818.108 | 2187.260 | 784000.0 | 1428000.0 | 0.0021 | 0.0027 |
 
 ## 5. Land-Use Zone Distribution (`zones.geojson`)
 
 | Zone Code | Total Clipped Area | Share of Zoned Area |
 |---|---|---|
-| — | 0.00 sq.km | 0.0% |
+| `C-AXES` | 0.09 sq.km | 1.2% |
+| `C-BIZ` | 0.03 sq.km | 0.4% |
+| `G-LAKE` | 0.03 sq.km | 0.4% |
+| `G-PARK` | 0.31 sq.km | 4.1% |
+| `I-GEN` | 0.10 sq.km | 1.3% |
+| `I-HITECH` | 0.11 sq.km | 1.4% |
+| `PSP` | 0.41 sq.km | 5.3% |
+| `R-MAIN` | 5.94 sq.km | 77.6% |
+| `R-MIX` | 0.64 sq.km | 8.3% |
+| `T-TRANS` | 0.00 sq.km | 0.0% |
 
 ## 6. Existing Land Use Cross-Check & Overlay Notes
 
 - **Existing Land Use Cross-Check (Plan v2.0 §5.C3)**: Master plan zones reflect statutory *proposed/permissible* zoning and are never altered to match existing land use.
+- **`planning_districts`**: Bangalore Development Authority (BDA) Revised Master Plan 2015 — 47 Planning Districts Index Map, clipped to Bengaluru South City Corporation boundary.
 - No additional overlay layers configured.

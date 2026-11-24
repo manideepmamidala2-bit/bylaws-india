@@ -217,6 +217,21 @@ export interface PlanningDistrictMapConfig {
   source_url: string;
   district_code_field?: string;
   district_name_field?: string;
+  document?: string | null;
+  page?: number;
+  district_code?: string | null;
+  district_name?: string | null;
+  scale_m_per_pt?: number | null;
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  anchor_pdf_pt?: [number, number] | null;
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  anchor_utm_pt?: [number, number] | null;
   source_attribution?: string;
 }
 
@@ -229,6 +244,22 @@ export interface TracedZoningMapConfig {
   sheet?: string | null;
   legend_page: number | null;
   source_url?: string | null;
+  source_attribution?: string | null;
+  target_crs?: string;
+  grid_eastings?: number[] | null;
+  grid_northings?: number[] | null;
+  legend_palette?: TracedLegendPaletteEntry[] | null;
+}
+
+export interface TracedLegendPaletteEntry {
+  zone_code: string;
+  zone_label: string;
+  /**
+   * @minItems 1
+   */
+  rgbs: [[number, number, number], ...[number, number, number][]];
+  min_area_sq_m?: number;
+  morph_open_px?: number;
 }
 
 export interface ImportedZoningMapConfig {
@@ -585,7 +616,7 @@ export interface ZoneFeatureProperties {
   planning_district?: string | null;
   sheet?: string | null;
   source_map: string;
-  georef_run: string;
+  georef_run: string | GeorefRunSummary;
   extraction_method:
     | "vector_pdf"
     | "grid_georeferenced_raster"
@@ -596,9 +627,19 @@ export interface ZoneFeatureProperties {
     | "manual";
   source_attribution: string | null;
   area_sq_m: number;
+  accuracy_m?: number | null;
+  derived?: boolean;
   verification: "unverified" | "machine_checked" | "human_verified" | "rejected";
   verified_by?: string | null;
   notes: string | null;
+}
+
+export interface GeorefRunSummary {
+  target_crs: string;
+  gcp_count: number;
+  rmse_m: number;
+  loo_rmse_m: number;
+  max_residual_m: number;
 }
 
 /**
@@ -938,6 +979,23 @@ export interface GeoLayerEntry {
   external_url: string | null;
   feature_count?: number | null;
   notes?: string | null;
+  sheet_overlay?: SheetOverlayConfig | null;
+}
+
+export interface SheetOverlayConfig {
+  image_url: string;
+  /**
+   * @minItems 4
+   * @maxItems 4
+   */
+  bounds_wgs84: [[number, number], [number, number], [number, number], [number, number]];
+  sheet: string;
+  planning_district: string;
+  rmse_m: number;
+  loo_rmse_m?: number | null;
+  max_residual_m?: number | null;
+  road_median_offset_m?: number | null;
+  road_p90_offset_m?: number | null;
 }
 
 /**

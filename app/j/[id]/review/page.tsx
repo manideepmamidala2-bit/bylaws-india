@@ -20,7 +20,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
     notFound();
   }
 
-  const { jurisdiction, release, zones, geoLayers } = dataset;
+  const { jurisdiction, release, zones, boundary, gbaZones, wards, planningDistricts, geoLayers } = dataset;
 
   if (!release) {
     return (
@@ -81,7 +81,12 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
         </header>
 
         <ReviewPanel
+          jurisdictionId={jurisdiction.id}
           zones={zones.features}
+          boundary={boundary}
+          gbaZones={gbaZones}
+          wards={wards}
+          planningDistricts={planningDistricts}
           geoLayers={geoLayers?.layers ?? []}
         />
       </main>

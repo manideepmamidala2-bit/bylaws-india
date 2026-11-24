@@ -25,6 +25,9 @@ interface ZoneMapProps {
   geoLayers?: GeoLayerEntry[];
   showDrafts?: boolean;
   onToggleDrafts?: (next: boolean) => void;
+  initialShowSheetOverlay?: boolean;
+  sheetOverlayOpacity?: number;
+  onChangeSheetOverlayOpacity?: (nextOpacity: number) => void;
 }
 
 interface Bounds {
@@ -118,6 +121,9 @@ export function ZoneMap({
   geoLayers = [],
   showDrafts = false,
   onToggleDrafts,
+  initialShowSheetOverlay = false,
+  sheetOverlayOpacity,
+  onChangeSheetOverlayOpacity,
 }: ZoneMapProps) {
   // On by default: corporation and wards (06-real-map-foundation.md §3)
   const [showBoundaryLayer, setShowBoundaryLayer] = useState(true);
@@ -127,6 +133,23 @@ export function ZoneMap({
     useState(true);
   const [showZonesLayer, setShowZonesLayer] = useState(true);
   const [showOverlaysLayer, setShowOverlaysLayer] = useState(true);
+  const [showSheetOverlay, setShowSheetOverlay] = useState<boolean>(() => {
+    if (initialShowSheetOverlay) return true;
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("overlay") === "1" || params.get("overlay") === "true") {
+        return true;
+      }
+    }
+    return false;
+  });
+  const [internalOverlayOpacity, setInternalOverlayOpacity] = useState(65);
+  const effectiveOverlayOpacity =
+    sheetOverlayOpacity ?? internalOverlayOpacity;
+  const handleOverlayOpacityChange = (val: number) => {
+    setInternalOverlayOpacity(val);
+    onChangeSheetOverlayOpacity?.(val);
+  };
 
   const sortedWards = useMemo(() => {
     const feats = [...(wards?.features ?? [])];
@@ -183,6 +206,16 @@ export function ZoneMap({
     (wardsLayerMeta?.source?.startsWith("http")
       ? wardsLayerMeta.source
       : "https://gba.karnataka.gov.in/gba-corporations-delimitation-2025/index.html");
+
+  const zonesLayerMeta = useMemo(
+    () =>
+      geoLayers.find(
+        (l) =>
+          l.layer_id === "landuse_zones" || l.layer_id === "master-plan-zones"
+      ),
+    [geoLayers]
+  );
+  const sheetOverlay = zonesLayerMeta?.sheet_overlay ?? null;
 
   const legendItems = useMemo(() => {
     const byCode = new Map<
@@ -338,6 +371,55 @@ export function ZoneMap({
           );
         }
 
+        if (planningDistricts && planningDistricts.features.length > 0) {
+          map.addSource("planning-districts", {
+            type: "geojson",
+            data: planningDistricts as unknown as GeoJSON.FeatureCollection,
+          });
+          map.addLayer({
+            id: "planning-districts-line",
+            type: "line",
+            source: "planning-districts",
+            layout: {
+              visibility: showPlanningDistrictsLayer ? "visible" : "none",
+            },
+            paint: {
+              "line-color": "#080909",
+              "line-dasharray": [6, 3],
+              "line-width": 2.0,
+            },
+          });
+        }
+
+        if (sheetOverlay && sheetOverlay.bounds_wgs84?.length === 4) {
+          const imgUrl =
+            sheetOverlay.image_url.startsWith("http://") ||
+            sheetOverlay.image_url.startsWith("https://")
+              ? sheetOverlay.image_url
+              : `${window.location.origin}${sheetOverlay.image_url}`;
+          map.addSource("rmp-sheet-overlay", {
+            type: "image",
+            url: imgUrl,
+            coordinates: sheetOverlay.bounds_wgs84 as unknown as [
+              [number, number],
+              [number, number],
+              [number, number],
+              [number, number]
+            ],
+          });
+          map.addLayer({
+            id: "rmp-sheet-overlay-layer",
+            type: "raster",
+            source: "rmp-sheet-overlay",
+            layout: {
+              visibility: showSheetOverlay ? "visible" : "none",
+            },
+            paint: {
+              "raster-opacity": effectiveOverlayOpacity / 100,
+            },
+          });
+        }
+
         if (activeZones.length > 0) {
           map.addSource("master-plan-zones", {
             type: "geojson",
@@ -354,8 +436,32 @@ export function ZoneMap({
               visibility: showZonesLayer ? "visible" : "none",
             },
             paint: {
-              "fill-color": "#efeee8",
-              "fill-opacity": 0.5,
+              "fill-color": [
+                "match",
+                ["get", "zone_code"],
+                "R-MAIN",
+                "#faf57a",
+                "R-MIX",
+                "#ffd600",
+                "C-BIZ",
+                "#99ccff",
+                "C-AXES",
+                "#1ed2f5",
+                "I-GEN",
+                "#8c33ff",
+                "I-HITECH",
+                "#bfa6ff",
+                "PSP",
+                "#e01b1b",
+                "G-PARK",
+                "#a7f030",
+                "G-LAKE",
+                "#ccffff",
+                "T-TRANS",
+                "#4d4d4d",
+                "#efeee8",
+              ],
+              "fill-opacity": 0.48,
             },
           });
           map.addLayer({
@@ -367,7 +473,7 @@ export function ZoneMap({
             },
             paint: {
               "line-color": "#080909",
-              "line-width": 1.5,
+              "line-width": 1.0,
             },
           });
 
@@ -405,7 +511,7 @@ export function ZoneMap({
     wards,
   ]);
 
-  // Synchronize layer visibility toggles with MapLibre instance
+  // Synchronize layer visibility toggles and sheet overlay opacity with MapLibre instance
   useEffect(() => {
     const map = mapInstanceRef.current;
     if (!map || !map.isStyleLoaded()) return;
@@ -418,9 +524,26 @@ export function ZoneMap({
     syncVis("gba-zones-line", showGbaZonesLayer);
     syncVis("gba-wards-fill", showWardsLayer);
     syncVis("gba-wards-line", showWardsLayer);
+    syncVis("planning-districts-line", showPlanningDistrictsLayer);
+    syncVis("rmp-sheet-overlay-layer", showSheetOverlay);
     syncVis("master-plan-zones-fill", showZonesLayer);
     syncVis("master-plan-zones-line", showZonesLayer);
-  }, [showBoundaryLayer, showGbaZonesLayer, showWardsLayer, showZonesLayer]);
+    if (map.getLayer("rmp-sheet-overlay-layer")) {
+      map.setPaintProperty(
+        "rmp-sheet-overlay-layer",
+        "raster-opacity",
+        effectiveOverlayOpacity / 100
+      );
+    }
+  }, [
+    effectiveOverlayOpacity,
+    showBoundaryLayer,
+    showGbaZonesLayer,
+    showPlanningDistrictsLayer,
+    showSheetOverlay,
+    showWardsLayer,
+    showZonesLayer,
+  ]);
 
   const handleZoomIn = () => {
     mapInstanceRef.current?.zoomIn();
@@ -562,8 +685,40 @@ export function ZoneMap({
               onChange={(e) => setShowZonesLayer(e.target.checked)}
               className="h-3 w-3 accent-[#080909]"
             />
-            <span>Master Plan Zones ({activeZones.length})</span>
+            <span>Land-Use Zones ({activeZones.length})</span>
           </label>
+        )}
+        {sheetOverlay && (
+          <>
+            <label className="flex cursor-pointer items-center gap-1.5">
+              <input
+                type="checkbox"
+                checked={showSheetOverlay}
+                onChange={(e) => setShowSheetOverlay(e.target.checked)}
+                className="h-3 w-3 accent-[#080909]"
+              />
+              <span>Sheet Overlay: {sheetOverlay.sheet}</span>
+            </label>
+            <div className="flex items-center gap-2 border-l border-[#c8ccc0] pl-3">
+              <label
+                htmlFor="map-sheet-opacity"
+                className="text-[10px] text-[#080909]"
+              >
+                Sheet Opacity: {effectiveOverlayOpacity}%
+              </label>
+              <input
+                id="map-sheet-opacity"
+                type="range"
+                min={0}
+                max={100}
+                value={effectiveOverlayOpacity}
+                onChange={(e) =>
+                  handleOverlayOpacityChange(Number(e.target.value))
+                }
+                className="w-24 accent-[#080909]"
+              />
+            </div>
+          </>
         )}
         {overlays && overlays.features.length > 0 && (
           <label className="flex cursor-pointer items-center gap-1.5">
@@ -595,6 +750,33 @@ export function ZoneMap({
           <span>PMTiles v3 · dg2n Monochrome Basemap</span>
         </div>
       </div>
+
+      {/* Plain accuracy notice when a georeferenced land-use sheet is published (07-one-land-use-sheet.md §5) */}
+      {sheetOverlay && (
+        <p
+          role="status"
+          className="dg-serif mt-3 border border-[#080909] bg-[#efeee8] px-3 py-2 text-sm text-[#171917]"
+        >
+          Zones traced from the RMP 2015 Proposed Land Use sheet{" "}
+          <span className="font-semibold">{sheetOverlay.sheet}</span> (Planning
+          District {sheetOverlay.planning_district}), placed using the
+          sheet&apos;s printed UTM Zone 43N grid; measured placement error about{" "}
+          <span className="font-mono">
+            {Math.max(
+              1,
+              Math.round(
+                sheetOverlay.road_median_offset_m ?? sheetOverlay.rmse_m
+              )
+            )}{" "}
+            m
+          </span>{" "}
+          (printed-grid affine RMSE{" "}
+          <span className="font-mono">
+            {Number(sheetOverlay.rmse_m).toFixed(3)} m
+          </span>
+          ). Derived by this project, not an official publication.
+        </p>
+      )}
 
       {/* Plain line when no land-use zones are published yet (06-real-map-foundation.md §3) */}
       {activeZones.length === 0 && (

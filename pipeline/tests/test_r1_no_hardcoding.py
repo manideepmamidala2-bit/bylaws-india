@@ -81,6 +81,8 @@ GENERIC_CONFIG_VALUES: frozenset[str] = frozenset(
         "corporation",
         "gba_zones",
         "wards",
+        "planning_districts",
+        "landuse_zones",
         "official_boundary",
         "master_plan_zone",
         "derived_overlay",
