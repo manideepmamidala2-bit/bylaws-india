@@ -9,7 +9,7 @@
 | `fixture-base-2020` | `municipal` | `regulations` | 2 | Digital text layer | `en` | 21 blocks, 1 table(s); e.g. `Synthetic Municipal Building Regulations 2020` |
 | `fixture-amend-2024` | `municipal` | `amendment` | 1 | Digital text layer | `en` | 8 blocks, 0 table(s); e.g. `Synthetic Municipal Building (Amendment) Regulations 2024` |
 | `fixture-draft-2026` | `planning` | `regulations` | 1 | Digital text layer | `en` | 3 blocks, 0 table(s); e.g. `DRAFT -- Synthetic Zoning Revisions 2026` |
-| `fixture-map-atlas` | `planning` | `map` | — | `reference_only` | `en` | Reference metadata + cited provisions only (Rule R13) |
+| `fixture-map-atlas` | `planning` | `map` | 1 | Digital text layer | `en` | 4 blocks, 0 table(s); e.g. `Synthetic Planning District 01 -- Land Use Map` |
 
 ## 2. Structure Rules Derived from Reconnaissance (for Step B5)
 

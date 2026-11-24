@@ -63,20 +63,20 @@
 ## Acceptance
 
 ### Functional Completeness
-- [ ] A-001 R1: `data/reports/in-ka-bengaluru-south/source-discovery.md` logs the PR 08 re-search for all Building Bye-laws 2003 amendments (including `bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx`, the 04.03.2026 / 01.04.2026 draft, and the 14.05.2026 final notification); every acquired instrument has a complete R15 `retrieval` record and R17 `status_evidence`, and unobtainable notifications are declared in `unobtainable_documents` (`bylaws check-provenance` exits `0`).
-- [ ] A-002 R2: All acquired English instruments in the Building Bye-laws chain (`bbl-2003`, `ka-model-bbl-2017`, and any acquired `bbl-2003` amending instruments) are structured (`structured: true`) with valid Schema 1.3 `<doc_id>.clauses.json` and `<doc_id>.annotations.json` files; `draft` documents are labelled `draft` and do not modify `in_force` text.
-- [ ] A-003 R3: `public/data/in-ka-bengaluru-south/2.3.0/amendments.json` and `consolidated.json` validate against Schema 1.3; every instruction in every acquired in-force Building Bye-laws amending instrument has a Layer 3 effect (`applied: true` creating a new `NodeVersion` with `valid_from`/`valid_to`, or `applied: false` with `unapplied_reason`), and every applied effect is verified against the amending document's page image in `data/reports/in-ka-bengaluru-south/qa.md`.
-- [ ] A-004 R3: Consolidated views (`consolidated.json`, `derived: true`) are computed accurately for today and for each amendment date, verified by unit tests with hand-written expectations on affected `bbl-2003` nodes.
-- [ ] A-005 R4: `/j/in-ka-bengaluru-south/documents/bbl-2003` renders the **Original / As amended (derived)** toggle, shows `"Changed by <instrument>, from <date>"` on amended nodes with links to the instruction and source page, displays low-confidence unapplied effects beside their targets, and updates the coverage notice for `bbl-2003` while keeping `"Amendments not yet applied"` on `/j/in-ka-bengaluru-south/documents/rmp2015-zr`.
-- [ ] A-006 R4: `/j/in-ka-bengaluru-south/timeline` displays the Building Bye-laws chain in chronological date order with a clear summary of what each instrument changed and links to the structured documents/clauses.
+- [x] A-001 R1: `data/reports/in-ka-bengaluru-south/source-discovery.md` logs the PR 08 re-search for all Building Bye-laws 2003 amendments (including `bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx`, the 04.03.2026 / 01.04.2026 draft, and the 14.05.2026 final notification); every acquired instrument has a complete R15 `retrieval` record and R17 `status_evidence`, and unobtainable notifications are declared in `unobtainable_documents` (`bylaws check-provenance` exits `0`).
+- [x] A-002 R2: All acquired English instruments in the Building Bye-laws chain (`bbl-2003`, `ka-model-bbl-2017`, and any acquired `bbl-2003` amending instruments) are structured (`structured: true`) with valid Schema 1.3 `<doc_id>.clauses.json` and `<doc_id>.annotations.json` files; `draft` documents are labelled `draft` and do not modify `in_force` text.
+- [x] A-003 R3: `public/data/in-ka-bengaluru-south/2.3.0/amendments.json` and `consolidated.json` validate against Schema 1.3; every instruction in every acquired in-force Building Bye-laws amending instrument has a Layer 3 effect (`applied: true` creating a new `NodeVersion` with `valid_from`/`valid_to`, or `applied: false` with `unapplied_reason`), and every applied effect is verified against the amending document's page image in `data/reports/in-ka-bengaluru-south/qa.md`.
+- [x] A-004 R3: Consolidated views (`consolidated.json`, `derived: true`) are computed accurately for today and for each amendment date, verified by unit tests with hand-written expectations on affected `bbl-2003` nodes.
+- [x] A-005 R4: `/j/in-ka-bengaluru-south/documents/bbl-2003` renders the **Original / As amended (derived)** toggle, shows `"Changed by <instrument>, from <date>"` on amended nodes with links to the instruction and source page, displays low-confidence unapplied effects beside their targets, and updates the coverage notice for `bbl-2003` while keeping `"Amendments not yet applied"` on `/j/in-ka-bengaluru-south/documents/rmp2015-zr`.
+- [x] A-006 R4: `/j/in-ka-bengaluru-south/timeline` displays the Building Bye-laws chain in chronological date order with a clear summary of what each instrument changed and links to the structured documents/clauses.
 
 ### Scenario Coverage
-- [ ] A-007 R3: `pipeline/tests/test_bylaws_amendment_chain_pr08.py` verifies the structured Building Bye-laws chain documents, Layer 3 `effects` in `amendments.json`, node `versions` and `consolidated.json` against hand-written expectations, and the page-image effect verification section in `qa.md`.
-- [ ] A-008 R4: `__tests__/routes-and-axe.test.tsx` verifies the `bbl-2003` Document page toggle/notice, `rmp2015-zr` notice, Timeline page, and Data page (`Latest: v2.3.0`) with zero `axe-core` WCAG AA violations.
+- [x] A-007 R3: `pipeline/tests/test_bylaws_amendment_chain_pr08.py` verifies the structured Building Bye-laws chain documents, Layer 3 `effects` in `amendments.json`, node `versions` and `consolidated.json` against hand-written expectations, and the page-image effect verification section in `qa.md`.
+- [x] A-008 R4: `__tests__/routes-and-axe.test.tsx` verifies the `bbl-2003` Document page toggle/notice, `rmp2015-zr` notice, Timeline page, and Data page (`Latest: v2.3.0`) with zero `axe-core` WCAG AA violations.
 
 ### Code Quality
-- [ ] A-009 Pattern consistency: Zero jurisdiction-specific constants appear in `pipeline/bylaws/`, `app/`, `components/`, or `lib/` (`pipeline/tests/test_r1_no_hardcoding.py` passes).
-- [ ] A-010 No unnecessary duplication: All Python and npm dependencies remain strictly permissive (`pipeline/tests/test_r4_licences.py` passes) and `npm run build` succeeds.
+- [x] A-009 Pattern consistency: Zero jurisdiction-specific constants appear in `pipeline/bylaws/`, `app/`, `components/`, or `lib/` (`pipeline/tests/test_r1_no_hardcoding.py` passes).
+- [x] A-010 No unnecessary duplication: All Python and npm dependencies remain strictly permissive (`pipeline/tests/test_r4_licences.py` passes) and `npm run build` succeeds.
 
 ## Assumptions
 
@@ -87,3 +87,7 @@
 | 3 | Certain | Structure `ka-model-bbl-2017` and all acquired Building Bye-laws chain instruments to Schema 1.3 Layer 1 + Layer 2 + Layer 3, verify applied effects against page images in `qa.md`, and keep the `"Amendments not yet applied"` notice on `rmp2015-zr` until PR 09 | Explicitly required by `08-bye-laws-amendment-chain.md` §1–§5 | S:95 R:90 A:95 D:95 |
 
 3 assumptions (3 certain, 0 confident, 0 tentative).
+
+## Deletion Candidates
+
+- `None — this change adds new functionality without making existing code redundant`
