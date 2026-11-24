@@ -1,5 +1,6 @@
 # Archive Index
 
+- **261124-62ci-pr-06-real-map-foundation** — PR 06 — Real Map Foundation and Official Boundaries
 - **261124-fgv0-pr-05-structure-anchor-documents** — PR 05 — Structure the Two Anchor Documents (Checkpoint 2)
 - **261124-986m-pr-04-acquire-core-documents** — PR 04 — Acquire Core Documents and Reconnaissance
 - **261124-llmz-pr-03-schema-three-layers** — PR 03 — Schema 1.3: Three Layers
