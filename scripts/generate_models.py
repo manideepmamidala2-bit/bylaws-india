@@ -49,6 +49,7 @@ SCHEMA_FILES: tuple[str, ...] = (
     "jurisdiction.schema.json",
     "document.schema.json",
     "clause-tree.schema.json",
+    "annotations.schema.json",
     "zones.schema.json",
     "overrides.schema.json",
     "declarations.schema.json",

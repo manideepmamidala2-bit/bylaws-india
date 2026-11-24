@@ -38,7 +38,11 @@ def _find_active_clause(
         clauses = tree.get("clauses", [])
         for clause in clauses:
             if (
-                clause.get("clause_id") == clause_id
+                (
+                    clause.get("clause_id") == clause_id
+                    or clause.get("eid") == clause_id
+                    or f"{doc_id}:{clause.get('eid')}" == clause_id
+                )
                 and clause.get("superseded_by") is None
                 and clause.get("record_superseded_by") is None
             ):
@@ -75,7 +79,17 @@ def _apply_clause_mutation(
 
     Returns True if a mutation was applied, or False if `updates` was a no-op.
     """
-    if all(active_clause.get(k) == v for k, v in updates.items()):
+    sync_updates = dict(updates)
+    if "title" in sync_updates and "heading" not in sync_updates:
+        sync_updates["heading"] = sync_updates["title"]
+    elif "heading" in sync_updates and "title" not in sync_updates:
+        sync_updates["title"] = sync_updates["heading"]
+    if "text" in sync_updates and "content" not in sync_updates and not active_clause.get("children"):
+        sync_updates["content"] = sync_updates["text"]
+    elif "content" in sync_updates and "text" not in sync_updates and not active_clause.get("children"):
+        sync_updates["text"] = sync_updates["content"]
+
+    if all(active_clause.get(k) == v for k, v in sync_updates.items()):
         return False
 
     clause_id = str(active_clause["clause_id"])
@@ -92,12 +106,22 @@ def _apply_clause_mutation(
         new_clause["superseded_by"] = None
         new_clause["record_superseded_by"] = None
         new_clause["record_change_reason"] = reason
-        for key, val in updates.items():
+        for key, val in sync_updates.items():
             new_clause[key] = val
+        if new_clause.get("versions"):
+            if "heading" in sync_updates:
+                new_clause["versions"][0]["heading"] = sync_updates["heading"]
+            if "content" in sync_updates:
+                new_clause["versions"][0]["content"] = sync_updates["content"]
         clauses_list.append(new_clause)
     else:
-        for key, val in updates.items():
+        for key, val in sync_updates.items():
             active_clause[key] = val
+        if active_clause.get("versions"):
+            if "heading" in sync_updates:
+                active_clause["versions"][0]["heading"] = sync_updates["heading"]
+            if "content" in sync_updates:
+                active_clause["versions"][0]["content"] = sync_updates["content"]
     return True
 
 
@@ -329,7 +353,7 @@ def run_apply_overrides(config: JurisdictionConfig, *, repo_root: Path | None = 
         zones_path.write_text(json.dumps(zones_payload, indent=2) + "\n", encoding="utf-8")
 
     tags_payload: dict[str, Any] = {
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "jurisdiction": config.id,
         "tags": zone_tag_entries,
     }

@@ -9,12 +9,18 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "1.2"
+      "const": "1.3"
     },
     "clause_fixes": {
       "type": "array",
       "items": {
         "$ref": "#/$defs/clauseFix"
+      }
+    },
+    "annotation_fixes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/annotationFix"
       }
     },
     "zone_tags": {
@@ -57,10 +63,16 @@
           "type": "string",
           "enum": [
             "title",
+            "heading",
+            "intro",
+            "content",
+            "wrap_up",
             "number",
+            "native_number",
             "text",
             "level",
             "parent_id",
+            "parent_eid",
             "verification",
             "verified_by",
             "legal_status",
@@ -69,6 +81,27 @@
             "cross_references",
             "tables"
           ]
+        },
+        "value": {},
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "annotationFix": {
+      "type": "object",
+      "title": "AnnotationFix",
+      "additionalProperties": false,
+      "required": ["annotation_id", "field", "value", "reason"],
+      "properties": {
+        "annotation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "field": {
+          "type": "string",
+          "enum": ["value", "confidence", "verification"]
         },
         "value": {},
         "reason": {

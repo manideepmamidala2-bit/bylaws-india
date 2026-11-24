@@ -88,8 +88,8 @@ def _build_sources_exports(documents_list: list[dict[str, Any]]) -> tuple[bytes,
 def _collect_release_artifacts(
     config: JurisdictionConfig,
     root: Path,
-) -> tuple[dict[str, bytes], list[str], list[str]]:
-    """Collect release file bytes and return `(artifact_bytes, in_force_clause_files, draft_clause_files)`."""
+) -> tuple[dict[str, bytes], list[str], list[str], list[str]]:
+    """Collect release file bytes and return `(artifact_bytes, in_force_clause_files, in_force_annotation_files, draft_clause_files)`."""
     raw_dir = root / "data" / "raw" / config.id
     processed_dir = root / "data" / "processed" / config.id
     docs_dir = processed_dir / "documents"
@@ -112,6 +112,7 @@ def _collect_release_artifacts(
     }
 
     in_force_clause_files: list[str] = []
+    in_force_annotation_files: list[str] = []
     draft_clause_files: list[str] = []
 
     for doc in config.documents:
@@ -124,6 +125,12 @@ def _collect_release_artifacts(
                 f"Cannot publish '{config.id}': missing '{clause_path}'."
             )
         artifacts[clause_filename] = clause_path.read_bytes()
+        ann_filename = f"{doc.id}.annotations.json"
+        ann_path = docs_dir / ann_filename
+        if ann_path.is_file():
+            artifacts[ann_filename] = ann_path.read_bytes()
+            if doc.legal_status != "draft":
+                in_force_annotation_files.append(ann_filename)
         if doc.legal_status == "draft":
             draft_clause_files.append(clause_filename)
         else:
@@ -155,7 +162,12 @@ def _collect_release_artifacts(
         if opt_path.is_file():
             artifacts[optional_name] = opt_path.read_bytes()
 
-    return artifacts, in_force_clause_files, draft_clause_files
+    return (
+        artifacts,
+        in_force_clause_files,
+        in_force_annotation_files,
+        draft_clause_files,
+    )
 
 
 def _upload_to_vercel_blob(pathname: str, content: bytes, token: str) -> str:
@@ -214,7 +226,9 @@ def run_publish(
             f"Unsupported publish target '{resolved_target}'. Expected 'local' or 'blob'."
         )
 
-    artifacts, in_force_clauses, draft_clauses = _collect_release_artifacts(config, root)
+    artifacts, in_force_clauses, in_force_annotations, draft_clauses = (
+        _collect_release_artifacts(config, root)
+    )
 
     zip_filename = f"{config.id}-{release_version}.zip"
     zip_bytes = _build_deterministic_zip(artifacts)
@@ -236,6 +250,7 @@ def run_publish(
     files_entry: dict[str, Any] = {
         "documents": f"{url_prefix}/documents.json",
         "clauses": [f"{url_prefix}/{fname}" for fname in in_force_clauses],
+        "annotations": [f"{url_prefix}/{fname}" for fname in in_force_annotations],
         "amendments": f"{url_prefix}/amendments.json",
         "zones": f"{url_prefix}/zones.geojson",
         "boundary": f"{url_prefix}/boundary.geojson",
@@ -314,7 +329,7 @@ def run_publish(
     }
 
     manifest_payload: dict[str, Any] = {
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "jurisdictions": [*other_jurisdictions, jurisdiction_manifest_entry],
     }
     validate_payload(manifest_payload, "manifest", source=str(manifest_path))

@@ -107,7 +107,7 @@ def test_tables_extracted_to_tables_array_and_removed_from_prose() -> None:
     assert tbl["caption"] == "Table 2.1: Minimum Setbacks by Plot Size"
     assert tbl["headers"] == ["Zone Code", "Plot Area (sq.m)", "Front Setback (m)", "Max FAR"]
     assert tbl["rows"] == [
-        ["Z1", "Up to 240", "1.5", "1.75"],
+        ["Z1*", "Up to 240", "1.5", "1.75"],
         ["Z1", "Above 240", "3.0", "2.25"],
         ["Z2", "All plots", "3.0", "2.50"],
     ]

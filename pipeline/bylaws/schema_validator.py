@@ -18,6 +18,7 @@ SCHEMA_NAMES: tuple[str, ...] = (
     "jurisdiction",
     "document",
     "clause-tree",
+    "annotations",
     "zones",
     "overrides",
     "manifest",

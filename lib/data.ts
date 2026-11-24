@@ -6,7 +6,10 @@
  */
 
 import type {
+  AmendmentEffect,
   AmendmentLink,
+  AnnotationEntry,
+  AnnotationTarget,
   ClauseCitation,
   ClauseNode as GeneratedClauseNode,
   ClauseTable,
@@ -15,6 +18,7 @@ import type {
   ConsolidatedClauseRecord,
   ConsolidatedClauseTable,
   ContestedStatus,
+  DocumentAnnotations,
   DocumentCitedProvision,
   DocumentCopy,
   DocumentMetadata,
@@ -28,10 +32,14 @@ import type {
   JurisdictionGeoLayers,
   JurisdictionManifest as JurisdictionSummary,
   KnownGap,
+  NodeVersion,
   ReleaseDrafts,
   ReleaseEntry,
   ReleaseFiles,
   ReleaseManifest,
+  TableColumnHeader,
+  TableFootnote,
+  TableMeta,
   UnconsolidatedClauseRecord,
   UnobtainableDocument,
   UnreadDocument,
@@ -42,7 +50,10 @@ import type {
 } from "@/lib/types/generated";
 
 export type {
+  AmendmentEffect,
   AmendmentLink,
+  AnnotationEntry,
+  AnnotationTarget,
   ClauseCitation,
   ClauseTable,
   ClauseTreeDocument,
@@ -50,6 +61,7 @@ export type {
   ConsolidatedClauseRecord,
   ConsolidatedClauseTable,
   ContestedStatus,
+  DocumentAnnotations,
   DocumentCitedProvision,
   DocumentCopy,
   DocumentMetadata,
@@ -63,10 +75,14 @@ export type {
   JurisdictionGeoLayers,
   JurisdictionSummary,
   KnownGap,
+  NodeVersion,
   ReleaseDrafts,
   ReleaseEntry,
   ReleaseFiles,
   ReleaseManifest,
+  TableColumnHeader,
+  TableFootnote,
+  TableMeta,
   UnconsolidatedClauseRecord,
   UnobtainableDocument,
   UnreadDocument,
@@ -111,6 +127,7 @@ export interface JurisdictionDatasetBundle {
   documents: DocumentMetadata[];
   clauseTrees: ClauseTreeDocument[];
   draftClauseTrees: ClauseTreeDocument[];
+  annotationsByDocId: Record<string, AnnotationEntry[]>;
   clauses: ClauseNode[];
   amendments: JurisdictionAmendments;
   consolidated: JurisdictionConsolidated | null;
@@ -336,7 +353,7 @@ export async function fetchAmendments(
   const manifest = await fetchManifest();
   const found = findJurisdictionRelease(manifest, jurisdictionId, version);
   if (!found || !found.release || !found.release.files) {
-    return { schema_version: "1.2", jurisdiction: jurisdictionId, links: [] };
+    return { schema_version: "1.3", jurisdiction: jurisdictionId, effects: [], links: [] };
   }
   return readPublishedJson<JurisdictionAmendments>(
     found.release.files.amendments
@@ -371,7 +388,7 @@ export async function fetchZones(
   if (!found || !found.release || !found.release.files) {
     return {
       type: "FeatureCollection",
-      schema_version: "1.2",
+      schema_version: "1.3",
       features: [],
     };
   }
@@ -447,7 +464,7 @@ export async function fetchDeclarations(
   const found = findJurisdictionRelease(manifest, jurisdictionId, version);
   if (!found || !found.release || !found.release.declarations) {
     return {
-      schema_version: "1.2",
+      schema_version: "1.3",
       jurisdiction: jurisdictionId,
       not_modelled: [],
       known_gaps: [],
@@ -478,12 +495,18 @@ export async function fetchJurisdictionDataset(
       documents: [],
       clauseTrees: [],
       draftClauseTrees: [],
+      annotationsByDocId: {},
       clauses: [],
-      amendments: { schema_version: "1.2", jurisdiction: jurisdictionId, links: [] },
+      amendments: {
+        schema_version: "1.3",
+        jurisdiction: jurisdictionId,
+        effects: [],
+        links: [],
+      },
       consolidated: null,
       zones: {
         type: "FeatureCollection",
-        schema_version: "1.2",
+        schema_version: "1.3",
         features: [],
       },
       boundary: { type: "FeatureCollection", features: [] },
@@ -494,7 +517,7 @@ export async function fetchJurisdictionDataset(
       geoLayers: null,
       clauseZoneTags: null,
       declarations: {
-        schema_version: "1.2",
+        schema_version: "1.3",
         jurisdiction: jurisdictionId,
         not_modelled: [],
         known_gaps: [],
@@ -512,6 +535,7 @@ export async function fetchJurisdictionDataset(
     documents,
     clauseTrees,
     draftClauseTrees,
+    annotationDocs,
     amendments,
     consolidated,
     zones,
@@ -531,6 +555,11 @@ export async function fetchJurisdictionDataset(
     Promise.all(
       (releaseDrafts?.clauses ?? []).map((p) =>
         readPublishedJson<ClauseTreeDocument>(p)
+      )
+    ),
+    Promise.all(
+      (releaseFiles.annotations ?? []).map((p) =>
+        readPublishedJson<DocumentAnnotations>(p)
       )
     ),
     readPublishedJson<JurisdictionAmendments>(releaseFiles.amendments),
@@ -579,12 +608,18 @@ export async function fetchJurisdictionDataset(
     }
   }
 
+  const annotationsByDocId: Record<string, AnnotationEntry[]> = {};
+  for (const annDoc of annotationDocs) {
+    annotationsByDocId[annDoc.doc_id] = annDoc.annotations;
+  }
+
   return {
     jurisdiction,
     release,
     documents,
     clauseTrees,
     draftClauseTrees,
+    annotationsByDocId,
     clauses,
     amendments,
     consolidated,

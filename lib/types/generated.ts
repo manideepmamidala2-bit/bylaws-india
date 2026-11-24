@@ -10,7 +10,7 @@ export type ZoningMapConfig = TracedZoningMapConfig | ImportedZoningMapConfig;
  */
 
 export interface JurisdictionConfig {
-  schema_version?: "1.2";
+  schema_version?: "1.3";
   /**
    * Lowercase hyphenated hierarchical jurisdiction ID.
    */
@@ -255,7 +255,7 @@ export interface OverlayMapConfig {
  */
 
 export interface DocumentMetadata {
-  schema_version: "1.2";
+  schema_version: "1.3";
   doc_id: string;
   title: string;
   issuing_authority: string;
@@ -330,11 +330,11 @@ export interface DocumentCitedProvision {
 }
 
 /**
- * Structured clause tree for a document in data/processed/<jurisdiction>/documents/<doc_id>.clauses.json (Schema v1.2).
+ * Structured faithful document tree in data/processed/<jurisdiction>/documents/<doc_id>.clauses.json (Schema v1.3, Layer 1 & Layer 3).
  */
 
 export interface ClauseTree {
-  schema_version: "1.2";
+  schema_version: "1.3";
   doc_id: string;
   jurisdiction: string;
   legal_status: "in_force" | "draft" | "superseded" | "withdrawn" | "status_unknown";
@@ -350,6 +350,42 @@ export interface ClauseTreeGenerated {
 }
 
 export interface ClauseNode {
+  eid?: string;
+  native_number?: string | null;
+  type?:
+    | "preface"
+    | "preamble"
+    | "part"
+    | "chapter"
+    | "section"
+    | "regulation"
+    | "bye_law"
+    | "clause"
+    | "subclause"
+    | "item"
+    | "paragraph"
+    | "proviso"
+    | "explanation"
+    | "note"
+    | "definition"
+    | "schedule"
+    | "annexure"
+    | "appendix"
+    | "form"
+    | "table"
+    | "table_row"
+    | "signature_block";
+  heading?: string | null;
+  intro?: string | null;
+  content?: string | null;
+  wrap_up?: string | null;
+  children?: string[];
+  parent_eid?: string | null;
+  defines?: string | null;
+  defines_normalised?: string | null;
+  table_meta?: TableMeta | null;
+  cells?: string[] | null;
+  versions?: NodeVersion[];
   clause_id: string;
   record_version?: number;
   record_id: string;
@@ -379,12 +415,47 @@ export interface ClauseNode {
   verified_by?: string | null;
 }
 
-export interface ClauseTable {
-  table_id: string;
-  caption: string | null;
-  headers: string[];
-  rows: string[][];
-  page: number;
+export interface TableMeta {
+  columns: TableColumnHeader[];
+  rows: string[];
+  footnotes: TableFootnote[];
+  extraction: "complete" | "failed";
+  page_image?: string | null;
+  gap_reason?: string | null;
+}
+
+export interface TableColumnHeader {
+  label: string;
+  unit?: string | null;
+  children?: TableSubColumnHeader[];
+}
+
+export interface TableSubColumnHeader {
+  label: string;
+  unit?: string | null;
+}
+
+export interface TableFootnote {
+  marker: string;
+  text: string;
+  cell_refs?: string[];
+}
+
+export interface NodeVersion {
+  version_id: string;
+  valid_from: string | null;
+  valid_to: string | null;
+  heading?: string | null;
+  intro?: string | null;
+  content?: string | null;
+  wrap_up?: string | null;
+  cells?: string[] | null;
+  source_doc: string;
+  source_eid?: string | null;
+  effect_id?: string | null;
+  citations: ClauseCitation[];
+  legal_status: "in_force" | "draft" | "superseded" | "withdrawn" | "status_unknown";
+  omitted?: boolean;
 }
 
 export interface ClauseCitation {
@@ -396,6 +467,50 @@ export interface ClauseCitation {
    */
   bbox: [number, number, number, number] | null;
   text_excerpt: string;
+}
+
+export interface ClauseTable {
+  table_id: string;
+  caption: string | null;
+  headers: string[];
+  rows: string[][];
+  page: number;
+}
+
+/**
+ * Stand-off character-span annotations for a structured document in data/processed/<jurisdiction>/documents/<doc_id>.annotations.json (Schema v1.3, Layer 2).
+ */
+
+export interface DocumentAnnotations {
+  schema_version: "1.3";
+  doc_id: string;
+  jurisdiction: string;
+  annotations: AnnotationEntry[];
+}
+
+export interface AnnotationEntry {
+  annotation_id: string;
+  target: AnnotationTarget;
+  kind: "cross_reference" | "defined_term_use" | "provision_type";
+  value: string;
+  method: "rule" | "model" | "person";
+  model_name?: string | null;
+  model_version?: string | null;
+  confidence: number;
+  verification: "unverified" | "machine_checked" | "human_verified";
+}
+
+export interface AnnotationTarget {
+  eid: string;
+  version_id: string;
+  field: "heading" | "intro" | "content" | "wrap_up" | "cell";
+  cell_index?: number | null;
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  span: [number, number];
+  span_text: string;
 }
 
 export type ZoneGeometry = PolygonGeometry | MultiPolygonGeometry;
@@ -417,7 +532,7 @@ export type Position = [number, number] | [number, number, number];
 
 export interface ZonesFeatureCollection {
   type: "FeatureCollection";
-  schema_version: "1.2";
+  schema_version: "1.3";
   /**
    * @minItems 4
    * @maxItems 4
@@ -484,8 +599,9 @@ export interface ZoneFeatureProperties {
  */
 
 export interface JurisdictionOverrides {
-  schema_version: "1.2";
+  schema_version: "1.3";
   clause_fixes?: ClauseFix[];
+  annotation_fixes?: AnnotationFix[];
   zone_tags?: ZoneTag[];
   zone_fixes?: ZoneFix[];
   map_curations?: MapCuration[];
@@ -496,10 +612,16 @@ export interface ClauseFix {
   clause_id: string;
   field:
     | "title"
+    | "heading"
+    | "intro"
+    | "content"
+    | "wrap_up"
     | "number"
+    | "native_number"
     | "text"
     | "level"
     | "parent_id"
+    | "parent_eid"
     | "verification"
     | "verified_by"
     | "legal_status"
@@ -507,6 +629,13 @@ export interface ClauseFix {
     | "language"
     | "cross_references"
     | "tables";
+  value: unknown;
+  reason: string;
+}
+
+export interface AnnotationFix {
+  annotation_id: string;
+  field: "value" | "confidence" | "verification";
   value: unknown;
   reason: string;
 }
@@ -579,7 +708,7 @@ export interface AmendmentLinkOverride {
  */
 
 export interface JurisdictionDeclarations {
-  schema_version: "1.2";
+  schema_version: "1.3";
   jurisdiction: string;
   not_modelled: string[];
   known_gaps: KnownGap[];
@@ -623,13 +752,40 @@ export interface ContestedStatus {
 }
 
 /**
- * Linked amendment instructions between amending clauses and target base clauses (Schema v1.2).
+ * Amending effects and links between amending instructions and target nodes (Schema v1.3, Layer 3).
  */
 
 export interface JurisdictionAmendments {
-  schema_version: "1.2";
+  schema_version: "1.3";
   jurisdiction: string;
+  effects?: AmendmentEffect[];
   links: AmendmentLink[];
+}
+
+export interface AmendmentEffect {
+  effect_id: string;
+  amending_doc: string;
+  amending_eid: string;
+  target_doc: string;
+  target_eid: string;
+  action: "substitute" | "insert_after" | "insert_before" | "omit" | "renumber" | "modify_text";
+  new_nodes: EffectNodePayload[];
+  valid_from: string | null;
+  confidence: number;
+  applied: boolean;
+  unapplied_reason?: string | null;
+  verification: "unverified" | "machine_checked" | "human_verified";
+}
+
+export interface EffectNodePayload {
+  eid: string;
+  native_number?: string | null;
+  type: string;
+  heading?: string | null;
+  intro?: string | null;
+  content?: string | null;
+  wrap_up?: string | null;
+  parent_eid?: string | null;
 }
 
 export interface AmendmentLink {
@@ -637,7 +793,7 @@ export interface AmendmentLink {
   target_clause: string;
   amending_doc_id?: string | null;
   target_doc_id?: string | null;
-  action: "substitute" | "insert_after" | "insert_before" | "omit" | "modify" | "renumber";
+  action: "substitute" | "insert_after" | "insert_before" | "omit" | "modify" | "modify_text" | "renumber";
   effective_date?: string | null;
   confidence: "high" | "medium" | "low";
   verification: "unverified" | "machine_checked" | "human_verified";
@@ -650,7 +806,7 @@ export interface AmendmentLink {
  */
 
 export interface ReleaseManifest {
-  schema_version: "1.2";
+  schema_version: "1.3";
   jurisdictions: JurisdictionManifest[];
 }
 
@@ -683,6 +839,7 @@ export interface ReleaseEntry {
 export interface ReleaseFiles {
   documents: string;
   clauses: string[];
+  annotations?: string[];
   amendments: string;
   consolidated?: string | null;
   zones: string;
@@ -707,7 +864,7 @@ export interface ReleaseDrafts {
  */
 
 export interface JurisdictionConsolidated {
-  schema_version: "1.2";
+  schema_version: "1.3";
   jurisdiction: string;
   generated: ConsolidatedGenerated;
   records: ConsolidatedClauseRecord[];
@@ -753,7 +910,7 @@ export interface UnconsolidatedClauseRecord {
  */
 
 export interface JurisdictionGeoLayers {
-  schema_version: "1.2";
+  schema_version: "1.3";
   jurisdiction: string;
   layers: GeoLayerEntry[];
 }
@@ -777,7 +934,7 @@ export interface GeoLayerEntry {
  */
 
 export interface JurisdictionClauseZoneTags {
-  schema_version: "1.2";
+  schema_version: "1.3";
   jurisdiction: string;
   tags: ClauseZoneTagEntry[];
 }

@@ -1,4 +1,4 @@
-"""Stage 8.5b: Produce derived consolidated 'as amended' clause records (Plan v2.0 §5.B7, Rule R14)."""
+"""Stage 8.5b: Compute derived consolidated views per document and date (Schema v1.3, Layer 3, Rule R14)."""
 
 from __future__ import annotations
 
@@ -16,9 +16,76 @@ from bylaws.root import get_deterministic_timestamp, resolve_repo_root
 from bylaws.schema_validator import validate_payload
 
 SUBSTITUTED_QUOTE_RE = re.compile(
-    r"substituted\s*:\s*['\"\u2018\u201c](?P<quoted>.+)['\"\u2019\u201d]\s*\.?$",
+    r"(?:substituted|inserted)\s*:\s*['\"\u2018\u201c](?P<quoted>.+)['\"\u2019\u201d]\s*\.?$",
     re.IGNORECASE | re.DOTALL,
 )
+
+
+def compute_consolidated_view_as_of(
+    tree_payload: dict[str, Any],
+    effects: list[dict[str, Any]] | None = None,
+    *,
+    as_of_date: str,
+) -> dict[str, Any]:
+    """Compute a derived consolidated view of `tree_payload` on `as_of_date` (`YYYY-MM-DD`) from node `versions`."""
+    _ = effects  # effects are reflected in each node's `versions` list
+    doc_id = str(tree_payload["doc_id"])
+    consolidated_nodes: list[dict[str, Any]] = []
+    applied_effects: list[str] = []
+
+    for node in tree_payload.get("clauses", []):
+        if node.get("superseded_by") is not None or node.get("record_superseded_by") is not None:
+            continue
+        versions: list[dict[str, Any]] = list(node.get("versions") or [])
+        if not versions:
+            consolidated_nodes.append(copy.deepcopy(node))
+            continue
+
+        selected_ver: dict[str, Any] | None = None
+        for ver in versions:
+            v_from = ver.get("valid_from")
+            v_to = ver.get("valid_to")
+            if (v_from is None or str(v_from) <= as_of_date) and (
+                v_to is None or as_of_date < str(v_to)
+            ):
+                selected_ver = ver
+
+        if selected_ver is None:
+            # Node did not exist yet on `as_of_date` (e.g. inserted by a later amendment)
+            continue
+
+        eff_id = selected_ver.get("effect_id")
+        if eff_id and str(eff_id) not in applied_effects:
+            applied_effects.append(str(eff_id))
+
+        node_copy = copy.deepcopy(node)
+        node_copy["heading"] = selected_ver.get("heading")
+        node_copy["title"] = selected_ver.get("heading") or node_copy.get("title")
+        node_copy["intro"] = selected_ver.get("intro")
+        node_copy["content"] = selected_ver.get("content")
+        node_copy["wrap_up"] = selected_ver.get("wrap_up")
+        if selected_ver.get("cells") is not None:
+            node_copy["cells"] = list(selected_ver["cells"])
+        node_copy["legal_status"] = selected_ver.get("legal_status", node_copy["legal_status"])
+        node_copy["omitted"] = bool(selected_ver.get("omitted", False))
+        node_copy["active_version_id"] = selected_ver.get("version_id", "v1")
+        node_copy["active_effect_id"] = eff_id
+        text_parts = [
+            p
+            for p in (node_copy["intro"], node_copy["content"], node_copy["wrap_up"])
+            if p
+        ]
+        if text_parts:
+            node_copy["text"] = " ".join(text_parts)
+        consolidated_nodes.append(node_copy)
+
+    return {
+        "doc_id": doc_id,
+        "as_of_date": as_of_date,
+        "derived": True,
+        "applied_effects": applied_effects,
+        "nodes": consolidated_nodes,
+    }
 
 
 def _extract_substituted_text(
@@ -26,11 +93,9 @@ def _extract_substituted_text(
     target_number: str,
     target_title: str | None,
 ) -> tuple[str | None, str]:
-    """Extract the replacement title and text from a substitution clause."""
     match = SUBSTITUTED_QUOTE_RE.search(amending_text.strip())
     raw_replacement = match.group("quoted").strip() if match else amending_text.strip()
 
-    # Strip leading target clause number if repeated inside the quote (e.g. "1.2 Definitions: ...")
     prefix_re = re.compile(rf"^{re.escape(target_number)}\b\.?\s*(?P<rest>.+)$", re.DOTALL)
     pref_match = prefix_re.match(raw_replacement)
     if pref_match:
@@ -45,7 +110,7 @@ def _extract_substituted_text(
 
 
 def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None) -> dict[str, Any]:
-    """Build `consolidated.json` from base clause trees and high-confidence `amendments.json` links."""
+    """Build `consolidated.json` from base clause trees and high-confidence `amendments.json` links/effects."""
     root = repo_root or resolve_repo_root()
     processed_dir = root / "data" / "processed" / config.id
     docs_dir = processed_dir / "documents"
@@ -59,7 +124,6 @@ def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None
     amendments_data: dict[str, Any] = json.loads(amendments_path.read_text(encoding="utf-8"))
     links: list[dict[str, Any]] = amendments_data.get("links", [])
 
-    # Load all structured clause trees
     clause_lookup: dict[str, dict[str, Any]] = {}
     doc_effective_dates: dict[str, str] = {}
     for doc in config.documents:
@@ -108,7 +172,6 @@ def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None
             )
             continue
 
-        # Sort links chronologically by effective_date
         def _link_date(lnk: dict[str, Any]) -> str:
             if lnk.get("effective_date"):
                 return str(lnk["effective_date"])
@@ -153,7 +216,7 @@ def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None
                 omitted = True
                 current_text = f"[Omitted by {amending_cid} with effect from {as_of_date}.]"
                 current_tables = []
-            elif action in {"modify", "renumber"}:
+            elif action in {"modify", "modify_text", "renumber"}:
                 current_text = f"{current_text} [Modified ({as_of_date}, {amending_cid}): {amending_text}]".strip()
 
         records.append(
@@ -169,7 +232,7 @@ def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None
                 "derived": True,
                 "method": (
                     "Derived by this project via deterministic chronological application "
-                    "of high-confidence amendment links (Rule R14)."
+                    "of high-confidence amendment effects (Rule R14)."
                 ),
                 "confidence": "high",
                 "omitted": omitted,
@@ -177,7 +240,7 @@ def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None
         )
 
     consolidated_payload: dict[str, Any] = {
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "jurisdiction": config.id,
         "generated": {
             "pipeline_version": PIPELINE_VERSION,

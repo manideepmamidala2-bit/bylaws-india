@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.2",
+  "schema_version": "1.3",
   "jurisdiction": "xx-test-fixture",
   "generated": {
     "pipeline_version": "0.1.0",
@@ -7,36 +7,37 @@
   },
   "records": [
     {
-      "clause_id": "fixture-base-2020:1.2",
-      "doc_id": "fixture-base-2020",
-      "number": "1.2",
-      "title": "Definitions",
-      "text": "Floor Area Ratio (FAR) means total floor area divided by net plot area excluding road widening strips.",
-      "tables": [],
-      "as_of_date": "2024-06-15",
-      "amendments_applied": [
-        "fixture-amend-2024:2"
-      ],
-      "derived": true,
-      "method": "Derived by this project via deterministic chronological application of high-confidence amendment links (Rule R14).",
-      "confidence": "high",
-      "omitted": false
-    },
-    {
       "clause_id": "fixture-base-2020:2.2",
       "doc_id": "fixture-base-2020",
       "number": "2.2",
       "title": "Maximum Building Height",
-      "text": "No residential building in zone Z1 shall exceed 11.5 metres in height, subject to road width norms under clause 2.1. [Amended (2024-06-15, fixture-amend-2024:3): After clause 2.2, insert the following note on solar rooftop exemptions up to 1.8 metres.]",
+      "text": "No residential building in zone Z1 shall exceed 15.0 metres in height, subject to road width norms under clause 2.1. [Amended (2024-06-15, fixture-amend-2024:3): After clause 2.2, the following clause shall be inserted: '2.2A Solar Rooftop Structures: Elevated solar panels up to 1.8 metres above the parapet are exempt from height calculation.']",
       "tables": [],
       "as_of_date": "2024-06-15",
       "amendments_applied": [
+        "fixture-amend-2024:2",
         "fixture-amend-2024:3"
       ],
       "derived": true,
-      "method": "Derived by this project via deterministic chronological application of high-confidence amendment links (Rule R14).",
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
       "confidence": "high",
       "omitted": false
+    },
+    {
+      "clause_id": "fixture-base-2020:2.3",
+      "doc_id": "fixture-base-2020",
+      "number": "2.3",
+      "title": "Temporary Construction Sheds",
+      "text": "[Omitted by fixture-amend-2024:4 with effect from 2024-06-15.]",
+      "tables": [],
+      "as_of_date": "2024-06-15",
+      "amendments_applied": [
+        "fixture-amend-2024:4"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": true
     }
   ],
   "unconsolidated": []

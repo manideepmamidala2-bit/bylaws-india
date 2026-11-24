@@ -249,7 +249,7 @@ class JurisdictionConfig(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.2"] = "1.2"
+    schema_version: Literal["1.3"] = "1.3"
     id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$") = Field(
         ..., description="Lowercase hyphenated hierarchical jurisdiction ID."
     )
@@ -345,7 +345,7 @@ class DocumentMetadata(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.2"]
+    schema_version: Literal["1.3"]
     doc_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     title: constr(min_length=1)
     issuing_authority: constr(min_length=1)
@@ -415,6 +415,66 @@ class ClauseCitation(BaseModel):
     text_excerpt: constr(min_length=1)
 
 
+class TableSubColumnHeader(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    label: constr(min_length=1)
+    unit: str | None = None
+
+
+class TableColumnHeader(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    label: constr(min_length=1)
+    unit: str | None = None
+    children: list[TableSubColumnHeader] | None = None
+
+
+class TableFootnote(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    marker: constr(min_length=1)
+    text: constr(min_length=1)
+    cell_refs: list[str] | None = None
+
+
+class TableMeta(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    columns: list[TableColumnHeader]
+    rows: list[constr(min_length=1)]
+    footnotes: list[TableFootnote]
+    extraction: Literal["complete", "failed"]
+    page_image: str | None = None
+    gap_reason: str | None = None
+
+
+class NodeVersion(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    version_id: constr(min_length=1)
+    valid_from: str | None
+    valid_to: str | None
+    heading: str | None = None
+    intro: str | None = None
+    content: str | None = None
+    wrap_up: str | None = None
+    cells: list[str] | None = None
+    source_doc: constr(min_length=1)
+    source_eid: str | None = None
+    effect_id: str | None = None
+    citations: list[ClauseCitation]
+    legal_status: Literal[
+        "in_force", "draft", "superseded", "withdrawn", "status_unknown"
+    ]
+    omitted: bool | None = False
+
+
 class ClauseTable(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -434,6 +494,43 @@ class ClauseTreeGenerated(BaseModel):
     parser_version: constr(min_length=1)
     pipeline_version: constr(min_length=1)
     generated_at: constr(min_length=10)
+
+
+class AnnotationTarget(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    eid: constr(min_length=1)
+    version_id: constr(min_length=1)
+    field: Literal["heading", "intro", "content", "wrap_up", "cell"]
+    cell_index: conint(ge=0) | None = None
+    span: list[conint(ge=0)] = Field(..., max_length=2, min_length=2)
+    span_text: constr(min_length=1)
+
+
+class AnnotationEntry(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    annotation_id: constr(min_length=1)
+    target: AnnotationTarget
+    kind: Literal["cross_reference", "defined_term_use", "provision_type"]
+    value: constr(min_length=1)
+    method: Literal["rule", "model", "person"]
+    model_name: str | None = None
+    model_version: str | None = None
+    confidence: confloat(ge=0.0, le=1.0)
+    verification: Literal["unverified", "machine_checked", "human_verified"]
+
+
+class DocumentAnnotations(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    schema_version: Literal["1.3"]
+    doc_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    annotations: list[AnnotationEntry]
 
 
 class ZoneFeatureProperties(BaseModel):
@@ -505,10 +602,16 @@ class ClauseFix(BaseModel):
     clause_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:.+$")
     field: Literal[
         "title",
+        "heading",
+        "intro",
+        "content",
+        "wrap_up",
         "number",
+        "native_number",
         "text",
         "level",
         "parent_id",
+        "parent_eid",
         "verification",
         "verified_by",
         "legal_status",
@@ -517,6 +620,16 @@ class ClauseFix(BaseModel):
         "cross_references",
         "tables",
     ]
+    value: Any
+    reason: constr(min_length=1)
+
+
+class AnnotationFix(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    annotation_id: constr(min_length=1)
+    field: Literal["value", "confidence", "verification"]
     value: Any
     reason: constr(min_length=1)
 
@@ -608,8 +721,9 @@ class JurisdictionOverrides(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.2"]
+    schema_version: Literal["1.3"]
     clause_fixes: list[ClauseFix] | None = None
+    annotation_fixes: list[AnnotationFix] | None = None
     zone_tags: list[ZoneTag] | None = None
     zone_fixes: list[ZoneFix] | None = None
     map_curations: list[MapCuration] | None = None
@@ -657,7 +771,7 @@ class JurisdictionDeclarations(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.2"]
+    schema_version: Literal["1.3"]
     jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     not_modelled: list[constr(min_length=1)]
     known_gaps: list[KnownGap]
@@ -669,6 +783,40 @@ class JurisdictionDeclarations(BaseModel):
     building_relevant_sections: dict[str, list[constr(min_length=1)]] | None = None
 
 
+class EffectNodePayload(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    eid: constr(min_length=1)
+    native_number: str | None = None
+    type: constr(min_length=1)
+    heading: str | None = None
+    intro: str | None = None
+    content: str | None = None
+    wrap_up: str | None = None
+    parent_eid: str | None = None
+
+
+class AmendmentEffect(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    effect_id: constr(min_length=1)
+    amending_doc: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    amending_eid: constr(min_length=1)
+    target_doc: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    target_eid: constr(min_length=1)
+    action: Literal[
+        "substitute", "insert_after", "insert_before", "omit", "renumber", "modify_text"
+    ]
+    new_nodes: list[EffectNodePayload]
+    valid_from: str | None
+    confidence: confloat(ge=0.0, le=1.0)
+    applied: bool
+    unapplied_reason: str | None = None
+    verification: Literal["unverified", "machine_checked", "human_verified"]
+
+
 class AmendmentLink(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -678,7 +826,13 @@ class AmendmentLink(BaseModel):
     amending_doc_id: str | None = None
     target_doc_id: str | None = None
     action: Literal[
-        "substitute", "insert_after", "insert_before", "omit", "modify", "renumber"
+        "substitute",
+        "insert_after",
+        "insert_before",
+        "omit",
+        "modify",
+        "modify_text",
+        "renumber",
     ]
     effective_date: str | None = None
     confidence: Literal["high", "medium", "low"]
@@ -691,8 +845,9 @@ class JurisdictionAmendments(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.2"]
+    schema_version: Literal["1.3"]
     jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    effects: list[AmendmentEffect] | None = Field([], validate_default=True)
     links: list[AmendmentLink]
 
 
@@ -702,6 +857,7 @@ class ReleaseFiles(BaseModel):
     )
     documents: constr(min_length=1)
     clauses: list[constr(min_length=1)]
+    annotations: list[constr(min_length=1)] | None = None
     amendments: constr(min_length=1)
     consolidated: str | None = None
     zones: constr(min_length=1)
@@ -791,7 +947,7 @@ class JurisdictionConsolidated(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.2"]
+    schema_version: Literal["1.3"]
     jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     generated: ConsolidatedGenerated
     records: list[ConsolidatedClauseRecord]
@@ -821,7 +977,7 @@ class JurisdictionGeoLayers(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.2"]
+    schema_version: Literal["1.3"]
     jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     layers: list[GeoLayerEntry]
 
@@ -841,7 +997,7 @@ class JurisdictionClauseZoneTags(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.2"]
+    schema_version: Literal["1.3"]
     jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     tags: list[ClauseZoneTagEntry]
 
@@ -850,6 +1006,46 @@ class ClauseNode(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
+    eid: constr(min_length=1) | None = None
+    native_number: str | None = None
+    type: (
+        Literal[
+            "preface",
+            "preamble",
+            "part",
+            "chapter",
+            "section",
+            "regulation",
+            "bye_law",
+            "clause",
+            "subclause",
+            "item",
+            "paragraph",
+            "proviso",
+            "explanation",
+            "note",
+            "definition",
+            "schedule",
+            "annexure",
+            "appendix",
+            "form",
+            "table",
+            "table_row",
+            "signature_block",
+        ]
+        | None
+    ) = "clause"
+    heading: str | None = None
+    intro: str | None = None
+    content: str | None = None
+    wrap_up: str | None = None
+    children: list[constr(min_length=1)] | None = []
+    parent_eid: str | None = None
+    defines: str | None = None
+    defines_normalised: str | None = None
+    table_meta: TableMeta | None = None
+    cells: list[str] | None = None
+    versions: list[NodeVersion] | None = Field([], validate_default=True)
     clause_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:.+$")
     record_version: conint(ge=1) | None = 1
     record_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:.+@v[0-9]+$")
@@ -882,7 +1078,7 @@ class ClauseTree(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.2"]
+    schema_version: Literal["1.3"]
     doc_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     legal_status: Literal[
@@ -907,7 +1103,7 @@ class ZonesFeatureCollection(BaseModel):
         extra="forbid",
     )
     type: Literal["FeatureCollection"]
-    schema_version: Literal["1.2"]
+    schema_version: Literal["1.3"]
     bbox: list[float] | None = Field(None, max_length=4, min_length=4)
     features: list[ZoneFeature]
 
@@ -928,7 +1124,7 @@ class ReleaseManifest(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.2"]
+    schema_version: Literal["1.3"]
     jurisdictions: list[JurisdictionManifest]
 
 
@@ -937,6 +1133,7 @@ class BylawsSchemaBundle(
         JurisdictionConfig
         | DocumentMetadata
         | ClauseTree
+        | DocumentAnnotations
         | ZonesFeatureCollection
         | JurisdictionOverrides
         | JurisdictionDeclarations
@@ -951,6 +1148,7 @@ class BylawsSchemaBundle(
         JurisdictionConfig
         | DocumentMetadata
         | ClauseTree
+        | DocumentAnnotations
         | ZonesFeatureCollection
         | JurisdictionOverrides
         | JurisdictionDeclarations

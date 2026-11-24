@@ -9,7 +9,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "1.2"
+      "const": "1.3"
     },
     "jurisdictions": {
       "type": "array",
@@ -76,6 +76,13 @@
           "minLength": 1
         },
         "clauses": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "annotations": {
           "type": "array",
           "items": {
             "type": "string",

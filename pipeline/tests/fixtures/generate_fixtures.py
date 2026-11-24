@@ -1,4 +1,4 @@
-"""Deterministic generator for synthetic fixture PDFs, KML, imported GeoJSON, and sample v1.1 payloads."""
+"""Deterministic generator for synthetic fixture PDFs, KML, imported GeoJSON, and sample v1.3 payloads."""
 
 from __future__ import annotations
 
@@ -22,62 +22,126 @@ def _fixed_pdf() -> FPDF:
 
 
 def build_fixture_base_pdf(output_path: Path) -> None:
-    """Create a 2-page synthetic base bylaw PDF with clauses, table, and cross-references."""
+    """Create a 2-page synthetic base bylaw PDF covering all Schema 1.3 Layer 1-2 constructs."""
     pdf = _fixed_pdf()
     pdf.set_title("Synthetic Municipal Building Regulations 2020")
 
     # Page 1
     pdf.add_page()
     pdf.set_font("Helvetica", "B", 14)
-    pdf.cell(0, 10, "Synthetic Municipal Building Regulations 2020", new_x="LMARGIN", new_y="NEXT")
-    pdf.ln(3)
+    pdf.cell(0, 9, "Synthetic Municipal Building Regulations 2020", new_x="LMARGIN", new_y="NEXT")
+    pdf.ln(2)
 
     pdf.set_font("Helvetica", "B", 12)
-    pdf.cell(0, 8, "1. General Provisions", new_x="LMARGIN", new_y="NEXT")
-    pdf.set_font("Helvetica", "", 11)
+    pdf.cell(0, 7, "CHAPTER I: General Provisions", new_x="LMARGIN", new_y="NEXT")
+    pdf.set_font("Helvetica", "", 10.5)
     pdf.multi_cell(
         0,
-        6,
+        5.5,
         "1.1 Short Title and Commencement: These regulations apply to all residential "
-        "plots within the synthetic planning area.",
+        "plots within the synthetic planning area:",
+        new_x="LMARGIN",
+        new_y="NEXT",
+    )
+    pdf.multi_cell(
+        0,
+        5.5,
+        "(a) New residential construction on plotted developments.",
+        new_x="LMARGIN",
+        new_y="NEXT",
+    )
+    pdf.multi_cell(
+        0,
+        5.5,
+        "(b) Additions and alterations to existing residential buildings.",
+        new_x="LMARGIN",
+        new_y="NEXT",
+    )
+    pdf.ln(1.5)
+    pdf.multi_cell(
+        0,
+        5.5,
+        '1.2 Definitions: "Floor Area Ratio" (FAR) means the quotient obtained by dividing '
+        "the total covered area on all floors by the plot area.",
+        new_x="LMARGIN",
+        new_y="NEXT",
     )
     pdf.ln(2)
-    pdf.multi_cell(
-        0,
-        6,
-        "1.2 Definitions: Floor Area Ratio (FAR) means the quotient obtained by dividing "
-        "the total covered area on all floors by the plot area.",
-    )
-    pdf.ln(3)
     pdf.set_font("Helvetica", "B", 12)
-    pdf.cell(0, 8, "2. Setbacks and Height Norms", new_x="LMARGIN", new_y="NEXT")
-    pdf.set_font("Helvetica", "", 11)
+    pdf.cell(0, 7, "CHAPTER II: Setbacks and Height Norms", new_x="LMARGIN", new_y="NEXT")
+    pdf.set_font("Helvetica", "", 10.5)
     pdf.multi_cell(
         0,
-        6,
+        5.5,
         "2.1 Residential Setbacks: Every residential building in zone Z1 or Z2 shall "
-        "provide minimum setbacks as per clause 1.1 and Table 2.1 below.",
+        "provide minimum setbacks as per clause 1.1 and Table 2.1 below:",
+        new_x="LMARGIN",
+        new_y="NEXT",
     )
-    pdf.ln(3)
+    pdf.multi_cell(
+        0,
+        5.5,
+        "(a) Front setback measured from the street alignment.",
+        new_x="LMARGIN",
+        new_y="NEXT",
+    )
+    pdf.multi_cell(
+        0,
+        5.5,
+        "(b) Side and rear setbacks clear of projections.",
+        new_x="LMARGIN",
+        new_y="NEXT",
+    )
+    pdf.multi_cell(
+        0,
+        5.5,
+        "Corner plots shall provide the front setback on both abutting streets.",
+        new_x="LMARGIN",
+        new_y="NEXT",
+    )
+    pdf.multi_cell(
+        0,
+        5.5,
+        "Provided that architectural sunshades up to 0.75 m may project into the setback.",
+        new_x="LMARGIN",
+        new_y="NEXT",
+    )
+    pdf.multi_cell(
+        0,
+        5.5,
+        "Explanation: Setback width is measured perpendicular to the plot boundary.",
+        new_x="LMARGIN",
+        new_y="NEXT",
+    )
+    pdf.ln(2)
 
-    # Table 2.1
+    # Table 2.1 with two-row headers and a footnote
     pdf.set_font("Helvetica", "B", 10)
-    pdf.cell(0, 7, "Table 2.1: Minimum Setbacks by Plot Size", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 6.5, "Table 2.1: Minimum Setbacks by Plot Size", new_x="LMARGIN", new_y="NEXT")
     headers = ["Zone Code", "Plot Area (sq.m)", "Front Setback (m)", "Max FAR"]
     rows = [
-        ["Z1", "Up to 240", "1.5", "1.75"],
+        ["Category", "Threshold", "Minimum", "Permissible"],
+        ["Z1*", "Up to 240", "1.5", "1.75"],
         ["Z1", "Above 240", "3.0", "2.25"],
         ["Z2", "All plots", "3.0", "2.50"],
     ]
     col_widths = [35, 50, 50, 40]
     for width, header in zip(col_widths, headers, strict=True):
-        pdf.cell(width, 7, header, border=1)
+        pdf.cell(width, 6.5, header, border=1)
     pdf.ln()
     pdf.set_font("Helvetica", "", 10)
     for row in rows:
         for width, cell_val in zip(col_widths, row, strict=True):
-            pdf.cell(width, 7, cell_val, border=1)
+            pdf.cell(width, 6.5, cell_val, border=1)
         pdf.ln()
+    pdf.set_font("Helvetica", "", 9.5)
+    pdf.cell(
+        0,
+        5.5,
+        "* Corner plots in Z1 require an additional 0.5 m splay.",
+        new_x="LMARGIN",
+        new_y="NEXT",
+    )
 
     # Page 2
     pdf.add_page()
@@ -88,13 +152,24 @@ def build_fixture_base_pdf(output_path: Path) -> None:
         0,
         6,
         "2.2 Maximum Building Height: No residential building in zone Z1 shall exceed "
-        "11.5 metres in height, subject to road width norms under clause 2.1.",
+        "11.5 metres in height, subject to road width norms under clause 2.1 and Floor Area Ratio limits.",
+        new_x="LMARGIN",
+        new_y="NEXT",
+    )
+    pdf.ln(2)
+    pdf.multi_cell(
+        0,
+        6,
+        "2.3 Temporary Construction Sheds: Temporary sheds for watchmen are permitted "
+        "during active construction.",
+        new_x="LMARGIN",
+        new_y="NEXT",
     )
     pdf.output(str(output_path))
 
 
 def build_fixture_amend_pdf(output_path: Path) -> None:
-    """Create a 1-page synthetic amendment PDF with explicit substitution instructions."""
+    """Create a 1-page synthetic amendment PDF that substitutes one clause, inserts one, and omits one."""
     pdf = _fixed_pdf()
     pdf.set_title("Synthetic Municipal Building (Amendment) Regulations 2024")
     pdf.add_page()
@@ -112,21 +187,36 @@ def build_fixture_amend_pdf(output_path: Path) -> None:
         0,
         6,
         "1. Short Title: These rules amend the Synthetic Municipal Building Regulations 2020.",
+        new_x="LMARGIN",
+        new_y="NEXT",
     )
     pdf.ln(2)
     pdf.multi_cell(
         0,
         6,
-        "2. Amendment of Clause 1.2: For clause 1.2, the following shall be substituted: "
-        "'1.2 Definitions: Floor Area Ratio (FAR) means total floor area divided by net plot area "
-        "excluding road widening strips.'",
+        "2. Amendment of Clause 2.2: For clause 2.2, the following shall be substituted: "
+        "'2.2 Maximum Building Height: No residential building in zone Z1 shall exceed "
+        "15.0 metres in height, subject to road width norms under clause 2.1.'",
+        new_x="LMARGIN",
+        new_y="NEXT",
     )
     pdf.ln(2)
     pdf.multi_cell(
         0,
         6,
-        "3. Amendment of Clause 2.2: After clause 2.2, insert the following note on solar "
-        "rooftop exemptions up to 1.8 metres.",
+        "3. Insertion after Clause 2.2: After clause 2.2, the following clause shall be inserted: "
+        "'2.2A Solar Rooftop Structures: Elevated solar panels up to 1.8 metres above the parapet "
+        "are exempt from height calculation.'",
+        new_x="LMARGIN",
+        new_y="NEXT",
+    )
+    pdf.ln(2)
+    pdf.multi_cell(
+        0,
+        6,
+        "4. Omission of Clause 2.3: Clause 2.3 shall be omitted.",
+        new_x="LMARGIN",
+        new_y="NEXT",
     )
     pdf.output(str(output_path))
 
@@ -157,33 +247,27 @@ def build_fixture_map_pdf(output_path: Path) -> None:
     pdf.set_font("Helvetica", "B", 14)
     pdf.cell(0, 10, "Synthetic Planning District 01 -- Land Use Map", new_x="LMARGIN", new_y="NEXT")
 
-    # Map frame
     pdf.set_draw_color(20, 20, 20)
     pdf.rect(20, 25, 120, 120)
 
-    # Zone Z1 block (warm yellow/amber)
     pdf.set_fill_color(250, 215, 100)
     pdf.rect(25, 30, 50, 110, style="DF")
 
-    # Zone Z2 block (coral/commercial)
     pdf.set_fill_color(230, 110, 95)
     pdf.rect(80, 30, 55, 110, style="DF")
 
-    # Legend box on the right
     pdf.set_draw_color(0, 0, 0)
     pdf.rect(145, 25, 50, 60)
     pdf.set_xy(148, 28)
     pdf.set_font("Helvetica", "B", 10)
     pdf.cell(40, 6, "LEGEND")
 
-    # Swatch Z1
     pdf.set_fill_color(250, 215, 100)
     pdf.rect(148, 38, 10, 8, style="DF")
     pdf.set_xy(161, 38)
     pdf.set_font("Helvetica", "", 9)
     pdf.cell(30, 8, "Z1 - Residential")
 
-    # Swatch Z2
     pdf.set_fill_color(230, 110, 95)
     pdf.rect(148, 50, 10, 8, style="DF")
     pdf.set_xy(161, 50)
@@ -295,13 +379,13 @@ def build_fixture_imported_zones_geojson(output_path: Path) -> None:
 
 
 def build_sample_payloads(fixtures_dir: Path) -> None:
-    """Write sample valid Schema v1.2 payloads for all schemas."""
+    """Write sample valid Schema v1.3 payloads for all schemas."""
     base_pdf = fixtures_dir / "fixture-base.pdf"
     sha256_hex = hashlib.sha256(base_pdf.read_bytes()).hexdigest()
     size_bytes = base_pdf.stat().st_size
 
     sample_document = {
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "doc_id": "fixture-base-2020",
         "title": "Synthetic Municipal Building Regulations 2020",
         "issuing_authority": "Synthetic Civic Authority",
@@ -309,6 +393,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
         "layer": "municipal",
         "role": "base",
         "legal_status": "in_force",
+        "acquisition_status": "acquired",
         "status_evidence": {
             "url": "https://example.org/gazette/2020-01-15",
             "quoted_line": "Notification No. 10/2020 — Regulations in force from 1 February 2020.",
@@ -348,18 +433,56 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
     )
 
     sample_clause_tree = {
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "doc_id": "fixture-base-2020",
         "jurisdiction": "xx-test-fixture",
         "legal_status": "in_force",
         "generated": {
             "parser": "pypdfium2",
-            "parser_version": "5.0.0",
+            "parser_version": "4.30.0",
             "pipeline_version": "0.1.0",
             "generated_at": "2026-11-23T00:00:00Z",
         },
         "clauses": [
             {
+                "eid": "chp_I__cl_1.1",
+                "native_number": "1.1",
+                "type": "clause",
+                "heading": "Short Title and Commencement",
+                "intro": "These regulations apply to all residential plots within the synthetic planning area:",
+                "content": None,
+                "wrap_up": None,
+                "children": ["chp_I__cl_1.1__item_a"],
+                "parent_eid": "chp_I",
+                "defines": None,
+                "defines_normalised": None,
+                "table_meta": None,
+                "cells": None,
+                "versions": [
+                    {
+                        "version_id": "v1",
+                        "valid_from": "2020-02-01",
+                        "valid_to": None,
+                        "heading": "Short Title and Commencement",
+                        "intro": "These regulations apply to all residential plots within the synthetic planning area:",
+                        "content": None,
+                        "wrap_up": None,
+                        "cells": None,
+                        "source_doc": "fixture-base-2020",
+                        "source_eid": "chp_I__cl_1.1",
+                        "effect_id": None,
+                        "citations": [
+                            {
+                                "doc_id": "fixture-base-2020",
+                                "page": 1,
+                                "bbox": [0.05, 0.12, 0.90, 0.18],
+                                "text_excerpt": "1.1 Short Title and Commencement",
+                            }
+                        ],
+                        "legal_status": "in_force",
+                        "omitted": False,
+                    }
+                ],
                 "clause_id": "fixture-base-2020:1.1",
                 "record_version": 1,
                 "record_id": "fixture-base-2020:1.1@v1",
@@ -373,9 +496,9 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
                 "number": "1.1",
                 "title": "Short Title and Commencement",
                 "level": 2,
-                "parent_id": "fixture-base-2020:1",
-                "order": 1,
-                "text": "These regulations apply to all residential plots within the synthetic planning area.",
+                "parent_id": "fixture-base-2020:CHAPTER I",
+                "order": 0,
+                "text": "These regulations apply to all residential plots within the synthetic planning area:",
                 "language": "en",
                 "tables": [],
                 "citations": [
@@ -383,7 +506,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
                         "doc_id": "fixture-base-2020",
                         "page": 1,
                         "bbox": [0.05, 0.12, 0.90, 0.18],
-                        "text_excerpt": "1.1 Short Title and Commencement: These regulations apply to all residential plots",
+                        "text_excerpt": "1.1 Short Title and Commencement",
                     }
                 ],
                 "cross_references": [],
@@ -391,57 +514,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
                 "applies_to_zones": ["Z1", "Z2"],
                 "verification": "machine_checked",
                 "verified_by": None,
-            },
-            {
-                "clause_id": "fixture-base-2020:2.1",
-                "record_version": 1,
-                "record_id": "fixture-base-2020:2.1@v1",
-                "record_supersedes": None,
-                "record_superseded_by": None,
-                "record_change_reason": None,
-                "supersedes": None,
-                "superseded_by": None,
-                "legal_status": "in_force",
-                "effective_from": "2020-02-01",
-                "number": "2.1",
-                "title": "Residential Setbacks",
-                "level": 2,
-                "parent_id": "fixture-base-2020:2",
-                "order": 2,
-                "text": "Every residential building in zone Z1 or Z2 shall provide minimum setbacks as per clause 1.1 and Table 2.1 below.",
-                "language": "en",
-                "tables": [
-                    {
-                        "table_id": "fixture-base-2020:2.1:t1",
-                        "caption": "Table 2.1: Minimum Setbacks by Plot Size",
-                        "headers": [
-                            "Zone Code",
-                            "Plot Area (sq.m)",
-                            "Front Setback (m)",
-                            "Max FAR",
-                        ],
-                        "rows": [
-                            ["Z1", "Up to 240", "1.5", "1.75"],
-                            ["Z1", "Above 240", "3.0", "2.25"],
-                            ["Z2", "All plots", "3.0", "2.50"],
-                        ],
-                        "page": 1,
-                    }
-                ],
-                "citations": [
-                    {
-                        "doc_id": "fixture-base-2020",
-                        "page": 1,
-                        "bbox": [0.05, 0.30, 0.90, 0.38],
-                        "text_excerpt": "2.1 Residential Setbacks: Every residential building in zone Z1 or Z2 shall",
-                    }
-                ],
-                "cross_references": ["fixture-base-2020:1.1"],
-                "amended_by": [],
-                "applies_to_zones": ["Z1", "Z2"],
-                "verification": "machine_checked",
-                "verified_by": None,
-            },
+            }
         ],
     }
     (fixtures_dir / "sample-clause-tree.json").write_text(
@@ -450,7 +523,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
 
     sample_zones = {
         "type": "FeatureCollection",
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "features": [
             {
                 "type": "Feature",
@@ -488,44 +561,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
                     "verified_by": None,
                     "notes": None,
                 },
-            },
-            {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Polygon",
-                    "coordinates": [
-                        [
-                            [10.010, 10.001],
-                            [10.019, 10.001],
-                            [10.019, 10.019],
-                            [10.010, 10.019],
-                            [10.010, 10.001],
-                        ]
-                    ],
-                },
-                "properties": {
-                    "zone_id": "fixture-pd-01:z0002",
-                    "record_version": 1,
-                    "record_id": "fixture-pd-01:z0002@v1",
-                    "record_supersedes": None,
-                    "record_superseded_by": None,
-                    "record_change_reason": None,
-                    "supersedes": None,
-                    "superseded_by": None,
-                    "zone_code": "Z2",
-                    "zone_label": "Mixed Use",
-                    "planning_district": "PD-01",
-                    "sheet": "Sheet-1",
-                    "source_map": "fixture-pd-01",
-                    "georef_run": "imported-v1",
-                    "extraction_method": "imported",
-                    "source_attribution": "Synthetic Planning Board Open GIS Portal (CC BY 4.0)",
-                    "area_sq_m": 15800.0,
-                    "verification": "human_verified",
-                    "verified_by": None,
-                    "notes": "Verified against synthetic atlas.",
-                },
-            },
+            }
         ],
     }
     (fixtures_dir / "sample-zones.geojson").write_text(
@@ -533,7 +569,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
     )
 
     sample_overrides = {
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "clause_fixes": [
             {
                 "clause_id": "fixture-base-2020:2.1",
@@ -574,15 +610,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
                         "pixel_y": 100,
                         "lon": 10.001,
                         "lat": 10.019,
-                    },
-                    {
-                        "id": "gcp-se",
-                        "label": "Southeast Synthetic Corner",
-                        "pixel_x": 500,
-                        "pixel_y": 500,
-                        "lon": 10.019,
-                        "lat": 10.001,
-                    },
+                    }
                 ],
             }
         ],
@@ -592,15 +620,10 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
     )
 
     sample_declarations = {
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "jurisdiction": "xx-test-fixture",
         "not_modelled": ["Fire safety requirements of the National Building Code"],
-        "known_gaps": [
-            {
-                "doc_id": "fixture-base-2020",
-                "description": "Tables not extracted by pypdfium2 baseline adapter",
-            }
-        ],
+        "known_gaps": [],
         "unread_documents": [
             {
                 "title": "Draft Circular 2026",
@@ -616,16 +639,43 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
     )
 
     sample_amendments = {
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "jurisdiction": "xx-test-fixture",
+        "effects": [
+            {
+                "effect_id": "fixture-amend-2024:eff_1",
+                "amending_doc": "fixture-amend-2024",
+                "amending_eid": "cl_2",
+                "target_doc": "fixture-base-2020",
+                "target_eid": "chp_II__cl_2.2",
+                "action": "substitute",
+                "new_nodes": [
+                    {
+                        "eid": "chp_II__cl_2.2",
+                        "native_number": "2.2",
+                        "type": "clause",
+                        "heading": "Maximum Building Height",
+                        "intro": None,
+                        "content": "No residential building in zone Z1 shall exceed 15.0 metres in height, subject to road width norms under clause 2.1.",
+                        "wrap_up": None,
+                        "parent_eid": "chp_II",
+                    }
+                ],
+                "valid_from": "2024-06-15",
+                "confidence": 0.95,
+                "applied": True,
+                "unapplied_reason": None,
+                "verification": "machine_checked",
+            }
+        ],
         "links": [
             {
                 "amending_clause": "fixture-amend-2024:2",
-                "target_clause": "fixture-base-2020:1.2",
+                "target_clause": "fixture-base-2020:2.2",
                 "action": "substitute",
                 "effective_date": "2024-06-15",
                 "confidence": "high",
-                "verification": "unverified",
+                "verification": "machine_checked",
             }
         ],
     }
@@ -634,7 +684,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
     )
 
     sample_consolidated = {
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "jurisdiction": "xx-test-fixture",
         "generated": {
             "pipeline_version": "0.1.0",
@@ -642,17 +692,18 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
         },
         "records": [
             {
-                "clause_id": "fixture-base-2020:1.2",
+                "clause_id": "fixture-base-2020:2.2",
                 "doc_id": "fixture-base-2020",
-                "number": "1.2",
-                "title": "Definitions",
-                "text": "Floor Area Ratio (FAR) means total floor area divided by net plot area excluding road widening strips.",
+                "number": "2.2",
+                "title": "Maximum Building Height",
+                "text": "No residential building in zone Z1 shall exceed 15.0 metres in height, subject to road width norms under clause 2.1.",
                 "tables": [],
                 "as_of_date": "2024-06-15",
                 "amendments_applied": ["fixture-amend-2024:2"],
                 "derived": True,
-                "method": "Deterministic substitution of high-confidence amendment fixture-amend-2024:2",
+                "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
                 "confidence": "high",
+                "omitted": False,
             }
         ],
         "unconsolidated": [],
@@ -662,7 +713,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
     )
 
     sample_geo_layers = {
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "jurisdiction": "xx-test-fixture",
         "layers": [
             {
@@ -684,7 +735,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
     )
 
     sample_clause_zone_tags = {
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "jurisdiction": "xx-test-fixture",
         "tags": [
             {
@@ -701,7 +752,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
     )
 
     sample_manifest = {
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "jurisdictions": [
             {
                 "id": "xx-test-fixture",
@@ -712,6 +763,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
                 "releases": [
                     {
                         "version": "0.1.0",
+                        "status": "published",
                         "released_at": "2026-11-23T00:00:00Z",
                         "licence": "CC BY 4.0",
                         "download_zip": "/data/xx-test-fixture/0.1.0/xx-test-fixture-0.1.0.zip",
@@ -722,6 +774,10 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
                             "clauses": [
                                 "/data/xx-test-fixture/0.1.0/fixture-base-2020.clauses.json",
                                 "/data/xx-test-fixture/0.1.0/fixture-amend-2024.clauses.json",
+                            ],
+                            "annotations": [
+                                "/data/xx-test-fixture/0.1.0/fixture-base-2020.annotations.json",
+                                "/data/xx-test-fixture/0.1.0/fixture-amend-2024.annotations.json",
                             ],
                             "amendments": "/data/xx-test-fixture/0.1.0/amendments.json",
                             "consolidated": "/data/xx-test-fixture/0.1.0/consolidated.json",

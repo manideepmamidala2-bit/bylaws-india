@@ -1,72 +1,192 @@
-# Data Model & JSON Schemas (`schemas/` — Schema v1.2)
+# Data Model & JSON Schemas (`schemas/` — Schema v1.3: Three Layers)
 
-All structured outputs in `bylaws-india` are validated against versioned **JSON Schema Draft 2020-12** (`https://json-schema.org/draft/2020-12/schema`) files located in `schemas/`. These 11 schema files are the single source of truth from which both Python Pydantic v2 models (`pipeline/bylaws/models/_generated.py`) and TypeScript types (`lib/types/generated.ts`) are generated via `make generate`.
+All structured outputs in `bylaws-india` are validated against twelve **JSON Schema Draft 2020-12** (`https://json-schema.org/draft/2020-12/schema`) files at `schema_version: "1.3"` in `schemas/`. These schemas are the single source of truth from which both Python Pydantic v2 models (`pipeline/bylaws/models/_generated.py`) and TypeScript types (`lib/types/generated.ts`) are generated via `make generate`.
 
-## Core Invariants Enforced by Schema v1.2
+Schema 1.3 models every regulatory document across **three distinct layers**:
 
-1. **R1 — Jurisdiction Isolation**: No schema hard-codes city names, planning district numbers, or authority-specific zone codes. All jurisdiction IDs follow the standard lowercase hyphenated pattern `^[a-z0-9]+(-[a-z0-9]+)*$`.
-2. **R2 — Mandatory Provenance with Page Bounding Boxes**: Every clause requires a non-empty `citations` array (`{ doc_id, page, bbox: [x0, y0, x1, y1] | null, text_excerpt }`), `effective_from`, `language` (`en | kn`), and `verification` (`unverified | machine_checked | human_verified`). Every zone feature requires `source_map`, `georef_run`, `extraction_method`, `source_attribution`, and `verification`.
-3. **R3 — Explicit Legal Status**: Every document, clause tree, and individual clause carries `legal_status` (`in_force | draft | superseded | withdrawn | status_unknown`). In `manifest.schema.json`, draft clause trees are isolated under `drafts.clauses` and never mixed into `files.clauses`.
-4. **R5 — Immutable Raw Metadata**: `document.schema.json` enforces `sha256` (64-character lowercase hex for `full_text` documents), `bytes`, `retrieved_at` (ISO 8601), `source_url`, `status_evidence`, `copies[]`, and `licence_or_terms`.
-5. **R6, R9 & R12 — Deterministic Overrides & Record Version Separation**: `overrides.schema.json` captures `clause_fixes`, `zone_tags`, `zone_fixes`, `map_curations`, and `amendment_links` as committed YAML files. Every clause and zone carries `record_version` (`integer >= 1`), `record_id` (`<id>@v<N>`), `record_supersedes`, `record_superseded_by`, and `record_change_reason` (separate from `legal_status`, Rule R12).
-6. **R13 — Explicit Text Rights**: Every document specifies `text_rights` (`{ mode: "full_text" | "reference_only", reason }`). Standards with `mode: "reference_only"` (`nbc-2016`, `aai-cczm`) carry `cited_provisions[]` without full text.
-7. **R14 — Derived Work Provenance**: `consolidated.schema.json` and `geo-layers.schema.json` tag project-derived outputs with `derived: true` and `method`.
+1. **Layer 1 — The Faithful Tree (`clause-tree.schema.json`)**: Mirrors each document's native hierarchy down to the smallest citable unit using Akoma Ntoso hierarchical addresses (`eid`).
+2. **Layer 2 — Stand-Off Annotations (`annotations.schema.json`)**: Stores meaning (`cross_reference`, `defined_term_use`, `provision_type`) in `<doc_id>.annotations.json` pointing at exact character spans `[start, end]`, never mutating the verbatim text.
+3. **Layer 3 — History, Versions & Effects (`amendments.schema.json`, `consolidated.schema.json`)**: Records dated `versions` on each node and amending instructions as structured `effects`, computing derived consolidated views for any date (`Rule R14`) while keeping data-correction `record_version` chains separate (`Rule R12`).
 
 ---
 
-## 1. `schemas/jurisdiction.schema.json` (`JurisdictionConfig`)
+## 1. Layer 1 — The Faithful Tree (`schemas/clause-tree.schema.json`)
 
-Validates `jurisdictions/<id>.yaml`.
+### Node Fields (`ClauseNode`)
 
-- `schema_version` (`"1.2"`), `id`, `name`, `aliases?`, `visibility` (`"public" | "test"`), `licence` (`string`), `country`, `state`, `building_types[]`, `parents[]`.
-- Declarations: `not_modelled?`, `unread_documents?`, `unobtainable_documents?`, `contested_status?`, `building_relevant_sections?`.
-- `documents[]`: `id`, `title`, `issuing_authority`, `doc_type` (`act | rules | regulations | bye_laws | amendment | notification | government_order | circular | map | standard_reference`), `layer` (`statute | state_rules | planning | municipal | orders | overlay | national_reference | boundary`), `legal_status` (`in_force | draft | superseded | withdrawn | status_unknown`), `status_evidence` (`{ url, quoted_line?, description? }`), `notification_number?`, `gazette_reference?`, `superseded_by_document?`, `licence_or_terms`, `text_rights?` (`{ mode, reason }`), `languages?` (`("en" | "kn")[]`), `role?`, `official_url?`, `mirror_urls?`, `source_url`, `notified_date?`, `effective_from?`, `amends?`, `supersedes?`, `cited_provisions?`.
-- `maps`: `boundaries[]`, `planning_districts?`, `zoning[]` (`traced | vector_pdf | grid_georeferenced_raster | osm_gcp_raster | imported`), `overlays?`.
+Every node in a structured document tree carries:
 
-## 2. `schemas/document.schema.json` (`DocumentMetadata`)
+- `eid`: Hierarchical address built from ancestors following the Akoma Ntoso naming approach. Each segment is `<prefix>_<sanitised_native_token>`, joined with `__` (e.g., `chp_II__cl_2.1__item_a`, `bl_6.0__cl_i__item_2`).
+- `native_number`: Exactly as printed in the source (e.g., `"6.0"`, `"(i)"`, `"(2)"`, `"2A"`, `"(aa)"`), or `null` for unnumbered provisos/tables/rows.
+- `type`: One of 22 structural node types:
+  `preface`, `preamble`, `part`, `chapter`, `section`, `regulation`, `bye_law`, `clause`, `subclause`, `item`, `paragraph`, `proviso`, `explanation`, `note`, `definition`, `schedule`, `annexure`, `appendix`, `form`, `table`, `table_row`, `signature_block`.
+- `heading`: Printed heading (`string | null`).
+- `intro`: Lead-in text before child nodes (`string | null`).
+- `content`: Body text for leaf nodes (`string | null`).
+- `wrap_up`: Closing text after child nodes (`string | null`).
+- `children`: Ordered list of child `eid`s (`string[]`), paired with `parent_eid` (`string | null`).
+- `defines` & `defines_normalised`: On `definition` nodes, the defined term exactly as printed (`'"Floor Area Ratio"'`) and normalized (`"floor area ratio"`).
+- `table_meta`: On `table` nodes:
+  - `columns`: Hierarchical header tree (`{ label, unit?, children? }[]`) supporting multi-row headers.
+  - `rows`: Ordered list of `table_row` child `eid`s (`tbl_2.1__row_1`, etc.).
+  - `footnotes`: Attached footnote definitions (`{ marker, text, cell_refs[] }[]`).
+  - `extraction`: `"complete"` or `"failed"` (with `page_image` and `gap_reason` when extraction fails).
+- `cells`: On `table_row` nodes, verbatim cell strings (`string[]`).
+- `citations`: Non-empty array of `{ doc_id, page, bbox, text_excerpt }` (`bbox: null` when word coordinates are unavailable; never invented, `Rule R8`).
+- `language`: `"en"` (or `"kn"`).
 
-Validates `data/raw/<jurisdiction>/<doc_id>.meta.json` and entries in `documents.json`.
+### Prefix & Akoma Ntoso Mapping Table
 
-- `schema_version`: Const `"1.2"`.
-- `doc_id`, `title`, `issuing_authority`, `doc_type?`, `layer`, `role`, `legal_status`, `status_evidence`, `notification_number?`, `gazette_reference?`, `superseded_by_document?`, `licence_or_terms`, `text_rights?`, `languages?`, `official_url?`, `mirror_urls?`, `copies?`, `cited_provisions?`, `notified_date`, `effective_from`, `amends`, `supersedes`, `source_url`, `retrieved_at`, `sha256`, `bytes`, `page_count`, `is_scanned`.
+Native tokens are sanitised (spaces removed, brackets dropped, case preserved) and must be unique within their parent; sibling `eid` collisions fail validation.
 
-## 3. `schemas/clause-tree.schema.json` (`ClauseTree`)
+| Schema 1.3 `type` | `eid` Prefix | Example Segment | Akoma Ntoso XML Element |
+|-------------------|--------------|-----------------|-------------------------|
+| `preface` | `pref_` | `pref_1` | `<preface>` |
+| `preamble` | `prea_` | `prea_1` | `<preamble>` |
+| `part` | `part_` | `part_I` | `<part>` |
+| `chapter` | `chp_` | `chp_II` | `<chapter>` |
+| `section` | `sec_` | `sec_13` | `<section>` |
+| `regulation` | `reg_` | `reg_3.1` | `<article>` / `<section>` |
+| `bye_law` | `bl_` | `bl_6.0` | `<article>` / `<clause>` |
+| `clause` | `cl_` | `cl_2.1` | `<clause>` |
+| `subclause` | `subcl_` | `subcl_1` | `<subclause>` |
+| `item` | `item_` | `item_a` | `<item>` / `<point>` |
+| `paragraph` | `para_` | `para_1` | `<paragraph>` |
+| `proviso` | `prov_` | `prov_1` | `<proviso>` / `<mod>` |
+| `explanation` | `expl_` | `expl_1` | `<authorialNote>` / `<block name="explanation">` |
+| `note` | `note_` | `note_1` | `<note>` |
+| `definition` | `def_` | `def_1.2` | `<def>` |
+| `schedule` | `sch_` | `sch_I` | `<attachment>` / `<doc name="schedule">` |
+| `annexure` | `ann_` | `ann_A` | `<attachment>` / `<doc name="annexure">` |
+| `appendix` | `app_` | `app_I` | `<attachment>` / `<doc name="appendix">` |
+| `form` | `form_` | `form_1` | `<attachment>` / `<doc name="form">` |
+| `table` | `tbl_` | `tbl_2.1` | `<table>` |
+| `table_row` | `row_` | `row_1` | `<tr>` |
+| `signature_block` | `sig_` | `sig_1` | `<conclusions>` / `<signature>` |
 
-Validates `data/processed/<jurisdiction>/documents/<doc_id>.clauses.json`.
+---
 
-- `schema_version`: Const `"1.2"`, `doc_id`, `jurisdiction`, `legal_status`, `generated`, `clauses[]`.
-- Each `ClauseNode` includes `clause_id`, `record_version`, `record_id`, `record_supersedes`, `record_superseded_by`, `record_change_reason`, `supersedes`, `superseded_by`, `legal_status`, `effective_from`, `number`, `title`, `level`, `parent_id`, `order`, `text`, `language` (`en | kn`), `tables[]`, `citations[]`, `cross_references[]`, `amended_by[]`, `applies_to_zones[]`, `verification`, `verified_by`.
+## 2. Layer 2 — Stand-Off Annotations (`schemas/annotations.schema.json`)
 
-## 4. `schemas/zones.schema.json` (`ZonesFeatureCollection`)
+Stored separately from nodes in `<doc_id>.annotations.json`. Each `AnnotationEntry` contains:
 
-Validates `data/processed/<jurisdiction>/zones.geojson`.
+- `annotation_id`: Unique ID (`<doc_id>:ann_<N>`).
+- `target`: `{ eid, version_id, field ("heading" | "intro" | "content" | "wrap_up" | "cell"), cell_index?, span: [start, end], span_text }`.
+- `kind`:
+  - `cross_reference` (`value` = target `eid` or `"unresolved:<raw_text>"`)
+  - `defined_term_use` (`value` = target `definition` node `eid`)
+  - `provision_type` (`value` = one of `definition`, `obligation`, `prohibition`, `permission`, `exception`, `procedure`, `fee`, `penalty`, `scope`, `commencement`)
+- `method`: `"rule"`, `"model"` (with `model_name` and `model_version`), or `"person"`.
+- `confidence`: `0.0`–`1.0`.
+- `verification`: `"unverified"`, `"machine_checked"`, or `"human_verified"`.
 
-- GeoJSON `FeatureCollection` with `schema_version: "1.2"` and `features[]` carrying `zone_id`, `record_version`, `record_id`, `record_supersedes`, `record_superseded_by`, `record_change_reason`, `supersedes`, `superseded_by`, `zone_code`, `zone_label`, `planning_district`, `sheet`, `source_map`, `georef_run`, `extraction_method` (`vector_pdf | grid_georeferenced_raster | osm_gcp_raster | imported | colour_segmentation | road_outline_fallback | manual`), `source_attribution`, `area_sq_m`, `verification`, `verified_by`, `notes`.
+**Span Validation**: Every annotation span `[start, end]` must lie within the target field's text and satisfy `field_text[start:end] == span_text`.
 
-## 5. `schemas/overrides.schema.json` (`JurisdictionOverrides`)
+---
 
-Validates `data/overrides/<jurisdiction>/*.yaml` (`schema_version: "1.2"`, `clause_fixes`, `zone_tags`, `zone_fixes`, `map_curations`, `amendment_links`).
+## 3. Layer 3 — History, Versions & Effects (`schemas/amendments.schema.json`, `schemas/consolidated.schema.json`)
 
-## 6. `schemas/declarations.schema.json` (`JurisdictionDeclarations`)
+### Node Versions (`versions[]`)
 
-Validates `data/processed/<jurisdiction>/declarations.json` (`schema_version: "1.2"`, `jurisdiction`, `not_modelled[]`, `known_gaps[]`, `unread_documents[]`, `unobtainable_documents[]`, `contested_status[]`, `building_relevant_sections?`).
+Every node carries an ordered `versions` list (`NodeVersion`):
+- `version_id` (`"v1"`, `"v2"`, ...), `valid_from` (commencement date from the instrument itself, `Rule R17`), `valid_to` (`null` while active, or closed when superseded by a later amendment), `heading`, `intro`, `content`, `wrap_up`, `cells`, `source_doc`, `source_eid`, `effect_id`, `citations`, `legal_status`, and `omitted`.
 
-## 7. `schemas/amendments.schema.json` (`JurisdictionAmendments`)
+### Amending Effects (`effects[]`)
 
-Validates `data/processed/<jurisdiction>/amendments.json` (`schema_version: "1.2"`, `jurisdiction`, `links[]` with `action: substitute | insert_after | insert_before | omit | modify | renumber`, `effective_date`, `confidence`, `verification`).
+Amending instruments are structured as their own Layer 1 documents AND produce `AmendmentEffect` entries:
+- `effect_id`, `amending_doc`, `amending_eid`, `target_doc`, `target_eid`, `action` (`"substitute" | "insert_after" | "insert_before" | "omit" | "renumber" | "modify_text"`), `new_nodes` (structured nodes from the quoted replacement/inserted text), `valid_from`, `confidence` (`0.0`–`1.0`), `applied`, `unapplied_reason`, `verification`.
+- Applying high-confidence effects (`confidence >= 0.8`) appends new versions on target nodes (or inserts `new_nodes` into the tree for `insert_after`/`insert_before`). Low-confidence effects are recorded with `applied: false` and displayed beside the target without mutating versions.
 
-## 8. `schemas/manifest.schema.json` (`ReleaseManifest`)
+### Consolidated View (`Rule R14`) & Record Versions (`Rule R12`)
 
-Validates `public/data/manifest.json` (`schema_version: "1.2"`, `jurisdictions[]` with `visibility`, `latest_release`, and `releases[]` referencing `documents`, `clauses`, `amendments`, `consolidated?`, `zones`, `boundary`, `gba_zones?`, `wards?`, `planning_districts?`, `overlays?`, `geo_layers?`, `clause_zone_tags?`, `sources_json?`, `sources_csv?`, `review_images`).
+- **Consolidated View (`compute_consolidated_view_as_of`)**: Derived per document per date (`as_of_date`) by selecting each node's version where `valid_from <= as_of_date < valid_to`. Marked `derived: true` with `applied_effects[]`.
+- **Record Versions (`Rule R12`)**: Data corrections applied via `data/overrides/<jurisdiction>/` increment `record_version` (`@v1` -> `@v2`) and never conflate data-correction history with legal amendment `versions`.
 
-## 9. `schemas/consolidated.schema.json` (`JurisdictionConsolidated`)
+---
 
-Validates `data/processed/<jurisdiction>/consolidated.json` (`schema_version: "1.2"`, `jurisdiction`, `generated`, `records[]` with `derived: true`, `method`, `confidence: "high"`, `as_of_date`, `amendments_applied[]`, and `unconsolidated[]`).
+## 4. Worked Example (All Three Layers)
 
-## 10. `schemas/geo-layers.schema.json` (`JurisdictionGeoLayers`)
+### Layer 1 Node (`fixture-base-2020.clauses.json`)
 
-Validates `data/processed/<jurisdiction>/geo-layers.json` (`schema_version: "1.2"`, `jurisdiction`, `layers[]` with `layer_id`, `title`, `kind` (`official_boundary | master_plan_zone | derived_overlay | reference`), `source`, `method`, `accuracy_m`, `derived`, `file`, `external_url`, `feature_count`).
+```json
+{
+  "eid": "chp_II__cl_2.1",
+  "native_number": "2.1",
+  "type": "clause",
+  "heading": "Residential Setback Norms",
+  "intro": "Every residential building in zone Z1 or Z2 shall provide minimum setbacks as per clause 1.1 and Table 2.1 below:",
+  "content": null,
+  "wrap_up": "Corner plots shall provide the front setback on both abutting streets.",
+  "children": [
+    "chp_II__cl_2.1__item_a",
+    "chp_II__cl_2.1__item_b",
+    "chp_II__cl_2.1__prov_1",
+    "chp_II__cl_2.1__expl_1",
+    "chp_II__cl_2.1__tbl_2.1"
+  ],
+  "parent_eid": "chp_II",
+  "versions": [
+    {
+      "version_id": "v1",
+      "valid_from": "2020-02-01",
+      "valid_to": null,
+      "heading": "Residential Setback Norms",
+      "intro": "Every residential building in zone Z1 or Z2 shall provide minimum setbacks as per clause 1.1 and Table 2.1 below:",
+      "content": null,
+      "wrap_up": "Corner plots shall provide the front setback on both abutting streets.",
+      "source_doc": "fixture-base-2020",
+      "source_eid": "chp_II__cl_2.1",
+      "effect_id": null,
+      "legal_status": "in_force",
+      "omitted": false
+    }
+  ]
+}
+```
 
-## 11. `schemas/clause-zone-tags.schema.json` (`JurisdictionClauseZoneTags`)
+### Layer 2 Stand-Off Annotation (`fixture-base-2020.annotations.json`)
 
-Validates `data/processed/<jurisdiction>/clause-zone-tags.json` (`schema_version: "1.2"`, `jurisdiction`, `tags[]` with `clause_id`, `doc_id`, `zone_code`, `reason`, `verification`).
+```json
+{
+  "annotation_id": "fixture-base-2020:ann_10",
+  "target": {
+    "eid": "chp_II__cl_2.1",
+    "version_id": "v1",
+    "field": "intro",
+    "span": [82, 92],
+    "span_text": "clause 1.1"
+  },
+  "kind": "cross_reference",
+  "value": "chp_I__cl_1.1",
+  "method": "rule",
+  "confidence": 0.95,
+  "verification": "machine_checked"
+}
+```
+
+### Layer 3 Amending Effect (`amendments.json`)
+
+```json
+{
+  "effect_id": "fixture-amend-2024:eff_1",
+  "amending_doc": "fixture-amend-2024",
+  "amending_eid": "cl_2",
+  "target_doc": "fixture-base-2020",
+  "target_eid": "chp_II__cl_2.2",
+  "action": "substitute",
+  "new_nodes": [
+    {
+      "eid": "chp_II__cl_2.2",
+      "native_number": "2.2",
+      "type": "clause",
+      "heading": "Maximum Building Height",
+      "content": "No residential building in zone Z1 shall exceed 15.0 metres in height, subject to road width norms under clause 2.1.",
+      "parent_eid": "chp_II"
+    }
+  ],
+  "valid_from": "2024-06-15",
+  "confidence": 0.95,
+  "applied": true,
+  "verification": "machine_checked"
+}
+```

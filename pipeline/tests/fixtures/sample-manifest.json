@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.2",
+  "schema_version": "1.3",
   "jurisdictions": [
     {
       "id": "xx-test-fixture",
@@ -13,6 +13,7 @@
       "releases": [
         {
           "version": "0.1.0",
+          "status": "published",
           "released_at": "2026-11-23T00:00:00Z",
           "licence": "CC BY 4.0",
           "download_zip": "/data/xx-test-fixture/0.1.0/xx-test-fixture-0.1.0.zip",
@@ -23,6 +24,10 @@
             "clauses": [
               "/data/xx-test-fixture/0.1.0/fixture-base-2020.clauses.json",
               "/data/xx-test-fixture/0.1.0/fixture-amend-2024.clauses.json"
+            ],
+            "annotations": [
+              "/data/xx-test-fixture/0.1.0/fixture-base-2020.annotations.json",
+              "/data/xx-test-fixture/0.1.0/fixture-amend-2024.annotations.json"
             ],
             "amendments": "/data/xx-test-fixture/0.1.0/amendments.json",
             "consolidated": "/data/xx-test-fixture/0.1.0/consolidated.json",

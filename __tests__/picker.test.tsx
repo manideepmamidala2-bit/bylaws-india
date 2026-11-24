@@ -4,7 +4,7 @@ import JurisdictionPickerPage, { getHomePageProps } from "@/app/page";
 import type { ReleaseManifest } from "@/lib/data";
 
 const FIXTURE_MANIFEST: ReleaseManifest = {
-  schema_version: "1.2",
+  schema_version: "1.3",
   jurisdictions: [
     {
       id: "in-ka-bengaluru-south",
@@ -126,7 +126,7 @@ describe("JurisdictionPickerPage server filtering and status tests", () => {
     vi.spyOn(globalThis, "fetch").mockResolvedValue({
       ok: true,
       status: 200,
-      json: async () => ({ schema_version: "1.2", jurisdictions: [] }),
+      json: async () => ({ schema_version: "1.3", jurisdictions: [] }),
     } as Response);
 
     const ui = await JurisdictionPickerPage();

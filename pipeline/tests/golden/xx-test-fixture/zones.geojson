@@ -1,6 +1,6 @@
 {
   "type": "FeatureCollection",
-  "schema_version": "1.2",
+  "schema_version": "1.3",
   "features": [
     {
       "type": "Feature",
@@ -48,7 +48,7 @@
         "georef_run": "imported-v1",
         "extraction_method": "imported",
         "source_attribution": "Synthetic Planning Board Open GIS Portal (CC BY 4.0)",
-        "area_sq_m": 1744032.39,
+        "area_sq_m": 1745357.99,
         "verification": "machine_checked",
         "verified_by": null,
         "notes": null
@@ -100,7 +100,7 @@
         "georef_run": "imported-v1",
         "extraction_method": "imported",
         "source_attribution": "Synthetic Planning Board Open GIS Portal (CC BY 4.0)",
-        "area_sq_m": 2180141.73,
+        "area_sq_m": 2181710.6,
         "verification": "human_verified",
         "verified_by": null,
         "notes": "Verified against synthetic planning atlas."
@@ -152,7 +152,7 @@
         "georef_run": "imported-v1",
         "extraction_method": "imported",
         "source_attribution": "Synthetic Planning Board Open GIS Portal (CC BY 4.0)",
-        "area_sq_m": 2180141.73,
+        "area_sq_m": 2181710.6,
         "verification": "human_verified",
         "verified_by": null,
         "notes": "Updated label after human verification (supersedes @v1)."
