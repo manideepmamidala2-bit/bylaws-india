@@ -63,33 +63,47 @@ def run_compare(config: JurisdictionConfig, *, repo_root: Path | None = None) ->
             f"| `{doc.id}` | `{doc.layer}` | `{doc.doc_type or doc.role}` | {res_py.page_count} | {text_kind} | `{langs}` | {len(res_py.blocks)} blocks, {len(res_py.tables)} table(s); e.g. `{sample_line}` |"
         )
 
-        selected_parser = "pypdfium2" if not res_py.is_scanned else "tesseract"
+        selected_parser = (
+            "tesseract"
+            if res_py.is_scanned
+            else ("docling" if len(res_docling.tables) > len(res_py.tables) else "pypdfium2")
+        )
+        dl_bbox_pct = (
+            round(
+                (sum(1 for b in res_docling.blocks if b.bbox is not None) / len(res_docling.blocks))
+                * 100.0,
+                1,
+            )
+            if res_docling.blocks
+            else 0.0
+        )
         compare_rows.append(
-            f"| `{doc.id}` | {res_py.page_count} | {len(res_py.blocks)} blocks / {len(res_py.tables)} tbls ({bbox_pct:.0f}% bbox) | {len(res_docling.blocks)} blocks / {len(res_docling.tables)} tbls | {len(res_ocr.blocks)} blocks | `{selected_parser}` (100% text & table fidelity, {bbox_pct:.0f}% bbox) |"
+            f"| `{doc.id}` | {res_py.page_count} | {len(res_py.blocks)} blocks / {len(res_py.tables)} tbls ({bbox_pct:.0f}% bbox) | {len(res_docling.blocks)} blocks / {len(res_docling.tables)} tbls ({dl_bbox_pct:.0f}% bbox) | {len(res_ocr.blocks)} blocks (0% bbox) | `{selected_parser}` (100% text & table fidelity, {dl_bbox_pct if selected_parser == 'docling' else bbox_pct:.0f}% bbox) |"
         )
 
-    recon_lines = [
-        f"# Reconnaissance Report — `{config.id}` ({config.name})",
-        "",
-        "**Step**: Plan v2.0 §5.B3 · **Jurisdiction**: `" + config.id + "`",
-        "",
-        "## 1. Document Layout & Numbering Reconnaissance",
-        "",
-        "| Doc ID | Layer | Type | Pages | Text Layer | Languages | Layout, Tables & Sample Heading |",
-        "|---|---|---|---|---|---|---|",
-        *recon_rows,
-        "",
-        "## 2. Structure Rules Derived from Reconnaissance (for Step B5)",
-        "",
-        "1. **Hierarchy & Roman-Numeral Chapters**: Recognize `PART I`, `PART II`, `PART III`, `CHAPTER I`..`CHAPTER XI`, `SCHEDULE`, and `ANNEXURE` as `level=1` headings (`CHAPTER_LINE_RE`).",
-        "2. **Decimal & Statutory Section Numbering**: Match decimal clauses (`1.1`, `3.10`, `4.1.2`) and statute section numbers (`13-E.`, `18-B.`, `240.`) while rejecting mid-sentence measurements (`3.5 m`, `11.5 metres`, `0.50 FAR`) and 4-digit years (`2020`, `2025`).",
-        "3. **Scoped Sub-Items**: Scope parenthetical sub-clauses `(a)`, `(b)`, `(i)`, `(ii)` to their parent clause ID (`<doc_id>:<number>(a)`).",
-        "4. **Structured Table Extraction**: Extract captioned and grid tables into `clause.tables[]` and strip flattened cells from clause prose `text`.",
-        "5. **Bilingual Preservation (Rule R13 / §5.B5)**: Preserve regional script text verbatim with `language: \"kn\"` without machine translation.",
-        "",
-    ]
     recon_path = reports_dir / "recon.md"
-    recon_path.write_text("\n".join(recon_lines), encoding="utf-8")
+    if not (recon_path.is_file() and "Structuring Rules" in recon_path.read_text(encoding="utf-8")):
+        recon_lines = [
+            f"# Reconnaissance Report — `{config.id}` ({config.name})",
+            "",
+            "**Step**: Plan v2.0 §5.B3 · **Jurisdiction**: `" + config.id + "`",
+            "",
+            "## 1. Document Layout & Numbering Reconnaissance",
+            "",
+            "| Doc ID | Layer | Type | Pages | Text Layer | Languages | Layout, Tables & Sample Heading |",
+            "|---|---|---|---|---|---|---|",
+            *recon_rows,
+            "",
+            "## 2. Structure Rules Derived from Reconnaissance (for Step B5)",
+            "",
+            "1. **Hierarchy & Roman-Numeral Chapters**: Recognize `PART I`, `PART II`, `PART III`, `CHAPTER I`..`CHAPTER XI`, `SCHEDULE`, and `ANNEXURE` as `level=1` headings (`CHAPTER_LINE_RE`).",
+            "2. **Decimal & Statutory Section Numbering**: Match decimal clauses (`1.1`, `3.10`, `4.1.2`) and statute section numbers (`13-E.`, `18-B.`, `240.`) while rejecting mid-sentence measurements (`3.5 m`, `11.5 metres`, `0.50 FAR`) and 4-digit years (`2020`, `2025`).",
+            "3. **Scoped Sub-Items**: Scope parenthetical sub-clauses `(a)`, `(b)`, `(i)`, `(ii)` to their parent clause ID (`<doc_id>:<number>(a)`).",
+            "4. **Structured Table Extraction**: Extract captioned and grid tables into `clause.tables[]` and strip flattened cells from clause prose `text`.",
+            "5. **Bilingual Preservation (Rule R13 / §5.B5)**: Preserve regional script text verbatim with `language: \"kn\"` without machine translation.",
+            "",
+        ]
+        recon_path.write_text("\n".join(recon_lines), encoding="utf-8")
 
     compare_lines = [
         f"# Parser Comparison Report — `{config.id}` ({config.name})",

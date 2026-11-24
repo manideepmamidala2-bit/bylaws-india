@@ -43,8 +43,8 @@ TYPE_TO_PREFIX: dict[str, str] = {
 }
 
 CHAPTER_LINE_RE = re.compile(
-    r"^(?P<kind>PART|CHAPTER|SCHEDULE|ANNEXURE|APPENDIX|FORM)\s*[-–—]?\s*"
-    r"(?P<num>(?:[IVXLCDM]+|\d+)(?:\s*-\s*[A-Z0-9]+|[A-Z])?)\b"
+    r"^(?P<kind>PART|CHAPTER|C\s*H\s*A\s*P\s*T\s*E\s*R|SCHEDULE|ANNEXURE|APPENDIX|FORM)[\s.:\-\u2013\u2014]+"
+    r"(?P<num>(?:[IVXLCDM]+|\d+)(?:\s*-\s*[A-Z0-9]+|[A-Z])?)(?:\.0)?\b"
     r"(?:\s*[:.\-\u2013\u2014]?\s*(?P<title>.*))?$",
     re.IGNORECASE,
 )
@@ -108,7 +108,7 @@ LEADING_QUOTED_TERM_RE = re.compile(
 )
 
 MEASUREMENT_UNIT_RE = re.compile(
-    r"^(?:m|mm|cm|km|sq\.?\s*m|sq\.?\s*ft|sft|sqm|ft|feet|metre|metres|meter|meters|"
+    r"^(?:m|mm|cm|km|mtrs?|mts?|sq\.?\s*m|sq\.?\s*ft|sft|sqm|ft|feet|metre|metres|meter|meters|"
     r"ha|hectare|hectares|acre|acres|percent|%|times|floors?|storeys?)\b",
     re.IGNORECASE,
 )
@@ -259,11 +259,16 @@ def _match_structural_line(line: str) -> tuple[str, str, str] | None:
 
     chap_match = CHAPTER_LINE_RE.match(line)
     if chap_match:
-        kind_word = chap_match.group("kind").lower()
+        kind_word = re.sub(r"\s+", "", chap_match.group("kind")).lower()
         num_word = re.sub(r"\s+", "", chap_match.group("num").upper())
         title_part = (chap_match.group("title") or "").strip()
+        if title_part.startswith("0:"):
+            title_part = title_part[2:].strip()
         # Reject TOC lines ending with a bare page number when kind is CHAPTER
         if kind_word == "chapter" and re.search(r"\s+\d{1,2}$", title_part):
+            return None
+        # Reject subtitle lines like "SCHEDULE II OF THE NATIONAL BUILDING ORGANISATION"
+        if kind_word == "schedule" and title_part.upper().startswith("OF THE "):
             return None
         number = f"{kind_word.upper()} {num_word}"
         return kind_word, number, title_part or number
@@ -472,10 +477,14 @@ def build_clause_tree_from_parse_result(
             parsed_line is not None
             and current_section_node is not None
             and current_section_node.get("number") == "TOC"
-            and parsed_line[0] != "unnumbered_section"
-            and re.search(r"\s+\d{1,2}$", line)
         ):
-            parsed_line = None
+            p_kind, p_num, _p_rest = parsed_line
+            is_exit_from_toc = (
+                p_kind == "unnumbered_section"
+                or (p_kind in {"part", "chapter"} and p_num.endswith((" 1", " I")))
+            )
+            if not is_exit_from_toc:
+                parsed_line = None
         if parsed_line is None and current is None and _is_top_title_banner(block):
             continue
 
@@ -563,6 +572,26 @@ def build_clause_tree_from_parse_result(
                 title, body = _split_title_and_body(rest)
                 base_num = number.split("(")[0]
                 parts = base_num.split(".")
+
+                # Reject 2-decimal FAR/measurement values (e.g. 1.50 or 1.75 inside section 13.0)
+                active_sec_num = (
+                    str(current_section_node.get("native_number") or "")
+                    if current_section_node is not None
+                    else ""
+                )
+                active_sec_prefix = active_sec_num.split(".")[0] if active_sec_num else ""
+                if (
+                    kind == "clause"
+                    and len(parts) == 2
+                    and parts[1] in {"25", "50", "75"}
+                    and active_sec_prefix
+                    and parts[0] != active_sec_prefix
+                    and current is not None
+                ):
+                    current["content_parts"].append(line)
+                    current["blocks"].append(block)
+                    continue
+
                 parent_eid: str | None = current_container_eid
                 level = 2 if current_container_eid else 1
                 is_dot_zero_section = (
@@ -577,18 +606,12 @@ def build_clause_tree_from_parse_result(
                     level = 2 if current_container_eid else 1
                     in_definitions_section = "DEFINITION" in rest.upper()
                 elif kind == "int_clause":
-                    # Check if this integer continues a .0 section sequence (e.g. 34. after 33.0)
-                    prev_sec_num = (
-                        str(current_section_node.get("native_number") or "")
-                        if current_section_node
-                        else ""
-                    )
-                    prev_sec_prefix = prev_sec_num.split(".")[0] if "." in prev_sec_num else ""
+                    # Check if this integer continues a .0 section sequence (e.g. 14. after 13.0 or 34. after 33.0)
                     if (
                         number.isdigit()
-                        and prev_sec_prefix.isdigit()
-                        and int(number) == int(prev_sec_prefix) + 1
-                        and int(number) >= 20
+                        and active_sec_prefix.isdigit()
+                        and int(number) == int(active_sec_prefix) + 1
+                        and int(number) >= 2
                     ):
                         is_dot_zero_section = True
                         parent_eid = current_container_eid
@@ -611,20 +634,28 @@ def build_clause_tree_from_parse_result(
                             level = int(cand["level"]) + 1
                             break
                 elif len(parts) == 2:
-                    sec_candidate = f"{parts[0]}.0"
                     if (
                         current_section_node is not None
-                        and current_section_node.get("native_number") == sec_candidate
+                        and active_sec_prefix == parts[0]
                     ):
                         parent_eid = str(current_section_node["eid"])
                         level = int(current_section_node["level"]) + 1
                 elif len(parts) > 2:
                     parent_num = ".".join(parts[:-1])
+                    matched_parent = False
                     for cand in reversed(raw_nodes):
                         if cand.get("native_number") == parent_num:
                             parent_eid = cand["eid"]
                             level = int(cand["level"]) + 1
+                            matched_parent = True
                             break
+                    if (
+                        not matched_parent
+                        and current_section_node is not None
+                        and active_sec_prefix == parts[0]
+                    ):
+                        parent_eid = str(current_section_node["eid"])
+                        level = int(current_section_node["level"]) + 1
 
                 def_info = _extract_defined_term(
                     body,

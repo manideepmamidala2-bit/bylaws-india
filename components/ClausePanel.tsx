@@ -268,18 +268,32 @@ export function ClausePanel({
                         </>
                       )}
                     </span>
-                    {firstPage !== null &&
-                      sourceHref &&
-                      sourceHref.startsWith("http") && (
-                        <a
-                          href={`${sourceHref}#page=${firstPage}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[#080909] underline underline-offset-3"
-                        >
-                          View source p. {firstPage}
-                        </a>
-                      )}
+                    <div className="flex flex-wrap items-center gap-3">
+                      {firstPage !== null &&
+                        sourceHref &&
+                        sourceHref.startsWith("http") && (
+                          <a
+                            href={`${sourceHref}#page=${firstPage}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#080909] underline underline-offset-3"
+                          >
+                            View source p. {firstPage}
+                          </a>
+                        )}
+                      {firstPage !== null &&
+                        clause.archive_url &&
+                        clause.archive_url.startsWith("http") && (
+                          <a
+                            href={`${clause.archive_url}#page=${firstPage}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#5b5e56] underline underline-offset-3 hover:text-[#080909]"
+                          >
+                            Archive p. {firstPage} ↗
+                          </a>
+                        )}
+                    </div>
                   </div>
 
                   {hasVersionHistory && (

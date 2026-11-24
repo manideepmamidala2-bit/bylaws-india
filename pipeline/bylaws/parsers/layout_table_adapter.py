@@ -48,10 +48,23 @@ TABLE_HEADER_KEYWORDS: tuple[str, ...] = (
 def _is_hanging_indent_clause_table(
     headers: list[str], rows: list[list[str]]
 ) -> bool:
-    """Return True if a Docling grid is a 2/3-column hanging-indent clause or definition list rather than a data table."""
+    """Return True if a Docling grid is a 2/3-column hanging-indent clause/definition list or TOC grid rather than a data table."""
     if not headers:
         return False
     all_rows = [headers, *rows]
+    # Check for Table of Contents leader / page-number grid (where last non-empty cell in each row ends with a page number and rows have TOC leaders/headings)
+    non_empty_rows = [[c.strip() for c in r if c.strip()] for r in all_rows if any(c.strip() for c in r)]
+    if non_empty_rows and all(len(r) >= 2 and bool(re.search(r"\d+$", r[-1])) for r in non_empty_rows):
+        has_toc_dots_or_headings = any(
+            "...." in " ".join(r)
+            or "list of tables" in r[0].lower()
+            or "regulations for" in r[0].lower()
+            or "appendix" in r[0].lower()
+            for r in non_empty_rows
+        )
+        if has_toc_dots_or_headings:
+            return True
+
     clause_num_rows = sum(
         1
         for r in all_rows

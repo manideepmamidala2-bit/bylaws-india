@@ -77,29 +77,33 @@
 
 ### Functional Completeness
 
-- [ ] A-001 R1: `data/reports/in-ka-bengaluru-south/parser-comparison.md` and `docs/decisions/004-bengaluru-south-parser-and-map-decisions.md` benchmark real `pypdfium2`, `docling` standard pipeline with table structure, and `tesseract` (plus R4 evaluation of Docling VLM) on `bbl-2003.pdf` and `rmp2015-zr.pdf`
-- [ ] A-002 R2: `bbl-2003.clauses.json` and `rmp2015-zr.clauses.json` are structured completely to Schema 1.3 Layer 1 (`versions: [v1]` only) with `definition`, `proviso`, `explanation`, `note`, `schedule`, `appendix`, `table`, and `table_row` nodes, running headers stripped, and zero content pages dropped
-- [ ] A-003 R3: `bbl-2003.annotations.json` and `rmp2015-zr.annotations.json` contain valid `cross_reference`, `defined_term_use`, and `provision_type` stand-off annotations
-- [ ] A-004 R3: `data/reports/in-ka-bengaluru-south/qa.md` confirms 100% page citation coverage, $\ge 95\%$ `bbox` coverage, $\ge 98\%$ page text coverage, explained source numbering gaps, and a 30-node stratified page-image self-check per document (60 nodes total)
-- [ ] A-005 R4: Release `2.0.0` is published in `public/data/in-ka-bengaluru-south/2.0.0/` and `public/data/manifest.json` (with Release `1.0.0` kept as `withdrawn`), and the web UI displays the prominent `"Two base documents published. Amendments not yet applied..."` notice and side-by-side official + Wayback archive `#page=N` links
+- [x] A-001 R1: `data/reports/in-ka-bengaluru-south/parser-comparison.md` and `docs/decisions/004-bengaluru-south-parser-and-map-decisions.md` benchmark real `pypdfium2`, `docling` standard pipeline with table structure, and `tesseract` (plus R4 evaluation of Docling VLM) on `bbl-2003.pdf` and `rmp2015-zr.pdf`
+- [x] A-002 R2: `bbl-2003.clauses.json` and `rmp2015-zr.clauses.json` are structured completely to Schema 1.3 Layer 1 (`versions: [v1]` only) with `definition`, `proviso`, `explanation`, `note`, `schedule`, `appendix`, `table`, and `table_row` nodes, running headers stripped, and zero content pages dropped
+- [x] A-003 R3: `bbl-2003.annotations.json` and `rmp2015-zr.annotations.json` contain valid `cross_reference`, `defined_term_use`, and `provision_type` stand-off annotations
+- [x] A-004 R3: `data/reports/in-ka-bengaluru-south/qa.md` confirms 100% page citation coverage, $\ge 95\%$ `bbox` coverage, $\ge 98\%$ page text coverage, explained source numbering gaps, and a 30-node stratified page-image self-check per document (60 nodes total)
+- [x] A-005 R4: Release `2.0.0` is published in `public/data/in-ka-bengaluru-south/2.0.0/` and `public/data/manifest.json` (with Release `1.0.0` kept as `withdrawn`), and the web UI displays the prominent `"Two base documents published. Amendments not yet applied..."` notice and side-by-side official + Wayback archive `#page=N` links
 
 ### Behavioral Correctness
 
-- [ ] A-006 R2: Every `table` node in `bbl-2003.clauses.json` and `rmp2015-zr.clauses.json` has structured `table_meta` and `table_row` children (or an explicit declared gap), and raw table text is not duplicated in surrounding prose
-- [ ] A-007 R4: Map (`/j/in-ka-bengaluru-south`) and Review (`/j/in-ka-bengaluru-south/review`) continue showing honest empty-map notices when `zones.features` and `boundary.features` are empty in Release `2.0.0` (before PRs 06–07)
+- [x] A-006 R2: Every `table` node in `bbl-2003.clauses.json` and `rmp2015-zr.clauses.json` has structured `table_meta` and `table_row` children (or an explicit declared gap), and raw table text is not duplicated in surrounding prose
+- [x] A-007 R4: Map (`/j/in-ka-bengaluru-south`) and Review (`/j/in-ka-bengaluru-south/review`) continue showing honest empty-map notices when `zones.features` and `boundary.features` are empty in Release `2.0.0` (before PRs 06–07)
 
 ### Scenario Coverage
 
-- [ ] A-008 R1: Falsifiable tests in `pipeline/tests/test_anchor_documents_pr05.py` are shown failing first (Rule R11) and pass once structuring, annotations, QA, and Release `2.0.0` publication complete
-- [ ] A-009 R4: All Vitest and `axe-core` WCAG AA checks pass across all routes with Release `2.0.0` active
+- [x] A-008 R1: Falsifiable tests in `pipeline/tests/test_anchor_documents_pr05.py` are shown failing first (Rule R11) and pass once structuring, annotations, QA, and Release `2.0.0` publication complete
+- [x] A-009 R4: All Vitest and `axe-core` WCAG AA checks pass across all routes with Release `2.0.0` active
 
 ### Code Quality
 
-- [ ] A-010 Pattern consistency & R1 compliance: `structure.py`, `annotations.py`, `validate.py`, and web components contain zero hard-coded jurisdiction strings (`in-ka-bengaluru-south`, `bbl-2003`, `rmp2015-zr`)
+- [x] A-010 Pattern consistency & R1 compliance: `structure.py`, `annotations.py`, `validate.py`, and web components contain zero hard-coded jurisdiction strings (`in-ka-bengaluru-south`, `bbl-2003`, `rmp2015-zr`)
 
 ## Notes
 
 - Check items as you review: `- [x]`
+
+## Deletion Candidates
+
+- `None — this change adds new functionality without making existing code redundant`
 
 ## Assumptions
 

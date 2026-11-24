@@ -108,3 +108,9 @@ The Schema v1.2 contracts MUST enforce provenance, record version separation, te
 **Why**: Allows the Sources and Data pages to display the real acquired source register in PR 04 (marked `"Not yet structured"`) while Map, Documents, Timeline, and Review pages continue showing `"No data published yet"` until PR 05 publishes Release `2.0.0`.
 **Rejected**: Creating a premature release entry in `releases[]` for PR 04, which would violate `00-overview.md` §7 ("Real releases start at `2.0.0` (PR 05)").
 *Introduced by*: 261124-986m-pr-04-acquire-core-documents
+
+### Selective Structuring Flag (`structured`) for Multi-Stage PR Rollout
+**Decision**: Add an optional `structured` (`boolean | null`, default `true`) field to `documentConfig` in `schemas/jurisdiction.schema.json` so `bylaws structure`, `bylaws amendments`, `bylaws validate`, and `bylaws publish` can structure and publish the active base documents (`bbl-2003` and `rmp2015-zr` in PR 05 Release `2.0.0`) while retaining all 12 core register documents in `documents.json` / `sources.json` / `sources.csv` and declaring `"Two base documents published. Amendments not yet applied: the text shown is the original wording, which may have been changed since."` in `declarations.json`.
+**Why**: `05-structure-anchor-documents.md` requires Release `2.0.0` to publish only the two base anchor documents with `v1` nodes while deferring the Building Bye-laws amendment chain to PR 08 and the Zoning Regulations amendment chain to PR 09, without regressing the 12-document core source register established in PR 04.
+**Rejected**: Temporarily deleting the 8 acquired amendment documents from `jurisdictions/in-ka-bengaluru-south.yaml`.
+*Introduced by*: 261124-fgv0-pr-05-structure-anchor-documents
