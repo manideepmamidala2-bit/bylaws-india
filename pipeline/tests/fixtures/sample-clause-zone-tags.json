@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.2",
+  "jurisdiction": "xx-test-fixture",
+  "tags": [
+    {
+      "clause_id": "fixture-base-2020:2.1",
+      "doc_id": "fixture-base-2020",
+      "zone_code": "Z1",
+      "reason": "Every residential building in zone Z1 or Z2 shall provide minimum setbacks",
+      "verification": "machine_checked"
+    }
+  ]
+}

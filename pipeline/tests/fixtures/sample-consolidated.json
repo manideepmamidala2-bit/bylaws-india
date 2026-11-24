@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.2",
+  "jurisdiction": "xx-test-fixture",
+  "generated": {
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "records": [
+    {
+      "clause_id": "fixture-base-2020:1.2",
+      "doc_id": "fixture-base-2020",
+      "number": "1.2",
+      "title": "Definitions",
+      "text": "Floor Area Ratio (FAR) means total floor area divided by net plot area excluding road widening strips.",
+      "tables": [],
+      "as_of_date": "2024-06-15",
+      "amendments_applied": [
+        "fixture-amend-2024:2"
+      ],
+      "derived": true,
+      "method": "Deterministic substitution of high-confidence amendment fixture-amend-2024:2",
+      "confidence": "high"
+    }
+  ],
+  "unconsolidated": []
+}

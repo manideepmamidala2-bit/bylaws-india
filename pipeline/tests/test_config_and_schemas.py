@@ -29,13 +29,14 @@ FIXTURES_DIR = Path(__file__).resolve().parent / "fixtures"
 
 
 @pytest.mark.parametrize("schema_name", SCHEMA_NAMES)
-def test_all_eight_schemas_exist_and_are_valid_draft_2020_12(schema_name: str) -> None:
-    assert len(SCHEMA_NAMES) == 8
+def test_all_eleven_schemas_exist_and_are_valid_draft_2020_12(schema_name: str) -> None:
+    assert len(SCHEMA_NAMES) == 11
     schema = load_schema(schema_name)
     assert schema["$schema"] == "https://json-schema.org/draft/2020-12/schema"
     assert schema["type"] == "object"
     schema_text = json.dumps(schema)
     assert "_fixture-test" not in schema_text
+    assert "xx-test-fixture" not in schema_text
 
 
 def test_legacy_fixture_test_yaml_is_removed() -> None:
@@ -138,6 +139,9 @@ def test_invalid_jurisdiction_config_id_mismatch_fails() -> None:
         (FIXTURES_DIR / "sample-manifest.json", "manifest"),
         (FIXTURES_DIR / "sample-declarations.json", "declarations"),
         (FIXTURES_DIR / "sample-amendments.json", "amendments"),
+        (FIXTURES_DIR / "sample-consolidated.json", "consolidated"),
+        (FIXTURES_DIR / "sample-geo-layers.json", "geo-layers"),
+        (FIXTURES_DIR / "sample-clause-zone-tags.json", "clause-zone-tags"),
     ],
 )
 def test_sample_payload_files_validate_against_schemas(

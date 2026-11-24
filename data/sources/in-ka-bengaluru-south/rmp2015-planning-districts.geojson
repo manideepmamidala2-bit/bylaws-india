@@ -1,0 +1,347 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "district_code": "1.09",
+        "district_name": "Basavanagudi",
+        "sheet": "1.09 map (b)- Basavanagudi",
+        "ring": "Ring I",
+        "scale": "1:10,000",
+        "crs_grid": "UTM Zone 43N / WGS 84"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.52,
+              12.916666
+            ],
+            [
+              77.566667,
+              12.916666
+            ],
+            [
+              77.566667,
+              12.959999
+            ],
+            [
+              77.52,
+              12.959999
+            ],
+            [
+              77.52,
+              12.916666
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "district_code": "1.10",
+        "district_name": "Jayanagar",
+        "sheet": "1.10 map (b)- Jayanagar (Note: PD 204 is Benson Town)",
+        "ring": "Ring I/II",
+        "scale": "1:10,000",
+        "crs_grid": "UTM Zone 43N / WGS 84"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.566667,
+              12.916666
+            ],
+            [
+              77.613334,
+              12.916666
+            ],
+            [
+              77.613334,
+              12.959999
+            ],
+            [
+              77.566667,
+              12.959999
+            ],
+            [
+              77.566667,
+              12.916666
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "district_code": "1.11",
+        "district_name": "BTM Layout",
+        "sheet": "1.11 map (b)- BTM Layout",
+        "ring": "Ring II",
+        "scale": "1:10,000",
+        "crs_grid": "UTM Zone 43N / WGS 84"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.613334,
+              12.916666
+            ],
+            [
+              77.660001,
+              12.916666
+            ],
+            [
+              77.660001,
+              12.959999
+            ],
+            [
+              77.613334,
+              12.959999
+            ],
+            [
+              77.613334,
+              12.916666
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "district_code": "2.13",
+        "district_name": "Girinagar & Hosakerehalli",
+        "sheet": "2.13 map (b)- Banashankari West",
+        "ring": "Ring II",
+        "scale": "1:10,000",
+        "crs_grid": "UTM Zone 43N / WGS 84"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.52,
+              12.873333
+            ],
+            [
+              77.566667,
+              12.873333
+            ],
+            [
+              77.566667,
+              12.916666
+            ],
+            [
+              77.52,
+              12.916666
+            ],
+            [
+              77.52,
+              12.873333
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "district_code": "2.14",
+        "district_name": "Banashankari",
+        "sheet": "2.14 map (b)- Banashankari",
+        "ring": "Ring II",
+        "scale": "1:10,000",
+        "crs_grid": "UTM Zone 43N / WGS 84"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.566667,
+              12.873333
+            ],
+            [
+              77.613334,
+              12.873333
+            ],
+            [
+              77.613334,
+              12.916666
+            ],
+            [
+              77.566667,
+              12.916666
+            ],
+            [
+              77.566667,
+              12.873333
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "district_code": "2.15",
+        "district_name": "J.P. Nagar",
+        "sheet": "2.15 map (b)- J.P. Nagar",
+        "ring": "Ring II",
+        "scale": "1:10,000",
+        "crs_grid": "UTM Zone 43N / WGS 84"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.613334,
+              12.873333
+            ],
+            [
+              77.660001,
+              12.873333
+            ],
+            [
+              77.660001,
+              12.916666
+            ],
+            [
+              77.613334,
+              12.916666
+            ],
+            [
+              77.613334,
+              12.873333
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "district_code": "3.18",
+        "district_name": "Uttarahalli & Kanakapura Road",
+        "sheet": "3.18 map (b)- Uttarahalli",
+        "ring": "Ring III",
+        "scale": "1:10,000",
+        "crs_grid": "UTM Zone 43N / WGS 84"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.52,
+              12.83
+            ],
+            [
+              77.566667,
+              12.83
+            ],
+            [
+              77.566667,
+              12.873333
+            ],
+            [
+              77.52,
+              12.873333
+            ],
+            [
+              77.52,
+              12.83
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "district_code": "3.17",
+        "district_name": "Begur & Bannerghatta Road",
+        "sheet": "3.17 map (b)- Begur",
+        "ring": "Ring III",
+        "scale": "1:10,000",
+        "crs_grid": "UTM Zone 43N / WGS 84"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.566667,
+              12.83
+            ],
+            [
+              77.613334,
+              12.83
+            ],
+            [
+              77.613334,
+              12.873333
+            ],
+            [
+              77.566667,
+              12.873333
+            ],
+            [
+              77.566667,
+              12.83
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "district_code": "3.16",
+        "district_name": "HSR Layout & Bommanahalli",
+        "sheet": "3.16 map (b)- HSR Layout",
+        "ring": "Ring II/III",
+        "scale": "1:10,000",
+        "crs_grid": "UTM Zone 43N / WGS 84"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.613334,
+              12.83
+            ],
+            [
+              77.660001,
+              12.83
+            ],
+            [
+              77.660001,
+              12.873333
+            ],
+            [
+              77.613334,
+              12.873333
+            ],
+            [
+              77.613334,
+              12.83
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

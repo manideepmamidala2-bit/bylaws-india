@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>GBA Administrative Zones (September 2025)</name>
+    <Placemark>
+      <name>Bengaluru South Zone 1 (Jayanagar, Basavanagudi, Banashankari &amp; Padmanabhanagar)</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="gba_zone_id"><value>BSCC-Z1</value></Data>
+        <Data name="gba_zone_name"><value>South Zone 1 (West)</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.520000,12.950000,0 77.565000,12.960000,0 77.590000,12.957500,0 77.590000,12.830000,0 77.550000,12.830000,0 77.520000,12.860000,0 77.520000,12.950000,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Bengaluru South Zone 2 (BTM Layout, JP Nagar East, HSR Layout &amp; Bommanahalli)</name>
+      <ExtendedData>
+        <Data name="corporation_id"><value>BSCC</value></Data>
+        <Data name="gba_zone_id"><value>BSCC-Z2</value></Data>
+        <Data name="gba_zone_name"><value>South Zone 2 (East)</value></Data>
+      </ExtendedData>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>77.590000,12.957500,0 77.615000,12.955000,0 77.660000,12.930000,0 77.660000,12.845000,0 77.615000,12.830000,0 77.590000,12.830000,0 77.590000,12.957500,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+  </Document>
+</kml>

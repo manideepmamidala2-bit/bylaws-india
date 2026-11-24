@@ -1,0 +1,446 @@
+{
+  "schema_version": "1.2",
+  "jurisdiction": "in-ka-bengaluru-south",
+  "generated": {
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "records": [
+    {
+      "clause_id": "bbl-2003:3.10",
+      "doc_id": "bbl-2003",
+      "number": "3.10",
+      "title": "Refund of Ground Rent Deposit",
+      "text": "[Omitted by bscc-bbl-amend-2026:2.3 with effect from 2026-05-14.]",
+      "tables": [],
+      "as_of_date": "2026-05-14",
+      "amendments_applied": [
+        "bscc-bbl-amend-2026:2.3"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment links (Rule R14).",
+      "confidence": "high",
+      "omitted": true
+    },
+    {
+      "clause_id": "bbl-2003:3.8",
+      "doc_id": "bbl-2003",
+      "number": "3.8",
+      "title": "Ground Rent for Stacking Materials",
+      "text": "[Omitted by bscc-bbl-amend-2026:2.1 with effect from 2026-05-14.]",
+      "tables": [],
+      "as_of_date": "2026-05-14",
+      "amendments_applied": [
+        "bscc-bbl-amend-2026:2.1"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment links (Rule R14).",
+      "confidence": "high",
+      "omitted": true
+    },
+    {
+      "clause_id": "bbl-2003:3.9",
+      "doc_id": "bbl-2003",
+      "number": "3.9",
+      "title": "Exemption from Ground Rent for Government Works",
+      "text": "[Omitted by bscc-bbl-amend-2026:2.2 with effect from 2026-05-14.]",
+      "tables": [],
+      "as_of_date": "2026-05-14",
+      "amendments_applied": [
+        "bscc-bbl-amend-2026:2.2"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment links (Rule R14).",
+      "confidence": "high",
+      "omitted": true
+    },
+    {
+      "clause_id": "bbl-2003:6.0",
+      "doc_id": "bbl-2003",
+      "number": "6.0",
+      "title": "Permissible Deviations During Construction",
+      "text": "Dimensional deviations in setbacks, ground coverage, and building height up to the limits specified in revised Table 2B (up to 10 percent for residential plots up to 240 sq.m and up to 5 percent for larger plots without violating FAR or road alignment) may be regularised upon payment of compounding fees prior to Occupancy Certificate.",
+      "tables": [
+        {
+          "table_id": "bscc-bbl-amend-2026:3.1:t1",
+          "caption": "Table 2B: Revised Compoundable Deviation Limits (2026 Amendment)",
+          "headers": [
+            "Parameter",
+            "Plots up to 240 sq.m",
+            "Plots above 240 sq.m",
+            "Restriction"
+          ],
+          "rows": [
+            [
+              "Front Setback",
+              "Up to 5%",
+              "Nil (0%)",
+              "Street line inviolable"
+            ],
+            [
+              "Side & Rear Setbacks",
+              "Up to 10%",
+              "Up to 5%",
+              "Fire driveway preserved"
+            ],
+            [
+              "Ground Coverage",
+              "Up to 5%",
+              "Up to 5%",
+              "Total FAR not exceeded"
+            ]
+          ],
+          "page": 1
+        }
+      ],
+      "as_of_date": "2026-05-14",
+      "amendments_applied": [
+        "bscc-bbl-amend-2026:3.1"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment links (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:10.1",
+      "doc_id": "rmp2015-zr",
+      "number": "10.1",
+      "title": "Transferable Development Rights (TDR) and Premium FAR Loading",
+      "text": "Plots abutting roads of 9.0 m to 12.0 m may load up to 0.20 Premium FAR; roads above 12.0 m to 18.0 m up to 0.40; and roads above 18.0 m up to 0.60 over the permissible base FAR under Chapter 11 and Table 11.1.",
+      "tables": [
+        {
+          "table_id": "rmp2015-zr-premium-far-2026-02:2.1:t1",
+          "caption": "Table 11.1: Revised February 2026 Premium FAR Schedule by Road Width",
+          "headers": [
+            "Abutting Road Width",
+            "Max Additional Premium FARTD ARTDR Loading Allowed",
+            "Max Combined Addition"
+          ],
+          "rows": [
+            [
+              "Below 9.0 m",
+              "Nil (0.00)",
+              "Nil (0.00)",
+              "0.00"
+            ],
+            [
+              "9.0 m up to 12.0 m",
+              "0.20 of Base FAR",
+              "0.20 of Base FAR",
+              "0.40 of Base FAR"
+            ],
+            [
+              "Above 12.0 m up to 18.0 m",
+              "0.40 of Base FAR",
+              "0.40 of Base FAR",
+              "0.60 of Base FAR"
+            ],
+            [
+              "Above 18.0 m",
+              "0.60 of Base FAR",
+              "0.50 of Base FAR",
+              "0.60 of Base FAR"
+            ]
+          ],
+          "page": 1
+        }
+      ],
+      "as_of_date": "2026-02-10",
+      "amendments_applied": [
+        "rmp2015-zr-premium-far-2025-02:2.1",
+        "rmp2015-zr-premium-far-2026-02:2.1"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment links (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:3.10",
+      "doc_id": "rmp2015-zr",
+      "number": "3.10",
+      "title": "Setback Norms and Revised Table 8 (2026)",
+      "text": "Minimum front, rear, and side setbacks for residential and commercial plots up to 4,000 sq.m shall be governed by revised Table 8 effective 5 January 2026, eliminating side setbacks on plots up to 60 sq.m and rationalising percentage setbacks on plots up to 240 sq.m.",
+      "tables": [
+        {
+          "table_id": "rmp2015-zr-amend-2026-01:2.1:t1",
+          "caption": "Table 8: Revised Building Setbacks by Plot Area (Effective 05.01.2026)",
+          "headers": [
+            "Plot Area Slab",
+            "Min Front Setback",
+            "Min Rear Setback",
+            "Min Left / Right Setback"
+          ],
+          "rows": [
+            [
+              "Up to 60 sq.m",
+              "0.75 m",
+              "0.00 m",
+              "0.00 m (Row housing allowed)"
+            ],
+            [
+              "Above 60 to 150 sq.m",
+              "1.00 m",
+              "0.75 m",
+              "0.75 m on one side"
+            ],
+            [
+              "Above 150 to 240 sq.m",
+              "1.50 m",
+              "1.00 m",
+              "1.00 m on both sides"
+            ],
+            [
+              "Above 240 to 500 sq.m",
+              "2.00 m (or 12% depth)",
+              "1.50 m (or 8% depth)",
+              "1.20 m (or 8% width)"
+            ],
+            [
+              "Above 500 to 4000 sq.m",
+              "12% of plot depth (min 3.0 m) 8% of plot depth (min 2.0 m)",
+              "8% of plot width (min 1.5 m)"
+            ]
+          ],
+          "page": 1
+        }
+      ],
+      "as_of_date": "2026-01-05",
+      "amendments_applied": [
+        "rmp2015-zr-amend-2026-01:2.1"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment links (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:3.12",
+      "doc_id": "rmp2015-zr",
+      "number": "3.12",
+      "title": "Building Height and Stilt Floor Exemption",
+      "text": "Building height shall be measured from the average level of the abutting street to the terrace slab. One or two stilt floors used exclusively for vehicle parking up to a cumulative height of 4.5 metres shall be exempt from FAR computation and included in total building height for setback and fire safety classification.",
+      "tables": [],
+      "as_of_date": "2025-07-18",
+      "amendments_applied": [
+        "rmp2015-zr-amend-2025-07:2.1"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment links (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:4.1.2",
+      "doc_id": "rmp2015-zr",
+      "number": "4.1.2",
+      "title": "Ancillary Uses in R-Main",
+      "text": "Ancillary commercial uses in Residential (Main) zone are permissible only in Ring I and Ring II on plots up to 240 sq.m abutting roads of 12.0 m width or more, restricted to 20 percent of built-up area or 50 sq.m whichever is less; in Ring III, commercial uses in R-Main require an 18.0 m road.",
+      "tables": [],
+      "as_of_date": "2014-12-09",
+      "amendments_applied": [
+        "rmp2015-zr-amend-2014:2.1"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment links (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:4.12.2",
+      "doc_id": "rmp2015-zr",
+      "number": "4.12.2",
+      "title": "Storm Water Drain (Rajakaluve) Buffers",
+      "text": "Every storm water drain in the Bengaluru Metropolitan Region shall maintain a no-construction buffer zone of 30 metres for Primary (Rajakaluve) drains, 15 metres for Secondary drains, and 10 metres for Tertiary drains measured from the outer edge of the drain wall.",
+      "tables": [
+        {
+          "table_id": "rmp2015-zr-swd-buffer-2025:2.1:t1",
+          "caption": "Table 4.12: Revised Storm Water Drain Buffer Widths (2025)",
+          "headers": [
+            "Drain Category",
+            "Previous RMP 2015 Buffer Revised 2025 Buffer",
+            "Measurement Datum"
+          ],
+          "rows": [
+            [
+              "Primary Drain (Rajakaluve)",
+              "50 m",
+              "30 m",
+              "Outer edge of drain retaining wall"
+            ],
+            [
+              "Secondary Drain",
+              "25 m",
+              "15 m",
+              "Outer edge of drain retaining wall"
+            ],
+            [
+              "Tertiary / Feeder Drain",
+              "15 m",
+              "10 m",
+              "Outer edge of drain retaining wall"
+            ]
+          ],
+          "page": 1
+        }
+      ],
+      "as_of_date": "2025-10-15",
+      "amendments_applied": [
+        "rmp2015-zr-swd-buffer-2025:2.1"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment links (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:4.2",
+      "doc_id": "rmp2015-zr",
+      "number": "4.2",
+      "title": "Residential (Mixed) Zone [R-Mixed]",
+      "text": "R-Mixed permits residential development alongside commercial and institutional uses subject to abutting road width thresholds under Table 10. [Amended (2018-08-14, rmp2015-zr-amend-2018:2.1): After regulation 4.2, insert the following requirement: in Residential (Mixed) zone [R-Mixed], standalone commercial buildings are permitted only where the abutting street has an existing clear width of 12.0 metres or more.]",
+      "tables": [
+        {
+          "table_id": "rmp2015-zr:4.2:t1",
+          "caption": "Table 10: FAR and Ground Coverage in Residential (Main & Mixed) Zones",
+          "headers": [
+            "Plot Area (sq.m)",
+            "Max Ground CoverageB eBase FAR (Ring I & II) Base FAR (Ring III)",
+            "Min Road Width"
+          ],
+          "rows": [
+            [
+              "Up to 360",
+              "75%",
+              "1.75",
+              "1.75",
+              "Up to 9.0 m"
+            ],
+            [
+              "Above 360 to 1000",
+              "65%",
+              "2.25",
+              "2.00",
+              "Above 9.0 m to 12.0 m"
+            ],
+            [
+              "Above 1000 to 2000",
+              "60%",
+              "2.50",
+              "2.25",
+              "Above 12.0 m to 18.0 m"
+            ],
+            [
+              "Above 2000 to 4000",
+              "55%",
+              "3.00",
+              "2.50",
+              "Above 18.0 m to 24.0 m"
+            ],
+            [
+              "Above 4000",
+              "50%",
+              "3.25",
+              "2.75",
+              "Above 24.0 m"
+            ]
+          ],
+          "page": 2
+        }
+      ],
+      "as_of_date": "2018-08-14",
+      "amendments_applied": [
+        "rmp2015-zr-amend-2018:2.1"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment links (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:4.9",
+      "doc_id": "rmp2015-zr",
+      "number": "4.9",
+      "title": "Transport and Communication Zone [T&T]",
+      "text": "T&T zone permits bus terminals, metro stations, depots, multi-level parking, telecommunication towers, and ancillary commercial/office transit-oriented development up to 25 percent of total built-up area with FAR up to 2.25.",
+      "tables": [],
+      "as_of_date": "2019-06-15",
+      "amendments_applied": [
+        "rmp2015-zr-amend-tt:2.1"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment links (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:6.1",
+      "doc_id": "rmp2015-zr",
+      "number": "6.1",
+      "title": "Residential Layout and Villa Sub-division Norms",
+      "text": "Every residential layout exceeding 4,000 sq.m shall earmark at least 15 percent of total area for parks and open spaces and 10 percent for civic amenities. [Amended (2015-03-20, rmp2015-zr-amend-2015-03:2.1): After regulation 6.1, insert the following proviso requiring minimum 9.0 m internal access driveways and 15 percent open space relinquishment in all gated villa and villament development plans.]",
+      "tables": [],
+      "as_of_date": "2015-03-20",
+      "amendments_applied": [
+        "rmp2015-zr-amend-2015-03:2.1"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment links (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:8.1",
+      "doc_id": "rmp2015-zr",
+      "number": "8.1",
+      "title": "Parking Requirements and EV Charging Norms",
+      "text": "Every building shall provide off-street parking per Table 23, with mandatory electric vehicle (EV) charging points for at least 20 percent of car and two-wheeler parking bays in all multi-dwelling and commercial buildings.",
+      "tables": [
+        {
+          "table_id": "rmp2015-zr:8.1:t1",
+          "caption": "Table 23: Minimum Off-Street Parking Norms",
+          "headers": [
+            "Use Category",
+            "One Car Space (2.5 m x 5.0 m) Per Visitor m) Per Visitor Parking",
+            "Two-Wheeler Provision"
+          ],
+          "rows": [
+            [
+              "Single / Multi-Dwelling <=150 sq.m1 te .m1 tenement",
+              "10% additional",
+              "2 spaces per tenement"
+            ],
+            [
+              "Multi-Dwelling >150 to 225 sq.m 150 sq.m floor area",
+              "10% additional",
+              "2 spaces per tenement"
+            ],
+            [
+              "Commercial / Office / Retail",
+              "50 sq.m floor area",
+              "10% additional",
+              "25% of car bay area"
+            ],
+            [
+              "IT / BT (I-HiTech)",
+              "50 sq.m floor area",
+              "10% additional",
+              "25% of car bay area"
+            ]
+          ],
+          "page": 4
+        }
+      ],
+      "as_of_date": "2026-01-05",
+      "amendments_applied": [
+        "rmp2015-zr-amend-2026-01:3.1"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment links (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    }
+  ],
+  "unconsolidated": []
+}

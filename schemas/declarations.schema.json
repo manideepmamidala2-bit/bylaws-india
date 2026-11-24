@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bylaws-india.local/schemas/declarations.schema.json",
   "title": "JurisdictionDeclarations",
-  "description": "Self-declared coverage scope, known extraction gaps, and unread documents for a jurisdiction release (Schema v1.1).",
+  "description": "Self-declared coverage scope, known extraction gaps, unread/unobtainable documents, and contested status for a jurisdiction release (Schema v1.2).",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -15,7 +15,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "1.1"
+      "const": "1.2"
     },
     "jurisdiction": {
       "type": "string",
@@ -38,6 +38,30 @@
       "type": "array",
       "items": {
         "$ref": "#/$defs/unreadDocument"
+      }
+    },
+    "unobtainable_documents": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/unobtainableDocument"
+      }
+    },
+    "contested_status": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/contestedStatus"
+      }
+    },
+    "building_relevant_sections": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
       }
     }
   },
@@ -75,6 +99,62 @@
         "reason": {
           "type": "string",
           "minLength": 1
+        }
+      }
+    },
+    "unobtainableDocument": {
+      "type": "object",
+      "title": "UnobtainableDocument",
+      "additionalProperties": false,
+      "required": ["id", "title", "searched_sources", "reason"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "searched_sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "contestedStatus": {
+      "type": "object",
+      "title": "ContestedStatus",
+      "additionalProperties": false,
+      "required": ["doc_id", "title", "declared_status", "conflicting_evidence"],
+      "properties": {
+        "doc_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "declared_status": {
+          "type": "string",
+          "const": "status_unknown"
+        },
+        "conflicting_evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         }
       }
     }

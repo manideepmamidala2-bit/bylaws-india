@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "jurisdiction": "xx-test-fixture",
   "not_modelled": [
     "Fire safety requirements of the National Building Code"
@@ -16,5 +16,7 @@
       "source_url": "https://example.org/circular.pdf",
       "reason": "Published after this release"
     }
-  ]
+  ],
+  "unobtainable_documents": [],
+  "contested_status": []
 }

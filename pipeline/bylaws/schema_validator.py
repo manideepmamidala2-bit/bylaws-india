@@ -23,6 +23,9 @@ SCHEMA_NAMES: tuple[str, ...] = (
     "manifest",
     "declarations",
     "amendments",
+    "consolidated",
+    "geo-layers",
+    "clause-zone-tags",
 )
 
 

@@ -1,27 +1,33 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "doc_id": "fixture-amend-2024",
   "jurisdiction": "xx-test-fixture",
   "legal_status": "in_force",
   "generated": {
     "parser": "pypdfium2",
-    "parser_version": "5.0.0",
+    "parser_version": "5.15.2",
     "pipeline_version": "0.1.0",
     "generated_at": "2026-11-23T00:00:00Z"
   },
   "clauses": [
     {
       "clause_id": "fixture-amend-2024:1",
+      "record_version": 1,
       "record_id": "fixture-amend-2024:1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
       "supersedes": null,
       "superseded_by": null,
       "legal_status": "in_force",
+      "effective_from": "2024-06-15",
       "number": "1",
       "title": "Short Title",
       "level": 1,
       "parent_id": null,
       "order": 0,
       "text": "These rules amend the Synthetic Municipal Building Regulations 2020.",
+      "language": "en",
       "tables": [],
       "citations": [
         {
@@ -39,20 +45,27 @@
       "cross_references": [],
       "amended_by": [],
       "applies_to_zones": [],
-      "verification": "machine_checked"
+      "verification": "machine_checked",
+      "verified_by": null
     },
     {
       "clause_id": "fixture-amend-2024:2",
+      "record_version": 1,
       "record_id": "fixture-amend-2024:2@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
       "supersedes": null,
       "superseded_by": null,
       "legal_status": "in_force",
+      "effective_from": "2024-06-15",
       "number": "2",
       "title": "Amendment of Clause 1.2",
       "level": 1,
       "parent_id": null,
       "order": 1,
       "text": "For clause 1.2, the following shall be substituted: '1.2 Definitions: Floor Area Ratio (FAR) means total floor area divided by net plot area excluding road widening strips.'",
+      "language": "en",
       "tables": [],
       "citations": [
         {
@@ -70,20 +83,27 @@
       "cross_references": [],
       "amended_by": [],
       "applies_to_zones": [],
-      "verification": "machine_checked"
+      "verification": "machine_checked",
+      "verified_by": null
     },
     {
       "clause_id": "fixture-amend-2024:3",
+      "record_version": 1,
       "record_id": "fixture-amend-2024:3@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
       "supersedes": null,
       "superseded_by": null,
       "legal_status": "in_force",
+      "effective_from": "2024-06-15",
       "number": "3",
       "title": "Amendment of Clause 2.2",
       "level": 1,
       "parent_id": null,
       "order": 2,
       "text": "After clause 2.2, insert the following note on solar rooftop exemptions up to 1.8 metres.",
+      "language": "en",
       "tables": [],
       "citations": [
         {
@@ -101,7 +121,8 @@
       "cross_references": [],
       "amended_by": [],
       "applies_to_zones": [],
-      "verification": "machine_checked"
+      "verification": "machine_checked",
+      "verified_by": null
     }
   ]
 }

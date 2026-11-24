@@ -15,7 +15,27 @@ class StatusEvidenceConfig(BaseModel):
         extra="forbid",
     )
     url: str | None
-    description: constr(min_length=1)
+    quoted_line: str | None = None
+    description: str | None = None
+
+
+class TextRightsConfig(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    mode: Literal["full_text", "reference_only"]
+    reason: constr(min_length=1)
+
+
+class CitedProvisionConfig(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    part: str | None = None
+    clause: constr(min_length=1)
+    topic: str | None = None
+    cited_by: list[constr(min_length=1)]
+    where_to_obtain: str | None = None
 
 
 class UnreadDocumentConfig(BaseModel):
@@ -27,6 +47,26 @@ class UnreadDocumentConfig(BaseModel):
     reason: constr(min_length=1)
 
 
+class UnobtainableDocumentConfig(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    title: constr(min_length=1)
+    searched_sources: list[constr(min_length=1)] = Field(..., min_length=1)
+    reason: constr(min_length=1)
+
+
+class ContestedStatusConfig(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    doc_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    title: constr(min_length=1)
+    declared_status: Literal["status_unknown"]
+    conflicting_evidence: list[constr(min_length=1)] = Field(..., min_length=1)
+
+
 class DocumentConfig(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -34,16 +74,52 @@ class DocumentConfig(BaseModel):
     id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     title: constr(min_length=1)
     issuing_authority: constr(min_length=1)
-    layer: Literal["national", "state", "planning", "municipal"]
-    legal_status: Literal["in_force", "draft", "superseded", "withdrawn"]
+    doc_type: (
+        Literal[
+            "act",
+            "rules",
+            "regulations",
+            "bye_laws",
+            "amendment",
+            "notification",
+            "government_order",
+            "circular",
+            "map",
+            "standard_reference",
+        ]
+        | None
+    ) = None
+    layer: Literal[
+        "statute",
+        "state_rules",
+        "planning",
+        "municipal",
+        "orders",
+        "overlay",
+        "national_reference",
+        "boundary",
+    ]
+    legal_status: Literal[
+        "in_force", "draft", "superseded", "withdrawn", "status_unknown"
+    ]
     status_evidence: StatusEvidenceConfig
+    notification_number: str | None = None
+    gazette_reference: str | None = None
+    superseded_by_document: str | None = None
     licence_or_terms: constr(min_length=1)
-    role: Literal["base", "amendment", "regulation", "boundary", "reference"]
+    text_rights: TextRightsConfig | None = None
+    languages: list[Literal["en", "kn"]] | None = Field(None, min_length=1)
+    role: Literal["base", "amendment", "regulation", "boundary", "reference"] | None = (
+        None
+    )
+    official_url: str | None = None
+    mirror_urls: list[constr(min_length=1)] | None = None
     source_url: constr(min_length=1)
     notified_date: constr(pattern=r"^\d{4}-\d{2}-\d{2}$") | None = None
     effective_from: constr(pattern=r"^\d{4}-\d{2}-\d{2}$") | None = None
     amends: list[constr(min_length=1)] | None = None
     supersedes: list[constr(min_length=1)] | None = None
+    cited_provisions: list[CitedProvisionConfig] | None = None
 
 
 class BoundarySelectRule(BaseModel):
@@ -59,8 +135,23 @@ class BoundaryMapConfig(BaseModel):
         extra="forbid",
     )
     id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    title: str | None = None
+    layer_role: Literal["corporation", "gba_zones", "wards"] | None = None
+    output_file: str | None = None
     source_url: constr(min_length=1)
     select: BoundarySelectRule = Field(..., title="BoundarySelectRule")
+
+
+class PlanningDistrictMapConfig(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    title: str | None = None
+    source_url: constr(min_length=1)
+    district_code_field: str | None = None
+    district_name_field: str | None = None
+    source_attribution: str | None = None
 
 
 class TracedZoningMapConfig(BaseModel):
@@ -68,11 +159,13 @@ class TracedZoningMapConfig(BaseModel):
         extra="forbid",
     )
     id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
-    kind: Literal["traced"]
+    kind: Literal["traced", "vector_pdf", "grid_georeferenced_raster", "osm_gcp_raster"]
     document: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     page: conint(ge=1)
     planning_district: int | str
+    sheet: str | None = None
     legend_page: conint(ge=1) | None
+    source_url: str | None = None
 
 
 class ImportedZoningMapConfig(BaseModel):
@@ -84,7 +177,27 @@ class ImportedZoningMapConfig(BaseModel):
     source_url: constr(min_length=1)
     zone_code_field: constr(min_length=1)
     zone_label_field: constr(min_length=1)
+    planning_district: str | None = None
+    sheet: str | None = None
     source_attribution: constr(min_length=1)
+
+
+class OverlayMapConfig(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    title: constr(min_length=1)
+    kind: Literal["derived_overlay", "reference"]
+    source: constr(min_length=1)
+    method: constr(min_length=1)
+    accuracy_m: confloat(ge=0.0) | None = None
+    derived: bool | None = True
+    buffer_m: confloat(ge=0.0) | None = None
+    source_url: str | None = None
+    external_url: str | None = None
+    rule_doc_id: str | None = None
+    rule_clause: str | None = None
 
 
 class MapsConfig(BaseModel):
@@ -92,21 +205,31 @@ class MapsConfig(BaseModel):
         extra="forbid",
     )
     boundaries: list[BoundaryMapConfig]
+    planning_districts: list[PlanningDistrictMapConfig] | None = None
     zoning: list[TracedZoningMapConfig | ImportedZoningMapConfig]
+    overlays: list[OverlayMapConfig] | None = None
 
 
 class JurisdictionConfig(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
+    schema_version: Literal["1.2"] = "1.2"
     id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$") = Field(
-        ...,
-        description="Lowercase hyphenated hierarchical jurisdiction ID (e.g. xx-test-fixture).",
+        ..., description="Lowercase hyphenated hierarchical jurisdiction ID."
     )
     name: constr(min_length=1)
     aliases: list[constr(min_length=1)] | None = Field(
         None,
         description="Optional alternative display or search names for the jurisdiction.",
+    )
+    visibility: Literal["public", "test"] | None = Field(
+        "public",
+        description="Visibility of the jurisdiction in production vs preview/test environments.",
+    )
+    licence: constr(min_length=1) | None = Field(
+        "CC BY 4.0",
+        description="Open data licence identifier for published releases of this jurisdiction.",
     )
     country: constr(pattern=r"^[A-Z]{2}$") = Field(
         ..., description="Two-letter uppercase country code."
@@ -124,8 +247,49 @@ class JurisdictionConfig(BaseModel):
         None,
         description="Known documents or circulars not yet ingested in this release.",
     )
+    unobtainable_documents: list[UnobtainableDocumentConfig] | None = Field(
+        None,
+        description="Documents identified during discovery that could not be obtained from official or mirror sources.",
+    )
+    contested_status: list[ContestedStatusConfig] | None = Field(
+        None,
+        description="Documents whose legal status has conflicting evidence and is declared status_unknown.",
+    )
+    building_relevant_sections: dict[str, list[constr(min_length=1)]] | None = Field(
+        None,
+        description="Map of doc_id to building-relevant section or chapter numbers.",
+    )
     documents: list[DocumentConfig] = Field(..., min_length=1)
     maps: MapsConfig = Field(..., title="MapsConfig")
+
+
+class DocumentTextRights(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    mode: Literal["full_text", "reference_only"]
+    reason: constr(min_length=1)
+
+
+class DocumentCopy(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    url: constr(min_length=1)
+    path: constr(min_length=1)
+    sha256: constr(pattern=r"^[a-f0-9]{64}$")
+    retrieved_at: constr(min_length=10)
+
+
+class DocumentCitedProvision(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    part: str | None = None
+    clause: constr(min_length=1)
+    topic: str | None = None
+    cited_by: list[constr(min_length=1)]
+    where_to_obtain: str | None = None
 
 
 class DocumentStatusEvidence(BaseModel):
@@ -133,32 +297,68 @@ class DocumentStatusEvidence(BaseModel):
         extra="forbid",
     )
     url: str | None
-    description: constr(min_length=1)
+    quoted_line: str | None = None
+    description: str | None = None
 
 
 class DocumentMetadata(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.1"]
+    schema_version: Literal["1.2"]
     doc_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     title: constr(min_length=1)
     issuing_authority: constr(min_length=1)
-    layer: Literal["national", "state", "planning", "municipal"]
+    doc_type: (
+        Literal[
+            "act",
+            "rules",
+            "regulations",
+            "bye_laws",
+            "amendment",
+            "notification",
+            "government_order",
+            "circular",
+            "map",
+            "standard_reference",
+        ]
+        | None
+    ) = None
+    layer: Literal[
+        "statute",
+        "state_rules",
+        "planning",
+        "municipal",
+        "orders",
+        "overlay",
+        "national_reference",
+        "boundary",
+    ]
     role: Literal["base", "amendment", "regulation", "boundary", "reference"]
-    legal_status: Literal["in_force", "draft", "superseded", "withdrawn"]
+    legal_status: Literal[
+        "in_force", "draft", "superseded", "withdrawn", "status_unknown"
+    ]
     status_evidence: DocumentStatusEvidence = Field(..., title="DocumentStatusEvidence")
+    notification_number: str | None = None
+    gazette_reference: str | None = None
+    superseded_by_document: str | None = None
     licence_or_terms: constr(min_length=1)
+    text_rights: DocumentTextRights | None = None
+    languages: list[Literal["en", "kn"]] | None = Field(None, min_length=1)
+    official_url: str | None = None
+    mirror_urls: list[constr(min_length=1)] | None = None
+    copies: list[DocumentCopy] | None = None
+    cited_provisions: list[DocumentCitedProvision] | None = None
     notified_date: constr(pattern=r"^\d{4}-\d{2}-\d{2}$") | None
     effective_from: constr(pattern=r"^\d{4}-\d{2}-\d{2}$") | None
     amends: list[constr(min_length=1)]
     supersedes: list[constr(min_length=1)]
     source_url: constr(min_length=1)
     retrieved_at: constr(min_length=10)
-    sha256: constr(pattern=r"^[a-f0-9]{64}$")
-    bytes: conint(ge=0)
+    sha256: constr(pattern=r"^[a-f0-9]{64}$") | None
+    bytes: conint(ge=0) | None
     page_count: conint(ge=1) | None
-    is_scanned: bool
+    is_scanned: bool | None
 
 
 class ClauseCitation(BaseModel):
@@ -197,19 +397,32 @@ class ZoneFeatureProperties(BaseModel):
         extra="forbid",
     )
     zone_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:z[0-9a-zA-Z_-]+$")
+    record_version: conint(ge=1) | None = 1
     record_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:z[0-9a-zA-Z_-]+@v[0-9]+$")
+    record_supersedes: str | None = None
+    record_superseded_by: str | None = None
+    record_change_reason: str | None = None
     supersedes: str | None
     superseded_by: str | None
     zone_code: constr(min_length=1)
     zone_label: constr(min_length=1)
+    planning_district: str | None = None
+    sheet: str | None = None
     source_map: constr(min_length=1)
     georef_run: constr(min_length=1)
     extraction_method: Literal[
-        "colour_segmentation", "road_outline_fallback", "manual", "imported"
+        "vector_pdf",
+        "grid_georeferenced_raster",
+        "osm_gcp_raster",
+        "imported",
+        "colour_segmentation",
+        "road_outline_fallback",
+        "manual",
     ]
     source_attribution: str | None
     area_sq_m: confloat(ge=0.0)
     verification: Literal["unverified", "machine_checked", "human_verified", "rejected"]
+    verified_by: str | None = None
     notes: str | None
 
 
@@ -253,7 +466,12 @@ class ClauseFix(BaseModel):
         "level",
         "parent_id",
         "verification",
+        "verified_by",
+        "legal_status",
+        "effective_from",
+        "language",
         "cross_references",
+        "tables",
     ]
     value: Any
     reason: constr(min_length=1)
@@ -266,6 +484,9 @@ class ZoneTag(BaseModel):
     clause_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:.+$")
     zones: list[constr(min_length=1)] = Field(..., min_length=1)
     reason: constr(min_length=1)
+    verification: Literal["unverified", "machine_checked", "human_verified"] | None = (
+        "machine_checked"
+    )
 
 
 class ZoneFixSet(BaseModel):
@@ -274,9 +495,12 @@ class ZoneFixSet(BaseModel):
     )
     zone_code: constr(min_length=1) | None = None
     zone_label: constr(min_length=1) | None = None
+    planning_district: str | None = None
+    sheet: str | None = None
     verification: (
         Literal["unverified", "machine_checked", "human_verified", "rejected"] | None
     ) = None
+    verified_by: str | None = None
     notes: str | None = None
 
 
@@ -320,15 +544,32 @@ class MapCuration(BaseModel):
     gcps: list[MapGcp] | None = None
 
 
+class AmendmentLinkOverride(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    amending_clause: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:.+$")
+    target_clause: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:.+$")
+    action: Literal[
+        "substitute", "insert_after", "insert_before", "omit", "modify", "renumber"
+    ]
+    effective_date: str | None = None
+    confidence: Literal["high", "medium", "low"]
+    verification: Literal["unverified", "machine_checked", "human_verified"]
+    note: str | None = None
+    replacement_text: str | None = None
+
+
 class JurisdictionOverrides(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.1"]
+    schema_version: Literal["1.2"]
     clause_fixes: list[ClauseFix] | None = None
     zone_tags: list[ZoneTag] | None = None
     zone_fixes: list[ZoneFix] | None = None
     map_curations: list[MapCuration] | None = None
+    amendment_links: list[AmendmentLinkOverride] | None = None
 
 
 class KnownGap(BaseModel):
@@ -348,15 +589,40 @@ class UnreadDocument(BaseModel):
     reason: constr(min_length=1)
 
 
+class UnobtainableDocument(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    title: constr(min_length=1)
+    searched_sources: list[constr(min_length=1)] = Field(..., min_length=1)
+    reason: constr(min_length=1)
+
+
+class ContestedStatus(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    doc_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    title: constr(min_length=1)
+    declared_status: Literal["status_unknown"]
+    conflicting_evidence: list[constr(min_length=1)] = Field(..., min_length=1)
+
+
 class JurisdictionDeclarations(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.1"]
+    schema_version: Literal["1.2"]
     jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     not_modelled: list[constr(min_length=1)]
     known_gaps: list[KnownGap]
     unread_documents: list[UnreadDocument]
+    unobtainable_documents: list[UnobtainableDocument] | None = Field(
+        [], validate_default=True
+    )
+    contested_status: list[ContestedStatus] | None = Field([], validate_default=True)
+    building_relevant_sections: dict[str, list[constr(min_length=1)]] | None = None
 
 
 class AmendmentLink(BaseModel):
@@ -365,17 +631,23 @@ class AmendmentLink(BaseModel):
     )
     amending_clause: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:.+$")
     target_clause: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:.+$")
-    action: Literal["substitute", "insert_after", "insert_before", "omit", "modify"]
+    amending_doc_id: str | None = None
+    target_doc_id: str | None = None
+    action: Literal[
+        "substitute", "insert_after", "insert_before", "omit", "modify", "renumber"
+    ]
+    effective_date: str | None = None
     confidence: Literal["high", "medium", "low"]
     verification: Literal["unverified", "machine_checked", "human_verified"]
     note: str | None = None
+    summary: str | None = None
 
 
 class JurisdictionAmendments(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.1"]
+    schema_version: Literal["1.2"]
     jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     links: list[AmendmentLink]
 
@@ -387,8 +659,17 @@ class ReleaseFiles(BaseModel):
     documents: constr(min_length=1)
     clauses: list[constr(min_length=1)]
     amendments: constr(min_length=1)
+    consolidated: str | None = None
     zones: constr(min_length=1)
     boundary: constr(min_length=1)
+    gba_zones: str | None = None
+    wards: str | None = None
+    planning_districts: str | None = None
+    overlays: str | None = None
+    geo_layers: str | None = None
+    clause_zone_tags: str | None = None
+    sources_json: str | None = None
+    sources_csv: str | None = None
     review_images: list[constr(min_length=1)]
 
 
@@ -414,37 +695,153 @@ class ReleaseEntry(BaseModel):
     changelog: str
 
 
+class ConsolidatedGenerated(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    pipeline_version: constr(min_length=1)
+    generated_at: constr(min_length=10)
+
+
+class ConsolidatedClauseTable(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    table_id: constr(min_length=1)
+    caption: str | None
+    headers: list[str]
+    rows: list[list[str]]
+    page: conint(ge=1)
+
+
+class ConsolidatedClauseRecord(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    clause_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:.+$")
+    doc_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    number: constr(min_length=1)
+    title: str | None
+    text: constr(min_length=1)
+    tables: list[ConsolidatedClauseTable]
+    as_of_date: constr(min_length=10)
+    amendments_applied: list[constr(min_length=1)]
+    derived: Literal[True]
+    method: constr(min_length=1)
+    confidence: Literal["high"]
+    omitted: bool | None = False
+
+
+class UnconsolidatedClauseRecord(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    clause_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:.+$")
+    doc_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    reason: constr(min_length=1)
+
+
+class JurisdictionConsolidated(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    schema_version: Literal["1.2"]
+    jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    generated: ConsolidatedGenerated
+    records: list[ConsolidatedClauseRecord]
+    unconsolidated: list[UnconsolidatedClauseRecord]
+
+
+class GeoLayerEntry(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    layer_id: constr(min_length=1)
+    title: constr(min_length=1)
+    kind: Literal[
+        "official_boundary", "master_plan_zone", "derived_overlay", "reference"
+    ]
+    source: constr(min_length=1)
+    method: constr(min_length=1)
+    accuracy_m: confloat(ge=0.0) | None
+    derived: bool
+    file: str | None
+    external_url: str | None
+    feature_count: conint(ge=0) | None = None
+    notes: str | None = None
+
+
+class JurisdictionGeoLayers(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    schema_version: Literal["1.2"]
+    jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    layers: list[GeoLayerEntry]
+
+
+class ClauseZoneTagEntry(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    clause_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:.+$")
+    doc_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    zone_code: constr(min_length=1)
+    reason: constr(min_length=1)
+    verification: Literal["unverified", "machine_checked", "human_verified"]
+
+
+class JurisdictionClauseZoneTags(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    schema_version: Literal["1.2"]
+    jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    tags: list[ClauseZoneTagEntry]
+
+
 class ClauseNode(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
     clause_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:.+$")
+    record_version: conint(ge=1) | None = 1
     record_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*:.+@v[0-9]+$")
+    record_supersedes: str | None = None
+    record_superseded_by: str | None = None
+    record_change_reason: str | None = None
     supersedes: str | None
     superseded_by: str | None
-    legal_status: Literal["in_force", "draft", "superseded", "withdrawn"]
+    legal_status: Literal[
+        "in_force", "draft", "superseded", "withdrawn", "status_unknown"
+    ]
+    effective_from: str | None = None
     number: constr(min_length=1)
     title: str | None
     level: conint(ge=1)
     parent_id: str | None
     order: conint(ge=0)
     text: constr(min_length=1)
+    language: Literal["en", "kn"] | None = "en"
     tables: list[ClauseTable]
     citations: list[ClauseCitation] = Field(..., min_length=1)
     cross_references: list[constr(min_length=1)]
     amended_by: list[constr(min_length=1)]
     applies_to_zones: list[constr(min_length=1)]
     verification: Literal["unverified", "machine_checked", "human_verified"]
+    verified_by: str | None = None
 
 
 class ClauseTree(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.1"]
+    schema_version: Literal["1.2"]
     doc_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
-    legal_status: Literal["in_force", "draft", "superseded", "withdrawn"]
+    legal_status: Literal[
+        "in_force", "draft", "superseded", "withdrawn", "status_unknown"
+    ]
     generated: ClauseTreeGenerated = Field(..., title="ClauseTreeGenerated")
     clauses: list[ClauseNode]
 
@@ -464,7 +861,7 @@ class ZonesFeatureCollection(BaseModel):
         extra="forbid",
     )
     type: Literal["FeatureCollection"]
-    schema_version: Literal["1.1"]
+    schema_version: Literal["1.2"]
     bbox: list[float] | None = Field(None, max_length=4, min_length=4)
     features: list[ZoneFeature]
 
@@ -476,6 +873,7 @@ class JurisdictionManifest(BaseModel):
     id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     name: constr(min_length=1)
     aliases: list[constr(min_length=1)] | None = None
+    visibility: Literal["public", "test"] | None = "public"
     latest_release: constr(pattern=r"^\d+\.\d+\.\d+$")
     releases: list[ReleaseEntry] = Field(..., min_length=1)
 
@@ -484,7 +882,7 @@ class ReleaseManifest(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.1"]
+    schema_version: Literal["1.2"]
     jurisdictions: list[JurisdictionManifest]
 
 
@@ -498,6 +896,9 @@ class BylawsSchemaBundle(
         | JurisdictionDeclarations
         | JurisdictionAmendments
         | ReleaseManifest
+        | JurisdictionConsolidated
+        | JurisdictionGeoLayers
+        | JurisdictionClauseZoneTags
     ]
 ):
     root: (
@@ -509,4 +910,7 @@ class BylawsSchemaBundle(
         | JurisdictionDeclarations
         | JurisdictionAmendments
         | ReleaseManifest
+        | JurisdictionConsolidated
+        | JurisdictionGeoLayers
+        | JurisdictionClauseZoneTags
     ) = Field(..., title="BylawsSchemaBundle")

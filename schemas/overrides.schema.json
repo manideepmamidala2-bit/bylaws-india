@@ -2,14 +2,14 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bylaws-india.local/schemas/overrides.schema.json",
   "title": "JurisdictionOverrides",
-  "description": "Versioned manual corrections, zone tags, and map curations in data/overrides/<jurisdiction>/*.yaml (Schema v1.1).",
+  "description": "Versioned manual corrections, zone tags, and map curations in data/overrides/<jurisdiction>/*.yaml (Schema v1.2).",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version"],
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "1.1"
+      "const": "1.2"
     },
     "clause_fixes": {
       "type": "array",
@@ -34,6 +34,12 @@
       "items": {
         "$ref": "#/$defs/mapCuration"
       }
+    },
+    "amendment_links": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/amendmentLinkOverride"
+      }
     }
   },
   "$defs": {
@@ -56,7 +62,12 @@
             "level",
             "parent_id",
             "verification",
-            "cross_references"
+            "verified_by",
+            "legal_status",
+            "effective_from",
+            "language",
+            "cross_references",
+            "tables"
           ]
         },
         "value": {},
@@ -88,6 +99,11 @@
         "reason": {
           "type": "string",
           "minLength": 1
+        },
+        "verification": {
+          "type": "string",
+          "enum": ["unverified", "machine_checked", "human_verified"],
+          "default": "machine_checked"
         }
       }
     },
@@ -118,6 +134,12 @@
               "type": "string",
               "minLength": 1
             },
+            "planning_district": {
+              "type": ["string", "null"]
+            },
+            "sheet": {
+              "type": ["string", "null"]
+            },
             "verification": {
               "type": "string",
               "enum": [
@@ -126,6 +148,9 @@
                 "human_verified",
                 "rejected"
               ]
+            },
+            "verified_by": {
+              "type": ["string", "null"]
             },
             "notes": {
               "type": ["string", "null"]
@@ -208,6 +233,56 @@
               }
             }
           }
+        }
+      }
+    },
+    "amendmentLinkOverride": {
+      "type": "object",
+      "title": "AmendmentLinkOverride",
+      "additionalProperties": false,
+      "required": [
+        "amending_clause",
+        "target_clause",
+        "action",
+        "confidence",
+        "verification"
+      ],
+      "properties": {
+        "amending_clause": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*:.+$"
+        },
+        "target_clause": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*:.+$"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "substitute",
+            "insert_after",
+            "insert_before",
+            "omit",
+            "modify",
+            "renumber"
+          ]
+        },
+        "effective_date": {
+          "type": ["string", "null"]
+        },
+        "confidence": {
+          "type": "string",
+          "enum": ["high", "medium", "low"]
+        },
+        "verification": {
+          "type": "string",
+          "enum": ["unverified", "machine_checked", "human_verified"]
+        },
+        "note": {
+          "type": ["string", "null"]
+        },
+        "replacement_text": {
+          "type": ["string", "null"]
         }
       }
     }

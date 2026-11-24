@@ -1,16 +1,37 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "doc_id": "fixture-base-2020",
   "title": "Synthetic Municipal Building Regulations 2020",
   "issuing_authority": "Synthetic Civic Authority",
+  "doc_type": "regulations",
   "layer": "municipal",
   "role": "base",
   "legal_status": "in_force",
   "status_evidence": {
     "url": "https://example.org/gazette/2020-01-15",
+    "quoted_line": "Notification No. 10/2020 \u2014 Regulations in force from 1 February 2020.",
     "description": "Synthetic Municipal Gazette Notification No. 10/2020"
   },
+  "notification_number": "SYN/UDD/10/2020",
+  "gazette_reference": "Synthetic Gazette Part IV-A dated 2020-01-15",
   "licence_or_terms": "CC0-1.0",
+  "text_rights": {
+    "mode": "full_text",
+    "reason": "Synthetic public regulation under CC0-1.0"
+  },
+  "languages": [
+    "en"
+  ],
+  "official_url": "https://example.org/gazette/2020-01-15.pdf",
+  "mirror_urls": [],
+  "copies": [
+    {
+      "url": "pipeline/tests/fixtures/fixture-base.pdf",
+      "path": "data/raw/xx-test-fixture/fixture-base-2020.pdf",
+      "sha256": "36f32618ee3ceaf70c3a0cf840f0fef402123a78aa0d5dc73ab4aab966168dda",
+      "retrieved_at": "2026-11-23T00:00:00Z"
+    }
+  ],
   "notified_date": "2020-01-15",
   "effective_from": "2020-02-01",
   "amends": [],

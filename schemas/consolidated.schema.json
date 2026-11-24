@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bylaws-india.local/schemas/consolidated.schema.json",
+  "title": "JurisdictionConsolidated",
+  "description": "Derived consolidated 'as amended' clause records and unconsolidated clause explanations (Schema v1.2, Rule R14).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "jurisdiction",
+    "generated",
+    "records",
+    "unconsolidated"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.2"
+    },
+    "jurisdiction": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "generated": {
+      "$ref": "#/$defs/consolidatedGenerated"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/consolidatedClauseRecord"
+      }
+    },
+    "unconsolidated": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/unconsolidatedClauseRecord"
+      }
+    }
+  },
+  "$defs": {
+    "consolidatedGenerated": {
+      "type": "object",
+      "title": "ConsolidatedGenerated",
+      "additionalProperties": false,
+      "required": ["pipeline_version", "generated_at"],
+      "properties": {
+        "pipeline_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "generated_at": {
+          "type": "string",
+          "minLength": 10
+        }
+      }
+    },
+    "consolidatedClauseTable": {
+      "type": "object",
+      "title": "ConsolidatedClauseTable",
+      "additionalProperties": false,
+      "required": ["table_id", "caption", "headers", "rows", "page"],
+      "properties": {
+        "table_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "caption": {
+          "type": ["string", "null"]
+        },
+        "headers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "page": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "consolidatedClauseRecord": {
+      "type": "object",
+      "title": "ConsolidatedClauseRecord",
+      "additionalProperties": false,
+      "required": [
+        "clause_id",
+        "doc_id",
+        "number",
+        "title",
+        "text",
+        "tables",
+        "as_of_date",
+        "amendments_applied",
+        "derived",
+        "method",
+        "confidence"
+      ],
+      "properties": {
+        "clause_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*:.+$"
+        },
+        "doc_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "number": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": ["string", "null"]
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/consolidatedClauseTable"
+          }
+        },
+        "as_of_date": {
+          "type": "string",
+          "minLength": 10
+        },
+        "amendments_applied": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "derived": {
+          "type": "boolean",
+          "const": true
+        },
+        "method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "confidence": {
+          "type": "string",
+          "const": "high"
+        },
+        "omitted": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "unconsolidatedClauseRecord": {
+      "type": "object",
+      "title": "UnconsolidatedClauseRecord",
+      "additionalProperties": false,
+      "required": ["clause_id", "doc_id", "reason"],
+      "properties": {
+        "clause_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*:.+$"
+        },
+        "doc_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

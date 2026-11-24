@@ -1,0 +1,168 @@
+{
+  "schema_version": "1.2",
+  "doc_id": "kfs-act-1964",
+  "jurisdiction": "in-ka-bengaluru-south",
+  "legal_status": "in_force",
+  "generated": {
+    "parser": "pypdfium2",
+    "parser_version": "5.15.2",
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "clauses": [
+    {
+      "clause_id": "kfs-act-1964:CHAPTER II",
+      "record_version": 1,
+      "record_id": "kfs-act-1964:CHAPTER II@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2023-03-24",
+      "number": "CHAPTER II",
+      "title": "FIRE PREVENTION, HIGH-RISE NOC AND FIRE SAFETY CESS",
+      "level": 1,
+      "parent_id": null,
+      "order": 0,
+      "text": "FIRE PREVENTION, HIGH-RISE NOC AND FIRE SAFETY CESS",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "kfs-act-1964",
+          "page": 1,
+          "bbox": [
+            0.0532,
+            0.0785,
+            0.7129,
+            0.0903
+          ],
+          "text_excerpt": "CHAPTER II: FIRE PREVENTION, HIGH-RISE NOC AND FIRE SAFETY CESS"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "kfs-act-1964:13",
+      "record_version": 1,
+      "record_id": "kfs-act-1964:13@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2023-03-24",
+      "number": "13",
+      "title": "Issue of No Objection Certificate and Advisory for High-Rise Buildings",
+      "level": 2,
+      "parent_id": "kfs-act-1964:CHAPTER II",
+      "order": 1,
+      "text": "Under the Karnataka Fire Force (Amendment) Act, 2023 (deemed in force from 24 March 2023), every high-rise building of 21 metres or more in height shall obtain a Fire Prevention and Fire Safety No Objection Certificate (NOC) from the Director General of Karnataka State Fire and Emergency Services in accordance with Part 4 of the National Building Code of India 2016.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "kfs-act-1964",
+          "page": 1,
+          "bbox": [
+            0.0529,
+            0.1051,
+            0.9473,
+            0.172
+          ],
+          "text_excerpt": "13. Issue of No Objection Certificate and Advisory for High-Rise Buildings: Under"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [
+        "ALL"
+      ],
+      "verification": "machine_checked",
+      "verified_by": "agent-qa-selfcheck-v2"
+    },
+    {
+      "clause_id": "kfs-act-1964:13-A",
+      "record_version": 1,
+      "record_id": "kfs-act-1964:13-A@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2023-03-24",
+      "number": "13-A",
+      "title": "Biennial Fire Safety Audit and Renewal",
+      "level": 2,
+      "parent_id": "kfs-act-1964:CHAPTER II",
+      "order": 2,
+      "text": "Owners and occupiers of high-rise buildings of 21 metres and above shall submit a fire safety compliance certificate every two years.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "kfs-act-1964",
+          "page": 1,
+          "bbox": [
+            0.0529,
+            0.1842,
+            0.9465,
+            0.214
+          ],
+          "text_excerpt": "13-A. Biennial Fire Safety Audit and Renewal: Owners and occupiers of high-rise"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "kfs-act-1964:13-B",
+      "record_version": 1,
+      "record_id": "kfs-act-1964:13-B@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2023-03-24",
+      "number": "13-B",
+      "title": "Levy of Fire Safety Cess on New Multi-Storey Construction",
+      "level": 2,
+      "parent_id": "kfs-act-1964:CHAPTER II",
+      "order": 3,
+      "text": "Under the 2025 Amendment Act, a fire safety infrastructure cess is levied alongside building plan sanction fees for commercial and high-rise buildings.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "kfs-act-1964",
+          "page": 1,
+          "bbox": [
+            0.0535,
+            0.2263,
+            0.9474,
+            0.2562
+          ],
+          "text_excerpt": "13-B. Levy of Fire Safety Cess on New Multi-Storey Construction: Under the"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    }
+  ]
+}

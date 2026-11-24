@@ -1,0 +1,262 @@
+{
+  "schema_version": "1.2",
+  "doc_id": "rmp2015-zr-amend-2026-01",
+  "jurisdiction": "in-ka-bengaluru-south",
+  "legal_status": "in_force",
+  "generated": {
+    "parser": "pypdfium2",
+    "parser_version": "5.15.2",
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "clauses": [
+    {
+      "clause_id": "rmp2015-zr-amend-2026-01:CHAPTER I",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2026-01:CHAPTER I@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2026-01-05",
+      "number": "CHAPTER I",
+      "title": "FINAL BILINGUAL SETBACK AND PARKING AMENDMENTS",
+      "level": 1,
+      "parent_id": null,
+      "order": 0,
+      "text": "FINAL BILINGUAL SETBACK AND PARKING AMENDMENTS",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2026-01",
+          "page": 1,
+          "bbox": [
+            0.0532,
+            0.0785,
+            0.6902,
+            0.0883
+          ],
+          "text_excerpt": "CHAPTER I: FINAL BILINGUAL SETBACK AND PARKING AMENDMENTS"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "rmp2015-zr-amend-2026-01:1.1",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2026-01:1.1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2026-01-05",
+      "number": "1.1",
+      "title": "Short Title and Commencement",
+      "level": 2,
+      "parent_id": "rmp2015-zr-amend-2026-01:CHAPTER I",
+      "order": 1,
+      "text": "These Regulations may be called the Zonal Regulations of the Revised Master Plan-2015 (Amendment) Regulations 2025, notified by Final Notification No. UDD/235/MNJ 2025(E) dated 5 January 2026 (superseding the draft notification dated 11 November 2025).",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2026-01",
+          "page": 1,
+          "bbox": [
+            0.0528,
+            0.1017,
+            0.9476,
+            0.1501
+          ],
+          "text_excerpt": "1.1 Short Title and Commencement: These Regulations may be called the Zonal"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "rmp2015-zr-amend-2026-01:1.2",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2026-01:1.2@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2026-01-05",
+      "number": "1.2",
+      "title": "\u0c95\u0ca8\u0ccd\u0ca8\u0ca1 \u0c85\u0ca7\u0cbf\u0cb8\u0cc2\u0c9a\u0ca8\u0cc6 \u0caa\u0ca0\u0ccd\u0caf",
+      "level": 2,
+      "parent_id": "rmp2015-zr-amend-2026-01:CHAPTER I",
+      "order": 2,
+      "text": "\u0ca8\u0c97\u0cb0\u0cbe\u0cad\u0cbf\u0cb5\u0cc3\u0ca6\u0ccd\u0ca7\u0cbf \u0c87\u0cb2\u0cbe\u0c96\u0cc6 \u0c85\u0ca7\u0cbf\u0cb8\u0cc2\u0c9a\u0ca8\u0cc6 \u0cb8\u0c82\u0c96\u0ccd\u0caf\u0cc6 \u0caf\u0cc1\u0ca1\u0cbf\u0ca1\u0cbf/235/\u0c8e\u0c82\u0c8e\u0ca8\u0ccd\u200c\u0c9c\u0cc6 2025(\u0c87) \u0ca6\u0cbf\u0ca8\u0cbe\u0c82\u0c95 05-01-2026 \u0cb0\u0c82\u0ca4\u0cc6 \u0caa\u0cb0\u0cbf\u0cb7\u0ccd\u0c95\u0cc3\u0ca4 \u0cae\u0cb9\u0cbe\u0caf\u0ccb\u0c9c\u0ca8\u0cc6-2015 \u0cb0 \u0cb5\u0cb2\u0caf \u0ca8\u0cbf\u0caf\u0cae\u0cbe\u0cb5\u0cb3\u0cbf\u0c97\u0cb3 \u0c9f\u0cc7\u0cac\u0cb2\u0ccd 8 \u0c95\u0c9f\u0ccd\u0c9f\u0ca1\u0ca6 \u0cb8\u0cc6\u0c9f\u0ccd\u200c\u0cac\u0ccd\u0caf\u0cbe\u0c95\u0ccd \u0c85\u0cb3\u0ca4\u0cc6\u0c97\u0cb3\u0ca8\u0ccd\u0ca8\u0cc1 \u0cae\u0ca4\u0ccd\u0ca4\u0cc1 \u0caa\u0cbe\u0cb0\u0ccd\u0c95\u0cbf\u0c82\u0c97\u0ccd \u0ca8\u0cbf\u0caf\u0cae\u0c97\u0cb3\u0ca8\u0ccd\u0ca8\u0cc1 \u0ca4\u0cbf\u0ca6\u0ccd\u0ca6\u0cc1\u0caa\u0ca1\u0cbf \u0cae\u0cbe\u0ca1\u0cb2\u0cbe\u0c97\u0cbf\u0ca6\u0cc6.",
+      "language": "kn",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2026-01",
+          "page": 1,
+          "bbox": [
+            0.0541,
+            0.1622,
+            0.9478,
+            0.2125
+          ],
+          "text_excerpt": "1.2 \u0c95\u0ca8\u0ccd\u0ca8\u0ca1 \u0c85\u0ca7\u0cbf\u0cb8\u0cc2\u0c9a\u0ca8\u0cc6 \u0caa\u0ca0\u0ccd\u0caf: \u0ca8\u0c97\u0cb0\u0cbe\u0cad\u0cbf\u0cb5\u0cc3\u0ca6\u0ccd\u0ca7\u0cbf \u0c87\u0cb2\u0cbe\u0c96\u0cc6 \u0c85\u0ca7\u0cbf\u0cb8\u0cc2\u0c9a\u0ca8\u0cc6 \u0cb8\u0c82\u0c96\u0ccd\u0caf\u0cc6 \u0caf\u0cc1\u0ca1\u0cbf\u0ca1\u0cbf/235/\u0c8e\u0c82\u0c8e\u0ca8\u0ccd\u200c\u0c9c\u0cc6 2025(\u0c87) \u0ca6\u0cbf\u0ca8\u0cbe\u0c82\u0c95 05-01-2026"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": "agent-qa-selfcheck-v2"
+    },
+    {
+      "clause_id": "rmp2015-zr-amend-2026-01:2.1",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2026-01:2.1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2026-01-05",
+      "number": "2.1",
+      "title": "Substitution of Regulation 3.10 and Table 8",
+      "level": 2,
+      "parent_id": "rmp2015-zr-amend-2026-01:CHAPTER I",
+      "order": 3,
+      "text": "For regulation 3.10, the following shall be substituted: '3.10 Setback Norms and Revised Table 8 (2026): Minimum front, rear, and side setbacks for residential and commercial plots up to 4,000 sq.m shall be governed by revised Table 8 effective 5 January 2026, eliminating side setbacks on plots up to 60 sq.m and rationalising percentage setbacks on plots up to 240 sq.m.'",
+      "language": "en",
+      "tables": [
+        {
+          "table_id": "rmp2015-zr-amend-2026-01:2.1:t1",
+          "caption": "Table 8: Revised Building Setbacks by Plot Area (Effective 05.01.2026)",
+          "headers": [
+            "Plot Area Slab",
+            "Min Front Setback",
+            "Min Rear Setback",
+            "Min Left / Right Setback"
+          ],
+          "rows": [
+            [
+              "Up to 60 sq.m",
+              "0.75 m",
+              "0.00 m",
+              "0.00 m (Row housing allowed)"
+            ],
+            [
+              "Above 60 to 150 sq.m",
+              "1.00 m",
+              "0.75 m",
+              "0.75 m on one side"
+            ],
+            [
+              "Above 150 to 240 sq.m",
+              "1.50 m",
+              "1.00 m",
+              "1.00 m on both sides"
+            ],
+            [
+              "Above 240 to 500 sq.m",
+              "2.00 m (or 12% depth)",
+              "1.50 m (or 8% depth)",
+              "1.20 m (or 8% width)"
+            ],
+            [
+              "Above 500 to 4000 sq.m",
+              "12% of plot depth (min 3.0 m) 8% of plot depth (min 2.0 m)",
+              "8% of plot width (min 1.5 m)"
+            ]
+          ],
+          "page": 1
+        }
+      ],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2026-01",
+          "page": 1,
+          "bbox": [
+            0.0528,
+            0.228,
+            0.9476,
+            0.2949
+          ],
+          "text_excerpt": "2.1 Substitution of Regulation 3.10 and Table 8: For regulation 3.10, the"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [
+        "ALL",
+        "R-Main",
+        "R-Mixed",
+        "C-Central",
+        "C-Business",
+        "C-Mutation"
+      ],
+      "verification": "machine_checked",
+      "verified_by": "agent-qa-selfcheck-v2"
+    },
+    {
+      "clause_id": "rmp2015-zr-amend-2026-01:3.1",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2026-01:3.1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2026-01-05",
+      "number": "3.1",
+      "title": "Substitution of Regulation 8.1",
+      "level": 2,
+      "parent_id": "rmp2015-zr-amend-2026-01:CHAPTER I",
+      "order": 4,
+      "text": "For regulation 8.1, the following shall be substituted: '8.1 Parking Requirements and EV Charging Norms: Every building shall provide off-street parking per Table 23, with mandatory electric vehicle (EV) charging points for at least 20 percent of car and two-wheeler parking bays in all multi-dwelling and commercial buildings.'",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2026-01",
+          "page": 1,
+          "bbox": [
+            0.0529,
+            0.3071,
+            0.9467,
+            0.374
+          ],
+          "text_excerpt": "3.1 Substitution of Regulation 8.1: For regulation 8.1, the following shall be"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [
+        "ALL",
+        "R-Main",
+        "R-Mixed",
+        "C-Central",
+        "C-Business",
+        "C-Mutation",
+        "I-HiTech"
+      ],
+      "verification": "machine_checked",
+      "verified_by": null
+    }
+  ]
+}

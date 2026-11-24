@@ -1,4 +1,4 @@
-"""Stage 8.7: Schema v1.1 validation, 9-point QA suite, declarations.json, and qa.md report."""
+"""Stage 8.7: Schema v1.2 validation, 9-point QA suite, declarations.json, and qa.md report."""
 
 from __future__ import annotations
 
@@ -15,15 +15,20 @@ from bylaws.schema_validator import (
     validate_file,
     validate_payload,
 )
+from bylaws.structure import is_structurable_document
 
-VALID_LEGAL_STATUSES = {"in_force", "draft", "superseded", "withdrawn"}
+VALID_LEGAL_STATUSES = {"in_force", "draft", "superseded", "withdrawn", "status_unknown"}
 
 
 def _detect_numbering_gaps_and_duplicates(
     clauses: list[dict[str, Any]],
 ) -> tuple[list[str], list[str]]:
     """Return `(duplicates, gaps)` among active clauses in a document."""
-    active_clauses = [c for c in clauses if c.get("superseded_by") is None]
+    active_clauses = [
+        c
+        for c in clauses
+        if c.get("superseded_by") is None and c.get("record_superseded_by") is None
+    ]
     seen_ids: set[str] = set()
     duplicates: list[str] = []
     by_parent: dict[str | None, list[int]] = {}
@@ -56,12 +61,14 @@ def _detect_numbering_gaps_and_duplicates(
 
 def _collect_known_gaps_for_doc(
     doc_id: str,
-    doc_role: str,
-    page_count: int,
+    doc_role: str | None,
+    page_count: int | None,
     active_clauses: list[dict[str, Any]],
     interim_dir: Path,
 ) -> list[dict[str, str]]:
     gaps: list[dict[str, str]] = []
+    if page_count is None or page_count < 1:
+        return gaps
 
     covered_pages: set[int] = set()
     for clause in active_clauses:
@@ -119,13 +126,15 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
             )
         try:
             doc_metas[doc.id] = validate_file(meta_path, "document")
-            schema_checks_run.append(f"`{meta_path.relative_to(root)}` against `document.schema.json`: PASS")
+            schema_checks_run.append(
+                f"`{meta_path.relative_to(root)}` against `document.schema.json`: PASS"
+            )
         except SchemaValidationError as exc:
             raise click.ClickException(str(exc)) from exc
 
     clause_trees: dict[str, dict[str, Any]] = {}
     for doc in config.documents:
-        if doc.role not in {"base", "amendment", "regulation"}:
+        if not is_structurable_document(doc):
             continue
         clause_path = docs_dir / f"{doc.id}.clauses.json"
         if not clause_path.is_file():
@@ -153,6 +162,16 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
     except SchemaValidationError as exc:
         raise click.ClickException(str(exc)) from exc
 
+    consolidated_path = processed_dir / "consolidated.json"
+    if consolidated_path.is_file():
+        try:
+            validate_file(consolidated_path, "consolidated")
+            schema_checks_run.append(
+                f"`{consolidated_path.relative_to(root)}` against `consolidated.schema.json`: PASS"
+            )
+        except SchemaValidationError as exc:
+            raise click.ClickException(str(exc)) from exc
+
     if config.maps.zoning:
         zones_path = processed_dir / "zones.geojson"
         if not zones_path.is_file():
@@ -167,6 +186,20 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
         except SchemaValidationError as exc:
             raise click.ClickException(str(exc)) from exc
 
+    for optional_name, schema_key in (
+        ("geo-layers.json", "geo-layers"),
+        ("clause-zone-tags.json", "clause-zone-tags"),
+    ):
+        opt_path = processed_dir / optional_name
+        if opt_path.is_file():
+            try:
+                validate_file(opt_path, schema_key)
+                schema_checks_run.append(
+                    f"`{opt_path.relative_to(root)}` against `{schema_key}.schema.json`: PASS"
+                )
+            except SchemaValidationError as exc:
+                raise click.ClickException(str(exc)) from exc
+
     boundary_path = processed_dir / "boundary.geojson"
     if not boundary_path.is_file():
         raise click.ClickException(
@@ -179,7 +212,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
     for tree in clause_trees.values():
         for clause in tree.get("clauses", []):
             all_clauses.append(clause)
-            if clause.get("superseded_by") is None:
+            if clause.get("superseded_by") is None and clause.get("record_superseded_by") is None:
                 active_clause_status[str(clause.get("clause_id"))] = str(
                     clause.get("legal_status", "")
                 )
@@ -252,9 +285,12 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
         if doc.id not in clause_trees:
             continue
         meta = doc_metas[doc.id]
-        page_count = int(meta.get("page_count", 1))
+        raw_page_count = meta.get("page_count")
+        page_count = int(raw_page_count) if isinstance(raw_page_count, int) else None
         active_clauses = [
-            c for c in clause_trees[doc.id].get("clauses", []) if c.get("superseded_by") is None
+            c
+            for c in clause_trees[doc.id].get("clauses", [])
+            if c.get("superseded_by") is None and c.get("record_superseded_by") is None
         ]
         known_gaps.extend(
             _collect_known_gaps_for_doc(doc.id, doc.role, page_count, active_clauses, interim_dir)
@@ -263,7 +299,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
     # QA Check 7: Unresolved cross-references
     unresolved_refs: list[str] = []
     for clause in all_clauses:
-        if clause.get("superseded_by") is not None:
+        if clause.get("superseded_by") is not None or clause.get("record_superseded_by") is not None:
             continue
         cid = str(clause.get("clause_id"))
         for ref in clause.get("cross_references") or []:
@@ -280,7 +316,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
     # QA Check 9: Drafts referenced from in_force documents/clauses (hard fail if > 0)
     draft_refs_from_in_force: list[str] = []
     for clause in all_clauses:
-        if clause.get("superseded_by") is not None:
+        if clause.get("superseded_by") is not None or clause.get("record_superseded_by") is not None:
             continue
         if clause.get("legal_status") != "in_force":
             continue
@@ -295,7 +331,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
 
     # Build and validate declarations.json
     declarations_payload: dict[str, Any] = {
-        "schema_version": "1.1",
+        "schema_version": "1.2",
         "jurisdiction": config.id,
         "not_modelled": list(config.not_modelled or []),
         "known_gaps": known_gaps,
@@ -307,7 +343,30 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
             }
             for item in (config.unread_documents or [])
         ],
+        "unobtainable_documents": [
+            {
+                "id": item.id,
+                "title": item.title,
+                "searched_sources": list(item.searched_sources),
+                "reason": item.reason,
+            }
+            for item in (config.unobtainable_documents or [])
+        ],
+        "contested_status": [
+            {
+                "doc_id": item.doc_id,
+                "title": item.title,
+                "declared_status": item.declared_status,
+                "conflicting_evidence": list(item.conflicting_evidence),
+            }
+            for item in (config.contested_status or [])
+        ],
     }
+    if config.building_relevant_sections:
+        declarations_payload["building_relevant_sections"] = dict(
+            config.building_relevant_sections
+        )
+
     declarations_path = processed_dir / "declarations.json"
     validate_payload(declarations_payload, "declarations", source=str(declarations_path))
     declarations_path.write_text(
@@ -321,7 +380,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
     qa_lines = [
         f"# Quality Assurance Report — `{config.id}` ({config.name})",
         "",
-        "## 1. Schema v1.1 Validation",
+        "## 1. Schema v1.2 Validation",
         "",
         *[f"- {line}" for line in schema_checks_run],
         "",
@@ -344,6 +403,8 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
         f"- **Not Modelled**: {len(declarations_payload['not_modelled'])}",
         f"- **Known Gaps**: {len(declarations_payload['known_gaps'])}",
         f"- **Unread Documents**: {len(declarations_payload['unread_documents'])}",
+        f"- **Unobtainable Documents**: {len(declarations_payload['unobtainable_documents'])}",
+        f"- **Contested Status**: {len(declarations_payload['contested_status'])}",
         "",
     ]
     qa_path = reports_dir / "qa.md"

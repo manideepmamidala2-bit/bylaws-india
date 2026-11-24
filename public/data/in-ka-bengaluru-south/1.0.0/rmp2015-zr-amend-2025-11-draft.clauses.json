@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.2",
+  "doc_id": "rmp2015-zr-amend-2025-11-draft",
+  "jurisdiction": "in-ka-bengaluru-south",
+  "legal_status": "superseded",
+  "generated": {
+    "parser": "pypdfium2",
+    "parser_version": "5.15.2",
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "clauses": [
+    {
+      "clause_id": "rmp2015-zr-amend-2025-11-draft:CHAPTER I",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2025-11-draft:CHAPTER I@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "superseded",
+      "effective_from": null,
+      "number": "CHAPTER I",
+      "title": "NOVEMBER 2025 SETBACK DRAFT (SUPERSEDED BY 05.01.2026 FINAL)",
+      "level": 1,
+      "parent_id": null,
+      "order": 0,
+      "text": "NOVEMBER 2025 SETBACK DRAFT (SUPERSEDED BY 05.01.2026 FINAL)",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2025-11-draft",
+          "page": 1,
+          "bbox": [
+            0.0532,
+            0.0785,
+            0.8105,
+            0.0908
+          ],
+          "text_excerpt": "CHAPTER I: NOVEMBER 2025 SETBACK DRAFT (SUPERSEDED BY 05.01.2026 FINAL)"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "rmp2015-zr-amend-2025-11-draft:1.1",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2025-11-draft:1.1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "superseded",
+      "effective_from": null,
+      "number": "1.1",
+      "title": "Draft Notice",
+      "level": 2,
+      "parent_id": "rmp2015-zr-amend-2025-11-draft:CHAPTER I",
+      "order": 1,
+      "text": "Draft Notification No. UDD/235/MNJ 2025 dated 11 November 2025 inviting public objections on proposed Table 8 setback revisions; superseded by Final Notification No. UDD/235/MNJ 2025(E) dated 5 January 2026.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2025-11-draft",
+          "page": 1,
+          "bbox": [
+            0.0534,
+            0.1051,
+            0.9465,
+            0.1349
+          ],
+          "text_excerpt": "1.1 Draft Notice: Draft Notification No. UDD/235/MNJ 2025 dated 11 November 2025"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    }
+  ]
+}

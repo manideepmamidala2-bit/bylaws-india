@@ -1,1 +1,99 @@
 @import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+:root {
+  --paper: #f5f3ed;
+  --panel: #efeee8;
+  --ink: #080909;
+  --ink2: #171917;
+  --muted: #5b5e56;
+  --hairline: #c8ccc0;
+  --rule2: #e5e6de;
+  --accent: #ff6b52;
+  --font-display: "Inter Tight", system-ui, -apple-system, sans-serif;
+  --font-serif: "Source Serif 4", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  border-radius: 0;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-display);
+  margin: 0;
+  padding: 0;
+}
+
+.dg-mono {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.dg-serif {
+  font-family: var(--font-serif);
+  color: var(--ink2);
+}
+
+.dg-pill {
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  padding: 5px 13px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background-color: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.dg-pill-active {
+  background-color: var(--ink);
+  color: var(--paper);
+}
+
+.dg-selected-row {
+  box-shadow: inset 3px 0 0 var(--accent);
+  background-color: var(--panel);
+}
+
+.dg-accent-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent);
+  border-radius: 999px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.dg-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+
+.dg-table th {
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 6px 8px;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background-color: var(--panel);
+  color: var(--ink);
+}
+
+.dg-table td {
+  border-bottom: 1px solid var(--hairline);
+  padding: 6px 8px;
+  color: var(--ink2);
+}

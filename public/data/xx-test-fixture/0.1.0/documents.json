@@ -1,6 +1,6 @@
 [
   {
-    "schema_version": "1.1",
+    "schema_version": "1.2",
     "doc_id": "fixture-base-2020",
     "title": "Synthetic Municipal Building Regulations 2020",
     "issuing_authority": "Synthetic Civic Authority",
@@ -9,6 +9,7 @@
     "legal_status": "in_force",
     "status_evidence": {
       "url": "https://example.org/gazette/2020-01-15",
+      "quoted_line": "Notification No. 10/2020 \u2014 Synthetic Municipal Building Regulations 2020 shall come into force on 1 February 2020.",
       "description": "Synthetic Municipal Gazette Notification No. 10/2020 bringing base regulations into force"
     },
     "licence_or_terms": "CC0-1.0",
@@ -21,10 +22,30 @@
     "sha256": "36f32618ee3ceaf70c3a0cf840f0fef402123a78aa0d5dc73ab4aab966168dda",
     "bytes": 2437,
     "page_count": 2,
-    "is_scanned": false
+    "is_scanned": false,
+    "doc_type": "regulations",
+    "notification_number": "SYN/UDD/10/2020",
+    "gazette_reference": "Synthetic Gazette Part IV-A dated 2020-01-15",
+    "text_rights": {
+      "mode": "full_text",
+      "reason": "Synthetic public municipal regulation published under CC0-1.0"
+    },
+    "languages": [
+      "en"
+    ],
+    "official_url": "https://example.org/gazette/2020-01-15.pdf",
+    "mirror_urls": [],
+    "copies": [
+      {
+        "url": "pipeline/tests/fixtures/fixture-base.pdf",
+        "path": "data/raw/xx-test-fixture/fixture-base-2020.pdf",
+        "sha256": "36f32618ee3ceaf70c3a0cf840f0fef402123a78aa0d5dc73ab4aab966168dda",
+        "retrieved_at": "2026-11-23T00:00:00Z"
+      }
+    ]
   },
   {
-    "schema_version": "1.1",
+    "schema_version": "1.2",
     "doc_id": "fixture-amend-2024",
     "title": "Synthetic Municipal Building (Amendment) Regulations 2024",
     "issuing_authority": "Synthetic Civic Authority",
@@ -33,6 +54,7 @@
     "legal_status": "in_force",
     "status_evidence": {
       "url": "https://example.org/gazette/2024-06-01",
+      "quoted_line": "Notification No. 42/2024 \u2014 Final Amendment Regulations in force from 15 June 2024.",
       "description": "Synthetic Municipal Gazette Final Notification No. 42/2024"
     },
     "licence_or_terms": "CC0-1.0",
@@ -47,10 +69,30 @@
     "sha256": "b11a9df84703012cb10469959f84498dfda93ec00c7abff8b957c8cad8c074ef",
     "bytes": 1566,
     "page_count": 1,
-    "is_scanned": false
+    "is_scanned": false,
+    "doc_type": "amendment",
+    "notification_number": "SYN/UDD/42/2024",
+    "gazette_reference": "Synthetic Gazette Part IV-A dated 2024-06-01",
+    "text_rights": {
+      "mode": "full_text",
+      "reason": "Synthetic public municipal amendment published under CC0-1.0"
+    },
+    "languages": [
+      "en"
+    ],
+    "official_url": "https://example.org/gazette/2024-06-01.pdf",
+    "mirror_urls": [],
+    "copies": [
+      {
+        "url": "pipeline/tests/fixtures/fixture-amend.pdf",
+        "path": "data/raw/xx-test-fixture/fixture-amend-2024.pdf",
+        "sha256": "b11a9df84703012cb10469959f84498dfda93ec00c7abff8b957c8cad8c074ef",
+        "retrieved_at": "2026-11-23T00:00:00Z"
+      }
+    ]
   },
   {
-    "schema_version": "1.1",
+    "schema_version": "1.2",
     "doc_id": "fixture-draft-2026",
     "title": "Draft Synthetic Zoning Revisions 2026",
     "issuing_authority": "Synthetic Planning Board",
@@ -59,6 +101,7 @@
     "legal_status": "draft",
     "status_evidence": {
       "url": "https://example.org/planning/draft-2026",
+      "quoted_line": "Draft published for public objections and suggestions within 30 days.",
       "description": "Public consultation draft notice inviting objections and suggestions"
     },
     "licence_or_terms": "CC0-1.0",
@@ -71,10 +114,30 @@
     "sha256": "eef7a229367ceb1a8ab9dde19be1dde02cefd3456047f2d0ddec6a1d72c85f59",
     "bytes": 1412,
     "page_count": 1,
-    "is_scanned": false
+    "is_scanned": false,
+    "doc_type": "regulations",
+    "notification_number": "SYN/SPB/DRAFT/01/2026",
+    "gazette_reference": "Synthetic Gazette Draft Notice dated 2026-03-01",
+    "text_rights": {
+      "mode": "full_text",
+      "reason": "Synthetic public draft notification published under CC0-1.0"
+    },
+    "languages": [
+      "en"
+    ],
+    "official_url": "https://example.org/planning/draft-2026.pdf",
+    "mirror_urls": [],
+    "copies": [
+      {
+        "url": "pipeline/tests/fixtures/fixture-draft.pdf",
+        "path": "data/raw/xx-test-fixture/fixture-draft-2026.pdf",
+        "sha256": "eef7a229367ceb1a8ab9dde19be1dde02cefd3456047f2d0ddec6a1d72c85f59",
+        "retrieved_at": "2026-11-23T00:00:00Z"
+      }
+    ]
   },
   {
-    "schema_version": "1.1",
+    "schema_version": "1.2",
     "doc_id": "fixture-map-atlas",
     "title": "Synthetic Planning District Land Use Atlas",
     "issuing_authority": "Synthetic Planning Board",
@@ -83,6 +146,7 @@
     "legal_status": "in_force",
     "status_evidence": {
       "url": "https://example.org/planning/atlas-2020",
+      "quoted_line": "Approved Master Plan Land Use Atlas for Planning District 01.",
       "description": "Approved Master Plan Land Use Atlas notification"
     },
     "licence_or_terms": "CC0-1.0",
@@ -95,6 +159,26 @@
     "sha256": "3e0c5e8e24d977475a039e846f3e851aca7a9c2e26278007f368a6c22acfc921",
     "bytes": 1478,
     "page_count": 1,
-    "is_scanned": false
+    "is_scanned": false,
+    "doc_type": "map",
+    "notification_number": "SYN/SPB/ATLAS/2020",
+    "gazette_reference": "Synthetic Master Plan Atlas Notification dated 2020-01-15",
+    "text_rights": {
+      "mode": "full_text",
+      "reason": "Synthetic public planning atlas published under CC0-1.0"
+    },
+    "languages": [
+      "en"
+    ],
+    "official_url": "https://example.org/planning/atlas-2020.pdf",
+    "mirror_urls": [],
+    "copies": [
+      {
+        "url": "pipeline/tests/fixtures/fixture-map.pdf",
+        "path": "data/raw/xx-test-fixture/fixture-map-atlas.pdf",
+        "sha256": "3e0c5e8e24d977475a039e846f3e851aca7a9c2e26278007f368a6c22acfc921",
+        "retrieved_at": "2026-11-23T00:00:00Z"
+      }
+    ]
   }
 ]

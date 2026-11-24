@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bylaws-india.local/schemas/jurisdiction.schema.json",
   "title": "JurisdictionConfig",
-  "description": "Configuration contract for a jurisdiction in jurisdictions/<id>.yaml (Schema v1.1).",
+  "description": "Configuration contract for a jurisdiction in jurisdictions/<id>.yaml (Schema v1.2).",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -16,10 +16,15 @@
     "maps"
   ],
   "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.2",
+      "default": "1.2"
+    },
     "id": {
       "type": "string",
       "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
-      "description": "Lowercase hyphenated hierarchical jurisdiction ID (e.g. xx-test-fixture)."
+      "description": "Lowercase hyphenated hierarchical jurisdiction ID."
     },
     "name": {
       "type": "string",
@@ -32,6 +37,18 @@
         "minLength": 1
       },
       "description": "Optional alternative display or search names for the jurisdiction."
+    },
+    "visibility": {
+      "type": "string",
+      "enum": ["public", "test"],
+      "default": "public",
+      "description": "Visibility of the jurisdiction in production vs preview/test environments."
+    },
+    "licence": {
+      "type": "string",
+      "minLength": 1,
+      "default": "CC BY 4.0",
+      "description": "Open data licence identifier for published releases of this jurisdiction."
     },
     "country": {
       "type": "string",
@@ -74,6 +91,31 @@
       },
       "description": "Known documents or circulars not yet ingested in this release."
     },
+    "unobtainable_documents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/unobtainableDocumentConfig"
+      },
+      "description": "Documents identified during discovery that could not be obtained from official or mirror sources."
+    },
+    "contested_status": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/contestedStatusConfig"
+      },
+      "description": "Documents whose legal status has conflicting evidence and is declared status_unknown."
+    },
+    "building_relevant_sections": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "description": "Map of doc_id to building-relevant section or chapter numbers."
+    },
     "documents": {
       "type": "array",
       "minItems": 1,
@@ -93,10 +135,22 @@
             "$ref": "#/$defs/boundaryMapConfig"
           }
         },
+        "planning_districts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/planningDistrictMapConfig"
+          }
+        },
         "zoning": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/zoningMapConfig"
+          }
+        },
+        "overlays": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/overlayMapConfig"
           }
         }
       }
@@ -107,14 +161,60 @@
       "type": "object",
       "title": "StatusEvidenceConfig",
       "additionalProperties": false,
-      "required": ["url", "description"],
+      "required": ["url"],
       "properties": {
         "url": {
           "type": ["string", "null"]
         },
+        "quoted_line": {
+          "type": ["string", "null"]
+        },
         "description": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "textRightsConfig": {
+      "type": "object",
+      "title": "TextRightsConfig",
+      "additionalProperties": false,
+      "required": ["mode", "reason"],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["full_text", "reference_only"]
+        },
+        "reason": {
           "type": "string",
           "minLength": 1
+        }
+      }
+    },
+    "citedProvisionConfig": {
+      "type": "object",
+      "title": "CitedProvisionConfig",
+      "additionalProperties": false,
+      "required": ["clause", "cited_by"],
+      "properties": {
+        "part": {
+          "type": ["string", "null"]
+        },
+        "clause": {
+          "type": "string",
+          "minLength": 1
+        },
+        "topic": {
+          "type": ["string", "null"]
+        },
+        "cited_by": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "where_to_obtain": {
+          "type": ["string", "null"]
         }
       }
     },
@@ -138,6 +238,62 @@
         }
       }
     },
+    "unobtainableDocumentConfig": {
+      "type": "object",
+      "title": "UnobtainableDocumentConfig",
+      "additionalProperties": false,
+      "required": ["id", "title", "searched_sources", "reason"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "searched_sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "contestedStatusConfig": {
+      "type": "object",
+      "title": "ContestedStatusConfig",
+      "additionalProperties": false,
+      "required": ["doc_id", "title", "declared_status", "conflicting_evidence"],
+      "properties": {
+        "doc_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "declared_status": {
+          "type": "string",
+          "const": "status_unknown"
+        },
+        "conflicting_evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
     "documentConfig": {
       "type": "object",
       "title": "DocumentConfig",
@@ -150,7 +306,6 @@
         "legal_status",
         "status_evidence",
         "licence_or_terms",
-        "role",
         "source_url"
       ],
       "properties": {
@@ -166,24 +321,84 @@
           "type": "string",
           "minLength": 1
         },
+        "doc_type": {
+          "type": "string",
+          "enum": [
+            "act",
+            "rules",
+            "regulations",
+            "bye_laws",
+            "amendment",
+            "notification",
+            "government_order",
+            "circular",
+            "map",
+            "standard_reference"
+          ]
+        },
         "layer": {
           "type": "string",
-          "enum": ["national", "state", "planning", "municipal"]
+          "enum": [
+            "statute",
+            "state_rules",
+            "planning",
+            "municipal",
+            "orders",
+            "overlay",
+            "national_reference",
+            "boundary"
+          ]
         },
         "legal_status": {
           "type": "string",
-          "enum": ["in_force", "draft", "superseded", "withdrawn"]
+          "enum": [
+            "in_force",
+            "draft",
+            "superseded",
+            "withdrawn",
+            "status_unknown"
+          ]
         },
         "status_evidence": {
           "$ref": "#/$defs/statusEvidenceConfig"
+        },
+        "notification_number": {
+          "type": ["string", "null"]
+        },
+        "gazette_reference": {
+          "type": ["string", "null"]
+        },
+        "superseded_by_document": {
+          "type": ["string", "null"]
         },
         "licence_or_terms": {
           "type": "string",
           "minLength": 1
         },
+        "text_rights": {
+          "$ref": "#/$defs/textRightsConfig"
+        },
+        "languages": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": ["en", "kn"]
+          }
+        },
         "role": {
           "type": "string",
           "enum": ["base", "amendment", "regulation", "boundary", "reference"]
+        },
+        "official_url": {
+          "type": ["string", "null"]
+        },
+        "mirror_urls": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         },
         "source_url": {
           "type": "string",
@@ -210,6 +425,12 @@
             "type": "string",
             "minLength": 1
           }
+        },
+        "cited_provisions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/citedProvisionConfig"
+          }
         }
       }
     },
@@ -222,6 +443,16 @@
         "id": {
           "type": "string",
           "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "title": {
+          "type": "string"
+        },
+        "layer_role": {
+          "type": "string",
+          "enum": ["corporation", "gba_zones", "wards"]
+        },
+        "output_file": {
+          "type": "string"
         },
         "source_url": {
           "type": "string",
@@ -245,6 +476,34 @@
         }
       }
     },
+    "planningDistrictMapConfig": {
+      "type": "object",
+      "title": "PlanningDistrictMapConfig",
+      "additionalProperties": false,
+      "required": ["id", "source_url"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "title": {
+          "type": "string"
+        },
+        "source_url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "district_code_field": {
+          "type": "string"
+        },
+        "district_name_field": {
+          "type": "string"
+        },
+        "source_attribution": {
+          "type": "string"
+        }
+      }
+    },
     "tracedZoningMapConfig": {
       "type": "object",
       "title": "TracedZoningMapConfig",
@@ -264,7 +523,12 @@
         },
         "kind": {
           "type": "string",
-          "const": "traced"
+          "enum": [
+            "traced",
+            "vector_pdf",
+            "grid_georeferenced_raster",
+            "osm_gcp_raster"
+          ]
         },
         "document": {
           "type": "string",
@@ -277,9 +541,15 @@
         "planning_district": {
           "type": ["integer", "string"]
         },
+        "sheet": {
+          "type": ["string", "null"]
+        },
         "legend_page": {
           "type": ["integer", "null"],
           "minimum": 1
+        },
+        "source_url": {
+          "type": ["string", "null"]
         }
       }
     },
@@ -316,6 +586,12 @@
           "type": "string",
           "minLength": 1
         },
+        "planning_district": {
+          "type": ["string", "null"]
+        },
+        "sheet": {
+          "type": ["string", "null"]
+        },
         "source_attribution": {
           "type": "string",
           "minLength": 1
@@ -332,6 +608,58 @@
           "$ref": "#/$defs/importedZoningMapConfig"
         }
       ]
+    },
+    "overlayMapConfig": {
+      "type": "object",
+      "title": "OverlayMapConfig",
+      "additionalProperties": false,
+      "required": ["id", "title", "kind", "source", "method"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "enum": ["derived_overlay", "reference"]
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "accuracy_m": {
+          "type": ["number", "null"],
+          "minimum": 0
+        },
+        "derived": {
+          "type": "boolean",
+          "default": true
+        },
+        "buffer_m": {
+          "type": ["number", "null"],
+          "minimum": 0
+        },
+        "source_url": {
+          "type": ["string", "null"]
+        },
+        "external_url": {
+          "type": ["string", "null"]
+        },
+        "rule_doc_id": {
+          "type": ["string", "null"]
+        },
+        "rule_clause": {
+          "type": ["string", "null"]
+        }
+      }
     }
   }
 }

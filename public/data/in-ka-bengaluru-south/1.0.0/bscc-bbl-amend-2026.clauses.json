@@ -1,0 +1,281 @@
+{
+  "schema_version": "1.2",
+  "doc_id": "bscc-bbl-amend-2026",
+  "jurisdiction": "in-ka-bengaluru-south",
+  "legal_status": "in_force",
+  "generated": {
+    "parser": "pypdfium2",
+    "parser_version": "5.15.2",
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "clauses": [
+    {
+      "clause_id": "bscc-bbl-amend-2026:CHAPTER I",
+      "record_version": 1,
+      "record_id": "bscc-bbl-amend-2026:CHAPTER I@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2026-05-14",
+      "number": "CHAPTER I",
+      "title": "PRELIMINARY AND AMENDMENTS TO 2003 BYE-LAWS",
+      "level": 1,
+      "parent_id": null,
+      "order": 0,
+      "text": "PRELIMINARY AND AMENDMENTS TO 2003 BYE-LAWS",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bscc-bbl-amend-2026",
+          "page": 1,
+          "bbox": [
+            0.0532,
+            0.0785,
+            0.6533,
+            0.0883
+          ],
+          "text_excerpt": "CHAPTER I: PRELIMINARY AND AMENDMENTS TO 2003 BYE-LAWS"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "bscc-bbl-amend-2026:1.1",
+      "record_version": 1,
+      "record_id": "bscc-bbl-amend-2026:1.1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2026-05-14",
+      "number": "1.1",
+      "title": "Short Title and Commencement",
+      "level": 2,
+      "parent_id": "bscc-bbl-amend-2026:CHAPTER I",
+      "order": 1,
+      "text": "These Bye-laws may be called the Bengaluru City Corporation Building (Amendment) Bye-laws 2026 as issued by Bengaluru South City Corporation and come into force on 14 May 2026.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bscc-bbl-amend-2026",
+          "page": 1,
+          "bbox": [
+            0.0535,
+            0.1051,
+            0.9467,
+            0.135
+          ],
+          "text_excerpt": "1.1 Short Title and Commencement: These Bye-laws may be called the Bengaluru"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "bscc-bbl-amend-2026:2.1",
+      "record_version": 1,
+      "record_id": "bscc-bbl-amend-2026:2.1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2026-05-14",
+      "number": "2.1",
+      "title": "Omission of Bye-law 3.8",
+      "level": 2,
+      "parent_id": "bscc-bbl-amend-2026:CHAPTER I",
+      "order": 2,
+      "text": "In the Bangalore Mahanagara Palike Building Bye-laws 2003, bye-law 3.8 shall be omitted.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bscc-bbl-amend-2026",
+          "page": 1,
+          "bbox": [
+            0.0528,
+            0.1472,
+            0.9435,
+            0.1585
+          ],
+          "text_excerpt": "2.1 Omission of Bye-law 3.8: In the Bangalore Mahanagara Palike Building Bye-laws"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "bscc-bbl-amend-2026:2.2",
+      "record_version": 1,
+      "record_id": "bscc-bbl-amend-2026:2.2@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2026-05-14",
+      "number": "2.2",
+      "title": "Omission of Bye-law 3.9",
+      "level": 2,
+      "parent_id": "bscc-bbl-amend-2026:CHAPTER I",
+      "order": 3,
+      "text": "In the Bangalore Mahanagara Palike Building Bye-laws 2003, bye-law 3.9 shall be omitted.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bscc-bbl-amend-2026",
+          "page": 1,
+          "bbox": [
+            0.0528,
+            0.1707,
+            0.9435,
+            0.1821
+          ],
+          "text_excerpt": "2.2 Omission of Bye-law 3.9: In the Bangalore Mahanagara Palike Building Bye-laws"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "bscc-bbl-amend-2026:2.3",
+      "record_version": 1,
+      "record_id": "bscc-bbl-amend-2026:2.3@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2026-05-14",
+      "number": "2.3",
+      "title": "Omission of Bye-law 3.10",
+      "level": 2,
+      "parent_id": "bscc-bbl-amend-2026:CHAPTER I",
+      "order": 4,
+      "text": "In the Bangalore Mahanagara Palike Building Bye-laws 2003, bye-law 3.10 shall be omitted.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bscc-bbl-amend-2026",
+          "page": 1,
+          "bbox": [
+            0.0528,
+            0.1943,
+            0.9469,
+            0.2217
+          ],
+          "text_excerpt": "2.3 Omission of Bye-law 3.10: In the Bangalore Mahanagara Palike Building Bye-laws"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "bscc-bbl-amend-2026:3.1",
+      "record_version": 1,
+      "record_id": "bscc-bbl-amend-2026:3.1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2026-05-14",
+      "number": "3.1",
+      "title": "Substitution of Bye-law 6.0 and Table 2B",
+      "level": 2,
+      "parent_id": "bscc-bbl-amend-2026:CHAPTER I",
+      "order": 5,
+      "text": "For bye-law 6.0, the following shall be substituted: '6.0 Permissible Deviations During Construction: Dimensional deviations in setbacks, ground coverage, and building height up to the limits specified in revised Table 2B (up to 10 percent for residential plots up to 240 sq.m and up to 5 percent for larger plots without violating FAR or road alignment) may be regularised upon payment of compounding fees prior to Occupancy Certificate.'",
+      "language": "en",
+      "tables": [
+        {
+          "table_id": "bscc-bbl-amend-2026:3.1:t1",
+          "caption": "Table 2B: Revised Compoundable Deviation Limits (2026 Amendment)",
+          "headers": [
+            "Parameter",
+            "Plots up to 240 sq.m",
+            "Plots above 240 sq.m",
+            "Restriction"
+          ],
+          "rows": [
+            [
+              "Front Setback",
+              "Up to 5%",
+              "Nil (0%)",
+              "Street line inviolable"
+            ],
+            [
+              "Side & Rear Setbacks",
+              "Up to 10%",
+              "Up to 5%",
+              "Fire driveway preserved"
+            ],
+            [
+              "Ground Coverage",
+              "Up to 5%",
+              "Up to 5%",
+              "Total FAR not exceeded"
+            ]
+          ],
+          "page": 1
+        }
+      ],
+      "citations": [
+        {
+          "doc_id": "bscc-bbl-amend-2026",
+          "page": 1,
+          "bbox": [
+            0.0529,
+            0.2364,
+            0.9476,
+            0.3218
+          ],
+          "text_excerpt": "3.1 Substitution of Bye-law 6.0 and Table 2B: For bye-law 6.0, the"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [
+        "ALL",
+        "R-Main",
+        "R-Mixed",
+        "C-Central",
+        "C-Business",
+        "C-Mutation"
+      ],
+      "verification": "machine_checked",
+      "verified_by": "agent-qa-selfcheck-v2"
+    }
+  ]
+}

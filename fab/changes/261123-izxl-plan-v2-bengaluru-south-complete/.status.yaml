@@ -1,0 +1,54 @@
+id: izxl
+name: 261123-izxl-plan-v2-bengaluru-south-complete
+created: 2026-11-23T17:30:34Z
+created_by: manideepmamidala2-bit
+change_type: feat
+issues: []
+progress:
+    intake: done
+    apply: done
+    review: done
+    hydrate: done
+    ship: done
+    review-pr: pending
+plan:
+    generated: true
+    task_count: 20
+    acceptance_count: 27
+    acceptance_completed: 27
+confidence:
+    certain: 5
+    confident: 0
+    tentative: 0
+    unresolved: 0
+    score: 5.0
+    fuzzy: true
+    dimensions:
+        signal: 89.0
+        reversibility: 90.0
+        competence: 93.0
+        disambiguation: 92.0
+stage_metrics:
+    intake: {started_at: "2026-11-23T17:30:34Z", driver: fab-new, iterations: 1, completed_at: "2026-11-23T17:36:23Z"}
+    apply: {started_at: "2026-11-23T17:36:23Z", driver: fab-ff, iterations: 1, completed_at: "2026-11-23T19:08:42Z"}
+    review: {started_at: "2026-11-23T19:08:42Z", driver: fab-ff, iterations: 1, completed_at: "2026-11-23T19:18:52Z"}
+    hydrate: {started_at: "2026-11-23T19:18:52Z", driver: fab-ff, iterations: 1, completed_at: "2026-11-23T19:27:07Z"}
+    ship: {started_at: "2026-11-23T19:27:07Z", driver: fab-ff, iterations: 1, completed_at: "2026-11-24T03:31:19Z"}
+prs:
+    - https://github.com/manideepmamidala2-bit/bylaws-india/pull/5
+base_branch: 261123-a5ou-m0-m1-scaffold-schemas-fixture
+change_type_source: explicit
+true_impact:
+    added: 30848
+    deleted: 1202
+    net: 29646
+    tests:
+        added: 1532
+        deleted: 135
+        net: 1397
+    computed_at: "2026-11-24T03:31:20Z"
+    computed_at_stage: ship
+summary: deliver Plan v2.0 (Bengaluru South, Complete) with Schema v1.2, Rules R1–R14, Part A foundations, 31-source Bengaluru South dataset & maps, 8-route dg2n web app, axe-core CI, and release 1.0.0
+# base_branch: written by /git-branch or /fab-new when the change's branch is created (no placeholder here).
+# true_impact: lazily created on first stage-finish that computes it (no placeholder here).
+last_updated: 2026-11-24T03:31:20Z

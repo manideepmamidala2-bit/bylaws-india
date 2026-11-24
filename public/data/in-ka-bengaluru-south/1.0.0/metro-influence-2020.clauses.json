@@ -1,0 +1,170 @@
+{
+  "schema_version": "1.2",
+  "doc_id": "metro-influence-2020",
+  "jurisdiction": "in-ka-bengaluru-south",
+  "legal_status": "in_force",
+  "generated": {
+    "parser": "pypdfium2",
+    "parser_version": "5.15.2",
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "clauses": [
+    {
+      "clause_id": "metro-influence-2020:preamble",
+      "record_version": 1,
+      "record_id": "metro-influence-2020:preamble@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2020-05-11",
+      "number": "preamble",
+      "title": "Preamble",
+      "level": 1,
+      "parent_id": null,
+      "order": 0,
+      "text": "Notification No. UDD 110 PRJ 2020 -- Namma Metro 11 m Underground Influence Zone",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "metro-influence-2020",
+          "page": 1,
+          "bbox": [
+            0.0539,
+            0.0422,
+            0.9437,
+            0.0568
+          ],
+          "text_excerpt": "Notification No. UDD 110 PRJ 2020 -- Namma Metro 11 m Underground"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "metro-influence-2020:CHAPTER I",
+      "record_version": 1,
+      "record_id": "metro-influence-2020:CHAPTER I@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2020-05-11",
+      "number": "CHAPTER I",
+      "title": "NAMMA METRO UNDERGROUND INFLUENCE ZONE REGULATIONS",
+      "level": 1,
+      "parent_id": null,
+      "order": 1,
+      "text": "NAMMA METRO UNDERGROUND INFLUENCE ZONE REGULATIONS",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "metro-influence-2020",
+          "page": 1,
+          "bbox": [
+            0.0532,
+            0.0785,
+            0.7651,
+            0.0883
+          ],
+          "text_excerpt": "CHAPTER I: NAMMA METRO UNDERGROUND INFLUENCE ZONE REGULATIONS"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "metro-influence-2020:1.1",
+      "record_version": 1,
+      "record_id": "metro-influence-2020:1.1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2020-05-11",
+      "number": "1.1",
+      "title": "Declaration of 11 Metre Underground Metro Influence Zone",
+      "level": 2,
+      "parent_id": "metro-influence-2020:CHAPTER I",
+      "order": 2,
+      "text": "By Notification No. UDD 110 PRJ 2020 dated 11 May 2020, a corridor of 11 metres on either side of the outer edge of Namma Metro underground twin-bored tunnels and underground station boxes is declared as the Metro Influence Zone.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "metro-influence-2020",
+          "page": 1,
+          "bbox": [
+            0.0528,
+            0.1052,
+            0.9474,
+            0.1535
+          ],
+          "text_excerpt": "1.1 Declaration of 11 Metre Underground Metro Influence Zone: By Notification No."
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [
+        "overlay-metro-11m"
+      ],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "metro-influence-2020:1.2",
+      "record_version": 1,
+      "record_id": "metro-influence-2020:1.2@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2020-05-11",
+      "number": "1.2",
+      "title": "Mandatory BMRCL No Objection Certificate",
+      "level": 2,
+      "parent_id": "metro-influence-2020:CHAPTER I",
+      "order": 3,
+      "text": "No excavation, piling, basement construction, or borewell drilling on any plot falling wholly or partly within the 11 metre Underground Metro Influence Zone in Bengaluru South shall be sanctioned without a structural No Objection Certificate from Bangalore Metro Rail Corporation Limited (BMRCL).",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "metro-influence-2020",
+          "page": 1,
+          "bbox": [
+            0.0529,
+            0.1657,
+            0.9469,
+            0.2141
+          ],
+          "text_excerpt": "1.2 Mandatory BMRCL No Objection Certificate: No excavation, piling, basement construction, or"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [
+        "overlay-metro-11m"
+      ],
+      "verification": "machine_checked",
+      "verified_by": null
+    }
+  ]
+}

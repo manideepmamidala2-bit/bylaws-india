@@ -1,0 +1,130 @@
+{
+  "schema_version": "1.2",
+  "doc_id": "rmp2015-zr-amend-2014",
+  "jurisdiction": "in-ka-bengaluru-south",
+  "legal_status": "in_force",
+  "generated": {
+    "parser": "pypdfium2",
+    "parser_version": "5.15.2",
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "clauses": [
+    {
+      "clause_id": "rmp2015-zr-amend-2014:CHAPTER I",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2014:CHAPTER I@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2014-12-09",
+      "number": "CHAPTER I",
+      "title": "2014 AMENDMENTS TO RESIDENTIAL ANCILLARY USES",
+      "level": 1,
+      "parent_id": null,
+      "order": 0,
+      "text": "2014 AMENDMENTS TO RESIDENTIAL ANCILLARY USES",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2014",
+          "page": 1,
+          "bbox": [
+            0.0532,
+            0.0785,
+            0.6677,
+            0.0883
+          ],
+          "text_excerpt": "CHAPTER I: 2014 AMENDMENTS TO RESIDENTIAL ANCILLARY USES"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "rmp2015-zr-amend-2014:1.1",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2014:1.1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2014-12-09",
+      "number": "1.1",
+      "title": "Short Title and Commencement",
+      "level": 2,
+      "parent_id": "rmp2015-zr-amend-2014:CHAPTER I",
+      "order": 1,
+      "text": "These Regulations may be called the Zoning Regulations of Bangalore of RMP 2015 (Amendment) Regulations 2014, notified on 9 December 2014.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2014",
+          "page": 1,
+          "bbox": [
+            0.0528,
+            0.1051,
+            0.9469,
+            0.135
+          ],
+          "text_excerpt": "1.1 Short Title and Commencement: These Regulations may be called the Zoning"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "clause_id": "rmp2015-zr-amend-2014:2.1",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2014:2.1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2014-12-09",
+      "number": "2.1",
+      "title": "Substitution of Regulation 4.1.2",
+      "level": 2,
+      "parent_id": "rmp2015-zr-amend-2014:CHAPTER I",
+      "order": 2,
+      "text": "For regulation 4.1.2, the following shall be substituted: '4.1.2 Ancillary Uses in R-Main: Ancillary commercial uses in Residential (Main) zone are permissible only in Ring I and Ring II on plots up to 240 sq.m abutting roads of 12.0 m width or more, restricted to 20 percent of built-up area or 50 sq.m whichever is less; in Ring III, commercial uses in R-Main require an 18.0 m road.'",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2014",
+          "page": 1,
+          "bbox": [
+            0.0528,
+            0.1472,
+            0.947,
+            0.2141
+          ],
+          "text_excerpt": "2.1 Substitution of Regulation 4.1.2: For regulation 4.1.2, the following shall be"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [
+        "R-Main"
+      ],
+      "verification": "machine_checked",
+      "verified_by": null
+    }
+  ]
+}

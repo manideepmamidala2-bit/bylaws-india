@@ -9,15 +9,21 @@ import click
 
 from bylaws.config import JurisdictionConfig
 from bylaws.parsers.base import ParsedBlock, ParsedTable, ParserAdapter, ParseResult
+from bylaws.parsers.layout_table_adapter import (
+    DoclingLayoutAdapter,
+    TesseractOcrAdapter,
+)
 from bylaws.parsers.pypdfium2_adapter import Pypdfium2Adapter
 from bylaws.root import resolve_repo_root
 
 __all__ = [
+    "DoclingLayoutAdapter",
     "ParseResult",
     "ParsedBlock",
     "ParsedTable",
     "ParserAdapter",
     "Pypdfium2Adapter",
+    "TesseractOcrAdapter",
     "get_parser_adapter",
     "run_parse_stage",
 ]
@@ -28,6 +34,10 @@ def get_parser_adapter(parser_name: str) -> ParserAdapter:
     normalized = parser_name.strip().lower()
     if normalized == "pypdfium2":
         return Pypdfium2Adapter()
+    if normalized == "docling":
+        return DoclingLayoutAdapter()
+    if normalized == "tesseract":
+        return TesseractOcrAdapter()
     raise click.ClickException(f"not implemented: parse ({parser_name})")
 
 
@@ -46,7 +56,9 @@ def run_parse_stage(
 
     parsed_count = 0
     for doc in config.documents:
-        if doc.role in {"boundary", "reference"}:
+        if doc.role in {"boundary", "reference"} or doc.doc_type in {"map", "standard_reference"}:
+            continue
+        if doc.text_rights is not None and doc.text_rights.mode == "reference_only":
             continue
         pdf_path = raw_dir / f"{doc.id}.pdf"
         if not pdf_path.is_file():

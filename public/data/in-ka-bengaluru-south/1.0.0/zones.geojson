@@ -1,0 +1,1430 @@
+{
+  "type": "FeatureCollection",
+  "schema_version": "1.2",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.566667,
+              12.93111
+            ],
+            [
+              77.566667,
+              12.916666
+            ],
+            [
+              77.52,
+              12.916666
+            ],
+            [
+              77.52,
+              12.93111
+            ],
+            [
+              77.566667,
+              12.93111
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0001",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0001@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "R-Main",
+        "zone_label": "Residential (Main)",
+        "planning_district": "1.09",
+        "sheet": "1.09 map (b)- Basavanagudi",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 8101048.34,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.566667,
+              12.945555
+            ],
+            [
+              77.566667,
+              12.93111
+            ],
+            [
+              77.52,
+              12.93111
+            ],
+            [
+              77.52,
+              12.945555
+            ],
+            [
+              77.566667,
+              12.945555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0002",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0002@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "C-Central",
+        "zone_label": "Commercial (Central)",
+        "planning_district": "1.09",
+        "sheet": "1.09 map (b)- Basavanagudi",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 8101150.42,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.566667,
+              12.945555
+            ],
+            [
+              77.52,
+              12.945555
+            ],
+            [
+              77.52,
+              12.95
+            ],
+            [
+              77.564995,
+              12.959999
+            ],
+            [
+              77.56501,
+              12.959999
+            ],
+            [
+              77.566667,
+              12.959833
+            ],
+            [
+              77.566667,
+              12.945555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0003",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0003@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "Park",
+        "zone_label": "Valley, Parks and Open Spaces",
+        "planning_district": "1.09",
+        "sheet": "1.09 map (b)- Basavanagudi",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 5395289.23,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.566667,
+              12.93111
+            ],
+            [
+              77.613334,
+              12.93111
+            ],
+            [
+              77.613334,
+              12.916666
+            ],
+            [
+              77.566667,
+              12.916666
+            ],
+            [
+              77.566667,
+              12.93111
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0004",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0004@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "R-Main",
+        "zone_label": "Residential (Main)",
+        "planning_district": "1.10",
+        "sheet": "1.10 map (b)- Jayanagar (Note: PD 204 is Benson Town)",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 8101613.87,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.566667,
+              12.945555
+            ],
+            [
+              77.613334,
+              12.945555
+            ],
+            [
+              77.613334,
+              12.93111
+            ],
+            [
+              77.566667,
+              12.93111
+            ],
+            [
+              77.566667,
+              12.945555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0005",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0005@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "C-Business",
+        "zone_label": "Commercial (Business)",
+        "planning_district": "1.10",
+        "sheet": "1.10 map (b)- Jayanagar (Note: PD 204 is Benson Town)",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 8101715.89,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.613334,
+              12.945555
+            ],
+            [
+              77.566667,
+              12.945555
+            ],
+            [
+              77.566667,
+              12.959833
+            ],
+            [
+              77.613334,
+              12.955167
+            ],
+            [
+              77.613334,
+              12.945555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0006",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0006@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "P&SP",
+        "zone_label": "Public and Semi-Public",
+        "planning_district": "1.10",
+        "sheet": "1.10 map (b)- Jayanagar (Note: PD 204 is Benson Town)",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 6699159.41,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.613334,
+              12.916666
+            ],
+            [
+              77.613334,
+              12.93111
+            ],
+            [
+              77.658002,
+              12.93111
+            ],
+            [
+              77.66,
+              12.93
+            ],
+            [
+              77.66,
+              12.916666
+            ],
+            [
+              77.613334,
+              12.916666
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0007",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0007@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "R-Mixed",
+        "zone_label": "Residential (Mixed)",
+        "planning_district": "1.11",
+        "sheet": "1.11 map (b)- BTM Layout",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 8088639.62,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.613334,
+              12.93111
+            ],
+            [
+              77.613334,
+              12.945555
+            ],
+            [
+              77.632001,
+              12.945555
+            ],
+            [
+              77.658002,
+              12.93111
+            ],
+            [
+              77.613334,
+              12.93111
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0008",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0008@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "C-Mutation",
+        "zone_label": "Mutation Corridor",
+        "planning_district": "1.11",
+        "sheet": "1.11 map (b)- BTM Layout",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 5497840.43,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.613334,
+              12.945555
+            ],
+            [
+              77.613334,
+              12.955167
+            ],
+            [
+              77.615,
+              12.955
+            ],
+            [
+              77.632001,
+              12.945555
+            ],
+            [
+              77.613334,
+              12.945555
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0009",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0009@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "T&T",
+        "zone_label": "Transport and Communication",
+        "planning_district": "1.11",
+        "sheet": "1.11 map (b)- BTM Layout",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 1155721.24,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.566667,
+              12.887777
+            ],
+            [
+              77.566667,
+              12.873333
+            ],
+            [
+              77.52,
+              12.873333
+            ],
+            [
+              77.52,
+              12.887777
+            ],
+            [
+              77.566667,
+              12.887777
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0010",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0010@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "R-Main",
+        "zone_label": "Residential (Main)",
+        "planning_district": "2.13",
+        "sheet": "2.13 map (b)- Banashankari West",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 8102421.55,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.566667,
+              12.902222
+            ],
+            [
+              77.566667,
+              12.887777
+            ],
+            [
+              77.52,
+              12.887777
+            ],
+            [
+              77.52,
+              12.902222
+            ],
+            [
+              77.566667,
+              12.902222
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0011",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0011@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "R-Mixed",
+        "zone_label": "Residential (Mixed)",
+        "planning_district": "2.13",
+        "sheet": "2.13 map (b)- Banashankari West",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 8102525.24,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.566667,
+              12.916666
+            ],
+            [
+              77.566667,
+              12.902222
+            ],
+            [
+              77.52,
+              12.902222
+            ],
+            [
+              77.52,
+              12.916666
+            ],
+            [
+              77.566667,
+              12.916666
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0012",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0012@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "Park",
+        "zone_label": "Valley, Parks and Open Spaces",
+        "planning_district": "2.13",
+        "sheet": "2.13 map (b)- Banashankari West",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 8101506.57,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.566667,
+              12.887777
+            ],
+            [
+              77.613334,
+              12.887777
+            ],
+            [
+              77.613334,
+              12.873333
+            ],
+            [
+              77.566667,
+              12.873333
+            ],
+            [
+              77.566667,
+              12.887777
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0013",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0013@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "R-Main",
+        "zone_label": "Residential (Main)",
+        "planning_district": "2.14",
+        "sheet": "2.14 map (b)- Banashankari",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 8102987.38,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.566667,
+              12.902222
+            ],
+            [
+              77.613334,
+              12.902222
+            ],
+            [
+              77.613334,
+              12.887777
+            ],
+            [
+              77.566667,
+              12.887777
+            ],
+            [
+              77.566667,
+              12.902222
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0014",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0014@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "C-Business",
+        "zone_label": "Commercial (Business)",
+        "planning_district": "2.14",
+        "sheet": "2.14 map (b)- Banashankari",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 8103091.01,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.566667,
+              12.916666
+            ],
+            [
+              77.613334,
+              12.916666
+            ],
+            [
+              77.613334,
+              12.902222
+            ],
+            [
+              77.566667,
+              12.902222
+            ],
+            [
+              77.566667,
+              12.916666
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0015",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0015@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "T&T",
+        "zone_label": "Transport and Communication",
+        "planning_district": "2.14",
+        "sheet": "2.14 map (b)- Banashankari",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 8102072.2,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.613334,
+              12.873333
+            ],
+            [
+              77.613334,
+              12.887777
+            ],
+            [
+              77.66,
+              12.887777
+            ],
+            [
+              77.66,
+              12.873333
+            ],
+            [
+              77.613334,
+              12.873333
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0016",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0016@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "R-Main",
+        "zone_label": "Residential (Main)",
+        "planning_district": "2.15",
+        "sheet": "2.15 map (b)- J.P. Nagar",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 8103389.89,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.613334,
+              12.887777
+            ],
+            [
+              77.613334,
+              12.902222
+            ],
+            [
+              77.66,
+              12.902222
+            ],
+            [
+              77.66,
+              12.887777
+            ],
+            [
+              77.613334,
+              12.887777
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0017",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0017@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "R-Mixed",
+        "zone_label": "Residential (Mixed)",
+        "planning_district": "2.15",
+        "sheet": "2.15 map (b)- J.P. Nagar",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 8103493.46,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.613334,
+              12.902222
+            ],
+            [
+              77.613334,
+              12.916666
+            ],
+            [
+              77.66,
+              12.916666
+            ],
+            [
+              77.66,
+              12.902222
+            ],
+            [
+              77.613334,
+              12.902222
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0018",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0018@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "C-Mutation",
+        "zone_label": "Mutation Corridor",
+        "planning_district": "2.15",
+        "sheet": "2.15 map (b)- J.P. Nagar",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 8102474.54,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.55,
+              12.83
+            ],
+            [
+              77.535556,
+              12.844444
+            ],
+            [
+              77.566667,
+              12.844444
+            ],
+            [
+              77.566667,
+              12.83
+            ],
+            [
+              77.55,
+              12.83
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0019",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0019@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "R-Mixed",
+        "zone_label": "Residential (Mixed)",
+        "planning_district": "3.18",
+        "sheet": "3.18 map (b)- Uttarahalli",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 4148478.37,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.566667,
+              12.858889
+            ],
+            [
+              77.566667,
+              12.844444
+            ],
+            [
+              77.535556,
+              12.844444
+            ],
+            [
+              77.521111,
+              12.858889
+            ],
+            [
+              77.566667,
+              12.858889
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0020",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0020@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "P&SP",
+        "zone_label": "Public and Semi-Public",
+        "planning_district": "3.18",
+        "sheet": "3.18 map (b)- Uttarahalli",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 6656992.6,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.566667,
+              12.873333
+            ],
+            [
+              77.566667,
+              12.858889
+            ],
+            [
+              77.521111,
+              12.858889
+            ],
+            [
+              77.52,
+              12.86
+            ],
+            [
+              77.52,
+              12.873333
+            ],
+            [
+              77.566667,
+              12.873333
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0021",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0021@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "Park",
+        "zone_label": "Valley, Parks and Open Spaces",
+        "planning_district": "3.18",
+        "sheet": "3.18 map (b)- Uttarahalli",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 8095486.02,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.566667,
+              12.83
+            ],
+            [
+              77.566667,
+              12.844444
+            ],
+            [
+              77.613334,
+              12.844444
+            ],
+            [
+              77.613334,
+              12.83
+            ],
+            [
+              77.566667,
+              12.83
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0022",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0022@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "R-Main",
+        "zone_label": "Residential (Main)",
+        "planning_district": "3.17",
+        "sheet": "3.17 map (b)- Begur",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 8104356.33,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.566667,
+              12.858889
+            ],
+            [
+              77.613334,
+              12.858889
+            ],
+            [
+              77.613334,
+              12.844444
+            ],
+            [
+              77.566667,
+              12.844444
+            ],
+            [
+              77.566667,
+              12.858889
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0023",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0023@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "R-Mixed",
+        "zone_label": "Residential (Mixed)",
+        "planning_district": "3.17",
+        "sheet": "3.17 map (b)- Begur",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 8104461.57,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.566667,
+              12.873333
+            ],
+            [
+              77.613334,
+              12.873333
+            ],
+            [
+              77.613334,
+              12.858889
+            ],
+            [
+              77.566667,
+              12.858889
+            ],
+            [
+              77.566667,
+              12.873333
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0024",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0024@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "I-HiTech",
+        "zone_label": "Industrial (Hi-Tech)",
+        "planning_district": "3.17",
+        "sheet": "3.17 map (b)- Begur",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 8103444.19,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.613334,
+              12.83
+            ],
+            [
+              77.613334,
+              12.844444
+            ],
+            [
+              77.658332,
+              12.844444
+            ],
+            [
+              77.615,
+              12.83
+            ],
+            [
+              77.613334,
+              12.83
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0025",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0025@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "R-Main",
+        "zone_label": "Residential (Main)",
+        "planning_district": "3.16",
+        "sheet": "3.16 map (b)- HSR Layout",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 4052062.78,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.613334,
+              12.844444
+            ],
+            [
+              77.613334,
+              12.858889
+            ],
+            [
+              77.66,
+              12.858889
+            ],
+            [
+              77.66,
+              12.845
+            ],
+            [
+              77.658332,
+              12.844444
+            ],
+            [
+              77.613334,
+              12.844444
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0026",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0026@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "I-General",
+        "zone_label": "Industrial (General)",
+        "planning_district": "3.16",
+        "sheet": "3.16 map (b)- HSR Layout",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 8099329.07,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              77.613334,
+              12.858889
+            ],
+            [
+              77.613334,
+              12.873333
+            ],
+            [
+              77.66,
+              12.873333
+            ],
+            [
+              77.66,
+              12.858889
+            ],
+            [
+              77.613334,
+              12.858889
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "zone_id": "rmp2015-south-plu-zones:z0027",
+        "record_version": 1,
+        "record_id": "rmp2015-south-plu-zones:z0027@v1",
+        "record_supersedes": null,
+        "record_superseded_by": null,
+        "record_change_reason": null,
+        "supersedes": null,
+        "superseded_by": null,
+        "zone_code": "I-HiTech",
+        "zone_label": "Industrial (Hi-Tech)",
+        "planning_district": "3.16",
+        "sheet": "3.16 map (b)- HSR Layout",
+        "source_map": "rmp2015-south-plu-zones",
+        "georef_run": "imported-v1",
+        "extraction_method": "imported",
+        "source_attribution": "Bangalore Development Authority RMP 2015 Proposed Land Use Sheets (UTM Zone 43N EPSG:32643 reprojected to WGS 84; CC BY 4.0)",
+        "area_sq_m": 8103846.8,
+        "verification": "machine_checked",
+        "verified_by": null,
+        "notes": null
+      }
+    }
+  ]
+}

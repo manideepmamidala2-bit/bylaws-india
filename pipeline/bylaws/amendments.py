@@ -1,4 +1,4 @@
-"""Stage 8.5: Detect amendment instructions and link amending clauses to targets."""
+"""Stage 8.5: Detect amendment instructions, link amending clauses to targets, and consolidate."""
 
 from __future__ import annotations
 
@@ -10,6 +10,7 @@ from typing import Any
 import click
 
 from bylaws.config import JurisdictionConfig
+from bylaws.consolidate import run_consolidate
 from bylaws.root import resolve_repo_root
 from bylaws.schema_validator import validate_payload
 
@@ -20,8 +21,8 @@ AMENDMENT_PATTERNS: tuple[tuple[str, str, re.Pattern[str]], ...] = (
         "substitute",
         "high",
         re.compile(
-            rf"\bfor\s+clause\s+{CLAUSE_NUM_PATTERN}\b[^.]*?\bsubstituted\b"
-            rf"|\bsubstitute(?:d)?\s+for\s+clause\s+{CLAUSE_NUM_PATTERN}\b",
+            rf"\bfor\s+(?:clause|bye-?law|regulation|section)\s+{CLAUSE_NUM_PATTERN}\b[^.]*?\bsubstituted\b"
+            rf"|\bsubstitute(?:d)?\s+for\s+(?:clause|bye-?law|regulation|section)\s+{CLAUSE_NUM_PATTERN}\b",
             re.IGNORECASE,
         ),
     ),
@@ -29,8 +30,8 @@ AMENDMENT_PATTERNS: tuple[tuple[str, str, re.Pattern[str]], ...] = (
         "insert_after",
         "high",
         re.compile(
-            rf"\bafter\s+clause\s+{CLAUSE_NUM_PATTERN}\b[^.]*?\binsert(?:ed)?\b"
-            rf"|\binsert(?:ed)?\s+after\s+clause\s+{CLAUSE_NUM_PATTERN}\b",
+            rf"\bafter\s+(?:clause|bye-?law|regulation|section|chapter)\s+{CLAUSE_NUM_PATTERN}\b[^.]*?\binsert(?:ed)?\b"
+            rf"|\binsert(?:ed)?\s+after\s+(?:clause|bye-?law|regulation|section|chapter)\s+{CLAUSE_NUM_PATTERN}\b",
             re.IGNORECASE,
         ),
     ),
@@ -38,8 +39,8 @@ AMENDMENT_PATTERNS: tuple[tuple[str, str, re.Pattern[str]], ...] = (
         "insert_before",
         "high",
         re.compile(
-            rf"\bbefore\s+clause\s+{CLAUSE_NUM_PATTERN}\b[^.]*?\binsert(?:ed)?\b"
-            rf"|\binsert(?:ed)?\s+before\s+clause\s+{CLAUSE_NUM_PATTERN}\b",
+            rf"\bbefore\s+(?:clause|bye-?law|regulation|section|chapter)\s+{CLAUSE_NUM_PATTERN}\b[^.]*?\binsert(?:ed)?\b"
+            rf"|\binsert(?:ed)?\s+before\s+(?:clause|bye-?law|regulation|section|chapter)\s+{CLAUSE_NUM_PATTERN}\b",
             re.IGNORECASE,
         ),
     ),
@@ -47,8 +48,8 @@ AMENDMENT_PATTERNS: tuple[tuple[str, str, re.Pattern[str]], ...] = (
         "omit",
         "high",
         re.compile(
-            rf"\bclause\s+{CLAUSE_NUM_PATTERN}\s+shall\s+be\s+(?:omitted|deleted)\b"
-            rf"|\b(?:omit|delete)(?:ted|d)?\s+clause\s+{CLAUSE_NUM_PATTERN}\b",
+            rf"\b(?:clause|bye-?law|regulation|section)\s+{CLAUSE_NUM_PATTERN}\s+shall\s+be\s+(?:omitted|deleted)\b"
+            rf"|\b(?:omit|delete)(?:ted|d)?\s+(?:clause|bye-?law|regulation|section)\s+{CLAUSE_NUM_PATTERN}\b",
             re.IGNORECASE,
         ),
     ),
@@ -56,7 +57,7 @@ AMENDMENT_PATTERNS: tuple[tuple[str, str, re.Pattern[str]], ...] = (
         "modify",
         "medium",
         re.compile(
-            rf"\b(?:amendment\s+of|in)\s+clause\s+{CLAUSE_NUM_PATTERN}\b",
+            rf"\b(?:amendment\s+of|in)\s+(?:clause|bye-?law|regulation|section)\s+{CLAUSE_NUM_PATTERN}\b",
             re.IGNORECASE,
         ),
     ),
@@ -87,7 +88,7 @@ def _load_clause_tree(docs_dir: Path, doc_id: str) -> dict[str, Any]:
 
 
 def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None) -> None:
-    """Detect and link amendment clauses for a jurisdiction and write `amendments.json`."""
+    """Detect and link amendment clauses for a jurisdiction and write `amendments.json` + `consolidated.json`."""
     root = repo_root or resolve_repo_root()
     processed_dir = root / "data" / "processed" / config.id
     docs_dir = processed_dir / "documents"
@@ -98,7 +99,10 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
     links: list[dict[str, Any]] = []
 
     for doc in config.documents:
-        if doc.role != "amendment" or not doc.amends:
+        is_amend = doc.role == "amendment" or doc.doc_type in {"amendment", "notification"}
+        if not is_amend or not doc.amends:
+            continue
+        if doc.text_rights is not None and doc.text_rights.mode == "reference_only":
             continue
 
         if doc.id not in loaded_trees:
@@ -111,7 +115,7 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
                 loaded_trees[target_doc_id] = _load_clause_tree(docs_dir, target_doc_id)
 
         for clause in amend_tree.get("clauses", []):
-            if clause.get("superseded_by") is not None:
+            if clause.get("superseded_by") is not None or clause.get("record_superseded_by") is not None:
                 continue
             detection = detect_amendment_instruction(
                 str(clause.get("text", "")),
@@ -124,6 +128,7 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
             amending_clause_id = str(clause["clause_id"])
 
             matched_target_clause_id: str | None = None
+            matched_target_doc_id: str = target_doc_ids[0]
             for target_doc_id in target_doc_ids:
                 candidate_id = f"{target_doc_id}:{target_number}"
                 target_tree = loaded_trees[target_doc_id]
@@ -131,8 +136,10 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
                     if (
                         target_clause.get("clause_id") == candidate_id
                         and target_clause.get("superseded_by") is None
+                        and target_clause.get("record_superseded_by") is None
                     ):
                         matched_target_clause_id = candidate_id
+                        matched_target_doc_id = target_doc_id
                         amended_by: list[str] = list(target_clause.get("amended_by", []))
                         if amending_clause_id not in amended_by:
                             amended_by.append(amending_clause_id)
@@ -150,7 +157,10 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
                 {
                     "amending_clause": amending_clause_id,
                     "target_clause": matched_target_clause_id,
+                    "amending_doc_id": doc.id,
+                    "target_doc_id": matched_target_doc_id,
                     "action": action,
+                    "effective_date": doc.effective_from or doc.notified_date,
                     "confidence": confidence,
                     "verification": "unverified",
                 }
@@ -163,7 +173,7 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
         tree_path.write_text(json.dumps(tree_payload, indent=2) + "\n", encoding="utf-8")
 
     amendments_payload: dict[str, Any] = {
-        "schema_version": "1.1",
+        "schema_version": "1.2",
         "jurisdiction": config.id,
         "links": links,
     }
@@ -173,6 +183,9 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
         json.dumps(amendments_payload, indent=2) + "\n",
         encoding="utf-8",
     )
+
+    consolidated_payload = run_consolidate(config, repo_root=root)
     click.echo(
-        f"[amendments] Linked {len(links)} amendment instruction(s) for '{config.id}'."
+        f"[amendments] Linked {len(links)} amendment instruction(s) and consolidated "
+        f"{len(consolidated_payload['records'])} clause(s) for '{config.id}'."
     )

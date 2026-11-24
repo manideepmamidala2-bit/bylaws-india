@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bylaws-india.local/schemas/clause-zone-tags.schema.json",
+  "title": "JurisdictionClauseZoneTags",
+  "description": "Structured clause-to-zone applicability tags with quoted clause reasons and verification status (Schema v1.2).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "jurisdiction", "tags"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.2"
+    },
+    "jurisdiction": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/clauseZoneTagEntry"
+      }
+    }
+  },
+  "$defs": {
+    "clauseZoneTagEntry": {
+      "type": "object",
+      "title": "ClauseZoneTagEntry",
+      "additionalProperties": false,
+      "required": ["clause_id", "doc_id", "zone_code", "reason", "verification"],
+      "properties": {
+        "clause_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*:.+$"
+        },
+        "doc_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "zone_code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verification": {
+          "type": "string",
+          "enum": ["unverified", "machine_checked", "human_verified"]
+        }
+      }
+    }
+  }
+}

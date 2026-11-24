@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.2",
+  "jurisdiction": "xx-test-fixture",
+  "layers": [
+    {
+      "layer_id": "fixture-corp-boundary",
+      "title": "Synthetic Corporation Boundary",
+      "kind": "official_boundary",
+      "source": "pipeline/tests/fixtures/fixture-boundary.kml",
+      "method": "KML polygon extraction (EPSG:4326)",
+      "accuracy_m": 1.0,
+      "derived": false,
+      "file": "boundary.geojson",
+      "external_url": null,
+      "feature_count": 1
+    }
+  ]
+}

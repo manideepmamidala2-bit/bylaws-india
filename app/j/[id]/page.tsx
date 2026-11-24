@@ -1,81 +1,159 @@
-"use client";
-
-import React, { use, useState } from "react";
-import Link from "next/link";
-import { ZoneMap } from "@/components/ZoneMap";
-import { ClausePanel } from "@/components/ClausePanel";
+import React from "react";
+import { notFound } from "next/navigation";
+import {
+  fetchJurisdictionDataset,
+  fetchManifest,
+  partitionClauseVersions,
+} from "@/lib/data";
+import { TopNav } from "@/components/TopNav";
+import { AreaExplorerClient } from "@/components/AreaExplorerClient";
 
 interface JurisdictionMapPageProps {
   params: Promise<{ id: string }>;
 }
 
-export default function JurisdictionMapPage({
+export async function generateStaticParams() {
+  const manifest = await fetchManifest();
+  return manifest.jurisdictions.map((j) => ({ id: j.id }));
+}
+
+export default async function JurisdictionMapPage({
   params,
 }: JurisdictionMapPageProps) {
-  const { id } = use(params);
-  const [selectedZoneCode, setSelectedZoneCode] = useState<string | null>(null);
-  const [showDrafts, setShowDrafts] = useState(false);
+  const { id } = await params;
+  const dataset = await fetchJurisdictionDataset(id);
+  if (!dataset) {
+    notFound();
+  }
+
+  const {
+    jurisdiction,
+    release,
+    documents,
+    clauses,
+    amendments,
+    zones,
+    boundary,
+    gbaZones,
+    wards,
+    planningDistricts,
+    overlays,
+    geoLayers,
+    clauseZoneTags,
+    declarations,
+  } = dataset;
+
+  const { activeClauses } = partitionClauseVersions(clauses);
+  const inForceDocsCount = documents.filter(
+    (d) => d.legal_status === "in_force"
+  ).length;
+  const draftDocsCount = documents.filter(
+    (d) => d.legal_status === "draft"
+  ).length;
+  const activeZonesCount = zones.features.filter(
+    (z) => !z.properties.superseded_by && !z.properties.record_superseded_by
+  ).length;
+
+  const masterPlanLayer = geoLayers?.layers.find(
+    (l) => l.kind === "master_plan_zone"
+  );
+  const accuracyMessage = masterPlanLayer
+    ? `${masterPlanLayer.method}${
+        masterPlanLayer.accuracy_m !== null
+          ? ` (±${masterPlanLayer.accuracy_m} m)`
+          : ""
+      } · Source: ${masterPlanLayer.source} · Confirm a plot's zone with the planning authority.`
+    : "Zones loaded from published master plan layer · Confirm a plot's zone with the planning authority.";
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-[#f5f3ed] text-[#080909]">
+      <TopNav
+        jurisdictionId={jurisdiction.id}
+        jurisdictionName={jurisdiction.name}
+        active="map"
+        releaseVersion={release.version}
+        licence={release.licence}
+      />
+
+      {/* Dynamic Accuracy Note Strip */}
       <div
         role="region"
         aria-label="Zone boundary accuracy notice"
-        className="border-b border-amber-300 bg-amber-50 px-6 py-2.5 font-mono text-xs font-medium text-amber-950"
+        className="flex items-center gap-2.5 border-b border-[#c8ccc0] bg-[#f5f3ed] px-6 py-2 font-mono text-[10.5px] uppercase tracking-[0.12em] text-[#080909]"
       >
-        ZONE BOUNDARIES ARE TRACED FROM SCANNED MASTER PLAN MAPS AND ARE
-        APPROXIMATE. CONFIRM A PLOT&apos;S ZONE WITH THE PLANNING AUTHORITY.
+        <span className="dg-accent-dot" />
+        <span>{accuracyMessage}</span>
       </div>
 
-      <header className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 bg-white px-6 py-4">
-        <div>
-          <Link href="/" className="text-xs font-medium text-slate-500 underline">
-            ← All Jurisdictions
-          </Link>
-          <h1 className="mt-0.5 text-lg font-bold text-slate-900">
-            Jurisdiction: <span className="font-mono">{id}</span>
-          </h1>
+      {/* Jurisdiction Header & Coverage Strip */}
+      <div className="border-b border-[#080909] bg-[#f5f3ed] px-6 py-5">
+        <div className="dg-mono">
+          {jurisdiction.id}
+          {jurisdiction.aliases && jurisdiction.aliases.length > 0
+            ? ` · ${jurisdiction.aliases.slice(0, 5).join(" · ")}`
+            : ""}
         </div>
+        <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909] sm:text-4xl">
+          {jurisdiction.name}
+        </h1>
+        <div className="mt-3 flex flex-wrap gap-6 font-mono text-[11px] uppercase tracking-[0.12em] text-[#5b5e56]">
+          <span>
+            Sources{" "}
+            <strong className="font-semibold text-[#080909]">
+              {inForceDocsCount} in force · {draftDocsCount} draft ·{" "}
+              {documents.length} total
+            </strong>
+          </span>
+          <span>
+            Clauses{" "}
+            <strong className="font-semibold text-[#080909]">
+              {activeClauses.length}
+            </strong>
+          </span>
+          <span>
+            Zones{" "}
+            <strong className="font-semibold text-[#080909]">
+              {activeZonesCount}
+            </strong>
+          </span>
+          <span>
+            Amendment links{" "}
+            <strong className="font-semibold text-[#080909]">
+              {amendments.links.length}
+            </strong>
+          </span>
+        </div>
+      </div>
 
-        <div className="flex items-center gap-4 text-sm">
-          <label className="flex items-center gap-2 text-xs font-medium text-slate-700">
-            <input
-              type="checkbox"
-              checked={showDrafts}
-              onChange={(e) => setShowDrafts(e.target.checked)}
-            />
-            Show draft documents
-          </label>
-          <Link
-            href={`/j/${id}/clauses`}
-            className="rounded border border-slate-300 px-3 py-1 text-xs font-medium text-slate-700 hover:bg-slate-100"
-          >
-            Clause Browser
-          </Link>
-          <Link
-            href={`/j/${id}/review`}
-            className="rounded border border-slate-300 px-3 py-1 text-xs font-medium text-slate-700 hover:bg-slate-100"
-          >
-            Map Review
-          </Link>
-        </div>
-      </header>
+      <div className="border-b border-[#c8ccc0] bg-[#efeee8] px-6 py-2.5 text-xs text-[#5b5e56]">
+        <span className="mr-2 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[#080909]">
+          COVERAGE &amp; DECLARATIONS
+        </span>
+        <span className="dg-serif text-sm text-[#171917]">
+          Not modelled: {declarations.not_modelled.join("; ") || "None"}.
+          {declarations.contested_status &&
+          declarations.contested_status.length > 0
+            ? ` Contested status (${declarations.contested_status.length}): ${declarations.contested_status
+                .map((c) => `${c.doc_id} (${c.declared_status})`)
+                .join(", ")}.`
+            : ""}
+        </span>
+      </div>
 
-      <main className="grid flex-1 grid-cols-1 gap-4 p-6 lg:grid-cols-3">
-        <div className="lg:col-span-2">
-          <ZoneMap
-            zones={[]}
-            selectedZoneCode={selectedZoneCode}
-            onSelectZone={setSelectedZoneCode}
-          />
-        </div>
-        <div>
-          <ClausePanel
-            selectedZoneCode={selectedZoneCode}
-            clauses={[]}
-            showDrafts={showDrafts}
-          />
-        </div>
+      <main className="flex flex-1 flex-col">
+        <AreaExplorerClient
+          jurisdictionId={jurisdiction.id}
+          zones={zones.features}
+          clauses={clauses}
+          amendmentLinks={amendments.links}
+          clauseZoneTags={clauseZoneTags?.tags ?? []}
+          boundary={boundary}
+          gbaZones={gbaZones}
+          wards={wards}
+          planningDistricts={planningDistricts}
+          overlays={overlays}
+          geoLayers={geoLayers?.layers ?? []}
+        />
       </main>
     </div>
   );

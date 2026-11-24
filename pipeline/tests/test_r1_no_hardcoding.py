@@ -26,28 +26,63 @@ SENTINEL_TERMS: tuple[str, ...] = (
 
 GENERIC_CONFIG_VALUES: frozenset[str] = frozenset(
     {
+        "1.2",
         "in",
         "ka",
         "xx",
         "yy",
+        "en",
+        "kn",
+        "public",
+        "test",
+        "cc by 4.0",
+        "cc-by-4.0",
+        "cc0-1.0",
+        "odbl-1.0",
         "residential",
         "commercial",
         "industrial",
         "municipal",
         "planning",
         "state",
+        "state_rules",
+        "statute",
+        "orders",
+        "overlay",
         "national",
+        "national_reference",
         "in_force",
         "draft",
         "superseded",
         "withdrawn",
+        "status_unknown",
+        "full_text",
+        "reference_only",
         "base",
         "amendment",
         "regulation",
+        "regulations",
+        "act",
+        "rules",
+        "bye_laws",
+        "notification",
+        "government_order",
+        "circular",
+        "map",
+        "standard_reference",
         "boundary",
         "reference",
         "imported",
         "traced",
+        "vector_pdf",
+        "grid_georeferenced_raster",
+        "osm_gcp_raster",
+        "corporation",
+        "gba_zones",
+        "wards",
+        "official_boundary",
+        "master_plan_zone",
+        "derived_overlay",
     }
 )
 
@@ -77,23 +112,65 @@ IGNORED_FILE_NAMES: frozenset[str] = frozenset(
 )
 
 
-def _extract_strings_from_yaml_value(value: Any) -> set[str]:
+def _extract_jurisdiction_identifiers(raw: dict[str, Any]) -> set[str]:
+    """Extract jurisdiction-specific identifiers, names, titles, and URLs from a jurisdiction config."""
+    candidates: list[str] = []
+
+    for top_key in ("id", "name"):
+        if isinstance(raw.get(top_key), str):
+            candidates.append(raw[top_key])
+
+    for list_key in ("aliases", "parents"):
+        for item in raw.get(list_key) or []:
+            if isinstance(item, str):
+                candidates.append(item)
+
+    for doc in raw.get("documents") or []:
+        if not isinstance(doc, dict):
+            continue
+        for doc_key in (
+            "id",
+            "title",
+            "issuing_authority",
+            "notification_number",
+            "official_url",
+            "source_url",
+        ):
+            val = doc.get(doc_key)
+            if isinstance(val, str):
+                candidates.append(val)
+        for m_url in doc.get("mirror_urls") or []:
+            if isinstance(m_url, str):
+                candidates.append(m_url)
+
+    maps = raw.get("maps")
+    if isinstance(maps, dict):
+        for map_group in ("boundaries", "planning_districts", "zoning", "overlays"):
+            for m_entry in maps.get(map_group) or []:
+                if not isinstance(m_entry, dict):
+                    continue
+                for m_key in ("id", "planning_district", "source_url"):
+                    val = m_entry.get(m_key)
+                    if isinstance(val, str):
+                        candidates.append(val)
+                sel = m_entry.get("select")
+                if (
+                    isinstance(sel, dict)
+                    and isinstance(sel.get("equals"), str)
+                    and sel["equals"] != "*"
+                ):
+                    candidates.append(sel["equals"])
+
     found: set[str] = set()
-    if isinstance(value, str):
-        cleaned = value.strip()
+    for item in candidates:
+        cleaned = item.strip()
         if len(cleaned) >= 4 and cleaned.lower() not in GENERIC_CONFIG_VALUES:
             found.add(cleaned)
-    elif isinstance(value, list):
-        for item in value:
-            found.update(_extract_strings_from_yaml_value(item))
-    elif isinstance(value, dict):
-        for item in value.values():
-            found.update(_extract_strings_from_yaml_value(item))
     return found
 
 
 def collect_prohibited_terms(jurisdictions_dir: Path | None = None) -> set[str]:
-    """Collect prohibited strings from all non-fixture jurisdiction configs (country != 'XX') plus sentinels."""
+    """Collect prohibited strings from all public jurisdiction configs (visibility != 'test') plus sentinels."""
     terms: set[str] = {term.lower() for term in SENTINEL_TERMS}
     base_dir = jurisdictions_dir or (REPO_ROOT / "jurisdictions")
     if not base_dir.is_dir():
@@ -101,9 +178,9 @@ def collect_prohibited_terms(jurisdictions_dir: Path | None = None) -> set[str]:
 
     for yaml_path in sorted(base_dir.glob("*.yaml")):
         raw = yaml.safe_load(yaml_path.read_text(encoding="utf-8"))
-        if not isinstance(raw, dict) or raw.get("country") == "XX":
+        if not isinstance(raw, dict) or raw.get("visibility") == "test":
             continue
-        for extracted in _extract_strings_from_yaml_value(raw):
+        for extracted in _extract_jurisdiction_identifiers(raw):
             terms.add(extracted.lower())
     return terms
 

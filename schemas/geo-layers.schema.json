@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bylaws-india.local/schemas/geo-layers.schema.json",
+  "title": "JurisdictionGeoLayers",
+  "description": "Registry of official boundaries, master plan zone layers, derived overlays, and external reference map layers for a jurisdiction (Schema v1.2, Rule R14).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "jurisdiction", "layers"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.2"
+    },
+    "jurisdiction": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "layers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/geoLayerEntry"
+      }
+    }
+  },
+  "$defs": {
+    "geoLayerEntry": {
+      "type": "object",
+      "title": "GeoLayerEntry",
+      "additionalProperties": false,
+      "required": [
+        "layer_id",
+        "title",
+        "kind",
+        "source",
+        "method",
+        "accuracy_m",
+        "derived",
+        "file",
+        "external_url"
+      ],
+      "properties": {
+        "layer_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "official_boundary",
+            "master_plan_zone",
+            "derived_overlay",
+            "reference"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "accuracy_m": {
+          "type": ["number", "null"],
+          "minimum": 0
+        },
+        "derived": {
+          "type": "boolean"
+        },
+        "file": {
+          "type": ["string", "null"]
+        },
+        "external_url": {
+          "type": ["string", "null"]
+        },
+        "feature_count": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "default": null
+        },
+        "notes": {
+          "type": ["string", "null"],
+          "default": null
+        }
+      }
+    }
+  }
+}

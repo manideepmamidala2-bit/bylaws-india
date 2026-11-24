@@ -14,11 +14,12 @@ const STATUS_LABELS: Record<DisplayLegalStatus, string> = {
 };
 
 const STATUS_STYLES: Record<DisplayLegalStatus, string> = {
-  in_force: "bg-emerald-100 text-emerald-900 border-emerald-300 border-solid",
-  draft: "bg-amber-100 text-amber-900 border-amber-400 border-dashed",
-  superseded: "bg-slate-200 text-slate-800 border-slate-400 line-through",
-  withdrawn: "bg-rose-100 text-rose-900 border-rose-300",
-  status_unknown: "bg-slate-100 text-slate-900 border-slate-500 border-dotted",
+  in_force: "border-[#080909] border-solid bg-[#f5f3ed] text-[#080909]",
+  draft: "border-[#080909] border-dashed bg-[#efeee8] text-[#080909]",
+  superseded:
+    "border-[#5b5e56] border-solid bg-[#efeee8] text-[#5b5e56] line-through",
+  withdrawn: "border-[#080909] border-double bg-[#efeee8] text-[#080909]",
+  status_unknown: "border-[#5b5e56] border-dotted bg-[#efeee8] text-[#080909]",
 };
 
 export function StatusBadge({ status }: StatusBadgeProps) {
@@ -27,10 +28,10 @@ export function StatusBadge({ status }: StatusBadgeProps) {
       data-testid={`status-badge-${status}`}
       title={
         status === "status_unknown"
-          ? "Legal status was not recorded in the source dataset."
+          ? "Legal status is contested or was not recorded in the source dataset."
           : undefined
       }
-      className={`inline-flex items-center rounded border px-2 py-0.5 font-mono text-xs font-semibold uppercase tracking-wide ${STATUS_STYLES[status]}`}
+      className={`inline-flex items-center border px-1.5 py-0.5 font-mono text-[9.5px] font-medium uppercase tracking-[0.14em] ${STATUS_STYLES[status]}`}
     >
       {STATUS_LABELS[status]}
     </span>
