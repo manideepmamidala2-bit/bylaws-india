@@ -1,0 +1,5 @@
+{"action":"enter","driver":"fab-new","event":"stage-transition","stage":"intake","ts":"2026-11-24T17:39:36Z"}
+{"args":"Implement PR 12 (Greater Bengaluru overnight run) per docs/plans/pr-series/00-overview.md and docs/plans/pr-series/12-bengaluru-city-overnight.md","cmd":"fab-new","event":"command","ts":"2026-11-24T17:39:36Z"}
+{"delta":"+5.0","event":"confidence","score":5,"trigger":"calc-score","ts":"2026-11-24T17:41:04Z"}
+{"cmd":"fab-fff","event":"command","ts":"2026-11-24T17:42:06Z"}
+{"action":"enter","driver":"/fab-fff","event":"stage-transition","stage":"apply","ts":"2026-11-24T17:42:06Z"}
