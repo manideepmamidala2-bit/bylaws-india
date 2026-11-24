@@ -81,33 +81,38 @@ The document and jurisdiction schemas (`schemas/document.schema.json`, `schemas/
 
 ### Functional Completeness
 
-- [ ] A-001 R1: `schemas/document.schema.json` and `schemas/jurisdiction.schema.json` include `retrieval` (`RetrievalRecord`), `acquisition_status`, and `release_version`, and `make generate` produces zero git diff
-- [ ] A-002 R1: `bylaws acquire` populates `retrieval` with HTTP metadata, SHA-256, and Wayback Machine snapshot URL (`archive_url` or `archive_failure_reason`), and `bylaws verify-sources --jurisdiction <id>` + `.github/workflows/verify-sources.yml` exist and work
-- [ ] A-003 R1: `bylaws check-provenance` fails on planted local `source_url`s, missing `retrieval` records, and planted `fpdf`-generated PDFs in non-test jurisdictions, and passes on the repository
-- [ ] A-004 R2: No generated Bengaluru South file exists anywhere in `data/` or `public/data/`, `scripts/build_bengaluru_south_sources.py` is replaced by `pipeline/tests/fixtures/build_synthetic_jurisdiction.py` (`xx-synthetic-city`, `visibility: "test"`, no real names or URLs), and `jurisdictions/in-ka-bengaluru-south.yaml` lists only real `http(s)` URLs with `acquisition_status: "pending"`
-- [ ] A-005 R3: `DoclingLayoutAdapter` calls real Docling (`DocumentConverter`) on `xx-test-fixture` with no `pypdfium2` alias, `TesseractOcrAdapter` uses `bbox: null` when word coordinates are absent, missing parser packages fail loudly (`ClickException`), and `bylaws publish` requires `config.release_version`
-- [ ] A-006 R4: `pipeline/pyproject.toml`, `pipeline/uv.lock`, `docs/dependencies.md`, `Makefile` (`make setup`), and `.github/workflows/ci.yml` include all required Python and system packages and pass `test_r4_licences.py`
-- [ ] A-007 R5: `README.md`, `docs/provenance.md`, `docs/architecture.md`, `docs/scope.md`, `docs/decisions/2026-11-24-audit-3.md`, and `docs/progress.md` are written and truthful
+- [x] A-001 R1: `schemas/document.schema.json` and `schemas/jurisdiction.schema.json` include `retrieval` (`RetrievalRecord`), `acquisition_status`, and `release_version`, and `make generate` produces zero git diff
+- [x] A-002 R1: `bylaws acquire` populates `retrieval` with HTTP metadata, SHA-256, and Wayback Machine snapshot URL (`archive_url` or `archive_failure_reason`), and `bylaws verify-sources --jurisdiction <id>` + `.github/workflows/verify-sources.yml` exist and work
+- [x] A-003 R1: `bylaws check-provenance` fails on planted local `source_url`s, missing `retrieval` records, and planted `fpdf`-generated PDFs in non-test jurisdictions, and passes on the repository
+- [x] A-004 R2: No generated Bengaluru South file exists anywhere in `data/` or `public/data/`, `scripts/build_bengaluru_south_sources.py` is replaced by `pipeline/tests/fixtures/build_synthetic_jurisdiction.py` (`xx-synthetic-city`, `visibility: "test"`, no real names or URLs), and `jurisdictions/in-ka-bengaluru-south.yaml` lists only real `http(s)` URLs with `acquisition_status: "pending"`
+- [x] A-005 R3: `DoclingLayoutAdapter` calls real Docling (`DocumentConverter`) on `xx-test-fixture` with no `pypdfium2` alias, `TesseractOcrAdapter` uses `bbox: null` when word coordinates are absent, missing parser packages fail loudly (`ClickException`), and `bylaws publish` requires `config.release_version`
+- [x] A-006 R4: `pipeline/pyproject.toml`, `pipeline/uv.lock`, `docs/dependencies.md`, `Makefile` (`make setup`), and `.github/workflows/ci.yml` include all required Python and system packages and pass `test_r4_licences.py`
+- [x] A-007 R5: `README.md`, `docs/provenance.md`, `docs/architecture.md`, `docs/scope.md`, `docs/decisions/2026-11-24-audit-3.md`, and `docs/progress.md` are written and truthful
 
 ### Behavioral Correctness
 
-- [ ] A-008 R1: Planted local source and planted `fpdf`-generated PDF tests are demonstrated failing before the gate/check passes (R11)
-- [ ] A-009 R3: `bylaws publish` without `release_version` in the jurisdiction config raises `ClickException`
+- [x] A-008 R1: Planted local source and planted `fpdf`-generated PDF tests are demonstrated failing before the gate/check passes (R11)
+- [x] A-009 R3: `bylaws publish` without `release_version` in the jurisdiction config raises `ClickException`
 
 ### Scenario Coverage
 
-- [ ] A-010 R3: `uv run bylaws parse --jurisdiction xx-test-fixture --parser docling` and `uv run bylaws run-all --jurisdiction xx-test-fixture` succeed end-to-end
+- [x] A-010 R3: `uv run bylaws parse --jurisdiction xx-test-fixture --parser docling` and `uv run bylaws run-all --jurisdiction xx-test-fixture` succeed end-to-end
 
 ### Code Quality
 
-- [ ] A-011 Pattern consistency: New code follows existing CLI, schema validation, and error-handling conventions
-- [ ] A-012 No unnecessary duplication: Shared provenance and HTTP utilities are reused across `acquire`, `check-provenance`, and `verify-sources`
+- [x] A-011 Pattern consistency: New code follows existing CLI, schema validation, and error-handling conventions
+- [x] A-012 No unnecessary duplication: Shared provenance and HTTP utilities are reused across `acquire`, `check-provenance`, and `verify-sources`
 
 ## Notes
 
 - Check items as you review: `- [x]`
 - All acceptance items must pass before `/fab-continue` (hydrate)
 - If an item is not applicable, mark checked and prefix with **N/A**: `- [x] A-NNN **N/A**: {reason}`
+
+## Deletion Candidates
+
+- `pipeline/bylaws/parsers/pypdfium2_adapter.py:19-20` (`_clamp`) and `pipeline/bylaws/parsers/pypdfium2_adapter.py:41-45` (`_get_pypdfium2_version`) — duplicated by `_clamp` and `_resolve_adapter_version` in `pipeline/bylaws/parsers/layout_table_adapter.py:18-30`; can be consolidated into `pipeline/bylaws/parsers/base.py`.
+- `pipeline/tests/test_bengaluru_south_dataset.py:61-66` (ad-hoc URL prefix checks inside `assert_published_manifest_has_no_local_sources`) — superseded by `is_remote_http_url` in `pipeline/bylaws/provenance.py:89-97`.
 
 ## Assumptions
 

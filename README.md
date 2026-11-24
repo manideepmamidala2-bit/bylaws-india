@@ -79,7 +79,7 @@ Every source document and map in any non-test jurisdiction is governed by the **
 
 ## Contributing Corrections
 
- generated files in `data/processed/` are never hand-edited. All manual text, table, or map corrections are committed as reproducible YAML overrides under `data/overrides/<jurisdiction>/` with a cited page and reason. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
+Generated files in `data/processed/` are never hand-edited. All manual text, table, or map corrections are committed as reproducible YAML overrides under `data/overrides/<jurisdiction>/` with a cited page and reason. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## Documentation
 
