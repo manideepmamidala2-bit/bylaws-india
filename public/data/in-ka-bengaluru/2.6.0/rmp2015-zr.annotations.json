@@ -1,0 +1,5047 @@
+{
+  "schema_version": "1.3",
+  "doc_id": "rmp2015-zr",
+  "jurisdiction": "in-ka-bengaluru",
+  "annotations": [
+    {
+      "annotation_id": "rmp2015-zr:ann_1",
+      "target": {
+        "eid": "sec_DEFINITIONS__cl_12",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          90,
+          95
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_2",
+      "target": {
+        "eid": "sec_DEFINITIONS__cl_18",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          111,
+          117
+        ],
+        "span_text": "buffer"
+      },
+      "kind": "defined_term_use",
+      "value": "chp_4__cl_4.11__cl_4.11.2__def_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_3",
+      "target": {
+        "eid": "sec_DEFINITIONS__cl_28",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          90,
+          95
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_4",
+      "target": {
+        "eid": "sec_DEFINITIONS__cl_32",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          100,
+          109
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_5",
+      "target": {
+        "eid": "sec_DEFINITIONS__cl_33",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          93,
+          98
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_6",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          618,
+          631
+        ],
+        "span_text": "applicable to"
+      },
+      "kind": "provision_type",
+      "value": "scope",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_7",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          257,
+          266
+        ],
+        "span_text": "Chapter 1"
+      },
+      "kind": "cross_reference",
+      "value": "chp_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_8",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          504,
+          513
+        ],
+        "span_text": "Chapter 2"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_9",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          595,
+          604
+        ],
+        "span_text": "Chapter 3"
+      },
+      "kind": "cross_reference",
+      "value": "chp_3",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_10",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          702,
+          711
+        ],
+        "span_text": "Chapter 4"
+      },
+      "kind": "cross_reference",
+      "value": "chp_4",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_11",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1227,
+          1236
+        ],
+        "span_text": "CHAPTER 5"
+      },
+      "kind": "cross_reference",
+      "value": "chp_5",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_12",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1325,
+          1334
+        ],
+        "span_text": "CHAPTER 6"
+      },
+      "kind": "cross_reference",
+      "value": "chp_6",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_13",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1363,
+          1372
+        ],
+        "span_text": "CHAPTER 7"
+      },
+      "kind": "cross_reference",
+      "value": "chp_7",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_14",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1568,
+          1577
+        ],
+        "span_text": "CHAPTER 8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_15",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1624,
+          1633
+        ],
+        "span_text": "CHAPTER 9"
+      },
+      "kind": "cross_reference",
+      "value": "chp_9",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_16",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1714,
+          1724
+        ],
+        "span_text": "CHAPTER 10"
+      },
+      "kind": "cross_reference",
+      "value": "chp_10",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_17",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1775,
+          1785
+        ],
+        "span_text": "APPENDIX I"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:APPENDIX I",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_18",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1833,
+          1844
+        ],
+        "span_text": "APPENDIX II"
+      },
+      "kind": "cross_reference",
+      "value": "app_II",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_19",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1910,
+          1922
+        ],
+        "span_text": "APPENDIX III"
+      },
+      "kind": "cross_reference",
+      "value": "app_III",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_20",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1951,
+          1962
+        ],
+        "span_text": "APPENDIX IV"
+      },
+      "kind": "cross_reference",
+      "value": "app_IV",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_21",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1988,
+          1998
+        ],
+        "span_text": "APPENDIX V"
+      },
+      "kind": "cross_reference",
+      "value": "app_V",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_22",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2033,
+          2044
+        ],
+        "span_text": "APPENDIX VI"
+      },
+      "kind": "cross_reference",
+      "value": "app_VI",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_23",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2085,
+          2097
+        ],
+        "span_text": "APPENDIX VII"
+      },
+      "kind": "cross_reference",
+      "value": "app_VII",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_24",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2125,
+          2138
+        ],
+        "span_text": "APPENDIX VIII"
+      },
+      "kind": "cross_reference",
+      "value": "app_VIII",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_25",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2190,
+          2197
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "app_IV__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_26",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2245,
+          2252
+        ],
+        "span_text": "Table 2"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_27",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2299,
+          2306
+        ],
+        "span_text": "Table 3"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_3",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_28",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2353,
+          2360
+        ],
+        "span_text": "Table 4"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_4",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_29",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2421,
+          2428
+        ],
+        "span_text": "Table 5"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_5",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_30",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2479,
+          2486
+        ],
+        "span_text": "Table 6"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_6",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_31",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2546,
+          2553
+        ],
+        "span_text": "Table 7"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_7",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_32",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2598,
+          2605
+        ],
+        "span_text": "Table 8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_33",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2684,
+          2691
+        ],
+        "span_text": "Table 9"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_9",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_34",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2736,
+          2744
+        ],
+        "span_text": "Table 10"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__tbl_10",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_35",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2792,
+          2800
+        ],
+        "span_text": "Table 11"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__tbl_11",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_36",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2866,
+          2874
+        ],
+        "span_text": "Table 12"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_3__row_12",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_37",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2923,
+          2931
+        ],
+        "span_text": "Table 13"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_13",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_38",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2981,
+          2989
+        ],
+        "span_text": "Table 14"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_14",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_39",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          3040,
+          3048
+        ],
+        "span_text": "Table 15"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_15",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_40",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          3096,
+          3104
+        ],
+        "span_text": "Table 16"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_16",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_41",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          3154,
+          3162
+        ],
+        "span_text": "Table 17"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_17",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_42",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          3211,
+          3219
+        ],
+        "span_text": "Table 18"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_18",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_43",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          3271,
+          3279
+        ],
+        "span_text": "Table 19"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_19",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_44",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          3335,
+          3343
+        ],
+        "span_text": "Table 20"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_20",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_45",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          3436,
+          3444
+        ],
+        "span_text": "Table 21"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_21",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_46",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          3562,
+          3570
+        ],
+        "span_text": "Table 22"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_22",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_47",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          3621,
+          3629
+        ],
+        "span_text": "Table 23"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_23",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_48",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          3652,
+          3660
+        ],
+        "span_text": "Table 24"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_24",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_49",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          3742,
+          3750
+        ],
+        "span_text": "Table 25"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_25",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_50",
+      "target": {
+        "eid": "pref_TOC",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          3794,
+          3802
+        ],
+        "span_text": "Table 26"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_26",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_51",
+      "target": {
+        "eid": "chp_1__cl_1.1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          352,
+          365
+        ],
+        "span_text": "applicable to"
+      },
+      "kind": "provision_type",
+      "value": "scope",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_52",
+      "target": {
+        "eid": "chp_1__cl_1.3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          511,
+          516
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_53",
+      "target": {
+        "eid": "chp_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          800,
+          807
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "app_IV__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_54",
+      "target": {
+        "eid": "chp_2__note_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          97,
+          102
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_55",
+      "target": {
+        "eid": "chp_2__note_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          49,
+          59
+        ],
+        "span_text": "section 18"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_18",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_56",
+      "target": {
+        "eid": "chp_2__note_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          114,
+          121
+        ],
+        "span_text": "Table 2"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_57",
+      "target": {
+        "eid": "chp_2__note_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          171,
+          178
+        ],
+        "span_text": "Table 3"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_3",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_58",
+      "target": {
+        "eid": "chp_2__note_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          757,
+          764
+        ],
+        "span_text": "Table 4"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_4",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_59",
+      "target": {
+        "eid": "chp_2__note_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          849,
+          856
+        ],
+        "span_text": "Table.4"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_4",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_60",
+      "target": {
+        "eid": "chp_2__cl_13",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          92,
+          99
+        ],
+        "span_text": "Table 5"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_5",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_61",
+      "target": {
+        "eid": "chp_2__cl_13",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          153,
+          160
+        ],
+        "span_text": "Table 6"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_6",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_62",
+      "target": {
+        "eid": "chp_2__cl_13",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          222,
+          229
+        ],
+        "span_text": "Table.7"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_7",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_63",
+      "target": {
+        "eid": "chp_3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          12,
+          25
+        ],
+        "span_text": "APPLICABLE TO"
+      },
+      "kind": "provision_type",
+      "value": "scope",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_64",
+      "target": {
+        "eid": "chp_3__cl_3.1",
+        "version_id": "v2",
+        "field": "content",
+        "span": [
+          539,
+          548
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_65",
+      "target": {
+        "eid": "chp_3__cl_3.1",
+        "version_id": "v2",
+        "field": "content",
+        "span": [
+          252,
+          259
+        ],
+        "span_text": "Table.8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_66",
+      "target": {
+        "eid": "chp_3__cl_3.1",
+        "version_id": "v2",
+        "field": "content",
+        "span": [
+          266,
+          273
+        ],
+        "span_text": "Table.9"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_9",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_67",
+      "target": {
+        "eid": "chp_3__cl_3.1",
+        "version_id": "v2",
+        "field": "content",
+        "span": [
+          1459,
+          1466
+        ],
+        "span_text": "Table 8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_68",
+      "target": {
+        "eid": "chp_3__cl_3.1",
+        "version_id": "v2",
+        "field": "content",
+        "span": [
+          1633,
+          1640
+        ],
+        "span_text": "Table 9"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_9",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_69",
+      "target": {
+        "eid": "chp_3__cl_3.2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          265,
+          270
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_70",
+      "target": {
+        "eid": "chp_3__cl_3.4__item_i__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          21,
+          26
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_71",
+      "target": {
+        "eid": "chp_3__cl_3.4__item_i__item_iii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          88,
+          101
+        ],
+        "span_text": "applicable to"
+      },
+      "kind": "provision_type",
+      "value": "scope",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_72",
+      "target": {
+        "eid": "chp_3__cl_3.4__item_i__item_iv",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          76,
+          81
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_73",
+      "target": {
+        "eid": "chp_3__cl_3.6",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          82,
+          87
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_74",
+      "target": {
+        "eid": "chp_3__cl_3.7",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          35,
+          44
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_75",
+      "target": {
+        "eid": "chp_3__cl_3.8",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          91,
+          100
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_76",
+      "target": {
+        "eid": "chp_3__cl_3.9",
+        "version_id": "v2",
+        "field": "content",
+        "span": [
+          487,
+          496
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_77",
+      "target": {
+        "eid": "chp_3__cl_3.10__item_i",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          19,
+          24
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_78",
+      "target": {
+        "eid": "chp_3__cl_3.10__item_i__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          36,
+          41
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_79",
+      "target": {
+        "eid": "chp_3__cl_3.11",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          535,
+          551
+        ],
+        "span_text": "may be permitted"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_80",
+      "target": {
+        "eid": "chp_3__cl_3.12",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          161,
+          166
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_81",
+      "target": {
+        "eid": "chp_3__cl_3.13",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          34,
+          39
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_82",
+      "target": {
+        "eid": "chp_3__cl_3.14",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          111,
+          116
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_83",
+      "target": {
+        "eid": "chp_3__cl_3.14",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          468,
+          479
+        ],
+        "span_text": "appendix II"
+      },
+      "kind": "cross_reference",
+      "value": "app_II",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_84",
+      "target": {
+        "eid": "chp_3__cl_3.15",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          163,
+          168
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_85",
+      "target": {
+        "eid": "chp_3__cl_3.16",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2279,
+          2292
+        ],
+        "span_text": "applicable to"
+      },
+      "kind": "provision_type",
+      "value": "scope",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_86",
+      "target": {
+        "eid": "chp_3__cl_3.16",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          459,
+          469
+        ],
+        "span_text": "section 18"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_18",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_87",
+      "target": {
+        "eid": "chp_4__cl_4.1__cl_4.1.2__item_i",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          338,
+          346
+        ],
+        "span_text": "Table 10"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__tbl_10",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_88",
+      "target": {
+        "eid": "chp_4__cl_4.1__cl_4.1.2__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          9,
+          14
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_89",
+      "target": {
+        "eid": "chp_4__cl_4.1__cl_4.1.2__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          37,
+          44
+        ],
+        "span_text": "Table.8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_90",
+      "target": {
+        "eid": "chp_4__cl_4.1__cl_4.1.2__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          48,
+          55
+        ],
+        "span_text": "Table.9"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_9",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_91",
+      "target": {
+        "eid": "chp_4__cl_4.1__cl_4.1.2__item_c",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          34,
+          39
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_92",
+      "target": {
+        "eid": "chp_4__cl_4.2__cl_4.2.2__item_i",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          100,
+          114
+        ],
+        "span_text": "is permissible"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_93",
+      "target": {
+        "eid": "chp_4__cl_4.2__cl_4.2.2__item_i",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          302,
+          310
+        ],
+        "span_text": "Table 11"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__tbl_11",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_94",
+      "target": {
+        "eid": "chp_4__cl_4.2__cl_4.2.2__item_i",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          376,
+          384
+        ],
+        "span_text": "Table.12"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_3__row_12",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_95",
+      "target": {
+        "eid": "chp_4__cl_4.2__cl_4.2.2__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          9,
+          14
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_96",
+      "target": {
+        "eid": "chp_4__cl_4.2__cl_4.2.2__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          37,
+          44
+        ],
+        "span_text": "Table 8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_97",
+      "target": {
+        "eid": "chp_4__cl_4.2__cl_4.2.2__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          48,
+          55
+        ],
+        "span_text": "Table 9"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_9",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_98",
+      "target": {
+        "eid": "chp_4__cl_4.2__cl_4.2.3__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          122,
+          127
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_99",
+      "target": {
+        "eid": "chp_4__cl_4.3__cl_4.3.2__item_i",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          95,
+          103
+        ],
+        "span_text": "Table 13"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_13",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_100",
+      "target": {
+        "eid": "chp_4__cl_4.3__cl_4.3.2__item_i__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          161,
+          166
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_101",
+      "target": {
+        "eid": "chp_4__cl_4.3__cl_4.3.2__item_i__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          236,
+          244
+        ],
+        "span_text": "Table. 8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_102",
+      "target": {
+        "eid": "chp_4__cl_4.3__cl_4.3.2__item_i__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          248,
+          256
+        ],
+        "span_text": "Table. 9"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_9",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_103",
+      "target": {
+        "eid": "chp_4__cl_4.3__cl_4.3.3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          125,
+          130
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_104",
+      "target": {
+        "eid": "chp_4__cl_4.3__cl_4.3.3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          337,
+          345
+        ],
+        "span_text": "table.23"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_23",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_105",
+      "target": {
+        "eid": "chp_4__cl_4.4__cl_4.4.2__item_i",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          211,
+          219
+        ],
+        "span_text": "Table 14"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_14",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_106",
+      "target": {
+        "eid": "chp_4__cl_4.4__cl_4.4.2__item_b",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          9,
+          14
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_107",
+      "target": {
+        "eid": "chp_4__cl_4.4__cl_4.4.2__item_b",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          37,
+          44
+        ],
+        "span_text": "Table-8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_108",
+      "target": {
+        "eid": "chp_4__cl_4.4__cl_4.4.2__item_b",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          48,
+          55
+        ],
+        "span_text": "Table-9"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_9",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_109",
+      "target": {
+        "eid": "chp_4__cl_4.5__cl_4.5.2__item_i",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          1040,
+          1049
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_110",
+      "target": {
+        "eid": "chp_4__cl_4.5__cl_4.5.2__item_i__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          95,
+          103
+        ],
+        "span_text": "Table 15"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_15",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_111",
+      "target": {
+        "eid": "chp_4__cl_4.5__cl_4.5.2__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          9,
+          14
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_112",
+      "target": {
+        "eid": "chp_4__cl_4.5__cl_4.5.2__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          37,
+          44
+        ],
+        "span_text": "Table.8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_113",
+      "target": {
+        "eid": "chp_4__cl_4.5__cl_4.5.2__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          48,
+          55
+        ],
+        "span_text": "Table.9"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_9",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_114",
+      "target": {
+        "eid": "chp_4__cl_4.6__cl_4.6.1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          247,
+          252
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_115",
+      "target": {
+        "eid": "chp_4__cl_4.6__cl_4.6.2__item_i__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          235,
+          240
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_116",
+      "target": {
+        "eid": "chp_4__cl_4.6__cl_4.6.2__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          9,
+          14
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_117",
+      "target": {
+        "eid": "chp_4__cl_4.6__cl_4.6.2__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          37,
+          44
+        ],
+        "span_text": "Table.8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_118",
+      "target": {
+        "eid": "chp_4__cl_4.6__cl_4.6.2__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          48,
+          55
+        ],
+        "span_text": "Table.9"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_9",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_119",
+      "target": {
+        "eid": "chp_4__cl_4.7__cl_4.7.2__item_i",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          238,
+          246
+        ],
+        "span_text": "Table.16"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_16",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_120",
+      "target": {
+        "eid": "chp_4__cl_4.7__cl_4.7.2__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          146,
+          159
+        ],
+        "span_text": "Authority may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_121",
+      "target": {
+        "eid": "chp_4__cl_4.7__cl_4.7.2__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          48,
+          56
+        ],
+        "span_text": "table if"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:table if",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_122",
+      "target": {
+        "eid": "chp_4__cl_4.7__cl_4.7.2__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          187,
+          194
+        ],
+        "span_text": "table.8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_123",
+      "target": {
+        "eid": "chp_4__cl_4.7__cl_4.7.2__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          198,
+          205
+        ],
+        "span_text": "table.9"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_9",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_124",
+      "target": {
+        "eid": "chp_4__cl_4.7__cl_4.7.2__item_b",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          91,
+          100
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_125",
+      "target": {
+        "eid": "chp_4__cl_4.8__cl_4.8.2__item_i",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          217,
+          233
+        ],
+        "span_text": "may be permitted"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_126",
+      "target": {
+        "eid": "chp_4__cl_4.8__cl_4.8.2__item_i",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          247,
+          255
+        ],
+        "span_text": "Table.17"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_17",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_127",
+      "target": {
+        "eid": "chp_4__cl_4.8__cl_4.8.2__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          9,
+          14
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_128",
+      "target": {
+        "eid": "chp_4__cl_4.8__cl_4.8.2__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          37,
+          44
+        ],
+        "span_text": "Table.8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_129",
+      "target": {
+        "eid": "chp_4__cl_4.8__cl_4.8.2__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          48,
+          55
+        ],
+        "span_text": "Table.9"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_9",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_130",
+      "target": {
+        "eid": "chp_4__cl_4.9__cl_4.9.2__item_i",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          501,
+          510
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_131",
+      "target": {
+        "eid": "chp_4__cl_4.9__cl_4.9.2__item_i",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          537,
+          545
+        ],
+        "span_text": "Table 18"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_18",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_132",
+      "target": {
+        "eid": "chp_4__cl_4.9__cl_4.9.2__item_i__item_i",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          202,
+          207
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_133",
+      "target": {
+        "eid": "chp_4__cl_4.10__cl_4.10.2__item_i",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          195,
+          204
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_134",
+      "target": {
+        "eid": "chp_4__cl_4.10__cl_4.10.2__item_i",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          382,
+          390
+        ],
+        "span_text": "Table 19"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_19",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_135",
+      "target": {
+        "eid": "chp_4__cl_4.10__cl_4.10.3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          20,
+          29
+        ],
+        "span_text": "table. 23"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_23",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_136",
+      "target": {
+        "eid": "chp_4__cl_4.11__cl_4.11.2__def_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          3
+        ],
+        "span_text": "The"
+      },
+      "kind": "provision_type",
+      "value": "definition",
+      "method": "rule",
+      "confidence": 1.0,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_137",
+      "target": {
+        "eid": "chp_4__cl_4.11__cl_4.11.2__cl_3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          35,
+          40
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_138",
+      "target": {
+        "eid": "chp_4__cl_4.12__cl_4.12.2__item_i",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          339,
+          348
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_139",
+      "target": {
+        "eid": "chp_4__cl_4.12__cl_4.12.2__item_i__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1108,
+          1117
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_140",
+      "target": {
+        "eid": "chp_4__cl_4.12__cl_4.12.2__item_i__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          798,
+          808
+        ],
+        "span_text": "section 17"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_17",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_141",
+      "target": {
+        "eid": "chp_4__cl_4.12__cl_4.12.2__item_i__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          36,
+          42
+        ],
+        "span_text": "buffer"
+      },
+      "kind": "defined_term_use",
+      "value": "chp_4__cl_4.11__cl_4.11.2__def_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_142",
+      "target": {
+        "eid": "chp_4__cl_4.13__cl_4.13.2__item_i__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          404,
+          420
+        ],
+        "span_text": "may be permitted"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_143",
+      "target": {
+        "eid": "chp_4__cl_4.13__cl_4.13.2__item_i__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          488,
+          495
+        ],
+        "span_text": "Table 8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_144",
+      "target": {
+        "eid": "chp_4__cl_4.13__cl_4.13.2__item_i__item_iii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          169,
+          185
+        ],
+        "span_text": "may be permitted"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_145",
+      "target": {
+        "eid": "chp_4__cl_4.13__cl_4.13.2__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          139,
+          148
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_146",
+      "target": {
+        "eid": "chp_4__cl_4.14__item_i",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          206,
+          219
+        ],
+        "span_text": "authority may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_147",
+      "target": {
+        "eid": "chp_4__cl_4.14__item_i__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          190,
+          195
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_148",
+      "target": {
+        "eid": "chp_5__cl_5.1__item_i",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          734,
+          739
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_149",
+      "target": {
+        "eid": "chp_5__cl_5.3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          22,
+          27
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_150",
+      "target": {
+        "eid": "chp_5__cl_5.3__note_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          10,
+          15
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_151",
+      "target": {
+        "eid": "chp_5__cl_5.3__note_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          37,
+          44
+        ],
+        "span_text": "Table 8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_152",
+      "target": {
+        "eid": "chp_6__cl_6.1",
+        "version_id": "v2",
+        "field": "intro",
+        "span": [
+          54,
+          63
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_153",
+      "target": {
+        "eid": "chp_6__cl_6.1__item_c",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          36,
+          45
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_154",
+      "target": {
+        "eid": "chp_6__cl_6.1__item_d__item_i",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          86,
+          91
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_155",
+      "target": {
+        "eid": "chp_6__cl_6.1__item_d__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          104,
+          109
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_156",
+      "target": {
+        "eid": "chp_6__cl_6.1__item_d__item_iii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          372,
+          377
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_157",
+      "target": {
+        "eid": "chp_6__cl_6.1__item_d__item_iv",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          177,
+          182
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_158",
+      "target": {
+        "eid": "chp_6__cl_6.1__item_d__item_iv",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          292,
+          301
+        ],
+        "span_text": "clause is"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:clause is",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_159",
+      "target": {
+        "eid": "chp_6__cl_6.1__item_e",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          792,
+          808
+        ],
+        "span_text": "may be permitted"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_160",
+      "target": {
+        "eid": "chp_6__cl_6.2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1258,
+          1267
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_161",
+      "target": {
+        "eid": "chp_6__cl_6.2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          980,
+          990
+        ],
+        "span_text": "section 17"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_17",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_162",
+      "target": {
+        "eid": "chp_6__cl_6.2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1016,
+          1026
+        ],
+        "span_text": "section 32"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_32",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_163",
+      "target": {
+        "eid": "chp_6__cl_6.3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          231,
+          240
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_164",
+      "target": {
+        "eid": "chp_6__cl_6.3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          393,
+          403
+        ],
+        "span_text": "section 32"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_32",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_165",
+      "target": {
+        "eid": "chp_7__cl_7.1",
+        "version_id": "v2",
+        "field": "intro",
+        "span": [
+          20,
+          25
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_166",
+      "target": {
+        "eid": "chp_7__cl_7.1__cl_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          33,
+          38
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_167",
+      "target": {
+        "eid": "chp_7__cl_7.1__cl_5",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          47,
+          52
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_168",
+      "target": {
+        "eid": "chp_7__cl_7.1__cl_5",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          137,
+          145
+        ],
+        "span_text": "Table 20"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_20",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_169",
+      "target": {
+        "eid": "chp_7__cl_7.1__cl_5",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1006,
+          1014
+        ],
+        "span_text": "Table.21"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_21",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_170",
+      "target": {
+        "eid": "chp_7__cl_7.1__item_e",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          80,
+          85
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_171",
+      "target": {
+        "eid": "chp_7__cl_7.1__item_e",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          761,
+          769
+        ],
+        "span_text": "Table 22"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_22",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_172",
+      "target": {
+        "eid": "chp_8",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          31,
+          39
+        ],
+        "span_text": "Table 23"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_23",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_173",
+      "target": {
+        "eid": "chp_8__note_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          33,
+          38
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_174",
+      "target": {
+        "eid": "chp_8__cl_8.1__item_a__item_i",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          79,
+          84
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_175",
+      "target": {
+        "eid": "chp_8__cl_8.1__item_a__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          31,
+          36
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_176",
+      "target": {
+        "eid": "chp_8__cl_8.1__item_a__item_iii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          42,
+          51
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_177",
+      "target": {
+        "eid": "chp_8__cl_8.1__item_a__item_v",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          131,
+          136
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_178",
+      "target": {
+        "eid": "chp_8__cl_8.1__item_b__item_i",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          73,
+          82
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_179",
+      "target": {
+        "eid": "chp_8__cl_8.1__item_b__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          12,
+          21
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_180",
+      "target": {
+        "eid": "chp_8__cl_8.1__item_b__item_iii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          89,
+          98
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_181",
+      "target": {
+        "eid": "chp_9__cl_9.1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          63,
+          68
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_182",
+      "target": {
+        "eid": "chp_9__cl_9.1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          382,
+          392
+        ],
+        "span_text": "Annexure C"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Annexure C",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_183",
+      "target": {
+        "eid": "chp_9__cl_9.2",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          50,
+          55
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_184",
+      "target": {
+        "eid": "chp_9__cl_9.2__note_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          63,
+          72
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_185",
+      "target": {
+        "eid": "chp_9__cl_9.2__prov_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          13
+        ],
+        "span_text": "Provided that"
+      },
+      "kind": "provision_type",
+      "value": "exception",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_186",
+      "target": {
+        "eid": "chp_9__cl_9.2__item_iii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          145,
+          150
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_187",
+      "target": {
+        "eid": "chp_9__cl_9.2__item_iii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          183,
+          191
+        ],
+        "span_text": "Table 23"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_23",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_188",
+      "target": {
+        "eid": "chp_9__cl_9.2__item_iii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          350,
+          358
+        ],
+        "span_text": "Table 23"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_23",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_189",
+      "target": {
+        "eid": "chp_9__cl_9.3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          133,
+          138
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_190",
+      "target": {
+        "eid": "chp_9__cl_9.3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          746,
+          756
+        ],
+        "span_text": "TABLE - 24"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_24",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_191",
+      "target": {
+        "eid": "chp_9__cl_9.3__note_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          14,
+          19
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_192",
+      "target": {
+        "eid": "chp_10",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          466,
+          471
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_193",
+      "target": {
+        "eid": "chp_11.0",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          609,
+          618
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_194",
+      "target": {
+        "eid": "chp_11.0",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          10
+        ],
+        "span_text": "CHAPTER 11"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_3__row_11",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_195",
+      "target": {
+        "eid": "chp_11.0",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          78,
+          88
+        ],
+        "span_text": "Chapter 10"
+      },
+      "kind": "cross_reference",
+      "value": "chp_10",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_196",
+      "target": {
+        "eid": "chp_11.0",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          724,
+          768
+        ],
+        "span_text": "Section 45B of the Karnataka Stamp Act, 1957"
+      },
+      "kind": "cross_reference",
+      "value": "external:Karnataka Stamp Act, 1957:section_45b",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_197",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          36,
+          41
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_198",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          161,
+          185
+        ],
+        "span_text": "Section 14(B) of the Act"
+      },
+      "kind": "cross_reference",
+      "value": "external:Act:section_14(b)",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_199",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          9,
+          14
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_200",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          7,
+          12
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_201",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_4",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          4,
+          9
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_202",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_5",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          11,
+          16
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_203",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_6",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          11,
+          16
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_204",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_8",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          8,
+          17
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_205",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_9",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          470,
+          483
+        ],
+        "span_text": "Authority may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_206",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_13",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          72,
+          77
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_207",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_15",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          4,
+          17
+        ],
+        "span_text": "Authority may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_208",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_16",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          9,
+          18
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_209",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_17",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          38,
+          43
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_210",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_18",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          4,
+          17
+        ],
+        "span_text": "Authority may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_211",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_20",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          4,
+          17
+        ],
+        "span_text": "Authority may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_212",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_21",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          42,
+          51
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_213",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_22",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          335,
+          340
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_214",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_23",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          79,
+          84
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_215",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_24",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          317,
+          326
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_216",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_25",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          7,
+          12
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_217",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_26",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          182,
+          187
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_218",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_27",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          203,
+          208
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_219",
+      "target": {
+        "eid": "app_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          11,
+          19
+        ],
+        "span_text": "Table 26"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2__row_26",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_220",
+      "target": {
+        "eid": "app_VI",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          728,
+          793
+        ],
+        "span_text": "Section 14-B of the Karnataka Town and Country Planning Act, 1961"
+      },
+      "kind": "cross_reference",
+      "value": "external:Karnataka Town and Country Planning Act, 1961:section_14-b",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_221",
+      "target": {
+        "eid": "app_VIII",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          293,
+          357
+        ],
+        "span_text": "Section 14-B of the Karnataka Town and Country planing Act, 1961"
+      },
+      "kind": "cross_reference",
+      "value": "external:Karnataka Town and Country planing Act, 1961:section_14-b",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_222",
+      "target": {
+        "eid": "chp_2__tbl_1",
+        "version_id": "v2",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "app_IV__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_223",
+      "target": {
+        "eid": "chp_2__tbl_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 2"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_224",
+      "target": {
+        "eid": "chp_2__tbl_2__row_9",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          30,
+          37
+        ],
+        "span_text": "Table.7"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_7",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_225",
+      "target": {
+        "eid": "chp_2__tbl_3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 3"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_3",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_226",
+      "target": {
+        "eid": "chp_2__tbl_4",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 4"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_4",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_227",
+      "target": {
+        "eid": "chp_2__tbl_4__row_10",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          50,
+          57
+        ],
+        "span_text": "Table.7"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_7",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_228",
+      "target": {
+        "eid": "chp_2__tbl_4__row_11",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          28,
+          35
+        ],
+        "span_text": "Table.7"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_7",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_229",
+      "target": {
+        "eid": "chp_2__tbl_5",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 5"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_5",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_230",
+      "target": {
+        "eid": "chp_2__tbl_6",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 6"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_6",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_231",
+      "target": {
+        "eid": "chp_2__tbl_7",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 7"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_7",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_232",
+      "target": {
+        "eid": "chp_2__tbl_7__row_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          265,
+          270
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_233",
+      "target": {
+        "eid": "chp_2__tbl_7__row_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          193,
+          200
+        ],
+        "span_text": "Table.7"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_7",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_234",
+      "target": {
+        "eid": "chp_2__tbl_7__row_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          345,
+          352
+        ],
+        "span_text": "table.4"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_4",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_235",
+      "target": {
+        "eid": "chp_2__tbl_7__row_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          548,
+          555
+        ],
+        "span_text": "Table.7"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_7",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_236",
+      "target": {
+        "eid": "chp_2__tbl_7__row_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          700,
+          707
+        ],
+        "span_text": "table.4"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_4",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_237",
+      "target": {
+        "eid": "chp_2__tbl_8",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_238",
+      "target": {
+        "eid": "chp_2__tbl_9",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 9"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_9",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_239",
+      "target": {
+        "eid": "chp_2__cl_13__tbl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "app_IV__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_240",
+      "target": {
+        "eid": "chp_2__cl_13__tbl_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 2"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_241",
+      "target": {
+        "eid": "chp_2__cl_13__tbl_3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 3"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_3",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_242",
+      "target": {
+        "eid": "chp_2__cl_13__tbl_4__row_5",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          88,
+          93
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_243",
+      "target": {
+        "eid": "chp_3__cl_3.1__tbl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "app_IV__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_244",
+      "target": {
+        "eid": "chp_3__cl_3.4__tbl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "app_IV__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_245",
+      "target": {
+        "eid": "chp_3__cl_3.7__tbl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "app_IV__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_246",
+      "target": {
+        "eid": "chp_4__cl_4.1__cl_4.1.3__tbl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "app_IV__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_247",
+      "target": {
+        "eid": "chp_4__cl_4.2__cl_4.2.2__tbl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "app_IV__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_248",
+      "target": {
+        "eid": "chp_4__cl_4.2__cl_4.2.2__tbl_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 2"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_249",
+      "target": {
+        "eid": "chp_4__cl_4.3__cl_4.3.3__tbl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "app_IV__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_250",
+      "target": {
+        "eid": "chp_4__cl_4.4__cl_4.4.3__tbl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "app_IV__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_251",
+      "target": {
+        "eid": "chp_4__cl_4.5__cl_4.5.3__tbl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "app_IV__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_252",
+      "target": {
+        "eid": "chp_4__cl_4.7__cl_4.7.3__tbl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "app_IV__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_253",
+      "target": {
+        "eid": "chp_4__cl_4.8__cl_4.8.3__tbl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "app_IV__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_254",
+      "target": {
+        "eid": "chp_4__cl_4.9__cl_4.9.3__tbl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "app_IV__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_255",
+      "target": {
+        "eid": "chp_4__cl_4.9__cl_4.9.3__tbl_1__row_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          35,
+          42
+        ],
+        "span_text": "Table.8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_256",
+      "target": {
+        "eid": "chp_4__cl_4.9__cl_4.9.3__tbl_1__row_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          46,
+          53
+        ],
+        "span_text": "Table.9"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_9",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_257",
+      "target": {
+        "eid": "chp_4__cl_4.9__cl_4.9.3__tbl_1__row_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          36,
+          43
+        ],
+        "span_text": "Table.8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_258",
+      "target": {
+        "eid": "chp_4__cl_4.9__cl_4.9.3__tbl_1__row_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          47,
+          54
+        ],
+        "span_text": "Table.9"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_9",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_259",
+      "target": {
+        "eid": "chp_4__cl_4.9__cl_4.9.3__tbl_1__row_3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          47,
+          54
+        ],
+        "span_text": "Table.8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_260",
+      "target": {
+        "eid": "chp_4__cl_4.9__cl_4.9.3__tbl_1__row_3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          58,
+          65
+        ],
+        "span_text": "Table.9"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_9",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_261",
+      "target": {
+        "eid": "chp_4__cl_4.9__cl_4.9.3__tbl_1__row_4",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          36,
+          43
+        ],
+        "span_text": "Table.8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_262",
+      "target": {
+        "eid": "chp_4__cl_4.9__cl_4.9.3__tbl_1__row_4",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          47,
+          54
+        ],
+        "span_text": "Table.9"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_9",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_263",
+      "target": {
+        "eid": "chp_4__cl_4.10__cl_4.10.3__tbl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "app_IV__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_264",
+      "target": {
+        "eid": "chp_4__cl_4.10__cl_4.10.3__tbl_1__row_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          35,
+          42
+        ],
+        "span_text": "Table.8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_265",
+      "target": {
+        "eid": "chp_4__cl_4.10__cl_4.10.3__tbl_1__row_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          46,
+          53
+        ],
+        "span_text": "Table.9"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_9",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_266",
+      "target": {
+        "eid": "chp_4__cl_4.10__cl_4.10.3__tbl_1__row_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          36,
+          43
+        ],
+        "span_text": "Table.8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_267",
+      "target": {
+        "eid": "chp_4__cl_4.10__cl_4.10.3__tbl_1__row_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          47,
+          54
+        ],
+        "span_text": "Table.9"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_9",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_268",
+      "target": {
+        "eid": "chp_4__cl_4.10__cl_4.10.3__tbl_1__row_3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          47,
+          54
+        ],
+        "span_text": "Table.8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_269",
+      "target": {
+        "eid": "chp_4__cl_4.10__cl_4.10.3__tbl_1__row_3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          58,
+          65
+        ],
+        "span_text": "Table.9"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_9",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_270",
+      "target": {
+        "eid": "chp_4__cl_4.10__cl_4.10.3__tbl_1__row_4",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          36,
+          43
+        ],
+        "span_text": "Table.8"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_8",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_271",
+      "target": {
+        "eid": "chp_4__cl_4.10__cl_4.10.3__tbl_1__row_4",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          47,
+          54
+        ],
+        "span_text": "Table.9"
+      },
+      "kind": "cross_reference",
+      "value": "chp_2__cl_13__tbl_9",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_272",
+      "target": {
+        "eid": "chp_7__cl_7.1__cl_5__tbl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "app_IV__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_273",
+      "target": {
+        "eid": "chp_7__cl_7.1__cl_5__tbl_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 2"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_2",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_274",
+      "target": {
+        "eid": "chp_7__cl_7.1__cl_5__tbl_3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 3"
+      },
+      "kind": "cross_reference",
+      "value": "app_1__tbl_3",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_275",
+      "target": {
+        "eid": "chp_8__tbl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "app_IV__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_276",
+      "target": {
+        "eid": "chp_8__tbl_1__row_7",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          81,
+          86
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_277",
+      "target": {
+        "eid": "chp_8__tbl_1__row_13",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          312,
+          317
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_278",
+      "target": {
+        "eid": "chp_9__cl_9.3__tbl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "app_IV__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_279",
+      "target": {
+        "eid": "chp_10__cl_10.1__cl_12__tbl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "app_IV__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr:ann_280",
+      "target": {
+        "eid": "app_1__tbl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "app_IV__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    }
+  ]
+}

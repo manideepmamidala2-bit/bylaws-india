@@ -10,7 +10,7 @@ aliases:
 - BDA Local Planning Area
 visibility: public
 licence: CC BY 4.0
-release_version: 2.5.0
+release_version: 2.6.0
 country: IN
 state: KA
 building_types:
@@ -215,7 +215,7 @@ documents:
   role: amendment
   legal_status: in_force
   acquisition_status: acquired
-  structured: false
+  structured: true
   notification_number: No.UDD 93 MNJ 2008
   gazette_reference: Karnataka Extra-Ordinary Gazette Notification under Section 13-E
     of the Karnataka Town & Country Planning Act, 1961
@@ -265,7 +265,7 @@ documents:
   role: amendment
   legal_status: in_force
   acquisition_status: acquired
-  structured: false
+  structured: true
   notification_number: 'No: UDD 105 MNJ 2008'
   gazette_reference: Part - II Bengaluru, Monday, March 23, 2015 (Chaithra 02, Shaka
     Varsha 1937) No. 230
@@ -317,7 +317,7 @@ documents:
   role: amendment
   legal_status: in_force
   acquisition_status: acquired
-  structured: false
+  structured: true
   notification_number: NO. UDD 112 MNJ 2015
   gazette_reference: Part–IVA Bengaluru, Saturday, September 29, 2018 (Ashwayuja 7,
     Shaka Varsha 1940) No. 1376
@@ -369,7 +369,7 @@ documents:
   role: amendment
   legal_status: in_force
   acquisition_status: acquired
-  structured: false
+  structured: true
   notification_number: No. UDD 255 MNJ 2018
   gazette_reference: Part-IVA Bengaluru, Thursday, June 20, 2019 (Jyesta 30, Shaka
     Varsha 1940) No. 483
@@ -468,9 +468,9 @@ documents:
   doc_type: notification
   layer: planning
   role: amendment
-  legal_status: in_force
+  legal_status: draft
   acquisition_status: acquired
-  structured: false
+  structured: true
   notification_number: No. UDD 78 MNJ 2024 (E)
   gazette_reference: 'Karnataka Special Gazette Part-IVA Dated: 21.02.2025'
   notified_date: '2025-02-21'
@@ -513,6 +513,7 @@ documents:
     archive_url: https://web.archive.org/web/20250307075721id_/https://data.opencity.in/dataset/3877072d-adef-4923-890d-1de96e72faeb/resource/886578b2-3419-40f0-9f51-21b78fefbac7/download/premium-far-gazette.pdf
     archive_failure_reason: null
     fetched_by: agent
+  superseded_by_document: rmp2015-zr-amend-2025-04
 - id: rmp2015-zr-amend-2026-01
   title: 'GOVERNMENT OF KARNATAKA No. UDD 235 MNJ 2025(E) date: 05.01.2026 NOTIFICATION
     (Amendment to Zonal Regulations of Revised Master Plan-2015 of Bengaluru and Greater
@@ -523,7 +524,7 @@ documents:
   role: amendment
   legal_status: in_force
   acquisition_status: acquired
-  structured: false
+  structured: true
   notification_number: No. UDD 235 MNJ 2025(E)
   gazette_reference: Karnataka Special Gazette Part-IVA dated 05.01.2026
   notified_date: '2026-01-05'
@@ -1277,6 +1278,111 @@ documents:
     archive_url: null
     archive_failure_reason: Wayback Machine Save Page Now timed out on updates.bbmp.gov.in
     fetched_by: agent
+- id: rmp2015-zr-amend-2025-04
+  title: 'Notification No. UDD 78 MNJ 2024 (E) (02-04-2025) — Insertion of Chapter
+    11: Premium F.A.R Granted by Levy of Premium Charges (Final Notification)'
+  issuing_authority: Government of Karnataka, Urban Development Secretariat
+  doc_type: amendment
+  layer: planning
+  role: amendment
+  legal_status: in_force
+  acquisition_status: acquired
+  structured: true
+  notification_number: No. UDD 78 MNJ 2024 (E)
+  gazette_reference: Karnataka Extra-Ordinary Gazette Part-IVA, dated 02-04-2025
+  notified_date: '2025-04-02'
+  effective_from: '2025-04-02'
+  amends:
+  - rmp2015-zr
+  supersedes:
+  - rmp2015-zr-amend-2025-02
+  status_evidence:
+    url: https://updates.bbmp.gov.in/public
+    quoted_line: 'REGULATIONS Insertion of Chapter 11: In the zonal regulations of
+      the approved Revised Master Plan-2015 of the Local Planning Area of Bengaluru
+      in force, after Chapter 10, the following chapter 11 shall be inserted namely:-
+      CHAPTER – 11: PREMIUM F.A.R GRANTED BY LEVY OF PREMIUM CHARGES.'
+    description: Final Gazette Notification No. UDD 78 MNJ 2024 (E) dated 02-04-2025
+      published on updates.bbmp.gov.in/public under GBA Town Planning notifications.
+  licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public state gazette
+    notification)
+  text_rights:
+    mode: full_text
+    reason: Public Karnataka Gazette notification issued under Section 13-E of the
+      Karnataka Town and Country Planning Act, 1961
+  languages:
+  - en
+  official_url: https://updates.bbmp.gov.in/v1/api/file/620565994067-Annexure%20E%20Premium%20FAR%20notification%2002-04-2025.pdf
+  mirror_urls:
+  - https://updates.bbmp.gov.in/public
+  source_url: https://updates.bbmp.gov.in/v1/api/file/620565994067-Annexure%20E%20Premium%20FAR%20notification%2002-04-2025.pdf
+  retrieval:
+    fetched_at: '2026-11-23T00:00:00Z'
+    requested_url: https://updates.bbmp.gov.in/v1/api/file/620565994067-Annexure%20E%20Premium%20FAR%20notification%2002-04-2025.pdf
+    final_url: https://updates.bbmp.gov.in/v1/api/file/620565994067-Annexure%20E%20Premium%20FAR%20notification%2002-04-2025.pdf
+    http_status: 200
+    content_type: application/pdf
+    content_length: 1339849
+    response_headers:
+      etag: null
+      last_modified: null
+      server: nginx/1.24.0 (Ubuntu)
+      date: Tue, 24 Nov 2026 19:26:06 GMT
+    sha256: f9f6fdd2806e407c8f6c745f6ff5b554b4bf846ad78c7c49d511c840d20ed3bf
+    archive_url: null
+    archive_failure_reason: Wayback Machine Save Page Now timed out on updates.bbmp.gov.in
+    fetched_by: agent
+- id: rmp2015-zr-amend-2025-10
+  title: Notification No. UDD 468 MNJ 2025(E) (15-10-2025) — Revised Master Plan 2015
+    Zonal Regulations Amendment (Storm Water Drain / Nala Buffer Zones)
+  issuing_authority: Government of Karnataka, Urban Development Secretariat
+  doc_type: amendment
+  layer: planning
+  role: amendment
+  legal_status: in_force
+  acquisition_status: acquired
+  structured: true
+  notification_number: No. UDD 468 MNJ 2025(E)
+  gazette_reference: Karnataka Extra-Ordinary Gazette Part-IVA, dated 15-10-2025
+  notified_date: '2025-10-15'
+  effective_from: '2025-10-15'
+  amends:
+  - rmp2015-zr
+  status_evidence:
+    url: https://updates.bbmp.gov.in/public
+    quoted_line: Whereas the draft to further amend the zonal regulations of Revised
+      Master Plan-2015 of the Local Planning Area of Bengaluru ... (2) They shall
+      come into force from the date of its final publication in the official Gazette.
+    description: Final Gazette Notification No. UDD 468 MNJ 2025(E) dated 15-10-2025
+      published on updates.bbmp.gov.in/public under GBA Town Planning notifications.
+  licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public state gazette
+    notification)
+  text_rights:
+    mode: full_text
+    reason: Public Karnataka Gazette notification issued under Section 13-E of the
+      Karnataka Town and Country Planning Act, 1961
+  languages:
+  - en
+  official_url: https://updates.bbmp.gov.in/v1/api/file/389854408219-Naala%20Buffer%20Notification%202025.pdf
+  mirror_urls:
+  - https://updates.bbmp.gov.in/public
+  source_url: https://updates.bbmp.gov.in/v1/api/file/389854408219-Naala%20Buffer%20Notification%202025.pdf
+  retrieval:
+    fetched_at: '2026-11-23T00:00:00Z'
+    requested_url: https://updates.bbmp.gov.in/v1/api/file/389854408219-Naala%20Buffer%20Notification%202025.pdf
+    final_url: https://updates.bbmp.gov.in/v1/api/file/389854408219-Naala%20Buffer%20Notification%202025.pdf
+    http_status: 200
+    content_type: application/pdf
+    content_length: 1085762
+    response_headers:
+      etag: null
+      last_modified: null
+      server: nginx/1.24.0 (Ubuntu)
+      date: Tue, 24 Nov 2026 19:26:07 GMT
+    sha256: 22b74123e5fc190e78938f97b8bb61ea5a91a6a80f4fc9170b35c59c100ec047
+    archive_url: null
+    archive_failure_reason: Wayback Machine Save Page Now timed out on updates.bbmp.gov.in
+    fetched_by: agent
 amendment_links:
 - amending_clause: rmp2015-zr:chp_3__cl_3.1
   target_clause: bbl-2003:part_III__sec_9.0__cl_9.2
@@ -1698,6 +1804,256 @@ amendment_links:
     14-05-2026): substitutes Clause (i) under Bye-law 6.0 (Deviation during construction)
     and inserts Table-2A, Table-2B, Table-2C, and Table-2D for Bengaluru West City
     Corporation.'
+- amending_clause: rmp2015-zr-amend-2009-03:chp_3__cl_3.16__item_ix
+  target_clause: rmp2015-zr:chp_3__cl_3.16
+  action: insert_after
+  effective_date: '2009-03-02'
+  confidence: high
+  verification: machine_checked
+  replacement_text: '3.16(ix) Metro Station 150m Buffer FAR: Areas which fall within
+    a distance of 150m from the outer boundary of the Metro Terminal/Station are eligible
+    for maximum FAR of 4.0 for all permissible uses irrespective of the applicable
+    FAR in the respective Zonal Regulations, subject to road width of minimum 18m.'
+  note: Notification No. UDD 93 MNJ 2008 dated 02-03-2009 inserts clause (ix) under
+    Regulation 3.16 (General notes) granting FAR 4.0 within 150m of Metro Rail stations.
+- amending_clause: rmp2015-zr-amend-2009-03:chp_3__cl_4.10__cl_4.10.2
+  target_clause: rmp2015-zr:chp_4__cl_4.10__cl_4.10.2
+  action: substitute
+  effective_date: '2009-03-02'
+  confidence: high
+  verification: machine_checked
+  replacement_text: '4.10.2 Regulations: Permissible land uses in Traffic and Transportation
+    (T&T) zone: Main land use category T-4; Ancillary uses (Retail shops, restaurants,
+    banks, post offices, offices, hotels, transport terminals, bus stands, railway/metro
+    stations, multi-level parking) up to 50% of total built-up area. Table 19 (FAR
+    and Ground Coverage in T&T Zone): Plot area up to 500 sq.m (45% coverage, 1.00
+    FAR up to 12m road); 500–2000 sq.m (45% coverage, 1.50 FAR on 12m–18m road); 2000–4000
+    sq.m (45% coverage, 1.75 FAR on 18m–24m road); above 4000 sq.m (45% coverage,
+    2.25 FAR on road above 24m).'
+  note: Notification No. UDD 93 MNJ 2008 dated 02-03-2009 substitutes Regulation 4.10.2
+    and Table 19 (FAR and Ground Coverage in Traffic and Transportation zone).
+- amending_clause: rmp2015-zr-amend-2015-03:part_IIL__cl_4
+  target_clause: rmp2015-zr:chp_2__tbl_1
+  action: substitute
+  effective_date: '2015-03-20'
+  confidence: high
+  verification: machine_checked
+  replacement_text: 'Table 1: Permissible land use in Residential category (substituted
+    by Notification No. UDD 105 MNJ 2008 dated 20-03-2015): R-1 Plotted residential
+    developments; R-2 Villas, semi-detached houses; R-3 Apartments, Hostels, Dharmashala;
+    R-4 Multi-Dwelling Housing, Service Apartments; R-5 Group Housing (Development
+    Plans); R-6 Bus bays, Auto stand, milk booth, HOPCOMS; R-7 Kalyana Mantapas; R-8
+    Multi-level car parking as part of residential developments.'
+  note: Notification No. UDD 105 MNJ 2008 dated 20-03-2015 substitutes Table 1 (Permissible
+    land use in Residential category).
+- amending_clause: rmp2015-zr-amend-2015-03:part_IIL__cl_8__item_i
+  target_clause: rmp2015-zr:chp_4__cl_4.1__cl_4.1.2
+  action: substitute
+  effective_date: '2015-03-20'
+  confidence: high
+  verification: machine_checked
+  replacement_text: '4.1.2 Regulations (Permissible land uses in Residential Main,
+    substituted 20-03-2015): (1) No commercial activity of whatsoever nature shall
+    be allowed in Residential Main and Residential Mixed zones in all three rings
+    if the road width is less than 40 ft (12 m). (2) In Ring I and II: Main land use
+    R; Ancillary land use up to 20% of total built-up area or 50 sq.m whichever is
+    lower on roads 40 ft (12 m) and above, only as part of residential building. (3)
+    In Ring III: Ancillary land use up to 20% of built-up area or 50 sq.m whichever
+    is lower.'
+  note: Notification No. UDD 105 MNJ 2008 dated 20-03-2015 substitutes Regulation
+    4.1.2 (Permissible land uses in Residential Main across Rings I, II & III).
+- amending_clause: rmp2015-zr-amend-2015-03:part_IIL__cl_10
+  target_clause: rmp2015-zr:chp_4__cl_4.2__cl_4.2.2
+  action: substitute
+  effective_date: '2015-03-20'
+  confidence: high
+  verification: machine_checked
+  replacement_text: '4.2.2 Regulations (Permissible land uses in Residential Mixed,
+    substituted 20-03-2015): In Ring I and II, ancillary commercial uses up to C-2
+    category permitted on roads of width 40 ft (12 m) and above subject to plot size
+    not exceeding 1000 sq.m and space standards in Table 7; in Ring III, ancillary
+    uses permitted up to 30% of built-up area on roads 12 m and above.'
+  note: Notification No. UDD 105 MNJ 2008 dated 20-03-2015 substitutes Regulation
+    4.2.2 (Permissible land uses in Residential Mixed across Rings I, II & III).
+- amending_clause: rmp2015-zr-amend-2018-09:part_IVA__cl_3.4
+  target_clause: rmp2015-zr:chp_3__cl_3.4
+  action: modify
+  effective_date: '2018-09-29'
+  confidence: high
+  verification: machine_checked
+  replacement_text: '3.4 FAR or Floor Area Ratio (as amended 29-09-2018 by UDD 112
+    MNJ 2015): Inserts sub-clause (vi) Impact Zone Premium FAR: Within a 500 m wide
+    impact zone on either side of the outer edge of the Metro Rail corridor alignment,
+    additional Impact Zone Premium FAR up to a maximum total FAR of 4.0 is permissible
+    for plots of minimum 1000 sq.m abutting roads of width 18 m and above, on payment
+    of fee at 50% of Guidance Value.'
+  note: Notification No. UDD 112 MNJ 2015 dated 29-09-2018 inserts sub-clause 3.4(vi)
+    Impact Zone Premium FAR (500m Metro corridor buffer, up to FAR 4.0) and Appendix-IX.
+- amending_clause: rmp2015-zr-amend-2019-06:cl_3_2
+  target_clause: rmp2015-zr:chp_3__cl_3.4
+  action: substitute
+  effective_date: '2019-06-19'
+  confidence: high
+  verification: machine_checked
+  replacement_text: '3.4 FAR or Floor Area Ratio (substituted 19-06-2019 by UDD 255
+    MNJ 2018): Exclusions from FAR computation: (i) electrical substation/transformer/generator
+    room; (ii) refuge areas in high-rise buildings as per fire norms; (iii) separate
+    public toilet block in non-residential buildings on plots > 1000 sq.m; (iv) swimming
+    pool (open to sky); (v) staircase/staircase room; (vi) architectural features;
+    (vii) chimneys; (viii) ventilation ducts and garbage shafts; (ix) service ducts;
+    (x) parking areas including driveways and ramps; (xi) open courts; (xii) overhead
+    tanks; (xiii) escalators; (xiv) lift wells and lift machine room; (xv) watchman
+    cubicle not exceeding 4 sq.m; (xvi) sewage treatment plant. Inserts Regulation
+    3.4-A Height of Building (NOC from HAL/AAI/Defence authorities).'
+  note: Notification No. UDD 255 MNJ 2018 dated 19-06-2019 substitutes Regulation
+    3.4 FAR exclusions (i)–(xvi) and inserts Regulation 3.4-A Height of Building.
+- amending_clause: rmp2015-zr-amend-2019-06:cl_4
+  target_clause: rmp2015-zr:chp_6__cl_6.1
+  action: modify
+  effective_date: '2019-06-19'
+  confidence: high
+  verification: machine_checked
+  replacement_text: '6.1 Residential Subdivision Regulations (amended 19-06-2019 by
+    UDD 255 MNJ 2018): In Regulation 6.1.2, residential area earmarking increased
+    up to 55% of total layout area.'
+  note: Notification No. UDD 255 MNJ 2018 dated 19-06-2019 amends Chapter 6 Regulation
+    6.1.2.
+- amending_clause: rmp2015-zr-amend-2019-06:cl_5S
+  target_clause: rmp2015-zr:chp_7__cl_7.1
+  action: modify
+  effective_date: '2019-06-19'
+  confidence: high
+  verification: machine_checked
+  replacement_text: '7.1 Regulations for Residential and Non-Residential Development
+    Plan (amended 19-06-2019 by UDD 255 MNJ 2018): In Table-20, Table-21, and Table-22,
+    road width bands updated to "9m and up to 12m", "Above 18m up to 24m", and "Above
+    24m up to 30m"; in Regulation 7.2(c), the word "excluding" is substituted by "including".'
+  note: Notification No. UDD 255 MNJ 2018 dated 19-06-2019 amends Chapter 7 (Regulation
+    7.1 Table-20, 7.2(c) Table-21, and 7.3 Table-22).
+- amending_clause: rmp2015-zr-amend-2025-02:chp_11
+  target_clause: rmp2015-zr:chp_10
+  action: insert_after
+  effective_date: '2025-02-21'
+  confidence: high
+  verification: unverified
+  note: Draft Notification No. UDD 78 MNJ 2024 (E) dated 21-02-2025 proposing insertion
+    of Chapter 11 (Premium FAR); not applied from this draft because it has legal_status
+    "draft" and was superseded by the final Gazette Notification dated 02-04-2025
+    (rmp2015-zr-amend-2025-04).
+- amending_clause: rmp2015-zr-amend-2025-04:chp_11_2
+  target_clause: rmp2015-zr:chp_10
+  action: insert_after
+  effective_date: '2025-04-02'
+  confidence: high
+  verification: machine_checked
+  replacement_text: '11.0 CHAPTER 11 — PREMIUM F.A.R GRANTED BY LEVY OF PREMIUM CHARGES
+    (Inserted after Chapter 10 by Notification No. UDD 78 MNJ 2024 (E), dated 02-04-2025):
+    (1) Additional Premium FAR over and above the permissible FAR in the Zonal Regulations
+    is permissible based on abutting road width: (a) Road width above 9 meters and
+    up to 12 meters: up to 20% of permissible FAR (0.2 factor); (b) Road width above
+    12 meters and up to 18 meters: up to 40% of permissible FAR (0.4 factor); (c)
+    Road width above 18 meters: up to 60% of permissible FAR (0.6 factor). (2) The
+    maximum combined additional FAR (Premium FAR + TDR/DRC) shall not exceed 60% of
+    regular permissible FAR. (3) Premium FAR charges shall be 50% of the Guidance
+    Value (under Section 45B of the Karnataka Stamp Act, 1957) of the notional land
+    required for the additional floor area (i.e. Additional Built-up Area divided
+    by permissible FAR), or 28% of the combined land + building guidance value per
+    sq.m, whichever is higher.'
+  note: Final Notification No. UDD 78 MNJ 2024 (E) dated 02-04-2025 inserts Chapter
+    11 (Premium F.A.R Granted by Levy of Premium Charges) after Chapter 10 of RMP
+    2015 Zonal Regulations.
+- amending_clause: rmp2015-zr-amend-2025-10:part_IVA__tbl_1
+  target_clause: rmp2015-zr:chp_4__cl_4.12__cl_4.12.2
+  action: substitute
+  effective_date: '2025-10-15'
+  confidence: high
+  verification: machine_checked
+  replacement_text: '4.12.2 Regulations for Park and Open Space (P) & Valley / Drain
+    Buffer Zones (amended 15-10-2025 by Notification No. UDD 468 MNJ 2025(E)): In
+    case of water bodies, a 30.0 m buffer of "No Development Zone" is to be maintained
+    around the lake as per revenue records. Valley / Storm Water Drain (Nala) Buffer
+    Table: (1) Primary / Raja Kaluve (P-1): 15m buffer from the edge of the drain;
+    (2) Secondary drain (P-2): 10m buffer from the edge of the drain; (3) Tertiary
+    drain (P-3): 5m buffer from the edge of the drain. Drains/nalas leading to tertiary
+    drains shall be maintained as per revenue records and no buffer shall be insisted
+    for such drains.'
+  note: Notification No. UDD 468 MNJ 2025(E) dated 15-10-2025 substitutes the storm
+    water drain / nala buffer table under Regulation 4.12.2 (Primary 15m, Secondary
+    10m, Tertiary 5m).
+- amending_clause: rmp2015-zr-amend-2026-01:cl_11.11.2025__item_a
+  target_clause: rmp2015-zr:chp_3__cl_3.1
+  action: substitute
+  effective_date: '2026-01-05'
+  confidence: high
+  verification: machine_checked
+  replacement_text: '3.1 SETBACKS (substituted 05-01-2026 by Notification No. UDD
+    235 MNJ 2025(E)): Clauses (ii) & (iii) and Table 8 (Setbacks for buildings with
+    total height up to 12.0 m excluding stilt floor): (1) Plot up to 60 sq.m (All
+    uses): Front 0.75 m, Rear 0 m, Left 0 m, Right 0.75 m; (2) Plot above 60 sq.m
+    up to 150 sq.m (Width up to 9.0 m): Front 0.90 m, Rear 0.75 m, Left 0.75 m, Right
+    0.90 m; (Width above 9.0 m): Front 12% of depth (min 1.0 m), Rear 8% (min 0.75
+    m), Left 8% (min 0.75 m), Right 8% (min 1.0 m); (3) Plot above 150 sq.m up to
+    250 sq.m: Front 1.00 m (or 12%), Rear 0.80 m (or 8%), Left 0.80 m (or 8%), Right
+    1.00 m (or 8%); (4) Plot above 250 sq.m up to 4000 sq.m: Front 12% of depth, Rear
+    8% of depth, Left 8% of width, Right 8% of width; (5) Plot above 4000 sq.m: minimum
+    setback of 5.0 m on all sides. Note 1: For plots up to 250 sq.m in area, maximum
+    permissible building height is 15.0 m (including stilt floor) and setbacks in
+    Table 8 apply.'
+  note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 substitutes Regulation
+    3.1 Clauses (ii)–(iii), Table 8 (Setbacks up to 12m/15m height), and inserts Notes
+    1–7 after Table 9.
+- amending_clause: rmp2015-zr-amend-2026-01:cl_11.11.2025__item_e
+  target_clause: rmp2015-zr:chp_3__cl_3.9
+  action: modify
+  effective_date: '2026-01-05'
+  confidence: high
+  verification: machine_checked
+  replacement_text: '3.9 Basement (amended 05-01-2026 by Notification No. UDD 235
+    MNJ 2025(E)): (iii) One basement (single cellar) is permitted for residential
+    buildings on plot area above 200 sq.m abutting road width above 9.0 m solely for
+    parking and household services; (x) Vehicle parking in basement or upper floors
+    may use mechanical/automated multi-level parking systems.'
+  note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 amends Regulation 3.9
+    Basement clauses (iii) and (x).
+- amending_clause: rmp2015-zr-amend-2026-01:cl_11.11.2025__item_a_2
+  target_clause: rmp2015-zr:chp_3__cl_3.10
+  action: modify
+  effective_date: '2026-01-05'
+  confidence: high
+  verification: machine_checked
+  replacement_text: '3.10 Ramps (amended 05-01-2026 by Notification No. UDD 235 MNJ
+    2025(E)): (i) Minimum ramp width 1.5 m for two-wheelers; (iii) For plot area up
+    to 1000 sq.m, a single ramp of 3.5 m width is permitted with 1.0 m setback from
+    plot boundary; (x) For plot area up to 500 sq.m, mechanical/hydraulic car lift
+    is permitted without ramps.'
+  note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 amends Regulation 3.10
+    Ramps clauses (i), (iii), (iv), and (x).
+- amending_clause: rmp2015-zr-amend-2026-01:cl_11.11.2025__item_a_3
+  target_clause: rmp2015-zr:chp_4__cl_4.5
+  action: modify
+  effective_date: '2026-01-05'
+  confidence: high
+  verification: machine_checked
+  replacement_text: '4.5 MUTATION CORRIDORS (Table 15 substituted 05-01-2026 by Notification
+    No. UDD 235 MNJ 2025(E)): (1) Plot size up to 10000 sq.m: Max Ground Coverage
+    55%; FAR 2.75 on roads up to 30m, FAR 3.25 on roads above 30m; (2) Plot size above
+    10000 sq.m: Max Ground Coverage 50%; FAR 3.25 on all roads.'
+  note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 substitutes Table 15
+    under Regulation 4.5 (Mutation Corridors).
+- amending_clause: rmp2015-zr-amend-2026-01:cl_11.11.2025__cl_11
+  target_clause: rmp2015-zr:chp_4__cl_4.7
+  action: modify
+  effective_date: '2026-01-05'
+  confidence: high
+  verification: machine_checked
+  replacement_text: '4.7 INDUSTRIAL I (GENERAL) (Table 16 substituted 05-01-2026 by
+    Notification No. UDD 235 MNJ 2025(E)): (1) Tiny (up to 500 sq.m): 75% coverage,
+    1.50 FAR, min road width up to 9m; (2) Small (above 500 up to 2000 sq.m): 65%
+    coverage, 1.50 FAR, min road above 9m; (3) Medium (above 2000 up to 4000 sq.m):
+    55% coverage, 1.25 FAR, min road above 12m; (4) Large (above 4000 sq.m): 50% coverage,
+    1.25 FAR, min road above 12m.'
+  note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 substitutes Table 16
+    under Regulation 4.7 (Industrial I General).
 maps:
   boundaries:
   - id: corporation

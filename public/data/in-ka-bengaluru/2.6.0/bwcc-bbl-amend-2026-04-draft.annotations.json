@@ -1,0 +1,529 @@
+{
+  "schema_version": "1.3",
+  "doc_id": "bwcc-bbl-amend-2026-04-draft",
+  "jurisdiction": "in-ka-bengaluru",
+  "annotations": [
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_1",
+      "target": {
+        "eid": "part_III",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          521,
+          532
+        ],
+        "span_text": "section 317"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:section 317",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_2",
+      "target": {
+        "eid": "part_III__cl_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          10,
+          22
+        ],
+        "span_text": "commencement"
+      },
+      "kind": "provision_type",
+      "value": "commencement",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_3",
+      "target": {
+        "eid": "part_III__cl_1__item_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          11,
+          26
+        ],
+        "span_text": "come into force"
+      },
+      "kind": "provision_type",
+      "value": "commencement",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_4",
+      "target": {
+        "eid": "part_III__cl_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          154,
+          166
+        ],
+        "span_text": "Scrutiny Fee"
+      },
+      "kind": "provision_type",
+      "value": "fee",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_5",
+      "target": {
+        "eid": "part_III__cl_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          506,
+          514
+        ],
+        "span_text": "Table-2A"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Table-2A",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_6",
+      "target": {
+        "eid": "part_III__cl_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          803,
+          811
+        ],
+        "span_text": "Table-2B"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Table-2B",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_7",
+      "target": {
+        "eid": "part_III__cl_3.8",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          127,
+          132
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_8",
+      "target": {
+        "eid": "part_III__cl_3.8",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          13,
+          24
+        ],
+        "span_text": "Bye-law 3.9"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Bye-law 3.9",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_9",
+      "target": {
+        "eid": "part_III__cl_3.8__cl_3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          34,
+          39
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_10",
+      "target": {
+        "eid": "part_III__cl_3.8__item_i",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          769,
+          778
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_11",
+      "target": {
+        "eid": "part_III__cl_3.8__item_i",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          182,
+          190
+        ],
+        "span_text": "Table-2B"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Table-2B",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_12",
+      "target": {
+        "eid": "part_III__cl_3.8__item_i",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          360,
+          383
+        ],
+        "span_text": "chapter XVII of the Act"
+      },
+      "kind": "cross_reference",
+      "value": "external:Act:chapter_xvii",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_13",
+      "target": {
+        "eid": "part_III__cl_3.8__item_i",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          899,
+          907
+        ],
+        "span_text": "Table-2B"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Table-2B",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_14",
+      "target": {
+        "eid": "part_III__cl_3.8__item_i",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          922,
+          930
+        ],
+        "span_text": "Table-2C"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Table-2C",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_15",
+      "target": {
+        "eid": "part_III__cl_3.8__item_b",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          176,
+          181
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_16",
+      "target": {
+        "eid": "part_III__cl_3.8__item_b",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          199,
+          207
+        ],
+        "span_text": "Table-2C"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Table-2C",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_17",
+      "target": {
+        "eid": "part_III__cl_3.8__note_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          19,
+          24
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_18",
+      "target": {
+        "eid": "part_III__cl_3.8__note_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          42,
+          50
+        ],
+        "span_text": "Table-2C"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Table-2C",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_19",
+      "target": {
+        "eid": "part_III__cl_3.8__cl_3_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          263,
+          268
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_20",
+      "target": {
+        "eid": "part_III__cl_3.8__cl_3_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          45,
+          53
+        ],
+        "span_text": "Table-2B"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Table-2B",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_21",
+      "target": {
+        "eid": "part_III__cl_3.8__cl_3_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          133,
+          141
+        ],
+        "span_text": "Table-2B"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Table-2B",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_22",
+      "target": {
+        "eid": "part_III__cl_3.8__cl_4",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          46,
+          55
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_23",
+      "target": {
+        "eid": "part_III__cl_3.8__cl_4",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          36,
+          44
+        ],
+        "span_text": "Table-2B"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Table-2B",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_24",
+      "target": {
+        "eid": "part_III__cl_3.8__note_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          16,
+          21
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_25",
+      "target": {
+        "eid": "part_III__cl_3.8__note_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1008,
+          1016
+        ],
+        "span_text": "Table-2D"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Table-2D",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_26",
+      "target": {
+        "eid": "part_III__cl_3.8__cl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          72,
+          83
+        ],
+        "span_text": "Section 45B"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Section 45B",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_27",
+      "target": {
+        "eid": "part_III__cl_3.8__cl_2_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          58,
+          63
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_28",
+      "target": {
+        "eid": "part_III__cl_3.8__cl_3_3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          26,
+          31
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "bwcc-bbl-amend-2026-04-draft:ann_29",
+      "target": {
+        "eid": "part_III__cl_3.8__cl_3__tbl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "part_III__cl_3.8__cl_3_3__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    }
+  ]
+}

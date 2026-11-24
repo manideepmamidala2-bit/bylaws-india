@@ -1,0 +1,1537 @@
+{
+  "schema_version": "1.3",
+  "doc_id": "rmp2015-zr-amend-2025-02",
+  "jurisdiction": "in-ka-bengaluru-south",
+  "annotations": [
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_1",
+      "target": {
+        "eid": "prea_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1359,
+          1364
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_2",
+      "target": {
+        "eid": "prea_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          368,
+          429
+        ],
+        "span_text": "Section 13-E of Karnataka Town and Country Planning Act, 1961"
+      },
+      "kind": "cross_reference",
+      "value": "external:Karnataka Town and Country Planning Act, 1961:section_13-e",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_3",
+      "target": {
+        "eid": "prea_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          989,
+          1053
+        ],
+        "span_text": "Section 13E of the Karnataka Town and Country Planning Act, 1961"
+      },
+      "kind": "cross_reference",
+      "value": "external:Karnataka Town and Country Planning Act, 1961:section_13e",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_4",
+      "target": {
+        "eid": "prea_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1188,
+          1198
+        ],
+        "span_text": "Chapter 11"
+      },
+      "kind": "cross_reference",
+      "value": "chp_11",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_5",
+      "target": {
+        "eid": "prea_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1322,
+          1332
+        ],
+        "span_text": "Chapter 10"
+      },
+      "kind": "cross_reference",
+      "value": "chp_11__tbl_No.27__row_10",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_6",
+      "target": {
+        "eid": "prea_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1348,
+          1358
+        ],
+        "span_text": "chapter 11"
+      },
+      "kind": "cross_reference",
+      "value": "chp_11",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_7",
+      "target": {
+        "eid": "chp_11",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          679,
+          700
+        ],
+        "span_text": "Provided further that"
+      },
+      "kind": "provision_type",
+      "value": "exception",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_8",
+      "target": {
+        "eid": "chp_11",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          301,
+          311
+        ],
+        "span_text": "section 15"
+      },
+      "kind": "cross_reference",
+      "value": "chp_11__cl_04.01.2025__cl_15_2",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_9",
+      "target": {
+        "eid": "chp_11",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          400,
+          408
+        ],
+        "span_text": "Clause 2"
+      },
+      "kind": "cross_reference",
+      "value": "chp_11__cl_04.01.2025__cl_4__tbl_No.5.01__row_2",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_10",
+      "target": {
+        "eid": "chp_11",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          832,
+          843
+        ],
+        "span_text": "section 14B"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:section 14B",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_11",
+      "target": {
+        "eid": "chp_11",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2089,
+          2101
+        ],
+        "span_text": "Regulation 2"
+      },
+      "kind": "cross_reference",
+      "value": "chp_11__cl_04.01.2025__cl_4__tbl_No.5.01__row_2",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_12",
+      "target": {
+        "eid": "chp_11",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          4219,
+          4257
+        ],
+        "span_text": "section 45B of the Karnataka Stamp Act"
+      },
+      "kind": "cross_reference",
+      "value": "external:Karnataka Stamp Act:section_45b",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_13",
+      "target": {
+        "eid": "chp_11__cl_10",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          72,
+          77
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_14",
+      "target": {
+        "eid": "chp_11__cl_11",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          65,
+          70
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_15",
+      "target": {
+        "eid": "chp_11__cl_11",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          155,
+          165
+        ],
+        "span_text": "section 15"
+      },
+      "kind": "cross_reference",
+      "value": "chp_11__cl_04.01.2025__cl_15_2",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_16",
+      "target": {
+        "eid": "chp_11__cl_12",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          14,
+          23
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_17",
+      "target": {
+        "eid": "chp_11__cl_13",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          129,
+          138
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_18",
+      "target": {
+        "eid": "chp_11__cl_15",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          187,
+          192
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_19",
+      "target": {
+        "eid": "chp_11__cl_16",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          127,
+          132
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_20",
+      "target": {
+        "eid": "chp_11__cl_17",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          81,
+          86
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_21",
+      "target": {
+        "eid": "chp_11__cl_18",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          114,
+          123
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_22",
+      "target": {
+        "eid": "chp_11__cl_19",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          58,
+          63
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_23",
+      "target": {
+        "eid": "chp_11__cl_20",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          91,
+          96
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_24",
+      "target": {
+        "eid": "chp_11__cl_21",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          368,
+          377
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_25",
+      "target": {
+        "eid": "chp_11__cl_22",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          207,
+          212
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_26",
+      "target": {
+        "eid": "chp_11__cl_23",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          106,
+          111
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_27",
+      "target": {
+        "eid": "chp_11__cl_24",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          85,
+          90
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_28",
+      "target": {
+        "eid": "chp_11__cl_24",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1103,
+          1164
+        ],
+        "span_text": "Section 13-E of Karnataka Town and Country Planning Act, 1961"
+      },
+      "kind": "cross_reference",
+      "value": "external:Karnataka Town and Country Planning Act, 1961:section_13-e",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_29",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          775,
+          780
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_30",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          382,
+          446
+        ],
+        "span_text": "Section 13E of the Karnataka Town and Country Planning Act, 1961"
+      },
+      "kind": "cross_reference",
+      "value": "external:Karnataka Town and Country Planning Act, 1961:section_13e",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_31",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          578,
+          587
+        ],
+        "span_text": "Section 5"
+      },
+      "kind": "cross_reference",
+      "value": "chp_11__cl_04.01.2025__cl_4__tbl_No.5.01__row_5",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_32",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          740,
+          749
+        ],
+        "span_text": "section 4"
+      },
+      "kind": "cross_reference",
+      "value": "chp_11__cl_04.01.2025__cl_4__tbl_No.5.01__row_4",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_33",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          765,
+          774
+        ],
+        "span_text": "section 5"
+      },
+      "kind": "cross_reference",
+      "value": "chp_11__cl_04.01.2025__cl_4__tbl_No.5.01__row_5",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_34",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          801,
+          812
+        ],
+        "span_text": "SECTION \u2013 5"
+      },
+      "kind": "cross_reference",
+      "value": "chp_11__cl_04.01.2025__cl_4__tbl_No.5.01__row_5",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_35",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          248,
+          258
+        ],
+        "span_text": "section 15"
+      },
+      "kind": "cross_reference",
+      "value": "chp_11__cl_04.01.2025__cl_15_2",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_36",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          347,
+          355
+        ],
+        "span_text": "Clause 2"
+      },
+      "kind": "cross_reference",
+      "value": "chp_11__cl_04.01.2025__cl_4__tbl_No.5.01__row_2",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_37",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          260,
+          281
+        ],
+        "span_text": "Provided further that"
+      },
+      "kind": "provision_type",
+      "value": "exception",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_38",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          417,
+          428
+        ],
+        "span_text": "section 14B"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:section 14B",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_39",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__item_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          260,
+          265
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_40",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          99,
+          104
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_41",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_5",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1046,
+          1059
+        ],
+        "span_text": "Provided that"
+      },
+      "kind": "provision_type",
+      "value": "exception",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_42",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_5",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          193,
+          201
+        ],
+        "span_text": "table in"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:table in",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_43",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_5",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          202,
+          214
+        ],
+        "span_text": "Regulation 2"
+      },
+      "kind": "cross_reference",
+      "value": "chp_11__cl_04.01.2025__cl_4__tbl_No.5.01__row_2",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_44",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_6",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          407,
+          416
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_45",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_6",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          562,
+          600
+        ],
+        "span_text": "section 45B of the Karnataka Stamp Act"
+      },
+      "kind": "cross_reference",
+      "value": "external:Karnataka Stamp Act:section_45b",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_46",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_10",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          72,
+          77
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_47",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_11",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          65,
+          70
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_48",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_11",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          155,
+          165
+        ],
+        "span_text": "section 15"
+      },
+      "kind": "cross_reference",
+      "value": "chp_11__cl_04.01.2025__cl_15_2",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_49",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_12",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          14,
+          23
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_50",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_13",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          129,
+          138
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_51",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_15",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          187,
+          192
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_52",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_16",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          127,
+          132
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_53",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_17",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          81,
+          86
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_54",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_18",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          114,
+          123
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_55",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_19",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          58,
+          63
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_56",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_20",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          91,
+          96
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_57",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_21",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          368,
+          377
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_58",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_22",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          207,
+          212
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_59",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_23",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          106,
+          111
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_60",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_24",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          85,
+          90
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_61",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_24",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1164,
+          1225
+        ],
+        "span_text": "Section 13-E of Karnataka Town and Country Planning Act, 1961"
+      },
+      "kind": "cross_reference",
+      "value": "external:Karnataka Town and Country Planning Act, 1961:section_13-e",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_62",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_24",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1786,
+          1850
+        ],
+        "span_text": "Section 13E of the Karnataka Town and Country Planning Act, 1961"
+      },
+      "kind": "cross_reference",
+      "value": "external:Karnataka Town and Country Planning Act, 1961:section_13e",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_63",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_1_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          248,
+          258
+        ],
+        "span_text": "section 15"
+      },
+      "kind": "cross_reference",
+      "value": "chp_11__cl_04.01.2025__cl_15_2",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_64",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_1_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          347,
+          355
+        ],
+        "span_text": "Clause 2"
+      },
+      "kind": "cross_reference",
+      "value": "chp_11__cl_04.01.2025__cl_4__tbl_No.5.01__row_2",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_65",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_2_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          260,
+          281
+        ],
+        "span_text": "Provided further that"
+      },
+      "kind": "provision_type",
+      "value": "exception",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_66",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_2_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          416,
+          427
+        ],
+        "span_text": "section 14B"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:section 14B",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_67",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_2_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1313,
+          1321
+        ],
+        "span_text": "table in"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:table in",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_68",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_3_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          252,
+          265
+        ],
+        "span_text": "Provided that"
+      },
+      "kind": "provision_type",
+      "value": "exception",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_69",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_3_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1286,
+          1297
+        ],
+        "span_text": "section 45B"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:section 45B",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_70",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_10_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          72,
+          77
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_71",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_11_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          65,
+          70
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_72",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_11_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          155,
+          165
+        ],
+        "span_text": "section 15"
+      },
+      "kind": "cross_reference",
+      "value": "chp_11__cl_04.01.2025__cl_15_2",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_73",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_12_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          14,
+          23
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_74",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_13_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          129,
+          138
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_75",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_15_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          187,
+          192
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_76",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_16_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          127,
+          132
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_77",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_17_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          81,
+          86
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_78",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_18_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          114,
+          123
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_79",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_19_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          58,
+          63
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_80",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_20_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          91,
+          96
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_81",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_21_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          368,
+          377
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_82",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_22_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          207,
+          212
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_83",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_23_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          106,
+          111
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_84",
+      "target": {
+        "eid": "chp_11__cl_04.01.2025__cl_24_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          85,
+          90
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2025-02:ann_85",
+      "target": {
+        "eid": "chp_11__tbl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "chp_11__cl_04.01.2025__cl_2_2__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    }
+  ]
+}

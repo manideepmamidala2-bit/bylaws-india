@@ -131,3 +131,56 @@ def test_part2_five_city_corporations_369_wards_and_2026_consolidated_views() ->
     assert len(set(clause_6_texts.values())) == 5, (
         "Each of the 5 City Corporations must have its own distinct consolidated text for Bye-law 6.0(i)"
     )
+
+
+def test_part3_rmp2015_zr_amendment_chain_inserted_chapter_11_and_replaced_tables() -> None:
+    """Part 3 (`09-zoning-regulations-amendment-chain.md`): All 8 English `rmp2015-zr` amending notifications are structured, inserted Chapter 11 (Premium FAR) and replaced setback/FAR/drain-buffer tables are applied to `rmp2015-zr` node versions and `consolidated.json`, and verified in `qa.md`."""
+    rel_dir = _get_latest_south_release_dir()
+    parent_cfg = load_jurisdiction_config("in-ka-bengaluru")
+    parent_rel_dir = REPO_ROOT / "public" / "data" / "in-ka-bengaluru" / str(parent_cfg.release_version)
+
+    for zr_doc_id in (
+        "rmp2015-zr-amend-2009-03",
+        "rmp2015-zr-amend-2015-03",
+        "rmp2015-zr-amend-2018-09",
+        "rmp2015-zr-amend-2019-06",
+        "rmp2015-zr-amend-2025-02",
+        "rmp2015-zr-amend-2025-04",
+        "rmp2015-zr-amend-2025-10",
+        "rmp2015-zr-amend-2026-01",
+    ):
+        cfile = parent_rel_dir / f"{zr_doc_id}.clauses.json"
+        assert cfile.is_file(), f"Missing structured clause tree {cfile}"
+        tree = validate_file(cfile, "clause-tree")
+        assert len(tree["clauses"]) >= 5
+
+    zr_tree = validate_file(rel_dir / "rmp2015-zr.clauses.json", "clause-tree")
+    zr_by_eid = {c["eid"]: c for c in zr_tree["clauses"]}
+
+    # Inserted Chapter 11 (Premium FAR, 2025-04-02)
+    assert "chp_11.0" in zr_by_eid, "Expected inserted Chapter 11 (chp_11.0) in rmp2015-zr"
+    chp11 = zr_by_eid["chp_11.0"]
+    assert chp11["versions"][0]["source_doc"] == "rmp2015-zr-amend-2025-04"
+    assert "PREMIUM F.A.R" in f"{chp11.get('heading') or ''} {chp11.get('text') or ''}"
+
+    # Substituted Setbacks 3.1 / Table 8 (2026-01-05)
+    cl_31 = zr_by_eid["chp_3__cl_3.1"]
+    assert len(cl_31["versions"]) >= 2
+    assert cl_31["versions"][-1]["source_doc"] == "rmp2015-zr-amend-2026-01"
+    assert "0.75 m" in str(cl_31["versions"][-1]["content"])
+
+    # Substituted Drain / Nala Buffer 4.12.2 (2025-10-15)
+    cl_412 = zr_by_eid["chp_4__cl_4.12__cl_4.12.2"]
+    assert len(cl_412["versions"]) >= 2
+    assert cl_412["versions"][-1]["source_doc"] == "rmp2015-zr-amend-2025-10"
+    assert "15m buffer" in str(cl_412["versions"][-1]["content"])
+
+    # Consolidated view records
+    cons = validate_file(rel_dir / "consolidated.json", "consolidated")
+    zr_cons = [r for r in cons["records"] if r["doc_id"] == "rmp2015-zr"]
+    assert len(zr_cons) >= 12
+    qa_text = (REPO_ROOT / "data" / "reports" / "in-ka-bengaluru-south" / "qa.md").read_text(
+        encoding="utf-8"
+    )
+    assert "rmp2015-zr-amend-2026-01" in qa_text
+    assert "rmp2015-zr-amend-2025-04" in qa_text

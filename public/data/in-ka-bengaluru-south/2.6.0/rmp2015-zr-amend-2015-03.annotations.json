@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.3",
+  "doc_id": "rmp2015-zr-amend-2015-03",
+  "jurisdiction": "in-ka-bengaluru-south",
+  "annotations": [
+    {
+      "annotation_id": "rmp2015-zr-amend-2015-03:ann_1",
+      "target": {
+        "eid": "part_IIL__cl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          44,
+          49
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2015-03:ann_2",
+      "target": {
+        "eid": "part_IIL__cl_9",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          249,
+          265
+        ],
+        "span_text": "may be permitted"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2015-03:ann_3",
+      "target": {
+        "eid": "part_IIL__cl_4",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          19,
+          26
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "part_IIL__cl_1_2",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    }
+  ]
+}

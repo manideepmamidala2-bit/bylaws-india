@@ -690,7 +690,7 @@
     "issuing_authority": "GOVERNMENT OF KARNATAKA, Urban Development Department",
     "layer": "planning",
     "role": "amendment",
-    "legal_status": "in_force",
+    "legal_status": "draft",
     "acquisition_status": "acquired",
     "status_evidence": {
       "url": "https://web.archive.org/web/20250307075721id_/https://data.opencity.in/dataset/3877072d-adef-4923-890d-1de96e72faeb/resource/886578b2-3419-40f0-9f51-21b78fefbac7/download/premium-far-gazette.pdf",
@@ -731,6 +731,7 @@
     "doc_type": "notification",
     "notification_number": "No. UDD 78 MNJ 2024 (E)",
     "gazette_reference": "Karnataka Special Gazette Part-IVA Dated: 21.02.2025",
+    "superseded_by_document": "rmp2015-zr-amend-2025-04",
     "text_rights": {
       "mode": "full_text",
       "reason": "Public gazette notification amending RMP 2015 Zoning Regulations"
@@ -1054,6 +1055,180 @@
           "sha256": "a545231e0a3a6298f070951eb0ee556369fdf680d638dc5c37825ed42391d91b",
           "archive_url": "http://web.archive.org/web/20221222112943/https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PD-IndexMap.pdf",
           "archive_failure_reason": null,
+          "fetched_by": "agent"
+        }
+      }
+    ]
+  },
+  {
+    "schema_version": "1.3",
+    "doc_id": "rmp2015-zr-amend-2025-04",
+    "title": "Notification No. UDD 78 MNJ 2024 (E) (02-04-2025) \u2014 Insertion of Chapter 11: Premium F.A.R Granted by Levy of Premium Charges (Final Notification)",
+    "issuing_authority": "Government of Karnataka, Urban Development Secretariat",
+    "layer": "planning",
+    "role": "amendment",
+    "legal_status": "in_force",
+    "acquisition_status": "acquired",
+    "status_evidence": {
+      "url": "https://updates.bbmp.gov.in/public",
+      "quoted_line": "REGULATIONS Insertion of Chapter 11: In the zonal regulations of the approved Revised Master Plan-2015 of the Local Planning Area of Bengaluru in force, after Chapter 10, the following chapter 11 shall be inserted namely:- CHAPTER \u2013 11: PREMIUM F.A.R GRANTED BY LEVY OF PREMIUM CHARGES.",
+      "description": "Final Gazette Notification No. UDD 78 MNJ 2024 (E) dated 02-04-2025 published on updates.bbmp.gov.in/public under GBA Town Planning notifications."
+    },
+    "licence_or_terms": "Section 52(1)(q) Indian Copyright Act, 1957 (public state gazette notification)",
+    "notified_date": "2025-04-02",
+    "effective_from": "2025-04-02",
+    "amends": [
+      "rmp2015-zr"
+    ],
+    "supersedes": [
+      "rmp2015-zr-amend-2025-02"
+    ],
+    "source_url": "https://updates.bbmp.gov.in/v1/api/file/620565994067-Annexure%20E%20Premium%20FAR%20notification%2002-04-2025.pdf",
+    "retrieved_at": "2026-11-23T00:00:00Z",
+    "sha256": "f9f6fdd2806e407c8f6c745f6ff5b554b4bf846ad78c7c49d511c840d20ed3bf",
+    "bytes": 1339849,
+    "page_count": 16,
+    "is_scanned": false,
+    "retrieval": {
+      "fetched_at": "2026-11-23T00:00:00Z",
+      "requested_url": "https://updates.bbmp.gov.in/v1/api/file/620565994067-Annexure%20E%20Premium%20FAR%20notification%2002-04-2025.pdf",
+      "final_url": "https://updates.bbmp.gov.in/v1/api/file/620565994067-Annexure%20E%20Premium%20FAR%20notification%2002-04-2025.pdf",
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "content_length": 1339849,
+      "response_headers": {
+        "etag": null,
+        "last_modified": null,
+        "server": "nginx/1.24.0 (Ubuntu)",
+        "date": "Tue, 24 Nov 2026 19:26:06 GMT"
+      },
+      "sha256": "f9f6fdd2806e407c8f6c745f6ff5b554b4bf846ad78c7c49d511c840d20ed3bf",
+      "archive_url": null,
+      "archive_failure_reason": "Wayback Machine Save Page Now timed out on updates.bbmp.gov.in",
+      "fetched_by": "agent"
+    },
+    "doc_type": "amendment",
+    "notification_number": "No. UDD 78 MNJ 2024 (E)",
+    "gazette_reference": "Karnataka Extra-Ordinary Gazette Part-IVA, dated 02-04-2025",
+    "text_rights": {
+      "mode": "full_text",
+      "reason": "Public Karnataka Gazette notification issued under Section 13-E of the Karnataka Town and Country Planning Act, 1961"
+    },
+    "languages": [
+      "en"
+    ],
+    "official_url": "https://updates.bbmp.gov.in/v1/api/file/620565994067-Annexure%20E%20Premium%20FAR%20notification%2002-04-2025.pdf",
+    "mirror_urls": [
+      "https://updates.bbmp.gov.in/public"
+    ],
+    "copies": [
+      {
+        "url": "https://updates.bbmp.gov.in/v1/api/file/620565994067-Annexure%20E%20Premium%20FAR%20notification%2002-04-2025.pdf",
+        "path": "data/raw/in-ka-bengaluru-east/rmp2015-zr-amend-2025-04.pdf",
+        "sha256": "f9f6fdd2806e407c8f6c745f6ff5b554b4bf846ad78c7c49d511c840d20ed3bf",
+        "retrieved_at": "2026-11-23T00:00:00Z",
+        "retrieval": {
+          "fetched_at": "2026-11-23T00:00:00Z",
+          "requested_url": "https://updates.bbmp.gov.in/v1/api/file/620565994067-Annexure%20E%20Premium%20FAR%20notification%2002-04-2025.pdf",
+          "final_url": "https://updates.bbmp.gov.in/v1/api/file/620565994067-Annexure%20E%20Premium%20FAR%20notification%2002-04-2025.pdf",
+          "http_status": 200,
+          "content_type": "application/pdf",
+          "content_length": 1339849,
+          "response_headers": {
+            "etag": null,
+            "last_modified": null,
+            "server": "nginx/1.24.0 (Ubuntu)",
+            "date": "Tue, 24 Nov 2026 19:26:06 GMT"
+          },
+          "sha256": "f9f6fdd2806e407c8f6c745f6ff5b554b4bf846ad78c7c49d511c840d20ed3bf",
+          "archive_url": null,
+          "archive_failure_reason": "Wayback Machine Save Page Now timed out on updates.bbmp.gov.in",
+          "fetched_by": "agent"
+        }
+      }
+    ]
+  },
+  {
+    "schema_version": "1.3",
+    "doc_id": "rmp2015-zr-amend-2025-10",
+    "title": "Notification No. UDD 468 MNJ 2025(E) (15-10-2025) \u2014 Revised Master Plan 2015 Zonal Regulations Amendment (Storm Water Drain / Nala Buffer Zones)",
+    "issuing_authority": "Government of Karnataka, Urban Development Secretariat",
+    "layer": "planning",
+    "role": "amendment",
+    "legal_status": "in_force",
+    "acquisition_status": "acquired",
+    "status_evidence": {
+      "url": "https://updates.bbmp.gov.in/public",
+      "quoted_line": "Whereas the draft to further amend the zonal regulations of Revised Master Plan-2015 of the Local Planning Area of Bengaluru ... (2) They shall come into force from the date of its final publication in the official Gazette.",
+      "description": "Final Gazette Notification No. UDD 468 MNJ 2025(E) dated 15-10-2025 published on updates.bbmp.gov.in/public under GBA Town Planning notifications."
+    },
+    "licence_or_terms": "Section 52(1)(q) Indian Copyright Act, 1957 (public state gazette notification)",
+    "notified_date": "2025-10-15",
+    "effective_from": "2025-10-15",
+    "amends": [
+      "rmp2015-zr"
+    ],
+    "supersedes": [],
+    "source_url": "https://updates.bbmp.gov.in/v1/api/file/389854408219-Naala%20Buffer%20Notification%202025.pdf",
+    "retrieved_at": "2026-11-23T00:00:00Z",
+    "sha256": "22b74123e5fc190e78938f97b8bb61ea5a91a6a80f4fc9170b35c59c100ec047",
+    "bytes": 1085762,
+    "page_count": 3,
+    "is_scanned": false,
+    "retrieval": {
+      "fetched_at": "2026-11-23T00:00:00Z",
+      "requested_url": "https://updates.bbmp.gov.in/v1/api/file/389854408219-Naala%20Buffer%20Notification%202025.pdf",
+      "final_url": "https://updates.bbmp.gov.in/v1/api/file/389854408219-Naala%20Buffer%20Notification%202025.pdf",
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "content_length": 1085762,
+      "response_headers": {
+        "etag": null,
+        "last_modified": null,
+        "server": "nginx/1.24.0 (Ubuntu)",
+        "date": "Tue, 24 Nov 2026 19:26:07 GMT"
+      },
+      "sha256": "22b74123e5fc190e78938f97b8bb61ea5a91a6a80f4fc9170b35c59c100ec047",
+      "archive_url": null,
+      "archive_failure_reason": "Wayback Machine Save Page Now timed out on updates.bbmp.gov.in",
+      "fetched_by": "agent"
+    },
+    "doc_type": "amendment",
+    "notification_number": "No. UDD 468 MNJ 2025(E)",
+    "gazette_reference": "Karnataka Extra-Ordinary Gazette Part-IVA, dated 15-10-2025",
+    "text_rights": {
+      "mode": "full_text",
+      "reason": "Public Karnataka Gazette notification issued under Section 13-E of the Karnataka Town and Country Planning Act, 1961"
+    },
+    "languages": [
+      "en"
+    ],
+    "official_url": "https://updates.bbmp.gov.in/v1/api/file/389854408219-Naala%20Buffer%20Notification%202025.pdf",
+    "mirror_urls": [
+      "https://updates.bbmp.gov.in/public"
+    ],
+    "copies": [
+      {
+        "url": "https://updates.bbmp.gov.in/v1/api/file/389854408219-Naala%20Buffer%20Notification%202025.pdf",
+        "path": "data/raw/in-ka-bengaluru-east/rmp2015-zr-amend-2025-10.pdf",
+        "sha256": "22b74123e5fc190e78938f97b8bb61ea5a91a6a80f4fc9170b35c59c100ec047",
+        "retrieved_at": "2026-11-23T00:00:00Z",
+        "retrieval": {
+          "fetched_at": "2026-11-23T00:00:00Z",
+          "requested_url": "https://updates.bbmp.gov.in/v1/api/file/389854408219-Naala%20Buffer%20Notification%202025.pdf",
+          "final_url": "https://updates.bbmp.gov.in/v1/api/file/389854408219-Naala%20Buffer%20Notification%202025.pdf",
+          "http_status": 200,
+          "content_type": "application/pdf",
+          "content_length": 1085762,
+          "response_headers": {
+            "etag": null,
+            "last_modified": null,
+            "server": "nginx/1.24.0 (Ubuntu)",
+            "date": "Tue, 24 Nov 2026 19:26:07 GMT"
+          },
+          "sha256": "22b74123e5fc190e78938f97b8bb61ea5a91a6a80f4fc9170b35c59c100ec047",
+          "archive_url": null,
+          "archive_failure_reason": "Wayback Machine Save Page Now timed out on updates.bbmp.gov.in",
           "fetched_by": "agent"
         }
       }

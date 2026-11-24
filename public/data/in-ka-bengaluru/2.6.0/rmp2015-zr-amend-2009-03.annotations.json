@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.3",
+  "doc_id": "rmp2015-zr-amend-2009-03",
+  "jurisdiction": "in-ka-bengaluru",
+  "annotations": [
+    {
+      "annotation_id": "rmp2015-zr-amend-2009-03:ann_1",
+      "target": {
+        "eid": "prea_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1248,
+          1253
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2009-03:ann_2",
+      "target": {
+        "eid": "prea_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          869,
+          881
+        ],
+        "span_text": "Section.13-E"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Section.13-E",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2009-03:ann_3",
+      "target": {
+        "eid": "chp_3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          12,
+          25
+        ],
+        "span_text": "APPLICABLE TO"
+      },
+      "kind": "provision_type",
+      "value": "scope",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2009-03:ann_4",
+      "target": {
+        "eid": "chp_3__cl_3.16__item_ix",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          185,
+          190
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2009-03:ann_5",
+      "target": {
+        "eid": "chp_3__cl_4.10__cl_4.10.2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          442,
+          451
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2009-03:ann_6",
+      "target": {
+        "eid": "chp_3__cl_4.10__cl_4.10.2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          783,
+          791
+        ],
+        "span_text": "Table 19"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Table 19",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2009-03:ann_7",
+      "target": {
+        "eid": "chp_3__cl_4.10__cl_4.10.2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          955,
+          962
+        ],
+        "span_text": "Table.9"
+      },
+      "kind": "cross_reference",
+      "value": "chp_3__cl_4.10__cl_4.10.2__cl_9",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    }
+  ]
+}

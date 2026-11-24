@@ -81,6 +81,8 @@ def run_parse_stage(
                         break
         if not json_out.is_file():
             result = adapter.parse(pdf_path)
+            if not result.blocks and adapter.name == "pypdfium2":
+                result = TesseractOcrAdapter().parse(pdf_path)
             json_out.write_text(
                 json.dumps(result.model_dump(mode="json"), indent=2) + "\n",
                 encoding="utf-8",

@@ -265,7 +265,7 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     await assertNoAxeViolations(docContainer);
     uDoc();
 
-    // Document page for rmp2015-zr still renders "Amendments not yet applied" until PR 09
+    // Document page for rmp2015-zr renders Original / As Amended (Derived) toggle in PR 09 and no "Amendments not yet applied" notice
     const zrDocUi = await DocumentViewerPage({
       params: Promise.resolve({
         id: "in-ka-bengaluru-south",
@@ -274,17 +274,18 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     });
     const { unmount: uZrDoc } = render(zrDocUi);
     expect(
-      screen.getByText(
-        /Amendments not yet applied: the text shown is the original wording, which may have been changed since\./i
-      )
+      screen.queryByText(/Amendments not yet applied/i)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /As Amended \(Derived\)/i })
     ).toBeInTheDocument();
     uZrDoc();
 
-    // Unstructured amendment document renders "Not yet structured"
+    // Unstructured Kannada compilation document renders "Not yet structured"
     const unstructUi = await DocumentViewerPage({
       params: Promise.resolve({
         id: "in-ka-bengaluru-south",
-        doc: "rmp2015-zr-amend-2026-01",
+        doc: "rmp2015-zr-comp-2024-10-kn",
       }),
     });
     const { container: unstructContainer, unmount: uUnstruct } =

@@ -70,7 +70,7 @@
 
 ### Phase 3: Part 3 (`09`) — RMP 2015 Zoning Regulations Amendment Chain
 
-- [ ] T003 Implement Part 3 (`09`): structure all acquired RMP 2015 Zoning Regulations (`rmp2015-zr`) amending instruments (`2009-03`, `2015-03`, `2018-09`, `2019-06`, `2025-02`, `2026-01`), extract and apply Layer 3 `effects` (including inserted Premium FAR / TDR provisions and replaced setback/FAR/parking tables) in date order, record any conflicts without guesswork, verify all applied effects against 150 DPI page images in `qa.md`, update the Zoning Regulations coverage notice and Timeline, publish Release `2.6.0`, and commit + push <!-- R3 -->
+- [x] T003 Implement Part 3 (`09`): structure all acquired RMP 2015 Zoning Regulations (`rmp2015-zr`) amending instruments (`2009-03`, `2015-03`, `2018-09`, `2019-06`, `2025-02`, `2026-01`), extract and apply Layer 3 `effects` (including inserted Premium FAR / TDR provisions and replaced setback/FAR/parking tables) in date order, record any conflicts without guesswork, verify all applied effects against 150 DPI page images in `qa.md`, update the Zoning Regulations coverage notice and Timeline, publish Release `2.6.0`, and commit + push <!-- R3 -->
 
 ### Phase 4: Part 4 (`09b`) — Schema 1.4 Topics, Relations, Conflicts, Precedence, Applicability, Succession & Local Graph
 
