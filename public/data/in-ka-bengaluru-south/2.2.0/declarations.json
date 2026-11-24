@@ -3,7 +3,8 @@
   "jurisdiction": "in-ka-bengaluru-south",
   "not_modelled": [
     "National Building Code of India 2016 (copyrighted by BIS; listed as reference only)",
-    "Airports Authority of India NOCAS colour-coded zoning map (external aviation portal; reference only)"
+    "Airports Authority of India NOCAS colour-coded zoning map (external aviation portal; reference only)",
+    "RMP 2015 Proposed Land Use sheets: 1 of 10 Planning Districts intersecting Bengaluru South (Planning District 2.10 Jayanagar, sheet 2.10 Jayanagar map (b)) has extracted land-use zones in Release 2.2.0; the remaining 20 sheets across the 10 intersecting Planning Districts (2.08 Koramangala, 2.09 Shanti Nagar, 2.10 Jayanagar map (a), 2.11 Banashankari, 3.01 Kengeri, 3.16 Varthur, 3.18 Begur, 3.19 Electronic City, 3.20 Bannerghatta, and 3.21 Anjanapura) are pending in PR 11."
   ],
   "known_gaps": [
     {

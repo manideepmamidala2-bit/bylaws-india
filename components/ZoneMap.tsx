@@ -245,6 +245,10 @@ export function ZoneMap({
 
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapInstanceRef = useRef<maplibregl.Map | null>(null);
+  const onSelectZoneRef = useRef(onSelectZone);
+  useEffect(() => {
+    onSelectZoneRef.current = onSelectZone;
+  }, [onSelectZone]);
 
   const pmtilesUrl =
     process.env.NEXT_PUBLIC_PMTILES_URL?.trim() ||
@@ -483,7 +487,7 @@ export function ZoneMap({
             (ev: maplibregl.MapLayerMouseEvent) => {
               const zCode = ev.features?.[0]?.properties?.zone_code;
               if (typeof zCode === "string" && zCode) {
-                onSelectZone(zCode);
+                onSelectZoneRef.current(zCode);
               }
             }
           );
@@ -506,7 +510,6 @@ export function ZoneMap({
     bounds.minLat,
     bounds.minLon,
     gbaZones,
-    onSelectZone,
     pmtilesUrl,
     wards,
   ]);

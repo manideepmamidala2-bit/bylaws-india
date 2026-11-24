@@ -139,6 +139,21 @@
 | `grid_783000_1428000` | 2251.500 | 2187.260 | 783000.0 | 1428000.0 | 0.0011 | 0.0013 |
 | `grid_784000_1428000` | 2818.108 | 2187.260 | 784000.0 | 1428000.0 | 0.0021 | 0.0027 |
 
+#### Legend Colour Mapping Table (`ZONING CLASSIFICATION`)
+
+| Zone Code | Zone Label | Indexed Palette RGB Swatches | Min Polygon Area (`sq.m`) |
+|---|---|---|---:|
+| `R-MAIN` | Residential (Main) | `(255, 255, 153)`, `(255, 255, 204)`, `(255, 255, 224)`, `(206, 206, 155)` | 2000 |
+| `R-MIX` | Residential (Mixed) | `(255, 224, 38)`, `(255, 239, 146)`, `(206, 190, 97)` | 2000 |
+| `C-BIZ` | Commercial (Business) | `(153, 204, 255)`, `(102, 179, 255)`, `(204, 229, 255)`, `(155, 180, 206)`, `(129, 168, 206)`, `(178, 217, 255)` | 400 |
+| `C-AXES` | Commercial Axes | `(0, 224, 255)`, `(127, 239, 255)`, `(78, 190, 206)` | 400 |
+| `I-GEN` | Industrial | `(163, 102, 179)`, `(209, 178, 217)`, `(160, 129, 168)` | 1500 |
+| `I-HITECH` | High Tech | `(191, 166, 255)`, `(223, 210, 255)`, `(174, 161, 206)` | 1500 |
+| `PSP` | Public and Semi-public | `(224, 0, 0)`, `(239, 127, 127)`, `(190, 78, 78)` | 1500 |
+| `G-PARK` | Green (Parks and Open Spaces) | `(163, 240, 36)`, `(209, 247, 145)`, `(160, 198, 96)` | 1500 |
+| `G-LAKE` | Lake / tank | `(224, 240, 255)`, `(239, 247, 255)` | 400 |
+| `T-TRANS` | Traffic and Transportation | `(102, 102, 102)`, `(129, 129, 129)`, `(127, 127, 127)` | 2000 |
+
 ## 5. Land-Use Zone Distribution (`zones.geojson`)
 
 | Zone Code | Total Clipped Area | Share of Zoned Area |

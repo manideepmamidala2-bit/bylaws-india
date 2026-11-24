@@ -111,3 +111,9 @@ def test_independent_road_and_ward_checks_and_sheet_overlay_published() -> None:
     assert "Leave-One-Out" in ver_text or "LOO RMSE" in ver_text
     assert "OpenStreetMap" in ver_text
     assert "90th" in ver_text or "p90" in ver_text.lower()
+    assert "Legend Colour Mapping Table" in ver_text
+
+    declarations = validate_file(RELEASE_DIR / "declarations.json", "declarations")
+    not_modelled_joined = " ".join(declarations.get("not_modelled") or [])
+    assert "1 of 10 Planning Districts" in not_modelled_joined
+    assert "PR 11" in not_modelled_joined

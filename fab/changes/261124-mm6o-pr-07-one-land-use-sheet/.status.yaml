@@ -7,15 +7,15 @@ issues: []
 progress:
     intake: done
     apply: done
-    review: active
-    hydrate: pending
-    ship: pending
+    review: done
+    hydrate: done
+    ship: active
     review-pr: pending
 plan:
     generated: true
     task_count: 5
     acceptance_count: 10
-    acceptance_completed: 0
+    acceptance_completed: 10
 confidence:
     certain: 3
     confident: 0
@@ -30,21 +30,24 @@ confidence:
         disambiguation: 95.0
 stage_metrics:
     intake: {started_at: "2026-11-24T14:15:10Z", driver: fab-new, iterations: 1, completed_at: "2026-11-24T14:17:38Z"}
-    apply: {started_at: "2026-11-24T14:17:38Z", driver: /fab-fff, iterations: 1, completed_at: "2026-11-24T15:23:16Z"}
-    review: {started_at: "2026-11-24T15:23:16Z", driver: /fab-fff, iterations: 1}
-prs: []
+    apply: {started_at: "2026-11-24T15:30:38Z", driver: /fab-fff, iterations: 2, completed_at: "2026-11-24T15:34:46Z"}
+    review: {started_at: "2026-11-24T15:34:46Z", driver: /fab-fff, iterations: 2, completed_at: "2026-11-24T15:42:08Z"}
+    hydrate: {started_at: "2026-11-24T15:42:08Z", driver: /fab-fff, iterations: 1, completed_at: "2026-11-24T15:42:08Z"}
+    ship: {started_at: "2026-11-24T15:42:08Z", driver: /fab-fff, iterations: 1}
+prs:
+    - https://github.com/manideepmamidala2-bit/bylaws-india/pull/12
 base_branch: main
 change_type_source: explicit
 true_impact:
-    added: 0
-    deleted: 0
-    net: 0
+    added: 500568
+    deleted: 77
+    net: 500491
     tests:
-        added: 0
-        deleted: 0
-        net: 0
-    computed_at: "2026-11-24T15:23:16Z"
-    computed_at_stage: apply
+        added: 131
+        deleted: 8
+        net: 123
+    computed_at: "2026-11-24T15:42:08Z"
+    computed_at_stage: hydrate
 # base_branch: written by /git-branch or /fab-new when the change's branch is created (no placeholder here).
 # true_impact: lazily created on first stage-finish that computes it (no placeholder here).
-last_updated: 2026-11-24T15:23:16Z
+last_updated: 2026-11-24T15:42:08Z

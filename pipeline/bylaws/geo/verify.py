@@ -202,6 +202,25 @@ def write_jurisdiction_map_verification_report(
                 f"| `{gcp['id']}` | {gcp['pdf_x']:.3f} | {gcp['pdf_y']:.3f} | {gcp['utm_e']:.1f} | {gcp['utm_n']:.1f} | {gcp['residual_m']:.4f} | {gcp['loo_error_m']:.4f} |"
             )
         traced_section_lines.append("")
+        if getattr(cfg_r, "legend_palette", None):
+            traced_section_lines.extend(
+                [
+                    "#### Legend Colour Mapping Table (`ZONING CLASSIFICATION`)",
+                    "",
+                    "| Zone Code | Zone Label | Indexed Palette RGB Swatches | Min Polygon Area (`sq.m`) |",
+                    "|---|---|---|---:|",
+                ]
+            )
+            for l_entry in cfg_r.legend_palette:
+                rgb_strs = []
+                for r_trip in l_entry.rgbs:
+                    rv = getattr(r_trip, "root", r_trip)
+                    rgb_strs.append(f"`({rv[0]}, {rv[1]}, {rv[2]})`")
+                min_a_val = float(getattr(l_entry, "min_area_sq_m", None) or 1500.0)
+                traced_section_lines.append(
+                    f"| `{l_entry.zone_code}` | {l_entry.zone_label} | {', '.join(rgb_strs)} | {min_a_val:.0f} |"
+                )
+            traced_section_lines.append("")
 
     lines = [
         f"# Map & Geospatial Verification Report — `{config.id}` ({config.name})",

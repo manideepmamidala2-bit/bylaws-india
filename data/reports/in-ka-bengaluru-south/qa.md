@@ -14,12 +14,15 @@
 - `data/raw/in-ka-bengaluru-south/rmp2015-zr-amend-2026-01.meta.json` against `document.schema.json`: PASS
 - `register:rmp2015-zr-amend-2025-07` (not_found) against `document.schema.json`: PASS
 - `register:bscc-bbl-amend-2026` (not_found) against `document.schema.json`: PASS
+- `data/raw/in-ka-bengaluru-south/rmp2015-pd-index.meta.json` against `document.schema.json`: PASS
+- `data/raw/in-ka-bengaluru-south/rmp2015-plu-pd-210.meta.json` against `document.schema.json`: PASS
 - `data/processed/in-ka-bengaluru-south/documents/bbl-2003.clauses.json` against `clause-tree.schema.json`: PASS
 - `data/processed/in-ka-bengaluru-south/documents/bbl-2003.annotations.json` against `annotations.schema.json`: PASS
 - `data/processed/in-ka-bengaluru-south/documents/rmp2015-zr.clauses.json` against `clause-tree.schema.json`: PASS
 - `data/processed/in-ka-bengaluru-south/documents/rmp2015-zr.annotations.json` against `annotations.schema.json`: PASS
 - `data/processed/in-ka-bengaluru-south/amendments.json` against `amendments.schema.json`: PASS
 - `data/processed/in-ka-bengaluru-south/consolidated.json` against `consolidated.schema.json`: PASS
+- `data/processed/in-ka-bengaluru-south/zones.geojson` against `zones.schema.json`: PASS
 - `data/processed/in-ka-bengaluru-south/geo-layers.json` against `geo-layers.schema.json`: PASS
 - `data/processed/in-ka-bengaluru-south/clause-zone-tags.json` against `clause-zone-tags.schema.json`: PASS
 - `data/processed/in-ka-bengaluru-south/declarations.json` against `declarations.schema.json`: PASS
@@ -40,7 +43,7 @@
 
 ## 3. Declarations Summary
 
-- **Not Modelled**: 2
+- **Not Modelled**: 3
 - **Known Gaps**: 2
 - **Unread Documents**: 1
 - **Unobtainable Documents**: 2

@@ -124,11 +124,16 @@ def extract_planning_district_from_pdf(
 
     page_num = int(getattr(pd_cfg, "page", None) or 1)
     target_code = str(getattr(pd_cfg, "district_code", None) or pd_cfg.id).replace(".", "")
-    scale_m = float(getattr(pd_cfg, "scale_m_per_pt", None) or 113.0006)
+    raw_scale_m = getattr(pd_cfg, "scale_m_per_pt", None)
     raw_anchor_pdf = getattr(pd_cfg, "anchor_pdf_pt", None)
     raw_anchor_utm = getattr(pd_cfg, "anchor_utm_pt", None)
-    anchor_pdf = list(getattr(raw_anchor_pdf, "root", raw_anchor_pdf) or [229.518, 319.426])
-    anchor_utm = list(getattr(raw_anchor_utm, "root", raw_anchor_utm) or [779275.0, 1434401.8])
+    if raw_scale_m is None or raw_anchor_pdf is None or raw_anchor_utm is None:
+        raise click.ClickException(
+            f"Planning district PDF config '{pd_cfg.id}' must specify scale_m_per_pt, anchor_pdf_pt, and anchor_utm_pt."
+        )
+    scale_m = float(raw_scale_m)
+    anchor_pdf = list(getattr(raw_anchor_pdf, "root", raw_anchor_pdf))
+    anchor_utm = list(getattr(raw_anchor_utm, "root", raw_anchor_utm))
     e0 = float(anchor_utm[0]) - float(anchor_pdf[0]) * scale_m
     n0 = float(anchor_utm[1]) + float(anchor_pdf[1]) * scale_m
 

@@ -63,20 +63,20 @@
 ## Acceptance
 
 ### Functional Completeness
-- [ ] A-001 R1: `docs/map.md` lists every RMP 2015 planning district sheet intersecting the Bengaluru South corporation boundary (with district numbers and names verified from the maps, noting PD 204), records the candidate sheet evaluation (vector paths vs. raster, printed UTM 43N grid readability, legend readability, corporation overlap), and explains why the chosen sheet was selected.
-- [ ] A-002 R1: Both the RMP 2015 index/planning-district source and the chosen RMP 2015 Proposed Land Use PDF sheet are acquired with full Rule R15 `retrieval` records (`fetched_at`, `requested_url`, `final_url`, `http_status: 200`, `content_type`, `content_length`, `response_headers`, 64-hex `sha256`, `archive_url` or `archive_failure_reason`, `fetched_by`), and `bylaws check-provenance` exits `0`.
-- [ ] A-003 R2: `pipeline/bylaws/geo/georef.py` fits a PDF-to-UTM-43N (`EPSG:32643`) transform from the sheet's printed grid intersections and computes per-point residuals, leave-one-out RMSE, overall RMSE in metres (`≤ 10 m` or declared shortfall), and maximum residual.
-- [ ] A-004 R2: `public/data/in-ka-bengaluru-south/2.2.0/zones.geojson` and `planning-districts.geojson` validate against Schema 1.3; every zone polygon is clipped to `boundary.geojson` and carries `zone_code` and `zone_label` from the sheet's own legend, `planning_district`, `sheet`, `extraction_method`, `georef_run` (with measured `rmse_m`), `derived: true`, and `verification: "machine_checked"`.
-- [ ] A-005 R3: `data/reports/in-ka-bengaluru-south/map-verification.md` records all grid intersection residuals, LOO RMSE, maximum residual, independent OpenStreetMap road offset metrics (median and 90th-percentile offset in metres), and ward boundary comparison against `wards.geojson`.
-- [ ] A-006 R4: `components/ZoneMap.tsx` and `components/ReviewPanel.tsx` render the georeferenced RMP 2015 sheet image (`public/data/in-ka-bengaluru-south/sheets/<sheet_id>.png`) as a MapLibre `"image"` source overlay with a toggle on the Map page (`/j/in-ka-bengaluru-south`) and an interactive opacity slider on the Review page (`/j/in-ka-bengaluru-south/review`), alongside the plain-words accuracy notice and updated `declarations.json` for Release `2.2.0`.
+- [x] A-001 R1: `docs/map.md` lists every RMP 2015 planning district sheet intersecting the Bengaluru South corporation boundary (with district numbers and names verified from the maps, noting PD 204), records the candidate sheet evaluation (vector paths vs. raster, printed UTM 43N grid readability, legend readability, corporation overlap), and explains why the chosen sheet was selected.
+- [x] A-002 R1: Both the RMP 2015 index/planning-district source and the chosen RMP 2015 Proposed Land Use PDF sheet are acquired with full Rule R15 `retrieval` records (`fetched_at`, `requested_url`, `final_url`, `http_status: 200`, `content_type`, `content_length`, `response_headers`, 64-hex `sha256`, `archive_url` or `archive_failure_reason`, `fetched_by`), and `bylaws check-provenance` exits `0`.
+- [x] A-003 R2: `pipeline/bylaws/geo/georef.py` fits a PDF-to-UTM-43N (`EPSG:32643`) transform from the sheet's printed grid intersections and computes per-point residuals, leave-one-out RMSE, overall RMSE in metres (`≤ 10 m` or declared shortfall), and maximum residual.
+- [x] A-004 R2: `public/data/in-ka-bengaluru-south/2.2.0/zones.geojson` and `planning-districts.geojson` validate against Schema 1.3; every zone polygon is clipped to `boundary.geojson` and carries `zone_code` and `zone_label` from the sheet's own legend, `planning_district`, `sheet`, `extraction_method`, `georef_run` (with measured `rmse_m`), `derived: true`, and `verification: "machine_checked"`.
+- [x] A-005 R3: `data/reports/in-ka-bengaluru-south/map-verification.md` records all grid intersection residuals, LOO RMSE, maximum residual, independent OpenStreetMap road offset metrics (median and 90th-percentile offset in metres), and ward boundary comparison against `wards.geojson`.
+- [x] A-006 R4: `components/ZoneMap.tsx` and `components/ReviewPanel.tsx` render the georeferenced RMP 2015 sheet image (`public/data/in-ka-bengaluru-south/sheets/<sheet_id>.png`) as a MapLibre `"image"` source overlay with a toggle on the Map page (`/j/in-ka-bengaluru-south`) and an interactive opacity slider on the Review page (`/j/in-ka-bengaluru-south/review`), alongside the plain-words accuracy notice and updated `declarations.json` for Release `2.2.0`.
 
 ### Scenario Coverage
-- [ ] A-007 R2: `pipeline/tests/test_one_land_use_sheet_pr07.py` verifies the intersecting planning districts list in `docs/map.md`, R15 `retrieval` records for the index and sheet PDF, printed-grid georeferencing RMSE and LOO RMSE, legend-matched `zones.geojson` polygons, independent road/ward check metrics in `map-verification.md`, and published sheet overlay assets.
-- [ ] A-008 R4: `__tests__/routes-and-axe.test.tsx` verifies that `/j/in-ka-bengaluru-south` and `/j/in-ka-bengaluru-south/review` render the extracted zones, sheet overlay toggle/opacity slider, and plain-words accuracy notice, with zero `axe-core` WCAG AA violations.
+- [x] A-007 R2: `pipeline/tests/test_one_land_use_sheet_pr07.py` verifies the intersecting planning districts list in `docs/map.md`, R15 `retrieval` records for the index and sheet PDF, printed-grid georeferencing RMSE and LOO RMSE, legend-matched `zones.geojson` polygons, independent road/ward check metrics in `map-verification.md`, and published sheet overlay assets.
+- [x] A-008 R4: `__tests__/routes-and-axe.test.tsx` verifies that `/j/in-ka-bengaluru-south` and `/j/in-ka-bengaluru-south/review` render the extracted zones, sheet overlay toggle/opacity slider, and plain-words accuracy notice, with zero `axe-core` WCAG AA violations.
 
 ### Code Quality
-- [ ] A-009 Pattern consistency: Zero jurisdiction-specific constants appear in `pipeline/bylaws/`, `app/`, `components/`, or `lib/` (`pipeline/tests/test_r1_no_hardcoding.py` passes).
-- [ ] A-010 No unnecessary duplication: All Python and npm dependencies remain strictly permissive (`pipeline/tests/test_r4_licences.py` passes) and `npm run build` succeeds.
+- [x] A-009 Pattern consistency: Zero jurisdiction-specific constants appear in `pipeline/bylaws/`, `app/`, `components/`, or `lib/` (`pipeline/tests/test_r1_no_hardcoding.py` passes).
+- [x] A-010 No unnecessary duplication: All Python and npm dependencies remain strictly permissive (`pipeline/tests/test_r4_licences.py` passes) and `npm run build` succeeds.
 
 ## Assumptions
 
@@ -87,3 +87,8 @@
 | 3 | Certain | Render the georeferenced sheet overlay using a MapLibre `"image"` source with 4 WGS 84 corner coordinates and interactive opacity slider on both the Map and Review pages | Explicitly specified by `07-one-land-use-sheet.md` §5 (`MapLibre image source placed by the fitted transform ... with an opacity slider on the Review page and a toggle on the Map page`) | S:95 R:90 A:95 D:95 |
 
 3 assumptions (3 certain, 0 confident, 0 tentative).
+
+## Deletion Candidates
+
+- `components/ZoneMap.tsx:135` (`showOverlaysLayer` state) — Toggled by checkbox at `components/ZoneMap.tsx:730-736`, but never wired to any MapLibre source or layer.
+- `pipeline/bylaws/geo/__init__.py:263` (`"master-plan-zones"` legacy layer ID) — Unifying imported and traced zoning layer IDs on `"landuse_zones"` would remove the dual-ID fallback in `components/ZoneMap.tsx:214`.
