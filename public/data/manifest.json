@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.2",
+  "schema_version": "1.3",
   "jurisdictions": [
     {
       "id": "in-ka-bengaluru-south",
@@ -60,6 +60,10 @@
             "clauses": [
               "/data/xx-test-fixture/0.1.0/fixture-base-2020.clauses.json",
               "/data/xx-test-fixture/0.1.0/fixture-amend-2024.clauses.json"
+            ],
+            "annotations": [
+              "/data/xx-test-fixture/0.1.0/fixture-base-2020.annotations.json",
+              "/data/xx-test-fixture/0.1.0/fixture-amend-2024.annotations.json"
             ],
             "amendments": "/data/xx-test-fixture/0.1.0/amendments.json",
             "zones": "/data/xx-test-fixture/0.1.0/zones.geojson",

@@ -1,0 +1,205 @@
+{
+  "schema_version": "1.3",
+  "doc_id": "fixture-base-2020",
+  "jurisdiction": "xx-test-fixture",
+  "annotations": [
+    {
+      "annotation_id": "fixture-base-2020:ann_1",
+      "target": {
+        "eid": "chp_I__cl_1.1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          18,
+          26
+        ],
+        "span_text": "apply to"
+      },
+      "kind": "provision_type",
+      "value": "scope",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_2",
+      "target": {
+        "eid": "chp_I__def_1.2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          25,
+          30
+        ],
+        "span_text": "means"
+      },
+      "kind": "provision_type",
+      "value": "definition",
+      "method": "rule",
+      "confidence": 1.0,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_3",
+      "target": {
+        "eid": "chp_II__cl_2.1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          44,
+          49
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_4",
+      "target": {
+        "eid": "chp_II__cl_2.1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          82,
+          92
+        ],
+        "span_text": "clause 1.1"
+      },
+      "kind": "cross_reference",
+      "value": "chp_I__cl_1.1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_5",
+      "target": {
+        "eid": "chp_II__cl_2.1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          97,
+          106
+        ],
+        "span_text": "Table 2.1"
+      },
+      "kind": "cross_reference",
+      "value": "chp_II__cl_2.1__tbl_2.1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_6",
+      "target": {
+        "eid": "chp_II__cl_2.1__prov_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          13
+        ],
+        "span_text": "Provided that"
+      },
+      "kind": "provision_type",
+      "value": "exception",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_7",
+      "target": {
+        "eid": "chp_II__cl_2.2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          23
+        ],
+        "span_text": "No residential building"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_8",
+      "target": {
+        "eid": "chp_II__cl_2.2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          105,
+          115
+        ],
+        "span_text": "clause 2.1"
+      },
+      "kind": "cross_reference",
+      "value": "chp_II__cl_2.1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_9",
+      "target": {
+        "eid": "chp_II__cl_2.2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          120,
+          136
+        ],
+        "span_text": "Floor Area Ratio"
+      },
+      "kind": "defined_term_use",
+      "value": "chp_I__def_1.2",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_10",
+      "target": {
+        "eid": "chp_II__cl_2.3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          33,
+          42
+        ],
+        "span_text": "permitted"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_11",
+      "target": {
+        "eid": "chp_II__cl_2.1__tbl_2.1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          9
+        ],
+        "span_text": "Table 2.1"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Table 2.1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    }
+  ]
+}

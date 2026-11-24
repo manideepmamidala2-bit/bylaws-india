@@ -1,6 +1,6 @@
 {
   "type": "FeatureCollection",
-  "schema_version": "1.2",
+  "schema_version": "1.3",
   "features": [
     {
       "type": "Feature",
@@ -52,58 +52,6 @@
         "verification": "machine_checked",
         "verified_by": null,
         "notes": null
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              10.01,
-              10.001
-            ],
-            [
-              10.019,
-              10.001
-            ],
-            [
-              10.019,
-              10.019
-            ],
-            [
-              10.01,
-              10.019
-            ],
-            [
-              10.01,
-              10.001
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "zone_id": "fixture-pd-01:z0002",
-        "record_version": 1,
-        "record_id": "fixture-pd-01:z0002@v1",
-        "record_supersedes": null,
-        "record_superseded_by": null,
-        "record_change_reason": null,
-        "supersedes": null,
-        "superseded_by": null,
-        "zone_code": "Z2",
-        "zone_label": "Mixed Use",
-        "planning_district": "PD-01",
-        "sheet": "Sheet-1",
-        "source_map": "fixture-pd-01",
-        "georef_run": "imported-v1",
-        "extraction_method": "imported",
-        "source_attribution": "Synthetic Planning Board Open GIS Portal (CC BY 4.0)",
-        "area_sq_m": 15800.0,
-        "verification": "human_verified",
-        "verified_by": null,
-        "notes": "Verified against synthetic atlas."
       }
     }
   ]

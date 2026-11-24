@@ -9,7 +9,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "1.2"
+      "const": "1.3"
     },
     "jurisdiction": {
       "type": "string",

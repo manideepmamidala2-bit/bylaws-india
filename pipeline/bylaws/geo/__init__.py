@@ -110,7 +110,7 @@ def run_geo_pipeline(config: JurisdictionConfig, *, repo_root: Path | None = Non
 
     zones_payload: dict[str, Any] = {
         "type": "FeatureCollection",
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "features": all_features,
     }
     zones_path = processed_dir / "zones.geojson"
@@ -244,7 +244,7 @@ def run_geo_pipeline(config: JurisdictionConfig, *, repo_root: Path | None = Non
         )
 
     geo_layers_payload: dict[str, Any] = {
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "jurisdiction": config.id,
         "layers": layers,
     }

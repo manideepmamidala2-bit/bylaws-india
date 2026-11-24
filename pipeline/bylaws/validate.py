@@ -1,4 +1,4 @@
-"""Stage 8.7: Schema v1.2 validation, 9-point QA suite, declarations.json, and qa.md report."""
+"""Stage 8.7: Schema v1.3 validation, 9-point QA suite, declarations.json, and qa.md report."""
 
 from __future__ import annotations
 
@@ -8,6 +8,7 @@ from typing import Any
 
 import click
 
+from bylaws.annotations import AnnotationSpanError, validate_annotations_against_tree
 from bylaws.config import JurisdictionConfig
 from bylaws.root import resolve_repo_root
 from bylaws.schema_validator import (
@@ -148,6 +149,17 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
             )
         except SchemaValidationError as exc:
             raise click.ClickException(str(exc)) from exc
+
+        ann_path = docs_dir / f"{doc.id}.annotations.json"
+        if ann_path.is_file():
+            try:
+                ann_data = validate_file(ann_path, "annotations")
+                validate_annotations_against_tree(ann_data, clause_trees[doc.id])
+                schema_checks_run.append(
+                    f"`{ann_path.relative_to(root)}` against `annotations.schema.json`: PASS"
+                )
+            except (SchemaValidationError, AnnotationSpanError) as exc:
+                raise click.ClickException(str(exc)) from exc
 
     amendments_path = processed_dir / "amendments.json"
     if not amendments_path.is_file():
@@ -331,7 +343,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
 
     # Build and validate declarations.json
     declarations_payload: dict[str, Any] = {
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "jurisdiction": config.id,
         "not_modelled": list(config.not_modelled or []),
         "known_gaps": known_gaps,
@@ -380,7 +392,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
     qa_lines = [
         f"# Quality Assurance Report — `{config.id}` ({config.name})",
         "",
-        "## 1. Schema v1.2 Validation",
+        "## 1. Schema v1.3 Validation",
         "",
         *[f"- {line}" for line in schema_checks_run],
         "",

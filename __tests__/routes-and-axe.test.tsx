@@ -289,6 +289,25 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
       }),
     });
     const { container: cDoc, unmount: uDoc } = render(docUi);
+
+    // Layer 1 node types: definition, proviso, explanation, hierarchical table + footnote
+    expect(screen.getByText(/Defines: "Floor Area Ratio"/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/proviso/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/explanation/i).length).toBeGreaterThan(0);
+    expect(
+      screen.getByText(/Corner plots in Z1 require an additional 0\.5 m splay/i)
+    ).toBeInTheDocument();
+
+    // Layer 2 annotations: cross-reference and defined-term use links
+    expect(
+      screen.getAllByText(/Ref: clause 1\.1 → chp_I__cl_1\.1/i).length
+    ).toBeGreaterThan(0);
+    expect(
+      screen.getByText(/Term: Floor Area Ratio → chp_I__def_1\.2/i)
+    ).toBeInTheDocument();
+
+    // Layer 3 versions: Original vs As Amended (Derived)
+    expect(screen.getByText(/11\.5 metres/i)).toBeInTheDocument();
     const derivedBtn = screen.getByRole("button", {
       name: /As Amended \(Derived\)/i,
     });
@@ -296,6 +315,13 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     expect(
       screen.getAllByText(/Derived by this project, not an official publication/i)
         .length
+    ).toBeGreaterThan(0);
+    expect(screen.getAllByText(/15\.0 metres/i).length).toBeGreaterThan(0);
+    expect(
+      screen.getAllByText(/Solar Rooftop Structures/i).length
+    ).toBeGreaterThan(0);
+    expect(
+      screen.getAllByText(/Omitted by fixture-amend-2024/i).length
     ).toBeGreaterThan(0);
     assertCleanPublicCopy(cDoc.textContent ?? "", "Fixture Document");
     await assertNoAxeViolations(cDoc);
@@ -317,7 +343,7 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
 
     // Planted non-test manifest entry referencing fixture documents.json (which has local file path in source_url)
     const plantedManifest: ReleaseManifest = {
-      schema_version: "1.2",
+      schema_version: "1.3",
       jurisdictions: [
         {
           id: "in-ka-planted",

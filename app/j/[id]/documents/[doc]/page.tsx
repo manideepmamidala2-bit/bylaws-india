@@ -40,6 +40,7 @@ export default async function DocumentViewerPage({
     jurisdiction,
     release,
     documents,
+    annotationsByDocId,
     clauses,
     amendments,
     consolidated,
@@ -264,11 +265,18 @@ export default async function DocumentViewerPage({
         ) : (
           <ClauseTree
             clauses={docClauses}
+            annotations={annotationsByDocId[doc] ?? []}
+            amendmentEffects={(amendments.effects ?? []).filter(
+              (e) => e.target_doc === doc
+            )}
             consolidatedRecords={docConsolidated}
             unconsolidatedRecords={docUnconsolidated}
             amendmentLinks={amendments.links}
             allClausesLookup={allClausesLookup}
-            allowConsolidatedToggle={docConsolidated.length > 0}
+            allowConsolidatedToggle={
+              docConsolidated.length > 0 ||
+              (amendments.effects ?? []).some((e) => e.target_doc === doc)
+            }
           />
         )}
       </main>

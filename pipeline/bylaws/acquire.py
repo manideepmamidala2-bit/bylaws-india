@@ -192,7 +192,7 @@ def _acquire_single_document(
         evidence_payload["description"] = doc.status_evidence.description
 
     meta_payload: dict[str, Any] = {
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "doc_id": doc.id,
         "title": doc.title,
         "issuing_authority": doc.issuing_authority,

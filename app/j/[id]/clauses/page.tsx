@@ -30,6 +30,7 @@ export default async function ClausesPage({ params }: ClausesPageProps) {
     jurisdiction,
     release,
     documents,
+    annotationsByDocId,
     clauses,
     amendments,
     consolidated,
@@ -140,12 +141,15 @@ export default async function ClausesPage({ params }: ClausesPageProps) {
 
         <ClauseTree
           clauses={clauses}
+          annotations={Object.values(annotationsByDocId).flat()}
+          amendmentEffects={amendments.effects ?? []}
           consolidatedRecords={consolidated?.records ?? []}
           unconsolidatedRecords={consolidated?.unconsolidated ?? []}
           amendmentLinks={amendments.links}
           allClausesLookup={allClausesLookup}
           allowConsolidatedToggle={Boolean(
-            consolidated && consolidated.records.length > 0
+            (consolidated && consolidated.records.length > 0) ||
+              (amendments.effects && amendments.effects.length > 0)
           )}
         />
       </main>

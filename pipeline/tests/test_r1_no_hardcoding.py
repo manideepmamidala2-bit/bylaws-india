@@ -27,6 +27,7 @@ SENTINEL_TERMS: tuple[str, ...] = (
 GENERIC_CONFIG_VALUES: frozenset[str] = frozenset(
     {
         "1.2",
+        "1.3",
         "in",
         "ka",
         "xx",

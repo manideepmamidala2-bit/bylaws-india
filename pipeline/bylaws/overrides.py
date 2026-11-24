@@ -10,6 +10,7 @@ from typing import Any
 
 import click
 
+from bylaws.annotations import validate_annotations_against_tree
 from bylaws.config import JurisdictionConfig
 from bylaws.root import resolve_repo_root
 from bylaws.schema_validator import (
@@ -38,7 +39,11 @@ def _find_active_clause(
         clauses = tree.get("clauses", [])
         for clause in clauses:
             if (
-                clause.get("clause_id") == clause_id
+                (
+                    clause.get("clause_id") == clause_id
+                    or clause.get("eid") == clause_id
+                    or f"{doc_id}:{clause.get('eid')}" == clause_id
+                )
                 and clause.get("superseded_by") is None
                 and clause.get("record_superseded_by") is None
             ):
@@ -65,6 +70,19 @@ def _find_active_zone_feature(
     )
 
 
+def _find_annotation_entry(
+    annotation_docs: dict[str, dict[str, Any]],
+    annotation_id: str,
+) -> tuple[str, dict[str, Any]]:
+    for doc_id, ann_doc in annotation_docs.items():
+        for ann in ann_doc.get("annotations", []):
+            if ann.get("annotation_id") == annotation_id:
+                return doc_id, ann
+    raise click.ClickException(
+        f"Override target annotation_id '{annotation_id}' not found in any document annotations."
+    )
+
+
 def _apply_clause_mutation(
     clauses_list: list[dict[str, Any]],
     active_clause: dict[str, Any],
@@ -75,7 +93,17 @@ def _apply_clause_mutation(
 
     Returns True if a mutation was applied, or False if `updates` was a no-op.
     """
-    if all(active_clause.get(k) == v for k, v in updates.items()):
+    sync_updates = dict(updates)
+    if "title" in sync_updates and "heading" not in sync_updates:
+        sync_updates["heading"] = sync_updates["title"]
+    elif "heading" in sync_updates and "title" not in sync_updates:
+        sync_updates["title"] = sync_updates["heading"]
+    if "text" in sync_updates and "content" not in sync_updates and not active_clause.get("children"):
+        sync_updates["content"] = sync_updates["text"]
+    elif "content" in sync_updates and "text" not in sync_updates and not active_clause.get("children"):
+        sync_updates["text"] = sync_updates["content"]
+
+    if all(active_clause.get(k) == v for k, v in sync_updates.items()):
         return False
 
     clause_id = str(active_clause["clause_id"])
@@ -92,12 +120,22 @@ def _apply_clause_mutation(
         new_clause["superseded_by"] = None
         new_clause["record_superseded_by"] = None
         new_clause["record_change_reason"] = reason
-        for key, val in updates.items():
+        for key, val in sync_updates.items():
             new_clause[key] = val
+        if new_clause.get("versions"):
+            if "heading" in sync_updates:
+                new_clause["versions"][0]["heading"] = sync_updates["heading"]
+            if "content" in sync_updates:
+                new_clause["versions"][0]["content"] = sync_updates["content"]
         clauses_list.append(new_clause)
     else:
-        for key, val in updates.items():
+        for key, val in sync_updates.items():
             active_clause[key] = val
+        if active_clause.get("versions"):
+            if "heading" in sync_updates:
+                active_clause["versions"][0]["heading"] = sync_updates["heading"]
+            if "content" in sync_updates:
+                active_clause["versions"][0]["content"] = sync_updates["content"]
     return True
 
 
@@ -153,10 +191,14 @@ def run_apply_overrides(config: JurisdictionConfig, *, repo_root: Path | None = 
     )
 
     clause_trees: dict[str, dict[str, Any]] = {}
+    annotation_docs: dict[str, dict[str, Any]] = {}
     if docs_dir.is_dir():
         for clause_file in sorted(docs_dir.glob("*.clauses.json")):
             tree_data: dict[str, Any] = json.loads(clause_file.read_text(encoding="utf-8"))
             clause_trees[str(tree_data["doc_id"])] = tree_data
+        for ann_file in sorted(docs_dir.glob("*.annotations.json")):
+            ann_data: dict[str, Any] = json.loads(ann_file.read_text(encoding="utf-8"))
+            annotation_docs[str(ann_data["doc_id"])] = ann_data
 
     zones_payload: dict[str, Any] | None = None
     if zones_path.is_file():
@@ -204,6 +246,7 @@ def run_apply_overrides(config: JurisdictionConfig, *, repo_root: Path | None = 
                 zones_already_converged.add(zid)
 
     modified_docs: set[str] = set()
+    modified_ann_docs: set[str] = set()
     zones_modified = False
     applied_count = 0
     zone_tag_entries: list[dict[str, Any]] = []
@@ -318,18 +361,37 @@ def run_apply_overrides(config: JurisdictionConfig, *, repo_root: Path | None = 
                 zones_modified = True
                 applied_count += 1
 
+        # 5. Apply annotation_fixes in YAML order (idempotent)
+        for afix in override_data.get("annotation_fixes") or []:
+            ann_id = str(afix["annotation_id"])
+            field_name = str(afix["field"])
+            field_val = afix["value"]
+            doc_id, ann_entry = _find_annotation_entry(annotation_docs, ann_id)
+            if ann_entry.get(field_name) != field_val:
+                ann_entry[field_name] = field_val
+                modified_ann_docs.add(doc_id)
+                applied_count += 1
+
     for doc_id in sorted(modified_docs):
         tree_payload = clause_trees[doc_id]
         out_path = docs_dir / f"{doc_id}.clauses.json"
         validate_payload(tree_payload, "clause-tree", source=str(out_path))
         out_path.write_text(json.dumps(tree_payload, indent=2) + "\n", encoding="utf-8")
 
+    for doc_id in sorted(modified_ann_docs):
+        ann_payload = annotation_docs[doc_id]
+        ann_out_path = docs_dir / f"{doc_id}.annotations.json"
+        validate_payload(ann_payload, "annotations", source=str(ann_out_path))
+        if doc_id in clause_trees:
+            validate_annotations_against_tree(ann_payload, clause_trees[doc_id])
+        ann_out_path.write_text(json.dumps(ann_payload, indent=2) + "\n", encoding="utf-8")
+
     if zones_modified and zones_payload is not None:
         validate_payload(zones_payload, "zones", source=str(zones_path))
         zones_path.write_text(json.dumps(zones_payload, indent=2) + "\n", encoding="utf-8")
 
     tags_payload: dict[str, Any] = {
-        "schema_version": "1.2",
+        "schema_version": "1.3",
         "jurisdiction": config.id,
         "tags": zone_tag_entries,
     }

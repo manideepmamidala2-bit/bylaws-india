@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.2",
+  "schema_version": "1.3",
   "doc_id": "fixture-base-2020",
   "jurisdiction": "xx-test-fixture",
   "legal_status": "in_force",
@@ -11,9 +11,55 @@
   },
   "clauses": [
     {
-      "clause_id": "fixture-base-2020:1",
+      "eid": "chp_I",
+      "native_number": "CHAPTER I",
+      "type": "chapter",
+      "heading": "General Provisions",
+      "intro": null,
+      "content": "General Provisions",
+      "wrap_up": null,
+      "children": [
+        "chp_I__cl_1.1",
+        "chp_I__def_1.2"
+      ],
+      "parent_eid": null,
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2020-02-01",
+          "valid_to": null,
+          "heading": "General Provisions",
+          "intro": null,
+          "content": "General Provisions",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "fixture-base-2020",
+          "source_eid": "chp_I",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "fixture-base-2020",
+              "page": 1,
+              "bbox": [
+                0.0533,
+                0.0763,
+                0.3563,
+                0.087
+              ],
+              "text_excerpt": "CHAPTER I: General Provisions"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "fixture-base-2020:CHAPTER I",
       "record_version": 1,
-      "record_id": "fixture-base-2020:1@v1",
+      "record_id": "fixture-base-2020:CHAPTER I@v1",
       "record_supersedes": null,
       "record_superseded_by": null,
       "record_change_reason": null,
@@ -21,7 +67,7 @@
       "superseded_by": null,
       "legal_status": "in_force",
       "effective_from": "2020-02-01",
-      "number": "1",
+      "number": "CHAPTER I",
       "title": "General Provisions",
       "level": 1,
       "parent_id": null,
@@ -34,12 +80,12 @@
           "doc_id": "fixture-base-2020",
           "page": 1,
           "bbox": [
-            0.0538,
-            0.0849,
-            0.2578,
-            0.0954
+            0.0533,
+            0.0763,
+            0.3563,
+            0.087
           ],
-          "text_excerpt": "1. General Provisions"
+          "text_excerpt": "CHAPTER I: General Provisions"
         }
       ],
       "cross_references": [],
@@ -49,6 +95,52 @@
       "verified_by": null
     },
     {
+      "eid": "chp_I__cl_1.1",
+      "native_number": "1.1",
+      "type": "clause",
+      "heading": "Short Title and Commencement",
+      "intro": "These regulations apply to all residential plots within the synthetic planning area:",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "chp_I__cl_1.1__item_a",
+        "chp_I__cl_1.1__item_b"
+      ],
+      "parent_eid": "chp_I",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2020-02-01",
+          "valid_to": null,
+          "heading": "Short Title and Commencement",
+          "intro": "These regulations apply to all residential plots within the synthetic planning area:",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "fixture-base-2020",
+          "source_eid": "chp_I__cl_1.1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "fixture-base-2020",
+              "page": 1,
+              "bbox": [
+                0.053,
+                0.0981,
+                0.9466,
+                0.126
+              ],
+              "text_excerpt": "1.1 Short Title and Commencement: These regulations apply to all residential plots"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
       "clause_id": "fixture-base-2020:1.1",
       "record_version": 1,
       "record_id": "fixture-base-2020:1.1@v1",
@@ -62,9 +154,9 @@
       "number": "1.1",
       "title": "Short Title and Commencement",
       "level": 2,
-      "parent_id": "fixture-base-2020:1",
+      "parent_id": "fixture-base-2020:CHAPTER I",
       "order": 1,
-      "text": "These regulations apply to all residential plots within the synthetic planning area.",
+      "text": "These regulations apply to all residential plots within the synthetic planning area:",
       "language": "en",
       "tables": [],
       "citations": [
@@ -72,10 +164,10 @@
           "doc_id": "fixture-base-2020",
           "page": 1,
           "bbox": [
-            0.0535,
-            0.1088,
-            0.9474,
-            0.1415
+            0.053,
+            0.0981,
+            0.9466,
+            0.126
           ],
           "text_excerpt": "1.1 Short Title and Commencement: These regulations apply to all residential plots"
         }
@@ -90,6 +182,211 @@
       "verified_by": null
     },
     {
+      "eid": "chp_I__cl_1.1__item_a",
+      "native_number": "(a)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "New residential construction on plotted developments.",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "chp_I__cl_1.1",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2020-02-01",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "New residential construction on plotted developments.",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "fixture-base-2020",
+          "source_eid": "chp_I__cl_1.1__item_a",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "fixture-base-2020",
+              "page": 1,
+              "bbox": [
+                0.0536,
+                0.1352,
+                0.4998,
+                0.1469
+              ],
+              "text_excerpt": "(a) New residential construction on plotted developments."
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "fixture-base-2020:1.1(a)",
+      "record_version": 1,
+      "record_id": "fixture-base-2020:1.1(a)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2020-02-01",
+      "number": "1.1(a)",
+      "title": "New residential construction on plotted developments.",
+      "level": 3,
+      "parent_id": "fixture-base-2020:1.1",
+      "order": 2,
+      "text": "New residential construction on plotted developments.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "fixture-base-2020",
+          "page": 1,
+          "bbox": [
+            0.0536,
+            0.1352,
+            0.4998,
+            0.1469
+          ],
+          "text_excerpt": "(a) New residential construction on plotted developments."
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "chp_I__cl_1.1__item_b",
+      "native_number": "(b)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "Additions and alterations to existing residential buildings.",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "chp_I__cl_1.1",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2020-02-01",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "Additions and alterations to existing residential buildings.",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "fixture-base-2020",
+          "source_eid": "chp_I__cl_1.1__item_b",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "fixture-base-2020",
+              "page": 1,
+              "bbox": [
+                0.0536,
+                0.1537,
+                0.5195,
+                0.1656
+              ],
+              "text_excerpt": "(b) Additions and alterations to existing residential buildings."
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "fixture-base-2020:1.1(b)",
+      "record_version": 1,
+      "record_id": "fixture-base-2020:1.1(b)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2020-02-01",
+      "number": "1.1(b)",
+      "title": "Additions and alterations to existing residential buildings.",
+      "level": 3,
+      "parent_id": "fixture-base-2020:1.1",
+      "order": 3,
+      "text": "Additions and alterations to existing residential buildings.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "fixture-base-2020",
+          "page": 1,
+          "bbox": [
+            0.0536,
+            0.1537,
+            0.5195,
+            0.1656
+          ],
+          "text_excerpt": "(b) Additions and alterations to existing residential buildings."
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "chp_I__def_1.2",
+      "native_number": "1.2",
+      "type": "definition",
+      "heading": "Definitions",
+      "intro": null,
+      "content": "\"Floor Area Ratio\" (FAR) means the quotient obtained by dividing the total covered area on all floors by the plot area.",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "chp_I",
+      "defines": "\"Floor Area Ratio\"",
+      "defines_normalised": "floor area ratio",
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2020-02-01",
+          "valid_to": null,
+          "heading": "Definitions",
+          "intro": null,
+          "content": "\"Floor Area Ratio\" (FAR) means the quotient obtained by dividing the total covered area on all floors by the plot area.",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "fixture-base-2020",
+          "source_eid": "chp_I__def_1.2",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "fixture-base-2020",
+              "page": 1,
+              "bbox": [
+                0.0526,
+                0.1773,
+                0.9464,
+                0.2076
+              ],
+              "text_excerpt": "1.2 Definitions: \"Floor Area Ratio\" (FAR) means the quotient obtained by dividing"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
       "clause_id": "fixture-base-2020:1.2",
       "record_version": 1,
       "record_id": "fixture-base-2020:1.2@v1",
@@ -103,9 +400,9 @@
       "number": "1.2",
       "title": "Definitions",
       "level": 2,
-      "parent_id": "fixture-base-2020:1",
-      "order": 2,
-      "text": "Floor Area Ratio (FAR) means the quotient obtained by dividing the total covered area on all floors by the plot area.",
+      "parent_id": "fixture-base-2020:CHAPTER I",
+      "order": 4,
+      "text": "\"Floor Area Ratio\" (FAR) means the quotient obtained by dividing the total covered area on all floors by the plot area.",
       "language": "en",
       "tables": [],
       "citations": [
@@ -114,51 +411,11 @@
           "page": 1,
           "bbox": [
             0.0526,
-            0.156,
+            0.1773,
             0.9464,
-            0.1885
+            0.2076
           ],
-          "text_excerpt": "1.2 Definitions: Floor Area Ratio (FAR) means the quotient obtained by dividing"
-        }
-      ],
-      "cross_references": [],
-      "amended_by": [
-        "fixture-amend-2024:2"
-      ],
-      "applies_to_zones": [],
-      "verification": "machine_checked",
-      "verified_by": null
-    },
-    {
-      "clause_id": "fixture-base-2020:2",
-      "record_version": 1,
-      "record_id": "fixture-base-2020:2@v1",
-      "record_supersedes": null,
-      "record_superseded_by": null,
-      "record_change_reason": null,
-      "supersedes": null,
-      "superseded_by": null,
-      "legal_status": "in_force",
-      "effective_from": "2020-02-01",
-      "number": "2",
-      "title": "Setbacks and Height Norms",
-      "level": 1,
-      "parent_id": null,
-      "order": 3,
-      "text": "Setbacks and Height Norms",
-      "language": "en",
-      "tables": [],
-      "citations": [
-        {
-          "doc_id": "fixture-base-2020",
-          "page": 1,
-          "bbox": [
-            0.0529,
-            0.2093,
-            0.3418,
-            0.2228
-          ],
-          "text_excerpt": "2. Setbacks and Height Norms"
+          "text_excerpt": "1.2 Definitions: \"Floor Area Ratio\" (FAR) means the quotient obtained by dividing"
         }
       ],
       "cross_references": [],
@@ -168,6 +425,141 @@
       "verified_by": null
     },
     {
+      "eid": "chp_II",
+      "native_number": "CHAPTER II",
+      "type": "chapter",
+      "heading": "Setbacks and Height Norms",
+      "intro": null,
+      "content": "Setbacks and Height Norms",
+      "wrap_up": null,
+      "children": [
+        "chp_II__cl_2.1",
+        "chp_II__cl_2.2",
+        "chp_II__cl_2.2A",
+        "chp_II__cl_2.3"
+      ],
+      "parent_eid": null,
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2020-02-01",
+          "valid_to": null,
+          "heading": "Setbacks and Height Norms",
+          "intro": null,
+          "content": "Setbacks and Height Norms",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "fixture-base-2020",
+          "source_eid": "chp_II",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "fixture-base-2020",
+              "page": 1,
+              "bbox": [
+                0.0533,
+                0.2227,
+                0.4459,
+                0.2363
+              ],
+              "text_excerpt": "CHAPTER II: Setbacks and Height Norms"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "fixture-base-2020:CHAPTER II",
+      "record_version": 1,
+      "record_id": "fixture-base-2020:CHAPTER II@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2020-02-01",
+      "number": "CHAPTER II",
+      "title": "Setbacks and Height Norms",
+      "level": 1,
+      "parent_id": null,
+      "order": 5,
+      "text": "Setbacks and Height Norms",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "fixture-base-2020",
+          "page": 1,
+          "bbox": [
+            0.0533,
+            0.2227,
+            0.4459,
+            0.2363
+          ],
+          "text_excerpt": "CHAPTER II: Setbacks and Height Norms"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "chp_II__cl_2.1",
+      "native_number": "2.1",
+      "type": "clause",
+      "heading": "Residential Setback Norms",
+      "intro": "Every residential building in zone Z1 or Z2 shall provide minimum setbacks as per clause 1.1 and Table 2.1 below:",
+      "content": null,
+      "wrap_up": "Corner plots shall provide the front setback on both abutting streets.",
+      "children": [
+        "chp_II__cl_2.1__item_a",
+        "chp_II__cl_2.1__item_b",
+        "chp_II__cl_2.1__prov_1",
+        "chp_II__cl_2.1__expl_1",
+        "chp_II__cl_2.1__tbl_2.1"
+      ],
+      "parent_eid": "chp_II",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2020-02-01",
+          "valid_to": null,
+          "heading": "Residential Setback Norms",
+          "intro": "Every residential building in zone Z1 or Z2 shall provide minimum setbacks as per clause 1.1 and Table 2.1 below:",
+          "content": null,
+          "wrap_up": "Corner plots shall provide the front setback on both abutting streets.",
+          "cells": null,
+          "source_doc": "fixture-base-2020",
+          "source_eid": "chp_II__cl_2.1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "fixture-base-2020",
+              "page": 1,
+              "bbox": [
+                0.0528,
+                0.2445,
+                0.9476,
+                0.3305
+              ],
+              "text_excerpt": "2.1 Residential Setbacks: Every residential building in zone Z1 or Z2 shall"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
       "clause_id": "fixture-base-2020:2.1",
       "record_version": 1,
       "record_id": "fixture-base-2020:2.1@v1",
@@ -181,9 +573,9 @@
       "number": "2.1",
       "title": "Residential Setback Norms",
       "level": 2,
-      "parent_id": "fixture-base-2020:2",
-      "order": 4,
-      "text": "Every residential building in zone Z1 or Z2 shall provide minimum setbacks as per clause 1.1 and Table 2.1 below.",
+      "parent_id": "fixture-base-2020:CHAPTER II",
+      "order": 6,
+      "text": "Every residential building in zone Z1 or Z2 shall provide minimum setbacks as per clause 1.1 and Table 2.1 below: Corner plots shall provide the front setback on both abutting streets.",
       "language": "en",
       "tables": [
         {
@@ -197,7 +589,7 @@
           ],
           "rows": [
             [
-              "Z1",
+              "Z1*",
               "Up to 240",
               "1.5",
               "1.75"
@@ -223,10 +615,10 @@
           "doc_id": "fixture-base-2020",
           "page": 1,
           "bbox": [
-            0.0529,
-            0.2334,
+            0.0528,
+            0.2445,
             0.9476,
-            0.2633
+            0.3305
           ],
           "text_excerpt": "2.1 Residential Setbacks: Every residential building in zone Z1 or Z2 shall"
         }
@@ -243,6 +635,401 @@
       "verified_by": null
     },
     {
+      "eid": "chp_II__cl_2.1__item_a",
+      "native_number": "(a)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "Front setback measured from the street alignment.",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "chp_II__cl_2.1",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2020-02-01",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "Front setback measured from the street alignment.",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "fixture-base-2020",
+          "source_eid": "chp_II__cl_2.1__item_a",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "fixture-base-2020",
+              "page": 1,
+              "bbox": [
+                0.0536,
+                0.2816,
+                0.4724,
+                0.2935
+              ],
+              "text_excerpt": "(a) Front setback measured from the street alignment."
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "fixture-base-2020:2.1(a)",
+      "record_version": 1,
+      "record_id": "fixture-base-2020:2.1(a)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2020-02-01",
+      "number": "2.1(a)",
+      "title": "Front setback measured from the street alignment.",
+      "level": 3,
+      "parent_id": "fixture-base-2020:2.1",
+      "order": 7,
+      "text": "Front setback measured from the street alignment.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "fixture-base-2020",
+          "page": 1,
+          "bbox": [
+            0.0536,
+            0.2816,
+            0.4724,
+            0.2935
+          ],
+          "text_excerpt": "(a) Front setback measured from the street alignment."
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "chp_II__cl_2.1__item_b",
+      "native_number": "(b)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "Side and rear setbacks clear of projections.",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "chp_II__cl_2.1",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2020-02-01",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "Side and rear setbacks clear of projections.",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "fixture-base-2020",
+          "source_eid": "chp_II__cl_2.1__item_b",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "fixture-base-2020",
+              "page": 1,
+              "bbox": [
+                0.0536,
+                0.3001,
+                0.4155,
+                0.3119
+              ],
+              "text_excerpt": "(b) Side and rear setbacks clear of projections."
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "fixture-base-2020:2.1(b)",
+      "record_version": 1,
+      "record_id": "fixture-base-2020:2.1(b)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2020-02-01",
+      "number": "2.1(b)",
+      "title": "Side and rear setbacks clear of projections.",
+      "level": 3,
+      "parent_id": "fixture-base-2020:2.1",
+      "order": 8,
+      "text": "Side and rear setbacks clear of projections.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "fixture-base-2020",
+          "page": 1,
+          "bbox": [
+            0.0536,
+            0.3001,
+            0.4155,
+            0.3119
+          ],
+          "text_excerpt": "(b) Side and rear setbacks clear of projections."
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "chp_II__cl_2.1__prov_1",
+      "native_number": null,
+      "type": "proviso",
+      "heading": "Proviso",
+      "intro": null,
+      "content": "Provided that architectural sunshades up to 0.75 m may project into the setback.",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "chp_II__cl_2.1",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2020-02-01",
+          "valid_to": null,
+          "heading": "Proviso",
+          "intro": null,
+          "content": "Provided that architectural sunshades up to 0.75 m may project into the setback.",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "fixture-base-2020",
+          "source_eid": "chp_II__cl_2.1__prov_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "fixture-base-2020",
+              "page": 1,
+              "bbox": [
+                0.0539,
+                0.3374,
+                0.6783,
+                0.349
+              ],
+              "text_excerpt": "Provided that architectural sunshades up to 0.75 m may project into the"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "fixture-base-2020:2.1:proviso_1",
+      "record_version": 1,
+      "record_id": "fixture-base-2020:2.1:proviso_1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2020-02-01",
+      "number": "2.1:proviso_1",
+      "title": "Proviso",
+      "level": 3,
+      "parent_id": "fixture-base-2020:2.1",
+      "order": 9,
+      "text": "Provided that architectural sunshades up to 0.75 m may project into the setback.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "fixture-base-2020",
+          "page": 1,
+          "bbox": [
+            0.0539,
+            0.3374,
+            0.6783,
+            0.349
+          ],
+          "text_excerpt": "Provided that architectural sunshades up to 0.75 m may project into the"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "chp_II__cl_2.1__expl_1",
+      "native_number": null,
+      "type": "explanation",
+      "heading": "Explanation",
+      "intro": null,
+      "content": "Setback width is measured perpendicular to the plot boundary.",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "chp_II__cl_2.1",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2020-02-01",
+          "valid_to": null,
+          "heading": "Explanation",
+          "intro": null,
+          "content": "Setback width is measured perpendicular to the plot boundary.",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "fixture-base-2020",
+          "source_eid": "chp_II__cl_2.1__expl_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "fixture-base-2020",
+              "page": 1,
+              "bbox": [
+                0.0539,
+                0.3557,
+                0.6411,
+                0.3675
+              ],
+              "text_excerpt": "Explanation: Setback width is measured perpendicular to the plot boundary."
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "fixture-base-2020:2.1:explanation_1",
+      "record_version": 1,
+      "record_id": "fixture-base-2020:2.1:explanation_1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2020-02-01",
+      "number": "2.1:explanation_1",
+      "title": "Explanation",
+      "level": 3,
+      "parent_id": "fixture-base-2020:2.1",
+      "order": 10,
+      "text": "Setback width is measured perpendicular to the plot boundary.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "fixture-base-2020",
+          "page": 1,
+          "bbox": [
+            0.0539,
+            0.3557,
+            0.6411,
+            0.3675
+          ],
+          "text_excerpt": "Explanation: Setback width is measured perpendicular to the plot boundary."
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "chp_II__cl_2.2",
+      "native_number": "2.2",
+      "type": "clause",
+      "heading": "Maximum Building Height",
+      "intro": null,
+      "content": "No residential building in zone Z1 shall exceed 11.5 metres in height, subject to road width norms under clause 2.1 and Floor Area Ratio limits.",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "chp_II",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2020-02-01",
+          "valid_to": "2024-06-15",
+          "heading": "Maximum Building Height",
+          "intro": null,
+          "content": "No residential building in zone Z1 shall exceed 11.5 metres in height, subject to road width norms under clause 2.1 and Floor Area Ratio limits.",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "fixture-base-2020",
+          "source_eid": "chp_II__cl_2.2",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "fixture-base-2020",
+              "page": 2,
+              "bbox": [
+                0.0526,
+                0.0411,
+                0.9472,
+                0.095
+              ],
+              "text_excerpt": "2.2 Maximum Building Height 2.2 Maximum Building Height: No residential building in"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        },
+        {
+          "version_id": "v2",
+          "valid_from": "2024-06-15",
+          "valid_to": null,
+          "heading": "Maximum Building Height",
+          "intro": null,
+          "content": "No residential building in zone Z1 shall exceed 15.0 metres in height, subject to road width norms under clause 2.1.",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "fixture-amend-2024",
+          "source_eid": "cl_2",
+          "effect_id": "fixture-amend-2024:eff_1",
+          "citations": [
+            {
+              "doc_id": "fixture-amend-2024",
+              "page": 1,
+              "bbox": [
+                0.0529,
+                0.1088,
+                0.947,
+                0.159
+              ],
+              "text_excerpt": "2. Amendment of Clause 2.2: For clause 2.2, the following shall be"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
       "clause_id": "fixture-base-2020:2.2",
       "record_version": 1,
       "record_id": "fixture-base-2020:2.2@v1",
@@ -256,9 +1043,9 @@
       "number": "2.2",
       "title": "Maximum Building Height",
       "level": 2,
-      "parent_id": "fixture-base-2020:2",
-      "order": 5,
-      "text": "No residential building in zone Z1 shall exceed 11.5 metres in height, subject to road width norms under clause 2.1.",
+      "parent_id": "fixture-base-2020:CHAPTER II",
+      "order": 11,
+      "text": "No residential building in zone Z1 shall exceed 11.5 metres in height, subject to road width norms under clause 2.1 and Floor Area Ratio limits.",
       "language": "en",
       "tables": [],
       "citations": [
@@ -278,6 +1065,7 @@
         "fixture-base-2020:2.1"
       ],
       "amended_by": [
+        "fixture-amend-2024:2",
         "fixture-amend-2024:3"
       ],
       "applies_to_zones": [
@@ -287,6 +1075,664 @@
       "verified_by": null
     },
     {
+      "eid": "chp_II__cl_2.2A",
+      "native_number": "2.2A",
+      "type": "clause",
+      "heading": "Solar Rooftop Structures",
+      "intro": null,
+      "content": "Elevated solar panels up to 1.8 metres above the parapet are exempt from height calculation.",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "chp_II",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2024-06-15",
+          "valid_to": null,
+          "heading": "Solar Rooftop Structures",
+          "intro": null,
+          "content": "Elevated solar panels up to 1.8 metres above the parapet are exempt from height calculation.",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "fixture-amend-2024",
+          "source_eid": "cl_3",
+          "effect_id": "fixture-amend-2024:eff_2",
+          "citations": [
+            {
+              "doc_id": "fixture-amend-2024",
+              "page": 1,
+              "bbox": [
+                0.053,
+                0.1761,
+                0.9469,
+                0.2088
+              ],
+              "text_excerpt": "3. Insertion after Clause 2.2: After clause 2.2, the following clause shall"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "fixture-base-2020:2.2A",
+      "record_version": 1,
+      "record_id": "fixture-base-2020:2.2A@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2024-06-15",
+      "number": "2.2A",
+      "title": "Solar Rooftop Structures",
+      "level": 2,
+      "parent_id": "fixture-base-2020:CHAPTER II",
+      "order": 12,
+      "text": "Elevated solar panels up to 1.8 metres above the parapet are exempt from height calculation.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "fixture-amend-2024",
+          "page": 1,
+          "bbox": [
+            0.053,
+            0.1761,
+            0.9469,
+            0.2088
+          ],
+          "text_excerpt": "3. Insertion after Clause 2.2: After clause 2.2, the following clause shall"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [
+        "fixture-amend-2024:3"
+      ],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "chp_II__cl_2.3",
+      "native_number": "2.3",
+      "type": "clause",
+      "heading": "Temporary Construction Sheds",
+      "intro": null,
+      "content": "Temporary sheds for watchmen are permitted during active construction.",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "chp_II",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2020-02-01",
+          "valid_to": "2024-06-15",
+          "heading": "Temporary Construction Sheds",
+          "intro": null,
+          "content": "Temporary sheds for watchmen are permitted during active construction.",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "fixture-base-2020",
+          "source_eid": "chp_II__cl_2.3",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "fixture-base-2020",
+              "page": 2,
+              "bbox": [
+                0.0529,
+                0.1121,
+                0.9412,
+                0.1246
+              ],
+              "text_excerpt": "2.3 Temporary Construction Sheds: Temporary sheds for watchmen are permitted during active"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        },
+        {
+          "version_id": "v2",
+          "valid_from": "2024-06-15",
+          "valid_to": null,
+          "heading": "Temporary Construction Sheds",
+          "intro": null,
+          "content": "[Omitted by fixture-amend-2024:cl_4 with effect from 2024-06-15.]",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "fixture-amend-2024",
+          "source_eid": "cl_4",
+          "effect_id": "fixture-amend-2024:eff_3",
+          "citations": [
+            {
+              "doc_id": "fixture-amend-2024",
+              "page": 1,
+              "bbox": [
+                0.0528,
+                0.2233,
+                0.5006,
+                0.2331
+              ],
+              "text_excerpt": "4. Omission of Clause 2.3: Clause 2.3 shall be omitted."
+            }
+          ],
+          "legal_status": "superseded",
+          "omitted": true
+        }
+      ],
+      "clause_id": "fixture-base-2020:2.3",
+      "record_version": 1,
+      "record_id": "fixture-base-2020:2.3@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2020-02-01",
+      "number": "2.3",
+      "title": "Temporary Construction Sheds",
+      "level": 2,
+      "parent_id": "fixture-base-2020:CHAPTER II",
+      "order": 13,
+      "text": "Temporary sheds for watchmen are permitted during active construction.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "fixture-base-2020",
+          "page": 2,
+          "bbox": [
+            0.0529,
+            0.1121,
+            0.9412,
+            0.1246
+          ],
+          "text_excerpt": "2.3 Temporary Construction Sheds: Temporary sheds for watchmen are permitted during active"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [
+        "fixture-amend-2024:4"
+      ],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "chp_II__cl_2.1__tbl_2.1",
+      "native_number": "Table 2.1",
+      "type": "table",
+      "heading": "Table 2.1: Minimum Setbacks by Plot Size",
+      "intro": null,
+      "content": "Table 2.1: Minimum Setbacks by Plot Size",
+      "wrap_up": null,
+      "children": [
+        "chp_II__cl_2.1__tbl_2.1__row_1",
+        "chp_II__cl_2.1__tbl_2.1__row_2",
+        "chp_II__cl_2.1__tbl_2.1__row_3"
+      ],
+      "parent_eid": "chp_II__cl_2.1",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": {
+        "columns": [
+          {
+            "label": "Zone Code",
+            "unit": null,
+            "children": [
+              {
+                "label": "Category",
+                "unit": null
+              }
+            ]
+          },
+          {
+            "label": "Plot Area",
+            "unit": "sq.m",
+            "children": [
+              {
+                "label": "Threshold",
+                "unit": "sq.m"
+              }
+            ]
+          },
+          {
+            "label": "Front Setback",
+            "unit": "m",
+            "children": [
+              {
+                "label": "Minimum",
+                "unit": "m"
+              }
+            ]
+          },
+          {
+            "label": "Max FAR",
+            "unit": null,
+            "children": [
+              {
+                "label": "Permissible",
+                "unit": null
+              }
+            ]
+          }
+        ],
+        "rows": [
+          "chp_II__cl_2.1__tbl_2.1__row_1",
+          "chp_II__cl_2.1__tbl_2.1__row_2",
+          "chp_II__cl_2.1__tbl_2.1__row_3"
+        ],
+        "footnotes": [
+          {
+            "marker": "*",
+            "text": "Corner plots in Z1 require an additional 0.5 m splay.",
+            "cell_refs": [
+              "chp_II__cl_2.1__tbl_2.1__row_1"
+            ]
+          }
+        ],
+        "extraction": "complete",
+        "page_image": null,
+        "gap_reason": null
+      },
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2020-02-01",
+          "valid_to": null,
+          "heading": "Table 2.1: Minimum Setbacks by Plot Size",
+          "intro": null,
+          "content": "Table 2.1: Minimum Setbacks by Plot Size",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "fixture-base-2020",
+          "source_eid": "chp_II__cl_2.1__tbl_2.1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "fixture-base-2020",
+              "page": 1,
+              "bbox": [
+                0.0528,
+                0.2445,
+                0.9476,
+                0.3305
+              ],
+              "text_excerpt": "Table 2.1: Minimum Setbacks by Plot Size"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "fixture-base-2020:chp_II__cl_2.1__tbl_2.1",
+      "record_version": 1,
+      "record_id": "fixture-base-2020:chp_II__cl_2.1__tbl_2.1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2020-02-01",
+      "number": "chp_II__cl_2.1__tbl_2.1",
+      "title": "Table 2.1: Minimum Setbacks by Plot Size",
+      "level": 3,
+      "parent_id": "fixture-base-2020:2.1",
+      "order": 14,
+      "text": "Table 2.1: Minimum Setbacks by Plot Size",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "fixture-base-2020",
+          "page": 1,
+          "bbox": [
+            0.0528,
+            0.2445,
+            0.9476,
+            0.3305
+          ],
+          "text_excerpt": "Table 2.1: Minimum Setbacks by Plot Size"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "chp_II__cl_2.1__tbl_2.1__row_1",
+      "native_number": "1",
+      "type": "table_row",
+      "heading": null,
+      "intro": null,
+      "content": "Z1* | Up to 240 | 1.5 | 1.75",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "chp_II__cl_2.1__tbl_2.1",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": [
+        "Z1*",
+        "Up to 240",
+        "1.5",
+        "1.75"
+      ],
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2020-02-01",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "Z1* | Up to 240 | 1.5 | 1.75",
+          "wrap_up": null,
+          "cells": [
+            "Z1*",
+            "Up to 240",
+            "1.5",
+            "1.75"
+          ],
+          "source_doc": "fixture-base-2020",
+          "source_eid": "chp_II__cl_2.1__tbl_2.1__row_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "fixture-base-2020",
+              "page": 1,
+              "bbox": [
+                0.0528,
+                0.2445,
+                0.9476,
+                0.3305
+              ],
+              "text_excerpt": "Table 2.1: Minimum Setbacks by Plot Size"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "fixture-base-2020:chp_II__cl_2.1__tbl_2.1__row_1",
+      "record_version": 1,
+      "record_id": "fixture-base-2020:chp_II__cl_2.1__tbl_2.1__row_1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2020-02-01",
+      "number": "chp_II__cl_2.1__tbl_2.1__row_1",
+      "title": "Row 1",
+      "level": 4,
+      "parent_id": "fixture-base-2020:chp_II__cl_2.1__tbl_2.1",
+      "order": 15,
+      "text": "Z1* | Up to 240 | 1.5 | 1.75",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "fixture-base-2020",
+          "page": 1,
+          "bbox": [
+            0.0528,
+            0.2445,
+            0.9476,
+            0.3305
+          ],
+          "text_excerpt": "Table 2.1: Minimum Setbacks by Plot Size"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "chp_II__cl_2.1__tbl_2.1__row_2",
+      "native_number": "2",
+      "type": "table_row",
+      "heading": null,
+      "intro": null,
+      "content": "Z1 | Above 240 | 3.0 | 2.25",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "chp_II__cl_2.1__tbl_2.1",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": [
+        "Z1",
+        "Above 240",
+        "3.0",
+        "2.25"
+      ],
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2020-02-01",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "Z1 | Above 240 | 3.0 | 2.25",
+          "wrap_up": null,
+          "cells": [
+            "Z1",
+            "Above 240",
+            "3.0",
+            "2.25"
+          ],
+          "source_doc": "fixture-base-2020",
+          "source_eid": "chp_II__cl_2.1__tbl_2.1__row_2",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "fixture-base-2020",
+              "page": 1,
+              "bbox": [
+                0.0528,
+                0.2445,
+                0.9476,
+                0.3305
+              ],
+              "text_excerpt": "Table 2.1: Minimum Setbacks by Plot Size"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "fixture-base-2020:chp_II__cl_2.1__tbl_2.1__row_2",
+      "record_version": 1,
+      "record_id": "fixture-base-2020:chp_II__cl_2.1__tbl_2.1__row_2@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2020-02-01",
+      "number": "chp_II__cl_2.1__tbl_2.1__row_2",
+      "title": "Row 2",
+      "level": 4,
+      "parent_id": "fixture-base-2020:chp_II__cl_2.1__tbl_2.1",
+      "order": 16,
+      "text": "Z1 | Above 240 | 3.0 | 2.25",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "fixture-base-2020",
+          "page": 1,
+          "bbox": [
+            0.0528,
+            0.2445,
+            0.9476,
+            0.3305
+          ],
+          "text_excerpt": "Table 2.1: Minimum Setbacks by Plot Size"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "chp_II__cl_2.1__tbl_2.1__row_3",
+      "native_number": "3",
+      "type": "table_row",
+      "heading": null,
+      "intro": null,
+      "content": "Z2 | All plots | 3.0 | 2.50",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "chp_II__cl_2.1__tbl_2.1",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": [
+        "Z2",
+        "All plots",
+        "3.0",
+        "2.50"
+      ],
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2020-02-01",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "Z2 | All plots | 3.0 | 2.50",
+          "wrap_up": null,
+          "cells": [
+            "Z2",
+            "All plots",
+            "3.0",
+            "2.50"
+          ],
+          "source_doc": "fixture-base-2020",
+          "source_eid": "chp_II__cl_2.1__tbl_2.1__row_3",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "fixture-base-2020",
+              "page": 1,
+              "bbox": [
+                0.0528,
+                0.2445,
+                0.9476,
+                0.3305
+              ],
+              "text_excerpt": "Table 2.1: Minimum Setbacks by Plot Size"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "fixture-base-2020:chp_II__cl_2.1__tbl_2.1__row_3",
+      "record_version": 1,
+      "record_id": "fixture-base-2020:chp_II__cl_2.1__tbl_2.1__row_3@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2020-02-01",
+      "number": "chp_II__cl_2.1__tbl_2.1__row_3",
+      "title": "Row 3",
+      "level": 4,
+      "parent_id": "fixture-base-2020:chp_II__cl_2.1__tbl_2.1",
+      "order": 17,
+      "text": "Z2 | All plots | 3.0 | 2.50",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "fixture-base-2020",
+          "page": 1,
+          "bbox": [
+            0.0528,
+            0.2445,
+            0.9476,
+            0.3305
+          ],
+          "text_excerpt": "Table 2.1: Minimum Setbacks by Plot Size"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "chp_I__cl_1.1",
+      "native_number": "1.1",
+      "type": "clause",
+      "heading": "Short Title, Extent and Commencement",
+      "intro": "These regulations apply to all residential plots within the synthetic planning area:",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "chp_I__cl_1.1__item_a",
+        "chp_I__cl_1.1__item_b"
+      ],
+      "parent_eid": "chp_I",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2020-02-01",
+          "valid_to": null,
+          "heading": "Short Title, Extent and Commencement",
+          "intro": "These regulations apply to all residential plots within the synthetic planning area:",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "fixture-base-2020",
+          "source_eid": "chp_I__cl_1.1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "fixture-base-2020",
+              "page": 1,
+              "bbox": [
+                0.053,
+                0.0981,
+                0.9466,
+                0.126
+              ],
+              "text_excerpt": "1.1 Short Title and Commencement: These regulations apply to all residential plots"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
       "clause_id": "fixture-base-2020:1.1",
       "record_version": 2,
       "record_id": "fixture-base-2020:1.1@v2",
@@ -300,9 +1746,9 @@
       "number": "1.1",
       "title": "Short Title, Extent and Commencement",
       "level": 2,
-      "parent_id": "fixture-base-2020:1",
+      "parent_id": "fixture-base-2020:CHAPTER I",
       "order": 1,
-      "text": "These regulations apply to all residential plots within the synthetic planning area.",
+      "text": "These regulations apply to all residential plots within the synthetic planning area:",
       "language": "en",
       "tables": [],
       "citations": [
@@ -310,10 +1756,10 @@
           "doc_id": "fixture-base-2020",
           "page": 1,
           "bbox": [
-            0.0535,
-            0.1088,
-            0.9474,
-            0.1415
+            0.053,
+            0.0981,
+            0.9466,
+            0.126
           ],
           "text_excerpt": "1.1 Short Title and Commencement: These regulations apply to all residential plots"
         }

@@ -2,7 +2,9 @@
 
 import React, { useState } from "react";
 import type {
+  AmendmentEffect,
   AmendmentLink,
+  AnnotationEntry,
   ClauseNode,
   ConsolidatedClauseRecord,
   DisplayLegalStatus,
@@ -13,6 +15,8 @@ import { StatusBadge } from "./StatusBadge";
 
 interface ClauseTreeProps {
   clauses: ClauseNode[];
+  annotations?: AnnotationEntry[];
+  amendmentEffects?: AmendmentEffect[];
   consolidatedRecords?: ConsolidatedClauseRecord[];
   unconsolidatedRecords?: UnconsolidatedClauseRecord[];
   amendmentLinks?: AmendmentLink[];
@@ -22,6 +26,8 @@ interface ClauseTreeProps {
 
 export function ClauseTree({
   clauses,
+  annotations = [],
+  amendmentEffects = [],
   consolidatedRecords = [],
   unconsolidatedRecords = [],
   amendmentLinks = [],
@@ -35,6 +41,21 @@ export function ClauseTree({
 
   const { activeClauses, historyByClauseId } = partitionClauseVersions(clauses);
   const baseClauses = activeClauses.length > 0 ? activeClauses : clauses;
+
+  const byEid = new Map<string, ClauseNode>();
+  for (const node of baseClauses) {
+    if (node.eid) {
+      byEid.set(node.eid, node);
+    }
+  }
+
+  const annotationsByEid = new Map<string, AnnotationEntry[]>();
+  for (const ann of annotations) {
+    const eid = ann.target.eid;
+    const list = annotationsByEid.get(eid) ?? [];
+    list.push(ann);
+    annotationsByEid.set(eid, list);
+  }
 
   const consolidatedByClauseId = new Map<string, ConsolidatedClauseRecord>();
   for (const rec of consolidatedRecords) {
@@ -56,16 +77,48 @@ export function ClauseTree({
     amendmentsByTarget.set(lnk.target_clause, existing);
   }
 
+  const effectsByTargetEid = new Map<string, AmendmentEffect[]>();
+  for (const eff of amendmentEffects) {
+    const existing = effectsByTargetEid.get(eff.target_eid) ?? [];
+    existing.push(eff);
+    effectsByTargetEid.set(eff.target_eid, existing);
+  }
+
+  // Separate `table_row` nodes so they render inside their parent `table` node rather than as loose rows
+  const displayClauses = baseClauses.filter((node) => {
+    if (node.type === "table_row") {
+      return false;
+    }
+    if (viewMode === "original") {
+      const firstVer = node.versions?.[0];
+      if (firstVer && firstVer.effect_id) {
+        return false;
+      }
+    }
+    return true;
+  });
+
+  const hasVersionedAmendments =
+    allowConsolidatedToggle ||
+    amendmentEffects.length > 0 ||
+    baseClauses.some((c) => (c.versions?.length ?? 0) > 1);
+
   const normalizedQuery = query.trim().toLowerCase();
-  const filtered = baseClauses.filter((clause) => {
+  const filtered = displayClauses.filter((clause) => {
     if (!normalizedQuery) {
       return true;
     }
     const cons = consolidatedByClauseId.get(clause.clause_id);
+    const latestVer =
+      clause.versions && clause.versions.length > 0
+        ? clause.versions[clause.versions.length - 1]
+        : null;
     return (
       clause.number.toLowerCase().includes(normalizedQuery) ||
+      (clause.eid?.toLowerCase().includes(normalizedQuery) ?? false) ||
       (clause.title?.toLowerCase().includes(normalizedQuery) ?? false) ||
       clause.text.toLowerCase().includes(normalizedQuery) ||
+      (latestVer?.content?.toLowerCase().includes(normalizedQuery) ?? false) ||
       (cons?.text.toLowerCase().includes(normalizedQuery) ?? false)
     );
   });
@@ -78,19 +131,19 @@ export function ClauseTree({
             htmlFor="clause-search"
             className="dg-mono block text-[10.5px] text-[#080909]"
           >
-            Filter clauses by number, title, or text
+            Filter provisions by number, address, title, or text
           </label>
           <input
             id="clause-search"
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Filter clauses..."
+            placeholder="Filter provisions..."
             className="mt-1.5 w-full border border-[#080909] bg-[#f5f3ed] px-3 py-2 text-sm text-[#080909]"
           />
         </div>
 
-        {allowConsolidatedToggle && (
+        {hasVersionedAmendments && (
           <div
             role="group"
             aria-label="Document text view mode"
@@ -128,10 +181,9 @@ export function ClauseTree({
               Derived by this project, not an official publication:
             </strong>{" "}
             <span className="dg-serif text-sm">
-              Consolidated clauses are produced deterministically only where all
-              applicable amendment links are high-confidence. Where consolidation
-              is not performed, original wording and amending clauses are shown
-              side by side.
+              Consolidated provisions are computed from node versions where
+              amending effects have high confidence. Low-confidence effects are
+              shown beside the target provision without modifying its text.
             </span>
           </div>
         </div>
@@ -139,8 +191,57 @@ export function ClauseTree({
 
       <div className="divide-y divide-[#c8ccc0] border border-[#080909] bg-[#f5f3ed]">
         {filtered.map((clause) => {
+          const eid = clause.eid ?? clause.number;
+          const nodeType = clause.type ?? "clause";
+          const versions = clause.versions ?? [];
+          const activeVer =
+            viewMode === "consolidated" && versions.length > 0
+              ? versions[versions.length - 1]
+              : versions[0];
+
+          const consRecord =
+            viewMode === "consolidated"
+              ? consolidatedByClauseId.get(clause.clause_id)
+              : undefined;
+          const unconsRecord =
+            viewMode === "consolidated"
+              ? unconsolidatedByClauseId.get(clause.clause_id)
+              : undefined;
+
           const status: DisplayLegalStatus =
-            clause.legal_status ?? "status_unknown";
+            (viewMode === "consolidated" && activeVer?.legal_status
+              ? activeVer.legal_status
+              : clause.legal_status) ?? "status_unknown";
+
+          const isAmendedVersion =
+            viewMode === "consolidated" &&
+            (Boolean(activeVer?.effect_id) || Boolean(consRecord));
+
+          const displayTitle =
+            (viewMode === "consolidated" && activeVer?.heading) ||
+            (consRecord ? consRecord.title : clause.heading ?? clause.title);
+          const displayIntro =
+            viewMode === "consolidated" && activeVer
+              ? activeVer.intro
+              : clause.intro;
+          const displayContent =
+            viewMode === "consolidated" && activeVer?.content
+              ? activeVer.content
+              : consRecord
+                ? consRecord.text
+                : clause.content ?? (!displayIntro ? clause.text : null);
+          const displayWrapUp =
+            viewMode === "consolidated" && activeVer
+              ? activeVer.wrap_up
+              : clause.wrap_up;
+          const displayTables = consRecord ? consRecord.tables : clause.tables;
+
+          const nodeAnns = annotationsByEid.get(eid) ?? [];
+          const provTypeAnn = nodeAnns.find((a) => a.kind === "provision_type");
+          const linkAnns = nodeAnns.filter(
+            (a) => a.kind === "cross_reference" || a.kind === "defined_term_use"
+          );
+
           const validPages = Array.from(
             new Set(
               (clause.citations ?? [])
@@ -154,20 +255,12 @@ export function ClauseTree({
             )
           );
           const firstPage = validPages[0] ?? null;
-          const consRecord =
-            viewMode === "consolidated"
-              ? consolidatedByClauseId.get(clause.clause_id)
-              : undefined;
-          const unconsRecord =
-            viewMode === "consolidated"
-              ? unconsolidatedByClauseId.get(clause.clause_id)
-              : undefined;
+
           const targetAmendments =
             amendmentsByTarget.get(clause.clause_id) ?? [];
-
-          const displayTitle = consRecord ? consRecord.title : clause.title;
-          const displayText = consRecord ? consRecord.text : clause.text;
-          const displayTables = consRecord ? consRecord.tables : clause.tables;
+          const unappliedEffects = (effectsByTargetEid.get(eid) ?? []).filter(
+            (e) => !e.applied
+          );
 
           const recordVersion =
             clause.record_version ??
@@ -181,24 +274,61 @@ export function ClauseTree({
             priorVersions.length > 0;
 
           const sourceHref = clause.official_url || clause.source_url;
+          const indentClass =
+            clause.level >= 3
+              ? "pl-8 bg-[#f5f3ed]"
+              : clause.level === 2
+                ? "pl-5"
+                : "";
+
+          const specialTypeClass =
+            nodeType === "proviso"
+              ? "border-l-4 border-l-[#080909] bg-[#efeee8]/60"
+              : nodeType === "explanation" || nodeType === "note"
+                ? "border-l-2 border-l-[#5b5e56] bg-[#efeee8]/40"
+                : "";
 
           return (
             <details
               key={clause.record_id ?? clause.clause_id}
+              id={`node-${eid}`}
               open
-              className="p-4"
+              className={`p-4 ${indentClass} ${specialTypeClass}`}
             >
               <summary className="flex cursor-pointer flex-wrap items-center justify-between gap-2 font-medium text-[#080909]">
-                <span>
-                  <span className="font-mono text-xs">{clause.number}</span>{" "}
+                <span className="flex flex-wrap items-center gap-2">
+                  <span className="font-mono text-xs">
+                    {clause.native_number ?? clause.number}
+                  </span>
                   {displayTitle && (
                     <span className="font-semibold">{displayTitle}</span>
                   )}
+                  <span className="font-mono text-[10px] text-[#5b5e56]">
+                    [{eid}]
+                  </span>
                 </span>
                 <span className="flex flex-wrap items-center gap-2">
-                  {consRecord && (
+                  {nodeType === "definition" && clause.defines && (
                     <span className="border border-[#080909] bg-[#efeee8] px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#080909]">
-                      Derived · As of {consRecord.as_of_date}
+                      Defines: {clause.defines}
+                    </span>
+                  )}
+                  {(nodeType === "proviso" ||
+                    nodeType === "explanation" ||
+                    nodeType === "note") && (
+                    <span className="border border-[#080909] bg-[#f5f3ed] px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#080909]">
+                      {nodeType}
+                    </span>
+                  )}
+                  {provTypeAnn && (
+                    <span className="border border-[#c8ccc0] bg-[#efeee8] px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#5b5e56]">
+                      {provTypeAnn.value}
+                    </span>
+                  )}
+                  {isAmendedVersion && (
+                    <span className="border border-[#080909] bg-[#efeee8] px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#080909]">
+                      Derived · From{" "}
+                      {activeVer?.valid_from ?? consRecord?.as_of_date}
                     </span>
                   )}
                   {clause.language === "kn" && (
@@ -210,23 +340,174 @@ export function ClauseTree({
                 </span>
               </summary>
 
-              <p
-                lang={clause.language === "kn" ? "kn" : "en"}
-                className="dg-serif mt-2 whitespace-pre-line text-[15px] leading-[1.52] text-[#171917]"
-              >
-                {displayText}
-              </p>
+              {displayIntro && (
+                <p
+                  lang={clause.language === "kn" ? "kn" : "en"}
+                  className="dg-serif mt-2 whitespace-pre-line text-[15px] leading-[1.52] text-[#171917]"
+                >
+                  {displayIntro}
+                </p>
+              )}
 
-              {consRecord && (
+              {displayContent && nodeType !== "table" && (
+                <p
+                  lang={clause.language === "kn" ? "kn" : "en"}
+                  className="dg-serif mt-2 whitespace-pre-line text-[15px] leading-[1.52] text-[#171917]"
+                >
+                  {displayContent}
+                </p>
+              )}
+
+              {displayWrapUp && (
+                <p
+                  lang={clause.language === "kn" ? "kn" : "en"}
+                  className="dg-serif mt-2 border-t border-dotted border-[#c8ccc0] pt-1.5 text-[14.5px] leading-[1.5] text-[#171917]"
+                >
+                  {displayWrapUp}
+                </p>
+              )}
+
+              {/* Layer 1 Structured Table Node */}
+              {nodeType === "table" && clause.table_meta && (
+                <div className="mt-3 overflow-x-auto">
+                  {clause.table_meta.extraction === "failed" ? (
+                    <div className="border border-dashed border-[#080909] bg-[#efeee8] p-3 font-mono text-xs text-[#080909]">
+                      Table extraction gap:{" "}
+                      {clause.table_meta.gap_reason ?? "Unable to extract table grid"}
+                    </div>
+                  ) : (
+                    <>
+                      <table className="dg-table">
+                        <thead>
+                          <tr>
+                            {clause.table_meta.columns.map((col, cIdx) => (
+                              <th key={cIdx}>
+                                {col.label}
+                                {col.unit ? ` (${col.unit})` : ""}
+                              </th>
+                            ))}
+                          </tr>
+                          {clause.table_meta.columns.some(
+                            (col) => col.children && col.children.length > 0
+                          ) && (
+                            <tr>
+                              {clause.table_meta.columns.map((col, cIdx) => (
+                                <th
+                                  key={`sub-${cIdx}`}
+                                  className="font-mono text-[10px] font-normal text-[#5b5e56]"
+                                >
+                                  {col.children?.[0]?.label ?? ""}
+                                </th>
+                              ))}
+                            </tr>
+                          )}
+                        </thead>
+                        <tbody>
+                          {clause.table_meta.rows.map((rowEid) => {
+                            const rowNode = byEid.get(rowEid);
+                            const cells = rowNode?.cells ?? [];
+                            return (
+                              <tr key={rowEid} id={`node-${rowEid}`}>
+                                {cells.map((cell, cellIdx) => (
+                                  <td key={cellIdx}>{cell}</td>
+                                ))}
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                      {clause.table_meta.footnotes.length > 0 && (
+                        <ul className="mt-2 space-y-1 font-mono text-[11px] text-[#5b5e56]">
+                          {clause.table_meta.footnotes.map((fn, fIdx) => (
+                            <li key={fIdx}>
+                              <strong>{fn.marker}</strong> {fn.text}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </>
+                  )}
+                </div>
+              )}
+
+              {/* Legacy/inline tables when present on non-table nodes */}
+              {nodeType !== "table" &&
+                clause.children?.every((chEid) => byEid.get(chEid)?.type !== "table") &&
+                displayTables.map((table) => (
+                  <div key={table.table_id} className="mt-3 overflow-x-auto">
+                    {table.caption && (
+                      <p className="mb-1 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-[#080909]">
+                        {table.caption}
+                      </p>
+                    )}
+                    <table className="dg-table">
+                      <thead>
+                        <tr>
+                          {table.headers.map((header, idx) => (
+                            <th key={idx}>{header}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {table.rows.map((row, rIdx) => (
+                          <tr key={rIdx}>
+                            {row.map((cell, cIdx) => (
+                              <td key={cIdx}>{cell}</td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ))}
+
+              {/* Layer 2 Stand-Off Annotation Links */}
+              {linkAnns.length > 0 && (
+                <div className="mt-2 flex flex-wrap items-center gap-2 font-mono text-[10.5px]">
+                  <span className="uppercase tracking-[0.12em] text-[#5b5e56]">
+                    Annotations:
+                  </span>
+                  {linkAnns.map((ann) => {
+                    const isUnresolved = ann.value.startsWith("unresolved:");
+                    const targetHref = isUnresolved
+                      ? undefined
+                      : `#node-${ann.value}`;
+                    const labelPrefix =
+                      ann.kind === "defined_term_use" ? "Term" : "Ref";
+                    return targetHref ? (
+                      <a
+                        key={ann.annotation_id}
+                        href={targetHref}
+                        className="border border-[#080909] bg-[#efeee8] px-2 py-0.5 text-[#080909] underline"
+                      >
+                        {labelPrefix}: {ann.target.span_text} → {ann.value}
+                      </a>
+                    ) : (
+                      <span
+                        key={ann.annotation_id}
+                        className="border border-dashed border-[#5b5e56] px-2 py-0.5 text-[#5b5e56]"
+                      >
+                        {labelPrefix}: {ann.target.span_text} (unresolved)
+                      </span>
+                    );
+                  })}
+                </div>
+              )}
+
+              {isAmendedVersion && (
                 <div className="mt-2 border-l-2 border-[#080909] bg-[#efeee8] px-3 py-2 text-xs">
                   <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#080909]">
-                    Derived by this project, not an official publication ·
-                    Amendments applied: {consRecord.amendments_applied.join(", ")}
+                    Derived by this project, not an official publication ·{" "}
+                    {activeVer?.effect_id
+                      ? `Effect applied: ${activeVer.effect_id} (${activeVer.source_doc})`
+                      : `Amendments applied: ${consRecord?.amendments_applied.join(", ")}`}
                   </div>
-                  <div className="mt-1 text-xs text-[#5b5e56]">
-                    Original wording ({clause.clause_id}): &ldquo;{clause.text}
-                    &rdquo;
-                  </div>
+                  {versions.length > 1 && versions[0]?.content && (
+                    <div className="mt-1 text-xs text-[#5b5e56]">
+                      Original wording ({eid}): &ldquo;{versions[0].content}
+                      &rdquo;
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -236,31 +517,13 @@ export function ClauseTree({
                 </div>
               )}
 
-              {displayTables.map((table) => (
-                <div key={table.table_id} className="mt-3 overflow-x-auto">
-                  {table.caption && (
-                    <p className="mb-1 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-[#080909]">
-                      {table.caption}
-                    </p>
-                  )}
-                  <table className="dg-table">
-                    <thead>
-                      <tr>
-                        {table.headers.map((header, idx) => (
-                          <th key={idx}>{header}</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {table.rows.map((row, rIdx) => (
-                        <tr key={rIdx}>
-                          {row.map((cell, cIdx) => (
-                            <td key={cIdx}>{cell}</td>
-                          ))}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+              {unappliedEffects.map((eff) => (
+                <div
+                  key={eff.effect_id}
+                  className="mt-2 border border-dashed border-[#080909] bg-[#efeee8] px-3 py-2 font-mono text-[10.5px] text-[#080909]"
+                >
+                  Unapplied effect ({eff.effect_id}, {eff.action}):{" "}
+                  {eff.unapplied_reason ?? "Low confidence"}
                 </div>
               ))}
 

@@ -97,7 +97,7 @@ def test_planted_local_source_in_non_test_jurisdiction_fails_gate(tmp_path: Path
     (workspace / "jurisdictions" / "in-ka-planted.yaml").write_text(
         yaml.safe_dump(
             {
-                "schema_version": "1.2",
+                "schema_version": "1.3",
                 "id": "in-ka-planted",
                 "name": "Planted Public Jurisdiction",
                 "visibility": "public",
@@ -135,7 +135,7 @@ def test_planted_missing_retrieval_block_in_non_test_jurisdiction_fails_gate(
     (workspace / "jurisdictions" / "in-ka-no-retrieval.yaml").write_text(
         yaml.safe_dump(
             {
-                "schema_version": "1.2",
+                "schema_version": "1.3",
                 "id": "in-ka-no-retrieval",
                 "name": "Missing Retrieval Jurisdiction",
                 "visibility": "public",
@@ -199,7 +199,7 @@ def test_planted_fpdf_generated_pdf_in_non_test_jurisdiction_fails_gate(
     (workspace / "jurisdictions" / "in-ka-fpdf.yaml").write_text(
         yaml.safe_dump(
             {
-                "schema_version": "1.2",
+                "schema_version": "1.3",
                 "id": "in-ka-fpdf",
                 "name": "Planted FPDF Jurisdiction",
                 "visibility": "public",
@@ -264,7 +264,7 @@ def test_valid_retrieval_record_and_clean_pdf_pass_gate(tmp_path: Path) -> None:
     (raw_dir / "valid-doc.meta.json").write_text(
         json.dumps(
             {
-                "schema_version": "1.2",
+                "schema_version": "1.3",
                 "doc_id": "valid-doc",
                 "title": "Valid Official Notification",
                 "issuing_authority": "Authority",
@@ -294,7 +294,7 @@ def test_valid_retrieval_record_and_clean_pdf_pass_gate(tmp_path: Path) -> None:
     (workspace / "jurisdictions" / "in-ka-valid.yaml").write_text(
         yaml.safe_dump(
             {
-                "schema_version": "1.2",
+                "schema_version": "1.3",
                 "id": "in-ka-valid",
                 "name": "Valid Public Jurisdiction",
                 "visibility": "public",
