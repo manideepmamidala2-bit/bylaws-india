@@ -74,7 +74,7 @@
 
 ### Phase 4: Part 4 (`09b`) — Schema 1.4 Topics, Relations, Conflicts, Precedence, Applicability, Succession & Local Graph
 
-- [ ] T004 Implement Part 4 (`09b`): add Schema 1.4 (`topics.yaml`, `succession.yaml`, `schemas/relations.schema.json`, `applies_to_jurisdiction` on documents, `topic` and `quantity` annotations using `pint`/regex, and `pipeline/bylaws/relations.py` generating `relations.json` with `same_topic`, `definition_differs`, `numeric_differs`, `cross_document_reference`, `precedence` requiring quoted statutory spans, and `corporation_differs`, plus `relations.md` QA report), build `/j/[id]/topics`, `/j/[id]/topics/[topic]`, and `/j/[id]/documents/[doc]/[eid]` (with local neighborhood graph + accessible list) and update `/structure` and `/j/[id]/sources`, publish Release `2.7.0`, and commit + push <!-- R4 -->
+- [x] T004 Implement Part 4 (`09b`): add Schema 1.4 (`topics.yaml`, `succession.yaml`, `schemas/relations.schema.json`, `applies_to_jurisdiction` on documents, `topic` and `quantity` annotations using `pint`/regex, and `pipeline/bylaws/relations.py` generating `relations.json` with `same_topic`, `definition_differs`, `numeric_differs`, `cross_document_reference`, `precedence` requiring quoted statutory spans, and `corporation_differs`, plus `relations.md` QA report), build `/j/[id]/topics`, `/j/[id]/topics/[topic]`, and `/j/[id]/documents/[doc]/[eid]` (with local neighborhood graph + accessible list) and update `/structure` and `/j/[id]/sources`, publish Release `2.7.0`, and commit + push <!-- R4 -->
 
 ### Phase 5: Parts 5 & 6 (`10` & `11`) — Supporting Provisions, Verified Overlays, All GBA Land-Use Sheets, `zone_applicability` Links & Final Release `3.0.0`
 

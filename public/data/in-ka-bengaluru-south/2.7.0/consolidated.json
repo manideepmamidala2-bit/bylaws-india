@@ -1,0 +1,888 @@
+{
+  "schema_version": "1.3",
+  "jurisdiction": "in-ka-bengaluru-south",
+  "generated": {
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "records": [
+    {
+      "clause_id": "bbl-2003:1.3",
+      "doc_id": "bbl-2003",
+      "number": "1.3",
+      "title": "These Bye-laws shall come into operation from 5 th of June 2004 .",
+      "text": "These Bye-laws shall come into operation from 5 th of June 2004 . [Amended (2017-10-28, ka-model-bbl-2017:CHAPTER 2(2)(3)): 1.4 Mutatis mutandis application of Master Plan and Zonal Regulations: Pursuant to Clause 1(3) of Notification No. UDD 14 TTP 2017 (P-4) dated 28-10-2017 (published on the official GBA/BBMP Building Plan Approval System under Bye laws and Zoning Regulations), all mandatory Master Plan or Zonal Regulations regarding use, land use, coverage, FAR, setback or open space, height, number of stories, number of dwelling units, and parking standards for various categories of buildings, including all amendments or modifications made therein from time to time, apply mutatis mutandis as part of these Bye-laws.]",
+      "tables": [],
+      "as_of_date": "2017-10-28",
+      "amendments_applied": [
+        "ka-model-bbl-2017:CHAPTER 2(2)(3)"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "bbl-2003:16.0",
+      "doc_id": "bbl-2003",
+      "number": "16.0",
+      "title": "Parking space",
+      "text": "Adequate space for the parking of vehicles shall be provided in the sites in accordance with the parking norms and stipulations set out in Chapter 8, Table 23 of the Revised Master Plan 2015 Volume III Zoning Regulations (effective 25-06-2007), superseding Table 13 of the 2003 Bye-laws.",
+      "tables": [
+        {
+          "table_id": "rmp2015-zr:CHAPTER 8:t1",
+          "caption": null,
+          "headers": [
+            "Sl. No",
+            "Type of use",
+            "One car parking of 2.5m x 5.5m each shall be provided for every"
+          ],
+          "rows": [
+            [
+              "1",
+              "Theaters and Auditoriums except Educational Institutions.",
+              "25 seats of accommodation subject to minimum of 20"
+            ],
+            [
+              "2",
+              "Retail Business ( shops, Shopping complexes, Malls, etc)",
+              "50sqm of floor area"
+            ],
+            [
+              "3",
+              "Multiplex integrated with shopping",
+              "40sqm of floor area plus requirement of parking according to Cinematographic act"
+            ],
+            [
+              "4",
+              "Wholesale and Warehouse buildings",
+              "150sqm plus 1 lorry parking space measuring 3.5 mx7.5 m. 1 additional for every 500sqm or part thereof"
+            ],
+            [
+              "5",
+              "Restaurant establishment servicing food and drinks and such other establishment",
+              "75sqm of Floor area"
+            ],
+            [
+              "6",
+              "Lodging establishments, hotels and Tourist homes",
+              "80 sq.m of Floor area."
+            ],
+            [
+              "7",
+              "For star hotels",
+              "For every 2 rooms. Additional 10% of the total requirement shall be reserved as parking for visitors."
+            ],
+            [
+              "8",
+              "Office buildings (Govt/Semi-Govt.& Pvt)",
+              "50sqm of Floor area"
+            ],
+            [
+              "9",
+              "Hostels",
+              "Professional college hostels: 1 for every 5 rooms and others: 1 for every 10 rooms."
+            ],
+            [
+              "10",
+              "Industrial Buildings",
+              "100sqm of floor area plus 1 lorry space measuring 3.5 mx7.5 mfor every 1000 sq.mt or part thereof"
+            ],
+            [
+              "11",
+              "Nursing homes",
+              "50sqm of Floor area"
+            ],
+            [
+              "12",
+              "Hospitals",
+              "100sqm of Floor area"
+            ],
+            [
+              "13",
+              "Multi- dwellings Units",
+              "A. Dwelling unit measuring more than 50 sq.m up to 150 sq.m of floor area. Additional 1 car park for part thereof, when it is more than 50% of the prescribed limit. B. Additional car parking for each two Dwelling units, if the DU is less than 50 sq.mt C . 10 %of additional parking shall be kept for visitors car parking."
+            ],
+            [
+              "15",
+              "Kalyana mantaps, Convention centers",
+              "50sqm of Floor area."
+            ],
+            [
+              "16",
+              "Recreational clubs",
+              "50sqm of Floor area."
+            ],
+            [
+              "17",
+              "Educational buildings",
+              "150sqm of Floor area"
+            ],
+            [
+              "18",
+              "Other Public and Semi-Public Buildings",
+              "100sqm of Floor area"
+            ]
+          ],
+          "page": 49
+        }
+      ],
+      "as_of_date": "2007-06-25",
+      "amendments_applied": [
+        "rmp2015-zr:CHAPTER 8"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "bbl-2003:3.10",
+      "doc_id": "bbl-2003",
+      "number": "3.10",
+      "title": "Exemptions for ground rent -",
+      "text": "[Omitted by bscc-bbl-amend-2026-05:2 with effect from 2026-05-14.]",
+      "tables": [],
+      "as_of_date": "2026-05-14",
+      "amendments_applied": [
+        "bscc-bbl-amend-2026-05:2"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": true
+    },
+    {
+      "clause_id": "bbl-2003:3.8",
+      "doc_id": "bbl-2003",
+      "number": "3.8",
+      "title": "Ground rent The ground rent for stocking of building materials on public land as prescribed by the Authority without causing obstruction to movement of vehicles and pedestrians subject to the permission of the Authority.",
+      "text": "[Omitted by bscc-bbl-amend-2026-05:2 with effect from 2026-05-14.]",
+      "tables": [],
+      "as_of_date": "2026-05-14",
+      "amendments_applied": [
+        "bscc-bbl-amend-2026-05:2"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": true
+    },
+    {
+      "clause_id": "bbl-2003:3.9",
+      "doc_id": "bbl-2003",
+      "number": "3.9",
+      "title": "Ground rent for high rise buildings",
+      "text": "[Omitted by bscc-bbl-amend-2026-05:2 with effect from 2026-05-14.]",
+      "tables": [],
+      "as_of_date": "2026-05-14",
+      "amendments_applied": [
+        "bscc-bbl-amend-2026-05:2"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": true
+    },
+    {
+      "clause_id": "bbl-2003:30.0",
+      "doc_id": "bbl-2003",
+      "number": "30.0",
+      "title": "SAFETY MEASURES AGAINST EARTH QUAKE IN BUILDING CONSTRUCTION",
+      "text": "SAFETY MEASURES AGAINST EARTH QUAKE IN BUILDING CONSTRUCTION Buildings with ground plus four floors and above or buildings with a height of 15 mtrs. and above shall be designed and constructed adopting the norms prescribed in the National Building Code and in the 'Criteria for earthquake resistant design of structures' bearing No. IS 1893-2002 published by the Bureau of Indian Standards, making the buildings resistant to earthquake. The supervision certificate and the completion certificate of every such building shall contain a certificate recorded by the Registered Engineer / Architect that the norms of the National Building Code and I.S. 1893-2002 have been followed in the design and construction of buildings for making the buildings resistant to earthquake. [Modified (2007-06-25, rmp2015-zr:9.3): 30.0 SAFETY MEASURES AGAINST EARTHQUAKE IN BUILDING CONSTRUCTION: Buildings with ground plus three floors and above or height of 11.5 m / 15.0 m and above shall be designed and constructed in accordance with the Indian Standard codes for earthquake-resistant design (IS 1893, IS 13920, IS 4326) and certified by a Registered Structural Engineer under Clause 30.0 and Chapter 9, Clause 9.3 of the RMP 2015 Zoning Regulations.]",
+      "tables": [
+        {
+          "table_id": "bbl-2003:30.0:t1",
+          "caption": null,
+          "headers": [
+            "Sl. No.",
+            "Type of use",
+            "100 liters per day shall be provided for every unit"
+          ],
+          "rows": [
+            [
+              "1",
+              "Restaurants serving food and drinks with seating / serving area of more than 100 sq.m and above",
+              "40 sq. m. of seating or serving area"
+            ],
+            [
+              "2",
+              "Lodging establishments and Tourist Homes",
+              "3 rooms"
+            ],
+            [
+              "3",
+              "Hostel and guest houses",
+              "6 beds / persons capacity"
+            ],
+            [
+              "4",
+              "Industrial canteens",
+              "50 workers"
+            ],
+            [
+              "5",
+              "Nursing homes and hospitals",
+              "4 beds"
+            ],
+            [
+              "6",
+              "Kalyana Mandira, Community Hall and Convention hall (with dining hall and kitchen)",
+              "30 sq.mtrs. of floor area"
+            ],
+            [
+              "7",
+              "Recreational clubs",
+              "100 sq. mtrs of floor area"
+            ],
+            [
+              "8",
+              "Residential buildings: a) Single dwelling unit measuring 200 sq.m. of floor area or site area of more than 400 sq.m. whichever is more b) 500 lpd for multi dwelling unit / apartments for every 5 units and multiples thereof.",
+              ""
+            ],
+            [
+              "9",
+              "Solar photovoltaic lighting systems shall be installed in multi unit residential buildings (with more than five units) for lighting the set back areas, drive ways, and internal corridors.",
+              ""
+            ]
+          ],
+          "page": 49
+        }
+      ],
+      "as_of_date": "2007-06-25",
+      "amendments_applied": [
+        "rmp2015-zr:9.3"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "bbl-2003:6.0(i)",
+      "doc_id": "bbl-2003",
+      "number": "6.0(i)",
+      "title": "Wherever any construction is in violation/deviation of the sanctioned plan, the Commissioner may, if he considers that the violations / deviations are within 5% of (1) the set back to be provided around the building, (2) plot coverage (3) floor area ratio and (4) height of the building and that the demolition under chapter XV of the Act is not feasible without affecting structural stability, he may regularise such violations/deviations after recording detailed reasons for the same.",
+      "text": "(i) Wherever any construction is in violation/deviation of the sanctioned plan, the Commissioner (Bengaluru South City Corporation, Notification No: BSCC/Com/PR/35/2026-27 dated 14-05-2026) may, if he considers that the violations / deviations are within the limits specified in Table-2B below (up to 15% setback and coverage deviation; up to 15% FAR deviation on plots up to 500 sq.m and 5% FAR deviation on plots above 500 sq.m; 7.5% height deviation not beyond sanctioned number of floors) in case of (1) the setback to be provided around the building, (2) plot coverage (3) floor area ratio and (4) height of the building and that the demolition under chapter XVII of the Act is not feasible without affecting structural stability, he may regularize such violations/deviations after recording detailed reasons for the same and levying compounding fee as per Table-2A, Table-2C and Table-2D (minimum guidance value consideration Rs.50,000/- per sq.m; Residential 3%/6% up to 500 sq.m and 5%/10% above 500 sq.m; Non-Residential 6%/12%).",
+      "tables": [],
+      "as_of_date": "2026-05-14",
+      "amendments_applied": [
+        "bscc-bbl-amend-2026-05:3"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "bbl-2003:9.10.1",
+      "doc_id": "bbl-2003",
+      "number": "9.10.1",
+      "title": "Limitations of floor area and covered area",
+      "text": "Under Revised Master Plan 2015 Volume III Zoning Regulations (effective 25-06-2007), the Local Planning Area of Bengaluru is organized into three main Rings (Ring I: Core Area within Core Ring Road; Ring II: Developed Area between Core Ring Road and Outer Ring Road; Ring III: Developing Area beyond Outer Ring Road) and zone-specific land-use categories in Chapter 4 (Tables 10\u201319), which govern maximum plot coverage and Floor Area Ratio (FAR) with reference to plot size and existing road width, superseding the 1995 CDP A, B and C areas and Table 6 of the 2003 Bye-laws.",
+      "tables": [],
+      "as_of_date": "2007-06-25",
+      "amendments_applied": [
+        "rmp2015-zr:1.2"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "bbl-2003:9.2",
+      "doc_id": "bbl-2003",
+      "number": "9.2",
+      "title": "Exterior open spaces/ set backs, coverage, floor area ratio, numbers of floors and heights The set backs required on all the sides of building/s, maximum plot coverage, maximum FAR, maximum number of floors, maximum height of buildings that are permissible for different dimensioned sites and widths of roads are set out in Tables 4, 5 and 6 given below.",
+      "text": "Exterior open spaces / setbacks, coverage, floor area ratio, numbers of floors and heights: Under Section 76M of the Karnataka Town and Country Planning Act, 1961 and Revised Master Plan 2015 Volume III Zoning Regulations (G.O. No. UDD 540 BEM AA SE 2004, effective 25-06-2007), the setbacks required on all sides of buildings up to 11.5 m height (plots up to 4000 sq.m) and high-rise buildings above 11.5 m height are governed by Chapter 3, Regulation 3.1 (Table 8: Exterior open spaces / setbacks in percentage of width/depth of plot, and Table 9: All-around setbacks for buildings above 11.5 m height) of the RMP 2015 Zoning Regulations, superseding Tables 4 and 5 of the 2003 Bye-laws.",
+      "tables": [
+        {
+          "table_id": "rmp2015-zr:3.1:t1",
+          "caption": null,
+          "headers": [
+            "Width/Depth of site",
+            "Width of site",
+            "Width of site",
+            "Depth of site",
+            "Depth of site"
+          ],
+          "rows": [
+            [
+              "Up to 6.0",
+              "1.0 m",
+              "0",
+              "1.0 m",
+              "0"
+            ],
+            [
+              "Above 6.0 up to 9.0",
+              "1.0 mon all sides",
+              "1.0 mon all sides",
+              "1.0 mon all sides",
+              "1.0 mon all sides"
+            ],
+            [
+              "Above 9.0m",
+              "8%",
+              "8%",
+              "12%",
+              "8%"
+            ]
+          ],
+          "page": 20
+        }
+      ],
+      "as_of_date": "2007-06-25",
+      "amendments_applied": [
+        "rmp2015-zr:3.1"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "bbl-2003:9.3.1",
+      "doc_id": "bbl-2003",
+      "number": "9.3.1",
+      "title": "High-rise buildings (11.5 m height and above)",
+      "text": "In the case of high-rise buildings (11.5 m height and above), the minimum all-around front, rear, and side setbacks shall be as specified in Chapter 3, Regulation 3.1, Table 9 of the Revised Master Plan 2015 Zoning Regulations (effective 25-06-2007), starting at 5.0 m all-around for buildings above 11.5 m up to 15.0 m height and increasing progressively up to 16.0 m for buildings above 50.0 m height.",
+      "tables": [
+        {
+          "table_id": "rmp2015-zr:3.1:t1",
+          "caption": null,
+          "headers": [
+            "Width/Depth of site",
+            "Width of site",
+            "Width of site",
+            "Depth of site",
+            "Depth of site"
+          ],
+          "rows": [
+            [
+              "Up to 6.0",
+              "1.0 m",
+              "0",
+              "1.0 m",
+              "0"
+            ],
+            [
+              "Above 6.0 up to 9.0",
+              "1.0 mon all sides",
+              "1.0 mon all sides",
+              "1.0 mon all sides",
+              "1.0 mon all sides"
+            ],
+            [
+              "Above 9.0m",
+              "8%",
+              "8%",
+              "12%",
+              "8%"
+            ]
+          ],
+          "page": 20
+        }
+      ],
+      "as_of_date": "2007-06-25",
+      "amendments_applied": [
+        "rmp2015-zr:3.1"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:3.1",
+      "doc_id": "rmp2015-zr",
+      "number": "3.1",
+      "title": "SETBACKS (substituted 05-01-2026 by Notification No. UDD 235 MNJ 2025(E))",
+      "text": "Clauses (ii) & (iii) and Table 8 (Setbacks for buildings with total height up to 12.0 m excluding stilt floor): (1) Plot up to 60 sq.m (All uses): Front 0.75 m, Rear 0 m, Left 0 m, Right 0.75 m; (2) Plot above 60 sq.m up to 150 sq.m (Width up to 9.0 m): Front 0.90 m, Rear 0.75 m, Left 0.75 m, Right 0.90 m; (Width above 9.0 m): Front 12% of depth (min 1.0 m), Rear 8% (min 0.75 m), Left 8% (min 0.75 m), Right 8% (min 1.0 m); (3) Plot above 150 sq.m up to 250 sq.m: Front 1.00 m (or 12%), Rear 0.80 m (or 8%), Left 0.80 m (or 8%), Right 1.00 m (or 8%); (4) Plot above 250 sq.m up to 4000 sq.m: Front 12% of depth, Rear 8% of depth, Left 8% of width, Right 8% of width; (5) Plot above 4000 sq.m: minimum setback of 5.0 m on all sides. Note 1: For plots up to 250 sq.m in area, maximum permissible building height is 15.0 m (including stilt floor) and setbacks in Table 8 apply.",
+      "tables": [
+        {
+          "table_id": "rmp2015-zr:3.1:t1",
+          "caption": null,
+          "headers": [
+            "Width/Depth of site",
+            "Width of site",
+            "Width of site",
+            "Depth of site",
+            "Depth of site"
+          ],
+          "rows": [
+            [
+              "Up to 6.0",
+              "1.0 m",
+              "0",
+              "1.0 m",
+              "0"
+            ],
+            [
+              "Above 6.0 up to 9.0",
+              "1.0 mon all sides",
+              "1.0 mon all sides",
+              "1.0 mon all sides",
+              "1.0 mon all sides"
+            ],
+            [
+              "Above 9.0m",
+              "8%",
+              "8%",
+              "12%",
+              "8%"
+            ]
+          ],
+          "page": 20
+        }
+      ],
+      "as_of_date": "2026-01-05",
+      "amendments_applied": [
+        "rmp2015-zr-amend-2026-01:11.11.2025(a)"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:3.10",
+      "doc_id": "rmp2015-zr",
+      "number": "3.10",
+      "title": "Ramps",
+      "text": "Ramps [Modified (2026-01-05, rmp2015-zr-amend-2026-01:11.11.2025:11.11.2025(a)): 3.10 Ramps (amended 05-01-2026 by Notification No. UDD 235 MNJ 2025(E)): (i) Minimum ramp width 1.5 m for two-wheelers; (iii) For plot area up to 1000 sq.m, a single ramp of 3.5 m width is permitted with 1.0 m setback from plot boundary; (x) For plot area up to 500 sq.m, mechanical/hydraulic car lift is permitted without ramps.]",
+      "tables": [],
+      "as_of_date": "2026-01-05",
+      "amendments_applied": [
+        "rmp2015-zr-amend-2026-01:11.11.2025:11.11.2025(a)"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:3.16",
+      "doc_id": "rmp2015-zr",
+      "number": "3.16",
+      "title": "General notes",
+      "text": "i. All permissions accorded by BDA or Government shall be treated as conforming uses irrespective of the classification made in the Revised Master Plan 2015. This is to be allowed on a case by case basis only. ii. All cases of SEZ approved by Government of India (GOI), till the Revised Master Plan2015 is finally approved, shall be considered for clearance, irrespective of land use classification (except the drain buffers) subject to payment of fees under section 18 of KTCP Act, 1961. Decision of the Authority in this regard shall be final. iii. In case of buildings that have been permitted lawfully by CMC's or BMP or BDA and if such structures are in obstruction to the alignment of the proposed roads in RMP 2015, such road alignment shall be re-looked into by the authority and decision may be taken suitably. iv. When mixed uses are permitted on the plot, the land use of ground floor shall be considered as the main use and the relevant regulations shall be applicable. v. In case of commercial buildings or shopping centres and residential apartments, provision shall be made for fire safety measures in accordance with requirement as stipulated by the Fire Force authorities before the issue of occupancy certificate. vi. Mezzanine floor is not permitted in residential buildings. vii. Elevator (Lift) has to be provided for buildings with more than G+3 floors. viii. New Additions to existing buildings: In case of buildings which are existing prior to coming into force of these regulations, upper floors may be permitted according to the existing coverage subject to limitation of height , FAR , building line or any road widening proposals in accordance with present regulations. ix. Areas which fall within 150m radius from the metro terminals shall be eligible for a maximum FAR of 4 for all permissible uses, irrespective of the FAR applicable for the respective uses in the respective tables. However, this will be applied only after the completion of the metro stations and also the same to be confirmed by the BMRCL. Till such time the existing regulations shall apply. x. TDR may be permitted till the completion of the Metro stations and not after that. However, FAR shall not exceed 4 in any case. xi. All bus terminals shall be eligible for an FAR as applicable to commercial zone. Min area 1 acres. xii. If the total floor area of a proposed building is more than 500 sq mtrs, then an area measuring minimum of 3mtx5mt abutting to the access road shall be reserved for installation of electrical transformer, while issuing building permission. xiii. Rain water harvesting: Provision of Rain Water Harvesting is mandatory for all plots which are more than 240 sq.m in extent. A 5 % rebate on the property tax is offered for residential property and 2 % for non residential buildings within BMA for the first 5 years, when rain water harvesting is made as an integral part of the building constructed. xiv. Solar energy: Solar lighting and solar water heating is recommended for all new development/constructions. If the solar lighting and solar water heating is adopted, then refundable security deposit on fulfilling the conditions shall be returned along with 2 % interest. xv. Tree Planting: Planting of minimum one tree is mandatory for a site measuring more than 2400 sq ft and minimum of 2 trees for a site measuring more than 4000 sq ft. The concerned authorities shall ensure that the trees are planted before approval of building plan and tax shall be accessed only after confirming the existence of trees in the site in question. The trees shall be planted only in the rear set back area. [Amended (2009-03-02, rmp2015-zr-amend-2009-03:3.16(ix)): 3.16(ix) Metro Station 150m Buffer FAR: Areas which fall within a distance of 150m from the outer boundary of the Metro Terminal/Station are eligible for maximum FAR of 4.0 for all permissible uses irrespective of the applicable FAR in the respective Zonal Regulations, subject to road width of minimum 18m.]",
+      "tables": [],
+      "as_of_date": "2009-03-02",
+      "amendments_applied": [
+        "rmp2015-zr-amend-2009-03:3.16(ix)"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:3.4",
+      "doc_id": "rmp2015-zr",
+      "number": "3.4",
+      "title": "FAR or Floor Area Ratio",
+      "text": "FAR or Floor Area Ratio (substituted 19-06-2019 by UDD 255 MNJ 2018): Exclusions from FAR computation: (i) electrical substation/transformer/generator room; (ii) refuge areas in high-rise buildings as per fire norms; (iii) separate public toilet block in non-residential buildings on plots > 1000 sq.m; (iv) swimming pool (open to sky); (v) staircase/staircase room; (vi) architectural features; (vii) chimneys; (viii) ventilation ducts and garbage shafts; (ix) service ducts; (x) parking areas including driveways and ramps; (xi) open courts; (xii) overhead tanks; (xiii) escalators; (xiv) lift wells and lift machine room; (xv) watchman cubicle not exceeding 4 sq.m; (xvi) sewage treatment plant. Inserts Regulation 3.4-A Height of Building (NOC from HAL/AAI/Defence authorities).",
+      "tables": [
+        {
+          "table_id": "rmp2015-zr:3.4:t1",
+          "caption": null,
+          "headers": [
+            "Sl. No.",
+            "Height of the bldg (m)",
+            "Front, rear and side setbacks (Min. in m)"
+          ],
+          "rows": [
+            [
+              "1",
+              "Above 11.5m up to 15m",
+              "5.00"
+            ],
+            [
+              "2",
+              "Above 15 mup to 18.0m",
+              "6.00"
+            ],
+            [
+              "3",
+              "Above 18.0 up to 21 .0m",
+              "7.00"
+            ],
+            [
+              "4",
+              "Above 21 up to 24 m",
+              "8.00"
+            ],
+            [
+              "5",
+              "Above 24.0 mup to 27.0 m",
+              "9.00"
+            ],
+            [
+              "6",
+              "Above 27 up to 30.0 m",
+              "10.00"
+            ],
+            [
+              "7",
+              "Above 30 up to 35.0 m",
+              "11.00"
+            ],
+            [
+              "8",
+              "Above 35 up to 40.0 m",
+              "12.00"
+            ],
+            [
+              "9",
+              "Above 40 up to 45.0 m",
+              "13.00"
+            ],
+            [
+              "10",
+              "Above 45 up to 50.0 m",
+              "14.00"
+            ],
+            [
+              "11",
+              "Above 50.0m",
+              "16.00"
+            ]
+          ],
+          "page": 21
+        }
+      ],
+      "as_of_date": "2019-06-19",
+      "amendments_applied": [
+        "rmp2015-zr-amend-2018-09:3.4",
+        "rmp2015-zr-amend-2019-06:3_2"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:3.9",
+      "doc_id": "rmp2015-zr",
+      "number": "3.9",
+      "title": "Basement",
+      "text": "i. Means storey which is partly or wholly below the average ground level and with a height not exceeding a projection of 1.2 m above the average ground level and overall height of the basement under any circumstances should not exceed 4.5 m between the floor and the ceiling of the basement in case of normal parking. In case of stacked/ mechanical parking the height of the basement may be permitted up to a maximum of 4.5m ii. If a site is measuring less than 200sqm, then car parking shall not be permitted in the basement floor. iii. If the minimum setback is more than 2.0 m, then the basement may be extended on all sides except the side abutting the road, provided the minimum setback between the basement and property boundary is minimum 2.0 m. iv. Basement floors up to a maximum of 5 (five) levels may be permitted for car parking. v. Permissible uses in the Basement for buildings other than 3 star and above category: \u00b7 Dark rooms for X ray and storage of light sensitive materials \u00b7 Bank Safes/ Strong room included in the FAR \u00b7 Air condition handling units/equipment, utilities and services connected with the building. \u00b7 Parking vi. In case of 3 star and above category of hotels, the spare area in the basement after catering to the requirement of parking facilities may be allowed to be used for other purposes incidental to the running of the hotel, such as; health club, shopping arcade, dining area, with or without kitchen facilities, with gas cylinder, administrative office, gym rooms, banquet/conferencing facility, swimming pool, discoth\u00e8que etc. subject to reckoning of the same for FAR calculations. vii. Parking area if misused is liable to be municipalised/taken over by the local body/authority without any compensation. viii. Basement in a residential building shall be allowed without taking into FAR calculations subject to the condition that it will be used only for the purposes of Home Theater or Gym or a combination of both for personal use of the occupant on a site which does not exceed 500sqm and should be in Residential (Main) area as per Revised Master Plan 2015. In such cases, it should be single dwelling unit only and the entry to the basement shall be from inside the main building itself. ix. When Basement is used for Car parking, the convenient entry and exit shall be provided. Adequate drainage, ventilation, lighting arrangements shall be made to the satisfaction of the authority. [Modified (2026-01-05, rmp2015-zr-amend-2026-01:11.11.2025(e)): 3.9 Basement (amended 05-01-2026 by Notification No. UDD 235 MNJ 2025(E)): (iii) One basement (single cellar) is permitted for residential buildings on plot area above 200 sq.m abutting road width above 9.0 m solely for parking and household services; (x) Vehicle parking in basement or upper floors may use mechanical/automated multi-level parking systems.]",
+      "tables": [],
+      "as_of_date": "2026-01-05",
+      "amendments_applied": [
+        "rmp2015-zr-amend-2026-01:11.11.2025(e)"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:4.1.2",
+      "doc_id": "rmp2015-zr",
+      "number": "4.1.2",
+      "title": "Regulations (Permissible land uses in Residential Main, substituted 20-03-2015)",
+      "text": "(1) No commercial activity of whatsoever nature shall be allowed in Residential Main and Residential Mixed zones in all three rings if the road width is less than 40 ft (12 m). (2) In Ring I and II: Main land use R; Ancillary land use up to 20% of total built-up area or 50 sq.m whichever is lower on roads 40 ft (12 m) and above, only as part of residential building. (3) In Ring III: Ancillary land use up to 20% of built-up area or 50 sq.m whichever is lower.",
+      "tables": [],
+      "as_of_date": "2015-03-20",
+      "amendments_applied": [
+        "rmp2015-zr-amend-2015-03:8(i)"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:4.10.2",
+      "doc_id": "rmp2015-zr",
+      "number": "4.10.2",
+      "title": "Regulations",
+      "text": "Permissible land uses in Traffic and Transportation (T&T) zone: Main land use category T-4; Ancillary uses (Retail shops, restaurants, banks, post offices, offices, hotels, transport terminals, bus stands, railway/metro stations, multi-level parking) up to 50% of total built-up area. Table 19 (FAR and Ground Coverage in T&T Zone): Plot area up to 500 sq.m (45% coverage, 1.00 FAR up to 12m road); 500\u20132000 sq.m (45% coverage, 1.50 FAR on 12m\u201318m road); 2000\u20134000 sq.m (45% coverage, 1.75 FAR on 18m\u201324m road); above 4000 sq.m (45% coverage, 2.25 FAR on road above 24m).",
+      "tables": [],
+      "as_of_date": "2009-03-02",
+      "amendments_applied": [
+        "rmp2015-zr-amend-2009-03:4.10.2"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:4.12.2",
+      "doc_id": "rmp2015-zr",
+      "number": "4.12.2",
+      "title": "Regulations",
+      "text": "Regulations for Park and Open Space (P) & Valley / Drain Buffer Zones (amended 15-10-2025 by Notification No. UDD 468 MNJ 2025(E)): In case of water bodies, a 30.0 m buffer of \"No Development Zone\" is to be maintained around the lake as per revenue records. Valley / Storm Water Drain (Nala) Buffer Table: (1) Primary / Raja Kaluve (P-1): 15m buffer from the edge of the drain; (2) Secondary drain (P-2): 10m buffer from the edge of the drain; (3) Tertiary drain (P-3): 5m buffer from the edge of the drain. Drains/nalas leading to tertiary drains shall be maintained as per revenue records and no buffer shall be insisted for such drains.",
+      "tables": [],
+      "as_of_date": "2025-10-15",
+      "amendments_applied": [
+        "rmp2015-zr-amend-2025-10:part_IVA__tbl_1"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:4.2.2",
+      "doc_id": "rmp2015-zr",
+      "number": "4.2.2",
+      "title": "Regulations (Permissible land uses in Residential Mixed, substituted 20-03-2015)",
+      "text": "In Ring I and II, ancillary commercial uses up to C-2 category permitted on roads of width 40 ft (12 m) and above subject to plot size not exceeding 1000 sq.m and space standards in Table 7; in Ring III, ancillary uses permitted up to 30% of built-up area on roads 12 m and above.",
+      "tables": [
+        {
+          "table_id": "rmp2015-zr:4.2.2:t1",
+          "caption": null,
+          "headers": [
+            "Sl.No.",
+            "Plot size (sq.m)",
+            "Road Width (Min)",
+            "Ancillary Uses permissible as main land use"
+          ],
+          "rows": [
+            [
+              "1",
+              "Up to 240",
+              "15.0m",
+              "C2, I-2,U3,T2"
+            ],
+            [
+              "2",
+              "Above 240 Up to 1000",
+              "18.0m",
+              "C3, I-2,U4,T2"
+            ]
+          ],
+          "page": 29
+        },
+        {
+          "table_id": "rmp2015-zr:4.2.2:t2",
+          "caption": null,
+          "headers": [
+            "Sl.No.",
+            "Ground Coverage. (Max)",
+            "FAR",
+            "Road width (m)"
+          ],
+          "rows": [
+            [
+              "1",
+              "Up to 70%",
+              "1.75",
+              "Up to 12.0"
+            ],
+            [
+              "2",
+              "Up to 65%",
+              "2.25",
+              "Above 12.0 up to18.0m"
+            ],
+            [
+              "3",
+              "Up to 60%",
+              "2.50",
+              "Above 18.0 up to 24.0m"
+            ],
+            [
+              "4",
+              "Up to 55%",
+              "3.00",
+              "Above 24.0 mup to 30m"
+            ],
+            [
+              "5",
+              "Up to 50%",
+              "3.25",
+              "Above 30m"
+            ]
+          ],
+          "page": 29
+        }
+      ],
+      "as_of_date": "2015-03-20",
+      "amendments_applied": [
+        "rmp2015-zr-amend-2015-03:10"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:4.5",
+      "doc_id": "rmp2015-zr",
+      "number": "4.5",
+      "title": "MUTATION CORRIDORS",
+      "text": "MUTATION CORRIDORS [Modified (2026-01-05, rmp2015-zr-amend-2026-01:11.11.2025:11.11.2025(a)_2): 4.5 MUTATION CORRIDORS (Table 15 substituted 05-01-2026 by Notification No. UDD 235 MNJ 2025(E)): (1) Plot size up to 10000 sq.m: Max Ground Coverage 55%; FAR 2.75 on roads up to 30m, FAR 3.25 on roads above 30m; (2) Plot size above 10000 sq.m: Max Ground Coverage 50%; FAR 3.25 on all roads.]",
+      "tables": [],
+      "as_of_date": "2026-01-05",
+      "amendments_applied": [
+        "rmp2015-zr-amend-2026-01:11.11.2025:11.11.2025(a)_2"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:4.7",
+      "doc_id": "rmp2015-zr",
+      "number": "4.7",
+      "title": "INDUSTRIAL [I (General)]",
+      "text": "INDUSTRIAL [I (General)] [Modified (2026-01-05, rmp2015-zr-amend-2026-01:11): 4.7 INDUSTRIAL I (GENERAL) (Table 16 substituted 05-01-2026 by Notification No. UDD 235 MNJ 2025(E)): (1) Tiny (up to 500 sq.m): 75% coverage, 1.50 FAR, min road width up to 9m; (2) Small (above 500 up to 2000 sq.m): 65% coverage, 1.50 FAR, min road above 9m; (3) Medium (above 2000 up to 4000 sq.m): 55% coverage, 1.25 FAR, min road above 12m; (4) Large (above 4000 sq.m): 50% coverage, 1.25 FAR, min road above 12m.]",
+      "tables": [],
+      "as_of_date": "2026-01-05",
+      "amendments_applied": [
+        "rmp2015-zr-amend-2026-01:11"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:6.1",
+      "doc_id": "rmp2015-zr",
+      "number": "6.1",
+      "title": "RESIDENTIAL",
+      "text": "RESIDENTIAL a. Road widths: The minimum width of road shall not be less than 9.0 m and the road widths shall not be less than the plot widths facing the respective road. Every Fourth road in a layout shall have a minimum of 12.0 m width. b. Area for Residential development: Apart from the provision for amenities and open spaces, the area for residential development shall be up to a maximum of 55 % of the total land area. [Modified (2019-06-19, rmp2015-zr-amend-2019-06:4): 6.1 Residential Subdivision Regulations (amended 19-06-2019 by UDD 255 MNJ 2018): In Regulation 6.1.2, residential area earmarking increased up to 55% of total layout area.]",
+      "tables": [],
+      "as_of_date": "2019-06-19",
+      "amendments_applied": [
+        "rmp2015-zr-amend-2019-06:4"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:7.1",
+      "doc_id": "rmp2015-zr",
+      "number": "7.1",
+      "title": "Regulations for Residential Development Plan",
+      "text": "1. 10 % of the land shall be reserved for Park & Open space. The open space (park) shall be relinquished to the authority free of cost and the same may be allowed to be maintained by the local residents association (registered), if the Authority so desires. [Modified (2019-06-19, rmp2015-zr-amend-2019-06:5S): 7.1 Regulations for Residential and Non-Residential Development Plan (amended 19-06-2019 by UDD 255 MNJ 2018): In Table-20, Table-21, and Table-22, road width bands updated to \"9m and up to 12m\", \"Above 18m up to 24m\", and \"Above 24m up to 30m\"; in Regulation 7.2(c), the word \"excluding\" is substituted by \"including\".]",
+      "tables": [],
+      "as_of_date": "2019-06-19",
+      "amendments_applied": [
+        "rmp2015-zr-amend-2019-06:5S"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:CHAPTER 10",
+      "doc_id": "rmp2015-zr",
+      "number": "CHAPTER 10",
+      "title": "TRANSFER OF DEVELOPME NT RIGHTS (TDR)",
+      "text": "TRANSFER OF DEVELOPME NT RIGHTS (TDR) When an area with in the local planning area is required for public purpose (i.e. road, widening of road, parks, etc.) the owner of any site or land which comprises of such area surrenders it free of cost and hands over possession of the same to the planning authority / Local Authority free of cost and encumbrance. The Planning Authority / Local Authority permits development rights in the form of additional floor area which shall be equal to one and half times the area surrendered. The development rights so permitted may be utilised either at the remaining portion of the area after surrender or any where in the LPA, either by himself or by transfer to any other person. [Amended (2025-04-02, rmp2015-zr-amend-2025-04:CHAPTER 11_2): 11.0 CHAPTER 11 \u2014 PREMIUM F.A.R GRANTED BY LEVY OF PREMIUM CHARGES (Inserted after Chapter 10 by Notification No. UDD 78 MNJ 2024 (E), dated 02-04-2025): (1) Additional Premium FAR over and above the permissible FAR in the Zonal Regulations is permissible based on abutting road width: (a) Road width above 9 meters and up to 12 meters: up to 20% of permissible FAR (0.2 factor); (b) Road width above 12 meters and up to 18 meters: up to 40% of permissible FAR (0.4 factor); (c) Road width above 18 meters: up to 60% of permissible FAR (0.6 factor). (2) The maximum combined additional FAR (Premium FAR + TDR/DRC) shall not exceed 60% of regular permissible FAR. (3) Premium FAR charges shall be 50% of the Guidance Value (under Section 45B of the Karnataka Stamp Act, 1957) of the notional land required for the additional floor area (i.e. Additional Built-up Area divided by permissible FAR), or 28% of the combined land + building guidance value per sq.m, whichever is higher.]",
+      "tables": [
+        {
+          "table_id": "rmp2015-zr-amend-2025-04:CHAPTER 11_2:t1",
+          "caption": "Table No.27",
+          "headers": [
+            "Areas as defined",
+            "Maximum",
+            "How the maximum allowed"
+          ],
+          "rows": [
+            [
+              "by the Road",
+              "permissible",
+              "additional FAR in Col (2) should be"
+            ],
+            [
+              "Width where",
+              "additional F.A.R availed as shown below"
+            ],
+            [
+              "Premium FAR",
+              "for a property for",
+              "Maximum",
+              "The additional"
+            ],
+            [
+              "may be issued",
+              "which Premium",
+              "additional",
+              "F.A.R which"
+            ],
+            [
+              "(m)",
+              "F.A.R by levy of",
+              "F.A.R via",
+              "may be availed"
+            ],
+            [
+              "charges is",
+              "Premium F.A.R",
+              "using D.R.C /"
+            ],
+            [
+              "granted",
+              "which may be",
+              "T.D.R alongwith"
+            ],
+            [
+              "granted by levy",
+              "the Premium"
+            ],
+            [
+              "of charges",
+              "FAR"
+            ],
+            [
+              "(1)",
+              "(2)",
+              "(3)",
+              "(4)"
+            ]
+          ],
+          "page": 2
+        }
+      ],
+      "as_of_date": "2025-04-02",
+      "amendments_applied": [
+        "rmp2015-zr-amend-2025-04:CHAPTER 11_2"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    },
+    {
+      "clause_id": "rmp2015-zr:chp_2__tbl_1",
+      "doc_id": "rmp2015-zr",
+      "number": "chp_2__tbl_1",
+      "title": "Table 1",
+      "text": "Table 1: Permissible land use in Residential category (substituted by Notification No. UDD 105 MNJ 2008 dated 20-03-2015): R-1 Plotted residential developments; R-2 Villas, semi-detached houses; R-3 Apartments, Hostels, Dharmashala; R-4 Multi-Dwelling Housing, Service Apartments; R-5 Group Housing (Development Plans); R-6 Bus bays, Auto stand, milk booth, HOPCOMS; R-7 Kalyana Mantapas; R-8 Multi-level car parking as part of residential developments.",
+      "tables": [],
+      "as_of_date": "2015-03-20",
+      "amendments_applied": [
+        "rmp2015-zr-amend-2015-03:4"
+      ],
+      "derived": true,
+      "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
+      "confidence": "high",
+      "omitted": false
+    }
+  ],
+  "unconsolidated": [
+    {
+      "clause_id": "bbl-2003:3.0",
+      "doc_id": "bbl-2003",
+      "reason": "1 of 1 applicable amendment link(s) have confidence below 'high'; showing original plus amendments side by side."
+    },
+    {
+      "clause_id": "bbl-2003:4.0",
+      "doc_id": "bbl-2003",
+      "reason": "Applicable amendment link(s) originate from a 'draft' instrument; draft instruments never produce effects on in-force text."
+    }
+  ]
+}

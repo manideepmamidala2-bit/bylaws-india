@@ -45,6 +45,12 @@
     "doc_type": "bye_laws",
     "notification_number": "Order No.UDD/223/MNU/2001",
     "gazette_reference": "Published in pursuance of Section 428 Of the Karnataka Municipal Corporation Act 1976",
+    "applies_to_jurisdiction": {
+      "status": "yes",
+      "reason": "Applies across in-ka-bengaluru (municipal base).",
+      "quoted_evidence": "BANGALORE MAHANAGARA PALIKE BUILDING BYE-LAWS 2003 (Approved by the Government in their Order No.UDD/223/MNU/2001, Dated 21-02-2004 \u2013 Published in pursuance of Section 428 Of the Karnataka Municipal Corporation Act 1976) ... 1.3 These Bye-laws shall come into operation from 5th of June 2004.",
+      "url": "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public municipal building bye-laws notified under Section 428 of the Karnataka Municipal Corporations Act, 1976"
@@ -132,6 +138,12 @@
     "doc_type": "bye_laws",
     "notification_number": "No. UDD 14 TTP 2017 (P-4)",
     "gazette_reference": "Karnataka Extra-Ordinary Gazette Part-IVA",
+    "applies_to_jurisdiction": {
+      "status": "unknown",
+      "reason": "Notified under Section 325 of the Karnataka Municipalities Act, 1964 for municipal councils and town panchayats, while listed on the municipal Building Plan Approval System alongside the principal 2003 Building Bye-laws; applicability to city corporations is recorded as unknown with both sources.",
+      "quoted_evidence": "Now, therefore, in exercise of the powers conferred by section 325 of the Karnataka Municipalities Act, 1964 (Karnataka Act 22 of 1964) the Government of Karnataka hereby makes the following building bye-laws namely: 1. Title, commencement and application.- (1) These bye-laws may be called the Karnataka Municipalities Model Building Bye-laws, 2017.",
+      "url": "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public state model building bye-laws published in the Karnataka Extraordinary Gazette"
@@ -216,6 +228,12 @@
     "doc_type": "regulations",
     "notification_number": "G.O. No UDD 540 BEM AA SE 2004",
     "gazette_reference": "Approved by Govt vide G.O. No UDD 540 BEM AA SE 2004, Dated: 22 \u2013 06 - 2007 as part of the Revised Master Plan 2015",
+    "applies_to_jurisdiction": {
+      "status": "yes",
+      "reason": "Applies across in-ka-bengaluru (planning base).",
+      "quoted_evidence": "Revised Master Plan 2015 BANGALORE 2007 Volume \u2013 III ZONING OF LANDUSE AND REGULATIONS (Approved by Govt vide G.O. No UDD 540 BEM AA SE 2004, Dated: 22 \u2013 06 - 2007 as part of the Revised Master Plan 2015) BANGALORE DEVELOPMENT AUTHORITY, BANGALORE",
+      "url": "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public statutory master plan zoning regulations approved under the Karnataka Town and Country Planning Act, 1961"
@@ -303,6 +321,12 @@
     "doc_type": "notification",
     "notification_number": "No.UDD 93 MNJ 2008",
     "gazette_reference": "Karnataka Extra-Ordinary Gazette Notification under Section 13-E of the Karnataka Town & Country Planning Act, 1961",
+    "applies_to_jurisdiction": {
+      "status": "yes",
+      "reason": "Applies across in-ka-bengaluru (planning amendment).",
+      "quoted_evidence": "GOVERNMENT OF KARNATAKA Karnataka Government Secretariat, Vikasa Soudha, 4th Floor, Bangalore, dated. 2-3-2009 No.UDD 93 MNJ 2008 NOTIFICATION ... 4.10 TRAFFIC AND TRANSPORTATION (T&T)",
+      "url": "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public statutory zoning amendment notification"
@@ -389,6 +413,12 @@
     "doc_type": "notification",
     "notification_number": "No: UDD 105 MNJ 2008",
     "gazette_reference": "Part - II Bengaluru, Monday, March 23, 2015 (Chaithra 02, Shaka Varsha 1937) No. 230",
+    "applies_to_jurisdiction": {
+      "status": "yes",
+      "reason": "Applies across in-ka-bengaluru (planning amendment).",
+      "quoted_evidence": "Part - II Bengaluru, Monday, March 23, 2015 (Chaithra 02, Shaka Varsha 1937) No. 230 URBAN DEVELOPMENT SECRETARIAT NOTIFICATION No: UDD 105 MNJ 2008, Bangalore, Dated:20/03/2015 ... As per the affidavit filed by the BDA, the zoning regulations of Bengaluru in the Revised Master Plan 2015 and amendments, regulations 2014 are amended as below:",
+      "url": "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public gazette notification amending RMP 2015 Zoning Regulations"
@@ -475,6 +505,12 @@
     "doc_type": "amendment",
     "notification_number": "NO. UDD 112 MNJ 2015",
     "gazette_reference": "Part\u2013IVA Bengaluru, Saturday, September 29, 2018 (Ashwayuja 7, Shaka Varsha 1940) No. 1376",
+    "applies_to_jurisdiction": {
+      "status": "yes",
+      "reason": "Applies across in-ka-bengaluru (planning amendment).",
+      "quoted_evidence": "NO. UDD 112 MNJ 2015, Bengaluru, Dated : 29.09.2018 ... 1. Title and commencement.- (1) These regulations may be called the Zoning Regulations of Bengaluru of the Revised Master Plan-2015 (Amendment) Regulations 2018. (2) They shall come into force from the date of their publication in the official Gazette.",
+      "url": "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public gazette notification amending RMP 2015 Zoning Regulations"
@@ -561,6 +597,12 @@
     "doc_type": "amendment",
     "notification_number": "No. UDD 255 MNJ 2018",
     "gazette_reference": "Part-IVA Bengaluru, Thursday, June 20, 2019 (Jyesta 30, Shaka Varsha 1940) No. 483",
+    "applies_to_jurisdiction": {
+      "status": "yes",
+      "reason": "Applies across in-ka-bengaluru (planning amendment).",
+      "quoted_evidence": "URBAN DEVELOPMENT SECRETARIAT NOTIFICATION No. UDD 255 MNJ 2018, Bengaluru, Dated: 19.06.2019 ... 1. Title and commencement.- (1) These regulations may be called the Zoning Regulations of Bengaluru of the Revised Master Plan-2015 (Amendment) Regulations, 2019. (2) They shall come into force from the date of their final publication in the Official Gazette.",
+      "url": "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public gazette notification amending RMP 2015 Zoning Regulations"
@@ -647,6 +689,12 @@
     },
     "doc_type": "circular",
     "notification_number": "BBMP/TP/2024-25",
+    "applies_to_jurisdiction": {
+      "status": "yes",
+      "reason": "Applies across in-ka-bengaluru (municipal reference).",
+      "quoted_evidence": "Revising the amendments in the regulations in BBMP revised Mahayojane 2015 (PDF/townplanning/KM_266_160102035827-pages-deleted_29102024.pdf)",
+      "url": "https://web.archive.org/web/20250406150942/https://site.bbmp.gov.in/townplanning.html"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public municipal circular/compilation"
@@ -732,6 +780,12 @@
     "notification_number": "No. UDD 78 MNJ 2024 (E)",
     "gazette_reference": "Karnataka Special Gazette Part-IVA Dated: 21.02.2025",
     "superseded_by_document": "rmp2015-zr-amend-2025-04",
+    "applies_to_jurisdiction": {
+      "status": "yes",
+      "reason": "Applies across in-ka-bengaluru (planning amendment).",
+      "quoted_evidence": "GOVERNMENT OF KARNATAKA No. UDD 78 MNJ 2024 (E) Karnataka Government Secretariat Vikasa Soudha, Bengaluru Dated:21.02.2025 NOTIFICATION-1 Whereas the draft to amend the Zonal Regulations of Revised Master Plan-2015 of the Local Planning Area of Bengaluru, in exercise of the powers conferred under Section 13-E of Karnataka Town and Country Planning Act, 1961...",
+      "url": "https://web.archive.org/web/20250307075721id_/https://data.opencity.in/dataset/3877072d-adef-4923-890d-1de96e72faeb/resource/886578b2-3419-40f0-9f51-21b78fefbac7/download/premium-far-gazette.pdf"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public gazette notification amending RMP 2015 Zoning Regulations"
@@ -817,6 +871,12 @@
     "doc_type": "amendment",
     "notification_number": "No. UDD 235 MNJ 2025(E)",
     "gazette_reference": "Karnataka Special Gazette Part-IVA dated 05.01.2026",
+    "applies_to_jurisdiction": {
+      "status": "yes",
+      "reason": "Applies across in-ka-bengaluru (planning amendment).",
+      "quoted_evidence": "GOVERNMENT OF KARNATAKA No. UDD 235 MNJ 2025(E) Karnataka Government Secretariat, Vikasa Soudha, Dr. Ambedkar Veedhi, Bengaluru, date: 05.01.2026 NOTIFICATION Whereas the draft to amend the zonal regulations of Revised Master Plan-2015 of the local planning area of Bengaluru and Greater Bengaluru, in exercise of the powers conferred under Section 13-E of Karnataka Town and Country Planning Act, 1961...",
+      "url": "https://web.archive.org/web/20260216195827id_/https://data.opencity.in/dataset/31a482fe-4ffd-4929-a61d-2fdcca90be91/resource/36f1c5e6-5f5d-4356-bfba-00c5fe1020e2/download/udd-235-mnj-2025e-05.01.2026.pdf"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public gazette notification amending RMP 2015 Zoning Regulations for Greater Bengaluru"
@@ -881,6 +941,12 @@
     "page_count": null,
     "is_scanned": null,
     "doc_type": "amendment",
+    "applies_to_jurisdiction": {
+      "status": "yes",
+      "reason": "Applies across in-ka-bengaluru (planning amendment).",
+      "quoted_evidence": "Gazette Notification (July 2025) - Bengaluru Master Plan 2015 Zoning Regulations Amendments ... https://data.opencity.in/dataset/31a482fe-4ffd-4929-a61d-2fdcca90be91/resource/3f2685b8-5e27-44e5-9222-8f6dbff9445f/download/d7b00660-a3bc-49cf-b35a-3d70283ace0a.pdf",
+      "url": "https://web.archive.org/web/20260208040653id_/https://data.opencity.in/dataset/bengaluru-bda-revised-master-plan-2015-zoning-regulation-amendments"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public gazette notification"
@@ -939,6 +1005,12 @@
     "doc_type": "amendment",
     "notification_number": "No. UDD 1107 MNU 2015",
     "gazette_reference": "Part-IVA Karnataka Extraordinary Gazette, Wednesday, November 28, 2018 (extended December 28, 2018)",
+    "applies_to_jurisdiction": {
+      "status": "yes",
+      "reason": "Applies across in-ka-bengaluru (municipal amendment).",
+      "quoted_evidence": "URBAN DEVELOPMENT SECRETARIAT DRAFT NOTIFICATION NO. UDD 1107 MNU 2015, Bengaluru, Dated: 27.11.2018 ... Therefore, punishments for various offences under Chapter XV of the Karnataka Municipal Corporations Act, 1976 and under the Building Bye-laws, 2003 which has to be prescribed under Section 321-B of K.M.C. Act, 1976 have been listed as below",
+      "url": "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Official Karnataka Extraordinary Gazette notification"
@@ -1022,6 +1094,12 @@
     },
     "doc_type": "regulations",
     "notification_number": "No. UDD 540 BEMAASE 2004",
+    "applies_to_jurisdiction": {
+      "status": "yes",
+      "reason": "Applies across in-ka-bengaluru (planning boundary).",
+      "quoted_evidence": "REVISED MASTER PLAN - 2015 Bangalore 47 Planning Districts ... 210 Jayanagar 211 Banashankari ... 318 Begur 319 Electronic City 320 Banerghatta 321 Anjanapura",
+      "url": "https://web.archive.org/web/20250224114910id_/https://site.bbmp.gov.in/revised%20masterplan%20(1).html"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Official BDA statutory master plan index map"
@@ -1113,6 +1191,12 @@
     "applies_in": [
       "in-ka-bengaluru-central"
     ],
+    "applies_to_jurisdiction": {
+      "status": "partly",
+      "reason": "Enacted by Bengaluru Central City Corporation, Greater Bengaluru Authority for in-ka-bengaluru-central.",
+      "quoted_evidence": "Now, therefore, in exercise of the powers conferred by section 318(2) and read with section 224, 232, 233 241 and 317 of the Greater Bengaluru Governance Act, 2024 (Karnataka Act 36 of 2025). The Bengaluru Central City Corporation hereby makes the following Building Bye-Laws, namely.- 1. Title and commencement.- (1) These Bye-laws may be called the Bengaluru City Corporation Building (Amendment) Bye-laws, 2026.",
+      "url": "https://updates.bbmp.gov.in/public"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public municipal building bye-law amendment published in the Karnataka Gazette Part-III"
@@ -1203,6 +1287,12 @@
     "applies_in": [
       "in-ka-bengaluru-central"
     ],
+    "applies_to_jurisdiction": {
+      "status": "partly",
+      "reason": "Enacted by Bengaluru Central City Corporation, Greater Bengaluru Authority for in-ka-bengaluru-central.",
+      "quoted_evidence": "The draft of the Building (Amendment) Bye-Laws further to amend the Bengaluru City Corporation Building Bye-Laws, 2003 which the Bengaluru Central City Corporation proposes to make in exercise of the powers conferred by section 317 read with sections 224, 232, 233 241 and 318 (2) of the Greater Bengaluru Governance Act, 2024 (Karnataka Act 36 of 2025) is hereby published",
+      "url": "https://updates.bbmp.gov.in/public"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public draft municipal bye-law notification published in the Karnataka Gazette Part-III"
@@ -1294,6 +1384,12 @@
     "applies_in": [
       "in-ka-bengaluru-north"
     ],
+    "applies_to_jurisdiction": {
+      "status": "partly",
+      "reason": "Enacted by Bengaluru North City Corporation, Greater Bengaluru Authority for in-ka-bengaluru-north.",
+      "quoted_evidence": "Now, therefore, in exercise of the powers conferred by section 318(2) and read with section 224, 232, 233 241 and 317 of the Greater Bengaluru Governance Act, 2024 (Karnataka Act 36 of 2025). The Bengaluru North City Corporation hereby makes the following Building Bye-Laws, namely.- 1. Title and commencement.- (1) These Bye-laws may be called the Bengaluru City Corporation Building (Amendment) Bye-laws, 2026.",
+      "url": "https://updates.bbmp.gov.in/public"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public municipal building bye-law amendment published in the Karnataka Gazette Part-III"
@@ -1384,6 +1480,12 @@
     "applies_in": [
       "in-ka-bengaluru-north"
     ],
+    "applies_to_jurisdiction": {
+      "status": "partly",
+      "reason": "Enacted by Bengaluru North City Corporation, Greater Bengaluru Authority for in-ka-bengaluru-north.",
+      "quoted_evidence": "The draft of the Building (Amendment) Bye-Laws further to amend the Bengaluru City Corporation Building Bye-Laws, 2003 which the Bengaluru North City Corporation proposes to make in exercise of the powers conferred by section 317 read with sections 224, 232, 233 241 and 318 (2) of the Greater Bengaluru Governance Act, 2024 (Karnataka Act 36 of 2025) is hereby published",
+      "url": "https://updates.bbmp.gov.in/public"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public draft municipal bye-law notification published in the Karnataka Gazette Part-III"
@@ -1475,6 +1577,12 @@
     "applies_in": [
       "in-ka-bengaluru-south"
     ],
+    "applies_to_jurisdiction": {
+      "status": "partly",
+      "reason": "Enacted by Bengaluru South City Corporation, Greater Bengaluru Authority for in-ka-bengaluru-south.",
+      "quoted_evidence": "Now, therefore, in exercise of the powers conferred by section 318(2) and read with section 224, 232, 233 241 and 317 of the Greater Bengaluru Governance Act, 2024 (Karnataka Act 36 of 2025). The Bengaluru South City Corporation hereby makes the following Building Bye-Laws, namely.- 1. Title and commencement.- (1) These Bye-laws may be called the Bengaluru City Corporation Building (Amendment) Bye-laws, 2026.",
+      "url": "https://updates.bbmp.gov.in/public"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public municipal building bye-law amendment published in the Karnataka Gazette Part-III"
@@ -1565,6 +1673,12 @@
     "applies_in": [
       "in-ka-bengaluru-south"
     ],
+    "applies_to_jurisdiction": {
+      "status": "partly",
+      "reason": "Enacted by Bengaluru South City Corporation, Greater Bengaluru Authority for in-ka-bengaluru-south.",
+      "quoted_evidence": "The draft of the Building (Amendment) Bye-Laws further to amend the Bengaluru City Corporation Building Bye-Laws, 2003 which the Bengaluru South City Corporation proposes to make in exercise of the powers conferred by section 317 read with sections 224, 232, 233 241 and 318 (2) of the Greater Bengaluru Governance Act, 2024 (Karnataka Act 36 of 2025) is hereby published",
+      "url": "https://updates.bbmp.gov.in/public"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public draft municipal bye-law notification published in the Karnataka Gazette Part-III"
@@ -1656,6 +1770,12 @@
     "applies_in": [
       "in-ka-bengaluru-east"
     ],
+    "applies_to_jurisdiction": {
+      "status": "partly",
+      "reason": "Enacted by Bengaluru East City Corporation, Greater Bengaluru Authority for in-ka-bengaluru-east.",
+      "quoted_evidence": "Now, therefore, in exercise of the powers conferred by section 318(2) and read with section 224, 232, 233 241 and 317 of the Greater Bengaluru Governance Act, 2024 (Karnataka Act 36 of 2025). The Bengaluru East City Corporation hereby makes the following Building Bye-Laws, namely.- 1. Title and commencement.- (1) These Bye-laws may be called the Bengaluru City Corporation Building (Amendment) Bye-laws, 2026.",
+      "url": "https://updates.bbmp.gov.in/public"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public municipal building bye-law amendment published in the Karnataka Gazette Part-III"
@@ -1746,6 +1866,12 @@
     "applies_in": [
       "in-ka-bengaluru-east"
     ],
+    "applies_to_jurisdiction": {
+      "status": "partly",
+      "reason": "Enacted by Bengaluru East City Corporation, Greater Bengaluru Authority for in-ka-bengaluru-east.",
+      "quoted_evidence": "The draft of the Building (Amendment) Bye-Laws further to amend the Bengaluru City Corporation Building Bye-Laws, 2003 which the Bengaluru East City Corporation proposes to make in exercise of the powers conferred by section 317 read with sections 224, 232, 233 241 and 318 (2) of the Greater Bengaluru Governance Act, 2024 (Karnataka Act 36 of 2025) is hereby published",
+      "url": "https://updates.bbmp.gov.in/public"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public draft municipal bye-law notification published in the Karnataka Gazette Part-III"
@@ -1837,6 +1963,12 @@
     "applies_in": [
       "in-ka-bengaluru-west"
     ],
+    "applies_to_jurisdiction": {
+      "status": "partly",
+      "reason": "Enacted by Bengaluru West City Corporation, Greater Bengaluru Authority for in-ka-bengaluru-west.",
+      "quoted_evidence": "Now, therefore, in exercise of the powers conferred by section 318(2) and read with section 224, 232, 233 241 and 317 of the Greater Bengaluru Governance Act, 2024 (Karnataka Act 36 of 2025). The Bengaluru West City Corporation hereby makes the following Building Bye-Laws, namely.- 1. Title and commencement.- (1) These Bye-laws may be called the Bengaluru City Corporation Building (Amendment) Bye-laws, 2026.",
+      "url": "https://updates.bbmp.gov.in/public"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public municipal building bye-law amendment published in the Karnataka Gazette Part-III"
@@ -1927,6 +2059,12 @@
     "applies_in": [
       "in-ka-bengaluru-west"
     ],
+    "applies_to_jurisdiction": {
+      "status": "partly",
+      "reason": "Enacted by Bengaluru West City Corporation, Greater Bengaluru Authority for in-ka-bengaluru-west.",
+      "quoted_evidence": "The draft of the Building (Amendment) Bye-Laws further to amend the Bengaluru City Corporation Building Bye-Laws, 2003 which the Bengaluru West City Corporation proposes to make in exercise of the powers conferred by section 317 read with sections 224, 232, 233 241 and 318 (2) of the Greater Bengaluru Governance Act, 2024 (Karnataka Act 36 of 2025) is hereby published",
+      "url": "https://updates.bbmp.gov.in/public"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public draft municipal bye-law notification published in the Karnataka Gazette Part-III"
@@ -2015,6 +2153,12 @@
     "doc_type": "amendment",
     "notification_number": "No. UDD 78 MNJ 2024 (E)",
     "gazette_reference": "Karnataka Extra-Ordinary Gazette Part-IVA, dated 02-04-2025",
+    "applies_to_jurisdiction": {
+      "status": "yes",
+      "reason": "Applies across in-ka-bengaluru (planning amendment).",
+      "quoted_evidence": "REGULATIONS Insertion of Chapter 11: In the zonal regulations of the approved Revised Master Plan-2015 of the Local Planning Area of Bengaluru in force, after Chapter 10, the following chapter 11 shall be inserted namely:- CHAPTER \u2013 11: PREMIUM F.A.R GRANTED BY LEVY OF PREMIUM CHARGES.",
+      "url": "https://updates.bbmp.gov.in/public"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public Karnataka Gazette notification issued under Section 13-E of the Karnataka Town and Country Planning Act, 1961"
@@ -2101,6 +2245,12 @@
     "doc_type": "amendment",
     "notification_number": "No. UDD 468 MNJ 2025(E)",
     "gazette_reference": "Karnataka Extra-Ordinary Gazette Part-IVA, dated 15-10-2025",
+    "applies_to_jurisdiction": {
+      "status": "yes",
+      "reason": "Applies across in-ka-bengaluru (planning amendment).",
+      "quoted_evidence": "Whereas the draft to further amend the zonal regulations of Revised Master Plan-2015 of the Local Planning Area of Bengaluru ... (2) They shall come into force from the date of its final publication in the official Gazette.",
+      "url": "https://updates.bbmp.gov.in/public"
+    },
     "text_rights": {
       "mode": "full_text",
       "reason": "Public Karnataka Gazette notification issued under Section 13-E of the Karnataka Town and Country Planning Act, 1961"

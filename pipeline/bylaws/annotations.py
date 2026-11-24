@@ -3,9 +3,54 @@
 from __future__ import annotations
 
 import re
+from functools import lru_cache
 from typing import Any
 
+import yaml
+
+from bylaws.root import resolve_repo_root
 from bylaws.schema_validator import validate_payload
+
+QUANTITY_SPAN_RE = re.compile(
+    r"\b(?P<num>\d+(?:\.\d+)?)\s*(?P<unit>sq\s*\.?\s*m(?:trs?|etres?|eters?)?|m2|sq\s*\.?\s*ft|m(?:trs?|etres?|eters?)|ft|feet|%|percent|floors?|storeys?)\b",
+    re.IGNORECASE,
+)
+
+
+@lru_cache(maxsize=1)
+def _load_compiled_topics() -> list[tuple[str, list[re.Pattern[str]]]]:
+    topics_path = resolve_repo_root() / "topics.yaml"
+    if not topics_path.is_file():
+        return []
+    raw = yaml.safe_load(topics_path.read_text(encoding="utf-8")) or {}
+    out: list[tuple[str, list[re.Pattern[str]]]] = []
+    for t in raw.get("topics") or []:
+        tid = str(t["id"])
+        pats = [
+            re.compile(rf"\b{re.escape(str(p).strip())}\b", re.IGNORECASE)
+            for p in (t.get("seed_phrases") or [])
+            if str(p).strip()
+        ]
+        out.append((tid, pats))
+    return out
+
+
+def _normalise_quantity(num_str: str, unit_str: str) -> str:
+    val = float(num_str)
+    u = re.sub(r"\s+", "", unit_str.lower()).rstrip(".")
+    if u in {"sqm", "sq.m", "sqmt", "sqmtr", "sqmtrs", "sqmetre", "sqmetres", "sqmeter", "sqmeters", "m2"}:
+        return f"{val:g} sq_m"
+    if u in {"sqft", "sq.ft"}:
+        return f"{round(val * 0.092903, 2):g} sq_m ({val:g} sq_ft)"
+    if u in {"m", "mt", "mtr", "mtrs", "metre", "metres", "meter", "meters"}:
+        return f"{val:g} m"
+    if u in {"ft", "feet"}:
+        return f"{round(val * 0.3048, 2):g} m ({val:g} ft)"
+    if u in {"%", "percent"}:
+        return f"{val:g} percent"
+    if u.startswith(("floor", "storey")):
+        return f"{int(val)} floors"
+    return f"{val:g} {u}"
 
 CROSS_REF_SPAN_RE = re.compile(
     r"\b(?P<kind>clause|sub-?clause|bye-?law|regulation|section|rule|table|schedule|appendix|annexure|chapter)\s*[-–.]?\s*"
@@ -407,6 +452,116 @@ def build_document_annotations(tree_payload: dict[str, Any]) -> dict[str, Any]:
                                 "value": def_eid,
                                 "method": "rule",
                                 "confidence": 0.95,
+                                "verification": "machine_checked",
+                            }
+                        )
+
+        # 4. Topic & Quantity annotations (Schema 1.4 / 09b)
+        if len(active_nodes) <= 2500 and candidate_fields:
+            first_field_name, first_field_text = candidate_fields[0]
+            matched_topics: set[str] = set()
+            if node_type == "definition" or node.get("defines_normalised"):
+                matched_topics.add("definitions")
+                span_end = min(len(first_field_text), 25)
+                seq += 1
+                annotations.append(
+                    {
+                        "annotation_id": f"{doc_id}:ann_{seq}",
+                        "target": {
+                            "eid": eid,
+                            "version_id": version_id,
+                            "field": first_field_name,
+                            "span": [0, span_end],
+                            "span_text": first_field_text[:span_end],
+                        },
+                        "kind": "topic",
+                        "value": "definitions",
+                        "method": "rule",
+                        "confidence": 0.95,
+                        "verification": "machine_checked",
+                    }
+                )
+
+            for topic_id, topic_patterns in _load_compiled_topics():
+                if topic_id in matched_topics:
+                    continue
+                found_in_body = False
+                for field_name, f_text in candidate_fields:
+                    for t_pat in topic_patterns:
+                        mt = t_pat.search(f_text)
+                        if mt:
+                            matched_topics.add(topic_id)
+                            seq += 1
+                            annotations.append(
+                                {
+                                    "annotation_id": f"{doc_id}:ann_{seq}",
+                                    "target": {
+                                        "eid": eid,
+                                        "version_id": version_id,
+                                        "field": field_name,
+                                        "span": [mt.start(), mt.end()],
+                                        "span_text": f_text[mt.start() : mt.end()],
+                                    },
+                                    "kind": "topic",
+                                    "value": topic_id,
+                                    "method": "rule",
+                                    "confidence": 0.90,
+                                    "verification": "machine_checked",
+                                }
+                            )
+                            found_in_body = True
+                            break
+                    if found_in_body:
+                        break
+                node_heading_str = str(node.get("heading") or "")
+                if not found_in_body and node_heading_str:
+                    for t_pat in topic_patterns:
+                        if t_pat.search(node_heading_str):
+                            matched_topics.add(topic_id)
+                            span_end = min(len(first_field_text), 25)
+                            seq += 1
+                            annotations.append(
+                                {
+                                    "annotation_id": f"{doc_id}:ann_{seq}",
+                                    "target": {
+                                        "eid": eid,
+                                        "version_id": version_id,
+                                        "field": first_field_name,
+                                        "span": [0, span_end],
+                                        "span_text": first_field_text[:span_end],
+                                    },
+                                    "kind": "topic",
+                                    "value": topic_id,
+                                    "method": "rule",
+                                    "confidence": 0.95,
+                                    "verification": "machine_checked",
+                                }
+                            )
+                            break
+
+            if matched_topics:
+                qty_count = 0
+                for field_name, f_text in candidate_fields:
+                    for mq in QUANTITY_SPAN_RE.finditer(f_text):
+                        if qty_count >= 4:
+                            break
+                        norm_qty = _normalise_quantity(mq.group("num"), mq.group("unit"))
+                        seq += 1
+                        qty_count += 1
+                        annotations.append(
+                            {
+                                "annotation_id": f"{doc_id}:ann_{seq}",
+                                "target": {
+                                    "eid": eid,
+                                    "version_id": version_id,
+                                    "field": field_name,
+                                    "span": [mq.start(), mq.end()],
+                                    "span_text": f_text[mq.start() : mq.end()],
+                                },
+                                "kind": "quantity",
+                                "value": norm_qty,
+                                "method": "rule",
+                                "confidence": 0.92,
                                 "verification": "machine_checked",
                             }
                         )

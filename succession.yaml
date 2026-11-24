@@ -1,0 +1,62 @@
+schema_version: "1.4"
+succession:
+  - id: succ-bmp-bbmp-to-gba-corps
+    old_body: "Bangalore Mahanagara Palike / Bruhat Bengaluru Mahanagara Palike (BMP / BBMP)"
+    aliases:
+      - "Bangalore Mahanagara Palike"
+      - "Bruhat Bengaluru Mahanagara Palike"
+      - "BBMP"
+      - "BMP"
+      - "Corporation of the City of Bangalore"
+    new_body: "Greater Bengaluru Authority (GBA) and the 5 City Corporations (Bengaluru Central, North, South, East, and West City Corporations)"
+    by_jurisdiction:
+      in-ka-bengaluru: "Greater Bengaluru Authority (GBA) and the 5 City Corporations"
+      in-ka-bengaluru-central: "Bengaluru Central City Corporation (and Greater Bengaluru Authority)"
+      in-ka-bengaluru-north: "Bengaluru North City Corporation (and Greater Bengaluru Authority)"
+      in-ka-bengaluru-south: "Bengaluru South City Corporation (and Greater Bengaluru Authority)"
+      in-ka-bengaluru-east: "Bengaluru East City Corporation (and Greater Bengaluru Authority)"
+      in-ka-bengaluru-west: "Bengaluru West City Corporation (and Greater Bengaluru Authority)"
+    effective_date: "2025-09-02"
+    instrument_id: "gbga-2024"
+    instrument_title: "The Greater Bengaluru Governance Act, 2024 (Karnataka Act 36 of 2025) & GBA Corporations Delimitation Notification (02-09-2025)"
+    quoted_evidence: "Whereas, the draft of the Building (Amendment) Bye-Laws further to amend the Bengaluru City Corporation Building Bye-Laws, 2003 which the Bengaluru Central/North/South/East/West City Corporation proposes to make in exercise of the powers conferred by section 317 read with sections 224, 232, 233, 241 and 318(2) of the Greater Bengaluru Governance Act, 2024 (Karnataka Act 36 of 2025)"
+    source_url: "https://updates.bbmp.gov.in/v1/api/file/120330573287-THE%20GREATER%20BENGALURU%20GOVERNANCE%20ACT,%202024%20Gazzet%20copy%20GBGA.pdf"
+
+  - id: succ-commissioner-bbmp-to-city-corp
+    old_body: "Commissioner, Bangalore Mahanagara Palike / Commissioner, BBMP"
+    aliases:
+      - "Commissioner of the Corporation"
+      - "Commissioner, BBMP"
+      - "Commissioner, BMP"
+    new_body: "Commissioner of the respective City Corporation (or Chief Commissioner, Greater Bengaluru Authority)"
+    by_jurisdiction:
+      in-ka-bengaluru: "Chief Commissioner, Greater Bengaluru Authority / Commissioner of the respective City Corporation"
+      in-ka-bengaluru-central: "Commissioner, Bengaluru Central City Corporation"
+      in-ka-bengaluru-north: "Commissioner, Bengaluru North City Corporation"
+      in-ka-bengaluru-south: "Commissioner, Bengaluru South City Corporation"
+      in-ka-bengaluru-east: "Commissioner, Bengaluru East City Corporation"
+      in-ka-bengaluru-west: "Commissioner, Bengaluru West City Corporation"
+    effective_date: "2025-09-02"
+    instrument_id: "gbga-2024"
+    instrument_title: "The Greater Bengaluru Governance Act, 2024 (Karnataka Act 36 of 2025), Sections 15 & 66"
+    quoted_evidence: "Wherever any construction is in violation/deviation of the sanctioned plan, the Commissioner may, if he considers that the violations / deviations are within the limits specified in Table-2B below ... Commissioner, Bengaluru Central / North / South / East / West City Corporation."
+    source_url: "https://updates.bbmp.gov.in/v1/api/file/750612105093-Central%20City%20Coropration.pdf"
+
+  - id: succ-bda-lpa-to-gba-lpa
+    old_body: "Local Planning Area of Bangalore (BDA)"
+    aliases:
+      - "Bangalore Development Authority"
+      - "Local Planning Area of Bengaluru"
+    new_body: "Local Planning Area of Bengaluru (BDA) and Local Planning Area of Greater Bengaluru Authority (GBA)"
+    by_jurisdiction:
+      in-ka-bengaluru: "Local Planning Area of Bengaluru (BDA) & Greater Bengaluru Authority (GBA)"
+      in-ka-bengaluru-central: "Local Planning Area of Bengaluru (BDA) & Greater Bengaluru Authority (GBA)"
+      in-ka-bengaluru-north: "Local Planning Area of Bengaluru (BDA) & Greater Bengaluru Authority (GBA)"
+      in-ka-bengaluru-south: "Local Planning Area of Bengaluru (BDA) & Greater Bengaluru Authority (GBA)"
+      in-ka-bengaluru-east: "Local Planning Area of Bengaluru (BDA) & Greater Bengaluru Authority (GBA)"
+      in-ka-bengaluru-west: "Local Planning Area of Bengaluru (BDA) & Greater Bengaluru Authority (GBA)"
+    effective_date: "2025-05-15"
+    instrument_id: "rmp2015-zr-amend-2025-10"
+    instrument_title: "Notification No. UDD 468 MNJ 2025(E) dated 15-10-2025 & Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026"
+    quoted_evidence: "These may be called the Zonal Regulations of Revised Master Plan-2015 of the Local Planning Area of Bengaluru (BDA) and Local Planning Area of Greater Bengaluru Authority (Amendment) Regulations 2025."
+    source_url: "https://updates.bbmp.gov.in/v1/api/file/389854408219-Naala%20Buffer%20Notification%202025.pdf"

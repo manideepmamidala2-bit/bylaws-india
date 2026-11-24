@@ -234,8 +234,7 @@ def _extract_defined_term(
     *,
     in_definitions_section: bool = False,
 ) -> tuple[str, str] | None:
-    """Return `(defines_printed, defines_normalised)` if `text` defines a quoted term."""
-    _ = (heading, in_definitions_section)
+    """Return `(defines_printed, defines_normalised)` if `text` defines a quoted or definition-section term."""
     m = DEFINED_TERM_RE.search(text)
     if m and m.group("term"):
         raw_term = m.group("term").strip()
@@ -247,6 +246,18 @@ def _extract_defined_term(
         raw_term = mq.group("term").strip()
         if _is_valid_defined_term(raw_term):
             return f'"{raw_term}"', " ".join(raw_term.lower().split())
+
+    if in_definitions_section and heading:
+        h_clean = heading.strip().strip(":;.-–— ")
+        h_words = h_clean.split()
+        first_w = h_words[0].lower() if h_words else ""
+        if (
+            1 <= len(h_words) <= 6
+            and h_clean[0].isupper()
+            and first_w not in STOPWORD_DEFINED_TERMS
+            and _is_valid_defined_term(h_clean)
+        ):
+            return f'"{h_clean}"', " ".join(h_clean.lower().split())
 
     return None
 

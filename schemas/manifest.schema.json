@@ -137,6 +137,12 @@
         "sources_csv": {
           "type": ["string", "null"]
         },
+        "relations": {
+          "type": ["string", "null"]
+        },
+        "graph": {
+          "type": ["string", "null"]
+        },
         "review_images": {
           "type": "array",
           "items": {

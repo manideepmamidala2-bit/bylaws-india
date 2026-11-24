@@ -184,3 +184,45 @@ def test_part3_rmp2015_zr_amendment_chain_inserted_chapter_11_and_replaced_table
     )
     assert "rmp2015-zr-amend-2026-01" in qa_text
     assert "rmp2015-zr-amend-2025-04" in qa_text
+
+
+def test_part4_schema_1_4_topics_relations_precedence_succession_and_applicability() -> None:
+    """Part 4 (`09b-relations-topics-conflicts.md`): Schema 1.4 `relations.json` has topics, succession, and relations (`same_topic`, `definition_differs`, `numeric_differs`, `cross_document_reference`, `precedence` with quoted spans, `corporation_differs`), `applies_to_jurisdiction` is recorded on every document, and `relations.md` exists."""
+    rel_dir = _get_latest_south_release_dir()
+    rels_payload = validate_file(rel_dir / "relations.json", "relations")
+    assert len(rels_payload["topics"]) == 14
+    assert len(rels_payload["succession"]) >= 3
+
+    rels = rels_payload["relations"]
+    assert len(rels) >= 100
+    kinds = {r["kind"] for r in rels}
+    for req_kind in (
+        "same_topic",
+        "definition_differs",
+        "numeric_differs",
+        "cross_document_reference",
+        "precedence",
+        "corporation_differs",
+    ):
+        assert req_kind in kinds, f"Missing relation kind '{req_kind}' in relations.json"
+
+    for r in rels:
+        assert r["status"] != "human_verified", "Rule R10: no relation may be marked human_verified"
+        if r["kind"] == "precedence":
+            assert r.get("precedence_span") and len(str(r["precedence_span"]).strip()) >= 10, (
+                f"Precedence relation {r['id']} missing quoted statutory precedence_span"
+            )
+
+    docs = json.loads((rel_dir / "documents.json").read_text(encoding="utf-8"))
+    for d in docs:
+        app_here = d.get("applies_to_jurisdiction")
+        assert isinstance(app_here, dict), f"Document {d['doc_id']} missing applies_to_jurisdiction"
+        assert app_here.get("status") in {"yes", "no", "partly", "unknown"}
+        if d["doc_id"] == "ka-model-bbl-2017":
+            assert app_here["status"] == "unknown"
+
+    rel_md = (REPO_ROOT / "data" / "reports" / "in-ka-bengaluru-south" / "relations.md").read_text(
+        encoding="utf-8"
+    )
+    assert "Statutory Precedence Relations" in rel_md
+    assert "corporation_differs" in rel_md

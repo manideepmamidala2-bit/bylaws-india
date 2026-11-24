@@ -19,6 +19,7 @@ def build_jurisdiction_graph(
     clause_trees: dict[str, dict[str, Any]],
     annotation_docs: dict[str, dict[str, Any]],
     amendments_data: dict[str, Any],
+    relations_data: dict[str, Any] | None = None,
 ) -> tuple[dict[str, Any], str]:
     """Build Graphology JSON (`graph.json`) and XML GraphML (`graph.graphml`) for a jurisdiction release."""
     parent_jurisdiction = (
@@ -249,6 +250,50 @@ def build_jurisdiction_graph(
             confidence=conf,
         )
 
+    # 5. Schema 1.4 Topic nodes, Succession nodes, and Relation edges
+    if relations_data:
+        for topic_obj in relations_data.get("topics") or []:
+            t_id = str(topic_obj["id"])
+            _add_node(
+                f"topic:{t_id}",
+                {
+                    "label": str(topic_obj.get("label") or t_id),
+                    "kind": "topic",
+                    "topic_id": t_id,
+                    "jurisdiction": config.id,
+                    "parent_jurisdiction": parent_jurisdiction,
+                },
+            )
+        for doc_id, ann_doc in sorted(annotation_docs.items()):
+            for ann in ann_doc.get("annotations", []):
+                if ann.get("kind") == "topic":
+                    target = ann.get("target") or {}
+                    src_eid = str(target.get("eid") or "")
+                    t_id = str(ann.get("value") or "")
+                    src_key = f"{doc_id}:{src_eid}"
+                    t_key = f"topic:{t_id}"
+                    if src_key in seen_nodes and t_key in seen_nodes:
+                        _add_edge(
+                            src_key,
+                            t_key,
+                            "tagged_topic",
+                            evidence=str(target.get("span_text") or ""),
+                            method=str(ann.get("method") or "rule"),
+                            confidence=float(ann.get("confidence") or 0.9),
+                        )
+        for rel in relations_data.get("relations") or []:
+            f_key = f"{rel['from_doc']}:{rel['from_eid']}"
+            t_key = f"{rel['to_doc']}:{rel['to_eid']}"
+            if f_key in seen_nodes and t_key in seen_nodes and f_key != t_key:
+                _add_edge(
+                    f_key,
+                    t_key,
+                    str(rel["kind"]),
+                    evidence=str(rel.get("precedence_span") or rel.get("from_span") or "")[:120],
+                    method=str(rel.get("method") or "rule"),
+                    confidence=float(rel.get("confidence") or 0.9),
+                )
+
     graphology_payload: dict[str, Any] = {
         "attributes": {
             "name": f"{config.name} Regulatory Knowledge Graph",
@@ -314,6 +359,7 @@ def write_jurisdiction_graph_files(
     clause_trees: dict[str, dict[str, Any]],
     annotation_docs: dict[str, dict[str, Any]],
     amendments_data: dict[str, Any],
+    relations_data: dict[str, Any] | None = None,
 ) -> None:
     """Write `graph.json` and `graph.graphml` into `processed_dir`."""
     filtered_trees = dict(clause_trees)
@@ -332,6 +378,7 @@ def write_jurisdiction_graph_files(
         clause_trees=filtered_trees,
         annotation_docs=filtered_anns,
         amendments_data=amendments_data,
+        relations_data=relations_data,
     )
     (processed_dir / "graph.json").write_text(
         json.dumps(graph_json, separators=(",", ":")) + "\n", encoding="utf-8"

@@ -542,6 +542,28 @@
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
           }
         },
+        "applies_to_jurisdiction": {
+          "type": "object",
+          "title": "DocumentApplicabilityConfig",
+          "additionalProperties": false,
+          "required": ["status", "reason"],
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": ["yes", "no", "partly", "unknown"]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            },
+            "quoted_evidence": {
+              "type": ["string", "null"]
+            },
+            "url": {
+              "type": ["string", "null"]
+            }
+          }
+        },
         "licence_or_terms": {
           "type": "string",
           "minLength": 1

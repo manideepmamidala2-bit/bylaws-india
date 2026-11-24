@@ -17,6 +17,7 @@ from bylaws.annotations import AnnotationSpanError, validate_annotations_against
 from bylaws.config import JurisdictionConfig
 from bylaws.graph import write_jurisdiction_graph_files
 from bylaws.parsers.base import ParsedBlock
+from bylaws.relations import build_jurisdiction_relations
 from bylaws.root import resolve_repo_root
 from bylaws.schema_validator import (
     SchemaValidationError,
@@ -717,6 +718,24 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
         f"`{declarations_path.relative_to(root)}` against `declarations.schema.json`: PASS"
     )
 
+    relations_payload, relations_md = build_jurisdiction_relations(
+        config,
+        clause_trees=clause_trees,
+        annotation_docs=annotation_docs,
+        amendments_data=amendments_data,
+        repo_root=root,
+    )
+    relations_path = processed_dir / "relations.json"
+    validate_payload(relations_payload, "relations", source=str(relations_path))
+    relations_path.write_text(
+        json.dumps(relations_payload, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    schema_checks_run.append(
+        f"`{relations_path.relative_to(root)}` against `relations.schema.json`: PASS"
+    )
+    (reports_dir / "relations.md").write_text(relations_md, encoding="utf-8")
+
     write_jurisdiction_graph_files(
         config,
         processed_dir=processed_dir,
@@ -724,9 +743,20 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
         clause_trees=clause_trees,
         annotation_docs=annotation_docs,
         amendments_data=amendments_data,
+        relations_data=relations_payload,
     )
 
     text_coverage_summary = _compute_text_coverage_summary(clause_trees, interim_dir)
+    stratified_trees = (
+        {
+            d.id: clause_trees[d.id]
+            for d in config.documents
+            if getattr(d, "applies_in", None) and d.id in clause_trees
+        }
+        if getattr(config, "parent", None) and not config.maps.zoning
+        else clause_trees
+    )
+
     qa_lines = [
         f"# Quality Assurance Report — `{config.id}` ({config.name})",
         "",
@@ -756,7 +786,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
         f"- **Unobtainable Documents**: {len(declarations_payload['unobtainable_documents'])}",
         f"- **Contested Status**: {len(declarations_payload['contested_status'])}",
         "",
-        *_build_stratified_self_check_section(clause_trees, raw_dir),
+        *_build_stratified_self_check_section(stratified_trees, raw_dir),
         *_build_applied_effects_self_check_section(amendments_data, clause_trees, raw_dir),
         *_build_annotation_quality_summary_section(clause_trees, annotation_docs),
     ]

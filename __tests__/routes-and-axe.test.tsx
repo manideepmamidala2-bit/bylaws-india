@@ -22,6 +22,9 @@ import ReviewPage from "@/app/j/[id]/review/page";
 import DataReleasesPage from "@/app/data/page";
 import AboutPage from "@/app/about/page";
 import StructurePage from "@/app/structure/page";
+import TopicsIndexPage from "@/app/j/[id]/topics/page";
+import TopicDetailPage from "@/app/j/[id]/topics/[topic]/page";
+import ProvisionDetailPage from "@/app/j/[id]/documents/[doc]/[eid]/page";
 
 async function assertNoAxeViolations(container: HTMLElement) {
   const results = await axe.run(container, {
@@ -424,6 +427,44 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     assertCleanPublicCopy(structureContainer.textContent ?? "", "Structure");
     await assertNoAxeViolations(structureContainer);
     uStructure();
+
+    const topicsUi = await TopicsIndexPage({
+      params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
+    });
+    const { container: topicsContainer, unmount: uTopics } = render(topicsUi);
+    expect(
+      screen.getByText(/Regulatory Topics & Cross-Document Relations/i)
+    ).toBeInTheDocument();
+    await assertNoAxeViolations(topicsContainer);
+    uTopics();
+
+    const topicDetailUi = await TopicDetailPage({
+      params: Promise.resolve({
+        id: "in-ka-bengaluru-south",
+        topic: "setbacks",
+      }),
+    });
+    const { container: topicDetailContainer, unmount: uTopicDetail } =
+      render(topicDetailUi);
+    expect(
+      screen.getAllByText(/Setbacks & Building Lines/i).length
+    ).toBeGreaterThan(0);
+    await assertNoAxeViolations(topicDetailContainer);
+    uTopicDetail();
+
+    const provUi = await ProvisionDetailPage({
+      params: Promise.resolve({
+        id: "in-ka-bengaluru-south",
+        doc: "bbl-2003",
+        eid: "part_II__sec_6.0__item_i",
+      }),
+    });
+    const { container: provContainer, unmount: uProv } = render(provUi);
+    expect(
+      screen.getByText(/One-Hop Neighborhood Around bbl-2003:part_II__sec_6\.0__item_i/i)
+    ).toBeInTheDocument();
+    await assertNoAxeViolations(provContainer);
+    uProv();
   });
 
   it("renders xx-test-fixture routes cleanly when SHOW_TEST_JURISDICTIONS=true with zero copy or axe violations", async () => {

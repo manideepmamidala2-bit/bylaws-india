@@ -305,6 +305,8 @@ def run_publish(
         ("wards", "wards.geojson"),
         ("planning_districts", "planning-districts.geojson"),
         ("overlays", "overlays.geojson"),
+        ("relations", "relations.json"),
+        ("graph", "graph.json"),
     )
     for manifest_key, filename in optional_file_keys:
         if filename in artifacts:

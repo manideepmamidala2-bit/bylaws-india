@@ -76,6 +76,7 @@
 - `data/processed/in-ka-bengaluru/geo-layers.json` against `geo-layers.schema.json`: PASS
 - `data/processed/in-ka-bengaluru/clause-zone-tags.json` against `clause-zone-tags.schema.json`: PASS
 - `data/processed/in-ka-bengaluru/declarations.json` against `declarations.schema.json`: PASS
+- `data/processed/in-ka-bengaluru/relations.json` against `relations.schema.json`: PASS
 
 ## 2. QA Checks Executed
 
@@ -175,36 +176,36 @@
 
 | # | `eid` | Type | Page | Native No. | Page Image Dim (px @ 150 DPI) | Excerpt Verified Against Rendered Page | Result |
 |---:|---|---|---:|---|---|---|---|
-| 1 | `sec_DEFINITIONS__cl_18` | `clause` | 4 | `18` | `1275x1651` | `The drains have been categorized into 3 types namely primary, sec` | PASS |
-| 2 | `sec_DEFINITIONS__cl_19` | `clause` | 4 | `19` | `1275x1651` | `Used primarily to describe the equivalent household in buildings.` | PASS |
-| 3 | `sec_DEFINITIONS__cl_40` | `clause` | 5 | `40` | `1275x1651` | `Building constructed with stilt area of non habitable height(less` | PASS |
-| 4 | `chp_1__cl_1.2` | `clause` | 10 | `1.2` | `1275x1651` | `LAND USE ZONE CATEGORIES A. The entire Local Planning Area is con` | PASS |
-| 5 | `chp_2__note_1` | `note` | 12 | `—` | `1275x1651` | `When service apartments are permitted, fee under section 18 of KT` | PASS |
-| 6 | `chp_4__cl_4.1__cl_4.1.2__item_i__item_ii` | `item` | 28 | `(ii)` | `1275x1651` | `Notes` | PASS |
-| 7 | `chp_4__cl_4.3__cl_4.3.2__item_i` | `item` | 31 | `(i)` | `1275x1651` | ` Main Land use category: C4  Other land uses permissible (as ma` | PASS |
-| 8 | `chp_4__cl_4.8__cl_4.8.2__item_a` | `item` | 36 | `(a)` | `1275x1651` | `Setbacks shall be in accordance with Table.8 or Table.9 depending` | PASS |
-| 9 | `chp_4__cl_4.11__cl_4.11.2__def_1` | `definition` | 39 | `1` | `1275x1651` | `The buffer created for accommodating the utilities such as Power,` | PASS |
-| 10 | `chp_4__cl_4.13__cl_4.13.2__cl_3` | `clause` | 41 | `3` | `1275x1651` | `As per Table no 8` | PASS |
-| 11 | `chp_5__cl_5.1` | `clause` | 43 | `5.1` | `1275x1651` | `These areas that are proposed to be taken up as detailed schemes ` | PASS |
-| 12 | `chp_5__cl_5.3__note_1` | `note` | 43 | `—` | `1275x1651` | `Set backs shall be applicable as per Table 8 or 9 as the case may` | PASS |
-| 13 | `chp_6__cl_6.1__item_d` | `item` | 44 | `(d)` | `1275x1651` | `Civic amenities and Roads` | PASS |
-| 14 | `chp_6__cl_6.1__item_d__item_i` | `item` | 44 | `(i)` | `1275x1651` | `After making provision for Parks and roads in the layout, the bal` | PASS |
-| 15 | `chp_7__cl_7.1` | `clause` | 46 | `7.1` | `1275x1651` | `1. 10 % of the land shall be reserved for Park & Open space. The ` | PASS |
-| 16 | `chp_8__note_1` | `note` | 49 | `—` | `1275x1651` | `Additional parking for part area shall be provided when the part ` | PASS |
-| 17 | `chp_8__cl_8.1__item_a__item_iii` | `item` | 50 | `(iii)` | `1275x1651` | `When stilt parking is provided the height shall not exceed 2.4mtr` | PASS |
-| 18 | `chp_8__cl_8.1__item_b__item_ii` | `item` | 50 | `(ii)` | `1275x1651` | `Car Parking shall not be provided in the setback areas. If provid` | PASS |
-| 19 | `chp_9__cl_9.2__note_1` | `note` | 52 | `—` | `1275x1651` | `The travel distance to an exit from the dead end of a corridor sh` | PASS |
-| 20 | `chp_10__cl_10.1__cl_18` | `clause` | 56 | `18` | `1275x1651` | `The Authority may reject or cancel the grant of D.R.C. in the fol` | PASS |
-| 21 | `app_1` | `appendix` | 58 | `APPENDIX 1` | `1275x1651` | `APPENDIX 1 Table 26: Building lines specified for various roads T` | PASS |
-| 22 | `chp_2__tbl_5__row_2` | `table_row` | 13 | `2` | `1651x1275` | `2 / Warehouses and storage areas for goods` | PASS |
-| 23 | `chp_2__tbl_11__row_1` | `table_row` | 15 | `1` | `1651x1275` | `1) Food products / 5) Other works such as` | PASS |
-| 24 | `chp_2__tbl_11__row_20` | `table_row` | 15 | `20` | `1651x1275` | `Printing, publishing, book binding, engraving , etching / buckets` | PASS |
-| 25 | `chp_2__tbl_11__row_21` | `table_row` | 15 | `21` | `1651x1275` | `Making of stationery - post cards, mathematical items, block maki` | PASS |
-| 26 | `chp_2__cl_13__tbl_2` | `table` | 17 | `Table 2` | `1651x1275` | `Table 2` | PASS |
-| 27 | `chp_4__cl_4.4__cl_4.4.3__tbl_1__row_4` | `table_row` | 32 | `4` | `1275x1651` | `Above 18.0 up to 24.0 / 2.50 / 45%` | PASS |
-| 28 | `chp_7__cl_7.1__cl_5__tbl_3__row_1` | `table_row` | 48 | `1` | `1275x1651` | `Above 18m < 24m / 55% / 2.5` | PASS |
-| 29 | `app_1__tbl_1__row_12` | `table_row` | 58 | `12` | `1275x1651` | `12. / Triveni Road, Yashwanthpur / 12.0 mbeyond C.M.T.I Quarter r` | PASS |
-| 30 | `app_1__tbl_2__row_5` | `table_row` | 59 | `5` | `1275x1651` | `44. / Narasimharaja road / 3.0 mfrom the edge of the road` | PASS |
+| 1 | `sec_DEFINITIONS__def_11` | `definition` | 3 | `11` | `1275x1651` | `A premises used by public transport agency to park the buses for ` | PASS |
+| 2 | `sec_DEFINITIONS__def_17` | `definition` | 4 | `17` | `1275x1651` | `is a premise where temporary accommodation for short duration is ` | PASS |
+| 3 | `sec_DEFINITIONS__def_19` | `definition` | 4 | `19` | `1275x1651` | `Used primarily to describe the equivalent household in buildings.` | PASS |
+| 4 | `sec_DEFINITIONS__def_24` | `definition` | 4 | `24` | `1275x1651` | `Means the vertical distance measured, in the case of flat roofs, ` | PASS |
+| 5 | `sec_DEFINITIONS__def_37` | `definition` | 5 | `37` | `1275x1651` | `A premises similar to retail shop for carrying out repair of hous` | PASS |
+| 6 | `sec_DEFINITIONS__def_39` | `definition` | 5 | `39` | `1275x1651` | `A premises used for serving food items on commercial basis includ` | PASS |
+| 7 | `chp_2__cl_13` | `clause` | 16 | `13` | `1651x1275` | `Job oriented Training activity Computer & IT training centres and` | PASS |
+| 8 | `chp_4__cl_4.3` | `clause` | 31 | `4.3` | `1275x1651` | `COMMERCIAL (CENTRAL)` | PASS |
+| 9 | `chp_4__cl_4.4__cl_4.4.2__item_i` | `item` | 32 | `(i)` | `1275x1651` | ` Main land use category: C3  Other land uses permissible (as ma` | PASS |
+| 10 | `chp_4__cl_4.4__cl_4.4.2__item_a` | `item` | 32 | `(a)` | `1275x1651` | `TDR is applicable as per rules.` | PASS |
+| 11 | `chp_4__cl_4.6__cl_4.6.1` | `clause` | 34 | `4.6.1` | `1275x1651` | `Description The major and minor roads which have commercial activ` | PASS |
+| 12 | `chp_4__cl_4.6__cl_4.6.2__item_i` | `item` | 34 | `(i)` | `1275x1651` | ` If the plot size is more than 240 sq.m and faces a road width u` | PASS |
+| 13 | `chp_4__cl_4.7` | `clause` | 35 | `4.7` | `1275x1651` | `INDUSTRIAL [I (General)]` | PASS |
+| 14 | `chp_4__cl_4.8__cl_4.8.2__item_b` | `item` | 36 | `(b)` | `1275x1651` | `TDR is applicable as per rules.` | PASS |
+| 15 | `chp_4__cl_4.11__cl_4.11.2__def_1` | `definition` | 39 | `1` | `1275x1651` | `The buffer created for accommodating the utilities such as Power,` | PASS |
+| 16 | `chp_5__cl_5.1__item_i` | `item` | 43 | `(i)` | `1275x1651` | `These are identified areas which require detailed planning and de` | PASS |
+| 17 | `chp_6__cl_6.1` | `clause` | 44 | `6.1` | `1275x1651` | `RESIDENTIAL a. Road widths: The minimum width of road shall not b` | PASS |
+| 18 | `chp_8__note_1` | `note` | 49 | `—` | `1275x1651` | `Additional parking for part area shall be provided when the part ` | PASS |
+| 19 | `chp_9__cl_9.2__prov_1` | `proviso` | 52 | `—` | `1275x1651` | `Provided that for all multi-Storeyed high rise and special buildi` | PASS |
+| 20 | `chp_9__cl_9.3__note_1` | `note` | 53 | `—` | `1275x1651` | `No deductions shall be made in the gross area of the corridors, c` | PASS |
+| 21 | `chp_10__cl_10.1__cl_6` | `clause` | 54 | `6` | `1275x1651` | `The D.R.C. shall contain details of the floor area credit in squa` | PASS |
+| 22 | `app_IV` | `appendix` | 63 | `APPENDIX IV` | `1275x1651` | `APPENDIX IV Office of the Commissioner BDA/BBMP, Bangalore Regist` | PASS |
+| 23 | `app_V` | `appendix` | 64 | `APPENDIX V` | `1275x1651` | `APPENDIX V UNDERTAKING BY THE APPLICANT To The Commissioner, BDA/` | PASS |
+| 24 | `app_VIII__item_1__item_a__item_b__item_1__item_2__item_3` | `item` | 69 | `(3)` | `1275x1651` | `The area where D.R.C. can be utilised. D.R.C. will be allowed to ` | PASS |
+| 25 | `chp_2__tbl_3__row_9` | `table_row` | 13 | `9` | `1651x1275` | `10 / Hospitals and specialty hospitals` | PASS |
+| 26 | `chp_4__cl_4.2__cl_4.2.2__tbl_2__row_4` | `table_row` | 29 | `4` | `1275x1651` | `4 / Up to 55% / 3.00 / Above 24.0 mup to 30m` | PASS |
+| 27 | `chp_4__cl_4.10__cl_4.10.3__tbl_1` | `table` | 38 | `Table 1` | `1275x1651` | `Table 1` | PASS |
+| 28 | `app_1__tbl_1__row_7` | `table_row` | 58 | `7` | `1275x1651` | `7. / 80 ft road, Rajajinagar / 3.0 mfrom the edge of road` | PASS |
+| 29 | `app_1__tbl_2__row_24` | `table_row` | 59 | `24` | `1275x1651` | `63. / Hennur road / 3.0 mup to Salem railway line level crossing` | PASS |
+| 30 | `app_1__tbl_2__row_37` | `table_row` | 59 | `37` | `1275x1651` | `76. / Thoppa mudaliar road / 2.0 mfrom the edge of road` | PASS |
 
 ### Document: `rmp2015-zr-amend-2019-06` (30 Stratified Nodes Verified Against Rendered Page Images)
 
@@ -412,7 +413,7 @@
 | `bwcc-bbl-amend-2026-04-draft` | 0 | 0 | `0.0` / `0` | `1` / `1` / `14` | `commencement`: 2, `fee`: 1, `obligation`: 8, `prohibition`: 2 |
 | `bwcc-bbl-amend-2026-05` | 0 | 0 | `0.0` / `0` | `0` / `2` / `16` | `commencement`: 2, `fee`: 2, `obligation`: 8, `prohibition`: 1 |
 | `ka-model-bbl-2017` | 177 | 0 | `2.0` / `50` | `602` / `22` / `192` | `commencement`: 35, `definition`: 184, `exception`: 28, `fee`: 8, `obligation`: 1127, `permission`: 19, `prohibition`: 173, `scope`: 20 |
-| `rmp2015-zr` | 1 | 0 | `1.0` / `1` | `157` / `4` / `4` | `definition`: 1, `exception`: 1, `obligation`: 68, `permission`: 12, `prohibition`: 26, `scope`: 5 |
+| `rmp2015-zr` | 43 | 0 | `1.0` / `5` | `157` / `4` / `4` | `definition`: 42, `exception`: 1, `obligation`: 65, `permission`: 12, `prohibition`: 26, `scope`: 5 |
 | `rmp2015-zr-amend-2009-03` | 0 | 0 | `0.0` / `0` | `1` / `0` / `2` | `obligation`: 2, `prohibition`: 1, `scope`: 1 |
 | `rmp2015-zr-amend-2015-03` | 0 | 0 | `0.0` / `0` | `1` / `0` / `0` | `obligation`: 1, `permission`: 1 |
 | `rmp2015-zr-amend-2018-09` | 0 | 0 | `0.0` / `0` | `11` / `1` / `6` | `commencement`: 2, `obligation`: 7, `prohibition`: 2, `scope`: 1 |

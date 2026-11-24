@@ -16,6 +16,10 @@ export default async function StructurePage() {
     ? Object.values(dataset.annotationsByDocId).flat()
     : [];
   const effectsList = dataset?.amendments.effects ?? [];
+  const relationsData = dataset?.relations ?? null;
+  const topicsCount = relationsData?.topics.length ?? 0;
+  const relationsList = relationsData?.relations ?? [];
+  const successionCount = relationsData?.succession.length ?? 0;
 
   const byNodeKind: Record<string, number> = {};
   for (const c of clausesList) {
@@ -346,6 +350,33 @@ export default async function StructurePage() {
             </div>
           </div>
 
+          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <div className="border border-[#080909] bg-[#f5f3ed] p-4">
+              <div className="dg-mono text-[10px] text-[#5b5e56]">
+                Regulatory Topics
+              </div>
+              <div className="mt-1 font-mono text-2xl font-semibold">
+                {topicsCount}
+              </div>
+            </div>
+            <div className="border border-[#080909] bg-[#f5f3ed] p-4">
+              <div className="dg-mono text-[10px] text-[#5b5e56]">
+                Cross-Document Relations
+              </div>
+              <div className="mt-1 font-mono text-2xl font-semibold">
+                {relationsList.length}
+              </div>
+            </div>
+            <div className="border border-[#080909] bg-[#f5f3ed] p-4">
+              <div className="dg-mono text-[10px] text-[#5b5e56]">
+                Institution Successions
+              </div>
+              <div className="mt-1 font-mono text-2xl font-semibold">
+                {successionCount}
+              </div>
+            </div>
+          </div>
+
           {jId && (
             <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-[#c8ccc0] pt-4 font-mono text-xs">
               <a
@@ -359,6 +390,12 @@ export default async function StructurePage() {
                 className="border border-[#080909] bg-[#f5f3ed] px-3 py-2 uppercase tracking-[0.12em] text-[#080909] no-underline hover:bg-[#e5e6de]"
               >
                 Download graph.graphml (Gephi)
+              </a>
+              <a
+                href={`/data/${jId}/${releaseVer}/relations.json`}
+                className="border border-[#080909] bg-[#f5f3ed] px-3 py-2 uppercase tracking-[0.12em] text-[#080909] no-underline hover:bg-[#e5e6de]"
+              >
+                Download relations.json (Schema 1.4)
               </a>
               <Link
                 href="/data"

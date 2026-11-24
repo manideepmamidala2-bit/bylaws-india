@@ -87,7 +87,14 @@
         },
         "kind": {
           "type": "string",
-          "enum": ["cross_reference", "defined_term_use", "provision_type"]
+          "enum": [
+            "cross_reference",
+            "defined_term_use",
+            "provision_type",
+            "topic",
+            "quantity",
+            "zone_applicability"
+          ]
         },
         "value": {
           "type": "string",

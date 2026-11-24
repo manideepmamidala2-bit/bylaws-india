@@ -1,0 +1,1393 @@
+{
+  "schema_version": "1.3",
+  "doc_id": "rmp2015-zr-amend-2019-06",
+  "jurisdiction": "in-ka-bengaluru",
+  "annotations": [
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_1",
+      "target": {
+        "eid": "prea_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          256,
+          321
+        ],
+        "span_text": "section 13-E of the Karnataka Town and Country Planning Act, 1961"
+      },
+      "kind": "cross_reference",
+      "value": "external:Karnataka Town and Country Planning Act, 1961:section_13-e",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_2",
+      "target": {
+        "eid": "prea_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          898,
+          963
+        ],
+        "span_text": "section 13-F of the Karnataka Town and Country Planning Act, 1961"
+      },
+      "kind": "cross_reference",
+      "value": "external:Karnataka Town and Country Planning Act, 1961:section_13-f",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_3",
+      "target": {
+        "eid": "cl_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          10,
+          22
+        ],
+        "span_text": "commencement"
+      },
+      "kind": "provision_type",
+      "value": "commencement",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_4",
+      "target": {
+        "eid": "cl_1__item_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          11,
+          26
+        ],
+        "span_text": "come into force"
+      },
+      "kind": "provision_type",
+      "value": "commencement",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_5",
+      "target": {
+        "eid": "cl_2",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          34,
+          45
+        ],
+        "span_text": "definitions"
+      },
+      "kind": "topic",
+      "value": "definitions",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_6",
+      "target": {
+        "eid": "cl_3",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          69,
+          74
+        ],
+        "span_text": "means"
+      },
+      "kind": "topic",
+      "value": "definitions",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_7",
+      "target": {
+        "eid": "cl_3__item_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          113,
+          118
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_8",
+      "target": {
+        "eid": "cl_3__item_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          270,
+          279
+        ],
+        "span_text": "plot size"
+      },
+      "kind": "topic",
+      "value": "plot_size_frontage",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_9",
+      "target": {
+        "eid": "cl_3__item_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          179,
+          184
+        ],
+        "span_text": "means"
+      },
+      "kind": "topic",
+      "value": "definitions",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_10",
+      "target": {
+        "eid": "cl_3_2__item_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          144,
+          160
+        ],
+        "span_text": "may be permitted"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_11",
+      "target": {
+        "eid": "cl_3_2__item_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          3,
+          17
+        ],
+        "span_text": "regulation 3.1"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:regulation 3.1",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_12",
+      "target": {
+        "eid": "cl_3_2__item_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          25,
+          32
+        ],
+        "span_text": "Table-9"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Table-9",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_13",
+      "target": {
+        "eid": "cl_3_2__item_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          172,
+          179
+        ],
+        "span_text": "setback"
+      },
+      "kind": "topic",
+      "value": "setbacks",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_14",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          54,
+          58
+        ],
+        "span_text": "exit"
+      },
+      "kind": "topic",
+      "value": "fire_safety",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_15",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          34,
+          38
+        ],
+        "span_text": "4sqm"
+      },
+      "kind": "quantity",
+      "value": "4 sq_m",
+      "method": "rule",
+      "confidence": 0.92,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_16",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          37,
+          45
+        ],
+        "span_text": "set back"
+      },
+      "kind": "topic",
+      "value": "setbacks",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_17",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          0,
+          17
+        ],
+        "span_text": "Fire control room"
+      },
+      "kind": "topic",
+      "value": "fire_safety",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_18",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          67,
+          72
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_19",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          4,
+          18
+        ],
+        "span_text": "regulation 3.4"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:regulation 3.4",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_20",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          113,
+          129
+        ],
+        "span_text": "Floor Area Ratio"
+      },
+      "kind": "topic",
+      "value": "far",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_21",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_v",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          9
+        ],
+        "span_text": "Staircase"
+      },
+      "kind": "topic",
+      "value": "fire_safety",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_22",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Parking"
+      },
+      "kind": "topic",
+      "value": "parking",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_23",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          157,
+          162
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_24",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          109,
+          127
+        ],
+        "span_text": "Height of Building"
+      },
+      "kind": "topic",
+      "value": "building_height",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_25",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          442,
+          451
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_26",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          354,
+          364
+        ],
+        "span_text": "open space"
+      },
+      "kind": "topic",
+      "value": "projections_open_spaces",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_27",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          193,
+          202
+        ],
+        "span_text": "staircase"
+      },
+      "kind": "topic",
+      "value": "fire_safety",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_28",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          151,
+          156
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_29",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          92,
+          114
+        ],
+        "span_text": "height of the building"
+      },
+      "kind": "topic",
+      "value": "building_height",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_30",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          106,
+          111
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_31",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          325,
+          330
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_32",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          302,
+          324
+        ],
+        "span_text": "height of the building"
+      },
+      "kind": "topic",
+      "value": "building_height",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_33",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          163,
+          168
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_34",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          171,
+          176
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_35",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          3,
+          17
+        ],
+        "span_text": "regulation 3.9"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:regulation 3.9",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_36",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          3,
+          18
+        ],
+        "span_text": "regulation 3.11"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:regulation 3.11",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_37",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          91,
+          107
+        ],
+        "span_text": "may be permitted"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_38",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          139,
+          146
+        ],
+        "span_text": "setback"
+      },
+      "kind": "topic",
+      "value": "setbacks",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_39",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          662,
+          669
+        ],
+        "span_text": "Balcony"
+      },
+      "kind": "topic",
+      "value": "projections_open_spaces",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_40",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          51,
+          56
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_41",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          3,
+          18
+        ],
+        "span_text": "regulation 3.12"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:regulation 3.12",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_42",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6__item_7",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          376,
+          385
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_43",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6__item_7",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          3,
+          18
+        ],
+        "span_text": "regulation 3.16"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:regulation 3.16",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_44",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6__item_7",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          28,
+          37
+        ],
+        "span_text": "clause vi"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:clause vi",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_45",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6__item_7__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          197,
+          202
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_46",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6__item_7__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          325,
+          332
+        ],
+        "span_text": "setback"
+      },
+      "kind": "topic",
+      "value": "setbacks",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_47",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6__item_7__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1076,
+          1085
+        ],
+        "span_text": "plot area"
+      },
+      "kind": "topic",
+      "value": "plot_size_frontage",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_48",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6__item_7__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          248,
+          269
+        ],
+        "span_text": "occupancy certificate"
+      },
+      "kind": "topic",
+      "value": "approvals_certificates",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_49",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6__item_7__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          89,
+          96
+        ],
+        "span_text": "180 sqm"
+      },
+      "kind": "quantity",
+      "value": "180 sq_m",
+      "method": "rule",
+      "confidence": 0.92,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_50",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6__item_7__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          107,
+          114
+        ],
+        "span_text": "240 sqm"
+      },
+      "kind": "quantity",
+      "value": "240 sq_m",
+      "method": "rule",
+      "confidence": 0.92,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_51",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6__item_7__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          163,
+          170
+        ],
+        "span_text": "240 sqm"
+      },
+      "kind": "quantity",
+      "value": "240 sq_m",
+      "method": "rule",
+      "confidence": 0.92,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_52",
+      "target": {
+        "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6__item_7__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          480,
+          486
+        ],
+        "span_text": "240sqm"
+      },
+      "kind": "quantity",
+      "value": "240 sq_m",
+      "method": "rule",
+      "confidence": 0.92,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_53",
+      "target": {
+        "eid": "cl_4",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          245,
+          250
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_54",
+      "target": {
+        "eid": "cl_4",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          13,
+          22
+        ],
+        "span_text": "Chapter 6"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Chapter 6",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_55",
+      "target": {
+        "eid": "cl_4",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          28,
+          37
+        ],
+        "span_text": "chapter 6"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:chapter 6",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_56",
+      "target": {
+        "eid": "cl_4",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          66,
+          80
+        ],
+        "span_text": "regulation 6.1"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:regulation 6.1",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_57",
+      "target": {
+        "eid": "cl_5S",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          13,
+          22
+        ],
+        "span_text": "Chapter 7"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Chapter 7",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_58",
+      "target": {
+        "eid": "cl_5S",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          28,
+          37
+        ],
+        "span_text": "chapter 7"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:chapter 7",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_59",
+      "target": {
+        "eid": "cl_5S__item_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          113,
+          118
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_60",
+      "target": {
+        "eid": "cl_5S__item_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          3,
+          17
+        ],
+        "span_text": "regulation 7.1"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:regulation 7.1",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_61",
+      "target": {
+        "eid": "cl_5S__item_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          26,
+          34
+        ],
+        "span_text": "Table-20"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Table-20",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_62",
+      "target": {
+        "eid": "cl_5S__item_1__item_2",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          3,
+          17
+        ],
+        "span_text": "regulation 7.2"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:regulation 7.2",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_63",
+      "target": {
+        "eid": "cl_5S__item_1__item_2__item_i",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          62,
+          67
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_64",
+      "target": {
+        "eid": "cl_5S__item_1__item_2__item_ii",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          88,
+          93
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_65",
+      "target": {
+        "eid": "cl_5S__item_1__item_2__item_ii",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          7,
+          15
+        ],
+        "span_text": "Table-21"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Table-21",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_66",
+      "target": {
+        "eid": "cl_5S__item_1__item_2__item_ii__item_3",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          3,
+          17
+        ],
+        "span_text": "regulation 7.3"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:regulation 7.3",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_67",
+      "target": {
+        "eid": "cl_5S__item_1__item_2__item_ii__item_3",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          26,
+          34
+        ],
+        "span_text": "Table-22"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Table-22",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_68",
+      "target": {
+        "eid": "cl_5S__item_1__item_2__item_ii__item_3__item_i",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          117,
+          122
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_69",
+      "target": {
+        "eid": "cl_5S__item_1__item_2__item_ii__item_3__item_i_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          117,
+          122
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_70",
+      "target": {
+        "eid": "cl_5S__item_1__item_2__item_ii__item_3__item_i_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          154,
+          163
+        ],
+        "span_text": "Chapter 8"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Chapter 8",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_71",
+      "target": {
+        "eid": "cl_5S__item_1__item_2__item_ii__item_3__item_i_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          169,
+          178
+        ],
+        "span_text": "chapter 8"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:chapter 8",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_72",
+      "target": {
+        "eid": "cl_5S__item_1__item_2__item_ii__item_3__item_i_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          207,
+          221
+        ],
+        "span_text": "regulation 8.0"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:regulation 8.0",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_73",
+      "target": {
+        "eid": "cl_5S__item_1__item_2__item_ii__item_3__item_i_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          230,
+          238
+        ],
+        "span_text": "Table-23"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Table-23",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_74",
+      "target": {
+        "eid": "cl_5S__item_1__item_2__item_ii__item_3__item_i_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          374,
+          381
+        ],
+        "span_text": "parking"
+      },
+      "kind": "topic",
+      "value": "parking",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_75",
+      "target": {
+        "eid": "cl_5S__item_1__item_2__item_ii__item_3__item_i_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          655,
+          671
+        ],
+        "span_text": "Development Plan"
+      },
+      "kind": "topic",
+      "value": "plot_size_frontage",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_76",
+      "target": {
+        "eid": "cl_5S__item_1__item_2__item_ii__item_3__item_i_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          485,
+          490
+        ],
+        "span_text": "75sqm"
+      },
+      "kind": "quantity",
+      "value": "75 sq_m",
+      "method": "rule",
+      "confidence": 0.92,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "rmp2015-zr-amend-2019-06:ann_77",
+      "target": {
+        "eid": "cl_5S__item_1__item_2__item_ii__item_3__item_i_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          541,
+          546
+        ],
+        "span_text": "50sqm"
+      },
+      "kind": "quantity",
+      "value": "50 sq_m",
+      "method": "rule",
+      "confidence": 0.92,
+      "verification": "machine_checked"
+    }
+  ]
+}
