@@ -352,7 +352,9 @@ def test_real_docling_adapter_and_strict_versions_and_release_version_check(
         assert blk.bbox is None
 
     # Publish without release_version on config must fail loudly
-    config = load_jurisdiction_config("in-ka-bengaluru-south")
+    config = load_jurisdiction_config("in-ka-bengaluru-south").model_copy(
+        update={"release_version": None}
+    )
     assert config.release_version is None
     with pytest.raises(click.ClickException, match="release_version"):
         run_publish(config, repo_root=tmp_path)

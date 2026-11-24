@@ -160,6 +160,9 @@ export default async function JurisdictionMapPage({
           COVERAGE &amp; DECLARATIONS
         </span>
         <span className="dg-serif text-sm text-[#171917]">
+          {declarations.known_gaps && declarations.known_gaps.length > 0
+            ? `${declarations.known_gaps[0].description} `
+            : ""}
           Not modelled: {declarations.not_modelled.join("; ") || "None"}.
           {declarations.contested_status &&
           declarations.contested_status.length > 0

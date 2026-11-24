@@ -14,6 +14,7 @@ from typing import Any
 
 import click
 
+from bylaws.acquire import _build_unacquired_document_payload
 from bylaws.config import JurisdictionConfig
 from bylaws.root import (
     get_deterministic_timestamp,
@@ -97,7 +98,11 @@ def _collect_release_artifacts(
     documents_list: list[dict[str, Any]] = []
     for doc in config.documents:
         meta_path = raw_dir / f"{doc.id}.meta.json"
+        acq_status = getattr(doc, "acquisition_status", None) or "acquired"
         if not meta_path.is_file():
+            if acq_status in {"pending", "not_found"}:
+                documents_list.append(_build_unacquired_document_payload(doc))
+                continue
             raise click.ClickException(
                 f"Cannot publish '{config.id}': missing '{meta_path}'."
             )
@@ -291,6 +296,7 @@ def run_publish(
 
     other_jurisdictions: list[dict[str, Any]] = []
     existing_releases_for_current: list[dict[str, Any]] = []
+    existing_register_docs: str | None = None
 
     if manifest_path.exists():
         try:
@@ -313,11 +319,16 @@ def run_publish(
                     f"Existing manifest at '{manifest_path}' contains malformed jurisdiction entry."
                 )
             if entry["id"] == config.id:
+                if isinstance(entry.get("register_documents"), str):
+                    existing_register_docs = str(entry["register_documents"])
                 for rel in entry.get("releases") or []:
                     if isinstance(rel, dict) and rel.get("version") != release_version:
                         existing_releases_for_current.append(rel)
             else:
                 other_jurisdictions.append(entry)
+
+    if not existing_register_docs and (public_data_dir / config.id / "register" / "documents.json").is_file():
+        existing_register_docs = f"/data/{config.id}/register/documents.json"
 
     jurisdiction_manifest_entry: dict[str, Any] = {
         "id": config.id,
@@ -327,6 +338,8 @@ def run_publish(
         "latest_release": release_version,
         "releases": [*existing_releases_for_current, release_entry],
     }
+    if existing_register_docs:
+        jurisdiction_manifest_entry["register_documents"] = existing_register_docs
 
     manifest_payload: dict[str, Any] = {
         "schema_version": "1.3",

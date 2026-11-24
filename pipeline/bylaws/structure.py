@@ -43,28 +43,37 @@ TYPE_TO_PREFIX: dict[str, str] = {
 }
 
 CHAPTER_LINE_RE = re.compile(
-    r"^(?P<kind>PART|CHAPTER|SCHEDULE|ANNEXURE|APPENDIX|FORM)\s+(?P<num>[IVXLCDM]+|\d+[A-Z]?)\b"
+    r"^(?P<kind>PART|CHAPTER|SCHEDULE|ANNEXURE|APPENDIX|FORM)\s*[-–—]?\s*"
+    r"(?P<num>(?:[IVXLCDM]+|\d+)(?:\s*-\s*[A-Z0-9]+|[A-Z])?)\b"
     r"(?:\s*[:.\-\u2013\u2014]?\s*(?P<title>.*))?$",
     re.IGNORECASE,
 )
 
+UNNUMBERED_SECTION_RE = re.compile(
+    r"^(?P<heading>ABBREVIATIONS|TECHNICAL\s+TERMS\s+AND\s+DEFINITIONS|TABLE\s+OF\s+CONTENTS|FRAMEWORK\s+AND\s+OBJECTIVES)$",
+    re.IGNORECASE,
+)
+
+TOC_LEADER_RE = re.compile(r"(?:\.\s*){4,}\d*$")
+
 SECTION_PREFIX_RE = re.compile(
     r"^(?P<prefix>Section|Clause|Regulation|Bye-law|Byelaw|Rule)\s+"
     r"(?P<number>[A-Z]?\d+(?:[.-]\d+)*[A-Z]?)"
-    r"(?:\s*[:.\-\u2013\u2014]\s*(?P<rest>[A-Z'\"(\u0c80-\u0cff].*))?$",
+    r"(?:\s*[:.\-\u2013\u2014]\s*(?P<rest>[A-Za-z'\"\u201c\u2018(\u0c80-\u0cff].*))?$",
     re.IGNORECASE,
 )
 
 DECIMAL_CLAUSE_RE = re.compile(
-    r"^(?P<number>(?:[A-Z]?\d+(?:\.\d+)+[A-Z]?))\b\.?\s+(?P<rest>[A-Z'\"(\u0c80-\u0cff].+)$"
+    r"^(?P<number>[A-Z]?\d+(?:\.\d+)+(?:\([0-9A-Za-z.]+\))?[A-Z]?)\)?\.?\s+"
+    r"(?P<rest>[A-Za-z'\"\u201c\u2018(\u0c80-\u0cff].+)$"
 )
 
 INT_CLAUSE_RE = re.compile(
-    r"^(?P<number>\d{1,3}(?:-[A-Z]|[A-Z])?)\.\s+(?P<rest>[A-Z'\"(\u0c80-\u0cff].+)$"
+    r"^(?P<number>\d{1,3}(?:-[A-Z]|[A-Z])?)[.)]\s+(?P<rest>[A-Za-z'\"\u201c\u2018(\u0c80-\u0cff].+)$"
 )
 
 SUB_ITEM_RE = re.compile(
-    r"^\((?P<subnum>[a-z]{1,2}|[ivxlcdm]+|\d+)\)\s+(?P<rest>.+)$"
+    r"^(?:\((?P<subnum>[a-z]{1,2}|[ivxlcdm]+|\d+)\)|(?P<bare_sub>[a-z]|[ivxlcdm]{1,4})\))\s+(?P<rest>.+)$"
 )
 
 PROVISO_LINE_RE = re.compile(
@@ -87,8 +96,15 @@ FOOTNOTE_LINE_RE = re.compile(
 )
 
 DEFINED_TERM_RE = re.compile(
-    r"[\"\u201c\u2018'](?P<term>[A-Za-z][A-Za-z0-9\s/-]{1,60})[\"\u201d\u2019']\s*(?:\([^)]+\)\s*)?means\b"
-    r"|^(?P<bare_term>[A-Z][A-Za-z\s]{2,40})\s*(?:\([A-Z]{2,8}\)\s*)?means\b"
+    r"[\"\u201c\u2018']\s*(?P<term>[A-Za-z][A-Za-z0-9\s/().,&-]{1,65}?)\s*[\"\u201d\u2019']\s*"
+    r"(?:\([^)]*\)\s*)?(?:with\s+its\s+grammatical\s+variations\s*[-:\u2013\u2014]?\s*)?"
+    r"(?:means|includes|is|shall\s+mean|refers\s+to)\b"
+    r"|^(?P<bare_term>[A-Z][A-Za-z\s/()-]{2,45})\s*(?:\([A-Z]{2,8}\)\s*)?means\b",
+    re.IGNORECASE,
+)
+
+LEADING_QUOTED_TERM_RE = re.compile(
+    r"^[\"\u201c\u2018']\s*(?P<term>[A-Za-z][A-Za-z0-9\s/().,&-]{1,65}?)\s*[\"\u201d\u2019']"
 )
 
 MEASUREMENT_UNIT_RE = re.compile(
@@ -151,7 +167,12 @@ def _detect_language(text: str) -> str:
     return "kn" if KANNADA_CHAR_RE.search(text) else "en"
 
 
-def _extract_defined_term(text: str, heading: str | None = None) -> tuple[str, str] | None:
+def _extract_defined_term(
+    text: str,
+    heading: str | None = None,
+    *,
+    in_definitions_section: bool = False,
+) -> tuple[str, str] | None:
     """Return `(defines_printed, defines_normalised)` if `text` defines a term."""
     m = DEFINED_TERM_RE.search(text)
     if m:
@@ -163,6 +184,18 @@ def _extract_defined_term(text: str, heading: str | None = None) -> tuple[str, s
             if heading and raw_term.lower().startswith(heading.lower()):
                 raw_term = raw_term[len(heading) :].strip(": ") or raw_term
             return f'"{raw_term}"', raw_term.lower()
+
+    if in_definitions_section:
+        mq = LEADING_QUOTED_TERM_RE.match(text.strip())
+        if mq:
+            raw_term = mq.group("term").strip()
+            if raw_term:
+                return f'"{raw_term}"', raw_term.lower()
+        if heading and heading.strip() and heading.strip() != text.strip():
+            raw_term = heading.strip().strip(":-–— ")
+            if 1 <= len(raw_term.split()) <= 8 and any(ch.isalpha() for ch in raw_term):
+                return f'"{raw_term}"', raw_term.lower()
+
     return None
 
 
@@ -210,11 +243,28 @@ def _split_title_and_body(rest: str) -> tuple[str | None, str]:
 
 
 def _match_structural_line(line: str) -> tuple[str, str, str] | None:
+    if TOC_LEADER_RE.search(line):
+        return None
+
+    unnum_match = UNNUMBERED_SECTION_RE.match(line.strip())
+    if unnum_match:
+        heading_raw = " ".join(unnum_match.group("heading").split()).upper()
+        if "DEFINITION" in heading_raw:
+            return "unnumbered_section", "DEFINITIONS", heading_raw
+        if "ABBREVIATION" in heading_raw:
+            return "unnumbered_section", "ABBREVIATIONS", heading_raw
+        if "CONTENTS" in heading_raw:
+            return "unnumbered_section", "TOC", heading_raw
+        return "unnumbered_section", "OBJECTIVES", heading_raw
+
     chap_match = CHAPTER_LINE_RE.match(line)
     if chap_match:
         kind_word = chap_match.group("kind").lower()
-        num_word = chap_match.group("num").upper()
+        num_word = re.sub(r"\s+", "", chap_match.group("num").upper())
         title_part = (chap_match.group("title") or "").strip()
+        # Reject TOC lines ending with a bare page number when kind is CHAPTER
+        if kind_word == "chapter" and re.search(r"\s+\d{1,2}$", title_part):
+            return None
         number = f"{kind_word.upper()} {num_word}"
         return kind_word, number, title_part or number
 
@@ -242,7 +292,13 @@ def _match_structural_line(line: str) -> tuple[str, str, str] | None:
     if dec_match:
         number = dec_match.group("number")
         rest = dec_match.group("rest").strip()
-        if not number.startswith("0.") and not MEASUREMENT_UNIT_RE.match(rest):
+        base_parts = number.split("(")[0].split(".")
+        is_float_measurement = len(base_parts) == 2 and base_parts[1] == "00"
+        if (
+            not number.startswith("0.")
+            and not is_float_measurement
+            and not MEASUREMENT_UNIT_RE.match(rest)
+        ):
             return "clause", number, rest
 
     int_match = INT_CLAUSE_RE.match(line)
@@ -250,11 +306,11 @@ def _match_structural_line(line: str) -> tuple[str, str, str] | None:
         number = int_match.group("number")
         rest = int_match.group("rest").strip()
         if not MEASUREMENT_UNIT_RE.match(rest):
-            return "clause", number, rest
+            return "int_clause", number, rest
 
     sub_match = SUB_ITEM_RE.match(line)
     if sub_match:
-        subnum = sub_match.group("subnum")
+        subnum = sub_match.group("subnum") or sub_match.group("bare_sub")
         rest = sub_match.group("rest").strip()
         return "subitem", subnum, rest
 
@@ -309,17 +365,21 @@ def _build_columns_hierarchy(
     columns: list[dict[str, Any]] = []
 
     for col_idx, raw_hdr in enumerate(headers):
-        m_unit = unit_re.match(raw_hdr.strip())
+        fallback_lbl = "Sl. No." if col_idx == 0 else f"Column {col_idx + 1}"
+        hdr_clean = raw_hdr.strip() or (
+            rows[0][col_idx].strip() if has_second_header_row and rows[0][col_idx].strip() else fallback_lbl
+        )
+        m_unit = unit_re.match(hdr_clean)
         col_entry: dict[str, Any] = {
-            "label": m_unit.group("label").strip() if m_unit else raw_hdr.strip(),
+            "label": (m_unit.group("label").strip() if m_unit else hdr_clean) or fallback_lbl,
             "unit": m_unit.group("unit").strip() if m_unit else None,
         }
         if has_second_header_row:
-            sub_raw = rows[0][col_idx].strip()
+            sub_raw = rows[0][col_idx].strip() or col_entry["label"]
             m_sub = unit_re.match(sub_raw)
             col_entry["children"] = [
                 {
-                    "label": m_sub.group("label").strip() if m_sub else sub_raw,
+                    "label": (m_sub.group("label").strip() if m_sub else sub_raw) or fallback_lbl,
                     "unit": m_sub.group("unit").strip() if m_sub else col_entry["unit"],
                 }
             ]
@@ -348,14 +408,46 @@ def build_clause_tree_from_parse_result(
 
     raw_nodes: list[dict[str, Any]] = []
     nodes_by_eid: dict[str, dict[str, Any]] = {}
+    seen_numbers: Counter[str] = Counter()
 
     current: dict[str, Any] | None = None
     current_container_eid: str | None = None
+    current_section_node: dict[str, Any] | None = None
     current_clause_node: dict[str, Any] | None = None
+    in_definitions_section = False
     last_alpha_node: dict[str, Any] | None = None
     last_alpha_letter: str | None = None
     sub_counters: Counter[tuple[str | None, str]] = Counter()
     pending_footnotes: dict[int, list[dict[str, Any]]] = {}
+
+    def _allocate_unique_eid_and_number(
+        parent_eid: str | None,
+        node_type: str,
+        raw_token: str,
+        raw_number: str,
+    ) -> tuple[str, str]:
+        base_eid = build_eid(parent_eid, node_type, raw_token)
+        eid = base_eid
+        suffix = 1
+        while eid in nodes_by_eid:
+            suffix += 1
+            eid = f"{base_eid}_{suffix}"
+
+        num_str = raw_number
+        if seen_numbers[num_str] > 0:
+            if parent_eid and parent_eid in nodes_by_eid:
+                parent_num = str(nodes_by_eid[parent_eid]["number"])
+                scoped_cand = f"{parent_num}:{raw_number}"
+                if seen_numbers[scoped_cand] == 0:
+                    num_str = scoped_cand
+                else:
+                    seen_numbers[scoped_cand] += 1
+                    num_str = f"{scoped_cand}_{seen_numbers[scoped_cand]}"
+            else:
+                seen_numbers[num_str] += 1
+                num_str = f"{raw_number}_{seen_numbers[num_str]}"
+        seen_numbers[num_str] += 1
+        return eid, num_str
 
     for block in parse_result.blocks:
         line = block.text.strip()
@@ -376,18 +468,61 @@ def build_clause_tree_from_parse_result(
             continue
 
         parsed_line = _match_structural_line(line)
+        if (
+            parsed_line is not None
+            and current_section_node is not None
+            and current_section_node.get("number") == "TOC"
+            and parsed_line[0] != "unnumbered_section"
+            and re.search(r"\s+\d{1,2}$", line)
+        ):
+            parsed_line = None
         if parsed_line is None and current is None and _is_top_title_banner(block):
             continue
 
         if parsed_line is not None:
             kind, number, rest = parsed_line
 
-            if kind in {"part", "chapter", "schedule", "annexure", "appendix", "form"}:
-                eid = build_eid(None, kind, number)
+            if kind == "unnumbered_section":
+                sec_type = "preface" if number in {"TOC", "ABBREVIATIONS"} else "section"
+                eid, uniq_num = _allocate_unique_eid_and_number(
+                    current_container_eid, sec_type, number, number
+                )
                 node_dict: dict[str, Any] = {
                     "eid": eid,
+                    "native_number": None,
+                    "number": uniq_num,
+                    "type": sec_type,
+                    "heading": rest,
+                    "title": rest,
+                    "level": 2 if current_container_eid else 1,
+                    "parent_eid": current_container_eid,
+                    "children": [],
+                    "intro_parts": [],
+                    "content_parts": [rest],
+                    "wrap_up_parts": [],
+                    "has_subitems": False,
+                    "blocks": [block],
+                }
+                if current_container_eid and current_container_eid in nodes_by_eid:
+                    nodes_by_eid[current_container_eid]["children"].append(eid)
+                raw_nodes.append(node_dict)
+                nodes_by_eid[eid] = node_dict
+                current = node_dict
+                current_section_node = node_dict
+                current_clause_node = None
+                in_definitions_section = number == "DEFINITIONS"
+                last_alpha_node = None
+                last_alpha_letter = None
+                continue
+
+            if kind in {"part", "chapter", "schedule", "annexure", "appendix", "form"}:
+                eid, uniq_num = _allocate_unique_eid_and_number(
+                    None, kind, number, number
+                )
+                node_dict = {
+                    "eid": eid,
                     "native_number": number,
-                    "number": number,
+                    "number": uniq_num,
                     "type": kind,
                     "heading": rest,
                     "title": rest,
@@ -404,12 +539,14 @@ def build_clause_tree_from_parse_result(
                 nodes_by_eid[eid] = node_dict
                 current = node_dict
                 current_container_eid = eid
+                current_section_node = None
                 current_clause_node = None
+                in_definitions_section = False
                 last_alpha_node = None
                 last_alpha_letter = None
                 continue
 
-            if kind == "clause":
+            if kind in {"clause", "int_clause"}:
                 if (
                     current is not None
                     and current["native_number"] == number
@@ -424,10 +561,64 @@ def build_clause_tree_from_parse_result(
                     continue
 
                 title, body = _split_title_and_body(rest)
-                parts = number.split(".")
+                base_num = number.split("(")[0]
+                parts = base_num.split(".")
                 parent_eid: str | None = current_container_eid
                 level = 2 if current_container_eid else 1
-                if len(parts) > 2:
+                is_dot_zero_section = (
+                    kind == "clause"
+                    and len(parts) == 2
+                    and parts[1] == "0"
+                    and "(" not in number
+                )
+
+                if is_dot_zero_section:
+                    parent_eid = current_container_eid
+                    level = 2 if current_container_eid else 1
+                    in_definitions_section = "DEFINITION" in rest.upper()
+                elif kind == "int_clause":
+                    # Check if this integer continues a .0 section sequence (e.g. 34. after 33.0)
+                    prev_sec_num = (
+                        str(current_section_node.get("native_number") or "")
+                        if current_section_node
+                        else ""
+                    )
+                    prev_sec_prefix = prev_sec_num.split(".")[0] if "." in prev_sec_num else ""
+                    if (
+                        number.isdigit()
+                        and prev_sec_prefix.isdigit()
+                        and int(number) == int(prev_sec_prefix) + 1
+                        and int(number) >= 20
+                    ):
+                        is_dot_zero_section = True
+                        parent_eid = current_container_eid
+                        level = 2 if current_container_eid else 1
+                        in_definitions_section = False
+                    else:
+                        target_parent = (
+                            current_section_node
+                            if in_definitions_section and current_section_node is not None
+                            else (current_clause_node or current_section_node)
+                        )
+                        if target_parent is not None:
+                            parent_eid = str(target_parent["eid"])
+                            level = int(target_parent["level"]) + 1
+                elif "(" in number:
+                    prefix_before_paren = number.split("(")[0]
+                    for cand in reversed(raw_nodes):
+                        if cand.get("native_number") == prefix_before_paren:
+                            parent_eid = cand["eid"]
+                            level = int(cand["level"]) + 1
+                            break
+                elif len(parts) == 2:
+                    sec_candidate = f"{parts[0]}.0"
+                    if (
+                        current_section_node is not None
+                        and current_section_node.get("native_number") == sec_candidate
+                    ):
+                        parent_eid = str(current_section_node["eid"])
+                        level = int(current_section_node["level"]) + 1
+                elif len(parts) > 2:
                     parent_num = ".".join(parts[:-1])
                     for cand in reversed(raw_nodes):
                         if cand.get("native_number") == parent_num:
@@ -435,14 +626,26 @@ def build_clause_tree_from_parse_result(
                             level = int(cand["level"]) + 1
                             break
 
-                def_info = _extract_defined_term(body, title)
-                node_type = "definition" if def_info is not None else "clause"
-                eid = build_eid(parent_eid, node_type, number)
+                def_info = _extract_defined_term(
+                    body,
+                    title,
+                    in_definitions_section=in_definitions_section and not is_dot_zero_section,
+                )
+                if def_info is not None and not is_dot_zero_section:
+                    node_type = "definition"
+                elif is_dot_zero_section:
+                    node_type = "section"
+                else:
+                    node_type = "clause"
+
+                eid, uniq_num = _allocate_unique_eid_and_number(
+                    parent_eid, node_type, number, number
+                )
 
                 node_dict = {
                     "eid": eid,
                     "native_number": number,
-                    "number": number,
+                    "number": uniq_num,
                     "type": node_type,
                     "heading": title,
                     "title": title,
@@ -462,7 +665,11 @@ def build_clause_tree_from_parse_result(
                 raw_nodes.append(node_dict)
                 nodes_by_eid[eid] = node_dict
                 current = node_dict
-                current_clause_node = node_dict
+                if is_dot_zero_section:
+                    current_section_node = node_dict
+                    current_clause_node = None
+                elif kind == "clause":
+                    current_clause_node = node_dict
                 last_alpha_node = None
                 last_alpha_letter = None
                 continue
@@ -480,6 +687,8 @@ def build_clause_tree_from_parse_result(
                     parent_node = last_alpha_node
                 elif current_clause_node is not None:
                     parent_node = current_clause_node
+                elif current_section_node is not None:
+                    parent_node = current_section_node
                 elif current is not None:
                     parent_node = current
                 else:
@@ -502,12 +711,14 @@ def build_clause_tree_from_parse_result(
                 title, body = _split_title_and_body(rest)
                 def_info = _extract_defined_term(body, title)
                 item_type = "definition" if def_info is not None else "item"
-                eid = build_eid(parent_eid, item_type, subnum)
+                eid, uniq_num = _allocate_unique_eid_and_number(
+                    parent_eid, item_type, subnum, scoped_number
+                )
 
                 node_dict = {
                     "eid": eid,
                     "native_number": f"({subnum})",
-                    "number": scoped_number,
+                    "number": uniq_num,
                     "type": item_type,
                     "heading": title if title != body else None,
                     "title": title,
@@ -533,18 +744,20 @@ def build_clause_tree_from_parse_result(
                 continue
 
             if kind in {"proviso", "explanation", "note"}:
-                parent_node = current_clause_node or current
+                parent_node = current_clause_node or current_section_node or current
                 parent_eid = str(parent_node["eid"]) if parent_node else current_container_eid
                 sub_counters[(parent_eid, kind)] += 1
                 seq_num = number or str(sub_counters[(parent_eid, kind)])
-                eid = build_eid(parent_eid, kind, seq_num)
                 parent_num_str = str(parent_node["number"]) if parent_node else ""
                 compat_number = f"{parent_num_str}:{kind}_{seq_num}" if parent_num_str else f"{kind}_{seq_num}"
+                eid, uniq_num = _allocate_unique_eid_and_number(
+                    parent_eid, kind, seq_num, compat_number
+                )
 
                 node_dict = {
                     "eid": eid,
                     "native_number": number if number else None,
-                    "number": compat_number,
+                    "number": uniq_num,
                     "type": kind,
                     "heading": kind.capitalize(),
                     "title": kind.capitalize(),
@@ -707,23 +920,33 @@ def build_clause_tree_from_parse_result(
         out_by_eid[eid] = node_out
 
     # Attach parsed tables both as `tables[]` compatibility entries and as Layer 1 `table` + `table_row` nodes
+    structural_clauses = list(clauses_out)
     table_counts: Counter[str] = Counter()
     for tbl in parse_result.tables:
         target_clause: dict[str, Any] | None = None
         if tbl.caption:
             cap_prefix = tbl.caption.split(":", 1)[0].strip().lower()
-            for clause in clauses_out:
+            for clause in structural_clauses:
                 if cap_prefix and cap_prefix in clause["text"].lower():
                     target_clause = clause
                     break
         if target_clause is None:
             same_page = [
                 c
-                for c in clauses_out
+                for c in structural_clauses
                 if any(cit["page"] == tbl.page for cit in c["citations"])
-                and c["type"] in {"clause", "bye_law", "regulation", "section"}
+                and c["type"] in {"clause", "bye_law", "regulation", "section", "schedule", "appendix", "chapter", "part", "preface"}
             ]
-            target_clause = same_page[-1] if same_page else (clauses_out[-1] if clauses_out else None)
+            if same_page:
+                target_clause = same_page[-1]
+            else:
+                prior_pages = [
+                    c
+                    for c in structural_clauses
+                    if any(cit["page"] <= tbl.page for cit in c["citations"])
+                    and c["type"] in {"clause", "bye_law", "regulation", "section", "schedule", "appendix", "chapter", "part", "preface"}
+                ]
+                target_clause = prior_pages[-1] if prior_pages else (structural_clauses[-1] if structural_clauses else None)
 
         if target_clause is None:
             continue
@@ -739,7 +962,10 @@ def build_clause_tree_from_parse_result(
             {
                 "table_id": f"{cid}:t{t_idx}",
                 "caption": tbl.caption,
-                "headers": list(tbl.headers),
+                "headers": [
+                    h.strip() or str(columns_tree[i]["label"])
+                    for i, h in enumerate(tbl.headers)
+                ],
                 "rows": data_rows,
                 "page": tbl.page,
             }
@@ -925,6 +1151,9 @@ def build_clause_tree_from_parse_result(
 
 
 def _find_interim_parse_file(interim_dir: Path, doc_id: str) -> Path:
+    docling_file = interim_dir / f"{doc_id}.docling.json"
+    if docling_file.is_file():
+        return docling_file
     candidates = sorted(interim_dir.glob(f"{doc_id}.*.json"))
     if not candidates:
         raise click.ClickException(
@@ -936,7 +1165,14 @@ def _find_interim_parse_file(interim_dir: Path, doc_id: str) -> Path:
 
 def is_structurable_document(doc: DocumentConfig) -> bool:
     """Return True if a document should be structured into a `.clauses.json` tree."""
+    if getattr(doc, "structured", None) is False:
+        return False
+    acq_status = getattr(doc, "acquisition_status", None) or "acquired"
+    if acq_status in {"pending", "not_found", "reference_only"}:
+        return False
     if doc.text_rights is not None and doc.text_rights.mode == "reference_only":
+        return False
+    if doc.languages and list(doc.languages) == ["kn"]:
         return False
     return not (
         doc.role in {"boundary", "reference"}

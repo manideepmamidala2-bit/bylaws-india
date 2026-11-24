@@ -17,7 +17,7 @@ aliases:
   - Uttarahalli
 visibility: public
 licence: CC BY 4.0
-release_version: null
+release_version: "2.0.0"
 country: IN
 state: KA
 building_types:
@@ -193,6 +193,7 @@ documents:
     role: amendment
     legal_status: in_force
     acquisition_status: acquired
+    structured: false
     notification_number: "No.UDD 93 MNJ 2008"
     gazette_reference: "Karnataka Extra-Ordinary Gazette Notification under Section 13-E of the Karnataka Town & Country Planning Act, 1961"
     notified_date: "2009-03-02"
@@ -238,6 +239,7 @@ documents:
     role: amendment
     legal_status: in_force
     acquisition_status: acquired
+    structured: false
     notification_number: "No: UDD 105 MNJ 2008"
     gazette_reference: "Part - II Bengaluru, Monday, March 23, 2015 (Chaithra 02, Shaka Varsha 1937) No. 230"
     notified_date: "2015-03-20"
@@ -283,6 +285,7 @@ documents:
     role: amendment
     legal_status: in_force
     acquisition_status: acquired
+    structured: false
     notification_number: "NO. UDD 112 MNJ 2015"
     gazette_reference: "Part–IVA Bengaluru, Saturday, September 29, 2018 (Ashwayuja 7, Shaka Varsha 1940) No. 1376"
     notified_date: "2018-09-29"
@@ -328,6 +331,7 @@ documents:
     role: amendment
     legal_status: in_force
     acquisition_status: acquired
+    structured: false
     notification_number: "No. UDD 255 MNJ 2018"
     gazette_reference: "Part-IVA Bengaluru, Thursday, June 20, 2019 (Jyesta 30, Shaka Varsha 1940) No. 483"
     notified_date: "2019-06-19"
@@ -417,6 +421,7 @@ documents:
     role: amendment
     legal_status: in_force
     acquisition_status: acquired
+    structured: false
     notification_number: "No. UDD 78 MNJ 2024 (E)"
     gazette_reference: "Karnataka Special Gazette Part-IVA Dated: 21.02.2025"
     notified_date: "2025-02-21"
@@ -462,6 +467,7 @@ documents:
     role: amendment
     legal_status: in_force
     acquisition_status: acquired
+    structured: false
     notification_number: "No. UDD 235 MNJ 2025(E)"
     gazette_reference: "Karnataka Special Gazette Part-IVA dated 05.01.2026"
     notified_date: "2026-01-05"

@@ -189,10 +189,13 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     ).toEqual(["in-ka-bengaluru-south", "xx-test-fixture"]);
   });
 
-  it("shows 'No data published yet' and zero generated data across Bengaluru South routes, and passes axe", async () => {
+  it(
+    "renders Release 2.0.0 base documents with 'Amendments not yet applied' notice and side-by-side archive links across Bengaluru South routes, and passes axe",
+    { timeout: 20000 },
+    async () => {
     const homeUi = await JurisdictionPickerPage();
     const { container: homeContainer, unmount: uHome } = render(homeUi);
-    expect(screen.getByText("No data published yet")).toBeInTheDocument();
+    expect(screen.getAllByText(/v2\.0\.0/i).length).toBeGreaterThan(0);
     expect(
       screen.getByText(/Synthetic demonstration data, not the law of Bengaluru South/i)
     ).toBeInTheDocument();
@@ -200,18 +203,18 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     await assertNoAxeViolations(homeContainer);
     uHome();
 
-    // Sources page renders the pre-release core source register with "Not yet structured"
+    // Sources page renders the 12-document core register (2 structured base docs + 10 "Not yet structured")
     const sourcesUi = await SourcesPage({
       params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
     });
     const { container: sourcesContainer, unmount: uSources } =
       render(sourcesUi);
     expect(
-      screen.getByText(/Pre-Release Source Register · Not yet structured/i)
-    ).toBeInTheDocument();
-    expect(
       screen.getByText("BANGALORE MAHANAGARA PALIKE BUILDING BYE-LAWS 2003")
     ).toBeInTheDocument();
+    expect(
+      screen.getAllByRole("link", { name: /Read Structured Document/i })
+    ).toHaveLength(2);
     expect(screen.getAllByText(/Not yet structured/i).length).toBeGreaterThan(1);
     assertCleanPublicCopy(
       sourcesContainer.textContent ?? "",
@@ -220,6 +223,48 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     );
     await assertNoAxeViolations(sourcesContainer);
     uSources();
+
+    // Document page for bbl-2003 renders prominent "Amendments not yet applied" notice and side-by-side View source + Archive links
+    const docUi = await DocumentViewerPage({
+      params: Promise.resolve({
+        id: "in-ka-bengaluru-south",
+        doc: "bbl-2003",
+      }),
+    });
+    const { container: docContainer, unmount: uDoc } = render(docUi);
+    expect(
+      screen.getByText(
+        /Two base documents published\. Amendments not yet applied: the text shown is the original wording, which may have been changed since\./i
+      )
+    ).toBeInTheDocument();
+    expect(
+      screen.getAllByRole("link", { name: /View source p\. 1/i }).length
+    ).toBeGreaterThan(0);
+    expect(
+      screen.getAllByRole("link", { name: /Archive p\. 1/i }).length
+    ).toBeGreaterThan(0);
+    assertCleanPublicCopy(
+      docContainer.textContent ?? "",
+      "Bengaluru South bbl-2003",
+      { allowDataEmDash: true }
+    );
+    await assertNoAxeViolations(docContainer);
+    uDoc();
+
+    // Unstructured amendment document renders "Not yet structured"
+    const unstructUi = await DocumentViewerPage({
+      params: Promise.resolve({
+        id: "in-ka-bengaluru-south",
+        doc: "rmp2015-zr-amend-2026-01",
+      }),
+    });
+    const { container: unstructContainer, unmount: uUnstruct } =
+      render(unstructUi);
+    expect(
+      screen.getByRole("heading", { name: "Not yet structured" })
+    ).toBeInTheDocument();
+    await assertNoAxeViolations(unstructContainer);
+    uUnstruct();
 
     const routes: Array<{ label: string; renderFn: () => Promise<React.ReactElement> }> = [
       {
@@ -234,16 +279,6 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
         renderFn: () =>
           ClausesPage({
             params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
-          }),
-      },
-      {
-        label: "Document",
-        renderFn: () =>
-          DocumentViewerPage({
-            params: Promise.resolve({
-              id: "in-ka-bengaluru-south",
-              doc: "bbl-2003",
-            }),
           }),
       },
       {
@@ -265,18 +300,15 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     for (const route of routes) {
       const ui = await route.renderFn();
       const { container, unmount } = render(ui);
-      expect(
-        screen.getByRole("heading", { name: "No data published yet" })
-      ).toBeInTheDocument();
-      expect(container.textContent).not.toContain("R-Main");
-      expect(container.textContent).not.toContain("bbl-2003");
-      assertCleanPublicCopy(container.textContent ?? "", route.label);
+      assertCleanPublicCopy(container.textContent ?? "", route.label, {
+        allowDataEmDash: true,
+      });
       await assertNoAxeViolations(container);
       unmount();
     }
   });
 
-  it("shows release 1.0.0 as withdrawn with reason and no download links on Data page, and renders honest About page", async () => {
+  it("shows release 1.0.0 as withdrawn and release 2.0.0 as published on Data page, and renders honest About page", async () => {
     const dataUi = await DataReleasesPage();
     const { container: dataContainer, unmount: uData } = render(dataUi);
 
@@ -285,14 +317,16 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
         /Withdrawn: Synthetic demonstration data, not the law of Bengaluru South/i
       )
     ).toBeInTheDocument();
-    expect(screen.getByText("No data published yet")).toBeInTheDocument();
+    expect(screen.getByText(/Latest: v2\.0\.0/i)).toBeInTheDocument();
     expect(
-      screen.queryByRole("link", { name: /Download Bundle/i })
-    ).not.toBeInTheDocument();
+      screen.getByRole("link", { name: /Download Bundle/i })
+    ).toBeInTheDocument();
     expect(
-      screen.queryByRole("link", { name: /SHA256SUMS/i })
-    ).not.toBeInTheDocument();
-    assertCleanPublicCopy(dataContainer.textContent ?? "", "Data");
+      screen.getByRole("link", { name: /SHA256SUMS/i })
+    ).toBeInTheDocument();
+    assertCleanPublicCopy(dataContainer.textContent ?? "", "Data", {
+      allowDataEmDash: true,
+    });
     await assertNoAxeViolations(dataContainer);
     uData();
 

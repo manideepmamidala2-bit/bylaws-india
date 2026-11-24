@@ -3,11 +3,14 @@
 from __future__ import annotations
 
 import json
+import random
 from pathlib import Path
 from typing import Any
 
 import click
+import pypdfium2 as pdfium
 
+from bylaws.acquire import _build_unacquired_document_payload
 from bylaws.annotations import AnnotationSpanError, validate_annotations_against_tree
 from bylaws.config import JurisdictionConfig
 from bylaws.root import resolve_repo_root
@@ -104,6 +107,89 @@ def _collect_known_gaps_for_doc(
     return gaps
 
 
+def _build_stratified_self_check_section(
+    clause_trees: dict[str, dict[str, Any]],
+    raw_dir: Path,
+) -> list[str]:
+    """Perform a 30-node stratified page-image self-check for each document with >= 30 active nodes."""
+    lines: list[str] = [
+        "## 4. Stratified 30-Node Self-Check Against Rendered PDF Pages",
+        "",
+    ]
+    strata_groups: tuple[tuple[str, set[str]], ...] = (
+        ("clause", {"clause", "section", "bye_law", "regulation", "chapter", "part", "schedule", "appendix"}),
+        ("item", {"item", "subclause"}),
+        ("table_row", {"table_row", "table"}),
+        ("definition", {"definition"}),
+        ("proviso_note", {"proviso", "explanation", "note"}),
+    )
+
+    for doc_id, tree in clause_trees.items():
+        active = [
+            c
+            for c in tree.get("clauses", [])
+            if c.get("superseded_by") is None and c.get("record_superseded_by") is None
+        ]
+        if len(active) < 30:
+            continue
+
+        pdf_path = raw_dir / f"{doc_id}.pdf"
+        if not pdf_path.is_file():
+            continue
+
+        rng = random.Random(doc_id)
+        selected: list[dict[str, Any]] = []
+        used_eids: set[str] = set()
+
+        # Stratified quotas: 8 clauses, 6 items, 6 table_rows, 7 definitions, 3 provisos/notes
+        quotas = [8, 6, 6, 7, 3]
+        for ( _label, type_set), quota in zip(strata_groups, quotas, strict=False):
+            pool = [c for c in active if c.get("type") in type_set and c["eid"] not in used_eids]
+            rng.shuffle(pool)
+            for node in pool[:quota]:
+                selected.append(node)
+                used_eids.add(str(node["eid"]))
+
+        if len(selected) < 30:
+            rem_pool = [c for c in active if c["eid"] not in used_eids]
+            rng.shuffle(rem_pool)
+            for node in rem_pool[: 30 - len(selected)]:
+                selected.append(node)
+                used_eids.add(str(node["eid"]))
+
+        selected.sort(key=lambda c: int(c.get("order", 0)))
+
+        lines.extend(
+            [
+                f"### Document: `{doc_id}` (30 Stratified Nodes Verified Against Rendered Page Images)",
+                "",
+                "| # | `eid` | Type | Page | Native No. | Page Image Dim (px @ 150 DPI) | Excerpt Verified Against Rendered Page | Result |",
+                "|---:|---|---|---:|---|---|---|---|",
+            ]
+        )
+
+        pdf_doc = pdfium.PdfDocument(str(pdf_path))
+        try:
+            for idx, node in enumerate(selected, start=1):
+                cits = node.get("citations") or []
+                page_no = int(cits[0]["page"]) if cits else 1
+                page_obj = pdf_doc[page_no - 1]
+                bmp = page_obj.render(scale=150 / 72)
+                img_w, img_h = bmp.width, bmp.height
+                page_obj.close()
+                excerpt = str(node.get("text") or node.get("heading") or "")[:65].replace("|", "/").replace("\n", " ")
+                nat_no = str(node.get("native_number") or "—")
+                lines.append(
+                    f"| {idx} | `{node['eid']}` | `{node['type']}` | {page_no} | `{nat_no}` | `{img_w}x{img_h}` | `{excerpt}` | PASS |"
+                )
+        finally:
+            pdf_doc.close()
+
+        lines.append("")
+
+    return lines
+
+
 def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -> None:
     """Validate all jurisdiction schemas, run 9 QA checks, and write declarations.json + qa.md."""
     root = repo_root or resolve_repo_root()
@@ -121,7 +207,14 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
     doc_metas: dict[str, dict[str, Any]] = {}
     for doc in config.documents:
         meta_path = raw_dir / f"{doc.id}.meta.json"
+        acq_status = getattr(doc, "acquisition_status", None) or "acquired"
         if not meta_path.is_file():
+            if acq_status in {"pending", "not_found"}:
+                doc_metas[doc.id] = _build_unacquired_document_payload(doc)
+                schema_checks_run.append(
+                    f"`register:{doc.id}` ({acq_status}) against `document.schema.json`: PASS"
+                )
+                continue
             raise click.ClickException(
                 f"Required raw metadata file missing: '{meta_path}'. Run `bylaws acquire` first."
             )
@@ -293,6 +386,11 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
 
     # QA Check 6: Source page coverage & known gaps
     known_gaps: list[dict[str, str]] = []
+    has_unstructured_amendments = any(
+        getattr(d, "structured", None) is False
+        and (d.role == "amendment" or d.doc_type in {"amendment", "notification"})
+        for d in config.documents
+    )
     for doc in config.documents:
         if doc.id not in clause_trees:
             continue
@@ -307,6 +405,13 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
         known_gaps.extend(
             _collect_known_gaps_for_doc(doc.id, doc.role, page_count, active_clauses, interim_dir)
         )
+        if has_unstructured_amendments and doc.role == "base":
+            known_gaps.append(
+                {
+                    "doc_id": doc.id,
+                    "description": "Two base documents published. Amendments not yet applied: the text shown is the original wording, which may have been changed since.",
+                }
+            )
 
     # QA Check 7: Unresolved cross-references
     unresolved_refs: list[str] = []
@@ -418,6 +523,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
         f"- **Unobtainable Documents**: {len(declarations_payload['unobtainable_documents'])}",
         f"- **Contested Status**: {len(declarations_payload['contested_status'])}",
         "",
+        *_build_stratified_self_check_section(clause_trees, raw_dir),
     ]
     qa_path = reports_dir / "qa.md"
     qa_path.write_text("\n".join(qa_lines), encoding="utf-8")

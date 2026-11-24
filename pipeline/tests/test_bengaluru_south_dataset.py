@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import copy
 import json
 from pathlib import Path
 from typing import Any
@@ -78,10 +77,9 @@ def test_bengaluru_south_release_1_0_0_is_withdrawn_and_files_removed() -> None:
 
     bscc = by_id["in-ka-bengaluru-south"]
     assert bscc["visibility"] == "public"
-    assert bscc["latest_release"] is None
-    assert len(bscc["releases"]) == 1
+    assert bscc["latest_release"] == "2.0.0"
 
-    rel = bscc["releases"][0]
+    rel = next(r for r in bscc["releases"] if r["version"] == "1.0.0")
     assert rel["version"] == "1.0.0"
     assert rel["status"] == "withdrawn"
     assert (
@@ -122,36 +120,38 @@ def test_published_manifest_recurrence_guard_blocks_local_source_urls(
         encoding="utf-8",
     )
 
-    planted_manifest = copy.deepcopy(manifest)
-    planted_manifest["jurisdictions"].append(
-        {
-            "id": "in-ka-planted",
-            "name": "Planted Public Jurisdiction",
-            "visibility": "public",
-            "latest_release": "1.0.0",
-            "releases": [
-                {
-                    "version": "1.0.0",
-                    "status": "published",
-                    "released_at": "2026-11-24T00:00:00Z",
-                    "licence": "CC BY 4.0",
-                    "download_zip": "/data/in-ka-planted/1.0.0/in-ka-planted-1.0.0.zip",
-                    "sha256sums": "/data/in-ka-planted/1.0.0/SHA256SUMS",
-                    "declarations": "/data/in-ka-planted/1.0.0/declarations.json",
-                    "files": {
-                        "documents": "/data/in-ka-planted/1.0.0/documents.json",
-                        "clauses": [],
-                        "amendments": "/data/in-ka-planted/1.0.0/amendments.json",
-                        "zones": "/data/in-ka-planted/1.0.0/zones.geojson",
-                        "boundary": "/data/in-ka-planted/1.0.0/boundary.geojson",
-                        "review_images": [],
-                    },
-                    "drafts": {"clauses": []},
-                    "changelog": "Planted release",
-                }
-            ],
-        }
-    )
+    planted_manifest = {
+        "schema_version": "1.3",
+        "jurisdictions": [
+            {
+                "id": "in-ka-planted",
+                "name": "Planted Public Jurisdiction",
+                "visibility": "public",
+                "latest_release": "1.0.0",
+                "releases": [
+                    {
+                        "version": "1.0.0",
+                        "status": "published",
+                        "released_at": "2026-11-24T00:00:00Z",
+                        "licence": "CC BY 4.0",
+                        "download_zip": "/data/in-ka-planted/1.0.0/in-ka-planted-1.0.0.zip",
+                        "sha256sums": "/data/in-ka-planted/1.0.0/SHA256SUMS",
+                        "declarations": "/data/in-ka-planted/1.0.0/declarations.json",
+                        "files": {
+                            "documents": "/data/in-ka-planted/1.0.0/documents.json",
+                            "clauses": [],
+                            "amendments": "/data/in-ka-planted/1.0.0/amendments.json",
+                            "zones": "/data/in-ka-planted/1.0.0/zones.geojson",
+                            "boundary": "/data/in-ka-planted/1.0.0/boundary.geojson",
+                            "review_images": [],
+                        },
+                        "drafts": {"clauses": []},
+                        "changelog": "Planted release",
+                    }
+                ],
+            }
+        ],
+    }
     validate_payload(planted_manifest, "manifest")
 
     with pytest.raises(AssertionError, match="has local or non-http\\(s\\) source_url"):

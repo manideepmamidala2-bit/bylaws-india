@@ -1,0 +1,50 @@
+id: fgv0
+name: 261124-fgv0-pr-05-structure-anchor-documents
+created: 2026-11-24T10:45:06Z
+created_by: manideepmamidala2-bit
+change_type: feat
+issues: []
+progress:
+    intake: done
+    apply: done
+    review: active
+    hydrate: pending
+    ship: pending
+    review-pr: pending
+plan:
+    generated: true
+    task_count: 5
+    acceptance_count: 10
+    acceptance_completed: 0
+confidence:
+    certain: 4
+    confident: 0
+    tentative: 0
+    unresolved: 0
+    score: 5.0
+    fuzzy: true
+    dimensions:
+        signal: 98.5
+        reversibility: 92.5
+        competence: 95.8
+        disambiguation: 97.0
+stage_metrics:
+    intake: {started_at: "2026-11-24T10:45:06Z", driver: fab-new, iterations: 1, completed_at: "2026-11-24T10:48:27Z"}
+    apply: {started_at: "2026-11-24T10:48:27Z", driver: /fab-fff, iterations: 1, completed_at: "2026-11-24T11:58:45Z"}
+    review: {started_at: "2026-11-24T11:58:45Z", driver: /fab-fff, iterations: 1}
+prs: []
+base_branch: main
+change_type_source: explicit
+true_impact:
+    added: 0
+    deleted: 0
+    net: 0
+    tests:
+        added: 0
+        deleted: 0
+        net: 0
+    computed_at: "2026-11-24T11:58:45Z"
+    computed_at_stage: apply
+# base_branch: written by /git-branch or /fab-new when the change's branch is created (no placeholder here).
+# true_impact: lazily created on first stage-finish that computes it (no placeholder here).
+last_updated: 2026-11-24T11:58:45Z

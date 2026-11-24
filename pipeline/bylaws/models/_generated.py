@@ -132,6 +132,10 @@ class DocumentConfig(BaseModel):
     acquisition_status: (
         Literal["acquired", "pending", "not_found", "reference_only"] | None
     ) = "acquired"
+    structured: bool | None = Field(
+        True,
+        description="Whether this document is structured into a clause tree in the current release.",
+    )
     retrieval: RetrievalRecord | None = None
     status_evidence: StatusEvidenceConfig
     notification_number: str | None = None
