@@ -64,31 +64,35 @@ Every core document in the Building Bye-laws chain and RMP 2015 Zoning Regulatio
 
 ### Functional Completeness
 
-- [ ] A-001 R1: Every core register row in `jurisdictions/in-ka-bengaluru-south.yaml` is confirmed from its fetched document with quoted `status_evidence`, or declared `not_found` / Kannada-only with the search logged in `data/reports/in-ka-bengaluru-south/source-discovery.md`
-- [ ] A-002 R1: Complete `retrieval` records and Wayback `archive_url` (or `archive_failure_reason`) are recorded for every acquired file, and `bylaws check-provenance` passes
-- [ ] A-003 R2: `data/reports/in-ka-bengaluru-south/recon.md` is measured from the real files and ends with the structuring rules list for PR 05, and `docs/sources/in-ka-bengaluru-south.md` lists the two chains in date order
-- [ ] A-004 R3: The Sources page (`/j/in-ka-bengaluru-south/sources`) and Data page (`/data`) show the real core register with links, archive links, and `"Not yet structured"` status
+- [x] A-001 R1: Every core register row in `jurisdictions/in-ka-bengaluru-south.yaml` is confirmed from its fetched document with quoted `status_evidence`, or declared `not_found` / Kannada-only with the search logged in `data/reports/in-ka-bengaluru-south/source-discovery.md`
+- [x] A-002 R1: Complete `retrieval` records and Wayback `archive_url` (or `archive_failure_reason`) are recorded for every acquired file, and `bylaws check-provenance` passes
+- [x] A-003 R2: `data/reports/in-ka-bengaluru-south/recon.md` is measured from the real files and ends with the structuring rules list for PR 05, and `docs/sources/in-ka-bengaluru-south.md` lists the two chains in date order
+- [x] A-004 R3: The Sources page (`/j/in-ka-bengaluru-south/sources`) and Data page (`/data`) show the real core register with links, archive links, and `"Not yet structured"` status
 
 ### Behavioral Correctness
 
-- [ ] A-005 R1: Zero synthetic or locally generated PDFs exist for `in-ka-bengaluru-south`, and all SHA-256 digests in `jurisdictions/in-ka-bengaluru-south.yaml` match the real downloaded bytes
-- [ ] A-006 R3: Map, Documents (`/clauses`), Timeline, and Review pages for `in-ka-bengaluru-south` continue showing `"No data published yet"` while Sources shows the real register
+- [x] A-005 R1: Zero synthetic or locally generated PDFs exist for `in-ka-bengaluru-south`, and all SHA-256 digests in `jurisdictions/in-ka-bengaluru-south.yaml` match the real downloaded bytes
+- [x] A-006 R3: Map, Documents (`/clauses`), Timeline, and Review pages for `in-ka-bengaluru-south` continue showing `"No data published yet"` while Sources shows the real register
 
 ### Scenario Coverage
 
-- [ ] A-007 R1: Falsifiable tests in `pipeline/tests/test_core_documents_pr04.py` are shown failing first (R11) and pass once the register, `source-discovery.md`, and `recon.md` are populated
-- [ ] A-008 R3: All Vitest and `axe-core` WCAG AA checks pass on the updated Sources and Data pages
+- [x] A-007 R1: Falsifiable tests in `pipeline/tests/test_core_documents_pr04.py` are shown failing first (R11) and pass once the register, `source-discovery.md`, and `recon.md` are populated
+- [x] A-008 R3: All Vitest and `axe-core` WCAG AA checks pass on the updated Sources and Data pages
 
 ### Code Quality
 
-- [ ] A-009 Pattern consistency: Register export and UI components follow existing schema and dg2n styling conventions
-- [ ] A-010 No unnecessary duplication: Reuses `SourcesFilterClient` and `DocumentMetadata` types
+- [x] A-009 Pattern consistency: Register export and UI components follow existing schema and dg2n styling conventions
+- [x] A-010 No unnecessary duplication: Reuses `SourcesFilterClient` and `DocumentMetadata` types
 
 ## Notes
 
 - Check items as you review: `- [x]`
 - All acceptance items must pass before `/fab-continue` (hydrate)
 - If an item is not applicable, mark checked and prefix with **N/A**: `- [x] A-NNN **N/A**: {reason}`
+
+## Deletion Candidates
+
+- `None` — this change adds new functionality without making existing code redundant
 
 ## Assumptions
 

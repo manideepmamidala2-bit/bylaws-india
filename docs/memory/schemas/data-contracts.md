@@ -1,13 +1,13 @@
 ---
 type: memory
-description: "Eleven Schema v1.2 Draft 2020-12 JSON Schema contracts, R12 record version chains, R13 text rights, R14 derived consolidated clauses and geo layers, clause-zone tags, and single-source Pydantic/TypeScript codegen."
+description: "Twelve Schema v1.3 Draft 2020-12 JSON Schema contracts, three-layer document model, R12 record version chains, R13 text rights, R14 derived consolidated clauses and geo layers, pre-release register_documents manifest path, and single-source Pydantic/TypeScript codegen."
 ---
 # Versioned JSON Schemas & Data Contracts
 
 **Domain**: schemas
 
 ## Overview
-All configuration inputs, raw document metadata, processed bylaw datasets, stand-off annotations, manual overrides, coverage gap declarations, amending effects, consolidated clauses, geospatial layers, clause–zone tags, and published release manifests are governed by twelve JSON Schema (Draft 2020-12) files at `schema_version: "1.3"` in `schemas/` (a5ou, 8ay2, izxl, fcwm, llmz). These contracts serve as the single source of truth for runtime validation in `pipeline/bylaws/schema_validator.py` and for generated Pydantic v2 models (`pipeline/bylaws/models/_generated.py`) and TypeScript interfaces (`lib/types/generated.ts`), forming the boundary between the Python pipeline and the Next.js web application described in [overview](/architecture/overview.md) (a5ou, 8ay2, izxl, llmz).
+All configuration inputs, raw document metadata, processed bylaw datasets, stand-off annotations, manual overrides, coverage gap declarations, amending effects, consolidated clauses, geospatial layers, clause–zone tags, and published release manifests are governed by twelve JSON Schema (Draft 2020-12) files at `schema_version: "1.3"` in `schemas/` (a5ou, 8ay2, izxl, fcwm, llmz, 986m). These contracts serve as the single source of truth for runtime validation in `pipeline/bylaws/schema_validator.py` and for generated Pydantic v2 models (`pipeline/bylaws/models/_generated.py`) and TypeScript interfaces (`lib/types/generated.ts`), forming the boundary between the Python pipeline and the Next.js web application described in [overview](/architecture/overview.md) (a5ou, 8ay2, izxl, llmz, 986m).
 
 ## Requirements
 
@@ -24,7 +24,7 @@ The `schemas/` directory MUST define twelve JSON Schema (Draft 2020-12) contract
 8. `schemas/consolidated.schema.json`: Validates `data/processed/<jurisdiction>/consolidated.json` (`schema_version: "1.2"`, `jurisdiction`, `generated`, `derived: true`, `clauses[]` with `{ clause_id, doc_id, number, title, as_of_date, text, tables[], amendments_applied[], derived: true, method, confidence: "high" }`, and `unconsolidated[]` recording clauses omitted from consolidation when any applicable amendment link is not high-confidence) (izxl).
 9. `schemas/geo-layers.schema.json`: Validates `data/processed/<jurisdiction>/geo-layers.json` (`schema_version: "1.2"`, `jurisdiction`, and `layers[]` with `{ layer_id, title, kind: "official_boundary" | "master_plan_zone" | "derived_overlay" | "reference", source, method, accuracy_m, derived, file, external_url? }`) (izxl).
 10. `schemas/clause-zone-tags.schema.json`: Validates `data/processed/<jurisdiction>/clause-zone-tags.json` (`schema_version: "1.2"`, `jurisdiction`, and `tags[]` with `{ clause_id, doc_id, zone_code, reason, verification }`) (izxl).
-11. `schemas/manifest.schema.json`: Validates `public/data/manifest.json` (`schema_version: "1.2"`, `jurisdictions[]` with `id`, `name`, optional `visibility` (`"public" | "test"`), optional `aliases[]`, nullable `latest_release` (`string | null`), and `releases[]` containing `version`, optional `status` (`"published" | "withdrawn"`, default `"published"`), optional `withdrawn_reason` (`string | null`), `released_at`, `licence`, and nullable `download_zip`, `sha256sums`, `declarations`, `files`, and `drafts`, plus `changelog`) (a5ou, 8ay2, izxl, tuou).
+11. `schemas/manifest.schema.json`: Validates `public/data/manifest.json` (`schema_version: "1.3"`, `jurisdictions[]` with `id`, `name`, optional `visibility` (`"public" | "test"`), optional `aliases[]`, nullable `latest_release` (`string | null`), optional `register_documents` (`string | null` pointing to `/data/<id>/register/documents.json` for pre-release source register display), and `releases[]` containing `version`, optional `status` (`"published" | "withdrawn"`, default `"published"`), optional `withdrawn_reason` (`string | null`), `released_at`, `licence`, and nullable `download_zip`, `sha256sums`, `declarations`, `files`, and `drafts`, plus `changelog`) (a5ou, 8ay2, izxl, tuou, llmz, 986m).
 
 #### Scenario: Valid and Invalid Schema v1.2 Payload Validation
 - **GIVEN** the eleven schema files in `schemas/` and `pipeline/bylaws/schema_validator.py`
@@ -102,3 +102,9 @@ The Schema v1.2 contracts MUST enforce provenance, record version separation, te
 **Why**: Satisfies every Layer 1–3 requirement of `03-schema-three-layers.md` while keeping map zone tagging (`clause-zone-tags.json`) and R12 record version helpers (`<doc_id>:<eid>@v<N>`) uniform across pipeline stages.
 **Rejected**: Breaking `clause_id` references in geospatial zone tags before PR 11 migrates zone links to `zone_applicability` annotations.
 *Introduced by*: 261124-llmz-pr-03-schema-three-layers
+
+### Pre-Release Source Register via `register_documents` on `JurisdictionManifest`
+**Decision**: Add an optional `register_documents` (`string | null`) field to `jurisdictionManifest` in `schemas/manifest.schema.json` pointing to `/data/<id>/register/documents.json`, populated by `bylaws acquire` from the verified `jurisdictions/<id>.yaml` register entries. When `release === null` on a jurisdiction but `register_documents` is present, `fetchJurisdictionDataset` loads `documents` from `register_documents` while keeping `release: null` and `clauses: []`.
+**Why**: Allows the Sources and Data pages to display the real acquired source register in PR 04 (marked `"Not yet structured"`) while Map, Documents, Timeline, and Review pages continue showing `"No data published yet"` until PR 05 publishes Release `2.0.0`.
+**Rejected**: Creating a premature release entry in `releases[]` for PR 04, which would violate `00-overview.md` §7 ("Real releases start at `2.0.0` (PR 05)").
+*Introduced by*: 261124-986m-pr-04-acquire-core-documents

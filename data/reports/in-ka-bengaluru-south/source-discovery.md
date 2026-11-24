@@ -88,7 +88,7 @@ A core legal question in `04-acquire-core-documents.md` is whether the **Bangalo
    - Direct HTTP GET requests to `data.opencity.in` return `HTTP 403 Forbidden` with `cf-mitigated: challenge` (Cloudflare Turnstile bot protection).
    - Searched Wayback Machine CDX (`web.archive.org/cdx/search/cdx?url=data.opencity.in/*`), `data-opencity.sgp1.cdn.digitaloceanspaces.com/*`, `bpas.bbmpgov.in`, `bdakarnataka.in`, and `erajyapatra.karnataka.gov.in`; no archived copy or mirror of `d7b00660-a3bc-49cf-b35a-3d70283ace0a.pdf` exists.
    - Recorded truthfully with `acquisition_status: "not_found"` in `jurisdictions/in-ka-bengaluru-south.yaml` and `unobtainable_documents` per Rule R16.
-2. **`bscc-bbl-amend-2026-draft`** — *Bengaluru South City Corporation Building (Amendment) Bye-laws 2026 (04-03-2026)*:
+2. **`bscc-bbl-amend-2026`** — *Bengaluru South City Corporation Building (Amendment) Bye-laws 2026 (04-03-2026)*:
    - Discovered in the Wayback Machine snapshot of `https://data.opencity.in/dataset/bbmp-building-byelaws` (`20260405045507`), which links to `https://data.opencity.in/dataset/bbmp-building-byelaws/resource/d37c7718-8c24-4da7-86a0-d19b974fb8a9/download/bscc-10125.pdf` ("Draft notification for Bengaluru South City Corporation inviting comments within 30 days").
    - Direct HTTP GET requests to `data.opencity.in` return `HTTP 403 Forbidden` (`cf-mitigated: challenge`).
    - Searched `bengalurusouth.karnataka.gov.in`, `gba.karnataka.gov.in`, `bpas.bbmpgov.in`, `updates.bbmpgov.in`, and Wayback Machine CDX; no archived copy or mirror of `bscc-10125.pdf` exists.

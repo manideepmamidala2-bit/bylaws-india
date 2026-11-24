@@ -11,4 +11,4 @@ description: "Versioned Draft 2020-12 JSON Schema contracts for jurisdiction con
 
 | File | Description |
 |------|-------------|
-| [data-contracts](data-contracts.md) | Eleven Schema v1.2 Draft 2020-12 JSON Schema contracts, R12 record version chains, R13 text rights, R14 derived consolidated clauses and geo layers, clause-zone tags, and single-source Pydantic/TypeScript codegen. |
+| [data-contracts](data-contracts.md) | Twelve Schema v1.3 Draft 2020-12 JSON Schema contracts, three-layer document model, R12 record version chains, R13 text rights, R14 derived consolidated clauses and geo layers, pre-release register_documents manifest path, and single-source Pydantic/TypeScript codegen. |
