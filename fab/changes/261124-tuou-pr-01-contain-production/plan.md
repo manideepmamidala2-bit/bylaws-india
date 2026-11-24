@@ -85,36 +85,41 @@ Automated tests in `pipeline/tests/` and `__tests__/` MUST fail if any published
 
 ### Functional Completeness
 
-- [ ] A-001 R1: `public/data/manifest.json` marks release `1.0.0` of `in-ka-bengaluru-south` as `status: "withdrawn"` with reason `"Synthetic demonstration data, not the law of Bengaluru South"`, `latest_release: null`, and no downloadable file links, and `public/data/in-ka-bengaluru-south/1.0.0/` is deleted
-- [ ] A-002 R2: `lib/data.ts` and `app/page.tsx` filter `visibility: "test"` jurisdictions on the server using `SHOW_TEST_JURISDICTIONS` (false unless set), not client-side `VERCEL_ENV`
-- [ ] A-003 R3: Home, Map, Sources, Documents, Timeline, Review, Data, and About pages render honest status copy, show `"No data published yet"` for Bengaluru South, and list release `1.0.0` on Data page as withdrawn with reason and no download link
-- [ ] A-004 R4: Recurrence guard tests in Python and Vitest fail if any non-test published manifest entry references a local `source_url` or if a withdrawn release exposes downloadable files
+- [x] A-001 R1: `public/data/manifest.json` marks release `1.0.0` of `in-ka-bengaluru-south` as `status: "withdrawn"` with reason `"Synthetic demonstration data, not the law of Bengaluru South"`, `latest_release: null`, and no downloadable file links, and `public/data/in-ka-bengaluru-south/1.0.0/` is deleted
+- [x] A-002 R2: `lib/data.ts` and `app/page.tsx` filter `visibility: "test"` jurisdictions on the server using `SHOW_TEST_JURISDICTIONS` (false unless set), not client-side `VERCEL_ENV`
+- [x] A-003 R3: Home, Map, Sources, Documents, Timeline, Review, Data, and About pages render honest status copy, show `"No data published yet"` for Bengaluru South, and list release `1.0.0` on Data page as withdrawn with reason and no download link
+- [x] A-004 R4: Recurrence guard tests in Python and Vitest fail if any non-test published manifest entry references a local `source_url` or if a withdrawn release exposes downloadable files
 
 ### Behavioral Correctness
 
-- [ ] A-005 R2: Production build page props (when `SHOW_TEST_JURISDICTIONS` is unset) contain zero `visibility: "test"` jurisdictions (verified by automated test)
-- [ ] A-006 R3: Zero occurrences of `"verified at its official origin"`, internal rule/plan references (`Rule R13`, `(R14)`, `Plan v2.0`), repository paths, raw backticks, or em dashes (`—`) exist in rendered public copy across `app/**` and `components/**`
+- [x] A-005 R2: Production build page props (when `SHOW_TEST_JURISDICTIONS` is unset) contain zero `visibility: "test"` jurisdictions (verified by automated test)
+- [x] A-006 R3: Zero occurrences of `"verified at its official origin"`, internal rule/plan references (`Rule R13`, `(R14)`, `Plan v2.0`), repository paths, raw backticks, or em dashes (`—`) exist in rendered public copy across `app/**` and `components/**`
 
 ### Scenario Coverage
 
-- [ ] A-007 R1: `make generate` produces zero git diff on `pipeline/bylaws/models/_generated.py` and `lib/types/generated.ts`, and `public/data/manifest.json` validates against `schemas/manifest.schema.json`
-- [ ] A-008 R3: All routes pass `axe-core` WCAG AA accessibility checks in `npm test`
+- [x] A-007 R1: `make generate` produces zero git diff on `pipeline/bylaws/models/_generated.py` and `lib/types/generated.ts`, and `public/data/manifest.json` validates against `schemas/manifest.schema.json`
+- [x] A-008 R3: All routes pass `axe-core` WCAG AA accessibility checks in `npm test`
 
 ### Edge Cases & Error Handling
 
-- [ ] A-009 R2: Visiting `/j/in-ka-bengaluru-south` and its sub-routes (`/sources`, `/clauses`, `/timeline`, `/review`) when `latest_release` is `null` renders `"No data published yet"` cleanly without throwing a null-dereference error
+- [x] A-009 R2: Visiting `/j/in-ka-bengaluru-south` and its sub-routes (`/sources`, `/clauses`, `/timeline`, `/review`) when `latest_release` is `null` renders `"No data published yet"` cleanly without throwing a null-dereference error
 
 ### Code Quality
 
-- [ ] A-010 Pattern consistency: New code follows naming and structural patterns of surrounding code
-- [ ] A-011 No unnecessary duplication: Existing utilities in `lib/data.ts` and `pipeline/bylaws/` are reused
-- [ ] A-012 Readability and concise functions: Helper functions in `lib/data.ts` and page components remain focused and under 50 lines where practical
+- [x] A-010 Pattern consistency: New code follows naming and structural patterns of surrounding code
+- [x] A-011 No unnecessary duplication: Existing utilities in `lib/data.ts` and `pipeline/bylaws/` are reused
+- [x] A-012 Readability and concise functions: Helper functions in `lib/data.ts` and page components remain focused and under 50 lines where practical
 
 ## Notes
 
 - Check items as you review: `- [x]`
 - All acceptance items must pass before `/fab-continue` (hydrate)
 - If an item is not applicable, mark checked and prefix with **N/A**: `- [x] A-NNN **N/A**: {reason}`
+
+## Deletion Candidates
+
+- `lib/data.ts:155-157` (`isProductionEnvironment`) — Legacy helper superseded by `shouldShowTestJurisdictions()` with zero remaining call sites in the codebase.
+- `scripts/build_bengaluru_south_sources.py` — Synthetic dataset generator whose published output in `public/data/in-ka-bengaluru-south/1.0.0/` was withdrawn and deleted in this change (scheduled to move to `pipeline/tests/fixtures/` in PR 02).
 
 ## Assumptions
 
