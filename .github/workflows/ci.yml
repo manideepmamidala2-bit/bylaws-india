@@ -58,7 +58,7 @@ jobs:
       - name: Verify single-source codegen freshness
         working-directory: .
         run: |
-          cd pipeline && uv run python ../scripts/generate_models.py --check
+          (cd pipeline && uv run python ../scripts/generate_models.py --check)
           git diff --exit-code pipeline/bylaws/models/_generated.py lib/types/generated.ts
 
       - name: Run Ruff lint check
