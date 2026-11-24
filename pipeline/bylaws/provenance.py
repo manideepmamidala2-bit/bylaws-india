@@ -342,6 +342,13 @@ def check_repository_provenance(repo_root: Path | None = None) -> None:
                             f"Rule R15 violation ({jur_id}:maps.{group_name}.{m_id}): "
                             f"non-test map source has local or non-http(s) source_url {m_url!r}."
                         )
+                    if group_name == "boundaries":
+                        b_acq = str(m_entry.get("acquisition_status") or "acquired")
+                        if b_acq == "acquired":
+                            validate_retrieval_record(
+                                m_entry.get("retrieval"),
+                                f"{jur_id}:maps.boundaries.{m_id}",
+                            )
 
         if raw_jur_dir.is_dir():
             for pdf_path in sorted(raw_jur_dir.rglob("*.pdf")):

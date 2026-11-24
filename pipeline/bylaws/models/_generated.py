@@ -169,8 +169,11 @@ class BoundaryMapConfig(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    id: constr(pattern=r"^[a-z0-9]+([-_][a-z0-9]+)*$")
     title: str | None = None
+    source_label: str | None = None
+    retrieved_date: str | None = None
+    verification_note: str | None = None
     layer_role: Literal["corporation", "gba_zones", "wards"] | None = None
     output_file: str | None = None
     source_url: constr(min_length=1)

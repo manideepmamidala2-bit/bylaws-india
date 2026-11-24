@@ -541,10 +541,19 @@
       "properties": {
         "id": {
           "type": "string",
-          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          "pattern": "^[a-z0-9]+([-_][a-z0-9]+)*$"
         },
         "title": {
           "type": "string"
+        },
+        "source_label": {
+          "type": ["string", "null"]
+        },
+        "retrieved_date": {
+          "type": ["string", "null"]
+        },
+        "verification_note": {
+          "type": ["string", "null"]
         },
         "layer_role": {
           "type": "string",

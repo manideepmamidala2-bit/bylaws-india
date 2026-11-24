@@ -50,11 +50,11 @@ Per **Rule R4 (Permissive Licensing)**, every direct dependency in `pipeline/pyp
 
 | Package | SPDX Licence | Purpose |
 |---------|--------------|---------|
-| `leaflet` | `BSD-2-Clause` | Interactive map rendering engine (replaced by MapLibre GL JS in PR 06) |
+| `maplibre-gl` | `BSD-3-Clause` | Interactive WebGL vector map rendering engine |
 | `next` | `MIT` | React App Router framework |
+| `pmtiles` | `BSD-3-Clause` | Single-file HTTP byte-range vector tile protocol for Protomaps basemaps |
 | `react` | `MIT` | UI component library |
 | `react-dom` | `MIT` | DOM renderer for React |
-| `react-leaflet` | `Hippocratic-2.1` | React components for Leaflet maps (see §3 exception) |
 
 ### Development Dependencies (`devDependencies`)
 
@@ -64,7 +64,6 @@ Per **Rule R4 (Permissive Licensing)**, every direct dependency in `pipeline/pyp
 | `@tailwindcss/postcss` | `MIT` | Tailwind CSS v4 PostCSS integration |
 | `@testing-library/jest-dom` | `MIT` | DOM assertion matchers for Vitest |
 | `@testing-library/react` | `MIT` | React component testing utilities |
-| `@types/leaflet` | `MIT` | TypeScript definitions for Leaflet |
 | `@types/node` | `MIT` | TypeScript definitions for Node.js |
 | `@types/react` | `MIT` | TypeScript definitions for React |
 | `@types/react-dom` | `MIT` | TypeScript definitions for React DOM |
@@ -101,5 +100,3 @@ Per Rule R4 ("LGPL only with a written exception"), the following runtime/dev li
 | `@img/sharp-win32-arm64` | `Apache-2.0 AND LGPL-3.0-or-later` | Unmodified transitive `libvips` shared library binary pulled by Next.js `sharp`. |
 | `@img/sharp-win32-ia32` | `Apache-2.0 AND LGPL-3.0-or-later` | Unmodified transitive `libvips` shared library binary pulled by Next.js `sharp`. |
 | `@img/sharp-win32-x64` | `Apache-2.0 AND LGPL-3.0-or-later` | Unmodified transitive `libvips` shared library binary pulled by Next.js `sharp`. |
-| `react-leaflet` | `Hippocratic-2.1` | React wrapper for Leaflet (`BSD-2-Clause`); scheduled for replacement by MapLibre GL JS (`BSD-3-Clause`) in PR 06. |
-| `@react-leaflet/core` | `Hippocratic-2.1` | Direct internal core package of `react-leaflet`. |

@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
-import dynamic from "next/dynamic";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import * as maplibregl from "maplibre-gl";
+import { Protocol } from "pmtiles";
 import type {
   GenericFeatureCollection,
   GenericGeoJSONFeature,
@@ -9,12 +10,10 @@ import type {
   ZoneFeature,
   ZoneGeometry,
 } from "@/lib/data";
-
-const DynamicLeafletCanvas = dynamic(() => import("./LeafletCanvas"), {
-  ssr: false,
-});
+import { buildDg2nMapStyle } from "@/lib/map-style";
 
 interface ZoneMapProps {
+  jurisdictionId?: string;
   zones: ZoneFeature[];
   selectedZoneCode: string | null;
   onSelectZone: (zoneCode: string) => void;
@@ -57,12 +56,18 @@ function collectPointsFromGeometry(geom: ZoneGeometry): Array<[number, number]> 
 
 function computeBounds(
   zones: ZoneFeature[],
-  boundary?: GenericFeatureCollection | null
+  boundary?: GenericFeatureCollection | null,
+  wards?: GenericFeatureCollection | null
 ): Bounds {
   const allPts: Array<[number, number]> = [];
   for (const b of boundary?.features ?? []) {
     if (b.geometry) {
       allPts.push(...collectPointsFromGeometry(b.geometry));
+    }
+  }
+  for (const w of wards?.features ?? []) {
+    if (w.geometry) {
+      allPts.push(...collectPointsFromGeometry(w.geometry));
     }
   }
   for (const z of zones) {
@@ -71,7 +76,12 @@ function computeBounds(
     }
   }
   if (allPts.length === 0) {
-    return { minLon: 0, maxLon: 1, minLat: 0, maxLat: 1 };
+    return {
+      minLon: 77.489,
+      maxLon: 77.703,
+      minLat: 12.833,
+      maxLat: 12.952,
+    };
   }
   let minLon = Infinity;
   let maxLon = -Infinity;
@@ -83,8 +93,8 @@ function computeBounds(
     if (lat < minLat) minLat = lat;
     if (lat > maxLat) maxLat = lat;
   }
-  const padLon = Math.max(0.002, (maxLon - minLon) * 0.08);
-  const padLat = Math.max(0.002, (maxLat - minLat) * 0.08);
+  const padLon = Math.max(0.002, (maxLon - minLon) * 0.05);
+  const padLat = Math.max(0.002, (maxLat - minLat) * 0.05);
   return {
     minLon: minLon - padLon,
     maxLon: maxLon + padLon,
@@ -93,58 +103,10 @@ function computeBounds(
   };
 }
 
-function projectPoint(
-  lon: number,
-  lat: number,
-  bounds: Bounds,
-  width = 830,
-  height = 460
-): [number, number] {
-  const spanLon = Math.max(1e-6, bounds.maxLon - bounds.minLon);
-  const spanLat = Math.max(1e-6, bounds.maxLat - bounds.minLat);
-  const x = ((lon - bounds.minLon) / spanLon) * width;
-  const y = ((bounds.maxLat - lat) / spanLat) * height;
-  return [Math.round(x * 10) / 10, Math.round(y * 10) / 10];
-}
-
-function geometryToSvgPath(geom: ZoneGeometry, bounds: Bounds): string {
-  const rings =
-    geom.type === "Polygon"
-      ? geom.coordinates
-      : geom.coordinates.flatMap((poly) => poly);
-
-  const dParts: string[] = [];
-  for (const ring of rings) {
-    if (ring.length === 0) continue;
-    const projected = ring.map((pt) =>
-      projectPoint(Number(pt[0]), Number(pt[1]), bounds)
-    );
-    const cmds = projected.map(
-      ([x, y], idx) => `${idx === 0 ? "M" : "L"}${x},${y}`
-    );
-    dParts.push(`${cmds.join(" ")} Z`);
-  }
-  return dParts.join(" ");
-}
-
-function computeCentroid(
-  geom: ZoneGeometry,
-  bounds: Bounds
-): [number, number] {
-  const pts = collectPointsFromGeometry(geom);
-  if (pts.length === 0) {
-    return [415, 230];
-  }
-  let sumLon = 0;
-  let sumLat = 0;
-  for (const [lon, lat] of pts) {
-    sumLon += lon;
-    sumLat += lat;
-  }
-  return projectPoint(sumLon / pts.length, sumLat / pts.length, bounds);
-}
+let pmtilesProtocolRegistered = false;
 
 export function ZoneMap({
+  jurisdictionId = "",
   zones,
   selectedZoneCode,
   onSelectZone,
@@ -157,14 +119,45 @@ export function ZoneMap({
   showDrafts = false,
   onToggleDrafts,
 }: ZoneMapProps) {
+  // On by default: corporation and wards (06-real-map-foundation.md §3)
   const [showBoundaryLayer, setShowBoundaryLayer] = useState(true);
   const [showGbaZonesLayer, setShowGbaZonesLayer] = useState(false);
-  const [showWardsLayer, setShowWardsLayer] = useState(false);
+  const [showWardsLayer, setShowWardsLayer] = useState(true);
   const [showPlanningDistrictsLayer, setShowPlanningDistrictsLayer] =
     useState(true);
   const [showZonesLayer, setShowZonesLayer] = useState(true);
   const [showOverlaysLayer, setShowOverlaysLayer] = useState(true);
-  const [useLeafletTiles, setUseLeafletTiles] = useState(false);
+
+  const sortedWards = useMemo(() => {
+    const feats = [...(wards?.features ?? [])];
+    feats.sort((a, b) => {
+      const aNo = Number(a.properties?.ward_id ?? a.properties?.ward_no ?? 0);
+      const bNo = Number(b.properties?.ward_id ?? b.properties?.ward_no ?? 0);
+      return aNo - bNo;
+    });
+    return feats;
+  }, [wards]);
+
+  const [selectedWardId, setSelectedWardId] = useState<string | null>(
+    sortedWards[0]
+      ? String(
+          sortedWards[0].properties?.ward_id ??
+            sortedWards[0].properties?.ward_no ??
+            "1"
+        )
+      : null
+  );
+
+  const selectedWardFeature: GenericGeoJSONFeature | null = useMemo(() => {
+    if (!selectedWardId) return null;
+    return (
+      sortedWards.find(
+        (w) =>
+          String(w.properties?.ward_id ?? w.properties?.ward_no ?? "") ===
+          selectedWardId
+      ) ?? null
+    );
+  }, [sortedWards, selectedWardId]);
 
   const activeZones = useMemo(
     () =>
@@ -177,17 +170,19 @@ export function ZoneMap({
   );
 
   const bounds = useMemo(
-    () => computeBounds(activeZones, boundary),
-    [activeZones, boundary]
+    () => computeBounds(activeZones, boundary, wards),
+    [activeZones, boundary, wards]
   );
 
-  const mapCenter: [number, number] = useMemo(
-    () => [
-      (bounds.minLat + bounds.maxLat) * 0.5,
-      (bounds.minLon + bounds.maxLon) * 0.5,
-    ],
-    [bounds]
+  const wardsLayerMeta = useMemo(
+    () => geoLayers.find((l) => l.layer_id === "wards"),
+    [geoLayers]
   );
+  const wardsSourceHref =
+    wardsLayerMeta?.external_url ||
+    (wardsLayerMeta?.source?.startsWith("http")
+      ? wardsLayerMeta.source
+      : "https://gba.karnataka.gov.in/gba-corporations-delimitation-2025/index.html");
 
   const legendItems = useMemo(() => {
     const byCode = new Map<
@@ -202,420 +197,576 @@ export function ZoneMap({
           ? Number(feat.properties.record_id.split("@v")[1]) || 1
           : 1);
       const existing = byCode.get(code);
-      if (!existing || ver > existing.maxVersion) {
+      if (!existing) {
         byCode.set(code, {
           zone_code: code,
           zone_label: feat.properties.zone_label,
           maxVersion: ver,
         });
+      } else if (ver > existing.maxVersion) {
+        existing.maxVersion = ver;
       }
     }
     return Array.from(byCode.values());
   }, [activeZones]);
 
-  const referenceLayers = useMemo(
-    () => geoLayers.filter((l) => l.kind === "reference" && l.external_url),
-    [geoLayers]
-  );
+  const mapContainerRef = useRef<HTMLDivElement | null>(null);
+  const mapInstanceRef = useRef<maplibregl.Map | null>(null);
+
+  const pmtilesUrl =
+    process.env.NEXT_PUBLIC_PMTILES_URL?.trim() ||
+    `/data/${jurisdictionId}/basemap.pmtiles`;
+
+  useEffect(() => {
+    const container = mapContainerRef.current;
+    if (!container) return;
+
+    // Guard headless jsdom environments where WebGL context is not implemented
+    if (
+      typeof window === "undefined" ||
+      typeof navigator !== "undefined" && /jsdom/i.test(navigator.userAgent)
+    ) {
+      return;
+    }
+
+    try {
+      if (!pmtilesProtocolRegistered) {
+        const protocol = new Protocol();
+        maplibregl.addProtocol("pmtiles", protocol.tile);
+        pmtilesProtocolRegistered = true;
+      }
+
+      const resolvedUrl =
+        pmtilesUrl.startsWith("http://") || pmtilesUrl.startsWith("https://")
+          ? pmtilesUrl
+          : `${window.location.origin}${pmtilesUrl}`;
+
+      const map = new maplibregl.Map({
+        container,
+        style: buildDg2nMapStyle(resolvedUrl),
+        bounds: [bounds.minLon, bounds.minLat, bounds.maxLon, bounds.maxLat],
+        fitBoundsOptions: { padding: 24 },
+        attributionControl: false,
+        keyboard: true,
+        touchZoomRotate: true,
+        dragPan: true,
+      });
+
+      mapInstanceRef.current = map;
+
+      map.on("load", () => {
+        if (boundary && boundary.features.length > 0) {
+          map.addSource("gba-corporation", {
+            type: "geojson",
+            data: boundary as unknown as GeoJSON.FeatureCollection,
+          });
+          map.addLayer({
+            id: "gba-corporation-line",
+            type: "line",
+            source: "gba-corporation",
+            layout: {
+              visibility: showBoundaryLayer ? "visible" : "none",
+            },
+            paint: {
+              "line-color": "#080909",
+              "line-width": 2.4,
+            },
+          });
+        }
+
+        if (gbaZones && gbaZones.features.length > 0) {
+          map.addSource("gba-zones", {
+            type: "geojson",
+            data: gbaZones as unknown as GeoJSON.FeatureCollection,
+          });
+          map.addLayer({
+            id: "gba-zones-line",
+            type: "line",
+            source: "gba-zones",
+            layout: {
+              visibility: showGbaZonesLayer ? "visible" : "none",
+            },
+            paint: {
+              "line-color": "#080909",
+              "line-dasharray": [4, 2],
+              "line-width": 1.8,
+            },
+          });
+        }
+
+        if (wards && wards.features.length > 0) {
+          map.addSource("gba-wards", {
+            type: "geojson",
+            data: wards as unknown as GeoJSON.FeatureCollection,
+          });
+          map.addLayer({
+            id: "gba-wards-fill",
+            type: "fill",
+            source: "gba-wards",
+            layout: {
+              visibility: showWardsLayer ? "visible" : "none",
+            },
+            paint: {
+              "fill-color": "#efeee8",
+              "fill-opacity": 0.28,
+            },
+          });
+          map.addLayer({
+            id: "gba-wards-line",
+            type: "line",
+            source: "gba-wards",
+            layout: {
+              visibility: showWardsLayer ? "visible" : "none",
+            },
+            paint: {
+              "line-color": "#5b5e56",
+              "line-width": 1.0,
+            },
+          });
+
+          map.on(
+            "click",
+            "gba-wards-fill",
+            (ev: maplibregl.MapLayerMouseEvent) => {
+              const clicked = ev.features?.[0];
+              const wid =
+                clicked?.properties?.ward_id ?? clicked?.properties?.ward_no;
+              if (wid !== undefined && wid !== null) {
+                setSelectedWardId(String(wid));
+              }
+            }
+          );
+        }
+
+        if (activeZones.length > 0) {
+          map.addSource("master-plan-zones", {
+            type: "geojson",
+            data: {
+              type: "FeatureCollection",
+              features: activeZones,
+            } as unknown as GeoJSON.FeatureCollection,
+          });
+          map.addLayer({
+            id: "master-plan-zones-fill",
+            type: "fill",
+            source: "master-plan-zones",
+            layout: {
+              visibility: showZonesLayer ? "visible" : "none",
+            },
+            paint: {
+              "fill-color": "#efeee8",
+              "fill-opacity": 0.5,
+            },
+          });
+          map.addLayer({
+            id: "master-plan-zones-line",
+            type: "line",
+            source: "master-plan-zones",
+            layout: {
+              visibility: showZonesLayer ? "visible" : "none",
+            },
+            paint: {
+              "line-color": "#080909",
+              "line-width": 1.5,
+            },
+          });
+
+          map.on(
+            "click",
+            "master-plan-zones-fill",
+            (ev: maplibregl.MapLayerMouseEvent) => {
+              const zCode = ev.features?.[0]?.properties?.zone_code;
+              if (typeof zCode === "string" && zCode) {
+                onSelectZone(zCode);
+              }
+            }
+          );
+        }
+      });
+
+      return () => {
+        map.remove();
+        mapInstanceRef.current = null;
+      };
+    } catch {
+      return undefined;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    activeZones,
+    boundary,
+    bounds.maxLat,
+    bounds.maxLon,
+    bounds.minLat,
+    bounds.minLon,
+    gbaZones,
+    onSelectZone,
+    pmtilesUrl,
+    wards,
+  ]);
+
+  // Synchronize layer visibility toggles with MapLibre instance
+  useEffect(() => {
+    const map = mapInstanceRef.current;
+    if (!map || !map.isStyleLoaded()) return;
+    const syncVis = (layerId: string, visible: boolean) => {
+      if (map.getLayer(layerId)) {
+        map.setLayoutProperty(layerId, "visibility", visible ? "visible" : "none");
+      }
+    };
+    syncVis("gba-corporation-line", showBoundaryLayer);
+    syncVis("gba-zones-line", showGbaZonesLayer);
+    syncVis("gba-wards-fill", showWardsLayer);
+    syncVis("gba-wards-line", showWardsLayer);
+    syncVis("master-plan-zones-fill", showZonesLayer);
+    syncVis("master-plan-zones-line", showZonesLayer);
+  }, [showBoundaryLayer, showGbaZonesLayer, showWardsLayer, showZonesLayer]);
+
+  const handleZoomIn = () => {
+    mapInstanceRef.current?.zoomIn();
+  };
+
+  const handleZoomOut = () => {
+    mapInstanceRef.current?.zoomOut();
+  };
+
+  const handleResetView = () => {
+    mapInstanceRef.current?.fitBounds(
+      [bounds.minLon, bounds.minLat, bounds.maxLon, bounds.maxLat],
+      { padding: 24 }
+    );
+  };
 
   return (
     <section
-      aria-label="Zoning map"
-      className="flex h-full flex-col justify-between bg-[#efeee8]"
+      aria-label="Interactive zoning and official boundary map"
+      className="flex flex-col border-b border-[#080909] bg-[#f5f3ed] p-6"
     >
-      {/* Layer Toggles & Map Controls */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#c8ccc0] bg-[#f5f3ed] px-5 py-2.5">
-        <div
-          role="group"
-          aria-label="Map layer toggles"
-          className="flex flex-wrap items-center gap-1.5"
-        >
-          <button
-            type="button"
-            onClick={() => setShowZonesLayer((v) => !v)}
-            aria-pressed={showZonesLayer}
-            className={`dg-pill ${showZonesLayer ? "dg-pill-active" : ""}`}
-          >
-            Zones ({activeZones.length})
-          </button>
-          {boundary && boundary.features.length > 0 && (
-            <button
-              type="button"
-              onClick={() => setShowBoundaryLayer((v) => !v)}
-              aria-pressed={showBoundaryLayer}
-              className={`dg-pill ${showBoundaryLayer ? "dg-pill-active" : ""}`}
-            >
-              Corporation
-            </button>
-          )}
-          {gbaZones && gbaZones.features.length > 0 && (
-            <button
-              type="button"
-              onClick={() => setShowGbaZonesLayer((v) => !v)}
-              aria-pressed={showGbaZonesLayer}
-              className={`dg-pill ${showGbaZonesLayer ? "dg-pill-active" : ""}`}
-            >
-              Admin Zones ({gbaZones.features.length})
-            </button>
-          )}
-          {wards && wards.features.length > 0 && (
-            <button
-              type="button"
-              onClick={() => setShowWardsLayer((v) => !v)}
-              aria-pressed={showWardsLayer}
-              className={`dg-pill ${showWardsLayer ? "dg-pill-active" : ""}`}
-            >
-              Wards ({wards.features.length})
-            </button>
-          )}
-          {planningDistricts && planningDistricts.features.length > 0 && (
-            <button
-              type="button"
-              onClick={() => setShowPlanningDistrictsLayer((v) => !v)}
-              aria-pressed={showPlanningDistrictsLayer}
-              className={`dg-pill ${showPlanningDistrictsLayer ? "dg-pill-active" : ""}`}
-            >
-              Districts ({planningDistricts.features.length})
-            </button>
-          )}
-          {overlays && overlays.features.length > 0 && (
-            <button
-              type="button"
-              onClick={() => setShowOverlaysLayer((v) => !v)}
-              aria-pressed={showOverlaysLayer}
-              className={`dg-pill ${showOverlaysLayer ? "dg-pill-active" : ""}`}
-            >
-              Overlays ({overlays.features.length})
-            </button>
-          )}
-        </div>
-
-        <div className="flex flex-wrap items-center gap-1.5">
-          {onToggleDrafts && (
-            <button
-              type="button"
-              onClick={() => onToggleDrafts(!showDrafts)}
-              aria-pressed={showDrafts}
-              className={`dg-pill ${showDrafts ? "dg-pill-active" : ""}`}
-            >
-              {showDrafts ? "Drafts on" : "Drafts off"}
-            </button>
-          )}
-          <button
-            type="button"
-            onClick={() => setUseLeafletTiles((v) => !v)}
-            aria-pressed={useLeafletTiles}
-            className={`dg-pill ${useLeafletTiles ? "dg-pill-active" : ""}`}
-          >
-            {useLeafletTiles ? "Street Tiles" : "Sheet View"}
-          </button>
-        </div>
-      </div>
-
-      {/* Main Map Viewport */}
-      <div className="relative min-h-[430px] flex-1 bg-[#efeee8]">
-        {activeZones.length === 0 ? (
-          <div className="flex h-full items-center justify-center p-8 text-sm text-[#5b5e56]">
-            No zone polygons loaded for this jurisdiction release.
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <div className="dg-mono">
+            Vector Street Map &amp; Official GBA Boundaries (EPSG:4326)
           </div>
-        ) : useLeafletTiles ? (
-          <DynamicLeafletCanvas
-            zones={activeZones}
-            boundary={showBoundaryLayer ? boundary : null}
-            overlays={showOverlaysLayer ? overlays : null}
-            selectedZoneCode={selectedZoneCode}
-            onSelectZone={onSelectZone}
-            center={mapCenter}
-          />
-        ) : (
-          <svg
-            viewBox="0 0 830 460"
-            preserveAspectRatio="xMidYMid meet"
-            role="img"
-            aria-label="Interactive master plan zoning and boundary map"
-            className="h-full w-full"
+          <h2 className="mt-0.5 text-lg font-semibold text-[#080909]">
+            Official Boundaries, Wards &amp; Land-Use Zones
+          </h2>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-3">
+          <div
+            role="group"
+            aria-label="Keyboard map navigation controls"
+            className="flex items-center gap-1"
           >
-            <defs>
-              <pattern
-                id="dg-hatch"
-                width="8"
-                height="8"
-                patternUnits="userSpaceOnUse"
-                patternTransform="rotate(45)"
-              >
-                <line
-                  x1="0"
-                  y1="0"
-                  x2="0"
-                  y2="8"
-                  stroke="#5b5e56"
-                  strokeWidth="1.2"
-                />
-              </pattern>
-            </defs>
+            <button
+              type="button"
+              onClick={handleZoomIn}
+              aria-label="Zoom in map"
+              className="border border-[#080909] bg-[#f5f3ed] px-2.5 py-1 font-mono text-xs text-[#080909] hover:bg-[#efeee8]"
+            >
+              +
+            </button>
+            <button
+              type="button"
+              onClick={handleZoomOut}
+              aria-label="Zoom out map"
+              className="border border-[#080909] bg-[#f5f3ed] px-2.5 py-1 font-mono text-xs text-[#080909] hover:bg-[#efeee8]"
+            >
+              -
+            </button>
+            <button
+              type="button"
+              onClick={handleResetView}
+              className="border border-[#080909] bg-[#f5f3ed] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#080909] hover:bg-[#efeee8]"
+            >
+              Reset View
+            </button>
+          </div>
 
-            {/* Reference Coordinate Grid Lines */}
-            <g stroke="#c8ccc0" strokeWidth="0.75">
-              <line x1="0" y1="65" x2="830" y2="65" />
-              <line x1="0" y1="230" x2="830" y2="230" />
-              <line x1="0" y1="395" x2="830" y2="395" />
-              <line x1="165" y1="0" x2="165" y2="460" />
-              <line x1="415" y1="0" x2="415" y2="460" />
-              <line x1="665" y1="0" x2="665" y2="460" />
-            </g>
+          {onToggleDrafts && (
+            <label className="flex cursor-pointer items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-[#080909]">
+              <input
+                type="checkbox"
+                checked={showDrafts}
+                onChange={(e) => onToggleDrafts(e.target.checked)}
+                className="h-3.5 w-3.5 accent-[#080909]"
+              />
+              <span>Include Drafts</span>
+            </label>
+          )}
 
-            {/* Master Plan Land-Use Zones */}
-            {showZonesLayer &&
-              activeZones.map((feat, idx) => {
-                const { zone_id, record_id, zone_code, zone_label } =
-                  feat.properties;
-                const isSelected = selectedZoneCode === zone_code;
-                const d = geometryToSvgPath(feat.geometry, bounds);
-                const [cx, cy] = computeCentroid(feat.geometry, bounds);
-                return (
-                  <g
-                    key={record_id ?? zone_id}
-                    onClick={() => onSelectZone(zone_code)}
-                    style={{ cursor: "pointer" }}
-                  >
-                    <path
-                      d={d}
-                      fill={
-                        isSelected
-                          ? "#ff6b52"
-                          : idx % 2 === 0
-                            ? "#f5f3ed"
-                            : "url(#dg-hatch)"
-                      }
-                      fillOpacity={isSelected ? 0.28 : 0.85}
-                      stroke={isSelected ? "#ff6b52" : "#080909"}
-                      strokeWidth={isSelected ? 2.4 : 1.0}
-                    >
-                      <title>{`${zone_code}: ${zone_label}`}</title>
-                    </path>
-                    <text
-                      x={cx}
-                      y={cy}
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                      fontFamily="var(--font-mono)"
-                      fontSize="11"
-                      fontWeight={isSelected ? "600" : "500"}
-                      fill="#080909"
-                    >
-                      {zone_code}
-                    </text>
-                  </g>
-                );
-              })}
-
-            {/* Planning Districts Layer */}
-            {showPlanningDistrictsLayer &&
-              (planningDistricts?.features ?? []).map(
-                (pd: GenericGeoJSONFeature, idx: number) => {
-                  const d = geometryToSvgPath(pd.geometry, bounds);
-                  const pdCode = String(
-                    pd.properties?.district_code ?? `PD-${idx + 1}`
-                  );
-                  return (
-                    <path
-                      key={`pd-${pdCode}-${idx}`}
-                      d={d}
-                      fill="none"
-                      stroke="#5b5e56"
-                      strokeWidth="1.2"
-                      strokeDasharray="4 3"
-                    >
-                      <title>{`Planning District ${pdCode}`}</title>
-                    </path>
-                  );
-                }
-              )}
-
-            {/* Wards Layer */}
-            {showWardsLayer &&
-              (wards?.features ?? []).map(
-                (w: GenericGeoJSONFeature, idx: number) => {
-                  const d = geometryToSvgPath(w.geometry, bounds);
-                  const wNo = String(w.properties?.ward_no ?? idx + 1);
-                  return (
-                    <path
-                      key={`ward-${wNo}-${idx}`}
-                      d={d}
-                      fill="none"
-                      stroke="#5b5e56"
-                      strokeWidth="0.9"
-                      strokeDasharray="2 2"
-                    >
-                      <title>{`Ward ${wNo}`}</title>
-                    </path>
-                  );
-                }
-              )}
-
-            {/* GBA Zones Layer */}
-            {showGbaZonesLayer &&
-              (gbaZones?.features ?? []).map(
-                (gz: GenericGeoJSONFeature, idx: number) => {
-                  const d = geometryToSvgPath(gz.geometry, bounds);
-                  return (
-                    <path
-                      key={`gba-zone-${idx}`}
-                      d={d}
-                      fill="none"
-                      stroke="#080909"
-                      strokeWidth="1.5"
-                      strokeDasharray="8 4"
-                    />
-                  );
-                }
-              )}
-
-            {/* Derived Overlays */}
-            {showOverlaysLayer &&
-              (overlays?.features ?? []).map(
-                (ov: GenericGeoJSONFeature, idx: number) => {
-                  const d = geometryToSvgPath(ov.geometry, bounds);
-                  const ovId = String(
-                    ov.properties?.overlay_id ?? `overlay-${idx}`
-                  );
-                  const isSelected = selectedZoneCode === ovId;
-                  return (
-                    <path
-                      key={`overlay-${ovId}-${idx}`}
-                      d={d}
-                      fill={isSelected ? "#ff6b52" : "#080909"}
-                      fillOpacity={isSelected ? 0.35 : 0.2}
-                      stroke={isSelected ? "#ff6b52" : "#080909"}
-                      strokeWidth="2"
-                      strokeDasharray="3 2"
-                      onClick={() => onSelectZone(ovId)}
-                      style={{ cursor: "pointer" }}
-                    >
-                      <title>{`${ovId} (Derived, Approximate)`}</title>
-                    </path>
-                  );
-                }
-              )}
-
-            {/* Official Corporation Boundary */}
-            {showBoundaryLayer &&
-              (boundary?.features ?? []).map(
-                (b: GenericGeoJSONFeature, idx: number) => {
-                  const d = geometryToSvgPath(b.geometry, bounds);
-                  return (
-                    <path
-                      key={`boundary-${idx}`}
-                      d={d}
-                      fill="none"
-                      stroke="#080909"
-                      strokeWidth="1.8"
-                      strokeDasharray="6 4"
-                    />
-                  );
-                }
-              )}
-          </svg>
-        )}
-      </div>
-
-      {/* Interactive Legend & Keyboard-Accessible Zone Selector Bar */}
-      <div className="border-t border-[#080909] bg-[#f5f3ed] px-5 py-3">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <span className="dg-mono text-[10.5px] text-[#080909]">
-            Legend · Select any zone code or overlay to inspect applicable clauses
-          </span>
           {selectedZoneCode && (
             <button
               type="button"
               onClick={() => onSelectZone("")}
-              className="font-mono text-[10.5px] uppercase tracking-[0.12em] text-[#080909] underline"
+              className="dg-pill"
             >
               Clear selection ({selectedZoneCode})
             </button>
           )}
         </div>
+      </div>
 
-        <div className="mt-2.5 flex flex-wrap gap-2">
+      {/* Layer Toggles (Corporation and Wards on by default) */}
+      <div
+        role="group"
+        aria-label="Map layer toggles"
+        className="mb-3 flex flex-wrap items-center gap-4 border border-[#c8ccc0] bg-[#efeee8] px-3 py-2 font-mono text-[10.5px] uppercase tracking-[0.12em] text-[#080909]"
+      >
+        <span className="font-semibold">Layers:</span>
+        <label className="flex cursor-pointer items-center gap-1.5">
+          <input
+            type="checkbox"
+            checked={showBoundaryLayer}
+            onChange={(e) => setShowBoundaryLayer(e.target.checked)}
+            className="h-3 w-3 accent-[#080909]"
+          />
+          <span>Corporation ({boundary?.features?.length ?? 0})</span>
+        </label>
+        <label className="flex cursor-pointer items-center gap-1.5">
+          <input
+            type="checkbox"
+            checked={showGbaZonesLayer}
+            onChange={(e) => setShowGbaZonesLayer(e.target.checked)}
+            className="h-3 w-3 accent-[#080909]"
+          />
+          <span>GBA Zones ({gbaZones?.features?.length ?? 0})</span>
+        </label>
+        <label className="flex cursor-pointer items-center gap-1.5">
+          <input
+            type="checkbox"
+            checked={showWardsLayer}
+            onChange={(e) => setShowWardsLayer(e.target.checked)}
+            className="h-3 w-3 accent-[#080909]"
+          />
+          <span>Wards ({wards?.features?.length ?? 0})</span>
+        </label>
+        {planningDistricts && planningDistricts.features.length > 0 && (
+          <label className="flex cursor-pointer items-center gap-1.5">
+            <input
+              type="checkbox"
+              checked={showPlanningDistrictsLayer}
+              onChange={(e) => setShowPlanningDistrictsLayer(e.target.checked)}
+              className="h-3 w-3 accent-[#080909]"
+            />
+            <span>
+              Planning Districts ({planningDistricts.features.length})
+            </span>
+          </label>
+        )}
+        {activeZones.length > 0 && (
+          <label className="flex cursor-pointer items-center gap-1.5">
+            <input
+              type="checkbox"
+              checked={showZonesLayer}
+              onChange={(e) => setShowZonesLayer(e.target.checked)}
+              className="h-3 w-3 accent-[#080909]"
+            />
+            <span>Master Plan Zones ({activeZones.length})</span>
+          </label>
+        )}
+        {overlays && overlays.features.length > 0 && (
+          <label className="flex cursor-pointer items-center gap-1.5">
+            <input
+              type="checkbox"
+              checked={showOverlaysLayer}
+              onChange={(e) => setShowOverlaysLayer(e.target.checked)}
+              className="h-3 w-3 accent-[#080909]"
+            />
+            <span>Derived Overlays ({overlays.features.length})</span>
+          </label>
+        )}
+      </div>
+
+      {/* MapLibre GL JS + PMTiles Canvas */}
+      <div className="relative w-full border border-[#080909] bg-[#efeee8]">
+        <div
+          ref={mapContainerRef}
+          role="region"
+          aria-label="MapLibre GL JS street map canvas"
+          tabIndex={0}
+          className="h-[460px] w-full focus:outline-2 focus:outline-[#080909]"
+        />
+        <div
+          aria-label="Map attribution"
+          className="flex flex-wrap items-center justify-between gap-2 border-t border-[#c8ccc0] bg-[#f5f3ed] px-3 py-1.5 font-mono text-[10px] text-[#5b5e56]"
+        >
+          <span>© OpenStreetMap contributors · Protomaps</span>
+          <span>PMTiles v3 · dg2n Monochrome Basemap</span>
+        </div>
+      </div>
+
+      {/* Plain line when no land-use zones are published yet (06-real-map-foundation.md §3) */}
+      {activeZones.length === 0 && (
+        <p
+          role="status"
+          className="dg-serif mt-3 border border-[#c8ccc0] bg-[#efeee8] px-3 py-2 text-sm text-[#171917]"
+        >
+          No master plan land-use zones are published yet; showing official
+          corporation, GBA zone, and ward boundaries.
+        </p>
+      )}
+
+      {/* Interactive Ward Inspector (06-real-map-foundation.md §3) */}
+      {sortedWards.length > 0 && (
+        <div
+          role="region"
+          aria-label="Official ward boundary inspector"
+          className="mt-4 border border-[#080909] bg-[#efeee8] p-4"
+        >
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div className="min-w-[260px] flex-1">
+              <label
+                htmlFor="ward-inspector-select"
+                className="dg-mono block text-[10.5px] text-[#080909]"
+              >
+                Inspect Official Ward ({sortedWards.length} Wards in Corporation)
+              </label>
+              <select
+                id="ward-inspector-select"
+                value={selectedWardId ?? ""}
+                onChange={(e) => setSelectedWardId(e.target.value || null)}
+                className="mt-1.5 w-full border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 font-mono text-xs text-[#080909]"
+              >
+                {sortedWards.map((w) => {
+                  const wid = String(
+                    w.properties?.ward_id ?? w.properties?.ward_no ?? ""
+                  );
+                  const wname = String(w.properties?.ward_name ?? "");
+                  const zname = String(
+                    w.properties?.zone_name ?? w.properties?.zone ?? ""
+                  );
+                  return (
+                    <option key={wid} value={wid}>
+                      Ward {wid} · {wname} ({zname})
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+
+            {wardsSourceHref && (
+              <a
+                href={wardsSourceHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.12em] text-[#080909] underline"
+              >
+                Official GBA Ward Delimitation Source ↗
+              </a>
+            )}
+          </div>
+
+          {selectedWardFeature && (
+            <dl className="mt-3 grid grid-cols-1 gap-3 border-t border-[#c8ccc0] pt-3 text-xs sm:grid-cols-4">
+              <div>
+                <dt className="dg-mono text-[10px]">Ward No. &amp; Name</dt>
+                <dd className="mt-0.5 font-semibold text-[#080909]">
+                  Ward{" "}
+                  {String(
+                    selectedWardFeature.properties?.ward_id ??
+                      selectedWardFeature.properties?.ward_no ??
+                      ""
+                  )}{" "}
+                  · {String(selectedWardFeature.properties?.ward_name ?? "")}
+                  {selectedWardFeature.properties?.ward_name_kn
+                    ? ` (${String(selectedWardFeature.properties.ward_name_kn)})`
+                    : ""}
+                </dd>
+              </div>
+              <div>
+                <dt className="dg-mono text-[10px]">GBA Zone</dt>
+                <dd className="mt-0.5 font-mono text-[#080909]">
+                  {String(selectedWardFeature.properties?.zone ?? "")}
+                  {selectedWardFeature.properties?.zone_name
+                    ? ` · ${String(selectedWardFeature.properties.zone_name)}`
+                    : ""}
+                </dd>
+              </div>
+              <div>
+                <dt className="dg-mono text-[10px]">Assembly Constituency</dt>
+                <dd className="mt-0.5 text-[#171917]">
+                  {String(
+                    selectedWardFeature.properties?.Assembly ??
+                      selectedWardFeature.properties?.ac ??
+                      "Not specified"
+                  )}
+                </dd>
+              </div>
+              <div>
+                <dt className="dg-mono text-[10px]">Source Attribution</dt>
+                <dd className="mt-0.5 font-mono text-[11px]">
+                  <a
+                    href={wardsSourceHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#080909] underline"
+                  >
+                    GBA Final Delimitation (Nov 2025) ↗
+                  </a>
+                </dd>
+              </div>
+            </dl>
+          )}
+        </div>
+      )}
+
+      {/* Zone Legend & Selector Pills (when land-use zones exist) */}
+      {legendItems.length > 0 && (
+        <div
+          role="group"
+          aria-label="Zone code filter buttons"
+          className="mt-4 flex flex-wrap gap-2"
+        >
           {legendItems.map((item) => {
             const isSelected = selectedZoneCode === item.zone_code;
             return (
               <button
                 key={item.zone_code}
                 type="button"
-                onClick={() => onSelectZone(item.zone_code)}
                 aria-pressed={isSelected}
-                className={`flex items-center gap-2 border px-2.5 py-1.5 text-left text-xs ${
-                  isSelected
-                    ? "border-[#ff6b52] bg-[#ff6b52]/20 font-semibold text-[#080909]"
-                    : "border-[#080909] bg-[#f5f3ed] text-[#080909] hover:bg-[#efeee8]"
-                }`}
+                onClick={() => onSelectZone(item.zone_code)}
+                className={`dg-pill ${isSelected ? "dg-pill-active" : ""}`}
               >
-                <span
-                  aria-hidden="true"
-                  className="inline-block h-3 w-3 border border-[#080909]"
-                  style={{
-                    backgroundColor: isSelected ? "#ff6b52" : "#efeee8",
-                  }}
-                />
-                <span className="font-mono text-[11px] font-medium">
-                  {item.zone_code}
-                </span>
-                <span className="text-[#5b5e56]">
-                  {item.zone_label}
-                  {item.maxVersion > 1 ? ` · v${item.maxVersion}` : ""}
-                  {isSelected ? " · selected" : ""}
-                </span>
+                {item.zone_code} · {item.zone_label}
+                {item.maxVersion > 1 ? ` · v${item.maxVersion}` : ""}
               </button>
             );
           })}
-
-          {overlays && overlays.features.length > 0 && (
-            <button
-              type="button"
-              onClick={() => {
-                const ovId = String(
-                  overlays.features[0]?.properties?.overlay_id ?? ""
-                );
-                if (ovId) onSelectZone(ovId);
-              }}
-              aria-pressed={
-                selectedZoneCode ===
-                String(overlays.features[0]?.properties?.overlay_id ?? "")
-              }
-              className="flex items-center gap-2 border border-dashed border-[#080909] bg-[#efeee8] px-2.5 py-1.5 text-left text-xs text-[#080909]"
-            >
-              <span className="dg-accent-dot" />
-              <span className="font-mono text-[11px]">
-                {String(
-                  overlays.features[0]?.properties?.overlay_id ?? "Overlay"
-                )}
-              </span>
-              <span className="text-[#5b5e56]">
-                Derived 11 m Influence Zone (Approximate)
-              </span>
-            </button>
-          )}
         </div>
+      )}
 
-        {/* External Reference Layers & Base Map Attribution */}
-        <footer className="mt-2.5 flex flex-wrap items-center justify-between gap-2 border-t border-[#c8ccc0] pt-2 font-mono text-[10px] uppercase tracking-[0.12em] text-[#5b5e56]">
-          <span>Base map attribution: © OpenStreetMap contributors (ODbL)</span>
-          <div className="flex flex-wrap gap-4">
-            {referenceLayers.map((refLayer) => (
-              <a
-                key={refLayer.layer_id}
-                href={refLayer.external_url ?? "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#080909] underline underline-offset-2"
+      {/* Layer Metadata & Accuracy Table */}
+      {geoLayers.length > 0 && (
+        <div className="mt-4 border-t border-[#c8ccc0] pt-3">
+          <div className="dg-mono mb-2">
+            Published Geospatial Layers ({geoLayers.length})
+          </div>
+          <div className="grid grid-cols-1 gap-2 text-xs sm:grid-cols-2">
+            {geoLayers.map((layer) => (
+              <div
+                key={layer.layer_id}
+                className="border border-[#c8ccc0] bg-[#efeee8] px-3 py-2"
               >
-                {refLayer.title} ↗
-              </a>
+                <div className="flex items-center justify-between gap-2 font-mono text-[10.5px]">
+                  <span className="font-semibold text-[#080909]">
+                    {layer.title}
+                  </span>
+                  <span className="uppercase text-[#5b5e56]">
+                    {layer.derived ? "Derived" : "Official"}
+                    {layer.accuracy_m !== null
+                      ? ` · ±${layer.accuracy_m}m`
+                      : ""}
+                  </span>
+                </div>
+                <p className="dg-serif mt-0.5 text-xs text-[#5b5e56]">
+                  {layer.method}
+                </p>
+              </div>
             ))}
           </div>
-        </footer>
-      </div>
+        </div>
+      )}
     </section>
   );
 }

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
@@ -99,32 +100,121 @@ def write_jurisdiction_map_verification_report(
         if pd_cfg.source_attribution
     ]
 
+    processed_dir = output_path.parent.parent.parent / "processed" / config.id
+    gba_zones_path = processed_dir / "gba-zones.geojson"
+    wards_path = processed_dir / "wards.geojson"
+
+    gba_zone_rows: list[str] = []
+    if gba_zones_path.is_file():
+        gba_zones_fc = json.loads(gba_zones_path.read_text(encoding="utf-8"))
+        for z_feat in gba_zones_fc.get("features", []):
+            z_props = z_feat.get("properties") or {}
+            z_geom = shape(z_feat["geometry"])
+            z_area_km2 = round(compute_geodesic_area_sq_m(z_geom) / 1_000_000.0, 2)
+            z_code = str(z_props.get("zone") or "—")
+            z_name = str(z_props.get("zone_name") or z_props.get("Zone") or "—")
+            z_corp = str(z_props.get("Corporation") or z_props.get("Corporatio") or "—")
+            z_rep = (
+                f"Repaired via `make_valid` ({z_props.get('geometry_repair_reason')})"
+                if z_props.get("geometry_repaired")
+                else "Valid in source (`is_valid=True`)"
+            )
+            gba_zone_rows.append(
+                f"| `{z_code}` | {z_name} | `{z_corp}` | {z_area_km2:.2f} sq.km | {z_rep} |"
+            )
+
+    ward_rows: list[str] = []
+    ward_count = 0
+    repaired_ward_count = 0
+    if wards_path.is_file():
+        wards_fc = json.loads(wards_path.read_text(encoding="utf-8"))
+        w_feats = list(wards_fc.get("features", []))
+        w_feats.sort(key=lambda f: int(str((f.get("properties") or {}).get("ward_id") or 0)))
+        ward_count = len(w_feats)
+        for w_feat in w_feats:
+            w_props = w_feat.get("properties") or {}
+            w_geom = shape(w_feat["geometry"])
+            w_area_km2 = round(compute_geodesic_area_sq_m(w_geom) / 1_000_000.0, 2)
+            w_id = str(w_props.get("ward_id") or "—")
+            w_name = str(w_props.get("ward_name") or "—")
+            w_kn = str(w_props.get("ward_name_kn") or "—")
+            w_zone = f"{w_props.get('zone', '—')} ({w_props.get('zone_name', '—')})"
+            w_ac = str(w_props.get("Assembly") or w_props.get("ac") or "—")
+            w_pop = str(w_props.get("TOT_P") or "—")
+            if w_props.get("geometry_repaired"):
+                repaired_ward_count += 1
+                w_geom_note = f"`make_valid` ({w_props.get('geometry_repair_reason')})"
+            else:
+                w_geom_note = "Valid (`is_valid=True`)"
+            ward_rows.append(
+                f"| `{w_id}` | {w_name} | {w_kn} | {w_zone} | {w_ac} | {w_pop} | {w_area_km2:.2f} sq.km | {w_geom_note} |"
+            )
+
+    corp_bounds_str = "—"
+    corp_repair_str = "Valid (`is_valid=True`)"
+    if boundary_shapes:
+        b_union = unary_union(boundary_shapes)
+        minx, miny, maxx, maxy = b_union.bounds
+        corp_bounds_str = f"[{minx:.6f}, {miny:.6f}, {maxx:.6f}, {maxy:.6f}]"
+        first_c_props = (boundary_geojson.get("features") or [{}])[0].get("properties") or {}
+        if first_c_props.get("geometry_repaired"):
+            corp_repair_str = f"Repaired via `make_valid` ({first_c_props.get('geometry_repair_reason')})"
+
+    ward_boundary_notes: list[str] = []
+    for b_cfg in config.maps.boundaries:
+        role_val = getattr(b_cfg.layer_role, "value", b_cfg.layer_role)
+        if role_val == "wards":
+            if b_cfg.select is not None:
+                ward_boundary_notes.append(
+                    f"- **Selection Method (Rule R1)**: Selected deterministically by source attribute `{b_cfg.select.property} == \"{b_cfg.select.equals}\"` from `{b_cfg.source_url}`."
+                )
+            if getattr(b_cfg, "verification_note", None):
+                ward_boundary_notes.append(
+                    f"- **Notification Cross-Check**: {b_cfg.verification_note}"
+                )
+
     lines = [
         f"# Map & Geospatial Verification Report — `{config.id}` ({config.name})",
         "",
-        "**Step**: Plan v2.0 §5.C1–C4 · **Verification Cap**: `machine_checked` (Rule R10)",
+        "**Step**: PR 06 / Plan v2.0 §5.C1–C4 · **Verification Cap**: `machine_checked` (Rule R10)",
         "",
         "## 1. Coverage & Coordinate Reference System Summary",
         "",
-        f"- **Corporation Boundary Area (`boundary.geojson`)**: {corp_area_sq_km:.2f} sq.km",
+        f"- **Corporation Boundary Area (`boundary.geojson`)**: {corp_area_sq_km:.2f} sq.km (Bounds `EPSG:4326`: `{corp_bounds_str}`; Geometry: {corp_repair_str})",
+        f"- **GBA Zones Within Corporation (`gba-zones.geojson`)**: {len(gba_zone_rows)}",
+        f"- **Official Wards Within Corporation (`wards.geojson`)**: {ward_count} ({ward_count - repaired_ward_count} valid in source, {repaired_ward_count} repaired via `shapely.make_valid`)",
         f"- **Intersecting Planning Districts (`planning-districts.geojson`)**: {len(planning_district_features)}",
         f"- **Active Master Plan Zone Polygons (`zones.geojson`)**: {len(active_zones)}",
-        f"- **Zoned Area Coverage Within Corporation**: **{coverage_pct:.1f}%** (Target >= 95.0%: **PASS**)",
+        f"- **Zoned Area Coverage Within Corporation**: **{coverage_pct:.1f}%**",
         f"- **Derived Overlay Features (`overlays.geojson`)**: {len(overlay_features)}",
         "",
-        "## 2. Per-Planning-District / Sheet Verification",
+        "## 2. Official GBA Zones (`gba-zones.geojson`)",
+        "",
+        "| Zone Code | Zone Name | Corporation Attribute | Area | Geometry Validation |",
+        "|---|---|---|---|---|",
+        *(gba_zone_rows or ["| — | — | — | 0.00 sq.km | — |"]),
+        "",
+        f"## 3. Official Delimitation Wards (`wards.geojson` — {ward_count} Wards) & Notification Cross-Check",
+        "",
+        *ward_boundary_notes,
+        "",
+        "| Ward No. | Ward Name (EN) | Ward Name (KN) | GBA Zone | Assembly Constituency | Population (`TOT_P`) | Area | Geometry Validation |",
+        "|---:|---|---|---|---|---:|---:|---|",
+        *(ward_rows or ["| — | — | — | — | — | — | 0.00 sq.km | — |"]),
+        "",
+        "## 4. Per-Planning-District / Sheet Verification",
         "",
         "| Planning District | Source Sheet | Extraction & CRS Method | Polygons | Zone Codes Present | Clipped Area | Status |",
         "|---|---|---|---|---|---|---|",
         *(district_rows or ["| — | — | — | 0 | — | 0.00 sq.km | — |"]),
         "",
-        "## 3. Land-Use Zone Distribution (`zones.geojson`)",
+        "## 5. Land-Use Zone Distribution (`zones.geojson`)",
         "",
         "| Zone Code | Total Clipped Area | Share of Zoned Area |",
         "|---|---|---|",
         *(code_rows or ["| — | 0.00 sq.km | 0.0% |"]),
         "",
-        "## 4. Existing Land Use Cross-Check & Overlay Notes",
+        "## 6. Existing Land Use Cross-Check & Overlay Notes",
         "",
         "- **Existing Land Use Cross-Check (Plan v2.0 §5.C3)**: Master plan zones reflect statutory *proposed/permissible* zoning and are never altered to match existing land use.",
         *pd_notes,
