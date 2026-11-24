@@ -61,14 +61,8 @@ def assert_published_manifest_has_no_local_sources(
                 source_url = str(doc.get("source_url") or "").strip()
                 if (
                     not source_url
-                    or source_url.startswith("file://")
-                    or source_url.startswith("/")
-                    or source_url.startswith(".")
-                    or source_url.startswith("data/")
-                    or not (
-                        source_url.startswith("http://")
-                        or source_url.startswith("https://")
-                    )
+                    or source_url.startswith(("file://", "/", ".", "data/"))
+                    or not source_url.startswith(("http://", "https://"))
                 ):
                     raise AssertionError(
                         f"Published non-test source {jur_id}@{ver}:{doc_id} has local or non-http(s) source_url: {source_url!r}"

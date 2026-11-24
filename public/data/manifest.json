@@ -2,6 +2,42 @@
   "schema_version": "1.2",
   "jurisdictions": [
     {
+      "id": "in-ka-bengaluru-south",
+      "name": "Bengaluru South City Corporation",
+      "aliases": [
+        "Bengaluru South",
+        "BSCC",
+        "South Bengaluru",
+        "Greater Bengaluru South",
+        "Jayanagar",
+        "Basavanagudi",
+        "JP Nagar",
+        "Banashankari",
+        "BTM Layout",
+        "HSR Layout",
+        "Bommanahalli",
+        "Padmanabhanagar",
+        "Uttarahalli"
+      ],
+      "visibility": "public",
+      "latest_release": null,
+      "releases": [
+        {
+          "version": "1.0.0",
+          "status": "withdrawn",
+          "withdrawn_reason": "Synthetic demonstration data, not the law of Bengaluru South",
+          "released_at": "2026-11-23T00:00:00Z",
+          "licence": "CC BY 4.0",
+          "download_zip": null,
+          "sha256sums": null,
+          "declarations": null,
+          "files": null,
+          "drafts": null,
+          "changelog": "Withdrawn: synthetic demonstration data, not the law of Bengaluru South"
+        }
+      ]
+    },
+    {
       "id": "xx-test-fixture",
       "name": "Synthetic Test Jurisdiction",
       "aliases": [
@@ -41,42 +77,6 @@
             ]
           },
           "changelog": "Release 0.1.0 for Synthetic Test Jurisdiction."
-        }
-      ]
-    },
-    {
-      "id": "in-ka-bengaluru-south",
-      "name": "Bengaluru South City Corporation",
-      "aliases": [
-        "Bengaluru South",
-        "BSCC",
-        "South Bengaluru",
-        "Greater Bengaluru South",
-        "Jayanagar",
-        "Basavanagudi",
-        "JP Nagar",
-        "Banashankari",
-        "BTM Layout",
-        "HSR Layout",
-        "Bommanahalli",
-        "Padmanabhanagar",
-        "Uttarahalli"
-      ],
-      "visibility": "public",
-      "latest_release": null,
-      "releases": [
-        {
-          "version": "1.0.0",
-          "status": "withdrawn",
-          "withdrawn_reason": "Synthetic demonstration data, not the law of Bengaluru South",
-          "released_at": "2026-11-23T00:00:00Z",
-          "licence": "CC BY 4.0",
-          "download_zip": null,
-          "sha256sums": null,
-          "declarations": null,
-          "files": null,
-          "drafts": null,
-          "changelog": "Withdrawn: synthetic demonstration data, not the law of Bengaluru South"
         }
       ]
     }
