@@ -142,3 +142,9 @@ The Next.js App Router application at the repository root (`app/`, `components/`
 **Why**: Keeps the provenance gate configurable without hard-coding tool names in multiple places while failing CI deterministically on any local `source_url`, missing `retrieval` block, or synthetic PDF metadata in non-test jurisdictions.
 **Rejected**: Checking provenance only inside `bylaws acquire`, which would not catch hand-committed files or config edits in CI.
 *Introduced by*: 261124-fcwm-pr-02-provenance-gate-repo-sync
+
+### Greater Bengaluru Parent-Child Jurisdiction Hierarchy and Shared Bundle Reference (`Release 3.0.0`)
+**Decision**: Model Greater Bengaluru with a parent jurisdiction (`in-ka-bengaluru`) holding shared documents, amendment links, and city-wide 5-corporation/369-ward boundaries, and five child City Corporations (`in-ka-bengaluru-central`, `-north`, `-south`, `-east`, `-west` with `parent: "in-ka-bengaluru"`) that inherit shared parent documents, apply corporation-specific 2026 Building (Amendment) Bye-laws via `applies_in`, and reference unamended shared `.clauses.json` bundles from `/data/in-ka-bengaluru/<version>/` in `manifest.json`.
+**Why**: Enables per-corporation consolidated views of `bbl-2003` and corporation-specific ward/zone maps while avoiding 6-way duplication of large unamended reference bundles (`ka-model-bbl-2017`) in git and Vercel static deployments.
+**Rejected**: Duplicating all 24 `.clauses.json` files across all 6 jurisdiction release folders, which would exceed Vercel's static deployment size limit.
+*Introduced by*: 261124-peq2-pr-12-greater-bengaluru-overnight

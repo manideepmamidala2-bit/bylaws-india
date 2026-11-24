@@ -133,6 +133,7 @@ export function ZoneMap({
     useState(true);
   const [showZonesLayer, setShowZonesLayer] = useState(true);
   const [showOverlaysLayer, setShowOverlaysLayer] = useState(true);
+  const [webglError, setWebglError] = useState<string | null>(null);
   const [showSheetOverlay, setShowSheetOverlay] = useState<boolean>(() => {
     if (initialShowSheetOverlay) return true;
     if (typeof window !== "undefined") {
@@ -501,7 +502,10 @@ export function ZoneMap({
         map.remove();
         mapInstanceRef.current = null;
       };
-    } catch {
+    } catch (err) {
+      setWebglError(
+        err instanceof Error ? err.message : "WebGL context unavailable"
+      );
       return undefined;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -741,6 +745,20 @@ export function ZoneMap({
 
       {/* MapLibre GL JS + PMTiles Canvas */}
       <div className="relative w-full border border-[#080909] bg-[#efeee8]">
+        {webglError && (
+          <div
+            role="alert"
+            className="border-b border-[#080909] bg-[#efeee8] p-4 font-mono text-xs text-[#080909]"
+          >
+            Interactive WebGL map rendering is unavailable in this browser (
+            {webglError}). Use the Ward and Zone selector controls below or
+            download the GeoJSON layers directly from{" "}
+            <a href="/data" className="underline">
+              /data
+            </a>
+            .
+          </div>
+        )}
         <div
           ref={mapContainerRef}
           role="region"

@@ -276,6 +276,8 @@ def build_document_annotations(tree_payload: dict[str, Any]) -> dict[str, Any]:
             curr_p = p_node.get("parent_eid")
         return False
 
+    compiled_topics = _load_compiled_topics()
+
     for node in active_nodes:
         eid = str(node.get("eid") or "")
         node_type = str(node.get("type") or "clause")
@@ -492,7 +494,6 @@ def build_document_annotations(tree_payload: dict[str, Any]) -> dict[str, Any]:
                         )
 
         # 4. Topic & Quantity annotations (Schema 1.4 / 09b)
-        compiled_topics = _load_compiled_topics()
         node_heading_str = str(node.get("heading") or "")
         if compiled_topics and len(active_nodes) <= 2500 and candidate_fields:
             first_field_name, first_field_text = candidate_fields[0]
