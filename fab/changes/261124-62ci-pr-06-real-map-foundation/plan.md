@@ -73,29 +73,33 @@
 
 ### Functional Completeness
 
-- [ ] A-001 R1: `leaflet` and `react-leaflet` are replaced by `maplibre-gl` and `pmtiles`, the SVG schematic view and its toggle are completely removed, and `ZoneMap.tsx` renders with the dg2n monochrome style (`lib/map-style.ts`) and visible `"© OpenStreetMap contributors · Protomaps"` attribution
-- [ ] A-002 R1: `public/data/in-ka-bengaluru-south/basemap.pmtiles` is extracted for Bengaluru South + ~2 km margin, supports HTTP `Range` requests, and its build date, bounding box, and SHA-256 checksum are documented in `docs/map.md`
-- [ ] A-003 R2: Official GBA corporation (`boundary.geojson`), GBA zones (`gba-zones.geojson`), and wards (`wards.geojson`) boundaries and notification PDF are acquired with R15 `retrieval` records, selected via config selectors (Rule R1), validated with `shapely`, and published in `geo-layers.json` (`kind: "official_boundary"`)
-- [ ] A-004 R2: `data/reports/in-ka-bengaluru-south/map-verification.md` reports the exact ward count, ward numbers, and ward names from the source and cross-checks them against the delimitation notification
-- [ ] A-005 R3: `/j/in-ka-bengaluru-south` enables `corporation` and `wards` by default, displays ward number, ward name, GBA zone, and source link when a ward is selected, and shows plain-language accuracy and no-land-use-zones notices
+- [x] A-001 R1: `leaflet` and `react-leaflet` are replaced by `maplibre-gl` and `pmtiles`, the SVG schematic view and its toggle are completely removed, and `ZoneMap.tsx` renders with the dg2n monochrome style (`lib/map-style.ts`) and visible `"© OpenStreetMap contributors · Protomaps"` attribution
+- [x] A-002 R1: `public/data/in-ka-bengaluru-south/basemap.pmtiles` is extracted for Bengaluru South + ~2 km margin, supports HTTP `Range` requests, and its build date, bounding box, and SHA-256 checksum are documented in `docs/map.md`
+- [x] A-003 R2: Official GBA corporation (`boundary.geojson`), GBA zones (`gba-zones.geojson`), and wards (`wards.geojson`) boundaries and notification PDF are acquired with R15 `retrieval` records, selected via config selectors (Rule R1), validated with `shapely`, and published in `geo-layers.json` (`kind: "official_boundary"`)
+- [x] A-004 R2: `data/reports/in-ka-bengaluru-south/map-verification.md` reports the exact ward count, ward numbers, and ward names from the source and cross-checks them against the delimitation notification
+- [x] A-005 R3: `/j/in-ka-bengaluru-south` enables `corporation` and `wards` by default, displays ward number, ward name, GBA zone, and source link when a ward is selected, and shows plain-language accuracy and no-land-use-zones notices
 
 ### Behavioral Correctness
 
-- [ ] A-006 R2: Published polygon outlines in `boundary.geojson`, `gba-zones.geojson`, and `wards.geojson` match the source file coordinates (verified by unit test) and all geometries are valid (`shapely.is_valid`)
-- [ ] A-007 R1: `test_r4_licences.py` passes with `maplibre-gl` and `pmtiles` installed
+- [x] A-006 R2: Published polygon outlines in `boundary.geojson`, `gba-zones.geojson`, and `wards.geojson` match the source file coordinates (verified by unit test) and all geometries are valid (`shapely.is_valid`)
+- [x] A-007 R1: `test_r4_licences.py` passes with `maplibre-gl` and `pmtiles` installed
 
 ### Scenario Coverage
 
-- [ ] A-008 R2: Falsifiable tests in `pipeline/tests/test_real_map_foundation_pr06.py` are shown failing first (Rule R11) and pass once boundaries, PMTiles basemap, `geo-layers.json`, and `map-verification.md` are generated
-- [ ] A-009 R3: All Vitest and `axe-core` WCAG AA checks pass on the updated Map page and ward inspector
+- [x] A-008 R2: Falsifiable tests in `pipeline/tests/test_real_map_foundation_pr06.py` are shown failing first (Rule R11) and pass once boundaries, PMTiles basemap, `geo-layers.json`, and `map-verification.md` are generated
+- [x] A-009 R3: All Vitest and `axe-core` WCAG AA checks pass on the updated Map page and ward inspector
 
 ### Code Quality
 
-- [ ] A-010 Pattern consistency & R1 compliance: Zero hard-coded city, corporation, or ward names exist in `pipeline/bylaws/` or `components/`
+- [x] A-010 Pattern consistency & R1 compliance: Zero hard-coded city, corporation, or ward names exist in `pipeline/bylaws/` or `components/`
 
 ## Notes
 
 - Check items as you review: `- [x]`
+
+## Deletion Candidates
+
+- `None — this change adds new functionality without making existing code redundant` (note: `components/LeafletCanvas.tsx` and the inline SVG schematic view in `components/ZoneMap.tsx` were already deleted as part of this change)
 
 ## Assumptions
 

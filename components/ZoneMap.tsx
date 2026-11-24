@@ -391,6 +391,7 @@ export function ZoneMap({
     } catch {
       return undefined;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     activeZones,
     boundary,
@@ -401,10 +402,6 @@ export function ZoneMap({
     gbaZones,
     onSelectZone,
     pmtilesUrl,
-    showBoundaryLayer,
-    showGbaZonesLayer,
-    showWardsLayer,
-    showZonesLayer,
     wards,
   ]);
 

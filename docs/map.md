@@ -53,7 +53,7 @@ pmtiles extract \
 - **Buildings (`buildings`)**: subtle fill (`#ebe9e1`) with hairline stroke (`#d5d7cd`) at zoom $\ge 13$
 - **Minor Roads (`roads` — residential, service, street, path)**: `--hairline` (`#c8ccc0`)
 - **Major Roads (`roads` — highway, major_road, medium_road)**: `--ink` (`#080909`) and muted (`#5b5e56`)
-- **Labels (`roads`, `places`, `water`)**: English labels (`coalesce(get("name:en"), get("name"))`) rendered in `--muted` (`#5b5e56`) with paper halo (`#f5f3ed`).
+- **Zero External Glyph/Tile Requests**: `lib/map-style.ts` defines a self-contained glyph-free vector style (`background`, `fill`, and `line` layers over `pmtiles://`) so no external font/glyph server or third-party tile CDN is contacted at runtime; ward names, GBA zone names, and source citations are rendered directly in the DOM Ward Inspector and layer controls.
 
 ---
 
