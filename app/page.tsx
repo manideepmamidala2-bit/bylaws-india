@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import {
+  fetchDeclarations,
   fetchManifest,
   getVisibleJurisdictions,
   isWithdrawnRelease,
@@ -38,6 +39,11 @@ export default async function JurisdictionPickerPage() {
   const withdrawnRelease = primaryJurisdiction?.releases.find((rel) =>
     isWithdrawnRelease(rel)
   );
+  const primaryDecl =
+    primaryJurisdiction && hasPublishedRelease(primaryJurisdiction)
+      ? await fetchDeclarations(primaryJurisdiction.id)
+      : null;
+  const primaryGapNote = primaryDecl?.known_gaps?.[0]?.description ?? null;
 
   return (
     <div className="min-h-screen bg-[#f5f3ed] text-[#080909]">
@@ -78,6 +84,11 @@ export default async function JurisdictionPickerPage() {
               ? `The initial release (${withdrawnRelease.version}) for ${primaryJurisdiction.name} has been withdrawn (${withdrawnRelease.withdrawn_reason}). Real source documents and official maps are now being acquired and will be published step by step as they are verified.`
               : "Real source documents and official maps are being acquired and will be published step by step as they are verified."}
           </p>
+          {primaryGapNote && (
+            <p className="dg-serif mt-2 max-w-3xl border-l-2 border-[#080909] pl-3 text-sm text-[#080909]">
+              {primaryGapNote}
+            </p>
+          )}
           <div className="mt-4 flex flex-wrap gap-3 font-mono text-xs uppercase tracking-[0.12em]">
             <Link
               href="/data"

@@ -335,6 +335,8 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
             continue
         if getattr(doc, "acquisition_status", None) in {"pending", "not_found"}:
             continue
+        if getattr(doc, "structured", None) is False:
+            continue
 
         if doc.id not in loaded_trees:
             loaded_trees[doc.id] = _load_clause_tree(docs_dir, doc.id)

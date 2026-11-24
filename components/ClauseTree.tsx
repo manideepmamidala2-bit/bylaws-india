@@ -24,6 +24,9 @@ interface ClauseTreeProps {
   allowConsolidatedToggle?: boolean;
 }
 
+const INITIAL_VISIBLE_COUNT = 40;
+const MAX_INLINE_ANNOTATIONS = 12;
+
 export function ClauseTree({
   clauses,
   annotations = [],
@@ -35,6 +38,7 @@ export function ClauseTree({
   allowConsolidatedToggle = false,
 }: ClauseTreeProps) {
   const [query, setQuery] = useState("");
+  const [showAll, setShowAll] = useState(false);
   const [viewMode, setViewMode] = useState<"original" | "consolidated">(
     "original"
   );
@@ -190,7 +194,10 @@ export function ClauseTree({
       )}
 
       <div className="divide-y divide-[#c8ccc0] border border-[#080909] bg-[#f5f3ed]">
-        {filtered.map((clause) => {
+        {(showAll || normalizedQuery.length > 0
+          ? filtered
+          : filtered.slice(0, INITIAL_VISIBLE_COUNT)
+        ).map((clause) => {
           const eid = clause.eid ?? clause.number;
           const nodeType = clause.type ?? "clause";
           const versions = clause.versions ?? [];
@@ -392,12 +399,12 @@ export function ClauseTree({
                           ) && (
                             <tr>
                               {clause.table_meta.columns.map((col, cIdx) => (
-                                <th
-                                  key={`sub-${cIdx}`}
-                                  className="font-mono text-[10px] font-normal text-[#5b5e56]"
-                                >
-                                  {col.children?.[0]?.label ?? ""}
-                                </th>
+                                  <th
+                                    key={`sub-${cIdx}`}
+                                    className="font-mono text-[10px] font-normal text-[#5b5e56]"
+                                  >
+                                    {col.children?.[0]?.label || col.label}
+                                  </th>
                               ))}
                             </tr>
                           )}
@@ -444,7 +451,10 @@ export function ClauseTree({
                       <thead>
                         <tr>
                           {table.headers.map((header, idx) => (
-                            <th key={idx}>{header}</th>
+                            <th key={idx}>
+                              {header.trim() ||
+                                (idx === 0 ? "Sl. No." : `Column ${idx + 1}`)}
+                            </th>
                           ))}
                         </tr>
                       </thead>
@@ -465,9 +475,9 @@ export function ClauseTree({
               {linkAnns.length > 0 && (
                 <div className="mt-2 flex flex-wrap items-center gap-2 font-mono text-[10.5px]">
                   <span className="uppercase tracking-[0.12em] text-[#5b5e56]">
-                    Annotations:
+                    Annotations ({linkAnns.length}):
                   </span>
-                  {linkAnns.map((ann) => {
+                  {linkAnns.slice(0, MAX_INLINE_ANNOTATIONS).map((ann) => {
                     const isUnresolved = ann.value.startsWith("unresolved:");
                     const targetHref = isUnresolved
                       ? undefined
@@ -491,6 +501,11 @@ export function ClauseTree({
                       </span>
                     );
                   })}
+                  {linkAnns.length > MAX_INLINE_ANNOTATIONS && (
+                    <span className="text-[#5b5e56]">
+                      +{linkAnns.length - MAX_INLINE_ANNOTATIONS} more
+                    </span>
+                  )}
                 </div>
               )}
 
@@ -566,18 +581,32 @@ export function ClauseTree({
                     "No source page recorded"
                   )}
                 </span>
-                {firstPage !== null &&
-                  sourceHref &&
-                  sourceHref.startsWith("http") && (
-                    <a
-                      href={`${sourceHref}#page=${firstPage}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#080909] underline underline-offset-3"
-                    >
-                      View source p. {firstPage}
-                    </a>
-                  )}
+                <div className="flex flex-wrap items-center gap-3">
+                  {firstPage !== null &&
+                    sourceHref &&
+                    sourceHref.startsWith("http") && (
+                      <a
+                        href={`${sourceHref}#page=${firstPage}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#080909] underline underline-offset-3"
+                      >
+                        View source p. {firstPage}
+                      </a>
+                    )}
+                  {firstPage !== null &&
+                    clause.archive_url &&
+                    clause.archive_url.startsWith("http") && (
+                      <a
+                        href={`${clause.archive_url}#page=${firstPage}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#5b5e56] underline underline-offset-3 hover:text-[#080909]"
+                      >
+                        Archive p. {firstPage} ↗
+                      </a>
+                    )}
+                </div>
               </div>
 
               {hasVersionHistory && (
@@ -619,6 +648,23 @@ export function ClauseTree({
           );
         })}
       </div>
+      {!showAll &&
+        normalizedQuery.length === 0 &&
+        filtered.length > INITIAL_VISIBLE_COUNT && (
+          <div className="flex items-center justify-between border border-[#080909] bg-[#efeee8] px-4 py-3 font-mono text-xs">
+            <span>
+              Showing {INITIAL_VISIBLE_COUNT} of {filtered.length} structured
+              provisions
+            </span>
+            <button
+              type="button"
+              onClick={() => setShowAll(true)}
+              className="border border-[#080909] bg-[#080909] px-3 py-1.5 uppercase tracking-[0.12em] text-[#f5f3ed]"
+            >
+              Show all {filtered.length} provisions
+            </button>
+          </div>
+        )}
     </section>
   );
 }

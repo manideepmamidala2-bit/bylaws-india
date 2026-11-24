@@ -194,15 +194,38 @@ export default async function DataReleasesPage() {
 
                 {decl && (
                   <div className="mt-6 grid grid-cols-1 gap-4 border-t border-[#c8ccc0] pt-4 text-xs md:grid-cols-2">
-                    <div>
-                      <h3 className="dg-mono text-[#080909]">
-                        Not Modelled ({decl.not_modelled.length})
-                      </h3>
-                      <ul className="dg-serif mt-2 list-disc space-y-1 pl-5 text-sm text-[#171917]">
-                        {decl.not_modelled.map((nm, idx) => (
-                          <li key={idx}>{nm}</li>
-                        ))}
-                      </ul>
+                    <div className="space-y-3">
+                      {decl.known_gaps && decl.known_gaps.length > 0 && (
+                        <div>
+                          <h3 className="dg-mono text-[#080909]">
+                            Coverage Notes ({decl.known_gaps.length})
+                          </h3>
+                          {decl.known_gaps.map((kg, kIdx) => (
+                            <div
+                              key={`${kg.doc_id}-${kIdx}`}
+                              className="mt-1 border-l-2 border-[#080909] pl-3"
+                            >
+                              <div className="font-mono text-xs font-semibold">
+                                {kg.doc_id}
+                              </div>
+                              <p className="dg-serif text-xs text-[#171917]">
+                                {kg.description}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      <div>
+                        <h3 className="dg-mono text-[#080909]">
+                          Not Modelled ({decl.not_modelled.length})
+                        </h3>
+                        <ul className="dg-serif mt-2 list-disc space-y-1 pl-5 text-sm text-[#171917]">
+                          {decl.not_modelled.map((nm, idx) => (
+                            <li key={idx}>{nm}</li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
 
                     <div className="space-y-3">

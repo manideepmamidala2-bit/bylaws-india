@@ -48,6 +48,9 @@ export function ClausePanel({
   }
 
   const visibleClauses = baseList.filter((clause) => {
+    if (clause.type === "table_row") {
+      return false;
+    }
     if (!showDrafts && clause.legal_status === "draft") {
       return false;
     }
@@ -60,6 +63,7 @@ export function ClausePanel({
       tagReasonMap.has(clause.clause_id)
     );
   });
+  const previewClauses = visibleClauses.slice(0, 40);
 
   const uniqueDocCount = new Set(
     visibleClauses.map((c) => c.doc_id ?? c.clause_id.split(":")[0])
@@ -101,7 +105,7 @@ export function ClausePanel({
             No matching clauses for the current selection.
           </p>
         ) : (
-          visibleClauses.map((clause, idx) => {
+          previewClauses.map((clause, idx) => {
             const status: DisplayLegalStatus =
               clause.legal_status ?? "status_unknown";
             const validPages = Array.from(
@@ -120,8 +124,8 @@ export function ClausePanel({
             const docId = clause.doc_id ?? clause.clause_id.split(":")[0];
             const prevDocId =
               idx > 0
-                ? (visibleClauses[idx - 1].doc_id ??
-                  visibleClauses[idx - 1].clause_id.split(":")[0])
+                ? (previewClauses[idx - 1].doc_id ??
+                  previewClauses[idx - 1].clause_id.split(":")[0])
                 : null;
             const showGroupHeader = docId !== prevDocId;
 
@@ -202,7 +206,12 @@ export function ClausePanel({
                             <thead>
                               <tr>
                                 {tbl.headers.map((h, hIdx) => (
-                                  <th key={hIdx}>{h}</th>
+                                  <th key={hIdx}>
+                                    {h.trim() ||
+                                      (hIdx === 0
+                                        ? "Sl. No."
+                                        : `Column ${hIdx + 1}`)}
+                                  </th>
                                 ))}
                               </tr>
                             </thead>
@@ -259,18 +268,32 @@ export function ClausePanel({
                         </>
                       )}
                     </span>
-                    {firstPage !== null &&
-                      sourceHref &&
-                      sourceHref.startsWith("http") && (
-                        <a
-                          href={`${sourceHref}#page=${firstPage}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[#080909] underline underline-offset-3"
-                        >
-                          View source p. {firstPage}
-                        </a>
-                      )}
+                    <div className="flex flex-wrap items-center gap-3">
+                      {firstPage !== null &&
+                        sourceHref &&
+                        sourceHref.startsWith("http") && (
+                          <a
+                            href={`${sourceHref}#page=${firstPage}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#080909] underline underline-offset-3"
+                          >
+                            View source p. {firstPage}
+                          </a>
+                        )}
+                      {firstPage !== null &&
+                        clause.archive_url &&
+                        clause.archive_url.startsWith("http") && (
+                          <a
+                            href={`${clause.archive_url}#page=${firstPage}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#5b5e56] underline underline-offset-3 hover:text-[#080909]"
+                          >
+                            Archive p. {firstPage} ↗
+                          </a>
+                        )}
+                    </div>
                   </div>
 
                   {hasVersionHistory && (

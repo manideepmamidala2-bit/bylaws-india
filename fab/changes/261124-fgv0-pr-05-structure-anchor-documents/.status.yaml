@@ -1,0 +1,53 @@
+id: fgv0
+name: 261124-fgv0-pr-05-structure-anchor-documents
+created: 2026-11-24T10:45:06Z
+created_by: manideepmamidala2-bit
+change_type: feat
+issues: []
+progress:
+    intake: done
+    apply: done
+    review: done
+    hydrate: done
+    ship: done
+    review-pr: pending
+plan:
+    generated: true
+    task_count: 5
+    acceptance_count: 10
+    acceptance_completed: 10
+confidence:
+    certain: 4
+    confident: 0
+    tentative: 0
+    unresolved: 0
+    score: 5.0
+    fuzzy: true
+    dimensions:
+        signal: 98.5
+        reversibility: 92.5
+        competence: 95.8
+        disambiguation: 97.0
+stage_metrics:
+    intake: {started_at: "2026-11-24T10:45:06Z", driver: fab-new, iterations: 1, completed_at: "2026-11-24T10:48:27Z"}
+    apply: {started_at: "2026-11-24T12:17:55Z", driver: /fab-fff, iterations: 2, completed_at: "2026-11-24T12:29:24Z"}
+    review: {started_at: "2026-11-24T12:29:24Z", driver: /fab-fff, iterations: 2, completed_at: "2026-11-24T12:37:30Z"}
+    hydrate: {started_at: "2026-11-24T12:37:30Z", driver: /fab-fff, iterations: 1, completed_at: "2026-11-24T12:37:30Z"}
+    ship: {started_at: "2026-11-24T12:37:30Z", driver: /fab-fff, iterations: 1, completed_at: "2026-11-24T12:37:30Z"}
+prs:
+    - https://github.com/manideepmamidala2-bit/bylaws-india/pull/10
+base_branch: main
+change_type_source: explicit
+true_impact:
+    added: 301760
+    deleted: 185
+    net: 301575
+    tests:
+        added: 233
+        deleted: 64
+        net: 169
+    computed_at: "2026-11-24T12:37:30Z"
+    computed_at_stage: ship
+# base_branch: written by /git-branch or /fab-new when the change's branch is created (no placeholder here).
+# true_impact: lazily created on first stage-finish that computes it (no placeholder here).
+last_updated: 2026-11-24T12:37:30Z

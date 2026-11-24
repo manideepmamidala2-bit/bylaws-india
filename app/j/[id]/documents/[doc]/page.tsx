@@ -44,6 +44,7 @@ export default async function DocumentViewerPage({
     clauses,
     amendments,
     consolidated,
+    declarations,
   } = dataset;
 
   if (!release) {
@@ -172,11 +173,42 @@ export default async function DocumentViewerPage({
                 ) : (
                   "Staged source"
                 )}
+                {docMeta.retrieval?.archive_url &&
+                  docMeta.retrieval.archive_url.startsWith("http") && (
+                    <>
+                      {" · "}
+                      <a
+                        href={docMeta.retrieval.archive_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline"
+                      >
+                        Wayback Snapshot ↗
+                      </a>
+                    </>
+                  )}
                 {docMeta.sha256 ? ` · ${docMeta.sha256.slice(0, 12)}…` : ""}
               </dd>
             </div>
           </dl>
         </header>
+
+        {(declarations.known_gaps ?? [])
+          .filter((g) => g.doc_id === doc)
+          .map((gap, gIdx) => (
+            <section
+              key={`gap-${gIdx}`}
+              aria-label="Document coverage notice"
+              className="mb-6 border border-[#080909] bg-[#efeee8] p-4"
+            >
+              <div className="dg-mono text-[10.5px] text-[#080909]">
+                Coverage Notice · Original Wording (v1)
+              </div>
+              <p className="dg-serif mt-1 text-sm text-[#171917]">
+                {gap.description}
+              </p>
+            </section>
+          ))}
 
         {isReferenceOnly ? (
           <section
@@ -261,6 +293,20 @@ export default async function DocumentViewerPage({
                 </table>
               </div>
             </div>
+          </section>
+        ) : docClauses.length === 0 ? (
+          <section
+            aria-label="Structuring status"
+            className="border border-[#080909] bg-[#efeee8] p-6"
+          >
+            <h2 className="text-lg font-semibold text-[#080909]">
+              Not yet structured
+            </h2>
+            <p className="dg-serif mt-2 max-w-2xl text-sm text-[#171917]">
+              This instrument is recorded in the legal source register for{" "}
+              {jurisdiction.name} but has not yet been structured into a clause
+              tree in Release v{release.version}.
+            </p>
           </section>
         ) : (
           <ClauseTree

@@ -447,6 +447,11 @@
           "enum": ["acquired", "pending", "not_found", "reference_only"],
           "default": "acquired"
         },
+        "structured": {
+          "type": ["boolean", "null"],
+          "default": true,
+          "description": "Whether this document is structured into a clause tree in the current release."
+        },
         "retrieval": {
           "anyOf": [
             { "$ref": "#/$defs/retrievalRecord" },

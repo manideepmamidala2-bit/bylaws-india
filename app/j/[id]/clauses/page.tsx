@@ -34,6 +34,7 @@ export default async function ClausesPage({ params }: ClausesPageProps) {
     clauses,
     amendments,
     consolidated,
+    declarations,
   } = dataset;
 
   if (!release) {
@@ -101,6 +102,20 @@ export default async function ClausesPage({ params }: ClausesPageProps) {
             across all structured clauses below.
           </p>
         </header>
+
+        {declarations.known_gaps && declarations.known_gaps.length > 0 && (
+          <section
+            aria-label="Coverage notice"
+            className="mb-6 border border-[#080909] bg-[#efeee8] p-4"
+          >
+            <div className="dg-mono text-[10.5px] text-[#080909]">
+              Coverage Notice · Release v{release.version}
+            </div>
+            <p className="dg-serif mt-1 text-sm text-[#171917]">
+              {declarations.known_gaps[0].description}
+            </p>
+          </section>
+        )}
 
         <section
           aria-label="Structured document directory"

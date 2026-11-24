@@ -8,7 +8,8 @@ from typing import Any
 from bylaws.schema_validator import validate_payload
 
 CROSS_REF_SPAN_RE = re.compile(
-    r"\b(?P<kind>clause|bye-?law|regulation|section|rule|table)\s+(?P<num>[A-Za-z]?\d+(?:\.\d+)*[A-Za-z]?)\b",
+    r"\b(?P<kind>clause|bye-?law|regulation|section|rule|table|schedule|appendix|annexure|part)\s*[-–]?\s*"
+    r"(?P<num>(?:[IVXLCDM]+|\d+)(?:\s*-\s*[A-Za-z0-9]+|(?:\.\d+)*[A-Za-z]?)?)\b",
     re.IGNORECASE,
 )
 
@@ -111,16 +112,23 @@ def build_document_annotations(tree_payload: dict[str, Any]) -> dict[str, Any]:
     ]
 
     eid_by_native: dict[str, str] = {}
-    defined_terms: list[tuple[str, str]] = []
+    compiled_defined_terms: list[tuple[str, str, re.Pattern[str]]] = []
     for node in active_nodes:
         eid = str(node.get("eid") or "")
         native = str(node.get("native_number") or node.get("number") or "").strip()
         if native and eid:
             eid_by_native[native.lower()] = eid
+            eid_by_native[re.sub(r"\s+", " ", native.lower())] = eid
         if node.get("type") == "definition":
             norm_term = str(node.get("defines_normalised") or "").strip()
-            if norm_term and eid:
-                defined_terms.append((norm_term, eid))
+            if norm_term and len(norm_term) >= 3 and eid:
+                compiled_defined_terms.append(
+                    (
+                        norm_term,
+                        eid,
+                        re.compile(rf"\b{re.escape(norm_term)}\b", re.IGNORECASE),
+                    )
+                )
 
     annotations: list[dict[str, Any]] = []
     seq = 0
@@ -207,14 +215,15 @@ def build_document_annotations(tree_payload: dict[str, Any]) -> dict[str, Any]:
         for field_name, f_text in candidate_fields:
             for m_ref in CROSS_REF_SPAN_RE.finditer(f_text):
                 ref_kind = m_ref.group("kind").lower()
-                ref_num = m_ref.group("num")
-                if ref_num.lower() == own_native and ref_kind != "table":
+                ref_num = re.sub(r"\s+", "", m_ref.group("num")).lower()
+                if ref_num == own_native and ref_kind not in {"table", "schedule", "appendix", "annexure", "part"}:
                     continue
-                lookup_keys = (
-                    [f"table {ref_num.lower()}", ref_num.lower()]
-                    if ref_kind == "table"
-                    else [ref_num.lower()]
-                )
+                if ref_kind in {"table", "schedule", "appendix", "annexure", "part"}:
+                    lookup_keys = [f"{ref_kind} {ref_num}", ref_num]
+                elif "." not in ref_num and ref_num.isdigit():
+                    lookup_keys = [ref_num, f"{ref_num}.0"]
+                else:
+                    lookup_keys = [ref_num]
                 resolved_eid: str | None = None
                 for lk in lookup_keys:
                     if lk in eid_by_native:
@@ -246,10 +255,9 @@ def build_document_annotations(tree_payload: dict[str, Any]) -> dict[str, Any]:
                 )
 
         # 3. Defined-term use annotations (within-document)
-        if node_type != "definition" and defined_terms:
+        if node_type != "definition" and compiled_defined_terms:
             for field_name, f_text in candidate_fields:
-                for norm_term, def_eid in defined_terms:
-                    term_re = re.compile(rf"\b{re.escape(norm_term)}\b", re.IGNORECASE)
+                for _norm_term, def_eid, term_re in compiled_defined_terms:
                     for m_term in term_re.finditer(f_text):
                         s, e = m_term.start(), m_term.end()
                         seq += 1

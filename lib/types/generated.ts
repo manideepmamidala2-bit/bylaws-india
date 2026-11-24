@@ -119,6 +119,10 @@ export interface DocumentConfig {
     "statute" | "state_rules" | "planning" | "municipal" | "orders" | "overlay" | "national_reference" | "boundary";
   legal_status: "in_force" | "draft" | "superseded" | "withdrawn" | "status_unknown";
   acquisition_status?: "acquired" | "pending" | "not_found" | "reference_only";
+  /**
+   * Whether this document is structured into a clause tree in the current release.
+   */
+  structured?: boolean | null;
   retrieval?: RetrievalRecord | null;
   status_evidence: StatusEvidenceConfig;
   notification_number?: string | null;

@@ -116,6 +116,7 @@ export type ClauseNode = Omit<GeneratedClauseNode, "legal_status" | "citations">
   citations?: ClauseCitation[];
   source_url?: string;
   official_url?: string | null;
+  archive_url?: string | null;
   doc_id?: string;
   doc_title?: string;
   doc_layer?: DocumentMetadata["layer"];
@@ -626,6 +627,7 @@ export async function fetchJurisdictionDataset(
         doc_layer: docMeta?.layer,
         source_url: pdfUrl,
         official_url: docMeta?.official_url ?? null,
+        archive_url: docMeta?.retrieval?.archive_url ?? null,
       });
     }
   }

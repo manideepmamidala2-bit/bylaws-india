@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 import shutil
 import subprocess
 import tempfile
@@ -13,6 +14,72 @@ import click
 import pypdfium2 as pdfium
 
 from bylaws.parsers.base import ParsedBlock, ParsedTable, ParserAdapter, ParseResult
+
+HANGING_CLAUSE_CELL_RE = re.compile(
+    r"^(?:\d+\.\d+(?:\.\d+)*|\d+\.\d+\(\d+\.\d+\)|[a-z]\)|\d+\))$"
+)
+TABLE_HEADER_KEYWORDS: tuple[str, ...] = (
+    "sl.",
+    "sl no",
+    "plot",
+    "site",
+    "depth",
+    "width",
+    "height",
+    "standard",
+    "electrical",
+    "building",
+    "storeys",
+    "occupancy",
+    "type of",
+    "description",
+    "road",
+    "balance",
+    "list of",
+    "regulations for",
+    "residential",
+    "commercial",
+    "industrial",
+    "transportation",
+    "urban amenities",
+)
+
+
+def _is_hanging_indent_clause_table(
+    headers: list[str], rows: list[list[str]]
+) -> bool:
+    """Return True if a Docling grid is a 2/3-column hanging-indent clause/definition list or TOC grid rather than a data table."""
+    if not headers:
+        return False
+    all_rows = [headers, *rows]
+    # Check for Table of Contents leader / page-number grid (where last non-empty cell in each row ends with a page number and rows have TOC leaders/headings)
+    non_empty_rows = [[c.strip() for c in r if c.strip()] for r in all_rows if any(c.strip() for c in r)]
+    if non_empty_rows and all(len(r) >= 2 and bool(re.search(r"\d+$", r[-1])) for r in non_empty_rows):
+        has_toc_dots_or_headings = any(
+            "...." in " ".join(r)
+            or "list of tables" in r[0].lower()
+            or "regulations for" in r[0].lower()
+            or "appendix" in r[0].lower()
+            for r in non_empty_rows
+        )
+        if has_toc_dots_or_headings:
+            return True
+
+    clause_num_rows = sum(
+        1
+        for r in all_rows
+        if r
+        and r[0].strip()
+        and HANGING_CLAUSE_CELL_RE.match(r[0].strip().split()[0])
+    )
+    max_cell_len = max((len(c) for r in all_rows for c in r), default=0)
+    first_hdr = headers[0].strip()
+    has_table_header_kw = any(
+        any(kw in c.lower() for kw in TABLE_HEADER_KEYWORDS) for c in headers
+    )
+    if has_table_header_kw and not HANGING_CLAUSE_CELL_RE.match(first_hdr):
+        return False
+    return clause_num_rows >= 2 and max_cell_len > 65
 
 
 def _resolve_adapter_version(pkg_name: str) -> str:
@@ -81,7 +148,7 @@ class DoclingLayoutAdapter(ParserAdapter):
                 page = pdf_doc[idx]
                 page_sizes[idx + 1] = page.get_size()
                 tp = page.get_textpage()
-                total_chars += len(tp.get_text_range().strip())
+                total_chars += len(tp.get_text_bounded().strip())
                 tp.close()
                 page.close()
             is_scanned = total_chars == 0
@@ -126,10 +193,17 @@ class DoclingLayoutAdapter(ParserAdapter):
             )
 
         tables: list[ParsedTable] = []
-        for tbl_idx, tbl_item in enumerate(getattr(dl_doc, "tables", []) or [], start=1):
+        tbl_seq = 0
+        for tbl_item in getattr(dl_doc, "tables", []) or []:
             prov_list = getattr(tbl_item, "prov", None) or []
             page_no = (
                 int(getattr(prov_list[0], "page_no", 1) or 1) if prov_list else 1
+            )
+            pw, ph = page_sizes.get(page_no, (0.0, 0.0))
+            tbl_bbox = (
+                _normalize_docling_bbox(getattr(prov_list[0], "bbox", None), pw, ph)
+                if prov_list
+                else None
             )
             headers: list[str] = []
             rows: list[list[str]] = []
@@ -142,15 +216,55 @@ class DoclingLayoutAdapter(ParserAdapter):
                 ]
                 headers = matrix[0]
                 rows = matrix[1:]
+
+            if _is_hanging_indent_clause_table(headers, rows):
+                all_rows = [headers, *rows]
+                total_r = max(1, len(all_rows))
+                base_x0 = tbl_bbox[0] if tbl_bbox else 0.14
+                base_y0 = tbl_bbox[1] if tbl_bbox else 0.12
+                base_x1 = tbl_bbox[2] if tbl_bbox else 0.86
+                base_y1 = tbl_bbox[3] if tbl_bbox else 0.88
+                span_y = max(0.02, base_y1 - base_y0)
+                for r_idx, row_cells in enumerate(all_rows):
+                    dedup_cells: list[str] = []
+                    for cell_str in row_cells:
+                        cleaned_cell = cell_str.strip()
+                        if cleaned_cell and (
+                            not dedup_cells or dedup_cells[-1] != cleaned_cell
+                        ):
+                            dedup_cells.append(cleaned_cell)
+                    joined_line = " ".join(dedup_cells).strip()
+                    if not joined_line:
+                        continue
+                    ry0 = _clamp(base_y0 + (span_y * r_idx / total_r))
+                    ry1 = _clamp(base_y0 + (span_y * (r_idx + 1) / total_r))
+                    blocks.append(
+                        ParsedBlock(
+                            text=joined_line,
+                            page=page_no,
+                            bbox=[base_x0, ry0, base_x1, max(ry0, ry1)],
+                        )
+                    )
+                continue
+
+            tbl_seq += 1
             tables.append(
                 ParsedTable(
-                    table_id=f"p{page_no}_t{tbl_idx}",
+                    table_id=f"p{page_no}_t{tbl_seq}",
                     caption=None,
                     headers=headers,
                     rows=rows,
                     page=page_no,
                 )
             )
+
+        blocks.sort(
+            key=lambda b: (
+                b.page,
+                b.bbox[1] if b.bbox is not None else 0.5,
+                b.bbox[0] if b.bbox is not None else 0.0,
+            )
+        )
 
         exported_md = dl_doc.export_to_markdown().strip()
         return ParseResult(
@@ -193,7 +307,7 @@ class TesseractOcrAdapter(ParserAdapter):
                     page_num = idx + 1
                     page = doc[idx]
                     tp = page.get_textpage()
-                    total_digital_chars += len(tp.get_text_range().strip())
+                    total_digital_chars += len(tp.get_text_bounded().strip())
                     tp.close()
 
                     bitmap = page.render(scale=300 / 72)
