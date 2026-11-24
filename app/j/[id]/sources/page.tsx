@@ -23,7 +23,7 @@ export default async function SourcesPage({ params }: SourcesPageProps) {
   const { jurisdiction, release, documents, clauseTrees, draftClauseTrees } =
     dataset;
 
-  if (!release) {
+  if (!release && documents.length === 0) {
     return (
       <div className="min-h-screen bg-[#f5f3ed] text-[#080909]">
         <TopNav
@@ -66,8 +66,8 @@ export default async function SourcesPage({ params }: SourcesPageProps) {
         jurisdictionId={jurisdiction.id}
         jurisdictionName={jurisdiction.name}
         active="sources"
-        releaseVersion={release.version}
-        licence={release.licence}
+        releaseVersion={release?.version}
+        licence={release?.licence}
       />
 
       <main className="mx-auto max-w-6xl px-6 py-8">
@@ -86,6 +86,23 @@ export default async function SourcesPage({ params }: SourcesPageProps) {
             links to source documents.
           </p>
         </header>
+
+        {!release && (
+          <section
+            aria-label="Structuring status"
+            className="mb-6 border border-[#080909] bg-[#efeee8] p-4"
+          >
+            <div className="dg-mono text-[10.5px] text-[#080909]">
+              Pre-Release Source Register · Not yet structured
+            </div>
+            <p className="dg-serif mt-1 text-sm text-[#171917]">
+              Core regulatory documents for {jurisdiction.name} have been
+              acquired and verified with SHA-256 checksums and archival
+              provenance. Clause structuring and consolidation are not yet
+              published.
+            </p>
+          </section>
+        )}
 
         <SourcesFilterClient
           jurisdictionId={jurisdiction.id}

@@ -294,7 +294,19 @@ export async function fetchDocuments(
 ): Promise<DocumentMetadata[]> {
   const manifest = await fetchManifest();
   const found = findJurisdictionRelease(manifest, jurisdictionId, version);
-  if (!found || !found.release || !found.release.files) {
+  if (!found) {
+    return [];
+  }
+  if (!found.release || !found.release.files) {
+    if (found.jurisdiction.register_documents) {
+      try {
+        return await readPublishedJson<DocumentMetadata[]>(
+          found.jurisdiction.register_documents
+        );
+      } catch {
+        return [];
+      }
+    }
     return [];
   }
   return readPublishedJson<DocumentMetadata[]>(found.release.files.documents);
@@ -489,10 +501,20 @@ export async function fetchJurisdictionDataset(
   }
   const { jurisdiction, release } = found;
   if (!release || !release.files || !release.declarations) {
+    let registerDocs: DocumentMetadata[] = [];
+    if (jurisdiction.register_documents) {
+      try {
+        registerDocs = await readPublishedJson<DocumentMetadata[]>(
+          jurisdiction.register_documents
+        );
+      } catch {
+        registerDocs = [];
+      }
+    }
     return {
       jurisdiction,
       release: null,
-      documents: [],
+      documents: registerDocs,
       clauseTrees: [],
       draftClauseTrees: [],
       annotationsByDocId: {},

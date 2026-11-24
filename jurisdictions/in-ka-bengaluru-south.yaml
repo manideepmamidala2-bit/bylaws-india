@@ -30,239 +30,524 @@ parents: []
 not_modelled:
   - National Building Code of India 2016 (copyrighted by BIS; listed as reference only)
   - Airports Authority of India NOCAS colour-coded zoning map (external aviation portal; reference only)
-unread_documents: []
-unobtainable_documents: []
+unread_documents:
+  - title: "Revising the amendments in the regulations in BBMP revised Mahayojane 2015 (Kannada Compilation)"
+    source_url: "https://web.archive.org/web/20250325225145id_/https://site.bbmp.gov.in/PDF/townplanning/KM_266_160102035827-pages-deleted_29102024.pdf"
+    reason: "Published in Kannada only (languages: ['kn']); per the English-only language policy in 00-overview.md, it is recorded in the register with full provenance and declared as a language gap rather than structured."
+unobtainable_documents:
+  - id: rmp2015-zr-amend-2025-07
+    title: "Gazette Notification (July 2025) - Bengaluru Master Plan 2015 Zoning Regulations Amendments"
+    searched_sources:
+      - "https://data.opencity.in/dataset/31a482fe-4ffd-4929-a61d-2fdcca90be91/resource/3f2685b8-5e27-44e5-9222-8f6dbff9445f/download/d7b00660-a3bc-49cf-b35a-3d70283ace0a.pdf"
+      - "https://web.archive.org/cdx/search/cdx?url=data.opencity.in/*"
+      - "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx"
+      - "https://erajyapatra.karnataka.gov.in/"
+    reason: "Listed on the archived OpenCity dataset page for Bengaluru BDA RMP 2015 Zoning Regulation Amendments; direct PDF download returns HTTP 403 (Cloudflare Turnstile challenge) and no Wayback Machine snapshot exists."
+  - id: bscc-bbl-amend-2026
+    title: "Bengaluru South City Corporation Building (Amendment) Bye-laws 2026 (04-03-2026)"
+    searched_sources:
+      - "https://data.opencity.in/dataset/bbmp-building-byelaws/resource/d37c7718-8c24-4da7-86a0-d19b974fb8a9/download/bscc-10125.pdf"
+      - "https://bengalurusouth.karnataka.gov.in/"
+      - "https://gba.karnataka.gov.in/"
+      - "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx"
+      - "https://web.archive.org/cdx/search/cdx?url=data.opencity.in/*"
+    reason: "Draft notification dated 04-03-2026 inviting comments within 30 days; direct PDF download on data.opencity.in returns HTTP 403 (Cloudflare Turnstile challenge) and no Wayback Machine snapshot or official mirror copy exists."
 contested_status: []
 documents:
   - id: bbl-2003
-    title: Bangalore Mahanagara Palike Building Bye-laws 2003
-    issuing_authority: Bruhat Bengaluru Mahanagara Palike (BBMP) / Urban Development Department, Government of Karnataka
+    title: "BANGALORE MAHANAGARA PALIKE BUILDING BYE-LAWS 2003"
+    issuing_authority: "Bangalore Mahanagara Palike / Government of Karnataka"
     doc_type: bye_laws
     layer: municipal
     role: base
     legal_status: in_force
-    acquisition_status: pending
+    acquisition_status: acquired
+    notification_number: "Order No.UDD/223/MNU/2001"
+    gazette_reference: "Published in pursuance of Section 428 Of the Karnataka Municipal Corporation Act 1976"
+    notified_date: "2004-02-21"
+    effective_from: "2004-06-05"
     status_evidence:
-      url: https://site.bbmp.gov.in/PDF/Bangalore-Building-Byelaws-%202003.pdf
-      description: Pending verification from fetched source document in PR 04 (R17).
-    licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public municipal bye-laws)
+      url: "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx"
+      quoted_line: "BANGALORE MAHANAGARA PALIKE BUILDING BYE-LAWS 2003 (Approved by the Government in their Order No.UDD/223/MNU/2001, Dated 21-02-2004 – Published in pursuance of Section 428 Of the Karnataka Municipal Corporation Act 1976) ... 1.3 These Bye-laws shall come into operation from 5th of June 2004."
+      description: "Listed on the active GBA/BBMP Building Plan Approval System (bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx) under 'Bye laws and Zoning Regulations' and continued in force under Section 375(2)(b) of the BBMP Act, 2020 and Section 370 of the Greater Bengaluru Governance Act, 2024."
+    licence_or_terms: "Section 52(1)(q) Indian Copyright Act, 1957 (public municipal bye-laws)"
     text_rights:
       mode: full_text
-      reason: Public municipal building bye-laws notified by the Government of Karnataka
+      reason: "Public municipal building bye-laws notified under Section 428 of the Karnataka Municipal Corporations Act, 1976"
     languages:
       - en
-    official_url: https://site.bbmp.gov.in/PDF/Bangalore-Building-Byelaws-%202003.pdf
+    official_url: "https://site.bbmp.gov.in/PDF/Bangalore-Building-Byelaws-%202003.pdf"
     mirror_urls:
-      - https://data.opencity.in/dataset/bbmp-building-bye-laws-2003
-    source_url: https://site.bbmp.gov.in/PDF/Bangalore-Building-Byelaws-%202003.pdf
+      - "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/Bangalore-Building-Byelaws-%202003.pdf"
+      - "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/BBMP-BuildingByeLaws2003.pdf"
+    source_url: "https://web.archive.org/web/20250417153022id_/https://site.bbmp.gov.in/PDF/Bangalore-Building-Byelaws-%202003.pdf"
+    retrieval:
+      fetched_at: "2026-11-23T00:00:00Z"
+      requested_url: "https://web.archive.org/web/20250417153022id_/https://site.bbmp.gov.in/PDF/Bangalore-Building-Byelaws-%202003.pdf"
+      final_url: "https://web.archive.org/web/20250417153022id_/https://site.bbmp.gov.in/PDF/Bangalore-Building-Byelaws-%202003.pdf"
+      http_status: 200
+      content_type: "application/pdf"
+      content_length: 370410
+      response_headers:
+        etag: null
+        last_modified: null
+        server: "nginx"
+        date: "Tue, 24 Nov 2026 09:46:20 GMT"
+      sha256: "b819e808ca7083ebf93362d9b2d30e73d90450f2949c8ebad20d488785aac95e"
+      archive_url: "https://web.archive.org/web/20250417153022id_/https://site.bbmp.gov.in/PDF/Bangalore-Building-Byelaws-%202003.pdf"
+      archive_failure_reason: null
+      fetched_by: "agent"
 
-  - id: bscc-bbl-amend-2026
-    title: Bengaluru South City Corporation Building (Amendment) Bye-laws, 2026
-    issuing_authority: Greater Bengaluru Authority / Bengaluru South City Corporation
-    doc_type: amendment
-    layer: municipal
-    role: amendment
+  - id: ka-model-bbl-2017
+    title: "Karnataka Municipalities Model Building Bye-Laws, 2017"
+    issuing_authority: "URBAN DEVELOPMENT SECRETARIAT, Government of Karnataka"
+    doc_type: bye_laws
+    layer: state_rules
+    role: reference
     legal_status: in_force
-    acquisition_status: pending
+    acquisition_status: acquired
+    notification_number: "No. UDD 14 TTP 2017 (P-4)"
+    gazette_reference: "Karnataka Extra-Ordinary Gazette Part-IVA"
+    notified_date: "2017-10-28"
+    effective_from: "2017-10-28"
     status_evidence:
-      url: https://data.opencity.in/dataset/bengaluru-city-corporations-bye-laws-2026
-      description: Pending verification from fetched source document in PR 04 (R17).
-    licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public municipal amendment notification)
+      url: "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx"
+      quoted_line: "Now, therefore, in exercise of the powers conferred by section 325 of the Karnataka Municipalities Act, 1964 (Karnataka Act 22 of 1964) the Government of Karnataka hereby makes the following building bye-laws namely: 1. Title, commencement and application.- (1) These bye-laws may be called the Karnataka Municipalities Model Building Bye-laws, 2017."
+      description: "Published on the active GBA/BBMP Building Plan Approval System (bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx) under 'Bye laws and Zoning Regulations' as the state model building bye-laws reference."
+    licence_or_terms: "Section 52(1)(q) Indian Copyright Act, 1957 (public state gazette notification)"
     text_rights:
       mode: full_text
-      reason: Public municipal bye-law amendment notification
+      reason: "Public state model building bye-laws published in the Karnataka Extraordinary Gazette"
     languages:
       - en
-    amends:
-      - bbl-2003
-    official_url: https://gba.karnataka.gov.in/
+    official_url: "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/Model%20Building%20Byelaws%20Notification%20No.%20UDD%2014%20TTP%202017%20(P-4)%20Bengaluru,%20Dated%2028-10-2017%20.pdf"
     mirror_urls:
-      - https://data.opencity.in/dataset/bengaluru-city-corporations-bye-laws-2026
-    source_url: https://data.opencity.in/dataset/bengaluru-city-corporations-bye-laws-2026
-
-  - id: bscc-bbl-amend-2026-draft
-    title: Draft Bengaluru South City Corporation Building (Amendment) Bye-laws, 2026
-    issuing_authority: Greater Bengaluru Authority / Bengaluru South City Corporation
-    doc_type: amendment
-    layer: municipal
-    role: amendment
-    legal_status: draft
-    acquisition_status: pending
-    status_evidence:
-      url: https://data.opencity.in/dataset/bengaluru-city-corporations-bye-laws-2026
-      description: Pending verification from fetched source document in PR 04 (R17).
-    licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public draft notification)
-    text_rights:
-      mode: full_text
-      reason: Public draft notification
-    languages:
-      - en
-    amends:
-      - bbl-2003
-    official_url: https://gba.karnataka.gov.in/
-    mirror_urls:
-      - https://data.opencity.in/dataset/bengaluru-city-corporations-bye-laws-2026
-    source_url: https://data.opencity.in/dataset/bengaluru-city-corporations-bye-laws-2026
+      - "http://web.archive.org/web/20240923114305/https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/Model%20Building%20Byelaws%20Notification%20No.%20UDD%2014%20TTP%202017%20(P-4)%20Bengaluru,%20Dated%2028-10-2017%20.pdf"
+    source_url: "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/Model%20Building%20Byelaws%20Notification%20No.%20UDD%2014%20TTP%202017%20(P-4)%20Bengaluru,%20Dated%2028-10-2017%20.pdf"
+    retrieval:
+      fetched_at: "2026-11-23T00:00:00Z"
+      requested_url: "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/Model%20Building%20Byelaws%20Notification%20No.%20UDD%2014%20TTP%202017%20(P-4)%20Bengaluru,%20Dated%2028-10-2017%20.pdf"
+      final_url: "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/Model%20Building%20Byelaws%20Notification%20No.%20UDD%2014%20TTP%202017%20(P-4)%20Bengaluru,%20Dated%2028-10-2017%20.pdf"
+      http_status: 200
+      content_type: "application/pdf"
+      content_length: 2640281
+      response_headers:
+        etag: "\"1fb4ecd964dad51:0\""
+        last_modified: "Mon, 03 Feb 2020 07:37:56 GMT"
+        server: null
+        date: "Tue, 24 Nov 2026 09:46:23 GMT"
+      sha256: "17ec9bac9bfb15d5d5ee5e48da5a67fa9967a93cf2994ccac18b93d96e80a9ed"
+      archive_url: "http://web.archive.org/web/20240923114305/https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/Model%20Building%20Byelaws%20Notification%20No.%20UDD%2014%20TTP%202017%20(P-4)%20Bengaluru,%20Dated%2028-10-2017%20.pdf"
+      archive_failure_reason: null
+      fetched_by: "agent"
 
   - id: rmp2015-zr
-    title: Zoning Regulations — Revised Master Plan 2015 (Bengaluru Local Planning Area)
-    issuing_authority: Bangalore Development Authority (BDA) / Urban Development Department, Government of Karnataka
+    title: "Revised Master Plan 2015 BANGALORE 2007 Volume – III ZONING OF LANDUSE AND REGULATIONS"
+    issuing_authority: "BANGALORE DEVELOPMENT AUTHORITY, BANGALORE"
     doc_type: regulations
     layer: planning
     role: base
     legal_status: in_force
-    acquisition_status: pending
+    acquisition_status: acquired
+    notification_number: "G.O. No UDD 540 BEM AA SE 2004"
+    gazette_reference: "Approved by Govt vide G.O. No UDD 540 BEM AA SE 2004, Dated: 22 – 06 - 2007 as part of the Revised Master Plan 2015"
+    notified_date: "2007-06-22"
+    effective_from: "2007-06-25"
     status_evidence:
-      url: https://upload.indiacode.nic.in/showfile?actid=AC_KA_71_402_00001_11_1552283484255&filename=zoning_regulations_rmp2015f.pdf&type=rule
-      description: Pending verification from fetched source document in PR 04 (R17).
-    licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public statutory master plan zoning regulations)
+      url: "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx"
+      quoted_line: "Revised Master Plan 2015 BANGALORE 2007 Volume – III ZONING OF LANDUSE AND REGULATIONS (Approved by Govt vide G.O. No UDD 540 BEM AA SE 2004, Dated: 22 – 06 - 2007 as part of the Revised Master Plan 2015) BANGALORE DEVELOPMENT AUTHORITY, BANGALORE"
+      description: "Listed on both the live BDA portal (bdakarnataka.in Town Planning section) and the active GBA/BBMP Building Plan Approval System (bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx) as the operative Master Plan Zoning Regulations for Bengaluru."
+    licence_or_terms: "Section 52(1)(q) Indian Copyright Act, 1957 (public statutory master plan zoning regulations)"
     text_rights:
       mode: full_text
-      reason: Public master plan zoning regulations published on India Code
+      reason: "Public statutory master plan zoning regulations approved under the Karnataka Town and Country Planning Act, 1961"
     languages:
       - en
-    official_url: https://upload.indiacode.nic.in/showfile?actid=AC_KA_71_402_00001_11_1552283484255&filename=zoning_regulations_rmp2015f.pdf&type=rule
+    official_url: "http://site.bbmp.gov.in/PDF/townplanning/Zoning_Regulations_RMP2015f%20(1).pdf"
     mirror_urls:
-      - https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/DocumentCloud/bda-zoning-regulations-rmp2015.pdf
-    source_url: https://upload.indiacode.nic.in/showfile?actid=AC_KA_71_402_00001_11_1552283484255&filename=zoning_regulations_rmp2015f.pdf&type=rule
+      - "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/Zoning_Regulations_RMP2015f%20(2).pdf"
+      - "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/DocumentCloud/bda-zoning-regulations-rmp2015.pdf"
+    source_url: "https://web.archive.org/web/20220721123900id_/http://site.bbmp.gov.in/PDF/townplanning/Zoning_Regulations_RMP2015f%20(1).pdf"
+    retrieval:
+      fetched_at: "2026-11-23T00:00:00Z"
+      requested_url: "https://web.archive.org/web/20220721123900id_/http://site.bbmp.gov.in/PDF/townplanning/Zoning_Regulations_RMP2015f%20(1).pdf"
+      final_url: "https://web.archive.org/web/20220721123900id_/http://site.bbmp.gov.in/PDF/townplanning/Zoning_Regulations_RMP2015f%20(1).pdf"
+      http_status: 200
+      content_type: "application/pdf"
+      content_length: 329801
+      response_headers:
+        etag: null
+        last_modified: null
+        server: "nginx"
+        date: "Tue, 24 Nov 2026 09:46:27 GMT"
+      sha256: "db0d125f4da8abcb2e80319f6fd324baa59f63a3037dd0c687f18150a20eafe3"
+      archive_url: "https://web.archive.org/web/20220721123900id_/http://site.bbmp.gov.in/PDF/townplanning/Zoning_Regulations_RMP2015f%20(1).pdf"
+      archive_failure_reason: null
+      fetched_by: "agent"
 
-  - id: rmp2015-zr-amend-2014
-    title: Revised Master Plan 2015 Zoning (Amendment) Regulations, 2014
-    issuing_authority: Urban Development Department, Government of Karnataka
-    doc_type: amendment
+  - id: rmp2015-zr-amend-2009-03
+    title: "Notification No.UDD 93 MNJ 2008 dated 2-3-2009 (4.10 Traffic and Transportation (T&T) Zone Uses Amendment)"
+    issuing_authority: "GOVERNMENT OF KARNATAKA, Urban Development Department"
+    doc_type: notification
     layer: planning
     role: amendment
     legal_status: in_force
-    acquisition_status: pending
-    status_evidence:
-      url: https://site.bbmp.gov.in/townplanning.html
-      description: Pending verification from fetched source document in PR 04 (R17).
-    licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public gazette notification)
-    text_rights:
-      mode: full_text
-      reason: Public gazette notification
-    languages:
-      - en
+    acquisition_status: acquired
+    notification_number: "No.UDD 93 MNJ 2008"
+    gazette_reference: "Karnataka Extra-Ordinary Gazette Notification under Section 13-E of the Karnataka Town & Country Planning Act, 1961"
+    notified_date: "2009-03-02"
+    effective_from: "2009-03-02"
     amends:
       - rmp2015-zr
-    official_url: https://site.bbmp.gov.in/townplanning.html
-    mirror_urls: []
-    source_url: https://site.bbmp.gov.in/townplanning.html
+    status_evidence:
+      url: "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx"
+      quoted_line: "GOVERNMENT OF KARNATAKA Karnataka Government Secretariat, Vikasa Soudha, 4th Floor, Bangalore, dated. 2-3-2009 No.UDD 93 MNJ 2008 NOTIFICATION ... 4.10 TRAFFIC AND TRANSPORTATION (T&T)"
+      description: "Listed on the active GBA/BBMP Building Plan Approval System (bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx) under 'Bye laws and Zoning Regulations'."
+    licence_or_terms: "Section 52(1)(q) Indian Copyright Act, 1957 (public gazette notification)"
+    text_rights:
+      mode: full_text
+      reason: "Public statutory zoning amendment notification"
+    languages:
+      - en
+    official_url: "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/T%20&%20T%20Zone%20Uses%20Amendment.pdf"
+    mirror_urls:
+      - "https://web.archive.org/web/20220831190609id_/http://site.bbmp.gov.in/PDF/townplanning/T%20&%20T%20Zone%20Uses%20Amendment2.3.09.pdf"
+    source_url: "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/T%20&%20T%20Zone%20Uses%20Amendment.pdf"
+    retrieval:
+      fetched_at: "2026-11-23T00:00:00Z"
+      requested_url: "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/T%20&%20T%20Zone%20Uses%20Amendment.pdf"
+      final_url: "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/T%20&%20T%20Zone%20Uses%20Amendment.pdf"
+      http_status: 200
+      content_type: "application/pdf"
+      content_length: 1458644
+      response_headers:
+        etag: "\"d04abd964dad51:0\""
+        last_modified: "Mon, 03 Feb 2020 07:37:56 GMT"
+        server: null
+        date: "Tue, 24 Nov 2026 09:46:28 GMT"
+      sha256: "a4f2be5a66485686771a5ace886b252aca0b66022ad79a04db73e475862419e3"
+      archive_url: "https://web.archive.org/web/20261124094633/https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/T%20&%20T%20Zone%20Uses%20Amendment.pdf"
+      archive_failure_reason: null
+      fetched_by: "agent"
 
   - id: rmp2015-zr-amend-2015-03
-    title: Notification No. UDD 105 MNJ 2008 dated 20-03-2015 (Zoning Regulations Amendment)
-    issuing_authority: Urban Development Department, Government of Karnataka
+    title: "URBAN DEVELOPMENT SECRETARIAT NOTIFICATION No: UDD 105 MNJ 2008, Bangalore, Dated:20/03/2015"
+    issuing_authority: "URBAN DEVELOPMENT SECRETARIAT, Government of Karnataka"
     doc_type: notification
     layer: planning
     role: amendment
     legal_status: in_force
-    acquisition_status: pending
-    status_evidence:
-      url: https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx
-      description: Pending verification from fetched source document in PR 04 (R17).
-    licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public gazette notification)
-    text_rights:
-      mode: full_text
-      reason: Public gazette notification
-    languages:
-      - en
+    acquisition_status: acquired
+    notification_number: "No: UDD 105 MNJ 2008"
+    gazette_reference: "Part - II Bengaluru, Monday, March 23, 2015 (Chaithra 02, Shaka Varsha 1937) No. 230"
+    notified_date: "2015-03-20"
+    effective_from: "2015-03-23"
     amends:
       - rmp2015-zr
-    official_url: https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx
-    mirror_urls: []
-    source_url: https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx
-
-  - id: rmp2015-zr-amend-2018-impact
-    title: Impact Zone Premium FAR Notification No. UDD 112 MNJ 2015 dated 29-09-2018
-    issuing_authority: Urban Development Department, Government of Karnataka
-    doc_type: notification
-    layer: planning
-    role: amendment
-    legal_status: in_force
-    acquisition_status: pending
     status_evidence:
-      url: https://site.bbmp.gov.in/PDF/townplanning/ImpactZone%20Premium%20FAR%20Notifi29.09.18.pdf
-      description: Pending verification from fetched source document in PR 04 (R17).
-    licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public gazette notification)
+      url: "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx"
+      quoted_line: "Part - II Bengaluru, Monday, March 23, 2015 (Chaithra 02, Shaka Varsha 1937) No. 230 URBAN DEVELOPMENT SECRETARIAT NOTIFICATION No: UDD 105 MNJ 2008, Bangalore, Dated:20/03/2015 ... As per the affidavit filed by the BDA, the zoning regulations of Bengaluru in the Revised Master Plan 2015 and amendments, regulations 2014 are amended as below:"
+      description: "Listed on the active GBA/BBMP Building Plan Approval System (bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx) under 'Bye laws and Zoning Regulations'."
+    licence_or_terms: "Section 52(1)(q) Indian Copyright Act, 1957 (public gazette notification)"
     text_rights:
       mode: full_text
-      reason: Public gazette notification
+      reason: "Public gazette notification amending RMP 2015 Zoning Regulations"
     languages:
       - en
-    amends:
-      - rmp2015-zr
-    official_url: https://site.bbmp.gov.in/PDF/townplanning/ImpactZone%20Premium%20FAR%20Notifi29.09.18.pdf
-    mirror_urls: []
-    source_url: https://site.bbmp.gov.in/PDF/townplanning/ImpactZone%20Premium%20FAR%20Notifi29.09.18.pdf
+    official_url: "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/Zoning%20Regulations%202015%20Amendment%20Notification%20No.%20UDD%20105%20MNJ%202008,%20Bangalore%20Dated%2020-03-2015.pdf"
+    mirror_urls:
+      - "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-Zoning_Regulations-Amendments-20-03-2015.pdf"
+    source_url: "https://web.archive.org/web/20220831190613id_/http://site.bbmp.gov.in/PDF/townplanning/Amendments%20ZR%20Commercial%20uses%20in%20Residential%20Zone%20dated%2020-03-2015.pdf"
+    retrieval:
+      fetched_at: "2026-11-23T00:00:00Z"
+      requested_url: "https://web.archive.org/web/20220831190613id_/http://site.bbmp.gov.in/PDF/townplanning/Amendments%20ZR%20Commercial%20uses%20in%20Residential%20Zone%20dated%2020-03-2015.pdf"
+      final_url: "https://web.archive.org/web/20220831190613id_/http://site.bbmp.gov.in/PDF/townplanning/Amendments%20ZR%20Commercial%20uses%20in%20Residential%20Zone%20dated%2020-03-2015.pdf"
+      http_status: 200
+      content_type: "application/pdf"
+      content_length: 155049
+      response_headers:
+        etag: null
+        last_modified: null
+        server: "nginx"
+        date: "Tue, 24 Nov 2026 09:46:41 GMT"
+      sha256: "620acf259f2cbf1911c7cc5badba27634812751b0ff41d4d4b46291cf335869b"
+      archive_url: "https://web.archive.org/web/20220831190613id_/http://site.bbmp.gov.in/PDF/townplanning/Amendments%20ZR%20Commercial%20uses%20in%20Residential%20Zone%20dated%2020-03-2015.pdf"
+      archive_failure_reason: null
+      fetched_by: "agent"
 
-  - id: rmp2015-zr-premium-far-2025-02
-    title: Premium FAR Gazette Notification No. UDD 78 MNJ 2024(E) dated 21-02-2025
-    issuing_authority: Urban Development Department, Government of Karnataka
-    doc_type: notification
-    layer: planning
-    role: amendment
-    legal_status: in_force
-    acquisition_status: pending
-    status_evidence:
-      url: https://data.opencity.in/dataset/3877072d-adef-4923-890d-1de96e72faeb/resource/886578b2-3419-40f0-9f51-21b78fefbac7/download/premium-far-gazette.pdf
-      description: Pending verification from fetched source document in PR 04 (R17).
-    licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public gazette notification)
-    text_rights:
-      mode: full_text
-      reason: Public gazette notification
-    languages:
-      - en
-    amends:
-      - rmp2015-zr
-    official_url: https://data.opencity.in/dataset/3877072d-adef-4923-890d-1de96e72faeb/resource/886578b2-3419-40f0-9f51-21b78fefbac7/download/premium-far-gazette.pdf
-    mirror_urls: []
-    source_url: https://data.opencity.in/dataset/3877072d-adef-4923-890d-1de96e72faeb/resource/886578b2-3419-40f0-9f51-21b78fefbac7/download/premium-far-gazette.pdf
-
-  - id: rmp2015-zr-amend-2025-07
-    title: Zonal Regulations of the RMP-2015 of Local Planning Area of Bengaluru (Amendment) Regulations, 2025
-    issuing_authority: Urban Development Department, Government of Karnataka
+  - id: rmp2015-zr-amend-2018-09
+    title: "Zoning Regulations of Bengaluru of the Revised Master Plan-2015 (Amendment) Regulations 2018"
+    issuing_authority: "URBAN DEVELOPMENT SECRETARIAT, Government of Karnataka"
     doc_type: amendment
     layer: planning
     role: amendment
     legal_status: in_force
-    acquisition_status: pending
-    status_evidence:
-      url: https://data.opencity.in/dataset/zonal-regulations-of-the-rmp-2015-of-local-planning-area-of-bengaluru-amendment-regulations-2025
-      description: Pending verification from fetched source document in PR 04 (R17).
-    licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public gazette notification)
-    text_rights:
-      mode: full_text
-      reason: Public gazette notification
-    languages:
-      - en
+    acquisition_status: acquired
+    notification_number: "NO. UDD 112 MNJ 2015"
+    gazette_reference: "Part–IVA Bengaluru, Saturday, September 29, 2018 (Ashwayuja 7, Shaka Varsha 1940) No. 1376"
+    notified_date: "2018-09-29"
+    effective_from: "2018-09-29"
     amends:
       - rmp2015-zr
-    official_url: https://data.opencity.in/dataset/zonal-regulations-of-the-rmp-2015-of-local-planning-area-of-bengaluru-amendment-regulations-2025
+    status_evidence:
+      url: "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx"
+      quoted_line: "NO. UDD 112 MNJ 2015, Bengaluru, Dated : 29.09.2018 ... 1. Title and commencement.- (1) These regulations may be called the Zoning Regulations of Bengaluru of the Revised Master Plan-2015 (Amendment) Regulations 2018. (2) They shall come into force from the date of their publication in the official Gazette."
+      description: "Listed on the active GBA/BBMP Building Plan Approval System (bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx) under 'Metro FAR / Impact Zone Premium FAR Notifi.pdf'."
+    licence_or_terms: "Section 52(1)(q) Indian Copyright Act, 1957 (public gazette notification)"
+    text_rights:
+      mode: full_text
+      reason: "Public gazette notification amending RMP 2015 Zoning Regulations"
+    languages:
+      - en
+    official_url: "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Metro%20FAR/Impact%20Zone%20Premium%20FAR%20Notifi.pdf"
+    mirror_urls:
+      - "http://site.bbmp.gov.in/PDF/townplanning/ImpactZone%20Premium%20FAR%20Notifi29.09.18.pdf"
+    source_url: "https://web.archive.org/web/20220831190616id_/http://site.bbmp.gov.in/PDF/townplanning/ImpactZone%20Premium%20FAR%20Notifi29.09.18.pdf"
+    retrieval:
+      fetched_at: "2026-11-23T00:00:00Z"
+      requested_url: "https://web.archive.org/web/20220831190616id_/http://site.bbmp.gov.in/PDF/townplanning/ImpactZone%20Premium%20FAR%20Notifi29.09.18.pdf"
+      final_url: "https://web.archive.org/web/20220831190616id_/http://site.bbmp.gov.in/PDF/townplanning/ImpactZone%20Premium%20FAR%20Notifi29.09.18.pdf"
+      http_status: 200
+      content_type: "application/pdf"
+      content_length: 118308
+      response_headers:
+        etag: null
+        last_modified: null
+        server: "nginx"
+        date: "Tue, 24 Nov 2026 09:46:43 GMT"
+      sha256: "51e90bb43a4c070fef2f1f073baf8df07b720097808da421e41fba9e03c23bf0"
+      archive_url: "https://web.archive.org/web/20220831190616id_/http://site.bbmp.gov.in/PDF/townplanning/ImpactZone%20Premium%20FAR%20Notifi29.09.18.pdf"
+      archive_failure_reason: null
+      fetched_by: "agent"
+
+  - id: rmp2015-zr-amend-2019-06
+    title: "Zoning Regulations of Bengaluru of the Revised Master Plan-2015 (Amendment) Regulations, 2019"
+    issuing_authority: "URBAN DEVELOPMENT SECRETARIAT, Government of Karnataka"
+    doc_type: amendment
+    layer: planning
+    role: amendment
+    legal_status: in_force
+    acquisition_status: acquired
+    notification_number: "No. UDD 255 MNJ 2018"
+    gazette_reference: "Part-IVA Bengaluru, Thursday, June 20, 2019 (Jyesta 30, Shaka Varsha 1940) No. 483"
+    notified_date: "2019-06-19"
+    effective_from: "2019-06-20"
+    amends:
+      - rmp2015-zr
+    status_evidence:
+      url: "https://bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx"
+      quoted_line: "URBAN DEVELOPMENT SECRETARIAT NOTIFICATION No. UDD 255 MNJ 2018, Bengaluru, Dated: 19.06.2019 ... 1. Title and commencement.- (1) These regulations may be called the Zoning Regulations of Bengaluru of the Revised Master Plan-2015 (Amendment) Regulations, 2019. (2) They shall come into force from the date of their final publication in the Official Gazette."
+      description: "Listed on the active GBA/BBMP Building Plan Approval System (bpas.bbmpgov.in/BPAMSClient4/CommonForms/Circulars.aspx) under 'Bye laws and Zoning Regulations'."
+    licence_or_terms: "Section 52(1)(q) Indian Copyright Act, 1957 (public gazette notification)"
+    text_rights:
+      mode: full_text
+      reason: "Public gazette notification amending RMP 2015 Zoning Regulations"
+    languages:
+      - kn
+      - en
+    official_url: "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/Zoning%20Regulations%202015%20Amendment%20Notification%20No.%20UDD%20255%20MNJ%202018,%20Bangalore%20Dated%2019-06-2019.pdf"
+    mirror_urls:
+      - "https://web.archive.org/web/20220831190619id_/http://site.bbmp.gov.in/PDF/townplanning/ZR%20Amend%20FAR%20exemptns%2019.6.19.pdf"
+    source_url: "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/Zoning%20Regulations%202015%20Amendment%20Notification%20No.%20UDD%20255%20MNJ%202018,%20Bangalore%20Dated%2019-06-2019.pdf"
+    retrieval:
+      fetched_at: "2026-11-23T00:00:00Z"
+      requested_url: "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/Zoning%20Regulations%202015%20Amendment%20Notification%20No.%20UDD%20255%20MNJ%202018,%20Bangalore%20Dated%2019-06-2019.pdf"
+      final_url: "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/Zoning%20Regulations%202015%20Amendment%20Notification%20No.%20UDD%20255%20MNJ%202018,%20Bangalore%20Dated%2019-06-2019.pdf"
+      http_status: 200
+      content_type: "application/pdf"
+      content_length: 3568360
+      response_headers:
+        etag: "\"ce5c47da64dad51:0\""
+        last_modified: "Mon, 03 Feb 2020 07:37:57 GMT"
+        server: null
+        date: "Tue, 24 Nov 2026 09:46:43 GMT"
+      sha256: "94fa7888905ff99b1acf3c02e0ea06d77fcf945f53f374749cd97ee37bcb97d8"
+      archive_url: "https://web.archive.org/web/20261124094650/https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/Zoning%20Regulations%202015%20Amendment%20Notification%20No.%20UDD%20255%20MNJ%202018,%20Bangalore%20Dated%2019-06-2019.pdf"
+      archive_failure_reason: null
+      fetched_by: "agent"
+
+  - id: rmp2015-zr-comp-2024-10-kn
+    title: "Revising the amendments in the regulations in BBMP revised Mahayojane 2015 (Kannada Compilation)"
+    issuing_authority: "Bruhat Bengaluru Mahanagara Palike (BBMP), Town Planning Department"
+    doc_type: circular
+    layer: municipal
+    role: reference
+    legal_status: in_force
+    acquisition_status: acquired
+    notification_number: "BBMP/TP/2024-25"
+    notified_date: "2024-10-19"
+    effective_from: "2024-10-19"
+    amends:
+      - rmp2015-zr
+    status_evidence:
+      url: "https://web.archive.org/web/20250406150942/https://site.bbmp.gov.in/townplanning.html"
+      quoted_line: "Revising the amendments in the regulations in BBMP revised Mahayojane 2015 (PDF/townplanning/KM_266_160102035827-pages-deleted_29102024.pdf)"
+      description: "Published on the BBMP Town Planning page (site.bbmp.gov.in/townplanning.html) in October 2024; Kannada-only compilation recorded in the register as a declared language gap under 00-overview.md."
+    licence_or_terms: "Section 52(1)(q) Indian Copyright Act, 1957 (public municipal circular/compilation)"
+    text_rights:
+      mode: full_text
+      reason: "Public municipal circular/compilation"
+    languages:
+      - kn
+    official_url: "https://site.bbmp.gov.in/PDF/townplanning/KM_266_160102035827-pages-deleted_29102024.pdf"
     mirror_urls: []
-    source_url: https://data.opencity.in/dataset/zonal-regulations-of-the-rmp-2015-of-local-planning-area-of-bengaluru-amendment-regulations-2025
+    source_url: "https://web.archive.org/web/20250325225145id_/https://site.bbmp.gov.in/PDF/townplanning/KM_266_160102035827-pages-deleted_29102024.pdf"
+    retrieval:
+      fetched_at: "2026-11-23T00:00:00Z"
+      requested_url: "https://web.archive.org/web/20250325225145id_/https://site.bbmp.gov.in/PDF/townplanning/KM_266_160102035827-pages-deleted_29102024.pdf"
+      final_url: "https://web.archive.org/web/20250325225145id_/https://site.bbmp.gov.in/PDF/townplanning/KM_266_160102035827-pages-deleted_29102024.pdf"
+      http_status: 200
+      content_type: "application/pdf"
+      content_length: 8248176
+      response_headers:
+        etag: null
+        last_modified: null
+        server: "nginx"
+        date: "Tue, 24 Nov 2026 09:46:56 GMT"
+      sha256: "2d1329fb205a708d57c2a4305c3d210ee17c3122c9b0b61371a5a3efcac69760"
+      archive_url: "https://web.archive.org/web/20250325225145id_/https://site.bbmp.gov.in/PDF/townplanning/KM_266_160102035827-pages-deleted_29102024.pdf"
+      archive_failure_reason: null
+      fetched_by: "agent"
+
+  - id: rmp2015-zr-amend-2025-02
+    title: "GOVERNMENT OF KARNATAKA No. UDD 78 MNJ 2024 (E) Dated:21.02.2025 NOTIFICATION-1 & NOTIFICATION-II (Premium F.A.R Amendment to Zonal Regulations of Revised Master Plan-2015)"
+    issuing_authority: "GOVERNMENT OF KARNATAKA, Urban Development Department"
+    doc_type: notification
+    layer: planning
+    role: amendment
+    legal_status: in_force
+    acquisition_status: acquired
+    notification_number: "No. UDD 78 MNJ 2024 (E)"
+    gazette_reference: "Karnataka Special Gazette Part-IVA Dated: 21.02.2025"
+    notified_date: "2025-02-21"
+    effective_from: "2025-02-21"
+    amends:
+      - rmp2015-zr
+    status_evidence:
+      url: "https://web.archive.org/web/20250307075721id_/https://data.opencity.in/dataset/3877072d-adef-4923-890d-1de96e72faeb/resource/886578b2-3419-40f0-9f51-21b78fefbac7/download/premium-far-gazette.pdf"
+      quoted_line: "GOVERNMENT OF KARNATAKA No. UDD 78 MNJ 2024 (E) Karnataka Government Secretariat Vikasa Soudha, Bengaluru Dated:21.02.2025 NOTIFICATION-1 Whereas the draft to amend the Zonal Regulations of Revised Master Plan-2015 of the Local Planning Area of Bengaluru, in exercise of the powers conferred under Section 13-E of Karnataka Town and Country Planning Act, 1961..."
+      description: "Final Karnataka Gazette Notification No. UDD 78 MNJ 2024 (E) dated 21.02.2025 amending the Zonal Regulations of Revised Master Plan-2015 for Premium FAR."
+    licence_or_terms: "Section 52(1)(q) Indian Copyright Act, 1957 (public gazette notification)"
+    text_rights:
+      mode: full_text
+      reason: "Public gazette notification amending RMP 2015 Zoning Regulations"
+    languages:
+      - en
+      - kn
+    official_url: "https://data.opencity.in/dataset/3877072d-adef-4923-890d-1de96e72faeb/resource/886578b2-3419-40f0-9f51-21b78fefbac7/download/premium-far-gazette.pdf"
+    mirror_urls: []
+    source_url: "https://web.archive.org/web/20250307075721id_/https://data.opencity.in/dataset/3877072d-adef-4923-890d-1de96e72faeb/resource/886578b2-3419-40f0-9f51-21b78fefbac7/download/premium-far-gazette.pdf"
+    retrieval:
+      fetched_at: "2026-11-23T00:00:00Z"
+      requested_url: "https://web.archive.org/web/20250307075721id_/https://data.opencity.in/dataset/3877072d-adef-4923-890d-1de96e72faeb/resource/886578b2-3419-40f0-9f51-21b78fefbac7/download/premium-far-gazette.pdf"
+      final_url: "https://web.archive.org/web/20250307075721id_/https://data.opencity.in/dataset/3877072d-adef-4923-890d-1de96e72faeb/resource/886578b2-3419-40f0-9f51-21b78fefbac7/download/premium-far-gazette.pdf"
+      http_status: 200
+      content_type: "application/pdf"
+      content_length: 1282141
+      response_headers:
+        etag: null
+        last_modified: null
+        server: "nginx"
+        date: "Tue, 24 Nov 2026 09:47:28 GMT"
+      sha256: "d305dbdf8a42ee7ae104f515e0b795cbf5d1d4d8b7aa6493e4ef84a4f860a330"
+      archive_url: "https://web.archive.org/web/20250307075721id_/https://data.opencity.in/dataset/3877072d-adef-4923-890d-1de96e72faeb/resource/886578b2-3419-40f0-9f51-21b78fefbac7/download/premium-far-gazette.pdf"
+      archive_failure_reason: null
+      fetched_by: "agent"
 
   - id: rmp2015-zr-amend-2026-01
-    title: Greater Bengaluru Amendment Regulations, 2025 (No. UDD/235/MNJ 2025(E), dated 05-01-2026)
-    issuing_authority: Urban Development Department, Government of Karnataka
+    title: "GOVERNMENT OF KARNATAKA No. UDD 235 MNJ 2025(E) date: 05.01.2026 NOTIFICATION (Amendment to Zonal Regulations of Revised Master Plan-2015 of Bengaluru and Greater Bengaluru)"
+    issuing_authority: "GOVERNMENT OF KARNATAKA, Urban Development Department"
     doc_type: amendment
     layer: planning
     role: amendment
     legal_status: in_force
-    acquisition_status: pending
-    status_evidence:
-      url: https://data.opencity.in/dataset/greater-bengaluru-amendment-regulations-2025
-      description: Pending verification from fetched source document in PR 04 (R17).
-    licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public gazette notification)
-    text_rights:
-      mode: full_text
-      reason: Public gazette notification
-    languages:
-      - en
+    acquisition_status: acquired
+    notification_number: "No. UDD 235 MNJ 2025(E)"
+    gazette_reference: "Karnataka Special Gazette Part-IVA dated 05.01.2026"
+    notified_date: "2026-01-05"
+    effective_from: "2026-01-05"
     amends:
       - rmp2015-zr
-    official_url: https://data.opencity.in/dataset/greater-bengaluru-amendment-regulations-2025
+    status_evidence:
+      url: "https://web.archive.org/web/20260216195827id_/https://data.opencity.in/dataset/31a482fe-4ffd-4929-a61d-2fdcca90be91/resource/36f1c5e6-5f5d-4356-bfba-00c5fe1020e2/download/udd-235-mnj-2025e-05.01.2026.pdf"
+      quoted_line: "GOVERNMENT OF KARNATAKA No. UDD 235 MNJ 2025(E) Karnataka Government Secretariat, Vikasa Soudha, Dr. Ambedkar Veedhi, Bengaluru, date: 05.01.2026 NOTIFICATION Whereas the draft to amend the zonal regulations of Revised Master Plan-2015 of the local planning area of Bengaluru and Greater Bengaluru, in exercise of the powers conferred under Section 13-E of Karnataka Town and Country Planning Act, 1961..."
+      description: "Final Karnataka Gazette Notification No. UDD 235 MNJ 2025(E) dated 05.01.2026 amending Table 8 (Setbacks), Regulation 3.9 (Basements), Regulation 3.10 (Ramps), Ring I–III apartment plot thresholds, Table 15 (Mutation Corridors), and Table 16 (Industrial I) of the RMP-2015 Zonal Regulations for Greater Bengaluru."
+    licence_or_terms: "Section 52(1)(q) Indian Copyright Act, 1957 (public gazette notification)"
+    text_rights:
+      mode: full_text
+      reason: "Public gazette notification amending RMP 2015 Zoning Regulations for Greater Bengaluru"
+    languages:
+      - en
+    official_url: "https://data.opencity.in/dataset/31a482fe-4ffd-4929-a61d-2fdcca90be91/resource/36f1c5e6-5f5d-4356-bfba-00c5fe1020e2/download/udd-235-mnj-2025e-05.01.2026.pdf"
     mirror_urls: []
-    source_url: https://data.opencity.in/dataset/greater-bengaluru-amendment-regulations-2025
+    source_url: "https://web.archive.org/web/20260216195827id_/https://data.opencity.in/dataset/31a482fe-4ffd-4929-a61d-2fdcca90be91/resource/36f1c5e6-5f5d-4356-bfba-00c5fe1020e2/download/udd-235-mnj-2025e-05.01.2026.pdf"
+    retrieval:
+      fetched_at: "2026-11-23T00:00:00Z"
+      requested_url: "https://web.archive.org/web/20260216195827id_/https://data.opencity.in/dataset/31a482fe-4ffd-4929-a61d-2fdcca90be91/resource/36f1c5e6-5f5d-4356-bfba-00c5fe1020e2/download/udd-235-mnj-2025e-05.01.2026.pdf"
+      final_url: "https://web.archive.org/web/20260216195827id_/https://data.opencity.in/dataset/31a482fe-4ffd-4929-a61d-2fdcca90be91/resource/36f1c5e6-5f5d-4356-bfba-00c5fe1020e2/download/udd-235-mnj-2025e-05.01.2026.pdf"
+      http_status: 200
+      content_type: "application/pdf"
+      content_length: 344161
+      response_headers:
+        etag: null
+        last_modified: null
+        server: "nginx"
+        date: "Tue, 24 Nov 2026 09:47:34 GMT"
+      sha256: "a3672d169c20b77ef3978dfad956c16a8fd6a0209266d553e16ddb7d3522e60e"
+      archive_url: "https://web.archive.org/web/20260216195827id_/https://data.opencity.in/dataset/31a482fe-4ffd-4929-a61d-2fdcca90be91/resource/36f1c5e6-5f5d-4356-bfba-00c5fe1020e2/download/udd-235-mnj-2025e-05.01.2026.pdf"
+      archive_failure_reason: null
+      fetched_by: "agent"
+
+  - id: rmp2015-zr-amend-2025-07
+    title: "Gazette Notification (July 2025) - Bengaluru Master Plan 2015 Zoning Regulations Amendments"
+    issuing_authority: "Urban Development Department, Government of Karnataka"
+    doc_type: amendment
+    layer: planning
+    role: amendment
+    legal_status: in_force
+    acquisition_status: not_found
+    notified_date: "2025-07-01"
+    amends:
+      - rmp2015-zr
+    status_evidence:
+      url: "https://web.archive.org/web/20260208040653id_/https://data.opencity.in/dataset/bengaluru-bda-revised-master-plan-2015-zoning-regulation-amendments"
+      quoted_line: "Gazette Notification (July 2025) - Bengaluru Master Plan 2015 Zoning Regulations Amendments ... https://data.opencity.in/dataset/31a482fe-4ffd-4929-a61d-2fdcca90be91/resource/3f2685b8-5e27-44e5-9222-8f6dbff9445f/download/d7b00660-a3bc-49cf-b35a-3d70283ace0a.pdf"
+      description: "Listed on the archived OpenCity dataset page for Bengaluru BDA RMP 2015 Zoning Regulation Amendments; direct PDF download returns HTTP 403 (Cloudflare Turnstile challenge) and no Wayback capture exists."
+    licence_or_terms: "Section 52(1)(q) Indian Copyright Act, 1957 (public gazette notification)"
+    text_rights:
+      mode: full_text
+      reason: "Public gazette notification"
+    languages:
+      - en
+    official_url: "https://data.opencity.in/dataset/31a482fe-4ffd-4929-a61d-2fdcca90be91/resource/3f2685b8-5e27-44e5-9222-8f6dbff9445f/download/d7b00660-a3bc-49cf-b35a-3d70283ace0a.pdf"
+    mirror_urls: []
+    source_url: "https://data.opencity.in/dataset/31a482fe-4ffd-4929-a61d-2fdcca90be91/resource/3f2685b8-5e27-44e5-9222-8f6dbff9445f/download/d7b00660-a3bc-49cf-b35a-3d70283ace0a.pdf"
+
+  - id: bscc-bbl-amend-2026
+    title: "Bengaluru South City Corporation Building (Amendment) Bye-laws 2026 (04-03-2026)"
+    issuing_authority: "Bengaluru South City Corporation / Greater Bengaluru Authority"
+    doc_type: amendment
+    layer: municipal
+    role: amendment
+    legal_status: draft
+    acquisition_status: not_found
+    notification_number: "BSCC-10125"
+    notified_date: "2026-03-04"
+    amends:
+      - bbl-2003
+    status_evidence:
+      url: "https://web.archive.org/web/20260405045507id_/https://data.opencity.in/dataset/bbmp-building-byelaws"
+      quoted_line: "Bengaluru South City Corporation Building (Amendment) Bye-laws 2026 (04-03-2026) — Draft notification for Bengaluru South City Corporation inviting comments within 30 days. ... https://data.opencity.in/dataset/bbmp-building-byelaws/resource/d37c7718-8c24-4da7-86a0-d19b974fb8a9/download/bscc-10125.pdf"
+      description: "Draft notification dated 04-03-2026 inviting public comments within 30 days; direct PDF download on data.opencity.in returns HTTP 403 (Cloudflare Turnstile challenge) and no Wayback capture exists."
+    licence_or_terms: "Section 52(1)(q) Indian Copyright Act, 1957 (public draft municipal bye-law notification)"
+    text_rights:
+      mode: full_text
+      reason: "Public draft municipal notification"
+    languages:
+      - en
+    official_url: "https://data.opencity.in/dataset/bbmp-building-byelaws/resource/d37c7718-8c24-4da7-86a0-d19b974fb8a9/download/bscc-10125.pdf"
+    mirror_urls: []
+    source_url: "https://data.opencity.in/dataset/bbmp-building-byelaws/resource/d37c7718-8c24-4da7-86a0-d19b974fb8a9/download/bscc-10125.pdf"
 maps:
   boundaries: []
   zoning: []

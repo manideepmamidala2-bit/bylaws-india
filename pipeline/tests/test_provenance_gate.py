@@ -69,9 +69,7 @@ def test_repository_passes_provenance_gate_and_has_no_generated_bengaluru_south_
     assert not (REPO_ROOT / "scripts" / "build_bengaluru_south_sources.py").exists()
     assert not (REPO_ROOT / "data" / "sources" / "in-ka-bengaluru-south").exists()
     assert not (REPO_ROOT / "data" / "overrides" / "in-ka-bengaluru-south").exists()
-    assert not (REPO_ROOT / "data" / "reports" / "in-ka-bengaluru-south").exists()
-    assert not (REPO_ROOT / "public" / "data" / "in-ka-bengaluru-south").exists()
-    assert not (REPO_ROOT / "docs" / "sources" / "in-ka-bengaluru-south.md").exists()
+    assert not (REPO_ROOT / "public" / "data" / "in-ka-bengaluru-south" / "1.0.0").exists()
 
     synth_script = (
         REPO_ROOT / "pipeline" / "tests" / "fixtures" / "build_synthetic_jurisdiction.py"
@@ -88,7 +86,7 @@ def test_repository_passes_provenance_gate_and_has_no_generated_bengaluru_south_
     assert len(config.documents) >= 10
     for doc in config.documents:
         assert doc.source_url.startswith(("http://", "https://"))
-        assert doc.acquisition_status == "pending"
+        assert doc.acquisition_status in {"acquired", "not_found"}
 
 
 def test_planted_local_source_in_non_test_jurisdiction_fails_gate(tmp_path: Path) -> None:

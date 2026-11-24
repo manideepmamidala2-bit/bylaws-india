@@ -1117,6 +1117,10 @@ class JurisdictionManifest(BaseModel):
     aliases: list[constr(min_length=1)] | None = None
     visibility: Literal["public", "test"] | None = "public"
     latest_release: constr(pattern=r"^\d+\.\d+\.\d+$") | None
+    register_documents: constr(min_length=1) | None = Field(
+        None,
+        description="Optional web path to pre-release source register JSON (e.g. /data/<id>/register/documents.json).",
+    )
     releases: list[ReleaseEntry] = Field(..., min_length=1)
 
 
