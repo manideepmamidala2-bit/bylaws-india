@@ -1,0 +1,636 @@
+{
+  "schema_version": "1.3",
+  "doc_id": "rmp2015-zr-amend-2025-10",
+  "jurisdiction": "in-ka-bengaluru",
+  "legal_status": "in_force",
+  "generated": {
+    "parser": "pypdfium2",
+    "parser_version": "4.30.0",
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "clauses": [
+    {
+      "eid": "prea_1",
+      "native_number": null,
+      "type": "preamble",
+      "heading": "Preamble",
+      "intro": null,
+      "content": "\u013b\u00af\u0cc6 \u00af\u0cc6\u0cd5\u0cb7 \u00aa\u0cbe \u00aa\u0cbe\u0c9c\u00cd \u0caa \u0126\u00ce\u0090\u0cc6 \u0090\u0cc6 \u0c9c\u00cd",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": null,
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-10-15",
+          "valid_to": null,
+          "heading": "Preamble",
+          "intro": null,
+          "content": "\u013b\u00af\u0cc6 \u00af\u0cc6\u0cd5\u0cb7 \u00aa\u0cbe \u00aa\u0cbe\u0c9c\u00cd \u0caa \u0126\u00ce\u0090\u0cc6 \u0090\u0cc6 \u0c9c\u00cd",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2025-10",
+          "source_eid": "prea_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2025-10",
+              "page": 1,
+              "bbox": [
+                0.4002,
+                0.2439,
+                0.6005,
+                0.2694
+              ],
+              "text_excerpt": "\u013b\u00af\u0cc6 \u00af\u0cc6\u0cd5\u0cb7 \u00aa\u0cbe \u00aa\u0cbe\u0c9c\u00cd \u0caa \u0126\u00ce\u0090\u0cc6 \u0090\u0cc6 \u0c9c\u00cd"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2025-10:preamble",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2025-10:preamble@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-10-15",
+      "number": "preamble",
+      "title": "Preamble",
+      "level": 1,
+      "parent_id": null,
+      "order": 0,
+      "text": "\u013b\u00af\u0cc6 \u00af\u0cc6\u0cd5\u0cb7 \u00aa\u0cbe \u00aa\u0cbe\u0c9c\u00cd \u0caa \u0126\u00ce\u0090\u0cc6 \u0090\u0cc6 \u0c9c\u00cd",
+      "language": "kn",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2025-10",
+          "page": 1,
+          "bbox": [
+            0.4002,
+            0.2439,
+            0.6005,
+            0.2694
+          ],
+          "text_excerpt": "\u013b\u00af\u0cc6 \u00af\u0cc6\u0cd5\u0cb7 \u00aa\u0cbe \u00aa\u0cbe\u0c9c\u00cd \u0caa \u0126\u00ce\u0090\u0cc6 \u0090\u0cc6 \u0c9c\u00cd"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_IVA",
+      "native_number": "PART IVA",
+      "type": "part",
+      "heading": "PART IVA",
+      "intro": "PART IVA BENGALURU, WEDNESDAY 15, OCTOBER, 2025 ( AASHWAYUJA, 23, SHAKAVARSHA , 1947 ) No. 656 GOVERNMENT OF KARNATAKA No . UDD 468 MNJ 2025(E) Karnataka Government Secretariat, Vikasa Soudha, Dr. B.R. Ambedkar Veedhi Bengaluru, dated: 15.10.2025. NOTIFICATION Whereas the draft to further amend the zonal regulations of Revised Master Plan\u0002 2015 of the Local Planning Area of Bengaluru, approved Master Plan of the Bengaluru - Mysuru Infrastructure Corridor Local Planning Area and the approved Master Plans of all the Local Planning Areas coming within the Bengaluru Metropolitan Region, in exercise of the powers conferred by Section 13-E of Karnataka Town and Country Planning Act, 1961, which the Government of Karnataka proposes to make was published in Notification no. UDD 468 MNJ 2025 (E), dated: 01.09.2025 in part-IVA of the Karnataka extra-ordinary Gazette dated: 02.09.2025 inviting objections and suggestions from all persons likely to be affected thereby within thirty days from the date of its publication in Official Gazette. And whereas the said Gazette was available to the public on 2 nd d September 2025 and whereas the objections and suggestions received have been considered by the State Government. Now therefore, in exercise of the powers conferred by Section 13E of the Karnataka Town and Country Planning Act, 1961, (Karnataka Act 11 of 1963), the Government of Karnataka hereby makes the following regulations, namely:- REGULATIONS Title and Applicability.- (1) These regulations may be called the Zonal Regulations of Revised Master Plan-2015 of the Local Planning Area of Bengaluru (1) (BDA) and Local Planning Area of Greater Bengaluru Authority, approved Master Plan of the Bengaluru - Mysuru Infrastructure Corridor Local Planning Area and the approved Master Plans of all the Local Planning Areas coming within the Bengaluru Metropolitan Region (Amendment) Regulations 2025.",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "part_IVA__item_2",
+        "part_IVA__tbl_1"
+      ],
+      "parent_eid": null,
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-10-15",
+          "valid_to": null,
+          "heading": "PART IVA",
+          "intro": "PART IVA BENGALURU, WEDNESDAY 15, OCTOBER, 2025 ( AASHWAYUJA, 23, SHAKAVARSHA , 1947 ) No. 656 GOVERNMENT OF KARNATAKA No . UDD 468 MNJ 2025(E) Karnataka Government Secretariat, Vikasa Soudha, Dr. B.R. Ambedkar Veedhi Bengaluru, dated: 15.10.2025. NOTIFICATION Whereas the draft to further amend the zonal regulations of Revised Master Plan\u0002 2015 of the Local Planning Area of Bengaluru, approved Master Plan of the Bengaluru - Mysuru Infrastructure Corridor Local Planning Area and the approved Master Plans of all the Local Planning Areas coming within the Bengaluru Metropolitan Region, in exercise of the powers conferred by Section 13-E of Karnataka Town and Country Planning Act, 1961, which the Government of Karnataka proposes to make was published in Notification no. UDD 468 MNJ 2025 (E), dated: 01.09.2025 in part-IVA of the Karnataka extra-ordinary Gazette dated: 02.09.2025 inviting objections and suggestions from all persons likely to be affected thereby within thirty days from the date of its publication in Official Gazette. And whereas the said Gazette was available to the public on 2 nd d September 2025 and whereas the objections and suggestions received have been considered by the State Government. Now therefore, in exercise of the powers conferred by Section 13E of the Karnataka Town and Country Planning Act, 1961, (Karnataka Act 11 of 1963), the Government of Karnataka hereby makes the following regulations, namely:- REGULATIONS Title and Applicability.- (1) These regulations may be called the Zonal Regulations of Revised Master Plan-2015 of the Local Planning Area of Bengaluru (1) (BDA) and Local Planning Area of Greater Bengaluru Authority, approved Master Plan of the Bengaluru - Mysuru Infrastructure Corridor Local Planning Area and the approved Master Plans of all the Local Planning Areas coming within the Bengaluru Metropolitan Region (Amendment) Regulations 2025.",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2025-10",
+          "source_eid": "part_IVA",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2025-10",
+              "page": 1,
+              "bbox": [
+                0.1294,
+                0.3014,
+                0.8764,
+                0.9468
+              ],
+              "text_excerpt": "Part \u2013 IVA BENGALURU, WEDNESDAY 15, OCTOBER, 2025 ( AASHWAYUJA, 23, SHAKAVARSHA"
+            },
+            {
+              "doc_id": "rmp2015-zr-amend-2025-10",
+              "page": 2,
+              "bbox": [
+                0.1296,
+                0.0934,
+                0.8758,
+                0.1748
+              ],
+              "text_excerpt": "(BDA) and Local Planning Area of Greater Bengaluru Authority, approved Master Plan"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2025-10:PART IVA",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2025-10:PART IVA@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-10-15",
+      "number": "PART IVA",
+      "title": "PART IVA",
+      "level": 1,
+      "parent_id": null,
+      "order": 1,
+      "text": "PART IVA BENGALURU, WEDNESDAY 15, OCTOBER, 2025 ( AASHWAYUJA, 23, SHAKAVARSHA , 1947 ) No. 656 GOVERNMENT OF KARNATAKA No . UDD 468 MNJ 2025(E) Karnataka Government Secretariat, Vikasa Soudha, Dr. B.R. Ambedkar Veedhi Bengaluru, dated: 15.10.2025. NOTIFICATION Whereas the draft to further amend the zonal regulations of Revised Master Plan\u0002 2015 of the Local Planning Area of Bengaluru, approved Master Plan of the Bengaluru - Mysuru Infrastructure Corridor Local Planning Area and the approved Master Plans of all the Local Planning Areas coming within the Bengaluru Metropolitan Region, in exercise of the powers conferred by Section 13-E of Karnataka Town and Country Planning Act, 1961, which the Government of Karnataka proposes to make was published in Notification no. UDD 468 MNJ 2025 (E), dated: 01.09.2025 in part-IVA of the Karnataka extra-ordinary Gazette dated: 02.09.2025 inviting objections and suggestions from all persons likely to be affected thereby within thirty days from the date of its publication in Official Gazette. And whereas the said Gazette was available to the public on 2 nd d September 2025 and whereas the objections and suggestions received have been considered by the State Government. Now therefore, in exercise of the powers conferred by Section 13E of the Karnataka Town and Country Planning Act, 1961, (Karnataka Act 11 of 1963), the Government of Karnataka hereby makes the following regulations, namely:- REGULATIONS Title and Applicability.- (1) These regulations may be called the Zonal Regulations of Revised Master Plan-2015 of the Local Planning Area of Bengaluru (1) (BDA) and Local Planning Area of Greater Bengaluru Authority, approved Master Plan of the Bengaluru - Mysuru Infrastructure Corridor Local Planning Area and the approved Master Plans of all the Local Planning Areas coming within the Bengaluru Metropolitan Region (Amendment) Regulations 2025.",
+      "language": "en",
+      "tables": [
+        {
+          "table_id": "rmp2015-zr-amend-2025-10:PART IVA:t1",
+          "caption": null,
+          "headers": [
+            "\u00a8\u00c1s \u00a8\u00c1s U\u00c0 U\u00c0 4 \u0c8e",
+            "15",
+            "2025 (",
+            "23,",
+            "\u0ce7\u0cef\u0cea 7)",
+            "656"
+          ],
+          "rows": [],
+          "page": 1
+        }
+      ],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2025-10",
+          "page": 1,
+          "bbox": [
+            0.1294,
+            0.3014,
+            0.8764,
+            0.9468
+          ],
+          "text_excerpt": "Part \u2013 IVA BENGALURU, WEDNESDAY 15, OCTOBER, 2025 ( AASHWAYUJA, 23, SHAKAVARSHA"
+        },
+        {
+          "doc_id": "rmp2015-zr-amend-2025-10",
+          "page": 2,
+          "bbox": [
+            0.1296,
+            0.0934,
+            0.8758,
+            0.1748
+          ],
+          "text_excerpt": "(BDA) and Local Planning Area of Greater Bengaluru Authority, approved Master Plan"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_IVA__item_2",
+      "native_number": "(2)",
+      "type": "item",
+      "heading": null,
+      "intro": "They shall come into force from the date of its final publication in the official Gazette.",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "part_IVA__item_2__item_3"
+      ],
+      "parent_eid": "part_IVA",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-10-15",
+          "valid_to": null,
+          "heading": null,
+          "intro": "They shall come into force from the date of its final publication in the official Gazette.",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2025-10",
+          "source_eid": "part_IVA__item_2",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2025-10",
+              "page": 2,
+              "bbox": [
+                0.13,
+                0.2007,
+                0.8758,
+                0.2317
+              ],
+              "text_excerpt": "(2) They shall come into force from the date of its final"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2025-10:PART IVA(2)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2025-10:PART IVA(2)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-10-15",
+      "number": "PART IVA(2)",
+      "title": "They shall come into force from the date of its final publication in the official",
+      "level": 2,
+      "parent_id": "rmp2015-zr-amend-2025-10:PART IVA",
+      "order": 2,
+      "text": "They shall come into force from the date of its final publication in the official Gazette.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2025-10",
+          "page": 2,
+          "bbox": [
+            0.13,
+            0.2007,
+            0.8758,
+            0.2317
+          ],
+          "text_excerpt": "(2) They shall come into force from the date of its final"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_IVA__item_2__item_3",
+      "native_number": "(3)",
+      "type": "item",
+      "heading": null,
+      "intro": "In the zonal regulations of the (i) Revised Master Plan-2015 of the Local Planning Area of Bengaluru and Local Planning Area of Greater Bengaluru Authority",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "part_IVA__item_2__item_3__item_ii"
+      ],
+      "parent_eid": "part_IVA__item_2",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-10-15",
+          "valid_to": null,
+          "heading": null,
+          "intro": "In the zonal regulations of the (i) Revised Master Plan-2015 of the Local Planning Area of Bengaluru and Local Planning Area of Greater Bengaluru Authority",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2025-10",
+          "source_eid": "part_IVA__item_2__item_3",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2025-10",
+              "page": 2,
+              "bbox": [
+                0.1296,
+                0.2461,
+                0.8758,
+                0.2834
+              ],
+              "text_excerpt": "(3) In the zonal regulations of the (i) Revised Master Plan-2015 of"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2025-10:PART IVA(2)(3)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2025-10:PART IVA(2)(3)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-10-15",
+      "number": "PART IVA(2)(3)",
+      "title": "In the zonal regulations of the (i) Revised Master Plan-2015 of the Local",
+      "level": 3,
+      "parent_id": "rmp2015-zr-amend-2025-10:PART IVA(2)",
+      "order": 3,
+      "text": "In the zonal regulations of the (i) Revised Master Plan-2015 of the Local Planning Area of Bengaluru and Local Planning Area of Greater Bengaluru Authority",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2025-10",
+          "page": 2,
+          "bbox": [
+            0.1296,
+            0.2461,
+            0.8758,
+            0.2834
+          ],
+          "text_excerpt": "(3) In the zonal regulations of the (i) Revised Master Plan-2015 of"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_IVA__item_2__item_3__item_ii",
+      "native_number": "(ii)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "approved Master Plan of the Bengaluru - Mysuru Infrastructure Corridor Local Planning Area and (iii) approved Master Plans of all the Local Planning Areas coming within the Bengaluru Metropolitan Region, irrespective of anything contained in the zonal regulations, the following regulations with regard to lakes and drains shall be applicable. Buffer for Lakes:- The buffer to be maintained around the lake (as per revenue records) and the infrastructure/activities permissible in the lake and the buffer area shall be as stipulated in the Karnataka Tank Conservation and Development Authority Act. This buffer may be taken into account for reservation of park while sanctioning plans. Drains:- The drains have been categorized into 3 types namely primary, secondary and tertiary as below: Primary Drain:- shall mean natural drain/ nala as per revenue records meant for carrying storm water, leading from lake to another lake or leading from lake to a river. Secondary Drain:- Shall mean natural drain/nala as per revenue records meant for carrying storm water, leading to a lake or to a primary drain. Tertiary Drain:- shall mean natural drain/ nala as per revenue records meant for carrying storm water, leading to secondary drain. Minimum buffer for primary, secondary and tertiary drain/ nala shall be as below. Sl Classification Buffer on either side from the edge of drain No. / nala as per revenue records (in m.) 1 Primary 15.00 2 Secondary 10.00 3 Tertiary 5.00 R.N.I. No. KARBIL/2001/47147 POSTAL REGN. No. RNP/KA/BGS/2202/2017-19 Licensed to post without prepayment WPP No. 297 Whereas drain/nalas leading to tertiary drains shall be maintained as per the revenue records and buffer shall not be insisted for such drains/ nalas. Permissible uses / activities in the buffer shall be as specified in the zonal regulations. These classifications have been used for the drains identified in the approved Master plan. In case the buffer has not been marked in the Master plan for any of the above types of drains, then based on the revenue records, buffer shall be insisted in all such cases without referring the land use plan while according approval for building/development/layout plan. Permission in sensitive areas, if earmarked on the land use plan, shall be considered only by the Planning Authority. By Order and in the name of the Governor of Karnataka (Rajesh S Sulikeri) Under Secretary to Government Urban Development Department, (BDA & B-1) [ \u0cae\u0cc1\u0ca6\u00ce \u0ca6\u00ce \u0c95\u0cb0\u0cc1 \u00b2\u0cbe \u00b2\u0cbe\u0c97\u0cc2 \u0caa\u00ce \u0caa\u00ce\u0090\u0cbe \u0090\u0cbe\u0cb6\u0c95\u0cb0\u0cc1 :- \u0cb8\u0c82\u0c95\u0cb2 \u00a3\u0cbe \u00a3\u0cbe \u0129\u0090\u0cbe \u0090\u0cbe \u0138 \u0c97\u0cb3 \u0cb3 \u0c95 \u00a3\u0cbe \u00a3\u0cbe \u008f \u0c9f\u0c95 \u00aa\u0cbe \u00aa\u0cbe\u0c9c\u00cd \u0caa\u0ca4\u00ce \u0ca4\u00ce \u0cb8 \u0090\u0cbe \u0090\u0cbe \u008f\u0138 \u0090\u0cc6 \u0090\u0cc6\u0cd5\u0c82\u0ca6\u00ce \u0ca6\u00ce \u0cae\u0cc1\u0ca6\u00ce \u0ca6\u00ce\u009e\u0cbe \u009e\u0cbe\u0cb2\u0caf \u00a6\u0cc6 \u00a6\u0cc6\u0c82\u0c97\u0cb3\u0088 \u0cb3\u0088 \u0cb0\u0cc1 , \u0c9c\u00cd , ,",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "part_IVA__item_2__item_3",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-10-15",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "approved Master Plan of the Bengaluru - Mysuru Infrastructure Corridor Local Planning Area and (iii) approved Master Plans of all the Local Planning Areas coming within the Bengaluru Metropolitan Region, irrespective of anything contained in the zonal regulations, the following regulations with regard to lakes and drains shall be applicable. Buffer for Lakes:- The buffer to be maintained around the lake (as per revenue records) and the infrastructure/activities permissible in the lake and the buffer area shall be as stipulated in the Karnataka Tank Conservation and Development Authority Act. This buffer may be taken into account for reservation of park while sanctioning plans. Drains:- The drains have been categorized into 3 types namely primary, secondary and tertiary as below: Primary Drain:- shall mean natural drain/ nala as per revenue records meant for carrying storm water, leading from lake to another lake or leading from lake to a river. Secondary Drain:- Shall mean natural drain/nala as per revenue records meant for carrying storm water, leading to a lake or to a primary drain. Tertiary Drain:- shall mean natural drain/ nala as per revenue records meant for carrying storm water, leading to secondary drain. Minimum buffer for primary, secondary and tertiary drain/ nala shall be as below. Sl Classification Buffer on either side from the edge of drain No. / nala as per revenue records (in m.) 1 Primary 15.00 2 Secondary 10.00 3 Tertiary 5.00 R.N.I. No. KARBIL/2001/47147 POSTAL REGN. No. RNP/KA/BGS/2202/2017-19 Licensed to post without prepayment WPP No. 297 Whereas drain/nalas leading to tertiary drains shall be maintained as per the revenue records and buffer shall not be insisted for such drains/ nalas. Permissible uses / activities in the buffer shall be as specified in the zonal regulations. These classifications have been used for the drains identified in the approved Master plan. In case the buffer has not been marked in the Master plan for any of the above types of drains, then based on the revenue records, buffer shall be insisted in all such cases without referring the land use plan while according approval for building/development/layout plan. Permission in sensitive areas, if earmarked on the land use plan, shall be considered only by the Planning Authority. By Order and in the name of the Governor of Karnataka (Rajesh S Sulikeri) Under Secretary to Government Urban Development Department, (BDA & B-1) [ \u0cae\u0cc1\u0ca6\u00ce \u0ca6\u00ce \u0c95\u0cb0\u0cc1 \u00b2\u0cbe \u00b2\u0cbe\u0c97\u0cc2 \u0caa\u00ce \u0caa\u00ce\u0090\u0cbe \u0090\u0cbe\u0cb6\u0c95\u0cb0\u0cc1 :- \u0cb8\u0c82\u0c95\u0cb2 \u00a3\u0cbe \u00a3\u0cbe \u0129\u0090\u0cbe \u0090\u0cbe \u0138 \u0c97\u0cb3 \u0cb3 \u0c95 \u00a3\u0cbe \u00a3\u0cbe \u008f \u0c9f\u0c95 \u00aa\u0cbe \u00aa\u0cbe\u0c9c\u00cd \u0caa\u0ca4\u00ce \u0ca4\u00ce \u0cb8 \u0090\u0cbe \u0090\u0cbe \u008f\u0138 \u0090\u0cc6 \u0090\u0cc6\u0cd5\u0c82\u0ca6\u00ce \u0ca6\u00ce \u0cae\u0cc1\u0ca6\u00ce \u0ca6\u00ce\u009e\u0cbe \u009e\u0cbe\u0cb2\u0caf \u00a6\u0cc6 \u00a6\u0cc6\u0c82\u0c97\u0cb3\u0088 \u0cb3\u0088 \u0cb0\u0cc1 , \u0c9c\u00cd , ,",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2025-10",
+          "source_eid": "part_IVA__item_2__item_3__item_ii",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2025-10",
+              "page": 2,
+              "bbox": [
+                0.1292,
+                0.2902,
+                0.876,
+                0.8698
+              ],
+              "text_excerpt": "(ii) approved Master Plan of the Bengaluru - Mysuru Infrastructure Corridor Local"
+            },
+            {
+              "doc_id": "rmp2015-zr-amend-2025-10",
+              "page": 3,
+              "bbox": [
+                0.0839,
+                0.0405,
+                0.8759,
+                0.926
+              ],
+              "text_excerpt": "R.N.I. No. KARBIL/2001/47147 POSTAL REGN. No. RNP/KA/BGS/2202/2017-19 Licensed to post without prepayment"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2025-10:PART IVA(2)(3)(ii)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2025-10:PART IVA(2)(3)(ii)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-10-15",
+      "number": "PART IVA(2)(3)(ii)",
+      "title": "approved Master Plan of the Bengaluru - Mysuru Infrastructure Corridor Local",
+      "level": 4,
+      "parent_id": "rmp2015-zr-amend-2025-10:PART IVA(2)(3)",
+      "order": 4,
+      "text": "approved Master Plan of the Bengaluru - Mysuru Infrastructure Corridor Local Planning Area and (iii) approved Master Plans of all the Local Planning Areas coming within the Bengaluru Metropolitan Region, irrespective of anything contained in the zonal regulations, the following regulations with regard to lakes and drains shall be applicable. Buffer for Lakes:- The buffer to be maintained around the lake (as per revenue records) and the infrastructure/activities permissible in the lake and the buffer area shall be as stipulated in the Karnataka Tank Conservation and Development Authority Act. This buffer may be taken into account for reservation of park while sanctioning plans. Drains:- The drains have been categorized into 3 types namely primary, secondary and tertiary as below: Primary Drain:- shall mean natural drain/ nala as per revenue records meant for carrying storm water, leading from lake to another lake or leading from lake to a river. Secondary Drain:- Shall mean natural drain/nala as per revenue records meant for carrying storm water, leading to a lake or to a primary drain. Tertiary Drain:- shall mean natural drain/ nala as per revenue records meant for carrying storm water, leading to secondary drain. Minimum buffer for primary, secondary and tertiary drain/ nala shall be as below. Sl Classification Buffer on either side from the edge of drain No. / nala as per revenue records (in m.) 1 Primary 15.00 2 Secondary 10.00 3 Tertiary 5.00 R.N.I. No. KARBIL/2001/47147 POSTAL REGN. No. RNP/KA/BGS/2202/2017-19 Licensed to post without prepayment WPP No. 297 Whereas drain/nalas leading to tertiary drains shall be maintained as per the revenue records and buffer shall not be insisted for such drains/ nalas. Permissible uses / activities in the buffer shall be as specified in the zonal regulations. These classifications have been used for the drains identified in the approved Master plan. In case the buffer has not been marked in the Master plan for any of the above types of drains, then based on the revenue records, buffer shall be insisted in all such cases without referring the land use plan while according approval for building/development/layout plan. Permission in sensitive areas, if earmarked on the land use plan, shall be considered only by the Planning Authority. By Order and in the name of the Governor of Karnataka (Rajesh S Sulikeri) Under Secretary to Government Urban Development Department, (BDA & B-1) [ \u0cae\u0cc1\u0ca6\u00ce \u0ca6\u00ce \u0c95\u0cb0\u0cc1 \u00b2\u0cbe \u00b2\u0cbe\u0c97\u0cc2 \u0caa\u00ce \u0caa\u00ce\u0090\u0cbe \u0090\u0cbe\u0cb6\u0c95\u0cb0\u0cc1 :- \u0cb8\u0c82\u0c95\u0cb2 \u00a3\u0cbe \u00a3\u0cbe \u0129\u0090\u0cbe \u0090\u0cbe \u0138 \u0c97\u0cb3 \u0cb3 \u0c95 \u00a3\u0cbe \u00a3\u0cbe \u008f \u0c9f\u0c95 \u00aa\u0cbe \u00aa\u0cbe\u0c9c\u00cd \u0caa\u0ca4\u00ce \u0ca4\u00ce \u0cb8 \u0090\u0cbe \u0090\u0cbe \u008f\u0138 \u0090\u0cc6 \u0090\u0cc6\u0cd5\u0c82\u0ca6\u00ce \u0ca6\u00ce \u0cae\u0cc1\u0ca6\u00ce \u0ca6\u00ce\u009e\u0cbe \u009e\u0cbe\u0cb2\u0caf \u00a6\u0cc6 \u00a6\u0cc6\u0c82\u0c97\u0cb3\u0088 \u0cb3\u0088 \u0cb0\u0cc1 , \u0c9c\u00cd , ,",
+      "language": "kn",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2025-10",
+          "page": 2,
+          "bbox": [
+            0.1292,
+            0.2902,
+            0.876,
+            0.8698
+          ],
+          "text_excerpt": "(ii) approved Master Plan of the Bengaluru - Mysuru Infrastructure Corridor Local"
+        },
+        {
+          "doc_id": "rmp2015-zr-amend-2025-10",
+          "page": 3,
+          "bbox": [
+            0.0839,
+            0.0405,
+            0.8759,
+            0.926
+          ],
+          "text_excerpt": "R.N.I. No. KARBIL/2001/47147 POSTAL REGN. No. RNP/KA/BGS/2202/2017-19 Licensed to post without prepayment"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [
+        "G-LAKE"
+      ],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_IVA__tbl_1",
+      "native_number": "Table 1",
+      "type": "table",
+      "heading": "Table 1",
+      "intro": null,
+      "content": "Table 1",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "part_IVA",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": {
+        "columns": [
+          {
+            "label": "\u00a8\u00c1s \u00a8\u00c1s U\u00c0 U\u00c0 4 \u0c8e",
+            "unit": null,
+            "children": [
+              {
+                "label": "\u00a8\u00c1s",
+                "unit": null
+              }
+            ]
+          },
+          {
+            "label": "15",
+            "unit": null,
+            "children": [
+              {
+                "label": "\u2013",
+                "unit": null
+              }
+            ]
+          },
+          {
+            "label": "2025 (",
+            "unit": null,
+            "children": [
+              {
+                "label": ",",
+                "unit": null
+              }
+            ]
+          },
+          {
+            "label": "23,",
+            "unit": null,
+            "children": [
+              {
+                "label": ",",
+                "unit": null
+              }
+            ]
+          },
+          {
+            "label": "\u0ce7\u0cef\u0cea 7)",
+            "unit": null,
+            "children": [
+              {
+                "label": ",",
+                "unit": null
+              }
+            ]
+          },
+          {
+            "label": "656",
+            "unit": null,
+            "children": [
+              {
+                "label": ".",
+                "unit": null
+              }
+            ]
+          }
+        ],
+        "rows": [],
+        "footnotes": [],
+        "extraction": "complete",
+        "page_image": null,
+        "gap_reason": null
+      },
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-10-15",
+          "valid_to": null,
+          "heading": "Table 1",
+          "intro": null,
+          "content": "Table 1",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2025-10",
+          "source_eid": "part_IVA__tbl_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2025-10",
+              "page": 1,
+              "bbox": [
+                0.1294,
+                0.3014,
+                0.8764,
+                0.9468
+              ],
+              "text_excerpt": "\u00a8\u00c1s \u00a8\u00c1s U\u00c0 U\u00c0 4 \u0c8e 15 2025 ( 23, \u0ce7\u0cef\u0cea 7)"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2025-10:part_IVA__tbl_1",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2025-10:part_IVA__tbl_1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-10-15",
+      "number": "part_IVA__tbl_1",
+      "title": "Table 1",
+      "level": 2,
+      "parent_id": "rmp2015-zr-amend-2025-10:PART IVA",
+      "order": 5,
+      "text": "Table 1",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2025-10",
+          "page": 1,
+          "bbox": [
+            0.1294,
+            0.3014,
+            0.8764,
+            0.9468
+          ],
+          "text_excerpt": "\u00a8\u00c1s \u00a8\u00c1s U\u00c0 U\u00c0 4 \u0c8e 15 2025 ( 23, \u0ce7\u0cef\u0cea 7)"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    }
+  ]
+}

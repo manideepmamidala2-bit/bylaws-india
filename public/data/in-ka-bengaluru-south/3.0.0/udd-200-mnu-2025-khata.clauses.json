@@ -1,0 +1,1948 @@
+{
+  "schema_version": "1.3",
+  "doc_id": "udd-200-mnu-2025-khata",
+  "jurisdiction": "in-ka-bengaluru-south",
+  "legal_status": "in_force",
+  "generated": {
+    "parser": "pypdfium2",
+    "parser_version": "4.30.0",
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "clauses": [
+    {
+      "eid": "prea_1",
+      "native_number": null,
+      "type": "preamble",
+      "heading": "Preamble",
+      "intro": null,
+      "content": "multi-storey Flat/unit then the his favor may himself apply and",
+      "wrap_up": null,
+      "children": [
+        "prea_1__prov_1"
+      ],
+      "parent_eid": null,
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-07-25",
+          "valid_to": null,
+          "heading": "Preamble",
+          "intro": null,
+          "content": "multi-storey Flat/unit then the his favor may himself apply and",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "udd-200-mnu-2025-khata",
+          "source_eid": "prea_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "udd-200-mnu-2025-khata",
+              "page": 13,
+              "bbox": [
+                0.2131,
+                0.131,
+                0.5198,
+                0.1666
+              ],
+              "text_excerpt": "multi-storey Flat/unit then the his favor may himself apply and"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "udd-200-mnu-2025-khata:preamble",
+      "record_version": 1,
+      "record_id": "udd-200-mnu-2025-khata:preamble@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-07-25",
+      "number": "preamble",
+      "title": "Preamble",
+      "level": 1,
+      "parent_id": null,
+      "order": 0,
+      "text": "multi-storey Flat/unit then the his favor may himself apply and",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "udd-200-mnu-2025-khata",
+          "page": 13,
+          "bbox": [
+            0.2131,
+            0.131,
+            0.5198,
+            0.1666
+          ],
+          "text_excerpt": "multi-storey Flat/unit then the his favor may himself apply and"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "prea_1__prov_1",
+      "native_number": null,
+      "type": "proviso",
+      "heading": "Proviso",
+      "intro": "Provided that one or more a registered deed in their favor for",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "prea_1__prov_1__item_a"
+      ],
+      "parent_eid": "prea_1",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-07-25",
+          "valid_to": null,
+          "heading": "Proviso",
+          "intro": "Provided that one or more a registered deed in their favor for",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "udd-200-mnu-2025-khata",
+          "source_eid": "prea_1__prov_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "udd-200-mnu-2025-khata",
+              "page": 13,
+              "bbox": [
+                0.2117,
+                0.1865,
+                0.5285,
+                0.2195
+              ],
+              "text_excerpt": "Provided that one or more a registered deed in their favor for"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "udd-200-mnu-2025-khata:preamble:proviso_1",
+      "record_version": 1,
+      "record_id": "udd-200-mnu-2025-khata:preamble:proviso_1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-07-25",
+      "number": "preamble:proviso_1",
+      "title": "Proviso",
+      "level": 2,
+      "parent_id": "udd-200-mnu-2025-khata:preamble",
+      "order": 1,
+      "text": "Provided that one or more a registered deed in their favor for",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "udd-200-mnu-2025-khata",
+          "page": 13,
+          "bbox": [
+            0.2117,
+            0.1865,
+            0.5285,
+            0.2195
+          ],
+          "text_excerpt": "Provided that one or more a registered deed in their favor for"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "prea_1__prov_1__item_a",
+      "native_number": "(a)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "to (c) above for the whole therein. under section 15 of the KTCp Act the GBG Act 2024- In case Certificate, then each Flat/Unit iv. The B-Khata is as for any action for violation of law in 2024 or any other law. v. The a construction was done by 30.09.2024. h g*! of plot any Single same shall not be issued B-Khata and and the GBG Act 2024. 4. Karnataka Land Revenue Act, 1964, after the conversion but has not KTCP Act 1961. Act, 1961, and thereupon be issued for such vacant land the a as Act. having person the registered - deed in B_Khata. g - obtain of these individual persons who have Flats/units one or more of the may comply with the requirements given in paragraph (ii) r*U\". points n ( *a construction the flats/units \"tt ng Thereupon-they may also apply for tt building plan approval relevait'provisions 1961 and or they successfully obtain the said Building Plan approval for the full construction and also obtain an Occupanc! eligible becomes for A_Khata. per provision contained in section 144(6) of the BBMP Act and parallel section in the ct2024.It GBG A is reiterated that as per proviso contained in these provisions such a B-Khata does not confer any right to regularize violations made or title, ownership or legal status to such buildings. Such buildings shall arways be liable accordance with th; GBG Act existence of regular BESCOM electricity connection for such a property on or before 30.09.2024 shall be mandatory to prove that with Murti-units constructed after 30.09.2024,the obtain A-Khata isat may as per KTCp A ct BBMP Khata for vacant land duly converted under section 95 of the which has not been further suhdivided obtained relevant approvals under the may be issued A-Khata from BBMP. No B-Khata shall person has opportunity to obtain A-Khata e}6 t566r , GrctreQ(.s d FAa? If{o6d,g ( tctd : ((i3pril_f , 5. BBMP Khata under section converted 95 iircp-act 196l. ' approvals under dhe in Only such cases transacted through registered deed a on or be issued as follows - a connects to the said vacant Plot. a",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "prea_1__prov_1",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-07-25",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "to (c) above for the whole therein. under section 15 of the KTCp Act the GBG Act 2024- In case Certificate, then each Flat/Unit iv. The B-Khata is as for any action for violation of law in 2024 or any other law. v. The a construction was done by 30.09.2024. h g*! of plot any Single same shall not be issued B-Khata and and the GBG Act 2024. 4. Karnataka Land Revenue Act, 1964, after the conversion but has not KTCP Act 1961. Act, 1961, and thereupon be issued for such vacant land the a as Act. having person the registered - deed in B_Khata. g - obtain of these individual persons who have Flats/units one or more of the may comply with the requirements given in paragraph (ii) r*U\". points n ( *a construction the flats/units \"tt ng Thereupon-they may also apply for tt building plan approval relevait'provisions 1961 and or they successfully obtain the said Building Plan approval for the full construction and also obtain an Occupanc! eligible becomes for A_Khata. per provision contained in section 144(6) of the BBMP Act and parallel section in the ct2024.It GBG A is reiterated that as per proviso contained in these provisions such a B-Khata does not confer any right to regularize violations made or title, ownership or legal status to such buildings. Such buildings shall arways be liable accordance with th; GBG Act existence of regular BESCOM electricity connection for such a property on or before 30.09.2024 shall be mandatory to prove that with Murti-units constructed after 30.09.2024,the obtain A-Khata isat may as per KTCp A ct BBMP Khata for vacant land duly converted under section 95 of the which has not been further suhdivided obtained relevant approvals under the may be issued A-Khata from BBMP. No B-Khata shall person has opportunity to obtain A-Khata e}6 t566r , GrctreQ(.s d FAa? If{o6d,g ( tctd : ((i3pril_f , 5. BBMP Khata under section converted 95 iircp-act 196l. ' approvals under dhe in Only such cases transacted through registered deed a on or be issued as follows - a connects to the said vacant Plot. a",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "udd-200-mnu-2025-khata",
+          "source_eid": "prea_1__prov_1__item_a",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "udd-200-mnu-2025-khata",
+              "page": 13,
+              "bbox": [
+                0.1282,
+                0.1357,
+                0.8913,
+                0.9813
+              ],
+              "text_excerpt": "(a) to (c) above for the whole therein. under section 15 of"
+            },
+            {
+              "doc_id": "udd-200-mnu-2025-khata",
+              "page": 14,
+              "bbox": [
+                0.104,
+                0.1134,
+                0.5111,
+                0.3952
+              ],
+              "text_excerpt": "5. BBMP Khata under section converted 95 iircp-act 196l. ' approvals under"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "udd-200-mnu-2025-khata:preamble:proviso_1(a)",
+      "record_version": 1,
+      "record_id": "udd-200-mnu-2025-khata:preamble:proviso_1(a)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-07-25",
+      "number": "preamble:proviso_1(a)",
+      "title": "to (c) above for the whole",
+      "level": 3,
+      "parent_id": "udd-200-mnu-2025-khata:preamble:proviso_1",
+      "order": 2,
+      "text": "to (c) above for the whole therein. under section 15 of the KTCp Act the GBG Act 2024- In case Certificate, then each Flat/Unit iv. The B-Khata is as for any action for violation of law in 2024 or any other law. v. The a construction was done by 30.09.2024. h g*! of plot any Single same shall not be issued B-Khata and and the GBG Act 2024. 4. Karnataka Land Revenue Act, 1964, after the conversion but has not KTCP Act 1961. Act, 1961, and thereupon be issued for such vacant land the a as Act. having person the registered - deed in B_Khata. g - obtain of these individual persons who have Flats/units one or more of the may comply with the requirements given in paragraph (ii) r*U\". points n ( *a construction the flats/units \"tt ng Thereupon-they may also apply for tt building plan approval relevait'provisions 1961 and or they successfully obtain the said Building Plan approval for the full construction and also obtain an Occupanc! eligible becomes for A_Khata. per provision contained in section 144(6) of the BBMP Act and parallel section in the ct2024.It GBG A is reiterated that as per proviso contained in these provisions such a B-Khata does not confer any right to regularize violations made or title, ownership or legal status to such buildings. Such buildings shall arways be liable accordance with th; GBG Act existence of regular BESCOM electricity connection for such a property on or before 30.09.2024 shall be mandatory to prove that with Murti-units constructed after 30.09.2024,the obtain A-Khata isat may as per KTCp A ct BBMP Khata for vacant land duly converted under section 95 of the which has not been further suhdivided obtained relevant approvals under the may be issued A-Khata from BBMP. No B-Khata shall person has opportunity to obtain A-Khata e}6 t566r , GrctreQ(.s d FAa? If{o6d,g ( tctd : ((i3pril_f , 5. BBMP Khata under section converted 95 iircp-act 196l. ' approvals under dhe in Only such cases transacted through registered deed a on or be issued as follows - a connects to the said vacant Plot. a",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "udd-200-mnu-2025-khata",
+          "page": 13,
+          "bbox": [
+            0.1282,
+            0.1357,
+            0.8913,
+            0.9813
+          ],
+          "text_excerpt": "(a) to (c) above for the whole therein. under section 15 of"
+        },
+        {
+          "doc_id": "udd-200-mnu-2025-khata",
+          "page": 14,
+          "bbox": [
+            0.104,
+            0.1134,
+            0.5111,
+            0.3952
+          ],
+          "text_excerpt": "5. BBMP Khata under section converted 95 iircp-act 196l. ' approvals under"
+        }
+      ],
+      "cross_references": [
+        "udd-200-mnu-2025-khata:15",
+        "udd-200-mnu-2025-khata:144",
+        "udd-200-mnu-2025-khata:95"
+      ],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_17",
+      "native_number": "17",
+      "type": "clause",
+      "heading": "17",
+      "intro": "17 layout. c) such Thereupon a by the BBMP as opportunity 6. Khata for BBMP an Number/Ilissa sy KLRAct 1964- a converted is an The BBMP Khata may following: It shall be ensured that there is plot. In vacant case a \"Public Road\" as 2024. oo\":dc$J 2025' dodq/6dr. 6iloo+: 25-07-2025d erdJa)od'1. for unauthorizedly sub-divided part of vacant land duly a of the Karnataka Land Revenue Act' 1964' which ' of sub-division where the sub-divided vacant plot has been before 30.09.2024, BBMP Khata may a of the KTCP Act 196l either a\"Single Plot''or as a sub-divided vacant site be issued A-I(hata may per the GBG Act, 2024. to obtain A-Khata pfter duly complying with the provisions of the KTCP Act 196 I and the GBG Act 2024. undivided vacait land bearing Revenue Survey a No which has not been converted under section 95 of the a agricultural land and cannot be issued BBMP Khata. be issued after complying with the public road connecting to the a there is private road connecting to such a p\u20acr pro visions of Section 212 of the GBG Act, f ?LgD fi g .Gftri csTEEr' e Ql(n (4t1i'r'': t ' 6t(c,\u20aci;.+ agtrr",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_17__item_a",
+        "cl_17__item_b",
+        "cl_17__item_d",
+        "cl_17__tbl_1",
+        "cl_17__tbl_2",
+        "cl_17__tbl_3",
+        "cl_17__tbl_4",
+        "cl_17__tbl_5"
+      ],
+      "parent_eid": null,
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-07-25",
+          "valid_to": null,
+          "heading": "17",
+          "intro": "17 layout. c) such Thereupon a by the BBMP as opportunity 6. Khata for BBMP an Number/Ilissa sy KLRAct 1964- a converted is an The BBMP Khata may following: It shall be ensured that there is plot. In vacant case a \"Public Road\" as 2024. oo\":dc$J 2025' dodq/6dr. 6iloo+: 25-07-2025d erdJa)od'1. for unauthorizedly sub-divided part of vacant land duly a of the Karnataka Land Revenue Act' 1964' which ' of sub-division where the sub-divided vacant plot has been before 30.09.2024, BBMP Khata may a of the KTCP Act 196l either a\"Single Plot''or as a sub-divided vacant site be issued A-I(hata may per the GBG Act, 2024. to obtain A-Khata pfter duly complying with the provisions of the KTCP Act 196 I and the GBG Act 2024. undivided vacait land bearing Revenue Survey a No which has not been converted under section 95 of the a agricultural land and cannot be issued BBMP Khata. be issued after complying with the public road connecting to the a there is private road connecting to such a p\u20acr pro visions of Section 212 of the GBG Act, f ?LgD fi g .Gftri csTEEr' e Ql(n (4t1i'r'': t ' 6t(c,\u20aci;.+ agtrr",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "udd-200-mnu-2025-khata",
+          "source_eid": "cl_17",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "udd-200-mnu-2025-khata",
+              "page": 14,
+              "bbox": [
+                0.1123,
+                0.0523,
+                0.8608,
+                0.9797
+              ],
+              "text_excerpt": "Section 17 layout. c) such Thereupon a by the BBMP as opportunity"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "udd-200-mnu-2025-khata:17",
+      "record_version": 1,
+      "record_id": "udd-200-mnu-2025-khata:17@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-07-25",
+      "number": "17",
+      "title": "17",
+      "level": 1,
+      "parent_id": null,
+      "order": 3,
+      "text": "17 layout. c) such Thereupon a by the BBMP as opportunity 6. Khata for BBMP an Number/Ilissa sy KLRAct 1964- a converted is an The BBMP Khata may following: It shall be ensured that there is plot. In vacant case a \"Public Road\" as 2024. oo\":dc$J 2025' dodq/6dr. 6iloo+: 25-07-2025d erdJa)od'1. for unauthorizedly sub-divided part of vacant land duly a of the Karnataka Land Revenue Act' 1964' which ' of sub-division where the sub-divided vacant plot has been before 30.09.2024, BBMP Khata may a of the KTCP Act 196l either a\"Single Plot''or as a sub-divided vacant site be issued A-I(hata may per the GBG Act, 2024. to obtain A-Khata pfter duly complying with the provisions of the KTCP Act 196 I and the GBG Act 2024. undivided vacait land bearing Revenue Survey a No which has not been converted under section 95 of the a agricultural land and cannot be issued BBMP Khata. be issued after complying with the public road connecting to the a there is private road connecting to such a p\u20acr pro visions of Section 212 of the GBG Act, f ?LgD fi g .Gftri csTEEr' e Ql(n (4t1i'r'': t ' 6t(c,\u20aci;.+ agtrr",
+      "language": "en",
+      "tables": [
+        {
+          "table_id": "udd-200-mnu-2025-khata:17:t1",
+          "caption": null,
+          "headers": [
+            "already",
+            "transactsd through",
+            "registered ' deed but without relevant"
+          ],
+          "rows": [],
+          "page": 14
+        },
+        {
+          "table_id": "udd-200-mnu-2025-khata:17:t2",
+          "caption": null,
+          "headers": [
+            "declared",
+            "\"Public Road\"",
+            "per provisions of Section 212"
+          ],
+          "rows": [],
+          "page": 14
+        },
+        {
+          "table_id": "udd-200-mnu-2025-khata:17:t3",
+          "caption": null,
+          "headers": [
+            "provisions of the KLR Act",
+            "KTCp Act",
+            "ail"
+          ],
+          "rows": [
+            [
+              "1964,",
+              "1961",
+              "the GBG"
+            ]
+          ],
+          "page": 15
+        },
+        {
+          "table_id": "udd-200-mnu-2025-khata:17:t4",
+          "caption": null,
+          "headers": [
+            "sub-divided vacant plot. [n",
+            "there is private",
+            "lonnectin!"
+          ],
+          "rows": [
+            [
+              "to such a vacant prot or land then the",
+              "shall",
+              "declari"
+            ]
+          ],
+          "page": 15
+        },
+        {
+          "table_id": "udd-200-mnu-2025-khata:17:t5",
+          "caption": null,
+          "headers": [
+            "as a \"Public Road\"",
+            "per provisions of the",
+            "ofthe"
+          ],
+          "rows": [
+            [
+              "as",
+              "on 212",
+              "GBG"
+            ]
+          ],
+          "page": 15
+        }
+      ],
+      "citations": [
+        {
+          "doc_id": "udd-200-mnu-2025-khata",
+          "page": 14,
+          "bbox": [
+            0.1123,
+            0.0523,
+            0.8608,
+            0.9797
+          ],
+          "text_excerpt": "Section 17 layout. c) such Thereupon a by the BBMP as opportunity"
+        }
+      ],
+      "cross_references": [
+        "udd-200-mnu-2025-khata:95",
+        "udd-200-mnu-2025-khata:212"
+      ],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_17__item_a",
+      "native_number": "(a)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "Firstly, the road connecting to such vacant plot or land shall have of the GBG Act,2024 unless \"public road\" already exists which",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_17",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-07-25",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "Firstly, the road connecting to such vacant plot or land shall have of the GBG Act,2024 unless \"public road\" already exists which",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "udd-200-mnu-2025-khata",
+          "source_eid": "cl_17__item_a",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "udd-200-mnu-2025-khata",
+              "page": 14,
+              "bbox": [
+                0.1595,
+                0.2884,
+                0.8118,
+                0.3446
+              ],
+              "text_excerpt": "a) Firstly, the road connecting to such vacant plot or land shall"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "udd-200-mnu-2025-khata:17(a)",
+      "record_version": 1,
+      "record_id": "udd-200-mnu-2025-khata:17(a)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-07-25",
+      "number": "17(a)",
+      "title": "Firstly, the road connecting to such vacant plot or land shall have",
+      "level": 2,
+      "parent_id": "udd-200-mnu-2025-khata:17",
+      "order": 4,
+      "text": "Firstly, the road connecting to such vacant plot or land shall have of the GBG Act,2024 unless \"public road\" already exists which",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "udd-200-mnu-2025-khata",
+          "page": 14,
+          "bbox": [
+            0.1595,
+            0.2884,
+            0.8118,
+            0.3446
+          ],
+          "text_excerpt": "a) Firstly, the road connecting to such vacant plot or land shall"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_17__item_b",
+      "native_number": "(b)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "Thereupon, such vacant site shall obtain relevant approval under",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_17",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-07-25",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "Thereupon, such vacant site shall obtain relevant approval under",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "udd-200-mnu-2025-khata",
+          "source_eid": "cl_17__item_b",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "udd-200-mnu-2025-khata",
+              "page": 14,
+              "bbox": [
+                0.1612,
+                0.3814,
+                0.8153,
+                0.3994
+              ],
+              "text_excerpt": "b) Thereupon, such vacant site shall obtain relevant approval under"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "udd-200-mnu-2025-khata:17(b)",
+      "record_version": 1,
+      "record_id": "udd-200-mnu-2025-khata:17(b)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-07-25",
+      "number": "17(b)",
+      "title": "Thereupon, such vacant site shall obtain relevant approval under",
+      "level": 2,
+      "parent_id": "udd-200-mnu-2025-khata:17",
+      "order": 5,
+      "text": "Thereupon, such vacant site shall obtain relevant approval under",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "udd-200-mnu-2025-khata",
+          "page": 14,
+          "bbox": [
+            0.1612,
+            0.3814,
+            0.8153,
+            0.3994
+          ],
+          "text_excerpt": "b) Thereupon, such vacant site shall obtain relevant approval under"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_17__item_d",
+      "native_number": "(d)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "No B-Khata shall be issued for such a vacant land as the person has Every undivided land bearing Revenue Survey Number or Hissa Survey Number under the Karnataka Land Revenue Act, 1964, which has not been vacant plot or land then the same shall have to be declared as a droFdEJ erd(, dods: de,tr dorlr/6d). biloo+: ii. The land be shall fL\\ Section l7 of the KTCp Act iii. Thereupon, such layout. iv. Thereupon such Revenue a the BBMP as v. No B-Khata shall be issued for such Act. 7. BBMP Khata for unauthorizedry bearing a Revenue Survey Number 30.09.2024. only in such of sub-division of cases No/Hissa Sy No where the sub-divided registered deed on or complying with the following - i. It shall be ensured that there Arct2024. : ooo6tcdp 2025. erdJaoC-1. 2s-07-2025d converted to non-agricultural purpose under Section 95 of the Kamataka Land Revenue Act r96i.In this regard as per latest amended Section 95, l in the land falls withirithe case approved Revised Master , plan of Bengaluru City then the permission of the Deputy Commissioner shall not be iequired for diversion of land to such non-agriculture purpose as prescribed in the approved Master Plan. The Fee prescribed under Section 95(7) fL\\ Si Act shall be paid to the authority according approval undei 1961. a vacant site shall obtain relevant approval under Section 17 of the KTCp Act 196l either a,.Singie plot, as or a vacant site may be issued A_Khata by per the GBG Act2024. a vacant land as the person has opportunity to obtain A-Khata after duly with complying the sub-divided part of vacant a rand o. Hissa survey Number which is not converted under section 95 ofthe Karnataka Land h.evenue Act, 1964, but wtrich has already been transacted through a registered deed or before on a vacant land bearing a Revenue Sy vacant prot has been traisa.tJ through u before 3o.og.2o24,trre gnlvfp Khata issuea ate. may ue is a public road connecting to such a same have to be SDIIE' sQrd E rtr\u20ac t t 6}GAd,q\u20ac<nd (ar,,,,r r - 11. per latest amended Se-otion 95, in as section 17 ofthe KTCP Act 1961. Plot\" or a layout. lv. A-I(hata by the BBMP as I 961 and the BBMP Act 2020. iiroFdd erdc, dodr: der\u20ac 2 200 oroorddp 2025. ?3orld.6d): bilood: 25-07-2025d erd)poC-1. the plot falls within the case the diversion ofland to such non-agriculture purpose prescribed in as approval under Section I 7 of the KTCP Act I 96 I either \"Single as a Thereupon such a sub-divided revenue vacant site may be issued per the GBG Act 2024. as d\u0002 GARA N.K) nder Se to Govemment, Urban Development Departnent i (BBMP-I ) nf i e}g.sDrtd hrda sQrd oo$rdDF icaaj (a'dO'J) ! d71@Qi,g - The land shall be converted to non-agricultural purpose rrnder Section 95 of the Karnataka Land Revenue Act 1964. [n this regard approved Revised Master Plan of Bengaluru City then pennission of the Deputy Commissioner shall not be required for the approved Master Plan. The Fee prescribed under Section 95(7) KLR Act shall be paid to the authority according approval under Thereupon, such a sub-divided vacant site shall obtain relevant No B-Khata shall be issued for such a sub-divided vacant land the person has the opportunity to obtain A-Khata after duly complying with the provisions of the KLR Act 1964, KTCP Act",
+      "wrap_up": null,
+      "children": [
+        "cl_17__item_d__tbl_1",
+        "cl_17__item_d__tbl_2"
+      ],
+      "parent_eid": "cl_17",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-07-25",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "No B-Khata shall be issued for such a vacant land as the person has Every undivided land bearing Revenue Survey Number or Hissa Survey Number under the Karnataka Land Revenue Act, 1964, which has not been vacant plot or land then the same shall have to be declared as a droFdEJ erd(, dods: de,tr dorlr/6d). biloo+: ii. The land be shall fL\\ Section l7 of the KTCp Act iii. Thereupon, such layout. iv. Thereupon such Revenue a the BBMP as v. No B-Khata shall be issued for such Act. 7. BBMP Khata for unauthorizedry bearing a Revenue Survey Number 30.09.2024. only in such of sub-division of cases No/Hissa Sy No where the sub-divided registered deed on or complying with the following - i. It shall be ensured that there Arct2024. : ooo6tcdp 2025. erdJaoC-1. 2s-07-2025d converted to non-agricultural purpose under Section 95 of the Kamataka Land Revenue Act r96i.In this regard as per latest amended Section 95, l in the land falls withirithe case approved Revised Master , plan of Bengaluru City then the permission of the Deputy Commissioner shall not be iequired for diversion of land to such non-agriculture purpose as prescribed in the approved Master Plan. The Fee prescribed under Section 95(7) fL\\ Si Act shall be paid to the authority according approval undei 1961. a vacant site shall obtain relevant approval under Section 17 of the KTCp Act 196l either a,.Singie plot, as or a vacant site may be issued A_Khata by per the GBG Act2024. a vacant land as the person has opportunity to obtain A-Khata after duly with complying the sub-divided part of vacant a rand o. Hissa survey Number which is not converted under section 95 ofthe Karnataka Land h.evenue Act, 1964, but wtrich has already been transacted through a registered deed or before on a vacant land bearing a Revenue Sy vacant prot has been traisa.tJ through u before 3o.og.2o24,trre gnlvfp Khata issuea ate. may ue is a public road connecting to such a same have to be SDIIE' sQrd E rtr\u20ac t t 6}GAd,q\u20ac<nd (ar,,,,r r - 11. per latest amended Se-otion 95, in as section 17 ofthe KTCP Act 1961. Plot\" or a layout. lv. A-I(hata by the BBMP as I 961 and the BBMP Act 2020. iiroFdd erdc, dodr: der\u20ac 2 200 oroorddp 2025. ?3orld.6d): bilood: 25-07-2025d erd)poC-1. the plot falls within the case the diversion ofland to such non-agriculture purpose prescribed in as approval under Section I 7 of the KTCP Act I 96 I either \"Single as a Thereupon such a sub-divided revenue vacant site may be issued per the GBG Act 2024. as d\u0002 GARA N.K) nder Se to Govemment, Urban Development Departnent i (BBMP-I ) nf i e}g.sDrtd hrda sQrd oo$rdDF icaaj (a'dO'J) ! d71@Qi,g - The land shall be converted to non-agricultural purpose rrnder Section 95 of the Karnataka Land Revenue Act 1964. [n this regard approved Revised Master Plan of Bengaluru City then pennission of the Deputy Commissioner shall not be required for the approved Master Plan. The Fee prescribed under Section 95(7) KLR Act shall be paid to the authority according approval under Thereupon, such a sub-divided vacant site shall obtain relevant No B-Khata shall be issued for such a sub-divided vacant land the person has the opportunity to obtain A-Khata after duly complying with the provisions of the KLR Act 1964, KTCP Act",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "udd-200-mnu-2025-khata",
+          "source_eid": "cl_17__item_d",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "udd-200-mnu-2025-khata",
+              "page": 14,
+              "bbox": [
+                0.1132,
+                0.5128,
+                0.8601,
+                0.8451
+              ],
+              "text_excerpt": "d) No B-Khata shall be issued for such a vacant land as"
+            },
+            {
+              "doc_id": "udd-200-mnu-2025-khata",
+              "page": 15,
+              "bbox": [
+                0.1176,
+                0.0697,
+                0.872,
+                0.9642
+              ],
+              "text_excerpt": "droFdEJ erd(, dods: de,tr dorlr/6d). biloo+: ii. The land be shall fL\\"
+            },
+            {
+              "doc_id": "udd-200-mnu-2025-khata",
+              "page": 16,
+              "bbox": [
+                0.1358,
+                0.0525,
+                0.8424,
+                0.6772
+              ],
+              "text_excerpt": "11. per latest amended Se-otion 95, in as section 17 ofthe KTCP"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "udd-200-mnu-2025-khata:17(d)",
+      "record_version": 1,
+      "record_id": "udd-200-mnu-2025-khata:17(d)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-07-25",
+      "number": "17(d)",
+      "title": "No B-Khata shall be issued for such a vacant land as the person has",
+      "level": 2,
+      "parent_id": "udd-200-mnu-2025-khata:17",
+      "order": 6,
+      "text": "No B-Khata shall be issued for such a vacant land as the person has Every undivided land bearing Revenue Survey Number or Hissa Survey Number under the Karnataka Land Revenue Act, 1964, which has not been vacant plot or land then the same shall have to be declared as a droFdEJ erd(, dods: de,tr dorlr/6d). biloo+: ii. The land be shall fL\\ Section l7 of the KTCp Act iii. Thereupon, such layout. iv. Thereupon such Revenue a the BBMP as v. No B-Khata shall be issued for such Act. 7. BBMP Khata for unauthorizedry bearing a Revenue Survey Number 30.09.2024. only in such of sub-division of cases No/Hissa Sy No where the sub-divided registered deed on or complying with the following - i. It shall be ensured that there Arct2024. : ooo6tcdp 2025. erdJaoC-1. 2s-07-2025d converted to non-agricultural purpose under Section 95 of the Kamataka Land Revenue Act r96i.In this regard as per latest amended Section 95, l in the land falls withirithe case approved Revised Master , plan of Bengaluru City then the permission of the Deputy Commissioner shall not be iequired for diversion of land to such non-agriculture purpose as prescribed in the approved Master Plan. The Fee prescribed under Section 95(7) fL\\ Si Act shall be paid to the authority according approval undei 1961. a vacant site shall obtain relevant approval under Section 17 of the KTCp Act 196l either a,.Singie plot, as or a vacant site may be issued A_Khata by per the GBG Act2024. a vacant land as the person has opportunity to obtain A-Khata after duly with complying the sub-divided part of vacant a rand o. Hissa survey Number which is not converted under section 95 ofthe Karnataka Land h.evenue Act, 1964, but wtrich has already been transacted through a registered deed or before on a vacant land bearing a Revenue Sy vacant prot has been traisa.tJ through u before 3o.og.2o24,trre gnlvfp Khata issuea ate. may ue is a public road connecting to such a same have to be SDIIE' sQrd E rtr\u20ac t t 6}GAd,q\u20ac<nd (ar,,,,r r - 11. per latest amended Se-otion 95, in as section 17 ofthe KTCP Act 1961. Plot\" or a layout. lv. A-I(hata by the BBMP as I 961 and the BBMP Act 2020. iiroFdd erdc, dodr: der\u20ac 2 200 oroorddp 2025. ?3orld.6d): bilood: 25-07-2025d erd)poC-1. the plot falls within the case the diversion ofland to such non-agriculture purpose prescribed in as approval under Section I 7 of the KTCP Act I 96 I either \"Single as a Thereupon such a sub-divided revenue vacant site may be issued per the GBG Act 2024. as d\u0002 GARA N.K) nder Se to Govemment, Urban Development Departnent i (BBMP-I ) nf i e}g.sDrtd hrda sQrd oo$rdDF icaaj (a'dO'J) ! d71@Qi,g - The land shall be converted to non-agricultural purpose rrnder Section 95 of the Karnataka Land Revenue Act 1964. [n this regard approved Revised Master Plan of Bengaluru City then pennission of the Deputy Commissioner shall not be required for the approved Master Plan. The Fee prescribed under Section 95(7) KLR Act shall be paid to the authority according approval under Thereupon, such a sub-divided vacant site shall obtain relevant No B-Khata shall be issued for such a sub-divided vacant land the person has the opportunity to obtain A-Khata after duly complying with the provisions of the KLR Act 1964, KTCP Act",
+      "language": "en",
+      "tables": [
+        {
+          "table_id": "udd-200-mnu-2025-khata:17(d):t1",
+          "caption": null,
+          "headers": [
+            "In all such",
+            "the",
+            "shall obtain relevant"
+          ],
+          "rows": [],
+          "page": 13
+        },
+        {
+          "table_id": "udd-200-mnu-2025-khata:17(d):t2",
+          "caption": null,
+          "headers": [
+            "after duly complying with the provisi",
+            "of",
+            "Acr",
+            "I"
+          ],
+          "rows": [
+            [
+              "ons",
+              "the KTCP",
+              "196",
+              "and the GBG"
+            ]
+          ],
+          "page": 13
+        }
+      ],
+      "citations": [
+        {
+          "doc_id": "udd-200-mnu-2025-khata",
+          "page": 14,
+          "bbox": [
+            0.1132,
+            0.5128,
+            0.8601,
+            0.8451
+          ],
+          "text_excerpt": "d) No B-Khata shall be issued for such a vacant land as"
+        },
+        {
+          "doc_id": "udd-200-mnu-2025-khata",
+          "page": 15,
+          "bbox": [
+            0.1176,
+            0.0697,
+            0.872,
+            0.9642
+          ],
+          "text_excerpt": "droFdEJ erd(, dods: de,tr dorlr/6d). biloo+: ii. The land be shall fL\\"
+        },
+        {
+          "doc_id": "udd-200-mnu-2025-khata",
+          "page": 16,
+          "bbox": [
+            0.1358,
+            0.0525,
+            0.8424,
+            0.6772
+          ],
+          "text_excerpt": "11. per latest amended Se-otion 95, in as section 17 ofthe KTCP"
+        }
+      ],
+      "cross_references": [
+        "udd-200-mnu-2025-khata:l7",
+        "udd-200-mnu-2025-khata:95",
+        "udd-200-mnu-2025-khata:17"
+      ],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_17__item_d__tbl_1",
+      "native_number": "Table 1",
+      "type": "table",
+      "heading": "Table 1",
+      "intro": null,
+      "content": "Table 1",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_17__item_d",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": {
+        "columns": [
+          {
+            "label": "In all such",
+            "unit": null,
+            "children": [
+              {
+                "label": "cases",
+                "unit": null
+              }
+            ]
+          },
+          {
+            "label": "the",
+            "unit": null,
+            "children": [
+              {
+                "label": "owner",
+                "unit": null
+              }
+            ]
+          },
+          {
+            "label": "shall obtain relevant",
+            "unit": null,
+            "children": [
+              {
+                "label": "approvals under the KTCp",
+                "unit": null
+              }
+            ]
+          }
+        ],
+        "rows": [],
+        "footnotes": [],
+        "extraction": "complete",
+        "page_image": null,
+        "gap_reason": null
+      },
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-07-25",
+          "valid_to": null,
+          "heading": "Table 1",
+          "intro": null,
+          "content": "Table 1",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "udd-200-mnu-2025-khata",
+          "source_eid": "cl_17__item_d__tbl_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "udd-200-mnu-2025-khata",
+              "page": 13,
+              "bbox": [
+                0.1132,
+                0.5128,
+                0.8601,
+                0.8451
+              ],
+              "text_excerpt": "In all such the shall obtain relevant"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "udd-200-mnu-2025-khata:cl_17__item_d__tbl_1",
+      "record_version": 1,
+      "record_id": "udd-200-mnu-2025-khata:cl_17__item_d__tbl_1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-07-25",
+      "number": "cl_17__item_d__tbl_1",
+      "title": "Table 1",
+      "level": 3,
+      "parent_id": "udd-200-mnu-2025-khata:17(d)",
+      "order": 7,
+      "text": "Table 1",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "udd-200-mnu-2025-khata",
+          "page": 13,
+          "bbox": [
+            0.1132,
+            0.5128,
+            0.8601,
+            0.8451
+          ],
+          "text_excerpt": "In all such the shall obtain relevant"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_17__item_d__tbl_2",
+      "native_number": "Table 2",
+      "type": "table",
+      "heading": "Table 2",
+      "intro": null,
+      "content": "Table 2",
+      "wrap_up": null,
+      "children": [
+        "cl_17__item_d__tbl_2__row_1"
+      ],
+      "parent_eid": "cl_17__item_d",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": {
+        "columns": [
+          {
+            "label": "after duly complying with the provisi",
+            "unit": null
+          },
+          {
+            "label": "of",
+            "unit": null
+          },
+          {
+            "label": "Acr",
+            "unit": null
+          },
+          {
+            "label": "I",
+            "unit": null
+          }
+        ],
+        "rows": [
+          "cl_17__item_d__tbl_2__row_1"
+        ],
+        "footnotes": [],
+        "extraction": "complete",
+        "page_image": null,
+        "gap_reason": null
+      },
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-07-25",
+          "valid_to": null,
+          "heading": "Table 2",
+          "intro": null,
+          "content": "Table 2",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "udd-200-mnu-2025-khata",
+          "source_eid": "cl_17__item_d__tbl_2",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "udd-200-mnu-2025-khata",
+              "page": 13,
+              "bbox": [
+                0.1132,
+                0.5128,
+                0.8601,
+                0.8451
+              ],
+              "text_excerpt": "after duly complying with the provisi of Acr I"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "udd-200-mnu-2025-khata:cl_17__item_d__tbl_2",
+      "record_version": 1,
+      "record_id": "udd-200-mnu-2025-khata:cl_17__item_d__tbl_2@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-07-25",
+      "number": "cl_17__item_d__tbl_2",
+      "title": "Table 2",
+      "level": 3,
+      "parent_id": "udd-200-mnu-2025-khata:17(d)",
+      "order": 8,
+      "text": "Table 2",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "udd-200-mnu-2025-khata",
+          "page": 13,
+          "bbox": [
+            0.1132,
+            0.5128,
+            0.8601,
+            0.8451
+          ],
+          "text_excerpt": "after duly complying with the provisi of Acr I"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_17__item_d__tbl_2__row_1",
+      "native_number": "1",
+      "type": "table_row",
+      "heading": null,
+      "intro": null,
+      "content": "ons | the KTCP | 196 | and the GBG",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_17__item_d__tbl_2",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": [
+        "ons",
+        "the KTCP",
+        "196",
+        "and the GBG"
+      ],
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-07-25",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "ons | the KTCP | 196 | and the GBG",
+          "wrap_up": null,
+          "cells": [
+            "ons",
+            "the KTCP",
+            "196",
+            "and the GBG"
+          ],
+          "source_doc": "udd-200-mnu-2025-khata",
+          "source_eid": "cl_17__item_d__tbl_2__row_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "udd-200-mnu-2025-khata",
+              "page": 13,
+              "bbox": [
+                0.1132,
+                0.5128,
+                0.8601,
+                0.8451
+              ],
+              "text_excerpt": "after duly complying with the provisi of Acr I"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "udd-200-mnu-2025-khata:cl_17__item_d__tbl_2__row_1",
+      "record_version": 1,
+      "record_id": "udd-200-mnu-2025-khata:cl_17__item_d__tbl_2__row_1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-07-25",
+      "number": "cl_17__item_d__tbl_2__row_1",
+      "title": "Row 1",
+      "level": 4,
+      "parent_id": "udd-200-mnu-2025-khata:cl_17__item_d__tbl_2",
+      "order": 9,
+      "text": "ons | the KTCP | 196 | and the GBG",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "udd-200-mnu-2025-khata",
+          "page": 13,
+          "bbox": [
+            0.1132,
+            0.5128,
+            0.8601,
+            0.8451
+          ],
+          "text_excerpt": "after duly complying with the provisi of Acr I"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_17__tbl_1",
+      "native_number": "Table 1",
+      "type": "table",
+      "heading": "Table 1",
+      "intro": null,
+      "content": "Table 1",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_17",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": {
+        "columns": [
+          {
+            "label": "already",
+            "unit": null,
+            "children": [
+              {
+                "label": "has",
+                "unit": null
+              }
+            ]
+          },
+          {
+            "label": "transactsd through",
+            "unit": null,
+            "children": [
+              {
+                "label": "been",
+                "unit": null
+              }
+            ]
+          },
+          {
+            "label": "registered ' deed but without relevant",
+            "unit": null,
+            "children": [
+              {
+                "label": "a",
+                "unit": null
+              }
+            ]
+          }
+        ],
+        "rows": [],
+        "footnotes": [
+          {
+            "marker": "*",
+            "text": "uoFd; erd(d iodr: del\u20ac 2",
+            "cell_refs": []
+          }
+        ],
+        "extraction": "complete",
+        "page_image": null,
+        "gap_reason": null
+      },
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-07-25",
+          "valid_to": null,
+          "heading": "Table 1",
+          "intro": null,
+          "content": "Table 1",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "udd-200-mnu-2025-khata",
+          "source_eid": "cl_17__tbl_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "udd-200-mnu-2025-khata",
+              "page": 14,
+              "bbox": [
+                0.1123,
+                0.0523,
+                0.8608,
+                0.9797
+              ],
+              "text_excerpt": "already transactsd through registered ' deed but without relevant"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "udd-200-mnu-2025-khata:cl_17__tbl_1",
+      "record_version": 1,
+      "record_id": "udd-200-mnu-2025-khata:cl_17__tbl_1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-07-25",
+      "number": "cl_17__tbl_1",
+      "title": "Table 1",
+      "level": 2,
+      "parent_id": "udd-200-mnu-2025-khata:17",
+      "order": 10,
+      "text": "Table 1",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "udd-200-mnu-2025-khata",
+          "page": 14,
+          "bbox": [
+            0.1123,
+            0.0523,
+            0.8608,
+            0.9797
+          ],
+          "text_excerpt": "already transactsd through registered ' deed but without relevant"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_17__tbl_2",
+      "native_number": "Table 2",
+      "type": "table",
+      "heading": "Table 2",
+      "intro": null,
+      "content": "Table 2",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_17",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": {
+        "columns": [
+          {
+            "label": "declared",
+            "unit": null,
+            "children": [
+              {
+                "label": "to be",
+                "unit": null
+              }
+            ]
+          },
+          {
+            "label": "\"Public Road\"",
+            "unit": null,
+            "children": [
+              {
+                "label": "as a",
+                "unit": null
+              }
+            ]
+          },
+          {
+            "label": "per provisions of Section 212",
+            "unit": null,
+            "children": [
+              {
+                "label": "as",
+                "unit": null
+              }
+            ]
+          }
+        ],
+        "rows": [],
+        "footnotes": [
+          {
+            "marker": "*",
+            "text": "uoFd; erd(d iodr: del\u20ac 2",
+            "cell_refs": []
+          }
+        ],
+        "extraction": "complete",
+        "page_image": null,
+        "gap_reason": null
+      },
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-07-25",
+          "valid_to": null,
+          "heading": "Table 2",
+          "intro": null,
+          "content": "Table 2",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "udd-200-mnu-2025-khata",
+          "source_eid": "cl_17__tbl_2",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "udd-200-mnu-2025-khata",
+              "page": 14,
+              "bbox": [
+                0.1123,
+                0.0523,
+                0.8608,
+                0.9797
+              ],
+              "text_excerpt": "declared \"Public Road\" per provisions of Section 212"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "udd-200-mnu-2025-khata:cl_17__tbl_2",
+      "record_version": 1,
+      "record_id": "udd-200-mnu-2025-khata:cl_17__tbl_2@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-07-25",
+      "number": "cl_17__tbl_2",
+      "title": "Table 2",
+      "level": 2,
+      "parent_id": "udd-200-mnu-2025-khata:17",
+      "order": 11,
+      "text": "Table 2",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "udd-200-mnu-2025-khata",
+          "page": 14,
+          "bbox": [
+            0.1123,
+            0.0523,
+            0.8608,
+            0.9797
+          ],
+          "text_excerpt": "declared \"Public Road\" per provisions of Section 212"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_17__tbl_3",
+      "native_number": "Table 3",
+      "type": "table",
+      "heading": "Table 3",
+      "intro": null,
+      "content": "Table 3",
+      "wrap_up": null,
+      "children": [
+        "cl_17__tbl_3__row_1"
+      ],
+      "parent_eid": "cl_17",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": {
+        "columns": [
+          {
+            "label": "provisions of the KLR Act",
+            "unit": null
+          },
+          {
+            "label": "KTCp Act",
+            "unit": null
+          },
+          {
+            "label": "ail",
+            "unit": null
+          }
+        ],
+        "rows": [
+          "cl_17__tbl_3__row_1"
+        ],
+        "footnotes": [],
+        "extraction": "complete",
+        "page_image": null,
+        "gap_reason": null
+      },
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-07-25",
+          "valid_to": null,
+          "heading": "Table 3",
+          "intro": null,
+          "content": "Table 3",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "udd-200-mnu-2025-khata",
+          "source_eid": "cl_17__tbl_3",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "udd-200-mnu-2025-khata",
+              "page": 15,
+              "bbox": [
+                0.1123,
+                0.0523,
+                0.8608,
+                0.9797
+              ],
+              "text_excerpt": "provisions of the KLR Act KTCp Act ail"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "udd-200-mnu-2025-khata:cl_17__tbl_3",
+      "record_version": 1,
+      "record_id": "udd-200-mnu-2025-khata:cl_17__tbl_3@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-07-25",
+      "number": "cl_17__tbl_3",
+      "title": "Table 3",
+      "level": 2,
+      "parent_id": "udd-200-mnu-2025-khata:17",
+      "order": 12,
+      "text": "Table 3",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "udd-200-mnu-2025-khata",
+          "page": 15,
+          "bbox": [
+            0.1123,
+            0.0523,
+            0.8608,
+            0.9797
+          ],
+          "text_excerpt": "provisions of the KLR Act KTCp Act ail"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_17__tbl_3__row_1",
+      "native_number": "1",
+      "type": "table_row",
+      "heading": null,
+      "intro": null,
+      "content": "1964, | 1961 | the GBG",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_17__tbl_3",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": [
+        "1964,",
+        "1961",
+        "the GBG"
+      ],
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-07-25",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "1964, | 1961 | the GBG",
+          "wrap_up": null,
+          "cells": [
+            "1964,",
+            "1961",
+            "the GBG"
+          ],
+          "source_doc": "udd-200-mnu-2025-khata",
+          "source_eid": "cl_17__tbl_3__row_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "udd-200-mnu-2025-khata",
+              "page": 15,
+              "bbox": [
+                0.1123,
+                0.0523,
+                0.8608,
+                0.9797
+              ],
+              "text_excerpt": "provisions of the KLR Act KTCp Act ail"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "udd-200-mnu-2025-khata:cl_17__tbl_3__row_1",
+      "record_version": 1,
+      "record_id": "udd-200-mnu-2025-khata:cl_17__tbl_3__row_1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-07-25",
+      "number": "cl_17__tbl_3__row_1",
+      "title": "Row 1",
+      "level": 3,
+      "parent_id": "udd-200-mnu-2025-khata:cl_17__tbl_3",
+      "order": 13,
+      "text": "1964, | 1961 | the GBG",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "udd-200-mnu-2025-khata",
+          "page": 15,
+          "bbox": [
+            0.1123,
+            0.0523,
+            0.8608,
+            0.9797
+          ],
+          "text_excerpt": "provisions of the KLR Act KTCp Act ail"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_17__tbl_4",
+      "native_number": "Table 4",
+      "type": "table",
+      "heading": "Table 4",
+      "intro": null,
+      "content": "Table 4",
+      "wrap_up": null,
+      "children": [
+        "cl_17__tbl_4__row_1"
+      ],
+      "parent_eid": "cl_17",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": {
+        "columns": [
+          {
+            "label": "sub-divided vacant plot. [n",
+            "unit": null,
+            "children": [
+              {
+                "label": "case",
+                "unit": null
+              }
+            ]
+          },
+          {
+            "label": "there is private",
+            "unit": null,
+            "children": [
+              {
+                "label": "a",
+                "unit": null
+              }
+            ]
+          },
+          {
+            "label": "lonnectin!",
+            "unit": null,
+            "children": [
+              {
+                "label": "roaa",
+                "unit": null
+              }
+            ]
+          }
+        ],
+        "rows": [
+          "cl_17__tbl_4__row_1"
+        ],
+        "footnotes": [],
+        "extraction": "complete",
+        "page_image": null,
+        "gap_reason": null
+      },
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-07-25",
+          "valid_to": null,
+          "heading": "Table 4",
+          "intro": null,
+          "content": "Table 4",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "udd-200-mnu-2025-khata",
+          "source_eid": "cl_17__tbl_4",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "udd-200-mnu-2025-khata",
+              "page": 15,
+              "bbox": [
+                0.1123,
+                0.0523,
+                0.8608,
+                0.9797
+              ],
+              "text_excerpt": "sub-divided vacant plot. [n there is private lonnectin!"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "udd-200-mnu-2025-khata:cl_17__tbl_4",
+      "record_version": 1,
+      "record_id": "udd-200-mnu-2025-khata:cl_17__tbl_4@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-07-25",
+      "number": "cl_17__tbl_4",
+      "title": "Table 4",
+      "level": 2,
+      "parent_id": "udd-200-mnu-2025-khata:17",
+      "order": 14,
+      "text": "Table 4",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "udd-200-mnu-2025-khata",
+          "page": 15,
+          "bbox": [
+            0.1123,
+            0.0523,
+            0.8608,
+            0.9797
+          ],
+          "text_excerpt": "sub-divided vacant plot. [n there is private lonnectin!"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_17__tbl_4__row_1",
+      "native_number": "1",
+      "type": "table_row",
+      "heading": null,
+      "intro": null,
+      "content": "to such a vacant prot or land then the | shall | declari",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_17__tbl_4",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": [
+        "to such a vacant prot or land then the",
+        "shall",
+        "declari"
+      ],
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-07-25",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "to such a vacant prot or land then the | shall | declari",
+          "wrap_up": null,
+          "cells": [
+            "to such a vacant prot or land then the",
+            "shall",
+            "declari"
+          ],
+          "source_doc": "udd-200-mnu-2025-khata",
+          "source_eid": "cl_17__tbl_4__row_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "udd-200-mnu-2025-khata",
+              "page": 15,
+              "bbox": [
+                0.1123,
+                0.0523,
+                0.8608,
+                0.9797
+              ],
+              "text_excerpt": "sub-divided vacant plot. [n there is private lonnectin!"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "udd-200-mnu-2025-khata:cl_17__tbl_4__row_1",
+      "record_version": 1,
+      "record_id": "udd-200-mnu-2025-khata:cl_17__tbl_4__row_1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-07-25",
+      "number": "cl_17__tbl_4__row_1",
+      "title": "Row 1",
+      "level": 3,
+      "parent_id": "udd-200-mnu-2025-khata:cl_17__tbl_4",
+      "order": 15,
+      "text": "to such a vacant prot or land then the | shall | declari",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "udd-200-mnu-2025-khata",
+          "page": 15,
+          "bbox": [
+            0.1123,
+            0.0523,
+            0.8608,
+            0.9797
+          ],
+          "text_excerpt": "sub-divided vacant plot. [n there is private lonnectin!"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_17__tbl_5",
+      "native_number": "Table 5",
+      "type": "table",
+      "heading": "Table 5",
+      "intro": null,
+      "content": "Table 5",
+      "wrap_up": null,
+      "children": [
+        "cl_17__tbl_5__row_1"
+      ],
+      "parent_eid": "cl_17",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": {
+        "columns": [
+          {
+            "label": "as a \"Public Road\"",
+            "unit": null
+          },
+          {
+            "label": "per provisions of the",
+            "unit": null
+          },
+          {
+            "label": "ofthe",
+            "unit": null
+          }
+        ],
+        "rows": [
+          "cl_17__tbl_5__row_1"
+        ],
+        "footnotes": [],
+        "extraction": "complete",
+        "page_image": null,
+        "gap_reason": null
+      },
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-07-25",
+          "valid_to": null,
+          "heading": "Table 5",
+          "intro": null,
+          "content": "Table 5",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "udd-200-mnu-2025-khata",
+          "source_eid": "cl_17__tbl_5",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "udd-200-mnu-2025-khata",
+              "page": 15,
+              "bbox": [
+                0.1123,
+                0.0523,
+                0.8608,
+                0.9797
+              ],
+              "text_excerpt": "as a \"Public Road\" per provisions of the ofthe"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "udd-200-mnu-2025-khata:cl_17__tbl_5",
+      "record_version": 1,
+      "record_id": "udd-200-mnu-2025-khata:cl_17__tbl_5@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-07-25",
+      "number": "cl_17__tbl_5",
+      "title": "Table 5",
+      "level": 2,
+      "parent_id": "udd-200-mnu-2025-khata:17",
+      "order": 16,
+      "text": "Table 5",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "udd-200-mnu-2025-khata",
+          "page": 15,
+          "bbox": [
+            0.1123,
+            0.0523,
+            0.8608,
+            0.9797
+          ],
+          "text_excerpt": "as a \"Public Road\" per provisions of the ofthe"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_17__tbl_5__row_1",
+      "native_number": "1",
+      "type": "table_row",
+      "heading": null,
+      "intro": null,
+      "content": "as | on 212 | GBG",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_17__tbl_5",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": [
+        "as",
+        "on 212",
+        "GBG"
+      ],
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2025-07-25",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "as | on 212 | GBG",
+          "wrap_up": null,
+          "cells": [
+            "as",
+            "on 212",
+            "GBG"
+          ],
+          "source_doc": "udd-200-mnu-2025-khata",
+          "source_eid": "cl_17__tbl_5__row_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "udd-200-mnu-2025-khata",
+              "page": 15,
+              "bbox": [
+                0.1123,
+                0.0523,
+                0.8608,
+                0.9797
+              ],
+              "text_excerpt": "as a \"Public Road\" per provisions of the ofthe"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "udd-200-mnu-2025-khata:cl_17__tbl_5__row_1",
+      "record_version": 1,
+      "record_id": "udd-200-mnu-2025-khata:cl_17__tbl_5__row_1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2025-07-25",
+      "number": "cl_17__tbl_5__row_1",
+      "title": "Row 1",
+      "level": 3,
+      "parent_id": "udd-200-mnu-2025-khata:cl_17__tbl_5",
+      "order": 17,
+      "text": "as | on 212 | GBG",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "udd-200-mnu-2025-khata",
+          "page": 15,
+          "bbox": [
+            0.1123,
+            0.0523,
+            0.8608,
+            0.9797
+          ],
+          "text_excerpt": "as a \"Public Road\" per provisions of the ofthe"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    }
+  ]
+}

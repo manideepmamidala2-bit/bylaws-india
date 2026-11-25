@@ -1,0 +1,3311 @@
+{
+  "schema_version": "1.3",
+  "doc_id": "rmp2015-zr-amend-2019-06",
+  "jurisdiction": "in-ka-bengaluru",
+  "legal_status": "in_force",
+  "generated": {
+    "parser": "tesseract",
+    "parser_version": "0.3.13",
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "clauses": [
+    {
+      "eid": "prea_1",
+      "native_number": null,
+      "type": "preamble",
+      "heading": "Preamble",
+      "intro": null,
+      "content": "URBAN DEVELOPMENT SECRETARIAT NOTIFICATION No. UDD 255 MNJ 2018, Bengaluru, Dated: 19.06.2019 Whereas, the draft of the following regulations further to amend the Zoning Regulation of Bengaluru of the Revised Master Plan-2015, was published as required by section 13-E of the Karnataka Town and Country Planning Act, 1961 (Karnataka Act 11 of 1963) in Notification No. UDD 255 MNJ 2018, dated 07.03.2019 in part IV-A of the Karnataka Extraordinary Gazette No. 235 dated 8th March 2019 inviting objections or suggestions from all the persons likely to be affected thereby within thirty days from the date of its publication in the official Gazctte. And whereas, the said Gazette was made available to the public on 8th March 2019. And whereas, objections and suggestions have been received in this behalf and considered by the State Government. Now, therefore in exercise of the powers conferred by section 13-F of the Karnataka Town and Country Planning Act, 1961 (Karnataka Act 11 of 1963), the Government of Karnataka hereby makes the following regulations further to amend the Zoning Regulation of Bengaluru of the Revised Master Plan-2015. 6 REGULATIONS",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": null,
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": "Preamble",
+          "intro": null,
+          "content": "URBAN DEVELOPMENT SECRETARIAT NOTIFICATION No. UDD 255 MNJ 2018, Bengaluru, Dated: 19.06.2019 Whereas, the draft of the following regulations further to amend the Zoning Regulation of Bengaluru of the Revised Master Plan-2015, was published as required by section 13-E of the Karnataka Town and Country Planning Act, 1961 (Karnataka Act 11 of 1963) in Notification No. UDD 255 MNJ 2018, dated 07.03.2019 in part IV-A of the Karnataka Extraordinary Gazette No. 235 dated 8th March 2019 inviting objections or suggestions from all the persons likely to be affected thereby within thirty days from the date of its publication in the official Gazctte. And whereas, the said Gazette was made available to the public on 8th March 2019. And whereas, objections and suggestions have been received in this behalf and considered by the State Government. Now, therefore in exercise of the powers conferred by section 13-F of the Karnataka Town and Country Planning Act, 1961 (Karnataka Act 11 of 1963), the Government of Karnataka hereby makes the following regulations further to amend the Zoning Regulation of Bengaluru of the Revised Master Plan-2015. 6 REGULATIONS",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "prea_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 5,
+              "bbox": null,
+              "text_excerpt": "URBAN DEVELOPMENT SECRETARIAT NOTIFICATION No. UDD 255 MNJ 2018, Bengaluru, Dated: 19.06.2019"
+            },
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "6 REGULATIONS"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:preamble",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:preamble@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "preamble",
+      "title": "Preamble",
+      "level": 1,
+      "parent_id": null,
+      "order": 0,
+      "text": "URBAN DEVELOPMENT SECRETARIAT NOTIFICATION No. UDD 255 MNJ 2018, Bengaluru, Dated: 19.06.2019 Whereas, the draft of the following regulations further to amend the Zoning Regulation of Bengaluru of the Revised Master Plan-2015, was published as required by section 13-E of the Karnataka Town and Country Planning Act, 1961 (Karnataka Act 11 of 1963) in Notification No. UDD 255 MNJ 2018, dated 07.03.2019 in part IV-A of the Karnataka Extraordinary Gazette No. 235 dated 8th March 2019 inviting objections or suggestions from all the persons likely to be affected thereby within thirty days from the date of its publication in the official Gazctte. And whereas, the said Gazette was made available to the public on 8th March 2019. And whereas, objections and suggestions have been received in this behalf and considered by the State Government. Now, therefore in exercise of the powers conferred by section 13-F of the Karnataka Town and Country Planning Act, 1961 (Karnataka Act 11 of 1963), the Government of Karnataka hereby makes the following regulations further to amend the Zoning Regulation of Bengaluru of the Revised Master Plan-2015. 6 REGULATIONS",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 5,
+          "bbox": null,
+          "text_excerpt": "URBAN DEVELOPMENT SECRETARIAT NOTIFICATION No. UDD 255 MNJ 2018, Bengaluru, Dated: 19.06.2019"
+        },
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "6 REGULATIONS"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_1",
+      "native_number": "1",
+      "type": "clause",
+      "heading": "Title and commencement.- (1) These regulations may be called the Zoning Regulations",
+      "intro": "Title and commencement.- (1) These regulations may be called the Zoning Regulations of Bengaluru of the Revised Master Plan-2015 (Amendment) Regulations, 2019.",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_1__item_2"
+      ],
+      "parent_eid": null,
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": "Title and commencement.- (1) These regulations may be called the Zoning Regulations",
+          "intro": "Title and commencement.- (1) These regulations may be called the Zoning Regulations of Bengaluru of the Revised Master Plan-2015 (Amendment) Regulations, 2019.",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "1. Title and commencement.- (1) These regulations may be called the Zoning"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:1",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "1",
+      "title": "Title and commencement.- (1) These regulations may be called the Zoning Regulations",
+      "level": 1,
+      "parent_id": null,
+      "order": 1,
+      "text": "Title and commencement.- (1) These regulations may be called the Zoning Regulations of Bengaluru of the Revised Master Plan-2015 (Amendment) Regulations, 2019.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "1. Title and commencement.- (1) These regulations may be called the Zoning"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_1__item_2",
+      "native_number": "(2)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "They shall come into force from the date of their final publication in the Official Gazette.",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_1",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "They shall come into force from the date of their final publication in the Official Gazette.",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_1__item_2",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "(2) They shall come into force from the date of their final"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:1(2)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:1(2)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "1(2)",
+      "title": "They shall come into force from the date of their final publication in the Official Gazette.",
+      "level": 2,
+      "parent_id": "rmp2015-zr-amend-2019-06:1",
+      "order": 2,
+      "text": "They shall come into force from the date of their final publication in the Official Gazette.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "(2) They shall come into force from the date of their final"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_2",
+      "native_number": "2",
+      "type": "clause",
+      "heading": "Amendment of \u201ctechnical terms and definitions\u201d.- In the Zoning Regulation of",
+      "intro": "Amendment of \u201ctechnical terms and definitions\u201d.- In the Zoning Regulation of Bangalore of the Revised Master Plan-2015 (hereinafter referred to as the said regulations), under the heading \u201cTechnical terms and Definitions\u2019\u201d,-",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_2__item_1"
+      ],
+      "parent_eid": null,
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": "Amendment of \u201ctechnical terms and definitions\u201d.- In the Zoning Regulation of",
+          "intro": "Amendment of \u201ctechnical terms and definitions\u201d.- In the Zoning Regulation of Bangalore of the Revised Master Plan-2015 (hereinafter referred to as the said regulations), under the heading \u201cTechnical terms and Definitions\u2019\u201d,-",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_2",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "2. Amendment of \u201ctechnical terms and definitions\u201d.- In the Zoning Regulation of"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:2",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:2@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "2",
+      "title": "Amendment of \u201ctechnical terms and definitions\u201d.- In the Zoning Regulation of",
+      "level": 1,
+      "parent_id": null,
+      "order": 3,
+      "text": "Amendment of \u201ctechnical terms and definitions\u201d.- In the Zoning Regulation of Bangalore of the Revised Master Plan-2015 (hereinafter referred to as the said regulations), under the heading \u201cTechnical terms and Definitions\u2019\u201d,-",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "2. Amendment of \u201ctechnical terms and definitions\u201d.- In the Zoning Regulation of"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_2__item_1",
+      "native_number": "(1)",
+      "type": "item",
+      "heading": "for serial number 3, the following shall be substituted, namely",
+      "intro": null,
+      "content": "-",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_2",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": "for serial number 3, the following shall be substituted, namely",
+          "intro": null,
+          "content": "-",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_2__item_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "(1) for serial number 3, the following shall be substituted, namely:-"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:2(1)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:2(1)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "2(1)",
+      "title": "for serial number 3, the following shall be substituted, namely",
+      "level": 2,
+      "parent_id": "rmp2015-zr-amend-2019-06:2",
+      "order": 4,
+      "text": "-",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "(1) for serial number 3, the following shall be substituted, namely:-"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3",
+      "native_number": "3",
+      "type": "clause",
+      "heading": "Apartment Building or Group Housing or Multi-Dwelling Unit Building;",
+      "intro": "Apartment Building or Group Housing or Multi-Dwelling Unit Building; means one or more buildings, containing or meant for multi-family dwelling and contains more than four dwelling units.\u201d ;",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_3__item_2"
+      ],
+      "parent_eid": null,
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": "Apartment Building or Group Housing or Multi-Dwelling Unit Building;",
+          "intro": "Apartment Building or Group Housing or Multi-Dwelling Unit Building; means one or more buildings, containing or meant for multi-family dwelling and contains more than four dwelling units.\u201d ;",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "3. Apartment Building or Group Housing or Multi-Dwelling Unit Building; means one"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3",
+      "title": "Apartment Building or Group Housing or Multi-Dwelling Unit Building;",
+      "level": 1,
+      "parent_id": null,
+      "order": 5,
+      "text": "Apartment Building or Group Housing or Multi-Dwelling Unit Building; means one or more buildings, containing or meant for multi-family dwelling and contains more than four dwelling units.\u201d ;",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "3. Apartment Building or Group Housing or Multi-Dwelling Unit Building; means one"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3__item_2",
+      "native_number": "(2)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "In serial number 16, for item \u201cNon residential development plan\u201d and the entries relating thereto, the following shall be substituted, namely:- \u201cNon residential Development Plan; means a plan containing proposal for construction of one or more commercial buildings on a plot size measuring more than 20,000 square meter in extent.\u201d \u201d",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_3",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "In serial number 16, for item \u201cNon residential development plan\u201d and the entries relating thereto, the following shall be substituted, namely:- \u201cNon residential Development Plan; means a plan containing proposal for construction of one or more commercial buildings on a plot size measuring more than 20,000 square meter in extent.\u201d \u201d",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3__item_2",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "(2) In serial number 16, for item \u201cNon residential development plan\u201d and"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3(2)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3(2)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3(2)",
+      "title": "In serial number 16, for item \u201cNon residential development plan\u201d and the entries",
+      "level": 2,
+      "parent_id": "rmp2015-zr-amend-2019-06:3",
+      "order": 6,
+      "text": "In serial number 16, for item \u201cNon residential development plan\u201d and the entries relating thereto, the following shall be substituted, namely:- \u201cNon residential Development Plan; means a plan containing proposal for construction of one or more commercial buildings on a plot size measuring more than 20,000 square meter in extent.\u201d \u201d",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "(2) In serial number 16, for item \u201cNon residential development plan\u201d and"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2",
+      "native_number": "3",
+      "type": "clause",
+      "heading": "Amendment of Chapter 3;- In chapter 3 of the said regulations, - :",
+      "intro": "Amendment of Chapter 3;- In chapter 3 of the said regulations, - :",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_3_2__item_1"
+      ],
+      "parent_eid": null,
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": "Amendment of Chapter 3;- In chapter 3 of the said regulations, - :",
+          "intro": "Amendment of Chapter 3;- In chapter 3 of the said regulations, - :",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "3. Amendment of Chapter 3;- In chapter 3 of the said regulations,"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2",
+      "title": "Amendment of Chapter 3;- In chapter 3 of the said regulations, - :",
+      "level": 1,
+      "parent_id": null,
+      "order": 7,
+      "text": "Amendment of Chapter 3;- In chapter 3 of the said regulations, - :",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "3. Amendment of Chapter 3;- In chapter 3 of the said regulations,"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1",
+      "native_number": "(1)",
+      "type": "item",
+      "heading": null,
+      "intro": "In regulation 3.1, after Table-9 and the entries relating thereto, the following shall be inserted namely:- \u201cNote:- The following constructions may be permitted within the setback area \u2014 without affecting the required drive-way around the building as prescribed in these regulations:",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_3_2__item_1__item_a"
+      ],
+      "parent_eid": "cl_3_2",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "In regulation 3.1, after Table-9 and the entries relating thereto, the following shall be inserted namely:- \u201cNote:- The following constructions may be permitted within the setback area \u2014 without affecting the required drive-way around the building as prescribed in these regulations:",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "(1) In regulation 3.1, after Table-9 and the entries relating thereto, the"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)",
+      "title": "In regulation 3.1, after Table-9 and the entries relating thereto, the following shall be",
+      "level": 2,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2",
+      "order": 8,
+      "text": "In regulation 3.1, after Table-9 and the entries relating thereto, the following shall be inserted namely:- \u201cNote:- The following constructions may be permitted within the setback area \u2014 without affecting the required drive-way around the building as prescribed in these regulations:",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "(1) In regulation 3.1, after Table-9 and the entries relating thereto, the"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a",
+      "native_number": "(a)",
+      "type": "item",
+      "heading": null,
+      "intro": "Watch man\u2019s cubicle not more than 4sqm at the entry / exit point; and",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_3_2__item_1__item_a__item_b"
+      ],
+      "parent_eid": "cl_3_2__item_1",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "Watch man\u2019s cubicle not more than 4sqm at the entry / exit point; and",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "(a) Watch man\u2019s cubicle not more than 4sqm at the entry /"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)",
+      "title": "Watch man\u2019s cubicle not more than 4sqm at the entry / exit point; and",
+      "level": 3,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)",
+      "order": 9,
+      "text": "Watch man\u2019s cubicle not more than 4sqm at the entry / exit point; and",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "(a) Watch man\u2019s cubicle not more than 4sqm at the entry /"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b",
+      "native_number": "(b)",
+      "type": "item",
+      "heading": null,
+      "intro": "Fire control room (maximum 4m*4m)(no set back from the boundary).\u201d",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_3_2__item_1__item_a__item_b__item_2"
+      ],
+      "parent_eid": "cl_3_2__item_1__item_a",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "Fire control room (maximum 4m*4m)(no set back from the boundary).\u201d",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "(b) Fire control room (maximum 4m*4m)(no set back from the boundary).\u201d"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)",
+      "title": "Fire control room (maximum 4m*4m)(no set back from the boundary).\u201d",
+      "level": 4,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)",
+      "order": 10,
+      "text": "Fire control room (maximum 4m*4m)(no set back from the boundary).\u201d",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "(b) Fire control room (maximum 4m*4m)(no set back from the boundary).\u201d"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2",
+      "native_number": "(2)",
+      "type": "item",
+      "heading": null,
+      "intro": "For regulation 3.4 and the entries relating thereto, the following shall be.substituted- namely:- . \u201c3.4: FAR or Floor Area Ratio:- : The following constructions shall be excluded from FAR computation, namely :-",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_3_2__item_1__item_a__item_b__item_2__item_i",
+        "cl_3_2__item_1__item_a__item_b__item_2__item_ii",
+        "cl_3_2__item_1__item_a__item_b__item_2__item_iii",
+        "cl_3_2__item_1__item_a__item_b__item_2__item_v",
+        "cl_3_2__item_1__item_a__item_b__item_2__item_vi",
+        "cl_3_2__item_1__item_a__item_b__item_2__item_vii",
+        "cl_3_2__item_1__item_a__item_b__item_2__item_viii",
+        "cl_3_2__item_1__item_a__item_b__item_2__item_x"
+      ],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "For regulation 3.4 and the entries relating thereto, the following shall be.substituted- namely:- . \u201c3.4: FAR or Floor Area Ratio:- : The following constructions shall be excluded from FAR computation, namely :-",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "(2) For regulation 3.4 and the entries relating thereto, the following shall"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)",
+      "title": "For regulation 3.4 and the entries relating thereto, the following shall be.substituted-",
+      "level": 5,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)",
+      "order": 11,
+      "text": "For regulation 3.4 and the entries relating thereto, the following shall be.substituted- namely:- . \u201c3.4: FAR or Floor Area Ratio:- : The following constructions shall be excluded from FAR computation, namely :-",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "(2) For regulation 3.4 and the entries relating thereto, the following shall"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_i",
+      "native_number": "(i)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": ".-Area-reserved for service such as electrical substation or panel room, generator, pump room, Ac plant room, solid waste management, fire. control room, security or CCTV room, etc. ;",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": ".-Area-reserved for service such as electrical substation or panel room, generator, pump room, Ac plant room, solid waste management, fire. control room, security or CCTV room, etc. ;",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_i",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "(i) .-Area-reserved for service such as electrical substation or panel room, generator,"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(i)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(i)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(i)",
+      "title": ".-Area-reserved for service such as electrical substation or panel room, generator,",
+      "level": 6,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)",
+      "order": 12,
+      "text": ".-Area-reserved for service such as electrical substation or panel room, generator, pump room, Ac plant room, solid waste management, fire. control room, security or CCTV room, etc. ;",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "(i) .-Area-reserved for service such as electrical substation or panel room, generator,"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_ii",
+      "native_number": "(ii)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "Refuge areas provided in high rise buildings as per fire norms;.",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "Refuge areas provided in high rise buildings as per fire norms;.",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_ii",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "(ii) Refuge areas provided in high rise buildings as per fire norms;."
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(ii)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(ii)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(ii)",
+      "title": "Refuge areas provided in high rise buildings as per fire norms;.",
+      "level": 6,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)",
+      "order": 13,
+      "text": "Refuge areas provided in high rise buildings as per fire norms;.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "(ii) Refuge areas provided in high rise buildings as per fire norms;."
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_iii",
+      "native_number": "(iii)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "A separate public toilet block provided in the non-residential complex or plot; {iv) Building management or society room with a maximum size of 40 square meter;",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "A separate public toilet block provided in the non-residential complex or plot; {iv) Building management or society room with a maximum size of 40 square meter;",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_iii",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "(iii) A separate public toilet block provided in the non-residential complex or"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(iii)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(iii)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(iii)",
+      "title": "A separate public toilet block provided in the non-residential complex or plot;",
+      "level": 6,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)",
+      "order": 14,
+      "text": "A separate public toilet block provided in the non-residential complex or plot; {iv) Building management or society room with a maximum size of 40 square meter;",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "(iii) A separate public toilet block provided in the non-residential complex or"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_v",
+      "native_number": "(v)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "Staircase / staircase room;",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "Staircase / staircase room;",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_v",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "(v) Staircase / staircase room;"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(v)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(v)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(v)",
+      "title": "Staircase / staircase room;",
+      "level": 6,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)",
+      "order": 15,
+      "text": "Staircase / staircase room;",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "(v) Staircase / staircase room;"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_vi",
+      "native_number": "(vi)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "Architectural features which are not usable for",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "Architectural features which are not usable for",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_vi",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "(vi) Architectural features which are not usable for"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(vi)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(vi)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(vi)",
+      "title": "Architectural features which are not usable for",
+      "level": 6,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)",
+      "order": 16,
+      "text": "Architectural features which are not usable for",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "(vi) Architectural features which are not usable for"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_vii",
+      "native_number": "(vii)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "Chimneys; .",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "Chimneys; .",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_vii",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "(vii) Chimneys; ."
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(vii)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(vii)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(vii)",
+      "title": "Chimneys; .",
+      "level": 6,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)",
+      "order": 17,
+      "text": "Chimneys; .",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "(vii) Chimneys; ."
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_viii",
+      "native_number": "(viii)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "Ventilation ducts and Garbage shafts; Qix) Ducts; _",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "Ventilation ducts and Garbage shafts; Qix) Ducts; _",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_viii",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "(viii) Ventilation ducts and Garbage shafts; Qix) Ducts; _"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(viii)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(viii)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(viii)",
+      "title": "Ventilation ducts and Garbage shafts;",
+      "level": 6,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)",
+      "order": 18,
+      "text": "Ventilation ducts and Garbage shafts; Qix) Ducts; _",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "(viii) Ventilation ducts and Garbage shafts; Qix) Ducts; _"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x",
+      "native_number": "(x)",
+      "type": "item",
+      "heading": null,
+      "intro": "Parking areas including driveways and ramps;",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij"
+      ],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "Parking areas including driveways and ramps;",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "(x) Parking areas including driveways and ramps;"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(x)",
+      "title": "Parking areas including driveways and ramps;",
+      "level": 6,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)",
+      "order": 19,
+      "text": "Parking areas including driveways and ramps;",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "(x) Parking areas including driveways and ramps;"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij",
+      "native_number": "(ij)",
+      "type": "item",
+      "heading": null,
+      "intro": "Swimming pools and toilets attached to swimming pools constructed in open yard or in any floor for common use by the residents/users;",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii"
+      ],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "Swimming pools and toilets attached to swimming pools constructed in open yard or in any floor for common use by the residents/users;",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "(ij) Swimming pools and toilets attached to swimming pools constructed in open"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(x)(ij)",
+      "title": "Swimming pools and toilets attached to swimming pools constructed in open yard or",
+      "level": 7,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)",
+      "order": 20,
+      "text": "Swimming pools and toilets attached to swimming pools constructed in open yard or in any floor for common use by the residents/users;",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "(ij) Swimming pools and toilets attached to swimming pools constructed in open"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii",
+      "native_number": "(xii)",
+      "type": "item",
+      "heading": null,
+      "intro": "Overhead tanks; (xin) Escalators;",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv"
+      ],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "Overhead tanks; (xin) Escalators;",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "(xii) Overhead tanks; (xin) Escalators;"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(x)(ij)(xii)",
+      "title": "Overhead tanks;",
+      "level": 8,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)",
+      "order": 21,
+      "text": "Overhead tanks; (xin) Escalators;",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "(xii) Overhead tanks; (xin) Escalators;"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv",
+      "native_number": "(xiv)",
+      "type": "item",
+      "heading": null,
+      "intro": "Lift wells and lift machine room;",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv"
+      ],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "Lift wells and lift machine room;",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "(xiv) Lift wells and lift machine room;"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)",
+      "title": "Lift wells and lift machine room;",
+      "level": 9,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)",
+      "order": 22,
+      "text": "Lift wells and lift machine room;",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "(xiv) Lift wells and lift machine room;"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv",
+      "native_number": "(xv)",
+      "type": "item",
+      "heading": null,
+      "intro": "Watch man\u2019s cubicle not exceeding four square meter area; and",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi"
+      ],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "Watch man\u2019s cubicle not exceeding four square meter area; and",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "(xv) Watch man\u2019s cubicle not exceeding four square meter area; and"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)",
+      "title": "Watch man\u2019s cubicle not exceeding four square meter area; and",
+      "level": 10,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)",
+      "order": 23,
+      "text": "Watch man\u2019s cubicle not exceeding four square meter area; and",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "(xv) Watch man\u2019s cubicle not exceeding four square meter area; and"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi",
+      "native_number": "(xvi)",
+      "type": "item",
+      "heading": null,
+      "intro": "Sewerage treatment plant as specified by the Karnataka State Pollution Control Board and pump rooms.\u201d \u201c3.4-A Height of Building.- {i) Height of the building shall be considered as defined in these regulations. The following constructions shall be exempted while calculating height of the building, namely;-",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a"
+      ],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "Sewerage treatment plant as specified by the Karnataka State Pollution Control Board and pump rooms.\u201d \u201c3.4-A Height of Building.- {i) Height of the building shall be considered as defined in these regulations. The following constructions shall be exempted while calculating height of the building, namely;-",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "(xvi) Sewerage treatment plant as specified by the Karnataka State Pollution Control"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)",
+      "title": "Sewerage treatment plant as specified by the Karnataka State Pollution Control",
+      "level": 11,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)",
+      "order": 24,
+      "text": "Sewerage treatment plant as specified by the Karnataka State Pollution Control Board and pump rooms.\u201d \u201c3.4-A Height of Building.- {i) Height of the building shall be considered as defined in these regulations. The following constructions shall be exempted while calculating height of the building, namely;-",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "(xvi) Sewerage treatment plant as specified by the Karnataka State Pollution Control"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a",
+      "native_number": "(a)",
+      "type": "item",
+      "heading": null,
+      "intro": "Slabs casted/ structures constructed above the terrace floor exclusively for providing services such as AC chiller plants, solar panels, deride antennas, lift machine rooms, overhead tanks and staircase head rooms cover (up to a maximum height of 3.5m) chimneys, parapet walls(up to 1.2m in height) and other architectural features; and (b} The internal open space may be covered on top to prevent rain water from entering the building which shall not exceed 2mi and shall not be a permanent structure; living or other purpose; and",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c"
+      ],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "Slabs casted/ structures constructed above the terrace floor exclusively for providing services such as AC chiller plants, solar panels, deride antennas, lift machine rooms, overhead tanks and staircase head rooms cover (up to a maximum height of 3.5m) chimneys, parapet walls(up to 1.2m in height) and other architectural features; and (b} The internal open space may be covered on top to prevent rain water from entering the building which shall not exceed 2mi and shall not be a permanent structure; living or other purpose; and",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "(a) Slabs casted/ structures constructed above the terrace floor exclusively for providing"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)",
+      "title": "Slabs casted/ structures constructed above the terrace floor exclusively for",
+      "level": 12,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)",
+      "order": 25,
+      "text": "Slabs casted/ structures constructed above the terrace floor exclusively for providing services such as AC chiller plants, solar panels, deride antennas, lift machine rooms, overhead tanks and staircase head rooms cover (up to a maximum height of 3.5m) chimneys, parapet walls(up to 1.2m in height) and other architectural features; and (b} The internal open space may be covered on top to prevent rain water from entering the building which shall not exceed 2mi and shall not be a permanent structure; living or other purpose; and",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "(a) Slabs casted/ structures constructed above the terrace floor exclusively for providing"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c",
+      "native_number": "(c)",
+      "type": "item",
+      "heading": null,
+      "intro": "For calculating the height limitation prescribed in the vicinity of Aerodromes, the overall height of the building including that of the above details shall be considered; and 7",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_ii",
+        "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii"
+      ],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "For calculating the height limitation prescribed in the vicinity of Aerodromes, the overall height of the building including that of the above details shall be considered; and 7",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 6,
+              "bbox": null,
+              "text_excerpt": "(c) For calculating the height limitation prescribed in the vicinity of Aerodromes,"
+            },
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 7,
+              "bbox": null,
+              "text_excerpt": "7"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)",
+      "title": "For calculating the height limitation prescribed in the vicinity of Aerodromes, the",
+      "level": 13,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)",
+      "order": 26,
+      "text": "For calculating the height limitation prescribed in the vicinity of Aerodromes, the overall height of the building including that of the above details shall be considered; and 7",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 6,
+          "bbox": null,
+          "text_excerpt": "(c) For calculating the height limitation prescribed in the vicinity of Aerodromes,"
+        },
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 7,
+          "bbox": null,
+          "text_excerpt": "7"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_ii",
+      "native_number": "(ii)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "The height of buildings and other structures within the Bengaluru Metropoliton Area (Local Planning Area) shall be within the limits prescribed by the various Airport Authorities with different air funnel zones; and",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "The height of buildings and other structures within the Bengaluru Metropoliton Area (Local Planning Area) shall be within the limits prescribed by the various Airport Authorities with different air funnel zones; and",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_ii",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 7,
+              "bbox": null,
+              "text_excerpt": "(ii) The height of buildings and other structures within the Bengaluru Metropoliton"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(ii)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(ii)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(ii)",
+      "title": "The height of buildings and other structures within the Bengaluru Metropoliton",
+      "level": 14,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)",
+      "order": 27,
+      "text": "The height of buildings and other structures within the Bengaluru Metropoliton Area (Local Planning Area) shall be within the limits prescribed by the various Airport Authorities with different air funnel zones; and",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 7,
+          "bbox": null,
+          "text_excerpt": "(ii) The height of buildings and other structures within the Bengaluru Metropoliton"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii",
+      "native_number": "(iii)",
+      "type": "item",
+      "heading": null,
+      "intro": "Incase of plots where the ground level contiguous to the building is below the road level (for which FAR is considered) and the building is located away from the road where the approach to the building is not provided directly from such road, but from a separate road or driveway through the plot, the height of the building shall be measured from the ground level contiguous to the building and not from the road level (For which FAR is considered).\u201d",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3"
+      ],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "Incase of plots where the ground level contiguous to the building is below the road level (for which FAR is considered) and the building is located away from the road where the approach to the building is not provided directly from such road, but from a separate road or driveway through the plot, the height of the building shall be measured from the ground level contiguous to the building and not from the road level (For which FAR is considered).\u201d",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 7,
+              "bbox": null,
+              "text_excerpt": "(iii) Incase of plots where the ground level contiguous to the building"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)",
+      "title": "Incase of plots where the ground level contiguous to the building is below the",
+      "level": 14,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)",
+      "order": 28,
+      "text": "Incase of plots where the ground level contiguous to the building is below the road level (for which FAR is considered) and the building is located away from the road where the approach to the building is not provided directly from such road, but from a separate road or driveway through the plot, the height of the building shall be measured from the ground level contiguous to the building and not from the road level (For which FAR is considered).\u201d",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 7,
+          "bbox": null,
+          "text_excerpt": "(iii) Incase of plots where the ground level contiguous to the building"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3",
+      "native_number": "(3)",
+      "type": "item",
+      "heading": null,
+      "intro": "In regulations 3.6 in clause-(i), for the words \u201ctallest building\u2019, the words, figures and brackets, \u201ctallest building or minimum 16 meters (whichever is lower)\u2019, shall be substituted.",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4"
+      ],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "In regulations 3.6 in clause-(i), for the words \u201ctallest building\u2019, the words, figures and brackets, \u201ctallest building or minimum 16 meters (whichever is lower)\u2019, shall be substituted.",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 7,
+              "bbox": null,
+              "text_excerpt": "(3) In regulations 3.6 in clause-(i), for the words \u201ctallest building\u2019, the"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)",
+      "title": "In regulations 3.6 in clause-(i), for the words \u201ctallest building\u2019, the words, figures and",
+      "level": 15,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)",
+      "order": 29,
+      "text": "In regulations 3.6 in clause-(i), for the words \u201ctallest building\u2019, the words, figures and brackets, \u201ctallest building or minimum 16 meters (whichever is lower)\u2019, shall be substituted.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 7,
+          "bbox": null,
+          "text_excerpt": "(3) In regulations 3.6 in clause-(i), for the words \u201ctallest building\u2019, the"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4",
+      "native_number": "(4)",
+      "type": "item",
+      "heading": null,
+      "intro": "In regulation 3.9, in clause-(ix), for the words \u201cto the satisfaction of the authority\u201d, the words \u201cunder the provisions of these regulations or National Building Code.\u201d, shall be substituted.",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5"
+      ],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "In regulation 3.9, in clause-(ix), for the words \u201cto the satisfaction of the authority\u201d, the words \u201cunder the provisions of these regulations or National Building Code.\u201d, shall be substituted.",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 7,
+              "bbox": null,
+              "text_excerpt": "(4) In regulation 3.9, in clause-(ix), for the words \u201cto the satisfaction"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)",
+      "title": "In regulation 3.9, in clause-(ix), for the words \u201cto the satisfaction of the authority\u201d, the",
+      "level": 16,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)",
+      "order": 30,
+      "text": "In regulation 3.9, in clause-(ix), for the words \u201cto the satisfaction of the authority\u201d, the words \u201cunder the provisions of these regulations or National Building Code.\u201d, shall be substituted.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 7,
+          "bbox": null,
+          "text_excerpt": "(4) In regulation 3.9, in clause-(ix), for the words \u201cto the satisfaction"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5",
+      "native_number": "(5)",
+      "type": "item",
+      "heading": null,
+      "intro": "In regulation 3.11,-",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i"
+      ],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "In regulation 3.11,-",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 7,
+              "bbox": null,
+              "text_excerpt": "(5) In regulation 3.11,-"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)(5)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)(5)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)(5)",
+      "title": "In regulation 3.11,-",
+      "level": 17,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)",
+      "order": 31,
+      "text": "In regulation 3.11,-",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 7,
+          "bbox": null,
+          "text_excerpt": "(5) In regulation 3.11,-"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i",
+      "native_number": "(i)",
+      "type": "item",
+      "heading": null,
+      "intro": "for clauses iii and iv, the following shall be substituted, namely \u201ciii. A portico / porch may be permitted in the ground floor within the setback. No access is permitted to the top of portico for using it as a sit out. The size of cantilever portico is restricted to 3.0m X 4.50m. In case of high rise buildings cantilever portico is allowed as per fire norms. The portico when allowed shall have a clear open space of 1m from the boundary of the property and in case of high rise buildings such portico should have a minimum clear height of 5.5m and a vehicle passage width of 6m, if such portico or porch projects into the mandatory driveway of 6m.\u201d; and iv. Balcony: a. No balcony is allowed in the ground floor. b. Open Balcony projection should not exceed 1/3*4 of the setback on that side subject to a maximum of 1.20m in the first floor and maximum 1.75m beyond second floor whichever is less. c. Balconies are not allowed in commercial Buildings, beyond setbacks.\u201d",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6"
+      ],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "for clauses iii and iv, the following shall be substituted, namely \u201ciii. A portico / porch may be permitted in the ground floor within the setback. No access is permitted to the top of portico for using it as a sit out. The size of cantilever portico is restricted to 3.0m X 4.50m. In case of high rise buildings cantilever portico is allowed as per fire norms. The portico when allowed shall have a clear open space of 1m from the boundary of the property and in case of high rise buildings such portico should have a minimum clear height of 5.5m and a vehicle passage width of 6m, if such portico or porch projects into the mandatory driveway of 6m.\u201d; and iv. Balcony: a. No balcony is allowed in the ground floor. b. Open Balcony projection should not exceed 1/3*4 of the setback on that side subject to a maximum of 1.20m in the first floor and maximum 1.75m beyond second floor whichever is less. c. Balconies are not allowed in commercial Buildings, beyond setbacks.\u201d",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 7,
+              "bbox": null,
+              "text_excerpt": "(i) for clauses iii and iv, the following shall be substituted, namely"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)(5)(i)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)(5)(i)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)(5)(i)",
+      "title": "for clauses iii and iv, the following shall be substituted, namely",
+      "level": 18,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)(5)",
+      "order": 32,
+      "text": "for clauses iii and iv, the following shall be substituted, namely \u201ciii. A portico / porch may be permitted in the ground floor within the setback. No access is permitted to the top of portico for using it as a sit out. The size of cantilever portico is restricted to 3.0m X 4.50m. In case of high rise buildings cantilever portico is allowed as per fire norms. The portico when allowed shall have a clear open space of 1m from the boundary of the property and in case of high rise buildings such portico should have a minimum clear height of 5.5m and a vehicle passage width of 6m, if such portico or porch projects into the mandatory driveway of 6m.\u201d; and iv. Balcony: a. No balcony is allowed in the ground floor. b. Open Balcony projection should not exceed 1/3*4 of the setback on that side subject to a maximum of 1.20m in the first floor and maximum 1.75m beyond second floor whichever is less. c. Balconies are not allowed in commercial Buildings, beyond setbacks.\u201d",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 7,
+          "bbox": null,
+          "text_excerpt": "(i) for clauses iii and iv, the following shall be substituted, namely"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6",
+      "native_number": "(6)",
+      "type": "item",
+      "heading": null,
+      "intro": "In regulation 3.12, for clause (ii), the following shall be substituted namely:- \u201c(ii) For all the buildings with height of 15m and above, NOC from Fire and Emergency Services Department in addition to NOC from Karnataka State Pollution Control Board shall be furnished.\u201d",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6__item_7"
+      ],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "In regulation 3.12, for clause (ii), the following shall be substituted namely:- \u201c(ii) For all the buildings with height of 15m and above, NOC from Fire and Emergency Services Department in addition to NOC from Karnataka State Pollution Control Board shall be furnished.\u201d",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 7,
+              "bbox": null,
+              "text_excerpt": "(6) In regulation 3.12, for clause (ii), the following shall be substituted"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)(5)(i)(6)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)(5)(i)(6)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)(5)(i)(6)",
+      "title": "In regulation 3.12, for clause (ii), the following shall be substituted namely:-",
+      "level": 19,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)(5)(i)",
+      "order": 33,
+      "text": "In regulation 3.12, for clause (ii), the following shall be substituted namely:- \u201c(ii) For all the buildings with height of 15m and above, NOC from Fire and Emergency Services Department in addition to NOC from Karnataka State Pollution Control Board shall be furnished.\u201d",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 7,
+          "bbox": null,
+          "text_excerpt": "(6) In regulation 3.12, for clause (ii), the following shall be substituted"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6__item_7",
+      "native_number": "(7)",
+      "type": "item",
+      "heading": null,
+      "intro": "In regulation 3.16,- (i)For clause vi, the following shall be substituted, namely:- \u201cvi. Mezzanine floor is permitted between any 2*floors in'residenrttial butichngs; the area of which is considered for calculation of FAR, subject to a minimum area of 9.5 sqm and maximum of 1/3rd of the area of the respective floor. The minimum height of Mezzanine floor shall be 2.75m, and shall not be used as kotchen.\u201d;",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6__item_7__item_ii"
+      ],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "In regulation 3.16,- (i)For clause vi, the following shall be substituted, namely:- \u201cvi. Mezzanine floor is permitted between any 2*floors in'residenrttial butichngs; the area of which is considered for calculation of FAR, subject to a minimum area of 9.5 sqm and maximum of 1/3rd of the area of the respective floor. The minimum height of Mezzanine floor shall be 2.75m, and shall not be used as kotchen.\u201d;",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6__item_7",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 7,
+              "bbox": null,
+              "text_excerpt": "(7) In regulation 3.16,- (i)For clause vi, the following shall be substituted,"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)(5)(i)(6)(7)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)(5)(i)(6)(7)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)(5)(i)(6)(7)",
+      "title": "In regulation 3.16,-",
+      "level": 20,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)(5)(i)(6)",
+      "order": 34,
+      "text": "In regulation 3.16,- (i)For clause vi, the following shall be substituted, namely:- \u201cvi. Mezzanine floor is permitted between any 2*floors in'residenrttial butichngs; the area of which is considered for calculation of FAR, subject to a minimum area of 9.5 sqm and maximum of 1/3rd of the area of the respective floor. The minimum height of Mezzanine floor shall be 2.75m, and shall not be used as kotchen.\u201d;",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 7,
+          "bbox": null,
+          "text_excerpt": "(7) In regulation 3.16,- (i)For clause vi, the following shall be substituted,"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6__item_7__item_ii",
+      "native_number": "(ii)",
+      "type": "item",
+      "heading": "For clause-xv, the following shall be substituted, namely",
+      "intro": null,
+      "content": "- \u201cxv. Tree Planting: (a) Planting of minimum one tree is mandatory for a site measuring 180 sqm and up to 240 sqm and minimum of 2 trees for sites with more than 240 sqm. The concemed authorities shall ensure that the trees are planted before the occupancy certificate is issued. The trees shall be planted only in the rear setback area. {b) In cases of Apartment Building or Group Housing or Multi dwelling Unit Building or Development Plan, one tree shall be planted for every 240sqm of FAR area or part thereof. In such cases, the Authorities shall ensure that the trees are at least 2m in height, before the issuance of occupancy certificate. The tree shall be planted in the set-back area along the periphery of the site or area reserved for parks or open spaces.or.along the roads as avenue plantation, excluding the drive way. {c) In case of sub-division, in addition to the site level mandatory plantation, the developer shall carryout plantation at the rate of fourty trees per hectare of land sub division and proportionately for every additional extent of land or plot area.\u201d St",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6__item_7",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": "For clause-xv, the following shall be substituted, namely",
+          "intro": null,
+          "content": "- \u201cxv. Tree Planting: (a) Planting of minimum one tree is mandatory for a site measuring 180 sqm and up to 240 sqm and minimum of 2 trees for sites with more than 240 sqm. The concemed authorities shall ensure that the trees are planted before the occupancy certificate is issued. The trees shall be planted only in the rear setback area. {b) In cases of Apartment Building or Group Housing or Multi dwelling Unit Building or Development Plan, one tree shall be planted for every 240sqm of FAR area or part thereof. In such cases, the Authorities shall ensure that the trees are at least 2m in height, before the issuance of occupancy certificate. The tree shall be planted in the set-back area along the periphery of the site or area reserved for parks or open spaces.or.along the roads as avenue plantation, excluding the drive way. {c) In case of sub-division, in addition to the site level mandatory plantation, the developer shall carryout plantation at the rate of fourty trees per hectare of land sub division and proportionately for every additional extent of land or plot area.\u201d St",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_3_2__item_1__item_a__item_b__item_2__item_x__item_ij__item_xii__item_xiv__item_xv__item_xvi__item_a__item_c__item_iii__item_3__item_4__item_5__item_i__item_6__item_7__item_ii",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 7,
+              "bbox": null,
+              "text_excerpt": "(ii) For clause-xv, the following shall be substituted, namely:- \u201cxv. Tree Planting:"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)(5)(i)(6)(7)(ii)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)(5)(i)(6)(7)(ii)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)(5)(i)(6)(7)(ii)",
+      "title": "For clause-xv, the following shall be substituted, namely",
+      "level": 21,
+      "parent_id": "rmp2015-zr-amend-2019-06:3_2(1)(a)(b)(2)(x)(ij)(xii)(xiv)(xv)(xvi)(a)(c)(iii)(3)(4)(5)(i)(6)(7)",
+      "order": 35,
+      "text": "- \u201cxv. Tree Planting: (a) Planting of minimum one tree is mandatory for a site measuring 180 sqm and up to 240 sqm and minimum of 2 trees for sites with more than 240 sqm. The concemed authorities shall ensure that the trees are planted before the occupancy certificate is issued. The trees shall be planted only in the rear setback area. {b) In cases of Apartment Building or Group Housing or Multi dwelling Unit Building or Development Plan, one tree shall be planted for every 240sqm of FAR area or part thereof. In such cases, the Authorities shall ensure that the trees are at least 2m in height, before the issuance of occupancy certificate. The tree shall be planted in the set-back area along the periphery of the site or area reserved for parks or open spaces.or.along the roads as avenue plantation, excluding the drive way. {c) In case of sub-division, in addition to the site level mandatory plantation, the developer shall carryout plantation at the rate of fourty trees per hectare of land sub division and proportionately for every additional extent of land or plot area.\u201d St",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 7,
+          "bbox": null,
+          "text_excerpt": "(ii) For clause-xv, the following shall be substituted, namely:- \u201cxv. Tree Planting:"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_4",
+      "native_number": "4",
+      "type": "clause",
+      "heading": "Amendment of Chapter 6.- In chapter 6 of the said regulations, in regulation 6.1, in",
+      "intro": null,
+      "content": "Amendment of Chapter 6.- In chapter 6 of the said regulations, in regulation 6.1, in clause (e), \u201cfor second point and the entries relating thereto, the following shal] be substituted, namely :- 8 \u2018The area earmarked for residential development shall be upto a maximum of 95% of the total land area. A maximum of 3% of the total area from out of permissible residential area may be earmarked for commercial use in one or two block only.\u201d",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": null,
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": "Amendment of Chapter 6.- In chapter 6 of the said regulations, in regulation 6.1, in",
+          "intro": null,
+          "content": "Amendment of Chapter 6.- In chapter 6 of the said regulations, in regulation 6.1, in clause (e), \u201cfor second point and the entries relating thereto, the following shal] be substituted, namely :- 8 \u2018The area earmarked for residential development shall be upto a maximum of 95% of the total land area. A maximum of 3% of the total area from out of permissible residential area may be earmarked for commercial use in one or two block only.\u201d",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_4",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 7,
+              "bbox": null,
+              "text_excerpt": "4. Amendment of Chapter 6.- In chapter 6 of the said regulations,"
+            },
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 8,
+              "bbox": null,
+              "text_excerpt": "8 \u2018The area earmarked for residential development shall be upto a maximum"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:4",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:4@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "4",
+      "title": "Amendment of Chapter 6.- In chapter 6 of the said regulations, in regulation 6.1, in",
+      "level": 1,
+      "parent_id": null,
+      "order": 36,
+      "text": "Amendment of Chapter 6.- In chapter 6 of the said regulations, in regulation 6.1, in clause (e), \u201cfor second point and the entries relating thereto, the following shal] be substituted, namely :- 8 \u2018The area earmarked for residential development shall be upto a maximum of 95% of the total land area. A maximum of 3% of the total area from out of permissible residential area may be earmarked for commercial use in one or two block only.\u201d",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 7,
+          "bbox": null,
+          "text_excerpt": "4. Amendment of Chapter 6.- In chapter 6 of the said regulations,"
+        },
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 8,
+          "bbox": null,
+          "text_excerpt": "8 \u2018The area earmarked for residential development shall be upto a maximum"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_5S",
+      "native_number": "5S",
+      "type": "clause",
+      "heading": "Amendment of Chapter 7.- In chapter 7 of the said regulations,",
+      "intro": "Amendment of Chapter 7.- In chapter 7 of the said regulations,",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_5S__item_1"
+      ],
+      "parent_eid": null,
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": "Amendment of Chapter 7.- In chapter 7 of the said regulations,",
+          "intro": "Amendment of Chapter 7.- In chapter 7 of the said regulations,",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_5S",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 8,
+              "bbox": null,
+              "text_excerpt": "5S. Amendment of Chapter 7.- In chapter 7 of the said regulations,"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:5S",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:5S@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "5S",
+      "title": "Amendment of Chapter 7.- In chapter 7 of the said regulations,",
+      "level": 1,
+      "parent_id": null,
+      "order": 37,
+      "text": "Amendment of Chapter 7.- In chapter 7 of the said regulations,",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 8,
+          "bbox": null,
+          "text_excerpt": "5S. Amendment of Chapter 7.- In chapter 7 of the said regulations,"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_5S__item_1",
+      "native_number": "(1)",
+      "type": "item",
+      "heading": null,
+      "intro": "in regulation 7.1, in the Table-20, for the words and figures \u201cLess than 12.0\u201d, the word and figures \u201cupto 12.0\u201d shall be substituted.",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_5S__item_1__item_2"
+      ],
+      "parent_eid": "cl_5S",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "in regulation 7.1, in the Table-20, for the words and figures \u201cLess than 12.0\u201d, the word and figures \u201cupto 12.0\u201d shall be substituted.",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_5S__item_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 8,
+              "bbox": null,
+              "text_excerpt": "(1) in regulation 7.1, in the Table-20, for the words and figures"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:5S(1)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:5S(1)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "5S(1)",
+      "title": "in regulation 7.1, in the Table-20, for the words and figures \u201cLess than 12.0\u201d, the",
+      "level": 2,
+      "parent_id": "rmp2015-zr-amend-2019-06:5S",
+      "order": 38,
+      "text": "in regulation 7.1, in the Table-20, for the words and figures \u201cLess than 12.0\u201d, the word and figures \u201cupto 12.0\u201d shall be substituted.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 8,
+          "bbox": null,
+          "text_excerpt": "(1) in regulation 7.1, in the Table-20, for the words and figures"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_5S__item_1__item_2",
+      "native_number": "(2)",
+      "type": "item",
+      "heading": null,
+      "intro": "in regulation 7.2,-",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_5S__item_1__item_2__item_i",
+        "cl_5S__item_1__item_2__item_ii"
+      ],
+      "parent_eid": "cl_5S__item_1",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "in regulation 7.2,-",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_5S__item_1__item_2",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 8,
+              "bbox": null,
+              "text_excerpt": "(2) in regulation 7.2,-"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:5S(1)(2)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:5S(1)(2)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "5S(1)(2)",
+      "title": "in regulation 7.2,-",
+      "level": 3,
+      "parent_id": "rmp2015-zr-amend-2019-06:5S(1)",
+      "order": 39,
+      "text": "in regulation 7.2,-",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 8,
+          "bbox": null,
+          "text_excerpt": "(2) in regulation 7.2,-"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_5S__item_1__item_2__item_i",
+      "native_number": "(i)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "in clause (c), for the word \u201cexcluding\u201d, the word \u201cincluding\u201d shall be substituted; and",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_5S__item_1__item_2",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "in clause (c), for the word \u201cexcluding\u201d, the word \u201cincluding\u201d shall be substituted; and",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_5S__item_1__item_2__item_i",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 8,
+              "bbox": null,
+              "text_excerpt": "(i) in clause (c), for the word \u201cexcluding\u201d, the word \u201cincluding\u201d shall"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:5S(1)(2)(i)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:5S(1)(2)(i)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "5S(1)(2)(i)",
+      "title": "in clause (c), for the word \u201cexcluding\u201d, the word \u201cincluding\u201d shall be substituted;",
+      "level": 4,
+      "parent_id": "rmp2015-zr-amend-2019-06:5S(1)(2)",
+      "order": 40,
+      "text": "in clause (c), for the word \u201cexcluding\u201d, the word \u201cincluding\u201d shall be substituted; and",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 8,
+          "bbox": null,
+          "text_excerpt": "(i) in clause (c), for the word \u201cexcluding\u201d, the word \u201cincluding\u201d shall"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_5S__item_1__item_2__item_ii",
+      "native_number": "(ii)",
+      "type": "item",
+      "heading": null,
+      "intro": "in'the Table-21 for the words and figures \u201cLess than 9\u201d the word and figures \u201cupto 9.0\u201d shall be substituted.",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_5S__item_1__item_2__item_ii__item_3"
+      ],
+      "parent_eid": "cl_5S__item_1__item_2",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "in'the Table-21 for the words and figures \u201cLess than 9\u201d the word and figures \u201cupto 9.0\u201d shall be substituted.",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_5S__item_1__item_2__item_ii",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 8,
+              "bbox": null,
+              "text_excerpt": "(ii) in'the Table-21 for the words and figures \u201cLess than 9\u201d the"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:5S(1)(2)(ii)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:5S(1)(2)(ii)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "5S(1)(2)(ii)",
+      "title": "in'the Table-21 for the words and figures \u201cLess than 9\u201d the word and figures \u201cupto",
+      "level": 4,
+      "parent_id": "rmp2015-zr-amend-2019-06:5S(1)(2)",
+      "order": 41,
+      "text": "in'the Table-21 for the words and figures \u201cLess than 9\u201d the word and figures \u201cupto 9.0\u201d shall be substituted.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 8,
+          "bbox": null,
+          "text_excerpt": "(ii) in'the Table-21 for the words and figures \u201cLess than 9\u201d the"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_5S__item_1__item_2__item_ii__item_3",
+      "native_number": "(3)",
+      "type": "item",
+      "heading": null,
+      "intro": "in regulation 7.3, in the Table-22.-",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "cl_5S__item_1__item_2__item_ii__item_3__item_i",
+        "cl_5S__item_1__item_2__item_ii__item_3__item_i_2"
+      ],
+      "parent_eid": "cl_5S__item_1__item_2__item_ii",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": "in regulation 7.3, in the Table-22.-",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_5S__item_1__item_2__item_ii__item_3",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 8,
+              "bbox": null,
+              "text_excerpt": "(3) in regulation 7.3, in the Table-22.-"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:5S(1)(2)(ii)(3)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:5S(1)(2)(ii)(3)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "5S(1)(2)(ii)(3)",
+      "title": "in regulation 7.3, in the Table-22.-",
+      "level": 5,
+      "parent_id": "rmp2015-zr-amend-2019-06:5S(1)(2)(ii)",
+      "order": 42,
+      "text": "in regulation 7.3, in the Table-22.-",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 8,
+          "bbox": null,
+          "text_excerpt": "(3) in regulation 7.3, in the Table-22.-"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_5S__item_1__item_2__item_ii__item_3__item_i",
+      "native_number": "(i)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "for the word, figures, symbol and letters \u201c Above 18m < 24m\u201d the words, figures and letters \u201cAbove 18.0m upto 24.0m\u201d shall be substituted; and",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_5S__item_1__item_2__item_ii__item_3",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "for the word, figures, symbol and letters \u201c Above 18m < 24m\u201d the words, figures and letters \u201cAbove 18.0m upto 24.0m\u201d shall be substituted; and",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_5S__item_1__item_2__item_ii__item_3__item_i",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 8,
+              "bbox": null,
+              "text_excerpt": "(i) for the word, figures, symbol and letters \u201c Above 18m <"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:5S(1)(2)(ii)(3)(i)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:5S(1)(2)(ii)(3)(i)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "5S(1)(2)(ii)(3)(i)",
+      "title": "for the word, figures, symbol and letters \u201c Above 18m < 24m\u201d the words, figures",
+      "level": 6,
+      "parent_id": "rmp2015-zr-amend-2019-06:5S(1)(2)(ii)(3)",
+      "order": 43,
+      "text": "for the word, figures, symbol and letters \u201c Above 18m < 24m\u201d the words, figures and letters \u201cAbove 18.0m upto 24.0m\u201d shall be substituted; and",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 8,
+          "bbox": null,
+          "text_excerpt": "(i) for the word, figures, symbol and letters \u201c Above 18m <"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "cl_5S__item_1__item_2__item_ii__item_3__item_i_2",
+      "native_number": "(i)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "for the word, figures, symbol and letters \u201c Above 24m < 30m\u201d the words, figures and letters \u201cAbove 24.0m upto 30.0m\u201d shall be substituted. - Amendment to Chapter 8.- In chapter 8 of the said regulations, in regulation 8.0, in the Table-23, for serial number 7 and 8 and the entries relating thereto, the following shall be substituted, namely:- for every 2 Rooms plus 1 car parking for every 7S5sqm of remaining built up area for visitors and part thereof (FAR area to be considered). 75sqm along 1 KM on either side of the metro corridors. 50sqm of floor area, in the areas other than metro corridors. For star hotels Office buildings in Non Residential Development Plan (Govt/Semi-Govt. IT, BT and Pvt By Order and in the.name of the Governor of Karnataka. N. NARASIMHA MURTHY Deputy Secretary to G\u00e9vernment\u201d Urban Development Department. \"\" gear dogwonob, Dies CUS sas, Bordach, (67) Wade: 300",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "cl_5S__item_1__item_2__item_ii__item_3",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2019-06-20",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "for the word, figures, symbol and letters \u201c Above 24m < 30m\u201d the words, figures and letters \u201cAbove 24.0m upto 30.0m\u201d shall be substituted. - Amendment to Chapter 8.- In chapter 8 of the said regulations, in regulation 8.0, in the Table-23, for serial number 7 and 8 and the entries relating thereto, the following shall be substituted, namely:- for every 2 Rooms plus 1 car parking for every 7S5sqm of remaining built up area for visitors and part thereof (FAR area to be considered). 75sqm along 1 KM on either side of the metro corridors. 50sqm of floor area, in the areas other than metro corridors. For star hotels Office buildings in Non Residential Development Plan (Govt/Semi-Govt. IT, BT and Pvt By Order and in the.name of the Governor of Karnataka. N. NARASIMHA MURTHY Deputy Secretary to G\u00e9vernment\u201d Urban Development Department. \"\" gear dogwonob, Dies CUS sas, Bordach, (67) Wade: 300",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "rmp2015-zr-amend-2019-06",
+          "source_eid": "cl_5S__item_1__item_2__item_ii__item_3__item_i_2",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "rmp2015-zr-amend-2019-06",
+              "page": 8,
+              "bbox": null,
+              "text_excerpt": "(i) for the word, figures, symbol and letters \u201c Above 24m <"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "rmp2015-zr-amend-2019-06:5S(1)(2)(ii)(3):5S(1)(2)(ii)(3)(i)",
+      "record_version": 1,
+      "record_id": "rmp2015-zr-amend-2019-06:5S(1)(2)(ii)(3):5S(1)(2)(ii)(3)(i)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2019-06-20",
+      "number": "5S(1)(2)(ii)(3):5S(1)(2)(ii)(3)(i)",
+      "title": "for the word, figures, symbol and letters \u201c Above 24m < 30m\u201d the words, figures",
+      "level": 6,
+      "parent_id": "rmp2015-zr-amend-2019-06:5S(1)(2)(ii)(3):5S(1)(2)(ii)(3)",
+      "order": 44,
+      "text": "for the word, figures, symbol and letters \u201c Above 24m < 30m\u201d the words, figures and letters \u201cAbove 24.0m upto 30.0m\u201d shall be substituted. - Amendment to Chapter 8.- In chapter 8 of the said regulations, in regulation 8.0, in the Table-23, for serial number 7 and 8 and the entries relating thereto, the following shall be substituted, namely:- for every 2 Rooms plus 1 car parking for every 7S5sqm of remaining built up area for visitors and part thereof (FAR area to be considered). 75sqm along 1 KM on either side of the metro corridors. 50sqm of floor area, in the areas other than metro corridors. For star hotels Office buildings in Non Residential Development Plan (Govt/Semi-Govt. IT, BT and Pvt By Order and in the.name of the Governor of Karnataka. N. NARASIMHA MURTHY Deputy Secretary to G\u00e9vernment\u201d Urban Development Department. \"\" gear dogwonob, Dies CUS sas, Bordach, (67) Wade: 300",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "rmp2015-zr-amend-2019-06",
+          "page": 8,
+          "bbox": null,
+          "text_excerpt": "(i) for the word, figures, symbol and letters \u201c Above 24m <"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    }
+  ]
+}

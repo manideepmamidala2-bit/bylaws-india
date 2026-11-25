@@ -136,6 +136,13 @@
         "verification": {
           "type": "string",
           "enum": ["unverified", "machine_checked", "human_verified"]
+        },
+        "applies_in": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          }
         }
       }
     },
@@ -194,6 +201,13 @@
         },
         "summary": {
           "type": ["string", "null"]
+        },
+        "applies_in": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          }
         }
       }
     }

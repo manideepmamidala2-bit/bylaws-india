@@ -86,6 +86,11 @@ GENERIC_CONFIG_VALUES: frozenset[str] = frozenset(
         "official_boundary",
         "master_plan_zone",
         "derived_overlay",
+        "north",
+        "south",
+        "east",
+        "west",
+        "central",
     }
 )
 

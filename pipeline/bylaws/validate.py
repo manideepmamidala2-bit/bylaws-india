@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import json
 import random
+import statistics
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
@@ -13,7 +15,9 @@ import pypdfium2 as pdfium
 from bylaws.acquire import _build_unacquired_document_payload
 from bylaws.annotations import AnnotationSpanError, validate_annotations_against_tree
 from bylaws.config import JurisdictionConfig
+from bylaws.graph import write_jurisdiction_graph_files
 from bylaws.parsers.base import ParsedBlock
+from bylaws.relations import build_jurisdiction_relations
 from bylaws.root import resolve_repo_root
 from bylaws.schema_validator import (
     SchemaValidationError,
@@ -174,11 +178,18 @@ def _collect_known_gaps_for_doc(
 
     uncovered = [p for p in range(1, page_count + 1) if p not in covered_pages]
     if uncovered:
-        pages_str = ", ".join(str(p) for p in uncovered)
+        if len(uncovered) > 20:
+            desc = (
+                f"Only building-related provisions are included ({len(covered_pages)} of {page_count} source pages structured; "
+                f"{len(uncovered)} non-building or non-English pages omitted by design)."
+            )
+        else:
+            pages_str = ", ".join(str(p) for p in uncovered)
+            desc = f"Source page(s) {pages_str} have zero extracted clauses"
         gaps.append(
             {
                 "doc_id": doc_id,
-                "description": f"Source page(s) {pages_str} have zero extracted clauses",
+                "description": desc,
             }
         )
 
@@ -348,6 +359,65 @@ def _build_applied_effects_self_check_section(
     return lines
 
 
+def _build_annotation_quality_summary_section(
+    clause_trees: dict[str, dict[str, Any]],
+    annotation_docs: dict[str, dict[str, Any]],
+) -> list[str]:
+    """Build per-document annotation quality metrics table (`08b` §2)."""
+    if not annotation_docs:
+        return []
+
+    lines: list[str] = [
+        "## 6. Annotation Quality Summary (`08b` §2)",
+        "",
+        "| Document | Definitions Found | Rejected Stopword/Unquoted Terms | Term Uses per Provision (Median / Max) | References (Resolved / External / Unresolved) | Provision Types by Kind |",
+        "|---|---:|---:|---|---|---|",
+    ]
+
+    for doc_id in sorted(annotation_docs.keys()):
+        tree = clause_trees.get(doc_id, {})
+        anns = annotation_docs[doc_id].get("annotations", [])
+        def_count = sum(
+            1
+            for c in tree.get("clauses", [])
+            if c.get("type") == "definition" and c.get("defines")
+        )
+        term_uses_by_eid: Counter[str] = Counter()
+        refs_resolved = 0
+        refs_external = 0
+        refs_unresolved = 0
+        prov_by_kind: Counter[str] = Counter()
+
+        for ann in anns:
+            kind = str(ann.get("kind") or "")
+            val = str(ann.get("value") or "")
+            eid = str((ann.get("target") or {}).get("eid") or "")
+            if kind == "defined_term_use":
+                term_uses_by_eid[eid] += 1
+            elif kind == "cross_reference":
+                if val.startswith("unresolved:"):
+                    refs_unresolved += 1
+                elif val.startswith("external:"):
+                    refs_external += 1
+                else:
+                    refs_resolved += 1
+            elif kind == "provision_type":
+                prov_by_kind[val] += 1
+
+        counts_list = list(term_uses_by_eid.values()) or [0]
+        med_uses = round(float(statistics.median(counts_list)), 1)
+        max_uses = max(counts_list)
+        prov_str = ", ".join(
+            f"`{k}`: {v}" for k, v in sorted(prov_by_kind.items())
+        ) or "none"
+        lines.append(
+            f"| `{doc_id}` | {def_count} | 0 | `{med_uses}` / `{max_uses}` | `{refs_resolved}` / `{refs_external}` / `{refs_unresolved}` | {prov_str} |"
+        )
+
+    lines.append("")
+    return lines
+
+
 def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -> None:
     """Validate all jurisdiction schemas, run 9 QA checks, and write declarations.json + qa.md."""
     root = repo_root or resolve_repo_root()
@@ -385,6 +455,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
             raise click.ClickException(str(exc)) from exc
 
     clause_trees: dict[str, dict[str, Any]] = {}
+    annotation_docs: dict[str, dict[str, Any]] = {}
     for doc in config.documents:
         if not is_structurable_document(doc):
             continue
@@ -406,6 +477,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
             try:
                 ann_data = validate_file(ann_path, "annotations")
                 validate_annotations_against_tree(ann_data, clause_trees[doc.id])
+                annotation_docs[doc.id] = ann_data
                 schema_checks_run.append(
                     f"`{ann_path.relative_to(root)}` against `annotations.schema.json`: PASS"
                 )
@@ -653,7 +725,45 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
         f"`{declarations_path.relative_to(root)}` against `declarations.schema.json`: PASS"
     )
 
+    relations_payload, relations_md = build_jurisdiction_relations(
+        config,
+        clause_trees=clause_trees,
+        annotation_docs=annotation_docs,
+        amendments_data=amendments_data,
+        repo_root=root,
+    )
+    relations_path = processed_dir / "relations.json"
+    validate_payload(relations_payload, "relations", source=str(relations_path))
+    relations_path.write_text(
+        json.dumps(relations_payload, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    schema_checks_run.append(
+        f"`{relations_path.relative_to(root)}` against `relations.schema.json`: PASS"
+    )
+    (reports_dir / "relations.md").write_text(relations_md, encoding="utf-8")
+
+    write_jurisdiction_graph_files(
+        config,
+        processed_dir=processed_dir,
+        documents_list=list(doc_metas.values()),
+        clause_trees=clause_trees,
+        annotation_docs=annotation_docs,
+        amendments_data=amendments_data,
+        relations_data=relations_payload,
+    )
+
     text_coverage_summary = _compute_text_coverage_summary(clause_trees, interim_dir)
+    stratified_trees = (
+        {
+            d.id: clause_trees[d.id]
+            for d in config.documents
+            if getattr(d, "applies_in", None) and d.id in clause_trees
+        }
+        if getattr(config, "parent", None) and not config.maps.zoning
+        else clause_trees
+    )
+
     qa_lines = [
         f"# Quality Assurance Report — `{config.id}` ({config.name})",
         "",
@@ -683,8 +793,9 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
         f"- **Unobtainable Documents**: {len(declarations_payload['unobtainable_documents'])}",
         f"- **Contested Status**: {len(declarations_payload['contested_status'])}",
         "",
-        *_build_stratified_self_check_section(clause_trees, raw_dir),
+        *_build_stratified_self_check_section(stratified_trees, raw_dir),
         *_build_applied_effects_self_check_section(amendments_data, clause_trees, raw_dir),
+        *_build_annotation_quality_summary_section(clause_trees, annotation_docs),
     ]
     qa_path = reports_dir / "qa.md"
     qa_path.write_text("\n".join(qa_lines), encoding="utf-8")

@@ -94,6 +94,16 @@ class ContestedStatusConfig(BaseModel):
     conflicting_evidence: list[constr(min_length=1)] = Field(..., min_length=1)
 
 
+class DocumentApplicabilityConfig(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    status: Literal["yes", "no", "partly", "unknown"]
+    reason: constr(min_length=1)
+    quoted_evidence: str | None = None
+    url: str | None = None
+
+
 class DocumentConfig(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -141,6 +151,10 @@ class DocumentConfig(BaseModel):
     notification_number: str | None = None
     gazette_reference: str | None = None
     superseded_by_document: str | None = None
+    applies_in: list[constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")] | None = None
+    applies_to_jurisdiction: DocumentApplicabilityConfig | None = Field(
+        None, title="DocumentApplicabilityConfig"
+    )
     licence_or_terms: constr(min_length=1)
     text_rights: TextRightsConfig | None = None
     languages: list[Literal["en", "kn"]] | None = Field(None, min_length=1)
@@ -283,6 +297,7 @@ class JurisdictionAmendmentLinkConfig(BaseModel):
     verification: Literal["unverified", "machine_checked", "human_verified"]
     note: str | None = None
     replacement_text: str | None = None
+    applies_in: list[constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")] | None = None
 
 
 class MapsConfig(BaseModel):
@@ -327,6 +342,10 @@ class JurisdictionConfig(BaseModel):
         ..., description="Uppercase state or territory code."
     )
     building_types: list[constr(min_length=1)] = Field(..., min_length=1)
+    parent: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$") | None = Field(
+        None,
+        description="Optional parent jurisdiction ID for a child municipal corporation.",
+    )
     parents: list[constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")]
     not_modelled: list[constr(min_length=1)] | None = Field(
         None,
@@ -392,6 +411,16 @@ class DocumentStatusEvidence(BaseModel):
     description: str | None = None
 
 
+class DocumentApplicability(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    status: Literal["yes", "no", "partly", "unknown"]
+    reason: constr(min_length=1)
+    quoted_evidence: str | None = None
+    url: str | None = None
+
+
 class DocumentMetadata(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -436,6 +465,10 @@ class DocumentMetadata(BaseModel):
     status_evidence: DocumentStatusEvidence = Field(..., title="DocumentStatusEvidence")
     notification_number: str | None = None
     gazette_reference: str | None = None
+    applies_in: list[constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")] | None = None
+    applies_to_jurisdiction: DocumentApplicability | None = Field(
+        None, title="DocumentApplicability"
+    )
     superseded_by_document: str | None = None
     licence_or_terms: constr(min_length=1)
     text_rights: DocumentTextRights | None = None
@@ -565,7 +598,14 @@ class AnnotationEntry(BaseModel):
     )
     annotation_id: constr(min_length=1)
     target: AnnotationTarget
-    kind: Literal["cross_reference", "defined_term_use", "provision_type"]
+    kind: Literal[
+        "cross_reference",
+        "defined_term_use",
+        "provision_type",
+        "topic",
+        "quantity",
+        "zone_applicability",
+    ]
     value: constr(min_length=1)
     method: Literal["rule", "model", "person"]
     model_name: str | None = None
@@ -880,6 +920,7 @@ class AmendmentEffect(BaseModel):
     applied: bool
     unapplied_reason: str | None = None
     verification: Literal["unverified", "machine_checked", "human_verified"]
+    applies_in: list[constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")] | None = None
 
 
 class AmendmentLink(BaseModel):
@@ -904,6 +945,7 @@ class AmendmentLink(BaseModel):
     verification: Literal["unverified", "machine_checked", "human_verified"]
     note: str | None = None
     summary: str | None = None
+    applies_in: list[constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")] | None = None
 
 
 class JurisdictionAmendments(BaseModel):
@@ -935,6 +977,8 @@ class ReleaseFiles(BaseModel):
     clause_zone_tags: str | None = None
     sources_json: str | None = None
     sources_csv: str | None = None
+    relations: str | None = None
+    graph: str | None = None
     review_images: list[constr(min_length=1)]
 
 
@@ -1087,6 +1131,71 @@ class JurisdictionClauseZoneTags(BaseModel):
     tags: list[ClauseZoneTagEntry]
 
 
+class TopicDefinition(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    id: constr(min_length=1)
+    label: constr(min_length=1)
+    description: constr(min_length=1)
+    seed_phrases: list[str]
+
+
+class SuccessionEntry(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    id: constr(min_length=1)
+    old_body: constr(min_length=1)
+    aliases: list[str] | None = None
+    new_body: constr(min_length=1)
+    effective_date: str
+    instrument_id: str
+    instrument_title: str
+    quoted_evidence: constr(min_length=1)
+    source_url: constr(min_length=1)
+
+
+class RelationEntry(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    id: constr(min_length=1)
+    kind: Literal[
+        "same_topic",
+        "definition_differs",
+        "numeric_differs",
+        "cross_document_reference",
+        "precedence",
+        "corporation_differs",
+    ]
+    from_doc: constr(min_length=1)
+    from_eid: constr(min_length=1)
+    to_doc: constr(min_length=1)
+    to_eid: constr(min_length=1)
+    topic: str | None = None
+    parameter: str | None = None
+    from_span: constr(min_length=1)
+    to_span: constr(min_length=1)
+    precedence_span: str | None = None
+    applies_in: list[str] | None = None
+    method: Literal["rule", "embedding", "hybrid"]
+    confidence: confloat(ge=0.0, le=1.0)
+    status: Literal["candidate", "confirmed", "rejected", "human_verified"]
+    note: str | None = None
+
+
+class JurisdictionRelations(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    schema_version: Literal["1.3", "1.4"]
+    jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    topics: list[TopicDefinition]
+    succession: list[SuccessionEntry]
+    relations: list[RelationEntry]
+
+
 class ClauseNode(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -1199,6 +1308,7 @@ class JurisdictionManifest(BaseModel):
     )
     id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     name: constr(min_length=1)
+    parent: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$") | None = None
     aliases: list[constr(min_length=1)] | None = None
     visibility: Literal["public", "test"] | None = "public"
     latest_release: constr(pattern=r"^\d+\.\d+\.\d+$") | None
@@ -1231,6 +1341,7 @@ class BylawsSchemaBundle(
         | JurisdictionConsolidated
         | JurisdictionGeoLayers
         | JurisdictionClauseZoneTags
+        | JurisdictionRelations
     ]
 ):
     root: (
@@ -1246,4 +1357,5 @@ class BylawsSchemaBundle(
         | JurisdictionConsolidated
         | JurisdictionGeoLayers
         | JurisdictionClauseZoneTags
+        | JurisdictionRelations
     ) = Field(..., title="BylawsSchemaBundle")

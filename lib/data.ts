@@ -19,6 +19,7 @@ import type {
   ConsolidatedClauseTable,
   ContestedStatus,
   DocumentAnnotations,
+  DocumentApplicability,
   DocumentCitedProvision,
   DocumentCopy,
   DocumentMetadata,
@@ -31,15 +32,19 @@ import type {
   JurisdictionDeclarations,
   JurisdictionGeoLayers,
   JurisdictionManifest as JurisdictionSummary,
+  JurisdictionRelations,
   KnownGap,
   NodeVersion,
+  RelationEntry,
   ReleaseDrafts,
   ReleaseEntry,
   ReleaseFiles,
   ReleaseManifest,
+  SuccessionEntry,
   TableColumnHeader,
   TableFootnote,
   TableMeta,
+  TopicDefinition,
   UnconsolidatedClauseRecord,
   UnobtainableDocument,
   UnreadDocument,
@@ -62,6 +67,7 @@ export type {
   ConsolidatedClauseTable,
   ContestedStatus,
   DocumentAnnotations,
+  DocumentApplicability,
   DocumentCitedProvision,
   DocumentCopy,
   DocumentMetadata,
@@ -73,16 +79,20 @@ export type {
   JurisdictionConsolidated,
   JurisdictionDeclarations,
   JurisdictionGeoLayers,
+  JurisdictionRelations,
   JurisdictionSummary,
   KnownGap,
   NodeVersion,
+  RelationEntry,
   ReleaseDrafts,
   ReleaseEntry,
   ReleaseFiles,
   ReleaseManifest,
+  SuccessionEntry,
   TableColumnHeader,
   TableFootnote,
   TableMeta,
+  TopicDefinition,
   UnconsolidatedClauseRecord,
   UnobtainableDocument,
   UnreadDocument,
@@ -140,6 +150,7 @@ export interface JurisdictionDatasetBundle {
   overlays: GenericFeatureCollection | null;
   geoLayers: JurisdictionGeoLayers | null;
   clauseZoneTags: JurisdictionClauseZoneTags | null;
+  relations: JurisdictionRelations | null;
   declarations: JurisdictionDeclarations;
 }
 
@@ -211,6 +222,8 @@ function isMockedGlobalFetch(): boolean {
   return Boolean(fn && ("mock" in fn || "_isMockFunction" in fn));
 }
 
+const diskJsonCache = new Map<string, { mtimeMs: number; value: unknown }>();
+
 export async function readPublishedJson<T>(
   webPath: string,
   customFetch?: typeof fetch
@@ -232,8 +245,15 @@ export async function readPublishedJson<T>(
     const path = process.getBuiltinModule("path") as typeof import("path");
     const relativePath = webPath.replace(/^\/+/, "");
     const diskPath = path.join(process.cwd(), "public", relativePath);
+    const stat = await fs.stat(diskPath);
+    const cached = diskJsonCache.get(diskPath);
+    if (cached && cached.mtimeMs === stat.mtimeMs) {
+      return cached.value as T;
+    }
     const rawText = await fs.readFile(diskPath, "utf8");
-    return JSON.parse(rawText) as T;
+    const parsed = JSON.parse(rawText) as T;
+    diskJsonCache.set(diskPath, { mtimeMs: stat.mtimeMs, value: parsed });
+    return parsed;
   }
 
   const fetchImpl = customFetch ?? fetch;
@@ -539,6 +559,7 @@ export async function fetchJurisdictionDataset(
       overlays: null,
       geoLayers: null,
       clauseZoneTags: null,
+      relations: null,
       declarations: {
         schema_version: "1.3",
         jurisdiction: jurisdictionId,
@@ -569,6 +590,7 @@ export async function fetchJurisdictionDataset(
     overlays,
     geoLayers,
     clauseZoneTags,
+    relations,
     declarations,
   ] = await Promise.all([
     readPublishedJson<DocumentMetadata[]>(releaseFiles.documents),
@@ -601,6 +623,11 @@ export async function fetchJurisdictionDataset(
     releaseFiles.clause_zone_tags
       ? readPublishedJson<JurisdictionClauseZoneTags>(
           releaseFiles.clause_zone_tags
+        )
+      : Promise.resolve(null),
+    releaseFiles.relations
+      ? readPublishedJson<JurisdictionRelations>(releaseFiles.relations).catch(
+          () => null
         )
       : Promise.resolve(null),
     readPublishedJson<JurisdictionDeclarations>(release.declarations),
@@ -655,6 +682,7 @@ export async function fetchJurisdictionDataset(
     overlays,
     geoLayers,
     clauseZoneTags,
+    relations,
     declarations,
   };
 }

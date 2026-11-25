@@ -35,7 +35,17 @@ function hasPublishedRelease(item: JurisdictionSummary): boolean {
 
 export default async function JurisdictionPickerPage() {
   const { visibleJurisdictions } = await getHomePageProps();
-  const primaryJurisdiction = visibleJurisdictions[0];
+  const primaryJurisdiction =
+    visibleJurisdictions.find((j) =>
+      j.releases.some((rel) => isWithdrawnRelease(rel))
+    ) ?? visibleJurisdictions[0];
+  const parentJurisdiction =
+    visibleJurisdictions.find((j) =>
+      visibleJurisdictions.some((child) => child.parent === j.id)
+    ) ?? primaryJurisdiction;
+  const childCorporations = parentJurisdiction
+    ? visibleJurisdictions.filter((j) => j.parent === parentJurisdiction.id)
+    : [];
   const withdrawnRelease = primaryJurisdiction?.releases.find((rel) =>
     isWithdrawnRelease(rel)
   );
@@ -48,10 +58,10 @@ export default async function JurisdictionPickerPage() {
   return (
     <div className="min-h-screen bg-[#f5f3ed] text-[#080909]">
       <TopNav
-        jurisdictionId={primaryJurisdiction?.id}
-        jurisdictionName={primaryJurisdiction?.name}
+        jurisdictionId={parentJurisdiction?.id}
+        jurisdictionName={parentJurisdiction?.name}
         active="home"
-        releaseVersion={primaryJurisdiction?.latest_release ?? undefined}
+        releaseVersion={parentJurisdiction?.latest_release ?? undefined}
       />
 
       <main className="mx-auto max-w-6xl px-6 py-10">
@@ -68,6 +78,44 @@ export default async function JurisdictionPickerPage() {
             land-use maps in India.
           </p>
         </header>
+
+        {parentJurisdiction && childCorporations.length > 0 && (
+          <section
+            aria-label="City corporation picker"
+            className="mt-8 border border-[#080909] bg-[#efeee8] p-6"
+          >
+            <div className="dg-mono">
+              {parentJurisdiction.name} · {childCorporations.length} City Corporations
+            </div>
+            <h2 className="mt-1 text-xl font-semibold tracking-tight text-[#080909]">
+              Select a City Corporation
+            </h2>
+            <p className="dg-serif mt-2 max-w-3xl text-sm text-[#171917]">
+              Base municipal building bye-laws and master plan zoning
+              regulations are shared across {parentJurisdiction.name}, while
+              each City Corporation has enacted its own 2026 Building
+              (Amendment) Bye-laws. Pick a corporation to inspect its wards,
+              zones, and consolidated bye-laws.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2 font-mono text-xs uppercase tracking-[0.12em]">
+              <Link
+                href={`/j/${parentJurisdiction.id}`}
+                className="border border-[#080909] bg-[#080909] px-3 py-2 text-[#f5f3ed] no-underline"
+              >
+                All Corporations Map ({parentJurisdiction.name})
+              </Link>
+              {childCorporations.map((corp) => (
+                <Link
+                  key={corp.id}
+                  href={`/j/${corp.id}`}
+                  className="border border-[#080909] bg-[#f5f3ed] px-3 py-2 text-[#080909] no-underline hover:bg-[#e5e6de]"
+                >
+                  {corp.name}
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         <section
           aria-label="Project status"

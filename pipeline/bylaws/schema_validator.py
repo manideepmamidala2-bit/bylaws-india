@@ -27,6 +27,7 @@ SCHEMA_NAMES: tuple[str, ...] = (
     "consolidated",
     "geo-layers",
     "clause-zone-tags",
+    "relations",
 )
 
 

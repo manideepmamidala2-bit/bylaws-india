@@ -1,0 +1,1934 @@
+{
+  "schema_version": "1.3",
+  "doc_id": "bwcc-bbl-amend-2026-04-draft",
+  "jurisdiction": "in-ka-bengaluru",
+  "legal_status": "draft",
+  "generated": {
+    "parser": "pypdfium2",
+    "parser_version": "4.30.0",
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "clauses": [
+    {
+      "eid": "prea_1",
+      "native_number": null,
+      "type": "preamble",
+      "heading": "Preamble",
+      "intro": null,
+      "content": "\u013b\u00af\u0cc6 \u00af\u0cc6\u0cd5\u0cb7 \u00aa\u0cbe \u00aa\u0cbe\u0c9c\u00cd \u0caa \u0126\u00ce\u0090\u0cc6 \u0090\u0cc6 \u0c9c\u00cd \u00a8s\u00c1U\u00c0 3 , 01 2026 11 1948 ) 254 \u2013 , . 2",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": null,
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2026-04-01",
+          "valid_to": null,
+          "heading": "Preamble",
+          "intro": null,
+          "content": "\u013b\u00af\u0cc6 \u00af\u0cc6\u0cd5\u0cb7 \u00aa\u0cbe \u00aa\u0cbe\u0c9c\u00cd \u0caa \u0126\u00ce\u0090\u0cc6 \u0090\u0cc6 \u0c9c\u00cd \u00a8s\u00c1U\u00c0 3 , 01 2026 11 1948 ) 254 \u2013 , . 2",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "bwcc-bbl-amend-2026-04-draft",
+          "source_eid": "prea_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 1,
+              "bbox": [
+                0.1528,
+                0.2439,
+                0.8616,
+                0.2925
+              ],
+              "text_excerpt": "\u013b\u00af\u0cc6 \u00af\u0cc6\u0cd5\u0cb7 \u00aa\u0cbe \u00aa\u0cbe\u0c9c\u00cd \u0caa \u0126\u00ce\u0090\u0cc6 \u0090\u0cc6 \u0c9c\u00cd \u00a8s\u00c1U\u00c0 3 , 01"
+            }
+          ],
+          "legal_status": "draft",
+          "omitted": false
+        }
+      ],
+      "clause_id": "bwcc-bbl-amend-2026-04-draft:preamble",
+      "record_version": 1,
+      "record_id": "bwcc-bbl-amend-2026-04-draft:preamble@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "draft",
+      "effective_from": "2026-04-01",
+      "number": "preamble",
+      "title": "Preamble",
+      "level": 1,
+      "parent_id": null,
+      "order": 0,
+      "text": "\u013b\u00af\u0cc6 \u00af\u0cc6\u0cd5\u0cb7 \u00aa\u0cbe \u00aa\u0cbe\u0c9c\u00cd \u0caa \u0126\u00ce\u0090\u0cc6 \u0090\u0cc6 \u0c9c\u00cd \u00a8s\u00c1U\u00c0 3 , 01 2026 11 1948 ) 254 \u2013 , . 2",
+      "language": "kn",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 1,
+          "bbox": [
+            0.1528,
+            0.2439,
+            0.8616,
+            0.2925
+          ],
+          "text_excerpt": "\u013b\u00af\u0cc6 \u00af\u0cc6\u0cd5\u0cb7 \u00aa\u0cbe \u00aa\u0cbe\u0c9c\u00cd \u0caa \u0126\u00ce\u0090\u0cc6 \u0090\u0cc6 \u0c9c\u00cd \u00a8s\u00c1U\u00c0 3 , 01"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_III",
+      "native_number": "PART III",
+      "type": "part",
+      "heading": "PART III",
+      "intro": null,
+      "content": "PART III BENGALURU, WEDNESDAY , 01, APRIL, 2026 ( CHAITHRA, 11 , SHAKAVARSHA, 1948 ) No. 2 5 4 GREATER BENGALURU AUTHORITY BENGALURU WEST CITY CORPORATION Office address: Office of Commissioner, 16 th Cross Road, IPP Office, Malleshwaram, Bengaluru-560 003 No:Comm/BWCC/PR/ 03 /2026-27 Date:01/04/2026 NOTIFICATION The draft of the following bye-laws further to amend the Bengaluru City Corporation Building Bye-Laws, 2003 which the Bengaluru West City Corporation proposes to make in exercise of the powers conferred by section 317 read with sections 224, 232, 233 and 241 of the Greater Bengaluru Governance Act, 2024 (Karnataka Act 36 of 2025), with approval of the Government is hereby published as required by sections 318(2) of the said Act, for the information of all persons likely to be affected thereby and notice is hereby given that the said draft will be taken into consideration after the expiry of thirty days from the date of its publication in the official Gazette. Any objection or suggestion which may be received by the Bengaluru West City Corporation from any person with respect to the said draft before the expiry of thirty days period from the date of this notification will be considered by the Bengaluru West City Corporation. Objections and suggestions may be addressed to the Commissioner, Bengaluru West City Corporation, 16th Cross Road, IPP Office, Malleshwaram, Bengaluru-560 003 . DRAFT BYE-LAWS",
+      "wrap_up": null,
+      "children": [
+        "part_III__cl_1",
+        "part_III__cl_2",
+        "part_III__cl_3.8"
+      ],
+      "parent_eid": null,
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2026-04-01",
+          "valid_to": null,
+          "heading": "PART III",
+          "intro": null,
+          "content": "PART III BENGALURU, WEDNESDAY , 01, APRIL, 2026 ( CHAITHRA, 11 , SHAKAVARSHA, 1948 ) No. 2 5 4 GREATER BENGALURU AUTHORITY BENGALURU WEST CITY CORPORATION Office address: Office of Commissioner, 16 th Cross Road, IPP Office, Malleshwaram, Bengaluru-560 003 No:Comm/BWCC/PR/ 03 /2026-27 Date:01/04/2026 NOTIFICATION The draft of the following bye-laws further to amend the Bengaluru City Corporation Building Bye-Laws, 2003 which the Bengaluru West City Corporation proposes to make in exercise of the powers conferred by section 317 read with sections 224, 232, 233 and 241 of the Greater Bengaluru Governance Act, 2024 (Karnataka Act 36 of 2025), with approval of the Government is hereby published as required by sections 318(2) of the said Act, for the information of all persons likely to be affected thereby and notice is hereby given that the said draft will be taken into consideration after the expiry of thirty days from the date of its publication in the official Gazette. Any objection or suggestion which may be received by the Bengaluru West City Corporation from any person with respect to the said draft before the expiry of thirty days period from the date of this notification will be considered by the Bengaluru West City Corporation. Objections and suggestions may be addressed to the Commissioner, Bengaluru West City Corporation, 16th Cross Road, IPP Office, Malleshwaram, Bengaluru-560 003 . DRAFT BYE-LAWS",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "bwcc-bbl-amend-2026-04-draft",
+          "source_eid": "part_III",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 1,
+              "bbox": [
+                0.1292,
+                0.2972,
+                0.8764,
+                0.7816
+              ],
+              "text_excerpt": "Part \u2013 III BENGALURU, WEDNESDAY , 01, APRIL, 2026 ( CHAITHRA, 11"
+            }
+          ],
+          "legal_status": "draft",
+          "omitted": false
+        }
+      ],
+      "clause_id": "bwcc-bbl-amend-2026-04-draft:PART III",
+      "record_version": 1,
+      "record_id": "bwcc-bbl-amend-2026-04-draft:PART III@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "draft",
+      "effective_from": "2026-04-01",
+      "number": "PART III",
+      "title": "PART III",
+      "level": 1,
+      "parent_id": null,
+      "order": 1,
+      "text": "PART III BENGALURU, WEDNESDAY , 01, APRIL, 2026 ( CHAITHRA, 11 , SHAKAVARSHA, 1948 ) No. 2 5 4 GREATER BENGALURU AUTHORITY BENGALURU WEST CITY CORPORATION Office address: Office of Commissioner, 16 th Cross Road, IPP Office, Malleshwaram, Bengaluru-560 003 No:Comm/BWCC/PR/ 03 /2026-27 Date:01/04/2026 NOTIFICATION The draft of the following bye-laws further to amend the Bengaluru City Corporation Building Bye-Laws, 2003 which the Bengaluru West City Corporation proposes to make in exercise of the powers conferred by section 317 read with sections 224, 232, 233 and 241 of the Greater Bengaluru Governance Act, 2024 (Karnataka Act 36 of 2025), with approval of the Government is hereby published as required by sections 318(2) of the said Act, for the information of all persons likely to be affected thereby and notice is hereby given that the said draft will be taken into consideration after the expiry of thirty days from the date of its publication in the official Gazette. Any objection or suggestion which may be received by the Bengaluru West City Corporation from any person with respect to the said draft before the expiry of thirty days period from the date of this notification will be considered by the Bengaluru West City Corporation. Objections and suggestions may be addressed to the Commissioner, Bengaluru West City Corporation, 16th Cross Road, IPP Office, Malleshwaram, Bengaluru-560 003 . DRAFT BYE-LAWS",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 1,
+          "bbox": [
+            0.1292,
+            0.2972,
+            0.8764,
+            0.7816
+          ],
+          "text_excerpt": "Part \u2013 III BENGALURU, WEDNESDAY , 01, APRIL, 2026 ( CHAITHRA, 11"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_III__cl_1",
+      "native_number": "1",
+      "type": "clause",
+      "heading": "Title and commencement.- (1) These Bye-laws may be called the",
+      "intro": "Title and commencement.- (1) These Bye-laws may be called the Bengaluru City Corporation Building (Amendment) Bye-laws, 2026.",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "part_III__cl_1__item_2"
+      ],
+      "parent_eid": "part_III",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2026-04-01",
+          "valid_to": null,
+          "heading": "Title and commencement.- (1) These Bye-laws may be called the",
+          "intro": "Title and commencement.- (1) These Bye-laws may be called the Bengaluru City Corporation Building (Amendment) Bye-laws, 2026.",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "bwcc-bbl-amend-2026-04-draft",
+          "source_eid": "part_III__cl_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 1,
+              "bbox": [
+                0.1298,
+                0.7954,
+                0.8764,
+                0.8327
+              ],
+              "text_excerpt": "1. Title and commencement.- (1) These Bye-laws may be called the Bengaluru"
+            }
+          ],
+          "legal_status": "draft",
+          "omitted": false
+        }
+      ],
+      "clause_id": "bwcc-bbl-amend-2026-04-draft:1",
+      "record_version": 1,
+      "record_id": "bwcc-bbl-amend-2026-04-draft:1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "draft",
+      "effective_from": "2026-04-01",
+      "number": "1",
+      "title": "Title and commencement.- (1) These Bye-laws may be called the",
+      "level": 2,
+      "parent_id": "bwcc-bbl-amend-2026-04-draft:PART III",
+      "order": 2,
+      "text": "Title and commencement.- (1) These Bye-laws may be called the Bengaluru City Corporation Building (Amendment) Bye-laws, 2026.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 1,
+          "bbox": [
+            0.1298,
+            0.7954,
+            0.8764,
+            0.8327
+          ],
+          "text_excerpt": "1. Title and commencement.- (1) These Bye-laws may be called the Bengaluru"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_III__cl_1__item_2",
+      "native_number": "(2)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "They shall come into force from the date of their final publication in the official Gazette.",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "part_III__cl_1",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2026-04-01",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "They shall come into force from the date of their final publication in the official Gazette.",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "bwcc-bbl-amend-2026-04-draft",
+          "source_eid": "part_III__cl_1__item_2",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 1,
+              "bbox": [
+                0.1301,
+                0.8504,
+                0.8764,
+                0.8814
+              ],
+              "text_excerpt": "(2) They shall come into force from the date of their final"
+            }
+          ],
+          "legal_status": "draft",
+          "omitted": false
+        }
+      ],
+      "clause_id": "bwcc-bbl-amend-2026-04-draft:1(2)",
+      "record_version": 1,
+      "record_id": "bwcc-bbl-amend-2026-04-draft:1(2)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "draft",
+      "effective_from": "2026-04-01",
+      "number": "1(2)",
+      "title": "They shall come into force from the date of their final publication in the",
+      "level": 3,
+      "parent_id": "bwcc-bbl-amend-2026-04-draft:1",
+      "order": 3,
+      "text": "They shall come into force from the date of their final publication in the official Gazette.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 1,
+          "bbox": [
+            0.1301,
+            0.8504,
+            0.8764,
+            0.8814
+          ],
+          "text_excerpt": "(2) They shall come into force from the date of their final"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_III__cl_2",
+      "native_number": "2",
+      "type": "clause",
+      "heading": "Amendment of Bye-law 3.8; Bye-law 3.9 & Bye-Law 3.10",
+      "intro": null,
+      "content": "- In the Bengaluru City Corporation Building Bye-laws- 2003 (hereinafter referred to as the said bye-laws), (1) detailed reasons for the same. Sl Fee No \u201cScrutiny Fee\u201d for issue of 1 occupancy certificate Compounding Fee for construction carried out without obtaining plinth 2 certificate (chargeable for total built up area constructed without obtaining plinth certificate) [ Maximum Deviation allowed in set back Sl Total Set Type of Building all sides Deviation/ violation against the permissible limit Table-2A Rate of fee for issue of occupancy certificate on the guidance value of site, subject to a minimum consideration of Rs.50,000/- per sq.m to be Chargeable for the total built up area of all floors. Non Residential Residential (Commercial / Industrial / Other Uses) 0.01% 0.02% 0.06% 0.08% Table-2B Maximum Condonable limits of Deviation against permissible limits [Subject to provision of minimum Fire Drive way of required width] Height of the Maximum Maximum building Deviation Deviation (not numbers of floors)",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "part_III",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2026-04-01",
+          "valid_to": null,
+          "heading": "Amendment of Bye-law 3.8; Bye-law 3.9 & Bye-Law 3.10",
+          "intro": null,
+          "content": "- In the Bengaluru City Corporation Building Bye-laws- 2003 (hereinafter referred to as the said bye-laws), (1) detailed reasons for the same. Sl Fee No \u201cScrutiny Fee\u201d for issue of 1 occupancy certificate Compounding Fee for construction carried out without obtaining plinth 2 certificate (chargeable for total built up area constructed without obtaining plinth certificate) [ Maximum Deviation allowed in set back Sl Total Set Type of Building all sides Deviation/ violation against the permissible limit Table-2A Rate of fee for issue of occupancy certificate on the guidance value of site, subject to a minimum consideration of Rs.50,000/- per sq.m to be Chargeable for the total built up area of all floors. Non Residential Residential (Commercial / Industrial / Other Uses) 0.01% 0.02% 0.06% 0.08% Table-2B Maximum Condonable limits of Deviation against permissible limits [Subject to provision of minimum Fire Drive way of required width] Height of the Maximum Maximum building Deviation Deviation (not numbers of floors)",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "bwcc-bbl-amend-2026-04-draft",
+          "source_eid": "part_III__cl_2",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 1,
+              "bbox": [
+                0.1299,
+                0.8942,
+                0.8765,
+                0.9468
+              ],
+              "text_excerpt": "2. Amendment of Bye-law 3.8; Bye-law 3.9 & Bye-Law 3.10:- In the"
+            },
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 2,
+              "bbox": [
+                0.1263,
+                0.3063,
+                0.8737,
+                0.8938
+              ],
+              "text_excerpt": "detailed reasons for the same. Sl Fee No \u201cScrutiny Fee\u201d for issue"
+            }
+          ],
+          "legal_status": "draft",
+          "omitted": false
+        }
+      ],
+      "clause_id": "bwcc-bbl-amend-2026-04-draft:2",
+      "record_version": 1,
+      "record_id": "bwcc-bbl-amend-2026-04-draft:2@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "draft",
+      "effective_from": "2026-04-01",
+      "number": "2",
+      "title": "Amendment of Bye-law 3.8; Bye-law 3.9 & Bye-Law 3.10",
+      "level": 2,
+      "parent_id": "bwcc-bbl-amend-2026-04-draft:PART III",
+      "order": 4,
+      "text": "- In the Bengaluru City Corporation Building Bye-laws- 2003 (hereinafter referred to as the said bye-laws), (1) detailed reasons for the same. Sl Fee No \u201cScrutiny Fee\u201d for issue of 1 occupancy certificate Compounding Fee for construction carried out without obtaining plinth 2 certificate (chargeable for total built up area constructed without obtaining plinth certificate) [ Maximum Deviation allowed in set back Sl Total Set Type of Building all sides Deviation/ violation against the permissible limit Table-2A Rate of fee for issue of occupancy certificate on the guidance value of site, subject to a minimum consideration of Rs.50,000/- per sq.m to be Chargeable for the total built up area of all floors. Non Residential Residential (Commercial / Industrial / Other Uses) 0.01% 0.02% 0.06% 0.08% Table-2B Maximum Condonable limits of Deviation against permissible limits [Subject to provision of minimum Fire Drive way of required width] Height of the Maximum Maximum building Deviation Deviation (not numbers of floors)",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 1,
+          "bbox": [
+            0.1299,
+            0.8942,
+            0.8765,
+            0.9468
+          ],
+          "text_excerpt": "2. Amendment of Bye-law 3.8; Bye-law 3.9 & Bye-Law 3.10:- In the"
+        },
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 2,
+          "bbox": [
+            0.1263,
+            0.3063,
+            0.8737,
+            0.8938
+          ],
+          "text_excerpt": "detailed reasons for the same. Sl Fee No \u201cScrutiny Fee\u201d for issue"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_III__cl_3.8",
+      "native_number": "3.8",
+      "type": "clause",
+      "heading": "Ground Rent; Bye-law 3.9- Ground Rent for high rise buildings and Bye\u0002",
+      "intro": "Ground Rent; Bye-law 3.9- Ground Rent for high rise buildings and Bye\u0002 law 3.10- Exemption of ground rent the entire provision shall be omitted.",
+      "content": null,
+      "wrap_up": null,
+      "children": [
+        "part_III__cl_3.8__cl_3",
+        "part_III__cl_3.8__item_i",
+        "part_III__cl_3.8__item_a",
+        "part_III__cl_3.8__item_b",
+        "part_III__cl_3.8__note_1",
+        "part_III__cl_3.8__cl_2",
+        "part_III__cl_3.8__cl_3_2",
+        "part_III__cl_3.8__cl_4",
+        "part_III__cl_3.8__note_2",
+        "part_III__cl_3.8__cl_1",
+        "part_III__cl_3.8__cl_2_2",
+        "part_III__cl_3.8__cl_3_3"
+      ],
+      "parent_eid": "part_III",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2026-04-01",
+          "valid_to": null,
+          "heading": "Ground Rent; Bye-law 3.9- Ground Rent for high rise buildings and Bye\u0002",
+          "intro": "Ground Rent; Bye-law 3.9- Ground Rent for high rise buildings and Bye\u0002 law 3.10- Exemption of ground rent the entire provision shall be omitted.",
+          "content": null,
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "bwcc-bbl-amend-2026-04-draft",
+          "source_eid": "part_III__cl_3.8",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 2,
+              "bbox": [
+                0.1296,
+                0.0934,
+                0.8696,
+                0.128
+              ],
+              "text_excerpt": "Bye-law 3.8- Ground Rent; Bye-law 3.9- Ground Rent for high rise buildings"
+            }
+          ],
+          "legal_status": "draft",
+          "omitted": false
+        }
+      ],
+      "clause_id": "bwcc-bbl-amend-2026-04-draft:3.8",
+      "record_version": 1,
+      "record_id": "bwcc-bbl-amend-2026-04-draft:3.8@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "draft",
+      "effective_from": "2026-04-01",
+      "number": "3.8",
+      "title": "Ground Rent; Bye-law 3.9- Ground Rent for high rise buildings and Bye\u0002",
+      "level": 2,
+      "parent_id": "bwcc-bbl-amend-2026-04-draft:PART III",
+      "order": 5,
+      "text": "Ground Rent; Bye-law 3.9- Ground Rent for high rise buildings and Bye\u0002 law 3.10- Exemption of ground rent the entire provision shall be omitted.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 2,
+          "bbox": [
+            0.1296,
+            0.0934,
+            0.8696,
+            0.128
+          ],
+          "text_excerpt": "Bye-law 3.8- Ground Rent; Bye-law 3.9- Ground Rent for high rise buildings"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_III__cl_3.8__cl_3",
+      "native_number": "3",
+      "type": "clause",
+      "heading": "Amendment to Bye-law 6.0 Deviation during construction",
+      "intro": null,
+      "content": "- Clause (i) under Bye-law no 6.0 shall be substituted as below:-",
+      "wrap_up": null,
+      "children": [
+        "part_III__cl_3.8__cl_3__tbl_1"
+      ],
+      "parent_eid": "part_III__cl_3.8",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2026-04-01",
+          "valid_to": null,
+          "heading": "Amendment to Bye-law 6.0 Deviation during construction",
+          "intro": null,
+          "content": "- Clause (i) under Bye-law no 6.0 shall be substituted as below:-",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "bwcc-bbl-amend-2026-04-draft",
+          "source_eid": "part_III__cl_3.8__cl_3",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 2,
+              "bbox": [
+                0.1292,
+                0.1391,
+                0.7192,
+                0.181
+              ],
+              "text_excerpt": "3. Amendment to Bye-law 6.0 Deviation during construction:- Clause (i) under Bye-law"
+            }
+          ],
+          "legal_status": "draft",
+          "omitted": false
+        }
+      ],
+      "clause_id": "bwcc-bbl-amend-2026-04-draft:3",
+      "record_version": 1,
+      "record_id": "bwcc-bbl-amend-2026-04-draft:3@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "draft",
+      "effective_from": "2026-04-01",
+      "number": "3",
+      "title": "Amendment to Bye-law 6.0 Deviation during construction",
+      "level": 3,
+      "parent_id": "bwcc-bbl-amend-2026-04-draft:3.8",
+      "order": 6,
+      "text": "- Clause (i) under Bye-law no 6.0 shall be substituted as below:-",
+      "language": "en",
+      "tables": [
+        {
+          "table_id": "bwcc-bbl-amend-2026-04-draft:3:t1",
+          "caption": null,
+          "headers": [
+            "No",
+            "back",
+            "Set back on any allowed in",
+            "allowed in",
+            "beyond"
+          ],
+          "rows": [],
+          "page": 2
+        }
+      ],
+      "citations": [
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 2,
+          "bbox": [
+            0.1292,
+            0.1391,
+            0.7192,
+            0.181
+          ],
+          "text_excerpt": "3. Amendment to Bye-law 6.0 Deviation during construction:- Clause (i) under Bye-law"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_III__cl_3.8__item_i",
+      "native_number": "(i)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "Wherever any construction is in violation/deviation of the sanctioned plan, the Commissioner may, if he considers that the violations / deviations are within the limits specified in Table-2B below in case of (1) the setback to be provided around the building, (2) plot coverage (3) floor area ratio and (4) height of the building and that the demolition under chapter XVII of the Act is not feasible without affecting structural stability, he may regularize such violations/deviations after recording Rate of fee & Penalty for not obtaining PC while issue of occupancy certificate 1 2 3 4 1 2 3 4 5 6 7 Half of the required set back measured All buildings of linearly, height below 15 m in 1. 15% Provided plots of extent upto Deviation in 500 Sq.m total set back area shall not exceed 15 % All buildings of height above / below 15 % (Measured 2 15 m in plots of 15% linearly) extent above 500 Sq.m Table-2B. Regulations. Table-2C Sl sq.m. Use of Building No Zonal regulations 1 Residential 1",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "part_III__cl_3.8",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2026-04-01",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "Wherever any construction is in violation/deviation of the sanctioned plan, the Commissioner may, if he considers that the violations / deviations are within the limits specified in Table-2B below in case of (1) the setback to be provided around the building, (2) plot coverage (3) floor area ratio and (4) height of the building and that the demolition under chapter XVII of the Act is not feasible without affecting structural stability, he may regularize such violations/deviations after recording Rate of fee & Penalty for not obtaining PC while issue of occupancy certificate 1 2 3 4 1 2 3 4 5 6 7 Half of the required set back measured All buildings of linearly, height below 15 m in 1. 15% Provided plots of extent upto Deviation in 500 Sq.m total set back area shall not exceed 15 % All buildings of height above / below 15 % (Measured 2 15 m in plots of 15% linearly) extent above 500 Sq.m Table-2B. Regulations. Table-2C Sl sq.m. Use of Building No Zonal regulations 1 Residential 1",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "bwcc-bbl-amend-2026-04-draft",
+          "source_eid": "part_III__cl_3.8__item_i",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 2,
+              "bbox": [
+                0.1298,
+                0.1915,
+                0.8759,
+                0.8664
+              ],
+              "text_excerpt": "i) Wherever any construction is in violation/deviation of the sanctioned plan, the"
+            },
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 3,
+              "bbox": [
+                0.1265,
+                0.0936,
+                0.5594,
+                0.7482
+              ],
+              "text_excerpt": "Half of the required set back measured All buildings of linearly, height"
+            }
+          ],
+          "legal_status": "draft",
+          "omitted": false
+        }
+      ],
+      "clause_id": "bwcc-bbl-amend-2026-04-draft:3.8(i)",
+      "record_version": 1,
+      "record_id": "bwcc-bbl-amend-2026-04-draft:3.8(i)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "draft",
+      "effective_from": "2026-04-01",
+      "number": "3.8(i)",
+      "title": "Wherever any construction is in violation/deviation of the sanctioned plan, the",
+      "level": 3,
+      "parent_id": "bwcc-bbl-amend-2026-04-draft:3.8",
+      "order": 7,
+      "text": "Wherever any construction is in violation/deviation of the sanctioned plan, the Commissioner may, if he considers that the violations / deviations are within the limits specified in Table-2B below in case of (1) the setback to be provided around the building, (2) plot coverage (3) floor area ratio and (4) height of the building and that the demolition under chapter XVII of the Act is not feasible without affecting structural stability, he may regularize such violations/deviations after recording Rate of fee & Penalty for not obtaining PC while issue of occupancy certificate 1 2 3 4 1 2 3 4 5 6 7 Half of the required set back measured All buildings of linearly, height below 15 m in 1. 15% Provided plots of extent upto Deviation in 500 Sq.m total set back area shall not exceed 15 % All buildings of height above / below 15 % (Measured 2 15 m in plots of 15% linearly) extent above 500 Sq.m Table-2B. Regulations. Table-2C Sl sq.m. Use of Building No Zonal regulations 1 Residential 1",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 2,
+          "bbox": [
+            0.1298,
+            0.1915,
+            0.8759,
+            0.8664
+          ],
+          "text_excerpt": "i) Wherever any construction is in violation/deviation of the sanctioned plan, the"
+        },
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 3,
+          "bbox": [
+            0.1265,
+            0.0936,
+            0.5594,
+            0.7482
+          ],
+          "text_excerpt": "Half of the required set back measured All buildings of linearly, height"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_III__cl_3.8__item_a",
+      "native_number": "(a)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "In site area up to 500 Sq\u0324 m. q\u0324 .",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "part_III__cl_3.8",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2026-04-01",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "In site area up to 500 Sq\u0324 m. q\u0324 .",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "bwcc-bbl-amend-2026-04-draft",
+          "source_eid": "part_III__cl_3.8__item_a",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 3,
+              "bbox": [
+                0.1824,
+                0.7343,
+                0.3699,
+                0.7451
+              ],
+              "text_excerpt": "(a) In site area up to 500 Sq\u0324 m. q\u0324 ."
+            }
+          ],
+          "legal_status": "draft",
+          "omitted": false
+        }
+      ],
+      "clause_id": "bwcc-bbl-amend-2026-04-draft:3.8(a)",
+      "record_version": 1,
+      "record_id": "bwcc-bbl-amend-2026-04-draft:3.8(a)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "draft",
+      "effective_from": "2026-04-01",
+      "number": "3.8(a)",
+      "title": "In site area up to 500 Sq\u0324 m.",
+      "level": 3,
+      "parent_id": "bwcc-bbl-amend-2026-04-draft:3.8",
+      "order": 8,
+      "text": "In site area up to 500 Sq\u0324 m. q\u0324 .",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 3,
+          "bbox": [
+            0.1824,
+            0.7343,
+            0.3699,
+            0.7451
+          ],
+          "text_excerpt": "(a) In site area up to 500 Sq\u0324 m. q\u0324 ."
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_III__cl_3.8__item_b",
+      "native_number": "(b)",
+      "type": "item",
+      "heading": null,
+      "intro": null,
+      "content": "In site area above 500 Sq m. . Non\u2013Residential (Commercial 2 / Industrial / Other Uses) of upto set back 15 % 7.5 % deviation limits 15 % 5% 7.5 % upto 15% and compounding fee shall be levied as per Table-2C. Compounding Fee for condoning Deviations in FAR area Rate of Compounding fee for Condoning Deviation of FAR in all floors or area of setback infringement in all floors, based on the guidance value of site, subject to a minimum consideration of Rs.50,000/- per Deviations within Deviations beyond the permissible limits of permissible limits of Zonal regulations but not exceeding 15% of the permissible limits in case building in plots upto 500 Sq.m and 5 % in case of buildings in plots of extent above 500 Sq.m 2 3 4 3% 6 % 5 % 10 % 6 % 12 % setback infringement in all floors\u2019, whichever is higher.",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "part_III__cl_3.8",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2026-04-01",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "In site area above 500 Sq m. . Non\u2013Residential (Commercial 2 / Industrial / Other Uses) of upto set back 15 % 7.5 % deviation limits 15 % 5% 7.5 % upto 15% and compounding fee shall be levied as per Table-2C. Compounding Fee for condoning Deviations in FAR area Rate of Compounding fee for Condoning Deviation of FAR in all floors or area of setback infringement in all floors, based on the guidance value of site, subject to a minimum consideration of Rs.50,000/- per Deviations within Deviations beyond the permissible limits of permissible limits of Zonal regulations but not exceeding 15% of the permissible limits in case building in plots upto 500 Sq.m and 5 % in case of buildings in plots of extent above 500 Sq.m 2 3 4 3% 6 % 5 % 10 % 6 % 12 % setback infringement in all floors\u2019, whichever is higher.",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "bwcc-bbl-amend-2026-04-draft",
+          "source_eid": "part_III__cl_3.8__item_b",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 3,
+              "bbox": [
+                0.1298,
+                0.136,
+                0.8587,
+                0.8591
+              ],
+              "text_excerpt": "(b) In site area above 500 Sq m. . Non\u2013Residential (Commercial 2"
+            }
+          ],
+          "legal_status": "draft",
+          "omitted": false
+        }
+      ],
+      "clause_id": "bwcc-bbl-amend-2026-04-draft:3.8(b)",
+      "record_version": 1,
+      "record_id": "bwcc-bbl-amend-2026-04-draft:3.8(b)@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "draft",
+      "effective_from": "2026-04-01",
+      "number": "3.8(b)",
+      "title": "In site area above 500 Sq m.",
+      "level": 3,
+      "parent_id": "bwcc-bbl-amend-2026-04-draft:3.8",
+      "order": 9,
+      "text": "In site area above 500 Sq m. . Non\u2013Residential (Commercial 2 / Industrial / Other Uses) of upto set back 15 % 7.5 % deviation limits 15 % 5% 7.5 % upto 15% and compounding fee shall be levied as per Table-2C. Compounding Fee for condoning Deviations in FAR area Rate of Compounding fee for Condoning Deviation of FAR in all floors or area of setback infringement in all floors, based on the guidance value of site, subject to a minimum consideration of Rs.50,000/- per Deviations within Deviations beyond the permissible limits of permissible limits of Zonal regulations but not exceeding 15% of the permissible limits in case building in plots upto 500 Sq.m and 5 % in case of buildings in plots of extent above 500 Sq.m 2 3 4 3% 6 % 5 % 10 % 6 % 12 % setback infringement in all floors\u2019, whichever is higher.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 3,
+          "bbox": [
+            0.1298,
+            0.136,
+            0.8587,
+            0.8591
+          ],
+          "text_excerpt": "(b) In site area above 500 Sq m. . Non\u2013Residential (Commercial 2"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_III__cl_3.8__note_1",
+      "native_number": null,
+      "type": "note",
+      "heading": "Note",
+      "intro": null,
+      "content": "1) Compounding fee shall be levied as per Table-2C, to condone the deviations within the limits specified in",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "part_III__cl_3.8",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2026-04-01",
+          "valid_to": null,
+          "heading": "Note",
+          "intro": null,
+          "content": "1) Compounding fee shall be levied as per Table-2C, to condone the deviations within the limits specified in",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "bwcc-bbl-amend-2026-04-draft",
+          "source_eid": "part_III__cl_3.8__note_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 3,
+              "bbox": [
+                0.1295,
+                0.3363,
+                0.8399,
+                0.3485
+              ],
+              "text_excerpt": "Note: 1) Compounding fee shall be levied as per Table-2C, to condone"
+            }
+          ],
+          "legal_status": "draft",
+          "omitted": false
+        }
+      ],
+      "clause_id": "bwcc-bbl-amend-2026-04-draft:3.8:note_1",
+      "record_version": 1,
+      "record_id": "bwcc-bbl-amend-2026-04-draft:3.8:note_1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "draft",
+      "effective_from": "2026-04-01",
+      "number": "3.8:note_1",
+      "title": "Note",
+      "level": 3,
+      "parent_id": "bwcc-bbl-amend-2026-04-draft:3.8",
+      "order": 10,
+      "text": "1) Compounding fee shall be levied as per Table-2C, to condone the deviations within the limits specified in",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 3,
+          "bbox": [
+            0.1295,
+            0.3363,
+            0.8399,
+            0.3485
+          ],
+          "text_excerpt": "Note: 1) Compounding fee shall be levied as per Table-2C, to condone"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_III__cl_3.8__cl_2",
+      "native_number": "2",
+      "type": "clause",
+      "heading": "Building sites which are not eligible for availing premium FAR, the deviation in FAR area may be allowed",
+      "intro": null,
+      "content": "Building sites which are not eligible for availing premium FAR, the deviation in FAR area may be allowed",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "part_III__cl_3.8",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2026-04-01",
+          "valid_to": null,
+          "heading": "Building sites which are not eligible for availing premium FAR, the deviation in FAR area may be allowed",
+          "intro": null,
+          "content": "Building sites which are not eligible for availing premium FAR, the deviation in FAR area may be allowed",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "bwcc-bbl-amend-2026-04-draft",
+          "source_eid": "part_III__cl_3.8__cl_2",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 3,
+              "bbox": [
+                0.1681,
+                0.3721,
+                0.8428,
+                0.383
+              ],
+              "text_excerpt": "2) Building sites which are not eligible for availing premium FAR, the"
+            }
+          ],
+          "legal_status": "draft",
+          "omitted": false
+        }
+      ],
+      "clause_id": "bwcc-bbl-amend-2026-04-draft:3.8:2",
+      "record_version": 1,
+      "record_id": "bwcc-bbl-amend-2026-04-draft:3.8:2@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "draft",
+      "effective_from": "2026-04-01",
+      "number": "3.8:2",
+      "title": "Building sites which are not eligible for availing premium FAR, the deviation in FAR area may be allowed",
+      "level": 3,
+      "parent_id": "bwcc-bbl-amend-2026-04-draft:3.8",
+      "order": 11,
+      "text": "Building sites which are not eligible for availing premium FAR, the deviation in FAR area may be allowed",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 3,
+          "bbox": [
+            0.1681,
+            0.3721,
+            0.8428,
+            0.383
+          ],
+          "text_excerpt": "2) Building sites which are not eligible for availing premium FAR, the"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_III__cl_3.8__cl_3_2",
+      "native_number": "3",
+      "type": "clause",
+      "heading": "Wherever the setback deviation allowed under Table-2B, amounts to FAR area deviation in excess of the",
+      "intro": null,
+      "content": "Wherever the setback deviation allowed under Table-2B, amounts to FAR area deviation in excess of the condonable limits specified in Table-2B, Such FAR area may be sanctioned by utilizing additional FAR (TDR/Premium FAR). In case Premium FAR is utilized, charges shall be levied as per Premium FAR",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "part_III__cl_3.8",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2026-04-01",
+          "valid_to": null,
+          "heading": "Wherever the setback deviation allowed under Table-2B, amounts to FAR area deviation in excess of the",
+          "intro": null,
+          "content": "Wherever the setback deviation allowed under Table-2B, amounts to FAR area deviation in excess of the condonable limits specified in Table-2B, Such FAR area may be sanctioned by utilizing additional FAR (TDR/Premium FAR). In case Premium FAR is utilized, charges shall be levied as per Premium FAR",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "bwcc-bbl-amend-2026-04-draft",
+          "source_eid": "part_III__cl_3.8__cl_3_2",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 3,
+              "bbox": [
+                0.1684,
+                0.4065,
+                0.8302,
+                0.4519
+              ],
+              "text_excerpt": "3) Wherever the setback deviation allowed under Table-2B, amounts to FAR area"
+            }
+          ],
+          "legal_status": "draft",
+          "omitted": false
+        }
+      ],
+      "clause_id": "bwcc-bbl-amend-2026-04-draft:3.8:3",
+      "record_version": 1,
+      "record_id": "bwcc-bbl-amend-2026-04-draft:3.8:3@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "draft",
+      "effective_from": "2026-04-01",
+      "number": "3.8:3",
+      "title": "Wherever the setback deviation allowed under Table-2B, amounts to FAR area deviation in excess of the",
+      "level": 3,
+      "parent_id": "bwcc-bbl-amend-2026-04-draft:3.8",
+      "order": 12,
+      "text": "Wherever the setback deviation allowed under Table-2B, amounts to FAR area deviation in excess of the condonable limits specified in Table-2B, Such FAR area may be sanctioned by utilizing additional FAR (TDR/Premium FAR). In case Premium FAR is utilized, charges shall be levied as per Premium FAR",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 3,
+          "bbox": [
+            0.1684,
+            0.4065,
+            0.8302,
+            0.4519
+          ],
+          "text_excerpt": "3) Wherever the setback deviation allowed under Table-2B, amounts to FAR area"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_III__cl_3.8__cl_4",
+      "native_number": "4",
+      "type": "clause",
+      "heading": "The deviation in FAR allowed as per Table-2B, shall not be applicable for buildings which have utilized",
+      "intro": null,
+      "content": "The deviation in FAR allowed as per Table-2B, shall not be applicable for buildings which have utilized additional FAR (TDR/Premium FAR) or eligible for utilization of additional FAR (TDR/Premium FAR). Deviation of FAR area in such buildings shall be condoned by utilizing TDR/Premium FAR.",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "part_III__cl_3.8",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2026-04-01",
+          "valid_to": null,
+          "heading": "The deviation in FAR allowed as per Table-2B, shall not be applicable for buildings which have utilized",
+          "intro": null,
+          "content": "The deviation in FAR allowed as per Table-2B, shall not be applicable for buildings which have utilized additional FAR (TDR/Premium FAR) or eligible for utilization of additional FAR (TDR/Premium FAR). Deviation of FAR area in such buildings shall be condoned by utilizing TDR/Premium FAR.",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "bwcc-bbl-amend-2026-04-draft",
+          "source_eid": "part_III__cl_3.8__cl_4",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 3,
+              "bbox": [
+                0.168,
+                0.4755,
+                0.8297,
+                0.5209
+              ],
+              "text_excerpt": "4) The deviation in FAR allowed as per Table-2B, shall not be"
+            }
+          ],
+          "legal_status": "draft",
+          "omitted": false
+        }
+      ],
+      "clause_id": "bwcc-bbl-amend-2026-04-draft:4",
+      "record_version": 1,
+      "record_id": "bwcc-bbl-amend-2026-04-draft:4@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "draft",
+      "effective_from": "2026-04-01",
+      "number": "4",
+      "title": "The deviation in FAR allowed as per Table-2B, shall not be applicable for buildings which have utilized",
+      "level": 3,
+      "parent_id": "bwcc-bbl-amend-2026-04-draft:3.8",
+      "order": 13,
+      "text": "The deviation in FAR allowed as per Table-2B, shall not be applicable for buildings which have utilized additional FAR (TDR/Premium FAR) or eligible for utilization of additional FAR (TDR/Premium FAR). Deviation of FAR area in such buildings shall be condoned by utilizing TDR/Premium FAR.",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 3,
+          "bbox": [
+            0.168,
+            0.4755,
+            0.8297,
+            0.5209
+          ],
+          "text_excerpt": "4) The deviation in FAR allowed as per Table-2B, shall not be"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_III__cl_3.8__note_2",
+      "native_number": null,
+      "type": "note",
+      "heading": "Note",
+      "intro": null,
+      "content": "Compounding fee shall be levied for the total area of \u2018deviation in FAR\u2019 or \u2018total covered area R.N.I. No. KARBIL/2001/47147 POSTAL REGN. No. RNP/KA/BGS/2202/2017-19 Licensed to post without prepayment WPP No. 297 Sl Details of Compounding Fee No Built-up area in violation of sanctioned mezzanine floor 2 area Balcony area in violation of sanctioned plan (subject to 3 maximum of 25 % of total sanctioned Balcony area) Construction on Terrace in violation of Sanctioned plan 4 (subject to maximum of 15 % of terrace area) Built up area constructed other than FAR area and also 5 BUA excluding Sl.No.(1) to (4) above Area / Part of Building Occupied without obtaining 6 Occupancy certificate Building constructed within the ZR / Bye-law limits but without obtaining permission from the 7 Competent Authority (shall be levied during issue of occupancy certificate) Note: Act, 1957 (at the time of issue of building permission). fine chargeable during issue of Occupancy certificate. the city corporation. [ , Table-2D Compounding Fee for condoning other type of Deviations Rate of Compounding Fee based on the guidance value of site, subject to a minimum consideration of Rs.50,000/- per sq.m. Chargeable for the built\u0332 up area - constructed in violation of the Sanction \u0332 Plan and but within permissible limits Non Residential Residential (Commercial / Industrial / Other Uses) 9 % 18% 7 % 14 % 9 % 18 % 5 % 10 % 0.15 % 0.30 % 0.20% 0.40% Commissioner Bengaluru West City Corporation \u0cae\u0cc1\u0ca6\u00ce \u0ca6\u00ce \u0c95\u0cb0\u0cc1 \u00b2\u0cbe \u00b2\u0cbe\u0c97\u0cc2 \u0caa\u00ce \u0caa\u00ce\u0090\u0cbe \u0090\u0cbe\u0cb6\u0c95\u0cb0\u0cc1 :- \u0cb8\u0c82\u0c95\u0cb2 \u00a3\u0cbe \u00a3\u0cbe \u0129\u0090\u0cbe \u0090\u0cbe \u0138 \u0c97\u0cb3 \u0cb3 \u0c95 \u00a3\u0cbe \u00a3\u0cbe \u008f \u0c9f\u0c95 \u00aa\u0cbe \u00aa\u0cbe\u0c9c\u00cd \u0caa\u0ca4\u00ce \u0ca4\u00ce \u0cb8 \u0090\u0cbe \u0090\u0cbe \u008f\u0138 \u0090\u0cc6 \u0090\u0cc6\u0cd5\u0c82\u0ca6\u00ce \u0ca6\u00ce \u0cae\u0cc1\u0ca6\u00ce \u0ca6\u00ce\u009e\u0cbe \u009e\u0cbe\u0cb2\u0caf \u00a6\u0cc6 \u00a6\u0cc6\u0c82\u0c97\u0cb3\u0088 \u0cb3\u0088 \u0cb0\u0cc1 \u0c9c\u00cd , ,",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "part_III__cl_3.8",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2026-04-01",
+          "valid_to": null,
+          "heading": "Note",
+          "intro": null,
+          "content": "Compounding fee shall be levied for the total area of \u2018deviation in FAR\u2019 or \u2018total covered area R.N.I. No. KARBIL/2001/47147 POSTAL REGN. No. RNP/KA/BGS/2202/2017-19 Licensed to post without prepayment WPP No. 297 Sl Details of Compounding Fee No Built-up area in violation of sanctioned mezzanine floor 2 area Balcony area in violation of sanctioned plan (subject to 3 maximum of 25 % of total sanctioned Balcony area) Construction on Terrace in violation of Sanctioned plan 4 (subject to maximum of 15 % of terrace area) Built up area constructed other than FAR area and also 5 BUA excluding Sl.No.(1) to (4) above Area / Part of Building Occupied without obtaining 6 Occupancy certificate Building constructed within the ZR / Bye-law limits but without obtaining permission from the 7 Competent Authority (shall be levied during issue of occupancy certificate) Note: Act, 1957 (at the time of issue of building permission). fine chargeable during issue of Occupancy certificate. the city corporation. [ , Table-2D Compounding Fee for condoning other type of Deviations Rate of Compounding Fee based on the guidance value of site, subject to a minimum consideration of Rs.50,000/- per sq.m. Chargeable for the built\u0332 up area - constructed in violation of the Sanction \u0332 Plan and but within permissible limits Non Residential Residential (Commercial / Industrial / Other Uses) 9 % 18% 7 % 14 % 9 % 18 % 5 % 10 % 0.15 % 0.30 % 0.20% 0.40% Commissioner Bengaluru West City Corporation \u0cae\u0cc1\u0ca6\u00ce \u0ca6\u00ce \u0c95\u0cb0\u0cc1 \u00b2\u0cbe \u00b2\u0cbe\u0c97\u0cc2 \u0caa\u00ce \u0caa\u00ce\u0090\u0cbe \u0090\u0cbe\u0cb6\u0c95\u0cb0\u0cc1 :- \u0cb8\u0c82\u0c95\u0cb2 \u00a3\u0cbe \u00a3\u0cbe \u0129\u0090\u0cbe \u0090\u0cbe \u0138 \u0c97\u0cb3 \u0cb3 \u0c95 \u00a3\u0cbe \u00a3\u0cbe \u008f \u0c9f\u0c95 \u00aa\u0cbe \u00aa\u0cbe\u0c9c\u00cd \u0caa\u0ca4\u00ce \u0ca4\u00ce \u0cb8 \u0090\u0cbe \u0090\u0cbe \u008f\u0138 \u0090\u0cc6 \u0090\u0cc6\u0cd5\u0c82\u0ca6\u00ce \u0ca6\u00ce \u0cae\u0cc1\u0ca6\u00ce \u0ca6\u00ce\u009e\u0cbe \u009e\u0cbe\u0cb2\u0caf \u00a6\u0cc6 \u00a6\u0cc6\u0c82\u0c97\u0cb3\u0088 \u0cb3\u0088 \u0cb0\u0cc1 \u0c9c\u00cd , ,",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "bwcc-bbl-amend-2026-04-draft",
+          "source_eid": "part_III__cl_3.8__note_2",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 3,
+              "bbox": [
+                0.1295,
+                0.8132,
+                0.875,
+                0.8262
+              ],
+              "text_excerpt": "Note: Compounding fee shall be levied for the total area of \u2018deviation"
+            },
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 4,
+              "bbox": [
+                0.0917,
+                0.041,
+                0.8819,
+                0.9191
+              ],
+              "text_excerpt": "R.N.I. No. KARBIL/2001/47147 POSTAL REGN. No. RNP/KA/BGS/2202/2017-19 Licensed to post without prepayment"
+            }
+          ],
+          "legal_status": "draft",
+          "omitted": false
+        }
+      ],
+      "clause_id": "bwcc-bbl-amend-2026-04-draft:3.8:note_2",
+      "record_version": 1,
+      "record_id": "bwcc-bbl-amend-2026-04-draft:3.8:note_2@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "draft",
+      "effective_from": "2026-04-01",
+      "number": "3.8:note_2",
+      "title": "Note",
+      "level": 3,
+      "parent_id": "bwcc-bbl-amend-2026-04-draft:3.8",
+      "order": 14,
+      "text": "Compounding fee shall be levied for the total area of \u2018deviation in FAR\u2019 or \u2018total covered area R.N.I. No. KARBIL/2001/47147 POSTAL REGN. No. RNP/KA/BGS/2202/2017-19 Licensed to post without prepayment WPP No. 297 Sl Details of Compounding Fee No Built-up area in violation of sanctioned mezzanine floor 2 area Balcony area in violation of sanctioned plan (subject to 3 maximum of 25 % of total sanctioned Balcony area) Construction on Terrace in violation of Sanctioned plan 4 (subject to maximum of 15 % of terrace area) Built up area constructed other than FAR area and also 5 BUA excluding Sl.No.(1) to (4) above Area / Part of Building Occupied without obtaining 6 Occupancy certificate Building constructed within the ZR / Bye-law limits but without obtaining permission from the 7 Competent Authority (shall be levied during issue of occupancy certificate) Note: Act, 1957 (at the time of issue of building permission). fine chargeable during issue of Occupancy certificate. the city corporation. [ , Table-2D Compounding Fee for condoning other type of Deviations Rate of Compounding Fee based on the guidance value of site, subject to a minimum consideration of Rs.50,000/- per sq.m. Chargeable for the built\u0332 up area - constructed in violation of the Sanction \u0332 Plan and but within permissible limits Non Residential Residential (Commercial / Industrial / Other Uses) 9 % 18% 7 % 14 % 9 % 18 % 5 % 10 % 0.15 % 0.30 % 0.20% 0.40% Commissioner Bengaluru West City Corporation \u0cae\u0cc1\u0ca6\u00ce \u0ca6\u00ce \u0c95\u0cb0\u0cc1 \u00b2\u0cbe \u00b2\u0cbe\u0c97\u0cc2 \u0caa\u00ce \u0caa\u00ce\u0090\u0cbe \u0090\u0cbe\u0cb6\u0c95\u0cb0\u0cc1 :- \u0cb8\u0c82\u0c95\u0cb2 \u00a3\u0cbe \u00a3\u0cbe \u0129\u0090\u0cbe \u0090\u0cbe \u0138 \u0c97\u0cb3 \u0cb3 \u0c95 \u00a3\u0cbe \u00a3\u0cbe \u008f \u0c9f\u0c95 \u00aa\u0cbe \u00aa\u0cbe\u0c9c\u00cd \u0caa\u0ca4\u00ce \u0ca4\u00ce \u0cb8 \u0090\u0cbe \u0090\u0cbe \u008f\u0138 \u0090\u0cc6 \u0090\u0cc6\u0cd5\u0c82\u0ca6\u00ce \u0ca6\u00ce \u0cae\u0cc1\u0ca6\u00ce \u0ca6\u00ce\u009e\u0cbe \u009e\u0cbe\u0cb2\u0caf \u00a6\u0cc6 \u00a6\u0cc6\u0c82\u0c97\u0cb3\u0088 \u0cb3\u0088 \u0cb0\u0cc1 \u0c9c\u00cd , ,",
+      "language": "kn",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 3,
+          "bbox": [
+            0.1295,
+            0.8132,
+            0.875,
+            0.8262
+          ],
+          "text_excerpt": "Note: Compounding fee shall be levied for the total area of \u2018deviation"
+        },
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 4,
+          "bbox": [
+            0.0917,
+            0.041,
+            0.8819,
+            0.9191
+          ],
+          "text_excerpt": "R.N.I. No. KARBIL/2001/47147 POSTAL REGN. No. RNP/KA/BGS/2202/2017-19 Licensed to post without prepayment"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_III__cl_3.8__cl_1",
+      "native_number": "1",
+      "type": "clause",
+      "heading": "Guidance value means the prevailing market value of site notified under Section 45B of the Karnataka Stamp",
+      "intro": null,
+      "content": "Guidance value means the prevailing market value of site notified under Section 45B of the Karnataka Stamp",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "part_III__cl_3.8",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2026-04-01",
+          "valid_to": null,
+          "heading": "Guidance value means the prevailing market value of site notified under Section 45B of the Karnataka Stamp",
+          "intro": null,
+          "content": "Guidance value means the prevailing market value of site notified under Section 45B of the Karnataka Stamp",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "bwcc-bbl-amend-2026-04-draft",
+          "source_eid": "part_III__cl_3.8__cl_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 4,
+              "bbox": [
+                0.1588,
+                0.5508,
+                0.8701,
+                0.5616
+              ],
+              "text_excerpt": "1. Guidance value means the prevailing market value of site notified under"
+            }
+          ],
+          "legal_status": "draft",
+          "omitted": false
+        }
+      ],
+      "clause_id": "bwcc-bbl-amend-2026-04-draft:3.8:1",
+      "record_version": 1,
+      "record_id": "bwcc-bbl-amend-2026-04-draft:3.8:1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "draft",
+      "effective_from": "2026-04-01",
+      "number": "3.8:1",
+      "title": "Guidance value means the prevailing market value of site notified under Section 45B of the Karnataka Stamp",
+      "level": 3,
+      "parent_id": "bwcc-bbl-amend-2026-04-draft:3.8",
+      "order": 15,
+      "text": "Guidance value means the prevailing market value of site notified under Section 45B of the Karnataka Stamp",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 4,
+          "bbox": [
+            0.1588,
+            0.5508,
+            0.8701,
+            0.5616
+          ],
+          "text_excerpt": "1. Guidance value means the prevailing market value of site notified under"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_III__cl_3.8__cl_2_2",
+      "native_number": "2",
+      "type": "clause",
+      "heading": "Security Deposit collected during plan sanction / licence shall be refunded or adjusted towards the compound",
+      "intro": null,
+      "content": "Security Deposit collected during plan sanction / licence shall be refunded or adjusted towards the compound",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "part_III__cl_3.8",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2026-04-01",
+          "valid_to": null,
+          "heading": "Security Deposit collected during plan sanction / licence shall be refunded or adjusted towards the compound",
+          "intro": null,
+          "content": "Security Deposit collected during plan sanction / licence shall be refunded or adjusted towards the compound",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "bwcc-bbl-amend-2026-04-draft",
+          "source_eid": "part_III__cl_3.8__cl_2_2",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 4,
+              "bbox": [
+                0.1574,
+                0.5824,
+                0.8706,
+                0.5933
+              ],
+              "text_excerpt": "2. Security Deposit collected during plan sanction / licence shall be refunded"
+            }
+          ],
+          "legal_status": "draft",
+          "omitted": false
+        }
+      ],
+      "clause_id": "bwcc-bbl-amend-2026-04-draft:3.8:2_2",
+      "record_version": 1,
+      "record_id": "bwcc-bbl-amend-2026-04-draft:3.8:2_2@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "draft",
+      "effective_from": "2026-04-01",
+      "number": "3.8:2_2",
+      "title": "Security Deposit collected during plan sanction / licence shall be refunded or adjusted towards the compound",
+      "level": 3,
+      "parent_id": "bwcc-bbl-amend-2026-04-draft:3.8",
+      "order": 16,
+      "text": "Security Deposit collected during plan sanction / licence shall be refunded or adjusted towards the compound",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 4,
+          "bbox": [
+            0.1574,
+            0.5824,
+            0.8706,
+            0.5933
+          ],
+          "text_excerpt": "2. Security Deposit collected during plan sanction / licence shall be refunded"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_III__cl_3.8__cl_3_3",
+      "native_number": "3",
+      "type": "clause",
+      "heading": "The Occupancy certificate shall be issued only after all the requisite fee, compounding fee is completely paid to",
+      "intro": null,
+      "content": "The Occupancy certificate shall be issued only after all the requisite fee, compounding fee is completely paid to",
+      "wrap_up": null,
+      "children": [
+        "part_III__cl_3.8__cl_3_3__tbl_1"
+      ],
+      "parent_eid": "part_III__cl_3.8",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2026-04-01",
+          "valid_to": null,
+          "heading": "The Occupancy certificate shall be issued only after all the requisite fee, compounding fee is completely paid to",
+          "intro": null,
+          "content": "The Occupancy certificate shall be issued only after all the requisite fee, compounding fee is completely paid to",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "bwcc-bbl-amend-2026-04-draft",
+          "source_eid": "part_III__cl_3.8__cl_3_3",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 4,
+              "bbox": [
+                0.1577,
+                0.6138,
+                0.8702,
+                0.6247
+              ],
+              "text_excerpt": "3. The Occupancy certificate shall be issued only after all the requisite"
+            }
+          ],
+          "legal_status": "draft",
+          "omitted": false
+        }
+      ],
+      "clause_id": "bwcc-bbl-amend-2026-04-draft:3.8:3_2",
+      "record_version": 1,
+      "record_id": "bwcc-bbl-amend-2026-04-draft:3.8:3_2@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "draft",
+      "effective_from": "2026-04-01",
+      "number": "3.8:3_2",
+      "title": "The Occupancy certificate shall be issued only after all the requisite fee, compounding fee is completely paid to",
+      "level": 3,
+      "parent_id": "bwcc-bbl-amend-2026-04-draft:3.8",
+      "order": 17,
+      "text": "The Occupancy certificate shall be issued only after all the requisite fee, compounding fee is completely paid to",
+      "language": "en",
+      "tables": [
+        {
+          "table_id": "bwcc-bbl-amend-2026-04-draft:3.8:3_2:t1",
+          "caption": null,
+          "headers": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "rows": [
+            [
+              "1",
+              "Extension of basement in violation of sanction plan",
+              "7 %",
+              "14 %"
+            ]
+          ],
+          "page": 4
+        }
+      ],
+      "citations": [
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 4,
+          "bbox": [
+            0.1577,
+            0.6138,
+            0.8702,
+            0.6247
+          ],
+          "text_excerpt": "3. The Occupancy certificate shall be issued only after all the requisite"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_III__cl_3.8__cl_3__tbl_1",
+      "native_number": "Table 1",
+      "type": "table",
+      "heading": "Table 1",
+      "intro": null,
+      "content": "Table 1",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "part_III__cl_3.8__cl_3",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": {
+        "columns": [
+          {
+            "label": "No",
+            "unit": null,
+            "children": [
+              {
+                "label": "Area on",
+                "unit": null
+              }
+            ]
+          },
+          {
+            "label": "back",
+            "unit": null,
+            "children": [
+              {
+                "label": "side",
+                "unit": null
+              }
+            ]
+          },
+          {
+            "label": "Set back on any allowed in",
+            "unit": null,
+            "children": [
+              {
+                "label": "Coverage",
+                "unit": null
+              }
+            ]
+          },
+          {
+            "label": "allowed in",
+            "unit": null,
+            "children": [
+              {
+                "label": "FAR",
+                "unit": null
+              }
+            ]
+          },
+          {
+            "label": "beyond",
+            "unit": null,
+            "children": [
+              {
+                "label": "sanctioned",
+                "unit": null
+              }
+            ]
+          }
+        ],
+        "rows": [],
+        "footnotes": [],
+        "extraction": "complete",
+        "page_image": null,
+        "gap_reason": null
+      },
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2026-04-01",
+          "valid_to": null,
+          "heading": "Table 1",
+          "intro": null,
+          "content": "Table 1",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "bwcc-bbl-amend-2026-04-draft",
+          "source_eid": "part_III__cl_3.8__cl_3__tbl_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 2,
+              "bbox": [
+                0.1292,
+                0.1391,
+                0.7192,
+                0.181
+              ],
+              "text_excerpt": "No back Set back on any allowed in allowed in beyond"
+            }
+          ],
+          "legal_status": "draft",
+          "omitted": false
+        }
+      ],
+      "clause_id": "bwcc-bbl-amend-2026-04-draft:part_III__cl_3.8__cl_3__tbl_1",
+      "record_version": 1,
+      "record_id": "bwcc-bbl-amend-2026-04-draft:part_III__cl_3.8__cl_3__tbl_1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "draft",
+      "effective_from": "2026-04-01",
+      "number": "part_III__cl_3.8__cl_3__tbl_1",
+      "title": "Table 1",
+      "level": 4,
+      "parent_id": "bwcc-bbl-amend-2026-04-draft:3",
+      "order": 18,
+      "text": "Table 1",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 2,
+          "bbox": [
+            0.1292,
+            0.1391,
+            0.7192,
+            0.181
+          ],
+          "text_excerpt": "No back Set back on any allowed in allowed in beyond"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_III__cl_3.8__cl_3_3__tbl_1",
+      "native_number": "Table 1",
+      "type": "table",
+      "heading": "Table 1",
+      "intro": null,
+      "content": "Table 1",
+      "wrap_up": null,
+      "children": [
+        "part_III__cl_3.8__cl_3_3__tbl_1__row_1"
+      ],
+      "parent_eid": "part_III__cl_3.8__cl_3_3",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": {
+        "columns": [
+          {
+            "label": "1",
+            "unit": null
+          },
+          {
+            "label": "2",
+            "unit": null
+          },
+          {
+            "label": "3",
+            "unit": null
+          },
+          {
+            "label": "4",
+            "unit": null
+          }
+        ],
+        "rows": [
+          "part_III__cl_3.8__cl_3_3__tbl_1__row_1"
+        ],
+        "footnotes": [],
+        "extraction": "complete",
+        "page_image": null,
+        "gap_reason": null
+      },
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2026-04-01",
+          "valid_to": null,
+          "heading": "Table 1",
+          "intro": null,
+          "content": "Table 1",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "bwcc-bbl-amend-2026-04-draft",
+          "source_eid": "part_III__cl_3.8__cl_3_3__tbl_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 4,
+              "bbox": [
+                0.1577,
+                0.6138,
+                0.8702,
+                0.6247
+              ],
+              "text_excerpt": "1 2 3 4"
+            }
+          ],
+          "legal_status": "draft",
+          "omitted": false
+        }
+      ],
+      "clause_id": "bwcc-bbl-amend-2026-04-draft:part_III__cl_3.8__cl_3_3__tbl_1",
+      "record_version": 1,
+      "record_id": "bwcc-bbl-amend-2026-04-draft:part_III__cl_3.8__cl_3_3__tbl_1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "draft",
+      "effective_from": "2026-04-01",
+      "number": "part_III__cl_3.8__cl_3_3__tbl_1",
+      "title": "Table 1",
+      "level": 4,
+      "parent_id": "bwcc-bbl-amend-2026-04-draft:3.8:3_2",
+      "order": 19,
+      "text": "Table 1",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 4,
+          "bbox": [
+            0.1577,
+            0.6138,
+            0.8702,
+            0.6247
+          ],
+          "text_excerpt": "1 2 3 4"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    },
+    {
+      "eid": "part_III__cl_3.8__cl_3_3__tbl_1__row_1",
+      "native_number": "1",
+      "type": "table_row",
+      "heading": null,
+      "intro": null,
+      "content": "1 | Extension of basement in violation of sanction plan | 7 % | 14 %",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": "part_III__cl_3.8__cl_3_3__tbl_1",
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": [
+        "1",
+        "Extension of basement in violation of sanction plan",
+        "7 %",
+        "14 %"
+      ],
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2026-04-01",
+          "valid_to": null,
+          "heading": null,
+          "intro": null,
+          "content": "1 | Extension of basement in violation of sanction plan | 7 % | 14 %",
+          "wrap_up": null,
+          "cells": [
+            "1",
+            "Extension of basement in violation of sanction plan",
+            "7 %",
+            "14 %"
+          ],
+          "source_doc": "bwcc-bbl-amend-2026-04-draft",
+          "source_eid": "part_III__cl_3.8__cl_3_3__tbl_1__row_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "bwcc-bbl-amend-2026-04-draft",
+              "page": 4,
+              "bbox": [
+                0.1577,
+                0.6138,
+                0.8702,
+                0.6247
+              ],
+              "text_excerpt": "1 2 3 4"
+            }
+          ],
+          "legal_status": "draft",
+          "omitted": false
+        }
+      ],
+      "clause_id": "bwcc-bbl-amend-2026-04-draft:part_III__cl_3.8__cl_3_3__tbl_1__row_1",
+      "record_version": 1,
+      "record_id": "bwcc-bbl-amend-2026-04-draft:part_III__cl_3.8__cl_3_3__tbl_1__row_1@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "draft",
+      "effective_from": "2026-04-01",
+      "number": "part_III__cl_3.8__cl_3_3__tbl_1__row_1",
+      "title": "Row 1",
+      "level": 5,
+      "parent_id": "bwcc-bbl-amend-2026-04-draft:part_III__cl_3.8__cl_3_3__tbl_1",
+      "order": 20,
+      "text": "1 | Extension of basement in violation of sanction plan | 7 % | 14 %",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "bwcc-bbl-amend-2026-04-draft",
+          "page": 4,
+          "bbox": [
+            0.1577,
+            0.6138,
+            0.8702,
+            0.6247
+          ],
+          "text_excerpt": "1 2 3 4"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    }
+  ]
+}

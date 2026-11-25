@@ -5,6 +5,7 @@ import {
   fetchDocuments,
   fetchJurisdictionDataset,
   fetchManifest,
+  getVisibleJurisdictions,
   type ClauseNode,
 } from "@/lib/data";
 import { TopNav } from "@/components/TopNav";
@@ -33,10 +34,24 @@ export default async function DocumentViewerPage({
   params,
 }: DocumentPageProps) {
   const { id, doc } = await params;
-  const dataset = await fetchJurisdictionDataset(id);
+  const [dataset, manifest] = await Promise.all([
+    fetchJurisdictionDataset(id),
+    fetchManifest(),
+  ]);
   if (!dataset) {
     notFound();
   }
+  const allVisible = getVisibleJurisdictions(manifest);
+  const rootParentId =
+    dataset.jurisdiction.parent ??
+    (allVisible.some((j) => j.parent === dataset.jurisdiction.id)
+      ? dataset.jurisdiction.id
+      : null);
+  const gbaCorporations = rootParentId
+    ? allVisible.filter(
+        (j) => j.id === rootParentId || j.parent === rootParentId
+      )
+    : [];
 
   const {
     jurisdiction,
@@ -226,6 +241,45 @@ export default async function DocumentViewerPage({
           </dl>
         </header>
 
+        {docMeta.role === "base" &&
+          docMeta.layer === "municipal" &&
+          gbaCorporations.length > 1 && (
+            <section
+              aria-label="Corporation consolidated view selector"
+              className="mb-6 border border-[#080909] bg-[#efeee8] p-4"
+            >
+              <div className="dg-mono text-[10.5px] text-[#080909]">
+                Corporation-Specific Consolidated View · 2026 Building (Amendment) Bye-laws
+              </div>
+              <p className="dg-serif mt-1 text-xs text-[#171917]">
+                Each City Corporation issued its own Building (Amendment)
+                Bye-laws, 2026 (in force 14 May 2026, omitting Bye-laws
+                3.8–3.10 and substituting Bye-law 6.0(i) with Table-2A to
+                Table-2D). Select a corporation to view its consolidated
+                version:
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2 font-mono text-[11px] uppercase tracking-[0.12em]">
+                {gbaCorporations.map((corp) => {
+                  const isCurrent = corp.id === jurisdiction.id;
+                  return (
+                    <Link
+                      key={corp.id}
+                      href={`/j/${corp.id}/documents/${doc}`}
+                      aria-current={isCurrent ? "page" : undefined}
+                      className={
+                        isCurrent
+                          ? "border border-[#080909] bg-[#080909] px-2.5 py-1.5 text-[#f5f3ed] no-underline"
+                          : "border border-[#080909] bg-[#f5f3ed] px-2.5 py-1.5 text-[#080909] no-underline hover:bg-[#e5e6de]"
+                      }
+                    >
+                      {corp.name}
+                    </Link>
+                  );
+                })}
+              </div>
+            </section>
+          )}
+
         {(declarations.known_gaps ?? [])
           .filter((g) => g.doc_id === doc)
           .map((gap, gIdx) => (
@@ -344,6 +398,7 @@ export default async function DocumentViewerPage({
         ) : (
           <ClauseTree
             jurisdictionId={jurisdiction.id}
+            jurisdictionName={jurisdiction.name}
             clauses={docClauses}
             annotations={slimDocAnns}
             amendmentEffects={(amendments.effects ?? []).filter(

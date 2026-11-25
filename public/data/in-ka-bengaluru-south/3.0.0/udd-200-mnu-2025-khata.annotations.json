@@ -1,0 +1,511 @@
+{
+  "schema_version": "1.3",
+  "doc_id": "udd-200-mnu-2025-khata",
+  "jurisdiction": "in-ka-bengaluru-south",
+  "annotations": [
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_1",
+      "target": {
+        "eid": "prea_1__prov_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          0,
+          13
+        ],
+        "span_text": "Provided that"
+      },
+      "kind": "provision_type",
+      "value": "exception",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_2",
+      "target": {
+        "eid": "prea_1__prov_1__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          288,
+          297
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_3",
+      "target": {
+        "eid": "prea_1__prov_1__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          42,
+          52
+        ],
+        "span_text": "section 15"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:section 15",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_4",
+      "target": {
+        "eid": "prea_1__prov_1__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          998,
+          1009
+        ],
+        "span_text": "section 144"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:section 144",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_5",
+      "target": {
+        "eid": "prea_1__prov_1__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1042,
+          1052
+        ],
+        "span_text": "section in"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:section in",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_6",
+      "target": {
+        "eid": "prea_1__prov_1__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1596,
+          1606
+        ],
+        "span_text": "section 95"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:section 95",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_7",
+      "target": {
+        "eid": "prea_1__prov_1__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          169,
+          178
+        ],
+        "span_text": "violation"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_8",
+      "target": {
+        "eid": "cl_17",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          160,
+          165
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_9",
+      "target": {
+        "eid": "cl_17",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          805,
+          815
+        ],
+        "span_text": "section 95"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:section 95",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_10",
+      "target": {
+        "eid": "cl_17",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          1005,
+          1016
+        ],
+        "span_text": "Section 212"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Section 212",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_11",
+      "target": {
+        "eid": "cl_17",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          404,
+          416
+        ],
+        "span_text": "sub-division"
+      },
+      "kind": "topic",
+      "value": "plot_size_frontage",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_12",
+      "target": {
+        "eid": "cl_17__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          57,
+          62
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_13",
+      "target": {
+        "eid": "cl_17__item_b",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          28,
+          33
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_14",
+      "target": {
+        "eid": "cl_17__item_d",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1045,
+          1054
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_15",
+      "target": {
+        "eid": "cl_17__item_d",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          815,
+          825
+        ],
+        "span_text": "Section 95"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Section 95",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_16",
+      "target": {
+        "eid": "cl_17__item_d",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          901,
+          911
+        ],
+        "span_text": "Section 95"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Section 95",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_17",
+      "target": {
+        "eid": "cl_17__item_d",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1189,
+          1199
+        ],
+        "span_text": "Section 95"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Section 95",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_18",
+      "target": {
+        "eid": "cl_17__item_d",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1327,
+          1337
+        ],
+        "span_text": "Section 17"
+      },
+      "kind": "cross_reference",
+      "value": "cl_17",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_19",
+      "target": {
+        "eid": "cl_17__item_d",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1626,
+          1636
+        ],
+        "span_text": "section 95"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:section 95",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_20",
+      "target": {
+        "eid": "cl_17__item_d",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2031,
+          2041
+        ],
+        "span_text": "section 17"
+      },
+      "kind": "cross_reference",
+      "value": "cl_17",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_21",
+      "target": {
+        "eid": "cl_17__item_d",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2344,
+          2353
+        ],
+        "span_text": "Section I"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Section I",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_22",
+      "target": {
+        "eid": "cl_17__item_d",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2687,
+          2731
+        ],
+        "span_text": "Section 95 of the Karnataka Land Revenue Act"
+      },
+      "kind": "cross_reference",
+      "value": "external:Karnataka Land Revenue Act:section_95",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_23",
+      "target": {
+        "eid": "cl_17__item_d",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          2920,
+          2930
+        ],
+        "span_text": "Section 95"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Section 95",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_24",
+      "target": {
+        "eid": "cl_17__item_d",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          575,
+          587
+        ],
+        "span_text": "sub-division"
+      },
+      "kind": "topic",
+      "value": "plot_size_frontage",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_25",
+      "target": {
+        "eid": "cl_17__item_d__tbl_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 1"
+      },
+      "kind": "cross_reference",
+      "value": "cl_17__tbl_1",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_26",
+      "target": {
+        "eid": "cl_17__item_d__tbl_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 2"
+      },
+      "kind": "cross_reference",
+      "value": "cl_17__tbl_2",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_27",
+      "target": {
+        "eid": "cl_17__tbl_4",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          7
+        ],
+        "span_text": "Table 4"
+      },
+      "kind": "topic",
+      "value": "setbacks",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "udd-200-mnu-2025-khata:ann_28",
+      "target": {
+        "eid": "cl_17__tbl_4__row_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          41,
+          46
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    }
+  ]
+}

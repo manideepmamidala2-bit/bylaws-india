@@ -33,6 +33,10 @@
           "type": "string",
           "minLength": 1
         },
+        "parent": {
+          "type": ["string", "null"],
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
         "aliases": {
           "type": "array",
           "items": {
@@ -131,6 +135,12 @@
           "type": ["string", "null"]
         },
         "sources_csv": {
+          "type": ["string", "null"]
+        },
+        "relations": {
+          "type": ["string", "null"]
+        },
+        "graph": {
           "type": ["string", "null"]
         },
         "review_images": {

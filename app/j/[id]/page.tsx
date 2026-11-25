@@ -1,8 +1,10 @@
 import React from "react";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   fetchJurisdictionDataset,
   fetchManifest,
+  getVisibleJurisdictions,
   partitionClauseVersions,
 } from "@/lib/data";
 import { TopNav } from "@/components/TopNav";
@@ -23,10 +25,24 @@ export default async function JurisdictionMapPage({
   params,
 }: JurisdictionMapPageProps) {
   const { id } = await params;
-  const dataset = await fetchJurisdictionDataset(id);
+  const [dataset, manifest] = await Promise.all([
+    fetchJurisdictionDataset(id),
+    fetchManifest(),
+  ]);
   if (!dataset) {
     notFound();
   }
+  const allVisible = getVisibleJurisdictions(manifest);
+  const rootParentId =
+    dataset.jurisdiction.parent ??
+    (allVisible.some((j) => j.parent === dataset.jurisdiction.id)
+      ? dataset.jurisdiction.id
+      : null);
+  const gbaJurisdictions = rootParentId
+    ? allVisible.filter(
+        (j) => j.id === rootParentId || j.parent === rootParentId
+      )
+    : [];
 
   const {
     jurisdiction,
@@ -145,6 +161,31 @@ export default async function JurisdictionMapPage({
         <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909] sm:text-4xl">
           {jurisdiction.name}
         </h1>
+        {gbaJurisdictions.length > 1 && (
+          <div
+            aria-label="City corporation selector"
+            className="mt-3 flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em]"
+          >
+            <span className="text-[#5b5e56]">Corporation View:</span>
+            {gbaJurisdictions.map((j) => {
+              const isCurrent = j.id === jurisdiction.id;
+              return (
+                <Link
+                  key={j.id}
+                  href={`/j/${j.id}`}
+                  aria-current={isCurrent ? "page" : undefined}
+                  className={
+                    isCurrent
+                      ? "border border-[#080909] bg-[#080909] px-2.5 py-1 text-[#f5f3ed] no-underline"
+                      : "border border-[#080909] bg-[#efeee8] px-2.5 py-1 text-[#080909] no-underline hover:bg-[#e5e6de]"
+                  }
+                >
+                  {j.name}
+                </Link>
+              );
+            })}
+          </div>
+        )}
         <div className="mt-3 flex flex-wrap gap-6 font-mono text-[11px] uppercase tracking-[0.12em] text-[#5b5e56]">
           <span>
             Sources{" "}

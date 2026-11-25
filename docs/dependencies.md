@@ -61,6 +61,7 @@ Per **Rule R4 (Permissive Licensing)**, every direct dependency in `pipeline/pyp
 | Package | SPDX Licence | Purpose |
 |---------|--------------|---------|
 | `@eslint/eslintrc` | `MIT` | ESLint compatibility configuration helper |
+| `@playwright/test` | `Apache-2.0` | Headless Chromium end-to-end browser test runner (`e2e/map.spec.ts`) |
 | `@tailwindcss/postcss` | `MIT` | Tailwind CSS v4 PostCSS integration |
 | `@testing-library/jest-dom` | `MIT` | DOM assertion matchers for Vitest |
 | `@testing-library/react` | `MIT` | React component testing utilities |
@@ -100,3 +101,8 @@ Per Rule R4 ("LGPL only with a written exception"), the following runtime/dev li
 | `@img/sharp-win32-arm64` | `Apache-2.0 AND LGPL-3.0-or-later` | Unmodified transitive `libvips` shared library binary pulled by Next.js `sharp`. |
 | `@img/sharp-win32-ia32` | `Apache-2.0 AND LGPL-3.0-or-later` | Unmodified transitive `libvips` shared library binary pulled by Next.js `sharp`. |
 | `@img/sharp-win32-x64` | `Apache-2.0 AND LGPL-3.0-or-later` | Unmodified transitive `libvips` shared library binary pulled by Next.js `sharp`. |
+
+## 4. Evaluated Libraries & Tooling Decisions (PR 12 / `08b`)
+
+- **`@lawsafrica/law-widgets` (`MIT`)**: Evaluated in Part 1 (`08b` §3). `@lawsafrica/law-widgets` is a Stencil Web-Components bundle designed around server-rendered Akoma Ntoso XML/HTML (`<akomaNtoso>` DOM subtrees) and Indigo API conventions rather than React virtualized JSON node trees (`ClauseNode[]` + stand-off character-span `AnnotationEntry[]`). To keep React 19 / Next.js 15 App Router SSR and `axe-core` accessibility deterministic without Stencil hydration mismatches, we implemented the Akoma Ntoso `akn-ref` / `data-refers-to` term popovers, on-demand Details disclosure, and synchronized Document Outline tree directly in `components/ClauseTree.tsx`.
+- **Graphology JSON (`MIT` format) & GraphML**: `pipeline/bylaws/graph.py` emits `graph.json` in the standard Graphology serialized graph schema (`{ attributes, options, nodes, edges }`) and `graph.graphml` in standard XML GraphML so files load directly into Graphology, Sigma.js, NetworkX, and Gephi without extra runtime bundle weight.

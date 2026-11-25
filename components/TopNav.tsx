@@ -6,8 +6,10 @@ export type NavSection =
   | "map"
   | "sources"
   | "documents"
+  | "topics"
   | "timeline"
   | "review"
+  | "structure"
   | "data"
   | "about";
 
@@ -33,13 +35,16 @@ export function TopNav({
         { key: "map", label: "Map", href: `/j/${jId}` },
         { key: "sources", label: "Sources", href: `/j/${jId}/sources` },
         { key: "documents", label: "Documents", href: `/j/${jId}/clauses` },
+        { key: "topics", label: "Topics", href: `/j/${jId}/topics` },
         { key: "timeline", label: "Timeline", href: `/j/${jId}/timeline` },
         { key: "review", label: "Review", href: `/j/${jId}/review` },
+        { key: "structure", label: "Structure", href: "/structure" },
         { key: "data", label: "Data", href: "/data" },
         { key: "about", label: "About", href: "/about" },
       ]
     : [
         { key: "home", label: "Overview", href: "/" },
+        { key: "structure", label: "Structure", href: "/structure" },
         { key: "data", label: "Data", href: "/data" },
         { key: "about", label: "About", href: "/about" },
       ];

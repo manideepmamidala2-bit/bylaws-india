@@ -234,30 +234,30 @@ def _extract_defined_term(
     *,
     in_definitions_section: bool = False,
 ) -> tuple[str, str] | None:
-    """Return `(defines_printed, defines_normalised)` if `text` defines a term."""
+    """Return `(defines_printed, defines_normalised)` if `text` defines a quoted or definition-section term."""
     m = DEFINED_TERM_RE.search(text)
-    if m:
-        if m.group("term"):
-            raw_term = m.group("term").strip()
-            if _is_valid_defined_term(raw_term):
-                return f'"{raw_term}"', " ".join(raw_term.lower().split())
-        if in_definitions_section and m.group("bare_term"):
-            raw_term = m.group("bare_term").strip()
-            if heading and raw_term.lower().startswith(heading.lower()):
-                raw_term = raw_term[len(heading) :].strip(": ") or raw_term
-            if _is_valid_defined_term(raw_term):
-                return f'"{raw_term}"', " ".join(raw_term.lower().split())
+    if m and m.group("term"):
+        raw_term = m.group("term").strip()
+        if _is_valid_defined_term(raw_term):
+            return f'"{raw_term}"', " ".join(raw_term.lower().split())
 
-    if in_definitions_section:
-        mq = LEADING_QUOTED_TERM_RE.match(text.strip())
-        if mq:
-            raw_term = mq.group("term").strip()
-            if _is_valid_defined_term(raw_term):
-                return f'"{raw_term}"', " ".join(raw_term.lower().split())
-        if heading and heading.strip() and heading.strip() != text.strip():
-            raw_term = heading.strip().strip(":-–— ")
-            if 1 <= len(raw_term.split()) <= 6 and _is_valid_defined_term(raw_term):
-                return f'"{raw_term}"', " ".join(raw_term.lower().split())
+    mq = LEADING_QUOTED_TERM_RE.match(text.strip())
+    if mq:
+        raw_term = mq.group("term").strip()
+        if _is_valid_defined_term(raw_term):
+            return f'"{raw_term}"', " ".join(raw_term.lower().split())
+
+    if in_definitions_section and heading:
+        h_clean = heading.strip().strip(":;.-–— ")
+        h_words = h_clean.split()
+        first_w = h_words[0].lower() if h_words else ""
+        if (
+            1 <= len(h_words) <= 6
+            and h_clean[0].isupper()
+            and first_w not in STOPWORD_DEFINED_TERMS
+            and _is_valid_defined_term(h_clean)
+        ):
+            return f'"{h_clean}"', " ".join(h_clean.lower().split())
 
     return None
 
@@ -1248,13 +1248,24 @@ def _find_interim_parse_file(interim_dir: Path, doc_id: str) -> Path:
     docling_file = interim_dir / f"{doc_id}.docling.json"
     if docling_file.is_file():
         return docling_file
+    interim_root = interim_dir.parent
+    if interim_root.is_dir():
+        for cand_dir in sorted(interim_root.iterdir()):
+            cand_docling = cand_dir / f"{doc_id}.docling.json"
+            if cand_docling.is_file():
+                return cand_docling
     candidates = sorted(interim_dir.glob(f"{doc_id}.*.json"))
-    if not candidates:
-        raise click.ClickException(
-            f"Interim parse output not found for '{doc_id}' in '{interim_dir}'. "
-            "Run `bylaws parse` first."
-        )
-    return candidates[0]
+    if candidates:
+        return candidates[0]
+    if interim_root.is_dir():
+        for cand_dir in sorted(interim_root.iterdir()):
+            cand_others = sorted(cand_dir.glob(f"{doc_id}.*.json"))
+            if cand_others:
+                return cand_others[0]
+    raise click.ClickException(
+        f"Interim parse output not found for '{doc_id}' in '{interim_dir}'. "
+        "Run `bylaws parse` first."
+    )
 
 
 def is_structurable_document(doc: DocumentConfig) -> bool:
@@ -1282,17 +1293,57 @@ def run_structure(config: JurisdictionConfig, *, repo_root: Path | None = None) 
     interim_dir = root / "data" / "interim" / config.id
     docs_out_dir = root / "data" / "processed" / config.id / "documents"
     docs_out_dir.mkdir(parents=True, exist_ok=True)
+    parent_docs_dir = (
+        root / "data" / "processed" / config.parent / "documents"
+        if getattr(config, "parent", None)
+        else None
+    )
 
     structured_count = 0
     for doc in config.documents:
         if not is_structurable_document(doc):
             continue
+        out_path = docs_out_dir / f"{doc.id}.clauses.json"
+        ann_path = docs_out_dir / f"{doc.id}.annotations.json"
+
+        if (
+            parent_docs_dir is not None
+            and (parent_docs_dir / f"{doc.id}.clauses.json").is_file()
+            and (parent_docs_dir / f"{doc.id}.annotations.json").is_file()
+        ):
+            from bylaws.amendments import _reset_clause_tree_versions
+
+            clause_tree = json.loads(
+                (parent_docs_dir / f"{doc.id}.clauses.json").read_text(encoding="utf-8")
+            )
+            orig_len = len(clause_tree.get("clauses") or [])
+            _reset_clause_tree_versions(clause_tree)
+            clause_tree["jurisdiction"] = config.id
+            validate_payload(clause_tree, "clause-tree", source=str(out_path))
+            out_path.write_text(
+                json.dumps(clause_tree, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            if len(clause_tree.get("clauses") or []) == orig_len and doc.role != "base":
+                annotations_payload = json.loads(
+                    (parent_docs_dir / f"{doc.id}.annotations.json").read_text(encoding="utf-8")
+                )
+                annotations_payload["jurisdiction"] = config.id
+            else:
+                annotations_payload = build_document_annotations(clause_tree)
+            validate_payload(annotations_payload, "annotations", source=str(ann_path))
+            ann_path.write_text(
+                json.dumps(annotations_payload, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            structured_count += 1
+            continue
+
         interim_path = _find_interim_parse_file(interim_dir, doc.id)
         parse_result = ParseResult.model_validate_json(
             interim_path.read_text(encoding="utf-8")
         )
         clause_tree = build_clause_tree_from_parse_result(doc, config, parse_result)
-        out_path = docs_out_dir / f"{doc.id}.clauses.json"
         validate_payload(clause_tree, "clause-tree", source=str(out_path))
         out_path.write_text(
             json.dumps(clause_tree, indent=2) + "\n",
@@ -1300,7 +1351,6 @@ def run_structure(config: JurisdictionConfig, *, repo_root: Path | None = None) 
         )
 
         annotations_payload = build_document_annotations(clause_tree)
-        ann_path = docs_out_dir / f"{doc.id}.annotations.json"
         validate_payload(annotations_payload, "annotations", source=str(ann_path))
         ann_path.write_text(
             json.dumps(annotations_payload, indent=2) + "\n",

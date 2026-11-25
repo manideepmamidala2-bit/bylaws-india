@@ -74,6 +74,11 @@
         "minLength": 1
       }
     },
+    "parent": {
+      "type": ["string", "null"],
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Optional parent jurisdiction ID for a child municipal corporation."
+    },
     "parents": {
       "type": "array",
       "items": {
@@ -177,6 +182,13 @@
           },
           "replacement_text": {
             "type": ["string", "null"]
+          },
+          "applies_in": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+            }
           }
         }
       }
@@ -522,6 +534,35 @@
         },
         "superseded_by_document": {
           "type": ["string", "null"]
+        },
+        "applies_in": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          }
+        },
+        "applies_to_jurisdiction": {
+          "type": "object",
+          "title": "DocumentApplicabilityConfig",
+          "additionalProperties": false,
+          "required": ["status", "reason"],
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": ["yes", "no", "partly", "unknown"]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            },
+            "quoted_evidence": {
+              "type": ["string", "null"]
+            },
+            "url": {
+              "type": ["string", "null"]
+            }
+          }
         },
         "licence_or_terms": {
           "type": "string",

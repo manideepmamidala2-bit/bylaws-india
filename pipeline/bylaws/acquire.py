@@ -105,12 +105,56 @@ def _resolve_doc_role(doc: DocumentConfig) -> str:
     return "regulation"
 
 
+def _resolve_applies_to_jurisdiction(
+    doc: DocumentConfig, jurisdiction_id: str
+) -> dict[str, Any]:
+    explicit = getattr(doc, "applies_to_jurisdiction", None)
+    if explicit is not None:
+        return explicit.model_dump(exclude_none=True)
+    quoted = doc.status_evidence.quoted_line if doc.status_evidence else None
+    ev_url = doc.status_evidence.url if doc.status_evidence else doc.source_url
+    if doc.role == "reference" and doc.layer == "state_rules":
+        return {
+            "status": "unknown",
+            "reason": (
+                "Notified under Section 325 of the Karnataka Municipalities Act, 1964 for municipal "
+                "councils and town panchayats, while listed on the municipal Building Plan Approval "
+                "System alongside the principal 2003 Building Bye-laws; applicability to city "
+                "corporations is recorded as unknown with both sources."
+            ),
+            "quoted_evidence": quoted,
+            "url": ev_url,
+        }
+    applies_in = list(getattr(doc, "applies_in", None) or [])
+    if applies_in:
+        if jurisdiction_id in applies_in:
+            return {
+                "status": "yes",
+                "reason": f"Enacted by {doc.issuing_authority} for {jurisdiction_id}.",
+                "quoted_evidence": quoted,
+                "url": ev_url,
+            }
+        return {
+            "status": "partly",
+            "reason": f"Enacted by {doc.issuing_authority} for {', '.join(applies_in)}.",
+            "quoted_evidence": quoted,
+            "url": ev_url,
+        }
+    return {
+        "status": "yes",
+        "reason": f"Applies across {jurisdiction_id} ({doc.layer} {doc.role}).",
+        "quoted_evidence": quoted,
+        "url": ev_url,
+    }
+
+
 def _acquire_single_document(
     doc: DocumentConfig,
     raw_dir: Path,
     repo_root: Path,
     *,
     is_test_jurisdiction: bool = False,
+    jurisdiction_id: str = "",
 ) -> dict[str, Any] | None:
     acq_status = getattr(doc, "acquisition_status", None) or "acquired"
     if acq_status in {"pending", "not_found"}:
@@ -143,6 +187,18 @@ def _acquire_single_document(
             existing_meta = json.loads(meta_path.read_text(encoding="utf-8"))
             if retrieval_record is None and isinstance(existing_meta.get("retrieval"), dict):
                 retrieval_record = existing_meta["retrieval"]
+
+        if not pdf_path.is_file() and retrieval_record is not None and retrieval_record.get("sha256"):
+            expected_sha = str(retrieval_record["sha256"])
+            raw_root = repo_root / "data" / "raw"
+            if raw_root.is_dir():
+                for cand_dir in sorted(raw_root.iterdir()):
+                    cand_pdf = cand_dir / f"{doc.id}.pdf"
+                    if cand_pdf.is_file():
+                        cand_bytes = cand_pdf.read_bytes()
+                        if hashlib.sha256(cand_bytes).hexdigest() == expected_sha:
+                            pdf_path.write_bytes(cand_bytes)
+                            break
 
         if pdf_path.is_file() and (is_test_jurisdiction or retrieval_record is not None):
             raw_bytes = pdf_path.read_bytes()
@@ -249,6 +305,12 @@ def _acquire_single_document(
         meta_payload["gazette_reference"] = doc.gazette_reference
     if doc.superseded_by_document is not None:
         meta_payload["superseded_by_document"] = doc.superseded_by_document
+    if getattr(doc, "applies_in", None):
+        meta_payload["applies_in"] = list(doc.applies_in or [])
+    if not is_test_jurisdiction:
+        meta_payload["applies_to_jurisdiction"] = _resolve_applies_to_jurisdiction(
+            doc, jurisdiction_id or raw_dir.name
+        )
     if doc.text_rights is not None:
         meta_payload["text_rights"] = {
             "mode": doc.text_rights.mode,
@@ -272,7 +334,9 @@ def _acquire_single_document(
     return meta_payload
 
 
-def _build_unacquired_document_payload(doc: DocumentConfig) -> dict[str, Any]:
+def _build_unacquired_document_payload(
+    doc: DocumentConfig, jurisdiction_id: str = ""
+) -> dict[str, Any]:
     """Build a schema-valid `DocumentMetadata` record for a `pending` or `not_found` document."""
     acq_status = getattr(doc, "acquisition_status", None) or "pending"
     evidence_payload: dict[str, Any] = {
@@ -313,6 +377,11 @@ def _build_unacquired_document_payload(doc: DocumentConfig) -> dict[str, Any]:
         payload["gazette_reference"] = doc.gazette_reference
     if doc.superseded_by_document is not None:
         payload["superseded_by_document"] = doc.superseded_by_document
+    if getattr(doc, "applies_in", None):
+        payload["applies_in"] = list(doc.applies_in or [])
+    payload["applies_to_jurisdiction"] = _resolve_applies_to_jurisdiction(
+        doc, jurisdiction_id
+    )
     if doc.text_rights is not None:
         payload["text_rights"] = {
             "mode": doc.text_rights.mode,
@@ -349,12 +418,13 @@ def run_acquire(config: JurisdictionConfig, *, repo_root: Path | None = None) ->
             raw_dir,
             root,
             is_test_jurisdiction=is_test_jur,
+            jurisdiction_id=config.id,
         )
         if res is not None:
             acquired_count += 1
             register_entries.append(res)
         else:
-            register_entries.append(_build_unacquired_document_payload(doc))
+            register_entries.append(_build_unacquired_document_payload(doc, config.id))
 
     public_data_dir = root / "public" / "data"
     if not is_test_jur and public_data_dir.is_dir():
@@ -375,6 +445,16 @@ def run_acquire(config: JurisdictionConfig, *, repo_root: Path | None = None) ->
             ext = ".kml" if "kml" in boundary_cfg.source_url.lower() else ".geojson"
             raw_b_path = raw_dir / f"boundary_{boundary_cfg.id}{ext}"
             b_ret = getattr(boundary_cfg, "retrieval", None)
+            if not raw_b_path.is_file() and b_ret is not None and b_ret.sha256:
+                raw_root = root / "data" / "raw"
+                if raw_root.is_dir():
+                    for cand_dir in sorted(raw_root.iterdir()):
+                        cand_b = cand_dir / f"boundary_{boundary_cfg.id}{ext}"
+                        if cand_b.is_file():
+                            cand_bytes = cand_b.read_bytes()
+                            if hashlib.sha256(cand_bytes).hexdigest() == b_ret.sha256:
+                                raw_b_path.write_bytes(cand_bytes)
+                                break
             if raw_b_path.is_file() and b_ret is not None:
                 existing_b_sha = hashlib.sha256(raw_b_path.read_bytes()).hexdigest()
                 if b_ret.sha256 and b_ret.sha256 != existing_b_sha:

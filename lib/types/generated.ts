@@ -44,6 +44,10 @@ export interface JurisdictionConfig {
    * @minItems 1
    */
   building_types: [string, ...string[]];
+  /**
+   * Optional parent jurisdiction ID for a child municipal corporation.
+   */
+  parent?: string | null;
   parents: string[];
   /**
    * Regulatory domains or layers intentionally excluded from this jurisdiction dataset.
@@ -129,6 +133,8 @@ export interface DocumentConfig {
   notification_number?: string | null;
   gazette_reference?: string | null;
   superseded_by_document?: string | null;
+  applies_in?: string[];
+  applies_to_jurisdiction?: DocumentApplicabilityConfig;
   licence_or_terms: string;
   text_rights?: TextRightsConfig;
   /**
@@ -173,6 +179,13 @@ export interface StatusEvidenceConfig {
   description?: string | null;
 }
 
+export interface DocumentApplicabilityConfig {
+  status: "yes" | "no" | "partly" | "unknown";
+  reason: string;
+  quoted_evidence?: string | null;
+  url?: string | null;
+}
+
 export interface TextRightsConfig {
   mode: "full_text" | "reference_only";
   reason: string;
@@ -195,6 +208,7 @@ export interface JurisdictionAmendmentLinkConfig {
   verification: "unverified" | "machine_checked" | "human_verified";
   note?: string | null;
   replacement_text?: string | null;
+  applies_in?: string[];
 }
 
 export interface MapsConfig {
@@ -329,6 +343,8 @@ export interface DocumentMetadata {
   status_evidence: DocumentStatusEvidence;
   notification_number?: string | null;
   gazette_reference?: string | null;
+  applies_in?: string[];
+  applies_to_jurisdiction?: DocumentApplicability;
   superseded_by_document?: string | null;
   licence_or_terms: string;
   text_rights?: DocumentTextRights;
@@ -356,6 +372,13 @@ export interface DocumentStatusEvidence {
   url: string | null;
   quoted_line?: string | null;
   description?: string | null;
+}
+
+export interface DocumentApplicability {
+  status: "yes" | "no" | "partly" | "unknown";
+  reason: string;
+  quoted_evidence?: string | null;
+  url?: string | null;
 }
 
 export interface DocumentTextRights {
@@ -541,7 +564,7 @@ export interface DocumentAnnotations {
 export interface AnnotationEntry {
   annotation_id: string;
   target: AnnotationTarget;
-  kind: "cross_reference" | "defined_term_use" | "provision_type";
+  kind: "cross_reference" | "defined_term_use" | "provision_type" | "topic" | "quantity" | "zone_applicability";
   value: string;
   method: "rule" | "model" | "person";
   model_name?: string | null;
@@ -836,6 +859,7 @@ export interface AmendmentEffect {
   applied: boolean;
   unapplied_reason?: string | null;
   verification: "unverified" | "machine_checked" | "human_verified";
+  applies_in?: string[];
 }
 
 export interface EffectNodePayload {
@@ -860,6 +884,7 @@ export interface AmendmentLink {
   verification: "unverified" | "machine_checked" | "human_verified";
   note?: string | null;
   summary?: string | null;
+  applies_in?: string[];
 }
 
 /**
@@ -874,6 +899,7 @@ export interface ReleaseManifest {
 export interface JurisdictionManifest {
   id: string;
   name: string;
+  parent?: string | null;
   aliases?: string[];
   visibility?: "public" | "test";
   latest_release: string | null;
@@ -917,6 +943,8 @@ export interface ReleaseFiles {
   clause_zone_tags?: string | null;
   sources_json?: string | null;
   sources_csv?: string | null;
+  relations?: string | null;
+  graph?: string | null;
   review_images: string[];
 }
 
@@ -1027,4 +1055,60 @@ export interface ClauseZoneTagEntry {
   zone_code: string;
   reason: string;
   verification: "unverified" | "machine_checked" | "human_verified";
+}
+
+/**
+ * Schema v1.4 fourth layer: topics, cross-document relations, conflicts, statutory precedence, and institution succession.
+ */
+
+export interface JurisdictionRelations {
+  schema_version: "1.3" | "1.4";
+  jurisdiction: string;
+  topics: TopicDefinition[];
+  succession: SuccessionEntry[];
+  relations: RelationEntry[];
+}
+
+export interface TopicDefinition {
+  id: string;
+  label: string;
+  description: string;
+  seed_phrases: string[];
+}
+
+export interface SuccessionEntry {
+  id: string;
+  old_body: string;
+  aliases?: string[];
+  new_body: string;
+  effective_date: string;
+  instrument_id: string;
+  instrument_title: string;
+  quoted_evidence: string;
+  source_url: string;
+}
+
+export interface RelationEntry {
+  id: string;
+  kind:
+    | "same_topic"
+    | "definition_differs"
+    | "numeric_differs"
+    | "cross_document_reference"
+    | "precedence"
+    | "corporation_differs";
+  from_doc: string;
+  from_eid: string;
+  to_doc: string;
+  to_eid: string;
+  topic?: string | null;
+  parameter?: string | null;
+  from_span: string;
+  to_span: string;
+  precedence_span?: string | null;
+  applies_in?: string[];
+  method: "rule" | "embedding" | "hybrid";
+  confidence: number;
+  status: "candidate" | "confirmed" | "rejected" | "human_verified";
+  note?: string | null;
 }

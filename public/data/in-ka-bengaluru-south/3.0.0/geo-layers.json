@@ -1,0 +1,112 @@
+{
+  "schema_version": "1.3",
+  "jurisdiction": "in-ka-bengaluru-south",
+  "layers": [
+    {
+      "layer_id": "corporation",
+      "title": "Bengaluru South City Corporation Official Boundary",
+      "kind": "official_boundary",
+      "source": "Greater Bengaluru Authority delimitation maps, September 2025 (gba.karnataka.gov.in / gisapps.bbmp.gov.in)",
+      "method": "Official boundary polygon extraction (EPSG:4326)",
+      "accuracy_m": 1.0,
+      "derived": false,
+      "file": "boundary.geojson",
+      "external_url": "https://gisapps.bbmp.gov.in/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=gba_boundary:gba_corporation_boundary&outputFormat=application/vnd.google-earth.kml+xml&srsName=EPSG:4326",
+      "feature_count": 1,
+      "notes": "Retrieved 2026-11-24"
+    },
+    {
+      "layer_id": "gba_zones",
+      "title": "Bengaluru South City Corporation GBA Zones (Zone 1 Jayanagar & Zone 2 Bommanahalli)",
+      "kind": "official_boundary",
+      "source": "Greater Bengaluru Authority delimitation maps, September 2025 (gba.karnataka.gov.in / gisapps.bbmp.gov.in)",
+      "method": "Official boundary polygon extraction (EPSG:4326)",
+      "accuracy_m": 1.0,
+      "derived": false,
+      "file": "gba-zones.geojson",
+      "external_url": "https://gisapps.bbmp.gov.in/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=gba_boundary:gba_zone_boundary&outputFormat=application/vnd.google-earth.kml+xml&srsName=EPSG:4326",
+      "feature_count": 2,
+      "notes": "Retrieved 2026-11-24"
+    },
+    {
+      "layer_id": "wards",
+      "title": "Bengaluru South City Corporation Official Wards (72 Wards)",
+      "kind": "official_boundary",
+      "source": "Greater Bengaluru Authority delimitation maps, November 2025 (gba.karnataka.gov.in / gisapps.bbmp.gov.in)",
+      "method": "Official boundary polygon extraction (EPSG:4326)",
+      "accuracy_m": 1.0,
+      "derived": false,
+      "file": "wards.geojson",
+      "external_url": "https://gisapps.bbmp.gov.in/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=gba_boundary:ward_369_final&outputFormat=application/vnd.google-earth.kml+xml&srsName=EPSG:4326",
+      "feature_count": 72,
+      "notes": "Retrieved 2026-11-24"
+    },
+    {
+      "layer_id": "planning_districts",
+      "title": "RMP 2015 Planning District 2.10 (Jayanagar) Outline",
+      "kind": "official_boundary",
+      "source": "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PD-IndexMap.pdf",
+      "method": "RMP 2015 planning district boundary index clipped to corporation boundary (EPSG:4326)",
+      "accuracy_m": 5.0,
+      "derived": false,
+      "file": "planning-districts.geojson",
+      "external_url": null,
+      "feature_count": 1,
+      "notes": "Bangalore Development Authority (BDA) Revised Master Plan 2015 \u2014 47 Planning Districts Index Map, clipped to Bengaluru South City Corporation boundary."
+    },
+    {
+      "layer_id": "landuse_zones",
+      "title": "Bengaluru South City Corporation Master Plan Land Use Zones (2.10 Jayanagar map (b))",
+      "kind": "master_plan_zone",
+      "source": "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_210-Jayanagar.pdf",
+      "method": "Zones traced from the RMP 2015 Proposed Land Use sheet 2.10 Jayanagar map (b), placed using the sheet's printed grid (UTM 43N EPSG:32643 -> EPSG:4326)",
+      "accuracy_m": 0.0032,
+      "derived": true,
+      "file": "zones.geojson",
+      "external_url": "https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PLU_PD_210-Jayanagar.pdf",
+      "feature_count": 1276,
+      "notes": "Zones traced from the RMP 2015 Proposed Land Use sheet 2.10 Jayanagar map (b), placed using the sheet's printed grid; measured grid placement RMSE 0.00 m (independent OpenStreetMap road median offset 8.0 m).",
+      "sheet_overlay": {
+        "image_url": "/data/in-ka-bengaluru-south/sheets/rmp2015-pd-210-b.png",
+        "bounds_wgs84": [
+          [
+            77.572798,
+            12.938434
+          ],
+          [
+            77.623007,
+            12.937934
+          ],
+          [
+            77.622634,
+            12.902208
+          ],
+          [
+            77.572432,
+            12.902707
+          ]
+        ],
+        "sheet": "2.10 Jayanagar map (b)",
+        "planning_district": "2.10",
+        "rmse_m": 0.0032,
+        "loo_rmse_m": 0.0038,
+        "max_residual_m": 0.0046,
+        "road_median_offset_m": 8.02,
+        "road_p90_offset_m": 21.11
+      }
+    },
+    {
+      "layer_id": "lake-buffer-30m",
+      "title": "RMP 2015 Regulation 4.12.2 Verified 30.0 m Lake No-Development Buffer (Derived & Approximate)",
+      "kind": "derived_overlay",
+      "source": "RMP 2015 Zoning Regulations Clause 4.12.2 & Notification No. UDD 468 MNJ 2025(E) dated 15-10-2025 applied to extracted G-LAKE water bodies",
+      "method": "30.0 m Euclidean buffer in UTM Zone 43N (EPSG:32643) around extracted G-LAKE water-body polygons, reprojected to WGS 84 (EPSG:4326); approximate.",
+      "accuracy_m": 5.0,
+      "derived": true,
+      "file": "overlays.geojson",
+      "external_url": null,
+      "feature_count": 34,
+      "notes": "Derived by this project, not an official publication (approximate)."
+    }
+  ]
+}

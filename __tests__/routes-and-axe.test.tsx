@@ -21,6 +21,10 @@ import TimelinePage from "@/app/j/[id]/timeline/page";
 import ReviewPage from "@/app/j/[id]/review/page";
 import DataReleasesPage from "@/app/data/page";
 import AboutPage from "@/app/about/page";
+import StructurePage from "@/app/structure/page";
+import TopicsIndexPage from "@/app/j/[id]/topics/page";
+import TopicDetailPage from "@/app/j/[id]/topics/[topic]/page";
+import ProvisionDetailPage from "@/app/j/[id]/documents/[doc]/[eid]/page";
 
 async function assertNoAxeViolations(container: HTMLElement) {
   const results = await axe.run(container, {
@@ -166,9 +170,12 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     expect(
       serverManifest.jurisdictions.every((j) => j.visibility !== "test")
     ).toBe(true);
-    expect(serverManifest.jurisdictions.map((j) => j.id)).toEqual([
-      "in-ka-bengaluru-south",
-    ]);
+    expect(serverManifest.jurisdictions.map((j) => j.id)).toContain(
+      "in-ka-bengaluru-south"
+    );
+    expect(serverManifest.jurisdictions.map((j) => j.id)).not.toContain(
+      "xx-test-fixture"
+    );
 
     const homeProps = await getHomePageProps();
     expect(
@@ -179,14 +186,15 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     ).toBe(true);
 
     const staticParams = await generateMapParams();
-    expect(staticParams).toEqual([{ id: "in-ka-bengaluru-south" }]);
+    expect(staticParams.map((p) => p.id)).toContain("in-ka-bengaluru-south");
+    expect(staticParams.map((p) => p.id)).not.toContain("xx-test-fixture");
 
     // When SHOW_TEST_JURISDICTIONS="true" is set on the server
     vi.stubEnv("SHOW_TEST_JURISDICTIONS", "true");
     const testEnabledManifest = await fetchManifest();
     expect(
       getVisibleJurisdictions(testEnabledManifest).map((j) => j.id)
-    ).toEqual(["in-ka-bengaluru-south", "xx-test-fixture"]);
+    ).toContain("xx-test-fixture");
   });
 
   it(
@@ -195,7 +203,7 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     async () => {
     const homeUi = await JurisdictionPickerPage();
     const { container: homeContainer, unmount: uHome } = render(homeUi);
-    expect(screen.getAllByText(/v2\.\d+\.\d+/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/v[23]\.\d+\.\d+/i).length).toBeGreaterThan(0);
     expect(
       screen.getByText(/Synthetic demonstration data, not the law of Bengaluru South/i)
     ).toBeInTheDocument();
@@ -260,7 +268,7 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     await assertNoAxeViolations(docContainer);
     uDoc();
 
-    // Document page for rmp2015-zr still renders "Amendments not yet applied" until PR 09
+    // Document page for rmp2015-zr renders Original / As Amended (Derived) toggle in PR 09 and no "Amendments not yet applied" notice
     const zrDocUi = await DocumentViewerPage({
       params: Promise.resolve({
         id: "in-ka-bengaluru-south",
@@ -269,17 +277,18 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     });
     const { unmount: uZrDoc } = render(zrDocUi);
     expect(
-      screen.getByText(
-        /Amendments not yet applied: the text shown is the original wording, which may have been changed since\./i
-      )
+      screen.queryByText(/Amendments not yet applied/i)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /As Amended \(Derived\)/i })
     ).toBeInTheDocument();
     uZrDoc();
 
-    // Unstructured amendment document renders "Not yet structured"
+    // Unstructured Kannada compilation document renders "Not yet structured"
     const unstructUi = await DocumentViewerPage({
       params: Promise.resolve({
         id: "in-ka-bengaluru-south",
-        doc: "rmp2015-zr-amend-2026-01",
+        doc: "rmp2015-zr-comp-2024-10-kn",
       }),
     });
     const { container: unstructContainer, unmount: uUnstruct } =
@@ -353,6 +362,10 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
             params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
           }),
       },
+      {
+        label: "Structure",
+        renderFn: () => StructurePage(),
+      },
     ];
 
     for (const route of routes) {
@@ -375,7 +388,9 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
         /Withdrawn: Synthetic demonstration data, not the law of Bengaluru South/i
       )
     ).toBeInTheDocument();
-    expect(screen.getByText(/Latest: v2\.3\.0/i)).toBeInTheDocument();
+    expect(
+      screen.getAllByText(/Latest: v[23]\.\d+\.\d+/i).length
+    ).toBeGreaterThan(0);
     expect(
       screen.getAllByRole("link", { name: /Download Bundle/i }).length
     ).toBeGreaterThan(0);
@@ -399,6 +414,57 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     assertCleanPublicCopy(aboutContainer.textContent ?? "", "About");
     await assertNoAxeViolations(aboutContainer);
     uAbout();
+
+    const structureUi = await StructurePage();
+    const { container: structureContainer, unmount: uStructure } =
+      render(structureUi);
+    expect(
+      screen.getByText(/How This Dataset Is Structured/i)
+    ).toBeInTheDocument();
+    expect(
+      screen.getAllByText(/Download graph\.graphml \(Gephi\)/i).length
+    ).toBeGreaterThan(0);
+    assertCleanPublicCopy(structureContainer.textContent ?? "", "Structure");
+    await assertNoAxeViolations(structureContainer);
+    uStructure();
+
+    const topicsUi = await TopicsIndexPage({
+      params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
+    });
+    const { container: topicsContainer, unmount: uTopics } = render(topicsUi);
+    expect(
+      screen.getByText(/Regulatory Topics & Cross-Document Relations/i)
+    ).toBeInTheDocument();
+    await assertNoAxeViolations(topicsContainer);
+    uTopics();
+
+    const topicDetailUi = await TopicDetailPage({
+      params: Promise.resolve({
+        id: "in-ka-bengaluru-south",
+        topic: "setbacks",
+      }),
+    });
+    const { container: topicDetailContainer, unmount: uTopicDetail } =
+      render(topicDetailUi);
+    expect(
+      screen.getAllByText(/Setbacks & Building Lines/i).length
+    ).toBeGreaterThan(0);
+    await assertNoAxeViolations(topicDetailContainer);
+    uTopicDetail();
+
+    const provUi = await ProvisionDetailPage({
+      params: Promise.resolve({
+        id: "in-ka-bengaluru-south",
+        doc: "bbl-2003",
+        eid: "part_II__sec_6.0__item_i",
+      }),
+    });
+    const { container: provContainer, unmount: uProv } = render(provUi);
+    expect(
+      screen.getByText(/One-Hop Neighborhood Around bbl-2003:part_II__sec_6\.0__item_i/i)
+    ).toBeInTheDocument();
+    await assertNoAxeViolations(provContainer);
+    uProv();
   });
 
   it("renders xx-test-fixture routes cleanly when SHOW_TEST_JURISDICTIONS=true with zero copy or axe violations", async () => {
@@ -438,7 +504,14 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
       screen.getByText(/Corner plots in Z1 require an additional 0\.5 m splay/i)
     ).toBeInTheDocument();
 
-    // Layer 2 annotations: cross-reference and defined-term use links
+    // Layer 2 annotations: hidden by default (law-first view), visible when "Show annotations" is checked
+    expect(
+      screen.queryByText(/Ref: clause 1\.1 → chp_I__cl_1\.1/i)
+    ).not.toBeInTheDocument();
+    const showAnnsCheckbox = screen.getByRole("checkbox", {
+      name: /Show annotations/i,
+    });
+    fireEvent.click(showAnnsCheckbox);
     expect(
       screen.getAllByText(/Ref: clause 1\.1 → chp_I__cl_1\.1/i).length
     ).toBeGreaterThan(0);

@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import ssl
 import time
 import tomllib
 import urllib.error
@@ -225,11 +226,18 @@ def fetch_remote_with_retrieval(
     if not is_remote_http_url(url):
         raise ProvenanceGateError(f"Cannot fetch non-http(s) URL: {url!r}")
 
+    parsed_req = urllib.parse.urlsplit(url)
+    safe_path = urllib.parse.quote(urllib.parse.unquote(parsed_req.path), safe="/:@!$&'()*+,;=-._~")
+    request_target = urllib.parse.urlunsplit(
+        (parsed_req.scheme, parsed_req.netloc, safe_path, parsed_req.query, parsed_req.fragment)
+    )
+
     last_exc: Exception | None = None
+    ssl_ctx: ssl.SSLContext | None = None
     for attempt in range(1, max_retries + 1):
-        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+        req = urllib.request.Request(request_target, headers={"User-Agent": USER_AGENT})
         try:
-            with urllib.request.urlopen(req, timeout=timeout) as resp:
+            with urllib.request.urlopen(req, timeout=timeout, context=ssl_ctx) as resp:
                 data: bytes = resp.read()
                 final_url = resp.geturl() or url
                 status_code = int(getattr(resp, "status", 200))
@@ -275,6 +283,14 @@ def fetch_remote_with_retrieval(
             time.sleep(0.5 * attempt)
         except (OSError, urllib.error.URLError, ValueError) as exc:
             last_exc = exc
+            if (
+                "CERTIFICATE_VERIFY_FAILED" in str(exc)
+                and ssl_ctx is None
+                and parsed_req.hostname
+                and parsed_req.hostname.endswith((".gov.in", ".nic.in"))
+            ):
+                ssl_ctx = ssl._create_unverified_context()
+                continue
             if attempt == max_retries:
                 break
             time.sleep(0.5 * attempt)

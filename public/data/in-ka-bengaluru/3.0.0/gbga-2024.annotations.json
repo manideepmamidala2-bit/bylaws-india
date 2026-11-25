@@ -1,0 +1,3463 @@
+{
+  "schema_version": "1.3",
+  "doc_id": "gbga-2024",
+  "jurisdiction": "in-ka-bengaluru",
+  "annotations": [
+    {
+      "annotation_id": "gbga-2024:ann_1",
+      "target": {
+        "eid": "prea_1__item_3",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          11,
+          16
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_2",
+      "target": {
+        "eid": "prea_1__item_3__item_4",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          171,
+          187
+        ],
+        "span_text": "Commissioner may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_3",
+      "target": {
+        "eid": "prea_1__item_3__item_4",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          215,
+          225
+        ],
+        "span_text": "projection"
+      },
+      "kind": "topic",
+      "value": "projections_open_spaces",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_4",
+      "target": {
+        "eid": "prea_1__item_3__item_4__item_5",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          21,
+          26
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_5",
+      "target": {
+        "eid": "prea_1__item_3__item_4__item_5__prov_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          13
+        ],
+        "span_text": "Provided that"
+      },
+      "kind": "provision_type",
+      "value": "exception",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_6",
+      "target": {
+        "eid": "prea_1__item_3__item_4__item_5__prov_1__prov_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          21
+        ],
+        "span_text": "Provided further that"
+      },
+      "kind": "provision_type",
+      "value": "exception",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_7",
+      "target": {
+        "eid": "prea_1__item_3__item_4__item_5__prov_1__prov_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          160,
+          170
+        ],
+        "span_text": "section is"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:section is",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_8",
+      "target": {
+        "eid": "chp_XVII__cl_223__item_a",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          187,
+          192
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_9",
+      "target": {
+        "eid": "chp_XVII__cl_223__item_a",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          95,
+          158
+        ],
+        "span_text": "section 14 of the Karnataka Town and Country Planning Act, 1961"
+      },
+      "kind": "cross_reference",
+      "value": "external:Karnataka Town and Country Planning Act, 1961:section_14",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_10",
+      "target": {
+        "eid": "chp_XVII__cl_223__item_a__item_b",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          9
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_11",
+      "target": {
+        "eid": "chp_XVII__cl_224",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          119,
+          124
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_12",
+      "target": {
+        "eid": "chp_XVII__cl_224__item_a__item_b__item_c",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          69,
+          79
+        ],
+        "span_text": "prohibited"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_13",
+      "target": {
+        "eid": "chp_XVII__cl_224__item_a__item_b__item_c__item_d",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          0,
+          18
+        ],
+        "span_text": "Height of building"
+      },
+      "kind": "topic",
+      "value": "building_height",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_14",
+      "target": {
+        "eid": "chp_XVII__cl_224__item_a__item_b__item_c__item_d__item_e",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          159,
+          169
+        ],
+        "span_text": "open space"
+      },
+      "kind": "topic",
+      "value": "projections_open_spaces",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_15",
+      "target": {
+        "eid": "chp_XVII__cl_224__item_a__item_b__item_c__item_d__item_e",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          205,
+          210
+        ],
+        "span_text": "means"
+      },
+      "kind": "topic",
+      "value": "definitions",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_16",
+      "target": {
+        "eid": "chp_XVII__cl_224__item_a__item_b__item_c__item_d__item_e__item_g",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          24,
+          39
+        ],
+        "span_text": "means of access"
+      },
+      "kind": "topic",
+      "value": "road_width",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_17",
+      "target": {
+        "eid": "chp_XVII__cl_224__item_a__item_b__item_c__item_d__item_e__item_g",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          24,
+          29
+        ],
+        "span_text": "means"
+      },
+      "kind": "topic",
+      "value": "definitions",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_18",
+      "target": {
+        "eid": "chp_XVII__cl_224__item_a__item_b__item_c__item_d__item_e__item_g__item_h__item_k",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          197,
+          202
+        ],
+        "span_text": "ramps"
+      },
+      "kind": "topic",
+      "value": "parking",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_19",
+      "target": {
+        "eid": "chp_XVII__cl_224__item_a__item_b__item_c__item_d__item_e__item_g__item_h__item_k__item_m",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          0,
+          15
+        ],
+        "span_text": "Fire protection"
+      },
+      "kind": "topic",
+      "value": "fire_safety",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_20",
+      "target": {
+        "eid": "chp_XVII__cl_224__item_a__item_b__item_c__item_d__item_e__item_g__item_h__item_k__item_m__item_n__item_o",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          16,
+          37
+        ],
+        "span_text": "rain water harvesting"
+      },
+      "kind": "topic",
+      "value": "fire_safety",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_21",
+      "target": {
+        "eid": "chp_XVII__cl_224__item_a__item_b__item_c__item_d__item_e__item_g__item_h__item_k__item_m__item_n__item_o__item_p__item_q__item_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          17,
+          22
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_22",
+      "target": {
+        "eid": "chp_XVII__cl_225",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          123,
+          128
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_23",
+      "target": {
+        "eid": "chp_XVII__cl_225",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          26,
+          47
+        ],
+        "span_text": "rain water harvesting"
+      },
+      "kind": "topic",
+      "value": "fire_safety",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_24",
+      "target": {
+        "eid": "chp_XVII__cl_226",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          135,
+          148
+        ],
+        "span_text": "road widening"
+      },
+      "kind": "topic",
+      "value": "road_width",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_25",
+      "target": {
+        "eid": "chp_XVII__cl_226__item_i",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          30,
+          35
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_26",
+      "target": {
+        "eid": "chp_XVII__cl_226__item_i__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          390,
+          454
+        ],
+        "span_text": "section 14B of the Karnataka Town and Country Planning Act, 1961"
+      },
+      "kind": "cross_reference",
+      "value": "external:Karnataka Town and Country Planning Act, 1961:section_14b",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_27",
+      "target": {
+        "eid": "chp_XVII__cl_226__item_i__item_iv",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          155,
+          171
+        ],
+        "span_text": "Commissioner may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_28",
+      "target": {
+        "eid": "chp_XVII__cl_226__item_i__item_iv",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          37,
+          53
+        ],
+        "span_text": "floor area ratio"
+      },
+      "kind": "topic",
+      "value": "far",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_29",
+      "target": {
+        "eid": "chp_XVII__cl_226__item_i__item_iv",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          203,
+          211
+        ],
+        "span_text": "coverage"
+      },
+      "kind": "topic",
+      "value": "ground_coverage",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_30",
+      "target": {
+        "eid": "chp_XVII__cl_226__item_i__item_iv",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          190,
+          198
+        ],
+        "span_text": "setbacks"
+      },
+      "kind": "topic",
+      "value": "setbacks",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_31",
+      "target": {
+        "eid": "chp_XVII__cl_227",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          45,
+          60
+        ],
+        "span_text": "Corporation may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_32",
+      "target": {
+        "eid": "chp_XVII__cl_227__item_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          124,
+          135
+        ],
+        "span_text": "section 234"
+      },
+      "kind": "cross_reference",
+      "value": "chp_XVII__cl_234",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_33",
+      "target": {
+        "eid": "chp_XVII__cl_228",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          47,
+          62
+        ],
+        "span_text": "No person shall"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_34",
+      "target": {
+        "eid": "chp_XVII__cl_229__item_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          65,
+          70
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_35",
+      "target": {
+        "eid": "chp_XVII__cl_229__item_1__item_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          47,
+          52
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_36",
+      "target": {
+        "eid": "chp_XVII__cl_230",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          188,
+          196
+        ],
+        "span_text": "apply to"
+      },
+      "kind": "provision_type",
+      "value": "scope",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_37",
+      "target": {
+        "eid": "chp_XVII__cl_230__item_2__item_3",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          18,
+          23
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_38",
+      "target": {
+        "eid": "chp_XVII__cl_230__item_2__item_3__item_4",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          63,
+          79
+        ],
+        "span_text": "Commissioner may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_39",
+      "target": {
+        "eid": "chp_XVII__cl_230__item_2__item_3__item_4__item_5",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          4,
+          20
+        ],
+        "span_text": "Commissioner may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_40",
+      "target": {
+        "eid": "chp_XVII__cl_230__item_2__item_3__item_4__item_5__item_6",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          42,
+          47
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_41",
+      "target": {
+        "eid": "chp_XVII__cl_230__item_2__item_3__item_4__item_5__item_6__item_7",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          202,
+          207
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_42",
+      "target": {
+        "eid": "chp_XVII__cl_230__item_2__item_3__item_4__item_5__item_6__item_7",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          217,
+          232
+        ],
+        "span_text": "compounding fee"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_43",
+      "target": {
+        "eid": "chp_XVII__cl_230__item_2__item_3__item_4__item_5__item_6__item_7",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          67,
+          82
+        ],
+        "span_text": "sanctioned plan"
+      },
+      "kind": "topic",
+      "value": "approvals_certificates",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_44",
+      "target": {
+        "eid": "chp_XVII__cl_230__item_2__item_3__item_4__item_5__item_6__item_7__item_8",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          64,
+          79
+        ],
+        "span_text": "sanctioned plan"
+      },
+      "kind": "topic",
+      "value": "approvals_certificates",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_45",
+      "target": {
+        "eid": "chp_XVII__cl_230__item_2__item_3__item_4__item_5__item_6__item_7__item_8__item_9__item_10",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          69,
+          74
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_46",
+      "target": {
+        "eid": "chp_XVII__cl_230__item_2__item_3__item_4__item_5__item_6__item_7__item_8__item_9__item_10__item_11",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          37,
+          42
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_47",
+      "target": {
+        "eid": "chp_XVII__cl_231",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          359,
+          364
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_48",
+      "target": {
+        "eid": "chp_XVII__cl_231",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          186,
+          197
+        ],
+        "span_text": "section 230"
+      },
+      "kind": "cross_reference",
+      "value": "chp_XVII__cl_230",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_49",
+      "target": {
+        "eid": "chp_XVII__cl_231__item_2",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          205,
+          210
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_50",
+      "target": {
+        "eid": "chp_XVII__cl_231__item_2__item_3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          203,
+          208
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_51",
+      "target": {
+        "eid": "chp_XVII__cl_232",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          121,
+          126
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_52",
+      "target": {
+        "eid": "chp_XVII__cl_232",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          282,
+          297
+        ],
+        "span_text": "compounding fee"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_53",
+      "target": {
+        "eid": "chp_XVII__cl_232",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          330,
+          348
+        ],
+        "span_text": "plinth certificate"
+      },
+      "kind": "topic",
+      "value": "approvals_certificates",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_54",
+      "target": {
+        "eid": "chp_XVII__cl_232__item_a__item_b",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          445,
+          454
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_55",
+      "target": {
+        "eid": "chp_XVII__cl_232__item_a__item_b__item_c",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          17,
+          35
+        ],
+        "span_text": "plinth certificate"
+      },
+      "kind": "topic",
+      "value": "approvals_certificates",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_56",
+      "target": {
+        "eid": "chp_XVII__cl_232__item_a__item_b__item_c",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          64,
+          76
+        ],
+        "span_text": "0.15 percent"
+      },
+      "kind": "quantity",
+      "value": "0.15 percent",
+      "method": "rule",
+      "confidence": 0.92,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_57",
+      "target": {
+        "eid": "chp_XVII__cl_232__item_a__item_b__item_c",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          151,
+          163
+        ],
+        "span_text": "0.20 percent"
+      },
+      "kind": "quantity",
+      "value": "0.2 percent",
+      "method": "rule",
+      "confidence": 0.92,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_58",
+      "target": {
+        "eid": "chp_XVII__cl_232__item_a__item_b__item_c__item_d",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          9,
+          21
+        ],
+        "span_text": "scrutiny fee"
+      },
+      "kind": "provision_type",
+      "value": "fee",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_59",
+      "target": {
+        "eid": "chp_XVII__cl_232__item_a__item_b__item_c__item_d",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          36,
+          52
+        ],
+        "span_text": "building licence"
+      },
+      "kind": "topic",
+      "value": "approvals_certificates",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_60",
+      "target": {
+        "eid": "chp_XVII__cl_232__item_a__item_b__item_c__item_d",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          127,
+          139
+        ],
+        "span_text": "0.10 percent"
+      },
+      "kind": "quantity",
+      "value": "0.1 percent",
+      "method": "rule",
+      "confidence": 0.92,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_61",
+      "target": {
+        "eid": "chp_XVII__cl_232__item_a__item_b__item_c__item_d",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          214,
+          226
+        ],
+        "span_text": "0.20 percent"
+      },
+      "kind": "quantity",
+      "value": "0.2 percent",
+      "method": "rule",
+      "confidence": 0.92,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_62",
+      "target": {
+        "eid": "chp_XVII__cl_232__item_a__item_b__item_c__item_d__item_e",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          84,
+          96
+        ],
+        "span_text": "commencement"
+      },
+      "kind": "provision_type",
+      "value": "commencement",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_63",
+      "target": {
+        "eid": "chp_XVII__cl_232__item_a__item_b__item_c__item_d__item_e",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          9,
+          24
+        ],
+        "span_text": "compounding fee"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_64",
+      "target": {
+        "eid": "chp_XVII__cl_232__item_a__item_b__item_c__item_d__item_e",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          58,
+          76
+        ],
+        "span_text": "plinth certificate"
+      },
+      "kind": "topic",
+      "value": "approvals_certificates",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_65",
+      "target": {
+        "eid": "chp_XVII__cl_232__item_a__item_b__item_c__item_d__item_e",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          144,
+          156
+        ],
+        "span_text": "0.15 percent"
+      },
+      "kind": "quantity",
+      "value": "0.15 percent",
+      "method": "rule",
+      "confidence": 0.92,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_66",
+      "target": {
+        "eid": "chp_XVII__cl_232__item_a__item_b__item_c__item_d__item_e",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          231,
+          243
+        ],
+        "span_text": "0.25 percent"
+      },
+      "kind": "quantity",
+      "value": "0.25 percent",
+      "method": "rule",
+      "confidence": 0.92,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_67",
+      "target": {
+        "eid": "chp_XVII__cl_232__item_a__item_b__item_c__item_d__item_e__item_f",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          9,
+          24
+        ],
+        "span_text": "compounding fee"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_68",
+      "target": {
+        "eid": "chp_XVII__cl_232__item_a__item_b__item_c__item_d__item_e__item_f",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          143,
+          153
+        ],
+        "span_text": "15 percent"
+      },
+      "kind": "quantity",
+      "value": "15 percent",
+      "method": "rule",
+      "confidence": 0.92,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_69",
+      "target": {
+        "eid": "chp_XVII__cl_232__item_a__item_b__item_c__item_d__item_e__item_f",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          229,
+          239
+        ],
+        "span_text": "25 percent"
+      },
+      "kind": "quantity",
+      "value": "25 percent",
+      "method": "rule",
+      "confidence": 0.92,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_70",
+      "target": {
+        "eid": "chp_XVII__cl_232__item_a__item_b__item_c__item_d__item_e__item_f__def_g",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          0,
+          9
+        ],
+        "span_text": "\u2018security"
+      },
+      "kind": "provision_type",
+      "value": "definition",
+      "method": "rule",
+      "confidence": 1.0,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_71",
+      "target": {
+        "eid": "chp_XVII__cl_232__item_a__item_b__item_c__item_d__item_e__item_f__def_g",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          0,
+          25
+        ],
+        "span_text": "\u2018security deposit\u2019 as spe"
+      },
+      "kind": "topic",
+      "value": "definitions",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_72",
+      "target": {
+        "eid": "chp_XVII__cl_232__item_a__item_b__item_c__item_d__item_e__item_f__def_g",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          1,
+          17
+        ],
+        "span_text": "security deposit"
+      },
+      "kind": "topic",
+      "value": "approvals_certificates",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_73",
+      "target": {
+        "eid": "chp_XVII__cl_232__item_a__item_b__item_c__item_d__item_e__item_f__def_g__item_h",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          4
+        ],
+        "span_text": "such"
+      },
+      "kind": "provision_type",
+      "value": "definition",
+      "method": "rule",
+      "confidence": 1.0,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_74",
+      "target": {
+        "eid": "chp_XVII__cl_233__item_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          388,
+          393
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_75",
+      "target": {
+        "eid": "chp_XVII__cl_233__item_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          530,
+          548
+        ],
+        "span_text": "plinth certificate"
+      },
+      "kind": "topic",
+      "value": "approvals_certificates",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_76",
+      "target": {
+        "eid": "chp_XVII__cl_233__item_1__item_a__item_b",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          259,
+          268
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_77",
+      "target": {
+        "eid": "chp_XVII__cl_233__item_1__item_a__item_b__item_c",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          0,
+          12
+        ],
+        "span_text": "Scrutiny fee"
+      },
+      "kind": "provision_type",
+      "value": "fee",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_78",
+      "target": {
+        "eid": "chp_XVII__cl_233__item_1__item_a__item_b__item_c",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          26,
+          42
+        ],
+        "span_text": "building licence"
+      },
+      "kind": "topic",
+      "value": "approvals_certificates",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_79",
+      "target": {
+        "eid": "chp_XVII__cl_233__item_1__item_a__item_b__item_c__item_d",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          0,
+          15
+        ],
+        "span_text": "Compounding fee"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_80",
+      "target": {
+        "eid": "chp_XVII__cl_233__item_1__item_a__item_b__item_c__item_d",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          157,
+          172
+        ],
+        "span_text": "sanctioned plan"
+      },
+      "kind": "topic",
+      "value": "approvals_certificates",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_81",
+      "target": {
+        "eid": "chp_XVII__cl_233__item_1__item_a__item_b__item_c__item_d__item_e",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          0,
+          15
+        ],
+        "span_text": "Compounding fee"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_82",
+      "target": {
+        "eid": "chp_XVII__cl_233__item_1__item_a__item_b__item_c__item_d__item_e__item_f",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          166,
+          171
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_83",
+      "target": {
+        "eid": "chp_XVII__cl_233__item_1__item_a__item_b__item_c__item_d__item_e__item_f",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          0,
+          16
+        ],
+        "span_text": "Security deposit"
+      },
+      "kind": "defined_term_use",
+      "value": "chp_XVII__cl_232__item_a__item_b__item_c__item_d__item_e__item_f__def_g",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_84",
+      "target": {
+        "eid": "chp_XVII__cl_233__item_1__item_a__item_b__item_c__item_d__item_e__item_f",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          0,
+          16
+        ],
+        "span_text": "Security deposit"
+      },
+      "kind": "topic",
+      "value": "approvals_certificates",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_85",
+      "target": {
+        "eid": "chp_XVII__cl_233__item_1__item_a__item_b__item_c__item_d__item_e__item_f__item_g__item_h",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          44,
+          48
+        ],
+        "span_text": "cess"
+      },
+      "kind": "provision_type",
+      "value": "fee",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_86",
+      "target": {
+        "eid": "chp_XVII__cl_234",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          129,
+          134
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_87",
+      "target": {
+        "eid": "chp_XVII__cl_234",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          265,
+          275
+        ],
+        "span_text": "bye-law in"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:bye-law in",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_88",
+      "target": {
+        "eid": "chp_XVII__cl_234__prov_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          13
+        ],
+        "span_text": "Provided that"
+      },
+      "kind": "provision_type",
+      "value": "exception",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_89",
+      "target": {
+        "eid": "chp_XVII__cl_234__prov_1__prov_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          13
+        ],
+        "span_text": "Provided that"
+      },
+      "kind": "provision_type",
+      "value": "exception",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_90",
+      "target": {
+        "eid": "chp_XVII__cl_234__prov_1__prov_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          388,
+          399
+        ],
+        "span_text": "ground rent"
+      },
+      "kind": "topic",
+      "value": "approvals_certificates",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_91",
+      "target": {
+        "eid": "chp_XVII__cl_235",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          88,
+          102
+        ],
+        "span_text": "Government may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_92",
+      "target": {
+        "eid": "chp_XVII__cl_235__item_2",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          4,
+          18
+        ],
+        "span_text": "Government may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_93",
+      "target": {
+        "eid": "chp_XVII__cl_235__item_2__item_3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          200,
+          205
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_94",
+      "target": {
+        "eid": "chp_XVII__cl_235__item_2__item_3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          233,
+          240
+        ],
+        "span_text": "penalty"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_95",
+      "target": {
+        "eid": "chp_XVII__cl_235__item_2__item_3__prov_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          13
+        ],
+        "span_text": "Provided that"
+      },
+      "kind": "provision_type",
+      "value": "exception",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_96",
+      "target": {
+        "eid": "chp_XVII__cl_236",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          76,
+          81
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_97",
+      "target": {
+        "eid": "chp_XVII__cl_236__item_a__item_b__item_c__item_d__item_e",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          98,
+          109
+        ],
+        "span_text": "Chapter XVI"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:Chapter XVI",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_98",
+      "target": {
+        "eid": "chp_XVII__cl_236__item_a__item_b__item_c__item_d__item_e__item_g",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          241,
+          246
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_99",
+      "target": {
+        "eid": "chp_XVII__cl_237",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          99,
+          104
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_100",
+      "target": {
+        "eid": "chp_XVII__cl_237",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          121,
+          137
+        ],
+        "span_text": "building licence"
+      },
+      "kind": "topic",
+      "value": "approvals_certificates",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_101",
+      "target": {
+        "eid": "chp_XVII__cl_237__item_a",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          7,
+          22
+        ],
+        "span_text": "sanctioned plan"
+      },
+      "kind": "topic",
+      "value": "approvals_certificates",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_102",
+      "target": {
+        "eid": "chp_XVII__cl_237__item_a__item_b__item_c",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          108,
+          113
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_103",
+      "target": {
+        "eid": "chp_XVII__cl_237__item_a__item_b__item_c",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          445,
+          457
+        ],
+        "span_text": "scrutiny fee"
+      },
+      "kind": "topic",
+      "value": "approvals_certificates",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_104",
+      "target": {
+        "eid": "chp_XVII__cl_238",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          287,
+          296
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_105",
+      "target": {
+        "eid": "chp_XVII__cl_238__item_a__item_iii__item_b__item_c__prov_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          13
+        ],
+        "span_text": "Provided that"
+      },
+      "kind": "provision_type",
+      "value": "exception",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_106",
+      "target": {
+        "eid": "chp_XVII__cl_239",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          22,
+          31
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_107",
+      "target": {
+        "eid": "chp_XVII__cl_239",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          1240,
+          1251
+        ],
+        "span_text": "section 245"
+      },
+      "kind": "cross_reference",
+      "value": "chp_XVII__cl_245",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_108",
+      "target": {
+        "eid": "chp_XVII__cl_239",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          816,
+          831
+        ],
+        "span_text": "sanctioned plan"
+      },
+      "kind": "topic",
+      "value": "approvals_certificates",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_109",
+      "target": {
+        "eid": "chp_XVII__cl_239__item_i",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          35,
+          44
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_110",
+      "target": {
+        "eid": "chp_XVII__cl_239__item_i__item_ii",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          254,
+          259
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_111",
+      "target": {
+        "eid": "chp_XVII__cl_241",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          832,
+          848
+        ],
+        "span_text": "Commissioner may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_112",
+      "target": {
+        "eid": "chp_XVII__cl_241",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1312,
+          1322
+        ],
+        "span_text": "condonable"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_113",
+      "target": {
+        "eid": "chp_XVII__cl_241",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1282,
+          1297
+        ],
+        "span_text": "sanctioned plan"
+      },
+      "kind": "topic",
+      "value": "approvals_certificates",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_114",
+      "target": {
+        "eid": "chp_XVII__cl_241__prov_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          0,
+          13
+        ],
+        "span_text": "Provided that"
+      },
+      "kind": "provision_type",
+      "value": "exception",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_115",
+      "target": {
+        "eid": "chp_XVII__cl_241__prov_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          111,
+          126
+        ],
+        "span_text": "compounding fee"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_116",
+      "target": {
+        "eid": "chp_XVII__cl_241__prov_1__item_a__item_b",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          142,
+          158
+        ],
+        "span_text": "Commissioner may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_117",
+      "target": {
+        "eid": "chp_XVII__cl_241__prov_1__item_a__item_b",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          203,
+          224
+        ],
+        "span_text": "Occupancy certificate"
+      },
+      "kind": "topic",
+      "value": "approvals_certificates",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_118",
+      "target": {
+        "eid": "chp_XVII__cl_242__item_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          165,
+          178
+        ],
+        "span_text": "applicable to"
+      },
+      "kind": "provision_type",
+      "value": "scope",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_119",
+      "target": {
+        "eid": "chp_XVII__cl_242__item_1__prov_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          0,
+          13
+        ],
+        "span_text": "Provided that"
+      },
+      "kind": "provision_type",
+      "value": "exception",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_120",
+      "target": {
+        "eid": "chp_XVII__cl_242__item_1__prov_1__item_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          186,
+          191
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_121",
+      "target": {
+        "eid": "chp_XVII__cl_243",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          547,
+          563
+        ],
+        "span_text": "Commissioner may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_122",
+      "target": {
+        "eid": "chp_XVII__cl_243",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          140,
+          149
+        ],
+        "span_text": "violation"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_123",
+      "target": {
+        "eid": "chp_XVII__cl_243",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          261,
+          276
+        ],
+        "span_text": "sanctioned plan"
+      },
+      "kind": "topic",
+      "value": "approvals_certificates",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_124",
+      "target": {
+        "eid": "chp_XVII__cl_243__item_a__item_iii__item_b__item_c",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          755,
+          760
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_125",
+      "target": {
+        "eid": "chp_XVII__cl_243__item_a__item_iii__item_b__item_c",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          203,
+          214
+        ],
+        "span_text": "section 250"
+      },
+      "kind": "cross_reference",
+      "value": "chp_XVII__cl_250",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_126",
+      "target": {
+        "eid": "chp_XVII__cl_243__item_a__item_iii__item_b__item_c__item_d",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          17,
+          22
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_127",
+      "target": {
+        "eid": "chp_XVII__cl_243__item_a__item_iii__item_b__item_c__item_d__prov_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          0,
+          13
+        ],
+        "span_text": "Provided that"
+      },
+      "kind": "provision_type",
+      "value": "exception",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_128",
+      "target": {
+        "eid": "chp_XVII__cl_243__item_a__item_iii__item_b__item_c__item_d__prov_1__item_e",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          477,
+          493
+        ],
+        "span_text": "Commissioner may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_129",
+      "target": {
+        "eid": "chp_XVII__cl_243__item_a__item_iii__item_b__item_c__item_d__prov_1__item_e",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          341,
+          356
+        ],
+        "span_text": "compounding fee"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_130",
+      "target": {
+        "eid": "chp_XVII__cl_243__item_a__item_iii__item_b__item_c__item_d__prov_1__item_e__item_4__item_a",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          738,
+          753
+        ],
+        "span_text": "No person shall"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_131",
+      "target": {
+        "eid": "chp_XVII__cl_244",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          222,
+          227
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_132",
+      "target": {
+        "eid": "chp_XVII__cl_244",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          883,
+          890
+        ],
+        "span_text": "penalty"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_133",
+      "target": {
+        "eid": "chp_XVII__cl_245__item_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          4,
+          20
+        ],
+        "span_text": "Commissioner may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_134",
+      "target": {
+        "eid": "chp_XVII__cl_245__item_1__item_a__item_b__item_c",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          124,
+          129
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_135",
+      "target": {
+        "eid": "chp_XVII__cl_245__item_1__item_a__item_b__item_c",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          497,
+          504
+        ],
+        "span_text": "penalty"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_136",
+      "target": {
+        "eid": "chp_XVII__cl_246",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          374,
+          383
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_137",
+      "target": {
+        "eid": "chp_XVII__cl_246",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          643,
+          653
+        ],
+        "span_text": "condonable"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_138",
+      "target": {
+        "eid": "chp_XVII__cl_246__item_3",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          104,
+          109
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_139",
+      "target": {
+        "eid": "chp_XVII__cl_246__item_3__item_4",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          27,
+          36
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_140",
+      "target": {
+        "eid": "chp_XVII__cl_246__item_3__item_4",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          93,
+          102
+        ],
+        "span_text": "violation"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_141",
+      "target": {
+        "eid": "chp_XVII__cl_246__item_3__item_4__item_5",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          15,
+          36
+        ],
+        "span_text": "occupancy certificate"
+      },
+      "kind": "topic",
+      "value": "approvals_certificates",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_142",
+      "target": {
+        "eid": "chp_XVII__cl_247",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          316,
+          321
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_143",
+      "target": {
+        "eid": "chp_XVII__cl_247",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          248,
+          257
+        ],
+        "span_text": "deviation"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_144",
+      "target": {
+        "eid": "chp_XVII__cl_248__item_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          15,
+          20
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_145",
+      "target": {
+        "eid": "chp_XVII__cl_248__item_1__item_a__item_b__item_c",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          104,
+          109
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_146",
+      "target": {
+        "eid": "chp_XVII__cl_248__item_1__item_a__item_b__item_c",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          38,
+          46
+        ],
+        "span_text": "frontage"
+      },
+      "kind": "topic",
+      "value": "plot_size_frontage",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_147",
+      "target": {
+        "eid": "chp_XVII__cl_248__item_1__item_a__item_b__item_c__item_d",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          91,
+          96
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_148",
+      "target": {
+        "eid": "chp_XVII__cl_248__item_1__item_a__item_b__item_c__item_d__item_e",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          229,
+          238
+        ],
+        "span_text": "shall not"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_149",
+      "target": {
+        "eid": "chp_XVII__cl_248__item_1__item_a__item_b__item_c__item_d__item_e__item_2",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          38,
+          43
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_150",
+      "target": {
+        "eid": "chp_XVII__cl_248__item_1__item_a__item_b__item_c__item_d__item_e__item_2__item_3",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          15,
+          20
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_151",
+      "target": {
+        "eid": "chp_XVII__cl_248__item_1__item_a__item_b__item_c__item_d__item_e__item_2__item_3__item_4",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          15,
+          20
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_152",
+      "target": {
+        "eid": "chp_XVII__cl_248__item_1__item_a__item_b__item_c__item_d__item_e__item_2__item_3__item_4__item_5",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          15
+        ],
+        "span_text": "No person shall"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_153",
+      "target": {
+        "eid": "chp_XVII__cl_249",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          228,
+          244
+        ],
+        "span_text": "Commissioner may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_154",
+      "target": {
+        "eid": "chp_XVII__cl_249",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          563,
+          571
+        ],
+        "span_text": "set back"
+      },
+      "kind": "topic",
+      "value": "setbacks",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_155",
+      "target": {
+        "eid": "chp_XVII__cl_249",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          628,
+          637
+        ],
+        "span_text": "violation"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_156",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          0,
+          13
+        ],
+        "span_text": "Provided that"
+      },
+      "kind": "provision_type",
+      "value": "exception",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_157",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          56,
+          67
+        ],
+        "span_text": "section 18B"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:section 18B",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_158",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          120,
+          184
+        ],
+        "span_text": "section 14B of the Karnataka Town and Country Planning Act, 1961"
+      },
+      "kind": "cross_reference",
+      "value": "external:Karnataka Town and Country Planning Act, 1961:section_14b",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_159",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          1081,
+          1091
+        ],
+        "span_text": "section 76"
+      },
+      "kind": "cross_reference",
+      "value": "unresolved:section 76",
+      "method": "rule",
+      "confidence": 0.6,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_160",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          26,
+          42
+        ],
+        "span_text": "Floor Area Ratio"
+      },
+      "kind": "topic",
+      "value": "far",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_161",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          739,
+          752
+        ],
+        "span_text": "building line"
+      },
+      "kind": "topic",
+      "value": "setbacks",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_162",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          593,
+          601
+        ],
+        "span_text": "basement"
+      },
+      "kind": "topic",
+      "value": "basements_stilts",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_163",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          291,
+          300
+        ],
+        "span_text": "violation"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_164",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1__item_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          54,
+          59
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_165",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1__item_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          14
+        ],
+        "span_text": "Regularisation"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_166",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1__item_2__prov_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          0,
+          13
+        ],
+        "span_text": "Provided that"
+      },
+      "kind": "provision_type",
+      "value": "exception",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_167",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1__item_2__prov_1__item_a",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          315,
+          331
+        ],
+        "span_text": "floor area ratio"
+      },
+      "kind": "topic",
+      "value": "far",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_168",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1__item_2__prov_1__item_a",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          206,
+          215
+        ],
+        "span_text": "violation"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_169",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1__item_2__prov_1__item_a__item_b",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          302,
+          318
+        ],
+        "span_text": "floor area ratio"
+      },
+      "kind": "topic",
+      "value": "far",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_170",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1__item_2__prov_1__item_a__item_b",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          193,
+          202
+        ],
+        "span_text": "violation"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_171",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1__item_2__prov_1__item_a__item_b__prov_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          0,
+          21
+        ],
+        "span_text": "Provided further that"
+      },
+      "kind": "provision_type",
+      "value": "exception",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_172",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1__item_2__prov_1__item_a__item_b__prov_1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          68,
+          77
+        ],
+        "span_text": "violation"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_173",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1__item_2__prov_1__item_a__item_b__prov_1__item_a",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          303,
+          319
+        ],
+        "span_text": "floor area ratio"
+      },
+      "kind": "topic",
+      "value": "far",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_174",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1__item_2__prov_1__item_a__item_b__prov_1__item_a",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          194,
+          203
+        ],
+        "span_text": "violation"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_175",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1__item_2__prov_1__item_a__item_b__prov_1__item_a__item_b",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          308,
+          324
+        ],
+        "span_text": "floor area ratio"
+      },
+      "kind": "topic",
+      "value": "far",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_176",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1__item_2__prov_1__item_a__item_b__prov_1__item_a__item_b",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          199,
+          208
+        ],
+        "span_text": "violation"
+      },
+      "kind": "topic",
+      "value": "deviations_regularisation",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_177",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1__item_2__prov_1__item_a__item_b__prov_1__item_a__item_b__item_3",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          0,
+          15
+        ],
+        "span_text": "No person shall"
+      },
+      "kind": "provision_type",
+      "value": "prohibition",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_178",
+      "target": {
+        "eid": "chp_XVII__cl_249__prov_1__item_2__prov_1__item_a__item_b__prov_1__item_a__item_b__item_3__item_4",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          40,
+          45
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_179",
+      "target": {
+        "eid": "chp_XVII__cl_250",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          95,
+          111
+        ],
+        "span_text": "Commissioner may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_180",
+      "target": {
+        "eid": "chp_XVIII__cl_251",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          66,
+          71
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_181",
+      "target": {
+        "eid": "chp_XVIII__cl_252__item_a__item_b__item_c__item_d__item_e__item_f__item_g",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          119,
+          134
+        ],
+        "span_text": "Corporation may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_182",
+      "target": {
+        "eid": "chp_XVIII__cl_252__item_a__item_b__item_c__item_d__item_e__item_f__item_g__item_k__item_m",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          60,
+          65
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_183",
+      "target": {
+        "eid": "chp_XVIII__cl_316",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          193,
+          206
+        ],
+        "span_text": "Authority may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_184",
+      "target": {
+        "eid": "chp_XVIII__cl_316__item_2",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          113,
+          128
+        ],
+        "span_text": "come into force"
+      },
+      "kind": "provision_type",
+      "value": "commencement",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_185",
+      "target": {
+        "eid": "chp_XVIII__cl_316__item_2__item_3",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          307,
+          322
+        ],
+        "span_text": "come into force"
+      },
+      "kind": "provision_type",
+      "value": "commencement",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_186",
+      "target": {
+        "eid": "chp_XVIII__cl_316__item_2__item_3__item_4",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          25,
+          38
+        ],
+        "span_text": "Authority may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_187",
+      "target": {
+        "eid": "chp_XVIII__cl_316__item_2__item_3__item_4__item_b",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          207,
+          222
+        ],
+        "span_text": "come into force"
+      },
+      "kind": "provision_type",
+      "value": "commencement",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_188",
+      "target": {
+        "eid": "chp_XVIII__cl_316__item_2__item_3__item_4__item_b__item_5",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          31,
+          36
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_189",
+      "target": {
+        "eid": "chp_XVIII__cl_316__item_2__item_3__item_4__item_b__item_5",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          87,
+          98
+        ],
+        "span_text": "section 318"
+      },
+      "kind": "cross_reference",
+      "value": "chp_XVIII__cl_318",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_190",
+      "target": {
+        "eid": "chp_XVIII__cl_317",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          79,
+          84
+        ],
+        "span_text": "shall"
+      },
+      "kind": "provision_type",
+      "value": "obligation",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_191",
+      "target": {
+        "eid": "chp_XVIII__cl_318",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          63,
+          78
+        ],
+        "span_text": "Corporation may"
+      },
+      "kind": "provision_type",
+      "value": "permission",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "gbga-2024:ann_192",
+      "target": {
+        "eid": "chp_XVIII__cl_318",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          765,
+          770
+        ],
+        "span_text": "drain"
+      },
+      "kind": "topic",
+      "value": "projections_open_spaces",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    }
+  ]
+}

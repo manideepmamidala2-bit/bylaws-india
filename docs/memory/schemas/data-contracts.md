@@ -114,3 +114,9 @@ The Schema v1.2 contracts MUST enforce provenance, record version separation, te
 **Why**: `05-structure-anchor-documents.md` requires Release `2.0.0` to publish only the two base anchor documents with `v1` nodes while deferring the Building Bye-laws amendment chain to PR 08 and the Zoning Regulations amendment chain to PR 09, without regressing the 12-document core source register established in PR 04.
 **Rejected**: Temporarily deleting the 8 acquired amendment documents from `jurisdictions/in-ka-bengaluru-south.yaml`.
 *Introduced by*: 261124-fgv0-pr-05-structure-anchor-documents
+
+### Schema 1.4 Fourth Layer: Topics, Cross-Document Relations, Statutory Precedence, Succession, Applicability & Graphology Exports
+**Decision**: Add a 13th JSON Schema (`schemas/relations.schema.json` for `relations.json`), `topics.yaml`, `succession.yaml`, `applies_to_jurisdiction` (`yes | no | partly | unknown` with evidence) on `document.schema.json`, `parent` on `jurisdiction.schema.json` / `manifest.schema.json`, `applies_in` on `amendments.schema.json`, `topic` / `quantity` / `zone_applicability` annotation kinds on `annotations.schema.json`, and Graphology JSON (`graph.json`) + Gephi (`graph.graphml`) exports per release.
+**Why**: Connects overlapping provisions across `bbl-2003`, `rmp2015-zr`, 2026 corporation bye-laws, and supporting statutes (`same_topic`, `definition_differs`, `numeric_differs`, `cross_document_reference`, `precedence` requiring quoted statutory spans, `corporation_differs`), tracks statutory authority succession (`BMP/BBMP` → `GBA & 5 City Corporations`), and links map zone polygons (`zone_applicability`) to consolidated provisions with character-span evidence.
+**Rejected**: Resolving legal conflicts algorithmically without quoted statutory precedence language, or linking preamble/title/definition/commencement nodes to map zones.
+*Introduced by*: 261124-peq2-pr-12-greater-bengaluru-overnight

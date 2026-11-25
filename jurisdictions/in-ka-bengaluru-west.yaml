@@ -1,0 +1,324 @@
+schema_version: '1.3'
+id: in-ka-bengaluru-west
+name: Bengaluru West City Corporation
+aliases:
+- Bengaluru West
+- BWCC
+- West Bengaluru
+- Malleshwaram
+- Rajarajeshwarinagar
+- Rajajinagar
+- Vijayanagar
+- Govindraj Nagar
+- Mahalakshmi Layout
+- Yeshwanthpur
+visibility: public
+licence: CC BY 4.0
+release_version: 3.0.0
+country: IN
+state: KA
+building_types:
+- residential
+- commercial
+- industrial
+- public_and_semi_public
+- transport_and_communication
+parent: in-ka-bengaluru
+parents:
+- in-ka-bengaluru
+not_modelled:
+- National Building Code of India 2016 (copyrighted by BIS; listed as reference only)
+- Airports Authority of India NOCAS colour-coded zoning map (external aviation portal;
+  reference only)
+- Parts of the BDA Local Planning Area outside the Greater Bengaluru Authority (GBA)
+  5-corporation boundary are out of scope.
+unread_documents: []
+unobtainable_documents: []
+contested_status:
+- doc_id: ktcda-amend-bill-2025
+  title: The Karnataka Tank Conservation and Development Authority (Amendment) Bill,
+    2025 (L.A. Bill No. 33 of 2025)
+  declared_status: status_unknown
+  conflicting_evidence:
+  - Published under GBA Town Planning Notifications on updates.bbmp.gov.in/public
+    (ROW 70) proposing graded lake buffers (0m to 30m by tank area).
+  - The uploaded PDF is Legislative Assembly Bill No. 33 of 2025 without a verified
+    Governor assent or Gazette commencement notification; RMP 2015 Regulation 4.12.2
+    (30.0m Lake No-Development Buffer) remains the verified in-force rule.
+documents:
+- id: bwcc-bbl-amend-2026-05
+  title: Bengaluru West City Corporation — Bengaluru City Corporation Building (Amendment)
+    Bye-laws, 2026 (Final Gazette Notification)
+  issuing_authority: Bengaluru West City Corporation, Greater Bengaluru Authority
+  doc_type: amendment
+  layer: municipal
+  role: amendment
+  legal_status: in_force
+  acquisition_status: acquired
+  structured: true
+  notification_number: 'No: BWCC/Com/PR/44/2026-27'
+  gazette_reference: Karnataka Extra-Ordinary Gazette Part-III, No. 374, dated 14-05-2026
+  notified_date: '2026-05-14'
+  effective_from: '2026-05-14'
+  amends:
+  - bbl-2003
+  supersedes:
+  - bwcc-bbl-amend-2026-04-draft
+  applies_in:
+  - in-ka-bengaluru-west
+  status_evidence:
+    url: https://updates.bbmp.gov.in/public
+    quoted_line: Now, therefore, in exercise of the powers conferred by section 318(2)
+      and read with section 224, 232, 233 241 and 317 of the Greater Bengaluru Governance
+      Act, 2024 (Karnataka Act 36 of 2025). The Bengaluru West City Corporation hereby
+      makes the following Building Bye-Laws, namely.- 1. Title and commencement.-
+      (1) These Bye-laws may be called the Bengaluru City Corporation Building (Amendment)
+      Bye-laws, 2026.
+    description: 'Final Gazette notification (No: BWCC/Com/PR/44/2026-27, dated 14-05-2026)
+      published on updates.bbmp.gov.in/public under Building Bye Laws 2026 Final Notifications
+      for Bengaluru West City Corporation.'
+  licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public municipal
+    bye-law amendment)
+  text_rights:
+    mode: full_text
+    reason: Public municipal building bye-law amendment published in the Karnataka
+      Gazette Part-III
+  languages:
+  - en
+  official_url: https://updates.bbmp.gov.in/v1/api/file/402797961093-west-city-coropration.pdf
+  mirror_urls:
+  - https://updates.bbmp.gov.in/public
+  source_url: https://updates.bbmp.gov.in/v1/api/file/402797961093-west-city-coropration.pdf
+  retrieval:
+    fetched_at: '2026-11-23T00:00:00Z'
+    requested_url: https://updates.bbmp.gov.in/v1/api/file/402797961093-west-city-coropration.pdf
+    final_url: https://updates.bbmp.gov.in/v1/api/file/402797961093-west-city-coropration.pdf
+    http_status: 200
+    content_type: application/pdf
+    content_length: 1297557
+    response_headers:
+      etag: null
+      last_modified: null
+      server: nginx/1.24.0 (Ubuntu)
+      date: Tue, 24 Nov 2026 18:58:05 GMT
+    sha256: 0646ec65ff3c78c0a881225ca7ed0d598e7b6c6864e48b6a17be6ea91033f833
+    archive_url: null
+    archive_failure_reason: Wayback Machine Save Page Now timed out on updates.bbmp.gov.in
+    fetched_by: agent
+- id: bwcc-bbl-amend-2026-04-draft
+  title: Bengaluru West City Corporation — Draft Bengaluru City Corporation Building
+    (Amendment) Bye-laws, 2026 (01-04-2026)
+  issuing_authority: Bengaluru West City Corporation, Greater Bengaluru Authority
+  doc_type: amendment
+  layer: municipal
+  role: amendment
+  legal_status: draft
+  acquisition_status: acquired
+  structured: true
+  notification_number: 'No: Comm/BWCC/PR/03/2026-27'
+  gazette_reference: Karnataka Extra-Ordinary Gazette Part-III, No. 254, dated 01-04-2026
+  notified_date: '2026-04-01'
+  effective_from: '2026-04-01'
+  amends:
+  - bbl-2003
+  superseded_by_document: bwcc-bbl-amend-2026-05
+  applies_in:
+  - in-ka-bengaluru-west
+  status_evidence:
+    url: https://updates.bbmp.gov.in/public
+    quoted_line: The draft of the Building (Amendment) Bye-Laws further to amend the
+      Bengaluru City Corporation Building Bye-Laws, 2003 which the Bengaluru West
+      City Corporation proposes to make in exercise of the powers conferred by section
+      317 read with sections 224, 232, 233 241 and 318 (2) of the Greater Bengaluru
+      Governance Act, 2024 (Karnataka Act 36 of 2025) is hereby published
+    description: 'Draft Gazette notification (No: Comm/BWCC/PR/03/2026-27, dated 01-04-2026)
+      published on updates.bbmp.gov.in/public inviting objections within 30 days;
+      superseded by final notification No: BWCC/Com/PR/44/2026-27 dated 14-05-2026.'
+  licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public municipal
+    draft notification)
+  text_rights:
+    mode: full_text
+    reason: Public draft municipal bye-law notification published in the Karnataka
+      Gazette Part-III
+  languages:
+  - en
+  official_url: https://updates.bbmp.gov.in/v1/api/file/201689556342-10124.pdf
+  mirror_urls:
+  - https://updates.bbmp.gov.in/public
+  source_url: https://updates.bbmp.gov.in/v1/api/file/201689556342-10124.pdf
+  retrieval:
+    fetched_at: '2026-11-23T00:00:00Z'
+    requested_url: https://updates.bbmp.gov.in/v1/api/file/201689556342-10124.pdf
+    final_url: https://updates.bbmp.gov.in/v1/api/file/201689556342-10124.pdf
+    http_status: 200
+    content_type: application/pdf
+    content_length: 1533306
+    response_headers:
+      etag: null
+      last_modified: null
+      server: nginx/1.24.0 (Ubuntu)
+      date: Tue, 24 Nov 2026 18:58:05 GMT
+    sha256: 92cb0f552b06f36826b5d96af5a5062b950d4482ebad262f6cdbb64dc4795d20
+    archive_url: null
+    archive_failure_reason: Wayback Machine Save Page Now timed out on updates.bbmp.gov.in
+    fetched_by: agent
+amendment_links:
+- amending_clause: bwcc-bbl-amend-2026-05:part_III__cl_2
+  target_clause: bbl-2003:part_II__sec_3.0__cl_3.8
+  action: omit
+  effective_date: '2026-05-14'
+  confidence: high
+  verification: machine_checked
+  applies_in:
+  - in-ka-bengaluru-west
+  note: 'Clause 2 of No: BWCC/Com/PR/44/2026-27 (Bengaluru West City Corporation,
+    14-05-2026): "In the Bengaluru City Corporation Building Bye-laws- 2003 (hereinafter
+    referred to as the said bye-laws), Bye-law 3.8- Ground Rent; Bye-law 3.9- Ground
+    Rent for high rise buildings and Bye-law 3.10- Exemption of ground rent the entire
+    provision shall be omitted."'
+- amending_clause: bwcc-bbl-amend-2026-05:part_III__cl_2
+  target_clause: bbl-2003:part_II__sec_3.0__cl_3.9
+  action: omit
+  effective_date: '2026-05-14'
+  confidence: high
+  verification: machine_checked
+  applies_in:
+  - in-ka-bengaluru-west
+  note: 'Clause 2 of No: BWCC/Com/PR/44/2026-27 (Bengaluru West City Corporation,
+    14-05-2026): omits Bye-law 3.9 (Ground rent for high rise buildings) in Bengaluru
+    West City Corporation.'
+- amending_clause: bwcc-bbl-amend-2026-05:part_III__cl_2
+  target_clause: bbl-2003:part_II__sec_3.0__cl_3.10
+  action: omit
+  effective_date: '2026-05-14'
+  confidence: high
+  verification: machine_checked
+  applies_in:
+  - in-ka-bengaluru-west
+  note: 'Clause 2 of No: BWCC/Com/PR/44/2026-27 (Bengaluru West City Corporation,
+    14-05-2026): omits Bye-law 3.10 (Exemptions for ground rent) in Bengaluru West
+    City Corporation.'
+- amending_clause: bwcc-bbl-amend-2026-05:part_III__cl_3
+  target_clause: bbl-2003:part_II__sec_6.0__item_i
+  action: substitute
+  effective_date: '2026-05-14'
+  confidence: high
+  verification: machine_checked
+  applies_in:
+  - in-ka-bengaluru-west
+  replacement_text: '(i) Wherever any construction is in violation/deviation of the
+    sanctioned plan, the Commissioner (Bengaluru West City Corporation, Notification
+    No: BWCC/Com/PR/44/2026-27 dated 14-05-2026) may, if he considers that the violations
+    / deviations are within the limits specified in Table-2B below (up to 15% setback
+    and coverage deviation; up to 15% FAR deviation on plots up to 500 sq.m and 5%
+    FAR deviation on plots above 500 sq.m; 7.5% height deviation not beyond sanctioned
+    number of floors) in case of (1) the setback to be provided around the building,
+    (2) plot coverage (3) floor area ratio and (4) height of the building and that
+    the demolition under chapter XVII of the Act is not feasible without affecting
+    structural stability, he may regularize such violations/deviations after recording
+    detailed reasons for the same and levying compounding fee as per Table-2A, Table-2C
+    and Table-2D (minimum guidance value consideration Rs.50,000/- per sq.m; Residential
+    3%/6% up to 500 sq.m and 5%/10% above 500 sq.m; Non-Residential 6%/12%).'
+  note: 'Clause 3 of No: BWCC/Com/PR/44/2026-27 (Bengaluru West City Corporation,
+    14-05-2026): substitutes Clause (i) under Bye-law 6.0 (Deviation during construction)
+    and inserts Table-2A, Table-2B, Table-2C, and Table-2D for Bengaluru West City
+    Corporation.'
+maps:
+  boundaries:
+  - id: corporation
+    title: Bengaluru West City Corporation Official Boundary
+    source_label: Greater Bengaluru Authority delimitation maps, September 2025 (gba.karnataka.gov.in
+      / gisapps.bbmp.gov.in)
+    retrieved_date: '2026-11-24'
+    layer_role: corporation
+    output_file: boundary.geojson
+    source_url: https://gisapps.bbmp.gov.in/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=gba_boundary:gba_corporation_boundary&outputFormat=application/vnd.google-earth.kml+xml&srsName=EPSG:4326
+    acquisition_status: acquired
+    retrieval:
+      fetched_at: '2026-11-23T00:00:00Z'
+      requested_url: https://gisapps.bbmp.gov.in/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=gba_boundary:gba_corporation_boundary&outputFormat=application/vnd.google-earth.kml+xml&srsName=EPSG:4326
+      final_url: https://gisapps.bbmp.gov.in/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=gba_boundary:gba_corporation_boundary&outputFormat=application/vnd.google-earth.kml+xml&srsName=EPSG:4326
+      http_status: 200
+      content_type: application/vnd.google-earth.kml+xml
+      content_length: 790813
+      response_headers:
+        etag: null
+        last_modified: null
+        server: null
+        date: Tue, 24 Nov 2026 13:24:34 GMT
+      sha256: 535075101e49274311ee18d0b7b92a9e8f220393401ef795b2bd907005cd5cc9
+      archive_url: null
+      archive_failure_reason: 'Wayback Machine Save Page Now failed: The read operation
+        timed out'
+      fetched_by: agent
+    select:
+      property: Corporation
+      equals: West
+  - id: gba_zones
+    title: Bengaluru West City Corporation GBA Zones (Zone 1 Rajarajeshwarinagar &
+      Zone 2 Malleshwaram)
+    source_label: Greater Bengaluru Authority delimitation maps, September 2025 (gba.karnataka.gov.in
+      / gisapps.bbmp.gov.in)
+    retrieved_date: '2026-11-24'
+    layer_role: gba_zones
+    output_file: gba-zones.geojson
+    source_url: https://gisapps.bbmp.gov.in/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=gba_boundary:gba_zone_boundary&outputFormat=application/vnd.google-earth.kml+xml&srsName=EPSG:4326
+    acquisition_status: acquired
+    retrieval:
+      fetched_at: '2026-11-23T00:00:00Z'
+      requested_url: https://gisapps.bbmp.gov.in/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=gba_boundary:gba_zone_boundary&outputFormat=application/vnd.google-earth.kml+xml&srsName=EPSG:4326
+      final_url: https://gisapps.bbmp.gov.in/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=gba_boundary:gba_zone_boundary&outputFormat=application/vnd.google-earth.kml+xml&srsName=EPSG:4326
+      http_status: 200
+      content_type: application/vnd.google-earth.kml+xml
+      content_length: 1429400
+      response_headers:
+        etag: null
+        last_modified: null
+        server: null
+        date: Tue, 24 Nov 2026 13:24:58 GMT
+      sha256: 697f071030c5e7ccb9f615ac228ae4dfb339e0f0604969bb5745f9169f7e1daf
+      archive_url: null
+      archive_failure_reason: 'Wayback Machine Save Page Now failed: The read operation
+        timed out'
+      fetched_by: agent
+    select:
+      property: Corporation
+      equals: West
+  - id: wards
+    title: Bengaluru West City Corporation Official Wards (112 Wards)
+    source_label: Greater Bengaluru Authority delimitation maps, November 2025 (gba.karnataka.gov.in
+      / gisapps.bbmp.gov.in)
+    retrieved_date: '2026-11-24'
+    verification_note: 'Cross-checked against the official GBA Ward Delimitation notification
+      (gba_boundary:ward_369_final, November 2025): 112 wards in Bengaluru West City
+      Corporation (out of 369 GBA wards total).'
+    layer_role: wards
+    output_file: wards.geojson
+    source_url: https://gisapps.bbmp.gov.in/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=gba_boundary:ward_369_final&outputFormat=application/vnd.google-earth.kml+xml&srsName=EPSG:4326
+    acquisition_status: acquired
+    retrieval:
+      fetched_at: '2026-11-23T00:00:00Z'
+      requested_url: https://gisapps.bbmp.gov.in/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=gba_boundary:ward_369_final&outputFormat=application/vnd.google-earth.kml+xml&srsName=EPSG:4326
+      final_url: https://gisapps.bbmp.gov.in/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=gba_boundary:ward_369_final&outputFormat=application/vnd.google-earth.kml+xml&srsName=EPSG:4326
+      http_status: 200
+      content_type: application/vnd.google-earth.kml+xml
+      content_length: 4620950
+      response_headers:
+        etag: null
+        last_modified: null
+        server: null
+        date: Tue, 24 Nov 2026 13:25:21 GMT
+      sha256: 5e124ded2ac68b346553a702c404a284ebe34d5371034a8d90f7e457ad0e1d3f
+      archive_url: null
+      archive_failure_reason: 'Wayback Machine Save Page Now failed: The read operation
+        timed out'
+      fetched_by: agent
+    select:
+      property: Corporation
+      equals: West
+  planning_districts: []
+  zoning: []
+building_relevant_sections:
+  gbga-2024:
+  - Chapter XVII — Regulation of Buildings (Sections 224–253)
+  - Chapter XXII — Power to Make Building Bye-laws (Sections 317–318)

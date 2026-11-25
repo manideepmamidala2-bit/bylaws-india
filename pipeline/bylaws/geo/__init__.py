@@ -7,8 +7,10 @@ from pathlib import Path
 from typing import Any
 
 import click
+from pyproj import Transformer
 from shapely import make_valid
 from shapely.geometry import shape
+from shapely.ops import transform as shapely_transform
 from shapely.ops import unary_union
 
 from bylaws.config import (
@@ -158,6 +160,42 @@ def run_geo_pipeline(config: JurisdictionConfig, *, repo_root: Path | None = Non
                 props["accuracy_m"] = ov_cfg.accuracy_m
                 feat["properties"] = props
                 overlay_features.append(feat)
+        elif ov_cfg.kind == "derived_overlay" and ov_cfg.buffer_m:
+            buf_m = float(ov_cfg.buffer_m)
+            to_utm = Transformer.from_crs("EPSG:4326", "EPSG:32643", always_xy=True)
+            to_wgs = Transformer.from_crs("EPSG:32643", "EPSG:4326", always_xy=True)
+            lake_feats = [
+                f
+                for f in all_features
+                if f.get("properties", {}).get("zone_code") == "G-LAKE"
+            ]
+            for idx_l, lf in enumerate(lake_feats, start=1):
+                g_wgs = shape(lf["geometry"])
+                g_utm = shapely_transform(to_utm.transform, g_wgs)
+                ring_utm = g_utm.buffer(buf_m).difference(g_utm)
+                ring_wgs = _extract_polygonal(
+                    shapely_transform(to_wgs.transform, ring_utm)
+                )
+                if ring_wgs is None:
+                    continue
+                overlay_features.append(
+                    {
+                        "type": "Feature",
+                        "geometry": _geometry_to_geojson_dict(ring_wgs),
+                        "properties": {
+                            "overlay_id": ov_cfg.id,
+                            "feature_id": f"{ov_cfg.id}:{idx_l}",
+                            "title": ov_cfg.title,
+                            "derived": True,
+                            "approximate": True,
+                            "buffer_m": buf_m,
+                            "method": ov_cfg.method,
+                            "accuracy_m": ov_cfg.accuracy_m,
+                            "rule_doc_id": ov_cfg.rule_doc_id,
+                            "rule_clause": ov_cfg.rule_clause,
+                        },
+                    }
+                )
 
     if config.maps.overlays is not None:
         overlays_path = processed_dir / "overlays.geojson"

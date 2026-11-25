@@ -173,6 +173,14 @@ export function SourcesFilterClient({
                   <span className="border border-[#080909] bg-[#efeee8] px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#080909]">
                     {isRefOnly ? "REFERENCE ONLY" : "FULL TEXT"}
                   </span>
+                  {doc.applies_to_jurisdiction && (
+                    <span
+                      title={doc.applies_to_jurisdiction.reason}
+                      className="border border-[#080909] bg-[#f5f3ed] px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#080909]"
+                    >
+                      Applies here: {doc.applies_to_jurisdiction.status}
+                    </span>
+                  )}
                   <StatusBadge status={doc.legal_status} />
                 </div>
               </div>

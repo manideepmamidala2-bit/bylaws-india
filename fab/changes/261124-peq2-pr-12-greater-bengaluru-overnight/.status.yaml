@@ -1,0 +1,53 @@
+id: peq2
+name: 261124-peq2-pr-12-greater-bengaluru-overnight
+created: 2026-11-24T17:39:36Z
+created_by: manideepmamidala2-bit
+change_type: feat
+issues: []
+progress:
+    intake: done
+    apply: done
+    review: done
+    hydrate: done
+    ship: done
+    review-pr: skipped
+plan:
+    generated: true
+    task_count: 5
+    acceptance_count: 10
+    acceptance_completed: 10
+confidence:
+    certain: 3
+    confident: 0
+    tentative: 0
+    unresolved: 0
+    score: 5.0
+    fuzzy: true
+    dimensions:
+        signal: 98.0
+        reversibility: 95.0
+        competence: 96.0
+        disambiguation: 98.0
+stage_metrics:
+    intake: {started_at: "2026-11-24T17:39:36Z", driver: fab-new, iterations: 1, completed_at: "2026-11-24T17:42:06Z"}
+    apply: {started_at: "2026-11-24T17:42:06Z", driver: /fab-fff, iterations: 1, completed_at: "2026-11-24T21:07:19Z"}
+    review: {started_at: "2026-11-24T21:07:19Z", driver: /fab-fff, iterations: 1, completed_at: "2026-11-24T21:19:08Z"}
+    hydrate: {started_at: "2026-11-24T21:19:08Z", driver: /fab-fff, iterations: 1, completed_at: "2026-11-24T21:19:08Z"}
+    ship: {started_at: "2026-11-24T21:19:08Z", driver: /fab-fff, iterations: 1, completed_at: "2026-11-24T21:19:09Z"}
+prs:
+    - https://github.com/manideepmamidala2-bit/bylaws-india/pull/14
+base_branch: main
+change_type_source: explicit
+true_impact:
+    added: 3834695
+    deleted: 1155
+    net: 3833540
+    tests:
+        added: 389
+        deleted: 20
+        net: 369
+    computed_at: "2026-11-24T21:19:09Z"
+    computed_at_stage: ship
+# base_branch: written by /git-branch or /fab-new when the change's branch is created (no placeholder here).
+# true_impact: lazily created on first stage-finish that computes it (no placeholder here).
+last_updated: 2026-11-24T21:19:09Z
