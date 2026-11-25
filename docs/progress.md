@@ -49,8 +49,8 @@ Tracks the 11-PR remediation series defined in [`docs/plans/pr-series/00-overvie
 
 | Part | Title | Status | Notes |
 |------|-------|--------|-------|
-| **Baseline** | Record baseline (`Release 3.0.0`, commit `e7e033e`) & open draft PR | ✅ Complete | Recorded in `docs/progress.md`; draft PR opened |
-| **Part 1** | Clean foundation and speed (Schema 1.4, shared docs, out-of-git data, per-chapter splitting, Pagefind, budgets, CI E2E) | ⏳ Pending | — |
+| **Baseline** | Record baseline (`Release 3.0.0`, commit `e7e033e`) & open draft PR | ✅ Complete | Recorded in `docs/progress.md`; draft PR #15 opened |
+| **Part 1** | Clean foundation and speed (Schema 1.4, shared docs, out-of-git data, per-chapter splitting, Pagefind, budgets, CI E2E) | ✅ Complete | Unified all 15 schemas/configs/overrides/outputs to `1.4`; deduplicated shared docs (`in-ka-bengaluru`); moved ~280 MB data + PMTiles out of git (`data-v4.0.0` storage + `/api/range` HTTP 206 + CORS verified); split documents into `.outline.json` + `chapters/*.json` (max HTML reduced from ~12 MB to `292.5 KB`, max initial JS+data `0.62 MB`); built static Pagefind search (`5,158` active provisions); regenerated accurate declarations; added Playwright browser tests & budget checks to CI |
 | **Part 2** | The consolidated code (full consolidated text per corporation & date, quiet change marks, bye-law 1.4 `incorporates`, Akoma Ntoso XML) | ⏳ Pending | — |
 | **Part 3** | Parameters: the numbers as data (`parameters.json`, header/range parser, cell checks, 40-record page-image self-check) | ⏳ Pending | — |
 | **Part 4** | Resolution and the plot resolver (`resolution.yaml`, CLI/browser resolver, Jayanagar 600 m² / 15 m target, rebuilt relations & 60-item labelling sheet) | ⏳ Pending | — |

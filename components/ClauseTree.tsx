@@ -6,6 +6,8 @@ import type {
   AmendmentLink,
   AnnotationEntry,
   ClauseNode,
+  ClauseOutlineEntry,
+  ClauseTreeDocument,
   ConsolidatedClauseRecord,
   DisplayLegalStatus,
   UnconsolidatedClauseRecord,
@@ -17,6 +19,12 @@ interface ClauseTreeProps {
   jurisdictionId?: string;
   jurisdictionName?: string;
   clauses: ClauseNode[];
+  outline?: ClauseOutlineEntry[];
+  totalClausesCount?: number;
+  defaultStatus?: DisplayLegalStatus;
+  defaultEffectiveDate?: string | null;
+  docSourceUrl?: string;
+  docArchiveUrl?: string | null;
   annotations?: AnnotationEntry[];
   amendmentEffects?: AmendmentEffect[];
   consolidatedRecords?: ConsolidatedClauseRecord[];
@@ -26,13 +34,19 @@ interface ClauseTreeProps {
   allowConsolidatedToggle?: boolean;
 }
 
-const INITIAL_VISIBLE_COUNT = 40;
-const MAX_INLINE_ANNOTATIONS = 12;
+const INITIAL_VISIBLE_COUNT = 24;
+const MAX_INLINE_ANNOTATIONS = 8;
 
 export function ClauseTree({
   jurisdictionId = "",
   jurisdictionName = "",
   clauses,
+  outline = [],
+  totalClausesCount,
+  defaultStatus,
+  defaultEffectiveDate,
+  docSourceUrl,
+  docArchiveUrl,
   annotations = [],
   amendmentEffects = [],
   consolidatedRecords = [],
@@ -48,6 +62,62 @@ export function ClauseTree({
   const [viewMode, setViewMode] = useState<"original" | "consolidated">(
     "original"
   );
+  const [extraClauses, setExtraClauses] = useState<ClauseNode[]>([]);
+  const [loadedChapterUrls, setLoadedChapterUrls] = useState<string[]>(() =>
+    outline[0]?.chapter_file ? [outline[0].chapter_file] : []
+  );
+  const [loadingChapterUrl, setLoadingChapterUrl] = useState<string | null>(
+    null
+  );
+
+  const mergedClauses = React.useMemo(() => {
+    if (extraClauses.length === 0) return clauses;
+    const seen = new Set(
+      clauses.map((c) => `${c.record_id ?? c.clause_id}:${c.eid ?? ""}`)
+    );
+    const out = [...clauses];
+    for (const ec of extraClauses) {
+      const k = `${ec.record_id ?? ec.clause_id}:${ec.eid ?? ""}`;
+      if (!seen.has(k)) {
+        seen.add(k);
+        out.push(ec);
+      }
+    }
+    return out.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+  }, [clauses, extraClauses]);
+
+  async function loadChapterFile(chapterUrl: string) {
+    if (loadedChapterUrls.includes(chapterUrl) || loadingChapterUrl) return;
+    setLoadingChapterUrl(chapterUrl);
+    try {
+      const res = await fetch(chapterUrl);
+      if (!res.ok) return;
+      const tree = (await res.json()) as ClauseTreeDocument;
+      const hydrated: ClauseNode[] = (tree.clauses ?? []).map((c) => ({
+        ...c,
+        doc_id: tree.doc_id,
+        source_url: docSourceUrl,
+        official_url: docSourceUrl ?? null,
+        archive_url: docArchiveUrl ?? null,
+      }));
+      setExtraClauses((prev) => [...prev, ...hydrated]);
+      setLoadedChapterUrls((prev) =>
+        prev.includes(chapterUrl) ? prev : [...prev, chapterUrl]
+      );
+      setShowAll(true);
+    } finally {
+      setLoadingChapterUrl(null);
+    }
+  }
+
+  async function loadAllRemainingChapters() {
+    for (const item of outline) {
+      if (item.chapter_file && !loadedChapterUrls.includes(item.chapter_file)) {
+        await loadChapterFile(item.chapter_file);
+      }
+    }
+  }
+
   const availableDates = Array.from(
     new Set(
       amendmentEffects
@@ -57,8 +127,9 @@ export function ClauseTree({
   ).sort();
   const [asOfDate, setAsOfDate] = useState<string>("latest");
 
-  const { activeClauses, historyByClauseId } = partitionClauseVersions(clauses);
-  const baseClauses = activeClauses.length > 0 ? activeClauses : clauses;
+  const { activeClauses, historyByClauseId } =
+    partitionClauseVersions(mergedClauses);
+  const baseClauses = activeClauses.length > 0 ? activeClauses : mergedClauses;
 
   const byEid = new Map<string, ClauseNode>();
   for (const node of baseClauses) {
@@ -155,6 +226,12 @@ export function ClauseTree({
       c.type === "annexure"
   );
 
+  const outlineCount =
+    outline.length > 0 ? outline.length : outlineNodes.length;
+  const unloadedChaptersCount = outline.filter(
+    (o) => o.chapter_file && !loadedChapterUrls.includes(o.chapter_file)
+  ).length;
+
   return (
     <section aria-label="Clause tree browser" className="space-y-4">
       <div className="flex flex-wrap items-end justify-between gap-4 border-b border-[#c8ccc0] pb-4">
@@ -186,7 +263,7 @@ export function ClauseTree({
             <span>Show annotations</span>
           </label>
 
-          {outlineNodes.length > 0 && (
+          {outlineCount > 0 && (
             <label className="flex cursor-pointer items-center gap-1.5 border border-[#080909] bg-[#efeee8] px-2.5 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.12em] text-[#080909]">
               <input
                 type="checkbox"
@@ -194,7 +271,7 @@ export function ClauseTree({
                 onChange={(e) => setShowOutline(e.target.checked)}
                 className="h-3.5 w-3.5 accent-[#080909]"
               />
-              <span>Outline ({outlineNodes.length})</span>
+              <span>Outline ({outlineCount})</span>
             </label>
           )}
 
@@ -269,42 +346,110 @@ export function ClauseTree({
       )}
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-        {showOutline && outlineNodes.length > 0 && (
+        {showOutline && outlineCount > 0 && (
           <aside
             aria-label="Document outline navigation"
             className="max-h-[680px] overflow-y-auto border border-[#080909] bg-[#efeee8] p-3 lg:col-span-3"
           >
-            <div className="dg-mono mb-2 border-b border-[#c8ccc0] pb-1.5 text-[10px] text-[#080909]">
-              Document Outline ({outlineNodes.length})
+            <div className="dg-mono mb-2 flex items-center justify-between border-b border-[#c8ccc0] pb-1.5 text-[10px] text-[#080909]">
+              <span>Document Outline ({outlineCount})</span>
+              {totalClausesCount !== undefined && (
+                <span>{totalClausesCount} provisions</span>
+              )}
             </div>
-            <ul className="space-y-1 font-mono text-xs">
-              {outlineNodes.slice(0, 80).map((onode) => {
-                const oeid = onode.eid ?? onode.number;
-                const oIndent =
-                  onode.type === "part" || onode.type === "schedule"
-                    ? "font-semibold"
-                    : "pl-2 text-[11px]";
-                return (
-                  <li key={oeid} className={oIndent}>
-                    <a
-                      href={`#node-${oeid}`}
-                      className="block truncate py-0.5 text-[#080909] no-underline hover:underline"
-                    >
-                      {onode.native_number ?? onode.number}{" "}
-                      {onode.heading && onode.heading !== onode.native_number
-                        ? `· ${onode.heading}`
-                        : ""}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
+            {outline.length > 0 ? (
+              <div className="space-y-1.5">
+                <ul className="space-y-1 font-mono text-xs">
+                  {outline.map((entry) => {
+                    const isLoaded =
+                      !entry.chapter_file ||
+                      loadedChapterUrls.includes(entry.chapter_file);
+                    return (
+                      <li key={entry.eid} className="border-b border-[#e5e6de] pb-1">
+                        <div className="flex items-center justify-between gap-1">
+                          <a
+                            href={`#node-${entry.eid}`}
+                            onClick={(e) => {
+                              if (entry.chapter_file && !isLoaded) {
+                                e.preventDefault();
+                                void loadChapterFile(entry.chapter_file);
+                              }
+                            }}
+                            className="block truncate py-0.5 text-[#080909] no-underline hover:underline"
+                          >
+                            {entry.number}{" "}
+                            {entry.heading && entry.heading !== entry.number
+                              ? `· ${entry.heading}`
+                              : ""}
+                          </a>
+                          {entry.chapter_file && !isLoaded && (
+                            <button
+                              type="button"
+                              onClick={() =>
+                                void loadChapterFile(entry.chapter_file!)
+                              }
+                              disabled={loadingChapterUrl === entry.chapter_file}
+                              className="shrink-0 border border-[#080909] bg-[#f5f3ed] px-1.5 py-0.5 font-mono text-[9.5px] uppercase text-[#080909]"
+                            >
+                              {loadingChapterUrl === entry.chapter_file
+                                ? "..."
+                                : `Load (${entry.child_count})`}
+                            </button>
+                          )}
+                        </div>
+                        <div className="font-mono text-[10px] text-[#5b5e56]">
+                          p. {entry.page} · {entry.child_count} provisions
+                          {entry.table_count > 0
+                            ? ` · ${entry.table_count} tables`
+                            : ""}
+                          {entry.changed_count
+                            ? ` · ${entry.changed_count} changed`
+                            : ""}
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+                {unloadedChaptersCount > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => void loadAllRemainingChapters()}
+                    className="w-full border border-[#080909] bg-[#080909] px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-[#f5f3ed]"
+                  >
+                    Load remaining {unloadedChaptersCount} chapter(s)
+                  </button>
+                )}
+              </div>
+            ) : (
+              <ul className="space-y-1 font-mono text-xs">
+                {outlineNodes.slice(0, 80).map((onode) => {
+                  const oeid = onode.eid ?? onode.number;
+                  const oIndent =
+                    onode.type === "part" || onode.type === "schedule"
+                      ? "font-semibold"
+                      : "pl-2 text-[11px]";
+                  return (
+                    <li key={oeid} className={oIndent}>
+                      <a
+                        href={`#node-${oeid}`}
+                        className="block truncate py-0.5 text-[#080909] no-underline hover:underline"
+                      >
+                        {onode.native_number ?? onode.number}{" "}
+                        {onode.heading && onode.heading !== onode.native_number
+                          ? `· ${onode.heading}`
+                          : ""}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
           </aside>
         )}
 
         <div
           className={
-            showOutline && outlineNodes.length > 0
+            showOutline && outlineCount > 0
               ? "lg:col-span-9"
               : "lg:col-span-12"
           }
@@ -432,9 +577,6 @@ export function ClauseTree({
                   {displayTitle && (
                     <span className="font-semibold">{displayTitle}</span>
                   )}
-                  <span className="font-mono text-[10px] text-[#5b5e56]">
-                    [{eid}]
-                  </span>
                 </span>
                 <span className="flex flex-wrap items-center gap-2">
                   {nodeType === "definition" && clause.defines && (
@@ -449,17 +591,18 @@ export function ClauseTree({
                       {nodeType}
                     </span>
                   )}
-                  {provTypeAnn && (
+                  {provTypeAnn && showAnnotations && (
                     <span className="border border-[#c8ccc0] bg-[#efeee8] px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#5b5e56]">
                       {provTypeAnn.value}
                     </span>
                   )}
-                  {isAmendedVersion && (
+                  {(isAmendedVersion || clause.change_mark) && (
                     <span className="border border-[#080909] bg-[#efeee8] px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#080909]">
-                      {jurisdictionName
-                        ? `As amended in ${jurisdictionName} · Derived · From `
-                        : "Derived · From "}
-                      {activeVer?.valid_from ?? consRecord?.as_of_date}
+                      {clause.change_mark?.label
+                        ? clause.change_mark.label
+                        : jurisdictionName
+                          ? `Changed ${(activeVer?.valid_from ?? consRecord?.as_of_date ?? "").slice(0, 4)}, ${jurisdictionName}`
+                          : `Changed ${activeVer?.valid_from ?? consRecord?.as_of_date}`}
                     </span>
                   )}
                   {clause.language === "kn" && (
@@ -467,7 +610,9 @@ export function ClauseTree({
                       KN · Verbatim
                     </span>
                   )}
-                  <StatusBadge status={status} />
+                  {(!defaultStatus || status !== defaultStatus) && (
+                    <StatusBadge status={status} />
+                  )}
                 </span>
               </summary>
 
@@ -731,9 +876,9 @@ export function ClauseTree({
                 <span>
                   {validPages.length > 0 ? (
                     <>
-                      Pages: {validPages.join(", ")} ·{" "}
-                      {clause.verification.replace("_", " ")}
-                      {clause.effective_from
+                      Pages: {validPages.join(", ")}
+                      {clause.effective_from &&
+                      clause.effective_from !== defaultEffectiveDate
                         ? ` · Effective ${clause.effective_from}`
                         : ""}
                     </>
@@ -766,6 +911,15 @@ export function ClauseTree({
                         Archive p. {firstPage} ↗
                       </a>
                     )}
+                  <details className="inline-block">
+                    <summary className="cursor-pointer text-[10px] text-[#5b5e56] underline">
+                      Details
+                    </summary>
+                    <span className="ml-2 text-[10px] normal-case text-[#5b5e56]">
+                      Address: {eid} · Record: {clause.record_id ?? clause.clause_id} ·{" "}
+                      {clause.verification.replace("_", " ")}
+                    </span>
+                  </details>
                 </div>
               </div>
 

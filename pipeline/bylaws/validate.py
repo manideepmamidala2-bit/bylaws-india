@@ -643,6 +643,19 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
                     "description": "Amendments not yet applied: the text shown is the original wording, which may have been changed since.",
                 }
             )
+        unobtained_amends_for_base = [
+            d
+            for d in config.documents
+            if getattr(d, "acquisition_status", "acquired") == "not_found"
+            and doc.id in (d.amends or [])
+        ]
+        for unobt in unobtained_amends_for_base:
+            known_gaps.append(
+                {
+                    "doc_id": doc.id,
+                    "description": f"{unobt.title} could not be obtained from official sources; consolidated text and parameter values may not reflect changes made by it.",
+                }
+            )
 
     # QA Check 7: Unresolved cross-references
     unresolved_refs: list[str] = []
@@ -679,7 +692,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
 
     # Build and validate declarations.json
     declarations_payload: dict[str, Any] = {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "jurisdiction": config.id,
         "not_modelled": list(config.not_modelled or []),
         "known_gaps": known_gaps,

@@ -385,7 +385,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
     size_bytes = base_pdf.stat().st_size
 
     sample_document = {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "doc_id": "fixture-base-2020",
         "title": "Synthetic Municipal Building Regulations 2020",
         "issuing_authority": "Synthetic Civic Authority",
@@ -433,7 +433,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
     )
 
     sample_clause_tree = {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "doc_id": "fixture-base-2020",
         "jurisdiction": "xx-test-fixture",
         "legal_status": "in_force",
@@ -523,7 +523,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
 
     sample_zones = {
         "type": "FeatureCollection",
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "features": [
             {
                 "type": "Feature",
@@ -569,7 +569,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
     )
 
     sample_overrides = {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "clause_fixes": [
             {
                 "clause_id": "fixture-base-2020:2.1",
@@ -620,7 +620,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
     )
 
     sample_declarations = {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "jurisdiction": "xx-test-fixture",
         "not_modelled": ["Fire safety requirements of the National Building Code"],
         "known_gaps": [],
@@ -639,7 +639,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
     )
 
     sample_amendments = {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "jurisdiction": "xx-test-fixture",
         "effects": [
             {
@@ -684,7 +684,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
     )
 
     sample_consolidated = {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "jurisdiction": "xx-test-fixture",
         "generated": {
             "pipeline_version": "0.1.0",
@@ -713,7 +713,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
     )
 
     sample_geo_layers = {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "jurisdiction": "xx-test-fixture",
         "layers": [
             {
@@ -735,7 +735,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
     )
 
     sample_clause_zone_tags = {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "jurisdiction": "xx-test-fixture",
         "tags": [
             {
@@ -752,7 +752,7 @@ def build_sample_payloads(fixtures_dir: Path) -> None:
     )
 
     sample_manifest = {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "jurisdictions": [
             {
                 "id": "xx-test-fixture",

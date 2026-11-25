@@ -268,7 +268,7 @@ def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None
         )
 
     consolidated_payload: dict[str, Any] = {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "jurisdiction": config.id,
         "generated": {
             "pipeline_version": PIPELINE_VERSION,

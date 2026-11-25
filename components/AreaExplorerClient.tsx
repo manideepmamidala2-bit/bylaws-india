@@ -14,6 +14,7 @@ import { ClausePanel } from "./ClausePanel";
 
 interface AreaExplorerClientProps {
   jurisdictionId: string;
+  releaseVersion?: string;
   zones: ZoneFeature[];
   clauses: ClauseNode[];
   amendmentLinks: AmendmentLink[];
@@ -28,6 +29,7 @@ interface AreaExplorerClientProps {
 
 export function AreaExplorerClient({
   jurisdictionId,
+  releaseVersion,
   zones,
   clauses,
   amendmentLinks,
@@ -69,6 +71,7 @@ export function AreaExplorerClient({
       <div className="flex flex-col">
         <ZoneMap
           jurisdictionId={jurisdictionId}
+          releaseVersion={releaseVersion}
           zones={zones}
           selectedZoneCode={selectedZoneCode}
           onSelectZone={handleSelectZone}

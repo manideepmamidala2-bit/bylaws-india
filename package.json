@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/ensure_data.mjs && node scripts/build_search.mjs",
     "build": "next build",
+    "check-budgets": "node scripts/check_page_budgets.mjs",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
+    "test:e2e": "playwright test",
     "generate": "cd pipeline && uv run python ../scripts/generate_models.py"
   },
   "dependencies": {

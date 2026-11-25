@@ -1,0 +1,350 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bylaws-india.local/schemas/parameters.schema.json",
+  "title": "JurisdictionParameters",
+  "description": "Structured dated building parameter records with numeric intervals, categorical conditions, and cell-level provenance (Schema v1.4, Part 3).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "jurisdiction", "generated", "records"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.4"
+    },
+    "jurisdiction": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "generated": {
+      "$ref": "#/$defs/parametersGenerated"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/parameterRecord"
+      }
+    }
+  },
+  "$defs": {
+    "parametersGenerated": {
+      "type": "object",
+      "title": "ParametersGenerated",
+      "additionalProperties": false,
+      "required": ["pipeline_version", "generated_at"],
+      "properties": {
+        "pipeline_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "generated_at": {
+          "type": "string",
+          "minLength": 10
+        }
+      }
+    },
+    "numericInterval": {
+      "type": "object",
+      "title": "NumericInterval",
+      "additionalProperties": false,
+      "required": ["min", "max", "min_inclusive", "max_inclusive"],
+      "properties": {
+        "min": {
+          "type": ["number", "null"]
+        },
+        "max": {
+          "type": ["number", "null"]
+        },
+        "min_inclusive": {
+          "type": "boolean",
+          "default": true
+        },
+        "max_inclusive": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "parameterConditions": {
+      "type": "object",
+      "title": "ParameterConditions",
+      "additionalProperties": false,
+      "required": ["dependent"],
+      "properties": {
+        "plot_area_m2": {
+          "anyOf": [
+            { "$ref": "#/$defs/numericInterval" },
+            { "type": "null" }
+          ],
+          "default": null
+        },
+        "plot_depth_m": {
+          "anyOf": [
+            { "$ref": "#/$defs/numericInterval" },
+            { "type": "null" }
+          ],
+          "default": null
+        },
+        "plot_width_m": {
+          "anyOf": [
+            { "$ref": "#/$defs/numericInterval" },
+            { "type": "null" }
+          ],
+          "default": null
+        },
+        "road_width_m": {
+          "anyOf": [
+            { "$ref": "#/$defs/numericInterval" },
+            { "type": "null" }
+          ],
+          "default": null
+        },
+        "building_height_m": {
+          "anyOf": [
+            { "$ref": "#/$defs/numericInterval" },
+            { "type": "null" }
+          ],
+          "default": null
+        },
+        "zone": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "default": null
+        },
+        "area_class": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "default": null
+        },
+        "use": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "default": null
+        },
+        "jurisdiction": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "default": null
+        },
+        "unexpressed_conditions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "dependent": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "parameterSource": {
+      "type": "object",
+      "title": "ParameterSource",
+      "additionalProperties": false,
+      "required": [
+        "doc_id",
+        "eid",
+        "clause_id",
+        "cell_text",
+        "page",
+        "page_link"
+      ],
+      "properties": {
+        "doc_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "eid": {
+          "type": "string",
+          "minLength": 1
+        },
+        "clause_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "table_eid": {
+          "type": ["string", "null"],
+          "default": null
+        },
+        "table_id": {
+          "type": ["string", "null"],
+          "default": null
+        },
+        "row_index": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "default": null
+        },
+        "col_index": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "default": null
+        },
+        "row_header": {
+          "type": ["string", "null"],
+          "default": null
+        },
+        "column_header": {
+          "type": ["string", "null"],
+          "default": null
+        },
+        "cell_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "footnote_markers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "footnotes_text": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "page": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "bbox": {
+          "type": ["array", "null"],
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "number"
+          },
+          "default": null
+        },
+        "page_link": {
+          "type": "string",
+          "minLength": 1
+        },
+        "official_url": {
+          "type": ["string", "null"],
+          "default": null
+        },
+        "archive_url": {
+          "type": ["string", "null"],
+          "default": null
+        }
+      }
+    },
+    "parameterRecord": {
+      "type": "object",
+      "title": "ParameterRecord",
+      "additionalProperties": false,
+      "required": [
+        "parameter_id",
+        "parameter",
+        "value",
+        "unit",
+        "value_text",
+        "conditions",
+        "valid_from",
+        "valid_to",
+        "legal_status",
+        "source",
+        "derived",
+        "method",
+        "confidence",
+        "verification"
+      ],
+      "properties": {
+        "parameter_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parameter": {
+          "type": "string",
+          "enum": [
+            "ground_coverage_max_pct",
+            "far_base_max",
+            "far_premium_additional_max",
+            "tdr_receivable_max",
+            "setback_front_min_m",
+            "setback_rear_min_m",
+            "setback_side_min_m",
+            "building_height_max_m",
+            "floors_max",
+            "parking_requirement"
+          ]
+        },
+        "value": {
+          "type": ["number", "string", "null"]
+        },
+        "unit": {
+          "type": ["string", "null"]
+        },
+        "value_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "conditions": {
+          "$ref": "#/$defs/parameterConditions"
+        },
+        "valid_from": {
+          "type": ["string", "null"]
+        },
+        "valid_to": {
+          "type": ["string", "null"]
+        },
+        "legal_status": {
+          "type": "string",
+          "enum": [
+            "in_force",
+            "draft",
+            "superseded",
+            "withdrawn",
+            "status_unknown"
+          ]
+        },
+        "source": {
+          "$ref": "#/$defs/parameterSource"
+        },
+        "derived": {
+          "type": "boolean",
+          "const": true,
+          "default": true
+        },
+        "method": {
+          "type": "string",
+          "enum": [
+            "table_rule_parser",
+            "clause_rule_parser",
+            "override_curated"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "verification": {
+          "type": "string",
+          "enum": ["unverified", "machine_checked", "human_verified"]
+        },
+        "note": {
+          "type": ["string", "null"],
+          "default": null
+        }
+      }
+    }
+  }
+}

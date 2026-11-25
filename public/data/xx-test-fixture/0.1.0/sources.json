@@ -1,6 +1,6 @@
 [
   {
-    "schema_version": "1.3",
+    "schema_version": "1.4",
     "doc_id": "fixture-base-2020",
     "title": "Synthetic Municipal Building Regulations 2020",
     "issuing_authority": "Synthetic Civic Authority",
@@ -46,7 +46,7 @@
     ]
   },
   {
-    "schema_version": "1.3",
+    "schema_version": "1.4",
     "doc_id": "fixture-amend-2024",
     "title": "Synthetic Municipal Building (Amendment) Regulations 2024",
     "issuing_authority": "Synthetic Civic Authority",
@@ -94,7 +94,7 @@
     ]
   },
   {
-    "schema_version": "1.3",
+    "schema_version": "1.4",
     "doc_id": "fixture-draft-2026",
     "title": "Draft Synthetic Zoning Revisions 2026",
     "issuing_authority": "Synthetic Planning Board",
@@ -140,7 +140,7 @@
     ]
   },
   {
-    "schema_version": "1.3",
+    "schema_version": "1.4",
     "doc_id": "fixture-map-atlas",
     "title": "Synthetic Planning District Land Use Atlas",
     "issuing_authority": "Synthetic Planning Board",

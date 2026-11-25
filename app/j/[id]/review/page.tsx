@@ -1,6 +1,10 @@
 import React from "react";
 import { notFound } from "next/navigation";
-import { fetchJurisdictionDataset, fetchManifest } from "@/lib/data";
+import {
+  fetchJurisdictionDataset,
+  fetchManifest,
+  type ZoneGeometry,
+} from "@/lib/data";
 import { TopNav } from "@/components/TopNav";
 import { ReviewPanel } from "@/components/ReviewPanel";
 
@@ -58,6 +62,31 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
     );
   }
 
+  const emptyPoly = {
+    type: "Polygon",
+    coordinates: [],
+  } as unknown as ZoneGeometry;
+  const stripFc = (fc: typeof boundary | null, maxFeatures = 75) =>
+    fc
+      ? {
+          ...fc,
+          features: fc.features.slice(0, maxFeatures).map((f) => ({
+            ...f,
+            geometry: emptyPoly,
+          })),
+        }
+      : null;
+  const seenZoneCode = new Set<string>();
+  const ssrZones = zones.features
+    .filter((z) => {
+      const k = z.properties.zone_code;
+      if (seenZoneCode.has(k) && seenZoneCode.size >= 12) return false;
+      seenZoneCode.add(k);
+      return true;
+    })
+    .slice(0, 12)
+    .map((z) => ({ ...z, geometry: emptyPoly }));
+
   return (
     <div className="min-h-screen bg-[#f5f3ed] text-[#080909]">
       <TopNav
@@ -84,11 +113,11 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
 
         <ReviewPanel
           jurisdictionId={jurisdiction.id}
-          zones={zones.features}
-          boundary={boundary}
-          gbaZones={gbaZones}
-          wards={wards}
-          planningDistricts={planningDistricts}
+          zones={ssrZones}
+          boundary={stripFc(boundary)}
+          gbaZones={stripFc(gbaZones)}
+          wards={stripFc(wards)}
+          planningDistricts={stripFc(planningDistricts)}
           geoLayers={geoLayers?.layers ?? []}
         />
       </main>

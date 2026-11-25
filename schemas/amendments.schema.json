@@ -2,14 +2,14 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bylaws-india.local/schemas/amendments.schema.json",
   "title": "JurisdictionAmendments",
-  "description": "Amending effects and links between amending instructions and target nodes (Schema v1.3, Layer 3).",
+  "description": "Amending effects and links between amending instructions and target nodes (Schema v1.4, Layer 3).",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "jurisdiction", "links"],
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "1.3"
+      "const": "1.4"
     },
     "jurisdiction": {
       "type": "string",

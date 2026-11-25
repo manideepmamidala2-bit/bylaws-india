@@ -121,7 +121,7 @@ def test_published_manifest_recurrence_guard_blocks_local_source_urls(
     )
 
     planted_manifest = {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "jurisdictions": [
             {
                 "id": "in-ka-planted",

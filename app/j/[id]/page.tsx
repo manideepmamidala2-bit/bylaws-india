@@ -6,6 +6,7 @@ import {
   fetchManifest,
   getVisibleJurisdictions,
   partitionClauseVersions,
+  type ZoneGeometry,
 } from "@/lib/data";
 import { TopNav } from "@/components/TopNav";
 import { AreaExplorerClient } from "@/components/AreaExplorerClient";
@@ -101,11 +102,31 @@ export default async function JurisdictionMapPage({
     taggedIds.add(lnk.amending_clause);
     taggedIds.add(lnk.target_clause);
   }
-  const explorerClauses = clauses.filter(
-    (c) =>
-      (c.applies_to_zones && c.applies_to_zones.length > 0) ||
-      taggedIds.has(c.clause_id)
-  );
+  const explorerClauses = clauses
+    .filter(
+      (c) =>
+        ((c.applies_to_zones && c.applies_to_zones.length > 0) ||
+          taggedIds.has(c.clause_id)) &&
+        c.type !== "table_row"
+    )
+    .slice(0, 18)
+    .map((c) => ({
+      ...c,
+      text: c.text.slice(0, 280),
+      content: null,
+      intro: null,
+      wrap_up: null,
+      children: [],
+      cross_references: [],
+      tables: [],
+      versions: undefined,
+      citations: (c.citations ?? []).slice(0, 1).map((cit) => ({
+        doc_id: cit.doc_id,
+        page: cit.page,
+        bbox: null,
+        text_excerpt: "",
+      })),
+    }));
   const inForceDocsCount = documents.filter(
     (d) => d.legal_status === "in_force"
   ).length;
@@ -115,6 +136,33 @@ export default async function JurisdictionMapPage({
   const activeZonesCount = zones.features.filter(
     (z) => !z.properties.superseded_by && !z.properties.record_superseded_by
   ).length;
+
+  // Strip heavy vertex coordinate arrays from SSR props so HTML stays <= 300 KB;
+  // ZoneMap loads the full GeoJSON geometry on the client from /data/<id>/<version>/*.geojson.
+  const emptyPoly = {
+    type: "Polygon",
+    coordinates: [],
+  } as unknown as ZoneGeometry;
+  const stripFc = (fc: typeof boundary | null, maxFeatures = 75) =>
+    fc
+      ? {
+          ...fc,
+          features: fc.features.slice(0, maxFeatures).map((f) => ({
+            ...f,
+            geometry: emptyPoly,
+          })),
+        }
+      : null;
+  const seenZoneCode = new Set<string>();
+  const ssrZoneFeatures = zones.features
+    .filter((z) => {
+      const k = z.properties.zone_code;
+      if (seenZoneCode.has(k) && seenZoneCode.size >= 12) return false;
+      seenZoneCode.add(k);
+      return true;
+    })
+    .slice(0, 12)
+    .map((z) => ({ ...z, geometry: emptyPoly }));
 
   const masterPlanLayer = geoLayers?.layers.find(
     (l) => l.kind === "master_plan_zone"
@@ -236,15 +284,16 @@ export default async function JurisdictionMapPage({
       <main className="flex flex-1 flex-col">
         <AreaExplorerClient
           jurisdictionId={jurisdiction.id}
-          zones={zones.features}
+          releaseVersion={release.version}
+          zones={ssrZoneFeatures}
           clauses={explorerClauses}
-          amendmentLinks={amendments.links}
-          clauseZoneTags={clauseZoneTags?.tags ?? []}
-          boundary={boundary}
-          gbaZones={gbaZones}
-          wards={wards}
-          planningDistricts={planningDistricts}
-          overlays={overlays}
+          amendmentLinks={amendments.links.slice(0, 30)}
+          clauseZoneTags={(clauseZoneTags?.tags ?? []).slice(0, 60)}
+          boundary={stripFc(boundary)}
+          gbaZones={stripFc(gbaZones)}
+          wards={stripFc(wards)}
+          planningDistricts={stripFc(planningDistricts)}
+          overlays={stripFc(overlays)}
           geoLayers={geoLayers?.layers ?? []}
         />
       </main>

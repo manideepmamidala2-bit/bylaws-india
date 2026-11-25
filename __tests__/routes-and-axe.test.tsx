@@ -557,7 +557,7 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
 
     // Planted non-test manifest entry referencing fixture documents.json (which has local file path in source_url)
     const plantedManifest: ReleaseManifest = {
-      schema_version: "1.3",
+      schema_version: "1.4",
       jurisdictions: [
         {
           id: "in-ka-planted",

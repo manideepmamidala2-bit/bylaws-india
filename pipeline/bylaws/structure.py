@@ -1230,7 +1230,7 @@ def build_clause_tree_from_parse_result(
     assert_unique_sibling_eids(clauses_out)
 
     return {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "doc_id": doc.id,
         "jurisdiction": config.id,
         "legal_status": doc.legal_status,

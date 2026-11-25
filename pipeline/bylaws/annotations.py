@@ -692,7 +692,7 @@ def build_document_annotations(tree_payload: dict[str, Any]) -> dict[str, Any]:
                             break
 
     payload: dict[str, Any] = {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "doc_id": doc_id,
         "jurisdiction": jurisdiction,
         "annotations": annotations,

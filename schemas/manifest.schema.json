@@ -2,14 +2,14 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bylaws-india.local/schemas/manifest.schema.json",
   "title": "ReleaseManifest",
-  "description": "Published release manifest at Blob/static root manifest.json (Schema v1.3).",
+  "description": "Published release manifest at Blob/static root manifest.json (Schema v1.4).",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "jurisdictions"],
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "1.3"
+      "const": "1.4"
     },
     "jurisdictions": {
       "type": "array",
@@ -143,6 +143,60 @@
         "graph": {
           "type": ["string", "null"]
         },
+        "parameters": {
+          "type": ["string", "null"]
+        },
+        "resolution": {
+          "type": ["string", "null"]
+        },
+        "places": {
+          "type": ["string", "null"]
+        },
+        "outlines": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "consolidated_outlines": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "akn_xml": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "shared_documents": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["sha256", "clauses"],
+            "properties": {
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "clauses": {
+                "type": "string",
+                "minLength": 1
+              },
+              "outline": {
+                "type": ["string", "null"]
+              },
+              "annotations": {
+                "type": ["string", "null"]
+              }
+            }
+          }
+        },
         "review_images": {
           "type": "array",
           "items": {
@@ -159,6 +213,13 @@
       "required": ["clauses"],
       "properties": {
         "clauses": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "outlines": {
           "type": "array",
           "items": {
             "type": "string",

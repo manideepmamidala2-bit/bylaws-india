@@ -14,6 +14,7 @@ import { buildDg2nMapStyle } from "@/lib/map-style";
 
 interface ZoneMapProps {
   jurisdictionId?: string;
+  releaseVersion?: string;
   zones: ZoneFeature[];
   selectedZoneCode: string | null;
   onSelectZone: (zoneCode: string) => void;
@@ -110,6 +111,7 @@ let pmtilesProtocolRegistered = false;
 
 export function ZoneMap({
   jurisdictionId = "",
+  releaseVersion = "3.0.0",
   zones,
   selectedZoneCode,
   onSelectZone,
@@ -255,6 +257,18 @@ export function ZoneMap({
     process.env.NEXT_PUBLIC_PMTILES_URL?.trim() ||
     `/data/${jurisdictionId}/basemap.pmtiles`;
 
+  const hasCoords = (fc?: GenericFeatureCollection | null) =>
+    Boolean(
+      fc?.features?.[0]?.geometry &&
+        Array.isArray(fc.features[0].geometry.coordinates) &&
+        fc.features[0].geometry.coordinates.length > 0
+    );
+  const hasZoneCoords =
+    activeZones.length > 0 &&
+    Array.isArray(activeZones[0].geometry?.coordinates) &&
+    activeZones[0].geometry.coordinates.length > 0;
+  const relBase = `/data/${jurisdictionId}/${releaseVersion}`;
+
   useEffect(() => {
     const container = mapContainerRef.current;
     if (!container) return;
@@ -299,7 +313,9 @@ export function ZoneMap({
         if (boundary && boundary.features.length > 0) {
           map.addSource("gba-corporation", {
             type: "geojson",
-            data: boundary as unknown as GeoJSON.FeatureCollection,
+            data: hasCoords(boundary)
+              ? (boundary as unknown as GeoJSON.FeatureCollection)
+              : `${window.location.origin}${relBase}/boundary.geojson`,
           });
           map.addLayer({
             id: "gba-corporation-line",
@@ -318,7 +334,9 @@ export function ZoneMap({
         if (gbaZones && gbaZones.features.length > 0) {
           map.addSource("gba-zones", {
             type: "geojson",
-            data: gbaZones as unknown as GeoJSON.FeatureCollection,
+            data: hasCoords(gbaZones)
+              ? (gbaZones as unknown as GeoJSON.FeatureCollection)
+              : `${window.location.origin}${relBase}/gba-zones.geojson`,
           });
           map.addLayer({
             id: "gba-zones-line",
@@ -338,7 +356,9 @@ export function ZoneMap({
         if (wards && wards.features.length > 0) {
           map.addSource("gba-wards", {
             type: "geojson",
-            data: wards as unknown as GeoJSON.FeatureCollection,
+            data: hasCoords(wards)
+              ? (wards as unknown as GeoJSON.FeatureCollection)
+              : `${window.location.origin}${relBase}/wards.geojson`,
           });
           map.addLayer({
             id: "gba-wards-fill",
@@ -382,7 +402,9 @@ export function ZoneMap({
         if (planningDistricts && planningDistricts.features.length > 0) {
           map.addSource("planning-districts", {
             type: "geojson",
-            data: planningDistricts as unknown as GeoJSON.FeatureCollection,
+            data: hasCoords(planningDistricts)
+              ? (planningDistricts as unknown as GeoJSON.FeatureCollection)
+              : `${window.location.origin}${relBase}/planning-districts.geojson`,
           });
           map.addLayer({
             id: "planning-districts-line",
@@ -431,10 +453,12 @@ export function ZoneMap({
         if (activeZones.length > 0) {
           map.addSource("master-plan-zones", {
             type: "geojson",
-            data: {
-              type: "FeatureCollection",
-              features: activeZones,
-            } as unknown as GeoJSON.FeatureCollection,
+            data: hasZoneCoords
+              ? ({
+                  type: "FeatureCollection",
+                  features: activeZones,
+                } as unknown as GeoJSON.FeatureCollection)
+              : `${window.location.origin}${relBase}/zones.geojson`,
           });
           map.addLayer({
             id: "master-plan-zones-fill",

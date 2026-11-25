@@ -127,7 +127,7 @@ def build_synthetic_jurisdiction(output_root: Path) -> dict[str, Any]:
     )
 
     config_payload: dict[str, Any] = {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "id": jur_id,
         "name": "Synthetic Demonstration City",
         "aliases": ["Synthetic City", "Test Demonstration City"],

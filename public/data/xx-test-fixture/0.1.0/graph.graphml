@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns">
+  <key id="label" for="node" attr.name="label" attr.type="string"/>
+  <key id="kind" for="node" attr.name="kind" attr.type="string"/>
+  <key id="doc_id" for="node" attr.name="doc_id" attr.type="string"/>
+  <key id="jurisdiction" for="node" attr.name="jurisdiction" attr.type="string"/>
+  <key id="type" for="edge" attr.name="type" attr.type="string"/>
+  <key id="evidence" for="edge" attr.name="evidence" attr.type="string"/>
+  <key id="confidence" for="edge" attr.name="confidence" attr.type="double"/>
+  <graph id="xx-test-fixture" edgedefault="directed">
+    <node id="register:xx-test-fixture">
+      <data key="label">Synthetic Test Jurisdiction Source Register</data>
+      <data key="kind">register</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="doc:fixture-base-2020">
+      <data key="label">Synthetic Municipal Building Regulations 2020</data>
+      <data key="kind">document</data>
+      <data key="doc_id">fixture-base-2020</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="doc:fixture-amend-2024">
+      <data key="label">Synthetic Municipal Building (Amendment) Regulations 2024</data>
+      <data key="kind">document</data>
+      <data key="doc_id">fixture-amend-2024</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="doc:fixture-draft-2026">
+      <data key="label">Draft Synthetic Zoning Revisions 2026</data>
+      <data key="kind">document</data>
+      <data key="doc_id">fixture-draft-2026</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="doc:fixture-map-atlas">
+      <data key="label">Synthetic Planning District Land Use Atlas</data>
+      <data key="kind">document</data>
+      <data key="doc_id">fixture-map-atlas</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-amend-2024:cl_1">
+      <data key="label">Short Title</data>
+      <data key="kind">clause</data>
+      <data key="doc_id">fixture-amend-2024</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-amend-2024:cl_2">
+      <data key="label">Amendment of Clause 2.2</data>
+      <data key="kind">clause</data>
+      <data key="doc_id">fixture-amend-2024</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-amend-2024:cl_3">
+      <data key="label">Insertion after Clause 2.2</data>
+      <data key="kind">clause</data>
+      <data key="doc_id">fixture-amend-2024</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-amend-2024:cl_4">
+      <data key="label">Omission of Clause 2.3</data>
+      <data key="kind">clause</data>
+      <data key="doc_id">fixture-amend-2024</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-base-2020:chp_I">
+      <data key="label">General Provisions</data>
+      <data key="kind">chapter</data>
+      <data key="doc_id">fixture-base-2020</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-base-2020:chp_I__cl_1.1__item_a">
+      <data key="label">(a)</data>
+      <data key="kind">item</data>
+      <data key="doc_id">fixture-base-2020</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-base-2020:chp_I__cl_1.1__item_b">
+      <data key="label">(b)</data>
+      <data key="kind">item</data>
+      <data key="doc_id">fixture-base-2020</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-base-2020:chp_I__def_1.2">
+      <data key="label">Definitions</data>
+      <data key="kind">definition</data>
+      <data key="doc_id">fixture-base-2020</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="term:fixture-base-2020:floor area ratio">
+      <data key="label">&quot;Floor Area Ratio&quot;</data>
+      <data key="kind">defined_term</data>
+      <data key="doc_id">fixture-base-2020</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-base-2020:chp_II">
+      <data key="label">Setbacks and Height Norms</data>
+      <data key="kind">chapter</data>
+      <data key="doc_id">fixture-base-2020</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-base-2020:chp_II__cl_2.1">
+      <data key="label">Residential Setback Norms</data>
+      <data key="kind">clause</data>
+      <data key="doc_id">fixture-base-2020</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-base-2020:chp_II__cl_2.1__item_a">
+      <data key="label">(a)</data>
+      <data key="kind">item</data>
+      <data key="doc_id">fixture-base-2020</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-base-2020:chp_II__cl_2.1__item_b">
+      <data key="label">(b)</data>
+      <data key="kind">item</data>
+      <data key="doc_id">fixture-base-2020</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-base-2020:chp_II__cl_2.1__prov_1">
+      <data key="label">Proviso</data>
+      <data key="kind">proviso</data>
+      <data key="doc_id">fixture-base-2020</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-base-2020:chp_II__cl_2.1__expl_1">
+      <data key="label">Explanation</data>
+      <data key="kind">explanation</data>
+      <data key="doc_id">fixture-base-2020</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-base-2020:chp_II__cl_2.2">
+      <data key="label">Maximum Building Height</data>
+      <data key="kind">clause</data>
+      <data key="doc_id">fixture-base-2020</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-base-2020:chp_II__cl_2.2A">
+      <data key="label">Solar Rooftop Structures</data>
+      <data key="kind">clause</data>
+      <data key="doc_id">fixture-base-2020</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-base-2020:chp_II__cl_2.3">
+      <data key="label">Temporary Construction Sheds</data>
+      <data key="kind">clause</data>
+      <data key="doc_id">fixture-base-2020</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-base-2020:chp_II__cl_2.1__tbl_2.1">
+      <data key="label">Table 2.1: Minimum Setbacks by Plot Size</data>
+      <data key="kind">table</data>
+      <data key="doc_id">fixture-base-2020</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-base-2020:chp_II__cl_2.1__tbl_2.1__row_1">
+      <data key="label">1</data>
+      <data key="kind">table_row</data>
+      <data key="doc_id">fixture-base-2020</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-base-2020:chp_II__cl_2.1__tbl_2.1__row_2">
+      <data key="label">2</data>
+      <data key="kind">table_row</data>
+      <data key="doc_id">fixture-base-2020</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-base-2020:chp_II__cl_2.1__tbl_2.1__row_3">
+      <data key="label">3</data>
+      <data key="kind">table_row</data>
+      <data key="doc_id">fixture-base-2020</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-base-2020:chp_I__cl_1.1">
+      <data key="label">Short Title, Extent and Commencement</data>
+      <data key="kind">clause</data>
+      <data key="doc_id">fixture-base-2020</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-draft-2026:cl_D1.1">
+      <data key="label">Proposed Transit Overlay</data>
+      <data key="kind">clause</data>
+      <data key="doc_id">fixture-draft-2026</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="fixture-map-atlas:prea_1">
+      <data key="label">Preamble</data>
+      <data key="kind">preamble</data>
+      <data key="doc_id">fixture-map-atlas</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="topic:land_use">
+      <data key="label">Land Use &amp; Permissible Uses</data>
+      <data key="kind">topic</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="topic:far">
+      <data key="label">Floor Area Ratio (FAR), Premium FAR &amp; TDR</data>
+      <data key="kind">topic</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="topic:ground_coverage">
+      <data key="label">Ground Coverage</data>
+      <data key="kind">topic</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="topic:setbacks">
+      <data key="label">Setbacks &amp; Building Lines</data>
+      <data key="kind">topic</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="topic:building_height">
+      <data key="label">Building Height &amp; High-Rise Norms</data>
+      <data key="kind">topic</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="topic:parking">
+      <data key="label">Parking &amp; Ramps</data>
+      <data key="kind">topic</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="topic:basements_stilts">
+      <data key="label">Basements, Cellars &amp; Stilt Floors</data>
+      <data key="kind">topic</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="topic:projections_open_spaces">
+      <data key="label">Projections, Balconies, Open Spaces &amp; Buffers</data>
+      <data key="kind">topic</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="topic:plot_size_frontage">
+      <data key="label">Plot Size, Frontage &amp; Subdivision</data>
+      <data key="kind">topic</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="topic:road_width">
+      <data key="label">Road Width &amp; Means of Access</data>
+      <data key="kind">topic</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="topic:deviations_regularisation">
+      <data key="label">Deviations, Compounding &amp; Penalties</data>
+      <data key="kind">topic</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="topic:approvals_certificates">
+      <data key="label">Plan Sanction, Plinth &amp; Occupancy Certificates</data>
+      <data key="kind">topic</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="topic:fire_safety">
+      <data key="label">Fire Protection, Exit Requirements &amp; Structural Safety</data>
+      <data key="kind">topic</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <node id="topic:definitions">
+      <data key="label">Definitions of Building &amp; Planning Terms</data>
+      <data key="kind">topic</data>
+      <data key="jurisdiction">xx-test-fixture</data>
+    </node>
+    <edge id="e_1" source="doc:fixture-base-2020" target="register:xx-test-fixture">
+      <data key="type">in_register</data>
+      <data key="evidence">register:fixture-base-2020</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_2" source="doc:fixture-amend-2024" target="register:xx-test-fixture">
+      <data key="type">in_register</data>
+      <data key="evidence">register:fixture-amend-2024</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_3" source="doc:fixture-draft-2026" target="register:xx-test-fixture">
+      <data key="type">in_register</data>
+      <data key="evidence">register:fixture-draft-2026</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_4" source="doc:fixture-map-atlas" target="register:xx-test-fixture">
+      <data key="type">in_register</data>
+      <data key="evidence">register:fixture-map-atlas</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_5" source="doc:fixture-amend-2024" target="fixture-amend-2024:cl_1">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-amend-2024:cl_1</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_6" source="doc:fixture-amend-2024" target="fixture-amend-2024:cl_2">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-amend-2024:cl_2</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_7" source="doc:fixture-amend-2024" target="fixture-amend-2024:cl_3">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-amend-2024:cl_3</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_8" source="doc:fixture-amend-2024" target="fixture-amend-2024:cl_4">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-amend-2024:cl_4</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_9" source="doc:fixture-base-2020" target="fixture-base-2020:chp_I">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-base-2020:chp_I</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_10" source="fixture-base-2020:chp_I__cl_1.1" target="fixture-base-2020:chp_I__cl_1.1__item_a">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-base-2020:chp_I__cl_1.1__item_a</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_11" source="fixture-base-2020:chp_I__cl_1.1" target="fixture-base-2020:chp_I__cl_1.1__item_b">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-base-2020:chp_I__cl_1.1__item_b</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_12" source="fixture-base-2020:chp_I" target="fixture-base-2020:chp_I__def_1.2">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-base-2020:chp_I__def_1.2</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_13" source="fixture-base-2020:chp_I__def_1.2" target="term:fixture-base-2020:floor area ratio">
+      <data key="type">defines</data>
+      <data key="evidence">fixture-base-2020:chp_I__def_1.2</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_14" source="doc:fixture-base-2020" target="fixture-base-2020:chp_II">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-base-2020:chp_II</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_15" source="fixture-base-2020:chp_II" target="fixture-base-2020:chp_II__cl_2.1">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-base-2020:chp_II__cl_2.1</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_16" source="fixture-base-2020:chp_II__cl_2.1" target="fixture-base-2020:chp_II__cl_2.1__item_a">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-base-2020:chp_II__cl_2.1__item_a</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_17" source="fixture-base-2020:chp_II__cl_2.1" target="fixture-base-2020:chp_II__cl_2.1__item_b">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-base-2020:chp_II__cl_2.1__item_b</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_18" source="fixture-base-2020:chp_II__cl_2.1" target="fixture-base-2020:chp_II__cl_2.1__prov_1">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-base-2020:chp_II__cl_2.1__prov_1</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_19" source="fixture-base-2020:chp_II__cl_2.1" target="fixture-base-2020:chp_II__cl_2.1__expl_1">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-base-2020:chp_II__cl_2.1__expl_1</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_20" source="fixture-base-2020:chp_II" target="fixture-base-2020:chp_II__cl_2.2">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-base-2020:chp_II__cl_2.2</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_21" source="fixture-base-2020:chp_II" target="fixture-base-2020:chp_II__cl_2.2A">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-base-2020:chp_II__cl_2.2A</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_22" source="fixture-base-2020:chp_II" target="fixture-base-2020:chp_II__cl_2.3">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-base-2020:chp_II__cl_2.3</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_23" source="fixture-base-2020:chp_II__cl_2.1" target="fixture-base-2020:chp_II__cl_2.1__tbl_2.1">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-base-2020:chp_II__cl_2.1__tbl_2.1</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_24" source="fixture-base-2020:chp_II__cl_2.1__tbl_2.1" target="fixture-base-2020:chp_II__cl_2.1__tbl_2.1__row_1">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-base-2020:chp_II__cl_2.1__tbl_2.1__row_1</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_25" source="fixture-base-2020:chp_II__cl_2.1__tbl_2.1" target="fixture-base-2020:chp_II__cl_2.1__tbl_2.1__row_2">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-base-2020:chp_II__cl_2.1__tbl_2.1__row_2</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_26" source="fixture-base-2020:chp_II__cl_2.1__tbl_2.1" target="fixture-base-2020:chp_II__cl_2.1__tbl_2.1__row_3">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-base-2020:chp_II__cl_2.1__tbl_2.1__row_3</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_27" source="fixture-base-2020:chp_I" target="fixture-base-2020:chp_I__cl_1.1">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-base-2020:chp_I__cl_1.1</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_28" source="doc:fixture-draft-2026" target="fixture-draft-2026:cl_D1.1">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-draft-2026:cl_D1.1</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_29" source="doc:fixture-map-atlas" target="fixture-map-atlas:prea_1">
+      <data key="type">contains</data>
+      <data key="evidence">fixture-map-atlas:prea_1</data>
+      <data key="confidence">1.0</data>
+    </edge>
+    <edge id="e_30" source="fixture-base-2020:chp_II__cl_2.1" target="fixture-base-2020:chp_I__cl_1.1">
+      <data key="type">refers_to</data>
+      <data key="evidence">fixture-base-2020:ann_9</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e_31" source="fixture-base-2020:chp_II__cl_2.1" target="fixture-base-2020:chp_II__cl_2.1__tbl_2.1">
+      <data key="type">refers_to</data>
+      <data key="evidence">fixture-base-2020:ann_10</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e_32" source="fixture-base-2020:chp_II__cl_2.2" target="fixture-base-2020:chp_II__cl_2.1">
+      <data key="type">refers_to</data>
+      <data key="evidence">fixture-base-2020:ann_18</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e_33" source="fixture-base-2020:chp_II__cl_2.2" target="fixture-base-2020:chp_I__def_1.2">
+      <data key="type">uses_term</data>
+      <data key="evidence">fixture-base-2020:ann_19</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e_34" source="fixture-amend-2024:cl_2" target="fixture-base-2020:chp_II__cl_2.2">
+      <data key="type">amends</data>
+      <data key="evidence">fixture-amend-2024:eff_1</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e_35" source="fixture-base-2020:chp_II__cl_2.2" target="fixture-amend-2024:cl_2">
+      <data key="type">amended_by</data>
+      <data key="evidence">fixture-amend-2024:eff_1</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e_36" source="fixture-amend-2024:cl_3" target="fixture-base-2020:chp_II__cl_2.2">
+      <data key="type">amends</data>
+      <data key="evidence">fixture-amend-2024:eff_2</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e_37" source="fixture-base-2020:chp_II__cl_2.2" target="fixture-amend-2024:cl_3">
+      <data key="type">amended_by</data>
+      <data key="evidence">fixture-amend-2024:eff_2</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e_38" source="fixture-amend-2024:cl_4" target="fixture-base-2020:chp_II__cl_2.3">
+      <data key="type">amends</data>
+      <data key="evidence">fixture-amend-2024:eff_3</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e_39" source="fixture-base-2020:chp_II__cl_2.3" target="fixture-amend-2024:cl_4">
+      <data key="type">amended_by</data>
+      <data key="evidence">fixture-amend-2024:eff_3</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e_40" source="fixture-amend-2024:cl_2" target="topic:building_height">
+      <data key="type">tagged_topic</data>
+      <data key="evidence">Building Height</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e_41" source="fixture-amend-2024:cl_2" target="topic:road_width">
+      <data key="type">tagged_topic</data>
+      <data key="evidence">road width</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e_42" source="fixture-amend-2024:cl_3" target="topic:fire_safety">
+      <data key="type">tagged_topic</data>
+      <data key="evidence">Solar</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e_43" source="fixture-base-2020:chp_I__def_1.2" target="topic:definitions">
+      <data key="type">tagged_topic</data>
+      <data key="evidence">&quot;Floor Area Ratio&quot; (FAR) </data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e_44" source="fixture-base-2020:chp_I__def_1.2" target="topic:far">
+      <data key="type">tagged_topic</data>
+      <data key="evidence">Floor Area Ratio</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e_45" source="fixture-base-2020:chp_I__def_1.2" target="topic:ground_coverage">
+      <data key="type">tagged_topic</data>
+      <data key="evidence">covered area</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e_46" source="fixture-base-2020:chp_I__def_1.2" target="topic:plot_size_frontage">
+      <data key="type">tagged_topic</data>
+      <data key="evidence">plot area</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e_47" source="fixture-base-2020:chp_II" target="topic:setbacks">
+      <data key="type">tagged_topic</data>
+      <data key="evidence">Setbacks</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e_48" source="fixture-base-2020:chp_II__cl_2.1" target="topic:setbacks">
+      <data key="type">tagged_topic</data>
+      <data key="evidence">setbacks</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e_49" source="fixture-base-2020:chp_II__cl_2.1__item_a" target="topic:setbacks">
+      <data key="type">tagged_topic</data>
+      <data key="evidence">setback</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e_50" source="fixture-base-2020:chp_II__cl_2.1__item_b" target="topic:setbacks">
+      <data key="type">tagged_topic</data>
+      <data key="evidence">setbacks</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e_51" source="fixture-base-2020:chp_II__cl_2.1__prov_1" target="topic:setbacks">
+      <data key="type">tagged_topic</data>
+      <data key="evidence">setback</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e_52" source="fixture-base-2020:chp_II__cl_2.1__expl_1" target="topic:setbacks">
+      <data key="type">tagged_topic</data>
+      <data key="evidence">Setback</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e_53" source="fixture-base-2020:chp_II__cl_2.2" target="topic:far">
+      <data key="type">tagged_topic</data>
+      <data key="evidence">Floor Area Ratio</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e_54" source="fixture-base-2020:chp_II__cl_2.2" target="topic:building_height">
+      <data key="type">tagged_topic</data>
+      <data key="evidence">No residential building i</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e_55" source="fixture-base-2020:chp_II__cl_2.2" target="topic:road_width">
+      <data key="type">tagged_topic</data>
+      <data key="evidence">road width</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e_56" source="fixture-base-2020:chp_II__cl_2.2A" target="topic:fire_safety">
+      <data key="type">tagged_topic</data>
+      <data key="evidence">solar</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e_57" source="fixture-base-2020:chp_II__cl_2.1__tbl_2.1" target="topic:setbacks">
+      <data key="type">tagged_topic</data>
+      <data key="evidence">Setbacks</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e_58" source="fixture-base-2020:chp_II__cl_2.1__tbl_2.1" target="topic:plot_size_frontage">
+      <data key="type">tagged_topic</data>
+      <data key="evidence">Plot Size</data>
+      <data key="confidence">0.9</data>
+    </edge>
+    <edge id="e_59" source="fixture-amend-2024:cl_2" target="fixture-base-2020:chp_II__cl_2.2">
+      <data key="type">cross_document_reference</data>
+      <data key="evidence">Amendment of Clause 2.2 — For clause 2.2, the following shall be substituted: &#x27;2.2 Maximum Building Height: No residenti</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e_60" source="fixture-amend-2024:cl_3" target="fixture-base-2020:chp_II__cl_2.2">
+      <data key="type">cross_document_reference</data>
+      <data key="evidence">Insertion after Clause 2.2 — After clause 2.2, the following clause shall be inserted: &#x27;2.2A Solar Rooftop Structures: E</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e_61" source="fixture-amend-2024:cl_4" target="fixture-base-2020:chp_II__cl_2.3">
+      <data key="type">cross_document_reference</data>
+      <data key="evidence">Omission of Clause 2.3 — Clause 2.3 shall be omitted.</data>
+      <data key="confidence">0.95</data>
+    </edge>
+  </graph>
+</graphml>

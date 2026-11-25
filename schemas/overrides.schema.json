@@ -2,14 +2,14 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bylaws-india.local/schemas/overrides.schema.json",
   "title": "JurisdictionOverrides",
-  "description": "Versioned manual corrections, annotation fixes, zone tags, and map curations in data/overrides/<jurisdiction>/*.yaml (Schema v1.3).",
+  "description": "Versioned manual corrections, annotation fixes, zone tags, and map curations in data/overrides/<jurisdiction>/*.yaml (Schema v1.4).",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version"],
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "1.3"
+      "const": "1.4"
     },
     "clause_fixes": {
       "type": "array",

@@ -122,7 +122,7 @@ def test_apply_overrides_rejects_unknown_map_id_in_map_curations(tmp_path: Path)
 
     bad_curation = isolated / "data" / "overrides" / "xx-test-fixture" / "99-bad-map.yaml"
     bad_curation.write_text(
-        'schema_version: "1.3"\n'
+        'schema_version: "1.4"\n'
         "map_curations:\n"
         "  - map_id: unknown-map-id-999\n"
         "    legend_entries:\n"
@@ -172,7 +172,7 @@ def test_publish_fails_on_unreadable_manifest_and_preserves_multi_jurisdiction_r
 
     # Seed valid manifest with another jurisdiction + prior release 0.0.9 for xx-test-fixture
     seeded_manifest = {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "jurisdictions": [
             {
                 "id": "in-mh-other-city",

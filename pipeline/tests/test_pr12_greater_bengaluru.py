@@ -19,9 +19,22 @@ def _get_latest_south_release_dir():
     return REPO_ROOT / "public" / "data" / "in-ka-bengaluru-south" / config.release_version
 
 
+def _get_latest_parent_release_dir():
+    config = load_jurisdiction_config("in-ka-bengaluru")
+    assert config.release_version is not None
+    return REPO_ROOT / "public" / "data" / "in-ka-bengaluru" / config.release_version
+
+
+def _resolve_published_doc_file(rel_dir, filename: str):
+    cand = rel_dir / filename
+    if cand.is_file():
+        return cand
+    return _get_latest_parent_release_dir() / filename
+
+
 def test_part1_annotation_quality_no_stopwords_or_heading_references_and_qa_stats() -> None:
     """Part 1 (`08b` §2): No stopword is a defined term, `defines` comes from quoted terms only, no heading is a reference, at most 1 `defined_term_use` per term per provision, and `qa.md` reports annotation counts."""
-    rel_dir = _get_latest_south_release_dir()
+    rel_dir = _get_latest_parent_release_dir()
     for clauses_file in sorted(rel_dir.glob("*.clauses.json")):
         doc_id = clauses_file.name.replace(".clauses.json", "")
         tree = validate_file(clauses_file, "clause-tree")
@@ -154,7 +167,7 @@ def test_part3_rmp2015_zr_amendment_chain_inserted_chapter_11_and_replaced_table
         tree = validate_file(cfile, "clause-tree")
         assert len(tree["clauses"]) >= 5
 
-    zr_tree = validate_file(rel_dir / "rmp2015-zr.clauses.json", "clause-tree")
+    zr_tree = validate_file(_resolve_published_doc_file(rel_dir, "rmp2015-zr.clauses.json"), "clause-tree")
     zr_by_eid = {c["eid"]: c for c in zr_tree["clauses"]}
 
     # Inserted Chapter 11 (Premium FAR, 2025-04-02)
@@ -235,7 +248,10 @@ def test_part5_and_6_supporting_provisions_verified_overlays_4_sheets_and_zone_a
 
     # Supporting provisions & contested KTCDA Bill
     for sup_id in ("gbga-2024", "udd-200-mnu-2025-khata"):
-        tree = validate_file(rel_dir / f"{sup_id}.clauses.json", "clause-tree")
+        tree = validate_file(
+            _resolve_published_doc_file(rel_dir, f"{sup_id}.clauses.json"),
+            "clause-tree",
+        )
         assert len(tree["clauses"]) >= 5
 
     decls = validate_file(rel_dir / "declarations.json", "declarations")
@@ -263,9 +279,15 @@ def test_part5_and_6_supporting_provisions_verified_overlays_4_sheets_and_zone_a
     assert len(tags_payload["tags"]) >= 150
 
     for doc_id in ("bbl-2003", "rmp2015-zr"):
-        tree = validate_file(rel_dir / f"{doc_id}.clauses.json", "clause-tree")
+        tree = validate_file(
+            _resolve_published_doc_file(rel_dir, f"{doc_id}.clauses.json"),
+            "clause-tree",
+        )
         node_by_eid = {c["eid"]: c for c in tree["clauses"]}
-        ann_doc = validate_file(rel_dir / f"{doc_id}.annotations.json", "annotations")
+        ann_doc = validate_file(
+            _resolve_published_doc_file(rel_dir, f"{doc_id}.annotations.json"),
+            "annotations",
+        )
         prov_by_eid = {
             a["target"]["eid"]: a["value"]
             for a in ann_doc["annotations"]

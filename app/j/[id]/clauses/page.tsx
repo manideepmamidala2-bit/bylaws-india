@@ -32,7 +32,6 @@ export default async function ClausesPage({ params }: ClausesPageProps) {
     jurisdiction,
     release,
     documents,
-    annotationsByDocId,
     clauses,
     amendments,
     consolidated,
@@ -89,8 +88,8 @@ export default async function ClausesPage({ params }: ClausesPageProps) {
   const referenceDocIds = new Set(
     documents.filter((d) => d.role === "reference").map((d) => d.doc_id)
   );
-  const slimmedClauses: ClauseNode[] = clauses
-    .filter((c) => !referenceDocIds.has(c.doc_id ?? "") || c.level <= 2)
+  const allFilteredClauses: ClauseNode[] = clauses
+    .filter((c) => !referenceDocIds.has(c.doc_id ?? "") && c.type !== "table_row")
     .map((c) => ({
       ...c,
       title: c.title === c.heading ? null : c.title,
@@ -106,6 +105,10 @@ export default async function ClausesPage({ params }: ClausesPageProps) {
           ? c.versions
           : undefined,
     }));
+  const slimmedClauses = allFilteredClauses.slice(0, 16).map((c) => ({
+    ...c,
+    tables: [],
+  }));
 
   return (
     <div className="min-h-screen bg-[#f5f3ed] text-[#080909]">
@@ -185,14 +188,18 @@ export default async function ClausesPage({ params }: ClausesPageProps) {
 
         <ClauseTree
           clauses={slimmedClauses}
-          annotations={Object.entries(annotationsByDocId)
-            .filter(([docKey]) => !referenceDocIds.has(docKey))
-            .flatMap(([, anns]) => anns)}
-          amendmentEffects={amendments.effects ?? []}
-          consolidatedRecords={consolidated?.records ?? []}
+          totalClausesCount={allFilteredClauses.length}
+          annotations={[]}
+          amendmentEffects={(amendments.effects ?? []).map((e) => ({
+            ...e,
+            new_nodes: [],
+          }))}
+          consolidatedRecords={(consolidated?.records ?? [])
+            .slice(0, 12)
+            .map((r) => ({ ...r, tables: [] }))}
           unconsolidatedRecords={consolidated?.unconsolidated ?? []}
-          amendmentLinks={amendments.links}
-          allClausesLookup={allClausesLookup}
+          amendmentLinks={amendments.links.slice(0, 15)}
+          allClausesLookup={{}}
           allowConsolidatedToggle={Boolean(
             (consolidated && consolidated.records.length > 0) ||
               (amendments.effects && amendments.effects.length > 0)

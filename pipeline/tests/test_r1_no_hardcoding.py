@@ -28,6 +28,7 @@ GENERIC_CONFIG_VALUES: frozenset[str] = frozenset(
     {
         "1.2",
         "1.3",
+        "1.4",
         "in",
         "ka",
         "xx",

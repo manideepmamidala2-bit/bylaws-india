@@ -43,7 +43,7 @@ export function ReviewPanel({
     null;
 
   const yamlSnippet = selectedFeature
-    ? `schema_version: "1.2"\nzone_fixes:\n  - zone_id: ${selectedFeature.properties.zone_id}\n    reason: Verified polygon boundary and legend code against source sheet\n    set:\n      zone_code: ${selectedFeature.properties.zone_code}\n      zone_label: "${selectedFeature.properties.zone_label}"\n      verification: machine_checked\n`
+    ? `schema_version: "1.4"\nzone_fixes:\n  - zone_id: ${selectedFeature.properties.zone_id}\n    reason: Verified polygon boundary and legend code against source sheet\n    set:\n      zone_code: ${selectedFeature.properties.zone_code}\n      zone_label: "${selectedFeature.properties.zone_label}"\n      verification: machine_checked\n`
     : "";
 
   return (

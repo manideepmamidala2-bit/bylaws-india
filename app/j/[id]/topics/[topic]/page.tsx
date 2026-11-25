@@ -272,7 +272,7 @@ export default async function TopicDetailPage({
             const docMeta = docMetaById.get(docId);
             const docNodes = taggedClauses
               .filter((c) => c.doc_id === docId)
-              .slice(0, 35);
+              .slice(0, 12);
             return (
               <div
                 key={docId}
@@ -305,8 +305,10 @@ export default async function TopicDetailPage({
                       node.versions && node.versions.length > 0
                         ? node.versions[node.versions.length - 1]
                         : null;
-                    const displayTxt =
+                    const rawTxt =
                       lastVer?.content || node.content || node.text;
+                    const displayTxt =
+                      rawTxt.length > 360 ? `${rawTxt.slice(0, 360)}…` : rawTxt;
 
                     return (
                       <li key={node.eid} className="py-3">

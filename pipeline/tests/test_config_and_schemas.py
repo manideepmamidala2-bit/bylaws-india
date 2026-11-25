@@ -30,10 +30,11 @@ FIXTURES_DIR = Path(__file__).resolve().parent / "fixtures"
 
 @pytest.mark.parametrize("schema_name", SCHEMA_NAMES)
 def test_all_eleven_schemas_exist_and_are_valid_draft_2020_12(schema_name: str) -> None:
-    assert len(SCHEMA_NAMES) == 13
+    assert len(SCHEMA_NAMES) == 15
     schema = load_schema(schema_name)
     assert schema["$schema"] == "https://json-schema.org/draft/2020-12/schema"
     assert schema["type"] == "object"
+    assert schema["properties"]["schema_version"]["const"] == "1.4"
     schema_text = json.dumps(schema)
     assert "_fixture-test" not in schema_text
     assert "xx-test-fixture" not in schema_text

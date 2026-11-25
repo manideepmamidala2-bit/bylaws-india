@@ -716,7 +716,7 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
         ann_path.write_text(json.dumps(ann_payload, indent=2) + "\n", encoding="utf-8")
 
     amendments_payload: dict[str, Any] = {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "jurisdiction": config.id,
         "effects": effects,
         "links": links,
