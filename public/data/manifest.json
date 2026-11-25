@@ -62,117 +62,117 @@
         "BDA Local Planning Area"
       ],
       "visibility": "public",
-      "latest_release": "3.0.0",
+      "latest_release": "4.0.0",
       "releases": [
         {
-          "version": "3.0.0",
+          "version": "4.0.0",
           "status": "published",
           "released_at": "2026-11-23T00:00:00Z",
           "licence": "CC BY 4.0",
-          "download_zip": "/data/in-ka-bengaluru/3.0.0/in-ka-bengaluru-3.0.0.zip",
-          "sha256sums": "/data/in-ka-bengaluru/3.0.0/SHA256SUMS",
-          "declarations": "/data/in-ka-bengaluru/3.0.0/declarations.json",
+          "download_zip": "/data/in-ka-bengaluru/4.0.0/in-ka-bengaluru-4.0.0.zip",
+          "sha256sums": "/data/in-ka-bengaluru/4.0.0/SHA256SUMS",
+          "declarations": "/data/in-ka-bengaluru/4.0.0/declarations.json",
           "files": {
-            "documents": "/data/in-ka-bengaluru/3.0.0/documents.json",
+            "documents": "/data/in-ka-bengaluru/4.0.0/documents.json",
             "clauses": [
-              "/data/in-ka-bengaluru/3.0.0/bbl-2003.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/bccc-bbl-amend-2026-05.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/bncc-bbl-amend-2026-05.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/bscc-bbl-amend-2026-05.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/becc-bbl-amend-2026-05.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/bwcc-bbl-amend-2026-05.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/gbga-2024.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.clauses.json"
+              "/data/in-ka-bengaluru/4.0.0/bbl-2003.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/bccc-bbl-amend-2026-05.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/bncc-bbl-amend-2026-05.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/bscc-bbl-amend-2026-05.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/becc-bbl-amend-2026-05.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/bwcc-bbl-amend-2026-05.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/gbga-2024.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.clauses.json"
             ],
             "outlines": [
-              "/data/in-ka-bengaluru/3.0.0/bbl-2003.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/bccc-bbl-amend-2026-05.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/bncc-bbl-amend-2026-05.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/bscc-bbl-amend-2026-05.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/becc-bbl-amend-2026-05.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/bwcc-bbl-amend-2026-05.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/gbga-2024.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.outline.json"
+              "/data/in-ka-bengaluru/4.0.0/bbl-2003.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/bccc-bbl-amend-2026-05.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/bncc-bbl-amend-2026-05.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/bscc-bbl-amend-2026-05.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/becc-bbl-amend-2026-05.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/bwcc-bbl-amend-2026-05.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/gbga-2024.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.outline.json"
             ],
             "annotations": [
-              "/data/in-ka-bengaluru/3.0.0/bbl-2003.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/bccc-bbl-amend-2026-05.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/bncc-bbl-amend-2026-05.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/bscc-bbl-amend-2026-05.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/becc-bbl-amend-2026-05.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/bwcc-bbl-amend-2026-05.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/gbga-2024.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.annotations.json"
+              "/data/in-ka-bengaluru/4.0.0/bbl-2003.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/bccc-bbl-amend-2026-05.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/bncc-bbl-amend-2026-05.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/bscc-bbl-amend-2026-05.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/becc-bbl-amend-2026-05.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/bwcc-bbl-amend-2026-05.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/gbga-2024.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.annotations.json"
             ],
-            "amendments": "/data/in-ka-bengaluru/3.0.0/amendments.json",
-            "zones": "/data/in-ka-bengaluru/3.0.0/zones.geojson",
-            "boundary": "/data/in-ka-bengaluru/3.0.0/boundary.geojson",
-            "sources_json": "/data/in-ka-bengaluru/3.0.0/sources.json",
-            "sources_csv": "/data/in-ka-bengaluru/3.0.0/sources.csv",
+            "amendments": "/data/in-ka-bengaluru/4.0.0/amendments.json",
+            "zones": "/data/in-ka-bengaluru/4.0.0/zones.geojson",
+            "boundary": "/data/in-ka-bengaluru/4.0.0/boundary.geojson",
+            "sources_json": "/data/in-ka-bengaluru/4.0.0/sources.json",
+            "sources_csv": "/data/in-ka-bengaluru/4.0.0/sources.csv",
             "review_images": [],
-            "consolidated": "/data/in-ka-bengaluru/3.0.0/consolidated.json",
-            "geo_layers": "/data/in-ka-bengaluru/3.0.0/geo-layers.json",
-            "clause_zone_tags": "/data/in-ka-bengaluru/3.0.0/clause-zone-tags.json",
-            "gba_zones": "/data/in-ka-bengaluru/3.0.0/gba-zones.geojson",
-            "wards": "/data/in-ka-bengaluru/3.0.0/wards.geojson",
-            "planning_districts": "/data/in-ka-bengaluru/3.0.0/planning-districts.geojson",
-            "relations": "/data/in-ka-bengaluru/3.0.0/relations.json",
-            "graph": "/data/in-ka-bengaluru/3.0.0/graph.json",
-            "parameters": "/data/in-ka-bengaluru/3.0.0/parameters.json",
-            "resolution": "/data/in-ka-bengaluru/3.0.0/resolution.json",
+            "consolidated": "/data/in-ka-bengaluru/4.0.0/consolidated.json",
+            "geo_layers": "/data/in-ka-bengaluru/4.0.0/geo-layers.json",
+            "clause_zone_tags": "/data/in-ka-bengaluru/4.0.0/clause-zone-tags.json",
+            "gba_zones": "/data/in-ka-bengaluru/4.0.0/gba-zones.geojson",
+            "wards": "/data/in-ka-bengaluru/4.0.0/wards.geojson",
+            "planning_districts": "/data/in-ka-bengaluru/4.0.0/planning-districts.geojson",
+            "relations": "/data/in-ka-bengaluru/4.0.0/relations.json",
+            "graph": "/data/in-ka-bengaluru/4.0.0/graph.json",
+            "parameters": "/data/in-ka-bengaluru/4.0.0/parameters.json",
+            "resolution": "/data/in-ka-bengaluru/4.0.0/resolution.json",
             "akn_xml": [
-              "/data/in-ka-bengaluru/3.0.0/consolidated/bbl-2003.akn.xml",
-              "/data/in-ka-bengaluru/3.0.0/consolidated/rmp2015-zr.akn.xml"
+              "/data/in-ka-bengaluru/4.0.0/consolidated/bbl-2003.akn.xml",
+              "/data/in-ka-bengaluru/4.0.0/consolidated/rmp2015-zr.akn.xml"
             ]
           },
           "drafts": {
             "clauses": [
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/bccc-bbl-amend-2026-04-draft.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/bncc-bbl-amend-2026-04-draft.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/bscc-bbl-amend-2026-04-draft.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/becc-bbl-amend-2026-04-draft.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/bwcc-bbl-amend-2026-04-draft.clauses.json"
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/bccc-bbl-amend-2026-04-draft.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/bncc-bbl-amend-2026-04-draft.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/bscc-bbl-amend-2026-04-draft.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/becc-bbl-amend-2026-04-draft.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/bwcc-bbl-amend-2026-04-draft.clauses.json"
             ],
             "outlines": [
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/bccc-bbl-amend-2026-04-draft.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/bncc-bbl-amend-2026-04-draft.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/bscc-bbl-amend-2026-04-draft.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/becc-bbl-amend-2026-04-draft.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/bwcc-bbl-amend-2026-04-draft.outline.json"
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/bccc-bbl-amend-2026-04-draft.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/bncc-bbl-amend-2026-04-draft.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/bscc-bbl-amend-2026-04-draft.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/becc-bbl-amend-2026-04-draft.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/bwcc-bbl-amend-2026-04-draft.outline.json"
             ]
           },
-          "changelog": "Release 3.0.0 for Greater Bengaluru (GBA Area)."
+          "changelog": "Release 4.0.0 for Greater Bengaluru (GBA Area)."
         }
       ],
       "register_documents": "/data/in-ka-bengaluru/register/documents.json"
@@ -193,181 +193,181 @@
         "Chamarajpet"
       ],
       "visibility": "public",
-      "latest_release": "3.0.0",
+      "latest_release": "4.0.0",
       "releases": [
         {
-          "version": "3.0.0",
+          "version": "4.0.0",
           "status": "published",
           "released_at": "2026-11-23T00:00:00Z",
           "licence": "CC BY 4.0",
-          "download_zip": "/data/in-ka-bengaluru-central/3.0.0/in-ka-bengaluru-central-3.0.0.zip",
-          "sha256sums": "/data/in-ka-bengaluru-central/3.0.0/SHA256SUMS",
-          "declarations": "/data/in-ka-bengaluru-central/3.0.0/declarations.json",
+          "download_zip": "/data/in-ka-bengaluru-central/4.0.0/in-ka-bengaluru-central-4.0.0.zip",
+          "sha256sums": "/data/in-ka-bengaluru-central/4.0.0/SHA256SUMS",
+          "declarations": "/data/in-ka-bengaluru-central/4.0.0/declarations.json",
           "files": {
-            "documents": "/data/in-ka-bengaluru-central/3.0.0/documents.json",
+            "documents": "/data/in-ka-bengaluru-central/4.0.0/documents.json",
             "clauses": [
-              "/data/in-ka-bengaluru/3.0.0/bbl-2003.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/gbga-2024.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.clauses.json",
-              "/data/in-ka-bengaluru-central/3.0.0/bccc-bbl-amend-2026-05.clauses.json"
+              "/data/in-ka-bengaluru/4.0.0/bbl-2003.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/gbga-2024.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.clauses.json",
+              "/data/in-ka-bengaluru-central/4.0.0/bccc-bbl-amend-2026-05.clauses.json"
             ],
             "outlines": [
-              "/data/in-ka-bengaluru/3.0.0/bbl-2003.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/gbga-2024.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.outline.json",
-              "/data/in-ka-bengaluru-central/3.0.0/bccc-bbl-amend-2026-05.outline.json"
+              "/data/in-ka-bengaluru/4.0.0/bbl-2003.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/gbga-2024.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.outline.json",
+              "/data/in-ka-bengaluru-central/4.0.0/bccc-bbl-amend-2026-05.outline.json"
             ],
             "annotations": [
-              "/data/in-ka-bengaluru/3.0.0/bbl-2003.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/gbga-2024.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.annotations.json",
-              "/data/in-ka-bengaluru-central/3.0.0/bccc-bbl-amend-2026-05.annotations.json"
+              "/data/in-ka-bengaluru/4.0.0/bbl-2003.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/gbga-2024.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.annotations.json",
+              "/data/in-ka-bengaluru-central/4.0.0/bccc-bbl-amend-2026-05.annotations.json"
             ],
-            "amendments": "/data/in-ka-bengaluru-central/3.0.0/amendments.json",
-            "zones": "/data/in-ka-bengaluru-central/3.0.0/zones.geojson",
-            "boundary": "/data/in-ka-bengaluru-central/3.0.0/boundary.geojson",
-            "sources_json": "/data/in-ka-bengaluru-central/3.0.0/sources.json",
-            "sources_csv": "/data/in-ka-bengaluru-central/3.0.0/sources.csv",
+            "amendments": "/data/in-ka-bengaluru-central/4.0.0/amendments.json",
+            "zones": "/data/in-ka-bengaluru-central/4.0.0/zones.geojson",
+            "boundary": "/data/in-ka-bengaluru-central/4.0.0/boundary.geojson",
+            "sources_json": "/data/in-ka-bengaluru-central/4.0.0/sources.json",
+            "sources_csv": "/data/in-ka-bengaluru-central/4.0.0/sources.csv",
             "review_images": [],
             "shared_documents": {
               "bbl-2003": {
                 "sha256": "2e0f2b9c50664cd8500e99e0c4b8780828e53d7b794ace84a65ffab042ea8e98",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/bbl-2003.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/bbl-2003.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/bbl-2003.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/bbl-2003.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/bbl-2003.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/bbl-2003.annotations.json"
               },
               "ka-model-bbl-2017": {
                 "sha256": "670cdbe9ef72d7187ad58999609fa73ea950d8ce4560538468447d57f04f1d95",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.annotations.json"
               },
               "rmp2015-zr": {
                 "sha256": "405de2bf891253d00b86cda9ed6ed2fb9b5e6488700d1632a2419df54e6f68a6",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.annotations.json"
               },
               "rmp2015-zr-amend-2009-03": {
                 "sha256": "08ca14c56b786770b001f3c3fb3e014e140fd9a011801fdfb58e690a0ad4415f",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.annotations.json"
               },
               "rmp2015-zr-amend-2015-03": {
                 "sha256": "4bd21b431ad209fcbf1dcc39b4088f075fca3943ce06ffdc9705e7baf22d05be",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.annotations.json"
               },
               "rmp2015-zr-amend-2018-09": {
                 "sha256": "776f411d60b76c3611afb4cce736e888a89fb82dbaa7a8f1ab5f2a286b251dd7",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.annotations.json"
               },
               "rmp2015-zr-amend-2019-06": {
                 "sha256": "4b62dbd6498ae50557e7f02fd976403fb7cf917757488c4640b15122fac2d96c",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.annotations.json"
               },
               "rmp2015-zr-amend-2025-02": {
                 "sha256": "280ed08418234fe9e7f912b340c5a76526145d5660c78dc15628e132ec04d494",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.annotations.json"
               },
               "rmp2015-zr-amend-2026-01": {
                 "sha256": "6281942c286bd21e0bcc770bf653575ba0e7308a85cc9867be3a7e0441590a97",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.annotations.json"
               },
               "udd-1107-mnu-2018-draft": {
                 "sha256": "570031f5119dc2a186bdad7309c5312de51b47b9191c7bed1436ccec02e9d200",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.annotations.json"
               },
               "rmp2015-zr-amend-2025-04": {
                 "sha256": "310b46dbe0b4c83838b8bdab980873aa1d59b4f2311c8fb9a4597e2e1223327d",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.annotations.json"
               },
               "rmp2015-zr-amend-2025-10": {
                 "sha256": "1dbd151403aadc3e0135b6b8dd628a5db05861101158eb225d9810a19a85e360",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.annotations.json"
               },
               "gbga-2024": {
                 "sha256": "696122529e1ca500e731eaf7cf9782fa434ca285d959fc21aefac990cee1004f",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/gbga-2024.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/gbga-2024.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/gbga-2024.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/gbga-2024.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/gbga-2024.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/gbga-2024.annotations.json"
               },
               "udd-200-mnu-2025-khata": {
                 "sha256": "cf412e07e9637761d840b935520fb5cff9e2f2227c66e57dfe3572ad963bff2d",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.annotations.json"
               }
             },
-            "consolidated": "/data/in-ka-bengaluru-central/3.0.0/consolidated.json",
-            "geo_layers": "/data/in-ka-bengaluru-central/3.0.0/geo-layers.json",
-            "clause_zone_tags": "/data/in-ka-bengaluru-central/3.0.0/clause-zone-tags.json",
-            "gba_zones": "/data/in-ka-bengaluru-central/3.0.0/gba-zones.geojson",
-            "wards": "/data/in-ka-bengaluru-central/3.0.0/wards.geojson",
-            "relations": "/data/in-ka-bengaluru-central/3.0.0/relations.json",
-            "graph": "/data/in-ka-bengaluru-central/3.0.0/graph.json",
-            "parameters": "/data/in-ka-bengaluru-central/3.0.0/parameters.json",
-            "resolution": "/data/in-ka-bengaluru-central/3.0.0/resolution.json",
+            "consolidated": "/data/in-ka-bengaluru-central/4.0.0/consolidated.json",
+            "geo_layers": "/data/in-ka-bengaluru-central/4.0.0/geo-layers.json",
+            "clause_zone_tags": "/data/in-ka-bengaluru-central/4.0.0/clause-zone-tags.json",
+            "gba_zones": "/data/in-ka-bengaluru-central/4.0.0/gba-zones.geojson",
+            "wards": "/data/in-ka-bengaluru-central/4.0.0/wards.geojson",
+            "relations": "/data/in-ka-bengaluru-central/4.0.0/relations.json",
+            "graph": "/data/in-ka-bengaluru-central/4.0.0/graph.json",
+            "parameters": "/data/in-ka-bengaluru-central/4.0.0/parameters.json",
+            "resolution": "/data/in-ka-bengaluru-central/4.0.0/resolution.json",
             "akn_xml": [
-              "/data/in-ka-bengaluru-central/3.0.0/consolidated/bbl-2003.akn.xml"
+              "/data/in-ka-bengaluru-central/4.0.0/consolidated/bbl-2003.akn.xml"
             ]
           },
           "drafts": {
             "clauses": [
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.clauses.json",
-              "/data/in-ka-bengaluru-central/3.0.0/bccc-bbl-amend-2026-04-draft.clauses.json"
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.clauses.json",
+              "/data/in-ka-bengaluru-central/4.0.0/bccc-bbl-amend-2026-04-draft.clauses.json"
             ],
             "outlines": [
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.outline.json",
-              "/data/in-ka-bengaluru-central/3.0.0/bccc-bbl-amend-2026-04-draft.outline.json"
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.outline.json",
+              "/data/in-ka-bengaluru-central/4.0.0/bccc-bbl-amend-2026-04-draft.outline.json"
             ]
           },
-          "changelog": "Release 3.0.0 for Bengaluru Central City Corporation."
+          "changelog": "Release 4.0.0 for Bengaluru Central City Corporation."
         }
       ],
       "parent": "in-ka-bengaluru",
@@ -388,181 +388,181 @@
         "Sarvagnanagar"
       ],
       "visibility": "public",
-      "latest_release": "3.0.0",
+      "latest_release": "4.0.0",
       "releases": [
         {
-          "version": "3.0.0",
+          "version": "4.0.0",
           "status": "published",
           "released_at": "2026-11-23T00:00:00Z",
           "licence": "CC BY 4.0",
-          "download_zip": "/data/in-ka-bengaluru-north/3.0.0/in-ka-bengaluru-north-3.0.0.zip",
-          "sha256sums": "/data/in-ka-bengaluru-north/3.0.0/SHA256SUMS",
-          "declarations": "/data/in-ka-bengaluru-north/3.0.0/declarations.json",
+          "download_zip": "/data/in-ka-bengaluru-north/4.0.0/in-ka-bengaluru-north-4.0.0.zip",
+          "sha256sums": "/data/in-ka-bengaluru-north/4.0.0/SHA256SUMS",
+          "declarations": "/data/in-ka-bengaluru-north/4.0.0/declarations.json",
           "files": {
-            "documents": "/data/in-ka-bengaluru-north/3.0.0/documents.json",
+            "documents": "/data/in-ka-bengaluru-north/4.0.0/documents.json",
             "clauses": [
-              "/data/in-ka-bengaluru/3.0.0/bbl-2003.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/gbga-2024.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.clauses.json",
-              "/data/in-ka-bengaluru-north/3.0.0/bncc-bbl-amend-2026-05.clauses.json"
+              "/data/in-ka-bengaluru/4.0.0/bbl-2003.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/gbga-2024.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.clauses.json",
+              "/data/in-ka-bengaluru-north/4.0.0/bncc-bbl-amend-2026-05.clauses.json"
             ],
             "outlines": [
-              "/data/in-ka-bengaluru/3.0.0/bbl-2003.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/gbga-2024.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.outline.json",
-              "/data/in-ka-bengaluru-north/3.0.0/bncc-bbl-amend-2026-05.outline.json"
+              "/data/in-ka-bengaluru/4.0.0/bbl-2003.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/gbga-2024.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.outline.json",
+              "/data/in-ka-bengaluru-north/4.0.0/bncc-bbl-amend-2026-05.outline.json"
             ],
             "annotations": [
-              "/data/in-ka-bengaluru/3.0.0/bbl-2003.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/gbga-2024.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.annotations.json",
-              "/data/in-ka-bengaluru-north/3.0.0/bncc-bbl-amend-2026-05.annotations.json"
+              "/data/in-ka-bengaluru/4.0.0/bbl-2003.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/gbga-2024.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.annotations.json",
+              "/data/in-ka-bengaluru-north/4.0.0/bncc-bbl-amend-2026-05.annotations.json"
             ],
-            "amendments": "/data/in-ka-bengaluru-north/3.0.0/amendments.json",
-            "zones": "/data/in-ka-bengaluru-north/3.0.0/zones.geojson",
-            "boundary": "/data/in-ka-bengaluru-north/3.0.0/boundary.geojson",
-            "sources_json": "/data/in-ka-bengaluru-north/3.0.0/sources.json",
-            "sources_csv": "/data/in-ka-bengaluru-north/3.0.0/sources.csv",
+            "amendments": "/data/in-ka-bengaluru-north/4.0.0/amendments.json",
+            "zones": "/data/in-ka-bengaluru-north/4.0.0/zones.geojson",
+            "boundary": "/data/in-ka-bengaluru-north/4.0.0/boundary.geojson",
+            "sources_json": "/data/in-ka-bengaluru-north/4.0.0/sources.json",
+            "sources_csv": "/data/in-ka-bengaluru-north/4.0.0/sources.csv",
             "review_images": [],
             "shared_documents": {
               "bbl-2003": {
                 "sha256": "2e0f2b9c50664cd8500e99e0c4b8780828e53d7b794ace84a65ffab042ea8e98",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/bbl-2003.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/bbl-2003.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/bbl-2003.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/bbl-2003.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/bbl-2003.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/bbl-2003.annotations.json"
               },
               "ka-model-bbl-2017": {
                 "sha256": "670cdbe9ef72d7187ad58999609fa73ea950d8ce4560538468447d57f04f1d95",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.annotations.json"
               },
               "rmp2015-zr": {
                 "sha256": "405de2bf891253d00b86cda9ed6ed2fb9b5e6488700d1632a2419df54e6f68a6",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.annotations.json"
               },
               "rmp2015-zr-amend-2009-03": {
                 "sha256": "08ca14c56b786770b001f3c3fb3e014e140fd9a011801fdfb58e690a0ad4415f",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.annotations.json"
               },
               "rmp2015-zr-amend-2015-03": {
                 "sha256": "4bd21b431ad209fcbf1dcc39b4088f075fca3943ce06ffdc9705e7baf22d05be",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.annotations.json"
               },
               "rmp2015-zr-amend-2018-09": {
                 "sha256": "776f411d60b76c3611afb4cce736e888a89fb82dbaa7a8f1ab5f2a286b251dd7",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.annotations.json"
               },
               "rmp2015-zr-amend-2019-06": {
                 "sha256": "4b62dbd6498ae50557e7f02fd976403fb7cf917757488c4640b15122fac2d96c",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.annotations.json"
               },
               "rmp2015-zr-amend-2025-02": {
                 "sha256": "280ed08418234fe9e7f912b340c5a76526145d5660c78dc15628e132ec04d494",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.annotations.json"
               },
               "rmp2015-zr-amend-2026-01": {
                 "sha256": "6281942c286bd21e0bcc770bf653575ba0e7308a85cc9867be3a7e0441590a97",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.annotations.json"
               },
               "udd-1107-mnu-2018-draft": {
                 "sha256": "570031f5119dc2a186bdad7309c5312de51b47b9191c7bed1436ccec02e9d200",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.annotations.json"
               },
               "rmp2015-zr-amend-2025-04": {
                 "sha256": "310b46dbe0b4c83838b8bdab980873aa1d59b4f2311c8fb9a4597e2e1223327d",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.annotations.json"
               },
               "rmp2015-zr-amend-2025-10": {
                 "sha256": "1dbd151403aadc3e0135b6b8dd628a5db05861101158eb225d9810a19a85e360",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.annotations.json"
               },
               "gbga-2024": {
                 "sha256": "696122529e1ca500e731eaf7cf9782fa434ca285d959fc21aefac990cee1004f",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/gbga-2024.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/gbga-2024.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/gbga-2024.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/gbga-2024.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/gbga-2024.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/gbga-2024.annotations.json"
               },
               "udd-200-mnu-2025-khata": {
                 "sha256": "cf412e07e9637761d840b935520fb5cff9e2f2227c66e57dfe3572ad963bff2d",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.annotations.json"
               }
             },
-            "consolidated": "/data/in-ka-bengaluru-north/3.0.0/consolidated.json",
-            "geo_layers": "/data/in-ka-bengaluru-north/3.0.0/geo-layers.json",
-            "clause_zone_tags": "/data/in-ka-bengaluru-north/3.0.0/clause-zone-tags.json",
-            "gba_zones": "/data/in-ka-bengaluru-north/3.0.0/gba-zones.geojson",
-            "wards": "/data/in-ka-bengaluru-north/3.0.0/wards.geojson",
-            "relations": "/data/in-ka-bengaluru-north/3.0.0/relations.json",
-            "graph": "/data/in-ka-bengaluru-north/3.0.0/graph.json",
-            "parameters": "/data/in-ka-bengaluru-north/3.0.0/parameters.json",
-            "resolution": "/data/in-ka-bengaluru-north/3.0.0/resolution.json",
+            "consolidated": "/data/in-ka-bengaluru-north/4.0.0/consolidated.json",
+            "geo_layers": "/data/in-ka-bengaluru-north/4.0.0/geo-layers.json",
+            "clause_zone_tags": "/data/in-ka-bengaluru-north/4.0.0/clause-zone-tags.json",
+            "gba_zones": "/data/in-ka-bengaluru-north/4.0.0/gba-zones.geojson",
+            "wards": "/data/in-ka-bengaluru-north/4.0.0/wards.geojson",
+            "relations": "/data/in-ka-bengaluru-north/4.0.0/relations.json",
+            "graph": "/data/in-ka-bengaluru-north/4.0.0/graph.json",
+            "parameters": "/data/in-ka-bengaluru-north/4.0.0/parameters.json",
+            "resolution": "/data/in-ka-bengaluru-north/4.0.0/resolution.json",
             "akn_xml": [
-              "/data/in-ka-bengaluru-north/3.0.0/consolidated/bbl-2003.akn.xml"
+              "/data/in-ka-bengaluru-north/4.0.0/consolidated/bbl-2003.akn.xml"
             ]
           },
           "drafts": {
             "clauses": [
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.clauses.json",
-              "/data/in-ka-bengaluru-north/3.0.0/bncc-bbl-amend-2026-04-draft.clauses.json"
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.clauses.json",
+              "/data/in-ka-bengaluru-north/4.0.0/bncc-bbl-amend-2026-04-draft.clauses.json"
             ],
             "outlines": [
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.outline.json",
-              "/data/in-ka-bengaluru-north/3.0.0/bncc-bbl-amend-2026-04-draft.outline.json"
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.outline.json",
+              "/data/in-ka-bengaluru-north/4.0.0/bncc-bbl-amend-2026-04-draft.outline.json"
             ]
           },
-          "changelog": "Release 3.0.0 for Bengaluru North City Corporation."
+          "changelog": "Release 4.0.0 for Bengaluru North City Corporation."
         }
       ],
       "parent": "in-ka-bengaluru",
@@ -587,7 +587,7 @@
         "Uttarahalli"
       ],
       "visibility": "public",
-      "latest_release": "3.0.0",
+      "latest_release": "4.0.0",
       "releases": [
         {
           "version": "1.0.0",
@@ -747,180 +747,180 @@
           "changelog": "Release 2.3.0 for Bengaluru South City Corporation."
         },
         {
-          "version": "3.0.0",
+          "version": "4.0.0",
           "status": "published",
           "released_at": "2026-11-23T00:00:00Z",
           "licence": "CC BY 4.0",
-          "download_zip": "/data/in-ka-bengaluru-south/3.0.0/in-ka-bengaluru-south-3.0.0.zip",
-          "sha256sums": "/data/in-ka-bengaluru-south/3.0.0/SHA256SUMS",
-          "declarations": "/data/in-ka-bengaluru-south/3.0.0/declarations.json",
+          "download_zip": "/data/in-ka-bengaluru-south/4.0.0/in-ka-bengaluru-south-4.0.0.zip",
+          "sha256sums": "/data/in-ka-bengaluru-south/4.0.0/SHA256SUMS",
+          "declarations": "/data/in-ka-bengaluru-south/4.0.0/declarations.json",
           "files": {
-            "documents": "/data/in-ka-bengaluru-south/3.0.0/documents.json",
+            "documents": "/data/in-ka-bengaluru-south/4.0.0/documents.json",
             "clauses": [
-              "/data/in-ka-bengaluru/3.0.0/bbl-2003.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.clauses.json",
-              "/data/in-ka-bengaluru-south/3.0.0/bscc-bbl-amend-2026-05.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/gbga-2024.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.clauses.json"
+              "/data/in-ka-bengaluru/4.0.0/bbl-2003.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.clauses.json",
+              "/data/in-ka-bengaluru-south/4.0.0/bscc-bbl-amend-2026-05.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/gbga-2024.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.clauses.json"
             ],
             "outlines": [
-              "/data/in-ka-bengaluru/3.0.0/bbl-2003.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.outline.json",
-              "/data/in-ka-bengaluru-south/3.0.0/bscc-bbl-amend-2026-05.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/gbga-2024.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.outline.json"
+              "/data/in-ka-bengaluru/4.0.0/bbl-2003.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.outline.json",
+              "/data/in-ka-bengaluru-south/4.0.0/bscc-bbl-amend-2026-05.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/gbga-2024.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.outline.json"
             ],
             "annotations": [
-              "/data/in-ka-bengaluru/3.0.0/bbl-2003.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.annotations.json",
-              "/data/in-ka-bengaluru-south/3.0.0/bscc-bbl-amend-2026-05.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/gbga-2024.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.annotations.json"
+              "/data/in-ka-bengaluru/4.0.0/bbl-2003.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.annotations.json",
+              "/data/in-ka-bengaluru-south/4.0.0/bscc-bbl-amend-2026-05.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/gbga-2024.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.annotations.json"
             ],
-            "amendments": "/data/in-ka-bengaluru-south/3.0.0/amendments.json",
-            "zones": "/data/in-ka-bengaluru-south/3.0.0/zones.geojson",
-            "boundary": "/data/in-ka-bengaluru-south/3.0.0/boundary.geojson",
-            "sources_json": "/data/in-ka-bengaluru-south/3.0.0/sources.json",
-            "sources_csv": "/data/in-ka-bengaluru-south/3.0.0/sources.csv",
+            "amendments": "/data/in-ka-bengaluru-south/4.0.0/amendments.json",
+            "zones": "/data/in-ka-bengaluru-south/4.0.0/zones.geojson",
+            "boundary": "/data/in-ka-bengaluru-south/4.0.0/boundary.geojson",
+            "sources_json": "/data/in-ka-bengaluru-south/4.0.0/sources.json",
+            "sources_csv": "/data/in-ka-bengaluru-south/4.0.0/sources.csv",
             "review_images": [],
             "shared_documents": {
               "bbl-2003": {
                 "sha256": "2e0f2b9c50664cd8500e99e0c4b8780828e53d7b794ace84a65ffab042ea8e98",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/bbl-2003.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/bbl-2003.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/bbl-2003.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/bbl-2003.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/bbl-2003.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/bbl-2003.annotations.json"
               },
               "ka-model-bbl-2017": {
                 "sha256": "670cdbe9ef72d7187ad58999609fa73ea950d8ce4560538468447d57f04f1d95",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.annotations.json"
               },
               "rmp2015-zr": {
                 "sha256": "405de2bf891253d00b86cda9ed6ed2fb9b5e6488700d1632a2419df54e6f68a6",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.annotations.json"
               },
               "rmp2015-zr-amend-2009-03": {
                 "sha256": "08ca14c56b786770b001f3c3fb3e014e140fd9a011801fdfb58e690a0ad4415f",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.annotations.json"
               },
               "rmp2015-zr-amend-2015-03": {
                 "sha256": "4bd21b431ad209fcbf1dcc39b4088f075fca3943ce06ffdc9705e7baf22d05be",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.annotations.json"
               },
               "rmp2015-zr-amend-2018-09": {
                 "sha256": "776f411d60b76c3611afb4cce736e888a89fb82dbaa7a8f1ab5f2a286b251dd7",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.annotations.json"
               },
               "rmp2015-zr-amend-2019-06": {
                 "sha256": "4b62dbd6498ae50557e7f02fd976403fb7cf917757488c4640b15122fac2d96c",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.annotations.json"
               },
               "rmp2015-zr-amend-2025-02": {
                 "sha256": "280ed08418234fe9e7f912b340c5a76526145d5660c78dc15628e132ec04d494",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.annotations.json"
               },
               "rmp2015-zr-amend-2026-01": {
                 "sha256": "6281942c286bd21e0bcc770bf653575ba0e7308a85cc9867be3a7e0441590a97",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.annotations.json"
               },
               "udd-1107-mnu-2018-draft": {
                 "sha256": "570031f5119dc2a186bdad7309c5312de51b47b9191c7bed1436ccec02e9d200",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.annotations.json"
               },
               "rmp2015-zr-amend-2025-04": {
                 "sha256": "310b46dbe0b4c83838b8bdab980873aa1d59b4f2311c8fb9a4597e2e1223327d",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.annotations.json"
               },
               "rmp2015-zr-amend-2025-10": {
                 "sha256": "1dbd151403aadc3e0135b6b8dd628a5db05861101158eb225d9810a19a85e360",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.annotations.json"
               },
               "gbga-2024": {
                 "sha256": "696122529e1ca500e731eaf7cf9782fa434ca285d959fc21aefac990cee1004f",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/gbga-2024.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/gbga-2024.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/gbga-2024.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/gbga-2024.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/gbga-2024.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/gbga-2024.annotations.json"
               },
               "udd-200-mnu-2025-khata": {
                 "sha256": "cf412e07e9637761d840b935520fb5cff9e2f2227c66e57dfe3572ad963bff2d",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.annotations.json"
               }
             },
-            "consolidated": "/data/in-ka-bengaluru-south/3.0.0/consolidated.json",
-            "geo_layers": "/data/in-ka-bengaluru-south/3.0.0/geo-layers.json",
-            "clause_zone_tags": "/data/in-ka-bengaluru-south/3.0.0/clause-zone-tags.json",
-            "gba_zones": "/data/in-ka-bengaluru-south/3.0.0/gba-zones.geojson",
-            "wards": "/data/in-ka-bengaluru-south/3.0.0/wards.geojson",
-            "planning_districts": "/data/in-ka-bengaluru-south/3.0.0/planning-districts.geojson",
-            "overlays": "/data/in-ka-bengaluru-south/3.0.0/overlays.geojson",
-            "relations": "/data/in-ka-bengaluru-south/3.0.0/relations.json",
-            "graph": "/data/in-ka-bengaluru-south/3.0.0/graph.json",
-            "parameters": "/data/in-ka-bengaluru-south/3.0.0/parameters.json",
-            "resolution": "/data/in-ka-bengaluru-south/3.0.0/resolution.json",
+            "consolidated": "/data/in-ka-bengaluru-south/4.0.0/consolidated.json",
+            "geo_layers": "/data/in-ka-bengaluru-south/4.0.0/geo-layers.json",
+            "clause_zone_tags": "/data/in-ka-bengaluru-south/4.0.0/clause-zone-tags.json",
+            "gba_zones": "/data/in-ka-bengaluru-south/4.0.0/gba-zones.geojson",
+            "wards": "/data/in-ka-bengaluru-south/4.0.0/wards.geojson",
+            "planning_districts": "/data/in-ka-bengaluru-south/4.0.0/planning-districts.geojson",
+            "overlays": "/data/in-ka-bengaluru-south/4.0.0/overlays.geojson",
+            "relations": "/data/in-ka-bengaluru-south/4.0.0/relations.json",
+            "graph": "/data/in-ka-bengaluru-south/4.0.0/graph.json",
+            "parameters": "/data/in-ka-bengaluru-south/4.0.0/parameters.json",
+            "resolution": "/data/in-ka-bengaluru-south/4.0.0/resolution.json",
             "akn_xml": [
-              "/data/in-ka-bengaluru-south/3.0.0/consolidated/bbl-2003.akn.xml"
+              "/data/in-ka-bengaluru-south/4.0.0/consolidated/bbl-2003.akn.xml"
             ]
           },
           "drafts": {
             "clauses": [
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.clauses.json",
-              "/data/in-ka-bengaluru-south/3.0.0/bscc-bbl-amend-2026-04-draft.clauses.json"
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.clauses.json",
+              "/data/in-ka-bengaluru-south/4.0.0/bscc-bbl-amend-2026-04-draft.clauses.json"
             ],
             "outlines": [
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.outline.json",
-              "/data/in-ka-bengaluru-south/3.0.0/bscc-bbl-amend-2026-04-draft.outline.json"
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.outline.json",
+              "/data/in-ka-bengaluru-south/4.0.0/bscc-bbl-amend-2026-04-draft.outline.json"
             ]
           },
-          "changelog": "Release 3.0.0 for Bengaluru South City Corporation."
+          "changelog": "Release 4.0.0 for Bengaluru South City Corporation."
         }
       ],
       "parent": "in-ka-bengaluru",
@@ -940,181 +940,181 @@
         "Hoodi"
       ],
       "visibility": "public",
-      "latest_release": "3.0.0",
+      "latest_release": "4.0.0",
       "releases": [
         {
-          "version": "3.0.0",
+          "version": "4.0.0",
           "status": "published",
           "released_at": "2026-11-23T00:00:00Z",
           "licence": "CC BY 4.0",
-          "download_zip": "/data/in-ka-bengaluru-east/3.0.0/in-ka-bengaluru-east-3.0.0.zip",
-          "sha256sums": "/data/in-ka-bengaluru-east/3.0.0/SHA256SUMS",
-          "declarations": "/data/in-ka-bengaluru-east/3.0.0/declarations.json",
+          "download_zip": "/data/in-ka-bengaluru-east/4.0.0/in-ka-bengaluru-east-4.0.0.zip",
+          "sha256sums": "/data/in-ka-bengaluru-east/4.0.0/SHA256SUMS",
+          "declarations": "/data/in-ka-bengaluru-east/4.0.0/declarations.json",
           "files": {
-            "documents": "/data/in-ka-bengaluru-east/3.0.0/documents.json",
+            "documents": "/data/in-ka-bengaluru-east/4.0.0/documents.json",
             "clauses": [
-              "/data/in-ka-bengaluru/3.0.0/bbl-2003.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/gbga-2024.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.clauses.json",
-              "/data/in-ka-bengaluru-east/3.0.0/becc-bbl-amend-2026-05.clauses.json"
+              "/data/in-ka-bengaluru/4.0.0/bbl-2003.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/gbga-2024.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.clauses.json",
+              "/data/in-ka-bengaluru-east/4.0.0/becc-bbl-amend-2026-05.clauses.json"
             ],
             "outlines": [
-              "/data/in-ka-bengaluru/3.0.0/bbl-2003.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/gbga-2024.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.outline.json",
-              "/data/in-ka-bengaluru-east/3.0.0/becc-bbl-amend-2026-05.outline.json"
+              "/data/in-ka-bengaluru/4.0.0/bbl-2003.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/gbga-2024.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.outline.json",
+              "/data/in-ka-bengaluru-east/4.0.0/becc-bbl-amend-2026-05.outline.json"
             ],
             "annotations": [
-              "/data/in-ka-bengaluru/3.0.0/bbl-2003.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/gbga-2024.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.annotations.json",
-              "/data/in-ka-bengaluru-east/3.0.0/becc-bbl-amend-2026-05.annotations.json"
+              "/data/in-ka-bengaluru/4.0.0/bbl-2003.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/gbga-2024.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.annotations.json",
+              "/data/in-ka-bengaluru-east/4.0.0/becc-bbl-amend-2026-05.annotations.json"
             ],
-            "amendments": "/data/in-ka-bengaluru-east/3.0.0/amendments.json",
-            "zones": "/data/in-ka-bengaluru-east/3.0.0/zones.geojson",
-            "boundary": "/data/in-ka-bengaluru-east/3.0.0/boundary.geojson",
-            "sources_json": "/data/in-ka-bengaluru-east/3.0.0/sources.json",
-            "sources_csv": "/data/in-ka-bengaluru-east/3.0.0/sources.csv",
+            "amendments": "/data/in-ka-bengaluru-east/4.0.0/amendments.json",
+            "zones": "/data/in-ka-bengaluru-east/4.0.0/zones.geojson",
+            "boundary": "/data/in-ka-bengaluru-east/4.0.0/boundary.geojson",
+            "sources_json": "/data/in-ka-bengaluru-east/4.0.0/sources.json",
+            "sources_csv": "/data/in-ka-bengaluru-east/4.0.0/sources.csv",
             "review_images": [],
             "shared_documents": {
               "bbl-2003": {
                 "sha256": "2e0f2b9c50664cd8500e99e0c4b8780828e53d7b794ace84a65ffab042ea8e98",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/bbl-2003.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/bbl-2003.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/bbl-2003.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/bbl-2003.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/bbl-2003.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/bbl-2003.annotations.json"
               },
               "ka-model-bbl-2017": {
                 "sha256": "670cdbe9ef72d7187ad58999609fa73ea950d8ce4560538468447d57f04f1d95",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.annotations.json"
               },
               "rmp2015-zr": {
                 "sha256": "405de2bf891253d00b86cda9ed6ed2fb9b5e6488700d1632a2419df54e6f68a6",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.annotations.json"
               },
               "rmp2015-zr-amend-2009-03": {
                 "sha256": "08ca14c56b786770b001f3c3fb3e014e140fd9a011801fdfb58e690a0ad4415f",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.annotations.json"
               },
               "rmp2015-zr-amend-2015-03": {
                 "sha256": "4bd21b431ad209fcbf1dcc39b4088f075fca3943ce06ffdc9705e7baf22d05be",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.annotations.json"
               },
               "rmp2015-zr-amend-2018-09": {
                 "sha256": "776f411d60b76c3611afb4cce736e888a89fb82dbaa7a8f1ab5f2a286b251dd7",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.annotations.json"
               },
               "rmp2015-zr-amend-2019-06": {
                 "sha256": "4b62dbd6498ae50557e7f02fd976403fb7cf917757488c4640b15122fac2d96c",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.annotations.json"
               },
               "rmp2015-zr-amend-2025-02": {
                 "sha256": "280ed08418234fe9e7f912b340c5a76526145d5660c78dc15628e132ec04d494",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.annotations.json"
               },
               "rmp2015-zr-amend-2026-01": {
                 "sha256": "6281942c286bd21e0bcc770bf653575ba0e7308a85cc9867be3a7e0441590a97",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.annotations.json"
               },
               "udd-1107-mnu-2018-draft": {
                 "sha256": "570031f5119dc2a186bdad7309c5312de51b47b9191c7bed1436ccec02e9d200",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.annotations.json"
               },
               "rmp2015-zr-amend-2025-04": {
                 "sha256": "310b46dbe0b4c83838b8bdab980873aa1d59b4f2311c8fb9a4597e2e1223327d",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.annotations.json"
               },
               "rmp2015-zr-amend-2025-10": {
                 "sha256": "1dbd151403aadc3e0135b6b8dd628a5db05861101158eb225d9810a19a85e360",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.annotations.json"
               },
               "gbga-2024": {
                 "sha256": "696122529e1ca500e731eaf7cf9782fa434ca285d959fc21aefac990cee1004f",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/gbga-2024.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/gbga-2024.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/gbga-2024.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/gbga-2024.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/gbga-2024.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/gbga-2024.annotations.json"
               },
               "udd-200-mnu-2025-khata": {
                 "sha256": "cf412e07e9637761d840b935520fb5cff9e2f2227c66e57dfe3572ad963bff2d",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.annotations.json"
               }
             },
-            "consolidated": "/data/in-ka-bengaluru-east/3.0.0/consolidated.json",
-            "geo_layers": "/data/in-ka-bengaluru-east/3.0.0/geo-layers.json",
-            "clause_zone_tags": "/data/in-ka-bengaluru-east/3.0.0/clause-zone-tags.json",
-            "gba_zones": "/data/in-ka-bengaluru-east/3.0.0/gba-zones.geojson",
-            "wards": "/data/in-ka-bengaluru-east/3.0.0/wards.geojson",
-            "relations": "/data/in-ka-bengaluru-east/3.0.0/relations.json",
-            "graph": "/data/in-ka-bengaluru-east/3.0.0/graph.json",
-            "parameters": "/data/in-ka-bengaluru-east/3.0.0/parameters.json",
-            "resolution": "/data/in-ka-bengaluru-east/3.0.0/resolution.json",
+            "consolidated": "/data/in-ka-bengaluru-east/4.0.0/consolidated.json",
+            "geo_layers": "/data/in-ka-bengaluru-east/4.0.0/geo-layers.json",
+            "clause_zone_tags": "/data/in-ka-bengaluru-east/4.0.0/clause-zone-tags.json",
+            "gba_zones": "/data/in-ka-bengaluru-east/4.0.0/gba-zones.geojson",
+            "wards": "/data/in-ka-bengaluru-east/4.0.0/wards.geojson",
+            "relations": "/data/in-ka-bengaluru-east/4.0.0/relations.json",
+            "graph": "/data/in-ka-bengaluru-east/4.0.0/graph.json",
+            "parameters": "/data/in-ka-bengaluru-east/4.0.0/parameters.json",
+            "resolution": "/data/in-ka-bengaluru-east/4.0.0/resolution.json",
             "akn_xml": [
-              "/data/in-ka-bengaluru-east/3.0.0/consolidated/bbl-2003.akn.xml"
+              "/data/in-ka-bengaluru-east/4.0.0/consolidated/bbl-2003.akn.xml"
             ]
           },
           "drafts": {
             "clauses": [
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.clauses.json",
-              "/data/in-ka-bengaluru-east/3.0.0/becc-bbl-amend-2026-04-draft.clauses.json"
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.clauses.json",
+              "/data/in-ka-bengaluru-east/4.0.0/becc-bbl-amend-2026-04-draft.clauses.json"
             ],
             "outlines": [
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.outline.json",
-              "/data/in-ka-bengaluru-east/3.0.0/becc-bbl-amend-2026-04-draft.outline.json"
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.outline.json",
+              "/data/in-ka-bengaluru-east/4.0.0/becc-bbl-amend-2026-04-draft.outline.json"
             ]
           },
-          "changelog": "Release 3.0.0 for Bengaluru East City Corporation."
+          "changelog": "Release 4.0.0 for Bengaluru East City Corporation."
         }
       ],
       "parent": "in-ka-bengaluru",
@@ -1136,181 +1136,181 @@
         "Yeshwanthpur"
       ],
       "visibility": "public",
-      "latest_release": "3.0.0",
+      "latest_release": "4.0.0",
       "releases": [
         {
-          "version": "3.0.0",
+          "version": "4.0.0",
           "status": "published",
           "released_at": "2026-11-23T00:00:00Z",
           "licence": "CC BY 4.0",
-          "download_zip": "/data/in-ka-bengaluru-west/3.0.0/in-ka-bengaluru-west-3.0.0.zip",
-          "sha256sums": "/data/in-ka-bengaluru-west/3.0.0/SHA256SUMS",
-          "declarations": "/data/in-ka-bengaluru-west/3.0.0/declarations.json",
+          "download_zip": "/data/in-ka-bengaluru-west/4.0.0/in-ka-bengaluru-west-4.0.0.zip",
+          "sha256sums": "/data/in-ka-bengaluru-west/4.0.0/SHA256SUMS",
+          "declarations": "/data/in-ka-bengaluru-west/4.0.0/declarations.json",
           "files": {
-            "documents": "/data/in-ka-bengaluru-west/3.0.0/documents.json",
+            "documents": "/data/in-ka-bengaluru-west/4.0.0/documents.json",
             "clauses": [
-              "/data/in-ka-bengaluru/3.0.0/bbl-2003.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/gbga-2024.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.clauses.json",
-              "/data/in-ka-bengaluru-west/3.0.0/bwcc-bbl-amend-2026-05.clauses.json"
+              "/data/in-ka-bengaluru/4.0.0/bbl-2003.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/gbga-2024.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.clauses.json",
+              "/data/in-ka-bengaluru-west/4.0.0/bwcc-bbl-amend-2026-05.clauses.json"
             ],
             "outlines": [
-              "/data/in-ka-bengaluru/3.0.0/bbl-2003.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/gbga-2024.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.outline.json",
-              "/data/in-ka-bengaluru-west/3.0.0/bwcc-bbl-amend-2026-05.outline.json"
+              "/data/in-ka-bengaluru/4.0.0/bbl-2003.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/gbga-2024.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.outline.json",
+              "/data/in-ka-bengaluru-west/4.0.0/bwcc-bbl-amend-2026-05.outline.json"
             ],
             "annotations": [
-              "/data/in-ka-bengaluru/3.0.0/bbl-2003.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/gbga-2024.annotations.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.annotations.json",
-              "/data/in-ka-bengaluru-west/3.0.0/bwcc-bbl-amend-2026-05.annotations.json"
+              "/data/in-ka-bengaluru/4.0.0/bbl-2003.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/gbga-2024.annotations.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.annotations.json",
+              "/data/in-ka-bengaluru-west/4.0.0/bwcc-bbl-amend-2026-05.annotations.json"
             ],
-            "amendments": "/data/in-ka-bengaluru-west/3.0.0/amendments.json",
-            "zones": "/data/in-ka-bengaluru-west/3.0.0/zones.geojson",
-            "boundary": "/data/in-ka-bengaluru-west/3.0.0/boundary.geojson",
-            "sources_json": "/data/in-ka-bengaluru-west/3.0.0/sources.json",
-            "sources_csv": "/data/in-ka-bengaluru-west/3.0.0/sources.csv",
+            "amendments": "/data/in-ka-bengaluru-west/4.0.0/amendments.json",
+            "zones": "/data/in-ka-bengaluru-west/4.0.0/zones.geojson",
+            "boundary": "/data/in-ka-bengaluru-west/4.0.0/boundary.geojson",
+            "sources_json": "/data/in-ka-bengaluru-west/4.0.0/sources.json",
+            "sources_csv": "/data/in-ka-bengaluru-west/4.0.0/sources.csv",
             "review_images": [],
             "shared_documents": {
               "bbl-2003": {
                 "sha256": "2e0f2b9c50664cd8500e99e0c4b8780828e53d7b794ace84a65ffab042ea8e98",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/bbl-2003.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/bbl-2003.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/bbl-2003.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/bbl-2003.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/bbl-2003.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/bbl-2003.annotations.json"
               },
               "ka-model-bbl-2017": {
                 "sha256": "670cdbe9ef72d7187ad58999609fa73ea950d8ce4560538468447d57f04f1d95",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.annotations.json"
               },
               "rmp2015-zr": {
                 "sha256": "405de2bf891253d00b86cda9ed6ed2fb9b5e6488700d1632a2419df54e6f68a6",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.annotations.json"
               },
               "rmp2015-zr-amend-2009-03": {
                 "sha256": "08ca14c56b786770b001f3c3fb3e014e140fd9a011801fdfb58e690a0ad4415f",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2009-03.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.annotations.json"
               },
               "rmp2015-zr-amend-2015-03": {
                 "sha256": "4bd21b431ad209fcbf1dcc39b4088f075fca3943ce06ffdc9705e7baf22d05be",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2015-03.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.annotations.json"
               },
               "rmp2015-zr-amend-2018-09": {
                 "sha256": "776f411d60b76c3611afb4cce736e888a89fb82dbaa7a8f1ab5f2a286b251dd7",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2018-09.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.annotations.json"
               },
               "rmp2015-zr-amend-2019-06": {
                 "sha256": "4b62dbd6498ae50557e7f02fd976403fb7cf917757488c4640b15122fac2d96c",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2019-06.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.annotations.json"
               },
               "rmp2015-zr-amend-2025-02": {
                 "sha256": "280ed08418234fe9e7f912b340c5a76526145d5660c78dc15628e132ec04d494",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.annotations.json"
               },
               "rmp2015-zr-amend-2026-01": {
                 "sha256": "6281942c286bd21e0bcc770bf653575ba0e7308a85cc9867be3a7e0441590a97",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2026-01.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.annotations.json"
               },
               "udd-1107-mnu-2018-draft": {
                 "sha256": "570031f5119dc2a186bdad7309c5312de51b47b9191c7bed1436ccec02e9d200",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.annotations.json"
               },
               "rmp2015-zr-amend-2025-04": {
                 "sha256": "310b46dbe0b4c83838b8bdab980873aa1d59b4f2311c8fb9a4597e2e1223327d",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-04.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.annotations.json"
               },
               "rmp2015-zr-amend-2025-10": {
                 "sha256": "1dbd151403aadc3e0135b6b8dd628a5db05861101158eb225d9810a19a85e360",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-10.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.annotations.json"
               },
               "gbga-2024": {
                 "sha256": "696122529e1ca500e731eaf7cf9782fa434ca285d959fc21aefac990cee1004f",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/gbga-2024.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/gbga-2024.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/gbga-2024.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/gbga-2024.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/gbga-2024.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/gbga-2024.annotations.json"
               },
               "udd-200-mnu-2025-khata": {
                 "sha256": "cf412e07e9637761d840b935520fb5cff9e2f2227c66e57dfe3572ad963bff2d",
-                "clauses": "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.clauses.json",
-                "outline": "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.outline.json",
-                "annotations": "/data/in-ka-bengaluru/3.0.0/udd-200-mnu-2025-khata.annotations.json"
+                "clauses": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.clauses.json",
+                "outline": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.outline.json",
+                "annotations": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.annotations.json"
               }
             },
-            "consolidated": "/data/in-ka-bengaluru-west/3.0.0/consolidated.json",
-            "geo_layers": "/data/in-ka-bengaluru-west/3.0.0/geo-layers.json",
-            "clause_zone_tags": "/data/in-ka-bengaluru-west/3.0.0/clause-zone-tags.json",
-            "gba_zones": "/data/in-ka-bengaluru-west/3.0.0/gba-zones.geojson",
-            "wards": "/data/in-ka-bengaluru-west/3.0.0/wards.geojson",
-            "relations": "/data/in-ka-bengaluru-west/3.0.0/relations.json",
-            "graph": "/data/in-ka-bengaluru-west/3.0.0/graph.json",
-            "parameters": "/data/in-ka-bengaluru-west/3.0.0/parameters.json",
-            "resolution": "/data/in-ka-bengaluru-west/3.0.0/resolution.json",
+            "consolidated": "/data/in-ka-bengaluru-west/4.0.0/consolidated.json",
+            "geo_layers": "/data/in-ka-bengaluru-west/4.0.0/geo-layers.json",
+            "clause_zone_tags": "/data/in-ka-bengaluru-west/4.0.0/clause-zone-tags.json",
+            "gba_zones": "/data/in-ka-bengaluru-west/4.0.0/gba-zones.geojson",
+            "wards": "/data/in-ka-bengaluru-west/4.0.0/wards.geojson",
+            "relations": "/data/in-ka-bengaluru-west/4.0.0/relations.json",
+            "graph": "/data/in-ka-bengaluru-west/4.0.0/graph.json",
+            "parameters": "/data/in-ka-bengaluru-west/4.0.0/parameters.json",
+            "resolution": "/data/in-ka-bengaluru-west/4.0.0/resolution.json",
             "akn_xml": [
-              "/data/in-ka-bengaluru-west/3.0.0/consolidated/bbl-2003.akn.xml"
+              "/data/in-ka-bengaluru-west/4.0.0/consolidated/bbl-2003.akn.xml"
             ]
           },
           "drafts": {
             "clauses": [
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.clauses.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.clauses.json",
-              "/data/in-ka-bengaluru-west/3.0.0/bwcc-bbl-amend-2026-04-draft.clauses.json"
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.clauses.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.clauses.json",
+              "/data/in-ka-bengaluru-west/4.0.0/bwcc-bbl-amend-2026-04-draft.clauses.json"
             ],
             "outlines": [
-              "/data/in-ka-bengaluru/3.0.0/rmp2015-zr-amend-2025-02.outline.json",
-              "/data/in-ka-bengaluru/3.0.0/udd-1107-mnu-2018-draft.outline.json",
-              "/data/in-ka-bengaluru-west/3.0.0/bwcc-bbl-amend-2026-04-draft.outline.json"
+              "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.outline.json",
+              "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.outline.json",
+              "/data/in-ka-bengaluru-west/4.0.0/bwcc-bbl-amend-2026-04-draft.outline.json"
             ]
           },
-          "changelog": "Release 3.0.0 for Bengaluru West City Corporation."
+          "changelog": "Release 4.0.0 for Bengaluru West City Corporation."
         }
       ],
       "parent": "in-ka-bengaluru",

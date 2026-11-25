@@ -18,7 +18,7 @@ const southDir = path.join(
   "public",
   "data",
   "in-ka-bengaluru-south",
-  "3.0.0"
+  "4.0.0"
 );
 
 function readJson<T>(filename: string): T {

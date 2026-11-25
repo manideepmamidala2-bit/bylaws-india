@@ -160,8 +160,8 @@ def _reset_clause_tree_versions(tree: dict[str, Any]) -> None:
             v0["valid_to"] = None
             c["versions"] = [v0]
         c["amended_by"] = []
-        c["change_mark"] = None
-        c["omitted"] = False
+        c.pop("change_mark", None)
+        c.pop("omitted", None)
         base_clauses.append(c)
     if inserted_eids:
         for idx, c in enumerate(base_clauses):
@@ -230,17 +230,18 @@ def _apply_effect_to_target_tree(
         }
         versions.append(new_ver)
         target_node["versions"] = versions
-        target_node["change_mark"] = {
-            "label": mark_label,
-            "amending_doc": amending_doc,
-            "amending_eid": amending_eid,
-            "amending_clause_id": f"{amending_doc}:{amending_eid}",
-            "effective_date": str(valid_from or ""),
-            "action": action,
-            "original_text": orig_ver.get("content") or target_node.get("text"),
-            "original_heading": orig_ver.get("heading") or target_node.get("heading"),
-            "original_cells": orig_ver.get("cells") or target_node.get("cells"),
-        }
+        if jurisdiction_name:
+            target_node["change_mark"] = {
+                "label": mark_label,
+                "amending_doc": amending_doc,
+                "amending_eid": amending_eid,
+                "amending_clause_id": f"{amending_doc}:{amending_eid}",
+                "effective_date": str(valid_from or ""),
+                "action": action,
+                "original_text": orig_ver.get("content") or target_node.get("text"),
+                "original_heading": orig_ver.get("heading") or target_node.get("heading"),
+                "original_cells": orig_ver.get("cells") or target_node.get("cells"),
+            }
         return
 
     if action == "omit":
@@ -266,18 +267,19 @@ def _apply_effect_to_target_tree(
         }
         versions.append(omitted_ver)
         target_node["versions"] = versions
-        target_node["omitted"] = True
-        target_node["change_mark"] = {
-            "label": mark_label,
-            "amending_doc": amending_doc,
-            "amending_eid": amending_eid,
-            "amending_clause_id": f"{amending_doc}:{amending_eid}",
-            "effective_date": str(valid_from or ""),
-            "action": "omit",
-            "original_text": orig_ver.get("content") or target_node.get("text"),
-            "original_heading": orig_ver.get("heading") or target_node.get("heading"),
-            "original_cells": orig_ver.get("cells") or target_node.get("cells"),
-        }
+        if jurisdiction_name:
+            target_node["omitted"] = True
+            target_node["change_mark"] = {
+                "label": mark_label,
+                "amending_doc": amending_doc,
+                "amending_eid": amending_eid,
+                "amending_clause_id": f"{amending_doc}:{amending_eid}",
+                "effective_date": str(valid_from or ""),
+                "action": "omit",
+                "original_text": orig_ver.get("content") or target_node.get("text"),
+                "original_heading": orig_ver.get("heading") or target_node.get("heading"),
+                "original_cells": orig_ver.get("cells") or target_node.get("cells"),
+            }
         return
 
     if action in {"insert_after", "insert_before"} and effect.get("new_nodes"):
@@ -349,18 +351,24 @@ def _apply_effect_to_target_tree(
             "applies_to_zones": list(target_node.get("applies_to_zones") or []),
             "verification": "machine_checked",
             "verified_by": None,
-            "omitted": False,
-            "change_mark": {
-                "label": mark_label,
-                "amending_doc": amending_doc,
-                "amending_eid": amending_eid,
-                "amending_clause_id": f"{amending_doc}:{amending_eid}",
-                "effective_date": str(valid_from or ""),
-                "action": action,
-                "original_text": None,
-                "original_heading": None,
-                "original_cells": None,
-            },
+            **(
+                {
+                    "omitted": False,
+                    "change_mark": {
+                        "label": mark_label,
+                        "amending_doc": amending_doc,
+                        "amending_eid": amending_eid,
+                        "amending_clause_id": f"{amending_doc}:{amending_eid}",
+                        "effective_date": str(valid_from or ""),
+                        "action": action,
+                        "original_text": None,
+                        "original_heading": None,
+                        "original_cells": None,
+                    },
+                }
+                if jurisdiction_name
+                else {}
+            ),
         }
 
         target_idx = next(

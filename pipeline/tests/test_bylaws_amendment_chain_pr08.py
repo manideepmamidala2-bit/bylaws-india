@@ -17,7 +17,7 @@ def test_bylaws_chain_documents_structured_with_annotations_and_provenance() -> 
     check_repository_provenance(REPO_ROOT)
 
     config = load_jurisdiction_config("in-ka-bengaluru-south")
-    assert config.release_version in {"2.3.0", "2.4.0", "2.5.0", "2.6.0", "2.7.0", "2.8.0", "3.0.0"}
+    assert config.release_version in {"2.3.0", "2.4.0", "2.5.0", "2.6.0", "2.7.0", "2.8.0", "3.0.0", "4.0.0"}
     assert RELEASE_DIR.is_dir(), f"Missing Release 2.3.0 directory at {RELEASE_DIR}"
 
     by_id = {d.id: d for d in config.documents}

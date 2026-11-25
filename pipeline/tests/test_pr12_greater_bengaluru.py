@@ -251,7 +251,7 @@ def test_part4_schema_1_4_topics_relations_precedence_succession_and_applicabili
 def test_part5_and_6_supporting_provisions_verified_overlays_4_sheets_and_zone_applicability_links() -> None:
     """Parts 5 & 6 (`10-supporting-provisions.md` & `11-all-sheets-zone-links-release.md`): Supporting instruments (`gbga-2024`, `udd-200-mnu-2025-khata`) are structured with `building_relevant_sections`, `ktcda-amend-bill-2025` is `status_unknown` in `contested_status`, `overlays.geojson` is published (`derived: true`), 4 RMP 2015 land-use sheets (`1,276` zone polygons) are extracted with RMSE <= 10m, and `zone_applicability` annotations + `clause-zone-tags.json` never link preamble/title/definition/commencement nodes."""
     rel_dir = _get_latest_south_release_dir()
-    assert rel_dir.name == "3.0.0"
+    assert rel_dir.name in {"3.0.0", "4.0.0"}
 
     # Supporting provisions & contested KTCDA Bill
     for sup_id in ("gbga-2024", "udd-200-mnu-2025-khata"):

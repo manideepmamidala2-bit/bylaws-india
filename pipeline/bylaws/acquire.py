@@ -115,12 +115,13 @@ def _resolve_applies_to_jurisdiction(
     ev_url = doc.status_evidence.url if doc.status_evidence else doc.source_url
     if doc.role == "reference" and doc.layer == "state_rules":
         return {
-            "status": "unknown",
+            "status": "no",
             "reason": (
-                "Notified under Section 325 of the Karnataka Municipalities Act, 1964 for municipal "
-                "councils and town panchayats, while listed on the municipal Building Plan Approval "
-                "System alongside the principal 2003 Building Bye-laws; applicability to city "
-                "corporations is recorded as unknown with both sources."
+                "Not applicable here (likely): notified under Section 324(1) of the Karnataka "
+                "Municipalities Act, 1964 for municipal councils and town panchayats, rather than "
+                "City Corporations governed by the KMC Act, 1976 and GBGA, 2024. Kept in the "
+                "register for reference only and excluded from definitions, relations, parameters, "
+                "and plot answers."
             ),
             "quoted_evidence": quoted,
             "url": ev_url,

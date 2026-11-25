@@ -119,7 +119,7 @@ The web interface MUST replace verbose conflict cards with concise Resolution ca
 
 ### Phase 7: Part 6 — Register, Gaps & Final Verification
 
-- [ ] T009 Update `jurisdictions/in-ka-bengaluru*.yaml`, `pipeline/`, and `app/j/[id]/sources/page.tsx` + `app/data/page.tsx` to mark `ka-model-bbl-2017` as `"Not applicable here (likely)"` under `"In force elsewhere, not applicable here"` (excluding it from definitions, relations, parameters, and plot answers), declare all coverage gaps in plain words, publish Release `4.0.0` metadata and counts on `/data`, and verify all unit, Playwright E2E, page-budget, R1–R16, and `axe-core` tests pass — then commit, push, and update `docs/progress.md` and the PR body for Part 6 <!-- R8 -->
+- [x] T009 Update `jurisdictions/in-ka-bengaluru*.yaml`, `pipeline/`, and `app/j/[id]/sources/page.tsx` + `app/data/page.tsx` to mark `ka-model-bbl-2017` as `"Not applicable here (likely)"` under `"In force elsewhere, not applicable here"` (excluding it from definitions, relations, parameters, and plot answers), declare all coverage gaps in plain words, publish Release `4.0.0` metadata and counts on `/data`, and verify all unit, Playwright E2E, page-budget, R1–R16, and `axe-core` tests pass — then commit, push, and update `docs/progress.md` and the PR body for Part 6 <!-- R8 -->
 
 ## Execution Order
 

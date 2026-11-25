@@ -10,7 +10,7 @@ aliases:
 - BDA Local Planning Area
 visibility: public
 licence: CC BY 4.0
-release_version: 3.0.0
+release_version: 4.0.0
 country: IN
 state: KA
 building_types:

@@ -184,6 +184,62 @@ export default async function DataReleasesPage() {
                                   Declarations (.json)
                                 </a>
                               )}
+                              {rel.files?.consolidated && (
+                                <a
+                                  href={rel.files.consolidated}
+                                  className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 text-[#080909] no-underline"
+                                >
+                                  Consolidated Code (.json)
+                                </a>
+                              )}
+                              {rel.files?.parameters && (
+                                <a
+                                  href={rel.files.parameters}
+                                  className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 text-[#080909] no-underline"
+                                >
+                                  Parameters (.json)
+                                </a>
+                              )}
+                              {rel.files?.resolution && (
+                                <a
+                                  href={rel.files.resolution}
+                                  className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 text-[#080909] no-underline"
+                                >
+                                  Resolution Rules (.json)
+                                </a>
+                              )}
+                              {rel.files?.relations && (
+                                <a
+                                  href={rel.files.relations}
+                                  className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 text-[#080909] no-underline"
+                                >
+                                  Relations (Measured &amp; Unmeasured .json)
+                                </a>
+                              )}
+                              {rel.files?.boundary && (
+                                <a
+                                  href={rel.files.boundary}
+                                  className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 text-[#080909] no-underline"
+                                >
+                                  Boundaries (.geojson)
+                                </a>
+                              )}
+                              {rel.files?.wards && (
+                                <a
+                                  href={rel.files.wards}
+                                  className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 text-[#080909] no-underline"
+                                >
+                                  Wards (.geojson)
+                                </a>
+                              )}
+                              {rel.files?.zones && (
+                                <a
+                                  href={rel.files.zones}
+                                  className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 text-[#080909] no-underline"
+                                >
+                                  Land-Use Zones (.geojson)
+                                </a>
+                              )}
                             </div>
                           </>
                         )}
