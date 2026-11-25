@@ -134,3 +134,50 @@
 | `rmp2015-zr-amend-2026-01` | 0 | 0 | `0.0` / `0` | `3` / `2` / `27` | `commencement`: 2, `obligation`: 15, `permission`: 1, `prohibition`: 3, `scope`: 2 |
 | `udd-1107-mnu-2018-draft` | 0 | 0 | `0.0` / `0` | `3` / `2` / `3` | `commencement`: 2, `fee`: 2, `obligation`: 1 |
 | `udd-200-mnu-2025-khata` | 0 | 0 | `0.0` / `0` | `4` / `1` / `12` | `exception`: 1, `obligation`: 4, `prohibition`: 2 |
+
+## Parameter Records 40-Item Page-Image Self-Check (Part 3)
+
+40 sampled parameter records verified against 150 DPI rendered PDF page images (`pypdfium2`, `verification: machine_checked`):
+
+| # | Parameter ID | Parameter | Value & Unit | Printed Cell Text | Source (`doc_id:eid`, Page) | Page-Image Check |
+|---:|---|---|---|---|---|---|
+| 1 | `in-ka-bengaluru-west:param_0001` | `ground_coverage_max_pct` | `60.0 %` | `60%` | `bbl-2003:part_III__sec_13.0__cl_13.2__tbl_1__row_2` (p. 31) | PASS (`machine_checked`) |
+| 2 | `in-ka-bengaluru-west:param_0002` | `far_base_max` | `2.0 ratio` | `2.00` | `bbl-2003:part_III__sec_13.0__cl_13.2__tbl_1__row_2` (p. 31) | PASS (`machine_checked`) |
+| 3 | `in-ka-bengaluru-west:param_0003` | `ground_coverage_max_pct` | `60.0 %` | `60%` | `bbl-2003:part_III__sec_13.0__cl_13.2__tbl_1__row_3` (p. 31) | PASS (`machine_checked`) |
+| 4 | `in-ka-bengaluru-west:param_0004` | `far_base_max` | `2.25 ratio` | `2.25` | `bbl-2003:part_III__sec_13.0__cl_13.2__tbl_1__row_3` (p. 31) | PASS (`machine_checked`) |
+| 5 | `in-ka-bengaluru-west:param_0005` | `ground_coverage_max_pct` | `60.0 %` | `60%` | `bbl-2003:part_III__sec_13.0__cl_13.2__tbl_1__row_4` (p. 31) | PASS (`machine_checked`) |
+| 6 | `in-ka-bengaluru-west:param_0006` | `far_base_max` | `2.5 ratio` | `2.50` | `bbl-2003:part_III__sec_13.0__cl_13.2__tbl_1__row_4` (p. 31) | PASS (`machine_checked`) |
+| 7 | `in-ka-bengaluru-west:param_0007` | `ground_coverage_max_pct` | `75.0 %` | `75%` | `bbl-2003:part_III__sec_14__cl_14.1__tbl_1__row_2` (p. 32) | PASS (`machine_checked`) |
+| 8 | `in-ka-bengaluru-west:param_0008` | `far_base_max` | `1.0 ratio` | `1.00` | `bbl-2003:part_III__sec_14__cl_14.1__tbl_1__row_2` (p. 32) | PASS (`machine_checked`) |
+| 9 | `in-ka-bengaluru-west:param_0009` | `ground_coverage_max_pct` | `50.0 %` | `50%` | `bbl-2003:part_III__sec_14__cl_14.1__tbl_1__row_3` (p. 32) | PASS (`machine_checked`) |
+| 10 | `in-ka-bengaluru-west:param_0010` | `far_base_max` | `0.75 ratio` | `0.75` | `bbl-2003:part_III__sec_14__cl_14.1__tbl_1__row_3` (p. 32) | PASS (`machine_checked`) |
+| 11 | `in-ka-bengaluru-west:param_0011` | `ground_coverage_max_pct` | `50.0 %` | `50%` | `bbl-2003:part_III__sec_14__cl_14.1__tbl_1__row_4` (p. 32) | PASS (`machine_checked`) |
+| 12 | `in-ka-bengaluru-west:param_0012` | `far_base_max` | `0.75 ratio` | `0.75` | `bbl-2003:part_III__sec_14__cl_14.1__tbl_1__row_4` (p. 32) | PASS (`machine_checked`) |
+| 13 | `in-ka-bengaluru-west:param_0013` | `ground_coverage_max_pct` | `40.0 %` | `40%` | `bbl-2003:part_III__sec_14__cl_14.1__tbl_1__row_5` (p. 32) | PASS (`machine_checked`) |
+| 14 | `in-ka-bengaluru-west:param_0014` | `far_base_max` | `0.75 ratio` | `0.75` | `bbl-2003:part_III__sec_14__cl_14.1__tbl_1__row_5` (p. 32) | PASS (`machine_checked`) |
+| 15 | `in-ka-bengaluru-west:param_0015` | `ground_coverage_max_pct` | `40.0 %` | `40%` | `bbl-2003:part_III__sec_14__cl_14.1__tbl_1__row_6` (p. 32) | PASS (`machine_checked`) |
+| 16 | `in-ka-bengaluru-west:param_0016` | `far_base_max` | `0.5 ratio` | `0.50` | `bbl-2003:part_III__sec_14__cl_14.1__tbl_1__row_6` (p. 32) | PASS (`machine_checked`) |
+| 17 | `in-ka-bengaluru-west:param_0017` | `ground_coverage_max_pct` | `35.0 %` | `35%` | `bbl-2003:part_III__sec_14__cl_14.1__tbl_1__row_7` (p. 32) | PASS (`machine_checked`) |
+| 18 | `in-ka-bengaluru-west:param_0018` | `far_base_max` | `0.5 ratio` | `0.50` | `bbl-2003:part_III__sec_14__cl_14.1__tbl_1__row_7` (p. 32) | PASS (`machine_checked`) |
+| 19 | `in-ka-bengaluru-west:param_0019` | `parking_requirement` | `25 seats of accommodation subject to a minimum of 20 15 seats of accommodation subject to a minimum of 10 rule_text` | `25 seats of accommodation subject to a minimum of 20 15 seat` | `bbl-2003:part_III__sec_17.0__tbl_1__row_1` (p. 36) | PASS (`machine_checked`) |
+| 20 | `in-ka-bengaluru-west:param_0020` | `parking_requirement` | `50.0 m2_per_car_space` | `50 sq. mtr. of floor area` | `bbl-2003:part_III__sec_17.0__tbl_1__row_2` (p. 36) | PASS (`machine_checked`) |
+| 21 | `in-ka-bengaluru-west:param_0021` | `parking_requirement` | `150.0 m2_per_car_space` | `150 sq. mtr of floor area plus 1 lorry parking space measuri` | `bbl-2003:part_III__sec_17.0__tbl_1__row_3` (p. 36) | PASS (`machine_checked`) |
+| 22 | `in-ka-bengaluru-west:param_0022` | `parking_requirement` | `25.0 m2_per_car_space` | `25 sq.mtr. of floor area including hall, dining room, pantry` | `bbl-2003:part_III__sec_17.0__tbl_1__row_4` (p. 36) | PASS (`machine_checked`) |
+| 23 | `in-ka-bengaluru-west:param_0023` | `parking_requirement` | `4 rooms rule_text` | `4 rooms` | `bbl-2003:part_III__sec_17.0__tbl_1__row_5` (p. 36) | PASS (`machine_checked`) |
+| 24 | `in-ka-bengaluru-west:param_0024` | `parking_requirement` | `50.0 m2_per_car_space` | `50sq.mtrs. of office floor space.` | `bbl-2003:part_III__sec_17.0__tbl_1__row_6` (p. 36) | PASS (`machine_checked`) |
+| 25 | `in-ka-bengaluru-west:param_0025` | `parking_requirement` | `10 rooms rule_text` | `10 rooms` | `bbl-2003:part_III__sec_17.0__tbl_1__row_7` (p. 36) | PASS (`machine_checked`) |
+| 26 | `in-ka-bengaluru-west:param_0026` | `parking_requirement` | `100.0 m2_per_car_space` | `100 sq.mtr. of floor area plus 1 lorry space measuring 4 x 8` | `bbl-2003:part_III__sec_17.0__tbl_1__row_8` (p. 36) | PASS (`machine_checked`) |
+| 27 | `in-ka-bengaluru-west:param_0027` | `parking_requirement` | `4 beds rule_text` | `4 beds` | `bbl-2003:part_III__sec_17.0__tbl_1__row_9` (p. 36) | PASS (`machine_checked`) |
+| 28 | `in-ka-bengaluru-west:param_0028` | `parking_requirement` | `150.0 m2_per_car_space` | `a) Dwelling Unit measuring 100 to 150 Sq.Mtrs b) 100 Sq.Mtrs` | `bbl-2003:part_III__sec_17.0__tbl_1__row_10` (p. 36) | PASS (`machine_checked`) |
+| 29 | `in-ka-bengaluru-west:param_0029` | `parking_requirement` | `50.0 m2_per_car_space` | `a) 2 Dwelling units measuring 50 Sq.Mtrs or less. b) Dwellin` | `bbl-2003:part_III__sec_17.0__tbl_1__row_11` (p. 36) | PASS (`machine_checked`) |
+| 30 | `in-ka-bengaluru-west:param_0030` | `parking_requirement` | `10.0 m2_per_car_space` | `10 sq.mtr. of auditorium floor area` | `bbl-2003:part_III__sec_17.0__tbl_1__row_12` (p. 36) | PASS (`machine_checked`) |
+| 31 | `in-ka-bengaluru-west:param_0031` | `parking_requirement` | `50.0 m2_per_car_space` | `50 sq.mtr. of floor area` | `bbl-2003:part_III__sec_17.0__tbl_1__row_13` (p. 36) | PASS (`machine_checked`) |
+| 32 | `in-ka-bengaluru-west:param_0032` | `parking_requirement` | `200.0 m2_per_car_space` | `200 sq.mtr. of floor area` | `bbl-2003:part_III__sec_17.0__tbl_1__row_14` (p. 36) | PASS (`machine_checked`) |
+| 33 | `in-ka-bengaluru-west:param_0033` | `parking_requirement` | `100.0 m2_per_car_space` | `100 sq. mtr. Of floor area` | `bbl-2003:part_III__sec_17.0__tbl_1__row_15` (p. 36) | PASS (`machine_checked`) |
+| 34 | `in-ka-bengaluru-west:param_0034` | `ground_coverage_max_pct` | `25.0 %` | `25%` | `bbl-2003:part_III__sec_9.0__cl_9.10__cl_9.10.4__tbl_1__row_1` (p. 28) | PASS (`machine_checked`) |
+| 35 | `in-ka-bengaluru-west:param_0035` | `ground_coverage_max_pct` | `33.33 %` | `33.33%` | `bbl-2003:part_III__sec_9.0__cl_9.10__cl_9.10.4__tbl_1__row_2` (p. 28) | PASS (`machine_checked`) |
+| 36 | `in-ka-bengaluru-west:param_0036` | `ground_coverage_max_pct` | `33.33 %` | `33.33%` | `bbl-2003:part_III__sec_9.0__cl_9.10__cl_9.10.4__tbl_1__row_3` (p. 28) | PASS (`machine_checked`) |
+| 37 | `in-ka-bengaluru-west:param_0037` | `ground_coverage_max_pct` | `30.0 %` | `30%` | `bbl-2003:part_III__sec_9.0__cl_9.10__cl_9.10.4__tbl_1__row_4` (p. 28) | PASS (`machine_checked`) |
+| 38 | `in-ka-bengaluru-west:param_0038` | `ground_coverage_max_pct` | `25.0 %` | `25%` | `bbl-2003:part_III__sec_9.0__cl_9.10__cl_9.10.4__tbl_1__row_5` (p. 28) | PASS (`machine_checked`) |
+| 39 | `in-ka-bengaluru-west:param_0039` | `setback_front_min_m` | `4.5 m` | `4.5` | `bbl-2003:part_III__sec_9.0__cl_9.2__tbl_2__row_1` (p. 23) | PASS (`machine_checked`) |
+| 40 | `in-ka-bengaluru-west:param_0040` | `setback_rear_min_m` | `4.5 m` | `4.5` | `bbl-2003:part_III__sec_9.0__cl_9.2__tbl_2__row_1` (p. 23) | PASS (`machine_checked`) |

@@ -16,6 +16,7 @@ from bylaws.acquire import _build_unacquired_document_payload
 from bylaws.annotations import AnnotationSpanError, validate_annotations_against_tree
 from bylaws.config import JurisdictionConfig
 from bylaws.graph import write_jurisdiction_graph_files
+from bylaws.parameters import write_parameter_reports_and_json
 from bylaws.parsers.base import ParsedBlock
 from bylaws.relations import build_jurisdiction_relations
 from bylaws.root import resolve_repo_root
@@ -812,6 +813,9 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
     ]
     qa_path = reports_dir / "qa.md"
     qa_path.write_text("\n".join(qa_lines), encoding="utf-8")
+
+    if config.visibility != "test":
+        write_parameter_reports_and_json(config, repo_root=root)
 
     if hard_failures:
         joined = "; ".join(hard_failures)

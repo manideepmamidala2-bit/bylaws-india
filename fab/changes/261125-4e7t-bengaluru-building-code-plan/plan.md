@@ -106,7 +106,7 @@ The web interface MUST replace verbose conflict cards with concise Resolution ca
 
 ### Phase 4: Part 3 — Parameters: The Numbers as Data
 
-- [ ] T005 Implement `pipeline/bylaws/parameters.py` and wire into `pipeline/bylaws/cli.py` / `publish.py` / `validate.py` to fix multi-row headers, footnotes, and numeric misreads (`"10,000 sq. mtrs"`), parse numeric intervals and categorical conditions for all 10 building parameter types into `parameters.json`, cross-check every parsed value against `cell_text` (`data/reports/in-ka-bengaluru-south/parameter-mismatches.md`), and generate the 40-record PDF page-image self-check in `data/reports/in-ka-bengaluru-south/qa.md` with unit tests in `pipeline/tests/test_parameters.py` — then commit, push, and update `docs/progress.md` and the PR body for Part 3 <!-- R4 -->
+- [x] T005 Implement `pipeline/bylaws/parameters.py` and wire into `pipeline/bylaws/cli.py` / `publish.py` / `validate.py` to fix multi-row headers, footnotes, and numeric misreads (`"10,000 sq. mtrs"`), parse numeric intervals and categorical conditions for all 10 building parameter types into `parameters.json`, cross-check every parsed value against `cell_text` (`data/reports/in-ka-bengaluru-south/parameter-mismatches.md`), and generate the 40-record PDF page-image self-check in `data/reports/in-ka-bengaluru-south/qa.md` with unit tests in `pipeline/tests/test_parameters.py` — then commit, push, and update `docs/progress.md` and the PR body for Part 3 <!-- R4 -->
 
 ### Phase 5: Part 4 — Resolution, Plot Resolver & Rebuilt Relations
 

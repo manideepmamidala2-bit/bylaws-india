@@ -145,6 +145,7 @@
             "planning_districts": "/data/in-ka-bengaluru/3.0.0/planning-districts.geojson",
             "relations": "/data/in-ka-bengaluru/3.0.0/relations.json",
             "graph": "/data/in-ka-bengaluru/3.0.0/graph.json",
+            "parameters": "/data/in-ka-bengaluru/3.0.0/parameters.json",
             "akn_xml": [
               "/data/in-ka-bengaluru/3.0.0/consolidated/bbl-2003.akn.xml",
               "/data/in-ka-bengaluru/3.0.0/consolidated/rmp2015-zr.akn.xml"
@@ -347,6 +348,7 @@
             "wards": "/data/in-ka-bengaluru-central/3.0.0/wards.geojson",
             "relations": "/data/in-ka-bengaluru-central/3.0.0/relations.json",
             "graph": "/data/in-ka-bengaluru-central/3.0.0/graph.json",
+            "parameters": "/data/in-ka-bengaluru-central/3.0.0/parameters.json",
             "akn_xml": [
               "/data/in-ka-bengaluru-central/3.0.0/consolidated/bbl-2003.akn.xml"
             ]
@@ -540,6 +542,7 @@
             "wards": "/data/in-ka-bengaluru-north/3.0.0/wards.geojson",
             "relations": "/data/in-ka-bengaluru-north/3.0.0/relations.json",
             "graph": "/data/in-ka-bengaluru-north/3.0.0/graph.json",
+            "parameters": "/data/in-ka-bengaluru-north/3.0.0/parameters.json",
             "akn_xml": [
               "/data/in-ka-bengaluru-north/3.0.0/consolidated/bbl-2003.akn.xml"
             ]
@@ -896,6 +899,7 @@
             "overlays": "/data/in-ka-bengaluru-south/3.0.0/overlays.geojson",
             "relations": "/data/in-ka-bengaluru-south/3.0.0/relations.json",
             "graph": "/data/in-ka-bengaluru-south/3.0.0/graph.json",
+            "parameters": "/data/in-ka-bengaluru-south/3.0.0/parameters.json",
             "akn_xml": [
               "/data/in-ka-bengaluru-south/3.0.0/consolidated/bbl-2003.akn.xml"
             ]
@@ -1088,6 +1092,7 @@
             "wards": "/data/in-ka-bengaluru-east/3.0.0/wards.geojson",
             "relations": "/data/in-ka-bengaluru-east/3.0.0/relations.json",
             "graph": "/data/in-ka-bengaluru-east/3.0.0/graph.json",
+            "parameters": "/data/in-ka-bengaluru-east/3.0.0/parameters.json",
             "akn_xml": [
               "/data/in-ka-bengaluru-east/3.0.0/consolidated/bbl-2003.akn.xml"
             ]
@@ -1282,6 +1287,7 @@
             "wards": "/data/in-ka-bengaluru-west/3.0.0/wards.geojson",
             "relations": "/data/in-ka-bengaluru-west/3.0.0/relations.json",
             "graph": "/data/in-ka-bengaluru-west/3.0.0/graph.json",
+            "parameters": "/data/in-ka-bengaluru-west/3.0.0/parameters.json",
             "akn_xml": [
               "/data/in-ka-bengaluru-west/3.0.0/consolidated/bbl-2003.akn.xml"
             ]

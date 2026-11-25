@@ -418,6 +418,21 @@ def _build_columns_hierarchy(
 ) -> tuple[list[dict[str, Any]], list[list[str]]]:
     """Build hierarchical `TableColumnHeader` tree (supporting 2-row header grids and units)."""
     unit_re = re.compile(r"^(?P<label>.+?)\s*\((?P<unit>[^)]+)\)\s*$")
+    non_unit_qualifiers = {"max", "min", "maximum", "minimum", "optional", "approx"}
+
+    def _split_label_and_unit(raw_text: str, default_label: str) -> tuple[str, str | None]:
+        m_u = unit_re.match(raw_text)
+        if not m_u:
+            return (raw_text or default_label), None
+        cand_unit = m_u.group("unit").strip()
+        if cand_unit.lower().rstrip(".") in non_unit_qualifiers:
+            return (raw_text or default_label), None
+        if cand_unit.lower().startswith("min") or cand_unit.lower().startswith("max"):
+            inner = re.sub(r"^(?:min|max|minimum|maximum)\.?\s*(?:in\s*)?", "", cand_unit, flags=re.IGNORECASE).strip()
+            if inner:
+                return (m_u.group("label").strip() or default_label), inner
+            return (raw_text or default_label), None
+        return (m_u.group("label").strip() or default_label), cand_unit
 
     # Check if the first row in `rows` is a second-level subheader row (non-numeric labels)
     has_second_header_row = False
@@ -437,18 +452,18 @@ def _build_columns_hierarchy(
         hdr_clean = raw_hdr.strip() or (
             rows[0][col_idx].strip() if has_second_header_row and rows[0][col_idx].strip() else fallback_lbl
         )
-        m_unit = unit_re.match(hdr_clean)
+        lbl_parsed, unit_parsed = _split_label_and_unit(hdr_clean, fallback_lbl)
         col_entry: dict[str, Any] = {
-            "label": (m_unit.group("label").strip() if m_unit else hdr_clean) or fallback_lbl,
-            "unit": m_unit.group("unit").strip() if m_unit else None,
+            "label": lbl_parsed,
+            "unit": unit_parsed,
         }
         if has_second_header_row:
             sub_raw = rows[0][col_idx].strip() or col_entry["label"]
-            m_sub = unit_re.match(sub_raw)
+            sub_lbl, sub_unit = _split_label_and_unit(sub_raw, fallback_lbl)
             col_entry["children"] = [
                 {
-                    "label": (m_sub.group("label").strip() if m_sub else sub_raw) or fallback_lbl,
-                    "unit": m_sub.group("unit").strip() if m_sub else col_entry["unit"],
+                    "label": sub_lbl,
+                    "unit": sub_unit or col_entry["unit"],
                 }
             ]
         elif col_entry["unit"] is not None:
