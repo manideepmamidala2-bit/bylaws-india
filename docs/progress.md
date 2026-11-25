@@ -35,3 +35,25 @@ Tracks the 11-PR remediation series defined in [`docs/plans/pr-series/00-overvie
 - **Release `2.6.0` (PR 12 Part 3 / `09` — RMP 2015 Zoning Regulations Amendment Chain)**: **Published** across `in-ka-bengaluru` and all 5 child City Corporations with all 8 English `rmp2015-zr` amending notifications structured (`2009-03`, `2015-03`, `2018-09`, `2019-06`, `2025-02` draft, `2025-04` final Premium FAR Chapter 11, `2025-10` final Nala/Drain Buffer notification, and `2026-01` final Setbacks Table 8 / Basements / Ramps / Mutation Corridors / Industrial notification), 15 chronological Layer 3 `effects` applied to `rmp2015-zr` node `versions` and `consolidated.json` (25 consolidated clauses per corporation), and page-image verification in `qa.md`.
 - **Release `2.7.0` (PR 12 Part 4 / `09b` — Schema 1.4 Topics, Relations, Conflicts, Precedence, Applicability, Succession & Local Graph)**: **Published** across `in-ka-bengaluru` and all 5 child City Corporations with 14 regulatory topics (`topics.yaml`), 3 statutory institution succession entries (`succession.yaml`), `applies_to_jurisdiction` on every document (`unknown` with dual evidence on `ka-model-bbl-2017`), `topic` and `quantity` annotations, 186 cross-document relations per corporation (`49 same_topic`, `59 definition_differs`, `22 numeric_differs`, `27 cross_document_reference`, `13 precedence` with quoted statutory spans, and `16 corporation_differs`), `relations.md` QA report, and `/j/[id]/topics`, `/j/[id]/topics/[topic]`, and `/j/[id]/documents/[doc]/[eid]` (with local SVG neighborhood graph + accessible connection list).
 - **Release `3.0.0` (PR 12 Parts 5 & 6 / `10` & `11` — Supporting Provisions, Verified Overlays, Multi-Sheet Land-Use Zones & `zone_applicability` Links)**: **Published** across `in-ka-bengaluru` and all 5 child City Corporations (`central`, `north`, `south`, `east`, `west`) with supporting building provisions (`gbga-2024` Chapter XVII Regulation of Buildings & Sections 317–318 with `building_relevant_sections`, `udd-200-mnu-2025-khata` A/B Khata & Building Plan Approval Order, and `ktcda-amend-bill-2025` declared `status_unknown` in `contested_status`), verified 30.0 m Lake No-Development Buffer overlay (`overlays.geojson`, `derived: true`), 4 georeferenced RMP 2015 Proposed Land Use sheets (`rmp2015-pd-210-b`, `rmp2015-pd-210-a`, `rmp2015-pd-211-a`, `rmp2015-pd-211-b` yielding `1,276` zone polygons with `RMSE = 0.0002–0.0032 m` and OSM road median offset `7.76–8.93 m`), `zone_applicability` annotations + `241` `clause-zone-tags.json` entries linking map zone clicks to consolidated provisions, and Legend-to-Regulation Zone Mapping Table in `docs/map.md`.
+
+---
+
+## Bengaluru Building Code Plan (`docs/plans/building-code-plan.md` — Parts 1–6)
+
+- **Baseline Release**: `3.0.0`
+- **Baseline Commit**: `e7e033e` (`chore(pr-12): complete review fixes, hydrate memory & finalize ship stage`)
+- **Active Change**: `261125-4e7t-bengaluru-building-code-plan`
+- **Scope**: Strictly existing repository data (`data/raw/`, `data/interim/`, `data/overrides/`, `jurisdictions/`), zero new acquisition, zero invented source content, zero `human_verified` claims.
+
+### Part-by-Part Status
+
+| Part | Title | Status | Notes |
+|------|-------|--------|-------|
+| **Baseline** | Record baseline (`Release 3.0.0`, commit `e7e033e`) & open draft PR | ✅ Complete | Recorded in `docs/progress.md`; draft PR opened |
+| **Part 1** | Clean foundation and speed (Schema 1.4, shared docs, out-of-git data, per-chapter splitting, Pagefind, budgets, CI E2E) | ⏳ Pending | — |
+| **Part 2** | The consolidated code (full consolidated text per corporation & date, quiet change marks, bye-law 1.4 `incorporates`, Akoma Ntoso XML) | ⏳ Pending | — |
+| **Part 3** | Parameters: the numbers as data (`parameters.json`, header/range parser, cell checks, 40-record page-image self-check) | ⏳ Pending | — |
+| **Part 4** | Resolution and the plot resolver (`resolution.yaml`, CLI/browser resolver, Jayanagar 600 m² / 15 m target, rebuilt relations & 60-item labelling sheet) | ⏳ Pending | — |
+| **Part 5** | A readable, plot-first site (Protomaps light map-first home, official RMP 2015 colours, labels above zones, place/ward search, Plot Card, Resolution cards) | ⏳ Pending | — |
+| **Part 6** | Register and gaps (`ka-model-bbl-2017` marked not applicable here, plain-language gap declarations, Release `4.0.0` `/data` page) | ⏳ Pending | — |
+
