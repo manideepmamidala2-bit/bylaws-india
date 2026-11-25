@@ -6,3 +6,4 @@
 {"action":"enter","driver":"fab-fff","event":"stage-transition","stage":"review","ts":"2026-11-25T06:15:54Z"}
 {"action":"enter","driver":"fab-fff","event":"stage-transition","stage":"hydrate","ts":"2026-11-25T06:25:18Z"}
 {"event":"review","result":"passed","ts":"2026-11-25T06:25:18Z"}
+{"action":"enter","driver":"fab-fff","event":"stage-transition","stage":"ship","ts":"2026-11-25T06:35:01Z"}

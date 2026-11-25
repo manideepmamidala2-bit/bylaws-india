@@ -8,8 +8,8 @@ progress:
     intake: done
     apply: done
     review: done
-    hydrate: active
-    ship: pending
+    hydrate: done
+    ship: active
     review-pr: pending
 plan:
     generated: true
@@ -32,20 +32,22 @@ stage_metrics:
     intake: {started_at: "2026-11-25T03:52:04Z", driver: fab-new, iterations: 1, completed_at: "2026-11-25T03:57:05Z"}
     apply: {started_at: "2026-11-25T03:57:05Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-25T06:15:54Z"}
     review: {started_at: "2026-11-25T06:15:54Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-25T06:25:18Z"}
-    hydrate: {started_at: "2026-11-25T06:25:18Z", driver: fab-fff, iterations: 1}
+    hydrate: {started_at: "2026-11-25T06:25:18Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-25T06:35:01Z"}
+    ship: {started_at: "2026-11-25T06:35:01Z", driver: fab-fff, iterations: 1}
 prs: []
 change_type_source: explicit
 base_branch: main
 true_impact:
-    added: 26324
-    deleted: 2009982
-    net: -1983658
+    added: 13184
+    deleted: 5830409
+    net: -5817225
     tests:
-        added: 1416
-        deleted: 66
-        net: 1350
-    computed_at: "2026-11-25T06:15:54Z"
-    computed_at_stage: apply
+        added: 1046
+        deleted: 65
+        net: 981
+    computed_at: "2026-11-25T06:35:03Z"
+    computed_at_stage: hydrate
+summary: Unified Schema 1.4, per-chapter full consolidated code, 322 extracted building parameters, 6-step statutory plot resolver, Protomaps light map-first UI, and Release 4.0.0
 # base_branch: written by /git-branch or /fab-new when the change's branch is created (no placeholder here).
 # true_impact: lazily created on first stage-finish that computes it (no placeholder here).
-last_updated: 2026-11-25T06:25:18Z
+last_updated: 2026-11-25T06:35:03Z
