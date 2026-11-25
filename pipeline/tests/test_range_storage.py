@@ -165,3 +165,75 @@ def test_regenerated_declarations_have_no_stale_statements_and_pagefind_exists()
     assert (pagefind_dir / "pagefind.js").is_file()
     entry = json.loads((pagefind_dir / "pagefind-entry.json").read_text(encoding="utf-8"))
     assert entry["record_count"] >= 1000
+
+
+def test_part2_full_consolidated_documents_change_marks_akn_xml_and_incorporates() -> None:
+    """Part 2: Full consolidated documents exist per corporation and date with quiet change marks and Akoma Ntoso XML; zero `substitute` effects from `rmp2015-zr` target `bbl-2003`; and `bbl-2003` bye-law 1.4 has an `incorporates` relation to `rmp2015-zr`."""
+    import xml.etree.ElementTree as ET
+
+    south_cfg = load_jurisdiction_config("in-ka-bengaluru-south")
+    ver = str(south_cfg.release_version)
+    south_dir = REPO_ROOT / "public" / "data" / "in-ka-bengaluru-south" / ver
+
+    # 1. No substitute effects from rmp2015-zr against bbl-2003
+    amendments = validate_file(south_dir / "amendments.json", "amendments")
+    rmp_to_bbl = [
+        e
+        for e in amendments["effects"]
+        if e.get("amending_doc") == "rmp2015-zr" and e.get("target_doc") == "bbl-2003"
+    ]
+    assert len(rmp_to_bbl) == 0, f"Expected 0 rmp2015-zr -> bbl-2003 effects, found {rmp_to_bbl}"
+
+    # 2. `incorporates` relation from bbl-2003 bye-law 1.4 to rmp2015-zr
+    rels_payload = validate_file(south_dir / "relations.json", "relations")
+    inc_rels = [r for r in rels_payload["relations"] if r["kind"] == "incorporates"]
+    assert len(inc_rels) >= 1
+    inc = inc_rels[0]
+    assert inc["from_doc"] == "bbl-2003"
+    assert inc["from_eid"] == "part_I__sec_1.0__cl_1.4"
+    assert inc["to_doc"] == "rmp2015-zr"
+    assert inc["public_visible"] is True
+    assert set(inc.get("parameters_incorporated") or []) == {
+        "use",
+        "coverage",
+        "far",
+        "setbacks",
+        "height",
+        "floors",
+        "dwelling_units",
+        "parking",
+    }
+
+    # 3. Full consolidated documents per corporation and date + Akoma Ntoso XML
+    cons = validate_file(south_dir / "consolidated.json", "consolidated")
+    docs_manifest = {d["doc_id"]: d for d in (cons.get("documents") or [])}
+    assert "bbl-2003" in docs_manifest
+    assert "rmp2015-zr" in docs_manifest
+
+    bbl_snaps = {s["as_of_date"]: s for s in docs_manifest["bbl-2003"]["snapshots"]}
+    for req_snap in ("2004-06-05", "2017-10-28", "2026-05-14", "latest"):
+        assert req_snap in bbl_snaps, f"Missing bbl-2003 snapshot {req_snap}"
+        snap_info = bbl_snaps[req_snap]
+        assert snap_info["total_clauses"] >= 700
+        outline_disk = REPO_ROOT / "public" / snap_info["outline_file"].lstrip("/")
+        assert outline_disk.is_file()
+        validate_file(outline_disk, "clause-tree")
+
+    latest_bbl = bbl_snaps["latest"]
+    assert latest_bbl["changed_clauses"] >= 5
+    akn_disk = REPO_ROOT / "public" / str(latest_bbl["akn_xml_file"]).lstrip("/")
+    assert akn_disk.is_file()
+    xml_root = ET.fromstring(akn_disk.read_text(encoding="utf-8"))
+    assert "akomaNtoso" in xml_root.tag
+
+    # Verify quiet change mark on South City Corporation 2026 amendment
+    rec_by_id = {r["clause_id"]: r for r in cons["records"]}
+    assert "Changed 2026, South City Corporation" == rec_by_id["bbl-2003:6.0(i)"]["change_note"]
+
+    # 4. Unobtained July 2025 amendment declared in declarations.json
+    decls = validate_file(south_dir / "declarations.json", "declarations")
+    zr_gaps = " ".join(
+        g["description"] for g in decls["known_gaps"] if g["doc_id"] == "rmp2015-zr"
+    )
+    assert "July 2025" in zr_gaps and "could not be obtained" in zr_gaps
+

@@ -81,6 +81,7 @@ def build_jurisdiction_relations(
         )
 
     doc_role_by_id = {d.id: d.role for d in config.documents}
+    doc_layer_by_id = {d.id: d.layer for d in config.documents}
     doc_status_by_id = {d.id: d.legal_status for d in config.documents}
 
     # Index nodes and annotations
@@ -141,9 +142,13 @@ def build_jurisdiction_relations(
         confidence: float = 0.95,
         status: str = "confirmed",
         note: str | None = None,
+        public_visible: bool | None = None,
+        measured_precision: float | None = None,
+        parameters_incorporated: list[str] | None = None,
     ) -> None:
         nonlocal rel_seq
         rel_seq += 1
+        structurally_public = kind in {"amends", "incorporates", "corporation_differs"}
         entry: dict[str, Any] = {
             "id": f"rel_{rel_seq}",
             "kind": kind,
@@ -160,10 +165,103 @@ def build_jurisdiction_relations(
             "confidence": round(float(confidence), 3),
             "status": status,
             "note": note,
+            "public_visible": (
+                public_visible if public_visible is not None else structurally_public
+            ),
+            "measured_precision": (
+                measured_precision
+                if measured_precision is not None
+                else (1.0 if structurally_public else None)
+            ),
         }
+        if parameters_incorporated:
+            entry["parameters_incorporated"] = parameters_incorporated
         if applies_in:
             entry["applies_in"] = applies_in
         relations.append(entry)
+
+    # 0. `incorporates`: statutory incorporation by reference (e.g. Bye-law 1.4 incorporating Master Plan Zoning Regulations)
+    planning_base_docs = [
+        d_id
+        for d_id in sorted(clause_trees)
+        if doc_role_by_id.get(d_id) == "base" and doc_layer_by_id.get(d_id) == "planning"
+    ]
+    for (doc_id, eid), node in sorted(node_by_doc_eid.items()):
+        if doc_role_by_id.get(doc_id) != "base" or doc_layer_by_id.get(doc_id) != "municipal":
+            continue
+        txt = _active_node_text(node)
+        if "mutatis mutandis" in txt.lower() and "master plan" in txt.lower():
+            for plan_doc_id in planning_base_docs:
+                plan_root_node = next(
+                    (
+                        n
+                        for (pd, _), n in sorted(node_by_doc_eid.items())
+                        if pd == plan_doc_id
+                    ),
+                    node,
+                )
+                plan_eid = str(plan_root_node.get("eid") or "chp_1")
+                _add_rel(
+                    kind="incorporates",
+                    from_doc=doc_id,
+                    from_eid=eid,
+                    to_doc=plan_doc_id,
+                    to_eid=plan_eid,
+                    topic="hierarchy_applicability",
+                    parameter="use, coverage, far, setbacks, height, floors, dwelling_units, parking",
+                    from_span=txt,
+                    to_span=_active_node_text(plan_root_node),
+                    precedence_span=txt,
+                    confidence=1.0,
+                    status="confirmed",
+                    public_visible=True,
+                    measured_precision=1.0,
+                    parameters_incorporated=[
+                        "use",
+                        "coverage",
+                        "far",
+                        "setbacks",
+                        "height",
+                        "floors",
+                        "dwelling_units",
+                        "parking",
+                    ],
+                    note=(
+                        f"Bye-law {node.get('native_number') or node.get('number') or eid} of {doc_id} "
+                        f"incorporates {plan_doc_id} and its amendments mutatis mutandis for use, coverage, "
+                        "FAR, setbacks, height, floors, dwelling units, and parking."
+                    ),
+                )
+
+    # 0b. `amends`: applied statutory amendment effects
+    for eff in amendments_data.get("effects") or []:
+        if not eff.get("applied"):
+            continue
+        a_doc = str(eff.get("amending_doc") or "")
+        a_eid = str(eff.get("amending_eid") or "")
+        t_doc = str(eff.get("target_doc") or "")
+        t_eid = str(eff.get("target_eid") or "")
+        if (a_doc, a_eid) in node_by_doc_eid and (t_doc, t_eid) in node_by_doc_eid:
+            na = node_by_doc_eid[(a_doc, a_eid)]
+            nt = node_by_doc_eid[(t_doc, t_eid)]
+            t_topics = sorted(topics_by_node.get((t_doc, t_eid)) or [])
+            _add_rel(
+                kind="amends",
+                from_doc=a_doc,
+                from_eid=a_eid,
+                to_doc=t_doc,
+                to_eid=t_eid,
+                topic=t_topics[0] if t_topics else None,
+                parameter=str(eff.get("action") or "substitute"),
+                from_span=_active_node_text(na),
+                to_span=_active_node_text(nt),
+                applies_in=list(eff.get("applies_in") or []) or None,
+                confidence=float(eff.get("confidence", 0.95)),
+                status="confirmed",
+                public_visible=True,
+                measured_precision=1.0,
+                note=f"Amending provision {a_doc}:{a_eid} ({eff.get('action')}, effective {eff.get('valid_from')}) amends {t_doc}:{t_eid}.",
+            )
 
     # 1. `definition_differs`: same normalised defined term across 2+ documents
     for norm_term, items in sorted(defs_by_term.items()):

@@ -144,7 +144,11 @@
             "wards": "/data/in-ka-bengaluru/3.0.0/wards.geojson",
             "planning_districts": "/data/in-ka-bengaluru/3.0.0/planning-districts.geojson",
             "relations": "/data/in-ka-bengaluru/3.0.0/relations.json",
-            "graph": "/data/in-ka-bengaluru/3.0.0/graph.json"
+            "graph": "/data/in-ka-bengaluru/3.0.0/graph.json",
+            "akn_xml": [
+              "/data/in-ka-bengaluru/3.0.0/consolidated/bbl-2003.akn.xml",
+              "/data/in-ka-bengaluru/3.0.0/consolidated/rmp2015-zr.akn.xml"
+            ]
           },
           "drafts": {
             "clauses": [
@@ -252,7 +256,7 @@
             "review_images": [],
             "shared_documents": {
               "bbl-2003": {
-                "sha256": "eb8fb41fdc6d898f6fb3b23c835d0093ef78b9524b682d52bda48a9e9676234d",
+                "sha256": "2e0f2b9c50664cd8500e99e0c4b8780828e53d7b794ace84a65ffab042ea8e98",
                 "clauses": "/data/in-ka-bengaluru/3.0.0/bbl-2003.clauses.json",
                 "outline": "/data/in-ka-bengaluru/3.0.0/bbl-2003.outline.json",
                 "annotations": "/data/in-ka-bengaluru/3.0.0/bbl-2003.annotations.json"
@@ -264,7 +268,7 @@
                 "annotations": "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.annotations.json"
               },
               "rmp2015-zr": {
-                "sha256": "5a8ce0e01881e394af4c57207de2181f859b20b1fec2967ef21e0acd3f0b9659",
+                "sha256": "405de2bf891253d00b86cda9ed6ed2fb9b5e6488700d1632a2419df54e6f68a6",
                 "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.clauses.json",
                 "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.outline.json",
                 "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.annotations.json"
@@ -342,7 +346,10 @@
             "gba_zones": "/data/in-ka-bengaluru-central/3.0.0/gba-zones.geojson",
             "wards": "/data/in-ka-bengaluru-central/3.0.0/wards.geojson",
             "relations": "/data/in-ka-bengaluru-central/3.0.0/relations.json",
-            "graph": "/data/in-ka-bengaluru-central/3.0.0/graph.json"
+            "graph": "/data/in-ka-bengaluru-central/3.0.0/graph.json",
+            "akn_xml": [
+              "/data/in-ka-bengaluru-central/3.0.0/consolidated/bbl-2003.akn.xml"
+            ]
           },
           "drafts": {
             "clauses": [
@@ -442,7 +449,7 @@
             "review_images": [],
             "shared_documents": {
               "bbl-2003": {
-                "sha256": "eb8fb41fdc6d898f6fb3b23c835d0093ef78b9524b682d52bda48a9e9676234d",
+                "sha256": "2e0f2b9c50664cd8500e99e0c4b8780828e53d7b794ace84a65ffab042ea8e98",
                 "clauses": "/data/in-ka-bengaluru/3.0.0/bbl-2003.clauses.json",
                 "outline": "/data/in-ka-bengaluru/3.0.0/bbl-2003.outline.json",
                 "annotations": "/data/in-ka-bengaluru/3.0.0/bbl-2003.annotations.json"
@@ -454,7 +461,7 @@
                 "annotations": "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.annotations.json"
               },
               "rmp2015-zr": {
-                "sha256": "5a8ce0e01881e394af4c57207de2181f859b20b1fec2967ef21e0acd3f0b9659",
+                "sha256": "405de2bf891253d00b86cda9ed6ed2fb9b5e6488700d1632a2419df54e6f68a6",
                 "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.clauses.json",
                 "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.outline.json",
                 "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.annotations.json"
@@ -532,7 +539,10 @@
             "gba_zones": "/data/in-ka-bengaluru-north/3.0.0/gba-zones.geojson",
             "wards": "/data/in-ka-bengaluru-north/3.0.0/wards.geojson",
             "relations": "/data/in-ka-bengaluru-north/3.0.0/relations.json",
-            "graph": "/data/in-ka-bengaluru-north/3.0.0/graph.json"
+            "graph": "/data/in-ka-bengaluru-north/3.0.0/graph.json",
+            "akn_xml": [
+              "/data/in-ka-bengaluru-north/3.0.0/consolidated/bbl-2003.akn.xml"
+            ]
           },
           "drafts": {
             "clauses": [
@@ -793,7 +803,7 @@
             "review_images": [],
             "shared_documents": {
               "bbl-2003": {
-                "sha256": "eb8fb41fdc6d898f6fb3b23c835d0093ef78b9524b682d52bda48a9e9676234d",
+                "sha256": "2e0f2b9c50664cd8500e99e0c4b8780828e53d7b794ace84a65ffab042ea8e98",
                 "clauses": "/data/in-ka-bengaluru/3.0.0/bbl-2003.clauses.json",
                 "outline": "/data/in-ka-bengaluru/3.0.0/bbl-2003.outline.json",
                 "annotations": "/data/in-ka-bengaluru/3.0.0/bbl-2003.annotations.json"
@@ -805,7 +815,7 @@
                 "annotations": "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.annotations.json"
               },
               "rmp2015-zr": {
-                "sha256": "5a8ce0e01881e394af4c57207de2181f859b20b1fec2967ef21e0acd3f0b9659",
+                "sha256": "405de2bf891253d00b86cda9ed6ed2fb9b5e6488700d1632a2419df54e6f68a6",
                 "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.clauses.json",
                 "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.outline.json",
                 "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.annotations.json"
@@ -885,7 +895,10 @@
             "planning_districts": "/data/in-ka-bengaluru-south/3.0.0/planning-districts.geojson",
             "overlays": "/data/in-ka-bengaluru-south/3.0.0/overlays.geojson",
             "relations": "/data/in-ka-bengaluru-south/3.0.0/relations.json",
-            "graph": "/data/in-ka-bengaluru-south/3.0.0/graph.json"
+            "graph": "/data/in-ka-bengaluru-south/3.0.0/graph.json",
+            "akn_xml": [
+              "/data/in-ka-bengaluru-south/3.0.0/consolidated/bbl-2003.akn.xml"
+            ]
           },
           "drafts": {
             "clauses": [
@@ -984,7 +997,7 @@
             "review_images": [],
             "shared_documents": {
               "bbl-2003": {
-                "sha256": "eb8fb41fdc6d898f6fb3b23c835d0093ef78b9524b682d52bda48a9e9676234d",
+                "sha256": "2e0f2b9c50664cd8500e99e0c4b8780828e53d7b794ace84a65ffab042ea8e98",
                 "clauses": "/data/in-ka-bengaluru/3.0.0/bbl-2003.clauses.json",
                 "outline": "/data/in-ka-bengaluru/3.0.0/bbl-2003.outline.json",
                 "annotations": "/data/in-ka-bengaluru/3.0.0/bbl-2003.annotations.json"
@@ -996,7 +1009,7 @@
                 "annotations": "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.annotations.json"
               },
               "rmp2015-zr": {
-                "sha256": "5a8ce0e01881e394af4c57207de2181f859b20b1fec2967ef21e0acd3f0b9659",
+                "sha256": "405de2bf891253d00b86cda9ed6ed2fb9b5e6488700d1632a2419df54e6f68a6",
                 "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.clauses.json",
                 "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.outline.json",
                 "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.annotations.json"
@@ -1074,7 +1087,10 @@
             "gba_zones": "/data/in-ka-bengaluru-east/3.0.0/gba-zones.geojson",
             "wards": "/data/in-ka-bengaluru-east/3.0.0/wards.geojson",
             "relations": "/data/in-ka-bengaluru-east/3.0.0/relations.json",
-            "graph": "/data/in-ka-bengaluru-east/3.0.0/graph.json"
+            "graph": "/data/in-ka-bengaluru-east/3.0.0/graph.json",
+            "akn_xml": [
+              "/data/in-ka-bengaluru-east/3.0.0/consolidated/bbl-2003.akn.xml"
+            ]
           },
           "drafts": {
             "clauses": [
@@ -1175,7 +1191,7 @@
             "review_images": [],
             "shared_documents": {
               "bbl-2003": {
-                "sha256": "eb8fb41fdc6d898f6fb3b23c835d0093ef78b9524b682d52bda48a9e9676234d",
+                "sha256": "2e0f2b9c50664cd8500e99e0c4b8780828e53d7b794ace84a65ffab042ea8e98",
                 "clauses": "/data/in-ka-bengaluru/3.0.0/bbl-2003.clauses.json",
                 "outline": "/data/in-ka-bengaluru/3.0.0/bbl-2003.outline.json",
                 "annotations": "/data/in-ka-bengaluru/3.0.0/bbl-2003.annotations.json"
@@ -1187,7 +1203,7 @@
                 "annotations": "/data/in-ka-bengaluru/3.0.0/ka-model-bbl-2017.annotations.json"
               },
               "rmp2015-zr": {
-                "sha256": "5a8ce0e01881e394af4c57207de2181f859b20b1fec2967ef21e0acd3f0b9659",
+                "sha256": "405de2bf891253d00b86cda9ed6ed2fb9b5e6488700d1632a2419df54e6f68a6",
                 "clauses": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.clauses.json",
                 "outline": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.outline.json",
                 "annotations": "/data/in-ka-bengaluru/3.0.0/rmp2015-zr.annotations.json"
@@ -1265,7 +1281,10 @@
             "gba_zones": "/data/in-ka-bengaluru-west/3.0.0/gba-zones.geojson",
             "wards": "/data/in-ka-bengaluru-west/3.0.0/wards.geojson",
             "relations": "/data/in-ka-bengaluru-west/3.0.0/relations.json",
-            "graph": "/data/in-ka-bengaluru-west/3.0.0/graph.json"
+            "graph": "/data/in-ka-bengaluru-west/3.0.0/graph.json",
+            "akn_xml": [
+              "/data/in-ka-bengaluru-west/3.0.0/consolidated/bbl-2003.akn.xml"
+            ]
           },
           "drafts": {
             "clauses": [

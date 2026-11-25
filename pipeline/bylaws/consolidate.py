@@ -1,10 +1,11 @@
-"""Stage 8.5b: Compute derived consolidated views per document and date (Schema v1.3, Layer 3, Rule R14)."""
+"""Stage 8.5b: Compute full derived consolidated documents per date and corporation, change marks, and Akoma Ntoso XML (Schema v1.4, Part 2)."""
 
 from __future__ import annotations
 
 import copy
 import json
 import re
+import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Any
 
@@ -12,6 +13,7 @@ import click
 
 from bylaws import __version__ as PIPELINE_VERSION
 from bylaws.config import JurisdictionConfig
+from bylaws.publish import split_clause_tree_into_chapters
 from bylaws.root import get_deterministic_timestamp, resolve_repo_root
 from bylaws.schema_validator import validate_payload
 
@@ -21,14 +23,41 @@ SUBSTITUTED_QUOTE_RE = re.compile(
 )
 
 
+def format_change_mark_label(
+    amending_doc_id: str,
+    valid_from: str | None,
+    jurisdiction_name: str = "",
+    amending_doc_title: str = "",
+) -> str:
+    """Build a quiet change mark label such as `'Changed 2026, South City Corporation'`."""
+    year = (valid_from or "")[:4] or "Amended"
+    title_lower = f"{amending_doc_title} {jurisdiction_name}".lower()
+    for direction in ("South", "North", "Central", "East", "West"):
+        if f"{direction.lower()} city corporation" in title_lower and "bbl-amend" in amending_doc_id:
+            return f"Changed {year}, {direction} City Corporation"
+    if "zr-amend" in amending_doc_id:
+        return f"Changed {year}, Zoning Regulations Amendment"
+    if amending_doc_title:
+        short_title = amending_doc_title.split("—")[0].split("(")[0].strip()[:48]
+        return f"Changed {year}, {short_title}"
+    return f"Changed {year}, {amending_doc_id}"
+
+
 def compute_consolidated_view_as_of(
     tree_payload: dict[str, Any],
     effects: list[dict[str, Any]] | None = None,
     *,
     as_of_date: str,
+    jurisdiction_name: str = "",
+    doc_titles: dict[str, str] | None = None,
 ) -> dict[str, Any]:
     """Compute a derived consolidated view of `tree_payload` on `as_of_date` (`YYYY-MM-DD`) from node `versions`."""
-    _ = effects  # effects are reflected in each node's `versions` list
+    effects_by_id = {
+        str(e.get("effect_id")): e
+        for e in (effects or [])
+        if isinstance(e, dict) and e.get("effect_id")
+    }
+    titles_map = doc_titles or {}
     doc_id = str(tree_payload["doc_id"])
     consolidated_nodes: list[dict[str, Any]] = []
     applied_effects: list[str] = []
@@ -77,6 +106,33 @@ def compute_consolidated_view_as_of(
         ]
         if text_parts:
             node_copy["text"] = " ".join(text_parts)
+
+        if eff_id:
+            eff_obj = effects_by_id.get(str(eff_id), {})
+            amending_doc = str(selected_ver.get("source_doc") or eff_obj.get("amending_doc") or "")
+            amending_eid = str(selected_ver.get("source_eid") or eff_obj.get("amending_eid") or "")
+            v_from_str = str(selected_ver.get("valid_from") or eff_obj.get("valid_from") or as_of_date)
+            action_str = str(eff_obj.get("action") or ("omit" if node_copy["omitted"] else "substitute"))
+            orig_ver = versions[0] if len(versions) > 1 else None
+            node_copy["change_mark"] = {
+                "label": format_change_mark_label(
+                    amending_doc,
+                    v_from_str,
+                    jurisdiction_name=jurisdiction_name,
+                    amending_doc_title=titles_map.get(amending_doc, ""),
+                ),
+                "amending_doc": amending_doc,
+                "amending_eid": amending_eid or "cl_1",
+                "amending_clause_id": f"{amending_doc}:{amending_eid}" if amending_eid else amending_doc,
+                "effective_date": v_from_str,
+                "action": action_str,
+                "original_text": orig_ver.get("content") if orig_ver else None,
+                "original_heading": orig_ver.get("heading") if orig_ver else None,
+                "original_cells": orig_ver.get("cells") if orig_ver else None,
+            }
+        else:
+            node_copy["change_mark"] = None
+
         consolidated_nodes.append(node_copy)
 
     return {
@@ -86,6 +142,71 @@ def compute_consolidated_view_as_of(
         "applied_effects": applied_effects,
         "nodes": consolidated_nodes,
     }
+
+
+def build_akoma_ntoso_xml(
+    *,
+    doc_id: str,
+    doc_title: str,
+    jurisdiction_id: str,
+    as_of_date: str,
+    nodes: list[dict[str, Any]],
+) -> str:
+    """Export a consolidated document view as Akoma Ntoso 3.0 XML (`.akn.xml`)."""
+    akn_ns = "http://docs.oasis-open.org/legaldocml/ns/akn/3.0"
+    ET.register_namespace("", akn_ns)
+    root = ET.Element(f"{{{akn_ns}}}akomaNtoso")
+    act = ET.SubElement(root, f"{{{akn_ns}}}act", {"name": doc_id})
+
+    meta = ET.SubElement(act, f"{{{akn_ns}}}meta")
+    ident = ET.SubElement(meta, f"{{{akn_ns}}}identification", {"source": "#bylaws-india"})
+    work = ET.SubElement(ident, f"{{{akn_ns}}}FRBRWork")
+    ET.SubElement(work, f"{{{akn_ns}}}FRBRthis", {"value": f"/akn/in/{jurisdiction_id}/act/{doc_id}/!main"})
+    expr = ET.SubElement(ident, f"{{{akn_ns}}}FRBRExpression")
+    ET.SubElement(
+        expr,
+        f"{{{akn_ns}}}FRBRthis",
+        {"value": f"/akn/in/{jurisdiction_id}/act/{doc_id}/eng@{as_of_date}/!main"},
+    )
+
+    preface = ET.SubElement(act, f"{{{akn_ns}}}preface")
+    p_title = ET.SubElement(preface, f"{{{akn_ns}}}p")
+    doc_title_el = ET.SubElement(p_title, f"{{{akn_ns}}}docTitle")
+    doc_title_el.text = f"{doc_title} (Consolidated as of {as_of_date} — Derived by bylaws-india)"
+
+    body = ET.SubElement(act, f"{{{akn_ns}}}body")
+    for node in nodes:
+        if node.get("type") == "table_row":
+            continue
+        eid = str(node.get("eid") or node.get("number") or "sec")
+        sec = ET.SubElement(body, f"{{{akn_ns}}}section", {"eId": eid})
+        num_el = ET.SubElement(sec, f"{{{akn_ns}}}num")
+        num_el.text = str(node.get("native_number") or node.get("number") or "")
+        if node.get("heading") or node.get("title"):
+            hd_el = ET.SubElement(sec, f"{{{akn_ns}}}heading")
+            hd_el.text = str(node.get("heading") or node.get("title") or "")
+        content_el = ET.SubElement(sec, f"{{{akn_ns}}}content")
+        p_el = ET.SubElement(content_el, f"{{{akn_ns}}}p")
+        p_el.text = str(node.get("text") or node.get("content") or "")
+        cm = node.get("change_mark")
+        if isinstance(cm, dict) and cm.get("label"):
+            note_el = ET.SubElement(
+                content_el,
+                f"{{{akn_ns}}}authorialNote",
+                {
+                    "marker": str(cm["label"]),
+                    "placement": "inline",
+                },
+            )
+            note_p = ET.SubElement(note_el, f"{{{akn_ns}}}p")
+            note_p.text = (
+                f"{cm['label']} via {cm.get('amending_clause_id')} "
+                f"(effective {cm.get('effective_date')})"
+            )
+
+    ET.indent(root, space="  ")
+    xml_body = ET.tostring(root, encoding="unicode")
+    return '<?xml version="1.0" encoding="UTF-8"?>\n' + xml_body + "\n"
 
 
 def _extract_substituted_text(
@@ -110,7 +231,7 @@ def _extract_substituted_text(
 
 
 def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None) -> dict[str, Any]:
-    """Build `consolidated.json` from base clause trees and high-confidence `amendments.json` links/effects."""
+    """Build `consolidated.json`, full per-chapter consolidated snapshots per date, and Akoma Ntoso XML."""
     root = repo_root or resolve_repo_root()
     processed_dir = root / "data" / "processed" / config.id
     docs_dir = processed_dir / "documents"
@@ -123,18 +244,25 @@ def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None
 
     amendments_data: dict[str, Any] = json.loads(amendments_path.read_text(encoding="utf-8"))
     links: list[dict[str, Any]] = amendments_data.get("links", [])
+    effects: list[dict[str, Any]] = amendments_data.get("effects", [])
 
     clause_lookup: dict[str, dict[str, Any]] = {}
     doc_effective_dates: dict[str, str] = {}
     doc_legal_status: dict[str, str] = {}
+    doc_titles: dict[str, str] = {}
+    base_trees: dict[str, dict[str, Any]] = {}
+
     for doc in config.documents:
         doc_effective_dates[doc.id] = (
             doc.effective_from or doc.notified_date or get_deterministic_timestamp()[:10]
         )
         doc_legal_status[doc.id] = str(doc.legal_status)
+        doc_titles[doc.id] = str(doc.title)
         tree_path = docs_dir / f"{doc.id}.clauses.json"
         if tree_path.is_file():
             tree_data: dict[str, Any] = json.loads(tree_path.read_text(encoding="utf-8"))
+            if doc.role == "base":
+                base_trees[doc.id] = tree_data
             for clause in tree_data.get("clauses", []):
                 if clause.get("superseded_by") is None and clause.get("record_superseded_by") is None:
                     clause_lookup[str(clause["clause_id"])] = clause
@@ -204,7 +332,8 @@ def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None
 
         ordered_links = sorted(in_force_links, key=_link_date)
         current_title: str | None = target_clause.get("title")
-        current_text: str = str(target_clause.get("text", ""))
+        original_text: str = str(target_clause.get("text", ""))
+        current_text: str = original_text
         current_tables: list[dict[str, Any]] = copy.deepcopy(target_clause.get("tables") or [])
         applied_ids: list[str] = []
         as_of_date = doc_effective_dates.get(target_doc_id, get_deterministic_timestamp()[:10])
@@ -247,10 +376,20 @@ def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None
             elif action in {"modify", "modify_text", "renumber"}:
                 current_text = f"{current_text} [Modified ({as_of_date}, {amending_cid}): {amending_text}]".strip()
 
+        last_amending_cid = applied_ids[-1]
+        last_amending_doc = last_amending_cid.split(":", 1)[0]
+        change_note = format_change_mark_label(
+            last_amending_doc,
+            as_of_date,
+            jurisdiction_name=config.name,
+            amending_doc_title=doc_titles.get(last_amending_doc, ""),
+        )
+
         records.append(
             {
                 "clause_id": target_cid,
                 "doc_id": target_doc_id,
+                "eid": target_clause.get("eid"),
                 "number": str(target_clause["number"]),
                 "title": current_title,
                 "text": current_text,
@@ -264,8 +403,133 @@ def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None
                 ),
                 "confidence": "high",
                 "omitted": omitted,
+                "change_note": change_note,
+                "original_text": original_text,
+                "amending_clause_id": last_amending_cid,
             }
         )
+
+    # Full consolidated documents per base document, as of each amendment date and today (Part 2 §1)
+    consolidated_docs_manifest: list[dict[str, Any]] = []
+    if config.visibility != "test":
+        ver_str = str(getattr(config, "release_version", None) or "4.0.0")
+        parent_id = getattr(config, "parent", None)
+        url_prefix = f"/data/{config.id}/{ver_str}"
+        parent_prefix = f"/data/{parent_id}/{ver_str}" if parent_id else url_prefix
+        cons_out_root = processed_dir / "consolidated"
+        cons_out_root.mkdir(parents=True, exist_ok=True)
+
+        for base_doc_id, base_tree in sorted(base_trees.items()):
+            base_eff_date = doc_effective_dates.get(base_doc_id, "2004-06-05")
+            doc_effects = [
+                e
+                for e in effects
+                if e.get("target_doc") == base_doc_id and e.get("applied") is True
+            ]
+            has_corp_diff = any(bool(e.get("applies_in")) for e in doc_effects)
+            effective_doc_prefix = (
+                parent_prefix if (parent_id and not has_corp_diff) else url_prefix
+            )
+            write_files_locally = not (parent_id and not has_corp_diff)
+
+            amend_dates = sorted(
+                {
+                    str(e["valid_from"])
+                    for e in doc_effects
+                    if e.get("valid_from")
+                }
+            )
+            snapshot_dates = [base_eff_date, *[d for d in amend_dates if d != base_eff_date], "latest"]
+            snapshots_meta: list[dict[str, Any]] = []
+
+            for snap_key in snapshot_dates:
+                eval_date = "2026-11-25" if snap_key == "latest" else snap_key
+                snap_label = (
+                    "As of Today (Latest Consolidated)"
+                    if snap_key == "latest"
+                    else (
+                        f"Original Enactment ({snap_key})"
+                        if snap_key == base_eff_date
+                        else f"As Amended on {snap_key}"
+                    )
+                )
+                view = compute_consolidated_view_as_of(
+                    base_tree,
+                    doc_effects,
+                    as_of_date=eval_date,
+                    jurisdiction_name=config.name,
+                    doc_titles=doc_titles,
+                )
+                full_cons_tree: dict[str, Any] = {
+                    "schema_version": "1.4",
+                    "doc_id": base_doc_id,
+                    "jurisdiction": config.id,
+                    "legal_status": "in_force",
+                    "as_of_date": eval_date,
+                    "derived": True,
+                    "generated": base_tree["generated"],
+                    "clauses": view["nodes"],
+                }
+                snap_url_prefix = f"{effective_doc_prefix}/consolidated/{base_doc_id}/{snap_key}"
+                outline_dict, chapter_map = split_clause_tree_into_chapters(
+                    full_cons_tree, snap_url_prefix
+                )
+                outline_rel = f"consolidated/{base_doc_id}/{snap_key}/outline.json"
+                if write_files_locally:
+                    snap_disk_dir = cons_out_root / base_doc_id / snap_key
+                    snap_disk_dir.mkdir(parents=True, exist_ok=True)
+                    (processed_dir / outline_rel).write_text(
+                        json.dumps(outline_dict, indent=2) + "\n", encoding="utf-8"
+                    )
+                chapter_urls: list[str] = []
+                for ch_rel, ch_payload in sorted(chapter_map.items()):
+                    if write_files_locally:
+                        ch_disk = cons_out_root / base_doc_id / snap_key / ch_rel
+                        ch_disk.parent.mkdir(parents=True, exist_ok=True)
+                        ch_disk.write_text(
+                            json.dumps(ch_payload, indent=2) + "\n", encoding="utf-8"
+                        )
+                    chapter_urls.append(f"{snap_url_prefix}/{ch_rel}")
+
+                akn_url: str | None = None
+                if snap_key == "latest":
+                    akn_rel = f"consolidated/{base_doc_id}.akn.xml"
+                    if write_files_locally:
+                        akn_xml = build_akoma_ntoso_xml(
+                            doc_id=base_doc_id,
+                            doc_title=doc_titles.get(base_doc_id, base_doc_id),
+                            jurisdiction_id=config.id,
+                            as_of_date=eval_date,
+                            nodes=view["nodes"],
+                        )
+                        (processed_dir / akn_rel).write_text(akn_xml, encoding="utf-8")
+                    akn_url = f"{effective_doc_prefix}/{akn_rel}"
+
+                non_row_nodes = [
+                    n for n in view["nodes"] if n.get("type") != "table_row"
+                ]
+                changed_cnt = sum(
+                    1 for n in non_row_nodes if n.get("change_mark") is not None
+                )
+                snapshots_meta.append(
+                    {
+                        "as_of_date": snap_key,
+                        "label": snap_label,
+                        "outline_file": f"{effective_doc_prefix}/{outline_rel}",
+                        "chapters": chapter_urls,
+                        "akn_xml_file": akn_url,
+                        "total_clauses": len(non_row_nodes),
+                        "changed_clauses": changed_cnt,
+                    }
+                )
+
+            consolidated_docs_manifest.append(
+                {
+                    "doc_id": base_doc_id,
+                    "title": doc_titles.get(base_doc_id, base_doc_id),
+                    "snapshots": snapshots_meta,
+                }
+            )
 
     consolidated_payload: dict[str, Any] = {
         "schema_version": "1.4",
@@ -277,6 +541,9 @@ def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None
         "records": records,
         "unconsolidated": unconsolidated,
     }
+    if consolidated_docs_manifest:
+        consolidated_payload["documents"] = consolidated_docs_manifest
+
     consolidated_path = processed_dir / "consolidated.json"
     validate_payload(consolidated_payload, "consolidated", source=str(consolidated_path))
     consolidated_path.write_text(

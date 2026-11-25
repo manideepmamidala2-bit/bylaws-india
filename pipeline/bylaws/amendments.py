@@ -13,7 +13,7 @@ import yaml
 
 from bylaws.annotations import build_document_annotations
 from bylaws.config import JurisdictionConfig
-from bylaws.consolidate import run_consolidate
+from bylaws.consolidate import format_change_mark_label, run_consolidate
 from bylaws.root import resolve_repo_root
 from bylaws.schema_validator import validate_file, validate_payload
 from bylaws.structure import build_eid, sanitise_native_token
@@ -160,6 +160,8 @@ def _reset_clause_tree_versions(tree: dict[str, Any]) -> None:
             v0["valid_to"] = None
             c["versions"] = [v0]
         c["amended_by"] = []
+        c["change_mark"] = None
+        c["omitted"] = False
         base_clauses.append(c)
     if inserted_eids:
         for idx, c in enumerate(base_clauses):
@@ -186,6 +188,9 @@ def _apply_effect_to_target_tree(
     target_node: dict[str, Any],
     effect: dict[str, Any],
     amending_node: dict[str, Any],
+    *,
+    jurisdiction_name: str = "",
+    amending_doc_title: str = "",
 ) -> None:
     """Apply a high-confidence `effect` to `target_tree` by updating or inserting node `versions`."""
     action = str(effect["action"])
@@ -194,9 +199,16 @@ def _apply_effect_to_target_tree(
     amending_doc = str(effect["amending_doc"])
     amending_eid = str(effect["amending_eid"])
     amending_citations = copy.deepcopy(amending_node.get("citations") or [])
+    mark_label = format_change_mark_label(
+        amending_doc,
+        str(valid_from or ""),
+        jurisdiction_name=jurisdiction_name,
+        amending_doc_title=amending_doc_title,
+    )
 
     if action in {"substitute", "modify_text", "renumber"}:
         versions: list[dict[str, Any]] = list(target_node.get("versions") or [])
+        orig_ver = versions[0] if versions else {}
         if versions:
             versions[-1]["valid_to"] = valid_from
         new_node_info = (effect.get("new_nodes") or [{}])[0]
@@ -218,10 +230,22 @@ def _apply_effect_to_target_tree(
         }
         versions.append(new_ver)
         target_node["versions"] = versions
+        target_node["change_mark"] = {
+            "label": mark_label,
+            "amending_doc": amending_doc,
+            "amending_eid": amending_eid,
+            "amending_clause_id": f"{amending_doc}:{amending_eid}",
+            "effective_date": str(valid_from or ""),
+            "action": action,
+            "original_text": orig_ver.get("content") or target_node.get("text"),
+            "original_heading": orig_ver.get("heading") or target_node.get("heading"),
+            "original_cells": orig_ver.get("cells") or target_node.get("cells"),
+        }
         return
 
     if action == "omit":
         versions = list(target_node.get("versions") or [])
+        orig_ver = versions[0] if versions else {}
         if versions:
             versions[-1]["valid_to"] = valid_from
         omitted_ver: dict[str, Any] = {
@@ -242,6 +266,18 @@ def _apply_effect_to_target_tree(
         }
         versions.append(omitted_ver)
         target_node["versions"] = versions
+        target_node["omitted"] = True
+        target_node["change_mark"] = {
+            "label": mark_label,
+            "amending_doc": amending_doc,
+            "amending_eid": amending_eid,
+            "amending_clause_id": f"{amending_doc}:{amending_eid}",
+            "effective_date": str(valid_from or ""),
+            "action": "omit",
+            "original_text": orig_ver.get("content") or target_node.get("text"),
+            "original_heading": orig_ver.get("heading") or target_node.get("heading"),
+            "original_cells": orig_ver.get("cells") or target_node.get("cells"),
+        }
         return
 
     if action in {"insert_after", "insert_before"} and effect.get("new_nodes"):
@@ -313,6 +349,18 @@ def _apply_effect_to_target_tree(
             "applies_to_zones": list(target_node.get("applies_to_zones") or []),
             "verification": "machine_checked",
             "verified_by": None,
+            "omitted": False,
+            "change_mark": {
+                "label": mark_label,
+                "amending_doc": amending_doc,
+                "amending_eid": amending_eid,
+                "amending_clause_id": f"{amending_doc}:{amending_eid}",
+                "effective_date": str(valid_from or ""),
+                "action": action,
+                "original_text": None,
+                "original_heading": None,
+                "original_cells": None,
+            },
         }
 
         target_idx = next(
@@ -685,6 +733,8 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
                         target_node_ov,
                         effect_entry_ov,
                         amending_node_ov,
+                        jurisdiction_name=config.name,
+                        amending_doc_title=(amending_doc_cfg.title if amending_doc_cfg else ""),
                     )
                     modified_doc_ids.add(target_doc_id)
 

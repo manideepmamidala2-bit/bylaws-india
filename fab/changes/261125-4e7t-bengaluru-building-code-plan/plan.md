@@ -102,7 +102,7 @@ The web interface MUST replace verbose conflict cards with concise Resolution ca
 
 ### Phase 3: Part 2 — The Consolidated Code
 
-- [ ] T004 Upgrade `pipeline/bylaws/amendments.py`, `pipeline/bylaws/consolidate.py`, and `pipeline/bylaws/relations.py` to remove synthetic `substitute` effects from `rmp2015-zr` against `bbl-2003`, add the `incorporates` relation from `bbl-2003` bye-law `1.4` to `rmp2015-zr` for the 8 parameters, generate full per-chapter consolidated documents (`bbl-2003`, `rmp2015-zr`) as of today and each amendment date per corporation with quiet change marks and Akoma Ntoso XML (`.akn.xml`) export, and declare unobtained amendments in `declarations.json` — then commit, push, and update `docs/progress.md` and the PR body for Part 2 <!-- R3 -->
+- [x] T004 Upgrade `pipeline/bylaws/amendments.py`, `pipeline/bylaws/consolidate.py`, and `pipeline/bylaws/relations.py` to remove synthetic `substitute` effects from `rmp2015-zr` against `bbl-2003`, add the `incorporates` relation from `bbl-2003` bye-law `1.4` to `rmp2015-zr` for the 8 parameters, generate full per-chapter consolidated documents (`bbl-2003`, `rmp2015-zr`) as of today and each amendment date per corporation with quiet change marks and Akoma Ntoso XML (`.akn.xml`) export, and declare unobtained amendments in `declarations.json` — then commit, push, and update `docs/progress.md` and the PR body for Part 2 <!-- R3 -->
 
 ### Phase 4: Part 3 — Parameters: The Numbers as Data
 
