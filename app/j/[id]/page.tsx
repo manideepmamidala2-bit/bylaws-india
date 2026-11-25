@@ -4,8 +4,11 @@ import { notFound } from "next/navigation";
 import {
   fetchJurisdictionDataset,
   fetchManifest,
+  fetchParameters,
+  fetchResolution,
   getVisibleJurisdictions,
   partitionClauseVersions,
+  slimParametersForSsr,
   type ZoneGeometry,
 } from "@/lib/data";
 import { TopNav } from "@/components/TopNav";
@@ -26,10 +29,13 @@ export default async function JurisdictionMapPage({
   params,
 }: JurisdictionMapPageProps) {
   const { id } = await params;
-  const [dataset, manifest] = await Promise.all([
-    fetchJurisdictionDataset(id),
-    fetchManifest(),
-  ]);
+  const [dataset, manifest, parametersPayload, resolutionConfig] =
+    await Promise.all([
+      fetchJurisdictionDataset(id),
+      fetchManifest(),
+      fetchParameters(id),
+      fetchResolution(id),
+    ]);
   if (!dataset) {
     notFound();
   }
@@ -143,14 +149,21 @@ export default async function JurisdictionMapPage({
     type: "Polygon",
     coordinates: [],
   } as unknown as ZoneGeometry;
-  const stripFc = (fc: typeof boundary | null, maxFeatures = 75) =>
+  const stripFc = (fc: typeof boundary | null, maxFeatures = 72) =>
     fc
       ? {
           ...fc,
-          features: fc.features.slice(0, maxFeatures).map((f) => ({
-            ...f,
-            geometry: emptyPoly,
-          })),
+          features: fc.features.slice(0, maxFeatures).map((f) => {
+            const p = { ...(f.properties ?? {}) };
+            delete p.source_attribution;
+            delete p.verification_note;
+            delete p.georef_run;
+            return {
+              ...f,
+              properties: p,
+              geometry: emptyPoly,
+            };
+          }),
         }
       : null;
   const seenZoneCode = new Set<string>();
@@ -284,17 +297,32 @@ export default async function JurisdictionMapPage({
       <main className="flex flex-1 flex-col">
         <AreaExplorerClient
           jurisdictionId={jurisdiction.id}
+          corporationName={jurisdiction.name}
           releaseVersion={release.version}
           zones={ssrZoneFeatures}
           clauses={explorerClauses}
-          amendmentLinks={amendments.links.slice(0, 30)}
-          clauseZoneTags={(clauseZoneTags?.tags ?? []).slice(0, 60)}
+          amendmentLinks={amendments.links.slice(0, 15)}
+          clauseZoneTags={(clauseZoneTags?.tags ?? []).slice(0, 40)}
           boundary={stripFc(boundary)}
           gbaZones={stripFc(gbaZones)}
           wards={stripFc(wards)}
           planningDistricts={stripFc(planningDistricts)}
           overlays={stripFc(overlays)}
           geoLayers={geoLayers?.layers ?? []}
+          parametersPayload={slimParametersForSsr(parametersPayload)}
+          resolutionConfig={resolutionConfig}
+          consolidatedPayload={
+            dataset.consolidated
+              ? {
+                  ...dataset.consolidated,
+                  documents: undefined,
+                  records: dataset.consolidated.records.slice(0, 8).map((r) => ({
+                    ...r,
+                    tables: [],
+                  })),
+                }
+              : null
+          }
         />
       </main>
     </div>

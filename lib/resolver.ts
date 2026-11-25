@@ -13,6 +13,7 @@ import type {
   ResolutionStep,
   StatutoryResolutionConfig,
   ZoneGeometry,
+  ZonesFeatureCollection,
 } from "@/lib/data";
 
 export const PARAMETER_ORDER: ReadonlyArray<ParameterRecord["parameter"]> = [
@@ -191,7 +192,7 @@ export function lookupPlotGeography(options: {
   boundaryFc?: GenericFeatureCollection | null;
   wardsFc?: GenericFeatureCollection | null;
   planningDistrictsFc?: GenericFeatureCollection | null;
-  zonesFc?: { features: Array<{ geometry: ZoneGeometry; properties: Record<string, unknown> }> } | null;
+  zonesFc?: ZonesFeatureCollection | GenericFeatureCollection | null;
   overlaysFc?: GenericFeatureCollection | null;
 }): PlotGeographyLookup {
   const {
@@ -248,7 +249,7 @@ export function lookupPlotGeography(options: {
     }
 
     for (const feat of zonesFc?.features ?? []) {
-      const p = feat.properties ?? {};
+      const p = (feat.properties ?? {}) as Record<string, unknown>;
       if (p.superseded_by || p.record_superseded_by) continue;
       if (booleanPointInGeometry(lon, lat, feat.geometry)) {
         zoneCode = String(p.zone_code ?? "");

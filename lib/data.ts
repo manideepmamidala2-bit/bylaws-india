@@ -452,6 +452,41 @@ export async function fetchParameters(
   }
 }
 
+export function slimParametersForSsr(
+  payload: JurisdictionParameters | null
+): JurisdictionParameters | null {
+  if (!payload) return null;
+  const slimmed = payload.records
+    .filter(
+      (r) =>
+        r.conditions.zone !== null ||
+        r.source.doc_id.includes("amend-2026-01") ||
+        r.source.doc_id.includes("amend-2025-04") ||
+        r.source.eid.includes("chp_8__tbl_1__row_13") ||
+        r.source.eid.includes("chp_8__tbl_1__row_2")
+    )
+    .slice(0, 32)
+    .map((r) => ({
+      ...r,
+      value_text: r.value_text.slice(0, 120),
+      conditions: {
+        ...r.conditions,
+        unexpressed_conditions: [],
+      },
+      source: {
+        ...r.source,
+        bbox: null,
+        footnote_markers: [],
+        footnotes_text: [],
+        archive_url: null,
+      },
+    }));
+  return {
+    ...payload,
+    records: slimmed,
+  };
+}
+
 export async function fetchResolution(
   jurisdictionId: string,
   version?: string

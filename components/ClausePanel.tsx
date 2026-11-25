@@ -19,6 +19,39 @@ interface ClausePanelProps {
   jurisdictionId?: string;
 }
 
+function classifyClauseTopicGroup(clause: ClauseNode): string {
+  const hay = `${clause.title ?? ""} ${clause.heading ?? ""} ${clause.text}`.toLowerCase();
+  if (hay.includes("permissible land use") || hay.includes("ancillary") || hay.includes("uses permissible")) {
+    return "Uses";
+  }
+  if (hay.includes("ground coverage") || hay.includes("plot coverage") || hay.includes("covered area")) {
+    return "Coverage";
+  }
+  if (hay.includes("floor area ratio") || hay.includes("f.a.r") || /\bfar\b/.test(hay) || hay.includes("premium") || hay.includes("tdr")) {
+    return "FAR";
+  }
+  if (hay.includes("setback") || hay.includes("set-back") || hay.includes("open space") || hay.includes("buffer")) {
+    return "Setbacks";
+  }
+  if (hay.includes("height") || hay.includes("high-rise") || hay.includes("floors")) {
+    return "Height";
+  }
+  if (hay.includes("parking") || hay.includes("ramp") || hay.includes("basement")) {
+    return "Parking";
+  }
+  return "General";
+}
+
+const TOPIC_GROUP_ORDER = [
+  "Uses",
+  "Coverage",
+  "FAR",
+  "Setbacks",
+  "Height",
+  "Parking",
+  "General",
+] as const;
+
 export function ClausePanel({
   selectedZoneCode,
   selectedZoneLabel,
@@ -63,7 +96,17 @@ export function ClausePanel({
       tagReasonMap.has(clause.clause_id)
     );
   });
-  const previewClauses = visibleClauses.slice(0, 40);
+  const previewClauses = [...visibleClauses]
+    .sort((a, b) => {
+      const ga = TOPIC_GROUP_ORDER.indexOf(
+        classifyClauseTopicGroup(a) as (typeof TOPIC_GROUP_ORDER)[number]
+      );
+      const gb = TOPIC_GROUP_ORDER.indexOf(
+        classifyClauseTopicGroup(b) as (typeof TOPIC_GROUP_ORDER)[number]
+      );
+      return ga - gb;
+    })
+    .slice(0, 40);
 
   const uniqueDocCount = new Set(
     visibleClauses.map((c) => c.doc_id ?? c.clause_id.split(":")[0])
@@ -94,8 +137,8 @@ export function ClausePanel({
         </h2>
         <p className="dg-serif mt-1 text-sm text-[#5b5e56]">
           {selectedZoneCode
-            ? "Clauses tagged to this zone code and universal city-wide provisions, grouped by instrument."
-            : "Select a zone polygon on the map to filter clauses by land-use zone or overlay."}
+            ? "Governing provisions for this zone grouped by topic (uses, coverage, FAR, setbacks, height, parking)."
+            : "Select a zone on the map to inspect governing provisions grouped by topic."}
         </p>
       </div>
 
@@ -122,12 +165,10 @@ export function ClausePanel({
             );
             const firstPage = validPages[0] ?? null;
             const docId = clause.doc_id ?? clause.clause_id.split(":")[0];
-            const prevDocId =
-              idx > 0
-                ? (previewClauses[idx - 1].doc_id ??
-                  previewClauses[idx - 1].clause_id.split(":")[0])
-                : null;
-            const showGroupHeader = docId !== prevDocId;
+            const topicGroup = classifyClauseTopicGroup(clause);
+            const prevTopicGroup =
+              idx > 0 ? classifyClauseTopicGroup(previewClauses[idx - 1]) : null;
+            const showGroupHeader = topicGroup !== prevTopicGroup;
 
             const recordVersion =
               clause.record_version ??
@@ -148,11 +189,8 @@ export function ClausePanel({
             return (
               <React.Fragment key={clause.record_id ?? clause.clause_id}>
                 {showGroupHeader && (
-                  <div className="flex items-center justify-between bg-[#efeee8] px-6 py-2 font-mono text-[10.5px] uppercase tracking-[0.14em] text-[#5b5e56]">
-                    <span>
-                      {clause.doc_layer ? `${clause.doc_layer} · ` : ""}
-                      {docId}
-                    </span>
+                  <div className="flex items-center justify-between bg-[#efeee8] px-6 py-2 font-mono text-[10.5px] uppercase tracking-[0.14em] text-[#080909]">
+                    <span className="font-semibold">Topic: {topicGroup}</span>
                     {jurisdictionId && (
                       <Link
                         href={`/j/${jurisdictionId}/documents/${docId}`}
@@ -262,8 +300,7 @@ export function ClausePanel({
                         "No source page recorded"
                       ) : (
                         <>
-                          p. {validPages.join(", ")} ·{" "}
-                          {clause.verification.replace("_", " ")}
+                          p. {validPages.join(", ")}
                           {hasVersionHistory ? ` · v${recordVersion}` : ""}
                         </>
                       )}
@@ -293,6 +330,15 @@ export function ClausePanel({
                             Archive p. {firstPage} ↗
                           </a>
                         )}
+                      <details className="inline-block">
+                        <summary className="cursor-pointer text-[10px] text-[#5b5e56] underline">
+                          Details
+                        </summary>
+                        <span className="ml-2 text-[10px] normal-case text-[#5b5e56]">
+                          {clause.record_id ?? clause.clause_id} ·{" "}
+                          {clause.verification.replace("_", " ")}
+                        </span>
+                      </details>
                     </div>
                   </div>
 

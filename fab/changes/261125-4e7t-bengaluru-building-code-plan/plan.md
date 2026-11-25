@@ -115,7 +115,7 @@ The web interface MUST replace verbose conflict cards with concise Resolution ca
 
 ### Phase 6: Part 5 — Readable, Plot-First Site
 
-- [ ] T008 Redesign `app/page.tsx`, `lib/map-style.ts`, `components/ZoneMap.tsx`, `components/PlotCard.tsx`, `components/ClausePanel.tsx`, and `components/ClauseTree.tsx` to make Home (`/`) the full-width above-the-fold map with Protomaps light style, labels above official RMP 2015 legend-coloured zones, zoom-gated zone codes, local place-name (from PMTiles) and ward search, interactive Plot Card with answers/reasons/page links/`"Not settled"` dual display/shareable URL, Resolution cards, topic-grouped zone panel, document-level status header, `"Details"` toggle for internal IDs, and `<= 2`-sentence introductions — then commit, push, and update `docs/progress.md` and the PR body for Part 5 <!-- R7 -->
+- [x] T008 Redesign `app/page.tsx`, `lib/map-style.ts`, `components/ZoneMap.tsx`, `components/PlotCard.tsx`, `components/ClausePanel.tsx`, and `components/ClauseTree.tsx` to make Home (`/`) the full-width above-the-fold map with Protomaps light style, labels above official RMP 2015 legend-coloured zones, zoom-gated zone codes, local place-name (from PMTiles) and ward search, interactive Plot Card with answers/reasons/page links/`"Not settled"` dual display/shareable URL, Resolution cards, topic-grouped zone panel, document-level status header, `"Details"` toggle for internal IDs, and `<= 2`-sentence introductions — then commit, push, and update `docs/progress.md` and the PR body for Part 5 <!-- R7 -->
 
 ### Phase 7: Part 6 — Register, Gaps & Final Verification
 

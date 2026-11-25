@@ -86,4 +86,26 @@ test.describe("Map Page — PMTiles HTTP 206 Range & Non-Blank Canvas (08b §1)"
       page.getByRole("complementary", { name: /Document outline navigation/i })
     ).toBeVisible();
   });
+
+  test("renders map-first home and resolves Jayanagar 600 m² / 15 m road plot card answers", async ({
+    page,
+  }) => {
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+
+    const plotCard = page.getByRole("region", {
+      name: /Plot building code resolver card/i,
+    });
+    await expect(plotCard).toBeVisible();
+
+    const areaInput = plotCard.getByLabel(/Plot area \(m²\)/i);
+    const roadInput = plotCard.getByLabel(/Road width \(m\)/i);
+    await areaInput.fill("600");
+    await roadInput.fill("15");
+
+    await expect(plotCard).toContainText(/65%/i);
+    await expect(plotCard).toContainText(/2\.25/i);
+    await expect(plotCard).toContainText(
+      /Derived from the official documents by this project/i
+    );
+  });
 });

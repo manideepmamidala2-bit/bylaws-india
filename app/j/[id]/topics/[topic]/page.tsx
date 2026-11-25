@@ -75,11 +75,13 @@ export default async function TopicDetailPage({
       taggedNodeKeys.has(`${c.doc_id}:${c.eid}`)
   );
 
-  const topicRelations = relations.relations.filter((r) => r.topic === topic);
+  const topicRelations = relations.relations.filter(
+    (r) => r.topic === topic && r.public_visible !== false
+  );
   const diffRelations = topicRelations.filter(
     (r) =>
-      r.kind === "definition_differs" ||
-      r.kind === "numeric_differs" ||
+      r.kind === "incorporates" ||
+      r.kind === "amends" ||
       r.kind === "corporation_differs"
   );
   const precedenceRelations = topicRelations.filter(
@@ -137,51 +139,40 @@ export default async function TopicDetailPage({
           </p>
         </header>
 
-        {/* 1. Side-by-Side Comparisons & Conflict Flags */}
+        {/* 1. Resolution Cards (Part 5: what governs, why in one line, the other provision, links) */}
         {diffRelations.length > 0 && (
           <section
-            aria-label="Side-by-side differences and conflicts"
+            aria-label="Statutory resolution cards"
             className="border border-[#080909] bg-[#efeee8] p-6"
           >
             <div className="dg-mono mb-1">
-              1 · Side-by-Side Comparisons &amp; Conflict Flags (
-              {diffRelations.length})
+              1 · Statutory Resolution Cards ({diffRelations.length})
             </div>
             <h2 className="text-xl font-semibold text-[#080909]">
-              Provisions Where Definitions, Values, or Corporation Rules Differ
+              What Governs &amp; How Instruments Relate on This Topic
             </h2>
             <p className="dg-serif mt-1 text-sm text-[#171917]">
-              These provisions give different values or wording for the same
-              subject. This project never decides a legal conflict by itself:
-              inspect both provisions and their conditions below.
+              Each card states which provision governs, why in one plain line,
+              and links to both provisions.
             </p>
 
             <div className="mt-4 space-y-4">
-              {diffRelations.slice(0, 20).map((rel) => {
+              {diffRelations.slice(0, 16).map((rel) => {
                 const isCorpDiff = rel.kind === "corporation_differs";
-                const isDefDiff = rel.kind === "definition_differs";
-                const bannerText = isCorpDiff
-                  ? "This rule differs between corporations under their respective 2026 Building (Amendment) Bye-laws."
-                  : isDefDiff
-                    ? `Same defined term ("${rel.parameter}") defined with different wording across instruments.`
-                    : "These provisions give different values for the same thing. Check which applies to your case.";
+                const isIncorp = rel.kind === "incorporates";
+                const whyLine = isIncorp
+                  ? "Master Plan Zoning Regulations govern this parameter under Building Bye-law 1.4 (inserted 2017)."
+                  : isCorpDiff
+                    ? "Each City Corporation's 2026 Building (Amendment) Bye-laws govern inside that corporation."
+                    : "The later in-force amending notification governs over the original wording.";
 
                 return (
                   <article
                     key={rel.id}
-                    className="border border-dashed border-[#080909] bg-[#f5f3ed] p-4"
+                    className="border border-[#080909] bg-[#f5f3ed] p-4"
                   >
-                    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#c8ccc0] pb-2 font-mono text-xs">
-                      <span className="font-semibold uppercase tracking-[0.12em]">
-                        {rel.kind} · {rel.status} ·{" "}
-                        {rel.parameter ?? topicDef.id}
-                      </span>
-                      <span className="text-[#5b5e56]">
-                        Confidence: {Math.round(rel.confidence * 100)}%
-                      </span>
-                    </div>
-                    <p className="mt-2 font-mono text-xs font-medium text-[#080909]">
-                      ⚑ {bannerText}
+                    <p className="font-mono text-xs font-semibold text-[#080909]">
+                      {whyLine}
                     </p>
                     <div className="mt-3 grid grid-cols-1 gap-4 md:grid-cols-2">
                       <div className="border border-[#c8ccc0] bg-[#efeee8] p-3">
@@ -190,7 +181,7 @@ export default async function TopicDetailPage({
                             href={`/j/${jurisdiction.id}/documents/${rel.from_doc}/${rel.from_eid}`}
                             className="underline"
                           >
-                            {rel.from_doc}:{rel.from_eid}
+                            {rel.from_doc}
                           </Link>
                         </div>
                         <p className="dg-serif mt-1 text-sm text-[#171917]">
@@ -203,7 +194,7 @@ export default async function TopicDetailPage({
                             href={`/j/${jurisdiction.id}/documents/${rel.to_doc}/${rel.to_eid}`}
                             className="underline"
                           >
-                            {rel.to_doc}:{rel.to_eid}
+                            {rel.to_doc}
                           </Link>
                         </div>
                         <p className="dg-serif mt-1 text-sm text-[#171917]">
@@ -211,11 +202,6 @@ export default async function TopicDetailPage({
                         </p>
                       </div>
                     </div>
-                    {rel.note && (
-                      <p className="dg-serif mt-2 text-xs text-[#5b5e56]">
-                        {rel.note}
-                      </p>
-                    )}
                   </article>
                 );
               })}
