@@ -203,7 +203,7 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     async () => {
     const homeUi = await JurisdictionPickerPage();
     const { container: homeContainer, unmount: uHome } = render(homeUi);
-    expect(screen.getAllByText(/v[23]\.\d+\.\d+/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/v[234]\.\d+\.\d+/i).length).toBeGreaterThan(0);
     expect(
       screen.getByText(/Synthetic demonstration data, not the law of Bengaluru South/i)
     ).toBeInTheDocument();
@@ -389,7 +389,7 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
       )
     ).toBeInTheDocument();
     expect(
-      screen.getAllByText(/Latest: v[23]\.\d+\.\d+/i).length
+      screen.getAllByText(/Latest: v[234]\.\d+\.\d+/i).length
     ).toBeGreaterThan(0);
     expect(
       screen.getAllByRole("link", { name: /Download Bundle/i }).length
@@ -557,7 +557,7 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
 
     // Planted non-test manifest entry referencing fixture documents.json (which has local file path in source_url)
     const plantedManifest: ReleaseManifest = {
-      schema_version: "1.3",
+      schema_version: "1.4",
       jurisdictions: [
         {
           id: "in-ka-planted",

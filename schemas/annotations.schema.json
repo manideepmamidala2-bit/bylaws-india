@@ -2,14 +2,14 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bylaws-india.local/schemas/annotations.schema.json",
   "title": "DocumentAnnotations",
-  "description": "Stand-off character-span annotations for a structured document in data/processed/<jurisdiction>/documents/<doc_id>.annotations.json (Schema v1.3, Layer 2).",
+  "description": "Stand-off character-span annotations for a structured document in data/processed/<jurisdiction>/documents/<doc_id>.annotations.json (Schema v1.4, Layer 2).",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "doc_id", "jurisdiction", "annotations"],
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "1.3"
+      "const": "1.4"
     },
     "doc_id": {
       "type": "string",

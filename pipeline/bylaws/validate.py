@@ -16,8 +16,10 @@ from bylaws.acquire import _build_unacquired_document_payload
 from bylaws.annotations import AnnotationSpanError, validate_annotations_against_tree
 from bylaws.config import JurisdictionConfig
 from bylaws.graph import write_jurisdiction_graph_files
+from bylaws.parameters import write_parameter_reports_and_json
 from bylaws.parsers.base import ParsedBlock
 from bylaws.relations import build_jurisdiction_relations
+from bylaws.resolver import write_published_resolution_json
 from bylaws.root import resolve_repo_root
 from bylaws.schema_validator import (
     SchemaValidationError,
@@ -643,6 +645,19 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
                     "description": "Amendments not yet applied: the text shown is the original wording, which may have been changed since.",
                 }
             )
+        unobtained_amends_for_base = [
+            d
+            for d in config.documents
+            if getattr(d, "acquisition_status", "acquired") == "not_found"
+            and doc.id in (d.amends or [])
+        ]
+        for unobt in unobtained_amends_for_base:
+            known_gaps.append(
+                {
+                    "doc_id": doc.id,
+                    "description": f"{unobt.title} could not be obtained from official sources; consolidated text and parameter values may not reflect changes made by it.",
+                }
+            )
 
     # QA Check 7: Unresolved cross-references
     unresolved_refs: list[str] = []
@@ -679,7 +694,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
 
     # Build and validate declarations.json
     declarations_payload: dict[str, Any] = {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "jurisdiction": config.id,
         "not_modelled": list(config.not_modelled or []),
         "known_gaps": known_gaps,
@@ -799,6 +814,14 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
     ]
     qa_path = reports_dir / "qa.md"
     qa_path.write_text("\n".join(qa_lines), encoding="utf-8")
+
+    if config.visibility != "test":
+        write_parameter_reports_and_json(config, repo_root=root)
+        write_published_resolution_json(
+            config,
+            clause_trees=clause_trees,
+            repo_root=root,
+        )
 
     if hard_failures:
         joined = "; ".join(hard_failures)

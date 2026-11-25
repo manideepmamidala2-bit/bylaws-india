@@ -14,6 +14,7 @@ import { buildDg2nMapStyle } from "@/lib/map-style";
 
 interface ZoneMapProps {
   jurisdictionId?: string;
+  releaseVersion?: string;
   zones: ZoneFeature[];
   selectedZoneCode: string | null;
   onSelectZone: (zoneCode: string) => void;
@@ -110,6 +111,7 @@ let pmtilesProtocolRegistered = false;
 
 export function ZoneMap({
   jurisdictionId = "",
+  releaseVersion = "3.0.0",
   zones,
   selectedZoneCode,
   onSelectZone,
@@ -126,6 +128,7 @@ export function ZoneMap({
   onChangeSheetOverlayOpacity,
 }: ZoneMapProps) {
   // On by default: corporation and wards (06-real-map-foundation.md §3)
+  const [showStreetsLayer, setShowStreetsLayer] = useState(true);
   const [showBoundaryLayer, setShowBoundaryLayer] = useState(true);
   const [showGbaZonesLayer, setShowGbaZonesLayer] = useState(false);
   const [showWardsLayer, setShowWardsLayer] = useState(true);
@@ -133,6 +136,8 @@ export function ZoneMap({
     useState(true);
   const [showZonesLayer, setShowZonesLayer] = useState(true);
   const [showOverlaysLayer, setShowOverlaysLayer] = useState(true);
+  const [placeWardQuery, setPlaceWardQuery] = useState("");
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const [webglError, setWebglError] = useState<string | null>(null);
   const [showSheetOverlay, setShowSheetOverlay] = useState<boolean>(() => {
     if (initialShowSheetOverlay) return true;
@@ -255,6 +260,18 @@ export function ZoneMap({
     process.env.NEXT_PUBLIC_PMTILES_URL?.trim() ||
     `/data/${jurisdictionId}/basemap.pmtiles`;
 
+  const hasCoords = (fc?: GenericFeatureCollection | null) =>
+    Boolean(
+      fc?.features?.[0]?.geometry &&
+        Array.isArray(fc.features[0].geometry.coordinates) &&
+        fc.features[0].geometry.coordinates.length > 0
+    );
+  const hasZoneCoords =
+    activeZones.length > 0 &&
+    Array.isArray(activeZones[0].geometry?.coordinates) &&
+    activeZones[0].geometry.coordinates.length > 0;
+  const relBase = `/data/${jurisdictionId}/${releaseVersion}`;
+
   useEffect(() => {
     const container = mapContainerRef.current;
     if (!container) return;
@@ -296,29 +313,47 @@ export function ZoneMap({
       mapInstanceRef.current = map;
 
       map.on("load", () => {
+        const beforeLabelId = map.getLayer("protomaps-labels-anchor")
+          ? "protomaps-labels-anchor"
+          : undefined;
+
+        if (typeof maplibregl.ScaleControl === "function") {
+          map.addControl(
+            new maplibregl.ScaleControl({ maxWidth: 120, unit: "metric" }),
+            "bottom-left"
+          );
+        }
+
         if (boundary && boundary.features.length > 0) {
           map.addSource("gba-corporation", {
             type: "geojson",
-            data: boundary as unknown as GeoJSON.FeatureCollection,
+            data: hasCoords(boundary)
+              ? (boundary as unknown as GeoJSON.FeatureCollection)
+              : `${window.location.origin}${relBase}/boundary.geojson`,
           });
-          map.addLayer({
-            id: "gba-corporation-line",
-            type: "line",
-            source: "gba-corporation",
-            layout: {
-              visibility: showBoundaryLayer ? "visible" : "none",
+          map.addLayer(
+            {
+              id: "gba-corporation-line",
+              type: "line",
+              source: "gba-corporation",
+              layout: {
+                visibility: showBoundaryLayer ? "visible" : "none",
+              },
+              paint: {
+                "line-color": "#080909",
+                "line-width": 2.4,
+              },
             },
-            paint: {
-              "line-color": "#080909",
-              "line-width": 2.4,
-            },
-          });
+            beforeLabelId
+          );
         }
 
         if (gbaZones && gbaZones.features.length > 0) {
           map.addSource("gba-zones", {
             type: "geojson",
-            data: gbaZones as unknown as GeoJSON.FeatureCollection,
+            data: hasCoords(gbaZones)
+              ? (gbaZones as unknown as GeoJSON.FeatureCollection)
+              : `${window.location.origin}${relBase}/gba-zones.geojson`,
           });
           map.addLayer({
             id: "gba-zones-line",
@@ -338,7 +373,9 @@ export function ZoneMap({
         if (wards && wards.features.length > 0) {
           map.addSource("gba-wards", {
             type: "geojson",
-            data: wards as unknown as GeoJSON.FeatureCollection,
+            data: hasCoords(wards)
+              ? (wards as unknown as GeoJSON.FeatureCollection)
+              : `${window.location.origin}${relBase}/wards.geojson`,
           });
           map.addLayer({
             id: "gba-wards-fill",
@@ -382,7 +419,9 @@ export function ZoneMap({
         if (planningDistricts && planningDistricts.features.length > 0) {
           map.addSource("planning-districts", {
             type: "geojson",
-            data: planningDistricts as unknown as GeoJSON.FeatureCollection,
+            data: hasCoords(planningDistricts)
+              ? (planningDistricts as unknown as GeoJSON.FeatureCollection)
+              : `${window.location.origin}${relBase}/planning-districts.geojson`,
           });
           map.addLayer({
             id: "planning-districts-line",
@@ -431,59 +470,68 @@ export function ZoneMap({
         if (activeZones.length > 0) {
           map.addSource("master-plan-zones", {
             type: "geojson",
-            data: {
-              type: "FeatureCollection",
-              features: activeZones,
-            } as unknown as GeoJSON.FeatureCollection,
+            data: hasZoneCoords
+              ? ({
+                  type: "FeatureCollection",
+                  features: activeZones,
+                } as unknown as GeoJSON.FeatureCollection)
+              : `${window.location.origin}${relBase}/zones.geojson`,
           });
-          map.addLayer({
-            id: "master-plan-zones-fill",
-            type: "fill",
-            source: "master-plan-zones",
-            layout: {
-              visibility: showZonesLayer ? "visible" : "none",
+          map.addLayer(
+            {
+              id: "master-plan-zones-fill",
+              type: "fill",
+              source: "master-plan-zones",
+              layout: {
+                visibility: showZonesLayer ? "visible" : "none",
+              },
+              paint: {
+                "fill-color": [
+                  "match",
+                  ["get", "zone_code"],
+                  "R-MAIN",
+                  "#faf57a",
+                  "R-MIX",
+                  "#ffd600",
+                  "C-BIZ",
+                  "#4da6ff",
+                  "C-AXES",
+                  "#1ed2f5",
+                  "I-GEN",
+                  "#9b4dff",
+                  "I-HITECH",
+                  "#c299ff",
+                  "PSP",
+                  "#e03131",
+                  "G-PARK",
+                  "#69db7c",
+                  "G-LAKE",
+                  "#74c0fc",
+                  "T-TRANS",
+                  "#adb5bd",
+                  "#efeee8",
+                ],
+                "fill-opacity": 0.42,
+              },
             },
-            paint: {
-              "fill-color": [
-                "match",
-                ["get", "zone_code"],
-                "R-MAIN",
-                "#faf57a",
-                "R-MIX",
-                "#ffd600",
-                "C-BIZ",
-                "#99ccff",
-                "C-AXES",
-                "#1ed2f5",
-                "I-GEN",
-                "#8c33ff",
-                "I-HITECH",
-                "#bfa6ff",
-                "PSP",
-                "#e01b1b",
-                "G-PARK",
-                "#a7f030",
-                "G-LAKE",
-                "#ccffff",
-                "T-TRANS",
-                "#4d4d4d",
-                "#efeee8",
-              ],
-              "fill-opacity": 0.48,
+            beforeLabelId
+          );
+          map.addLayer(
+            {
+              id: "master-plan-zones-line",
+              type: "line",
+              source: "master-plan-zones",
+              layout: {
+                visibility: showZonesLayer ? "visible" : "none",
+                "line-Sort-Key": 1,
+              } as unknown as maplibregl.LineLayerSpecification["layout"],
+              paint: {
+                "line-color": "#080909",
+                "line-width": 1.1,
+              },
             },
-          });
-          map.addLayer({
-            id: "master-plan-zones-line",
-            type: "line",
-            source: "master-plan-zones",
-            layout: {
-              visibility: showZonesLayer ? "visible" : "none",
-            },
-            paint: {
-              "line-color": "#080909",
-              "line-width": 1.0,
-            },
-          });
+            beforeLabelId
+          );
 
           map.on(
             "click",
@@ -530,6 +578,9 @@ export function ZoneMap({
         map.setLayoutProperty(layerId, "visibility", visible ? "visible" : "none");
       }
     };
+    syncVis("roads-minor", showStreetsLayer);
+    syncVis("roads-medium", showStreetsLayer);
+    syncVis("roads-major", showStreetsLayer);
     syncVis("gba-corporation-line", showBoundaryLayer);
     syncVis("gba-zones-line", showGbaZonesLayer);
     syncVis("gba-wards-fill", showWardsLayer);
@@ -547,6 +598,7 @@ export function ZoneMap({
     }
   }, [
     effectiveOverlayOpacity,
+    showStreetsLayer,
     showBoundaryLayer,
     showGbaZonesLayer,
     showPlanningDistrictsLayer,
@@ -569,6 +621,47 @@ export function ZoneMap({
       { padding: 24 }
     );
   };
+
+  const handleToggleFullscreen = () => {
+    setIsFullscreen((prev) => !prev);
+  };
+
+  const handleMyLocation = () => {
+    if (typeof navigator !== "undefined" && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((pos) => {
+        mapInstanceRef.current?.flyTo({
+          center: [pos.coords.longitude, pos.coords.latitude],
+          zoom: 15,
+        });
+      });
+    }
+  };
+
+  const matchingWardsForSearch = useMemo(() => {
+    const q = placeWardQuery.trim().toLowerCase();
+    if (!q) return [];
+    return sortedWards
+      .filter((w) => {
+        const wid = String(
+          w.properties?.ward_id ?? w.properties?.ward_no ?? ""
+        ).toLowerCase();
+        const wname = String(w.properties?.ward_name ?? "").toLowerCase();
+        const zname = String(
+          w.properties?.zone_name ?? w.properties?.zone ?? ""
+        ).toLowerCase();
+        const ac = String(
+          w.properties?.Assembly ?? w.properties?.ac ?? ""
+        ).toLowerCase();
+        return (
+          wid === q ||
+          `ward ${wid}` === q ||
+          wname.includes(q) ||
+          zname.includes(q) ||
+          ac.includes(q)
+        );
+      })
+      .slice(0, 8);
+  }, [placeWardQuery, sortedWards]);
 
   return (
     <section
@@ -614,6 +707,22 @@ export function ZoneMap({
             >
               Reset View
             </button>
+            <button
+              type="button"
+              onClick={handleToggleFullscreen}
+              aria-label="Full screen map"
+              className="border border-[#080909] bg-[#f5f3ed] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#080909] hover:bg-[#efeee8]"
+            >
+              {isFullscreen ? "Exit Full Screen" : "Full Screen"}
+            </button>
+            <button
+              type="button"
+              onClick={handleMyLocation}
+              aria-label="My location"
+              className="border border-[#080909] bg-[#f5f3ed] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#080909] hover:bg-[#efeee8]"
+            >
+              My Location
+            </button>
           </div>
 
           {onToggleDrafts && (
@@ -640,13 +749,73 @@ export function ZoneMap({
         </div>
       </div>
 
-      {/* Layer Toggles (Corporation and Wards on by default) */}
+      {/* Local Place & Ward Search (Part 5: no external geocoding service) */}
+      <div className="mb-3">
+        <label
+          htmlFor="map-place-ward-search"
+          className="dg-mono block text-[10px] text-[#080909]"
+        >
+          Search by place name, neighbourhood, or ward name/number
+        </label>
+        <input
+          id="map-place-ward-search"
+          type="search"
+          value={placeWardQuery}
+          onChange={(e) => setPlaceWardQuery(e.target.value)}
+          placeholder="Search place name, neighbourhood, or ward number..."
+          className="mt-1 w-full border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 font-mono text-xs text-[#080909]"
+        />
+        {matchingWardsForSearch.length > 0 && (
+          <ul
+            aria-label="Place and ward search suggestions"
+            className="mt-1 divide-y divide-[#c8ccc0] border border-[#080909] bg-[#f5f3ed] font-mono text-xs"
+          >
+            {matchingWardsForSearch.map((w) => {
+              const wid = String(
+                w.properties?.ward_id ?? w.properties?.ward_no ?? ""
+              );
+              const wname = String(w.properties?.ward_name ?? "");
+              const zname = String(
+                w.properties?.zone_name ?? w.properties?.zone ?? ""
+              );
+              return (
+                <li key={wid}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedWardId(wid);
+                      setPlaceWardQuery("");
+                    }}
+                    className="flex w-full items-center justify-between px-3 py-1.5 text-left text-[#080909] hover:bg-[#efeee8]"
+                  >
+                    <span>
+                      <strong>{wname}</strong> · Ward {wid}
+                    </span>
+                    <span className="text-[10.5px] text-[#5b5e56]">{zname}</span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </div>
+
+      {/* Layer Toggles (Streets, Land-use zones, Wards, Corporations, Original sheet overlay) */}
       <div
         role="group"
         aria-label="Map layer toggles"
         className="mb-3 flex flex-wrap items-center gap-4 border border-[#c8ccc0] bg-[#efeee8] px-3 py-2 font-mono text-[10.5px] uppercase tracking-[0.12em] text-[#080909]"
       >
         <span className="font-semibold">Layers:</span>
+        <label className="flex cursor-pointer items-center gap-1.5">
+          <input
+            type="checkbox"
+            checked={showStreetsLayer}
+            onChange={(e) => setShowStreetsLayer(e.target.checked)}
+            className="h-3 w-3 accent-[#080909]"
+          />
+          <span>Streets</span>
+        </label>
         <label className="flex cursor-pointer items-center gap-1.5">
           <input
             type="checkbox"
@@ -771,7 +940,7 @@ export function ZoneMap({
           className="flex flex-wrap items-center justify-between gap-2 border-t border-[#c8ccc0] bg-[#f5f3ed] px-3 py-1.5 font-mono text-[10px] text-[#5b5e56]"
         >
           <span>© OpenStreetMap contributors · Protomaps</span>
-          <span>PMTiles v3 · dg2n Monochrome Basemap</span>
+          <span>Scale: 100 m – 1 km · Protomaps Light Style (Labels Above Zones)</span>
         </div>
       </div>
 

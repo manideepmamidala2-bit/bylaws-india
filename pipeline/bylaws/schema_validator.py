@@ -13,6 +13,7 @@ from bylaws.root import resolve_repo_root
 
 REPO_ROOT = resolve_repo_root()
 SCHEMAS_DIR = REPO_ROOT / "schemas"
+SCHEMA_VERSION = "1.4"
 
 SCHEMA_NAMES: tuple[str, ...] = (
     "jurisdiction",
@@ -28,6 +29,8 @@ SCHEMA_NAMES: tuple[str, ...] = (
     "geo-layers",
     "clause-zone-tags",
     "relations",
+    "parameters",
+    "resolution",
 )
 
 

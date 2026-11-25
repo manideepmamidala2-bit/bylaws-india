@@ -5,7 +5,8 @@
       "type": "Feature",
       "properties": {
         "name": "Synthetic District One",
-        "district_code": "FIX-01"
+        "district_code": "FIX-01",
+        "geometry_repaired": false
       },
       "geometry": {
         "type": "Polygon",

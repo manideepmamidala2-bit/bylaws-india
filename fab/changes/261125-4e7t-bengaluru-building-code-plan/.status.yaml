@@ -1,0 +1,54 @@
+id: 4e7t
+name: 261125-4e7t-bengaluru-building-code-plan
+created: 2026-11-25T03:52:04Z
+created_by: manideepmamidala2-bit
+change_type: feat
+issues: []
+progress:
+    intake: done
+    apply: done
+    review: done
+    hydrate: done
+    ship: done
+    review-pr: pending
+plan:
+    generated: true
+    task_count: 9
+    acceptance_count: 18
+    acceptance_completed: 18
+confidence:
+    certain: 8
+    confident: 0
+    tentative: 0
+    unresolved: 0
+    score: 5.0
+    fuzzy: true
+    dimensions:
+        signal: 95.6
+        reversibility: 86.3
+        competence: 92.5
+        disambiguation: 94.4
+stage_metrics:
+    intake: {started_at: "2026-11-25T03:52:04Z", driver: fab-new, iterations: 1, completed_at: "2026-11-25T03:57:05Z"}
+    apply: {started_at: "2026-11-25T03:57:05Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-25T06:15:54Z"}
+    review: {started_at: "2026-11-25T06:15:54Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-25T06:25:18Z"}
+    hydrate: {started_at: "2026-11-25T06:25:18Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-25T06:35:01Z"}
+    ship: {started_at: "2026-11-25T06:35:01Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-25T06:37:17Z"}
+prs:
+    - https://github.com/manideepmamidala2-bit/bylaws-india/pull/15
+change_type_source: explicit
+base_branch: main
+true_impact:
+    added: 13297
+    deleted: 5830490
+    net: -5817193
+    tests:
+        added: 1046
+        deleted: 65
+        net: 981
+    computed_at: "2026-11-25T06:37:18Z"
+    computed_at_stage: ship
+summary: Unified Schema 1.4, per-chapter full consolidated code, 322 extracted building parameters, 6-step statutory plot resolver, Protomaps light map-first UI, and Release 4.0.0
+# base_branch: written by /git-branch or /fab-new when the change's branch is created (no placeholder here).
+# true_impact: lazily created on first stage-finish that computes it (no placeholder here).
+last_updated: 2026-11-25T06:37:18Z

@@ -1,4 +1,4 @@
-schema_version: '1.3'
+schema_version: '1.4'
 id: in-ka-bengaluru-west
 name: Bengaluru West City Corporation
 aliases:
@@ -14,7 +14,7 @@ aliases:
 - Yeshwanthpur
 visibility: public
 licence: CC BY 4.0
-release_version: 3.0.0
+release_version: 4.0.0
 country: IN
 state: KA
 building_types:
@@ -27,13 +27,25 @@ parent: in-ka-bengaluru
 parents:
 - in-ka-bengaluru
 not_modelled:
-- National Building Code of India 2016 (copyrighted by BIS; listed as reference only)
-- Airports Authority of India NOCAS colour-coded zoning map (external aviation portal;
-  reference only)
-- Parts of the BDA Local Planning Area outside the Greater Bengaluru Authority (GBA)
-  5-corporation boundary are out of scope.
-unread_documents: []
-unobtainable_documents: []
+- 'July 2025 zoning amendment (UDD 85 MNJ 2025): the official gazette PDF could not be obtained from public sources, so consolidated zoning text and parameter values may not reflect changes made in July 2025.'
+- 'October 2024 Kannada compilation of RMP 2015 Zoning Regulations: published in Kannada only and not structured; this dataset uses the English original together with the 8 structured English amending notifications.'
+- 'Supporting instruments not in the dataset: Karnataka Fire and Emergency Services NOC rules, standalone Karnataka Transferable Development Rights (TDR) procedural rules, Occupancy Certificate exemption orders, and detailed BMRCL metro transit-oriented influence zone rules.'
+- 'Land-use zone polygons: available only where RMP 2015 Proposed Land Use map sheets have been processed (4 sheets in Bengaluru South); elsewhere on the map you can select a land-use zone manually.'
+- National Building Code of India 2016 (copyrighted by BIS; listed as reference only) and Airports Authority of India NOCAS colour-coded zoning map (external aviation portal; reference only).
+unread_documents:
+- title: Revising the amendments in the regulations in BBMP revised Mahayojane 2015
+    (Kannada Compilation)
+  source_url: https://web.archive.org/web/20250325225145id_/https://site.bbmp.gov.in/PDF/townplanning/KM_266_160102035827-pages-deleted_29102024.pdf
+  reason: Published in Kannada only and not structured. The English original and the
+    8 structured English amending notifications are used instead.
+unobtainable_documents:
+- id: rmp2015-zr-amend-2025-07
+  title: Gazette Notification (July 2025) - Bengaluru Master Plan 2015 Zoning Regulations
+    Amendments
+  searched_sources:
+  - https://data.opencity.in/dataset/31a482fe-4ffd-4929-a61d-2fdcca90be91/resource/3f2685b8-5e27-44e5-9222-8f6dbff9445f/download/d7b00660-a3bc-49cf-b35a-3d70283ace0a.pdf
+  - https://erajyapatra.karnataka.gov.in/
+  reason: Official gazette PDF could not be obtained from public sources; some zoning values may not reflect changes made in July 2025.
 contested_status:
 - doc_id: ktcda-amend-bill-2025
   title: The Karnataka Tank Conservation and Development Authority (Amendment) Bill,

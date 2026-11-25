@@ -79,7 +79,7 @@ def test_run_all_xx_test_fixture_matches_golden_snapshots(tmp_path: Path) -> Non
     manifest_path = isolated_root / "public" / "data" / "manifest.json"
     assert manifest_path.is_file()
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    assert manifest["schema_version"] == "1.3"
+    assert manifest["schema_version"] == "1.4"
 
     j_entry = next(j for j in manifest["jurisdictions"] if j["id"] == "xx-test-fixture")
     assert j_entry["aliases"] == ["Synthetic Fixture", "Test City"]
@@ -200,7 +200,7 @@ def test_apply_overrides_fails_on_missing_target_id(tmp_path: Path) -> None:
 
     bad_override = isolated_root / "data" / "overrides" / "xx-test-fixture" / "99-bad.yaml"
     bad_override.write_text(
-        'schema_version: "1.3"\n'
+        'schema_version: "1.4"\n'
         "clause_fixes:\n"
         "  - clause_id: fixture-base-2020:999.999\n"
         "    field: title\n"

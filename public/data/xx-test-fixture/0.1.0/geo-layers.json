@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.3",
+  "schema_version": "1.4",
   "jurisdiction": "xx-test-fixture",
   "layers": [
     {
@@ -11,7 +11,7 @@
       "accuracy_m": 1.0,
       "derived": false,
       "file": "boundary.geojson",
-      "external_url": null,
+      "external_url": "pipeline/tests/fixtures/fixture-boundary.kml",
       "feature_count": 1,
       "notes": null
     },

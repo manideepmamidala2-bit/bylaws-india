@@ -9,7 +9,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "enum": ["1.3", "1.4"]
+      "const": "1.4"
     },
     "jurisdiction": {
       "type": "string",
@@ -138,12 +138,14 @@
         "kind": {
           "type": "string",
           "enum": [
-            "same_topic",
-            "definition_differs",
-            "numeric_differs",
+            "amends",
+            "incorporates",
+            "corporation_differs",
             "cross_document_reference",
+            "definition_differs",
             "precedence",
-            "corporation_differs"
+            "same_topic",
+            "numeric_differs"
           ]
         },
         "from_doc": {
@@ -200,6 +202,23 @@
         },
         "note": {
           "type": ["string", "null"]
+        },
+        "public_visible": {
+          "type": "boolean",
+          "default": false
+        },
+        "measured_precision": {
+          "type": ["number", "null"],
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "default": null
+        },
+        "parameters_incorporated": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string"
+          },
+          "default": null
         }
       }
     }

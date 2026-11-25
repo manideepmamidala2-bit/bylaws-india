@@ -6,11 +6,11 @@
 export type ZoningMapConfig = TracedZoningMapConfig | ImportedZoningMapConfig;
 
 /**
- * Configuration contract for a jurisdiction in jurisdictions/<id>.yaml (Schema v1.2).
+ * Configuration contract for a jurisdiction in jurisdictions/<id>.yaml (Schema v1.4).
  */
 
 export interface JurisdictionConfig {
-  schema_version?: "1.3";
+  schema_version?: "1.4";
   /**
    * Lowercase hyphenated hierarchical jurisdiction ID.
    */
@@ -315,11 +315,11 @@ export interface OverlayMapConfig {
 }
 
 /**
- * Metadata and provenance record for an acquired raw document in data/raw/<jurisdiction>/<doc_id>.meta.json (Schema v1.2).
+ * Metadata and provenance record for an acquired raw document in data/raw/<jurisdiction>/<doc_id>.meta.json (Schema v1.4).
  */
 
 export interface DocumentMetadata {
-  schema_version: "1.3";
+  schema_version: "1.4";
   doc_id: string;
   title: string;
   issuing_authority: string;
@@ -403,16 +403,40 @@ export interface DocumentCitedProvision {
 }
 
 /**
- * Structured faithful document tree in data/processed/<jurisdiction>/documents/<doc_id>.clauses.json (Schema v1.3, Layer 1 & Layer 3).
+ * Structured faithful document tree in data/processed/<jurisdiction>/documents/<doc_id>.clauses.json (Schema v1.4, Layer 1 & Layer 3).
  */
 
 export interface ClauseTree {
-  schema_version: "1.3";
+  schema_version: "1.4";
   doc_id: string;
   jurisdiction: string;
   legal_status: "in_force" | "draft" | "superseded" | "withdrawn" | "status_unknown";
+  chapter_eid?: string | null;
+  chapter_title?: string | null;
+  as_of_date?: string | null;
+  derived?: boolean | null;
+  total_clauses?: number | null;
+  total_tables?: number | null;
+  outline?: ClauseOutlineEntry[];
   generated: ClauseTreeGenerated;
   clauses: ClauseNode[];
+}
+
+export interface ClauseOutlineEntry {
+  eid: string;
+  clause_id: string;
+  number: string;
+  title?: string | null;
+  heading?: string | null;
+  type: string;
+  level: number;
+  parent_eid?: string | null;
+  order: number;
+  page: number;
+  child_count: number;
+  table_count: number;
+  chapter_file?: string | null;
+  changed_count?: number;
 }
 
 export interface ClauseTreeGenerated {
@@ -486,6 +510,8 @@ export interface ClauseNode {
   applies_to_zones: string[];
   verification: "unverified" | "machine_checked" | "human_verified";
   verified_by?: string | null;
+  omitted?: boolean;
+  change_mark?: ClauseChangeMark | null;
 }
 
 export interface TableMeta {
@@ -550,12 +576,24 @@ export interface ClauseTable {
   page: number;
 }
 
+export interface ClauseChangeMark {
+  label: string;
+  amending_doc: string;
+  amending_eid: string;
+  amending_clause_id?: string | null;
+  effective_date: string;
+  action: string;
+  original_text?: string | null;
+  original_heading?: string | null;
+  original_cells?: string[] | null;
+}
+
 /**
- * Stand-off character-span annotations for a structured document in data/processed/<jurisdiction>/documents/<doc_id>.annotations.json (Schema v1.3, Layer 2).
+ * Stand-off character-span annotations for a structured document in data/processed/<jurisdiction>/documents/<doc_id>.annotations.json (Schema v1.4, Layer 2).
  */
 
 export interface DocumentAnnotations {
-  schema_version: "1.3";
+  schema_version: "1.4";
   doc_id: string;
   jurisdiction: string;
   annotations: AnnotationEntry[];
@@ -600,12 +638,12 @@ export type LinearRing = [Position, Position, Position, Position, ...Position[]]
 export type Position = [number, number] | [number, number, number];
 
 /**
- * GeoJSON FeatureCollection of zoning polygons in data/processed/<jurisdiction>/zones.geojson (Schema v1.2).
+ * GeoJSON FeatureCollection of zoning polygons in data/processed/<jurisdiction>/zones.geojson (Schema v1.4).
  */
 
 export interface ZonesFeatureCollection {
   type: "FeatureCollection";
-  schema_version: "1.3";
+  schema_version: "1.4";
   /**
    * @minItems 4
    * @maxItems 4
@@ -678,11 +716,11 @@ export interface GeorefRunSummary {
 }
 
 /**
- * Versioned manual corrections, annotation fixes, zone tags, and map curations in data/overrides/<jurisdiction>/*.yaml (Schema v1.3).
+ * Versioned manual corrections, annotation fixes, zone tags, and map curations in data/overrides/<jurisdiction>/*.yaml (Schema v1.4).
  */
 
 export interface JurisdictionOverrides {
-  schema_version: "1.3";
+  schema_version: "1.4";
   clause_fixes?: ClauseFix[];
   annotation_fixes?: AnnotationFix[];
   zone_tags?: ZoneTag[];
@@ -788,11 +826,11 @@ export interface AmendmentLinkOverride {
 }
 
 /**
- * Self-declared coverage scope, known extraction gaps, unread/unobtainable documents, and contested status for a jurisdiction release (Schema v1.2).
+ * Self-declared coverage scope, known extraction gaps, unread/unobtainable documents, and contested status for a jurisdiction release (Schema v1.4).
  */
 
 export interface JurisdictionDeclarations {
-  schema_version: "1.3";
+  schema_version: "1.4";
   jurisdiction: string;
   not_modelled: string[];
   known_gaps: KnownGap[];
@@ -836,11 +874,11 @@ export interface ContestedStatus {
 }
 
 /**
- * Amending effects and links between amending instructions and target nodes (Schema v1.3, Layer 3).
+ * Amending effects and links between amending instructions and target nodes (Schema v1.4, Layer 3).
  */
 
 export interface JurisdictionAmendments {
-  schema_version: "1.3";
+  schema_version: "1.4";
   jurisdiction: string;
   effects?: AmendmentEffect[];
   links: AmendmentLink[];
@@ -888,11 +926,11 @@ export interface AmendmentLink {
 }
 
 /**
- * Published release manifest at Blob/static root manifest.json (Schema v1.3).
+ * Published release manifest at Blob/static root manifest.json (Schema v1.4).
  */
 
 export interface ReleaseManifest {
-  schema_version: "1.3";
+  schema_version: "1.4";
   jurisdictions: JurisdictionManifest[];
 }
 
@@ -945,21 +983,37 @@ export interface ReleaseFiles {
   sources_csv?: string | null;
   relations?: string | null;
   graph?: string | null;
+  parameters?: string | null;
+  resolution?: string | null;
+  places?: string | null;
+  outlines?: string[];
+  consolidated_outlines?: string[];
+  akn_xml?: string[];
+  shared_documents?: {
+    [k: string]: {
+      sha256: string;
+      clauses: string;
+      outline?: string | null;
+      annotations?: string | null;
+    };
+  };
   review_images: string[];
 }
 
 export interface ReleaseDrafts {
   clauses: string[];
+  outlines?: string[];
 }
 
 /**
- * Derived consolidated 'as amended' clause records and unconsolidated clause explanations (Schema v1.3, Rule R14).
+ * Derived consolidated 'as amended' clause records, full consolidated document snapshots, and unconsolidated clause explanations (Schema v1.4, Rule R14).
  */
 
 export interface JurisdictionConsolidated {
-  schema_version: "1.3";
+  schema_version: "1.4";
   jurisdiction: string;
   generated: ConsolidatedGenerated;
+  documents?: ConsolidatedDocumentManifest[];
   records: ConsolidatedClauseRecord[];
   unconsolidated: UnconsolidatedClauseRecord[];
 }
@@ -967,6 +1021,22 @@ export interface JurisdictionConsolidated {
 export interface ConsolidatedGenerated {
   pipeline_version: string;
   generated_at: string;
+}
+
+export interface ConsolidatedDocumentManifest {
+  doc_id: string;
+  title: string;
+  snapshots: ConsolidatedSnapshotRef[];
+}
+
+export interface ConsolidatedSnapshotRef {
+  as_of_date: string;
+  label: string;
+  outline_file: string;
+  chapters: string[];
+  akn_xml_file?: string | null;
+  total_clauses: number;
+  changed_clauses: number;
 }
 
 export interface ConsolidatedClauseRecord {
@@ -982,6 +1052,10 @@ export interface ConsolidatedClauseRecord {
   method: string;
   confidence: "high";
   omitted?: boolean;
+  eid?: string | null;
+  change_note?: string | null;
+  original_text?: string | null;
+  amending_clause_id?: string | null;
 }
 
 export interface ConsolidatedClauseTable {
@@ -999,11 +1073,11 @@ export interface UnconsolidatedClauseRecord {
 }
 
 /**
- * Registry of official boundaries, master plan zone layers, derived overlays, and external reference map layers for a jurisdiction (Schema v1.2, Rule R14).
+ * Registry of official boundaries, master plan zone layers, derived overlays, and external reference map layers for a jurisdiction (Schema v1.4, Rule R14).
  */
 
 export interface JurisdictionGeoLayers {
-  schema_version: "1.3";
+  schema_version: "1.4";
   jurisdiction: string;
   layers: GeoLayerEntry[];
 }
@@ -1040,11 +1114,11 @@ export interface SheetOverlayConfig {
 }
 
 /**
- * Structured clause-to-zone applicability tags with quoted clause reasons and verification status (Schema v1.2).
+ * Structured clause-to-zone applicability tags with quoted clause reasons and verification status (Schema v1.4).
  */
 
 export interface JurisdictionClauseZoneTags {
-  schema_version: "1.3";
+  schema_version: "1.4";
   jurisdiction: string;
   tags: ClauseZoneTagEntry[];
 }
@@ -1062,7 +1136,7 @@ export interface ClauseZoneTagEntry {
  */
 
 export interface JurisdictionRelations {
-  schema_version: "1.3" | "1.4";
+  schema_version: "1.4";
   jurisdiction: string;
   topics: TopicDefinition[];
   succession: SuccessionEntry[];
@@ -1091,12 +1165,14 @@ export interface SuccessionEntry {
 export interface RelationEntry {
   id: string;
   kind:
-    | "same_topic"
-    | "definition_differs"
-    | "numeric_differs"
+    | "amends"
+    | "incorporates"
+    | "corporation_differs"
     | "cross_document_reference"
+    | "definition_differs"
     | "precedence"
-    | "corporation_differs";
+    | "same_topic"
+    | "numeric_differs";
   from_doc: string;
   from_eid: string;
   to_doc: string;
@@ -1111,4 +1187,149 @@ export interface RelationEntry {
   confidence: number;
   status: "candidate" | "confirmed" | "rejected" | "human_verified";
   note?: string | null;
+  public_visible?: boolean;
+  measured_precision?: number | null;
+  parameters_incorporated?: string[] | null;
+}
+
+/**
+ * Structured dated building parameter records with numeric intervals, categorical conditions, and cell-level provenance (Schema v1.4, Part 3).
+ */
+
+export interface JurisdictionParameters {
+  schema_version: "1.4";
+  jurisdiction: string;
+  generated: ParametersGenerated;
+  records: ParameterRecord[];
+}
+
+export interface ParametersGenerated {
+  pipeline_version: string;
+  generated_at: string;
+}
+
+export interface ParameterRecord {
+  parameter_id: string;
+  parameter:
+    | "ground_coverage_max_pct"
+    | "far_base_max"
+    | "far_premium_additional_max"
+    | "tdr_receivable_max"
+    | "setback_front_min_m"
+    | "setback_rear_min_m"
+    | "setback_side_min_m"
+    | "building_height_max_m"
+    | "floors_max"
+    | "parking_requirement";
+  value: number | string | null;
+  unit: string | null;
+  value_text: string;
+  conditions: ParameterConditions;
+  valid_from: string | null;
+  valid_to: string | null;
+  legal_status: "in_force" | "draft" | "superseded" | "withdrawn" | "status_unknown";
+  source: ParameterSource;
+  derived: true;
+  method: "table_rule_parser" | "clause_rule_parser" | "override_curated";
+  confidence: number;
+  verification: "unverified" | "machine_checked" | "human_verified";
+  note?: string | null;
+}
+
+export interface ParameterConditions {
+  plot_area_m2?: NumericInterval | null;
+  plot_depth_m?: NumericInterval | null;
+  plot_width_m?: NumericInterval | null;
+  road_width_m?: NumericInterval | null;
+  building_height_m?: NumericInterval | null;
+  zone?: string[] | null;
+  area_class?: string[] | null;
+  use?: string[] | null;
+  jurisdiction?: string[] | null;
+  unexpressed_conditions?: string[];
+  dependent: boolean;
+}
+
+export interface NumericInterval {
+  min: number | null;
+  max: number | null;
+  min_inclusive: boolean;
+  max_inclusive: boolean;
+}
+
+export interface ParameterSource {
+  doc_id: string;
+  eid: string;
+  clause_id: string;
+  table_eid?: string | null;
+  table_id?: string | null;
+  row_index?: number | null;
+  col_index?: number | null;
+  row_header?: string | null;
+  column_header?: string | null;
+  cell_text: string;
+  footnote_markers?: string[];
+  footnotes_text?: string[];
+  page: number;
+  /**
+   * @minItems 4
+   * @maxItems 4
+   */
+  bbox?: [number, number, number, number] | null;
+  page_link: string;
+  official_url?: string | null;
+  archive_url?: string | null;
+}
+
+/**
+ * Declarative top-to-bottom statutory resolution rules with quoted authorities for the plot resolver (Schema v1.4, Part 4).
+ */
+
+export interface StatutoryResolutionConfig {
+  schema_version: "1.4";
+  jurisdiction: string;
+  derived: true;
+  notice: string;
+  instrument_families: {
+    [k: string]: string[];
+  };
+  /**
+   * @minItems 6
+   */
+  steps: [
+    ResolutionStep,
+    ResolutionStep,
+    ResolutionStep,
+    ResolutionStep,
+    ResolutionStep,
+    ResolutionStep,
+    ...ResolutionStep[]
+  ];
+}
+
+export interface ResolutionStep {
+  step_number: number;
+  step_id:
+    | "draft_excluded"
+    | "corporation_scope"
+    | "gbga_notwithstanding"
+    | "zoning_governs_via_byelaw_1_4"
+    | "lex_posterior_within_family"
+    | "unresolved_tie";
+  title: string;
+  plain_rule: string;
+  enabled: boolean;
+  disabled_reason?: string | null;
+  parameters_governed?: string[] | null;
+  authority: ResolutionAuthority;
+  verification: "unverified" | "machine_checked" | "human_verified";
+}
+
+export interface ResolutionAuthority {
+  doc_id: string | null;
+  eid: string | null;
+  clause_id: string | null;
+  page: number | null;
+  quote: string | null;
+  official_url?: string | null;
 }

@@ -19,9 +19,22 @@ def _get_latest_south_release_dir():
     return REPO_ROOT / "public" / "data" / "in-ka-bengaluru-south" / config.release_version
 
 
+def _get_latest_parent_release_dir():
+    config = load_jurisdiction_config("in-ka-bengaluru")
+    assert config.release_version is not None
+    return REPO_ROOT / "public" / "data" / "in-ka-bengaluru" / config.release_version
+
+
+def _resolve_published_doc_file(rel_dir, filename: str):
+    cand = rel_dir / filename
+    if cand.is_file():
+        return cand
+    return _get_latest_parent_release_dir() / filename
+
+
 def test_part1_annotation_quality_no_stopwords_or_heading_references_and_qa_stats() -> None:
     """Part 1 (`08b` §2): No stopword is a defined term, `defines` comes from quoted terms only, no heading is a reference, at most 1 `defined_term_use` per term per provision, and `qa.md` reports annotation counts."""
-    rel_dir = _get_latest_south_release_dir()
+    rel_dir = _get_latest_parent_release_dir()
     for clauses_file in sorted(rel_dir.glob("*.clauses.json")):
         doc_id = clauses_file.name.replace(".clauses.json", "")
         tree = validate_file(clauses_file, "clause-tree")
@@ -154,7 +167,7 @@ def test_part3_rmp2015_zr_amendment_chain_inserted_chapter_11_and_replaced_table
         tree = validate_file(cfile, "clause-tree")
         assert len(tree["clauses"]) >= 5
 
-    zr_tree = validate_file(rel_dir / "rmp2015-zr.clauses.json", "clause-tree")
+    zr_tree = validate_file(_resolve_published_doc_file(rel_dir, "rmp2015-zr.clauses.json"), "clause-tree")
     zr_by_eid = {c["eid"]: c for c in zr_tree["clauses"]}
 
     # Inserted Chapter 11 (Premium FAR, 2025-04-02)
@@ -194,21 +207,28 @@ def test_part4_schema_1_4_topics_relations_precedence_succession_and_applicabili
     assert len(rels_payload["succession"]) >= 3
 
     rels = rels_payload["relations"]
-    assert len(rels) >= 100
+    assert len(rels) >= 60
     kinds = {r["kind"] for r in rels}
     for req_kind in (
-        "same_topic",
-        "definition_differs",
-        "numeric_differs",
-        "cross_document_reference",
-        "precedence",
+        "amends",
+        "incorporates",
         "corporation_differs",
+        "cross_document_reference",
+        "definition_differs",
+        "precedence",
     ):
         assert req_kind in kinds, f"Missing relation kind '{req_kind}' in relations.json"
+    assert "same_topic" not in kinds
+    assert "numeric_differs" not in kinds
 
     for r in rels:
         assert r["status"] != "human_verified", "Rule R10: no relation may be marked human_verified"
+        if r["kind"] in {"amends", "incorporates", "corporation_differs"}:
+            assert r["public_visible"] is True
+        else:
+            assert r["public_visible"] is False
         if r["kind"] == "precedence":
+            assert r["from_doc"] != r["to_doc"], "Precedence relation must be inter-instrument"
             assert r.get("precedence_span") and len(str(r["precedence_span"]).strip()) >= 10, (
                 f"Precedence relation {r['id']} missing quoted statutory precedence_span"
             )
@@ -219,7 +239,7 @@ def test_part4_schema_1_4_topics_relations_precedence_succession_and_applicabili
         assert isinstance(app_here, dict), f"Document {d['doc_id']} missing applies_to_jurisdiction"
         assert app_here.get("status") in {"yes", "no", "partly", "unknown"}
         if d["doc_id"] == "ka-model-bbl-2017":
-            assert app_here["status"] == "unknown"
+            assert app_here["status"] in {"no", "unknown"}
 
     rel_md = (REPO_ROOT / "data" / "reports" / "in-ka-bengaluru-south" / "relations.md").read_text(
         encoding="utf-8"
@@ -231,11 +251,14 @@ def test_part4_schema_1_4_topics_relations_precedence_succession_and_applicabili
 def test_part5_and_6_supporting_provisions_verified_overlays_4_sheets_and_zone_applicability_links() -> None:
     """Parts 5 & 6 (`10-supporting-provisions.md` & `11-all-sheets-zone-links-release.md`): Supporting instruments (`gbga-2024`, `udd-200-mnu-2025-khata`) are structured with `building_relevant_sections`, `ktcda-amend-bill-2025` is `status_unknown` in `contested_status`, `overlays.geojson` is published (`derived: true`), 4 RMP 2015 land-use sheets (`1,276` zone polygons) are extracted with RMSE <= 10m, and `zone_applicability` annotations + `clause-zone-tags.json` never link preamble/title/definition/commencement nodes."""
     rel_dir = _get_latest_south_release_dir()
-    assert rel_dir.name == "3.0.0"
+    assert rel_dir.name in {"3.0.0", "4.0.0"}
 
     # Supporting provisions & contested KTCDA Bill
     for sup_id in ("gbga-2024", "udd-200-mnu-2025-khata"):
-        tree = validate_file(rel_dir / f"{sup_id}.clauses.json", "clause-tree")
+        tree = validate_file(
+            _resolve_published_doc_file(rel_dir, f"{sup_id}.clauses.json"),
+            "clause-tree",
+        )
         assert len(tree["clauses"]) >= 5
 
     decls = validate_file(rel_dir / "declarations.json", "declarations")
@@ -263,9 +286,15 @@ def test_part5_and_6_supporting_provisions_verified_overlays_4_sheets_and_zone_a
     assert len(tags_payload["tags"]) >= 150
 
     for doc_id in ("bbl-2003", "rmp2015-zr"):
-        tree = validate_file(rel_dir / f"{doc_id}.clauses.json", "clause-tree")
+        tree = validate_file(
+            _resolve_published_doc_file(rel_dir, f"{doc_id}.clauses.json"),
+            "clause-tree",
+        )
         node_by_eid = {c["eid"]: c for c in tree["clauses"]}
-        ann_doc = validate_file(rel_dir / f"{doc_id}.annotations.json", "annotations")
+        ann_doc = validate_file(
+            _resolve_published_doc_file(rel_dir, f"{doc_id}.annotations.json"),
+            "annotations",
+        )
         prov_by_eid = {
             a["target"]["eid"]: a["value"]
             for a in ann_doc["annotations"]

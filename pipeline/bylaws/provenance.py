@@ -311,7 +311,7 @@ def check_repository_provenance(repo_root: Path | None = None) -> None:
 
     for yaml_path in sorted(jurisdictions_dir.glob("*.yaml")):
         raw = yaml.safe_load(yaml_path.read_text(encoding="utf-8"))
-        if not isinstance(raw, dict):
+        if not isinstance(raw, dict) or "documents" not in raw:
             continue
         jur_id = str(raw.get("id") or yaml_path.stem)
         visibility = str(raw.get("visibility") or "public")

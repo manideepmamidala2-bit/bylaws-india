@@ -1,0 +1,138 @@
+schema_version: "1.4"
+jurisdiction: in-ka-bengaluru
+derived: true
+notice: "Derived from the official documents by this project. Confirm with the planning authority or a qualified professional before relying on it."
+instrument_families:
+  zoning_regulations:
+    - rmp2015-zr
+    - rmp2015-zr-amend-2009-03
+    - rmp2015-zr-amend-2015-03
+    - rmp2015-zr-amend-2018-09
+    - rmp2015-zr-amend-2019-06
+    - rmp2015-zr-amend-2025-02
+    - rmp2015-zr-amend-2025-04
+    - rmp2015-zr-amend-2025-10
+    - rmp2015-zr-amend-2026-01
+  municipal_byelaws:
+    - bbl-2003
+    - bccc-bbl-amend-2026-04-draft
+    - bccc-bbl-amend-2026-05
+    - bncc-bbl-amend-2026-04-draft
+    - bncc-bbl-amend-2026-05
+    - bscc-bbl-amend-2026-04-draft
+    - bscc-bbl-amend-2026-05
+    - becc-bbl-amend-2026-04-draft
+    - becc-bbl-amend-2026-05
+    - bwcc-bbl-amend-2026-04-draft
+    - bwcc-bbl-amend-2026-05
+    - udd-1107-mnu-2018-draft
+  statute:
+    - gbga-2024
+  orders:
+    - udd-200-mnu-2025-khata
+steps:
+  - step_number: 1
+    step_id: draft_excluded
+    title: "Drafts never apply"
+    plain_rule: "Draft notifications invite public objections and do not apply until published as final notifications."
+    enabled: true
+    disabled_reason: null
+    parameters_governed: null
+    authority:
+      doc_id: rmp2015-zr-amend-2026-01
+      eid: cl_11.11.2025
+      clause_id: "rmp2015-zr-amend-2026-01:11.11.2025"
+      page: 1
+      quote: "inviting objections and suggestions from all persons likely to be affected thereby within thirty days from the date of its publication in the official Gazette."
+      official_url: "https://updates.bbmp.gov.in/v1/api/file/948358478137-Setback%20Notification.pdf"
+    verification: machine_checked
+
+  - step_number: 2
+    step_id: corporation_scope
+    title: "A corporation's amendment applies only inside that corporation"
+    plain_rule: "Building bye-law amendments made by a City Corporation apply only within that City Corporation's jurisdiction."
+    enabled: true
+    disabled_reason: null
+    parameters_governed: null
+    authority:
+      doc_id: gbga-2024
+      eid: chp_XVII__cl_224
+      clause_id: "gbga-2024:224"
+      page: 245
+      quote: "With the approval of the Greater Bengaluru Authority, the City Corporation in its jurisdiction shall make building bye-laws for the regulation and restriction of the use of sites or buildings"
+      official_url: "https://dpal.karnataka.gov.in/storage/pdf-files/36%20of%202025%20(E).pdf"
+    verification: machine_checked
+
+  - step_number: 3
+    step_id: gbga_notwithstanding
+    title: "Where the Greater Bengaluru Governance Act 2024 says 'notwithstanding', it prevails"
+    plain_rule: "Statutory non-obstante ('notwithstanding') provisions of the Greater Bengaluru Governance Act, 2024 prevail over inconsistent municipal rules."
+    enabled: true
+    disabled_reason: null
+    parameters_governed: null
+    authority:
+      doc_id: gbga-2024
+      eid: chp_XVII__cl_223
+      clause_id: "gbga-2024:223"
+      page: 245
+      quote: "Notwithstanding anything contained in this Act, a Corporation or any officer or other authority"
+      official_url: "https://dpal.karnataka.gov.in/storage/pdf-files/36%20of%202025%20(E).pdf"
+    verification: machine_checked
+
+  - step_number: 4
+    step_id: zoning_governs_via_byelaw_1_4
+    title: "For use, coverage, FAR, setbacks, height, floors, dwelling units and parking, the zoning regulations govern (bye-law 1.4)"
+    plain_rule: "Master Plan Zoning Regulations govern use, coverage, FAR, setbacks, height, floors, dwelling units, and parking pursuant to Building Bye-law 1.4 (inserted 2017)."
+    enabled: true
+    disabled_reason: null
+    parameters_governed:
+      - ground_coverage_max_pct
+      - far_base_max
+      - far_premium_additional_max
+      - tdr_receivable_max
+      - setback_front_min_m
+      - setback_rear_min_m
+      - setback_side_min_m
+      - building_height_max_m
+      - floors_max
+      - parking_requirement
+    authority:
+      doc_id: bbl-2003
+      eid: part_I__sec_1.0__cl_1.4
+      clause_id: "bbl-2003:1.4"
+      page: 2
+      quote: "all mandatory Master Plan or Zonal Regulations regarding use, land use, coverage, FAR, setback or open space, height, number of stories, number of dwelling units, and parking standards for various categories of buildings, including all amendments or modifications made therein from time to time, apply mutatis mutandis as part of these Bye-laws."
+      official_url: "https://site.bbmp.gov.in/PDF/Bangalore-Building-Byelaws-%202003.pdf"
+    verification: machine_checked
+
+  - step_number: 5
+    step_id: lex_posterior_within_family
+    title: "Within one instrument family, the later in-force provision wins"
+    plain_rule: "Within the same instrument family, a later in-force amendment or notification supersedes an earlier provision."
+    enabled: true
+    disabled_reason: null
+    parameters_governed: null
+    authority:
+      doc_id: rmp2015-zr-amend-2026-01
+      eid: cl_11.11.2025__item_3
+      clause_id: "rmp2015-zr-amend-2026-01:1(3)"
+      page: 1
+      quote: "They shall come into force from the date of their final publication in the official Gazette."
+      official_url: "https://updates.bbmp.gov.in/v1/api/file/948358478137-Setback%20Notification.pdf"
+    verification: machine_checked
+
+  - step_number: 6
+    step_id: unresolved_tie
+    title: "Otherwise: not settled; show both"
+    plain_rule: "Not settled: two rules apply. Both provisions are shown; confirm with the planning authority or a qualified professional."
+    enabled: true
+    disabled_reason: null
+    parameters_governed: null
+    authority:
+      doc_id: null
+      eid: null
+      clause_id: null
+      page: null
+      quote: null
+      official_url: null
+    verification: machine_checked

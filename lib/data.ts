@@ -10,13 +10,17 @@ import type {
   AmendmentLink,
   AnnotationEntry,
   AnnotationTarget,
+  ClauseChangeMark,
   ClauseCitation,
   ClauseNode as GeneratedClauseNode,
+  ClauseOutlineEntry,
   ClauseTable,
   ClauseTree as ClauseTreeDocument,
   ClauseZoneTagEntry,
   ConsolidatedClauseRecord,
   ConsolidatedClauseTable,
+  ConsolidatedDocumentManifest,
+  ConsolidatedSnapshotRef,
   ContestedStatus,
   DocumentAnnotations,
   DocumentApplicability,
@@ -32,14 +36,22 @@ import type {
   JurisdictionDeclarations,
   JurisdictionGeoLayers,
   JurisdictionManifest as JurisdictionSummary,
+  JurisdictionParameters,
   JurisdictionRelations,
   KnownGap,
   NodeVersion,
+  NumericInterval,
+  ParameterConditions,
+  ParameterRecord,
+  ParameterSource,
   RelationEntry,
   ReleaseDrafts,
   ReleaseEntry,
   ReleaseFiles,
   ReleaseManifest,
+  ResolutionAuthority,
+  ResolutionStep,
+  StatutoryResolutionConfig,
   SuccessionEntry,
   TableColumnHeader,
   TableFootnote,
@@ -59,12 +71,16 @@ export type {
   AmendmentLink,
   AnnotationEntry,
   AnnotationTarget,
+  ClauseChangeMark,
   ClauseCitation,
+  ClauseOutlineEntry,
   ClauseTable,
   ClauseTreeDocument,
   ClauseZoneTagEntry,
   ConsolidatedClauseRecord,
   ConsolidatedClauseTable,
+  ConsolidatedDocumentManifest,
+  ConsolidatedSnapshotRef,
   ContestedStatus,
   DocumentAnnotations,
   DocumentApplicability,
@@ -79,15 +95,23 @@ export type {
   JurisdictionConsolidated,
   JurisdictionDeclarations,
   JurisdictionGeoLayers,
+  JurisdictionParameters,
   JurisdictionRelations,
   JurisdictionSummary,
   KnownGap,
   NodeVersion,
+  NumericInterval,
+  ParameterConditions,
+  ParameterRecord,
+  ParameterSource,
   RelationEntry,
   ReleaseDrafts,
   ReleaseEntry,
   ReleaseFiles,
   ReleaseManifest,
+  ResolutionAuthority,
+  ResolutionStep,
+  StatutoryResolutionConfig,
   SuccessionEntry,
   TableColumnHeader,
   TableFootnote,
@@ -379,6 +403,113 @@ export async function fetchDocumentClauseTree(
   return readPublishedJson<ClauseTreeDocument>(matchedPath);
 }
 
+export async function fetchDocumentOutline(
+  jurisdictionId: string,
+  docId: string,
+  version?: string
+): Promise<ClauseTreeDocument | null> {
+  const manifest = await fetchManifest();
+  const found = findJurisdictionRelease(manifest, jurisdictionId, version);
+  if (!found || !found.release || !found.release.files) {
+    return null;
+  }
+  const outlinePaths = [
+    ...(found.release.files.outlines ?? []),
+    ...(found.release.drafts?.outlines ?? []),
+  ];
+  const suffix = `/${docId}.outline.json`;
+  const matchedPath = outlinePaths.find((p) => p.endsWith(suffix));
+  if (!matchedPath) {
+    return null;
+  }
+  try {
+    return await readPublishedJson<ClauseTreeDocument>(matchedPath);
+  } catch {
+    return null;
+  }
+}
+
+export async function fetchParameters(
+  jurisdictionId: string,
+  version?: string
+): Promise<JurisdictionParameters | null> {
+  const manifest = await fetchManifest();
+  const found = findJurisdictionRelease(manifest, jurisdictionId, version);
+  if (
+    !found ||
+    !found.release ||
+    !found.release.files ||
+    !found.release.files.parameters
+  ) {
+    return null;
+  }
+  try {
+    return await readPublishedJson<JurisdictionParameters>(
+      found.release.files.parameters
+    );
+  } catch {
+    return null;
+  }
+}
+
+export function slimParametersForSsr(
+  payload: JurisdictionParameters | null
+): JurisdictionParameters | null {
+  if (!payload) return null;
+  const slimmed = payload.records
+    .filter(
+      (r) =>
+        r.conditions.zone !== null ||
+        r.source.doc_id.includes("amend-2026-01") ||
+        r.source.doc_id.includes("amend-2025-04") ||
+        r.source.eid.includes("chp_8__tbl_1__row_13") ||
+        r.source.eid.includes("chp_8__tbl_1__row_2")
+    )
+    .slice(0, 32)
+    .map((r) => ({
+      ...r,
+      value_text: r.value_text.slice(0, 120),
+      conditions: {
+        ...r.conditions,
+        unexpressed_conditions: [],
+      },
+      source: {
+        ...r.source,
+        bbox: null,
+        footnote_markers: [],
+        footnotes_text: [],
+        archive_url: null,
+      },
+    }));
+  return {
+    ...payload,
+    records: slimmed,
+  };
+}
+
+export async function fetchResolution(
+  jurisdictionId: string,
+  version?: string
+): Promise<StatutoryResolutionConfig | null> {
+  const manifest = await fetchManifest();
+  const found = findJurisdictionRelease(manifest, jurisdictionId, version);
+  if (
+    !found ||
+    !found.release ||
+    !found.release.files ||
+    !found.release.files.resolution
+  ) {
+    return null;
+  }
+  try {
+    return await readPublishedJson<StatutoryResolutionConfig>(
+      found.release.files.resolution
+    );
+  } catch {
+    return null;
+  }
+}
+
 export async function fetchAmendments(
   jurisdictionId: string,
   version?: string
@@ -386,7 +517,7 @@ export async function fetchAmendments(
   const manifest = await fetchManifest();
   const found = findJurisdictionRelease(manifest, jurisdictionId, version);
   if (!found || !found.release || !found.release.files) {
-    return { schema_version: "1.3", jurisdiction: jurisdictionId, effects: [], links: [] };
+    return { schema_version: "1.4", jurisdiction: jurisdictionId, effects: [], links: [] };
   }
   return readPublishedJson<JurisdictionAmendments>(
     found.release.files.amendments
@@ -421,7 +552,7 @@ export async function fetchZones(
   if (!found || !found.release || !found.release.files) {
     return {
       type: "FeatureCollection",
-      schema_version: "1.3",
+      schema_version: "1.4",
       features: [],
     };
   }
@@ -497,7 +628,7 @@ export async function fetchDeclarations(
   const found = findJurisdictionRelease(manifest, jurisdictionId, version);
   if (!found || !found.release || !found.release.declarations) {
     return {
-      schema_version: "1.3",
+      schema_version: "1.4",
       jurisdiction: jurisdictionId,
       not_modelled: [],
       known_gaps: [],
@@ -541,7 +672,7 @@ export async function fetchJurisdictionDataset(
       annotationsByDocId: {},
       clauses: [],
       amendments: {
-        schema_version: "1.3",
+        schema_version: "1.4",
         jurisdiction: jurisdictionId,
         effects: [],
         links: [],
@@ -549,7 +680,7 @@ export async function fetchJurisdictionDataset(
       consolidated: null,
       zones: {
         type: "FeatureCollection",
-        schema_version: "1.3",
+        schema_version: "1.4",
         features: [],
       },
       boundary: { type: "FeatureCollection", features: [] },
@@ -561,7 +692,7 @@ export async function fetchJurisdictionDataset(
       clauseZoneTags: null,
       relations: null,
       declarations: {
-        schema_version: "1.3",
+        schema_version: "1.4",
         jurisdiction: jurisdictionId,
         not_modelled: [],
         known_gaps: [],
@@ -638,6 +769,15 @@ export async function fetchJurisdictionDataset(
     docById.set(doc.doc_id, doc);
   }
 
+  const appliedEffectsByTarget = new Map<string, AmendmentEffect[]>();
+  for (const eff of amendments.effects ?? []) {
+    if (!eff.applied) continue;
+    const key = `${eff.target_doc}:${eff.target_eid}`;
+    const list = appliedEffectsByTarget.get(key) ?? [];
+    list.push(eff);
+    appliedEffectsByTarget.set(key, list);
+  }
+
   const allTrees = [...clauseTrees, ...draftClauseTrees];
   const clauses: ClauseNode[] = [];
   for (const tree of allTrees) {
@@ -647,8 +787,53 @@ export async function fetchJurisdictionDataset(
       (docMeta?.mirror_urls && docMeta.mirror_urls[0]) ||
       docMeta?.source_url;
     for (const c of tree.clauses) {
+      let hydratedVersions = c.versions;
+      const targetEffects = c.eid
+        ? appliedEffectsByTarget.get(`${tree.doc_id}:${c.eid}`)
+        : undefined;
+      if (targetEffects && targetEffects.length > 0) {
+        const existingEffIds = new Set(
+          (c.versions ?? []).map((v) => v.effect_id).filter(Boolean)
+        );
+        const missingEffects = targetEffects.filter(
+          (e) => !existingEffIds.has(e.effect_id)
+        );
+        if (missingEffects.length > 0) {
+          const baseVers = [...(c.versions ?? [])];
+          for (const mEff of missingEffects) {
+            const firstPayload = mEff.new_nodes?.[0];
+            if (baseVers.length > 0 && !baseVers[baseVers.length - 1].valid_to) {
+              baseVers[baseVers.length - 1] = {
+                ...baseVers[baseVers.length - 1],
+                valid_to: mEff.valid_from ?? null,
+              };
+            }
+            baseVers.push({
+              version_id: `v${baseVers.length + 1}`,
+              valid_from: mEff.valid_from ?? null,
+              valid_to: null,
+              heading: firstPayload?.heading ?? c.heading ?? null,
+              intro: firstPayload?.intro ?? c.intro ?? null,
+              content:
+                mEff.action === "omit"
+                  ? `[Omitted by ${mEff.amending_doc}:${mEff.amending_eid}]`
+                  : firstPayload?.content ?? c.content ?? c.text,
+              wrap_up: firstPayload?.wrap_up ?? c.wrap_up ?? null,
+              cells: c.cells ?? null,
+              source_doc: mEff.amending_doc,
+              source_eid: mEff.amending_eid,
+              effect_id: mEff.effect_id,
+              citations: c.citations ?? [],
+              legal_status: "in_force",
+              omitted: mEff.action === "omit",
+            });
+          }
+          hydratedVersions = baseVers;
+        }
+      }
       clauses.push({
         ...c,
+        versions: hydratedVersions,
         doc_id: tree.doc_id,
         doc_title: docMeta?.title ?? tree.doc_id,
         doc_layer: docMeta?.layer,

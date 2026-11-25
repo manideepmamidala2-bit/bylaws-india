@@ -35,16 +35,22 @@ test.describe("Map Page — PMTiles HTTP 206 Range & Non-Blank Canvas (08b §1)"
       expect(box!.height).toBeGreaterThan(200);
 
       // Verify direct HTTP Range request against basemap.pmtiles returns 206 Partial Content
-      const rangeStatus = await page.evaluate(async () => {
+      const rangeCheck = await page.evaluate(async () => {
         const res = await fetch(
           "/data/in-ka-bengaluru-south/basemap.pmtiles",
           {
             headers: { Range: "bytes=0-511" },
           }
         );
-        return res.status;
+        return {
+          status: res.status,
+          contentRange: res.headers.get("content-range"),
+          acceptRanges: res.headers.get("accept-ranges"),
+        };
       });
-      expect([200, 206]).toContain(rangeStatus);
+      expect(rangeCheck.status).toBe(206);
+      expect(rangeCheck.contentRange).toMatch(/^bytes 0-511\//);
+      expect(rangeCheck.acceptRanges).toBe("bytes");
 
       // Wait for MapLibre canvas element or WebGL fallback banner
       const canvas = mapRegion.locator("canvas").first();
@@ -58,4 +64,48 @@ test.describe("Map Page — PMTiles HTTP 206 Range & Non-Blank Canvas (08b §1)"
       }
     });
   }
+
+  test("renders document page with per-chapter outline within <= 300 KB HTML budget", async ({
+    page,
+  }) => {
+    const resp = await page.goto(
+      "/j/in-ka-bengaluru-south/documents/bbl-2003",
+      { waitUntil: "domcontentloaded" }
+    );
+    expect(resp).not.toBeNull();
+    expect(resp!.status()).toBe(200);
+    const bodyBuffer = await resp!.body();
+    expect(bodyBuffer.byteLength).toBeLessThanOrEqual(300 * 1024);
+
+    await expect(
+      page.getByRole("heading", {
+        name: /BANGALORE MAHANAGARA PALIKE BUILDING BYE-LAWS 2003/i,
+      })
+    ).toBeVisible();
+    await expect(
+      page.getByRole("complementary", { name: /Document outline navigation/i })
+    ).toBeVisible();
+  });
+
+  test("renders map-first home and resolves Jayanagar 600 m² / 15 m road plot card answers", async ({
+    page,
+  }) => {
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+
+    const plotCard = page.getByRole("region", {
+      name: /Plot building code resolver card/i,
+    });
+    await expect(plotCard).toBeVisible();
+
+    const areaInput = plotCard.getByLabel(/Plot area \(m²\)/i);
+    const roadInput = plotCard.getByLabel(/Road width \(m\)/i);
+    await areaInput.fill("600");
+    await roadInput.fill("15");
+
+    await expect(plotCard).toContainText(/65%/i);
+    await expect(plotCard).toContainText(/2\.25/i);
+    await expect(plotCard).toContainText(
+      /Derived from the official documents by this project/i
+    );
+  });
 });

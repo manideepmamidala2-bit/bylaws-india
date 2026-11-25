@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { SearchBar } from "./SearchBar";
 
 export type NavSection =
   | "home"
@@ -88,8 +89,11 @@ export function TopNav({
         })}
       </nav>
 
-      <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-[#5b5e56]">
-        {releaseVersion ? `Release ${releaseVersion} · ${licence}` : licence}
+      <div className="flex flex-wrap items-center gap-4">
+        <SearchBar jurisdictionId={jId} />
+        <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-[#5b5e56]">
+          {releaseVersion ? `Release ${releaseVersion} · ${licence}` : licence}
+        </div>
       </div>
     </header>
   );

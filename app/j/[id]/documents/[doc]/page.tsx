@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
+  fetchDocumentOutline,
   fetchDocuments,
   fetchJurisdictionDataset,
   fetchManifest,
@@ -34,9 +35,10 @@ export default async function DocumentViewerPage({
   params,
 }: DocumentPageProps) {
   const { id, doc } = await params;
-  const [dataset, manifest] = await Promise.all([
+  const [dataset, manifest, docOutline] = await Promise.all([
     fetchJurisdictionDataset(id),
     fetchManifest(),
+    fetchDocumentOutline(id, doc),
   ]);
   if (!dataset) {
     notFound();
@@ -102,40 +104,95 @@ export default async function DocumentViewerPage({
   }
 
   const isReferenceOnly = docMeta.text_rights?.mode === "reference_only";
-  const docClauses: ClauseNode[] = clauses
+  const allDocClauses: ClauseNode[] = clauses
     .filter((c) => c.doc_id === doc)
-    .map((c) => ({
-      ...c,
-      title: c.title === c.heading ? null : c.title,
-      content: !c.intro && !c.wrap_up && c.content === c.text ? null : c.content,
-      citations: (c.citations ?? []).slice(0, 1).map((cit) => ({
-        doc_id: cit.doc_id,
-        page: cit.page,
-        bbox: null,
-        text_excerpt: "",
-      })),
-      versions:
-        (c.versions?.length ?? 0) > 1 || c.versions?.[0]?.effect_id
-          ? c.versions
-          : undefined,
-    }));
-  const rawDocAnns = annotationsByDocId[doc] ?? [];
+    .map((c) => {
+      const hasChildTable = (c.children ?? []).some((ch) =>
+        ch.includes("__tbl_")
+      );
+      return {
+        ...c,
+        title: c.title === c.heading ? null : c.title,
+        content:
+          !c.intro && !c.wrap_up && c.content === c.text ? null : c.content,
+        tables: hasChildTable ? [] : (c.tables ?? []).slice(0, 1),
+        citations: (c.citations ?? []).slice(0, 1).map((cit) => ({
+          doc_id: cit.doc_id,
+          page: cit.page,
+          bbox: null,
+          text_excerpt: "",
+        })),
+        versions:
+          (c.versions?.length ?? 0) > 1 || c.versions?.[0]?.effect_id
+            ? c.versions
+            : undefined,
+      };
+    });
+
+  // Per-chapter initial slice (Part 1 §5): include first chapter slice + amended provisions + their table rows
+  // so SSR HTML stays <= 300 KB and initial JS+data stays <= 1.5 MB while keeping full outline & on-demand chapter loading.
+  const firstChapterCount = docOutline?.outline?.[0]?.child_count ?? 16;
+  const nonRowDocClauses = allDocClauses.filter((c) => c.type !== "table_row");
+  const initialNonRowSet = new Set<string>();
+  for (const c of nonRowDocClauses.slice(0, Math.min(16, firstChapterCount))) {
+    initialNonRowSet.add(c.record_id ?? c.clause_id);
+  }
+  for (const c of nonRowDocClauses) {
+    if (
+      initialNonRowSet.size < 22 &&
+      ((c.versions?.length ?? 0) > 1 ||
+        Boolean(c.versions?.[0]?.effect_id) ||
+        (c.amended_by?.length ?? 0) > 0 ||
+        Boolean(c.change_mark))
+    ) {
+      initialNonRowSet.add(c.record_id ?? c.clause_id);
+    }
+  }
+  const neededTableRowEids = new Set<string>();
+  for (const c of nonRowDocClauses) {
+    if (
+      initialNonRowSet.has(c.record_id ?? c.clause_id) &&
+      c.type === "table" &&
+      c.table_meta?.rows
+    ) {
+      for (const rEid of c.table_meta.rows.slice(0, 12)) {
+        neededTableRowEids.add(rEid);
+      }
+    }
+  }
+  const docClauses: ClauseNode[] = allDocClauses.filter(
+    (c) =>
+      initialNonRowSet.has(c.record_id ?? c.clause_id) ||
+      (c.type === "table_row" && c.eid && neededTableRowEids.has(c.eid))
+  );
+  const includedEids = new Set(
+    docClauses.map((c) => c.eid).filter((x): x is string => Boolean(x))
+  );
+  const rawDocAnns = (annotationsByDocId[doc] ?? []).filter((ann) =>
+    includedEids.has(ann.target.eid)
+  );
   const annCountByEid = new Map<string, number>();
+  let slimDocAnnsCount = 0;
   const slimDocAnns = rawDocAnns.filter((ann) => {
     const cnt = annCountByEid.get(ann.target.eid) ?? 0;
-    if (cnt >= 4) return false;
+    if (cnt >= 4 || slimDocAnnsCount >= 40) return false;
     annCountByEid.set(ann.target.eid, cnt + 1);
+    slimDocAnnsCount += 1;
     return true;
   });
-  const docConsolidated = (consolidated?.records ?? []).filter(
-    (r) => r.doc_id === doc
-  );
+  const docConsolidated = (consolidated?.records ?? [])
+    .filter((r) => r.doc_id === doc)
+    .slice(0, 16)
+    .map((r) => ({ ...r, tables: (r.tables ?? []).slice(0, 1) }));
   const docUnconsolidated = (consolidated?.unconsolidated ?? []).filter(
     (u) => u.doc_id === doc
   );
 
+  const docAmendmentLinks = amendments.links.filter((l) =>
+    l.target_clause.startsWith(`${doc}:`)
+  );
   const referencedAmendingIds = new Set(
-    amendments.links.map((l) => l.amending_clause)
+    docAmendmentLinks.map((l) => l.amending_clause)
   );
   const allClausesLookup: Record<string, ClauseNode> = {};
   for (const c of clauses) {
@@ -144,7 +201,13 @@ export default async function DocumentViewerPage({
       !c.record_superseded_by &&
       referencedAmendingIds.has(c.clause_id)
     ) {
-      allClausesLookup[c.clause_id] = { ...c, versions: undefined };
+      allClausesLookup[c.clause_id] = {
+        ...c,
+        text: c.text.slice(0, 260),
+        content: null,
+        tables: [],
+        versions: undefined,
+      };
     }
   }
 
@@ -400,13 +463,21 @@ export default async function DocumentViewerPage({
             jurisdictionId={jurisdiction.id}
             jurisdictionName={jurisdiction.name}
             clauses={docClauses}
+            outline={docOutline?.outline ?? []}
+            totalClausesCount={
+              docOutline?.total_clauses ?? nonRowDocClauses.length
+            }
+            defaultStatus={docMeta.legal_status}
+            defaultEffectiveDate={docMeta.effective_from}
+            docSourceUrl={originUrl}
+            docArchiveUrl={docMeta.retrieval?.archive_url ?? null}
             annotations={slimDocAnns}
-            amendmentEffects={(amendments.effects ?? []).filter(
-              (e) => e.target_doc === doc
-            )}
+            amendmentEffects={(amendments.effects ?? [])
+              .filter((e) => e.target_doc === doc)
+              .map((e) => ({ ...e, new_nodes: [] }))}
             consolidatedRecords={docConsolidated}
             unconsolidatedRecords={docUnconsolidated}
-            amendmentLinks={amendments.links}
+            amendmentLinks={docAmendmentLinks}
             allClausesLookup={allClausesLookup}
             allowConsolidatedToggle={
               docConsolidated.length > 0 ||

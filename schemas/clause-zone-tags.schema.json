@@ -2,14 +2,14 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://bylaws-india.local/schemas/clause-zone-tags.schema.json",
   "title": "JurisdictionClauseZoneTags",
-  "description": "Structured clause-to-zone applicability tags with quoted clause reasons and verification status (Schema v1.2).",
+  "description": "Structured clause-to-zone applicability tags with quoted clause reasons and verification status (Schema v1.4).",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "jurisdiction", "tags"],
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "1.3"
+      "const": "1.4"
     },
     "jurisdiction": {
       "type": "string",

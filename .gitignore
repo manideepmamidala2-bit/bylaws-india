@@ -16,6 +16,12 @@ data/raw/
 data/interim/
 data/processed/
 
+# Published non-fixture datasets, PMTiles, and static search index (served via range storage / prebuild)
+public/data/in-ka-bengaluru/
+public/data/in-ka-bengaluru-*/
+public/data/**/*.pmtiles
+public/pagefind/
+
 # Python / uv
 __pycache__/
 *.py[cod]

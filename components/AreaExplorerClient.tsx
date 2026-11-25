@@ -7,13 +7,19 @@ import type {
   ClauseZoneTagEntry,
   GenericFeatureCollection,
   GeoLayerEntry,
+  JurisdictionConsolidated,
+  JurisdictionParameters,
+  StatutoryResolutionConfig,
   ZoneFeature,
 } from "@/lib/data";
 import { ZoneMap } from "./ZoneMap";
 import { ClausePanel } from "./ClausePanel";
+import { PlotCard } from "./PlotCard";
 
 interface AreaExplorerClientProps {
   jurisdictionId: string;
+  corporationName?: string;
+  releaseVersion?: string;
   zones: ZoneFeature[];
   clauses: ClauseNode[];
   amendmentLinks: AmendmentLink[];
@@ -24,10 +30,15 @@ interface AreaExplorerClientProps {
   planningDistricts: GenericFeatureCollection | null;
   overlays: GenericFeatureCollection | null;
   geoLayers: GeoLayerEntry[];
+  parametersPayload?: JurisdictionParameters | null;
+  resolutionConfig?: StatutoryResolutionConfig | null;
+  consolidatedPayload?: JurisdictionConsolidated | null;
 }
 
 export function AreaExplorerClient({
   jurisdictionId,
+  corporationName,
+  releaseVersion,
   zones,
   clauses,
   amendmentLinks,
@@ -38,6 +49,9 @@ export function AreaExplorerClient({
   planningDistricts,
   overlays,
   geoLayers,
+  parametersPayload = null,
+  resolutionConfig = null,
+  consolidatedPayload = null,
 }: AreaExplorerClientProps) {
   const activeZones = useMemo(
     () =>
@@ -69,6 +83,7 @@ export function AreaExplorerClient({
       <div className="flex flex-col">
         <ZoneMap
           jurisdictionId={jurisdictionId}
+          releaseVersion={releaseVersion}
           zones={zones}
           selectedZoneCode={selectedZoneCode}
           onSelectZone={handleSelectZone}
@@ -82,7 +97,17 @@ export function AreaExplorerClient({
           onToggleDrafts={setShowDrafts}
         />
       </div>
-      <div className="max-h-[820px] overflow-y-auto">
+      <div className="max-h-[880px] space-y-4 overflow-y-auto border-l border-[#080909] bg-[#f5f3ed] p-4">
+        <PlotCard
+          jurisdictionId={jurisdictionId}
+          corporationName={corporationName ?? jurisdictionId}
+          parametersPayload={parametersPayload}
+          resolutionConfig={resolutionConfig}
+          consolidatedPayload={consolidatedPayload}
+          selectedZoneCode={selectedZoneCode}
+          selectedZoneLabel={selectedZoneLabel}
+          onSelectZone={handleSelectZone}
+        />
         <ClausePanel
           selectedZoneCode={selectedZoneCode}
           selectedZoneLabel={selectedZoneLabel}

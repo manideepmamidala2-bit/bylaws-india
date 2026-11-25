@@ -20,17 +20,17 @@ GOLDEN_DIR = REPO_ROOT / "pipeline" / "tests" / "golden" / "xx-test-fixture"
 
 
 def test_schemas_are_at_version_1_3_and_include_annotations_schema() -> None:
-    """All schemas are at `schema_version: '1.3'` and `annotations.schema.json` is registered."""
+    """All schemas are at `schema_version: '1.4'` and `annotations.schema.json` is registered."""
     tree_schema = load_schema("clause-tree")
-    assert tree_schema["properties"]["schema_version"]["const"] == "1.3"
+    assert tree_schema["properties"]["schema_version"]["const"] == "1.4"
     ann_schema = load_schema("annotations")
-    assert ann_schema["properties"]["schema_version"]["const"] == "1.3"
+    assert ann_schema["properties"]["schema_version"]["const"] == "1.4"
 
 
 def test_layer_1_faithful_tree_eid_types_intro_wrapup_tables_definitions_and_no_collisions() -> None:
     """Fixture base tree has Akoma Ntoso `eid`s, repeated `(a)` without collision, `intro`/`wrap_up`, `proviso`, `explanation`, `definition`, and `table` + `table_row` nodes."""
     base_tree = validate_file(GOLDEN_DIR / "fixture-base-2020.clauses.json", "clause-tree")
-    assert base_tree["schema_version"] == "1.3"
+    assert base_tree["schema_version"] == "1.4"
 
     by_eid = {
         node["eid"]: node
@@ -185,7 +185,7 @@ def test_overrides_support_bare_eid_and_annotation_fixes_idempotently(tmp_path) 
     (overrides_dir / "overrides.yaml").write_text(
         yaml.safe_dump(
             {
-                "schema_version": "1.3",
+                "schema_version": "1.4",
                 "clause_fixes": [
                     {
                         "clause_id": "chp_II__cl_2.1__prov_1",

@@ -314,7 +314,7 @@ class JurisdictionConfig(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.3"] = "1.3"
+    schema_version: Literal["1.4"] = "1.4"
     id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$") = Field(
         ..., description="Lowercase hyphenated hierarchical jurisdiction ID."
     )
@@ -425,7 +425,7 @@ class DocumentMetadata(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.3"]
+    schema_version: Literal["1.4"]
     doc_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     title: constr(min_length=1)
     issuing_authority: constr(min_length=1)
@@ -559,6 +559,41 @@ class NodeVersion(BaseModel):
     omitted: bool | None = False
 
 
+class ClauseOutlineEntry(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    eid: constr(min_length=1)
+    clause_id: constr(min_length=1)
+    number: constr(min_length=1)
+    title: str | None = None
+    heading: str | None = None
+    type: constr(min_length=1)
+    level: conint(ge=1)
+    parent_eid: str | None = None
+    order: conint(ge=0)
+    page: conint(ge=1)
+    child_count: conint(ge=0)
+    table_count: conint(ge=0)
+    chapter_file: str | None = None
+    changed_count: conint(ge=0) | None = 0
+
+
+class ClauseChangeMark(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    label: constr(min_length=1)
+    amending_doc: constr(min_length=1)
+    amending_eid: constr(min_length=1)
+    amending_clause_id: str | None = None
+    effective_date: constr(min_length=1)
+    action: constr(min_length=1)
+    original_text: str | None = None
+    original_heading: str | None = None
+    original_cells: list[str] | None = None
+
+
 class ClauseTable(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -618,7 +653,7 @@ class DocumentAnnotations(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.3"]
+    schema_version: Literal["1.4"]
     doc_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     annotations: list[AnnotationEntry]
@@ -826,7 +861,7 @@ class JurisdictionOverrides(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.3"]
+    schema_version: Literal["1.4"]
     clause_fixes: list[ClauseFix] | None = None
     annotation_fixes: list[AnnotationFix] | None = None
     zone_tags: list[ZoneTag] | None = None
@@ -876,7 +911,7 @@ class JurisdictionDeclarations(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.3"]
+    schema_version: Literal["1.4"]
     jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     not_modelled: list[constr(min_length=1)]
     known_gaps: list[KnownGap]
@@ -952,10 +987,20 @@ class JurisdictionAmendments(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.3"]
+    schema_version: Literal["1.4"]
     jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     effects: list[AmendmentEffect] | None = Field([], validate_default=True)
     links: list[AmendmentLink]
+
+
+class SharedDocuments(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    sha256: constr(pattern=r"^[a-f0-9]{64}$")
+    clauses: constr(min_length=1)
+    outline: str | None = None
+    annotations: str | None = None
 
 
 class ReleaseFiles(BaseModel):
@@ -979,6 +1024,13 @@ class ReleaseFiles(BaseModel):
     sources_csv: str | None = None
     relations: str | None = None
     graph: str | None = None
+    parameters: str | None = None
+    resolution: str | None = None
+    places: str | None = None
+    outlines: list[constr(min_length=1)] | None = None
+    consolidated_outlines: list[constr(min_length=1)] | None = None
+    akn_xml: list[constr(min_length=1)] | None = None
+    shared_documents: dict[str, SharedDocuments] | None = None
     review_images: list[constr(min_length=1)]
 
 
@@ -987,6 +1039,7 @@ class ReleaseDrafts(BaseModel):
         extra="forbid",
     )
     clauses: list[constr(min_length=1)]
+    outlines: list[constr(min_length=1)] | None = None
 
 
 class ReleaseEntry(BaseModel):
@@ -1012,6 +1065,28 @@ class ConsolidatedGenerated(BaseModel):
     )
     pipeline_version: constr(min_length=1)
     generated_at: constr(min_length=10)
+
+
+class ConsolidatedSnapshotRef(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    as_of_date: constr(min_length=1)
+    label: constr(min_length=1)
+    outline_file: constr(min_length=1)
+    chapters: list[constr(min_length=1)]
+    akn_xml_file: str | None = None
+    total_clauses: conint(ge=0)
+    changed_clauses: conint(ge=0)
+
+
+class ConsolidatedDocumentManifest(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    doc_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    title: constr(min_length=1)
+    snapshots: list[ConsolidatedSnapshotRef]
 
 
 class ConsolidatedClauseTable(BaseModel):
@@ -1041,6 +1116,10 @@ class ConsolidatedClauseRecord(BaseModel):
     method: constr(min_length=1)
     confidence: Literal["high"]
     omitted: bool | None = False
+    eid: str | None = None
+    change_note: str | None = None
+    original_text: str | None = None
+    amending_clause_id: str | None = None
 
 
 class UnconsolidatedClauseRecord(BaseModel):
@@ -1056,9 +1135,10 @@ class JurisdictionConsolidated(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.3"]
+    schema_version: Literal["1.4"]
     jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     generated: ConsolidatedGenerated
+    documents: list[ConsolidatedDocumentManifest] | None = None
     records: list[ConsolidatedClauseRecord]
     unconsolidated: list[UnconsolidatedClauseRecord]
 
@@ -1106,7 +1186,7 @@ class JurisdictionGeoLayers(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.3"]
+    schema_version: Literal["1.4"]
     jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     layers: list[GeoLayerEntry]
 
@@ -1126,7 +1206,7 @@ class JurisdictionClauseZoneTags(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.3"]
+    schema_version: Literal["1.4"]
     jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     tags: list[ClauseZoneTagEntry]
 
@@ -1162,12 +1242,14 @@ class RelationEntry(BaseModel):
     )
     id: constr(min_length=1)
     kind: Literal[
-        "same_topic",
-        "definition_differs",
-        "numeric_differs",
-        "cross_document_reference",
-        "precedence",
+        "amends",
+        "incorporates",
         "corporation_differs",
+        "cross_document_reference",
+        "definition_differs",
+        "precedence",
+        "same_topic",
+        "numeric_differs",
     ]
     from_doc: constr(min_length=1)
     from_eid: constr(min_length=1)
@@ -1183,17 +1265,168 @@ class RelationEntry(BaseModel):
     confidence: confloat(ge=0.0, le=1.0)
     status: Literal["candidate", "confirmed", "rejected", "human_verified"]
     note: str | None = None
+    public_visible: bool | None = False
+    measured_precision: confloat(ge=0.0, le=1.0) | None = None
+    parameters_incorporated: list[str] | None = None
 
 
 class JurisdictionRelations(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.3", "1.4"]
+    schema_version: Literal["1.4"]
     jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     topics: list[TopicDefinition]
     succession: list[SuccessionEntry]
     relations: list[RelationEntry]
+
+
+class ParametersGenerated(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    pipeline_version: constr(min_length=1)
+    generated_at: constr(min_length=10)
+
+
+class NumericInterval(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    min: float | None
+    max: float | None
+    min_inclusive: bool
+    max_inclusive: bool
+
+
+class ParameterConditions(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    plot_area_m2: NumericInterval | None = None
+    plot_depth_m: NumericInterval | None = None
+    plot_width_m: NumericInterval | None = None
+    road_width_m: NumericInterval | None = None
+    building_height_m: NumericInterval | None = None
+    zone: list[constr(min_length=1)] | None = None
+    area_class: list[constr(min_length=1)] | None = None
+    use: list[constr(min_length=1)] | None = None
+    jurisdiction: list[constr(min_length=1)] | None = None
+    unexpressed_conditions: list[str] | None = []
+    dependent: bool
+
+
+class ParameterSource(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    doc_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    eid: constr(min_length=1)
+    clause_id: constr(min_length=1)
+    table_eid: str | None = None
+    table_id: str | None = None
+    row_index: conint(ge=0) | None = None
+    col_index: conint(ge=0) | None = None
+    row_header: str | None = None
+    column_header: str | None = None
+    cell_text: constr(min_length=1)
+    footnote_markers: list[str] | None = []
+    footnotes_text: list[str] | None = []
+    page: conint(ge=1)
+    bbox: list[float] | None = Field(None, max_length=4, min_length=4)
+    page_link: constr(min_length=1)
+    official_url: str | None = None
+    archive_url: str | None = None
+
+
+class ParameterRecord(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    parameter_id: constr(min_length=1)
+    parameter: Literal[
+        "ground_coverage_max_pct",
+        "far_base_max",
+        "far_premium_additional_max",
+        "tdr_receivable_max",
+        "setback_front_min_m",
+        "setback_rear_min_m",
+        "setback_side_min_m",
+        "building_height_max_m",
+        "floors_max",
+        "parking_requirement",
+    ]
+    value: float | str | None
+    unit: str | None
+    value_text: constr(min_length=1)
+    conditions: ParameterConditions
+    valid_from: str | None
+    valid_to: str | None
+    legal_status: Literal[
+        "in_force", "draft", "superseded", "withdrawn", "status_unknown"
+    ]
+    source: ParameterSource
+    derived: Literal[True]
+    method: Literal["table_rule_parser", "clause_rule_parser", "override_curated"]
+    confidence: confloat(ge=0.0, le=1.0)
+    verification: Literal["unverified", "machine_checked", "human_verified"]
+    note: str | None = None
+
+
+class JurisdictionParameters(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    schema_version: Literal["1.4"]
+    jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    generated: ParametersGenerated
+    records: list[ParameterRecord]
+
+
+class ResolutionAuthority(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    doc_id: str | None
+    eid: str | None
+    clause_id: str | None
+    page: conint(ge=1) | None
+    quote: str | None
+    official_url: str | None = None
+
+
+class ResolutionStep(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    step_number: conint(ge=1, le=6)
+    step_id: Literal[
+        "draft_excluded",
+        "corporation_scope",
+        "gbga_notwithstanding",
+        "zoning_governs_via_byelaw_1_4",
+        "lex_posterior_within_family",
+        "unresolved_tie",
+    ]
+    title: constr(min_length=1)
+    plain_rule: constr(min_length=1)
+    enabled: bool
+    disabled_reason: str | None = None
+    parameters_governed: list[str] | None = None
+    authority: ResolutionAuthority
+    verification: Literal["unverified", "machine_checked", "human_verified"]
+
+
+class StatutoryResolutionConfig(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    schema_version: Literal["1.4"]
+    jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    derived: Literal[True]
+    notice: constr(min_length=1)
+    instrument_families: dict[str, list[constr(min_length=1)]]
+    steps: list[ResolutionStep] = Field(..., min_length=6)
 
 
 class ClauseNode(BaseModel):
@@ -1266,18 +1499,27 @@ class ClauseNode(BaseModel):
     applies_to_zones: list[constr(min_length=1)]
     verification: Literal["unverified", "machine_checked", "human_verified"]
     verified_by: str | None = None
+    omitted: bool | None = False
+    change_mark: ClauseChangeMark | None = None
 
 
 class ClauseTree(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.3"]
+    schema_version: Literal["1.4"]
     doc_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     legal_status: Literal[
         "in_force", "draft", "superseded", "withdrawn", "status_unknown"
     ]
+    chapter_eid: str | None = None
+    chapter_title: str | None = None
+    as_of_date: str | None = None
+    derived: bool | None = None
+    total_clauses: conint(ge=0) | None = None
+    total_tables: conint(ge=0) | None = None
+    outline: list[ClauseOutlineEntry] | None = None
     generated: ClauseTreeGenerated = Field(..., title="ClauseTreeGenerated")
     clauses: list[ClauseNode]
 
@@ -1297,7 +1539,7 @@ class ZonesFeatureCollection(BaseModel):
         extra="forbid",
     )
     type: Literal["FeatureCollection"]
-    schema_version: Literal["1.3"]
+    schema_version: Literal["1.4"]
     bbox: list[float] | None = Field(None, max_length=4, min_length=4)
     features: list[ZoneFeature]
 
@@ -1323,7 +1565,7 @@ class ReleaseManifest(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    schema_version: Literal["1.3"]
+    schema_version: Literal["1.4"]
     jurisdictions: list[JurisdictionManifest]
 
 
@@ -1342,6 +1584,8 @@ class BylawsSchemaBundle(
         | JurisdictionGeoLayers
         | JurisdictionClauseZoneTags
         | JurisdictionRelations
+        | JurisdictionParameters
+        | StatutoryResolutionConfig
     ]
 ):
     root: (
@@ -1358,4 +1602,6 @@ class BylawsSchemaBundle(
         | JurisdictionGeoLayers
         | JurisdictionClauseZoneTags
         | JurisdictionRelations
+        | JurisdictionParameters
+        | StatutoryResolutionConfig
     ) = Field(..., title="BylawsSchemaBundle")

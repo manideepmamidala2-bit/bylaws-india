@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bylaws-india.local/schemas/resolution.schema.json",
+  "title": "StatutoryResolutionConfig",
+  "description": "Declarative top-to-bottom statutory resolution rules with quoted authorities for the plot resolver (Schema v1.4, Part 4).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "jurisdiction",
+    "derived",
+    "notice",
+    "instrument_families",
+    "steps"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.4"
+    },
+    "jurisdiction": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "derived": {
+      "type": "boolean",
+      "const": true,
+      "default": true
+    },
+    "notice": {
+      "type": "string",
+      "minLength": 1
+    },
+    "instrument_families": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 6,
+      "items": {
+        "$ref": "#/$defs/resolutionStep"
+      }
+    }
+  },
+  "$defs": {
+    "resolutionAuthority": {
+      "type": "object",
+      "title": "ResolutionAuthority",
+      "additionalProperties": false,
+      "required": ["doc_id", "eid", "clause_id", "page", "quote"],
+      "properties": {
+        "doc_id": {
+          "type": ["string", "null"]
+        },
+        "eid": {
+          "type": ["string", "null"]
+        },
+        "clause_id": {
+          "type": ["string", "null"]
+        },
+        "page": {
+          "type": ["integer", "null"],
+          "minimum": 1
+        },
+        "quote": {
+          "type": ["string", "null"]
+        },
+        "official_url": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "resolutionStep": {
+      "type": "object",
+      "title": "ResolutionStep",
+      "additionalProperties": false,
+      "required": [
+        "step_number",
+        "step_id",
+        "title",
+        "plain_rule",
+        "enabled",
+        "authority",
+        "verification"
+      ],
+      "properties": {
+        "step_number": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "step_id": {
+          "type": "string",
+          "enum": [
+            "draft_excluded",
+            "corporation_scope",
+            "gbga_notwithstanding",
+            "zoning_governs_via_byelaw_1_4",
+            "lex_posterior_within_family",
+            "unresolved_tie"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "plain_rule": {
+          "type": "string",
+          "minLength": 1
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "disabled_reason": {
+          "type": ["string", "null"],
+          "default": null
+        },
+        "parameters_governed": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string"
+          },
+          "default": null
+        },
+        "authority": {
+          "$ref": "#/$defs/resolutionAuthority"
+        },
+        "verification": {
+          "type": "string",
+          "enum": ["unverified", "machine_checked", "human_verified"]
+        }
+      }
+    }
+  }
+}

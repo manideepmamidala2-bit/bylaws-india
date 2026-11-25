@@ -11,7 +11,7 @@ from bylaws.root import resolve_repo_root
 from bylaws.schema_validator import validate_payload
 
 QUANTITY_SPAN_RE = re.compile(
-    r"\b(?P<num>\d+(?:\.\d+)?)\s*(?P<unit>sq\s*\.?\s*m(?:trs?|etres?|eters?)?|m2|sq\s*\.?\s*ft|m(?:trs?|etres?|eters?)|ft|feet|%|percent|floors?|storeys?)\b",
+    r"\b(?P<num>\d+(?:,\d+)*(?:\.\d+)?)\s*(?P<unit>sq\s*\.?\s*m(?:trs?|etres?|eters?)?|m2|sq\s*\.?\s*ft|m(?:trs?|etres?|eters?)|ft|feet|%|percent|floors?|storeys?)\b",
     re.IGNORECASE,
 )
 
@@ -71,11 +71,11 @@ def _load_compiled_topics() -> list[tuple[str, list[re.Pattern[str]]]]:
 
 
 def _normalise_quantity(num_str: str, unit_str: str) -> str:
-    val = float(num_str)
-    u = re.sub(r"\s+", "", unit_str.lower()).rstrip(".")
-    if u in {"sqm", "sq.m", "sqmt", "sqmtr", "sqmtrs", "sqmetre", "sqmetres", "sqmeter", "sqmeters", "m2"}:
+    val = float(num_str.replace(",", ""))
+    u = re.sub(r"[\s.]+", "", unit_str.lower())
+    if u in {"sqm", "sqmt", "sqmtr", "sqmtrs", "sqmetre", "sqmetres", "sqmeter", "sqmeters", "m2"}:
         return f"{val:g} sq_m"
-    if u in {"sqft", "sq.ft"}:
+    if u in {"sqft"}:
         return f"{round(val * 0.092903, 2):g} sq_m ({val:g} sq_ft)"
     if u in {"m", "mt", "mtr", "mtrs", "metre", "metres", "meter", "meters"}:
         return f"{val:g} m"
@@ -692,7 +692,7 @@ def build_document_annotations(tree_payload: dict[str, Any]) -> dict[str, Any]:
                             break
 
     payload: dict[str, Any] = {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "doc_id": doc_id,
         "jurisdiction": jurisdiction,
         "annotations": annotations,

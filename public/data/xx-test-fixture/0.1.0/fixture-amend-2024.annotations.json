@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.3",
+  "schema_version": "1.4",
   "doc_id": "fixture-amend-2024",
   "jurisdiction": "xx-test-fixture",
   "annotations": [
@@ -10,13 +10,13 @@
         "version_id": "v1",
         "field": "content",
         "span": [
-          82,
-          105
+          30,
+          35
         ],
-        "span_text": "No residential building"
+        "span_text": "shall"
       },
       "kind": "provision_type",
-      "value": "prohibition",
+      "value": "obligation",
       "method": "rule",
       "confidence": 0.95,
       "verification": "machine_checked"
@@ -60,6 +60,60 @@
     {
       "annotation_id": "fixture-amend-2024:ann_4",
       "target": {
+        "eid": "cl_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          65,
+          80
+        ],
+        "span_text": "Building Height"
+      },
+      "kind": "topic",
+      "value": "building_height",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-amend-2024:ann_5",
+      "target": {
+        "eid": "cl_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          164,
+          174
+        ],
+        "span_text": "road width"
+      },
+      "kind": "topic",
+      "value": "road_width",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-amend-2024:ann_6",
+      "target": {
+        "eid": "cl_2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          130,
+          141
+        ],
+        "span_text": "15.0 metres"
+      },
+      "kind": "quantity",
+      "value": "15 m",
+      "method": "rule",
+      "confidence": 0.92,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-amend-2024:ann_7",
+      "target": {
         "eid": "cl_3",
         "version_id": "v1",
         "field": "content",
@@ -76,7 +130,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-amend-2024:ann_5",
+      "annotation_id": "fixture-amend-2024:ann_8",
       "target": {
         "eid": "cl_3",
         "version_id": "v1",
@@ -94,7 +148,43 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-amend-2024:ann_6",
+      "annotation_id": "fixture-amend-2024:ann_9",
+      "target": {
+        "eid": "cl_3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          64,
+          69
+        ],
+        "span_text": "Solar"
+      },
+      "kind": "topic",
+      "value": "fire_safety",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-amend-2024:ann_10",
+      "target": {
+        "eid": "cl_3",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          118,
+          128
+        ],
+        "span_text": "1.8 metres"
+      },
+      "kind": "quantity",
+      "value": "1.8 m",
+      "method": "rule",
+      "confidence": 0.92,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-amend-2024:ann_11",
       "target": {
         "eid": "cl_4",
         "version_id": "v1",
@@ -112,7 +202,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-amend-2024:ann_7",
+      "annotation_id": "fixture-amend-2024:ann_12",
       "target": {
         "eid": "cl_4",
         "version_id": "v1",

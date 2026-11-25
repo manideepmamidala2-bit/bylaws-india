@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.3",
+  "schema_version": "1.4",
   "doc_id": "fixture-base-2020",
   "jurisdiction": "xx-test-fixture",
   "annotations": [
@@ -42,6 +42,96 @@
     {
       "annotation_id": "fixture-base-2020:ann_3",
       "target": {
+        "eid": "chp_I__def_1.2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          25
+        ],
+        "span_text": "\"Floor Area Ratio\" (FAR) "
+      },
+      "kind": "topic",
+      "value": "definitions",
+      "method": "rule",
+      "confidence": 0.95,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_4",
+      "target": {
+        "eid": "chp_I__def_1.2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          1,
+          17
+        ],
+        "span_text": "Floor Area Ratio"
+      },
+      "kind": "topic",
+      "value": "far",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_5",
+      "target": {
+        "eid": "chp_I__def_1.2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          75,
+          87
+        ],
+        "span_text": "covered area"
+      },
+      "kind": "topic",
+      "value": "ground_coverage",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_6",
+      "target": {
+        "eid": "chp_I__def_1.2",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          109,
+          118
+        ],
+        "span_text": "plot area"
+      },
+      "kind": "topic",
+      "value": "plot_size_frontage",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_7",
+      "target": {
+        "eid": "chp_II",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          0,
+          8
+        ],
+        "span_text": "Setbacks"
+      },
+      "kind": "topic",
+      "value": "setbacks",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_8",
+      "target": {
         "eid": "chp_II__cl_2.1",
         "version_id": "v1",
         "field": "intro",
@@ -58,7 +148,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_4",
+      "annotation_id": "fixture-base-2020:ann_9",
       "target": {
         "eid": "chp_II__cl_2.1",
         "version_id": "v1",
@@ -76,7 +166,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_5",
+      "annotation_id": "fixture-base-2020:ann_10",
       "target": {
         "eid": "chp_II__cl_2.1",
         "version_id": "v1",
@@ -94,7 +184,61 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_6",
+      "annotation_id": "fixture-base-2020:ann_11",
+      "target": {
+        "eid": "chp_II__cl_2.1",
+        "version_id": "v1",
+        "field": "intro",
+        "span": [
+          66,
+          74
+        ],
+        "span_text": "setbacks"
+      },
+      "kind": "topic",
+      "value": "setbacks",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_12",
+      "target": {
+        "eid": "chp_II__cl_2.1__item_a",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          6,
+          13
+        ],
+        "span_text": "setback"
+      },
+      "kind": "topic",
+      "value": "setbacks",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_13",
+      "target": {
+        "eid": "chp_II__cl_2.1__item_b",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          14,
+          22
+        ],
+        "span_text": "setbacks"
+      },
+      "kind": "topic",
+      "value": "setbacks",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_14",
       "target": {
         "eid": "chp_II__cl_2.1__prov_1",
         "version_id": "v1",
@@ -112,28 +256,64 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_7",
+      "annotation_id": "fixture-base-2020:ann_15",
       "target": {
-        "eid": "chp_II__cl_2.2",
+        "eid": "chp_II__cl_2.1__prov_1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          72,
+          79
+        ],
+        "span_text": "setback"
+      },
+      "kind": "topic",
+      "value": "setbacks",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_16",
+      "target": {
+        "eid": "chp_II__cl_2.1__expl_1",
         "version_id": "v1",
         "field": "content",
         "span": [
           0,
-          23
+          7
         ],
-        "span_text": "No residential building"
+        "span_text": "Setback"
+      },
+      "kind": "topic",
+      "value": "setbacks",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_17",
+      "target": {
+        "eid": "chp_II__cl_2.2",
+        "version_id": "v2",
+        "field": "content",
+        "span": [
+          35,
+          40
+        ],
+        "span_text": "shall"
       },
       "kind": "provision_type",
-      "value": "prohibition",
+      "value": "obligation",
       "method": "rule",
       "confidence": 0.95,
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_8",
+      "annotation_id": "fixture-base-2020:ann_18",
       "target": {
         "eid": "chp_II__cl_2.2",
-        "version_id": "v1",
+        "version_id": "v2",
         "field": "content",
         "span": [
           105,
@@ -148,10 +328,10 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_9",
+      "annotation_id": "fixture-base-2020:ann_19",
       "target": {
         "eid": "chp_II__cl_2.2",
-        "version_id": "v1",
+        "version_id": "v2",
         "field": "content",
         "span": [
           120,
@@ -166,39 +346,147 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_10",
+      "annotation_id": "fixture-base-2020:ann_20",
       "target": {
-        "eid": "chp_II__cl_2.3",
-        "version_id": "v1",
+        "eid": "chp_II__cl_2.2",
+        "version_id": "v2",
         "field": "content",
         "span": [
-          33,
-          42
+          120,
+          136
         ],
-        "span_text": "permitted"
+        "span_text": "Floor Area Ratio"
       },
-      "kind": "provision_type",
-      "value": "permission",
+      "kind": "topic",
+      "value": "far",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_21",
+      "target": {
+        "eid": "chp_II__cl_2.2",
+        "version_id": "v2",
+        "field": "content",
+        "span": [
+          0,
+          25
+        ],
+        "span_text": "No residential building i"
+      },
+      "kind": "topic",
+      "value": "building_height",
       "method": "rule",
       "confidence": 0.95,
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_11",
+      "annotation_id": "fixture-base-2020:ann_22",
+      "target": {
+        "eid": "chp_II__cl_2.2",
+        "version_id": "v2",
+        "field": "content",
+        "span": [
+          82,
+          92
+        ],
+        "span_text": "road width"
+      },
+      "kind": "topic",
+      "value": "road_width",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_23",
+      "target": {
+        "eid": "chp_II__cl_2.2",
+        "version_id": "v2",
+        "field": "content",
+        "span": [
+          48,
+          59
+        ],
+        "span_text": "11.5 metres"
+      },
+      "kind": "quantity",
+      "value": "11.5 m",
+      "method": "rule",
+      "confidence": 0.92,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_24",
+      "target": {
+        "eid": "chp_II__cl_2.2A",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          9,
+          14
+        ],
+        "span_text": "solar"
+      },
+      "kind": "topic",
+      "value": "fire_safety",
+      "method": "rule",
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_25",
+      "target": {
+        "eid": "chp_II__cl_2.2A",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          28,
+          38
+        ],
+        "span_text": "1.8 metres"
+      },
+      "kind": "quantity",
+      "value": "1.8 m",
+      "method": "rule",
+      "confidence": 0.92,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_26",
       "target": {
         "eid": "chp_II__cl_2.1__tbl_2.1",
         "version_id": "v1",
         "field": "content",
         "span": [
-          0,
-          9
+          19,
+          27
         ],
-        "span_text": "Table 2.1"
+        "span_text": "Setbacks"
       },
-      "kind": "cross_reference",
-      "value": "unresolved:Table 2.1",
+      "kind": "topic",
+      "value": "setbacks",
       "method": "rule",
-      "confidence": 0.95,
+      "confidence": 0.9,
+      "verification": "machine_checked"
+    },
+    {
+      "annotation_id": "fixture-base-2020:ann_27",
+      "target": {
+        "eid": "chp_II__cl_2.1__tbl_2.1",
+        "version_id": "v1",
+        "field": "content",
+        "span": [
+          31,
+          40
+        ],
+        "span_text": "Plot Size"
+      },
+      "kind": "topic",
+      "value": "plot_size_frontage",
+      "method": "rule",
+      "confidence": 0.9,
       "verification": "machine_checked"
     }
   ]

@@ -77,7 +77,7 @@ def test_bengaluru_south_release_1_0_0_is_withdrawn_and_files_removed() -> None:
 
     bscc = by_id["in-ka-bengaluru-south"]
     assert bscc["visibility"] == "public"
-    assert bscc["latest_release"] in {"2.0.0", "2.1.0", "2.2.0", "2.3.0", "2.4.0", "2.5.0", "2.6.0", "2.7.0", "2.8.0", "3.0.0"}
+    assert bscc["latest_release"] in {"2.0.0", "2.1.0", "2.2.0", "2.3.0", "2.4.0", "2.5.0", "2.6.0", "2.7.0", "2.8.0", "3.0.0", "4.0.0"}
 
     rel = next(r for r in bscc["releases"] if r["version"] == "1.0.0")
     assert rel["version"] == "1.0.0"
@@ -121,7 +121,7 @@ def test_published_manifest_recurrence_guard_blocks_local_source_urls(
     )
 
     planted_manifest = {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "jurisdictions": [
             {
                 "id": "in-ka-planted",

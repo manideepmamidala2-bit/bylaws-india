@@ -75,6 +75,12 @@ jobs:
           uv run bylaws run-all --jurisdiction xx-test-fixture
           uv run bylaws parse --jurisdiction xx-test-fixture --parser docling
 
+      - name: Pull published dataset & PMTiles from storage and build search index
+        working-directory: .
+        run: |
+          node scripts/ensure_data.mjs
+          node scripts/build_search.mjs
+
       - name: Run full pytest suite (schemas, CLI, R1, R4, provenance, golden snapshots)
         run: uv run pytest -v
 
@@ -95,6 +101,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Pull published dataset & PMTiles from storage and build search index
+        run: |
+          node scripts/ensure_data.mjs
+          node scripts/build_search.mjs
+
       - name: Run ESLint
         run: npm run lint
 
@@ -106,3 +117,12 @@ jobs:
 
       - name: Build production Next.js bundle
         run: npm run build
+
+      - name: Enforce page weight budgets (HTML <= 300 KB, initial JS+data <= 1.5 MB)
+        run: npm run check-budgets
+
+      - name: Install Playwright Chromium browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Playwright browser tests (PMTiles 206 range, non-blank map, document page, plot flow)
+        run: npx playwright test

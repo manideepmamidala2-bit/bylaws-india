@@ -439,7 +439,7 @@ def run_apply_overrides(config: JurisdictionConfig, *, repo_root: Path | None = 
         zones_path.write_text(json.dumps(zones_payload, indent=2) + "\n", encoding="utf-8")
 
     tags_payload: dict[str, Any] = {
-        "schema_version": "1.3",
+        "schema_version": "1.4",
         "jurisdiction": config.id,
         "tags": zone_tag_entries,
     }
