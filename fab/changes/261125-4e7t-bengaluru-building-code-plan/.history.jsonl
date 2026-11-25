@@ -3,3 +3,4 @@
 {"delta":"+5.0","event":"confidence","score":5,"trigger":"calc-score","ts":"2026-11-25T03:54:56Z"}
 {"cmd":"fab-fff","event":"command","ts":"2026-11-25T03:56:51Z"}
 {"action":"enter","driver":"fab-fff","event":"stage-transition","stage":"apply","ts":"2026-11-25T03:57:05Z"}
+{"action":"enter","driver":"fab-fff","event":"stage-transition","stage":"review","ts":"2026-11-25T06:15:54Z"}
