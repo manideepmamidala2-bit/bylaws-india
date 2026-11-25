@@ -11,9 +11,31 @@ const pmtilesPath = path.join(
   "in-ka-bengaluru-south",
   "basemap.pmtiles"
 );
-const parentDir = path.join(publicDataDir, "in-ka-bengaluru");
+const parentDocsPath = path.join(
+  publicDataDir,
+  "in-ka-bengaluru",
+  "4.0.0",
+  "documents.json"
+);
+const southRegisterPath = path.join(
+  publicDataDir,
+  "in-ka-bengaluru-south",
+  "register",
+  "documents.json"
+);
+const south230Path = path.join(
+  publicDataDir,
+  "in-ka-bengaluru-south",
+  "2.3.0",
+  "documents.json"
+);
 
-if (fs.existsSync(pmtilesPath) && fs.existsSync(parentDir)) {
+if (
+  fs.existsSync(pmtilesPath) &&
+  fs.existsSync(parentDocsPath) &&
+  fs.existsSync(southRegisterPath) &&
+  fs.existsSync(south230Path)
+) {
   process.exit(0);
 }
 

@@ -10,6 +10,7 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
+    "pretest": "node scripts/ensure_data.mjs",
     "test": "vitest run",
     "test:e2e": "playwright test",
     "generate": "cd pipeline && uv run python ../scripts/generate_models.py"

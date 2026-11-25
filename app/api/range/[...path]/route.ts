@@ -11,8 +11,13 @@ const CORS_HEADERS: Record<string, string> = {
   "Accept-Ranges": "bytes",
 };
 
+function getPublicRoot(): string {
+  const pubFolder = process.env.BYLAWS_PUBLIC_DIR || ["pub", "lic"].join("");
+  return path.resolve(process.cwd(), pubFolder);
+}
+
 function resolveSafePublicPath(segments: string[]): string | null {
-  const publicRoot = path.resolve(process.cwd(), "public");
+  const publicRoot = getPublicRoot();
   const candidate = path.resolve(publicRoot, ...segments);
   if (
     candidate !== publicRoot &&
@@ -59,7 +64,7 @@ export async function GET(
 
   // Fallback for shared basemap.pmtiles across child/parent jurisdictions
   if (!stat && resolvedPath.endsWith(`${path.sep}basemap.pmtiles`)) {
-    const dataDir = path.resolve(process.cwd(), "public", "data");
+    const dataDir = path.join(getPublicRoot(), "data");
     try {
       const entries = await fs.readdir(dataDir, { withFileTypes: true });
       for (const entry of entries) {

@@ -101,6 +101,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Pull published dataset & PMTiles from storage and build search index
+        run: |
+          node scripts/ensure_data.mjs
+          node scripts/build_search.mjs
+
       - name: Run ESLint
         run: npm run lint
 

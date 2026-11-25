@@ -2,6 +2,14 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  outputFileTracingExcludes: {
+    "*": [
+      "./public/data/**/*",
+      "public/data/**/*",
+      "./public/pagefind/**/*",
+      "public/pagefind/**/*",
+    ],
+  },
   async headers() {
     return [
       {
@@ -23,6 +31,18 @@ const nextConfig: NextConfig = {
     ];
   },
   async rewrites() {
+    if (process.env.VERCEL === "1") {
+      return {
+        beforeFiles: [
+          {
+            source: "/data/:jur/basemap.pmtiles",
+            destination: "/data/in-ka-bengaluru-south/basemap.pmtiles",
+          },
+        ],
+        afterFiles: [],
+        fallback: [],
+      };
+    }
     return {
       beforeFiles: [
         {
