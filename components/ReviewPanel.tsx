@@ -10,6 +10,7 @@ import { ZoneMap } from "@/components/ZoneMap";
 
 interface ReviewPanelProps {
   jurisdictionId?: string;
+  releaseVersion?: string;
   zones: ZoneFeature[];
   boundary?: GenericFeatureCollection | null;
   gbaZones?: GenericFeatureCollection | null;
@@ -20,6 +21,7 @@ interface ReviewPanelProps {
 
 export function ReviewPanel({
   jurisdictionId = "",
+  releaseVersion = "4.0.0",
   zones,
   boundary = null,
   gbaZones = null,
@@ -43,7 +45,7 @@ export function ReviewPanel({
     null;
 
   const yamlSnippet = selectedFeature
-    ? `schema_version: "1.4"\nzone_fixes:\n  - zone_id: ${selectedFeature.properties.zone_id}\n    reason: Verified polygon boundary and legend code against source sheet\n    set:\n      zone_code: ${selectedFeature.properties.zone_code}\n      zone_label: "${selectedFeature.properties.zone_label}"\n      verification: machine_checked\n`
+    ? `zone_fixes:\n  - zone_id: ${selectedFeature.properties.zone_id}\n    reason: Verified polygon boundary and legend code against source sheet\n    set:\n      zone_code: ${selectedFeature.properties.zone_code}\n      zone_label: "${selectedFeature.properties.zone_label}"\n      verification: machine_checked\n`
     : "";
 
   return (
@@ -87,6 +89,7 @@ export function ReviewPanel({
       <div className="border border-[#080909]">
         <ZoneMap
           jurisdictionId={jurisdictionId}
+          releaseVersion={releaseVersion}
           zones={displayZones}
           selectedZoneCode={selectedZoneCode}
           onSelectZone={setSelectedZoneCode}
@@ -175,11 +178,11 @@ export function ReviewPanel({
                         ? `District ${props.planning_district} · `
                         : ""}
                       {props.sheet ? `${props.sheet} · ` : ""}
-                      {Math.round(props.area_sq_m).toLocaleString()} sq.m
+                      {Math.round(props.area_sq_m).toLocaleString()} m²
                     </div>
                   </div>
                   <span className="border border-[#080909] px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#080909]">
-                    {props.verification}
+                    {props.verification.replace(/_/g, " ")}
                   </span>
                 </button>
               );

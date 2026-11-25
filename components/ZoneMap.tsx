@@ -111,7 +111,7 @@ let pmtilesProtocolRegistered = false;
 
 export function ZoneMap({
   jurisdictionId = "",
-  releaseVersion = "3.0.0",
+  releaseVersion = "4.0.0",
   zones,
   selectedZoneCode,
   onSelectZone,

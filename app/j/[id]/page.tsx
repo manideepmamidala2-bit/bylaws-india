@@ -288,7 +288,7 @@ export default async function JurisdictionMapPage({
           {declarations.contested_status &&
           declarations.contested_status.length > 0
             ? ` Contested status (${declarations.contested_status.length}): ${declarations.contested_status
-                .map((c) => `${c.doc_id} (${c.declared_status})`)
+                .map((c) => `${c.title} (status not confirmed)`)
                 .join(", ")}.`
             : ""}
         </span>

@@ -58,6 +58,27 @@
         "standard_reference"
       ]
     },
+    "instrument_type": {
+      "type": "string",
+      "enum": [
+        "instrument",
+        "compilation",
+        "map",
+        "bill",
+        "order"
+      ],
+      "default": "instrument"
+    },
+    "summary_by_site": {
+      "type": ["string", "null"]
+    },
+    "notes_by_site": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
     "layer": {
       "type": "string",
       "enum": [

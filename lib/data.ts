@@ -41,6 +41,7 @@ import type {
   KnownGap,
   NodeVersion,
   NumericInterval,
+  OcrCorrection,
   ParameterConditions,
   ParameterRecord,
   ParameterSource,
@@ -101,6 +102,7 @@ export type {
   KnownGap,
   NodeVersion,
   NumericInterval,
+  OcrCorrection,
   ParameterConditions,
   ParameterRecord,
   ParameterSource,
@@ -232,6 +234,155 @@ export function getVisibleJurisdictions(
   });
 }
 
+export function getPrimaryPublicJurisdiction(
+  manifest: ReleaseManifest
+): JurisdictionSummary | undefined {
+  const visible = getVisibleJurisdictions(manifest);
+  return (
+    visible.find(
+      (j) =>
+        j.visibility !== "test" &&
+        j.id === "in-ka-bengaluru-south" &&
+        Boolean(j.latest_release)
+    ) ??
+    visible.find((j) => j.visibility !== "test" && Boolean(j.latest_release)) ??
+    visible[0]
+  );
+}
+
+const LAYER_LABELS: Record<string, string> = {
+  statute: "State Act",
+  state_rules: "State model rules",
+  planning: "Master plan zoning regulations",
+  municipal: "Municipal building bye-laws",
+  orders: "Government order",
+  overlay: "Overlay & buffer rules",
+  national_reference: "National reference standard",
+  boundary: "Official boundary map",
+};
+
+export function formatLayerLabel(layer?: string | null): string {
+  if (!layer) return "Regulation";
+  return LAYER_LABELS[layer] ?? layer.replace(/_/g, " ");
+}
+
+export function formatInstrumentTypeLabel(
+  instrumentType?: string | null,
+  docType?: string | null,
+  role?: string | null
+): string {
+  if (instrumentType === "compilation") return "Unofficial compilation";
+  if (instrumentType === "map" || docType === "map") return "Map";
+  if (instrumentType === "bill") return "Legislative bill";
+  if (instrumentType === "order" || docType === "government_order") {
+    return "Government order";
+  }
+  if (docType === "act") return "Act";
+  if (docType === "bye_laws") return "Building bye-laws";
+  if (docType === "regulations") return "Zoning regulations";
+  if (docType === "amendment" || role === "amendment") return "Amendment notification";
+  if (docType === "notification") return "Gazette notification";
+  if (docType === "circular") return "Circular";
+  return "Legal instrument";
+}
+
+export function formatPlainDocumentStatus(doc: {
+  legal_status?: string | null;
+  instrument_type?: string | null;
+  doc_type?: string | null;
+  role?: string | null;
+  effective_from?: string | null;
+  notified_date?: string | null;
+  superseded_by_document?: string | null;
+  applies_to_jurisdiction?: { status?: string | null } | null;
+  acquisition_status?: string | null;
+}): string {
+  const instType =
+    doc.instrument_type ??
+    (doc.doc_type === "map" || doc.role === "boundary" ? "map" : "instrument");
+  if (instType === "compilation") {
+    return "Unofficial compilation (finding aid only)";
+  }
+  if (instType === "map") {
+    return "Reference map";
+  }
+  if (instType === "bill") {
+    return "Bill, not yet law";
+  }
+  if (doc.acquisition_status === "not_found") {
+    return "Not yet obtained";
+  }
+  if (doc.applies_to_jurisdiction?.status === "no") {
+    return "In force for municipalities; not applicable to City Corporations";
+  }
+  if (doc.superseded_by_document || doc.legal_status === "superseded") {
+    return "Replaced";
+  }
+  if (doc.legal_status === "draft") {
+    return "Draft, not in force";
+  }
+  if (doc.legal_status === "withdrawn") {
+    return "Withdrawn";
+  }
+  if (doc.legal_status === "status_unknown") {
+    return "Status not confirmed";
+  }
+  const dt = doc.effective_from || doc.notified_date;
+  if (doc.legal_status === "in_force") {
+    return dt ? `In force since ${formatHumanDate(dt)}` : "In force";
+  }
+  return "Status not confirmed";
+}
+
+const MONTH_NAMES = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+export function formatHumanDate(isoDate?: string | null): string {
+  if (!isoDate) return "Date not recorded";
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(isoDate.trim());
+  if (!m) return isoDate;
+  const year = Number(m[1]);
+  const monthIdx = Number(m[2]) - 1;
+  const day = Number(m[3]);
+  const monthName = MONTH_NAMES[monthIdx];
+  if (!monthName) return isoDate;
+  return `${day} ${monthName} ${year}`;
+}
+
+export function formatUnitLabel(unit?: string | null): string {
+  if (!unit) return "";
+  const map: Record<string, string> = {
+    sq_m: "m²",
+    "sq.m": "m²",
+    "sq. m": "m²",
+    m2: "m²",
+    m: "m",
+    mtrs: "m",
+    pct: "%",
+    "%": "%",
+    ratio: "",
+    floors: "floors",
+    spaces_per_m2: "spaces per m²",
+    spaces_per_dwelling: "spaces per dwelling",
+    pct_of_plot_depth: "% of plot depth",
+    pct_of_plot_width: "% of plot width",
+    multiple_of_base_far: "× base FAR",
+  };
+  return map[unit] ?? unit.replace(/sq_m/g, "m²").replace(/_/g, " ");
+}
+
 export function filterManifestForServer(
   manifest: ReleaseManifest
 ): ReleaseManifest {
@@ -252,14 +403,10 @@ export async function readPublishedJson<T>(
   webPath: string,
   customFetch?: typeof fetch
 ): Promise<T> {
-  const useNetwork =
-    Boolean(customFetch) ||
-    webPath.startsWith("http://") ||
-    webPath.startsWith("https://") ||
-    isMockedGlobalFetch();
+  const forceNetwork = Boolean(customFetch) || isMockedGlobalFetch();
 
   if (
-    !useNetwork &&
+    !forceNetwork &&
     typeof process !== "undefined" &&
     typeof process.getBuiltinModule === "function"
   ) {
@@ -267,17 +414,33 @@ export async function readPublishedJson<T>(
       "fs/promises"
     ) as typeof import("fs/promises");
     const path = process.getBuiltinModule("path") as typeof import("path");
-    const relativePath = webPath.replace(/^\/+/, "");
-    const diskPath = path.join(process.cwd(), "public", relativePath);
-    const stat = await fs.stat(diskPath);
-    const cached = diskJsonCache.get(diskPath);
-    if (cached && cached.mtimeMs === stat.mtimeMs) {
-      return cached.value as T;
+    let relativePath = webPath.replace(/^\/+/, "");
+    if (webPath.startsWith("http://") || webPath.startsWith("https://")) {
+      try {
+        const parsedUrl = new URL(webPath);
+        relativePath = parsedUrl.pathname.replace(/^\/+/, "");
+      } catch {
+        relativePath = "";
+      }
     }
-    const rawText = await fs.readFile(diskPath, "utf8");
-    const parsed = JSON.parse(rawText) as T;
-    diskJsonCache.set(diskPath, { mtimeMs: stat.mtimeMs, value: parsed });
-    return parsed;
+    if (relativePath) {
+      const diskPath = path.join(process.cwd(), "public", relativePath);
+      try {
+        const stat = await fs.stat(diskPath);
+        const cached = diskJsonCache.get(diskPath);
+        if (cached && cached.mtimeMs === stat.mtimeMs) {
+          return cached.value as T;
+        }
+        const rawText = await fs.readFile(diskPath, "utf8");
+        const parsed = JSON.parse(rawText) as T;
+        diskJsonCache.set(diskPath, { mtimeMs: stat.mtimeMs, value: parsed });
+        return parsed;
+      } catch {
+        if (!webPath.startsWith("http://") && !webPath.startsWith("https://")) {
+          throw new Error(`Failed to read local published JSON at ${diskPath}`);
+        }
+      }
+    }
   }
 
   const fetchImpl = customFetch ?? fetch;

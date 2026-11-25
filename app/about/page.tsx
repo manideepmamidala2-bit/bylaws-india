@@ -2,6 +2,7 @@ import React from "react";
 import {
   fetchJurisdictionDataset,
   fetchManifest,
+  getPrimaryPublicJurisdiction,
   getVisibleJurisdictions,
   isWithdrawnRelease,
 } from "@/lib/data";
@@ -10,7 +11,7 @@ import { TopNav } from "@/components/TopNav";
 export default async function AboutPage() {
   const manifest = await fetchManifest();
   const visible = getVisibleJurisdictions(manifest);
-  const primary = visible[0];
+  const primary = getPrimaryPublicJurisdiction(manifest);
   const withdrawnRelease = visible
     .flatMap((j) => j.releases)
     .find((rel) => isWithdrawnRelease(rel));
@@ -53,14 +54,17 @@ export default async function AboutPage() {
         >
           <div className="dg-mono text-[#080909]">Current Status</div>
           <h2 className="mt-1 text-lg font-semibold text-[#080909]">
-            {withdrawnRelease
-              ? `Release ${withdrawnRelease.version} withdrawn; real acquisition under way`
-              : "Real source acquisition and verification under way"}
+            {primary?.latest_release
+              ? `Release ${primary.latest_release} published — all checks are machine checks`
+              : "Consolidated building code published"}
           </h2>
           <p className="dg-serif mt-2 text-sm leading-relaxed text-[#171917]">
-            {primary && withdrawnRelease
-              ? `The initial release (${withdrawnRelease.version}) for ${primary.name} has been withdrawn (${withdrawnRelease.withdrawn_reason}). Real source PDFs, amendment notifications, and official maps are now being acquired with HTTP retrieval records and archive snapshots, and will be published as each stage is verified.`
-              : "Real source PDFs, amendment notifications, and official maps are being acquired with HTTP retrieval records and archive snapshots, and will be published as each stage is verified."}
+            All checks in this dataset are automated machine checks against the
+            source PDFs and page images; nothing on this site is presented as
+            verified by a person.
+            {withdrawnRelease
+              ? ` Release ${withdrawnRelease.version} was withdrawn (${withdrawnRelease.withdrawn_reason}); real source acquisition and verification under way for remaining map sheets.`
+              : ""}
           </p>
         </section>
 
@@ -78,24 +82,24 @@ export default async function AboutPage() {
             <ul className="dg-serif mt-2 list-disc space-y-1.5 pl-5 text-sm text-[#171917]">
               <li>
                 <strong className="font-mono text-xs uppercase">
-                  unverified
+                  Unchecked
                 </strong>
                 : Raw automated extraction prior to quality checks.
               </li>
               <li>
                 <strong className="font-mono text-xs uppercase">
-                  machine_checked
+                  Machine-checked
                 </strong>
                 : Checked by automated quality thresholds and page-image
                 self-checks with page and bounding-box citations.
               </li>
               <li>
                 <strong className="font-mono text-xs uppercase">
-                  human_verified
+                  Verified by a person (not claimed here)
                 </strong>
                 : Reserved strictly for records checked directly by a person
-                against the source document. Data corrections create new record
-                versions rather than editing verified records in place.
+                against the source document. Nothing in this release is marked
+                as verified by a person.
               </li>
             </ul>
           </div>

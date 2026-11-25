@@ -116,8 +116,15 @@ def load_jurisdiction_config(
 
     parent_cfg: JurisdictionConfig | None = None
     parent_doc_ids: set[str] = set()
-    if isinstance(raw_data, dict) and raw_data.get("parent"):
-        parent_id = str(raw_data["parent"]).strip()
+    raw_parent = None
+    if isinstance(raw_data, dict):
+        raw_parent = raw_data.get("parent") or (
+            raw_data.get("parents")[0]
+            if isinstance(raw_data.get("parents"), list) and raw_data.get("parents")
+            else None
+        )
+    if raw_parent:
+        parent_id = str(raw_parent).strip()
         if parent_id and (base_dir / f"{parent_id}.yaml").is_file():
             parent_cfg = load_jurisdiction_config(
                 parent_id,
@@ -136,6 +143,31 @@ def load_jurisdiction_config(
     )
 
     if inherit_parent and parent_cfg is not None:
+        parent_doc_by_id = {d.id: d for d in parent_cfg.documents}
+        for child_doc in config.documents:
+            pdoc = parent_doc_by_id.get(child_doc.id)
+            if pdoc is None:
+                continue
+            if (
+                getattr(child_doc, "instrument_type", "instrument") == "instrument"
+                and getattr(pdoc, "instrument_type", "instrument") != "instrument"
+            ):
+                child_doc.instrument_type = pdoc.instrument_type
+            if getattr(child_doc, "summary_by_site", None) is None and getattr(
+                pdoc, "summary_by_site", None
+            ):
+                child_doc.summary_by_site = pdoc.summary_by_site
+            if not getattr(child_doc, "notes_by_site", None) and getattr(
+                pdoc, "notes_by_site", None
+            ):
+                child_doc.notes_by_site = list(pdoc.notes_by_site or [])
+            if getattr(child_doc, "applies_to_jurisdiction", None) is None and getattr(
+                pdoc, "applies_to_jurisdiction", None
+            ):
+                child_doc.applies_to_jurisdiction = pdoc.applies_to_jurisdiction
+            if getattr(pdoc, "structured", None) is False:
+                child_doc.structured = False
+
         child_doc_ids = {d.id for d in config.documents}
         inherited_docs = [
             d

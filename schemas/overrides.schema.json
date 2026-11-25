@@ -46,9 +46,46 @@
       "items": {
         "$ref": "#/$defs/amendmentLinkOverride"
       }
+    },
+    "ocr_corrections": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ocrCorrectionOverride"
+      }
     }
   },
   "$defs": {
+    "ocrCorrectionOverride": {
+      "type": "object",
+      "title": "OcrCorrectionOverride",
+      "additionalProperties": false,
+      "required": ["doc_id", "page", "original_text", "corrected_text", "reason"],
+      "properties": {
+        "doc_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "eid": {
+          "type": ["string", "null"]
+        },
+        "page": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "original_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "corrected_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
     "clauseFix": {
       "type": "object",
       "title": "ClauseFix",
@@ -79,7 +116,15 @@
             "effective_from",
             "language",
             "cross_references",
-            "tables"
+            "tables",
+            "summary_by_site",
+            "notes_by_site",
+            "ocr_status",
+            "ocr_corrections",
+            "type",
+            "table_meta",
+            "cells",
+            "children"
           ]
         },
         "value": {},

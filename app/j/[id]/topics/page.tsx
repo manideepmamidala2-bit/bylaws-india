@@ -71,17 +71,15 @@ export default async function TopicsIndexPage({ params }: TopicsPageProps) {
       <main className="mx-auto max-w-6xl space-y-8 px-6 py-8">
         <header className="border-b border-[#080909] pb-6">
           <div className="dg-mono">
-            Schema 1.4 · Cross-Document Topics, Relations &amp; Succession ·{" "}
-            {jurisdiction.id}
+            Rules by Subject, Relations &amp; Authorities
           </div>
           <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909]">
-            Regulatory Topics &amp; Cross-Document Relations
+            Rules by Subject &amp; Cross-Document Relations
           </h1>
           <p className="dg-serif mt-2 max-w-3xl text-base text-[#171917]">
-            Inspect how building bye-laws, master plan zoning regulations, and
-            amending notifications overlap, where definitions or numeric
-            standards differ across instruments or City Corporations, and where
-            statutory precedence clauses apply.
+            See what applies today on each building subject across the master
+            plan zoning regulations, building bye-laws, and corporation
+            amendments, along with former and current statutory authorities.
           </p>
 
           {gbaCorporations.length > 1 && (
@@ -149,7 +147,7 @@ export default async function TopicsIndexPage({ params }: TopicsPageProps) {
                     <div>
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <span className="dg-mono text-[10px] text-[#5b5e56]">
-                          topic:{topic.id}
+                          Subject
                         </span>
                         <div className="flex flex-wrap gap-1.5 font-mono text-[10px] uppercase tracking-[0.12em]">
                           <span className="border border-[#080909] bg-[#efeee8] px-2 py-0.5">

@@ -12,7 +12,10 @@ from typing import Any
 import click
 import pypdfium2 as pdfium
 
-from bylaws.acquire import _build_unacquired_document_payload
+from bylaws.acquire import (
+    _build_unacquired_document_payload,
+    sync_raw_metadata_from_config,
+)
 from bylaws.annotations import AnnotationSpanError, validate_annotations_against_tree
 from bylaws.config import JurisdictionConfig
 from bylaws.graph import write_jurisdiction_graph_files
@@ -434,6 +437,8 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
     schema_checks_run: list[str] = []
     hard_failures: list[str] = []
 
+    sync_raw_metadata_from_config(config, repo_root=root)
+
     doc_metas: dict[str, dict[str, Any]] = {}
     for doc in config.documents:
         meta_path = raw_dir / f"{doc.id}.meta.json"
@@ -635,6 +640,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
         has_unstructured_for_this_base = any(
             getattr(d, "structured", None) is False
             and getattr(d, "acquisition_status", "acquired") == "acquired"
+            and getattr(d, "instrument_type", "instrument") == "instrument"
             and doc.id in (d.amends or [])
             for d in config.documents
         )

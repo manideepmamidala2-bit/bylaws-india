@@ -300,6 +300,38 @@
         "omitted": {
           "type": "boolean",
           "default": false
+        },
+        "notes_by_site": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "default": []
+        }
+      }
+    },
+    "ocrCorrection": {
+      "type": "object",
+      "title": "OcrCorrection",
+      "additionalProperties": false,
+      "required": ["original_text", "corrected_text", "page", "reason"],
+      "properties": {
+        "original_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "corrected_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "page": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
         }
       }
     },
@@ -534,6 +566,30 @@
             { "type": "null" }
           ],
           "default": null
+        },
+        "summary_by_site": {
+          "type": ["string", "null"],
+          "default": null
+        },
+        "notes_by_site": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "default": []
+        },
+        "ocr_status": {
+          "type": ["string", "null"],
+          "enum": ["corrected", "unreadable_fragments", null],
+          "default": null
+        },
+        "ocr_corrections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ocrCorrection"
+          },
+          "default": []
         }
       }
     },

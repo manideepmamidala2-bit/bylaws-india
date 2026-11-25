@@ -3,6 +3,7 @@ import Link from "next/link";
 import {
   fetchDeclarations,
   fetchManifest,
+  getPrimaryPublicJurisdiction,
   getVisibleJurisdictions,
   isWithdrawnRelease,
 } from "@/lib/data";
@@ -11,7 +12,7 @@ import { TopNav } from "@/components/TopNav";
 export default async function DataReleasesPage() {
   const manifest = await fetchManifest();
   const visibleJurisdictions = getVisibleJurisdictions(manifest);
-  const primary = visibleJurisdictions[0];
+  const primary = getPrimaryPublicJurisdiction(manifest);
 
   const declarationsByJurisdiction = await Promise.all(
     visibleJurisdictions.map(async (j) => {
@@ -40,15 +41,17 @@ export default async function DataReleasesPage() {
       <main className="mx-auto max-w-6xl px-6 py-8">
         <header className="mb-8 border-b border-[#080909] pb-6">
           <div className="dg-mono">
-            Open Data Releases · Schema v{manifest.schema_version} · CC BY 4.0
+            Open Data Releases · Release v{primary?.latest_release ?? "4.0.0"} · CC BY 4.0
           </div>
           <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909]">
             Dataset Releases, Checksums &amp; Declarations
           </h1>
           <p className="dg-serif mt-2 max-w-3xl text-base text-[#171917]">
             Download versioned regulatory bundles, verify file integrity against
-            published SHA-256 checksums, download machine-readable source
-            registers in CSV and JSON, and inspect declared coverage and gaps.
+            published SHA-256 checksums, and inspect declared coverage and gaps.
+            All verification checks in this dataset are automated machine checks
+            against the source PDFs and page images; nothing is presented as
+            verified by a person.
           </p>
         </header>
 
@@ -295,7 +298,7 @@ export default async function DataReleasesPage() {
                             className="mt-1 border-l-2 border-[#080909] pl-3"
                           >
                             <div className="font-mono text-xs font-semibold">
-                              {cs.doc_id}: {cs.title} ({cs.declared_status})
+                              {cs.title} (Status not confirmed)
                             </div>
                             <p className="dg-serif text-xs text-[#5b5e56]">
                               {cs.conflicting_evidence.join(" ")}

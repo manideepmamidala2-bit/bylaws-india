@@ -55,6 +55,14 @@ let maxHtmlObserved = 0;
 let maxHtmlRoute = "";
 let maxTotalObserved = 0;
 let maxTotalRoute = "";
+const observedReleases = new Set();
+
+const FORBIDDEN_COPY_PATTERNS = [
+  { label: "PR number reference", regex: /\bPR\s+0?\d+\b/ },
+  { label: "Internal plan reference", regex: /\b(Plan\s+v\d+|building-code-plan|00-overview\.md)\b/i },
+  { label: "Schema version label", regex: /\bSchema\s+v?1\.\d+\b/i },
+  { label: "Stale release notice", regex: /Two base documents published|pending in PR/i },
+];
 
 for (const htmlPath of htmlFiles) {
   const relRoute =
@@ -64,6 +72,28 @@ for (const htmlPath of htmlFiles) {
       .replace(/\.html$/, "")
       .replace(/\/index$/, "");
   const htmlBytes = fs.statSync(htmlPath).size;
+  const htmlText = fs.readFileSync(htmlPath, "utf8");
+  const visibleText = htmlText
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ");
+
+  if (!relRoute.includes("xx-test-fixture") && !relRoute.includes("_not-found")) {
+    const relMatch = visibleText.match(/Release\s+(\d+\.\d+\.\d+)\s*·\s*CC BY 4\.0/);
+    if (!relMatch) {
+      violations.push(`${relRoute}: Missing 'Release X.Y.Z · CC BY 4.0' banner in built HTML`);
+    } else {
+      observedReleases.add(relMatch[1]);
+    }
+    for (const pat of FORBIDDEN_COPY_PATTERNS) {
+      const m = visibleText.match(pat.regex);
+      if (m) {
+        violations.push(
+          `${relRoute}: Built HTML contains forbidden ${pat.label} (${JSON.stringify(m[0])})`
+        );
+      }
+    }
+  }
   const rscPath = htmlPath.replace(/\.html$/, ".rsc");
   const rscBytes = fs.existsSync(rscPath) ? fs.statSync(rscPath).size : 0;
   const initialJsAndDataBytes = rootMainJsBytes + rscBytes;
@@ -89,8 +119,14 @@ for (const htmlPath of htmlFiles) {
   }
 }
 
+if (observedReleases.size > 1) {
+  violations.push(
+    `Built pages report inconsistent release identifiers: ${Array.from(observedReleases).join(", ")}`
+  );
+}
+
 console.log(
-  `[check_page_budgets] Checked ${htmlFiles.length} built HTML routes: ` +
+  `[check_page_budgets] Checked ${htmlFiles.length} built HTML routes (release=${Array.from(observedReleases).join(",") || "none"}): ` +
     `max HTML = ${(maxHtmlObserved / 1024).toFixed(1)} KB (${maxHtmlRoute || "/"}) [budget <= 300 KB], ` +
     `max initial JS+data = ${(maxTotalObserved / (1024 * 1024)).toFixed(2)} MB (${maxTotalRoute || "/"}) [budget <= 1.50 MB].`
 );

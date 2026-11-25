@@ -57,3 +57,24 @@ Tracks the 11-PR remediation series defined in [`docs/plans/pr-series/00-overvie
 | **Part 5** | A readable, plot-first site (Protomaps light map-first home, official RMP 2015 colours, labels above zones, place/ward search, Plot Card, Resolution cards) | ✅ Complete | Redesigned `/` as the full-width above-the-fold interactive map + Plot Card with one line of introduction; switched `lib/map-style.ts` to Protomaps light style with `beforeId` ordering labels above official RMP 2015 legend-coloured zones; added Zoom, Scale bar, Full screen, My location, Layer switch (`Streets`, `Land-use zones`, `Wards`, `Corporations`, `Original sheet overlay`), and local place/ward search; built `components/PlotCard.tsx` with shareable URLs, one-line reasons, provision/PDF links, `"Not settled"` dual display, and mandatory derived-work notice; replaced conflict cards with Resolution cards; grouped zone panel by topic; hid internal IDs inside `"Details"` |
 | **Part 6** | Register and gaps (`ka-model-bbl-2017` marked not applicable here, plain-language gap declarations, Release `4.0.0` `/data` page) | ✅ Complete | Marked `ka-model-bbl-2017` as `applies_to_jurisdiction: "no"` (`"Not applicable here (likely)"`) under dedicated register group `"In force elsewhere, not applicable here"` with quoted statutory evidence from the *Karnataka Municipalities Act, 1964*, keeping its text browsable while excluding it from active definitions, relations, parameters, search, and plot answers; declared all coverage gaps in plain English; published Release `4.0.0` across `in-ka-bengaluru` and all 5 City Corporations on `/data`; verified all 141 pytest tests, 13 Vitest + axe-core tests, 271 page weight budgets (`max HTML = 292.5 KB`, `max initial JS+data = 0.66 MB`), and 4 Playwright E2E tests pass |
 
+---
+
+## Trustworthy Data, a Usable Code, a Simple Site (`docs/plans/trustworthy-simple-building-code-plan.md` — Parts 1–6)
+
+- **Baseline Release**: `4.0.0`
+- **Baseline Commit**: `48a1911` (`fix(ci): ensure data bundle before web tests and preserve scripts/*.mjs for Vercel`)
+- **Active Change**: `261125-ucy1-trustworthy-simple-building-code`
+- **Scope**: Strictly data already in the repository; zero new acquisition; never invent or rewrite legal text; never present anything as verified by a person.
+
+### Part-by-Part Status
+
+| Part | Title | Status | Notes |
+|------|-------|--------|-------|
+| **Part 1** | One consistent site (uniform release across all pages, remove internal references from public copy, regenerate declarations/notices, CI checks) | ✅ Complete | Fixed server-side manifest resolution in `lib/data.ts` (preventing stale `NEXT_PUBLIC_MANIFEST_URL` fetches), unified release resolution via `getPrimaryPublicJurisdiction` across `/`, `/about`, `/data`, `/structure`, and `/j/[id]/*`, stripped internal references (`PR 10`, `00-overview.md`, `Schema 1.4`, `topic:`) from public copy and configs, synchronized raw metadata from config, regenerated `declarations.json`, and added CI gates in `pipeline/tests/test_release_and_copy_consistency.py` and `scripts/check_page_budgets.mjs` |
+| **Part 2** | Text fidelity (machine-enforced in CI, editorial insertions moved to `notes_by_site`, table digests restored as real tables, OCR corrections/unreadable, strip page furniture) | ⏳ Pending | — |
+| **Part 3** | Structure repair (dates never clause numbers, remove duplicates, sibling list items + depth check, uniqueness check, meaningful table captions, exclude non-content from topics) | ⏳ Pending | — |
+| **Part 4** | Statuses and relationships (explicit instrument types, Kannada compilation unstructured, 2017 Model Bye-laws / bye-law 1.4 relationship with quotes, evidence-backed authority succession, re-derived statuses) | ⏳ Pending | — |
+| **Part 5** | The numbers as data (tables as data with intervals, parameter records with conditions & cell sources, 6-step resolution rules, pipeline/browser resolver, worked Jayanagar case, 40-record self-check) | ⏳ Pending | — |
+| **Part 6** | A simple site for non-experts (map-first home with "About this map" expander, plot card with plain answers & tap-to-expand, most-recent-first lists, law-order documents, "Rules by subject" showing what applies today first, language rules, budgets & browser tests in CI) | ⏳ Pending | — |
+
+

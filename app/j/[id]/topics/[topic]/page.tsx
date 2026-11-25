@@ -129,7 +129,7 @@ export default async function TopicDetailPage({
 
         <header className="border-b border-[#080909] pb-6">
           <div className="dg-mono">
-            Topic Comparison · As of Today (Consolidated) · topic:{topicDef.id}
+            Rules by Subject · What Applies Today
           </div>
           <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909]">
             {topicDef.label}

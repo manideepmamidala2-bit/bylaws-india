@@ -440,8 +440,8 @@ documents:
     quoted_line: Revising the amendments in the regulations in BBMP revised Mahayojane
       2015 (PDF/townplanning/KM_266_160102035827-pages-deleted_29102024.pdf)
     description: Published on the BBMP Town Planning page (site.bbmp.gov.in/townplanning.html)
-      in October 2024; Kannada-only compilation recorded in the register as a declared
-      language gap under 00-overview.md.
+      in October 2024; Kannada-only compilation recorded in the register as an unofficial
+      finding aid (English original and structured amendments used instead).
   licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public municipal
     circular/compilation)
   text_rights:
@@ -1415,7 +1415,7 @@ documents:
       317. Power to make bye-laws.
     description: Published on updates.bbmp.gov.in/public under Acts (GBA); came into
       force on 15-05-2025. Only the building-relevant provisions (Chapter XVII Sections
-      224–253 and Chapter XXII Sections 317–318) are structured per PR 10.
+      224–253 and Chapter XXII Sections 317–318) are structured in this dataset.
   licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public state statute)
   text_rights:
     mode: full_text
@@ -1516,7 +1516,7 @@ documents:
     description: Published on updates.bbmp.gov.in/public under GBA Town Planning Notifications
       (ROW 70), but the PDF is the Legislative Assembly Bill (LA Bill No. 33 of 2025)
       without a verified Governor assent or Gazette commencement notification; recorded
-      as status_unknown per PR 10.
+      as a legislative bill whose enactment status is not confirmed.
   licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public legislative
     bill)
   text_rights:
