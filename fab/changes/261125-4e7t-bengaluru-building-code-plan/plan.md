@@ -135,42 +135,48 @@ The web interface MUST replace verbose conflict cards with concise Resolution ca
 
 ### Functional Completeness
 
-- [ ] A-001 R1: `docs/progress.md` records the baseline release (`3.0.0`) and commit (`e7e033e`), and all schemas, configs, overrides, and published outputs use `schema_version: "1.4"` with CI failing on mismatch
-- [ ] A-002 R1: Shared base documents and amendments are stored once and referenced across corporations without duplicating unchanged `.clauses.json` payloads
-- [ ] A-003 R2: Published Bengaluru data and `basemap.pmtiles` are removed from git tracking, HTTP `206` range requests and CORS are verified by tests, documents load per chapter within page budgets (`<= 300 KB` HTML, `<= 1.5 MB` initial JS+data), Pagefind cross-document search works statically, `declarations.json` is regenerated accurately, and Playwright browser tests run in CI
-- [ ] A-004 R3: Full consolidated text is published per chapter (plus Akoma Ntoso XML) for every base document as of today and each amendment date per corporation, changed provisions show quiet change marks, and `bbl-2003` bye-law `1.4` is modelled as `incorporates` rather than `substitute`
-- [ ] A-005 R4: `parameters.json` contains dated records for coverage, FAR (base, premium, TDR), setbacks, height, floors, and parking with numeric intervals, categorical conditions (`dependent: true` when unexpressible), and cell-level sources, backed by cell-text checks and a 40-record page-image self-check in `qa.md`
-- [ ] A-006 R5: `jurisdictions/resolution.yaml` defines the 6 cited statutory steps with verbatim quotes, and both Python (`bylaws resolve`) and TypeScript (`lib/resolver.ts`) resolvers deterministically pass the Jayanagar `600 m²` / `15 m` road `Residential (Main)` worked target confirmed against PDF page images
-- [ ] A-007 R6: `relations.json` contains only the 6 legal relation kinds, shows only `amends`, `incorporates`, and `corporation_differs` publicly, and `docs/review/relations-labelling.md` provides a 60-item (10 per kind) owner labelling sheet
-- [ ] A-008 R7: Home (`/`) renders a full-width above-the-fold map in the Protomaps light style with labels above official RMP 2015 legend-coloured zones, local place/ward search, and a Plot Card with answers, one-line reasons, PDF page links, `"Not settled"` cases, mandatory disclaimer, and shareable URL
-- [ ] A-009 R8: `ka-model-bbl-2017` is listed under `"In force elsewhere, not applicable here"` and excluded from definitions, relations, parameters, and plot answers; Resolution cards replace conflict cards; internal IDs live inside `"Details"`; page introductions are `<= 2` sentences; all gaps are declared in plain words; and `/data` lists Release `4.0.0`
+- [x] A-001 R1: `docs/progress.md` records the baseline release (`3.0.0`) and commit (`e7e033e`), and all schemas, configs, overrides, and published outputs use `schema_version: "1.4"` with CI failing on mismatch
+- [x] A-002 R1: Shared base documents and amendments are stored once and referenced across corporations without duplicating unchanged `.clauses.json` payloads
+- [x] A-003 R2: Published Bengaluru data and `basemap.pmtiles` are removed from git tracking, HTTP `206` range requests and CORS are verified by tests, documents load per chapter within page budgets (`<= 300 KB` HTML, `<= 1.5 MB` initial JS+data), Pagefind cross-document search works statically, `declarations.json` is regenerated accurately, and Playwright browser tests run in CI
+- [x] A-004 R3: Full consolidated text is published per chapter (plus Akoma Ntoso XML) for every base document as of today and each amendment date per corporation, changed provisions show quiet change marks, and `bbl-2003` bye-law `1.4` is modelled as `incorporates` rather than `substitute`
+- [x] A-005 R4: `parameters.json` contains dated records for coverage, FAR (base, premium, TDR), setbacks, height, floors, and parking with numeric intervals, categorical conditions (`dependent: true` when unexpressible), and cell-level sources, backed by cell-text checks and a 40-record page-image self-check in `qa.md`
+- [x] A-006 R5: `jurisdictions/resolution.yaml` defines the 6 cited statutory steps with verbatim quotes, and both Python (`bylaws resolve`) and TypeScript (`lib/resolver.ts`) resolvers deterministically pass the Jayanagar `600 m²` / `15 m` road `Residential (Main)` worked target confirmed against PDF page images
+- [x] A-007 R6: `relations.json` contains only the 6 legal relation kinds, shows only `amends`, `incorporates`, and `corporation_differs` publicly, and `docs/review/relations-labelling.md` provides a 60-item (10 per kind) owner labelling sheet
+- [x] A-008 R7: Home (`/`) renders a full-width above-the-fold map in the Protomaps light style with labels above official RMP 2015 legend-coloured zones, local place/ward search, and a Plot Card with answers, one-line reasons, PDF page links, `"Not settled"` cases, mandatory disclaimer, and shareable URL
+- [x] A-009 R8: `ka-model-bbl-2017` is listed under `"In force elsewhere, not applicable here"` and excluded from definitions, relations, parameters, and plot answers; Resolution cards replace conflict cards; internal IDs live inside `"Details"`; page introductions are `<= 2` sentences; all gaps are declared in plain words; and `/data` lists Release `4.0.0`
 
 ### Behavioral Correctness
 
-- [ ] A-010 R3: Removing `rmp2015-zr` synthetic `substitute` effects leaves both `bbl-2003` and `rmp2015-zr` provisions intact in their respective consolidated documents while Step 4 of `resolution.yaml` selects `rmp2015-zr` via `bbl-2003` bye-law `1.4`
-- [ ] A-011 R4: Known table misreads (such as `"10,000 sq. mtrs"` previously parsed as `"0"`) and multi-row headers (`"Max"` / `"Min"`) are accurately parsed into numeric interval bounds
+- [x] A-010 R3: Removing `rmp2015-zr` synthetic `substitute` effects leaves both `bbl-2003` and `rmp2015-zr` provisions intact in their respective consolidated documents while Step 4 of `resolution.yaml` selects `rmp2015-zr` via `bbl-2003` bye-law `1.4`
+- [x] A-011 R4: Known table misreads (such as `"10,000 sq. mtrs"` previously parsed as `"0"`) and multi-row headers (`"Max"` / `"Min"`) are accurately parsed into numeric interval bounds
 
 ### Scenario Coverage
 
-- [ ] A-012 R5: Both `pytest pipeline/tests/test_resolver.py` and `npx vitest run __tests__/resolver.test.ts` verify the Jayanagar `600 m²` / `15 m` road `Residential (Main)` worked target and edge cases (draft exclusion, corporation-specific bye-law, GBGA notwithstanding, unknown zone outside processed sheets, and `"not_settled"` ties)
-- [ ] A-013 R2: Playwright E2E tests verify map rendering (`206` tile responses and non-blank canvas), per-chapter document rendering within weight budgets, and interactive plot card resolution
+- [x] A-012 R5: Both `pytest pipeline/tests/test_resolver.py` and `npx vitest run __tests__/resolver.test.ts` verify the Jayanagar `600 m²` / `15 m` road `Residential (Main)` worked target and edge cases (draft exclusion, corporation-specific bye-law, GBGA notwithstanding, unknown zone outside processed sheets, and `"not_settled"` ties)
+- [x] A-013 R2: Playwright E2E tests verify map rendering (`206` tile responses and non-blank canvas), per-chapter document rendering within weight budgets, and interactive plot card resolution
 
 ### Edge Cases & Error Handling
 
-- [ ] A-014 R5: Clicking a map location outside the 4 processed RMP 2015 land-use sheets reports `"Zone data not yet available here"` and allows the user to manually choose a zone (clearly marked as user-selected)
-- [ ] A-015 R8: Zero source content is invented and zero records carry `verification: "human_verified"`
+- [x] A-014 R5: Clicking a map location outside the 4 processed RMP 2015 land-use sheets reports `"Zone data not yet available here"` and allows the user to manually choose a zone (clearly marked as user-selected)
+- [x] A-015 R8: Zero source content is invented and zero records carry `verification: "human_verified"`
 
 ### Code Quality
 
-- [ ] A-016 Pattern consistency: New Python and TypeScript modules follow existing repository conventions, strict typing, and R1 zero-hardcoding rules
-- [ ] A-017 No unnecessary duplication: Shared resolution and range-parsing structures follow single-source JSON Schema contracts (`schemas/*.schema.json`)
-- [ ] A-018 Readability and maintainability: Functions remain focused, avoid magic strings/numbers, and keep pure bylaw computation separated from UI components
+- [x] A-016 Pattern consistency: New Python and TypeScript modules follow existing repository conventions, strict typing, and R1 zero-hardcoding rules
+- [x] A-017 No unnecessary duplication: Shared resolution and range-parsing structures follow single-source JSON Schema contracts (`schemas/*.schema.json`)
+- [x] A-018 Readability and maintainability: Functions remain focused, avoid magic strings/numbers, and keep pure bylaw computation separated from UI components
 
 ## Notes
 
 - Check items as you review: `- [x]`
 - All acceptance items must pass before `/fab-continue` (hydrate)
 - If an item is not applicable, mark checked and prefix with **N/A**: `- [x] A-NNN **N/A**: {reason}`
+
+## Deletion Candidates
+
+- `schemas/relations.schema.json:147-148` — Legacy `"same_topic"` and `"numeric_differs"` enum values in `RelationEntry.kind` are no longer emitted after Part 4 rebuilt `relations.py` around the 6 legal relation kinds.
+- `lib/map-style.ts:214` — `buildDg2nMapStyle` alias is retained only for compatibility with existing callers now that `buildProtomapsLightStyle` is the canonical style builder.
+- `pipeline/bylaws/storage.py:302-303` — `get_repo_root()` helper is redundant with `resolve_repo_root()` in `pipeline/bylaws/root.py`.
 
 ## Assumptions
 
