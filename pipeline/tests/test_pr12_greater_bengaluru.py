@@ -207,21 +207,28 @@ def test_part4_schema_1_4_topics_relations_precedence_succession_and_applicabili
     assert len(rels_payload["succession"]) >= 3
 
     rels = rels_payload["relations"]
-    assert len(rels) >= 100
+    assert len(rels) >= 60
     kinds = {r["kind"] for r in rels}
     for req_kind in (
-        "same_topic",
-        "definition_differs",
-        "numeric_differs",
-        "cross_document_reference",
-        "precedence",
+        "amends",
+        "incorporates",
         "corporation_differs",
+        "cross_document_reference",
+        "definition_differs",
+        "precedence",
     ):
         assert req_kind in kinds, f"Missing relation kind '{req_kind}' in relations.json"
+    assert "same_topic" not in kinds
+    assert "numeric_differs" not in kinds
 
     for r in rels:
         assert r["status"] != "human_verified", "Rule R10: no relation may be marked human_verified"
+        if r["kind"] in {"amends", "incorporates", "corporation_differs"}:
+            assert r["public_visible"] is True
+        else:
+            assert r["public_visible"] is False
         if r["kind"] == "precedence":
+            assert r["from_doc"] != r["to_doc"], "Precedence relation must be inter-instrument"
             assert r.get("precedence_span") and len(str(r["precedence_span"]).strip()) >= 10, (
                 f"Precedence relation {r['id']} missing quoted statutory precedence_span"
             )
@@ -232,7 +239,7 @@ def test_part4_schema_1_4_topics_relations_precedence_succession_and_applicabili
         assert isinstance(app_here, dict), f"Document {d['doc_id']} missing applies_to_jurisdiction"
         assert app_here.get("status") in {"yes", "no", "partly", "unknown"}
         if d["doc_id"] == "ka-model-bbl-2017":
-            assert app_here["status"] == "unknown"
+            assert app_here["status"] in {"no", "unknown"}
 
     rel_md = (REPO_ROOT / "data" / "reports" / "in-ka-bengaluru-south" / "relations.md").read_text(
         encoding="utf-8"

@@ -110,8 +110,8 @@ The web interface MUST replace verbose conflict cards with concise Resolution ca
 
 ### Phase 5: Part 4 — Resolution, Plot Resolver & Rebuilt Relations
 
-- [ ] T006 Author `jurisdictions/resolution.yaml` with the 6 cited statutory steps and verbatim quotes from structured text, implement the deterministic resolver in `pipeline/bylaws/resolver.py` (`bylaws resolve` CLI) and `lib/resolver.ts` (using `shapely` and `@turf/boolean-point-in-polygon`), confirm the Jayanagar `600 m²` / `15 m` road `Residential (Main)` worked target against rendered PDF page images, and add falsifiable tests in `pipeline/tests/test_resolver.py` and `__tests__/resolver.test.ts` <!-- R5 -->
-- [ ] T007 Rebuild `pipeline/bylaws/relations.py` to keep only the 6 legal relation kinds (`amends`, `incorporates`, `corporation_differs`, `cross_document_reference`, `definition_differs`, `precedence`), gate public visibility to `amends`, `incorporates`, and `corporation_differs`, and generate the 60-item owner labelling sheet in `docs/review/relations-labelling.md` — then commit, push, and update `docs/progress.md` and the PR body for Part 4 <!-- R6 -->
+- [x] T006 Author `jurisdictions/resolution.yaml` with the 6 cited statutory steps and verbatim quotes from structured text, implement the deterministic resolver in `pipeline/bylaws/resolver.py` (`bylaws resolve` CLI) and `lib/resolver.ts` (using `shapely` and `@turf/boolean-point-in-polygon`), confirm the Jayanagar `600 m²` / `15 m` road `Residential (Main)` worked target against rendered PDF page images, and add falsifiable tests in `pipeline/tests/test_resolver.py` and `__tests__/resolver.test.ts` <!-- R5 -->
+- [x] T007 Rebuild `pipeline/bylaws/relations.py` to keep only the 6 legal relation kinds (`amends`, `incorporates`, `corporation_differs`, `cross_document_reference`, `definition_differs`, `precedence`), gate public visibility to `amends`, `incorporates`, and `corporation_differs`, and generate the 60-item owner labelling sheet in `docs/review/relations-labelling.md` — then commit, push, and update `docs/progress.md` and the PR body for Part 4 <!-- R6 -->
 
 ### Phase 6: Part 5 — Readable, Plot-First Site
 

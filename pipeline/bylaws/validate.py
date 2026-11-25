@@ -19,6 +19,7 @@ from bylaws.graph import write_jurisdiction_graph_files
 from bylaws.parameters import write_parameter_reports_and_json
 from bylaws.parsers.base import ParsedBlock
 from bylaws.relations import build_jurisdiction_relations
+from bylaws.resolver import write_published_resolution_json
 from bylaws.root import resolve_repo_root
 from bylaws.schema_validator import (
     SchemaValidationError,
@@ -816,6 +817,11 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
 
     if config.visibility != "test":
         write_parameter_reports_and_json(config, repo_root=root)
+        write_published_resolution_json(
+            config,
+            clause_trees=clause_trees,
+            repo_root=root,
+        )
 
     if hard_failures:
         joined = "; ".join(hard_failures)

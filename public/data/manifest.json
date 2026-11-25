@@ -146,6 +146,7 @@
             "relations": "/data/in-ka-bengaluru/3.0.0/relations.json",
             "graph": "/data/in-ka-bengaluru/3.0.0/graph.json",
             "parameters": "/data/in-ka-bengaluru/3.0.0/parameters.json",
+            "resolution": "/data/in-ka-bengaluru/3.0.0/resolution.json",
             "akn_xml": [
               "/data/in-ka-bengaluru/3.0.0/consolidated/bbl-2003.akn.xml",
               "/data/in-ka-bengaluru/3.0.0/consolidated/rmp2015-zr.akn.xml"
@@ -349,6 +350,7 @@
             "relations": "/data/in-ka-bengaluru-central/3.0.0/relations.json",
             "graph": "/data/in-ka-bengaluru-central/3.0.0/graph.json",
             "parameters": "/data/in-ka-bengaluru-central/3.0.0/parameters.json",
+            "resolution": "/data/in-ka-bengaluru-central/3.0.0/resolution.json",
             "akn_xml": [
               "/data/in-ka-bengaluru-central/3.0.0/consolidated/bbl-2003.akn.xml"
             ]
@@ -543,6 +545,7 @@
             "relations": "/data/in-ka-bengaluru-north/3.0.0/relations.json",
             "graph": "/data/in-ka-bengaluru-north/3.0.0/graph.json",
             "parameters": "/data/in-ka-bengaluru-north/3.0.0/parameters.json",
+            "resolution": "/data/in-ka-bengaluru-north/3.0.0/resolution.json",
             "akn_xml": [
               "/data/in-ka-bengaluru-north/3.0.0/consolidated/bbl-2003.akn.xml"
             ]
@@ -900,6 +903,7 @@
             "relations": "/data/in-ka-bengaluru-south/3.0.0/relations.json",
             "graph": "/data/in-ka-bengaluru-south/3.0.0/graph.json",
             "parameters": "/data/in-ka-bengaluru-south/3.0.0/parameters.json",
+            "resolution": "/data/in-ka-bengaluru-south/3.0.0/resolution.json",
             "akn_xml": [
               "/data/in-ka-bengaluru-south/3.0.0/consolidated/bbl-2003.akn.xml"
             ]
@@ -1093,6 +1097,7 @@
             "relations": "/data/in-ka-bengaluru-east/3.0.0/relations.json",
             "graph": "/data/in-ka-bengaluru-east/3.0.0/graph.json",
             "parameters": "/data/in-ka-bengaluru-east/3.0.0/parameters.json",
+            "resolution": "/data/in-ka-bengaluru-east/3.0.0/resolution.json",
             "akn_xml": [
               "/data/in-ka-bengaluru-east/3.0.0/consolidated/bbl-2003.akn.xml"
             ]
@@ -1288,6 +1293,7 @@
             "relations": "/data/in-ka-bengaluru-west/3.0.0/relations.json",
             "graph": "/data/in-ka-bengaluru-west/3.0.0/graph.json",
             "parameters": "/data/in-ka-bengaluru-west/3.0.0/parameters.json",
+            "resolution": "/data/in-ka-bengaluru-west/3.0.0/resolution.json",
             "akn_xml": [
               "/data/in-ka-bengaluru-west/3.0.0/consolidated/bbl-2003.akn.xml"
             ]

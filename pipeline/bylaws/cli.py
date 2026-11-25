@@ -28,6 +28,9 @@ from bylaws import (
     publish as publish_mod,
 )
 from bylaws import (
+    resolver as resolver_mod,
+)
+from bylaws import (
     structure as structure_mod,
 )
 from bylaws import (
@@ -51,6 +54,7 @@ SUBCOMMANDS: tuple[str, ...] = (
     "validate",
     "geo",
     "publish",
+    "resolve",
     "run-all",
     "verify-sources",
 )
@@ -175,6 +179,83 @@ def geo_cmd(jurisdiction: str) -> None:
     """Run boundary extraction, map rasterization, georeferencing, and zone extraction."""
     config = _load_or_abort(jurisdiction)
     geo_mod.run_geo_pipeline(config)
+
+
+@main.command("resolve")
+@require_jurisdiction_option
+@click.option("--lat", type=float, default=None, help="Plot latitude (WGS 84).")
+@click.option("--lon", type=float, default=None, help="Plot longitude (WGS 84).")
+@click.option("--zone", "zone_code", type=str, default=None, help="Explicit land-use zone code.")
+@click.option("--plot-area", "plot_area_m2", type=float, default=600.0, show_default=True, help="Plot area in m².")
+@click.option("--road-width", "road_width_m", type=float, default=15.0, show_default=True, help="Abutting road width in m.")
+@click.option("--depth", "plot_depth_m", type=float, default=None, help="Optional plot depth in m.")
+@click.option("--width", "plot_width_m", type=float, default=None, help="Optional plot width in m.")
+@click.option("--height", "building_height_m", type=float, default=None, help="Optional proposed building height in m.")
+@click.option("--use", "use", type=str, default="residential", show_default=True, help="Building use category.")
+@click.option("--date", "as_of_date", type=str, default="2026-11-25", show_default=True, help="Evaluation date (YYYY-MM-DD).")
+def resolve_cmd(
+    jurisdiction: str,
+    lat: float | None,
+    lon: float | None,
+    zone_code: str | None,
+    plot_area_m2: float,
+    road_width_m: float,
+    plot_depth_m: float | None,
+    plot_width_m: float | None,
+    building_height_m: float | None,
+    use: str,
+    as_of_date: str,
+) -> None:
+    """Deterministically resolve building parameters for a plot using the 6 statutory steps."""
+    import json
+
+    from bylaws.root import resolve_repo_root
+
+    config = _load_or_abort(jurisdiction)
+    root = resolve_repo_root()
+    ver = str(config.release_version or "4.0.0")
+    rel_dir = root / "public" / "data" / config.id / ver
+    if not rel_dir.is_dir():
+        rel_dir = root / "data" / "processed" / config.id
+
+    def _read_opt_json(fname: str):
+        p = rel_dir / fname
+        return json.loads(p.read_text(encoding="utf-8")) if p.is_file() else None
+
+    params_payload = _read_opt_json("parameters.json")
+    if params_payload is None:
+        raise click.ClickException(f"Missing parameters.json for '{config.id}'.")
+    res_config = _read_opt_json("resolution.json") or resolver_mod.load_and_verify_resolution_config(
+        config, repo_root=root
+    )
+    geo_info = resolver_mod.lookup_plot_geography(
+        lat=lat,
+        lon=lon,
+        explicit_corporation_id=config.id,
+        explicit_zone_code=zone_code,
+        boundary_fc=_read_opt_json("boundary.geojson"),
+        wards_fc=_read_opt_json("wards.geojson"),
+        planning_districts_fc=_read_opt_json("planning-districts.geojson"),
+        zones_fc=_read_opt_json("zones.geojson"),
+        overlays_fc=_read_opt_json("overlays.geojson"),
+    )
+    resolved_zone = str(geo_info.get("zone_code") or zone_code or "unknown")
+    result = resolver_mod.resolve_plot_parameters(
+        parameters_payload=params_payload,
+        resolution_config=res_config,
+        corporation_id=config.id,
+        zone_code=resolved_zone,
+        plot_area_m2=plot_area_m2,
+        road_width_m=road_width_m,
+        plot_depth_m=plot_depth_m,
+        plot_width_m=plot_width_m,
+        building_height_m=building_height_m,
+        use=use,
+        as_of_date=as_of_date,
+        consolidated_payload=_read_opt_json("consolidated.json"),
+        geography=geo_info,
+    )
+    click.echo(json.dumps(result, indent=2))
 
 
 @main.command("publish")
