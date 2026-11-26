@@ -112,42 +112,46 @@ The web application MUST present a short, plain-language primary layer with all 
 
 ### Functional Completeness
 
-- [ ] A-001 R1: Every built page and manifest entry shows the same release (`5.0.0`), declarations and status notices are regenerated from actual data, and CI enforces zero internal references in public copy.
-- [ ] A-002 R2: `pipeline/bylaws/fidelity.py` and `pipeline/tests/test_text_fidelity.py` verify in CI that every provision's text is found on its cited page(s) or covered by a recorded correction/`"[unreadable in source]"`, editorial insertions are moved to `notes_by_site`, `rmp2015-zr` 3.1 is a real table, gazette headers are stripped, and `qa.md` reports all counts.
-- [ ] A-003 R3: Date-shaped tokens never become clause numbers, duplicate provisions (including premium FAR clause 17) are removed, same-level list items attach as siblings with depth ≤ 6 and uniqueness enforced in CI, tables have meaningful captions, and non-content nodes are excluded from topics and zones.
-- [ ] A-004 R4: Every register entry has an explicit `instrument_type` (`instrument`, `compilation`, `map`, `bill`, `order`), compilations/maps/bills never show `"In force"` or `"Full text"`, `ka-model-bbl-2017`'s relationship to bye-law `1.4` is explained with verbatim quotes, `succession.yaml` rows are backed by quotes and matching dates, and statuses are re-derived from evidence.
-- [ ] A-005 R5: `parameters.json` covers coverage, FAR, setbacks, height, floors, and parking with numeric intervals, conditions (`dependent` where unexpressed), and cell sources; `resolution.yaml` and the Python/TypeScript resolvers pass source-table tests including the worked Jayanagar `600 m²` / `15 m` road case; and `qa.md` includes the 40-record page-image self-check.
-- [ ] A-006 R6: Map-first home with light base map and `"About this map"` expander, Plot card with plain answers and tap-to-expand detail, most-recent-first lists everywhere, law-order documents with verbatim text and tap-to-expand details, `"Rules by subject"` starting with `"What applies today"`, page budgets (`<= 300 KB` HTML, `<= 1.5 MB` JS+data), and Playwright browser tests pass in CI.
+- [x] A-001 R1: Every built page and manifest entry shows the same release (`5.0.0`), declarations and status notices are regenerated from actual data, and CI enforces zero internal references in public copy.
+- [x] A-002 R2: `pipeline/bylaws/fidelity.py` and `pipeline/tests/test_text_fidelity.py` verify in CI that every provision's text is found on its cited page(s) or covered by a recorded correction/`"[unreadable in source]"`, editorial insertions are moved to `notes_by_site`, `rmp2015-zr` 3.1 is a real table, gazette headers are stripped, and `qa.md` reports all counts.
+- [x] A-003 R3: Date-shaped tokens never become clause numbers, duplicate provisions (including premium FAR clause 17) are removed, same-level list items attach as siblings with depth ≤ 6 and uniqueness enforced in CI, tables have meaningful captions, and non-content nodes are excluded from topics and zones.
+- [x] A-004 R4: Every register entry has an explicit `instrument_type` (`instrument`, `compilation`, `map`, `bill`, `order`), compilations/maps/bills never show `"In force"` or `"Full text"`, `ka-model-bbl-2017`'s relationship to bye-law `1.4` is explained with verbatim quotes, `succession.yaml` rows are backed by quotes and matching dates, and statuses are re-derived from evidence.
+- [x] A-005 R5: `parameters.json` covers coverage, FAR, setbacks, height, floors, and parking with numeric intervals, conditions (`dependent` where unexpressed), and cell sources; `resolution.yaml` and the Python/TypeScript resolvers pass source-table tests including the worked Jayanagar `600 m²` / `15 m` road case; and `qa.md` includes the 40-record page-image self-check.
+- [x] A-006 R6: Map-first home with light base map and `"About this map"` expander, Plot card with plain answers and tap-to-expand detail, most-recent-first lists everywhere, law-order documents with verbatim text and tap-to-expand details, `"Rules by subject"` starting with `"What applies today"`, page budgets (`<= 300 KB` HTML, `<= 1.5 MB` JS+data), and Playwright browser tests pass in CI.
 
 ### Behavioral Correctness
 
-- [ ] A-007 R2: `bbl-2003` bye-laws `6.0(i)` and `1.4` contain strictly verbatim printed text in `content`, with editorial commentary and notification notes surfaced only under `notes_by_site`.
-- [ ] A-008 R3: `rmp2015-zr-amend-2025-04` contains zero `cl_11.11.2025` or `cl_12.12.2025` nodes and exactly one clause 17 node.
-- [ ] A-009 R4: `ka-model-bbl-2017` (`UDD 14 TTP 2017`) displays a plain-language explanation with verbatim quotes explaining its relationship to `bbl-2003` bye-law `1.4` and City Corporations, and its other provisions do not feed plot answers.
+- [x] A-007 R2: `bbl-2003` bye-laws `6.0(i)` and `1.4` contain strictly verbatim printed text in `content`, with editorial commentary and notification notes surfaced only under `notes_by_site`.
+- [x] A-008 R3: `rmp2015-zr-amend-2025-04` contains zero `cl_11.11.2025` or `cl_12.12.2025` nodes and exactly one clause 17 node.
+- [x] A-009 R4: `ka-model-bbl-2017` (`UDD 14 TTP 2017`) displays a plain-language explanation with verbatim quotes explaining its relationship to `bbl-2003` bye-law `1.4` and City Corporations, and its other provisions do not feed plot answers.
 
 ### Scenario Coverage
 
-- [ ] A-010 R5: Both `pytest pipeline/tests/test_resolver.py` and `npx vitest run __tests__/resolver.test.ts` verify the Jayanagar `600 m²` / `15 m` road `Residential (Main)` plot case against source tables and page images.
-- [ ] A-011 R6: Playwright browser tests (`e2e/`) verify that the map renders, the plot card returns answers for the worked case and expands on tap, and a document page expands a provision on tap.
+- [x] A-010 R5: Both `pytest pipeline/tests/test_resolver.py` and `npx vitest run __tests__/resolver.test.ts` verify the Jayanagar `600 m²` / `15 m` road `Residential (Main)` plot case against source tables and page images.
+- [x] A-011 R6: Playwright browser tests (`e2e/`) verify that the map renders, the plot card returns answers for the worked case and expands on tap, and a document page expands a provision on tap.
 
 ### Edge Cases & Error Handling
 
-- [ ] A-012 R2: Unambiguous OCR errors are recorded with `original_text`, `corrected_text`, `page`, and `reason` and marked `"corrected"`, while illegible source fragments are rendered as `"[unreadable in source]"` with a page link.
-- [ ] A-013 R5: When resolution rules do not settle a parameter or a step's authority cannot be quoted, the resolver returns `"not_settled"` and displays both applicable provisions without inventing a rule.
-- [ ] A-014 R1: Zero records in any generated dataset carry `verification: "human_verified"`.
+- [x] A-012 R2: Unambiguous OCR errors are recorded with `original_text`, `corrected_text`, `page`, and `reason` and marked `"corrected"`, while illegible source fragments are rendered as `"[unreadable in source]"` with a page link.
+- [x] A-013 R5: When resolution rules do not settle a parameter or a step's authority cannot be quoted, the resolver returns `"not_settled"` and displays both applicable provisions without inventing a rule.
+- [x] A-014 R1: Zero records in any generated dataset carry `verification: "human_verified"`.
 
 ### Code Quality
 
-- [ ] A-015 Pattern consistency: New code follows naming and structural patterns of surrounding code in `pipeline/bylaws/`, `app/`, `components/`, and `lib/`.
-- [ ] A-016 No unnecessary duplication: Existing utilities (`schema_validator.py`, `lib/data.ts`, `lib/resolver.ts`) are reused rather than duplicated.
-- [ ] A-017 Readability and composition: Functions in `fidelity.py`, `structure.py`, `parameters.py`, `resolver.py`, and React components remain focused, modular, and readable without magic strings or hard-coded jurisdiction literals (Rule R1).
-- [ ] A-018 Test-alongside verification: Unit, fidelity, structure, budget, accessibility (`axe-core`), and E2E tests accompany every part and pass in CI.
+- [x] A-015 Pattern consistency: New code follows naming and structural patterns of surrounding code in `pipeline/bylaws/`, `app/`, `components/`, and `lib/`.
+- [x] A-016 No unnecessary duplication: Existing utilities (`schema_validator.py`, `lib/data.ts`, `lib/resolver.ts`) are reused rather than duplicated.
+- [x] A-017 Readability and composition: Functions in `fidelity.py`, `structure.py`, `parameters.py`, `resolver.py`, and React components remain focused, modular, and readable without magic strings or hard-coded jurisdiction literals (Rule R1).
+- [x] A-018 Test-alongside verification: Unit, fidelity, structure, budget, accessibility (`axe-core`), and E2E tests accompany every part and pass in CI.
 
 ## Notes
 
 - Check items as you review: `- [x]`
 - All acceptance items must pass before `/fab-continue` (hydrate)
 - If an item is not applicable, mark checked and prefix with **N/A**: `- [x] A-NNN **N/A**: {reason}`
+
+## Deletion Candidates
+
+- `pipeline/bylaws/parameters.py:53-56` (`TABLE8_INLINE_ROW_RE`) — Pre-existing regex for inline Table 8 prose digest made unused after `rmp2015-zr` regulation `3.1` Table 8 was restored as a structured `table` node (`chp_3__cl_3.1__tbl_8`) in Part 2.
 
 ## Assumptions
 
