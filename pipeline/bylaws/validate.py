@@ -18,6 +18,7 @@ from bylaws.acquire import (
 )
 from bylaws.annotations import AnnotationSpanError, validate_annotations_against_tree
 from bylaws.config import JurisdictionConfig
+from bylaws.fidelity import verify_jurisdiction_text_fidelity
 from bylaws.graph import write_jurisdiction_graph_files
 from bylaws.parameters import write_parameter_reports_and_json
 from bylaws.parsers.base import ParsedBlock
@@ -785,10 +786,23 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
         else clause_trees
     )
 
+    fidelity_report: dict[str, Any] | None = None
+    if config.visibility != "test":
+        fidelity_report = verify_jurisdiction_text_fidelity(
+            config,
+            clause_trees,
+            repo_root=root,
+        )
+        if fidelity_report["failures"]:
+            sample_f = fidelity_report["failures"][:5]
+            hard_failures.append(
+                f"QA-Fidelity: {len(fidelity_report['failures'])} provision(s) failed text fidelity: {sample_f}"
+            )
+
     qa_lines = [
         f"# Quality Assurance Report — `{config.id}` ({config.name})",
         "",
-        "## 1. Schema v1.3 Validation",
+        "## 1. Schema v1.4 Validation",
         "",
         *[f"- {line}" for line in schema_checks_run],
         "",
@@ -817,6 +831,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
         *_build_stratified_self_check_section(stratified_trees, raw_dir),
         *_build_applied_effects_self_check_section(amendments_data, clause_trees, raw_dir),
         *_build_annotation_quality_summary_section(clause_trees, annotation_docs),
+        *(fidelity_report["markdown_section"] if fidelity_report else []),
     ]
     qa_path = reports_dir / "qa.md"
     qa_path.write_text("\n".join(qa_lines), encoding="utf-8")

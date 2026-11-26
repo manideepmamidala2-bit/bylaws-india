@@ -746,6 +746,8 @@ export interface JurisdictionOverrides {
   map_curations?: MapCuration[];
   amendment_links?: AmendmentLinkOverride[];
   ocr_corrections?: OcrCorrectionOverride[];
+  unreadable_fragments?: UnreadableFragmentOverride[];
+  table_overrides?: TableOverride[];
 }
 
 export interface ClauseFix {
@@ -858,6 +860,27 @@ export interface OcrCorrectionOverride {
   page: number;
   original_text: string;
   corrected_text: string;
+  reason: string;
+}
+
+export interface UnreadableFragmentOverride {
+  doc_id: string;
+  page: number;
+  raw_fragment: string;
+  replacement?: string;
+  reason: string;
+}
+
+export interface TableOverride {
+  doc_id: string;
+  page: number;
+  table_id: string;
+  target_eid?: string | null;
+  caption: string;
+  headers: string[];
+  rows: string[][];
+  footnotes?: string[];
+  strip_block_fragments?: string[];
   reason: string;
 }
 

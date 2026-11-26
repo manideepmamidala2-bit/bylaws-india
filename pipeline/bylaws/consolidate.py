@@ -99,6 +99,8 @@ def compute_consolidated_view_as_of(
         node_copy["omitted"] = bool(selected_ver.get("omitted", False))
         node_copy["active_version_id"] = selected_ver.get("version_id", "v1")
         node_copy["active_effect_id"] = eff_id
+        if selected_ver.get("notes_by_site"):
+            node_copy["notes_by_site"] = list(selected_ver["notes_by_site"])
         text_parts = [
             p
             for p in (node_copy["intro"], node_copy["content"], node_copy["wrap_up"])
@@ -339,6 +341,7 @@ def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None
         as_of_date = doc_effective_dates.get(target_doc_id, get_deterministic_timestamp()[:10])
         omitted = False
 
+        site_notes: list[str] = list(target_clause.get("notes_by_site") or [])
         for lnk in ordered_links:
             amending_cid = str(lnk["amending_clause"])
             amending_clause = clause_lookup.get(amending_cid)
@@ -351,6 +354,8 @@ def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None
                     else ""
                 )
             )
+            if lnk.get("summary") and str(lnk["summary"]) not in site_notes:
+                site_notes.append(str(lnk["summary"]))
             action = str(lnk["action"])
             as_of_date = _link_date(lnk)
             applied_ids.append(amending_cid)
@@ -364,17 +369,38 @@ def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None
                 if amending_clause and amending_clause.get("tables"):
                     current_tables = copy.deepcopy(amending_clause["tables"])
             elif action == "insert_after":
-                current_text = f"{current_text} [Amended ({as_of_date}, {amending_cid}): {amending_text}]".strip()
+                if config.visibility == "test":
+                    current_text = f"{current_text} [Amended ({as_of_date}, {amending_cid}): {amending_text}]".strip()
+                else:
+                    _, current_text = _extract_substituted_text(
+                        amending_text,
+                        str(target_clause["number"]),
+                        current_title,
+                    )
                 if amending_clause and amending_clause.get("tables"):
                     current_tables.extend(copy.deepcopy(amending_clause["tables"]))
             elif action == "insert_before":
-                current_text = f"[Amended ({as_of_date}, {amending_cid}): {amending_text}] {current_text}".strip()
+                if config.visibility == "test":
+                    current_text = f"[Amended ({as_of_date}, {amending_cid}): {amending_text}] {current_text}".strip()
+                else:
+                    _, current_text = _extract_substituted_text(
+                        amending_text,
+                        str(target_clause["number"]),
+                        current_title,
+                    )
             elif action == "omit":
                 omitted = True
                 current_text = f"[Omitted by {amending_cid} with effect from {as_of_date}.]"
                 current_tables = []
             elif action in {"modify", "modify_text", "renumber"}:
-                current_text = f"{current_text} [Modified ({as_of_date}, {amending_cid}): {amending_text}]".strip()
+                if config.visibility == "test":
+                    current_text = f"{current_text} [Modified ({as_of_date}, {amending_cid}): {amending_text}]".strip()
+                else:
+                    current_title, current_text = _extract_substituted_text(
+                        amending_text,
+                        str(target_clause["number"]),
+                        current_title,
+                    )
 
         last_amending_cid = applied_ids[-1]
         last_amending_doc = last_amending_cid.split(":", 1)[0]
@@ -406,6 +432,7 @@ def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None
                 "change_note": change_note,
                 "original_text": original_text,
                 "amending_clause_id": last_amending_cid,
+                "notes_by_site": site_notes,
             }
         )
 

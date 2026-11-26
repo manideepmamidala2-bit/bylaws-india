@@ -22,11 +22,23 @@ building_types:
 parent: null
 parents: []
 not_modelled:
-- 'July 2025 zoning amendment (UDD 85 MNJ 2025): the official gazette PDF could not be obtained from public sources, so consolidated zoning text and parameter values may not reflect changes made in July 2025.'
-- 'October 2024 Kannada compilation of RMP 2015 Zoning Regulations: published in Kannada only and not structured; this dataset uses the English original together with the 8 structured English amending notifications.'
-- 'Supporting instruments not in the dataset: Karnataka Fire and Emergency Services NOC rules, standalone Karnataka Transferable Development Rights (TDR) procedural rules, Occupancy Certificate exemption orders, and detailed BMRCL metro transit-oriented influence zone rules.'
-- 'Land-use zone polygons: available only where RMP 2015 Proposed Land Use map sheets have been processed (4 sheets in Planning Districts 2.10 Jayanagar and 2.11 Banashankari covering 1,276 zone polygons in Bengaluru South); elsewhere on the map you can select a land-use zone manually.'
-- National Building Code of India 2016 (copyrighted by BIS; listed as reference only) and Airports Authority of India NOCAS colour-coded zoning map (external aviation portal; reference only).
+- 'July 2025 zoning amendment (UDD 85 MNJ 2025): the official gazette PDF could not
+  be obtained from public sources, so consolidated zoning text and parameter values
+  may not reflect changes made in July 2025.'
+- 'October 2024 Kannada compilation of RMP 2015 Zoning Regulations: published in Kannada
+  only and not structured; this dataset uses the English original together with the
+  8 structured English amending notifications.'
+- 'Supporting instruments not in the dataset: Karnataka Fire and Emergency Services
+  NOC rules, standalone Karnataka Transferable Development Rights (TDR) procedural
+  rules, Occupancy Certificate exemption orders, and detailed BMRCL metro transit-oriented
+  influence zone rules.'
+- 'Land-use zone polygons: available only where RMP 2015 Proposed Land Use map sheets
+  have been processed (4 sheets in Planning Districts 2.10 Jayanagar and 2.11 Banashankari
+  covering 1,276 zone polygons in Bengaluru South); elsewhere on the map you can select
+  a land-use zone manually.'
+- National Building Code of India 2016 (copyrighted by BIS; listed as reference only)
+  and Airports Authority of India NOCAS colour-coded zoning map (external aviation
+  portal; reference only).
 unread_documents:
 - title: Revising the amendments in the regulations in BBMP revised Mahayojane 2015
     (Kannada Compilation)
@@ -109,6 +121,9 @@ documents:
     archive_url: https://web.archive.org/web/20250417153022id_/https://site.bbmp.gov.in/PDF/Bangalore-Building-Byelaws-%202003.pdf
     archive_failure_reason: null
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: Principal municipal building bye-laws for Bengaluru (plan sanction,
+    licences, construction norms, occupancy certificates, and deviations).
 - id: ka-model-bbl-2017
   title: Karnataka Municipalities Model Building Bye-Laws, 2017
   issuing_authority: URBAN DEVELOPMENT SECRETARIAT, Government of Karnataka
@@ -162,6 +177,65 @@ documents:
     archive_url: http://web.archive.org/web/20240923114305/https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/Model%20Building%20Byelaws%20Notification%20No.%20UDD%2014%20TTP%202017%20(P-4)%20Bengaluru,%20Dated%2028-10-2017%20.pdf
     archive_failure_reason: null
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: 2017 state notification (UDD 14 TTP 2017) containing the Model
+    Building Bye-laws for Municipal Corporations (Part I, p. 128) and Municipalities
+    (Part II, p. 2); Clause 1(3) is the source of Bye-law 1.4.
+  applies_to_jurisdiction:
+    status: 'no'
+    reason: 'This 2017 notification (No. UDD 14 TTP 2017 (P-4), dated 28-10-2017)
+      is where the rule that master plan regulations govern setbacks, FAR and coverage
+      comes from (Clause 1(3), recorded as Bye-law 1.4 in the 2003 Bye-laws). The
+      PDF contains two notifications: Notification-II (pp. 2–127, Gazette No. 992)
+      is the Karnataka Municipalities Model Building Bye-Laws 2017 enacted under Section
+      325 of the Karnataka Municipalities Act, 1964 (where Act means the Karnataka
+      Municipalities Act, 1964, which applies to municipal councils and town panchayats,
+      not City Corporations); Notification-I (pp. 128–253, Gazette No. 991) is the
+      Karnataka Municipal Corporations Model Building Bye-Laws 2017 enacted under
+      Section 508 read with Section 428 of the Karnataka Municipal Corporations Act,
+      1976. Whether Notification-I as a whole replaced the 2003 Building Bye-laws
+      in Bengaluru is unclear from the 2017 text alone, and the May 2026 City Corporation
+      Building (Amendment) Bye-laws expressly amend the Bengaluru City Corporation
+      Building Bye-laws, 2003 as the principal in-force code. Accordingly, Clause
+      1(3) is recorded as the source of Bye-law 1.4, while the remaining provisions
+      of this 2017 model code do not feed plot answers.'
+    quoted_evidence: 'Notification-II (p. 2): "in exercise of the powers conferred
+      by section 325 of the Karnataka Municipalities Act, 1964 (Karnataka Act 22 of
+      1964) ... (1) These bye laws may be called as the Karnataka Municipalities Model
+      Building Bye-Laws 2017. ... (2) ‘Act’- means the Karnataka Municipalities Act,
+      1964 (Karnataka Act 22 of 1964)" | Notification-I (p. 128): "in exercise of
+      the powers conferred by clause (b) of sub-section(1) of section 508 read with
+      section 428 of the Karnataka Municipal Corporations Act, 1976 (Karnataka Act
+      14 of 1977), the Government of Karnataka hereby makes the following Model Building
+      Bye-Laws namely:- ... 1. Title, commencement and application- (1) These Bye
+      Laws may be called as the Karnataka Municipal Corporations Model Building Bye-Laws
+      2017. (2) They shall come into force from the date of their final publication
+      in the official Gazette. (3) All mandatory Master Plan or Zonal Regulations
+      regarding use, land use, coverage, FAR, setback or open space, height, number
+      of stories, number of dwelling units, parking standards etc. for various categories
+      of buildings including modification therein made from time to time shall be
+      applicable mutatis mutandis in these Bye-Laws under this clause. All amendments
+      or modifications made in the aforesaid regulations shall automatically stand
+      deemed to have been included as part of these Bye-laws." | May 2026 City Corporation
+      Amendments (p. 2, Clause 2): "In the Bengaluru City Corporation Building Bye-laws-
+      2003 (hereinafter referred to as the said bye-laws), Bye-law 3.8- Ground Rent;
+      Bye-law 3.9- Ground Rent for high rise buildings and Bye-law 3.10- Exemption
+      of ground rent the entire provision shall be omitted."'
+    url: https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/Model%20Building%20Byelaws%20Notification%20No.%20UDD%2014%20TTP%202017%20(P-4)%20Bengaluru,%20Dated%2028-10-2017%20.pdf
+  notes_by_site:
+  - This 2017 notification (No. UDD 14 TTP 2017 (P-4), dated 28-10-2017) is where
+    the rule that master plan regulations govern setbacks, FAR and coverage comes
+    from (Clause 1(3) on p. 128 and p. 2, recorded as Bye-law 1.4).
+  - Pages 2–127 (Notification-II, Gazette No. 992) are the Karnataka Municipalities
+    Model Building Bye-Laws 2017 made under Section 325 of the Karnataka Municipalities
+    Act, 1964 (applicable to municipalities, not City Corporations).
+  - Pages 128–253 (Notification-I, Gazette No. 991) are the Karnataka Municipal Corporations
+    Model Building Bye-Laws 2017 made under Section 508 read with Section 428 of the
+    Karnataka Municipal Corporations Act, 1976.
+  - Whether Notification-I as a whole replaced the 2003 Bye-laws in Bengaluru is unclear
+    from the 2017 text alone; however, the May 2026 City Corporation Building (Amendment)
+    Bye-laws expressly amend the 2003 Building Bye-laws, confirming the 2003 Bye-laws
+    remained the operative code.
 - id: rmp2015-zr
   title: Revised Master Plan 2015 BANGALORE 2007 Volume – III ZONING OF LANDUSE AND
     REGULATIONS
@@ -214,6 +288,9 @@ documents:
     archive_url: https://web.archive.org/web/20220721123900id_/http://site.bbmp.gov.in/PDF/townplanning/Zoning_Regulations_RMP2015f%20(1).pdf
     archive_failure_reason: null
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: Master Plan 2015 Zoning Regulations governing land-use zones, ground
+    coverage, Floor Area Ratio (FAR), setbacks, height, and parking across Bengaluru.
 - id: rmp2015-zr-amend-2009-03
   title: Notification No.UDD 93 MNJ 2008 dated 2-3-2009 (4.10 Traffic and Transportation
     (T&T) Zone Uses Amendment)
@@ -264,6 +341,10 @@ documents:
     archive_url: https://web.archive.org/web/20261124094633/https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/T%20&%20T%20Zone%20Uses%20Amendment.pdf
     archive_failure_reason: null
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: March 2009 zoning amendment adding metro station 150 m buffer FAR
+    (3.16(ix)) and revising Traffic and Transportation (T&T) zone rules and Table
+    19.
 - id: rmp2015-zr-amend-2015-03
   title: 'URBAN DEVELOPMENT SECRETARIAT NOTIFICATION No: UDD 105 MNJ 2008, Bangalore,
     Dated:20/03/2015'
@@ -316,6 +397,9 @@ documents:
     archive_url: https://web.archive.org/web/20220831190613id_/http://site.bbmp.gov.in/PDF/townplanning/Amendments%20ZR%20Commercial%20uses%20in%20Residential%20Zone%20dated%2020-03-2015.pdf
     archive_failure_reason: null
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: March 2015 zoning amendment restricting commercial uses on roads
+    under 40 ft (12 m) in Residential zones and updating Table 1, 4.1.2, and 4.2.2.
 - id: rmp2015-zr-amend-2018-09
   title: Zoning Regulations of Bengaluru of the Revised Master Plan-2015 (Amendment)
     Regulations 2018
@@ -368,6 +452,9 @@ documents:
     archive_url: https://web.archive.org/web/20220831190616id_/http://site.bbmp.gov.in/PDF/townplanning/ImpactZone%20Premium%20FAR%20Notifi29.09.18.pdf
     archive_failure_reason: null
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: September 2018 zoning amendment inserting Regulation 3.4(vi) Impact
+    Zone Premium FAR (+1.0 FAR on roads >= 12 m) and omitting Regulation 3.16(ix).
 - id: rmp2015-zr-amend-2019-06
   title: Zoning Regulations of Bengaluru of the Revised Master Plan-2015 (Amendment)
     Regulations, 2019
@@ -421,6 +508,10 @@ documents:
     archive_url: https://web.archive.org/web/20261124094650/https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/Zoning%20Regulations%202015%20Amendment%20Notification%20No.%20UDD%20255%20MNJ%202018,%20Bangalore%20Dated%2019-06-2019.pdf
     archive_failure_reason: null
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: June 2019 zoning amendment updating apartment/non-residential definitions,
+    FAR exclusions (3.4), building height exemptions (3.4-A), balconies, tree planting,
+    residential subdivision earmarking (55%), and hotel/office parking (Table 23).
 - id: rmp2015-zr-comp-2024-10-kn
   title: Revising the amendments in the regulations in BBMP revised Mahayojane 2015
     (Kannada Compilation)
@@ -428,7 +519,7 @@ documents:
   doc_type: circular
   layer: municipal
   role: reference
-  legal_status: in_force
+  legal_status: status_unknown
   acquisition_status: acquired
   notification_number: BBMP/TP/2024-25
   notified_date: '2024-10-19'
@@ -445,8 +536,8 @@ documents:
   licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public municipal
     circular/compilation)
   text_rights:
-    mode: full_text
-    reason: Public municipal circular/compilation
+    mode: reference_only
+    reason: Unofficial Kannada compilation (finding aid only, not structured)
   languages:
   - kn
   official_url: https://site.bbmp.gov.in/PDF/townplanning/KM_266_160102035827-pages-deleted_29102024.pdf
@@ -468,6 +559,11 @@ documents:
     archive_url: https://web.archive.org/web/20250325225145id_/https://site.bbmp.gov.in/PDF/townplanning/KM_266_160102035827-pages-deleted_29102024.pdf
     archive_failure_reason: null
     fetched_by: agent
+  instrument_type: compilation
+  summary_by_site: Unofficial October 2024 Kannada compilation of RMP 2015 Zoning
+    Regulations published by BBMP as a finding aid (not structured; English instruments
+    used).
+  structured: false
 - id: rmp2015-zr-amend-2025-02
   title: GOVERNMENT OF KARNATAKA No. UDD 78 MNJ 2024 (E) Dated:21.02.2025 NOTIFICATION-1
     & NOTIFICATION-II (Premium F.A.R Amendment to Zonal Regulations of Revised Master
@@ -522,6 +618,9 @@ documents:
     archive_failure_reason: null
     fetched_by: agent
   superseded_by_document: rmp2015-zr-amend-2025-04
+  instrument_type: instrument
+  summary_by_site: February 2025 Premium FAR notification (withdrawn and replaced
+    with effect from 25-02-2025 by the April 2025 final notification).
 - id: rmp2015-zr-amend-2026-01
   title: 'GOVERNMENT OF KARNATAKA No. UDD 235 MNJ 2025(E) date: 05.01.2026 NOTIFICATION
     (Amendment to Zonal Regulations of Revised Master Plan-2015 of Bengaluru and Greater
@@ -577,6 +676,10 @@ documents:
     archive_url: https://web.archive.org/web/20260216195827id_/https://data.opencity.in/dataset/31a482fe-4ffd-4929-a61d-2fdcca90be91/resource/36f1c5e6-5f5d-4356-bfba-00c5fe1020e2/download/udd-235-mnj-2025e-05.01.2026.pdf
     archive_failure_reason: null
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: January 2026 final notification replacing Setbacks Table 8 (up
+    to 12 m / 15 m height) and amending basement, car-lift/ramp, residential height/apartment,
+    mutation corridor, and industrial (Table 16) rules.
 - id: rmp2015-zr-amend-2025-07
   title: Gazette Notification (July 2025) - Bengaluru Master Plan 2015 Zoning Regulations
     Amendments
@@ -605,6 +708,9 @@ documents:
   official_url: https://data.opencity.in/dataset/31a482fe-4ffd-4929-a61d-2fdcca90be91/resource/3f2685b8-5e27-44e5-9222-8f6dbff9445f/download/d7b00660-a3bc-49cf-b35a-3d70283ace0a.pdf
   mirror_urls: []
   source_url: https://data.opencity.in/dataset/31a482fe-4ffd-4929-a61d-2fdcca90be91/resource/3f2685b8-5e27-44e5-9222-8f6dbff9445f/download/d7b00660-a3bc-49cf-b35a-3d70283ace0a.pdf
+  instrument_type: instrument
+  summary_by_site: July 2025 zoning amendment notification listed on OpenCity that
+    could not be obtained from official or archival sources.
 - id: udd-1107-mnu-2018-draft
   title: Draft Notification No. UDD 1107 MNU 2015 — Punishments under Section 321-B
     of K.M.C. Act, 1976 and Building Bye-laws, 2003
@@ -659,6 +765,9 @@ documents:
     archive_url: https://web.archive.org/web/20220813121043id_/https://site.bbmp.gov.in/PDF/townplanning/Amendments%20to%20Sec%20321%20of%20KMC%20Act%201976.pdf
     archive_failure_reason: null
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: November 2018 draft notification proposing penalties under Section
+    321-B of the KMC Act, 1976 (draft only, not in force).
 - id: rmp2015-pd-index
   title: BDA Revised Master Plan 2015 — Planning Districts Index Map (47 Planning
     Districts)
@@ -682,8 +791,8 @@ documents:
   licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (official statutory
     master plan index map)
   text_rights:
-    mode: full_text
-    reason: Official BDA statutory master plan index map
+    mode: reference_only
+    reason: Official master plan map sheet (georeferenced on map, not a text instrument)
   languages:
   - en
   official_url: https://site.bbmp.gov.in/revised%20masterplan%20(1).html
@@ -706,6 +815,9 @@ documents:
     archive_url: http://web.archive.org/web/20221222112943/https://data-opencity.sgp1.cdn.digitaloceanspaces.com/Documents/Recent/Bengaluru-BDA-RMP-2015-PD-IndexMap.pdf
     archive_failure_reason: null
     fetched_by: agent
+  instrument_type: map
+  summary_by_site: Official BDA Revised Master Plan 2015 index map of the 47 Planning
+    Districts.
 - id: bccc-bbl-amend-2026-05
   title: Bengaluru Central City Corporation — Bengaluru City Corporation Building
     (Amendment) Bye-laws, 2026 (Final Gazette Notification)
@@ -765,6 +877,10 @@ documents:
     archive_url: null
     archive_failure_reason: Wayback Machine Save Page Now timed out on updates.bbmp.gov.in
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: May 2026 final Building (Amendment) Bye-laws for Bengaluru Central
+    City Corporation omitting ground rent (3.8–3.10) and substituting deviation compounding
+    rules (6.0(i) and Tables 2A–2D).
 - id: bccc-bbl-amend-2026-04-draft
   title: Bengaluru Central City Corporation — Draft Bengaluru City Corporation Building
     (Amendment) Bye-laws, 2026 (01-04-2026)
@@ -822,6 +938,9 @@ documents:
     archive_url: null
     archive_failure_reason: Wayback Machine Save Page Now timed out on updates.bbmp.gov.in
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: April 2026 draft Building (Amendment) Bye-laws for Bengaluru Central
+    City Corporation (replaced by the 14 May 2026 final notification).
 - id: bncc-bbl-amend-2026-05
   title: Bengaluru North City Corporation — Bengaluru City Corporation Building (Amendment)
     Bye-laws, 2026 (Final Gazette Notification)
@@ -881,6 +1000,10 @@ documents:
     archive_url: null
     archive_failure_reason: Wayback Machine Save Page Now timed out on updates.bbmp.gov.in
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: May 2026 final Building (Amendment) Bye-laws for Bengaluru North
+    City Corporation omitting ground rent (3.8–3.10) and substituting deviation compounding
+    rules (6.0(i) and Tables 2A–2D).
 - id: bncc-bbl-amend-2026-04-draft
   title: Bengaluru North City Corporation — Draft Bengaluru City Corporation Building
     (Amendment) Bye-laws, 2026 (01-04-2026)
@@ -938,6 +1061,9 @@ documents:
     archive_url: null
     archive_failure_reason: Wayback Machine Save Page Now timed out on updates.bbmp.gov.in
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: April 2026 draft Building (Amendment) Bye-laws for Bengaluru North
+    City Corporation (replaced by the 14 May 2026 final notification).
 - id: bscc-bbl-amend-2026-05
   title: Bengaluru South City Corporation — Bengaluru City Corporation Building (Amendment)
     Bye-laws, 2026 (Final Gazette Notification)
@@ -997,6 +1123,10 @@ documents:
     archive_url: null
     archive_failure_reason: Wayback Machine Save Page Now timed out on updates.bbmp.gov.in
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: May 2026 final Building (Amendment) Bye-laws for Bengaluru South
+    City Corporation omitting ground rent (3.8–3.10) and substituting deviation compounding
+    rules (6.0(i) and Tables 2A–2D).
 - id: bscc-bbl-amend-2026-04-draft
   title: Bengaluru South City Corporation — Draft Bengaluru City Corporation Building
     (Amendment) Bye-laws, 2026 (01-04-2026)
@@ -1054,6 +1184,9 @@ documents:
     archive_url: null
     archive_failure_reason: Wayback Machine Save Page Now timed out on updates.bbmp.gov.in
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: April 2026 draft Building (Amendment) Bye-laws for Bengaluru South
+    City Corporation (replaced by the 14 May 2026 final notification).
 - id: becc-bbl-amend-2026-05
   title: Bengaluru East City Corporation — Bengaluru City Corporation Building (Amendment)
     Bye-laws, 2026 (Final Gazette Notification)
@@ -1113,6 +1246,10 @@ documents:
     archive_url: null
     archive_failure_reason: Wayback Machine Save Page Now timed out on updates.bbmp.gov.in
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: May 2026 final Building (Amendment) Bye-laws for Bengaluru East
+    City Corporation omitting ground rent (3.8–3.10) and substituting deviation compounding
+    rules (6.0(i) and Tables 2A–2D).
 - id: becc-bbl-amend-2026-04-draft
   title: Bengaluru East City Corporation — Draft Bengaluru City Corporation Building
     (Amendment) Bye-laws, 2026 (01-04-2026)
@@ -1170,6 +1307,9 @@ documents:
     archive_url: null
     archive_failure_reason: Wayback Machine Save Page Now timed out on updates.bbmp.gov.in
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: April 2026 draft Building (Amendment) Bye-laws for Bengaluru East
+    City Corporation (replaced by the 14 May 2026 final notification).
 - id: bwcc-bbl-amend-2026-05
   title: Bengaluru West City Corporation — Bengaluru City Corporation Building (Amendment)
     Bye-laws, 2026 (Final Gazette Notification)
@@ -1229,6 +1369,10 @@ documents:
     archive_url: null
     archive_failure_reason: Wayback Machine Save Page Now timed out on updates.bbmp.gov.in
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: May 2026 final Building (Amendment) Bye-laws for Bengaluru West
+    City Corporation omitting ground rent (3.8–3.10) and substituting deviation compounding
+    rules (6.0(i) and Tables 2A–2D).
 - id: bwcc-bbl-amend-2026-04-draft
   title: Bengaluru West City Corporation — Draft Bengaluru City Corporation Building
     (Amendment) Bye-laws, 2026 (01-04-2026)
@@ -1286,6 +1430,9 @@ documents:
     archive_url: null
     archive_failure_reason: Wayback Machine Save Page Now timed out on updates.bbmp.gov.in
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: April 2026 draft Building (Amendment) Bye-laws for Bengaluru West
+    City Corporation (replaced by the 14 May 2026 final notification).
 - id: rmp2015-zr-amend-2025-04
   title: 'Notification No. UDD 78 MNJ 2024 (E) (02-04-2025) — Insertion of Chapter
     11: Premium F.A.R Granted by Levy of Premium Charges (Final Notification)'
@@ -1340,6 +1487,9 @@ documents:
     archive_url: null
     archive_failure_reason: Wayback Machine Save Page Now timed out on updates.bbmp.gov.in
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: April 2025 final notification inserting Chapter 11 (Premium FAR
+    of 20%, 40%, or 60% of base FAR by road width).
 - id: rmp2015-zr-amend-2025-10
   title: Notification No. UDD 468 MNJ 2025(E) (15-10-2025) — Revised Master Plan 2015
     Zonal Regulations Amendment (Storm Water Drain / Nala Buffer Zones)
@@ -1391,6 +1541,9 @@ documents:
     archive_url: null
     archive_failure_reason: Wayback Machine Save Page Now timed out on updates.bbmp.gov.in
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: October 2025 final notification setting storm water drain (nala)
+    buffers (15 m primary, 10 m secondary, 5 m tertiary) and lake buffer rules.
 - id: gbga-2024
   title: The Greater Bengaluru Governance Act, 2024 (Karnataka Act No. 36 of 2025)
     — Building & Bye-law Provisions (Chapter XVII & Chapter XXII)
@@ -1443,6 +1596,10 @@ documents:
     archive_url: null
     archive_failure_reason: Wayback Machine Save Page Now timed out on large PDF
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: The Greater Bengaluru Governance Act, 2024 (Karnataka Act 36 of
+    2025) establishing the Greater Bengaluru Authority and the City Corporations;
+    Chapters XVII and XXII govern building regulation and bye-laws.
 - id: udd-200-mnu-2025-khata
   title: Government Order No. UDD 200 MNU 2025 (25-07-2025) — Regulation of Issuance
     of A and B Khata and Building Plan Approvals in Greater Bengaluru Area
@@ -1494,6 +1651,9 @@ documents:
     archive_url: null
     archive_failure_reason: Wayback Machine Save Page Now timed out on large PDF
     fetched_by: agent
+  instrument_type: order
+  summary_by_site: July 2025 Government Order governing A and B Khata issuance and
+    building plan approvals in the Greater Bengaluru Area.
 - id: ktcda-amend-bill-2025
   title: The Karnataka Tank Conservation and Development Authority (Amendment) Bill,
     2025 (L.A. Bill No. 33 of 2025 — Graded Lake Buffer Zones)
@@ -1520,8 +1680,8 @@ documents:
   licence_or_terms: Section 52(1)(q) Indian Copyright Act, 1957 (public legislative
     bill)
   text_rights:
-    mode: full_text
-    reason: Public Legislative Assembly Bill published by GBA
+    mode: reference_only
+    reason: Legislative Assembly Bill (not enacted into law)
   languages:
   - en
   - kn
@@ -1545,37 +1705,40 @@ documents:
     archive_url: null
     archive_failure_reason: Wayback Machine Save Page Now timed out on large PDF
     fetched_by: agent
+  instrument_type: bill
+  summary_by_site: Legislative Assembly Bill No. 33 of 2025 proposing graded lake
+    buffer zones under the KTCDA Act, 2014 (bill only; enactment not confirmed).
 amendment_links:
-- amending_clause: ka-model-bbl-2017:chp_2__item_2__item_3
+- amending_clause: ka-model-bbl-2017:chp_1__item_3
   target_clause: bbl-2003:part_I__sec_1.0__cl_1.3
   action: insert_after
   effective_date: '2017-10-28'
   confidence: high
   verification: machine_checked
-  note: Karnataka Municipal Corporations Model Building Bye-Laws, 2017 (Notification
-    No. UDD 14 TTP 2017 (P-4), dated 28-10-2017, Clause 1(3), pp. 2 & 128) incorporates
-    all mandatory Master Plan / Zonal Regulations and their amendments mutatis mutandis
-    into the municipal building bye-laws.
-  replacement_text: '1.4 Mutatis mutandis application of Master Plan and Zonal Regulations:
-    Pursuant to Clause 1(3) of Notification No. UDD 14 TTP 2017 (P-4) dated 28-10-2017
-    (published on the official GBA/BBMP Building Plan Approval System under Bye laws
-    and Zoning Regulations), all mandatory Master Plan or Zonal Regulations regarding
-    use, land use, coverage, FAR, setback or open space, height, number of stories,
-    number of dwelling units, and parking standards for various categories of buildings,
-    including all amendments or modifications made therein from time to time, apply
-    mutatis mutandis as part of these Bye-laws.'
+  replacement_text: 1.4 All mandatory Master Plan or Zonal Regulations regarding use,
+    land use, coverage, FAR, setback or open space, height, number of stories, number
+    of dwelling units, parking standards etc. for various categories of buildings
+    including modification therein made from time to time shall be applicable mutatis
+    mutandis in these Bye-Laws under this clause. All amendments or modifications
+    made in the aforesaid regulations shall automatically stand deemed to have been
+    included as part of these Bye-laws.
+  note: Inserted from Clause 1(3) of Notification No. UDD 14 TTP 2017 (P-4) dated
+    28-10-2017 (published on the official GBA/BBMP Building Plan Approval System alongside
+    the 2003 Building Bye-laws; appears identically in Notification-I on p. 128 and
+    Notification-II on p. 2). In the printed 2003 Bye-laws PDF, Section 1.0 ends at
+    Bye-law 1.3; this site records Clause 1(3) of the 2017 notification as Bye-law
+    1.4 to reflect the rule that Master Plan Zoning Regulations govern use, coverage,
+    FAR, setbacks, height, storeys, dwelling units, and parking.
 - amending_clause: ka-model-bbl-2017:chp_1
   target_clause: bbl-2003:part_II__sec_3.0
   action: modify
   effective_date: '2017-10-28'
   confidence: low
   verification: unverified
-  note: Karnataka Municipal Corporations Model Building Bye-Laws, 2017 (Notification
-    No. UDD 14 TTP 2017 (P-4), dated 28-10-2017) sets out a state model procedural
-    framework; recorded with low confidence (not applied to in-force text) because
-    Bangalore Mahanagara Palike Building Bye-laws 2003 remain listed as the operative
-    principal municipal bye-laws on bpas.bbmpgov.in pending formal corporation-specific
-    bye-law adoption.
+  note: Notification No. UDD 14 TTP 2017 (P-4) dated 28-10-2017 sets out a state model
+    procedural framework; recorded with low confidence (not applied to in-force text)
+    because the May 2026 City Corporation amendments confirm that the 2003 Building
+    Bye-laws remain the operative principal municipal bye-laws in Bengaluru.
 - amending_clause: udd-1107-mnu-2018-draft:cl_4
   target_clause: bbl-2003:part_II__sec_4.0
   action: modify
@@ -1583,10 +1746,9 @@ amendment_links:
   confidence: high
   verification: unverified
   note: Draft Notification No. UDD 1107 MNU 2015 dated 27-11-2018 (extended 28-12-2018)
-    proposes statutory penalties under Section 321-B of the KMC Act, 1976 for violations
-    of Bye-laws 4, 4.1.5(2), 5.1–5.7, 6, 7.1, 7.4, and 8; not applied to in-force
-    text because the notification has legal_status 'draft'.
-- amending_clause: bccc-bbl-amend-2026-05:part_III__cl_2
+    proposes penalties under Section 321-B of the KMC Act, 1976; not applied because
+    it is a draft notification.
+- amending_clause: bccc-bbl-amend-2026-05:cl_2
   target_clause: bbl-2003:part_II__sec_3.0__cl_3.8
   action: omit
   effective_date: '2026-05-14'
@@ -1595,11 +1757,8 @@ amendment_links:
   applies_in:
   - in-ka-bengaluru-central
   note: 'Clause 2 of No: BCCC/Com/PR/48/2026-27 (Bengaluru Central City Corporation,
-    14-05-2026): "In the Bengaluru City Corporation Building Bye-laws- 2003 (hereinafter
-    referred to as the said bye-laws), Bye-law 3.8- Ground Rent; Bye-law 3.9- Ground
-    Rent for high rise buildings and Bye-law 3.10- Exemption of ground rent the entire
-    provision shall be omitted."'
-- amending_clause: bccc-bbl-amend-2026-05:part_III__cl_2
+    14-05-2026) omits Bye-law 3.8 (Ground Rent).'
+- amending_clause: bccc-bbl-amend-2026-05:cl_2
   target_clause: bbl-2003:part_II__sec_3.0__cl_3.9
   action: omit
   effective_date: '2026-05-14'
@@ -1608,9 +1767,8 @@ amendment_links:
   applies_in:
   - in-ka-bengaluru-central
   note: 'Clause 2 of No: BCCC/Com/PR/48/2026-27 (Bengaluru Central City Corporation,
-    14-05-2026): omits Bye-law 3.9 (Ground rent for high rise buildings) in Bengaluru
-    Central City Corporation.'
-- amending_clause: bccc-bbl-amend-2026-05:part_III__cl_2
+    14-05-2026) omits Bye-law 3.9 (Ground Rent for high rise buildings).'
+- amending_clause: bccc-bbl-amend-2026-05:cl_2
   target_clause: bbl-2003:part_II__sec_3.0__cl_3.10
   action: omit
   effective_date: '2026-05-14'
@@ -1619,9 +1777,8 @@ amendment_links:
   applies_in:
   - in-ka-bengaluru-central
   note: 'Clause 2 of No: BCCC/Com/PR/48/2026-27 (Bengaluru Central City Corporation,
-    14-05-2026): omits Bye-law 3.10 (Exemptions for ground rent) in Bengaluru Central
-    City Corporation.'
-- amending_clause: bccc-bbl-amend-2026-05:part_III__cl_3
+    14-05-2026) omits Bye-law 3.10 (Exemption of ground rent).'
+- amending_clause: bccc-bbl-amend-2026-05:cl_3.10__item_i
   target_clause: bbl-2003:part_II__sec_6.0__item_i
   action: substitute
   effective_date: '2026-05-14'
@@ -1629,24 +1786,20 @@ amendment_links:
   verification: machine_checked
   applies_in:
   - in-ka-bengaluru-central
-  replacement_text: '(i) Wherever any construction is in violation/deviation of the
-    sanctioned plan, the Commissioner (Bengaluru Central City Corporation, Notification
-    No: BCCC/Com/PR/48/2026-27 dated 14-05-2026) may, if he considers that the violations
-    / deviations are within the limits specified in Table-2B below (up to 15% setback
-    and coverage deviation; up to 15% FAR deviation on plots up to 500 sq.m and 5%
-    FAR deviation on plots above 500 sq.m; 7.5% height deviation not beyond sanctioned
-    number of floors) in case of (1) the setback to be provided around the building,
-    (2) plot coverage (3) floor area ratio and (4) height of the building and that
-    the demolition under chapter XVII of the Act is not feasible without affecting
-    structural stability, he may regularize such violations/deviations after recording
-    detailed reasons for the same and levying compounding fee as per Table-2A, Table-2C
-    and Table-2D (minimum guidance value consideration Rs.50,000/- per sq.m; Residential
-    3%/6% up to 500 sq.m and 5%/10% above 500 sq.m; Non-Residential 6%/12%).'
-  note: 'Clause 3 of No: BCCC/Com/PR/48/2026-27 (Bengaluru Central City Corporation,
-    14-05-2026): substitutes Clause (i) under Bye-law 6.0 (Deviation during construction)
-    and inserts Table-2A, Table-2B, Table-2C, and Table-2D for Bengaluru Central City
-    Corporation.'
-- amending_clause: bncc-bbl-amend-2026-05:part_III__cl_2
+  replacement_text: Wherever any construction is in violation/deviation of the sanctioned
+    plan, the Commissioner may, if he considers that the violations / deviations are
+    within the limits specified in Table-2B below in case of (1) the setback to be
+    provided around the building, (2) plot coverage (3) floor area ratio and (4) height
+    of the building and that the demolition under chapter XVII of the Act is not feasible
+    without affecting structural stability, he may regularize such violations/deviations
+    after recording detailed reasons for the same and levying compounding fee as per
+    Table-2A, Table-2C and Table-2D
+  note: 'Substituted by Clause 3 of No: BCCC/Com/PR/48/2026-27 (Bengaluru Central
+    City Corporation, effective 14-05-2026), which also inserts Table-2A (occupancy
+    certificate fee), Table-2B (maximum condonable deviation limits: up to 15% setback
+    and coverage; up to 15% FAR on plots up to 500 m² and 5% FAR above 500 m²; 7.5%
+    height not beyond sanctioned floors), Table-2C, and Table-2D.'
+- amending_clause: bncc-bbl-amend-2026-05:cl_2
   target_clause: bbl-2003:part_II__sec_3.0__cl_3.8
   action: omit
   effective_date: '2026-05-14'
@@ -1655,11 +1808,8 @@ amendment_links:
   applies_in:
   - in-ka-bengaluru-north
   note: 'Clause 2 of No: BNCC/Com/PR/103/2026-27 (Bengaluru North City Corporation,
-    14-05-2026): "In the Bengaluru City Corporation Building Bye-laws- 2003 (hereinafter
-    referred to as the said bye-laws), Bye-law 3.8- Ground Rent; Bye-law 3.9- Ground
-    Rent for high rise buildings and Bye-law 3.10- Exemption of ground rent the entire
-    provision shall be omitted."'
-- amending_clause: bncc-bbl-amend-2026-05:part_III__cl_2
+    14-05-2026) omits Bye-law 3.8 (Ground Rent).'
+- amending_clause: bncc-bbl-amend-2026-05:cl_2
   target_clause: bbl-2003:part_II__sec_3.0__cl_3.9
   action: omit
   effective_date: '2026-05-14'
@@ -1668,9 +1818,8 @@ amendment_links:
   applies_in:
   - in-ka-bengaluru-north
   note: 'Clause 2 of No: BNCC/Com/PR/103/2026-27 (Bengaluru North City Corporation,
-    14-05-2026): omits Bye-law 3.9 (Ground rent for high rise buildings) in Bengaluru
-    North City Corporation.'
-- amending_clause: bncc-bbl-amend-2026-05:part_III__cl_2
+    14-05-2026) omits Bye-law 3.9 (Ground Rent for high rise buildings).'
+- amending_clause: bncc-bbl-amend-2026-05:cl_2
   target_clause: bbl-2003:part_II__sec_3.0__cl_3.10
   action: omit
   effective_date: '2026-05-14'
@@ -1679,9 +1828,8 @@ amendment_links:
   applies_in:
   - in-ka-bengaluru-north
   note: 'Clause 2 of No: BNCC/Com/PR/103/2026-27 (Bengaluru North City Corporation,
-    14-05-2026): omits Bye-law 3.10 (Exemptions for ground rent) in Bengaluru North
-    City Corporation.'
-- amending_clause: bncc-bbl-amend-2026-05:part_III__cl_3
+    14-05-2026) omits Bye-law 3.10 (Exemption of ground rent).'
+- amending_clause: bncc-bbl-amend-2026-05:item_i
   target_clause: bbl-2003:part_II__sec_6.0__item_i
   action: substitute
   effective_date: '2026-05-14'
@@ -1689,24 +1837,20 @@ amendment_links:
   verification: machine_checked
   applies_in:
   - in-ka-bengaluru-north
-  replacement_text: '(i) Wherever any construction is in violation/deviation of the
-    sanctioned plan, the Commissioner (Bengaluru North City Corporation, Notification
-    No: BNCC/Com/PR/103/2026-27 dated 14-05-2026) may, if he considers that the violations
-    / deviations are within the limits specified in Table-2B below (up to 15% setback
-    and coverage deviation; up to 15% FAR deviation on plots up to 500 sq.m and 5%
-    FAR deviation on plots above 500 sq.m; 7.5% height deviation not beyond sanctioned
-    number of floors) in case of (1) the setback to be provided around the building,
-    (2) plot coverage (3) floor area ratio and (4) height of the building and that
-    the demolition under chapter XVII of the Act is not feasible without affecting
-    structural stability, he may regularize such violations/deviations after recording
-    detailed reasons for the same and levying compounding fee as per Table-2A, Table-2C
-    and Table-2D (minimum guidance value consideration Rs.50,000/- per sq.m; Residential
-    3%/6% up to 500 sq.m and 5%/10% above 500 sq.m; Non-Residential 6%/12%).'
-  note: 'Clause 3 of No: BNCC/Com/PR/103/2026-27 (Bengaluru North City Corporation,
-    14-05-2026): substitutes Clause (i) under Bye-law 6.0 (Deviation during construction)
-    and inserts Table-2A, Table-2B, Table-2C, and Table-2D for Bengaluru North City
-    Corporation.'
-- amending_clause: bscc-bbl-amend-2026-05:part_III__cl_2
+  replacement_text: Wherever any construction is in violation/deviation of the sanctioned
+    plan, the Commissioner may, if he considers that the violations / deviations are
+    within the limits specified in Table-2B below in case of (1) the setback to be
+    provided around the building, (2) plot coverage (3) floor area ratio and (4) height
+    of the building and that the demolition under chapter XVII of the Act is not feasible
+    without affecting structural stability, he may regularize such violations/deviations
+    after recording detailed reasons for the same and levying compounding fee as per
+    Table-2A, Table-2C and Table-2D
+  note: 'Substituted by Clause 3 of No: BNCC/Com/PR/103/2026-27 (Bengaluru North City
+    Corporation, effective 14-05-2026), which also inserts Table-2A (occupancy certificate
+    fee), Table-2B (maximum condonable deviation limits: up to 15% setback and coverage;
+    up to 15% FAR on plots up to 500 m² and 5% FAR above 500 m²; 7.5% height not beyond
+    sanctioned floors), Table-2C, and Table-2D.'
+- amending_clause: bscc-bbl-amend-2026-05:cl_2
   target_clause: bbl-2003:part_II__sec_3.0__cl_3.8
   action: omit
   effective_date: '2026-05-14'
@@ -1715,11 +1859,8 @@ amendment_links:
   applies_in:
   - in-ka-bengaluru-south
   note: 'Clause 2 of No: BSCC/Com/PR/35/2026-27 (Bengaluru South City Corporation,
-    14-05-2026): "In the Bengaluru City Corporation Building Bye-laws- 2003 (hereinafter
-    referred to as the said bye-laws), Bye-law 3.8- Ground Rent; Bye-law 3.9- Ground
-    Rent for high rise buildings and Bye-law 3.10- Exemption of ground rent the entire
-    provision shall be omitted."'
-- amending_clause: bscc-bbl-amend-2026-05:part_III__cl_2
+    14-05-2026) omits Bye-law 3.8 (Ground Rent).'
+- amending_clause: bscc-bbl-amend-2026-05:cl_2
   target_clause: bbl-2003:part_II__sec_3.0__cl_3.9
   action: omit
   effective_date: '2026-05-14'
@@ -1728,9 +1869,8 @@ amendment_links:
   applies_in:
   - in-ka-bengaluru-south
   note: 'Clause 2 of No: BSCC/Com/PR/35/2026-27 (Bengaluru South City Corporation,
-    14-05-2026): omits Bye-law 3.9 (Ground rent for high rise buildings) in Bengaluru
-    South City Corporation.'
-- amending_clause: bscc-bbl-amend-2026-05:part_III__cl_2
+    14-05-2026) omits Bye-law 3.9 (Ground Rent for high rise buildings).'
+- amending_clause: bscc-bbl-amend-2026-05:cl_2
   target_clause: bbl-2003:part_II__sec_3.0__cl_3.10
   action: omit
   effective_date: '2026-05-14'
@@ -1739,9 +1879,8 @@ amendment_links:
   applies_in:
   - in-ka-bengaluru-south
   note: 'Clause 2 of No: BSCC/Com/PR/35/2026-27 (Bengaluru South City Corporation,
-    14-05-2026): omits Bye-law 3.10 (Exemptions for ground rent) in Bengaluru South
-    City Corporation.'
-- amending_clause: bscc-bbl-amend-2026-05:part_III__cl_3
+    14-05-2026) omits Bye-law 3.10 (Exemption of ground rent).'
+- amending_clause: bscc-bbl-amend-2026-05:item_i
   target_clause: bbl-2003:part_II__sec_6.0__item_i
   action: substitute
   effective_date: '2026-05-14'
@@ -1749,24 +1888,20 @@ amendment_links:
   verification: machine_checked
   applies_in:
   - in-ka-bengaluru-south
-  replacement_text: '(i) Wherever any construction is in violation/deviation of the
-    sanctioned plan, the Commissioner (Bengaluru South City Corporation, Notification
-    No: BSCC/Com/PR/35/2026-27 dated 14-05-2026) may, if he considers that the violations
-    / deviations are within the limits specified in Table-2B below (up to 15% setback
-    and coverage deviation; up to 15% FAR deviation on plots up to 500 sq.m and 5%
-    FAR deviation on plots above 500 sq.m; 7.5% height deviation not beyond sanctioned
-    number of floors) in case of (1) the setback to be provided around the building,
-    (2) plot coverage (3) floor area ratio and (4) height of the building and that
-    the demolition under chapter XVII of the Act is not feasible without affecting
-    structural stability, he may regularize such violations/deviations after recording
-    detailed reasons for the same and levying compounding fee as per Table-2A, Table-2C
-    and Table-2D (minimum guidance value consideration Rs.50,000/- per sq.m; Residential
-    3%/6% up to 500 sq.m and 5%/10% above 500 sq.m; Non-Residential 6%/12%).'
-  note: 'Clause 3 of No: BSCC/Com/PR/35/2026-27 (Bengaluru South City Corporation,
-    14-05-2026): substitutes Clause (i) under Bye-law 6.0 (Deviation during construction)
-    and inserts Table-2A, Table-2B, Table-2C, and Table-2D for Bengaluru South City
-    Corporation.'
-- amending_clause: becc-bbl-amend-2026-05:part_III__cl_2
+  replacement_text: Wherever any construction is in violation/deviation of the sanctioned
+    plan, the Commissioner may, if he considers that the violations / deviations are
+    within the limits specified in Table-2B below in case of (1) the setback to be
+    provided around the building, (2) plot coverage (3) floor area ratio and (4) height
+    of the building and that the demolition under chapter XVII of the Act is not feasible
+    without affecting structural stability, he may regularize such violations/deviations
+    after recording detailed reasons for the same and levying compounding fee as per
+    Table-2A, Table-2C and Table-2D
+  note: 'Substituted by Clause 3 of No: BSCC/Com/PR/35/2026-27 (Bengaluru South City
+    Corporation, effective 14-05-2026), which also inserts Table-2A (occupancy certificate
+    fee), Table-2B (maximum condonable deviation limits: up to 15% setback and coverage;
+    up to 15% FAR on plots up to 500 m² and 5% FAR above 500 m²; 7.5% height not beyond
+    sanctioned floors), Table-2C, and Table-2D.'
+- amending_clause: becc-bbl-amend-2026-05:cl_2
   target_clause: bbl-2003:part_II__sec_3.0__cl_3.8
   action: omit
   effective_date: '2026-05-14'
@@ -1775,11 +1910,8 @@ amendment_links:
   applies_in:
   - in-ka-bengaluru-east
   note: 'Clause 2 of No: BECC/Com/PR/331/2026-27 (Bengaluru East City Corporation,
-    14-05-2026): "In the Bengaluru City Corporation Building Bye-laws- 2003 (hereinafter
-    referred to as the said bye-laws), Bye-law 3.8- Ground Rent; Bye-law 3.9- Ground
-    Rent for high rise buildings and Bye-law 3.10- Exemption of ground rent the entire
-    provision shall be omitted."'
-- amending_clause: becc-bbl-amend-2026-05:part_III__cl_2
+    14-05-2026) omits Bye-law 3.8 (Ground Rent).'
+- amending_clause: becc-bbl-amend-2026-05:cl_2
   target_clause: bbl-2003:part_II__sec_3.0__cl_3.9
   action: omit
   effective_date: '2026-05-14'
@@ -1788,9 +1920,8 @@ amendment_links:
   applies_in:
   - in-ka-bengaluru-east
   note: 'Clause 2 of No: BECC/Com/PR/331/2026-27 (Bengaluru East City Corporation,
-    14-05-2026): omits Bye-law 3.9 (Ground rent for high rise buildings) in Bengaluru
-    East City Corporation.'
-- amending_clause: becc-bbl-amend-2026-05:part_III__cl_2
+    14-05-2026) omits Bye-law 3.9 (Ground Rent for high rise buildings).'
+- amending_clause: becc-bbl-amend-2026-05:cl_2
   target_clause: bbl-2003:part_II__sec_3.0__cl_3.10
   action: omit
   effective_date: '2026-05-14'
@@ -1799,9 +1930,8 @@ amendment_links:
   applies_in:
   - in-ka-bengaluru-east
   note: 'Clause 2 of No: BECC/Com/PR/331/2026-27 (Bengaluru East City Corporation,
-    14-05-2026): omits Bye-law 3.10 (Exemptions for ground rent) in Bengaluru East
-    City Corporation.'
-- amending_clause: becc-bbl-amend-2026-05:part_III__cl_3
+    14-05-2026) omits Bye-law 3.10 (Exemption of ground rent).'
+- amending_clause: becc-bbl-amend-2026-05:item_i
   target_clause: bbl-2003:part_II__sec_6.0__item_i
   action: substitute
   effective_date: '2026-05-14'
@@ -1809,24 +1939,20 @@ amendment_links:
   verification: machine_checked
   applies_in:
   - in-ka-bengaluru-east
-  replacement_text: '(i) Wherever any construction is in violation/deviation of the
-    sanctioned plan, the Commissioner (Bengaluru East City Corporation, Notification
-    No: BECC/Com/PR/331/2026-27 dated 14-05-2026) may, if he considers that the violations
-    / deviations are within the limits specified in Table-2B below (up to 15% setback
-    and coverage deviation; up to 15% FAR deviation on plots up to 500 sq.m and 5%
-    FAR deviation on plots above 500 sq.m; 7.5% height deviation not beyond sanctioned
-    number of floors) in case of (1) the setback to be provided around the building,
-    (2) plot coverage (3) floor area ratio and (4) height of the building and that
-    the demolition under chapter XVII of the Act is not feasible without affecting
-    structural stability, he may regularize such violations/deviations after recording
-    detailed reasons for the same and levying compounding fee as per Table-2A, Table-2C
-    and Table-2D (minimum guidance value consideration Rs.50,000/- per sq.m; Residential
-    3%/6% up to 500 sq.m and 5%/10% above 500 sq.m; Non-Residential 6%/12%).'
-  note: 'Clause 3 of No: BECC/Com/PR/331/2026-27 (Bengaluru East City Corporation,
-    14-05-2026): substitutes Clause (i) under Bye-law 6.0 (Deviation during construction)
-    and inserts Table-2A, Table-2B, Table-2C, and Table-2D for Bengaluru East City
-    Corporation.'
-- amending_clause: bwcc-bbl-amend-2026-05:part_III__cl_2
+  replacement_text: Wherever any construction is in violation/deviation of the sanctioned
+    plan, the Commissioner may, if he considers that the violations / deviations are
+    within the limits specified in Table-2B below in case of (1) the setback to be
+    provided around the building, (2) plot coverage (3) floor area ratio and (4) height
+    of the building and that the demolition under chapter XVII of the Act is not feasible
+    without affecting structural stability, he may regularize such violations/deviations
+    after recording detailed reasons for the same and levying compounding fee as per
+    Table-2A, Table-2C and Table-2D
+  note: 'Substituted by Clause 3 of No: BECC/Com/PR/331/2026-27 (Bengaluru East City
+    Corporation, effective 14-05-2026), which also inserts Table-2A (occupancy certificate
+    fee), Table-2B (maximum condonable deviation limits: up to 15% setback and coverage;
+    up to 15% FAR on plots up to 500 m² and 5% FAR above 500 m²; 7.5% height not beyond
+    sanctioned floors), Table-2C, and Table-2D.'
+- amending_clause: bwcc-bbl-amend-2026-05:cl_2
   target_clause: bbl-2003:part_II__sec_3.0__cl_3.8
   action: omit
   effective_date: '2026-05-14'
@@ -1835,11 +1961,8 @@ amendment_links:
   applies_in:
   - in-ka-bengaluru-west
   note: 'Clause 2 of No: BWCC/Com/PR/44/2026-27 (Bengaluru West City Corporation,
-    14-05-2026): "In the Bengaluru City Corporation Building Bye-laws- 2003 (hereinafter
-    referred to as the said bye-laws), Bye-law 3.8- Ground Rent; Bye-law 3.9- Ground
-    Rent for high rise buildings and Bye-law 3.10- Exemption of ground rent the entire
-    provision shall be omitted."'
-- amending_clause: bwcc-bbl-amend-2026-05:part_III__cl_2
+    14-05-2026) omits Bye-law 3.8 (Ground Rent).'
+- amending_clause: bwcc-bbl-amend-2026-05:cl_2
   target_clause: bbl-2003:part_II__sec_3.0__cl_3.9
   action: omit
   effective_date: '2026-05-14'
@@ -1848,9 +1971,8 @@ amendment_links:
   applies_in:
   - in-ka-bengaluru-west
   note: 'Clause 2 of No: BWCC/Com/PR/44/2026-27 (Bengaluru West City Corporation,
-    14-05-2026): omits Bye-law 3.9 (Ground rent for high rise buildings) in Bengaluru
-    West City Corporation.'
-- amending_clause: bwcc-bbl-amend-2026-05:part_III__cl_2
+    14-05-2026) omits Bye-law 3.9 (Ground Rent for high rise buildings).'
+- amending_clause: bwcc-bbl-amend-2026-05:cl_2
   target_clause: bbl-2003:part_II__sec_3.0__cl_3.10
   action: omit
   effective_date: '2026-05-14'
@@ -1859,9 +1981,8 @@ amendment_links:
   applies_in:
   - in-ka-bengaluru-west
   note: 'Clause 2 of No: BWCC/Com/PR/44/2026-27 (Bengaluru West City Corporation,
-    14-05-2026): omits Bye-law 3.10 (Exemptions for ground rent) in Bengaluru West
-    City Corporation.'
-- amending_clause: bwcc-bbl-amend-2026-05:part_III__cl_3
+    14-05-2026) omits Bye-law 3.10 (Exemption of ground rent).'
+- amending_clause: bwcc-bbl-amend-2026-05:item_i
   target_clause: bbl-2003:part_II__sec_6.0__item_i
   action: substitute
   effective_date: '2026-05-14'
@@ -1869,124 +1990,111 @@ amendment_links:
   verification: machine_checked
   applies_in:
   - in-ka-bengaluru-west
-  replacement_text: '(i) Wherever any construction is in violation/deviation of the
-    sanctioned plan, the Commissioner (Bengaluru West City Corporation, Notification
-    No: BWCC/Com/PR/44/2026-27 dated 14-05-2026) may, if he considers that the violations
-    / deviations are within the limits specified in Table-2B below (up to 15% setback
-    and coverage deviation; up to 15% FAR deviation on plots up to 500 sq.m and 5%
-    FAR deviation on plots above 500 sq.m; 7.5% height deviation not beyond sanctioned
-    number of floors) in case of (1) the setback to be provided around the building,
-    (2) plot coverage (3) floor area ratio and (4) height of the building and that
-    the demolition under chapter XVII of the Act is not feasible without affecting
-    structural stability, he may regularize such violations/deviations after recording
-    detailed reasons for the same and levying compounding fee as per Table-2A, Table-2C
-    and Table-2D (minimum guidance value consideration Rs.50,000/- per sq.m; Residential
-    3%/6% up to 500 sq.m and 5%/10% above 500 sq.m; Non-Residential 6%/12%).'
-  note: 'Clause 3 of No: BWCC/Com/PR/44/2026-27 (Bengaluru West City Corporation,
-    14-05-2026): substitutes Clause (i) under Bye-law 6.0 (Deviation during construction)
-    and inserts Table-2A, Table-2B, Table-2C, and Table-2D for Bengaluru West City
-    Corporation.'
+  replacement_text: Wherever any construction is in violation/deviation of the sanctioned
+    plan, the Commissioner may, if he considers that the violations / deviations are
+    within the limits specified in Table-2B below in case of (1) the setback to be
+    provided around the building, (2) plot coverage (3) floor area ratio and (4) height
+    of the building and that the demolition under chapter XVII of the Act is not feasible
+    without affecting structural stability, he may regularize such violations/deviations
+    after recording detailed reasons for the same and levying compounding fee as per
+    Table-2A, Table-2C and Table-2D
+  note: 'Substituted by Clause 3 of No: BWCC/Com/PR/44/2026-27 (Bengaluru West City
+    Corporation, effective 14-05-2026), which also inserts Table-2A (occupancy certificate
+    fee), Table-2B (maximum condonable deviation limits: up to 15% setback and coverage;
+    up to 15% FAR on plots up to 500 m² and 5% FAR above 500 m²; 7.5% height not beyond
+    sanctioned floors), Table-2C, and Table-2D.'
 - amending_clause: rmp2015-zr-amend-2009-03:chp_3__cl_3.16__item_ix
   target_clause: rmp2015-zr:chp_3__cl_3.16
   action: insert_after
   effective_date: '2009-03-02'
   confidence: high
   verification: machine_checked
-  replacement_text: '3.16(ix) Metro Station 150m Buffer FAR: Areas which fall within
-    a distance of 150m from the outer boundary of the Metro Terminal/Station are eligible
-    for maximum FAR of 4.0 for all permissible uses irrespective of the applicable
-    FAR in the respective Zonal Regulations, subject to road width of minimum 18m.'
+  replacement_text: 3.16(ix) Areas which fall within a distance of 150m from the outer
+    boundary of the metro station/terminals subject to confirmation from [unreadable
+    in source] Bangalore Metro Rail Corporation Ltd., shall be eligible for a maximum
+    FAR of 4 for all permissible uses, irrespective of the FAR applicable for the
+    respective uses in the respective tables.
   note: Notification No. UDD 93 MNJ 2008 dated 02-03-2009 inserts clause (ix) under
-    Regulation 3.16 (General notes) granting FAR 4.0 within 150m of Metro Rail stations.
+    Regulation 3.16 (General notes); subsequently omitted by Notification No. UDD
+    112 MNJ 2015 dated 29-09-2018.
 - amending_clause: rmp2015-zr-amend-2009-03:chp_3__cl_4.10__cl_4.10.2
   target_clause: rmp2015-zr:chp_4__cl_4.10__cl_4.10.2
   action: substitute
   effective_date: '2009-03-02'
   confidence: high
   verification: machine_checked
-  replacement_text: '4.10.2 Regulations: Permissible land uses in Traffic and Transportation
-    (T&T) zone: Main land use category T-4; Ancillary uses (Retail shops, restaurants,
-    banks, post offices, offices, hotels, transport terminals, bus stands, railway/metro
-    stations, multi-level parking) up to 50% of total built-up area. Table 19 (FAR
-    and Ground Coverage in T&T Zone): Plot area up to 500 sq.m (45% coverage, 1.00
-    FAR up to 12m road); 500–2000 sq.m (45% coverage, 1.50 FAR on 12m–18m road); 2000–4000
-    sq.m (45% coverage, 1.75 FAR on 18m–24m road); above 4000 sq.m (45% coverage,
-    2.25 FAR on road above 24m).'
+  replacement_text: '4.10.2 Regulations Permissible land uses Main land use category:
+    T4 (for MLCP, refer note below) Ancillary land uses: R, U2, C3, I-3 e Retails
+    shops, Restaurants and Hotels, Show rooms, Offices, Boarding and Lodging Houses,
+    Banking Counters, Indoor recreational uses, Multiplexes, Clubs, Godowns, two wheeler
+    parking and other conforming Commercial Activities that are ancillary to the main
+    use. Provided; - “ total area for such ancillary uses shall not exceed 45% of
+    the Permissible FAR of the project when taken up by the Central, State Government,
+    Agencies and Public Undertakings; and shall not exceed 20% of the total built
+    up area in other cases. If the road width abutting the land is less than 12m,
+    then I-2, U2 or C2 may be allowed as main land use or as independent land use.'
   note: Notification No. UDD 93 MNJ 2008 dated 02-03-2009 substitutes Regulation 4.10.2
     and Table 19 (FAR and Ground Coverage in Traffic and Transportation zone).
-- amending_clause: rmp2015-zr-amend-2015-03:part_IIL__cl_4
+- amending_clause: rmp2015-zr-amend-2015-03:cl_4
   target_clause: rmp2015-zr:chp_2__tbl_1
   action: substitute
   effective_date: '2015-03-20'
   confidence: high
   verification: machine_checked
-  replacement_text: 'Table 1: Permissible land use in Residential category (substituted
-    by Notification No. UDD 105 MNJ 2008 dated 20-03-2015): R-1 Plotted residential
-    developments; R-2 Villas, semi-detached houses; R-3 Apartments, Hostels, Dharmashala;
-    R-4 Multi-Dwelling Housing, Service Apartments; R-5 Group Housing (Development
-    Plans); R-6 Bus bays, Auto stand, milk booth, HOPCOMS; R-7 Kalyana Mantapas; R-8
-    Multi-level car parking as part of residential developments.'
+  replacement_text: 'Permissible uses _ Table 1: Permissible land use in Residential
+    category.'
   note: Notification No. UDD 105 MNJ 2008 dated 20-03-2015 substitutes Table 1 (Permissible
     land use in Residential category).
-- amending_clause: rmp2015-zr-amend-2015-03:part_IIL__cl_8__item_i
+- amending_clause: rmp2015-zr-amend-2015-03:cl_1
   target_clause: rmp2015-zr:chp_4__cl_4.1__cl_4.1.2
   action: substitute
   effective_date: '2015-03-20'
   confidence: high
   verification: machine_checked
-  replacement_text: '4.1.2 Regulations (Permissible land uses in Residential Main,
-    substituted 20-03-2015): (1) No commercial activity of whatsoever nature shall
-    be allowed in Residential Main and Residential Mixed zones in all three rings
-    if the road width is less than 40 ft (12 m). (2) In Ring I and II: Main land use
-    R; Ancillary land use up to 20% of total built-up area or 50 sq.m whichever is
-    lower on roads 40 ft (12 m) and above, only as part of residential building. (3)
-    In Ring III: Ancillary land use up to 20% of built-up area or 50 sq.m whichever
-    is lower.'
+  replacement_text: No commercial activity of whatsoever nature shall be allowed*in
+    residential main and | residential mixed zones in the three rings, Viz., Ring
+    No.1, Ring No.2 and Ring No.3 if road width is less:than 40 feet. - .
   note: Notification No. UDD 105 MNJ 2008 dated 20-03-2015 substitutes Regulation
     4.1.2 (Permissible land uses in Residential Main across Rings I, II & III).
-- amending_clause: rmp2015-zr-amend-2015-03:part_IIL__cl_10
+- amending_clause: rmp2015-zr-amend-2015-03:item_i_2
   target_clause: rmp2015-zr:chp_4__cl_4.2__cl_4.2.2
   action: substitute
   effective_date: '2015-03-20'
   confidence: high
   verification: machine_checked
-  replacement_text: '4.2.2 Regulations (Permissible land uses in Residential Mixed,
-    substituted 20-03-2015): In Ring I and II, ancillary commercial uses up to C-2
-    category permitted on roads of width 40 ft (12 m) and above subject to plot size
-    not exceeding 1000 sq.m and space standards in Table 7; in Ring III, ancillary
-    uses permitted up to 30% of built-up area on roads 12 m and above.'
+  replacement_text: 'In Ring-III . e Main land use category - R e Ancillary land use
+    category: C3, I-2, T2 and U4 .* Ancillary uses allowable upto 30% of the total
+    built up area ‘e If the plot size is more than 1000sqm having a frontage of 10m
+    or more and abutting road is more than 18m width, then ancillary uses can be used
+    as main use. . . 11. N. NARASIMHAMURTHY Under Secretary to Government Urban Development
+    Department'
   note: Notification No. UDD 105 MNJ 2008 dated 20-03-2015 substitutes Regulation
     4.2.2 (Permissible land uses in Residential Mixed across Rings I, II & III).
-- amending_clause: rmp2015-zr-amend-2018-09:part_IVA__cl_3.4
+- amending_clause: rmp2015-zr-amend-2018-09:cl_3.4__item_ii
   target_clause: rmp2015-zr:chp_3__cl_3.4
   action: modify
   effective_date: '2018-09-29'
   confidence: high
   verification: machine_checked
-  replacement_text: '3.4 FAR or Floor Area Ratio (as amended 29-09-2018 by UDD 112
-    MNJ 2015): Inserts sub-clause (vi) Impact Zone Premium FAR: Within a 500 m wide
-    impact zone on either side of the outer edge of the Metro Rail corridor alignment,
-    additional Impact Zone Premium FAR up to a maximum total FAR of 4.0 is permissible
-    for plots of minimum 1000 sq.m abutting roads of width 18 m and above, on payment
-    of fee at 50% of Guidance Value.'
-  note: Notification No. UDD 112 MNJ 2015 dated 29-09-2018 inserts sub-clause 3.4(vi)
-    Impact Zone Premium FAR (500m Metro corridor buffer, up to FAR 4.0) and Appendix-IX.
-- amending_clause: rmp2015-zr-amend-2019-06:cl_3_2
+  replacement_text: 'Impact Zone as defined in the Karnataka Planning Authority Rules,
+    1965 shall be entitled to one unit of extra FAR as premium F.A.R over and above
+    the permissible FAR for all permissible uses, irrespective of the FAR applicable
+    for the respective uses in the respective tables, subject to a minimum road width
+    of 12m. {Illustration: If the existing permissible FAR of a plot is 2, then the
+    Impact Zone Premium FAR would be 1 and the total permissible FAR would become
+    2+1 = 3.}'
+  note: Notification No. UDD 112 MNJ 2015 dated 29-09-2018 inserts Regulation 3.4(vi)
+    Impact Zone Premium FAR (+1.0 FAR on roads >= 12 m), omits Regulation 3.16(ix),
+    and inserts Appendix-IX.
+- amending_clause: rmp2015-zr-amend-2019-06:item_2_3
   target_clause: rmp2015-zr:chp_3__cl_3.4
   action: substitute
   effective_date: '2019-06-19'
   confidence: high
   verification: machine_checked
-  replacement_text: '3.4 FAR or Floor Area Ratio (substituted 19-06-2019 by UDD 255
-    MNJ 2018): Exclusions from FAR computation: (i) electrical substation/transformer/generator
-    room; (ii) refuge areas in high-rise buildings as per fire norms; (iii) separate
-    public toilet block in non-residential buildings on plots > 1000 sq.m; (iv) swimming
-    pool (open to sky); (v) staircase/staircase room; (vi) architectural features;
-    (vii) chimneys; (viii) ventilation ducts and garbage shafts; (ix) service ducts;
-    (x) parking areas including driveways and ramps; (xi) open courts; (xii) overhead
-    tanks; (xiii) escalators; (xiv) lift wells and lift machine room; (xv) watchman
-    cubicle not exceeding 4 sq.m; (xvi) sewage treatment plant. Inserts Regulation
-    3.4-A Height of Building (NOC from HAL/AAI/Defence authorities).'
+  replacement_text: 'For regulation 3.4 and the entries relating thereto, the following
+    shall be.substituted- namely:- . “3.4: FAR or Floor Area Ratio:- : The following
+    constructions shall be excluded from FAR computation, namely :-'
   note: Notification No. UDD 255 MNJ 2018 dated 19-06-2019 substitutes Regulation
     3.4 FAR exclusions (i)–(xvi) and inserts Regulation 3.4-A Height of Building.
 - amending_clause: rmp2015-zr-amend-2019-06:cl_4
@@ -1995,21 +2103,22 @@ amendment_links:
   effective_date: '2019-06-19'
   confidence: high
   verification: machine_checked
-  replacement_text: '6.1 Residential Subdivision Regulations (amended 19-06-2019 by
-    UDD 255 MNJ 2018): In Regulation 6.1.2, residential area earmarking increased
-    up to 55% of total layout area.'
+  replacement_text: Amendment of Chapter 6.- In chapter 6 of the said regulations,
+    in regulation 6.1, in clause (e), “for second point and the entries relating thereto,
+    the following shal] be substituted, namely :- ‘The area earmarked for residential
+    development shall be upto a maximum of 55% of the total land area. A maximum of
+    3% of the total area from out of permissible residential area may be earmarked
+    for commercial use in one or two block only.”
   note: Notification No. UDD 255 MNJ 2018 dated 19-06-2019 amends Chapter 6 Regulation
-    6.1.2.
-- amending_clause: rmp2015-zr-amend-2019-06:cl_5S
+    6.1(e) (residential earmarking up to 55% of total land area).
+- amending_clause: rmp2015-zr-amend-2019-06:item_1_3
   target_clause: rmp2015-zr:chp_7__cl_7.1
   action: modify
   effective_date: '2019-06-19'
   confidence: high
   verification: machine_checked
-  replacement_text: '7.1 Regulations for Residential and Non-Residential Development
-    Plan (amended 19-06-2019 by UDD 255 MNJ 2018): In Table-20, Table-21, and Table-22,
-    road width bands updated to "9m and up to 12m", "Above 18m up to 24m", and "Above
-    24m up to 30m"; in Regulation 7.2(c), the word "excluding" is substituted by "including".'
+  replacement_text: in regulation 7.1, in the Table-20, for the words and figures
+    “Less than 12.0”, the word and figures “upto 12.0” shall be substituted.
   note: Notification No. UDD 255 MNJ 2018 dated 19-06-2019 amends Chapter 7 (Regulation
     7.1 Table-20, 7.2(c) Table-21, and 7.3 Table-22).
 - amending_clause: rmp2015-zr-amend-2025-02:chp_11
@@ -2018,124 +2127,118 @@ amendment_links:
   effective_date: '2025-02-21'
   confidence: high
   verification: unverified
-  note: Draft Notification No. UDD 78 MNJ 2024 (E) dated 21-02-2025 proposing insertion
-    of Chapter 11 (Premium FAR); not applied from this draft because it has legal_status
-    "draft" and was superseded by the final Gazette Notification dated 02-04-2025
-    (rmp2015-zr-amend-2025-04).
+  note: Notification No. UDD 78 MNJ 2024 (E) dated 21-02-2025 inserting Chapter 11
+    (Premium FAR); withdrawn with effect from 25-02-2025 and replaced by the final
+    Gazette Notification dated 02-04-2025 (rmp2015-zr-amend-2025-04).
 - amending_clause: rmp2015-zr-amend-2025-04:chp_11_2
   target_clause: rmp2015-zr:chp_10
   action: insert_after
   effective_date: '2025-04-02'
   confidence: high
   verification: machine_checked
-  replacement_text: '11.0 CHAPTER 11 — PREMIUM F.A.R GRANTED BY LEVY OF PREMIUM CHARGES
-    (Inserted after Chapter 10 by Notification No. UDD 78 MNJ 2024 (E), dated 02-04-2025):
-    (1) Additional Premium FAR over and above the permissible FAR in the Zonal Regulations
-    is permissible based on abutting road width: (a) Road width above 9 meters and
-    up to 12 meters: up to 20% of permissible FAR (0.2 factor); (b) Road width above
-    12 meters and up to 18 meters: up to 40% of permissible FAR (0.4 factor); (c)
-    Road width above 18 meters: up to 60% of permissible FAR (0.6 factor). (2) The
-    maximum combined additional FAR (Premium FAR + TDR/DRC) shall not exceed 60% of
-    regular permissible FAR. (3) Premium FAR charges shall be 50% of the Guidance
-    Value (under Section 45B of the Karnataka Stamp Act, 1957) of the notional land
-    required for the additional floor area (i.e. Additional Built-up Area divided
-    by permissible FAR), or 28% of the combined land + building guidance value per
-    sq.m, whichever is higher.'
+  replacement_text: 11.0 The Premium F.A.R by levy of premium charges is the additional
+    F.A.R granted over and above the ordinarily permissible F.A.R, on the basis of
+    levy of premium charges by the Authority who accords permission for development
+    of building or land under section 15 of the Karnataka Town and Country Planning
+    Act, 1961, and in the areas as specified under regulation 2 below.
   note: Final Notification No. UDD 78 MNJ 2024 (E) dated 02-04-2025 inserts Chapter
-    11 (Premium F.A.R Granted by Levy of Premium Charges) after Chapter 10 of RMP
-    2015 Zonal Regulations.
-- amending_clause: rmp2015-zr-amend-2025-10:part_IVA__tbl_1
+    11 (Premium F.A.R Granted by Levy of Premium Charges, Table No. 27) after Chapter
+    10 of RMP 2015 Zonal Regulations.
+- amending_clause: rmp2015-zr-amend-2025-10:item_3__item_ii
   target_clause: rmp2015-zr:chp_4__cl_4.12__cl_4.12.2
   action: substitute
   effective_date: '2025-10-15'
   confidence: high
   verification: machine_checked
-  replacement_text: '4.12.2 Regulations for Park and Open Space (P) & Valley / Drain
-    Buffer Zones (amended 15-10-2025 by Notification No. UDD 468 MNJ 2025(E)): In
-    case of water bodies, a 30.0 m buffer of "No Development Zone" is to be maintained
-    around the lake as per revenue records. Valley / Storm Water Drain (Nala) Buffer
-    Table: (1) Primary / Raja Kaluve (P-1): 15m buffer from the edge of the drain;
-    (2) Secondary drain (P-2): 10m buffer from the edge of the drain; (3) Tertiary
-    drain (P-3): 5m buffer from the edge of the drain. Drains/nalas leading to tertiary
-    drains shall be maintained as per revenue records and no buffer shall be insisted
-    for such drains.'
-  note: Notification No. UDD 468 MNJ 2025(E) dated 15-10-2025 substitutes the storm
-    water drain / nala buffer table under Regulation 4.12.2 (Primary 15m, Secondary
-    10m, Tertiary 5m).
-- amending_clause: rmp2015-zr-amend-2026-01:cl_11.11.2025__item_a
-  target_clause: rmp2015-zr:chp_3__cl_3.1
+  replacement_text: 'Buffer for Lakes:- The buffer to be maintained around the lake
+    (as per revenue records) and the infrastructure/activities permissible in the
+    lake and the buffer area shall be as stipulated in the Karnataka Tank Conservation
+    and Development Authority Act. This buffer may be taken into account for reservation
+    of park while sanctioning plans. Drains:- The drains have been categorized into
+    3 types namely primary, secondary and tertiary as below: Primary Drain:- shall
+    mean natural drain/ nala as per revenue records meant for carrying storm water,
+    leading from lake to another lake or leading from lake to a river. Secondary Drain:-
+    Shall mean natural drain/nala as per revenue records meant for carrying storm
+    water, leading to a lake or to a primary drain. Tertiary Drain:- shall mean natural
+    drain/ nala as per revenue records meant for carrying storm water, leading to
+    secondary drain. Minimum buffer for primary, secondary and tertiary drain/ nala
+    shall be as below.'
+  note: Notification No. UDD 468 MNJ 2025(E) dated 15-10-2025 substitutes the lake
+    and storm water drain (nala) buffer provisions and table (Primary 15.00 m, Secondary
+    10.00 m, Tertiary 5.00 m) under Regulation 4.12.2.
+- amending_clause: rmp2015-zr-amend-2026-01:item_2_2__item_a__item_ii
+  target_clause: rmp2015-zr:chp_3__cl_3.1__item_ii
   action: substitute
   effective_date: '2026-01-05'
   confidence: high
   verification: machine_checked
-  replacement_text: '3.1 SETBACKS (substituted 05-01-2026 by Notification No. UDD
-    235 MNJ 2025(E)): Clauses (ii) & (iii) and Table 8 (Setbacks for buildings with
-    total height up to 12.0 m excluding stilt floor): (1) Plot up to 60 sq.m (All
-    uses): Front 0.75 m, Rear 0 m, Left 0 m, Right 0.75 m; (2) Plot above 60 sq.m
-    up to 150 sq.m (Width up to 9.0 m): Front 0.90 m, Rear 0.75 m, Left 0.75 m, Right
-    0.90 m; (Width above 9.0 m): Front 12% of depth (min 1.0 m), Rear 8% (min 0.75
-    m), Left 8% (min 0.75 m), Right 8% (min 1.0 m); (3) Plot above 150 sq.m up to
-    250 sq.m: Front 1.00 m (or 12%), Rear 0.80 m (or 8%), Left 0.80 m (or 8%), Right
-    1.00 m (or 8%); (4) Plot above 250 sq.m up to 4000 sq.m: Front 12% of depth, Rear
-    8% of depth, Left 8% of width, Right 8% of width; (5) Plot above 4000 sq.m: minimum
-    setback of 5.0 m on all sides. Note 1: For plots up to 250 sq.m in area, maximum
-    permissible building height is 15.0 m (including stilt floor) and setbacks in
-    Table 8 apply.'
-  note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 substitutes Regulation
-    3.1 Clauses (ii)–(iii), Table 8 (Setbacks up to 12m/15m height), and inserts Notes
-    1–7 after Table 9.
-- amending_clause: rmp2015-zr-amend-2026-01:cl_11.11.2025__item_e
+  replacement_text: For all types of building with total height up to 12.0m, excluding
+    the stilt floor, the setbacks shall be calculated as per Table 8.
+  note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 Clause (2)(a) substitutes
+    Clause (ii) under Regulation 3.1 (Setbacks) and substitutes Table 8.
+- amending_clause: rmp2015-zr-amend-2026-01:item_2_2__item_a__item_iii
+  target_clause: rmp2015-zr:chp_3__cl_3.1__item_iii
+  action: substitute
+  effective_date: '2026-01-05'
+  confidence: high
+  verification: machine_checked
+  replacement_text: Table 9 shall be referred to buildings which are more than 12.0
+    m in total height, to fix the setbacks (to be read with clause 8.1 (a) (iii)).
+    However, for buildings located on plots not exceeding 250 sq.m in area and with
+    a height up to 15 m (including the stilt floor), the setbacks shall be determined
+    as per Table 8.
+  note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 Clause (2)(a) substitutes
+    Clause (iii) under Regulation 3.1 (Setbacks).
+- amending_clause: rmp2015-zr-amend-2026-01:item_e
   target_clause: rmp2015-zr:chp_3__cl_3.9
   action: modify
   effective_date: '2026-01-05'
   confidence: high
   verification: machine_checked
-  replacement_text: '3.9 Basement (amended 05-01-2026 by Notification No. UDD 235
-    MNJ 2025(E)): (iii) One basement (single cellar) is permitted for residential
-    buildings on plot area above 200 sq.m abutting road width above 9.0 m solely for
-    parking and household services; (x) Vehicle parking in basement or upper floors
-    may use mechanical/automated multi-level parking systems.'
-  note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 amends Regulation 3.9
-    Basement clauses (iii) and (x).
-- amending_clause: rmp2015-zr-amend-2026-01:cl_11.11.2025__item_a_2
+  replacement_text: “iii. The minimum setback for the basement in plots of area up
+    to 4000 sq.m shall be either the minimum setback required for the building as
+    per Table 8/Table 9 or 2.0m whichever is less. Safety of the neighbouring property
+    while construction of basement shall be taken care of by the owner. In case of
+    any damage or loss made to the neighbouring property the owner shall be liable
+    to set right the damage and to bring such neighbouring property to its original
+    condition. The property owner shall ensure the safety and structural integrity
+    of adjoining properties during the construction of the basement. In the event
+    of any damage or loss to neighbouring properties resulting from the basement construction,
+    the owner shall be solely responsible for repairing the damage and restoring the
+    affected property to its original condition”.
+  note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 Clause (2)(e)–(f) amends
+    Regulation 3.9 Basement clauses (iii) and (x).
+- amending_clause: rmp2015-zr-amend-2026-01:item_a
   target_clause: rmp2015-zr:chp_3__cl_3.10
   action: modify
   effective_date: '2026-01-05'
   confidence: high
   verification: machine_checked
-  replacement_text: '3.10 Ramps (amended 05-01-2026 by Notification No. UDD 235 MNJ
-    2025(E)): (i) Minimum ramp width 1.5 m for two-wheelers; (iii) For plot area up
-    to 1000 sq.m, a single ramp of 3.5 m width is permitted with 1.0 m setback from
-    plot boundary; (x) For plot area up to 500 sq.m, mechanical/hydraulic car lift
-    is permitted without ramps.'
-  note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 amends Regulation 3.10
-    Ramps clauses (i), (iii), (iv), and (x).
-- amending_clause: rmp2015-zr-amend-2026-01:cl_11.11.2025__item_a_3
+  replacement_text: In clause (i) for the numerical and letter “2.0 m” following shall
+    be substituted. - “2.0 m or setback whichever is less”
+  note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 Clause (2)(g)–(h) amends
+    Regulation 3.10 Ramps clauses (i), (iii), and (iv).
+- amending_clause: rmp2015-zr-amend-2026-01:item_ii
   target_clause: rmp2015-zr:chp_4__cl_4.5
   action: modify
   effective_date: '2026-01-05'
   confidence: high
   verification: machine_checked
-  replacement_text: '4.5 MUTATION CORRIDORS (Table 15 substituted 05-01-2026 by Notification
-    No. UDD 235 MNJ 2025(E)): (1) Plot size up to 10000 sq.m: Max Ground Coverage
-    55%; FAR 2.75 on roads up to 30m, FAR 3.25 on roads above 30m; (2) Plot size above
-    10000 sq.m: Max Ground Coverage 50%; FAR 3.25 on all roads.'
-  note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 substitutes Table 15
-    under Regulation 4.5 (Mutation Corridors).
-- amending_clause: rmp2015-zr-amend-2026-01:cl_11.11.2025__cl_11
+  replacement_text: In regulation 4.5 MUTATION CORRIDORS, in table 15, plot size for
+    sl.no.1 & 2, “12000 sq.m” shall be substituted as “10000 sq.m”.
+  note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 Clause (3)(c) substitutes
+    plot size threshold 10000 sq.m for 12000 sq.m in Table 15 under Regulation 4.5
+    (Mutation Corridors).
+- amending_clause: rmp2015-zr-amend-2026-01:item_ii
   target_clause: rmp2015-zr:chp_4__cl_4.7
   action: modify
   effective_date: '2026-01-05'
   confidence: high
   verification: machine_checked
-  replacement_text: '4.7 INDUSTRIAL I (GENERAL) (Table 16 substituted 05-01-2026 by
-    Notification No. UDD 235 MNJ 2025(E)): (1) Tiny (up to 500 sq.m): 75% coverage,
-    1.50 FAR, min road width up to 9m; (2) Small (above 500 up to 2000 sq.m): 65%
-    coverage, 1.50 FAR, min road above 9m; (3) Medium (above 2000 up to 4000 sq.m):
-    55% coverage, 1.25 FAR, min road above 12m; (4) Large (above 4000 sq.m): 50% coverage,
-    1.25 FAR, min road above 12m.'
-  note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 substitutes Table 16
-    under Regulation 4.7 (Industrial I General).
+  replacement_text: 'In regulation 4.7 INDUSTRIAL I (GENERAL), table 16 shall be substituted
+    as below:'
+  note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 Clause (3)(d) substitutes
+    Table 16 under Regulation 4.7 (Industrial I General).
 maps:
   boundaries:
   - id: corporation

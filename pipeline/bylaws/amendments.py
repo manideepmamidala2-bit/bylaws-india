@@ -162,6 +162,7 @@ def _reset_clause_tree_versions(tree: dict[str, Any]) -> None:
         c["amended_by"] = []
         c.pop("change_mark", None)
         c.pop("omitted", None)
+        c.pop("notes_by_site", None)
         base_clauses.append(c)
     if inserted_eids:
         for idx, c in enumerate(base_clauses):
@@ -206,6 +207,7 @@ def _apply_effect_to_target_tree(
         amending_doc_title=amending_doc_title,
     )
 
+    site_note: str | None = effect.get("site_note")
     if action in {"substitute", "modify_text", "renumber"}:
         versions: list[dict[str, Any]] = list(target_node.get("versions") or [])
         orig_ver = versions[0] if versions else {}
@@ -227,9 +229,15 @@ def _apply_effect_to_target_tree(
             "citations": amending_citations or copy.deepcopy(target_node.get("citations") or []),
             "legal_status": "in_force",
             "omitted": False,
+            "notes_by_site": [site_note] if site_note else [],
         }
         versions.append(new_ver)
         target_node["versions"] = versions
+        if site_note:
+            existing_notes = list(target_node.get("notes_by_site") or [])
+            if site_note not in existing_notes:
+                existing_notes.append(site_note)
+            target_node["notes_by_site"] = existing_notes
         if jurisdiction_name:
             target_node["change_mark"] = {
                 "label": mark_label,
@@ -311,6 +319,7 @@ def _apply_effect_to_target_tree(
             "citations": amending_citations,
             "legal_status": "in_force",
             "omitted": False,
+            "notes_by_site": [site_note] if site_note else [],
         }
         inserted_node: dict[str, Any] = {
             "eid": new_eid,
@@ -351,6 +360,7 @@ def _apply_effect_to_target_tree(
             "applies_to_zones": list(target_node.get("applies_to_zones") or []),
             "verification": "machine_checked",
             "verified_by": None,
+            "notes_by_site": [site_note] if site_note else [],
             **(
                 {
                     "omitted": False,
@@ -607,6 +617,28 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
                     None,
                 )
                 if amending_node_ov is None:
+                    amending_node_ov = next(
+                        (
+                            c
+                            for c in amend_tree_ov.get("clauses", [])
+                            if (
+                                str(c.get("eid") or "").endswith(f"__{amending_token}")
+                                or (
+                                    "__" in amending_token
+                                    and (
+                                        c.get("eid") == amending_token.split("__")[-1]
+                                        or str(c.get("eid") or "").endswith(
+                                            f"__{amending_token.split('__')[-1]}"
+                                        )
+                                    )
+                                )
+                            )
+                            and c.get("superseded_by") is None
+                            and c.get("record_superseded_by") is None
+                        ),
+                        None,
+                    )
+                if amending_node_ov is None:
                     raise click.ClickException(
                         f"Amending clause '{amending_ref}' not found in '{amending_doc_id}'."
                     )
@@ -703,10 +735,11 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
                 effect_id_ov = f"{amending_doc_id}:eff_{effect_seq}"
                 replacement_txt = str(
                     ov_link.get("replacement_text")
-                    or ov_link.get("note")
+                    or amending_node_ov.get("content")
                     or amending_node_ov.get("text")
                     or ""
                 )
+                site_note_ov = str(ov_link.get("note") or "").strip() or None
                 new_nodes_ov: list[dict[str, Any]] = []
                 if eff_action in {"substitute", "insert_after", "insert_before", "modify_text"}:
                     new_nodes_ov.append(
@@ -733,9 +766,8 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
                 }
                 if applies_in_list:
                     effect_entry_ov["applies_in"] = applies_in_list
-                effects.append(effect_entry_ov)
-
                 if should_apply_ov and target_node_ov is not None:
+                    effect_entry_ov["site_note"] = site_note_ov
                     _apply_effect_to_target_tree(
                         target_tree_ov,
                         target_node_ov,
@@ -744,7 +776,9 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
                         jurisdiction_name=config.name,
                         amending_doc_title=(amending_doc_cfg.title if amending_doc_cfg else ""),
                     )
+                    effect_entry_ov.pop("site_note", None)
                     modified_doc_ids.add(target_doc_id)
+                effects.append(effect_entry_ov)
 
                 compat_action_ov = "modify" if eff_action == "modify_text" else eff_action
                 link_entry_ov: dict[str, Any] = {

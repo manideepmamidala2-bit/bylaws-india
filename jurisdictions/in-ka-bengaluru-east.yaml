@@ -25,11 +25,22 @@ parent: in-ka-bengaluru
 parents:
 - in-ka-bengaluru
 not_modelled:
-- 'July 2025 zoning amendment (UDD 85 MNJ 2025): the official gazette PDF could not be obtained from public sources, so consolidated zoning text and parameter values may not reflect changes made in July 2025.'
-- 'October 2024 Kannada compilation of RMP 2015 Zoning Regulations: published in Kannada only and not structured; this dataset uses the English original together with the 8 structured English amending notifications.'
-- 'Supporting instruments not in the dataset: Karnataka Fire and Emergency Services NOC rules, standalone Karnataka Transferable Development Rights (TDR) procedural rules, Occupancy Certificate exemption orders, and detailed BMRCL metro transit-oriented influence zone rules.'
-- 'Land-use zone polygons: available only where RMP 2015 Proposed Land Use map sheets have been processed (4 sheets in Bengaluru South); elsewhere on the map you can select a land-use zone manually.'
-- National Building Code of India 2016 (copyrighted by BIS; listed as reference only) and Airports Authority of India NOCAS colour-coded zoning map (external aviation portal; reference only).
+- 'July 2025 zoning amendment (UDD 85 MNJ 2025): the official gazette PDF could not
+  be obtained from public sources, so consolidated zoning text and parameter values
+  may not reflect changes made in July 2025.'
+- 'October 2024 Kannada compilation of RMP 2015 Zoning Regulations: published in Kannada
+  only and not structured; this dataset uses the English original together with the
+  8 structured English amending notifications.'
+- 'Supporting instruments not in the dataset: Karnataka Fire and Emergency Services
+  NOC rules, standalone Karnataka Transferable Development Rights (TDR) procedural
+  rules, Occupancy Certificate exemption orders, and detailed BMRCL metro transit-oriented
+  influence zone rules.'
+- 'Land-use zone polygons: available only where RMP 2015 Proposed Land Use map sheets
+  have been processed (4 sheets in Bengaluru South); elsewhere on the map you can
+  select a land-use zone manually.'
+- National Building Code of India 2016 (copyrighted by BIS; listed as reference only)
+  and Airports Authority of India NOCAS colour-coded zoning map (external aviation
+  portal; reference only).
 unread_documents:
 - title: Revising the amendments in the regulations in BBMP revised Mahayojane 2015
     (Kannada Compilation)
@@ -43,7 +54,8 @@ unobtainable_documents:
   searched_sources:
   - https://data.opencity.in/dataset/31a482fe-4ffd-4929-a61d-2fdcca90be91/resource/3f2685b8-5e27-44e5-9222-8f6dbff9445f/download/d7b00660-a3bc-49cf-b35a-3d70283ace0a.pdf
   - https://erajyapatra.karnataka.gov.in/
-  reason: Official gazette PDF could not be obtained from public sources; some zoning values may not reflect changes made in July 2025.
+  reason: Official gazette PDF could not be obtained from public sources; some zoning
+    values may not reflect changes made in July 2025.
 contested_status:
 - doc_id: ktcda-amend-bill-2025
   title: The Karnataka Tank Conservation and Development Authority (Amendment) Bill,
@@ -115,6 +127,10 @@ documents:
     archive_url: null
     archive_failure_reason: Wayback Machine Save Page Now timed out on updates.bbmp.gov.in
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: May 2026 final Building (Amendment) Bye-laws for Bengaluru East
+    City Corporation omitting ground rent (3.8–3.10) and substituting deviation compounding
+    rules (6.0(i) and Tables 2A–2D).
 - id: becc-bbl-amend-2026-04-draft
   title: Bengaluru East City Corporation — Draft Bengaluru City Corporation Building
     (Amendment) Bye-laws, 2026 (01-04-2026)
@@ -172,8 +188,11 @@ documents:
     archive_url: null
     archive_failure_reason: Wayback Machine Save Page Now timed out on updates.bbmp.gov.in
     fetched_by: agent
+  instrument_type: instrument
+  summary_by_site: April 2026 draft Building (Amendment) Bye-laws for Bengaluru East
+    City Corporation (replaced by the 14 May 2026 final notification).
 amendment_links:
-- amending_clause: becc-bbl-amend-2026-05:part_III__cl_2
+- amending_clause: becc-bbl-amend-2026-05:cl_2
   target_clause: bbl-2003:part_II__sec_3.0__cl_3.8
   action: omit
   effective_date: '2026-05-14'
@@ -182,11 +201,8 @@ amendment_links:
   applies_in:
   - in-ka-bengaluru-east
   note: 'Clause 2 of No: BECC/Com/PR/331/2026-27 (Bengaluru East City Corporation,
-    14-05-2026): "In the Bengaluru City Corporation Building Bye-laws- 2003 (hereinafter
-    referred to as the said bye-laws), Bye-law 3.8- Ground Rent; Bye-law 3.9- Ground
-    Rent for high rise buildings and Bye-law 3.10- Exemption of ground rent the entire
-    provision shall be omitted."'
-- amending_clause: becc-bbl-amend-2026-05:part_III__cl_2
+    14-05-2026) omits Bye-law 3.8 (Ground Rent).'
+- amending_clause: becc-bbl-amend-2026-05:cl_2
   target_clause: bbl-2003:part_II__sec_3.0__cl_3.9
   action: omit
   effective_date: '2026-05-14'
@@ -195,9 +211,8 @@ amendment_links:
   applies_in:
   - in-ka-bengaluru-east
   note: 'Clause 2 of No: BECC/Com/PR/331/2026-27 (Bengaluru East City Corporation,
-    14-05-2026): omits Bye-law 3.9 (Ground rent for high rise buildings) in Bengaluru
-    East City Corporation.'
-- amending_clause: becc-bbl-amend-2026-05:part_III__cl_2
+    14-05-2026) omits Bye-law 3.9 (Ground Rent for high rise buildings).'
+- amending_clause: becc-bbl-amend-2026-05:cl_2
   target_clause: bbl-2003:part_II__sec_3.0__cl_3.10
   action: omit
   effective_date: '2026-05-14'
@@ -206,9 +221,8 @@ amendment_links:
   applies_in:
   - in-ka-bengaluru-east
   note: 'Clause 2 of No: BECC/Com/PR/331/2026-27 (Bengaluru East City Corporation,
-    14-05-2026): omits Bye-law 3.10 (Exemptions for ground rent) in Bengaluru East
-    City Corporation.'
-- amending_clause: becc-bbl-amend-2026-05:part_III__cl_3
+    14-05-2026) omits Bye-law 3.10 (Exemption of ground rent).'
+- amending_clause: becc-bbl-amend-2026-05:item_i
   target_clause: bbl-2003:part_II__sec_6.0__item_i
   action: substitute
   effective_date: '2026-05-14'
@@ -216,23 +230,19 @@ amendment_links:
   verification: machine_checked
   applies_in:
   - in-ka-bengaluru-east
-  replacement_text: '(i) Wherever any construction is in violation/deviation of the
-    sanctioned plan, the Commissioner (Bengaluru East City Corporation, Notification
-    No: BECC/Com/PR/331/2026-27 dated 14-05-2026) may, if he considers that the violations
-    / deviations are within the limits specified in Table-2B below (up to 15% setback
-    and coverage deviation; up to 15% FAR deviation on plots up to 500 sq.m and 5%
-    FAR deviation on plots above 500 sq.m; 7.5% height deviation not beyond sanctioned
-    number of floors) in case of (1) the setback to be provided around the building,
-    (2) plot coverage (3) floor area ratio and (4) height of the building and that
-    the demolition under chapter XVII of the Act is not feasible without affecting
-    structural stability, he may regularize such violations/deviations after recording
-    detailed reasons for the same and levying compounding fee as per Table-2A, Table-2C
-    and Table-2D (minimum guidance value consideration Rs.50,000/- per sq.m; Residential
-    3%/6% up to 500 sq.m and 5%/10% above 500 sq.m; Non-Residential 6%/12%).'
-  note: 'Clause 3 of No: BECC/Com/PR/331/2026-27 (Bengaluru East City Corporation,
-    14-05-2026): substitutes Clause (i) under Bye-law 6.0 (Deviation during construction)
-    and inserts Table-2A, Table-2B, Table-2C, and Table-2D for Bengaluru East City
-    Corporation.'
+  replacement_text: Wherever any construction is in violation/deviation of the sanctioned
+    plan, the Commissioner may, if he considers that the violations / deviations are
+    within the limits specified in Table-2B below in case of (1) the setback to be
+    provided around the building, (2) plot coverage (3) floor area ratio and (4) height
+    of the building and that the demolition under chapter XVII of the Act is not feasible
+    without affecting structural stability, he may regularize such violations/deviations
+    after recording detailed reasons for the same and levying compounding fee as per
+    Table-2A, Table-2C and Table-2D
+  note: 'Substituted by Clause 3 of No: BECC/Com/PR/331/2026-27 (Bengaluru East City
+    Corporation, effective 14-05-2026), which also inserts Table-2A (occupancy certificate
+    fee), Table-2B (maximum condonable deviation limits: up to 15% setback and coverage;
+    up to 15% FAR on plots up to 500 m² and 5% FAR above 500 m²; 7.5% height not beyond
+    sanctioned floors), Table-2C, and Table-2D.'
 maps:
   boundaries:
   - id: corporation

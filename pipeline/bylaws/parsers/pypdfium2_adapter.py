@@ -166,7 +166,7 @@ def _order_prose_cells_column_aware(
         if len(row) == 2 and row[0][2] <= page_width * 0.54 and row[1][0] >= page_width * 0.46
     )
 
-    if two_col_row_count == 0:
+    if two_col_row_count < 2 or (two_col_row_count / len(prose_rows)) < 0.35:
         ordered: list[tuple[float, float, float, float, str]] = []
         for row in prose_rows:
             ordered.extend(row)
@@ -197,8 +197,17 @@ def _order_prose_cells_column_aware(
     return [*top_spanning, *left_col, *right_col, *bottom_spanning]
 
 
+OVERPRINT_REPEAT_RE = re.compile(r"([A-Za-z0-9\s,.\(\)-]{10,45})\1")
+
+
+def _clean_pdf_segment(raw: str) -> str:
+    cleaned = re.sub(r"\x02\s*", "-", raw)
+    cleaned = cleaned.replace("\x0c", " ").replace("\x90", "").replace("\r", " ").replace("\n", " ")
+    return " ".join(cleaned.split())
+
+
 class Pypdfium2Adapter(ParserAdapter):
-    """Local PDF text, column-aware block, and table adapter using `pypdfium2`."""
+    """Local PDF text, column-aware block, and table adapter using `pypdfium2` (with `pdfplumber` overprint deduplication)."""
 
     name = "pypdfium2"
 
@@ -206,7 +215,13 @@ class Pypdfium2Adapter(ParserAdapter):
         if not pdf_path.is_file():
             raise FileNotFoundError(f"PDF file not found: {pdf_path}")
 
+        try:
+            import pdfplumber
+        except ImportError:
+            pdfplumber = None  # type: ignore[assignment]
+
         doc = pdfium.PdfDocument(str(pdf_path))
+        plumber_doc = pdfplumber.open(str(pdf_path)) if pdfplumber is not None else None
         blocks: list[ParsedBlock] = []
         tables: list[ParsedTable] = []
         md_pages: list[str] = []
@@ -222,16 +237,72 @@ class Pypdfium2Adapter(ParserAdapter):
 
                 raw_rects: list[tuple[float, float, float, float, str]] = []
                 rect_count = textpage.count_rects()
+                has_overprint = False
                 for r_idx in range(rect_count):
                     left, bottom, right, top = textpage.get_rect(r_idx)
                     segment = textpage.get_text_bounded(left, bottom, right, top)
-                    cleaned = " ".join(segment.replace("\r", " ").replace("\n", " ").split())
+                    cleaned = _clean_pdf_segment(segment)
                     if cleaned:
+                        if OVERPRINT_REPEAT_RE.search(cleaned):
+                            has_overprint = True
                         raw_rects.append((left, bottom, right, top, cleaned))
                         total_chars += len(cleaned)
 
                 rows = _group_rects_into_rows(raw_rects)
                 page_tables, prose_rows = _extract_tables_and_prose_rows(rows, page_number)
+
+                if plumber_doc is not None and (has_overprint or not page_tables):
+                    p_page = plumber_doc.pages[page_idx].dedupe_chars(tolerance=1.5)
+                    if not page_tables:
+                        raw_pl_tables = p_page.extract_tables() or []
+                        for t_i, raw_t in enumerate(raw_pl_tables, start=1):
+                            if not raw_t or len(raw_t) < 2:
+                                continue
+                            norm_rows: list[list[str]] = []
+                            for r_cells in raw_t:
+                                norm_r = [
+                                    _clean_pdf_segment(str(c or ""))
+                                    for c in r_cells
+                                ]
+                                if any(norm_r):
+                                    norm_rows.append(norm_r)
+                            if len(norm_rows) >= 2 and len(norm_rows[0]) >= 2:
+                                page_tables.append(
+                                    ParsedTable(
+                                        table_id=f"p{page_number}_t{t_i}",
+                                        caption=None,
+                                        headers=norm_rows[0],
+                                        rows=norm_rows[1:],
+                                        page=page_number,
+                                    )
+                                )
+                    if has_overprint:
+                        pl_lines = p_page.extract_text_lines(layout=False, strip=True) or []
+                        page_lines_pl: list[str] = []
+                        for ln_obj in pl_lines:
+                            ln_txt = _clean_pdf_segment(str(ln_obj.get("text") or ""))
+                            if not ln_txt:
+                                continue
+                            x0 = _clamp(float(ln_obj.get("x0", 0.0)) / max(1.0, width))
+                            x1 = _clamp(float(ln_obj.get("x1", width)) / max(1.0, width))
+                            y0 = _clamp(float(ln_obj.get("top", 0.0)) / max(1.0, height))
+                            y1 = _clamp(float(ln_obj.get("bottom", height)) / max(1.0, height))
+                            blocks.append(
+                                ParsedBlock(
+                                    text=ln_txt,
+                                    page=page_number,
+                                    bbox=[x0, y0, x1, y1],
+                                )
+                            )
+                            page_lines_pl.append(ln_txt)
+                        tables.extend(page_tables)
+                        md_pages.append(
+                            f"<!-- page {page_number} -->\n" + "\n".join(page_lines_pl)
+                        )
+                        textpage.close()
+                        page.close()
+                        continue
+
                 tables.extend(page_tables)
 
                 ordered_cells = _order_prose_cells_column_aware(prose_rows, width)
@@ -253,6 +324,8 @@ class Pypdfium2Adapter(ParserAdapter):
                 textpage.close()
                 page.close()
         finally:
+            if plumber_doc is not None:
+                plumber_doc.close()
             doc.close()
 
         return ParseResult(

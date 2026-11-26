@@ -755,6 +755,33 @@ class MultiPolygonGeometry(BaseModel):
     coordinates: list[Coordinate] = Field(..., min_length=1)
 
 
+class UnreadableFragmentOverride(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    doc_id: constr(min_length=1)
+    page: conint(ge=1)
+    raw_fragment: constr(min_length=1)
+    replacement: str | None = "[unreadable in source]"
+    reason: constr(min_length=1)
+
+
+class TableOverride(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    doc_id: constr(min_length=1)
+    page: conint(ge=1)
+    table_id: constr(min_length=1)
+    target_eid: str | None = None
+    caption: constr(min_length=1)
+    headers: list[str]
+    rows: list[list[str]]
+    footnotes: list[str] | None = None
+    strip_block_fragments: list[str] | None = None
+    reason: constr(min_length=1)
+
+
 class OcrCorrectionOverride(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -910,6 +937,8 @@ class JurisdictionOverrides(BaseModel):
     map_curations: list[MapCuration] | None = None
     amendment_links: list[AmendmentLinkOverride] | None = None
     ocr_corrections: list[OcrCorrectionOverride] | None = None
+    unreadable_fragments: list[UnreadableFragmentOverride] | None = None
+    table_overrides: list[TableOverride] | None = None
 
 
 class KnownGap(BaseModel):
