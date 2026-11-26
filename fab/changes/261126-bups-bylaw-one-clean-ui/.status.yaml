@@ -8,8 +8,8 @@ progress:
     intake: done
     apply: done
     review: done
-    hydrate: active
-    ship: pending
+    hydrate: done
+    ship: active
     review-pr: pending
 plan:
     generated: true
@@ -32,21 +32,23 @@ stage_metrics:
     intake: {started_at: "2026-11-26T04:12:16Z", driver: fab-new, iterations: 1, completed_at: "2026-11-26T04:19:10Z"}
     apply: {started_at: "2026-11-26T04:19:10Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-26T05:50:38Z"}
     review: {started_at: "2026-11-26T05:50:38Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-26T06:02:58Z"}
-    hydrate: {started_at: "2026-11-26T06:02:58Z", driver: fab-fff, iterations: 1}
+    hydrate: {started_at: "2026-11-26T06:02:58Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-26T06:14:05Z"}
+    ship: {started_at: "2026-11-26T06:14:05Z", driver: fab-fff, iterations: 1}
 prs:
     - https://github.com/manideepmamidala2-bit/bylaws-india/pull/17
 change_type_source: explicit
 base_branch: main
 true_impact:
-    added: 14015
+    added: 14036
     deleted: 4620
-    net: 9395
+    net: 9416
     tests:
         added: 1007
         deleted: 83
         net: 924
-    computed_at: "2026-11-26T05:50:38Z"
-    computed_at_stage: apply
+    computed_at: "2026-11-26T06:14:05Z"
+    computed_at_stage: hydrate
+summary: Bylaw One clean interface, 5-step verbatim FAR home page, 3-item header, clean subject parameter tables, standalone map without plot inputs, and parameter plausibility bounds / hectare normalization / non-FAR exclusion
 # base_branch: written by /git-branch or /fab-new when the change's branch is created (no placeholder here).
 # true_impact: lazily created on first stage-finish that computes it (no placeholder here).
-last_updated: 2026-11-26T06:02:58Z
+last_updated: 2026-11-26T06:14:05Z
