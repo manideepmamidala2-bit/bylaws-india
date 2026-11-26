@@ -69,11 +69,15 @@ def _load_doc_page_token_sets(
                     pub_tree = json.loads(cand_cf.read_text(encoding="utf-8"))
                     synth_blocks = []
                     for c in pub_tree.get("clauses") or []:
-                        c_pg = int(((c.get("citations") or [{}])[0]).get("page") or 1)
-                        synth_blocks.append({"page": c_pg, "text": str(c.get("text") or "")})
+                        c_cits = c.get("citations") or [{"page": 1}]
+                        for c_cit in c_cits:
+                            c_pg = int(c_cit.get("page") or 1)
+                            synth_blocks.append({"page": c_pg, "text": str(c.get("text") or "")})
                         for v in c.get("versions") or []:
-                            v_pg = int(((v.get("citations") or c.get("citations") or [{}])[0]).get("page") or c_pg)
-                            synth_blocks.append({"page": v_pg, "text": str(v.get("content") or "")})
+                            v_cits = v.get("citations") or c_cits
+                            for v_cit in v_cits:
+                                v_pg = int(v_cit.get("page") or 1)
+                                synth_blocks.append({"page": v_pg, "text": str(v.get("content") or "")})
                     interim_data = {"blocks": synth_blocks, "tables": []}
                     break
             if interim_data:
