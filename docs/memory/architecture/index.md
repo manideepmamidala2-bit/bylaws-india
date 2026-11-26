@@ -11,4 +11,4 @@ description: "Two-half local Python pipeline and read-only Next.js web applicati
 
 | File | Description |
 |------|-------------|
-| [overview](overview.md) | Two-half Python pipeline and Bylaw One Next.js web architecture, Unified Schema 1.4, one-step dataset build with dataset_id, amending-page citations, register-backed instrument names, applicability rules, corporation 6.0(i) wording, Rules R1–R16, and Release 4.0.0. |
+| [overview](overview.md) | Two-half Python pipeline and Bylaw One Next.js web architecture, Unified Schema 1.4, stored PDF page-text fidelity verification, report-driven map accuracy, plain register names, honest relations and resolver outcomes, Rules R1–R16, and Release 4.0.0. |

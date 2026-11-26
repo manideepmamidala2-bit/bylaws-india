@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 import json
+from pathlib import Path
 
 from click.testing import CliRunner
 
@@ -233,11 +234,20 @@ def test_resolver_unknown_zone_outside_sheets_and_unresolved_ties() -> None:
     assert "Not settled: two rules apply" in res_tied["parameters"]["far_base_max"]["display_value"]
 
 
-def test_part4_relations_labelling_sheet_has_60_items() -> None:
-    """`docs/review/relations-labelling.md` exists and contains 60 sampled items (10 per kind across the 6 legal kinds)."""
+def test_part4_relations_labelling_sheet_has_60_items(tmp_path: Path) -> None:
+    """`docs/review/relations-labelling.md` contains 60 unfilled items with provision page numbers, non-structural kinds are marked `not_yet_reviewed`, public relations carry `'Checked by rule, not yet by a person'`, and the >= 0.8 precision promotion rule works."""
+    from bylaws.relations import (
+        MIN_PUBLIC_PRECISION,
+        STRUCTURALLY_CONFIRMED_KINDS,
+        compute_labelled_precision_by_kind,
+        is_relation_kind_public,
+    )
+
     sheet_path = REPO_ROOT / "docs" / "review" / "relations-labelling.md"
     assert sheet_path.is_file()
     text = sheet_path.read_text(encoding="utf-8")
+    assert "0.8" in text
+    assert "| From (`doc:eid`) | From Page | To (`doc:eid`) | To Page |" in text
     for kind in (
         "amends",
         "incorporates",
@@ -248,3 +258,195 @@ def test_part4_relations_labelling_sheet_has_60_items() -> None:
     ):
         assert f"## Kind: `{kind}` (10 sampled" in text
     assert "| 60 |" in text
+    # Sheet is unfilled (all 60 table rows have unfilled verdict checkboxes)
+    assert text.count("| `[ ] Correct / [ ] FP` |") == 60
+    unfilled_prec = compute_labelled_precision_by_kind(sheet_path)
+    for k in ("cross_document_reference", "definition_differs", "precedence"):
+        assert unfilled_prec.get(k) is None
+        assert is_relation_kind_public(k, unfilled_prec.get(k)) is False
+    for k in STRUCTURALLY_CONFIRMED_KINDS:
+        assert is_relation_kind_public(k, unfilled_prec.get(k)) is True
+
+    # Verify synthetic filled sheet: 8/10 (0.8) becomes public, 7/10 (0.7) stays hidden
+    assert MIN_PUBLIC_PRECISION == 0.80
+    synth_sheet = tmp_path / "relations-labelling.md"
+    synth_lines = [
+        "| # | Relation ID | Kind | From (`doc:eid`) | From Page | To (`doc:eid`) | To Page | Parameter / Subject | From Excerpt | To Excerpt | Owner Verdict |",
+        "|---:|---|---|---|---:|---|---:|---|---|---|---|",
+    ]
+    for i in range(1, 11):
+        verdict = "[x] Correct / [ ] FP" if i <= 8 else "[ ] Correct / [x] FP"
+        synth_lines.append(
+            f"| {i} | `rel_{i}` | `definition_differs` | `bbl-2003:1` | p. 2 | `rmp2015-zr:1` | p. 3 | `term` | a | b | `{verdict}` |"
+        )
+    for i in range(11, 21):
+        verdict = "[x] Correct / [ ] FP" if i <= 17 else "[ ] Correct / [x] FP"
+        synth_lines.append(
+            f"| {i} | `rel_{i}` | `precedence` | `gbga-2024:1` | p. 245 | `bbl-2003:1` | p. 1 | `prec` | a | b | `{verdict}` |"
+        )
+    synth_sheet.write_text("\n".join(synth_lines), encoding="utf-8")
+    synth_prec = compute_labelled_precision_by_kind(synth_sheet)
+    assert synth_prec["definition_differs"] == 0.8
+    assert is_relation_kind_public("definition_differs", synth_prec["definition_differs"]) is True
+    assert synth_prec["precedence"] == 0.7
+    assert is_relation_kind_public("precedence", synth_prec["precedence"]) is False
+
+    # Verify published relations.json
+    cfg = load_jurisdiction_config("in-ka-bengaluru-south")
+    rel_json = validate_file(
+        REPO_ROOT / "public" / "data" / "in-ka-bengaluru-south" / str(cfg.release_version) / "relations.json",
+        "relations",
+    )
+    assert "0.8" in str(rel_json.get("public_visibility_rule") or "")
+    for rel_item in rel_json["relations"]:
+        assert rel_item.get("from_page") >= 1
+        assert rel_item.get("to_page") >= 1
+        if rel_item["kind"] in STRUCTURALLY_CONFIRMED_KINDS:
+            assert rel_item["public_visible"] is True
+            assert rel_item["status"] == "confirmed"
+            assert rel_item["review_note"] == "Checked by rule, not yet by a person"
+        else:
+            assert rel_item["public_visible"] is False
+            assert rel_item["status"] == "not_yet_reviewed"
+            assert rel_item["review_note"] == "Not yet reviewed"
+
+
+def test_part5_resolver_honesty_across_four_review_plots() -> None:
+    """Trust and Accuracy Part 5: Resolver returns `needs depth`/`needs width`/`needs height` instead of assuming 3:2 plot or 11.5 m building, and distinguishes `'No limit in the law for this case'` (with citation) from `'Not covered by our data yet'` across the four review plots."""
+    cfg = load_jurisdiction_config("in-ka-bengaluru-south")
+    ver = str(cfg.release_version)
+    south_dir = REPO_ROOT / "public" / "data" / "in-ka-bengaluru-south" / ver
+    params_payload = json.loads((south_dir / "parameters.json").read_text(encoding="utf-8"))
+    res_config = json.loads((south_dir / "resolution.json").read_text(encoding="utf-8"))
+
+    # Review Plot 1: 600 m² on a 15 m road in Residential (Main) (`R-MAIN`)
+    p1_no_dims = resolve_plot_parameters(
+        parameters_payload=params_payload,
+        resolution_config=res_config,
+        corporation_id="in-ka-bengaluru-south",
+        zone_code="R-MAIN",
+        plot_area_m2=600.0,
+        road_width_m=15.0,
+        use="residential",
+    )
+    assert p1_no_dims["inputs"]["plot_depth_m"] is None
+    assert p1_no_dims["inputs"]["plot_width_m"] is None
+    assert p1_no_dims["inputs"]["building_height_m"] is None
+    assert p1_no_dims["parameters"]["setback_front_min_m"]["status"] == "needs_depth"
+    assert "needs depth" in p1_no_dims["parameters"]["setback_front_min_m"]["display_value"]
+    assert p1_no_dims["parameters"]["setback_rear_min_m"]["status"] == "needs_depth"
+    assert "needs depth" in p1_no_dims["parameters"]["setback_rear_min_m"]["display_value"]
+    assert p1_no_dims["parameters"]["setback_side_min_m"]["status"] == "needs_width"
+    assert "needs width" in p1_no_dims["parameters"]["setback_side_min_m"]["display_value"]
+    assert p1_no_dims["parameters"]["building_height_max_m"]["status"] == "no_limit_in_law"
+    assert p1_no_dims["parameters"]["building_height_max_m"]["display_value"] == "No limit in the law for this case"
+    assert p1_no_dims["parameters"]["building_height_max_m"]["no_limit_authority"]["doc_id"] == "rmp2015-zr-amend-2026-01"
+    assert p1_no_dims["parameters"]["building_height_max_m"]["no_limit_authority"]["page"] == 5
+    assert p1_no_dims["parameters"]["floors_max"]["status"] == "no_limit_in_law"
+
+    # With height=10.0 m provided but depth/width still omitted -> returns exact "needs depth" / "needs width"
+    p1_with_height = resolve_plot_parameters(
+        parameters_payload=params_payload,
+        resolution_config=res_config,
+        corporation_id="in-ka-bengaluru-south",
+        zone_code="R-MAIN",
+        plot_area_m2=600.0,
+        road_width_m=15.0,
+        building_height_m=10.0,
+        use="residential",
+    )
+    assert p1_with_height["parameters"]["setback_front_min_m"]["display_value"] == "needs depth"
+    assert p1_with_height["parameters"]["setback_rear_min_m"]["display_value"] == "needs depth"
+    assert p1_with_height["parameters"]["setback_side_min_m"]["display_value"] == "needs width"
+
+    # Review Plot 2: 150 m² on a 9 m road in Residential (Main) (`R-MAIN`)
+    p2_no_dims = resolve_plot_parameters(
+        parameters_payload=params_payload,
+        resolution_config=res_config,
+        corporation_id="in-ka-bengaluru-south",
+        zone_code="R-MAIN",
+        plot_area_m2=150.0,
+        road_width_m=9.0,
+        use="residential",
+    )
+    assert p2_no_dims["parameters"]["ground_coverage_max_pct"]["value"] == 75.0
+    assert p2_no_dims["parameters"]["far_base_max"]["value"] == 1.75
+    assert p2_no_dims["parameters"]["far_premium_additional_max"]["status"] == "no_limit_in_law"
+    assert p2_no_dims["parameters"]["far_premium_additional_max"]["display_value"] == "No limit in the law for this case"
+    assert p2_no_dims["parameters"]["far_premium_additional_max"]["no_limit_authority"]["doc_id"] == "rmp2015-zr-amend-2025-04"
+    assert p2_no_dims["parameters"]["tdr_receivable_max"]["status"] == "no_limit_in_law"
+    assert p2_no_dims["parameters"]["building_height_max_m"]["status"] == "resolved"
+    assert p2_no_dims["parameters"]["building_height_max_m"]["value"] == 12.0
+    assert p2_no_dims["parameters"]["floors_max"]["status"] == "no_limit_in_law"
+    assert p2_no_dims["parameters"]["setback_front_min_m"]["status"] == "needs_height"
+    assert p2_no_dims["parameters"]["setback_front_min_m"]["display_value"] == "needs height"
+
+    p2_with_height = resolve_plot_parameters(
+        parameters_payload=params_payload,
+        resolution_config=res_config,
+        corporation_id="in-ka-bengaluru-south",
+        zone_code="R-MAIN",
+        plot_area_m2=150.0,
+        road_width_m=9.0,
+        building_height_m=10.0,
+        use="residential",
+    )
+    assert p2_with_height["parameters"]["setback_front_min_m"]["value"] == 0.9
+    assert p2_with_height["parameters"]["setback_rear_min_m"]["value"] == 0.7
+    assert p2_with_height["parameters"]["setback_side_min_m"]["value"] == 0.7
+
+    # Review Plot 3: 3,000 m² commercial (`C-BIZ`) on a 24 m road
+    p3_no_dims = resolve_plot_parameters(
+        parameters_payload=params_payload,
+        resolution_config=res_config,
+        corporation_id="in-ka-bengaluru-south",
+        zone_code="C-BIZ",
+        plot_area_m2=3000.0,
+        road_width_m=24.0,
+        use="commercial",
+    )
+    assert p3_no_dims["parameters"]["ground_coverage_max_pct"]["value"] == 45.0
+    assert p3_no_dims["parameters"]["far_base_max"]["value"] == 2.5
+    assert p3_no_dims["parameters"]["far_premium_additional_max"]["value"] == 0.4
+    assert p3_no_dims["parameters"]["tdr_receivable_max"]["value"] == 0.2
+    assert p3_no_dims["parameters"]["setback_front_min_m"]["status"] == "needs_depth"
+    assert "needs depth" in p3_no_dims["parameters"]["setback_front_min_m"]["display_value"]
+    assert p3_no_dims["parameters"]["building_height_max_m"]["status"] == "no_limit_in_law"
+    assert p3_no_dims["parameters"]["building_height_max_m"]["no_limit_authority"]["doc_id"] == "rmp2015-zr"
+    assert p3_no_dims["parameters"]["building_height_max_m"]["no_limit_authority"]["page"] == 32
+    assert p3_no_dims["parameters"]["floors_max"]["status"] == "no_limit_in_law"
+
+    # Review Plot 4: 6,000 m² industrial (`I-GEN`) on an 18 m road
+    p4 = resolve_plot_parameters(
+        parameters_payload=params_payload,
+        resolution_config=res_config,
+        corporation_id="in-ka-bengaluru-south",
+        zone_code="I-GEN",
+        plot_area_m2=6000.0,
+        road_width_m=18.0,
+        use="industrial",
+    )
+    assert p4["parameters"]["ground_coverage_max_pct"]["value"] == 45.0
+    assert p4["parameters"]["far_base_max"]["value"] == 1.0
+    assert p4["parameters"]["setback_front_min_m"]["value"] == 10.0
+    assert p4["parameters"]["setback_rear_min_m"]["value"] == 8.0
+    assert p4["parameters"]["setback_side_min_m"]["value"] == 8.0
+    assert p4["parameters"]["building_height_max_m"]["status"] == "no_limit_in_law"
+    assert p4["parameters"]["building_height_max_m"]["no_limit_authority"]["doc_id"] == "rmp2015-zr-amend-2026-01"
+    assert p4["parameters"]["building_height_max_m"]["no_limit_authority"]["page"] == 6
+    assert p4["parameters"]["floors_max"]["status"] == "no_limit_in_law"
+
+    # Unknown zone -> returns "not_covered_by_data" ("Not covered by our data yet")
+    p_unknown = resolve_plot_parameters(
+        parameters_payload=params_payload,
+        resolution_config=res_config,
+        corporation_id="in-ka-bengaluru-south",
+        zone_code="unknown",
+        plot_area_m2=600.0,
+        road_width_m=15.0,
+        use="residential",
+    )
+    assert p_unknown["parameters"]["ground_coverage_max_pct"]["status"] == "not_covered_by_data"
+    assert p_unknown["parameters"]["ground_coverage_max_pct"]["display_value"] == "Not covered by our data yet"
+    assert p_unknown["parameters"]["far_base_max"]["status"] == "not_covered_by_data"
+    assert p_unknown["parameters"]["far_base_max"]["display_value"] == "Not covered by our data yet"

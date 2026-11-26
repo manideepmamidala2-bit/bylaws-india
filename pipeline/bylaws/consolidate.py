@@ -406,22 +406,28 @@ def run_consolidate(config: JurisdictionConfig, *, repo_root: Path | None = None
                 if config.visibility == "test":
                     current_text = f"{current_text} [Amended ({as_of_date}, {amending_cid}): {amending_text}]".strip()
                 else:
-                    _, current_text = _extract_substituted_text(
+                    _, inserted_body = _extract_substituted_text(
                         amending_text,
                         str(target_clause["number"]),
                         current_title,
                     )
+                    ins_note = f"Followed by inserted provision ({amending_cid}, effective {as_of_date}): {inserted_body}"
+                    if ins_note not in site_notes:
+                        site_notes.append(ins_note)
                 if amending_clause and amending_clause.get("tables"):
                     current_tables.extend(copy.deepcopy(amending_clause["tables"]))
             elif action == "insert_before":
                 if config.visibility == "test":
                     current_text = f"[Amended ({as_of_date}, {amending_cid}): {amending_text}] {current_text}".strip()
                 else:
-                    _, current_text = _extract_substituted_text(
+                    _, inserted_body = _extract_substituted_text(
                         amending_text,
                         str(target_clause["number"]),
                         current_title,
                     )
+                    ins_note = f"Preceded by inserted provision ({amending_cid}, effective {as_of_date}): {inserted_body}"
+                    if ins_note not in site_notes:
+                        site_notes.append(ins_note)
             elif action == "omit":
                 omitted = True
                 current_text = f"[Omitted by {amending_cid} with effect from {as_of_date}.]"

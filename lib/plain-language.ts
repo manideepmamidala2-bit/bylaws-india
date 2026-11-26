@@ -302,6 +302,43 @@ export function formatLandUseZoneGapPlainLine(
   return "Land-use zones are available for processed map sheets only. Elsewhere the map shows boundaries and wards.";
 }
 
+export function formatMapZoneAccuracyPlainLine(
+  roadMedianOffsetM: number | null | undefined,
+  roadP90OffsetM: number | null | undefined
+): string | null {
+  if (
+    typeof roadMedianOffsetM !== "number" ||
+    Number.isNaN(roadMedianOffsetM) ||
+    roadMedianOffsetM <= 0 ||
+    typeof roadP90OffsetM !== "number" ||
+    Number.isNaN(roadP90OffsetM) ||
+    roadP90OffsetM <= 0
+  ) {
+    return null;
+  }
+  const medianRounded = Math.max(1, Math.round(roadMedianOffsetM));
+  const p90Rounded = Math.max(1, Math.round(roadP90OffsetM));
+  return `Zone boundaries are approximate: typically about ${medianRounded} m from street centre-lines, and within about ${p90Rounded} m in 9 out of 10 places.`;
+}
+
+export function formatMapSheetFitErrorDetail(
+  gridFitRmseM: number | null | undefined,
+  looRmseM?: number | null
+): string | null {
+  if (
+    typeof gridFitRmseM !== "number" ||
+    Number.isNaN(gridFitRmseM) ||
+    gridFitRmseM < 0
+  ) {
+    return null;
+  }
+  const looPart =
+    typeof looRmseM === "number" && !Number.isNaN(looRmseM)
+      ? ` (${looRmseM} m leave-one-out cross-validation)`
+      : "";
+  return `Sheet-fitting error (how closely the printed UTM grid crosshairs on the scanned PDF fit the coordinate grid, not positional accuracy on the ground): ${gridFitRmseM} m RMSE${looPart}.`;
+}
+
 const ZONE_CODE_PLAIN_LABELS: Record<string, string> = {
   "R-MAIN": "Residential (Main)",
   "R-MIX": "Residential (Mixed)",
@@ -621,9 +658,17 @@ function toTitleCaseIfScreaming(title: string): string {
 }
 
 export function formatPlainDocumentTitle(
-  doc: Pick<DocumentMetadata, "doc_id" | "title"> | null | undefined,
+  doc:
+    | (Pick<DocumentMetadata, "doc_id" | "title"> & {
+        plain_title?: string | null;
+      })
+    | null
+    | undefined,
   fallbackId?: string
 ): string {
+  if (doc?.plain_title && doc.plain_title.trim().length > 0) {
+    return doc.plain_title.trim();
+  }
   if (doc?.title) {
     return toTitleCaseIfScreaming(doc.title.trim());
   }
@@ -735,10 +780,15 @@ export function formatMonthYearPlain(isoDate: string | null | undefined): string
 }
 
 export function formatReplacedByPlain(
-  doc: Pick<
-    DocumentMetadata,
-    "doc_id" | "title" | "effective_from" | "notified_date"
-  > | null | undefined,
+  doc:
+    | (Pick<
+        DocumentMetadata,
+        "doc_id" | "title" | "effective_from" | "notified_date"
+      > & {
+        plain_title?: string | null;
+      })
+    | null
+    | undefined,
   fallbackDate?: string | null
 ): string {
   const plainName = formatPlainDocumentTitle(doc);

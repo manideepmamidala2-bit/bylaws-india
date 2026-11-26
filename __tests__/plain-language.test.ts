@@ -140,14 +140,13 @@ describe("Bylaw One plain-language helpers & 11 code subjects", () => {
     expect(
       formatReplacedByPlain({
         doc_id: "rmp2015-zr-amend-2026-01",
+        plain_title: "Zoning amendment",
         title:
           "GOVERNMENT OF KARNATAKA No. UDD 235 MNJ 2025(E) date: 05.01.2026 NOTIFICATION (Amendment to Zonal Regulations of Revised Master Plan-2015 of Bengaluru and Greater Bengaluru)",
         effective_from: "2026-01-05",
         notified_date: "2026-01-05",
       })
-    ).toBe(
-      "Replaced by GOVERNMENT OF KARNATAKA No. UDD 235 MNJ 2025(E) date: 05.01.2026 NOTIFICATION (Amendment to Zonal Regulations of Revised Master Plan-2015 of Bengaluru and Greater Bengaluru), 5 January 2026"
-    );
+    ).toBe("Replaced by Zoning amendment, 5 January 2026");
 
     expect(
       formatLandUseZoneGapPlainLine("Bengaluru South City Corporation")

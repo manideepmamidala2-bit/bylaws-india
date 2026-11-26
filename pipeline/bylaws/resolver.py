@@ -220,6 +220,56 @@ def _find_instrument_family(doc_id: str, families: dict[str, list[str]]) -> str:
     return "other"
 
 
+def _match_no_limit_in_law_rule(
+    *,
+    param_name: str,
+    zone_code: str,
+    use: str,
+    plot_area_m2: float,
+    road_width_m: float,
+    no_limit_rules: list[dict[str, Any]],
+) -> dict[str, Any] | None:
+    for rule in no_limit_rules:
+        if param_name not in (rule.get("parameters") or []):
+            continue
+        r_zones = rule.get("zones")
+        if r_zones and (zone_code == "unknown" or zone_code not in r_zones):
+            continue
+        r_uses = rule.get("uses")
+        if r_uses and use.lower() not in [str(u).lower() for u in r_uses]:
+            continue
+        min_a = rule.get("min_plot_area_m2")
+        if min_a is not None:
+            min_a_inc = bool(rule.get("min_plot_area_inclusive", False))
+            if (min_a_inc and plot_area_m2 < float(min_a)) or (
+                not min_a_inc and plot_area_m2 <= float(min_a)
+            ):
+                continue
+        max_a = rule.get("max_plot_area_m2")
+        if max_a is not None:
+            max_a_inc = bool(rule.get("max_plot_area_inclusive", True))
+            if (max_a_inc and plot_area_m2 > float(max_a)) or (
+                not max_a_inc and plot_area_m2 >= float(max_a)
+            ):
+                continue
+        min_rw = rule.get("min_road_width_m")
+        if min_rw is not None:
+            min_rw_inc = bool(rule.get("min_road_width_inclusive", True))
+            if (min_rw_inc and road_width_m < float(min_rw)) or (
+                not min_rw_inc and road_width_m <= float(min_rw)
+            ):
+                continue
+        max_rw = rule.get("max_road_width_m")
+        if max_rw is not None:
+            max_rw_inc = bool(rule.get("max_road_width_inclusive", True))
+            if (max_rw_inc and road_width_m > float(max_rw)) or (
+                not max_rw_inc and road_width_m >= float(max_rw)
+            ):
+                continue
+        return rule
+    return None
+
+
 def resolve_plot_parameters(
     *,
     parameters_payload: dict[str, Any],
@@ -236,7 +286,7 @@ def resolve_plot_parameters(
     consolidated_payload: dict[str, Any] | None = None,
     geography: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Deterministically resolve building parameters for a plot using the 6 steps in `resolution.yaml`."""
+    """Deterministically resolve building parameters for a plot using the 6 steps in `resolution.yaml` without assuming missing dimensions."""
     all_records: list[dict[str, Any]] = list(parameters_payload.get("records") or [])
     steps_by_id = {
         str(s["step_id"]): s
@@ -247,16 +297,15 @@ def resolve_plot_parameters(
     zoning_governed_params = set(
         (steps_by_id.get("zoning_governs_via_byelaw_1_4") or {}).get("parameters_governed") or []
     )
-
-    inferred_depth = plot_depth_m if plot_depth_m is not None else round((plot_area_m2 * 1.5) ** 0.5, 2)
-    inferred_width = plot_width_m if plot_width_m is not None else round(plot_area_m2 / max(1.0, inferred_depth), 2)
-    eff_height = building_height_m if building_height_m is not None else 11.5
+    no_limit_rules: list[dict[str, Any]] = list(
+        resolution_config.get("no_limit_in_law_rules") or []
+    )
 
     resolved_by_param: dict[str, dict[str, Any]] = {}
     base_far_numeric: float | None = None
 
     for param_name in PARAMETER_ORDER:
-        # 1. Gather records for `param_name` whose numeric intervals and zone/use match
+        # 1. Gather records for `param_name` whose known numeric intervals and zone/use match
         matching: list[dict[str, Any]] = []
         for rec in all_records:
             if rec.get("parameter") != param_name:
@@ -266,28 +315,31 @@ def resolve_plot_parameters(
                 continue
 
             conds = rec.get("conditions") or {}
-            # Zone filter: match explicit zone_code or global (zone is None)
             rec_zones = conds.get("zone")
             if rec_zones and zone_code != "unknown" and zone_code not in rec_zones:
                 continue
             if rec_zones and zone_code == "unknown":
                 continue
 
-            # Use filter
             rec_uses = conds.get("use")
             if rec_uses and use.lower() not in [u.lower() for u in rec_uses]:
                 continue
 
-            # Numeric interval checks
             if not interval_matches(conds.get("plot_area_m2"), plot_area_m2):
                 continue
             if not interval_matches(conds.get("road_width_m"), road_width_m):
                 continue
-            if not interval_matches(conds.get("building_height_m"), eff_height):
+            if building_height_m is not None and not interval_matches(
+                conds.get("building_height_m"), building_height_m
+            ):
                 continue
-            if not interval_matches(conds.get("plot_depth_m"), inferred_depth):
+            if plot_depth_m is not None and not interval_matches(
+                conds.get("plot_depth_m"), plot_depth_m
+            ):
                 continue
-            if not interval_matches(conds.get("plot_width_m"), inferred_width):
+            if plot_width_m is not None and not interval_matches(
+                conds.get("plot_width_m"), plot_width_m
+            ):
                 continue
 
             matching.append(rec)
@@ -348,16 +400,16 @@ def resolve_plot_parameters(
                 active_pool = statute_recs
                 deciding_step_id = "gbga_notwithstanding"
 
-        # Step 4: Zoning regulations govern use, coverage, FAR, setbacks, height, floors, dwelling units, parking (`zoning_governs_via_byelaw_1_4`)
+        # Step 4: Zoning regulations govern via bye-law 1.4
         step4 = steps_by_id.get("zoning_governs_via_byelaw_1_4")
-        if step4 and param_name in zoning_governed_params:
+        if step4 and param_name in zoning_governed_params and families.get("zoning_regulations"):
             zr_recs = [
                 r
                 for r in active_pool
                 if _find_instrument_family(str(r["source"]["doc_id"]), families) == "zoning_regulations"
             ]
             non_zr_recs = [r for r in active_pool if r not in zr_recs]
-            if zr_recs and non_zr_recs:
+            if non_zr_recs:
                 for r in non_zr_recs:
                     other_records.append(
                         {
@@ -374,7 +426,6 @@ def resolve_plot_parameters(
         # Step 5: Within one instrument family, the later in-force provision wins (`lex_posterior_within_family`)
         step5 = steps_by_id.get("lex_posterior_within_family")
         if step5 and len(active_pool) > 1:
-            # Filter out explicitly superseded records (`valid_to <= as_of_date` or `legal_status == "superseded"`)
             in_force_now = [
                 r
                 for r in active_pool
@@ -413,8 +464,12 @@ def resolve_plot_parameters(
                         )
                 active_pool = zone_specific
 
-            # Prefer latest `valid_from` within the same instrument family
-            if len(active_pool) > 1:
+            # Only collapse by latest `valid_from` when building_height_m is known or records do not depend on distinct height bands
+            has_unfiltered_height_bands = building_height_m is None and any(
+                (r.get("conditions") or {}).get("building_height_m") is not None
+                for r in active_pool
+            )
+            if len(active_pool) > 1 and not has_unfiltered_height_bands:
                 families_in_pool = {
                     _find_instrument_family(str(r["source"]["doc_id"]), families)
                     for r in active_pool
@@ -437,7 +492,6 @@ def resolve_plot_parameters(
                         active_pool = latest_recs
                         deciding_step_id = "lex_posterior_within_family"
 
-                    # Prefer non-dependent numeric record over prose reference ("Refer Table 8 or Table 9")
                     non_ref_recs = [
                         r for r in active_pool if r.get("unit") != "reference"
                     ]
@@ -453,7 +507,56 @@ def resolve_plot_parameters(
                                 )
                         active_pool = non_ref_recs
 
-        # Deduplicate identical values from the same provision/row (e.g. Left Side & Right Side both 8%)
+        # Check whether the surviving rule(s) depend on an omitted dimension (`depth`, `width`, or `height`)
+        needs_d = plot_depth_m is None and any(
+            r.get("unit") == "pct_of_plot_depth"
+            or (r.get("conditions") or {}).get("plot_depth_m") is not None
+            for r in active_pool
+        )
+        needs_w = plot_width_m is None and any(
+            r.get("unit") == "pct_of_plot_width"
+            or (r.get("conditions") or {}).get("plot_width_m") is not None
+            for r in active_pool
+        )
+        needs_h = building_height_m is None and any(
+            (r.get("conditions") or {}).get("building_height_m") is not None
+            for r in active_pool
+        )
+        if active_pool and (needs_d or needs_w or needs_h):
+            needed_labels: list[str] = []
+            if needs_d:
+                needed_labels.append("depth")
+            if needs_w:
+                needed_labels.append("width")
+            if needs_h:
+                needed_labels.append("height")
+            primary_status = (
+                "needs_depth"
+                if needs_d
+                else ("needs_width" if needs_w else "needs_height")
+            )
+            display_needed = f"needs {' and '.join(needed_labels)}"
+            sample_rec = copy.deepcopy(active_pool[0])
+            resolved_by_param[param_name] = {
+                "parameter": param_name,
+                "status": primary_status,
+                "value": sample_rec.get("value") if len(active_pool) == 1 else None,
+                "unit": sample_rec.get("unit") if len(active_pool) == 1 else None,
+                "value_text": display_needed,
+                "computed_value": None,
+                "computed_unit": None,
+                "display_value": display_needed,
+                "governing_record": sample_rec if len(active_pool) == 1 else None,
+                "resolution_step": steps_by_id.get(deciding_step_id),
+                "plain_reason": (
+                    f"Rule depends on plot {' and '.join(needed_labels)}, which was not provided."
+                ),
+                "other_applicable_records": other_records,
+                "tied_records": [],
+            }
+            continue
+
+        # Deduplicate identical values from the same provision/row
         unique_by_val: list[dict[str, Any]] = []
         seen_val_keys: set[tuple[Any, Any, str]] = set()
         for r in active_pool:
@@ -463,20 +566,52 @@ def resolve_plot_parameters(
                 unique_by_val.append(r)
 
         if not unique_by_val:
-            resolved_by_param[param_name] = {
-                "parameter": param_name,
-                "status": "no_applicable_rule",
-                "value": None,
-                "unit": None,
-                "computed_value": None,
-                "computed_unit": None,
-                "display_value": "No rule matched plot inputs",
-                "governing_record": None,
-                "resolution_step": None,
-                "plain_reason": "No matching rule found for the given zone, plot area, and road width.",
-                "other_applicable_records": other_records,
-                "tied_records": [],
-            }
+            no_limit_match = _match_no_limit_in_law_rule(
+                param_name=param_name,
+                zone_code=zone_code,
+                use=use,
+                plot_area_m2=plot_area_m2,
+                road_width_m=road_width_m,
+                no_limit_rules=no_limit_rules,
+            )
+            if no_limit_match is not None:
+                auth = no_limit_match["authority"]
+                resolved_by_param[param_name] = {
+                    "parameter": param_name,
+                    "status": "no_limit_in_law",
+                    "value": None,
+                    "unit": None,
+                    "value_text": "No limit in the law for this case",
+                    "computed_value": None,
+                    "computed_unit": None,
+                    "display_value": "No limit in the law for this case",
+                    "governing_record": None,
+                    "resolution_step": None,
+                    "no_limit_authority": copy.deepcopy(auth),
+                    "plain_reason": (
+                        f"No limit in the law for this case — {no_limit_match['plain_reason']} "
+                        f"({auth['doc_id']}, p. {auth['page']}: \"{auth['quote']}\")."
+                    ),
+                    "other_applicable_records": other_records,
+                    "tied_records": [],
+                }
+            else:
+                resolved_by_param[param_name] = {
+                    "parameter": param_name,
+                    "status": "not_covered_by_data",
+                    "value": None,
+                    "unit": None,
+                    "value_text": "Not covered by our data yet",
+                    "computed_value": None,
+                    "computed_unit": None,
+                    "display_value": "Not covered by our data yet",
+                    "governing_record": None,
+                    "resolution_step": None,
+                    "no_limit_authority": None,
+                    "plain_reason": "Not covered by our data yet for the given zone, use, plot area, and road width.",
+                    "other_applicable_records": other_records,
+                    "tied_records": [],
+                }
             continue
 
         if len(unique_by_val) == 1:
@@ -499,14 +634,14 @@ def resolve_plot_parameters(
                     comp_val = round((num_v / 100.0) * plot_area_m2, 2)
                     comp_unit = "m2_max_footprint"
                     display_val = f"{num_v:g}% (up to {comp_val:g} m² footprint)"
-                elif raw_unit == "pct_of_plot_depth":
-                    comp_val = round((num_v / 100.0) * inferred_depth, 2)
+                elif raw_unit == "pct_of_plot_depth" and plot_depth_m is not None:
+                    comp_val = round((num_v / 100.0) * plot_depth_m, 2)
                     comp_unit = "m"
-                    display_val = f"{comp_val:g} m ({num_v:g}% of {inferred_depth:g} m plot depth)"
-                elif raw_unit == "pct_of_plot_width":
-                    comp_val = round((num_v / 100.0) * inferred_width, 2)
+                    display_val = f"{comp_val:g} m ({num_v:g}% of {plot_depth_m:g} m plot depth)"
+                elif raw_unit == "pct_of_plot_width" and plot_width_m is not None:
+                    comp_val = round((num_v / 100.0) * plot_width_m, 2)
                     comp_unit = "m"
-                    display_val = f"{comp_val:g} m ({num_v:g}% of {inferred_width:g} m plot width)"
+                    display_val = f"{comp_val:g} m ({num_v:g}% of {plot_width_m:g} m plot width)"
                 elif raw_unit == "multiple_of_base_far":
                     if base_far_numeric is not None:
                         comp_val = round(num_v * base_far_numeric, 3)
@@ -585,9 +720,9 @@ def resolve_plot_parameters(
             "zone_code": zone_code,
             "plot_area_m2": plot_area_m2,
             "road_width_m": road_width_m,
-            "plot_depth_m": inferred_depth,
-            "plot_width_m": inferred_width,
-            "building_height_m": eff_height,
+            "plot_depth_m": plot_depth_m,
+            "plot_width_m": plot_width_m,
+            "building_height_m": building_height_m,
             "use": use,
             "as_of_date": as_of_date,
         },

@@ -108,6 +108,7 @@ export interface ContestedStatusConfig {
 export interface DocumentConfig {
   id: string;
   title: string;
+  plain_title?: string | null;
   issuing_authority: string;
   doc_type?:
     | "act"
@@ -325,6 +326,7 @@ export interface DocumentMetadata {
   schema_version: "1.4";
   doc_id: string;
   title: string;
+  plain_title?: string | null;
   issuing_authority: string;
   doc_type?:
     | "act"
@@ -1204,6 +1206,7 @@ export interface ClauseZoneTagEntry {
 export interface JurisdictionRelations {
   schema_version: "1.4";
   jurisdiction: string;
+  public_visibility_rule?: string | null;
   topics: TopicDefinition[];
   succession: SuccessionEntry[];
   relations: RelationEntry[];
@@ -1246,6 +1249,8 @@ export interface RelationEntry {
   from_eid: string;
   to_doc: string;
   to_eid: string;
+  from_page?: number | null;
+  to_page?: number | null;
   topic?: string | null;
   parameter?: string | null;
   from_span: string;
@@ -1254,7 +1259,8 @@ export interface RelationEntry {
   applies_in?: string[];
   method: "rule" | "embedding" | "hybrid";
   confidence: number;
-  status: "candidate" | "confirmed" | "rejected" | "human_verified";
+  status: "candidate" | "confirmed" | "not_yet_reviewed" | "rejected" | "human_verified";
+  review_note?: string | null;
   note?: string | null;
   public_visible?: boolean;
   measured_precision?: number | null;
@@ -1399,6 +1405,7 @@ export interface StatutoryResolutionConfig {
     ResolutionStep,
     ...ResolutionStep[]
   ];
+  no_limit_in_law_rules?: NoLimitInLawRule[];
 }
 
 export interface ResolutionStep {
@@ -1426,4 +1433,24 @@ export interface ResolutionAuthority {
   page: number | null;
   quote: string | null;
   official_url?: string | null;
+}
+
+export interface NoLimitInLawRule {
+  rule_id: string;
+  /**
+   * @minItems 1
+   */
+  parameters: [string, ...string[]];
+  zones?: string[] | null;
+  uses?: string[] | null;
+  min_plot_area_m2?: number | null;
+  min_plot_area_inclusive?: boolean;
+  max_plot_area_m2?: number | null;
+  max_plot_area_inclusive?: boolean;
+  min_road_width_m?: number | null;
+  min_road_width_inclusive?: boolean;
+  max_road_width_m?: number | null;
+  max_road_width_inclusive?: boolean;
+  plain_reason: string;
+  authority: ResolutionAuthority;
 }

@@ -11,6 +11,10 @@ import type {
   ZoneGeometry,
 } from "@/lib/data";
 import { buildDg2nMapStyle } from "@/lib/map-style";
+import {
+  formatMapSheetFitErrorDetail,
+  formatMapZoneAccuracyPlainLine,
+} from "@/lib/plain-language";
 
 interface ZoneMapProps {
   jurisdictionId?: string;
@@ -770,7 +774,7 @@ export function ZoneMap({
             aria-label="Place and ward search suggestions"
             className="mt-1 divide-y divide-[#c8ccc0] border border-[#080909] bg-[#f5f3ed] font-mono text-xs"
           >
-            {matchingWardsForSearch.map((w) => {
+            {matchingWardsForSearch.map((w, wIdx) => {
               const wid = String(
                 w.properties?.ward_id ?? w.properties?.ward_no ?? ""
               );
@@ -778,8 +782,11 @@ export function ZoneMap({
               const zname = String(
                 w.properties?.zone_name ?? w.properties?.zone ?? ""
               );
+              const corpKey = String(
+                w.properties?.Corporation ?? w.properties?.Corporatio ?? wIdx
+              );
               return (
-                <li key={wid}>
+                <li key={`${corpKey}-${wid}-${wname}`}>
                   <button
                     type="button"
                     onClick={() => {
@@ -944,26 +951,19 @@ export function ZoneMap({
         </div>
       </div>
 
-      {/* One honest measured accuracy figure in plain words (Part 6) */}
+      {/* One honest measured accuracy figure in plain words (Part 2) */}
       {sheetOverlay && (
         <p
           role="status"
-          className="dg-serif mt-3 border border-[#080909] bg-[#efeee8] px-3 py-2 text-sm text-[#171917]"
+          className="dg-serif mt-3 border border-[#c8ccc0] bg-[#efeee8] px-3 py-2 text-sm text-[#171917]"
         >
           Zones traced from the RMP 2015 Proposed Land Use sheet{" "}
-          <span className="font-semibold">{sheetOverlay.sheet}</span>; within
-          about{" "}
-          <span className="font-mono">
-            {Math.max(
-              1,
-              Math.round(
-                sheetOverlay.road_median_offset_m ?? sheetOverlay.rmse_m
-              )
-            )}{" "}
-            m
-          </span>{" "}
-          of street centre-lines. Derived by this project, not an official
-          publication.
+          <span className="font-semibold">{sheetOverlay.sheet}</span>.{" "}
+          {formatMapZoneAccuracyPlainLine(
+            sheetOverlay.road_median_offset_m,
+            sheetOverlay.road_p90_offset_m
+          )}{" "}
+          Derived by this project, not an official publication.
         </p>
       )}
 
@@ -1032,7 +1032,7 @@ export function ZoneMap({
                     onChange={(e) => setSelectedWardId(e.target.value || null)}
                     className="mt-1.5 w-full border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 font-mono text-xs text-[#080909]"
                   >
-                    {sortedWards.map((w) => {
+                    {sortedWards.map((w, wIdx) => {
                       const wid = String(
                         w.properties?.ward_id ?? w.properties?.ward_no ?? ""
                       );
@@ -1040,8 +1040,13 @@ export function ZoneMap({
                       const zname = String(
                         w.properties?.zone_name ?? w.properties?.zone ?? ""
                       );
+                      const corpKey = String(
+                        w.properties?.Corporation ??
+                          w.properties?.Corporatio ??
+                          wIdx
+                      );
                       return (
-                        <option key={wid} value={wid}>
+                        <option key={`${corpKey}-${wid}-${wname}`} value={wid}>
                           Ward {wid} · {wname} ({zname})
                         </option>
                       );
@@ -1120,6 +1125,14 @@ export function ZoneMap({
               <div className="dg-mono mb-2">
                 Published Geospatial Layers ({geoLayers.length})
               </div>
+              {sheetOverlay && (
+                <p className="mb-2 font-mono text-xs text-[#5b5e56]">
+                  {formatMapSheetFitErrorDetail(
+                    sheetOverlay.rmse_m,
+                    sheetOverlay.loo_rmse_m
+                  )}
+                </p>
+              )}
               <div className="grid grid-cols-1 gap-2 text-xs sm:grid-cols-2">
                 {geoLayers.map((layer) => (
                   <div
@@ -1132,9 +1145,11 @@ export function ZoneMap({
                       </span>
                       <span className="uppercase text-[#5b5e56]">
                         {layer.derived ? "Derived" : "Official"}
-                        {layer.accuracy_m !== null
-                          ? ` · within about ${layer.accuracy_m} m`
-                          : ""}
+                        {layer.sheet_overlay?.road_median_offset_m
+                          ? ` · street offset ~${Math.round(layer.sheet_overlay.road_median_offset_m)} m (p90 ~${Math.round(layer.sheet_overlay.road_p90_offset_m ?? layer.sheet_overlay.road_median_offset_m)} m)`
+                          : layer.accuracy_m !== null
+                            ? ` · within about ${layer.accuracy_m} m`
+                            : ""}
                       </span>
                     </div>
                     <p className="dg-serif mt-0.5 text-xs text-[#5b5e56]">

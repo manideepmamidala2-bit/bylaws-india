@@ -264,6 +264,9 @@ def run_geo_pipeline(config: JurisdictionConfig, *, repo_root: Path | None = Non
             cfg0 = run0["config"]
             sheet_name = str(cfg0.sheet or cfg0.id)
             rmse_val = round(float(georef0["rmse_m"]), 4)
+            median_road_val = round(
+                float(checks0.get("road_median_offset_m") or rmse_val), 2
+            )
             layers.append(
                 {
                     "layer_id": "landuse_zones",
@@ -271,12 +274,12 @@ def run_geo_pipeline(config: JurisdictionConfig, *, repo_root: Path | None = Non
                     "kind": "master_plan_zone",
                     "source": str(cfg0.source_url or cfg0.document),
                     "method": f"Zones traced from the RMP 2015 Proposed Land Use sheet {sheet_name}, placed using the sheet's printed grid (UTM 43N EPSG:32643 -> EPSG:4326)",
-                    "accuracy_m": rmse_val,
+                    "accuracy_m": median_road_val,
                     "derived": True,
                     "file": "zones.geojson",
                     "external_url": cfg0.source_url,
                     "feature_count": active_zone_count,
-                    "notes": f"Zones traced from the RMP 2015 Proposed Land Use sheet {sheet_name}, placed using the sheet's printed grid; measured grid placement RMSE {rmse_val:.2f} m (independent OpenStreetMap road median offset {checks0.get('road_median_offset_m') or 0.0:.1f} m).",
+                    "notes": f"Zones traced from the RMP 2015 Proposed Land Use sheet {sheet_name}; street centre-line median offset {median_road_val:.2f} m, 90th-percentile offset {float(checks0.get('road_p90_offset_m') or 0.0):.2f} m (sheet-fitting grid RMSE {rmse_val:.4f} m).",
                     "sheet_overlay": {
                         "image_url": str(georef0["image_url"]),
                         "bounds_wgs84": georef0["bounds_wgs84"],

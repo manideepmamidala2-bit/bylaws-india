@@ -270,7 +270,10 @@ export default async function DocumentViewerPage({
           </Link>
         </div>
 
-        <header className="mb-6 border-b border-[#c8ccc0] pb-6">
+        <header
+          data-testid="document-page-header"
+          className="mb-6 border-b border-[#c8ccc0] pb-6"
+        >
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="dg-mono text-[#5b5e56]">
               {docMeta.issuing_authority} · {displayDate} ·{" "}
@@ -284,6 +287,11 @@ export default async function DocumentViewerPage({
           <h1 className="mt-2 text-2xl font-semibold tracking-tight text-[#080909] sm:text-3xl">
             {plainDocTitle}
           </h1>
+          {docMeta.title && docMeta.title !== plainDocTitle && (
+            <p className="mt-1 font-mono text-xs text-[#5b5e56]">
+              {docMeta.title}
+            </p>
+          )}
 
           {plainSummary && (
             <p className="dg-serif mt-2 text-sm text-[#171917]">

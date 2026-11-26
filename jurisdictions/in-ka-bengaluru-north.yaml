@@ -132,6 +132,7 @@ documents:
   summary_by_site: May 2026 final Building (Amendment) Bye-laws for Bengaluru North
     City Corporation omitting ground rent (3.8–3.10) and substituting deviation compounding
     rules (6.0(i) and Tables 2A–2D).
+  plain_title: Bengaluru North Building (Amendment) Bye-laws 2026
 - id: bncc-bbl-amend-2026-04-draft
   title: Bengaluru North City Corporation — Draft Bengaluru City Corporation Building
     (Amendment) Bye-laws, 2026 (01-04-2026)
@@ -192,6 +193,7 @@ documents:
   instrument_type: instrument
   summary_by_site: April 2026 draft Building (Amendment) Bye-laws for Bengaluru North
     City Corporation (replaced by the 14 May 2026 final notification).
+  plain_title: Draft Bengaluru North Building (Amendment) Bye-laws 2026
 amendment_links:
 - amending_clause: bncc-bbl-amend-2026-05:cl_2
   target_clause: bbl-2003:part_II__sec_3.0__cl_3.8

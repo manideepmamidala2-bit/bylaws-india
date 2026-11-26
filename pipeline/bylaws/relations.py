@@ -13,6 +13,64 @@ from bylaws.config import JurisdictionConfig, load_jurisdiction_config
 from bylaws.root import resolve_repo_root
 from bylaws.schema_validator import validate_payload
 
+MIN_PUBLIC_PRECISION: float = 0.80
+STRUCTURALLY_CONFIRMED_KINDS: tuple[str, ...] = (
+    "amends",
+    "incorporates",
+    "corporation_differs",
+)
+PUBLIC_VISIBILITY_RULE: str = (
+    "A relation kind becomes public only when confirmed by structure "
+    "(amends, incorporates, corporation_differs) or when its labelled precision "
+    "in docs/review/relations-labelling.md is at least 0.8."
+)
+
+
+def compute_labelled_precision_by_kind(sheet_path: Path) -> dict[str, float | None]:
+    """Compute labelled precision per relation kind from owner verdicts in `docs/review/relations-labelling.md`."""
+    if not sheet_path.is_file():
+        return {}
+    counts: dict[str, list[int]] = {}
+    for line in sheet_path.read_text(encoding="utf-8").splitlines():
+        if not line.startswith("|") or "Relation ID" in line or "---" in line:
+            continue
+        cells = [c.strip() for c in line.strip("|").split("|")]
+        if len(cells) < 5:
+            continue
+        kind = cells[2].strip("` ")
+        verdict_cell = cells[-1].lower()
+        has_correct = "[x] correct" in verdict_cell
+        has_fp = "[x] fp" in verdict_cell or "[x] false positive" in verdict_cell
+        if has_correct and not has_fp:
+            counts.setdefault(kind, []).append(1)
+        elif has_fp and not has_correct:
+            counts.setdefault(kind, []).append(0)
+    result: dict[str, float | None] = {}
+    for kind, verdicts in counts.items():
+        if len(verdicts) >= 10:
+            result[kind] = round(sum(verdicts) / len(verdicts), 3)
+        else:
+            result[kind] = None
+    return result
+
+
+def is_relation_kind_public(kind: str, labelled_precision: float | None) -> bool:
+    """Return True if `kind` is structurally confirmed or has labelled precision >= `0.8`."""
+    if kind in STRUCTURALLY_CONFIRMED_KINDS:
+        return True
+    return labelled_precision is not None and labelled_precision >= MIN_PUBLIC_PRECISION
+
+
+def _node_active_page(node: dict[str, Any] | None) -> int:
+    if not node:
+        return 1
+    versions = list(node.get("versions") or [])
+    src = versions[-1] if versions else node
+    cits = src.get("citations") or node.get("citations") or []
+    if cits and isinstance(cits[0].get("page"), int) and int(cits[0]["page"]) >= 1:
+        return int(cits[0]["page"])
+    return 1
+
 INTER_INSTRUMENT_PRECEDENCE_RE = re.compile(
     r"\b(?:notwithstanding\s+anything(?:\s+contained\s+in)?|in\s+supersession\s+of|shall\s+prevail|apply\s+mutatis\s+mutandis\s+as\s+part\s+of|in\s+conformity\s+with\s+the\s+(?:provisions?\s+of\s+the\s+[A-Z][A-Za-z\s]+Act|Act,\s+the\s+master\s+plan)|in\s+accordance\s+with\s+the\s+(?:Act,\s+the\s+)?master\s+plan|not\s+inconsistent\s+with\s+(?:this\s+|the\s+)?Act|over\s+and\s+above\s+the\s+ordinarily\s+permissible)[^.;\n]{0,160}",
     re.IGNORECASE,
@@ -153,6 +211,8 @@ def build_jurisdiction_relations(
 
     relations: list[dict[str, Any]] = []
     rel_seq = 0
+    labelling_sheet_path = root / "docs" / "review" / "relations-labelling.md"
+    labelled_precision_by_kind = compute_labelled_precision_by_kind(labelling_sheet_path)
 
     def _add_rel(
         *,
@@ -169,7 +229,7 @@ def build_jurisdiction_relations(
         applies_in: list[str] | None = None,
         method: str = "rule",
         confidence: float = 0.95,
-        status: str = "confirmed",
+        status: str | None = None,
         note: str | None = None,
         public_visible: bool | None = None,
         measured_precision: float | None = None,
@@ -177,14 +237,38 @@ def build_jurisdiction_relations(
     ) -> None:
         nonlocal rel_seq
         rel_seq += 1
-        structurally_public = kind in {"amends", "incorporates", "corporation_differs"}
+        labelled_prec = labelled_precision_by_kind.get(kind)
+        kind_is_public = is_relation_kind_public(kind, labelled_prec)
+        resolved_public = (
+            public_visible if public_visible is not None else kind_is_public
+        )
+        if not kind_is_public:
+            resolved_public = False
+        resolved_status = (
+            "confirmed"
+            if resolved_public
+            else (status if status == "not_yet_reviewed" else "not_yet_reviewed")
+        )
+        resolved_precision = (
+            measured_precision
+            if measured_precision is not None
+            else (
+                labelled_prec
+                if labelled_prec is not None
+                else (1.0 if kind in STRUCTURALLY_CONFIRMED_KINDS else None)
+            )
+        )
+        from_node = node_by_doc_eid.get((from_doc, from_eid))
+        to_node = node_by_doc_eid.get((to_doc, to_eid))
         entry: dict[str, Any] = {
             "id": f"rel_{rel_seq}",
             "kind": kind,
             "from_doc": from_doc,
             "from_eid": from_eid,
+            "from_page": _node_active_page(from_node),
             "to_doc": to_doc,
             "to_eid": to_eid,
+            "to_page": _node_active_page(to_node),
             "topic": topic,
             "parameter": parameter,
             "from_span": from_span[:280],
@@ -192,16 +276,15 @@ def build_jurisdiction_relations(
             "precedence_span": precedence_span[:280] if precedence_span else None,
             "method": method,
             "confidence": round(float(confidence), 3),
-            "status": status,
+            "status": resolved_status,
+            "review_note": (
+                "Checked by rule, not yet by a person"
+                if resolved_public
+                else "Not yet reviewed"
+            ),
             "note": note,
-            "public_visible": (
-                public_visible if public_visible is not None else structurally_public
-            ),
-            "measured_precision": (
-                measured_precision
-                if measured_precision is not None
-                else (1.0 if structurally_public else None)
-            ),
+            "public_visible": resolved_public,
+            "measured_precision": resolved_precision,
         }
         if parameters_incorporated:
             entry["parameters_incorporated"] = parameters_incorporated
@@ -455,6 +538,7 @@ def build_jurisdiction_relations(
     payload: dict[str, Any] = {
         "schema_version": "1.4",
         "jurisdiction": config.id,
+        "public_visibility_rule": PUBLIC_VISIBILITY_RULE,
         "topics": topics_list,
         "succession": succession_list,
         "relations": relations,
@@ -467,10 +551,12 @@ def build_jurisdiction_relations(
     md_lines: list[str] = [
         f"# Relations, Topics, Precedence & Succession QA Report (`{config.id}`)",
         "",
+        f"**Public visibility rule**: {PUBLIC_VISIBILITY_RULE}",
+        "",
         "## 1. Summary Counts by Relation Kind and Visibility",
         "",
-        "| Relation Kind | Total Count | Public Visible | Confirmed |",
-        "|---|---:|---|---:|",
+        "| Relation Kind | Total Count | Public Visible | Review Status |",
+        "|---|---:|---|---|",
     ]
     for k in (
         "amends",
@@ -481,11 +567,19 @@ def build_jurisdiction_relations(
         "precedence",
     ):
         tot_k = by_kind.get(k, 0)
-        pub_k = "Yes (`measured_precision = 1.0`)" if k in {"amends", "incorporates", "corporation_differs"} else "Hidden (`pending owner precision >= 0.8`)"
-        conf_k = sum(1 for r in relations if r["kind"] == k and r["status"] == "confirmed")
-        md_lines.append(f"| `{k}` | {tot_k} | {pub_k} | {conf_k} |")
+        pub_k = (
+            "Yes (`confirmed by structure`)"
+            if k in STRUCTURALLY_CONFIRMED_KINDS
+            else "Hidden (`not yet reviewed; requires labelled precision >= 0.8`)"
+        )
+        stat_k = (
+            f"Checked by rule, not yet by a person ({tot_k})"
+            if k in STRUCTURALLY_CONFIRMED_KINDS
+            else f"Not yet reviewed ({tot_k})"
+        )
+        md_lines.append(f"| `{k}` | {tot_k} | {pub_k} | {stat_k} |")
     md_lines.append(
-        f"| **Total** | **{len(relations)}** | — | **{by_status.get('confirmed', 0)}** |"
+        f"| **Total** | **{len(relations)}** | **{sum(1 for r in relations if r['public_visible'])} public** | **{by_status.get('confirmed', 0)} rule-confirmed, {by_status.get('not_yet_reviewed', 0)} not yet reviewed** |"
     )
     md_lines.append("")
 
@@ -501,7 +595,7 @@ def build_jurisdiction_relations(
         if r["kind"] == "precedence":
             q_span = str(r.get("precedence_span") or "").replace("|", "\\|").replace("\n", " ")
             md_lines.append(
-                f"| `{r['id']}` | `{r['from_doc']}:{r['from_eid']}` | `{r['to_doc']}:{r['to_eid']}` | `{r.get('topic') or 'general'}` | {q_span} |"
+                f"| `{r['id']}` | `{r['from_doc']}:{r['from_eid']}` (p. {r['from_page']}) | `{r['to_doc']}:{r['to_eid']}` (p. {r['to_page']}) | `{r.get('topic') or 'general'}` | {q_span} |"
             )
     md_lines.append("")
 
@@ -517,7 +611,7 @@ def build_jurisdiction_relations(
             "precedence",
         )
     ):
-        _write_relations_labelling_sheet(root / "docs" / "review" / "relations-labelling.md", relations)
+        _write_relations_labelling_sheet(labelling_sheet_path, relations)
 
     return payload, "\n".join(md_lines) + "\n"
 
@@ -536,24 +630,30 @@ def _write_relations_labelling_sheet(out_path: Path, relations: list[dict[str, A
     lines: list[str] = [
         "# Relations Precision Labelling Sheet (60 Items — 10 per Kind)",
         "",
-        "Prepared for owner review (`docs/plans/building-code-plan.md` Part 4). Structurally confirmed kinds (`amends`, `incorporates`, `corporation_differs`) are shown publicly (`public_visible: true`). Heuristic/extracted kinds (`cross_document_reference`, `definition_differs`, `precedence`) remain hidden in the public interface until owner precision measurement reaches at least `0.80` (`8/10` per kind).",
+        "Prepared for owner review (`docs/plans/trust-and-accuracy-plan.md` Part 4).",
+        "",
+        "**Public visibility rule (`>= 0.8` precision threshold):** Show publicly only relation kinds confirmed by structure (`amends`, `incorporates`, `corporation_differs`), which carry the disclosure *\"Checked by rule, not yet by a person\"* inside `Details`. All other relation kinds (`cross_document_reference`, `definition_differs`, `precedence`) are kept in `relations.json` marked `not_yet_reviewed` (`\"not yet reviewed\"`) and remain hidden from the public interface (`public_visible: false`) until owner verdicts are filled in this sheet and the kind's labelled precision is at least `0.8` (`8/10` correct).",
         "",
         "## Instructions for Owner Review",
         "",
-        "Mark each sampled relation row with `[x] Correct` or `[ ] False Positive` in the **Owner Verdict** column.",
+        "Mark each sampled relation row with `[x] Correct` or `[x] FP` in the **Owner Verdict** column. Do not fill by automation.",
         "",
     ]
 
     item_num = 0
     for kind in kinds_order:
         kind_items = [r for r in relations if r["kind"] == kind][:10]
-        vis_badge = "Public (`public_visible: true`)" if kind in {"amends", "incorporates", "corporation_differs"} else "Hidden (`public_visible: false` until precision >= 0.8)"
+        vis_badge = (
+            "Public (`public_visible: true` · Checked by rule, not yet by a person)"
+            if kind in STRUCTURALLY_CONFIRMED_KINDS
+            else "Hidden (`status: not_yet_reviewed`, `public_visible: false` until labelled precision >= 0.8)"
+        )
         lines.extend(
             [
                 f"## Kind: `{kind}` ({len(kind_items)} sampled · {vis_badge})",
                 "",
-                "| # | Relation ID | Kind | From (`doc:eid`) | To (`doc:eid`) | Parameter / Subject | From Excerpt | To Excerpt | Owner Verdict |",
-                "|---:|---|---|---|---|---|---|---|---|",
+                "| # | Relation ID | Kind | From (`doc:eid`) | From Page | To (`doc:eid`) | To Page | Parameter / Subject | From Excerpt | To Excerpt | Owner Verdict |",
+                "|---:|---|---|---|---:|---|---:|---|---|---|---|",
             ]
         )
         for r in kind_items:
@@ -561,8 +661,10 @@ def _write_relations_labelling_sheet(out_path: Path, relations: list[dict[str, A
             f_span = str(r.get("from_span") or "").replace("|", "\\|").replace("\n", " ")[:90]
             t_span = str(r.get("to_span") or "").replace("|", "\\|").replace("\n", " ")[:90]
             param = str(r.get("parameter") or r.get("topic") or "").replace("|", "\\|")
+            f_pg = int(r.get("from_page") or 1)
+            t_pg = int(r.get("to_page") or 1)
             lines.append(
-                f"| {item_num} | `{r['id']}` | `{kind}` | `{r['from_doc']}:{r['from_eid']}` | `{r['to_doc']}:{r['to_eid']}` | `{param}` | {f_span} | {t_span} | `[ ] Correct / [ ] FP` |"
+                f"| {item_num} | `{r['id']}` | `{kind}` | `{r['from_doc']}:{r['from_eid']}` | p. {f_pg} | `{r['to_doc']}:{r['to_eid']}` | p. {t_pg} | `{param}` | {f_span} | {t_span} | `[ ] Correct / [ ] FP` |"
             )
         lines.append("")
 

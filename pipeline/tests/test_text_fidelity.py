@@ -99,7 +99,7 @@ def test_all_bengaluru_provisions_pass_page_text_fidelity() -> None:
 
 
 def test_fidelity_verifier_is_falsifiable_on_editorial_or_invented_words() -> None:
-    """Falsifiability check: injecting non-source words into a provision fails `verify_jurisdiction_text_fidelity` and reports differing words."""
+    """Planted-fault test (a): altering one word in a published provision fails `verify_jurisdiction_text_fidelity` against stored page text."""
     repo_root = resolve_repo_root()
     cfg = load_jurisdiction_config("in-ka-bengaluru-south")
     trees = _load_clause_trees("in-ka-bengaluru-south", repo_root)
@@ -114,6 +114,80 @@ def test_fidelity_verifier_is_falsifiable_on_editorial_or_invented_words() -> No
     assert any(
         "syntheticinventedwordxyz" in f["differing_words"]
         for f in report["failures"]
+    )
+
+
+def test_planted_fault_changed_cited_page_number_fails_ci() -> None:
+    """Planted-fault test (b): changing one cited page number on a published provision makes `verify_jurisdiction_text_fidelity` fail in CI."""
+    repo_root = resolve_repo_root()
+    cfg = load_jurisdiction_config("in-ka-bengaluru-south")
+    trees = _load_clause_trees("in-ka-bengaluru-south", repo_root)
+    mutated_trees = {"rmp2015-zr": copy.deepcopy(trees["rmp2015-zr"])}
+    target = next(
+        c
+        for c in mutated_trees["rmp2015-zr"]["clauses"]
+        if c["eid"] == "chp_4__cl_4.1__cl_4.1.1"
+    )
+    # Shift cited page from p. 28 to p. 29 (adjacent page)
+    target["citations"][0]["page"] = 29
+    target["versions"][0]["citations"][0]["page"] = 29
+    report = verify_jurisdiction_text_fidelity(cfg, mutated_trees, repo_root=repo_root)
+    assert len(report["failures"]) >= 1
+    assert any(
+        f["eid"] == "chp_4__cl_4.1__cl_4.1.1" and f["pages"] == [29]
+        for f in report["failures"]
+    )
+
+
+def test_planted_fault_missing_page_text_and_checksum_mismatch_fail_not_skip(
+    tmp_path: Path,
+) -> None:
+    """Planted-fault test (c): missing stored page text for a cited page and PDF SHA-256 checksum mismatches fail `verify_jurisdiction_text_fidelity` (never skip)."""
+    import gzip
+    import shutil
+
+    repo_root = resolve_repo_root()
+    cfg = load_jurisdiction_config("in-ka-bengaluru-south")
+    trees = _load_clause_trees("in-ka-bengaluru-south", repo_root)
+
+    # 1. Missing stored page text for a cited page (e.g. page 999)
+    mutated_trees = {"rmp2015-zr": copy.deepcopy(trees["rmp2015-zr"])}
+    target = next(
+        c
+        for c in mutated_trees["rmp2015-zr"]["clauses"]
+        if c["eid"] == "chp_4__cl_4.1__cl_4.1.1"
+    )
+    target["citations"][0]["page"] = 999
+    target["versions"][0]["citations"][0]["page"] = 999
+    report_missing_page = verify_jurisdiction_text_fidelity(
+        cfg, mutated_trees, repo_root=repo_root
+    )
+    assert any(
+        f["eid"] == "chp_4__cl_4.1__cl_4.1.1"
+        and "Missing stored page text" in f["reason"]
+        for f in report_missing_page["failures"]
+    )
+
+    # 2. Corrupted PDF SHA-256 checksum in `data/page_text/` in an isolated root without `data/interim/` or `data/raw/`
+    iso_root = tmp_path / "ci_no_interim"
+    shutil.copytree(repo_root / "data" / "page_text", iso_root / "data" / "page_text")
+    shutil.copytree(repo_root / "data" / "overrides", iso_root / "data" / "overrides")
+    shutil.copytree(repo_root / "jurisdictions", iso_root / "jurisdictions")
+    pt_file = iso_root / "data" / "page_text" / "rmp2015-zr.pages.json.gz"
+    with gzip.open(pt_file, "rt", encoding="utf-8") as gz:
+        pt_payload = json.loads(gz.read())
+    pt_payload["sha256"] = "0" * 64
+    pt_file.write_bytes(
+        gzip.compress(json.dumps(pt_payload).encode("utf-8"), compresslevel=9, mtime=0)
+    )
+    report_bad_sha = verify_jurisdiction_text_fidelity(
+        cfg, {"rmp2015-zr": trees["rmp2015-zr"]}, repo_root=iso_root
+    )
+    assert any(
+        f["doc_id"] == "rmp2015-zr"
+        and f["eid"] == "<document_checksum>"
+        and "SHA-256 mismatch" in f["reason"]
+        for f in report_bad_sha["failures"]
     )
 
 
@@ -240,12 +314,12 @@ def test_home_page_far_story_excerpts_pass_verbatim_fidelity() -> None:
             "given below.",
         ),
         (
-            "Step 2 (2007 RMP 2015 4.1.1)",
+            "Step 2 (2007 RMP 2015 Table 10)",
             "rmp2015-zr",
-            "chp_4__cl_4.1__cl_4.1.1",
+            "chp_4__cl_4.1__cl_4.1.3__tbl_10",
             "rmp2015-zr",
             28,
-            "The areas of the city which have predominantly residential land use pattern",
+            "Table 10: FAR and Ground Coverage in Residential (Main)",
             None,
         ),
         (
@@ -305,14 +379,32 @@ def test_home_page_far_story_excerpts_pass_verbatim_fidelity() -> None:
             parent_id=cfg.parent,
             repo_root=repo_root,
         )
-        valid_tokens: set[str] = set()
-        for p in (page_num - 1, page_num, page_num + 1):
-            valid_tokens |= page_sets.get(p, set())
+        assert page_num in page_sets, f"Missing stored page {page_num} for {page_doc_id}"
+        valid_tokens = page_sets[page_num]
         missing = [
             w for w in extract_word_tokens(excerpt) if w not in valid_tokens
         ]
         assert not missing, (
             f"{step_label} ({page_doc_id} p.{page_num}) has words not on source page: {missing}"
+        )
+
+    if built_html_txt is not None:
+        # Part 3.3 & 3.4: verify 2017 and 2007 attributions and notes on built home page
+        assert (
+            "Building Bye-laws 2003, bye-law 1.4 (inserted by notification UDD 14 TTP 2017, 28 October 2017)"
+            in built_html_txt
+        )
+        assert (
+            "This notification also issued the Model Building Bye-laws, which do not otherwise apply in Bengaluru."
+            in built_html_txt
+        )
+        assert "/j/in-ka-bengaluru/documents/bbl-2003#node-part_I__sec_1.0__cl_1.4" in built_html_txt
+        assert "/j/in-ka-bengaluru/documents/ka-model-bbl-2017#node-chp_1__item_3" in built_html_txt
+        assert (
+            "Shown from Table 10&#x27;s own caption and column headings on p. 28"
+            in built_html_txt
+            or "Shown from Table 10's own caption and column headings on p. 28"
+            in built_html_txt
         )
 
 

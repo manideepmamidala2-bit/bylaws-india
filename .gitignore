@@ -11,7 +11,7 @@
 .env.*
 !.env.example
 
-# Pipeline generated data (only data/overrides/ and data/reports/ are committed)
+# Pipeline generated data (only data/overrides/, data/reports/, and data/page_text/ are committed)
 data/raw/
 data/interim/
 data/processed/

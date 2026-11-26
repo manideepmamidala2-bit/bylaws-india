@@ -1037,7 +1037,9 @@ export function ClauseTree({
                   <div className="border-t border-[#c8ccc0] pt-2 font-mono text-[10px] text-[#5b5e56]">
                     Address: {eid} · Record:{" "}
                     {clause.record_id ?? clause.clause_id} ·{" "}
-                    {clause.verification.replace("_", " ")}
+                    {clause.verification === "machine_checked"
+                      ? "Checked by rule, not yet by a person (machine checked)"
+                      : clause.verification.replace("_", " ")}
                   </div>
                 </div>
               </details>

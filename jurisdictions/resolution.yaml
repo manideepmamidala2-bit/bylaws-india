@@ -97,12 +97,12 @@ steps:
       - floors_max
       - parking_requirement
     authority:
-      doc_id: bbl-2003
-      eid: part_I__sec_1.0__cl_1.4
-      clause_id: "bbl-2003:1.4"
+      doc_id: ka-model-bbl-2017
+      eid: chp_1__item_3
+      clause_id: "bbl-2003:1.4 (inserted by UDD 14 TTP 2017)"
       page: 2
       quote: "All mandatory Master Plan or Zonal Regulations regarding use, land use, coverage, FAR, setback or open space, height, number of stories, number of dwelling units, parking standards etc. for various categories of buildings including modification therein made from time to time shall be applicable mutatis mutandis in these Bye-Laws under this clause."
-      official_url: "https://site.bbmp.gov.in/PDF/Bangalore-Building-Byelaws-%202003.pdf"
+      official_url: "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/Model%20Building%20Byelaws%20Notification%20No.%20UDD%2014%20TTP%202017%20(P-4)%20Bengaluru,%20Dated%2028-10-2017%20.pdf"
     verification: machine_checked
 
   - step_number: 5
@@ -136,3 +136,126 @@ steps:
       quote: null
       official_url: null
     verification: machine_checked
+
+no_limit_in_law_rules:
+  - rule_id: r_main_height_above_250m2_and_road_9m
+    parameters:
+      - building_height_max_m
+    zones:
+      - R-MAIN
+      - R-MIX
+    uses: null
+    min_plot_area_m2: 250.0
+    min_plot_area_inclusive: false
+    max_plot_area_m2: null
+    max_plot_area_inclusive: true
+    min_road_width_m: 9.0
+    min_road_width_inclusive: true
+    max_road_width_m: null
+    max_road_width_inclusive: true
+    plain_reason: "Fixed height caps in Residential (Main) apply only where road width is less than 9.0 m under clause 4.1.2(b) or on plots up to 250 m² under Table 8 (12.0 m / 15.0 m with stilt); on plots above 250 m² on roads 9.0 m and wider, building height is governed by FAR and Table 9 setbacks without a separate metre height cap"
+    authority:
+      doc_id: rmp2015-zr-amend-2026-01
+      eid: cl_11
+      clause_id: "rmp2015-zr-amend-2026-01:4.1.2(b)"
+      page: 5
+      quote: "if the road width is less than 9.0 m., then the maximum height is restricted to 15.0m (including stilt floor) irrespective of the FAR permissible"
+      official_url: "https://updates.bbmp.gov.in/v1/api/file/948358478137-Setback%20Notification.pdf"
+
+  - rule_id: r_main_no_separate_floor_cap_after_2026
+    parameters:
+      - floors_max
+    zones:
+      - R-MAIN
+      - R-MIX
+    uses: null
+    min_plot_area_m2: null
+    min_plot_area_inclusive: true
+    max_plot_area_m2: null
+    max_plot_area_inclusive: true
+    min_road_width_m: null
+    min_road_width_inclusive: true
+    max_road_width_m: null
+    max_road_width_inclusive: true
+    plain_reason: "Clause 4.1.2(b) as amended on 5 January 2026 replaced the 2007 'Stilt + GF + 2 floors' cap with a height restriction on roads under 9.0 m and sets no separate maximum floor count in Residential (Main)"
+    authority:
+      doc_id: rmp2015-zr-amend-2026-01
+      eid: cl_11
+      clause_id: "rmp2015-zr-amend-2026-01:4.1.2(b)"
+      page: 5
+      quote: "if the road width is less than 9.0 m., then the maximum height is restricted to 15.0m (including stilt floor) irrespective of the FAR permissible"
+      official_url: "https://updates.bbmp.gov.in/v1/api/file/948358478137-Setback%20Notification.pdf"
+
+  - rule_id: commercial_table_14_no_fixed_height_or_floors_cap
+    parameters:
+      - building_height_max_m
+      - floors_max
+    zones:
+      - C-BIZ
+      - C-CENTRAL
+      - C-AXES
+    uses: null
+    min_plot_area_m2: null
+    min_plot_area_inclusive: true
+    max_plot_area_m2: null
+    max_plot_area_inclusive: true
+    min_road_width_m: null
+    min_road_width_inclusive: true
+    max_road_width_m: null
+    max_road_width_inclusive: true
+    plain_reason: "Table 14 (Commercial Business) prescribes Ground Coverage and FAR by plot size and road width without a separate fixed building height or floor cap; height is governed by FAR, road width, and Table 9 setbacks"
+    authority:
+      doc_id: rmp2015-zr
+      eid: chp_4__cl_4.3__cl_4.3.2__tbl_14
+      clause_id: "rmp2015-zr:Table 14"
+      page: 32
+      quote: "Table 14: FAR and Ground coverage in Commercial (Business)"
+      official_url: "https://web.archive.org/web/20220721123900id_/http://site.bbmp.gov.in/PDF/townplanning/Zoning_Regulations_RMP2015f%20(1).pdf"
+
+  - rule_id: industrial_table_16_no_fixed_height_or_floors_cap
+    parameters:
+      - building_height_max_m
+      - floors_max
+    zones:
+      - I-GEN
+      - I-HITECH
+    uses: null
+    min_plot_area_m2: null
+    min_plot_area_inclusive: true
+    max_plot_area_m2: null
+    max_plot_area_inclusive: true
+    min_road_width_m: null
+    min_road_width_inclusive: true
+    max_road_width_m: null
+    max_road_width_inclusive: true
+    plain_reason: "Table 16 (Industrial I General, as substituted on 5 January 2026) prescribes Ground cover, FAR, and Setbacks by plot size without a separate fixed building height or floor cap"
+    authority:
+      doc_id: rmp2015-zr-amend-2026-01
+      eid: item_iii__tbl_16
+      clause_id: "rmp2015-zr-amend-2026-01:Table 16"
+      page: 6
+      quote: "Table 16: Industrial I (General)"
+      official_url: "https://updates.bbmp.gov.in/v1/api/file/948358478137-Setback%20Notification.pdf"
+
+  - rule_id: premium_far_and_tdr_only_above_9m_road
+    parameters:
+      - far_premium_additional_max
+      - tdr_receivable_max
+    zones: null
+    uses: null
+    min_plot_area_m2: null
+    min_plot_area_inclusive: true
+    max_plot_area_m2: null
+    max_plot_area_inclusive: true
+    min_road_width_m: null
+    min_road_width_inclusive: true
+    max_road_width_m: 9.0
+    max_road_width_inclusive: true
+    plain_reason: "Chapter 11 Table 27 grants Premium FAR and TDR only on roads above 9 m in width (>9 m to <=12 m, >12 m to <=18 m, and >18 m); no Premium FAR or TDR allowance applies on roads up to 9 m"
+    authority:
+      doc_id: rmp2015-zr-amend-2025-04
+      eid: chp_11_2
+      clause_id: "rmp2015-zr-amend-2025-04:Chapter 11 Table 27"
+      page: 2
+      quote: "The maximum additional FAR available for utilization for development of additional area in any property by purchase of Premium FAR shall be not more than the maximum extent given in the table below and only on such roads and areas as given in table below:"
+      official_url: "https://updates.bbmp.gov.in/v1/api/file/1744026273501-Final%20Notification%20Premium%20FAR.pdf"

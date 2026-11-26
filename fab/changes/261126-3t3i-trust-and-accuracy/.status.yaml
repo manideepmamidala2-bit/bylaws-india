@@ -1,0 +1,53 @@
+id: 3t3i
+name: 261126-3t3i-trust-and-accuracy
+created: 2026-11-26T13:31:24Z
+created_by: manideepmamidala2-bit
+change_type: fix
+issues: []
+progress:
+    intake: done
+    apply: done
+    review: done
+    hydrate: done
+    ship: done
+    review-pr: pending
+plan:
+    generated: true
+    task_count: 5
+    acceptance_count: 18
+    acceptance_completed: 18
+confidence:
+    certain: 6
+    confident: 0
+    tentative: 0
+    unresolved: 0
+    score: 5.0
+    fuzzy: true
+    dimensions:
+        signal: 100.0
+        reversibility: 95.0
+        competence: 95.0
+        disambiguation: 100.0
+stage_metrics:
+    intake: {started_at: "2026-11-26T13:31:24Z", driver: fab-new, iterations: 1, completed_at: "2026-11-26T13:49:57Z"}
+    apply: {started_at: "2026-11-26T13:49:57Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-26T16:05:27Z"}
+    review: {started_at: "2026-11-26T16:05:27Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-26T16:12:40Z"}
+    hydrate: {started_at: "2026-11-26T16:12:40Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-26T16:16:34Z"}
+    ship: {started_at: "2026-11-26T16:16:34Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-26T16:17:05Z"}
+prs:
+    - https://github.com/manideepmamidala2-bit/bylaws-india/pull/20
+base_branch: main
+true_impact:
+    added: 6372
+    deleted: 1589
+    net: 4783
+    tests:
+        added: 807
+        deleted: 34
+        net: 773
+    computed_at: "2026-11-26T16:17:05Z"
+    computed_at_stage: ship
+summary: Stored PDF page text with SHA-256 verification for CI fidelity checks, replaced map 0.0032 m claim with verification-report street offsets in Bylaw One design, added plain_title register names and fixed 2007/2017 home attributions, marked unreviewed relations with >= 0.8 precision rule, and made resolver return needs depth/width/height and distinguish no limit in law from unmodelled data.
+# base_branch: written by /git-branch or /fab-new when the change's branch is created (no placeholder here).
+# true_impact: lazily created on first stage-finish that computes it (no placeholder here).
+last_updated: 2026-11-26T16:17:05Z

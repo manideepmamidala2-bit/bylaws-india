@@ -465,6 +465,10 @@
           "type": "string",
           "minLength": 1
         },
+        "plain_title": {
+          "type": ["string", "null"],
+          "default": null
+        },
         "issuing_authority": {
           "type": "string",
           "minLength": 1

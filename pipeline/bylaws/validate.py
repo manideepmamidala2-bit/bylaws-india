@@ -661,10 +661,11 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
             and doc.id in (d.amends or [])
         ]
         for unobt in unobtained_amends_for_base:
+            unobt_label = getattr(unobt, "plain_title", None) or unobt.title
             known_gaps.append(
                 {
                     "doc_id": doc.id,
-                    "description": f"{unobt.title} could not be obtained from official sources; consolidated text and parameter values may not reflect changes made by it.",
+                    "description": f"{unobt_label} could not be obtained from official sources; consolidated text and parameter values may not reflect changes made by it.",
                 }
             )
 

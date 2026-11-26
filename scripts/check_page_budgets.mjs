@@ -116,6 +116,10 @@ const FORBIDDEN_PRIMARY_LAYER_PATTERNS = [
     regex:
       /Structured Building Bylaws|Statutory Resolution Cards|Local Graph|Local Knowledge Graph|One-Hop Neighborhood|\btopic:/i,
   },
+  {
+    label: "Grid-fit RMSE presented outside Details",
+    regex: /\b0\.0032\s*m\b/i,
+  },
 ];
 
 const FORBIDDEN_ANYWHERE_HTML_PATTERNS = [
@@ -180,6 +184,7 @@ function toTitleCaseIfScreamingJs(title) {
 
 const registeredReplacedByLabels = new Set();
 const registeredPlainTitles = new Set();
+const fullOfficialTitlesDisallowedOutsideDetails = new Set();
 if (manifestObj) {
   for (const j of manifestObj.jurisdictions || []) {
     if (j.visibility === "test") continue;
@@ -194,7 +199,10 @@ if (manifestObj) {
     if (fs.existsSync(docsPath)) {
       const docs = JSON.parse(fs.readFileSync(docsPath, "utf8"));
       for (const d of docs) {
-        const plainTitle = toTitleCaseIfScreamingJs(String(d.title || "").trim());
+        const rawOfficialTitle = String(d.title || "").trim();
+        const plainTitle =
+          String(d.plain_title || "").trim() ||
+          toTitleCaseIfScreamingJs(rawOfficialTitle);
         const dt = formatHumanDateJs(d.effective_from || d.notified_date);
         if (plainTitle) {
           registeredPlainTitles.add(plainTitle);
@@ -202,6 +210,13 @@ if (manifestObj) {
             registeredReplacedByLabels.add(`Replaced by ${plainTitle}, ${dt}`);
           }
           registeredReplacedByLabels.add(`Replaced by ${plainTitle}`);
+        }
+        if (
+          rawOfficialTitle &&
+          d.plain_title &&
+          rawOfficialTitle !== String(d.plain_title).trim()
+        ) {
+          fullOfficialTitlesDisallowedOutsideDetails.add(rawOfficialTitle);
         }
       }
     }
@@ -295,7 +310,8 @@ for (const htmlPath of htmlFiles) {
       }
     }
 
-    // Part 3.3 Name check (CI): verify every "Replaced by <name>, <date>" label in built HTML matches a registered instrument
+    // Part 3.2 & 3.3 Name check (CI): verify every "Replaced by <name>, <date>" label in built HTML matches a registered plain instrument name,
+    // and fail if any full official title appears outside `<details>` or `<header data-testid="document-page-header">`.
     for (const repMatch of cleanNoComments.matchAll(
       />(Replaced by [^<]+)</g
     )) {
@@ -310,6 +326,34 @@ for (const htmlPath of htmlFiles) {
       ) {
         violations.push(
           `${relRoute}: Name check failed — unregistered instrument reference ${JSON.stringify(repText)}`
+        );
+      }
+    }
+
+    const htmlWithoutDocHeaderAndVerbatimBody = htmlText
+      .replace(
+        /<header\b[^>]*data-testid="document-page-header"[^>]*>[\s\S]*?<\/header>/gi,
+        " "
+      )
+      .replace(
+        /<article\b[^>]*data-testid="provision-item-[^"]*"[^>]*>[\s\S]*?<\/article>/gi,
+        " "
+      );
+    const primaryOutsideDetailsAndDocHeader = stripDetailsAndTags(
+      htmlWithoutDocHeaderAndVerbatimBody
+    )
+      .replace(/&amp;/g, "&")
+      .replace(/&#x27;/g, "'")
+      .replace(/\s+/g, " ")
+      .trim();
+    for (const officialTitle of fullOfficialTitlesDisallowedOutsideDetails) {
+      const normOfficial = officialTitle.replace(/\s+/g, " ").trim();
+      if (
+        normOfficial.length >= 20 &&
+        primaryOutsideDetailsAndDocHeader.includes(normOfficial)
+      ) {
+        violations.push(
+          `${relRoute}: Name check failed — full official title ${JSON.stringify(normOfficial)} appeared outside Details or document page header`
         );
       }
     }
@@ -469,6 +513,82 @@ if (fs.existsSync(cityTopicsDir)) {
           }
         }
       }
+    }
+  }
+}
+
+// Part 2.2 Map accuracy check (CI): verify map accuracy text is generated from `map-verification.md`
+// and that UI source files do not hard-code the accuracy figures.
+const southMapReportPath = path.join(
+  repoRoot,
+  "data",
+  "reports",
+  "in-ka-bengaluru-south",
+  "map-verification.md"
+);
+if (fs.existsSync(southMapReportPath)) {
+  const reportText = fs.readFileSync(southMapReportPath, "utf8");
+  const roadMatch =
+    /OpenStreetMap Roads[^:]*:\s*`\d+`\s*vector road segments compared;\s*\*\*Median offset:\s*`([0-9.]+)\s*m`\*\*,\s*\*\*90th-percentile \(`p90`\) offset:\s*`([0-9.]+)\s*m`\*\*/.exec(
+      reportText
+    );
+  const rmseMatch = /\*\*Affine Fit RMSE\*\*:\s*\*\*`([0-9.]+)\s*m`\*\*/.exec(
+    reportText
+  );
+  if (!roadMatch || !rmseMatch) {
+    violations.push(
+      "Map accuracy check failed — could not parse median/p90/RMSE from data/reports/in-ka-bengaluru-south/map-verification.md"
+    );
+  } else {
+    const expMedian = Math.round(Number(roadMatch[1]));
+    const expP90 = Math.round(Number(roadMatch[2]));
+    const expRmse = rmseMatch[1];
+    const expectedAccuracySentence = `Zone boundaries are approximate: typically about ${expMedian} m from street centre-lines, and within about ${expP90} m in 9 out of 10 places.`;
+    for (const jurId of [
+      "in-ka-bengaluru",
+      "in-ka-bengaluru-central",
+      "in-ka-bengaluru-north",
+      "in-ka-bengaluru-south",
+      "in-ka-bengaluru-east",
+      "in-ka-bengaluru-west",
+    ]) {
+      const mapHtmlPath = path.join(nextServerAppDir, "j", `${jurId}.html`);
+      if (fs.existsSync(mapHtmlPath)) {
+        const mapHtml = fs.readFileSync(mapHtmlPath, "utf8");
+        const mapPrimary = stripDetailsAndTags(mapHtml)
+          .replace(/\s+/g, " ")
+          .trim();
+        if (!mapPrimary.includes(expectedAccuracySentence)) {
+          violations.push(
+            `/j/${jurId}: Map accuracy check failed — missing verification-report-generated sentence ${JSON.stringify(expectedAccuracySentence)}`
+          );
+        }
+        if (!mapHtml.includes(`${expRmse} m RMSE`)) {
+          violations.push(
+            `/j/${jurId}: Map accuracy check failed — missing sheet-fitting error (${expRmse} m RMSE) inside Details`
+          );
+        }
+      }
+    }
+  }
+}
+
+for (const srcDir of ["app", "components", "lib"]) {
+  const fullDir = path.join(repoRoot, srcDir);
+  if (!fs.existsSync(fullDir)) continue;
+  for (const tsFile of [
+    ...collectFiles(fullDir, ".ts"),
+    ...collectFiles(fullDir, ".tsx"),
+  ]) {
+    if (tsFile.endsWith("generated.ts")) continue;
+    const srcText = fs.readFileSync(tsFile, "utf8");
+    const hardCodedMatch = srcText.match(
+      /0\.0032|typically about 8\s*m|within about 21\s*m/i
+    );
+    if (hardCodedMatch) {
+      violations.push(
+        `${path.relative(repoRoot, tsFile)}: Map accuracy check failed — hard-coded accuracy figure ${JSON.stringify(hardCodedMatch[0])} found in source`
+      );
     }
   }
 }

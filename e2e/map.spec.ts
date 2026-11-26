@@ -87,6 +87,27 @@ test.describe("Bylaw One — Home, Subject, Document & Map E2E Suite", () => {
         expect(href).toMatch(/#page=\d+$/);
       }
 
+      // Verify Step 2 & Step 3 attributions on Home page
+      const step2 = page.getByTestId("far-story-step-2");
+      await expect(step2).toContainText(
+        "Table 10: FAR and Ground Coverage in Residential (Main)"
+      );
+      await expect(step2).toContainText(
+        "Shown from Table 10's own caption and column headings on p. 28"
+      );
+      const step3 = page.getByTestId("far-story-step-3");
+      await expect(step3).toContainText(
+        "Building Bye-laws 2003, bye-law 1.4 (inserted by notification UDD 14 TTP 2017, 28 October 2017)"
+      );
+      await expect(step3).toContainText(
+        "This notification also issued the Model Building Bye-laws, which do not otherwise apply in Bengaluru."
+      );
+      await step2.scrollIntoViewIfNeeded();
+      await page.screenshot({
+        path: `/tmp/opencode/home-steps-2-3-${viewport.width}px.png`,
+        fullPage: false,
+      });
+
       // 03 / The code, by subject (11 subjects)
       const subjectList = page.getByTestId("home-subject-list");
       await expect(subjectList.locator("li")).toHaveCount(11);
@@ -149,6 +170,12 @@ test.describe("Bylaw One — Home, Subject, Document & Map E2E Suite", () => {
       );
       await expect(paramTable).toContainText(/6 m/);
       await expect(paramTable).toContainText(/12% of plot depth/);
+      await expect(paramTable).toContainText(/Zoning amendment, 5 January 2026/i);
+      await paramTable.scrollIntoViewIfNeeded();
+      await page.screenshot({
+        path: `/tmp/opencode/subject-source-column-${viewport.width}px.png`,
+        fullPage: false,
+      });
 
       const olderDetails = page.getByTestId("older-or-replaced-rules");
       await expect(olderDetails).toBeVisible();
@@ -280,8 +307,15 @@ test.describe("Bylaw One — Home, Subject, Document & Map E2E Suite", () => {
 
       // Location summary shows area, ward, corporation and zone only (no plot inputs)
       await expect(page.getByTestId("map-location-summary")).toBeVisible();
+      await expect(page.getByTestId("map-accuracy-statement")).toContainText(
+        "Zone boundaries are approximate: typically about 8 m from street centre-lines, and within about 21 m in 9 out of 10 places."
+      );
       await expect(page.getByLabel(/Plot area/i)).toHaveCount(0);
       await expect(page.getByLabel(/Road width/i)).toHaveCount(0);
+      await page.screenshot({
+        path: `/tmp/opencode/map-${viewport.width}px.png`,
+        fullPage: false,
+      });
     });
   }
 
@@ -300,9 +334,12 @@ test.describe("Bylaw One — Home, Subject, Document & Map E2E Suite", () => {
 
     await expect(
       page.getByRole("heading", {
-        name: /Mahanagara Palike Building Bye-Laws 2003/i,
+        name: /Building Bye-laws 2003/i,
       })
     ).toBeVisible();
+    await expect(
+      page.getByTestId("document-page-header")
+    ).toContainText(/BANGALORE MAHANAGARA PALIKE BUILDING BYE-LAWS 2003/i);
     await expect(
       page.getByRole("complementary", { name: /Document outline navigation/i })
     ).toBeVisible();

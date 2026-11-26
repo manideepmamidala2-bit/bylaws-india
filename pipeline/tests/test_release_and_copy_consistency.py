@@ -152,6 +152,10 @@ def test_built_html_primary_layer_language_check_outside_details() -> None:
             "Raw unit token",
             re.compile(r"\b(sq_m|sq_ft)\b"),
         ),
+        (
+            "Grid-fit RMSE outside Details",
+            re.compile(r"\b0\.0032\s*m\b", re.IGNORECASE),
+        ),
     ]
 
     html_files = sorted(next_app_dir.rglob("*.html"))
@@ -197,14 +201,50 @@ def test_part3_one_name_and_date_per_instrument_from_register() -> None:
     public_jurs = [j for j in manifest["jurisdictions"] if j.get("visibility") != "test"]
 
     registered_replaced_labels: set[str] = set()
+    disallowed_full_titles: set[str] = set()
     for jur in public_jurs:
         rel_dir = PUBLIC_DATA_DIR / jur["id"] / str(jur["latest_release"])
         docs = json.loads((rel_dir / "documents.json").read_text(encoding="utf-8"))
         for d in docs:
-            plain_title = _format_short_doc_label(type("DocObj", (), {"title": d.get("title")})(), d["doc_id"])
+            plain_title = _format_short_doc_label(
+                type("DocObj", (), {"title": d.get("title"), "plain_title": d.get("plain_title")})(),
+                d["doc_id"],
+            )
             dt = _format_human_date_plain(d.get("effective_from") or d.get("notified_date"))
             registered_replaced_labels.add(f"Replaced by {plain_title}, {dt}")
             registered_replaced_labels.add(f"Replaced by {plain_title}")
+            raw_title = str(d.get("title") or "").strip()
+            if raw_title and d.get("plain_title") and raw_title != str(d["plain_title"]).strip():
+                disallowed_full_titles.add(" ".join(raw_title.split()))
+
+    next_app_dir = REPO_ROOT / ".next" / "server" / "app"
+    if next_app_dir.is_dir():
+        for html_path in sorted(next_app_dir.rglob("*.html")):
+            rel = html_path.relative_to(next_app_dir).as_posix()
+            if "xx-test-fixture" in rel or "_not-found" in rel:
+                continue
+            raw_html = html_path.read_text(encoding="utf-8")
+            no_doc_header = re.sub(
+                r'<header\b[^>]*data-testid="document-page-header"[^>]*>[\s\S]*?</header>',
+                " ",
+                raw_html,
+                flags=re.IGNORECASE,
+            )
+            no_verbatim_provisions = re.sub(
+                r'<article\b[^>]*data-testid="provision-item-[^"]*"[^>]*>[\s\S]*?</article>',
+                " ",
+                no_doc_header,
+                flags=re.IGNORECASE,
+            )
+            primary_txt = (
+                " ".join(_strip_details_and_tags(no_verbatim_provisions).split())
+                .replace("&amp;", "&")
+                .replace("&#x27;", "'")
+            )
+            for full_t in disallowed_full_titles:
+                assert full_t not in primary_txt, (
+                    f"{rel} contains full official title outside Details/header: {full_t!r}"
+                )
 
     for jur in public_jurs:
         rel_dir = PUBLIC_DATA_DIR / jur["id"] / str(jur["latest_release"])
@@ -297,5 +337,54 @@ def test_part5_byelaw_6_0_i_corporation_wording_and_byelaw_1_4_label_check() -> 
         assert "Previous wording (" in corp_60i_html
         assert "within 5% of" in corp_60i_html
         assert "Master plan rules apply instead" not in corp_60i_html
+
+
+def test_map_accuracy_statement_generated_from_verification_report_and_not_hardcoded() -> None:
+    """Trust and Accuracy Part 2: Map accuracy text is generated from `map-verification.md` median and 90th-percentile values, `0.0032 m` is inside Details as sheet-fitting error, and UI source files contain zero hard-coded accuracy figures."""
+    report_md = (
+        REPO_ROOT / "data" / "reports" / "in-ka-bengaluru-south" / "map-verification.md"
+    ).read_text(encoding="utf-8")
+    m_road = re.search(
+        r"OpenStreetMap Roads[^:]*:\s*`\d+`\s*vector road segments compared;\s*\*\*Median offset:\s*`([0-9.]+)\s*m`\*\*,\s*\*\*90th-percentile \(`p90`\) offset:\s*`([0-9.]+)\s*m`\*\*",
+        report_md,
+    )
+    m_rmse = re.search(
+        r"\*\*Affine Fit RMSE\*\*:\s*\*\*`([0-9.]+)\s*m`\*\*",
+        report_md,
+    )
+    assert m_road is not None and m_rmse is not None
+    exp_median = round(float(m_road.group(1)))
+    exp_p90 = round(float(m_road.group(2)))
+    exp_rmse = m_rmse.group(1)
+    expected_sentence = (
+        f"Zone boundaries are approximate: typically about {exp_median} m from street centre-lines, "
+        f"and within about {exp_p90} m in 9 out of 10 places."
+    )
+
+    # 1. Verify no hard-coded accuracy literals in UI source files
+    for src_dir in ("app", "components", "lib"):
+        for p in sorted((REPO_ROOT / src_dir).rglob("*")):
+            if p.suffix not in {".ts", ".tsx"} or p.name == "generated.ts":
+                continue
+            txt = p.read_text(encoding="utf-8")
+            assert not re.search(
+                r"0\.0032|typically about 8\s*m|within about 21\s*m",
+                txt,
+                re.IGNORECASE,
+            ), f"{p.relative_to(REPO_ROOT)} hard-codes map accuracy figure"
+
+    # 2. Verify built map HTML pages contain the report-derived sentence in the primary layer and RMSE in Details
+    next_app_dir = REPO_ROOT / ".next" / "server" / "app"
+    if next_app_dir.is_dir():
+        for jur_id in ("in-ka-bengaluru", "in-ka-bengaluru-south"):
+            map_html_path = next_app_dir / "j" / f"{jur_id}.html"
+            if map_html_path.is_file():
+                raw_html = map_html_path.read_text(encoding="utf-8")
+                primary_txt = " ".join(_strip_details_and_tags(raw_html).split())
+                assert expected_sentence in primary_txt
+                assert "0.0032" not in primary_txt
+                assert f"{exp_rmse} m RMSE" in raw_html
+                assert "sheet-fitting error" in raw_html.lower()
+
 
 

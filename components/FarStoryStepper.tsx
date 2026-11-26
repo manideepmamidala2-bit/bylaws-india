@@ -19,9 +19,13 @@ export interface FarStoryStep {
   missingExcerptReason?: string;
   documentTitle: string;
   documentDate: string;
+  documentNote?: string;
   pageNumber: number;
   viewPageUrl: string;
   documentHref: string;
+  documentLinkLabel?: string;
+  secondaryDocumentHref?: string;
+  secondaryDocumentLabel?: string;
   tableCaption?: string;
   tableHeaders?: string[];
   tableRows?: FarStoryTableRow[];
@@ -188,6 +192,15 @@ export function FarStoryStepper({ steps }: FarStoryStepperProps) {
                   </p>
                 )}
 
+                {step.documentNote && (
+                  <p
+                    data-testid={`far-story-note-${step.stepNumber}`}
+                    className="dg-serif mt-2 text-xs text-[#5b5e56]"
+                  >
+                    {step.documentNote}
+                  </p>
+                )}
+
                 <div className="mt-3 flex flex-wrap items-center gap-4">
                   <a
                     href={step.viewPageUrl}
@@ -202,8 +215,16 @@ export function FarStoryStepper({ steps }: FarStoryStepperProps) {
                     href={step.documentHref}
                     className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] text-[#5b5e56] underline decoration-[#c8ccc0] underline-offset-4 hover:text-[#080909]"
                   >
-                    Open in document
+                    {step.documentLinkLabel || "Open in document"}
                   </Link>
+                  {step.secondaryDocumentHref && (
+                    <Link
+                      href={step.secondaryDocumentHref}
+                      className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] text-[#5b5e56] underline decoration-[#c8ccc0] underline-offset-4 hover:text-[#080909]"
+                    >
+                      {step.secondaryDocumentLabel || "Open notification"}
+                    </Link>
+                  )}
                 </div>
               </div>
 
