@@ -8,8 +8,8 @@ progress:
     intake: done
     apply: done
     review: done
-    hydrate: active
-    ship: pending
+    hydrate: done
+    ship: active
     review-pr: pending
 plan:
     generated: true
@@ -32,19 +32,21 @@ stage_metrics:
     intake: {started_at: "2026-11-26T13:31:24Z", driver: fab-new, iterations: 1, completed_at: "2026-11-26T13:49:57Z"}
     apply: {started_at: "2026-11-26T13:49:57Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-26T16:05:27Z"}
     review: {started_at: "2026-11-26T16:05:27Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-26T16:12:40Z"}
-    hydrate: {started_at: "2026-11-26T16:12:40Z", driver: fab-fff, iterations: 1}
+    hydrate: {started_at: "2026-11-26T16:12:40Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-26T16:16:34Z"}
+    ship: {started_at: "2026-11-26T16:16:34Z", driver: fab-fff, iterations: 1}
 prs: []
 base_branch: main
 true_impact:
-    added: 5275
-    deleted: 1477
-    net: 3798
+    added: 6338
+    deleted: 1584
+    net: 4754
     tests:
-        added: 551
+        added: 807
         deleted: 34
-        net: 517
-    computed_at: "2026-11-26T16:05:28Z"
-    computed_at_stage: apply
+        net: 773
+    computed_at: "2026-11-26T16:16:34Z"
+    computed_at_stage: hydrate
+summary: Stored PDF page text with SHA-256 verification for CI fidelity checks, replaced map 0.0032 m claim with verification-report street offsets in Bylaw One design, added plain_title register names and fixed 2007/2017 home attributions, marked unreviewed relations with >= 0.8 precision rule, and made resolver return needs depth/width/height and distinguish no limit in law from unmodelled data.
 # base_branch: written by /git-branch or /fab-new when the change's branch is created (no placeholder here).
 # true_impact: lazily created on first stage-finish that computes it (no placeholder here).
-last_updated: 2026-11-26T16:12:40Z
+last_updated: 2026-11-26T16:16:34Z
