@@ -266,8 +266,36 @@ for (const htmlPath of htmlFiles) {
       }
     }
 
-    // Part 3.3 Name check (CI): verify every "Replaced by <name>, <date>" label in built HTML matches a registered instrument
     const cleanNoComments = htmlText.replace(/<!--[\s\S]*?-->/g, "");
+
+    // Part 5.3 Label check (CI): "Master plan rules apply instead (bye-law 1.4)" may only appear on provisions tagged to Bye-law 1.4 subjects
+    const BYELAW_1_4_ALLOWED_ROUTE_RE =
+      /^\/j\/[a-z0-9-]+\/topics\/(?:land-use|ground-coverage|far|setbacks|projections-and-open-spaces|height|parking)$/;
+    if (cleanNoComments.includes("Master plan rules apply instead (bye-law 1.4)")) {
+      if (!BYELAW_1_4_ALLOWED_ROUTE_RE.test(relRoute)) {
+        violations.push(
+          `${relRoute}: Label check failed — 'Master plan rules apply instead (bye-law 1.4)' appeared on a page outside Bye-law 1.4 subjects`
+        );
+      }
+      for (const liMatch of cleanNoComments.matchAll(
+        /<li\b[^>]*data-technical-address="([^"]+)"[^>]*>([\s\S]*?)<\/li>/g
+      )) {
+        const addr = liMatch[1];
+        const liBody = liMatch[2];
+        if (
+          liBody.includes("Master plan rules apply instead (bye-law 1.4)") &&
+          (addr === "bbl-2003:part_II__sec_6.0__item_i" ||
+            addr.toLowerCase().includes("part_ii__") ||
+            addr.toLowerCase().includes("part_v__"))
+        ) {
+          violations.push(
+            `${relRoute}: Label check failed — 'Master plan rules apply instead (bye-law 1.4)' appeared on non-Bye-law-1.4 provision ${addr}`
+          );
+        }
+      }
+    }
+
+    // Part 3.3 Name check (CI): verify every "Replaced by <name>, <date>" label in built HTML matches a registered instrument
     for (const repMatch of cleanNoComments.matchAll(
       />(Replaced by [^<]+)</g
     )) {

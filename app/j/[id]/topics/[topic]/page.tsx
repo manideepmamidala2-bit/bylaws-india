@@ -244,29 +244,44 @@ function isByeLaw14Node(
   );
 }
 
-function isByeLaw60iNode(node: ClauseNode): boolean {
+function isByeLaw60iNode(
+  node: ClauseNode,
+  docMetaById: ReadonlyMap<string, DocumentMetadata>
+): boolean {
   const eid = (node.eid ?? "").toLowerCase();
+  const dMeta = docMetaById.get(node.doc_id ?? "");
   return (
-    node.doc_id === "bbl-2003" &&
+    dMeta?.layer === "municipal" &&
+    dMeta?.role === "base" &&
     (eid === "part_ii__sec_6.0__item_i" || eid === "part_ii__sec_6.0__cl_6.0__item_i")
   );
 }
 
-function isGroundRentNode(node: ClauseNode): boolean {
+function isGroundRentNode(
+  node: ClauseNode,
+  docMetaById: ReadonlyMap<string, DocumentMetadata>
+): boolean {
   const eid = (node.eid ?? "").toLowerCase();
+  const dMeta = docMetaById.get(node.doc_id ?? "");
   return (
-    node.doc_id === "bbl-2003" &&
+    dMeta?.layer === "municipal" &&
+    dMeta?.role === "base" &&
     (eid.startsWith("part_ii__sec_3.0__cl_3.8") ||
       eid.startsWith("part_ii__sec_3.0__cl_3.9") ||
       eid.startsWith("part_ii__sec_3.0__cl_3.10"))
   );
 }
 
-function isCorporationAmendedBaseNode(node: ClauseNode): boolean {
+function isCorporationAmendedBaseNode(
+  node: ClauseNode,
+  docMetaById: ReadonlyMap<string, DocumentMetadata>
+): boolean {
   const eid = (node.eid ?? "").toLowerCase();
+  const dMeta = docMetaById.get(node.doc_id ?? "");
   return (
-    isByeLaw60iNode(node) ||
-    (node.doc_id === "bbl-2003" &&
+    isByeLaw60iNode(node, docMetaById) ||
+    (dMeta?.layer === "municipal" &&
+      dMeta?.role === "base" &&
       (eid === "part_ii__sec_3.0__cl_3.8" ||
         eid === "part_ii__sec_3.0__cl_3.9" ||
         eid === "part_ii__sec_3.0__cl_3.10"))
@@ -278,12 +293,9 @@ const BYELAW_1_4_SUBJECT_SLUGS = new Set([
   "ground-coverage",
   "far",
   "setbacks",
+  "projections-and-open-spaces",
   "height",
   "parking",
-  "basements-and-stilts",
-  "projections-and-open-spaces",
-  "plot-size-and-frontage",
-  "road-width",
 ]);
 
 function isNodeDisplacedByByeLaw14(
@@ -299,7 +311,11 @@ function isNodeDisplacedByByeLaw14(
   if (dMeta?.layer !== "municipal" || dMeta?.role !== "base") {
     return false;
   }
-  if (isByeLaw14Node(node, docMetaById) || isDefinitionNode(node) || isByeLaw60iNode(node)) {
+  if (
+    isByeLaw14Node(node, docMetaById) ||
+    isDefinitionNode(node) ||
+    isByeLaw60iNode(node, docMetaById)
+  ) {
     return false;
   }
   const eid = (node.eid ?? "").toLowerCase();
@@ -490,12 +506,16 @@ export default async function TopicDetailPage({
       }
     }
   }
+  const muniBaseDoc = documents.find(
+    (d) => d.layer === "municipal" && d.role === "base"
+  );
   if (
-    subjectMeta.topicId === "approvals_certificates" ||
-    subjectMeta.topicId === "deviations_regularisation" ||
-    subjectMeta.topicId === "setbacks"
+    muniBaseDoc &&
+    (subjectMeta.topicId === "approvals_certificates" ||
+      subjectMeta.topicId === "deviations_regularisation" ||
+      subjectMeta.topicId === "setbacks")
   ) {
-    taggedNodeKeys.add("bbl-2003:part_II__sec_6.0__item_i");
+    taggedNodeKeys.add(`${muniBaseDoc.doc_id}:part_II__sec_6.0__item_i`);
   }
 
   const rawTaggedClauses: ClauseNode[] = clauses.filter(
@@ -533,7 +553,10 @@ export default async function TopicDetailPage({
     }
 
     // Ground Rent clauses (3.8, 3.9, 3.10) belong only on Approvals and certificates
-    if (isGroundRentNode(node) && subjectMeta.topicId !== "approvals_certificates") {
+    if (
+      isGroundRentNode(node, docMetaById) &&
+      subjectMeta.topicId !== "approvals_certificates"
+    ) {
       continue;
     }
 
@@ -545,7 +568,7 @@ export default async function TopicDetailPage({
 
     // Bye-law 6.0(i) is a deviations/compounding rule amended by each City Corporation in May 2026;
     // it is NEVER displaced by Bye-law 1.4 and NEVER placed in "Older or replaced rules" (Part 5).
-    if (isByeLaw60iNode(node)) {
+    if (isByeLaw60iNode(node, docMetaById)) {
       if (
         subjectMeta.topicId === "deviations_regularisation" ||
         subjectMeta.topicId === "approvals_certificates"
@@ -563,7 +586,7 @@ export default async function TopicDetailPage({
       continue;
     }
 
-    if (isCorporationAmendedBaseNode(node)) {
+    if (isCorporationAmendedBaseNode(node, docMetaById)) {
       if (isNodeOmittedByAmendment(node)) {
         corpOlderRules.push(node);
       } else {
@@ -828,7 +851,8 @@ export default async function TopicDetailPage({
     const archiveUrl =
       citingDocMeta?.retrieval?.archive_url || node.archive_url;
 
-    const isCompact = Boolean(options?.compact) && !isByeLaw60iNode(node);
+    const isCompact =
+      Boolean(options?.compact) && !isByeLaw60iNode(node, docMetaById);
     const currentWording = activeVer?.content || node.text;
     const displayText = isCompact
       ? truncateAtWordBoundary(currentWording, 260)
@@ -869,7 +893,7 @@ export default async function TopicDetailPage({
         : `Changed ${formatMonthYearPlain(effDate)}`
       : null;
     const cityByeLaw60iNote =
-      !isChildCorporation && isByeLaw60iNode(node)
+      !isChildCorporation && isByeLaw60iNode(node, docMetaById)
         ? "Each City Corporation changed this rule in May 2026. Choose a corporation to see its wording."
         : null;
     const effectiveNotes = [

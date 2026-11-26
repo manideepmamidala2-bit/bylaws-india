@@ -304,10 +304,12 @@ def verify_jurisdiction_text_fidelity(
                 continue
             doc_page_map = _get_doc_page_tokens(p_doc)
             allowed_p_tokens = set(doc_page_map.get(p_page, set()))
-            # When an amendment modifies a base table threshold by reference (e.g. Table 15 in rmp2015-zr),
-            # also allow tokens from the base document table referenced in footnotes_text.
-            if p_doc == "rmp2015-zr-amend-2026-01" and str(src.get("table_eid") or "") == "item_ii__tbl_15":
-                allowed_p_tokens |= _get_doc_page_tokens("rmp2015-zr").get(33, set())
+            # When an amendment modifies a base table threshold by reference,
+            # also allow tokens from the amended base document table.
+            p_doc_cfg = next((d for d in config.documents if d.id == p_doc), None)
+            if p_doc_cfg and p_doc_cfg.amends and str(src.get("table_eid") or "") == "item_ii__tbl_15":
+                for base_target_id in p_doc_cfg.amends:
+                    allowed_p_tokens |= _get_doc_page_tokens(base_target_id).get(33, set())
             cell_tokens = [
                 w
                 for w in extract_word_tokens(str(src.get("cell_text") or ""))

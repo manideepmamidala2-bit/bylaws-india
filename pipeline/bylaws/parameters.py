@@ -1924,12 +1924,9 @@ def write_parameter_reports_and_json(
         jurs_dir = root / "jurisdictions"
         if jurs_dir.is_dir():
             for child_yaml in sorted(jurs_dir.glob("*.yaml")):
-                if child_yaml.stem in {config.id, "resolution", "_fixture-test", "xx-test-fixture"}:
+                if child_yaml.stem == config.id or child_yaml.stem == "resolution" or child_yaml.stem.startswith("_"):
                     continue
-                try:
-                    child_cfg = load_jurisdiction_config(child_yaml.stem, repo_root=root)
-                except Exception:
-                    continue
+                child_cfg = load_jurisdiction_config(child_yaml.stem, repo_root=root)
                 if getattr(child_cfg, "parent", None) == config.id:
                     write_parameter_reports_and_json(
                         child_cfg,

@@ -155,6 +155,10 @@ export default async function DocumentViewerPage({
     initialNonRowSet.add(c.record_id ?? c.clause_id);
   }
   for (const c of nonRowDocClauses) {
+    if (c.eid === "part_II__sec_6.0__item_i") {
+      initialNonRowSet.add(c.record_id ?? c.clause_id);
+      continue;
+    }
     if (
       initialNonRowSet.size < 22 &&
       ((c.versions?.length ?? 0) > 1 ||

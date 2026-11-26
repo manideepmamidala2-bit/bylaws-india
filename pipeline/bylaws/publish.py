@@ -477,7 +477,7 @@ def _compute_manifest_dataset_id(
         else:
             sha_file = public_data_dir / j_id / lat_ver / "SHA256SUMS"
             sha_bytes = sha_file.read_bytes() if sha_file.is_file() else b""
-        hasher.update(f"{j_id}@{lat_ver}:".encode("utf-8"))
+        hasher.update(f"{j_id}@{lat_ver}:".encode())
         hasher.update(sha_bytes)
     return f"ds-{hasher.hexdigest()[:12]}"
 
@@ -706,12 +706,9 @@ def run_publish(
             jurs_dir = root / "jurisdictions"
             if jurs_dir.is_dir():
                 for child_yaml in sorted(jurs_dir.glob("*.yaml")):
-                    if child_yaml.stem in {config.id, "resolution", "_fixture-test", "xx-test-fixture"}:
+                    if child_yaml.stem == config.id or child_yaml.stem == "resolution" or child_yaml.stem.startswith("_"):
                         continue
-                    try:
-                        child_cfg = load_jurisdiction_config(child_yaml.stem, repo_root=root)
-                    except Exception:
-                        continue
+                    child_cfg = load_jurisdiction_config(child_yaml.stem, repo_root=root)
                     if getattr(child_cfg, "parent", None) == config.id:
                         run_publish(
                             child_cfg,
