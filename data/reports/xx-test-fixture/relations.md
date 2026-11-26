@@ -1,27 +1,19 @@
 # Relations, Topics, Precedence & Succession QA Report (`xx-test-fixture`)
 
-## 1. Summary Counts by Relation Kind and Status
+## 1. Summary Counts by Relation Kind and Visibility
 
-| Relation Kind | Total Count | Confirmed | Candidate |
-|---|---:|---:|---:|
-| `same_topic` | 0 | 0 | 0 |
-| `definition_differs` | 0 | 0 | 0 |
-| `numeric_differs` | 0 | 0 | 0 |
-| `cross_document_reference` | 3 | 3 | 0 |
-| `precedence` | 0 | 0 | 0 |
-| `corporation_differs` | 0 | 0 | 0 |
-| **Total** | **3** | **3** | **0** |
+| Relation Kind | Total Count | Public Visible | Confirmed |
+|---|---:|---|---:|
+| `amends` | 3 | Yes (`measured_precision = 1.0`) | 3 |
+| `incorporates` | 0 | Yes (`measured_precision = 1.0`) | 0 |
+| `corporation_differs` | 0 | Yes (`measured_precision = 1.0`) | 0 |
+| `cross_document_reference` | 3 | Hidden (`pending owner precision >= 0.8`) | 3 |
+| `definition_differs` | 0 | Hidden (`pending owner precision >= 0.8`) | 0 |
+| `precedence` | 0 | Hidden (`pending owner precision >= 0.8`) | 0 |
+| **Total** | **6** | — | **6** |
 
 ## 2. Statutory Precedence Relations (Quoted Law Spans)
 
 | ID | From Provision | To Provision | Topic | Quoted Statutory Precedence Span |
 |---|---|---|---|---|
-
-## 3. Sampled Relations Verification Against Source Texts (30 Samples)
-
-| ID | Kind | Status | From (`doc:eid`) | To (`doc:eid`) | Verification |
-|---|---|---|---|---|---|
-| `rel_1` | `cross_document_reference` | `confirmed` | `fixture-amend-2024:cl_2` | `fixture-base-2020:chp_II__cl_2.2` | PASS (`machine_checked`) |
-| `rel_2` | `cross_document_reference` | `confirmed` | `fixture-amend-2024:cl_3` | `fixture-base-2020:chp_II__cl_2.2` | PASS (`machine_checked`) |
-| `rel_3` | `cross_document_reference` | `confirmed` | `fixture-amend-2024:cl_4` | `fixture-base-2020:chp_II__cl_2.3` | PASS (`machine_checked`) |
 

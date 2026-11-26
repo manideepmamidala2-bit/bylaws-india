@@ -1,6 +1,6 @@
 # Quality Assurance Report — `xx-test-fixture` (Synthetic Test Jurisdiction)
 
-## 1. Schema v1.3 Validation
+## 1. Schema v1.4 Validation
 
 - `data/raw/xx-test-fixture/fixture-base-2020.meta.json` against `document.schema.json`: PASS
 - `data/raw/xx-test-fixture/fixture-amend-2024.meta.json` against `document.schema.json`: PASS
@@ -35,6 +35,9 @@
 | 7 | Unresolved cross-references | PASS | 0 unresolved (none) |
 | 8 | Low-confidence amendment links | PASS | 0 low-confidence link(s) |
 | 9 | Drafts referenced from `in_force` clauses | PASS | 0 draft reference(s) |
+| 10 | Structure gates (no date clause numbers, depth <= 6, uniqueness, table captions) | PASS | Date tokens: 0; Depth > 6: 0; Duplicates: 0; Redundant table labels: 0 |
+| 11 | Non-content excluded from topics and zones | PASS | 0 non-content topic/zone tag(s) |
+| 12 | Explicit `instrument_type` & status/text-rights invariants | PASS | 4/4 valid |
 
 ## 3. Declarations Summary
 

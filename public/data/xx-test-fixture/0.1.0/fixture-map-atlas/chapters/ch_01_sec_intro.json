@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.4",
+  "doc_id": "fixture-map-atlas",
+  "jurisdiction": "xx-test-fixture",
+  "legal_status": "in_force",
+  "chapter_eid": "ch_01_sec_intro",
+  "chapter_title": "Preamble",
+  "as_of_date": null,
+  "derived": null,
+  "generated": {
+    "parser": "pypdfium2",
+    "parser_version": "4.30.0",
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "clauses": [
+    {
+      "eid": "prea_1",
+      "native_number": null,
+      "type": "preamble",
+      "heading": "Preamble",
+      "intro": null,
+      "content": "Z1 - Residential Z2 - Mixed Use",
+      "wrap_up": null,
+      "children": [],
+      "parent_eid": null,
+      "defines": null,
+      "defines_normalised": null,
+      "table_meta": null,
+      "cells": null,
+      "versions": [
+        {
+          "version_id": "v1",
+          "valid_from": "2020-02-01",
+          "valid_to": null,
+          "heading": "Preamble",
+          "intro": null,
+          "content": "Z1 - Residential Z2 - Mixed Use",
+          "wrap_up": null,
+          "cells": null,
+          "source_doc": "fixture-map-atlas",
+          "source_eid": "prea_1",
+          "effect_id": null,
+          "citations": [
+            {
+              "doc_id": "fixture-map-atlas",
+              "page": 1,
+              "bbox": [
+                0.7718,
+                0.137,
+                0.8763,
+                0.1852
+              ],
+              "text_excerpt": "Z1 - Residential Z2 - Mixed Use"
+            }
+          ],
+          "legal_status": "in_force",
+          "omitted": false
+        }
+      ],
+      "clause_id": "fixture-map-atlas:preamble",
+      "record_version": 1,
+      "record_id": "fixture-map-atlas:preamble@v1",
+      "record_supersedes": null,
+      "record_superseded_by": null,
+      "record_change_reason": null,
+      "supersedes": null,
+      "superseded_by": null,
+      "legal_status": "in_force",
+      "effective_from": "2020-02-01",
+      "number": "preamble",
+      "title": "Preamble",
+      "level": 1,
+      "parent_id": null,
+      "order": 0,
+      "text": "Z1 - Residential Z2 - Mixed Use",
+      "language": "en",
+      "tables": [],
+      "citations": [
+        {
+          "doc_id": "fixture-map-atlas",
+          "page": 1,
+          "bbox": [
+            0.7718,
+            0.137,
+            0.8763,
+            0.1852
+          ],
+          "text_excerpt": "Z1 - Residential Z2 - Mixed Use"
+        }
+      ],
+      "cross_references": [],
+      "amended_by": [],
+      "applies_to_zones": [],
+      "verification": "machine_checked",
+      "verified_by": null
+    }
+  ]
+}

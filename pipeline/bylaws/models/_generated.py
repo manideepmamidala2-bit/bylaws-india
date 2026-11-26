@@ -1118,6 +1118,7 @@ class ReleaseEntry(BaseModel):
         extra="forbid",
     )
     version: constr(pattern=r"^\d+\.\d+\.\d+$")
+    dataset_id: constr(min_length=1) | None = None
     status: Literal["published", "withdrawn"] | None = "published"
     withdrawn_reason: str | None = None
     released_at: constr(min_length=10)
@@ -1648,6 +1649,10 @@ class ReleaseManifest(BaseModel):
         extra="forbid",
     )
     schema_version: Literal["1.4"]
+    dataset_id: constr(min_length=1) | None = Field(
+        None,
+        description="Deterministic content-addressed build identifier across all public jurisdiction releases in this manifest.",
+    )
     jurisdictions: list[JurisdictionManifest]
 
 

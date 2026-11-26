@@ -9,6 +9,7 @@
     {
       "clause_id": "fixture-base-2020:2.2",
       "doc_id": "fixture-base-2020",
+      "eid": "chp_II__cl_2.2",
       "number": "2.2",
       "title": "Maximum Building Height",
       "text": "No residential building in zone Z1 shall exceed 15.0 metres in height, subject to road width norms under clause 2.1. [Amended (2024-06-15, fixture-amend-2024:3): After clause 2.2, the following clause shall be inserted: '2.2A Solar Rooftop Structures: Elevated solar panels up to 1.8 metres above the parapet are exempt from height calculation.']",
@@ -21,11 +22,16 @@
       "derived": true,
       "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
       "confidence": "high",
-      "omitted": false
+      "omitted": false,
+      "change_note": "Changed 2024, Synthetic Municipal Building",
+      "original_text": "No residential building in zone Z1 shall exceed 11.5 metres in height, subject to road width norms under clause 2.1 and Floor Area Ratio limits.",
+      "amending_clause_id": "fixture-amend-2024:3",
+      "notes_by_site": []
     },
     {
       "clause_id": "fixture-base-2020:2.3",
       "doc_id": "fixture-base-2020",
+      "eid": "chp_II__cl_2.3",
       "number": "2.3",
       "title": "Temporary Construction Sheds",
       "text": "[Omitted by fixture-amend-2024:4 with effect from 2024-06-15.]",
@@ -37,7 +43,11 @@
       "derived": true,
       "method": "Derived by this project via deterministic chronological application of high-confidence amendment effects (Rule R14).",
       "confidence": "high",
-      "omitted": true
+      "omitted": true,
+      "change_note": "Changed 2024, Synthetic Municipal Building",
+      "original_text": "Temporary sheds for watchmen are permitted during active construction.",
+      "amending_clause_id": "fixture-amend-2024:4",
+      "notes_by_site": []
     }
   ],
   "unconsolidated": []

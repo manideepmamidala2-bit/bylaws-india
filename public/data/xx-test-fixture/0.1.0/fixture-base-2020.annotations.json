@@ -114,24 +114,6 @@
     {
       "annotation_id": "fixture-base-2020:ann_7",
       "target": {
-        "eid": "chp_II",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          0,
-          8
-        ],
-        "span_text": "Setbacks"
-      },
-      "kind": "topic",
-      "value": "setbacks",
-      "method": "rule",
-      "confidence": 0.9,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "fixture-base-2020:ann_8",
-      "target": {
         "eid": "chp_II__cl_2.1",
         "version_id": "v1",
         "field": "intro",
@@ -148,7 +130,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_9",
+      "annotation_id": "fixture-base-2020:ann_8",
       "target": {
         "eid": "chp_II__cl_2.1",
         "version_id": "v1",
@@ -166,7 +148,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_10",
+      "annotation_id": "fixture-base-2020:ann_9",
       "target": {
         "eid": "chp_II__cl_2.1",
         "version_id": "v1",
@@ -184,7 +166,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_11",
+      "annotation_id": "fixture-base-2020:ann_10",
       "target": {
         "eid": "chp_II__cl_2.1",
         "version_id": "v1",
@@ -202,7 +184,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_12",
+      "annotation_id": "fixture-base-2020:ann_11",
       "target": {
         "eid": "chp_II__cl_2.1__item_a",
         "version_id": "v1",
@@ -220,7 +202,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_13",
+      "annotation_id": "fixture-base-2020:ann_12",
       "target": {
         "eid": "chp_II__cl_2.1__item_b",
         "version_id": "v1",
@@ -238,7 +220,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_14",
+      "annotation_id": "fixture-base-2020:ann_13",
       "target": {
         "eid": "chp_II__cl_2.1__prov_1",
         "version_id": "v1",
@@ -256,7 +238,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_15",
+      "annotation_id": "fixture-base-2020:ann_14",
       "target": {
         "eid": "chp_II__cl_2.1__prov_1",
         "version_id": "v1",
@@ -274,7 +256,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_16",
+      "annotation_id": "fixture-base-2020:ann_15",
       "target": {
         "eid": "chp_II__cl_2.1__expl_1",
         "version_id": "v1",
@@ -292,7 +274,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_17",
+      "annotation_id": "fixture-base-2020:ann_16",
       "target": {
         "eid": "chp_II__cl_2.2",
         "version_id": "v2",
@@ -310,7 +292,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_18",
+      "annotation_id": "fixture-base-2020:ann_17",
       "target": {
         "eid": "chp_II__cl_2.2",
         "version_id": "v2",
@@ -328,7 +310,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_19",
+      "annotation_id": "fixture-base-2020:ann_18",
       "target": {
         "eid": "chp_II__cl_2.2",
         "version_id": "v2",
@@ -346,7 +328,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_20",
+      "annotation_id": "fixture-base-2020:ann_19",
       "target": {
         "eid": "chp_II__cl_2.2",
         "version_id": "v2",
@@ -364,7 +346,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_21",
+      "annotation_id": "fixture-base-2020:ann_20",
       "target": {
         "eid": "chp_II__cl_2.2",
         "version_id": "v2",
@@ -382,7 +364,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_22",
+      "annotation_id": "fixture-base-2020:ann_21",
       "target": {
         "eid": "chp_II__cl_2.2",
         "version_id": "v2",
@@ -400,7 +382,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_23",
+      "annotation_id": "fixture-base-2020:ann_22",
       "target": {
         "eid": "chp_II__cl_2.2",
         "version_id": "v2",
@@ -418,7 +400,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_24",
+      "annotation_id": "fixture-base-2020:ann_23",
       "target": {
         "eid": "chp_II__cl_2.2A",
         "version_id": "v1",
@@ -436,7 +418,7 @@
       "verification": "machine_checked"
     },
     {
-      "annotation_id": "fixture-base-2020:ann_25",
+      "annotation_id": "fixture-base-2020:ann_24",
       "target": {
         "eid": "chp_II__cl_2.2A",
         "version_id": "v1",
@@ -451,42 +433,6 @@
       "value": "1.8 m",
       "method": "rule",
       "confidence": 0.92,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "fixture-base-2020:ann_26",
-      "target": {
-        "eid": "chp_II__cl_2.1__tbl_2.1",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          19,
-          27
-        ],
-        "span_text": "Setbacks"
-      },
-      "kind": "topic",
-      "value": "setbacks",
-      "method": "rule",
-      "confidence": 0.9,
-      "verification": "machine_checked"
-    },
-    {
-      "annotation_id": "fixture-base-2020:ann_27",
-      "target": {
-        "eid": "chp_II__cl_2.1__tbl_2.1",
-        "version_id": "v1",
-        "field": "content",
-        "span": [
-          31,
-          40
-        ],
-        "span_text": "Plot Size"
-      },
-      "kind": "topic",
-      "value": "plot_size_frontage",
-      "method": "rule",
-      "confidence": 0.9,
       "verification": "machine_checked"
     }
   ]

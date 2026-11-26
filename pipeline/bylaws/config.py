@@ -93,13 +93,15 @@ def load_jurisdiction_config(
     *,
     jurisdictions_dir: Path | None = None,
     schemas_dir: Path | None = None,
+    repo_root: Path | None = None,
     inherit_parent: bool = True,
 ) -> JurisdictionConfig:
     """Load and validate `jurisdictions/<jurisdiction_id>.yaml`, optionally inheriting from `parent`."""
     if not jurisdiction_id or not jurisdiction_id.strip():
         raise ConfigValidationError("Jurisdiction ID must be a non-empty string.")
 
-    base_dir = jurisdictions_dir or (resolve_repo_root() / "jurisdictions")
+    effective_root = repo_root or resolve_repo_root()
+    base_dir = jurisdictions_dir or (effective_root / "jurisdictions")
     config_path = base_dir / f"{jurisdiction_id}.yaml"
     if not config_path.is_file():
         raise ConfigValidationError(

@@ -244,6 +244,73 @@ function isByeLaw14Node(
   );
 }
 
+function isByeLaw60iNode(node: ClauseNode): boolean {
+  const eid = (node.eid ?? "").toLowerCase();
+  return (
+    node.doc_id === "bbl-2003" &&
+    (eid === "part_ii__sec_6.0__item_i" || eid === "part_ii__sec_6.0__cl_6.0__item_i")
+  );
+}
+
+function isGroundRentNode(node: ClauseNode): boolean {
+  const eid = (node.eid ?? "").toLowerCase();
+  return (
+    node.doc_id === "bbl-2003" &&
+    (eid.startsWith("part_ii__sec_3.0__cl_3.8") ||
+      eid.startsWith("part_ii__sec_3.0__cl_3.9") ||
+      eid.startsWith("part_ii__sec_3.0__cl_3.10"))
+  );
+}
+
+function isCorporationAmendedBaseNode(node: ClauseNode): boolean {
+  const eid = (node.eid ?? "").toLowerCase();
+  return (
+    isByeLaw60iNode(node) ||
+    (node.doc_id === "bbl-2003" &&
+      (eid === "part_ii__sec_3.0__cl_3.8" ||
+        eid === "part_ii__sec_3.0__cl_3.9" ||
+        eid === "part_ii__sec_3.0__cl_3.10"))
+  );
+}
+
+const BYELAW_1_4_SUBJECT_SLUGS = new Set([
+  "land-use",
+  "ground-coverage",
+  "far",
+  "setbacks",
+  "height",
+  "parking",
+  "basements-and-stilts",
+  "projections-and-open-spaces",
+  "plot-size-and-frontage",
+  "road-width",
+]);
+
+function isNodeDisplacedByByeLaw14(
+  node: ClauseNode,
+  docMetaById: ReadonlyMap<string, DocumentMetadata>,
+  subjectSlug: string,
+  zoningGoverned: boolean
+): boolean {
+  if (!zoningGoverned || !BYELAW_1_4_SUBJECT_SLUGS.has(subjectSlug)) {
+    return false;
+  }
+  const dMeta = docMetaById.get(node.doc_id ?? "");
+  if (dMeta?.layer !== "municipal" || dMeta?.role !== "base") {
+    return false;
+  }
+  if (isByeLaw14Node(node, docMetaById) || isDefinitionNode(node) || isByeLaw60iNode(node)) {
+    return false;
+  }
+  const eid = (node.eid ?? "").toLowerCase();
+  // Part II (plan sanction, licence, ground rent, deviations 6.0) and Part V (administration)
+  // are not among the subjects Bye-law 1.4 hands to the master plan.
+  if (eid.startsWith("part_ii__") || eid.startsWith("part_v__")) {
+    return false;
+  }
+  return true;
+}
+
 function isDefinitionNode(node: ClauseNode): boolean {
   const eid = (node.eid ?? "").toLowerCase();
   return (
@@ -390,9 +457,19 @@ export default async function TopicDetailPage({
     }
   }
 
-  // Collect all provisions tagged with `subjectMeta.topicId`
+  // Collect all provisions tagged with `subjectMeta.topicId`.
+  // Skip standalone clauses from in-force amending notifications (`role === "amendment"`) unless they
+  // map to a shared base provision via `appliedTargetByAmendingKey`, so city and corporation views
+  // never diverge on unmapped amending fragments.
   const taggedNodeKeys = new Set<string>();
   for (const [docId, anns] of Object.entries(annotationsByDocId)) {
+    const annDocMeta = docMetaById.get(docId);
+    const isCorpAmendDoc = docId.includes("-bbl-amend-2026");
+    if (isCorpAmendDoc) {
+      continue;
+    }
+    const isInForceAmendmentDoc =
+      annDocMeta?.role === "amendment" && annDocMeta?.legal_status === "in_force";
     for (const ann of anns) {
       if (ann.kind === "topic" && ann.value === subjectMeta.topicId) {
         if (
@@ -402,21 +479,36 @@ export default async function TopicDetailPage({
         ) {
           const rawKey = `${docId}:${ann.target.eid}`;
           const mappedTarget = appliedTargetByAmendingKey.get(rawKey);
-          taggedNodeKeys.add(mappedTarget ?? rawKey);
+          if (isInForceAmendmentDoc) {
+            if (mappedTarget) {
+              taggedNodeKeys.add(mappedTarget);
+            }
+          } else {
+            taggedNodeKeys.add(mappedTarget ?? rawKey);
+          }
         }
       }
     }
+  }
+  if (
+    subjectMeta.topicId === "approvals_certificates" ||
+    subjectMeta.topicId === "deviations_regularisation" ||
+    subjectMeta.topicId === "setbacks"
+  ) {
+    taggedNodeKeys.add("bbl-2003:part_II__sec_6.0__item_i");
   }
 
   const rawTaggedClauses: ClauseNode[] = clauses.filter(
     (c) =>
       !c.superseded_by &&
       !c.record_superseded_by &&
+      ! (c.doc_id ?? "").includes("-bbl-amend-2026") &&
       taggedNodeKeys.has(`${c.doc_id}:${c.eid}`) &&
       !appliedTargetByAmendingKey.has(`${c.doc_id}:${c.eid}`)
   );
 
   // Prioritize primary subject chapters (e.g. Chapter 3 Setbacks `chp_3__cl_3.1*` on Setbacks)
+  // without reordering shared provisions between city and corporation views.
   const taggedClauses = [...rawTaggedClauses].sort((a, b) => {
     const eidA = a.eid ?? "";
     const eidB = b.eid ?? "";
@@ -425,32 +517,58 @@ export default async function TopicDetailPage({
       const bPrimary = eidB.startsWith("chp_3__cl_3.1") ? 0 : 1;
       if (aPrimary !== bPrimary) return aPrimary - bPrimary;
     }
-    if (isChildCorporation) {
-      const aCorp = isNodeCorporationSpecific(a) ? 0 : 1;
-      const bCorp = isNodeCorporationSpecific(b) ? 0 : 1;
-      if (aCorp !== bCorp) return aCorp - bCorp;
-    }
     return 0;
   });
 
-  const whatAppliesToday: ClauseNode[] = [];
-  const olderOrReplacedRules: ClauseNode[] = [];
-  const relatedProvisions: ClauseNode[] = [];
+  const sharedWhatApplies: ClauseNode[] = [];
+  const sharedOlderRules: ClauseNode[] = [];
+  const sharedRelatedProvisions: ClauseNode[] = [];
+  const corpWhatApplies: ClauseNode[] = [];
+  const corpOlderRules: ClauseNode[] = [];
+  const corpRelatedProvisions: ClauseNode[] = [];
 
   for (const node of taggedClauses) {
     if (isExcludedNonContentOrBareHeading(node)) {
       continue;
     }
 
+    // Ground Rent clauses (3.8, 3.9, 3.10) belong only on Approvals and certificates
+    if (isGroundRentNode(node) && subjectMeta.topicId !== "approvals_certificates") {
+      continue;
+    }
+
     // Bye-law 1.4 is NEVER placed in "Older or replaced rules" and NEVER labelled replaced (Part 1.6)
     if (isByeLaw14Node(node, docMetaById)) {
-      relatedProvisions.push(node);
+      sharedRelatedProvisions.push(node);
+      continue;
+    }
+
+    // Bye-law 6.0(i) is a deviations/compounding rule amended by each City Corporation in May 2026;
+    // it is NEVER displaced by Bye-law 1.4 and NEVER placed in "Older or replaced rules" (Part 5).
+    if (isByeLaw60iNode(node)) {
+      if (
+        subjectMeta.topicId === "deviations_regularisation" ||
+        subjectMeta.topicId === "approvals_certificates"
+      ) {
+        corpWhatApplies.push(node);
+      } else {
+        corpRelatedProvisions.push(node);
+      }
       continue;
     }
 
     // Definitions move to "Related provisions" (except on the Definitions subject itself) and are never labelled replaced unless replaced by a later instrument (Part 1.6 & 1.7)
     if (subjectMeta.topicId !== "definitions" && isDefinitionNode(node)) {
-      relatedProvisions.push(node);
+      sharedRelatedProvisions.push(node);
+      continue;
+    }
+
+    if (isCorporationAmendedBaseNode(node)) {
+      if (isNodeOmittedByAmendment(node)) {
+        corpOlderRules.push(node);
+      } else {
+        corpWhatApplies.push(node);
+      }
       continue;
     }
 
@@ -465,22 +583,25 @@ export default async function TopicDetailPage({
       Boolean(dMeta?.superseded_by_document);
 
     if (isDraftOrSuperseded) {
-      olderOrReplacedRules.push(node);
+      sharedOlderRules.push(node);
       continue;
     }
 
     if (
-      subjectMeta.zoningGoverned &&
-      dMeta?.layer === "municipal" &&
-      dMeta?.role === "base"
+      isNodeDisplacedByByeLaw14(
+        node,
+        docMetaById,
+        subjectMeta.slug,
+        subjectMeta.zoningGoverned
+      )
     ) {
-      olderOrReplacedRules.push(node);
+      sharedOlderRules.push(node);
       continue;
     }
 
     // Exclude standalone `table` nodes from the text provision list when clean parameter tables are already rendered above
     if (node.type === "table" && subjectMeta.parameterKinds.length > 0) {
-      relatedProvisions.push(node);
+      sharedRelatedProvisions.push(node);
       continue;
     }
 
@@ -491,22 +612,22 @@ export default async function TopicDetailPage({
           dMeta?.layer === "statute" ||
           dMeta?.layer === "orders"))
     ) {
-      if (whatAppliesToday.length < 7) {
-        whatAppliesToday.push(node);
+      if (sharedWhatApplies.length < 7) {
+        sharedWhatApplies.push(node);
       } else {
-        relatedProvisions.push(node);
+        sharedRelatedProvisions.push(node);
       }
     } else {
-      relatedProvisions.push(node);
+      sharedRelatedProvisions.push(node);
     }
   }
 
-  if (whatAppliesToday.length === 0 && relatedProvisions.length > 0) {
-    whatAppliesToday.push(...relatedProvisions.splice(0, 6));
+  if (sharedWhatApplies.length === 0 && sharedRelatedProvisions.length > 0) {
+    sharedWhatApplies.push(...sharedRelatedProvisions.splice(0, 6));
   }
 
   // Sort older/replaced provisions newest first
-  olderOrReplacedRules.sort((a, b) => {
+  const sortOlderNewestFirst = (a: ClauseNode, b: ClauseNode) => {
     const verA = (a.versions ?? [])[a.versions ? a.versions.length - 1 : 0];
     const verB = (b.versions ?? [])[b.versions ? b.versions.length - 1 : 0];
     const dA =
@@ -520,12 +641,33 @@ export default async function TopicDetailPage({
       docMetaById.get(b.doc_id ?? "")?.notified_date ||
       "0000-00-00";
     return dB.localeCompare(dA);
-  });
+  };
+  sharedOlderRules.sort(sortOlderNewestFirst);
+  corpOlderRules.sort(sortOlderNewestFirst);
+
+  const whatAppliesToday: ClauseNode[] = [
+    ...corpWhatApplies,
+    ...sharedWhatApplies,
+  ];
+  const olderOrReplacedRules: ClauseNode[] = [
+    ...corpOlderRules,
+    ...sharedOlderRules,
+  ];
+  const relatedProvisions: ClauseNode[] = [
+    ...corpRelatedProvisions,
+    ...sharedRelatedProvisions,
+  ];
 
   const totalOlderProvisionsCount = olderOrReplacedRules.length;
   const totalRelatedProvisionsCount = relatedProvisions.length;
-  const visibleOlderRules = olderOrReplacedRules.slice(0, 6);
-  const visibleRelatedProvisions = relatedProvisions.slice(0, 6);
+  const visibleOlderRules = [
+    ...corpOlderRules,
+    ...sharedOlderRules.slice(0, 6),
+  ];
+  const visibleRelatedProvisions = [
+    ...corpRelatedProvisions,
+    ...sharedRelatedProvisions.slice(0, 6),
+  ];
 
   // Governing parameter table rows for this subject
   const paramKinds = subjectMeta.parameterKinds;
@@ -618,7 +760,14 @@ export default async function TopicDetailPage({
       const supMeta = docMetaById.get(dMeta.superseded_by_document);
       return formatReplacedByPlain(supMeta);
     }
-    if (dMeta?.layer === "municipal" && subjectMeta?.zoningGoverned) {
+    if (
+      isNodeDisplacedByByeLaw14(
+        node,
+        docMetaById,
+        subjectMeta?.slug ?? "",
+        Boolean(subjectMeta?.zoningGoverned)
+      )
+    ) {
       return "Master plan rules apply instead (bye-law 1.4)";
     }
     if (vers.length > 1 && lastVer) {
@@ -671,7 +820,7 @@ export default async function TopicDetailPage({
     const archiveUrl =
       citingDocMeta?.retrieval?.archive_url || node.archive_url;
 
-    const isCompact = Boolean(options?.compact);
+    const isCompact = Boolean(options?.compact) && !isByeLaw60iNode(node);
     const currentWording = activeVer?.content || node.text;
     const displayText = isCompact
       ? truncateAtWordBoundary(currentWording, 260)
@@ -704,11 +853,23 @@ export default async function TopicDetailPage({
       rawTitle.toLowerCase() !== (node.text || "").trim().toLowerCase() &&
       rawTitle.toLowerCase() !== (previousWording || "").trim().toLowerCase();
 
-    const changedMonthYear = hasAmendedVersion
-      ? `Changed ${formatMonthYearPlain(effDate)}`
-      : null;
     const isCorpDiffNode =
       isChildCorporation && isNodeCorporationSpecific(node);
+    const changedMonthYear = hasAmendedVersion
+      ? isCorpDiffNode
+        ? `Changed ${formatMonthYearPlain(effDate)}, ${plainCorporationName}`
+        : `Changed ${formatMonthYearPlain(effDate)}`
+      : null;
+    const cityByeLaw60iNote =
+      !isChildCorporation && isByeLaw60iNode(node)
+        ? "Each City Corporation changed this rule in May 2026. Choose a corporation to see its wording."
+        : null;
+    const effectiveNotes = [
+      ...(cityByeLaw60iNote ? [cityByeLaw60iNote] : []),
+      ...((node.notes_by_site ?? []).filter(
+        (n) => n !== cityByeLaw60iNote
+      )),
+    ];
 
     return (
       <li
@@ -773,12 +934,12 @@ export default async function TopicDetailPage({
           {displayText}
         </p>
 
-        {!isCompact && node.notes_by_site && node.notes_by_site.length > 0 && (
+        {!isCompact && effectiveNotes.length > 0 && (
           <div className="mt-3 border-l-2 border-[#c8ccc0] bg-[#efeee8] px-3 py-2 text-xs text-[#171917]">
             <span className="dg-mono mr-2 text-[#5b5e56]">
               In short, by this site:
             </span>
-            {node.notes_by_site.join(" ")}
+            {effectiveNotes.join(" ")}
           </div>
         )}
 
@@ -843,7 +1004,10 @@ export default async function TopicDetailPage({
         active="topics"
       />
 
-      <main className="mx-auto max-w-5xl space-y-12 px-5 py-10">
+      <main
+        data-dataset-id={dataset.release?.dataset_id ?? manifest.dataset_id ?? ""}
+        className="mx-auto max-w-5xl space-y-12 px-5 py-10"
+      >
         {/* 1. Heading, one plain sentence, and corporation selector */}
         <header className="border-b border-[#c8ccc0] pb-6">
           <div className="flex flex-wrap items-center justify-between gap-2">
@@ -1055,7 +1219,10 @@ export default async function TopicDetailPage({
                 From the official text · Governing provisions in force (
                 {whatAppliesToday.length})
               </div>
-              <ul className="border-t border-[#c8ccc0]">
+              <ul
+                data-testid="governing-provisions-list"
+                className="border-t border-[#c8ccc0]"
+              >
                 {whatAppliesToday.map((node) => renderProvisionRow(node))}
               </ul>
             </div>

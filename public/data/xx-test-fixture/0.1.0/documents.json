@@ -25,6 +25,7 @@
     "page_count": 2,
     "is_scanned": false,
     "doc_type": "regulations",
+    "instrument_type": "instrument",
     "notification_number": "SYN/UDD/10/2020",
     "gazette_reference": "Synthetic Gazette Part IV-A dated 2020-01-15",
     "text_rights": {
@@ -73,6 +74,7 @@
     "page_count": 1,
     "is_scanned": false,
     "doc_type": "amendment",
+    "instrument_type": "instrument",
     "notification_number": "SYN/UDD/42/2024",
     "gazette_reference": "Synthetic Gazette Part IV-A dated 2024-06-01",
     "text_rights": {
@@ -119,6 +121,7 @@
     "page_count": 1,
     "is_scanned": false,
     "doc_type": "regulations",
+    "instrument_type": "instrument",
     "notification_number": "SYN/SPB/DRAFT/01/2026",
     "gazette_reference": "Synthetic Gazette Draft Notice dated 2026-03-01",
     "text_rights": {
@@ -165,6 +168,7 @@
     "page_count": 1,
     "is_scanned": false,
     "doc_type": "map",
+    "instrument_type": "instrument",
     "notification_number": "SYN/SPB/ATLAS/2020",
     "gazette_reference": "Synthetic Master Plan Atlas Notification dated 2020-01-15",
     "text_rights": {

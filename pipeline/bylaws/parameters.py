@@ -1426,8 +1426,11 @@ def extract_jurisdiction_parameters(
 
     doc_meta_map = {d.id: d for d in config.documents}
     records = _apply_table_supersession_and_deduplication(records, doc_meta_map)
+    root_jur_id = str(getattr(config, "parent", None) or config.id)
     for idx_rec, rec_item in enumerate(records, start=1):
-        rec_item["parameter_id"] = f"{config.id}:param_{idx_rec:04d}"
+        corp_jurs = (rec_item.get("conditions") or {}).get("jurisdiction") or []
+        owner_id = str(corp_jurs[0]) if len(corp_jurs) == 1 else root_jur_id
+        rec_item["parameter_id"] = f"{owner_id}:param_{idx_rec:04d}"
 
     doc_layers = {d.id: str(d.layer) for d in config.documents}
     overlap_report = check_parameter_overlaps(records, doc_layers)
@@ -1822,6 +1825,7 @@ def write_parameter_reports_and_json(
     config: JurisdictionConfig,
     *,
     repo_root: Path | None = None,
+    _cascade_children: bool = True,
 ) -> dict[str, Any]:
     """Run parameter extraction, write `parameters.json`, `parameter-mismatches.md`, and append the 40-record self-check to `qa.md`."""
     root = repo_root or resolve_repo_root()
@@ -1838,6 +1842,25 @@ def write_parameter_reports_and_json(
     pub_rel_dir = root / "public" / "data" / config.id / str(config.release_version)
     if pub_rel_dir.is_dir():
         (pub_rel_dir / "parameters.json").write_text(params_text, encoding="utf-8")
+
+    if _cascade_children and not getattr(config, "parent", None) and config.visibility != "test":
+        from bylaws.config import load_jurisdiction_config
+
+        jurs_dir = root / "jurisdictions"
+        if jurs_dir.is_dir():
+            for child_yaml in sorted(jurs_dir.glob("*.yaml")):
+                if child_yaml.stem in {config.id, "resolution", "_fixture-test", "xx-test-fixture"}:
+                    continue
+                try:
+                    child_cfg = load_jurisdiction_config(child_yaml.stem, repo_root=root)
+                except Exception:
+                    continue
+                if getattr(child_cfg, "parent", None) == config.id:
+                    write_parameter_reports_and_json(
+                        child_cfg,
+                        repo_root=root,
+                        _cascade_children=False,
+                    )
 
     if config.visibility != "test":
         doc_layers = {d.id: str(d.layer) for d in config.documents}

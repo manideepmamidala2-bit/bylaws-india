@@ -74,6 +74,18 @@ let maxHtmlRoute = "";
 let maxTotalObserved = 0;
 let maxTotalRoute = "";
 
+const manifestJsonPath = path.join(repoRoot, "public", "data", "manifest.json");
+const manifestObj = fs.existsSync(manifestJsonPath)
+  ? JSON.parse(fs.readFileSync(manifestJsonPath, "utf8"))
+  : null;
+const expectedDatasetId = manifestObj?.dataset_id || "";
+if (!/^ds-[0-9a-f]{12}$/.test(expectedDatasetId)) {
+  violations.push(
+    `public/data/manifest.json: Missing or invalid dataset_id (${JSON.stringify(expectedDatasetId)})`
+  );
+}
+const observedDatasetIds = new Set();
+
 const FORBIDDEN_PRIMARY_LAYER_PATTERNS = [
   { label: "PR number reference", regex: /\bPR\s+0?\d+\b/ },
   {
@@ -129,6 +141,23 @@ for (const htmlPath of htmlFiles) {
     !relRoute.includes("xx-test-fixture") &&
     !relRoute.includes("_not-found")
   ) {
+    const dsMatches = [...htmlText.matchAll(/data-dataset-id="([^"]*)"/g)].map(
+      (m) => m[1]
+    );
+    if (dsMatches.length === 0) {
+      violations.push(
+        `${relRoute}: Same-build check failed — missing data-dataset-id attribute`
+      );
+    } else {
+      for (const dsVal of dsMatches) {
+        observedDatasetIds.add(dsVal);
+        if (expectedDatasetId && dsVal !== expectedDatasetId) {
+          violations.push(
+            `${relRoute}: Same-build check failed — page data-dataset-id ${JSON.stringify(dsVal)} !== manifest dataset_id ${JSON.stringify(expectedDatasetId)}`
+          );
+        }
+      }
+    }
     if (!primaryLayerText.includes("Bylaw One")) {
       violations.push(
         `${relRoute}: Missing 'Bylaw One' wordmark in built HTML`
@@ -181,8 +210,141 @@ for (const htmlPath of htmlFiles) {
   }
 }
 
+if (observedDatasetIds.size > 1) {
+  violations.push(
+    `Same-build check failed — multiple dataset_id values found across built pages: ${JSON.stringify([...observedDatasetIds])}`
+  );
+}
+
+// Part 1.3 Shared-content check (CI): compare shared parameter rows and shared provisions
+// between the Greater Bengaluru city view and all 5 City Corporation views across every subject.
+const cityTopicsDir = path.join(
+  nextServerAppDir,
+  "j",
+  "in-ka-bengaluru",
+  "topics"
+);
+const childCorporations = [
+  "in-ka-bengaluru-central",
+  "in-ka-bengaluru-north",
+  "in-ka-bengaluru-south",
+  "in-ka-bengaluru-east",
+  "in-ka-bengaluru-west",
+];
+const CORP_AMENDED_BASE_ADDRESSES = new Set([
+  "bbl-2003:part_II__sec_6.0__item_i",
+  "bbl-2003:part_II__sec_3.0__cl_3.8",
+  "bbl-2003:part_II__sec_3.0__cl_3.9",
+  "bbl-2003:part_II__sec_3.0__cl_3.10",
+]);
+
+function normalizeJurLinks(fragment) {
+  return fragment
+    .replace(/\/j\/in-ka-bengaluru(?:-[a-z]+)?\//g, "/j/<JUR>/")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function extractSharedParameterRowsFromSubjectHtml(html) {
+  const rows = [];
+  const tableMatches = html.matchAll(
+    /<table\b[^>]*data-testid="(?:subject-parameter-table|older-parameter-table)"[^>]*>([\s\S]*?)<\/table>/g
+  );
+  for (const tm of tableMatches) {
+    const tbodyMatch = tm[1].match(/<tbody>([\s\S]*?)<\/tbody>/);
+    if (!tbodyMatch) continue;
+    for (const trMatch of tbodyMatch[1].matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/g)) {
+      const trHtml = trMatch[1];
+      if (trHtml.includes('data-testid="corporation-diff-badge"')) {
+        continue;
+      }
+      rows.push(normalizeJurLinks(trHtml));
+    }
+  }
+  return rows;
+}
+
+function extractSharedProvisionsFromSubjectHtml(html) {
+  const map = new Map();
+  for (const liMatch of html.matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/g)) {
+    const liHtml = liMatch[1];
+    const codeMatch = liHtml.match(
+      /Technical address:\s*<!--\s*-->\s*<code[^>]*>([^<]+)<\/code>|Technical address:\s*<code[^>]*>([^<]+)<\/code>/
+    );
+    const addr = (codeMatch?.[1] || codeMatch?.[2] || "").trim();
+    if (!addr) continue;
+    if (
+      CORP_AMENDED_BASE_ADDRESSES.has(addr) ||
+      addr.includes("-bbl-amend-2026")
+    ) {
+      continue;
+    }
+    map.set(addr, normalizeJurLinks(liHtml));
+  }
+  return map;
+}
+
+let sharedChecksCount = 0;
+if (fs.existsSync(cityTopicsDir)) {
+  const subjectFiles = fs
+    .readdirSync(cityTopicsDir)
+    .filter((f) => f.endsWith(".html"))
+    .sort();
+  for (const sFile of subjectFiles) {
+    const slug = sFile.replace(/\.html$/, "");
+    const cityHtml = fs.readFileSync(path.join(cityTopicsDir, sFile), "utf8");
+    const cityParamRows = extractSharedParameterRowsFromSubjectHtml(cityHtml);
+    const cityProvs = extractSharedProvisionsFromSubjectHtml(cityHtml);
+
+    for (const corpId of childCorporations) {
+      const corpPath = path.join(nextServerAppDir, "j", corpId, "topics", sFile);
+      if (!fs.existsSync(corpPath)) {
+        violations.push(
+          `Shared-content check failed — missing subject page /j/${corpId}/topics/${slug}`
+        );
+        continue;
+      }
+      const corpHtml = fs.readFileSync(corpPath, "utf8");
+      const corpParamRows = extractSharedParameterRowsFromSubjectHtml(corpHtml);
+      const corpProvs = extractSharedProvisionsFromSubjectHtml(corpHtml);
+      sharedChecksCount += 1;
+
+      if (cityParamRows.length !== corpParamRows.length) {
+        violations.push(
+          `Shared-content check failed on /j/${corpId}/topics/${slug}: shared parameter row count ${corpParamRows.length} !== city view ${cityParamRows.length}`
+        );
+      } else {
+        for (let i = 0; i < cityParamRows.length; i++) {
+          if (cityParamRows[i] !== corpParamRows[i]) {
+            violations.push(
+              `Shared-content check failed on /j/${corpId}/topics/${slug}: shared parameter row #${i + 1} differs from Greater Bengaluru city view`
+            );
+            break;
+          }
+        }
+      }
+
+      const cityAddrs = [...cityProvs.keys()];
+      const corpAddrs = [...corpProvs.keys()];
+      if (JSON.stringify(cityAddrs) !== JSON.stringify(corpAddrs)) {
+        violations.push(
+          `Shared-content check failed on /j/${corpId}/topics/${slug}: shared provision list ${JSON.stringify(corpAddrs)} !== city view ${JSON.stringify(cityAddrs)}`
+        );
+      } else {
+        for (const addr of cityAddrs) {
+          if (cityProvs.get(addr) !== corpProvs.get(addr)) {
+            violations.push(
+              `Shared-content check failed on /j/${corpId}/topics/${slug}: shared provision ${addr} content differs between city view and ${corpId}`
+            );
+          }
+        }
+      }
+    }
+  }
+}
+
 console.log(
-  `[check_page_budgets] Checked ${htmlFiles.length} built HTML routes: ` +
+  `[check_page_budgets] Checked ${htmlFiles.length} built HTML routes (dataset_id=${expectedDatasetId}, shared-content pairs=${sharedChecksCount}): ` +
     `max HTML = ${(maxHtmlObserved / 1024).toFixed(1)} KB (${maxHtmlRoute || "/"}) [budget <= 300 KB], ` +
     `max initial JS+data = ${(maxTotalObserved / (1024 * 1024)).toFixed(2)} MB (${maxTotalRoute || "/"}) [budget <= 1.50 MB].`
 );

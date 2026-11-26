@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.4",
+  "doc_id": "fixture-map-atlas",
+  "jurisdiction": "xx-test-fixture",
+  "legal_status": "in_force",
+  "as_of_date": null,
+  "derived": null,
+  "total_clauses": 1,
+  "total_tables": 0,
+  "outline": [
+    {
+      "eid": "prea_1",
+      "clause_id": "fixture-map-atlas:preamble",
+      "number": "preamble",
+      "title": "Preamble",
+      "heading": "Preamble",
+      "type": "preamble",
+      "level": 1,
+      "parent_eid": null,
+      "order": 0,
+      "page": 1,
+      "child_count": 1,
+      "table_count": 0,
+      "chapter_file": "/data/xx-test-fixture/0.1.0/fixture-map-atlas/chapters/ch_01_sec_intro.json",
+      "changed_count": 0
+    }
+  ],
+  "generated": {
+    "parser": "pypdfium2",
+    "parser_version": "4.30.0",
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "clauses": []
+}

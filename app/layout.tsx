@@ -71,10 +71,12 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
+      data-dataset-id={manifest?.dataset_id ?? ""}
       className={`${interTight.variable} ${sourceSerif.variable} ${jetbrainsMono.variable}`}
     >
       <body
         data-default-jurisdiction={rootJur?.id ?? ""}
+        data-dataset-id={manifest?.dataset_id ?? ""}
         className="flex min-h-screen flex-col antialiased"
       >
         <div className="flex-1">{children}</div>

@@ -238,10 +238,10 @@
         "Corporation of the City of Bangalore"
       ],
       "new_body": "Greater Bengaluru Authority (GBA) and the 5 City Corporations (Bengaluru Central, North, South, East, and West City Corporations)",
-      "effective_date": "2025-09-02",
+      "effective_date": "2025-05-15",
       "instrument_id": "gbga-2024",
-      "instrument_title": "The Greater Bengaluru Governance Act, 2024 (Karnataka Act 36 of 2025) & GBA Corporations Delimitation Notification (02-09-2025)",
-      "quoted_evidence": "Whereas, the draft of the Building (Amendment) Bye-Laws further to amend the Bengaluru City Corporation Building Bye-Laws, 2003 which the Bengaluru Central/North/South/East/West City Corporation proposes to make in exercise of the powers conferred by section 317 read with sections 224, 232, 233, 241 and 318(2) of the Greater Bengaluru Governance Act, 2024 (Karnataka Act 36 of 2025)",
+      "instrument_title": "The Greater Bengaluru Governance Act, 2024 (Karnataka Act No. 36 of 2025), Preamble, Sections 4, 5, 360 & 361 (pp. 161, 167, 291\u2013292)",
+      "quoted_evidence": "WHEREAS, the Bruhat Bengaluru Mahanagara Palike was established in 2008 and was governed under the provisions of the Karnataka Municipal Corporations Act, 1976 (Karnataka Act 14 of 1977) and later by the provisions of Bruhat Bengaluru Mahanagara Palike Act, 2020 (Karnataka Act 53 of 2020). ... WHEREAS, it is expedient to establish the Greater Bengaluru Authority and introduce new provisions for governing the Corporations and Ward Committees in the Greater Bengaluru Area; ... 4. Civic Authorities in the Greater Bengaluru Area.- The following shall be the Civic Authorities in the Greater Bengaluru Area tasked with the powers to carry out the functions specified under this Act: (a) the Greater Bengaluru Authority; (b) the City Corporations; and (c) the Ward Committees. ... 360. Transitory Provisions.- Any rule, notification, order or appointment, made or issued under the Karnataka Municipal Corporations Act, 1976 (Karnataka Act No. 14 of 1977), the Bruhat Bengaluru Mahanagara Palike Act, 2020 (Karnataka Act No. 53 of 2020) and Rules made thereunder ... shall continue to be in force and effective as if they are made or issued or appointed under the corresponding provisions of this Act ... 361. Repeal and Savings.- (1) The provisions of the Bruhat Bengaluru Mahanagara Palike Act, 2020 (Karnataka Act No. 53 of 2020) and Rules made thereunder are hereby repealed.",
       "source_url": "https://updates.bbmp.gov.in/v1/api/file/120330573287-THE%20GREATER%20BENGALURU%20GOVERNANCE%20ACT,%202024%20Gazzet%20copy%20GBGA.pdf"
     },
     {
@@ -252,12 +252,12 @@
         "Commissioner, BBMP",
         "Commissioner, BMP"
       ],
-      "new_body": "Commissioner of the respective City Corporation (or Chief Commissioner, Greater Bengaluru Authority)",
-      "effective_date": "2025-09-02",
+      "new_body": "Commissioner of the respective City Corporation (and Chief Commissioner, Greater Bengaluru Authority)",
+      "effective_date": "2025-05-15",
       "instrument_id": "gbga-2024",
-      "instrument_title": "The Greater Bengaluru Governance Act, 2024 (Karnataka Act 36 of 2025), Sections 15 & 66",
-      "quoted_evidence": "Wherever any construction is in violation/deviation of the sanctioned plan, the Commissioner may, if he considers that the violations / deviations are within the limits specified in Table-2B below ... Commissioner, Bengaluru Central / North / South / East / West City Corporation.",
-      "source_url": "https://updates.bbmp.gov.in/v1/api/file/750612105093-Central%20City%20Coropration.pdf"
+      "instrument_title": "The Greater Bengaluru Governance Act, 2024 (Karnataka Act No. 36 of 2025), Sections 2(11), 2(16), 10(3), 25 & 230(1) (pp. 163, 170, 177, 247)",
+      "quoted_evidence": "(11) \u201cChief Commissioner\u201d means the Chief Commissioner of the Greater Bengaluru Authority appointed under section 10; ... (16) \u201cCommissioner\u201d means the Commissioner of a City Corporation appointed under this Act; ... 10. (3) The Chief Commissioner shall be the Principal Executive Officer of the Greater Bengaluru Authority ... 25. The Authorities of the City Corporation.- The following shall be the Authorities of the City Corporation who shall carry out the provisions of the Act, namely:- (a) The Mayor; (b) The Commissioner; (c) The Joint Commissioners; ... 230. Procedure for grant of sanction to building plan.\u2013 (1) Any person intending to construct or reconstruct a building, shall by way of an application, as specified in building bye-laws shall apply to the Commissioner for permission to execute the work.",
+      "source_url": "https://updates.bbmp.gov.in/v1/api/file/120330573287-THE%20GREATER%20BENGALURU%20GOVERNANCE%20ACT,%202024%20Gazzet%20copy%20GBGA.pdf"
     },
     {
       "id": "succ-bda-lpa-to-gba-lpa",
@@ -266,17 +266,74 @@
         "Bangalore Development Authority",
         "Local Planning Area of Bengaluru"
       ],
-      "new_body": "Local Planning Area of Bengaluru (BDA) and Local Planning Area of Greater Bengaluru Authority (GBA)",
+      "new_body": "Greater Bengaluru Authority (Planning Authority for Greater Bengaluru Area) & Local Planning Area of Bengaluru (BDA)",
       "effective_date": "2025-05-15",
-      "instrument_id": "rmp2015-zr-amend-2025-10",
-      "instrument_title": "Notification No. UDD 468 MNJ 2025(E) dated 15-10-2025 & Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026",
-      "quoted_evidence": "These may be called the Zonal Regulations of Revised Master Plan-2015 of the Local Planning Area of Bengaluru (BDA) and Local Planning Area of Greater Bengaluru Authority (Amendment) Regulations 2025.",
-      "source_url": "https://updates.bbmp.gov.in/v1/api/file/389854408219-Naala%20Buffer%20Notification%202025.pdf"
+      "instrument_id": "gbga-2024",
+      "instrument_title": "The Greater Bengaluru Governance Act, 2024 (Karnataka Act No. 36 of 2025), Section 14(2)(a)\u2013(b) (p. 173) & Notification No. UDD 468 MNJ 2025(E) (15-10-2025)",
+      "quoted_evidence": "14. (2) Planning Functions: Notwithstanding anything contained in any other law for the time being in force,- (a) the Greater Bengaluru Authority shall be the \u201cPlanning Authority\u201d as defined under the Karnataka Town and Country Planning Act, 1961, for the areas comprising of the Greater Bengaluru Area; (b) within the physical boundaries of Greater Bengaluru area the approval of any layout including the industrial layout may be done by Greater Bengaluru Authority in conformity with the master plan and to ensure proper circulation of traffic, Plan Sanction of such industrial units shall be done by the respective City Corporation; | Notification No. UDD 468 MNJ 2025(E) (15-10-2025, p. 1): \u201cThese may be called the Zonal Regulations of Revised Master Plan-2015 of the Local Planning Area of Bengaluru (BDA) and Local Planning Area of Greater Bengaluru Authority (Amendment) Regulations 2025.\u201d",
+      "source_url": "https://updates.bbmp.gov.in/v1/api/file/120330573287-THE%20GREATER%20BENGALURU%20GOVERNANCE%20ACT,%202024%20Gazzet%20copy%20GBGA.pdf"
     }
   ],
   "relations": [
     {
       "id": "rel_1",
+      "kind": "amends",
+      "from_doc": "fixture-amend-2024",
+      "from_eid": "cl_2",
+      "to_doc": "fixture-base-2020",
+      "to_eid": "chp_II__cl_2.2",
+      "topic": "building_height",
+      "parameter": "substitute",
+      "from_span": "Amendment of Clause 2.2 \u2014 For clause 2.2, the following shall be substituted: '2.2 Maximum Building Height: No residential building in zone Z1 shall exceed 15.0 metres in height, subject to road width norms under clause 2.1.'",
+      "to_span": "Maximum Building Height \u2014 No residential building in zone Z1 shall exceed 15.0 metres in height, subject to road width norms under clause 2.1.",
+      "precedence_span": null,
+      "method": "rule",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "note": "Amending provision fixture-amend-2024:cl_2 (substitute, effective 2024-06-15) amends fixture-base-2020:chp_II__cl_2.2.",
+      "public_visible": true,
+      "measured_precision": 1.0
+    },
+    {
+      "id": "rel_2",
+      "kind": "amends",
+      "from_doc": "fixture-amend-2024",
+      "from_eid": "cl_3",
+      "to_doc": "fixture-base-2020",
+      "to_eid": "chp_II__cl_2.2",
+      "topic": "building_height",
+      "parameter": "insert_after",
+      "from_span": "Insertion after Clause 2.2 \u2014 After clause 2.2, the following clause shall be inserted: '2.2A Solar Rooftop Structures: Elevated solar panels up to 1.8 metres above the parapet are exempt from height calculation.'",
+      "to_span": "Maximum Building Height \u2014 No residential building in zone Z1 shall exceed 15.0 metres in height, subject to road width norms under clause 2.1.",
+      "precedence_span": null,
+      "method": "rule",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "note": "Amending provision fixture-amend-2024:cl_3 (insert_after, effective 2024-06-15) amends fixture-base-2020:chp_II__cl_2.2.",
+      "public_visible": true,
+      "measured_precision": 1.0
+    },
+    {
+      "id": "rel_3",
+      "kind": "amends",
+      "from_doc": "fixture-amend-2024",
+      "from_eid": "cl_4",
+      "to_doc": "fixture-base-2020",
+      "to_eid": "chp_II__cl_2.3",
+      "topic": "hierarchy_applicability",
+      "parameter": "omit",
+      "from_span": "Omission of Clause 2.3 \u2014 Clause 2.3 shall be omitted.",
+      "to_span": "Temporary Construction Sheds \u2014 [Omitted by fixture-amend-2024:cl_4 with effect from 2024-06-15.]",
+      "precedence_span": null,
+      "method": "rule",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "note": "Amending provision fixture-amend-2024:cl_4 (omit, effective 2024-06-15) amends fixture-base-2020:chp_II__cl_2.3.",
+      "public_visible": true,
+      "measured_precision": 1.0
+    },
+    {
+      "id": "rel_4",
       "kind": "cross_document_reference",
       "from_doc": "fixture-amend-2024",
       "from_eid": "cl_2",
@@ -290,10 +347,12 @@
       "method": "rule",
       "confidence": 0.95,
       "status": "confirmed",
-      "note": "Amending provision fixture-amend-2024:cl_2 (substitute) references target fixture-base-2020:chp_II__cl_2.2."
+      "note": "Cross-document reference from fixture-amend-2024:cl_2 to fixture-base-2020:chp_II__cl_2.2.",
+      "public_visible": false,
+      "measured_precision": null
     },
     {
-      "id": "rel_2",
+      "id": "rel_5",
       "kind": "cross_document_reference",
       "from_doc": "fixture-amend-2024",
       "from_eid": "cl_3",
@@ -307,16 +366,18 @@
       "method": "rule",
       "confidence": 0.95,
       "status": "confirmed",
-      "note": "Amending provision fixture-amend-2024:cl_3 (insert_after) references target fixture-base-2020:chp_II__cl_2.2."
+      "note": "Cross-document reference from fixture-amend-2024:cl_3 to fixture-base-2020:chp_II__cl_2.2.",
+      "public_visible": false,
+      "measured_precision": null
     },
     {
-      "id": "rel_3",
+      "id": "rel_6",
       "kind": "cross_document_reference",
       "from_doc": "fixture-amend-2024",
       "from_eid": "cl_4",
       "to_doc": "fixture-base-2020",
       "to_eid": "chp_II__cl_2.3",
-      "topic": null,
+      "topic": "hierarchy_applicability",
       "parameter": "omit",
       "from_span": "Omission of Clause 2.3 \u2014 Clause 2.3 shall be omitted.",
       "to_span": "Temporary Construction Sheds \u2014 [Omitted by fixture-amend-2024:cl_4 with effect from 2024-06-15.]",
@@ -324,7 +385,9 @@
       "method": "rule",
       "confidence": 0.95,
       "status": "confirmed",
-      "note": "Amending provision fixture-amend-2024:cl_4 (omit) references target fixture-base-2020:chp_II__cl_2.3."
+      "note": "Cross-document reference from fixture-amend-2024:cl_4 to fixture-base-2020:chp_II__cl_2.3.",
+      "public_visible": false,
+      "measured_precision": null
     }
   ]
 }

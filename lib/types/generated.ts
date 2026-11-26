@@ -990,6 +990,10 @@ export interface AmendmentLink {
 
 export interface ReleaseManifest {
   schema_version: "1.4";
+  /**
+   * Deterministic content-addressed build identifier across all public jurisdiction releases in this manifest.
+   */
+  dataset_id?: string | null;
   jurisdictions: JurisdictionManifest[];
 }
 
@@ -1012,6 +1016,7 @@ export interface JurisdictionManifest {
 
 export interface ReleaseEntry {
   version: string;
+  dataset_id?: string | null;
   status?: "published" | "withdrawn";
   withdrawn_reason?: string | null;
   released_at: string;
