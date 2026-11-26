@@ -104,3 +104,59 @@ def test_zero_human_verified_records_across_published_datasets() -> None:
             assert '"human_verified"' not in text, (
                 f"{json_file.relative_to(REPO_ROOT)} contains forbidden human_verified claim"
             )
+
+
+def _strip_details_and_tags(html: str) -> str:
+    cleaned = re.sub(r"<script\b[^>]*>[\s\S]*?</script>", " ", html, flags=re.IGNORECASE)
+    cleaned = re.sub(r"<style\b[^>]*>[\s\S]*?</style>", " ", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"<svg\b[^>]*>[\s\S]*?</svg>", " ", cleaned, flags=re.IGNORECASE)
+    inner_details_re = re.compile(
+        r"<details\b[^>]*>(?:(?!<details\b)[\s\S])*?</details>",
+        re.IGNORECASE,
+    )
+    prev = None
+    while prev != cleaned:
+        prev = cleaned
+        cleaned = inner_details_re.sub(" ", cleaned)
+    return re.sub(r"<[^>]+>", " ", cleaned)
+
+
+def test_built_html_primary_layer_language_check_outside_details() -> None:
+    """Section 3.3 CI language check: built pages contain zero internal IDs, enum names, or raw unit tokens (`sq_m`) outside `<details>` expanders."""
+    next_app_dir = REPO_ROOT / ".next" / "server" / "app"
+    if not next_app_dir.is_dir():
+        return
+
+    forbidden_primary: list[tuple[str, re.Pattern[str]]] = [
+        *FORBIDDEN_PUBLIC_PATTERNS,
+        (
+            "Internal document/jurisdiction ID",
+            re.compile(
+                r"\b(bbl-2003|rmp2015-zr|in-ka-bengaluru(?:-south|-north|-central|-east|-west)?|xx-test-fixture|part_I__|sec_1\.0|chp_4__)\b"
+            ),
+        ),
+        (
+            "Raw enum name",
+            re.compile(
+                r"\b(in_force|status_unknown|reference_only|state_rules|far_base_max|ground_coverage_max_pct|setback_front_min_m|m2_per_car_space|pct_of_plot_depth)\b"
+            ),
+        ),
+        (
+            "Raw unit token",
+            re.compile(r"\b(sq_m|sq_ft)\b"),
+        ),
+    ]
+
+    html_files = sorted(next_app_dir.rglob("*.html"))
+    assert len(html_files) >= 10
+    for html_path in html_files:
+        rel = html_path.relative_to(next_app_dir).as_posix()
+        if "xx-test-fixture" in rel or "_not-found" in rel:
+            continue
+        primary_txt = _strip_details_and_tags(html_path.read_text(encoding="utf-8"))
+        assert "Bylaw One" in primary_txt, f"{rel} missing 'Bylaw One' wordmark"
+        for label, pat in forbidden_primary:
+            m = pat.search(primary_txt)
+            assert m is None, (
+                f"{rel} primary layer outside <details> contains {label}: {m.group(0)!r}"
+            )

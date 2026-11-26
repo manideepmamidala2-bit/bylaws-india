@@ -12,12 +12,16 @@ import {
   isDocumentTextHeld,
   sortDocumentsMostRecentFirst,
 } from "@/lib/plain-language";
-import { formatPlainCorporationName } from "./CorporationSelector";
+import {
+  formatPlainCorporationName,
+  type CorporationOption,
+} from "./CorporationSelector";
 
 interface WhatChangedClientProps {
   jurisdictionId: string;
   documents: DocumentMetadata[];
   amendmentLinks: AmendmentLink[];
+  corporations?: ReadonlyArray<CorporationOption>;
 }
 
 const TYPE_FILTERS = [
@@ -33,6 +37,7 @@ export function WhatChangedClient({
   jurisdictionId,
   documents,
   amendmentLinks,
+  corporations = [],
 }: WhatChangedClientProps) {
   const [selectedType, setSelectedType] = useState<string>("All");
   const [selectedCorp, setSelectedCorp] = useState<string>("ALL");
@@ -75,7 +80,6 @@ export function WhatChangedClient({
 
   return (
     <div className="space-y-6">
-      {/* Filter bar by type and corporation */}
       <div
         role="region"
         aria-label="Filter changes by type and corporation"
@@ -103,37 +107,29 @@ export function WhatChangedClient({
           })}
         </div>
 
-        <div className="flex items-center gap-2">
-          <label
-            htmlFor="what-changed-corp-filter"
-            className="dg-mono text-[#5b5e56]"
-          >
-            Corporation:
-          </label>
-          <select
-            id="what-changed-corp-filter"
-            value={selectedCorp}
-            onChange={(e) => setSelectedCorp(e.target.value)}
-            className="min-h-[44px] border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 font-mono text-xs text-[#080909]"
-          >
-            <option value="ALL">All corporations</option>
-            <option value="in-ka-bengaluru-central">
-              {formatPlainCorporationName("in-ka-bengaluru-central")}
-            </option>
-            <option value="in-ka-bengaluru-north">
-              {formatPlainCorporationName("in-ka-bengaluru-north")}
-            </option>
-            <option value="in-ka-bengaluru-south">
-              {formatPlainCorporationName("in-ka-bengaluru-south")}
-            </option>
-            <option value="in-ka-bengaluru-east">
-              {formatPlainCorporationName("in-ka-bengaluru-east")}
-            </option>
-            <option value="in-ka-bengaluru-west">
-              {formatPlainCorporationName("in-ka-bengaluru-west")}
-            </option>
-          </select>
-        </div>
+        {corporations.length > 1 && (
+          <div className="flex items-center gap-2">
+            <label
+              htmlFor="what-changed-corp-filter"
+              className="dg-mono text-[#5b5e56]"
+            >
+              Corporation:
+            </label>
+            <select
+              id="what-changed-corp-filter"
+              value={selectedCorp}
+              onChange={(e) => setSelectedCorp(e.target.value)}
+              className="min-h-[44px] border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 font-mono text-xs text-[#080909]"
+            >
+              <option value="ALL">All corporations</option>
+              {corporations.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {formatPlainCorporationName(c.id, c.name)}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
       </div>
 
       <ol
@@ -147,8 +143,7 @@ export function WhatChangedClient({
           const plainStatus = formatPlainInstrumentStatus(doc);
           const plainType = formatPlainInstrumentType(doc);
           const plainTitle = formatPlainDocumentTitle(doc);
-          const whatChangedLine =
-            doc.summary_by_site || formatPlainWhatChangedSummary(doc);
+          const whatChangedLine = formatPlainWhatChangedSummary(doc);
           const textHeld = isDocumentTextHeld(doc);
           const originUrl = doc.official_url || doc.source_url;
 

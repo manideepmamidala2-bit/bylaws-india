@@ -83,7 +83,7 @@ export function AreaExplorerClient({
   const firstPdName = String(
     planningDistricts?.features?.[0]?.properties?.name ??
       planningDistricts?.features?.[0]?.properties?.pd_name ??
-      "Planning District 2.10 (Jayanagar) & 2.11 (Banashankari)"
+      "Published planning districts"
   );
   const wardsCount = wards?.features?.length ?? 0;
 

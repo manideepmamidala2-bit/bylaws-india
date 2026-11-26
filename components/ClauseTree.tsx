@@ -39,7 +39,6 @@ const MAX_INLINE_ANNOTATIONS = 8;
 
 export function ClauseTree({
   jurisdictionId = "",
-  jurisdictionName = "",
   clauses,
   outline = [],
   totalClausesCount,
@@ -830,19 +829,15 @@ export function ClauseTree({
 
                 <div className="mt-2 space-y-3 border border-[#c8ccc0] bg-[#efeee8] p-3 text-xs">
                   <div className="flex flex-wrap items-center justify-between gap-2 font-mono text-[11px] text-[#5b5e56]">
-                    <span>
-                      {validPages.length > 0 ? (
-                        <>
-                          Pages: {validPages.join(", ")}
-                          {clause.effective_from &&
-                          clause.effective_from !== defaultEffectiveDate
-                            ? ` · Effective ${clause.effective_from}`
-                            : ""}
-                        </>
-                      ) : (
-                        "No source page recorded"
-                      )}
-                    </span>
+                    {validPages.length > 0 && (
+                      <span>
+                        Pages: {validPages.join(", ")}
+                        {clause.effective_from &&
+                        clause.effective_from !== defaultEffectiveDate
+                          ? ` · Effective ${clause.effective_from}`
+                          : ""}
+                      </span>
+                    )}
                     <div className="flex flex-wrap items-center gap-3">
                       {firstPage !== null &&
                         sourceHref &&

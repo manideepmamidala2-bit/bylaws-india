@@ -203,23 +203,28 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     async () => {
     const homeUi = await JurisdictionPickerPage();
     const { container: homeContainer, unmount: uHome } = render(homeUi);
-    expect(screen.getAllByText(/v[234]\.\d+\.\d+/i).length).toBeGreaterThan(0);
     expect(
-      screen.getByText(/Synthetic demonstration data, not the law of Bengaluru South/i)
+      screen.getByRole("heading", {
+        name: /Bengaluru's building rules\. One code\./i,
+      })
     ).toBeInTheDocument();
-    assertCleanPublicCopy(homeContainer.textContent ?? "", "Home");
+    expect(screen.getByTestId("far-story-stepper")).toBeInTheDocument();
+    expect(screen.queryByLabelText(/Plot area/i)).not.toBeInTheDocument();
+    assertCleanPublicCopy(homeContainer.textContent ?? "", "Home", {
+      allowDataEmDash: true,
+    });
     await assertNoAxeViolations(homeContainer);
     uHome();
 
-    // Sources page renders the 12-document core register (2 structured base docs + 10 "Not yet structured")
+    // Sources page renders plain names and statuses with technical fields in Details
     const sourcesUi = await SourcesPage({
       params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
     });
     const { container: sourcesContainer, unmount: uSources } =
       render(sourcesUi);
     expect(
-      screen.getByText("BANGALORE MAHANAGARA PALIKE BUILDING BYE-LAWS 2003")
-    ).toBeInTheDocument();
+      screen.getAllByText(/Mahanagara Palike Building Bye-Laws 2003/i).length
+    ).toBeGreaterThan(0);
     expect(
       screen.getAllByRole("link", { name: /Read Structured Document/i }).length
     ).toBeGreaterThanOrEqual(4);
@@ -232,7 +237,7 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     await assertNoAxeViolations(sourcesContainer);
     uSources();
 
-    // Document page for bbl-2003 renders Original / As Amended (Derived) toggle, Changed by links, and no "Amendments not yet applied" notice
+    // Document page for bbl-2003 renders Original / As Amended (Derived) toggle, Details on tap, and no 4 March 2026 South draft notice
     const docUi = await DocumentViewerPage({
       params: Promise.resolve({
         id: "in-ka-bengaluru-south",
@@ -243,6 +248,9 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     expect(
       screen.queryByText(/Amendments not yet applied/i)
     ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/04-03-2026/i)
+    ).not.toBeInTheDocument();
     const asAmendedBtn = screen.getByRole("button", {
       name: /As Amended \(Derived\)/i,
     });
@@ -252,13 +260,7 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
         .length
     ).toBeGreaterThan(0);
     expect(
-      screen.getAllByText(/Changed by/i).length
-    ).toBeGreaterThan(0);
-    expect(
       screen.getAllByRole("link", { name: /View source p\. 1/i }).length
-    ).toBeGreaterThan(0);
-    expect(
-      screen.getAllByRole("link", { name: /Archive p\. 1/i }).length
     ).toBeGreaterThan(0);
     assertCleanPublicCopy(
       docContainer.textContent ?? "",
@@ -406,12 +408,14 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     const aboutUi = await AboutPage();
     const { container: aboutContainer, unmount: uAbout } = render(aboutUi);
     expect(
-      screen.getByText(/About Structured Building Bylaws/i)
+      screen.getByRole("heading", { name: /About Bylaw One/i })
     ).toBeInTheDocument();
     expect(
       screen.getByText(/all checks are machine checks/i)
     ).toBeInTheDocument();
-    assertCleanPublicCopy(aboutContainer.textContent ?? "", "About");
+    assertCleanPublicCopy(aboutContainer.textContent ?? "", "About", {
+      allowDataEmDash: true,
+    });
     await assertNoAxeViolations(aboutContainer);
     uAbout();
 
@@ -424,7 +428,9 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     expect(
       screen.getAllByText(/Download graph\.graphml \(Gephi\)/i).length
     ).toBeGreaterThan(0);
-    assertCleanPublicCopy(structureContainer.textContent ?? "", "Structure");
+    assertCleanPublicCopy(structureContainer.textContent ?? "", "Structure", {
+      allowDataEmDash: true,
+    });
     await assertNoAxeViolations(structureContainer);
     uStructure();
 
@@ -433,7 +439,7 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     });
     const { container: topicsContainer, unmount: uTopics } = render(topicsUi);
     expect(
-      screen.getByText(/Regulatory Topics & Cross-Document Relations/i)
+      screen.getByRole("heading", { name: /The code, by subject\./i })
     ).toBeInTheDocument();
     await assertNoAxeViolations(topicsContainer);
     uTopics();
@@ -447,7 +453,13 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     const { container: topicDetailContainer, unmount: uTopicDetail } =
       render(topicDetailUi);
     expect(
-      screen.getAllByText(/Setbacks & Building Lines/i).length
+      screen.getByRole("heading", { name: "Setbacks" })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId("subject-parameter-table")
+    ).toBeInTheDocument();
+    expect(
+      screen.getAllByText(/Building height above 15 up to 18 m/i).length
     ).toBeGreaterThan(0);
     await assertNoAxeViolations(topicDetailContainer);
     uTopicDetail();

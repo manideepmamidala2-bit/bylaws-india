@@ -159,7 +159,7 @@ export const CODE_SUBJECTS: readonly CodeSubjectMeta[] = [
     parameterKinds: [],
     zoningGoverned: false,
     whyAppliesLine:
-      "The Greater Bengaluru Governance Act 2024, the Building Bye-laws 2003 (as amended in May 2026 for each City Corporation), and the February 2025 khata order govern plan sanction and occupancy certificates.",
+      "The municipal governance Act, the Building Bye-laws 2003 (as amended in May 2026 for each City Corporation), and the February 2025 property-record order govern plan sanction and occupancy certificates.",
   },
   {
     slug: "fire-safety",
@@ -277,12 +277,11 @@ export function getRelevantGapNoteForSubject(
     !declarations ||
     (declarations.unobtainable_documents ?? []).some(
       (u) =>
-        u.notified_date?.startsWith("2025-07") ||
-        u.title?.toLowerCase().includes("july 2025") ||
-        u.gazette_reference?.includes("85 MNJ 2025")
+        u.id.includes("2025-07") ||
+        u.title.toLowerCase().includes("july 2025")
     ) ||
     (declarations.known_gaps ?? []).some((g) =>
-      g.description.toLowerCase().includes("18 july 2025")
+      g.description.toLowerCase().includes("july 2025")
     );
 
   if (!hasMissingJuly2025) {
@@ -562,6 +561,117 @@ export function formatParameterValuePlain(record: ParameterRecord): string {
   return `${formatNumberPlain(value)}${unit ? ` ${unit}` : ""}`;
 }
 
+function toTitleCaseIfScreaming(title: string): string {
+  const letters = title.replace(/[^a-zA-Z]/g, "");
+  if (!letters) return title;
+  const upperCount = title.replace(/[^A-Z]/g, "").length;
+  if (upperCount / letters.length < 0.7) {
+    return title;
+  }
+  const keepUpper = new Set(["FAR", "TDR", "DRC", "NOC", "RMP", "I", "II", "III", "IV"]);
+  return title
+    .split(/\s+/)
+    .map((word) => {
+      const clean = word.replace(/[^a-zA-Z0-9]/g, "");
+      if (keepUpper.has(clean.toUpperCase())) {
+        return word.toUpperCase();
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    })
+    .join(" ");
+}
+
+export function formatPlainDocumentTitle(
+  doc: Pick<DocumentMetadata, "doc_id" | "title"> | null | undefined,
+  fallbackId?: string
+): string {
+  if (doc?.title) {
+    return toTitleCaseIfScreaming(doc.title.trim());
+  }
+  if (fallbackId) {
+    return fallbackId;
+  }
+  return "Official regulation";
+}
+
+export function formatPlainWhatChangedSummary(
+  doc: Pick<
+    DocumentMetadata,
+    | "doc_id"
+    | "title"
+    | "instrument_type"
+    | "legal_status"
+    | "layer"
+    | "role"
+    | "summary_by_site"
+  > & {
+    status_evidence?: { description?: string | null };
+  }
+): string {
+  if (doc.summary_by_site && doc.summary_by_site.trim().length > 0) {
+    return formatPlainQuantity(doc.summary_by_site.trim());
+  }
+  if (
+    doc.status_evidence?.description &&
+    doc.status_evidence.description.trim().length > 0
+  ) {
+    return formatPlainQuantity(doc.status_evidence.description.trim());
+  }
+  if (doc.legal_status === "draft") {
+    return "Draft notification published for public objection; not in force.";
+  }
+  if (doc.role === "amendment" && doc.layer === "planning") {
+    return "Amends the master plan zoning regulations and development control tables.";
+  }
+  if (doc.role === "amendment" && doc.layer === "municipal") {
+    return "Amends the municipal building bye-laws, plan sanction rules, and compounding schedules.";
+  }
+  if (doc.layer === "statute") {
+    return "Enacts municipal governance, building regulation, and licensing authority.";
+  }
+  if (doc.layer === "orders") {
+    return "Sets administrative rules for property records and building plan approval.";
+  }
+  if (doc.layer === "planning") {
+    return "Sets zone-by-zone permissible land uses, base FAR, ground coverage, setbacks, height, and parking tables.";
+  }
+  if (doc.layer === "municipal") {
+    return "Establishes municipal building plan sanction, occupancy certificate, structural, fire, and building envelope rules.";
+  }
+  return "Official instrument in the building code source register.";
+}
+
+export function computeHeroDocumentAndBodyCounts(
+  documents: ReadonlyArray<DocumentMetadata>
+): { documentCount: number; bodyCount: number } {
+  const inForceDocs = documents.filter(
+    (d) =>
+      d.legal_status === "in_force" &&
+      d.acquisition_status !== "not_found" &&
+      d.applies_to_jurisdiction?.status !== "no" &&
+      (d.instrument_type ?? "instrument") !== "map" &&
+      (d.instrument_type ?? "instrument") !== "compilation"
+  );
+
+  const normalizedBodies = new Set<string>();
+  for (const d of inForceDocs) {
+    const raw = (d.issuing_authority || "").trim();
+    if (!raw) continue;
+    const primaryPart = raw
+      .split(/[/,]/)
+      .map((s) => s.trim().toLowerCase())
+      .find(Boolean);
+    if (primaryPart) {
+      normalizedBodies.add(primaryPart);
+    }
+  }
+
+  return {
+    documentCount: inForceDocs.length,
+    bodyCount: normalizedBodies.size,
+  };
+}
+
 export function formatHumanDate(isoDate: string | null | undefined): string {
   if (!isoDate) return "Date not recorded";
   const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(isoDate.trim());
@@ -634,10 +744,17 @@ export function formatPlainInstrumentType(
 export function isDocumentTextHeld(
   doc: Pick<
     DocumentMetadata,
-    "structured" | "acquisition_status" | "text_rights" | "clauses_count"
-  >
+    "acquisition_status" | "text_rights" | "instrument_type"
+  > & {
+    structured?: boolean;
+    clauses_count?: number;
+  }
 ): boolean {
   if (doc.structured === false) return false;
+  const iType = doc.instrument_type ?? "instrument";
+  if (iType === "compilation" || iType === "map" || iType === "bill") {
+    return false;
+  }
   if (doc.acquisition_status && doc.acquisition_status !== "acquired") {
     return false;
   }

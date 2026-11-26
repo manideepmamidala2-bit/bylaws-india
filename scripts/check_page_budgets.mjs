@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 /**
- * Enforce Part 1 §5 Page Weight Budgets against the built Next.js `.next/` output:
+ * Enforce Bylaw One §3.3 & §12 Page Weight Budgets and Primary-Layer Language Gate
+ * against the built Next.js `.next/` output:
  * - HTML per page <= 300 KB (307,200 bytes) uncompressed
  * - Initial JavaScript + data per page <= 1.5 MB (1,572,864 bytes) uncompressed
+ * - Zero internal IDs, enum names, raw unit tokens (`sq_m`), or project references
+ *   outside `<details>` expanders.
  */
 
 import fs from "node:fs";
@@ -34,6 +37,21 @@ function collectFiles(dir, ext, out = []) {
   return out;
 }
 
+function stripDetailsAndTags(html) {
+  let cleaned = html
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, " ")
+    .replace(/<svg\b[^>]*>[\s\S]*?<\/svg>/gi, " ");
+  const innerDetailsRe =
+    /<details\b[^>]*>(?:(?!<details\b)[\s\S])*?<\/details>/gi;
+  let prev = "";
+  while (prev !== cleaned) {
+    prev = cleaned;
+    cleaned = cleaned.replace(innerDetailsRe, " ");
+  }
+  return cleaned.replace(/<[^>]+>/g, " ");
+}
+
 let rootMainJsBytes = 0;
 if (fs.existsSync(buildManifestPath)) {
   const bm = JSON.parse(fs.readFileSync(buildManifestPath, "utf8"));
@@ -55,13 +73,32 @@ let maxHtmlObserved = 0;
 let maxHtmlRoute = "";
 let maxTotalObserved = 0;
 let maxTotalRoute = "";
-const observedReleases = new Set();
 
-const FORBIDDEN_COPY_PATTERNS = [
+const FORBIDDEN_PRIMARY_LAYER_PATTERNS = [
   { label: "PR number reference", regex: /\bPR\s+0?\d+\b/ },
-  { label: "Internal plan reference", regex: /\b(Plan\s+v\d+|building-code-plan|00-overview\.md)\b/i },
+  {
+    label: "Internal plan reference",
+    regex: /\b(Plan\s+v\d+|building-code-plan|00-overview\.md)\b/i,
+  },
   { label: "Schema version label", regex: /\bSchema\s+v?1\.\d+\b/i },
-  { label: "Stale release notice", regex: /Two base documents published|pending in PR/i },
+  {
+    label: "Stale release notice",
+    regex: /Two base documents published|pending in PR/i,
+  },
+  {
+    label: "Internal document or jurisdiction ID",
+    regex:
+      /\b(bbl-2003|rmp2015-zr|in-ka-bengaluru(?:-south|-north|-central|-east|-west)?|xx-test-fixture|part_I__|sec_1\.0|chp_4__)\b/,
+  },
+  {
+    label: "Raw enum name",
+    regex:
+      /\b(in_force|status_unknown|reference_only|state_rules|far_base_max|ground_coverage_max_pct|setback_front_min_m|m2_per_car_space|pct_of_plot_depth)\b/,
+  },
+  {
+    label: "Raw unit token",
+    regex: /\b(sq_m|sq_ft)\b/,
+  },
 ];
 
 for (const htmlPath of htmlFiles) {
@@ -73,27 +110,27 @@ for (const htmlPath of htmlFiles) {
       .replace(/\/index$/, "");
   const htmlBytes = fs.statSync(htmlPath).size;
   const htmlText = fs.readFileSync(htmlPath, "utf8");
-  const visibleText = htmlText
-    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ")
-    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, " ")
-    .replace(/<[^>]+>/g, " ");
+  const primaryLayerText = stripDetailsAndTags(htmlText);
 
-  if (!relRoute.includes("xx-test-fixture") && !relRoute.includes("_not-found")) {
-    const relMatch = visibleText.match(/Release\s+(\d+\.\d+\.\d+)\s*·\s*CC BY 4\.0/);
-    if (!relMatch) {
-      violations.push(`${relRoute}: Missing 'Release X.Y.Z · CC BY 4.0' banner in built HTML`);
-    } else {
-      observedReleases.add(relMatch[1]);
+  if (
+    !relRoute.includes("xx-test-fixture") &&
+    !relRoute.includes("_not-found")
+  ) {
+    if (!primaryLayerText.includes("Bylaw One")) {
+      violations.push(
+        `${relRoute}: Missing 'Bylaw One' wordmark in built HTML`
+      );
     }
-    for (const pat of FORBIDDEN_COPY_PATTERNS) {
-      const m = visibleText.match(pat.regex);
+    for (const pat of FORBIDDEN_PRIMARY_LAYER_PATTERNS) {
+      const m = primaryLayerText.match(pat.regex);
       if (m) {
         violations.push(
-          `${relRoute}: Built HTML contains forbidden ${pat.label} (${JSON.stringify(m[0])})`
+          `${relRoute}: Primary layer outside <details> contains forbidden ${pat.label} (${JSON.stringify(m[0])})`
         );
       }
     }
   }
+
   const rscPath = htmlPath.replace(/\.html$/, ".rsc");
   const rscBytes = fs.existsSync(rscPath) ? fs.statSync(rscPath).size : 0;
   const initialJsAndDataBytes = rootMainJsBytes + rscBytes;
@@ -119,20 +156,16 @@ for (const htmlPath of htmlFiles) {
   }
 }
 
-if (observedReleases.size > 1) {
-  violations.push(
-    `Built pages report inconsistent release identifiers: ${Array.from(observedReleases).join(", ")}`
-  );
-}
-
 console.log(
-  `[check_page_budgets] Checked ${htmlFiles.length} built HTML routes (release=${Array.from(observedReleases).join(",") || "none"}): ` +
+  `[check_page_budgets] Checked ${htmlFiles.length} built HTML routes: ` +
     `max HTML = ${(maxHtmlObserved / 1024).toFixed(1)} KB (${maxHtmlRoute || "/"}) [budget <= 300 KB], ` +
     `max initial JS+data = ${(maxTotalObserved / (1024 * 1024)).toFixed(2)} MB (${maxTotalRoute || "/"}) [budget <= 1.50 MB].`
 );
 
 if (violations.length > 0) {
-  console.error("[check_page_budgets] FAIL — Page weight budget violations:");
+  console.error(
+    "[check_page_budgets] FAIL — Page budget or language gate violations:"
+  );
   for (const v of violations) {
     console.error(`  - ${v}`);
   }

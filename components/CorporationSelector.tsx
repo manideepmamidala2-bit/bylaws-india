@@ -4,50 +4,36 @@ import Link from "next/link";
 export interface CorporationOption {
   id: string;
   name: string;
-  href: string;
 }
-
-const DEFAULT_CORPORATIONS: ReadonlyArray<{ id: string; name: string }> = [
-  { id: "in-ka-bengaluru", name: "Greater Bengaluru" },
-  {
-    id: "in-ka-bengaluru-central",
-    name: "Bengaluru Central City Corporation",
-  },
-  { id: "in-ka-bengaluru-north", name: "Bengaluru North City Corporation" },
-  { id: "in-ka-bengaluru-south", name: "Bengaluru South City Corporation" },
-  { id: "in-ka-bengaluru-east", name: "Bengaluru East City Corporation" },
-  { id: "in-ka-bengaluru-west", name: "Bengaluru West City Corporation" },
-];
 
 export function formatPlainCorporationName(
   jurisdictionId: string,
   fallbackName?: string
 ): string {
-  const found = DEFAULT_CORPORATIONS.find((c) => c.id === jurisdictionId);
-  if (found) return found.name;
   if (fallbackName) {
     return fallbackName.replace(/\s*\(GBA Area\)\s*/i, "").trim();
   }
-  return "Greater Bengaluru";
+  return jurisdictionId;
 }
 
 interface CorporationSelectorProps {
   currentId: string;
   currentName?: string;
-  /** Path suffix after `/j/<id>`, e.g. `/topics` or `/topics/far` or `/documents/bbl-2003` */
   pathSuffix: string;
-  corporations?: ReadonlyArray<{ id: string; name: string }>;
+  corporations?: ReadonlyArray<CorporationOption>;
 }
 
 export function CorporationSelector({
   currentId,
   currentName,
   pathSuffix,
-  corporations = DEFAULT_CORPORATIONS,
+  corporations = [],
 }: CorporationSelectorProps) {
   const activeLabel = formatPlainCorporationName(currentId, currentName);
   const options =
-    corporations.length > 0 ? corporations : DEFAULT_CORPORATIONS;
+    corporations.length > 0
+      ? corporations
+      : [{ id: currentId, name: activeLabel }];
 
   return (
     <div

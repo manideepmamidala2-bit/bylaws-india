@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Map Page — PMTiles HTTP 206 Range & Non-Blank Canvas (08b §1)", () => {
+test.describe("Bylaw One — Home, Subject, Document & Map E2E Suite", () => {
   for (const viewport of [
     { name: "desktop", width: 1280, height: 800 },
     { name: "mobile", width: 390, height: 844 },
   ]) {
-    test(`renders MapLibre canvas and serves .pmtiles with HTTP 206 on ${viewport.name}`, async ({
+    test(`renders Home page 5-step FAR story, 11 subjects, and header/footer with no map or plot inputs on ${viewport.name}`, async ({
       page,
     }) => {
       await page.setViewportSize({
@@ -13,18 +13,165 @@ test.describe("Map Page — PMTiles HTTP 206 Range & Non-Blank Canvas (08b §1)"
         height: viewport.height,
       });
 
-      const pmtilesStatuses: number[] = [];
-      page.on("response", (resp) => {
-        if (resp.url().includes(".pmtiles")) {
-          pmtilesStatuses.push(resp.status());
-        }
+      await page.goto("/", { waitUntil: "domcontentloaded" });
+
+      // Wordmark & Hero
+      await expect(
+        page.getByRole("banner").getByRole("link", { name: "Bylaw One" })
+      ).toBeVisible();
+      await expect(
+        page.getByRole("heading", {
+          name: /Bengaluru's building rules\. One code\./i,
+        })
+      ).toBeVisible();
+
+      // Mobile vs desktop header behavior & >= 44px tap targets
+      const searchBtn = page.getByTestId("header-search-toggle");
+      await expect(searchBtn).toBeVisible();
+      const sBox = await searchBtn.boundingBox();
+      expect(sBox).not.toBeNull();
+      expect(sBox!.height).toBeGreaterThanOrEqual(44);
+      expect(sBox!.width).toBeGreaterThanOrEqual(44);
+
+      if (viewport.width === 390) {
+        const menuBtn = page.getByTestId("header-menu-toggle");
+        await expect(menuBtn).toBeVisible();
+        const mBox = await menuBtn.boundingBox();
+        expect(mBox).not.toBeNull();
+        expect(mBox!.height).toBeGreaterThanOrEqual(44);
+        await menuBtn.click();
+        const mobileNav = page.getByTestId("mobile-nav-menu");
+        await expect(mobileNav).toBeVisible();
+        await expect(
+          mobileNav.getByRole("link", { name: "The code" })
+        ).toBeVisible();
+        await expect(
+          mobileNav.getByRole("link", { name: "What changed" })
+        ).toBeVisible();
+        await expect(
+          mobileNav.getByRole("link", { name: "About" })
+        ).toBeVisible();
+        await menuBtn.click();
+      } else {
+        const primaryNav = page.getByRole("navigation", {
+          name: "Primary navigation",
+        });
+        await expect(
+          primaryNav.getByRole("link", { name: "The code" })
+        ).toBeVisible();
+        await expect(
+          primaryNav.getByRole("link", { name: "What changed" })
+        ).toBeVisible();
+        await expect(
+          primaryNav.getByRole("link", { name: "About" })
+        ).toBeVisible();
+      }
+
+      // 01 / The problem
+      await expect(
+        page.getByRole("heading", { name: /Many sources\. One building\./i })
+      ).toBeVisible();
+
+      // 02 / Follow one rule: FAR (all 5 steps with verbatim excerpts and working page links)
+      const stepper = page.getByTestId("far-story-stepper");
+      await expect(stepper).toBeVisible();
+      for (let i = 1; i <= 5; i++) {
+        const excerpt = page.getByTestId(`far-story-excerpt-${i}`);
+        await expect(excerpt).toBeVisible();
+        const txt = await excerpt.textContent();
+        expect((txt ?? "").length).toBeGreaterThan(40);
+
+        const viewPage = page.getByTestId(`far-story-view-page-${i}`);
+        await expect(viewPage).toBeVisible();
+        const href = await viewPage.getAttribute("href");
+        expect(href).toMatch(/#page=\d+$/);
+      }
+
+      // 03 / The code, by subject (11 subjects)
+      const subjectList = page.getByTestId("home-subject-list");
+      await expect(subjectList.locator("li")).toHaveCount(11);
+
+      // Closing & Footer
+      await expect(
+        page.getByRole("heading", { name: /Read\. Trace\. Compare\./i })
+      ).toBeVisible();
+      const footer = page.getByRole("contentinfo");
+      await expect(footer.getByRole("link", { name: "Sources" })).toBeVisible();
+      await expect(footer.getByRole("link", { name: "Map" })).toBeVisible();
+      await expect(
+        footer.getByRole("link", { name: "Data and downloads" })
+      ).toBeVisible();
+      await expect(footer.getByRole("link", { name: "Licence" })).toBeVisible();
+      await expect(
+        footer.getByRole("link", { name: "How this is built" })
+      ).toBeVisible();
+
+      // Zero map canvas and zero plot inputs on Home
+      await expect(
+        page.getByRole("region", { name: /MapLibre GL JS street map canvas/i })
+      ).toHaveCount(0);
+      await expect(page.getByLabel(/Plot area/i)).toHaveCount(0);
+      await expect(page.getByLabel(/Road width/i)).toHaveCount(0);
+
+      await page.screenshot({
+        path: `/tmp/opencode/home-${viewport.width}px.png`,
+        fullPage: false,
+      });
+    });
+
+    test(`renders Subject page clean table with units and conditions in words and no plot inputs on ${viewport.name}`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({
+        width: viewport.width,
+        height: viewport.height,
+      });
+
+      await page.goto("/j/in-ka-bengaluru-south/topics/setbacks", {
+        waitUntil: "domcontentloaded",
+      });
+
+      await expect(
+        page.getByRole("heading", { name: "Setbacks" })
+      ).toBeVisible();
+      await expect(
+        page.getByRole("heading", { name: "What applies today" })
+      ).toBeVisible();
+
+      const paramTable = page.getByTestId("subject-parameter-table");
+      await expect(paramTable).toBeVisible();
+      await expect(paramTable).toContainText(
+        /Building height above 15 up to 18 m/i
+      );
+      await expect(paramTable).toContainText(/6 m/);
+      await expect(paramTable).toContainText(/12% of plot depth/);
+
+      // Older and related rules collapsed by default
+      const olderDetails = page.getByTestId("older-or-replaced-rules");
+      await expect(olderDetails).toBeVisible();
+      expect(await olderDetails.getAttribute("open")).toBeNull();
+
+      // Zero plot inputs
+      await expect(page.getByLabel(/Plot area/i)).toHaveCount(0);
+
+      await page.screenshot({
+        path: `/tmp/opencode/subject-setbacks-${viewport.width}px.png`,
+        fullPage: false,
+      });
+    });
+
+    test(`renders MapLibre canvas and serves .pmtiles with HTTP 206 without plot inputs on ${viewport.name}`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({
+        width: viewport.width,
+        height: viewport.height,
       });
 
       await page.goto("/j/in-ka-bengaluru-south", {
         waitUntil: "domcontentloaded",
       });
 
-      // Verify map container has non-zero bounding box at this viewport
       const mapRegion = page.getByRole("region", {
         name: /MapLibre GL JS street map canvas/i,
       });
@@ -52,22 +199,17 @@ test.describe("Map Page — PMTiles HTTP 206 Range & Non-Blank Canvas (08b §1)"
       expect(rangeCheck.contentRange).toMatch(/^bytes 0-511\//);
       expect(rangeCheck.acceptRanges).toBe("bytes");
 
-      // Wait for MapLibre canvas element or WebGL fallback banner
-      const canvas = mapRegion.locator("canvas").first();
-      const hasCanvas = (await canvas.count()) > 0;
-      if (hasCanvas) {
-        await page.waitForTimeout(1500);
-        const nonBlank = await canvas.evaluate((el: HTMLCanvasElement) => {
-          return el.width > 0 && el.height > 0;
-        });
-        expect(nonBlank).toBe(true);
-      }
+      // Location summary shows area, ward, corporation and zone only (no plot inputs)
+      await expect(page.getByTestId("map-location-summary")).toBeVisible();
+      await expect(page.getByLabel(/Plot area/i)).toHaveCount(0);
+      await expect(page.getByLabel(/Road width/i)).toHaveCount(0);
     });
   }
 
-  test("renders document page with per-chapter outline within <= 300 KB HTML budget and expands a provision on tap", async ({
+  test("renders document page within <= 300 KB HTML budget, expands a provision on tap, and omits the 4 March 2026 South draft notice", async ({
     page,
   }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
     const resp = await page.goto(
       "/j/in-ka-bengaluru-south/documents/bbl-2003",
       { waitUntil: "domcontentloaded" }
@@ -79,45 +221,30 @@ test.describe("Map Page — PMTiles HTTP 206 Range & Non-Blank Canvas (08b §1)"
 
     await expect(
       page.getByRole("heading", {
-        name: /BANGALORE MAHANAGARA PALIKE BUILDING BYE-LAWS 2003/i,
+        name: /Mahanagara Palike Building Bye-Laws 2003/i,
       })
     ).toBeVisible();
     await expect(
       page.getByRole("complementary", { name: /Document outline navigation/i })
     ).toBeVisible();
 
+    // No 4 March 2026 South draft notice on in-force document page
+    await expect(page.getByText(/04-03-2026/i)).toHaveCount(0);
+
     const firstDetailsSummary = page
-      .locator("details summary", { hasText: /^Details$/ })
+      .locator('[data-testid^="provision-details-"] summary')
       .first();
     await firstDetailsSummary.click();
     await expect(page.getByText(/Address:/i).first()).toBeVisible();
-  });
 
-  test("renders map-first home and resolves Jayanagar 600 m² / 15 m road plot card answers with tap-to-expand details", async ({
-    page,
-  }) => {
-    await page.goto("/", { waitUntil: "domcontentloaded" });
-
-    const plotCard = page.getByRole("region", {
-      name: /Plot building code resolver card/i,
+    await page.screenshot({
+      path: "/tmp/opencode/document-bbl2003-1280px.png",
+      fullPage: false,
     });
-    await expect(plotCard).toBeVisible();
-
-    const areaInput = plotCard.getByLabel(/Plot area \(m²\)/i);
-    const roadInput = plotCard.getByLabel(/Road width \(m\)/i);
-    await areaInput.fill("600");
-    await roadInput.fill("15");
-
-    await expect(plotCard).toContainText(/65%/i);
-    await expect(plotCard).toContainText(/2\.25/i);
-    await expect(plotCard).toContainText(
-      /Worked out from the official documents by this site\. Confirm with the planning authority or a qualified professional\./i
-    );
-
-    const covDetails = plotCard.getByTestId(
-      "plot-answer-details-ground_coverage_max_pct"
-    );
-    await covDetails.locator("summary").click();
-    await expect(covDetails).toContainText(/Source table row:/i);
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.screenshot({
+      path: "/tmp/opencode/document-bbl2003-390px.png",
+      fullPage: false,
+    });
   });
 });

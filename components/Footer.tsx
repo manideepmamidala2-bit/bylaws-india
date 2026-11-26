@@ -18,15 +18,12 @@ export function Footer({ jurisdictionId }: FooterProps) {
   }
 
   const matchedJur = pathname ? /^\/j\/([^/]+)/.exec(pathname)?.[1] : null;
-  const targetJurId =
-    jurisdictionId ||
-    (matchedJur && matchedJur !== "xx-test-fixture"
-      ? matchedJur
-      : "in-ka-bengaluru");
+  const targetJurId = matchedJur || jurisdictionId || "";
+  const prefix = targetJurId ? `/j/${targetJurId}` : "";
 
   const footerLinks = [
-    { label: "Sources", href: `/j/${targetJurId}/sources` },
-    { label: "Map", href: `/j/${targetJurId}` },
+    { label: "Sources", href: prefix ? `${prefix}/sources` : "/data" },
+    { label: "Map", href: prefix || "/data" },
     { label: "Data and downloads", href: "/data" },
     { label: "Licence", href: "/about#licence" },
     { label: "How this is built", href: "/about#how-this-is-built" },

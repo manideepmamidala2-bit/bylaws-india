@@ -28,10 +28,8 @@ export function TopNav({ jurisdictionId, active }: TopNavProps) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const targetJurId =
-    jurisdictionId && jurisdictionId !== "xx-test-fixture"
-      ? jurisdictionId
-      : "in-ka-bengaluru";
+  const targetJurId = jurisdictionId ?? "";
+  const prefix = targetJurId ? `/j/${targetJurId}` : "";
 
   const navItems: Array<{
     key: "code" | "changed" | "about";
@@ -42,13 +40,13 @@ export function TopNav({ jurisdictionId, active }: TopNavProps) {
     {
       key: "code",
       label: "The code",
-      href: `/j/${targetJurId}/topics`,
+      href: prefix ? `${prefix}/topics` : "/data",
       isCurrent: active === "topics" || active === "documents",
     },
     {
       key: "changed",
       label: "What changed",
-      href: `/j/${targetJurId}/timeline`,
+      href: prefix ? `${prefix}/timeline` : "/data",
       isCurrent: active === "timeline",
     },
     {

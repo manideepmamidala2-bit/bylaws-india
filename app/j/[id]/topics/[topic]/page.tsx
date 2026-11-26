@@ -24,6 +24,7 @@ import {
   getRelevantGapNoteForSubject,
   isPlausibleParameterRecord,
   resolveCodeSubject,
+  truncateAtWordBoundary,
 } from "@/lib/plain-language";
 
 interface TopicDetailPageProps {
@@ -180,7 +181,7 @@ function isDefinitionOrBareHeading(
   node: ClauseNode,
   subjectTopicId: string
 ): boolean {
-  const eid = node.eid.toLowerCase();
+  const eid = (node.eid ?? "").toLowerCase();
   if (eid.includes("toc") || eid.startsWith("pref_") || eid.startsWith("prea_")) {
     return true;
   }
@@ -231,9 +232,9 @@ export default async function TopicDetailPage({
       ? jurisdiction.id
       : null);
   const gbaCorporations = rootParentId
-    ? allVisible.filter(
-        (j) => j.id === rootParentId || j.parent === rootParentId
-      )
+    ? allVisible
+        .filter((j) => j.id === rootParentId || j.parent === rootParentId)
+        .map((j) => ({ id: j.id, name: j.name }))
     : [];
 
   const docMetaById = new Map(documents.map((d) => [d.doc_id, d]));
@@ -307,7 +308,7 @@ export default async function TopicDetailPage({
           dMeta?.layer === "statute" ||
           dMeta?.layer === "orders"))
     ) {
-      if (whatAppliesToday.length < 12) {
+      if (whatAppliesToday.length < 8) {
         whatAppliesToday.push(node);
       } else {
         relatedProvisions.push(node);
@@ -318,7 +319,7 @@ export default async function TopicDetailPage({
   }
 
   if (whatAppliesToday.length === 0 && relatedProvisions.length > 0) {
-    whatAppliesToday.push(...relatedProvisions.splice(0, 8));
+    whatAppliesToday.push(...relatedProvisions.splice(0, 6));
   }
 
   // Sort older/replaced provisions newest first
@@ -333,6 +334,11 @@ export default async function TopicDetailPage({
       "0000-00-00";
     return dB.localeCompare(dA);
   });
+
+  const totalOlderProvisionsCount = olderOrReplacedRules.length;
+  const totalRelatedProvisionsCount = relatedProvisions.length;
+  const visibleOlderRules = olderOrReplacedRules.slice(0, 6);
+  const visibleRelatedProvisions = relatedProvisions.slice(0, 8);
 
   // Governing parameter table rows for this subject
   const paramKinds = subjectMeta.parameterKinds;
@@ -361,7 +367,7 @@ export default async function TopicDetailPage({
   const olderParameterRows = buildDeduplicatedSubjectParameterRows(
     olderParamRecords,
     docTitleById
-  );
+  ).slice(0, 8);
 
   // Statutory authority quotes for "Why this rule applies"
   const byelaw14Step = (resolutionConfig?.steps ?? []).find(
@@ -379,7 +385,10 @@ export default async function TopicDetailPage({
     declarations
   );
 
-  function renderProvisionRow(node: ClauseNode, olderReason?: string) {
+  function renderProvisionRow(
+    node: ClauseNode,
+    options?: { olderReason?: string; compact?: boolean }
+  ) {
     const docId = node.doc_id ?? "";
     const dMeta = docMetaById.get(docId);
     const plainDocTitle =
@@ -389,11 +398,15 @@ export default async function TopicDetailPage({
     const page = cit?.page ?? 1;
     const pdfUrl = dMeta?.official_url || dMeta?.source_url || node.source_url;
     const archiveUrl = dMeta?.retrieval?.archive_url || node.archive_url;
+    const isCompact = Boolean(options?.compact);
+    const displayText = isCompact
+      ? truncateAtWordBoundary(node.text, 260)
+      : truncateAtWordBoundary(node.text, 440);
 
     return (
       <li
         key={`${docId}:${node.eid}`}
-        className="border-b border-[#c8ccc0] py-5 last:border-b-0"
+        className="border-b border-[#c8ccc0] py-4 last:border-b-0"
       >
         <div className="flex flex-wrap items-baseline justify-between gap-2">
           <div className="flex flex-wrap items-baseline gap-2">
@@ -424,17 +437,17 @@ export default async function TopicDetailPage({
           </div>
         </div>
 
-        {olderReason && (
-          <div className="mt-1.5 font-mono text-xs text-[#5b5e56]">
-            {olderReason}
+        {options?.olderReason && (
+          <div className="mt-1 font-mono text-xs text-[#5b5e56]">
+            {options.olderReason}
           </div>
         )}
 
         <p className="dg-serif mt-2 whitespace-pre-line text-base leading-relaxed text-[#171917]">
-          {node.text}
+          {displayText}
         </p>
 
-        {node.notes_by_site && node.notes_by_site.length > 0 && (
+        {!isCompact && node.notes_by_site && node.notes_by_site.length > 0 && (
           <div className="mt-3 border-l-2 border-[#c8ccc0] bg-[#efeee8] px-3 py-2 text-xs text-[#171917]">
             <span className="dg-mono mr-2 text-[#5b5e56]">
               In short, by this site:
@@ -443,39 +456,42 @@ export default async function TopicDetailPage({
           </div>
         )}
 
-        <details className="mt-2">
-          <summary className="inline-flex min-h-[44px] cursor-pointer items-center font-mono text-[11px] uppercase tracking-[0.12em] text-[#5b5e56] hover:text-[#080909]">
-            Details
-          </summary>
-          <div className="mt-1 space-y-1 border border-[#c8ccc0] bg-[#efeee8] p-3 font-mono text-xs text-[#5b5e56]">
-            <div>
-              Document: <span className="text-[#080909]">{plainDocTitle}</span>{" "}
-              ({dMeta ? formatPlainInstrumentStatus(dMeta) : "In force"})
+        {!isCompact && (
+          <details className="mt-2">
+            <summary className="inline-flex min-h-[44px] cursor-pointer items-center font-mono text-[11px] uppercase tracking-[0.12em] text-[#5b5e56] hover:text-[#080909]">
+              Details
+            </summary>
+            <div className="mt-1 space-y-1 border border-[#c8ccc0] bg-[#efeee8] p-3 font-mono text-xs text-[#5b5e56]">
+              <div>
+                Document:{" "}
+                <span className="text-[#080909]">{plainDocTitle}</span> (
+                {dMeta ? formatPlainInstrumentStatus(dMeta) : "In force"})
+              </div>
+              <div>
+                Page: <span className="text-[#080909]">p. {page}</span>
+                {archiveUrl && (
+                  <>
+                    {" · "}
+                    <a
+                      href={`${archiveUrl}#page=${page}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#080909] underline"
+                    >
+                      Archived PDF (p. {page}) ↗
+                    </a>
+                  </>
+                )}
+              </div>
+              <div>
+                Technical address:{" "}
+                <code className="text-[#080909]">
+                  {docId}:{node.eid}
+                </code>
+              </div>
             </div>
-            <div>
-              Page: <span className="text-[#080909]">p. {page}</span>
-              {archiveUrl && (
-                <>
-                  {" · "}
-                  <a
-                    href={`${archiveUrl}#page=${page}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#080909] underline"
-                  >
-                    Archived PDF (p. {page}) ↗
-                  </a>
-                </>
-              )}
-            </div>
-            <div>
-              Technical address:{" "}
-              <code className="text-[#080909]">
-                {docId}:{node.eid}
-              </code>
-            </div>
-          </div>
-        </details>
+          </details>
+        )}
       </li>
     );
   }
@@ -583,39 +599,14 @@ export default async function TopicDetailPage({
                         </td>
                         <td>
                           <details>
-                            <summary className="cursor-pointer font-mono text-[11px] uppercase tracking-[0.12em] text-[#5b5e56] hover:text-[#080909]">
+                            <summary className="cursor-pointer font-mono text-[11px] uppercase tracking-[0.12em] text-[#5b5e56]">
                               Details
                             </summary>
-                            <div className="mt-1 space-y-1 border border-[#c8ccc0] bg-[#efeee8] p-2 font-mono text-[11px] text-[#5b5e56]">
-                              {row.tableLabel && (
-                                <div>
-                                  Table:{" "}
-                                  <span className="text-[#080909]">
-                                    {row.tableLabel}
-                                  </span>
-                                </div>
-                              )}
-                              {row.rawRowHeader && (
-                                <div>
-                                  Printed row header:{" "}
-                                  <code className="text-[#080909]">
-                                    {row.rawRowHeader}
-                                  </code>
-                                </div>
-                              )}
-                              <div>
-                                Printed cell:{" "}
-                                <code className="text-[#080909]">
-                                  {row.rawCellText}
-                                </code>
-                              </div>
-                              <div>
-                                Record ID:{" "}
-                                <code className="text-[#080909]">
-                                  {row.parameterIds.join(", ")}
-                                </code>
-                              </div>
-                            </div>
+                            <span className="mt-1 block font-mono text-[10px] text-[#5b5e56]">
+                              {row.tableLabel ? `${row.tableLabel} · ` : ""}
+                              {row.rawRowHeader ? `${row.rawRowHeader} · ` : ""}
+                              {row.rawCellText} ({row.parameterIds[0]})
+                            </span>
                           </details>
                         </td>
                       </tr>
@@ -670,11 +661,11 @@ export default async function TopicDetailPage({
                 <div>
                   <div className="font-mono text-xs font-semibold text-[#080909]">
                     {byelaw14Step.title} —{" "}
-                    {byelaw14Step.authority.provision_label} (p.{" "}
+                    {byelaw14Step.authority.clause_id} (p.{" "}
                     {byelaw14Step.authority.page})
                   </div>
                   <blockquote className="dg-serif mt-1 border-l-2 border-[#080909] pl-3 italic text-[#171917]">
-                    &ldquo;{byelaw14Step.authority.verbatim_quote}&rdquo;
+                    &ldquo;{byelaw14Step.authority.quote}&rdquo;
                   </blockquote>
                 </div>
               )}
@@ -682,11 +673,11 @@ export default async function TopicDetailPage({
                 <div>
                   <div className="font-mono text-xs font-semibold text-[#080909]">
                     {lexPosteriorStep.title} —{" "}
-                    {lexPosteriorStep.authority.provision_label} (p.{" "}
+                    {lexPosteriorStep.authority.clause_id} (p.{" "}
                     {lexPosteriorStep.authority.page})
                   </div>
                   <blockquote className="dg-serif mt-1 border-l-2 border-[#080909] pl-3 italic text-[#171917]">
-                    &ldquo;{lexPosteriorStep.authority.verbatim_quote}&rdquo;
+                    &ldquo;{lexPosteriorStep.authority.quote}&rdquo;
                   </blockquote>
                 </div>
               )}
@@ -694,11 +685,11 @@ export default async function TopicDetailPage({
                 <div>
                   <div className="font-mono text-xs font-semibold text-[#080909]">
                     {corpScopeStep.title} —{" "}
-                    {corpScopeStep.authority.provision_label} (p.{" "}
+                    {corpScopeStep.authority.clause_id} (p.{" "}
                     {corpScopeStep.authority.page})
                   </div>
                   <blockquote className="dg-serif mt-1 border-l-2 border-[#080909] pl-3 italic text-[#171917]">
-                    &ldquo;{corpScopeStep.authority.verbatim_quote}&rdquo;
+                    &ldquo;{corpScopeStep.authority.quote}&rdquo;
                   </blockquote>
                 </div>
               )}
@@ -707,7 +698,7 @@ export default async function TopicDetailPage({
         </section>
 
         {/* 4. Older or replaced rules (collapsed, newest first) */}
-        {(olderOrReplacedRules.length > 0 || olderParameterRows.length > 0) && (
+        {(visibleOlderRules.length > 0 || olderParameterRows.length > 0) && (
           <section
             aria-label="Older or replaced rules"
             className="border-t border-[#c8ccc0] pt-6"
@@ -716,7 +707,7 @@ export default async function TopicDetailPage({
               <summary className="flex min-h-[44px] cursor-pointer items-center justify-between font-mono text-xs uppercase tracking-[0.12em] text-[#5b5e56] hover:text-[#080909]">
                 <span>
                   Older or replaced rules (
-                  {olderOrReplacedRules.length + olderParameterRows.length}) —
+                  {totalOlderProvisionsCount + olderParameterRows.length}) —
                   newest first
                 </span>
               </summary>
@@ -762,9 +753,9 @@ export default async function TopicDetailPage({
                   </div>
                 )}
 
-                {olderOrReplacedRules.length > 0 && (
+                {visibleOlderRules.length > 0 && (
                   <ul className="border-t border-[#c8ccc0]">
-                    {olderOrReplacedRules.map((node) => {
+                    {visibleOlderRules.map((node) => {
                       const dMeta = docMetaById.get(node.doc_id ?? "");
                       const whyOlder =
                         dMeta?.legal_status === "draft"
@@ -773,7 +764,10 @@ export default async function TopicDetailPage({
                               subjectMeta.zoningGoverned
                             ? "Replaced for this subject by the Master Plan Zoning Regulations under Bye-law 1.4."
                             : "Replaced by a later amendment.";
-                      return renderProvisionRow(node, whyOlder);
+                      return renderProvisionRow(node, {
+                        olderReason: whyOlder,
+                        compact: true,
+                      });
                     })}
                   </ul>
                 )}
@@ -783,18 +777,20 @@ export default async function TopicDetailPage({
         )}
 
         {/* 5. Related provisions (collapsed) */}
-        {relatedProvisions.length > 0 && (
+        {visibleRelatedProvisions.length > 0 && (
           <section
             aria-label="Related provisions"
             className="border-t border-[#c8ccc0] pt-6"
           >
             <details data-testid="related-provisions">
               <summary className="flex min-h-[44px] cursor-pointer items-center justify-between font-mono text-xs uppercase tracking-[0.12em] text-[#5b5e56] hover:text-[#080909]">
-                <span>Related provisions ({relatedProvisions.length})</span>
+                <span>Related provisions ({totalRelatedProvisionsCount})</span>
               </summary>
               <div className="mt-4">
                 <ul className="border-t border-[#c8ccc0]">
-                  {relatedProvisions.map((node) => renderProvisionRow(node))}
+                  {visibleRelatedProvisions.map((node) =>
+                    renderProvisionRow(node, { compact: true })
+                  )}
                 </ul>
               </div>
             </details>

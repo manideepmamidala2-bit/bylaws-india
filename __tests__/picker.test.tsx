@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import JurisdictionPickerPage, { getHomePageProps } from "@/app/page";
+import HomePage, { getHomePageProps } from "@/app/page";
 import type { ReleaseManifest } from "@/lib/data";
 
 const FIXTURE_MANIFEST: ReleaseManifest = {
@@ -65,20 +65,20 @@ const FIXTURE_MANIFEST: ReleaseManifest = {
   ],
 };
 
-describe("JurisdictionPickerPage server filtering and status tests", () => {
+describe("Bylaw One HomePage server filtering and narrative structure tests", () => {
   afterEach(() => {
     vi.restoreAllMocks();
     vi.unstubAllEnvs();
   });
 
-  it("filters out visibility: test jurisdictions on the server by default and shows 'No data published yet' for Bengaluru South", async () => {
-    const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue({
-      ok: true,
-      status: 200,
-      json: async () => FIXTURE_MANIFEST,
-    } as Response);
-
-    const props = await getHomePageProps();
+  it("filters out visibility: test jurisdictions on the server by default and renders Bylaw One hero and 5-step FAR story", async () => {
+    const props = await getHomePageProps(
+      vi.fn().mockResolvedValue({
+        ok: true,
+        status: 200,
+        json: async () => FIXTURE_MANIFEST,
+      } as unknown as Response)
+    );
     expect(props.visibleJurisdictions.map((j) => j.id)).toEqual([
       "in-ka-bengaluru-south",
     ]);
@@ -86,54 +86,65 @@ describe("JurisdictionPickerPage server filtering and status tests", () => {
       props.visibleJurisdictions.every((j) => j.visibility !== "test")
     ).toBe(true);
 
-    const ui = await JurisdictionPickerPage();
+    const ui = await HomePage();
     render(ui);
 
     expect(
-      screen.getByRole("heading", { name: "Bengaluru South City Corporation" })
+      screen.getByRole("heading", {
+        name: /Bengaluru's building rules\. One code\./i,
+      })
     ).toBeInTheDocument();
-    expect(screen.getByText("No data published yet")).toBeInTheDocument();
     expect(
-      screen.queryByText("Synthetic Test Jurisdiction Alpha")
-    ).not.toBeInTheDocument();
-    expect(fetchSpy).toHaveBeenCalled();
+      screen.getByRole("heading", { name: /Many sources\. One building\./i })
+    ).toBeInTheDocument();
+    expect(screen.getByTestId("far-story-stepper")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /2004\. The bye-laws set FAR\./i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", {
+        name: /2007\. The master plan sets FAR by zone\./i,
+      })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", {
+        name: /2017\. The bye-laws hand FAR to the master plan\./i,
+      })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /2025\. Premium FAR is added\./i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /Today\. What applies\./i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /Read\. Trace\. Compare\./i })
+    ).toBeInTheDocument();
   });
 
   it("includes visibility: test jurisdictions on the server only when SHOW_TEST_JURISDICTIONS is set", async () => {
     vi.stubEnv("SHOW_TEST_JURISDICTIONS", "true");
-    vi.spyOn(globalThis, "fetch").mockResolvedValue({
-      ok: true,
-      status: 200,
-      json: async () => FIXTURE_MANIFEST,
-    } as Response);
-
-    const props = await getHomePageProps();
+    const props = await getHomePageProps(
+      vi.fn().mockResolvedValue({
+        ok: true,
+        status: 200,
+        json: async () => FIXTURE_MANIFEST,
+      } as unknown as Response)
+    );
     expect(props.visibleJurisdictions.map((j) => j.id)).toEqual([
       "in-ka-bengaluru-south",
       "xx-test-fixture",
     ]);
-
-    const ui = await JurisdictionPickerPage();
-    render(ui);
-
-    expect(
-      screen.getByText("Synthetic Test Jurisdiction Alpha")
-    ).toBeInTheDocument();
-    expect(screen.getByText("v0.1.0")).toBeInTheDocument();
   });
 
-  it("shows an empty state when the manifest has zero jurisdictions", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValue({
-      ok: true,
-      status: 200,
-      json: async () => ({ schema_version: "1.4", jurisdictions: [] }),
-    } as Response);
-
-    const ui = await JurisdictionPickerPage();
-    render(ui);
-
-    expect(
-      screen.getByText("No jurisdictions published in manifest.")
-    ).toBeInTheDocument();
+  it("renders cleanly when the manifest has zero jurisdictions", async () => {
+    const props = await getHomePageProps(
+      vi.fn().mockResolvedValue({
+        ok: true,
+        status: 200,
+        json: async () => ({ schema_version: "1.4", jurisdictions: [] }),
+      } as unknown as Response)
+    );
+    expect(props.visibleJurisdictions).toEqual([]);
   });
 });

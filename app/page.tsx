@@ -56,32 +56,22 @@ function hasPublishedRelease(item: JurisdictionSummary): boolean {
   return item.releases.some((rel) => !isWithdrawnRelease(rel));
 }
 
-function extractVerbatimSubstring(
-  clauses: ReadonlyArray<ClauseNode>,
-  docId: string,
-  eid: string,
-  targetSubstring: string
-): { excerpt: string | null; page: number; pdfUrl: string } {
-  const node = clauses.find((c) => c.doc_id === docId && c.eid === eid);
-  const cit = node?.citations?.[0];
-  const page = cit?.page ?? 1;
-  const pdfUrl =
-    node?.official_url || node?.source_url
-      ? `${node.official_url || node.source_url}#page=${page}`
-      : `/j/in-ka-bengaluru/documents/${docId}#node-${eid}`;
-
-  if (!node || !node.text) {
-    return { excerpt: null, page, pdfUrl };
-  }
-  const normalizedNode = node.text.replace(/\s+/g, " ").trim();
-  const normalizedTarget = targetSubstring.replace(/\s+/g, " ").trim();
-  if (normalizedNode.includes(normalizedTarget)) {
-    return { excerpt: normalizedTarget, page, pdfUrl };
-  }
-  return { excerpt: normalizedNode, page, pdfUrl };
+function sliceVerbatimSpan(
+  fullText: string | undefined | null,
+  startAnchor: string,
+  endAnchor?: string
+): string | null {
+  if (!fullText) return null;
+  const normalized = fullText.replace(/\s+/g, " ").trim();
+  const sIdx = normalized.indexOf(startAnchor);
+  if (sIdx === -1) return normalized;
+  if (!endAnchor) return normalized.slice(sIdx).trim();
+  const eIdx = normalized.indexOf(endAnchor, sIdx);
+  if (eIdx === -1) return normalized.slice(sIdx).trim();
+  return normalized.slice(sIdx, eIdx + endAnchor.length).trim();
 }
 
-function buildHomeFarStorySteps(
+export function buildHomeFarStorySteps(
   clauses: ReadonlyArray<ClauseNode>,
   documents: ReadonlyArray<DocumentMetadata>,
   parametersPayload: JurisdictionParameters | null,
@@ -92,17 +82,30 @@ function buildHomeFarStorySteps(
     isPlausibleParameterRecord
   );
 
-  // Step 1: 2004 BBL 2003 Bye-law 9.2
-  const s1Quote =
-    "The set backs required on all the sides of building/s, maximum plot coverage, maximum FAR, maximum number of floors, maximum height of buildings that are permissible for different dimensioned sites and widths of roads are set out in Tables 4, 5 and 6 given below.";
-  const s1 = extractVerbatimSubstring(
-    clauses,
-    "bbl-2003",
-    "part_III__sec_9.0__cl_9.2",
-    s1Quote
+  const muniBaseDoc = documents.find(
+    (d) => d.role === "base" && d.layer === "municipal"
   );
-  const bblDoc = docById.get("bbl-2003");
-  const bblPdfBase = bblDoc?.official_url || bblDoc?.source_url || "";
+  const planBaseDoc = documents.find(
+    (d) => d.role === "base" && d.layer === "planning"
+  );
+  const pfarAmendDoc = documents.find(
+    (d) =>
+      d.role === "amendment" &&
+      d.layer === "planning" &&
+      (d.effective_from ?? "").startsWith("2025-04")
+  );
+
+  // Step 1: 2004 Municipal Building Bye-laws 2003 (Bye-law 9.2)
+  const s1Node = clauses.find(
+    (c) => c.doc_id === muniBaseDoc?.doc_id && c.number === "9.2"
+  );
+  const s1Excerpt = sliceVerbatimSpan(
+    s1Node?.text,
+    "The set backs required on all the sides of building/s",
+    "given below."
+  );
+  const bblPdfBase = muniBaseDoc?.official_url || muniBaseDoc?.source_url || "";
+  const s1Page = s1Node?.citations?.[0]?.page ?? 21;
   const s1Rows: FarStoryTableRow[] = [
     {
       condition: "Plots up to 240 m² (Intensely developed area)",
@@ -134,20 +137,19 @@ function buildHomeFarStorySteps(
     },
   ];
 
-  // Step 2: 2007 RMP 2015 Zoning Regulations Chapter 4 (Residential Main Table 10)
-  const s2Quote =
-    "The areas of the city which have predominantly residential land use pattern is considered for the Residential (Main) zone. This includes many old areas of the city such as Parts of Malleswaram, Richmond Town, Vasant Nagar, Jayanagar, Vijayanagar, Visveswarapura, Rajajinagar, RT Nagar, etc.";
-  const s2 = extractVerbatimSubstring(
-    clauses,
-    "rmp2015-zr",
-    "chp_4__cl_4.1__cl_4.1.1",
-    s2Quote
+  // Step 2: 2007 Master Plan Zoning Regulations Chapter 4 (Residential Main Table 10)
+  const s2Node = clauses.find(
+    (c) => c.doc_id === planBaseDoc?.doc_id && c.number === "4.1.1"
   );
-  const rmpDoc = docById.get("rmp2015-zr");
-  const rmpPdfBase = rmpDoc?.official_url || rmpDoc?.source_url || "";
+  const s2Excerpt = sliceVerbatimSpan(
+    s2Node?.text,
+    "The areas of the city which have predominantly residential land use pattern"
+  );
+  const rmpPdfBase = planBaseDoc?.official_url || planBaseDoc?.source_url || "";
+  const s2Page = s2Node?.citations?.[0]?.page ?? 28;
   const tbl10Far = allParams.filter(
     (r) =>
-      r.source.doc_id === "rmp2015-zr" &&
+      r.source.doc_id === planBaseDoc?.doc_id &&
       r.parameter === "far_base_max" &&
       (r.source.table_eid === "chp_4__cl_4.1__cl_4.1.3__tbl_10" ||
         r.source.table_eid === "chp_4__cl_4.1__cl_4.1.3__tbl_1")
@@ -155,7 +157,7 @@ function buildHomeFarStorySteps(
   const tbl10CovByRow = new Map<number, string>();
   for (const r of allParams) {
     if (
-      r.source.doc_id === "rmp2015-zr" &&
+      r.source.doc_id === planBaseDoc?.doc_id &&
       r.parameter === "ground_coverage_max_pct" &&
       (r.source.table_eid === "chp_4__cl_4.1__cl_4.1.3__tbl_10" ||
         r.source.table_eid === "chp_4__cl_4.1__cl_4.1.3__tbl_1") &&
@@ -188,38 +190,37 @@ function buildHomeFarStorySteps(
         ];
 
   // Step 3: 2017 Bye-law 1.4
-  const s3Quote =
-    "All mandatory Master Plan or Zonal Regulations regarding use, land use, coverage, FAR, setback or open space, height, number of stories, number of dwelling units, parking standards etc. for various categories of buildings including modification therein made from time to time shall be applicable mutatis mutandis in these Bye-Laws under this clause. All amendments or modifications made in the aforesaid regulations shall automatically stand deemed to have been included as part of these Bye-laws.";
-  const s3 = extractVerbatimSubstring(
-    clauses,
-    "bbl-2003",
-    "part_I__sec_1.0__cl_1.4",
-    s3Quote
+  const s3Node = clauses.find(
+    (c) => c.doc_id === muniBaseDoc?.doc_id && c.number === "1.4"
   );
-  const modelDoc = docById.get("ka-model-bbl-2017");
-  const modelPdfBase =
-    modelDoc?.official_url || modelDoc?.source_url || bblPdfBase;
+  const s3Excerpt = s3Node?.text ? s3Node.text.replace(/\s+/g, " ").trim() : null;
+  const s3Ver = s3Node?.versions?.[0];
+  const s3SourceDoc = s3Ver?.source_doc ? docById.get(s3Ver.source_doc) : null;
+  const s3PdfBase =
+    s3SourceDoc?.official_url || s3SourceDoc?.source_url || bblPdfBase;
+  const s3Page = s3Ver?.citations?.[0]?.page ?? s3Node?.citations?.[0]?.page ?? 2;
 
   // Step 4: 2025 Premium FAR Chapter 11
-  const s4Quote =
-    "The Premium F.A.R by levy of premium charges is the additional F.A.R granted over and above the ordinarily permissible F.A.R, on the basis of levy of premium charges by the Authority who accords permission for development of building or land under section 15 of the Karnataka Town and Country Planning Act, 1961, and in the areas as specified under regulation 2 below.";
-  const s4 = extractVerbatimSubstring(
-    clauses,
-    "rmp2015-zr-amend-2025-04",
-    "chp_11_2",
-    s4Quote
+  const s4Node = clauses.find(
+    (c) => c.doc_id === pfarAmendDoc?.doc_id && c.eid === "chp_11_2"
   );
-  const pfarDoc = docById.get("rmp2015-zr-amend-2025-04");
-  const pfarPdfBase = pfarDoc?.official_url || pfarDoc?.source_url || "";
+  const s4Excerpt = sliceVerbatimSpan(
+    s4Node?.text,
+    "The Premium F.A.R by levy of premium charges is the additional F.A.R granted",
+    "regulation 2 below."
+  );
+  const pfarPdfBase =
+    pfarAmendDoc?.official_url || pfarAmendDoc?.source_url || "";
+  const s4Page = s4Node?.citations?.[0]?.page ?? 2;
   const pfarRecs = allParams.filter(
     (r) =>
-      r.source.doc_id === "rmp2015-zr-amend-2025-04" &&
+      r.source.doc_id === pfarAmendDoc?.doc_id &&
       r.parameter === "far_premium_additional_max"
   );
   const tdrByRow = new Map<number, string>();
   for (const r of allParams) {
     if (
-      r.source.doc_id === "rmp2015-zr-amend-2025-04" &&
+      r.source.doc_id === pfarAmendDoc?.doc_id &&
       r.parameter === "tdr_receivable_max" &&
       typeof r.source.row_index === "number"
     ) {
@@ -263,18 +264,18 @@ function buildHomeFarStorySteps(
         ];
 
   // Step 5: Today. What applies.
-  const s5Quote =
-    "The maximum additional FAR allowed for a given building site shall not be more than 60% of the regular FAR otherwise allowed free of cost. This could be availed either as combination of Premium FAR and TDR/ DRC as given in Table above or purely through purchase of the DRC/ TDR.";
-  const s5 = extractVerbatimSubstring(
-    clauses,
-    "rmp2015-zr-amend-2025-04",
-    "chp_11_2__note_2",
-    s5Quote
+  const s5Node = clauses.find(
+    (c) => c.doc_id === pfarAmendDoc?.doc_id && c.eid === "chp_11_2__note_2"
   );
+  const s5Excerpt = s5Node?.text ? s5Node.text.replace(/\s+/g, " ").trim() : null;
+  const s5Page = s5Node?.citations?.[0]?.page ?? 3;
   const s5Rows: FarStoryTableRow[] = [
     {
       condition: "Base FAR (by zone, plot size and road width)",
-      values: ["1.0 to 3.25", "RMP 2015 Zoning Regulations (via Bye-law 1.4)"],
+      values: [
+        "1.0 to 3.25",
+        "Master Plan Zoning Regulations (via Bye-law 1.4)",
+      ],
       sourceLabel: "Chapter 4",
       pageNumber: 28,
       pageLink: rmpPdfBase ? `${rmpPdfBase}#page=28` : "#page=28",
@@ -301,19 +302,24 @@ function buildHomeFarStorySteps(
     },
   ];
 
+  const muniDocId = muniBaseDoc?.doc_id ?? "";
+  const planDocId = planBaseDoc?.doc_id ?? "";
+  const pfarDocId = pfarAmendDoc?.doc_id ?? "";
+
   return [
     {
       stepNumber: 1,
       heading: "2004. The bye-laws set FAR.",
       inShortBySite:
         "The Building Bye-laws 2003 (in operation from 5 June 2004) set FAR in their own tables (bye-law 9.2, Tables 4 to 6).",
-      verbatimExcerpt: s1.excerpt ?? s1Quote,
-      documentTitle:
-        "Bengaluru Mahanagara Palike Building Bye-Laws 2003 (Bye-law 9.2)",
+      verbatimExcerpt: s1Excerpt,
+      documentTitle: `${formatPlainDocumentTitle(muniBaseDoc)} (Bye-law 9.2)`,
       documentDate: "5 June 2004",
-      pageNumber: 21,
-      viewPageUrl: bblPdfBase ? `${bblPdfBase}#page=21` : s1.pdfUrl,
-      documentHref: `/j/${jurId}/documents/bbl-2003#node-part_III__sec_9.0__cl_9.2`,
+      pageNumber: s1Page,
+      viewPageUrl: bblPdfBase ? `${bblPdfBase}#page=${s1Page}` : `#page=${s1Page}`,
+      documentHref: muniDocId
+        ? `/j/${jurId}/documents/${muniDocId}#node-${s1Node?.eid ?? ""}`
+        : `/j/${jurId}/topics/far`,
       tableCaption:
         "Derived by this site · Sample rows from 2003 Bye-laws Table 6 (replaced for FAR in 2017)",
       tableHeaders: [
@@ -329,17 +335,23 @@ function buildHomeFarStorySteps(
       stepNumber: 2,
       heading: "2007. The master plan sets FAR by zone.",
       inShortBySite:
-        "The RMP 2015 Zoning Regulations set FAR by zone, plot size and road width (Chapter 4, Table 10).",
-      verbatimExcerpt: s2.excerpt ?? s2Quote,
-      documentTitle:
-        "Revised Master Plan 2015 — Zoning of Land Use and Regulations (Chapter 4)",
+        "The Master Plan Zoning Regulations set FAR by zone, plot size and road width (Chapter 4, Table 10).",
+      verbatimExcerpt: s2Excerpt,
+      documentTitle: `${formatPlainDocumentTitle(planBaseDoc)} (Chapter 4)`,
       documentDate: "25 June 2007",
-      pageNumber: 28,
-      viewPageUrl: rmpPdfBase ? `${rmpPdfBase}#page=28` : s2.pdfUrl,
-      documentHref: `/j/${jurId}/documents/rmp2015-zr#node-chp_4__cl_4.1__cl_4.1.3__tbl_10`,
+      pageNumber: s2Page,
+      viewPageUrl: rmpPdfBase ? `${rmpPdfBase}#page=${s2Page}` : `#page=${s2Page}`,
+      documentHref: planDocId
+        ? `/j/${jurId}/documents/${planDocId}#node-${s2Node?.eid ?? ""}`
+        : `/j/${jurId}/topics/far`,
       tableCaption:
         "Derived by this site · Residential (Main) base FAR and coverage (Table 10)",
-      tableHeaders: ["Zone, plot size and road width", "Coverage", "Base FAR", "Source"],
+      tableHeaders: [
+        "Zone, plot size and road width",
+        "Coverage",
+        "Base FAR",
+        "Source",
+      ],
       tableRows: s2Rows,
     },
     {
@@ -347,26 +359,32 @@ function buildHomeFarStorySteps(
       heading: "2017. The bye-laws hand FAR to the master plan.",
       inShortBySite:
         "Bye-law 1.4, from notification UDD 14 TTP 2017, makes the master plan rules govern use, coverage, FAR, setbacks, height, floors, dwelling units and parking.",
-      verbatimExcerpt: s3.excerpt ?? s3Quote,
+      verbatimExcerpt: s3Excerpt,
       documentTitle:
         "Building Bye-Laws 2003 — Bye-law 1.4 (from Notification UDD 14 TTP 2017)",
       documentDate: "28 October 2017",
-      pageNumber: 2,
-      viewPageUrl: modelPdfBase ? `${modelPdfBase}#page=2` : s3.pdfUrl,
-      documentHref: `/j/${jurId}/documents/bbl-2003#node-part_I__sec_1.0__cl_1.4`,
+      pageNumber: s3Page,
+      viewPageUrl: s3PdfBase ? `${s3PdfBase}#page=${s3Page}` : `#page=${s3Page}`,
+      documentHref: muniDocId
+        ? `/j/${jurId}/documents/${muniDocId}#node-${s3Node?.eid ?? ""}`
+        : `/j/${jurId}/topics/far`,
     },
     {
       stepNumber: 4,
       heading: "2025. Premium FAR is added.",
       inShortBySite:
         "The premium FAR chapter (Chapter 11, notified 2 April 2025) allows extra FAR on payment, by road width.",
-      verbatimExcerpt: s4.excerpt ?? s4Quote,
+      verbatimExcerpt: s4Excerpt,
       documentTitle:
-        "RMP 2015 Zoning Regulations (Amendment) — Chapter 11 Premium FAR",
+        "Master Plan Zoning Regulations (Amendment) — Chapter 11 Premium FAR",
       documentDate: "2 April 2025",
-      pageNumber: 2,
-      viewPageUrl: pfarPdfBase ? `${pfarPdfBase}#page=2` : s4.pdfUrl,
-      documentHref: `/j/${jurId}/documents/rmp2015-zr-amend-2025-04#node-chp_11_2`,
+      pageNumber: s4Page,
+      viewPageUrl: pfarPdfBase
+        ? `${pfarPdfBase}#page=${s4Page}`
+        : `#page=${s4Page}`,
+      documentHref: pfarDocId
+        ? `/j/${jurId}/documents/${pfarDocId}#node-${s4Node?.eid ?? ""}`
+        : `/j/${jurId}/topics/far`,
       tableCaption:
         "Derived by this site · Allowable Premium FAR and TDR by road width (Table 27)",
       tableHeaders: [
@@ -382,15 +400,22 @@ function buildHomeFarStorySteps(
       heading: "Today. What applies.",
       inShortBySite:
         "Base FAR from the zoning table, with premium FAR and TDR on top, each from its own source.",
-      verbatimExcerpt: s5.excerpt ?? s5Quote,
+      verbatimExcerpt: s5Excerpt,
       documentTitle:
-        "RMP 2015 Zoning Regulations — Chapter 11, Note 2 (Combined FAR Cap)",
+        "Master Plan Zoning Regulations — Chapter 11, Note 2 (Combined FAR Cap)",
       documentDate: "2 April 2025",
-      pageNumber: 3,
-      viewPageUrl: pfarPdfBase ? `${pfarPdfBase}#page=3` : s5.pdfUrl,
+      pageNumber: s5Page,
+      viewPageUrl: pfarPdfBase
+        ? `${pfarPdfBase}#page=${s5Page}`
+        : `#page=${s5Page}`,
       documentHref: `/j/${jurId}/topics/far`,
       tableCaption: "Derived by this site · How FAR rules combine today",
-      tableHeaders: ["Component", "Allowance", "Governing instrument", "Source"],
+      tableHeaders: [
+        "Component",
+        "Allowance",
+        "Governing instrument",
+        "Source",
+      ],
       tableRows: s5Rows,
     },
   ];
@@ -399,13 +424,16 @@ function buildHomeFarStorySteps(
 export default async function HomePage() {
   const { visibleJurisdictions } = await getHomePageProps();
   const parentJurisdiction =
-    visibleJurisdictions.find((j) => j.id === "in-ka-bengaluru") ??
     visibleJurisdictions.find((j) =>
       visibleJurisdictions.some((child) => child.parent === j.id)
-    ) ??
-    visibleJurisdictions[0];
+    ) ?? visibleJurisdictions[0];
 
-  const targetJurId = parentJurisdiction?.id ?? "in-ka-bengaluru";
+  const targetJurId = parentJurisdiction?.id ?? "";
+  const cityLabel =
+    parentJurisdiction?.aliases?.[0] ?? parentJurisdiction?.name ?? "City";
+  const regionLabel =
+    parentJurisdiction?.aliases?.[2] ?? parentJurisdiction?.name ?? "City";
+
   const hasActiveDataset =
     parentJurisdiction && hasPublishedRelease(parentJurisdiction);
 
@@ -428,7 +456,6 @@ export default async function HomePage() {
     targetJurId
   );
 
-  // Newest 4 in-force instruments for 04 / Recently changed (collapsing the 5 May 2026 corporation amendments into one clean entry or showing the distinct recent changes)
   const inForceSorted = sortDocumentsMostRecentFirst(
     allDocuments.filter(
       (d) =>
@@ -440,7 +467,6 @@ export default async function HomePage() {
     )
   );
 
-  // Select up to 5 distinct recent changes (representing the 14 May 2026 City Corporation amendments + Jan 2026 + Oct 2025 + Jul 2025 Order + May 2025 Act)
   const recentChanges: DocumentMetadata[] = [];
   let seenMay2026CorpAmend = false;
   for (const doc of inForceSorted) {
@@ -452,7 +478,6 @@ export default async function HomePage() {
     if (recentChanges.length >= 5) break;
   }
 
-  // Convergence illustration lines (newest first)
   const convergenceItems = [
     {
       year: "May 2026",
@@ -460,23 +485,23 @@ export default async function HomePage() {
     },
     {
       year: "Jan 2026",
-      label: "RMP 2015 Setbacks, Basements and Ramps Amendment",
+      label: "Master Plan Setbacks, Basements and Ramps Amendment",
     },
     {
       year: "Oct 2025",
-      label: "RMP 2015 Storm-Water Drain Buffer Notification",
+      label: "Master Plan Storm-Water Drain Buffer Notification",
     },
     {
       year: "Jul 2025",
-      label: "Government Order on e-Khata and Plan Approval",
+      label: "Government Order on Property Records and Plan Approval",
     },
     {
       year: "May 2025",
-      label: "Greater Bengaluru Governance Act 2024",
+      label: "Municipal Governance Act 2024 (Chapter XVII)",
     },
     {
       year: "Apr 2025",
-      label: "RMP 2015 Chapter 11 Premium FAR and TDR Notification",
+      label: "Master Plan Chapter 11 Premium FAR and TDR Notification",
     },
     {
       year: "Oct 2017",
@@ -484,31 +509,16 @@ export default async function HomePage() {
     },
     {
       year: "Jun 2007",
-      label: "Revised Master Plan 2015 Zoning Regulations",
+      label: "Revised Master Plan Zoning Regulations",
     },
     {
       year: "Jun 2004",
-      label: "Bengaluru Mahanagara Palike Building Bye-Laws 2003",
+      label: "Municipal Building Bye-Laws 2003",
     },
   ];
 
-  // Plain-English missing items from declarations
-  const missingItems: string[] = [];
-  if (declarations) {
-    for (const u of declarations.unobtainable_documents ?? []) {
-      if (u.legal_status === "draft") continue;
-      missingItems.push(
-        "The 18 July 2025 Karnataka Gazette zoning amendment (referenced in later notifications) has not yet been obtained from official archives."
-      );
-    }
-  }
-  if (missingItems.length === 0) {
-    missingItems.push(
-      "The 18 July 2025 Karnataka Gazette zoning amendment (referenced in later notifications) has not yet been obtained from official archives."
-    );
-  }
-  missingItems.push(
-    "Georeferenced Proposed Land Use map polygons are currently published for four sheets in Planning Districts 2.10 (Jayanagar) and 2.11 (Banashankari) in Bengaluru South; the remaining planning districts are not yet georeferenced."
+  const missingItems = (declarations?.not_modelled ?? []).map((nm) =>
+    nm.replace(/\s*\([A-Z0-9\s-]+\)/g, "")
   );
 
   return (
@@ -521,12 +531,14 @@ export default async function HomePage() {
           aria-labelledby="hero-heading"
           className="border-b border-[#c8ccc0] py-14 md:py-20"
         >
-          <div className="dg-mono text-[#5b5e56]">Bylaw One · Greater Bengaluru</div>
+          <div className="dg-mono text-[#5b5e56]">
+            Bylaw One · {regionLabel}
+          </div>
           <h1
             id="hero-heading"
             className="mt-3 max-w-3xl text-4xl font-semibold tracking-tight text-[#080909] md:text-5xl"
           >
-            Bengaluru&apos;s building rules. One code.
+            {cityLabel}&apos;s building rules. One code.
           </h1>
           <p
             data-testid="hero-subline"
@@ -599,7 +611,7 @@ export default async function HomePage() {
               >
                 ───►
               </div>
-              <div className="border-l-4 border-l-[#ff6b52] border border-[#080909] bg-[#f5f3ed] p-4">
+              <div className="border border-[#080909] border-l-4 border-l-[#ff6b52] bg-[#f5f3ed] p-4">
                 <div className="dg-mono text-[#5b5e56]">Joined by subject</div>
                 <div className="mt-1 text-base font-semibold text-[#080909]">
                   Bylaw One
@@ -716,7 +728,7 @@ export default async function HomePage() {
           </h2>
           <p className="dg-serif mt-3 text-base leading-relaxed text-[#171917]">
             The newest in-force amendments, notifications, and enactments
-            affecting buildings in Bengaluru.
+            affecting buildings in {cityLabel}.
           </p>
 
           <ul
@@ -817,12 +829,11 @@ export default async function HomePage() {
                 <span>Where does the text come from?</span>
               </summary>
               <p className="dg-serif mt-2 pb-2 text-sm leading-relaxed text-[#171917]">
-                Every instrument is acquired from official Karnataka Gazette,
-                Bangalore Development Authority, or Greater Bengaluru / BBMP
-                publications, verified by cryptographic checksum, and preserved
-                in the Internet Archive. A machine fidelity check verifies that
-                every provision and excerpt matches the extracted text of its
-                cited source page.
+                Every instrument is acquired from official Gazette, development
+                authority, or municipal publications, verified by cryptographic
+                checksum, and preserved in the Internet Archive. A machine
+                fidelity check verifies that every provision and excerpt matches
+                the extracted text of its cited source page.
               </p>
             </details>
 

@@ -15,15 +15,19 @@ export default async function AboutPage() {
   const manifest = await fetchManifest();
   const visible = getVisibleJurisdictions(manifest);
   const primary = getPrimaryPublicJurisdiction(manifest);
+  const rootJur =
+    visible.find((j) => visible.some((child) => child.parent === j.id)) ??
+    primary;
+  const cityLabel = rootJur?.aliases?.[0] ?? rootJur?.name ?? "City";
   const withdrawnRelease = visible
     .flatMap((j) => j.releases)
     .find((rel) => isWithdrawnRelease(rel));
 
-  const targetJurId = primary?.id ?? "in-ka-bengaluru";
-  const [dataset, declarations] = primary
+  const targetJurId = rootJur?.id ?? primary?.id ?? "";
+  const [dataset, declarations] = targetJurId
     ? await Promise.all([
-        fetchJurisdictionDataset(primary.id),
-        fetchDeclarations(primary.id).catch(() => null),
+        fetchJurisdictionDataset(targetJurId),
+        fetchDeclarations(targetJurId).catch(() => null),
       ])
     : [null, null];
 
@@ -39,7 +43,7 @@ export default async function AboutPage() {
     <div className="min-h-screen bg-[#f5f3ed] text-[#080909]">
       <TopNav
         jurisdictionId={targetJurId}
-        jurisdictionName={primary?.name}
+        jurisdictionName={rootJur?.name}
         active="about"
       />
 
@@ -51,10 +55,10 @@ export default async function AboutPage() {
             About Bylaw One
           </h1>
           <p className="dg-serif mt-3 text-base leading-relaxed text-[#171917]">
-            Bylaw One gathers Bengaluru&apos;s scattered building rules ({documentCount}{" "}
-            in-force instruments from {bodyCount} statutory bodies) into one
-            readable code, with every rule traced to its official page and
-            overlaps resolved openly.
+            Bylaw One gathers {cityLabel}&apos;s scattered building rules (
+            {documentCount} in-force instruments from {bodyCount} statutory
+            bodies) into one readable code, with every rule traced to its
+            official page and overlaps resolved openly.
           </p>
         </header>
 
@@ -102,7 +106,7 @@ export default async function AboutPage() {
 
             <div className="border border-[#c8ccc0] bg-[#efeee8] p-5">
               <div className="dg-mono text-[#080909]">
-                3 ·Dated amendments &amp; parameters
+                3 · Dated amendments &amp; parameters
               </div>
               <p className="dg-serif mt-2 text-sm leading-relaxed text-[#171917]">
                 Amending notifications apply dated substitution, insertion, or
@@ -166,8 +170,8 @@ export default async function AboutPage() {
             </li>
             <li>
               <strong>Enabling statute prevails:</strong> Under Section 230 of
-              the Greater Bengaluru Governance Act 2024, the Act&apos;s building
-              provisions prevail over inconsistent rules or bye-laws.
+              the municipal governance Act, the Act&apos;s building provisions
+              prevail over inconsistent rules or bye-laws.
             </li>
             <li>
               <strong>
@@ -235,9 +239,7 @@ export default async function AboutPage() {
               <p className="dg-serif mt-2 pb-2 text-sm leading-relaxed text-[#171917]">
                 No. Bylaw One is worked out from the official documents, each
                 linked to its government PDF and an archived snapshot. It is not
-                an official publication of the Government of Karnataka, the
-                Bangalore Development Authority, or the Greater Bengaluru
-                Authority.
+                an official government publication.
               </p>
             </details>
 
@@ -246,10 +248,10 @@ export default async function AboutPage() {
                 <span>Where does the text come from?</span>
               </summary>
               <p className="dg-serif mt-2 pb-2 text-sm leading-relaxed text-[#171917]">
-                Every provision is extracted from official Karnataka Gazette,
-                Bangalore Development Authority, and municipal PDFs. No legal
-                text is rewritten or invented; site summaries are always
-                labelled &ldquo;In short, by this site&rdquo;.
+                Every provision is extracted from official Gazette, development
+                authority, and municipal PDFs. No legal text is rewritten or
+                invented; site summaries are always labelled &ldquo;In short, by
+                this site&rdquo;.
               </p>
             </details>
 
@@ -266,16 +268,16 @@ export default async function AboutPage() {
 
             <details className="py-3">
               <summary className="flex min-h-[44px] cursor-pointer items-center justify-between font-medium text-[#080909]">
-                <span>Do the 2017 Karnataka Model Building Bye-laws apply here?</span>
+                <span>Do the 2017 Model Building Bye-laws apply here?</span>
               </summary>
               <p className="dg-serif mt-2 pb-2 text-sm leading-relaxed text-[#171917]">
-                The 2017 Model Building Bye-laws were issued under the Karnataka
-                Municipalities Act 1964 for smaller municipalities, whereas
-                Bengaluru&apos;s Building Bye-laws 2003 (and the May 2026 City
-                Corporation amendments) remain the municipal bye-laws in force.
-                However, Clause 1(3) of Notification UDD 14 TTP 2017 is
-                published on the official building plan approval portal as
-                Bye-law 1.4, routing zoning parameters to the Master Plan.
+                The 2017 Model Building Bye-laws were issued under the
+                Municipalities Act 1964 for smaller municipalities, whereas the
+                2003 Building Bye-laws (and the May 2026 City Corporation
+                amendments) remain the municipal bye-laws in force. Clause 1(3)
+                of Notification UDD 14 TTP 2017 is published on the official
+                building plan approval portal as Bye-law 1.4, routing zoning
+                parameters to the Master Plan.
               </p>
             </details>
           </div>

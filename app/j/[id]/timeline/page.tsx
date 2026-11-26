@@ -38,10 +38,22 @@ export default async function TimelinePage({ params }: TimelinePageProps) {
       ? jurisdiction.id
       : null);
   const gbaCorporations = rootParentId
-    ? allVisible.filter(
-        (j) => j.id === rootParentId || j.parent === rootParentId
-      )
+    ? allVisible
+        .filter((j) => j.id === rootParentId || j.parent === rootParentId)
+        .map((j) => ({ id: j.id, name: j.name }))
     : [];
+
+  const slimDocs = documents.map((d) => ({
+    ...d,
+    mirror_urls: [],
+    cited_provisions: [],
+    notes_by_site: [],
+    status_evidence: {
+      ...d.status_evidence,
+      quoted_line: (d.status_evidence?.quoted_line ?? "").slice(0, 200),
+      description: (d.status_evidence?.description ?? "").slice(0, 200),
+    },
+  }));
 
   if (!release) {
     return (
@@ -109,8 +121,9 @@ export default async function TimelinePage({ params }: TimelinePageProps) {
 
         <WhatChangedClient
           jurisdictionId={jurisdiction.id}
-          documents={documents}
-          amendmentLinks={amendments.links}
+          documents={slimDocs}
+          amendmentLinks={amendments.links.slice(0, 20)}
+          corporations={gbaCorporations}
         />
       </main>
     </div>

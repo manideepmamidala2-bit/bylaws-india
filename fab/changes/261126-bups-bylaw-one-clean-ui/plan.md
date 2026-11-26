@@ -130,7 +130,7 @@ All pages MUST be designed for `390 px` phone viewports first (then `1280 px` de
 
 ### Phase 4: Polish, CI Gates, Browser Verification & Progress Tracking
 
-- [ ] T007 Update CI language and copy checks (`pipeline/tests/test_release_and_copy_consistency.py`), component tests (`__tests__/`), page budget check (`scripts/check_page_budgets.mjs`), Playwright browser tests (`e2e/`), and `docs/progress.md` so all unit tests, fidelity checks, language gates (outside `<details>`), `axe-core` accessibility checks, page budgets, and `390 px` / `1280 px` browser tests pass <!-- R8 -->
+- [x] T007 Update CI language and copy checks (`pipeline/tests/test_release_and_copy_consistency.py`), component tests (`__tests__/`), page budget check (`scripts/check_page_budgets.mjs`), Playwright browser tests (`e2e/`), and `docs/progress.md` so all unit tests, fidelity checks, language gates (outside `<details>`), `axe-core` accessibility checks, page budgets, and `390 px` / `1280 px` browser tests pass <!-- R8 -->
 
 ## Execution Order
 
