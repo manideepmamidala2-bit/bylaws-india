@@ -1123,6 +1123,90 @@ export async function fetchJurisdictionDataset(
   };
 }
 
+export interface MapVerificationMetrics {
+  sheetLabel: string | null;
+  roadMedianOffsetM: number | null;
+  roadP90OffsetM: number | null;
+  roadSegmentCount: number | null;
+  gridFitRmseM: number | null;
+  looRmseM: number | null;
+}
+
+export async function fetchMapVerificationMetrics(
+  jurisdictionId: string,
+  fallbackJurisdictionId?: string | null
+): Promise<MapVerificationMetrics | null> {
+  const candidateIds = [
+    jurisdictionId,
+    ...(fallbackJurisdictionId && fallbackJurisdictionId !== jurisdictionId
+      ? [fallbackJurisdictionId]
+      : []),
+  ];
+
+  if (typeof window === "undefined") {
+    const fs = await import("node:fs/promises");
+    const path = await import("node:path");
+    for (const candId of candidateIds) {
+      const reportPath = path.join(
+        process.cwd(),
+        "data",
+        "reports",
+        candId,
+        "map-verification.md"
+      );
+      try {
+        const mdText = await fs.readFile(reportPath, "utf8");
+        const sheetMatch = /### Sheet `([^`]+)`/.exec(mdText);
+        const rmseMatch =
+          /\*\*Affine Fit RMSE\*\*:\s*\*\*`([0-9.]+)\s*m`\*\*/.exec(mdText);
+        const looMatch =
+          /\*\*Leave-One-Out \(LOO\) Cross-Validation RMSE\*\*:\s*\*\*`([0-9.]+)\s*m`\*\*/.exec(
+            mdText
+          );
+        const roadMatch =
+          /OpenStreetMap Roads[^:]*:\s*`(\d+)`\s*vector road segments compared;\s*\*\*Median offset:\s*`([0-9.]+)\s*m`\*\*,\s*\*\*90th-percentile \(`p90`\) offset:\s*`([0-9.]+)\s*m`\*\*/.exec(
+            mdText
+          );
+        if (roadMatch) {
+          return {
+            sheetLabel: sheetMatch ? sheetMatch[1] : null,
+            roadSegmentCount: Number(roadMatch[1]),
+            roadMedianOffsetM: Number(roadMatch[2]),
+            roadP90OffsetM: Number(roadMatch[3]),
+            gridFitRmseM: rmseMatch ? Number(rmseMatch[1]) : null,
+            looRmseM: looMatch ? Number(looMatch[1]) : null,
+          };
+        }
+      } catch {
+        // Continue to next candidate or geo-layers fallback
+      }
+    }
+  }
+
+  for (const candId of candidateIds) {
+    try {
+      const ds = await fetchJurisdictionDataset(candId);
+      const mpLayer = ds?.geoLayers?.layers.find(
+        (l) => l.kind === "master_plan_zone" && l.sheet_overlay
+      );
+      const ov = mpLayer?.sheet_overlay;
+      if (ov && ov.road_median_offset_m && ov.road_p90_offset_m) {
+        return {
+          sheetLabel: ov.sheet ?? null,
+          roadMedianOffsetM: ov.road_median_offset_m,
+          roadP90OffsetM: ov.road_p90_offset_m,
+          roadSegmentCount: null,
+          gridFitRmseM: ov.rmse_m ?? null,
+          looRmseM: ov.loo_rmse_m ?? null,
+        };
+      }
+    } catch {
+      // Ignore
+    }
+  }
+  return null;
+}
+
 /**
  * Filter a list of ClauseNode records into active records vs historical record versions.
  */

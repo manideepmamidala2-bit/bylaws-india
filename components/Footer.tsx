@@ -18,7 +18,11 @@ export function Footer({ jurisdictionId }: FooterProps) {
   }
 
   const matchedJur = pathname ? /^\/j\/([^/]+)/.exec(pathname)?.[1] : null;
-  const targetJurId = matchedJur || jurisdictionId || "";
+  const bodyDefaultJur =
+    typeof document !== "undefined"
+      ? document.body?.dataset?.defaultJurisdiction || ""
+      : "";
+  const targetJurId = matchedJur || jurisdictionId || bodyDefaultJur || "";
   const prefix = targetJurId ? `/j/${targetJurId}` : "";
 
   const footerLinks = [

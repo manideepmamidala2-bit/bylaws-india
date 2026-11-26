@@ -1053,9 +1053,10 @@ export default async function TopicDetailPage({
             {subjectMeta.hasMapLink && (
               <Link
                 href={`/j/${jurisdiction.id}`}
+                data-testid="land-use-map-link"
                 className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] text-[#080909] underline decoration-[#080909] underline-offset-4"
               >
-                Open land-use map →
+                Map (boundaries, wards &amp; land-use zones) →
               </Link>
             )}
           </div>

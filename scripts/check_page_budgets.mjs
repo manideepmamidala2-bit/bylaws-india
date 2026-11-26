@@ -116,6 +116,10 @@ const FORBIDDEN_PRIMARY_LAYER_PATTERNS = [
     regex:
       /Structured Building Bylaws|Statutory Resolution Cards|Local Graph|Local Knowledge Graph|One-Hop Neighborhood|\btopic:/i,
   },
+  {
+    label: "Grid-fit RMSE presented outside Details",
+    regex: /\b0\.0032\s*m\b/i,
+  },
 ];
 
 const FORBIDDEN_ANYWHERE_HTML_PATTERNS = [
@@ -469,6 +473,82 @@ if (fs.existsSync(cityTopicsDir)) {
           }
         }
       }
+    }
+  }
+}
+
+// Part 2.2 Map accuracy check (CI): verify map accuracy text is generated from `map-verification.md`
+// and that UI source files do not hard-code the accuracy figures.
+const southMapReportPath = path.join(
+  repoRoot,
+  "data",
+  "reports",
+  "in-ka-bengaluru-south",
+  "map-verification.md"
+);
+if (fs.existsSync(southMapReportPath)) {
+  const reportText = fs.readFileSync(southMapReportPath, "utf8");
+  const roadMatch =
+    /OpenStreetMap Roads[^:]*:\s*`\d+`\s*vector road segments compared;\s*\*\*Median offset:\s*`([0-9.]+)\s*m`\*\*,\s*\*\*90th-percentile \(`p90`\) offset:\s*`([0-9.]+)\s*m`\*\*/.exec(
+      reportText
+    );
+  const rmseMatch = /\*\*Affine Fit RMSE\*\*:\s*\*\*`([0-9.]+)\s*m`\*\*/.exec(
+    reportText
+  );
+  if (!roadMatch || !rmseMatch) {
+    violations.push(
+      "Map accuracy check failed — could not parse median/p90/RMSE from data/reports/in-ka-bengaluru-south/map-verification.md"
+    );
+  } else {
+    const expMedian = Math.round(Number(roadMatch[1]));
+    const expP90 = Math.round(Number(roadMatch[2]));
+    const expRmse = rmseMatch[1];
+    const expectedAccuracySentence = `Zone boundaries are approximate: typically about ${expMedian} m from street centre-lines, and within about ${expP90} m in 9 out of 10 places.`;
+    for (const jurId of [
+      "in-ka-bengaluru",
+      "in-ka-bengaluru-central",
+      "in-ka-bengaluru-north",
+      "in-ka-bengaluru-south",
+      "in-ka-bengaluru-east",
+      "in-ka-bengaluru-west",
+    ]) {
+      const mapHtmlPath = path.join(nextServerAppDir, "j", `${jurId}.html`);
+      if (fs.existsSync(mapHtmlPath)) {
+        const mapHtml = fs.readFileSync(mapHtmlPath, "utf8");
+        const mapPrimary = stripDetailsAndTags(mapHtml)
+          .replace(/\s+/g, " ")
+          .trim();
+        if (!mapPrimary.includes(expectedAccuracySentence)) {
+          violations.push(
+            `/j/${jurId}: Map accuracy check failed — missing verification-report-generated sentence ${JSON.stringify(expectedAccuracySentence)}`
+          );
+        }
+        if (!mapHtml.includes(`${expRmse} m RMSE`)) {
+          violations.push(
+            `/j/${jurId}: Map accuracy check failed — missing sheet-fitting error (${expRmse} m RMSE) inside Details`
+          );
+        }
+      }
+    }
+  }
+}
+
+for (const srcDir of ["app", "components", "lib"]) {
+  const fullDir = path.join(repoRoot, srcDir);
+  if (!fs.existsSync(fullDir)) continue;
+  for (const tsFile of [
+    ...collectFiles(fullDir, ".ts"),
+    ...collectFiles(fullDir, ".tsx"),
+  ]) {
+    if (tsFile.endsWith("generated.ts")) continue;
+    const srcText = fs.readFileSync(tsFile, "utf8");
+    const hardCodedMatch = srcText.match(
+      /0\.0032|typically about 8\s*m|within about 21\s*m/i
+    );
+    if (hardCodedMatch) {
+      violations.push(
+        `${path.relative(repoRoot, tsFile)}: Map accuracy check failed — hard-coded accuracy figure ${JSON.stringify(hardCodedMatch[0])} found in source`
+      );
     }
   }
 }
