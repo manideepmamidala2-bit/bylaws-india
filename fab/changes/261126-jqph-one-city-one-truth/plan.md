@@ -108,44 +108,49 @@ The Map page (`app/j/[id]/page.tsx`, `components/AreaExplorerClient.tsx`) and th
 
 ### Functional Completeness
 
-- [ ] A-001 R1: "What applies today" on every subject page shows only current in-force parameter table rows and current consolidated provision wording, while superseded rows and provisions appear under "Older or replaced rules" ordered newest first with "Replaced by [plain name], [date]"
-- [ ] A-002 R1: Duplicate parameter rows (such as the 2009 Traffic and Transportation table restating the 2007 table) appear once under "What applies today" citing the latest source with earlier sources in Details, and CI overlap and band continuity checks pass while surfacing the `11.5 m`–`12 m` setback height-band overlap plainly with both sources
-- [ ] A-003 R2: Shared documents, parameters, and provisions are built once for Greater Bengaluru (`in-ka-bengaluru`), corporation subject pages display "Showing Greater Bengaluru rules, with differences for [corporation]" with differing items marked "In [corporation]: …" or "No differences for [corporation] on this subject.", and corporation document pages mark corporation-amended clauses "Changed for [corporation], [date]"
-- [ ] A-004 R2: All five City Corporations' 2026 amendments pass `verify_jurisdiction_text_fidelity` and structure checks (`depth <= 6`, no date-shaped clause numbers, no duplicates, zero editorial insertions in legal text), and the 5-corporation CI parity check passes
-- [ ] A-005 R3: All old-design routes are removed and redirected in `next.config.ts` preserving corporation selection, and the CI old-design check verifies zero occurrences of "Structured Building Bylaws", "Statutory Resolution Cards", "Local Graph", or "topic:" in built pages
-- [ ] A-006 R4: Both the Map page (`/j/[id]`) and the Land use subject page (`/j/[id]/topics/land-use`) display "Land-use zones are available for parts of Bengaluru South only. Elsewhere the map shows boundaries and wards.", and gap notices appear only where a gap can affect what a page shows
+- [x] A-001 R1: "What applies today" on every subject page shows only current in-force parameter table rows and current consolidated provision wording, while superseded rows and provisions appear under "Older or replaced rules" ordered newest first with "Replaced by [plain name], [date]"
+- [x] A-002 R1: Duplicate parameter rows (such as the 2009 Traffic and Transportation table restating the 2007 table) appear once under "What applies today" citing the latest source with earlier sources in Details, and CI overlap and band continuity checks pass while surfacing the `11.5 m`–`12 m` setback height-band overlap plainly with both sources
+- [x] A-003 R2: Shared documents, parameters, and provisions are built once for Greater Bengaluru (`in-ka-bengaluru`), corporation subject pages display "Showing Greater Bengaluru rules, with differences for [corporation]" with differing items marked "In [corporation]: …" or "No differences for [corporation] on this subject.", and corporation document pages mark corporation-amended clauses "Changed for [corporation], [date]"
+- [x] A-004 R2: All five City Corporations' 2026 amendments pass `verify_jurisdiction_text_fidelity` and structure checks (`depth <= 6`, no date-shaped clause numbers, no duplicates, zero editorial insertions in legal text), and the 5-corporation CI parity check passes
+- [x] A-005 R3: All old-design routes are removed and redirected in `next.config.ts` preserving corporation selection, and the CI old-design check verifies zero occurrences of "Structured Building Bylaws", "Statutory Resolution Cards", "Local Graph", or "topic:" in built pages
+- [x] A-006 R4: Both the Map page (`/j/[id]`) and the Land use subject page (`/j/[id]/topics/land-use`) display "Land-use zones are available for parts of Bengaluru South only. Elsewhere the map shows boundaries and wards.", and gap notices appear only where a gap can affect what a page shows
 
 ### Behavioral Correctness
 
-- [ ] A-007 R1: On Setbacks and FAR, Industrial (General) plots up to `500 m²` show only the January 2026 rule under "What applies today" (`12%` / `8%` / `8%` setbacks and 2026 FAR) with the 2007 `4.5 m` setback and 2007 FAR rows moved to "Older or replaced rules", and Setbacks clauses `3.1(ii)` and `3.1(iii)` display their January 2026 substituted wording with "Changed January 2026" and 2007 wording in Details
-- [ ] A-008 R1: Bye-law `1.4` is never placed in "Older or replaced rules" or labelled "Replaced"; `bbl-2003` rules displaced by Bye-law `1.4` are labelled "Master plan rules apply instead (bye-law 1.4)"; and definitions, tables of contents, and bare headings do not appear in "Governing provisions in force"
+- [x] A-007 R1: On Setbacks and FAR, Industrial (General) plots up to `500 m²` show only the January 2026 rule under "What applies today" (`12%` / `8%` / `8%` setbacks and 2026 FAR) with the 2007 `4.5 m` setback and 2007 FAR rows moved to "Older or replaced rules", and Setbacks clauses `3.1(ii)` and `3.1(iii)` display their January 2026 substituted wording with "Changed January 2026" and 2007 wording in Details
+- [x] A-008 R1: Bye-law `1.4` is never placed in "Older or replaced rules" or labelled "Replaced"; `bbl-2003` rules displaced by Bye-law `1.4` are labelled "Master plan rules apply instead (bye-law 1.4)"; and definitions, tables of contents, and bare headings do not appear in "Governing provisions in force"
 
 ### Removal Verification
 
-- [ ] A-009 R3: `app/j/[id]/documents/[doc]/[eid]/page.tsx`, `app/j/[id]/review/page.tsx`, `components/ReviewPanel.tsx`, and `app/structure/page.tsx` are removed and replaced by clean redirects in `next.config.ts`
+- [x] A-009 R3: `app/j/[id]/documents/[doc]/[eid]/page.tsx`, `app/j/[id]/review/page.tsx`, `components/ReviewPanel.tsx`, and `app/structure/page.tsx` are removed and replaced by clean redirects in `next.config.ts`
 
 ### Scenario Coverage
 
-- [ ] A-010 R1: Falsifiable unit tests in `pipeline/tests/test_parameters.py` and `__tests__/` verify Industrial (General) setbacks and FAR supersession, `3.1(ii)`–`(iii)` consolidated wording, Traffic and Transportation FAR deduplication, the `11.5 m`–`12 m` band continuity overlap, and the Bye-law `1.4` label invariants against source pages
-- [ ] A-011 R2: Falsifiable tests in `pipeline/tests/test_text_fidelity.py` and `pipeline/tests/test_pr12_greater_bengaluru.py` verify 5-corporation 2026 amendment text fidelity, structure invariants, and inter-corporation parity
-- [ ] A-012 R4: Playwright browser tests (`e2e/`), Vitest + `axe-core` WCAG AA checks, and `scripts/check_page_budgets.mjs` (`HTML <= 300 KB`, `initial JS + data <= 1.5 MB`) pass at `390 px` and `1280 px`
+- [x] A-010 R1: Falsifiable unit tests in `pipeline/tests/test_parameters.py` and `__tests__/` verify Industrial (General) setbacks and FAR supersession, `3.1(ii)`–`(iii)` consolidated wording, Traffic and Transportation FAR deduplication, the `11.5 m`–`12 m` band continuity overlap, and the Bye-law `1.4` label invariants against source pages
+- [x] A-011 R2: Falsifiable tests in `pipeline/tests/test_text_fidelity.py` and `pipeline/tests/test_pr12_greater_bengaluru.py` verify 5-corporation 2026 amendment text fidelity, structure invariants, and inter-corporation parity
+- [x] A-012 R4: Playwright browser tests (`e2e/`), Vitest + `axe-core` WCAG AA checks, and `scripts/check_page_budgets.mjs` (`HTML <= 300 KB`, `initial JS + data <= 1.5 MB`) pass at `390 px` and `1280 px`
 
 ### Edge Cases & Error Handling
 
-- [ ] A-013 R1: Any unexplained parameter overlap among governing in-force rows for the same parameter, zone/use, and overlapping numeric intervals causes `bylaws validate` and CI tests to fail loudly
+- [x] A-013 R1: Any unexplained parameter overlap among governing in-force rows for the same parameter, zone/use, and overlapping numeric intervals causes `bylaws validate` and CI tests to fail loudly
 
 ### Code Quality
 
-- [ ] A-014 Pattern consistency: New code follows naming and structural patterns of surrounding pipeline and Next.js modules
-- [ ] A-015 No unnecessary duplication: Existing utilities in `pipeline/bylaws/` and `lib/plain-language.ts` are reused where applicable
-- [ ] A-016 Readability and maintainability: Functions remain focused and modular (`<= 50` lines where practical) with named constants instead of magic strings or numbers
-- [ ] A-017 Rule R1 compliance: Zero jurisdiction IDs, city names, or regulatory constants are hard-coded in `pipeline/` or `app/`/`components/`/`lib/` (`pipeline/tests/test_r1_no_hardcoding.py` passes)
+- [x] A-014 Pattern consistency: New code follows naming and structural patterns of surrounding pipeline and Next.js modules
+- [x] A-015 No unnecessary duplication: Existing utilities in `pipeline/bylaws/` and `lib/plain-language.ts` are reused where applicable
+- [x] A-016 Readability and maintainability: Functions remain focused and modular (`<= 50` lines where practical) with named constants instead of magic strings or numbers
+- [x] A-017 Rule R1 compliance: Zero jurisdiction IDs, city names, or regulatory constants are hard-coded in `pipeline/` or `app/`/`components/`/`lib/` (`pipeline/tests/test_r1_no_hardcoding.py` passes)
 
 ## Notes
 
 - Check items as you review: `- [x]`
 - All acceptance items must pass before `/fab-continue` (hydrate)
 - If an item is not applicable, mark checked and prefix with **N/A**: `- [x] A-NNN **N/A**: {reason}`
+
+## Deletion Candidates
+
+- `components/PlotCard.tsx` — Standalone Plot Card UI component no longer imported by any route or component after removing plot inputs and plot answers from view.
+- `app/j/[id]/page.tsx:38-40,290-303` and `components/AreaExplorerClient.tsx:35-37` — Optional `parametersPayload`, `resolutionConfig`, and `consolidatedPayload` props passed to `AreaExplorerClient` that are not consumed by the standalone Map sidebar.
 
 ## Assumptions
 
