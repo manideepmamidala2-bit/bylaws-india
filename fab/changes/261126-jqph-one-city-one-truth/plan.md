@@ -98,7 +98,7 @@ The Map page (`app/j/[id]/page.tsx`, `components/AreaExplorerClient.tsx`) and th
 
 ### Phase 4: Part 4 — Plain Map/Land-Use Gap Notice, Screenshots & Final Verification
 
-- [ ] T004 Implement Part 4 plain land-use zone gap notice (`"Land-use zones are available for parts of Bengaluru South only. Elsewhere the map shows boundaries and wards."`) on the Map page (`app/j/[id]/page.tsx`, `components/AreaExplorerClient.tsx`) and `Land use` subject page (`app/j/[id]/topics/[topic]/page.tsx`, `lib/plain-language.ts`), ensure gap notices appear only where relevant, capture `390 px` and `1280 px` screenshots of Setbacks and FAR at city level and for Bengaluru South, run full `pytest`, `vitest`, `npm run build`, `scripts/check_page_budgets.mjs`, and Playwright `e2e/` browser tests, and commit, push, and update `docs/progress.md` and the PR description <!-- R4 -->
+- [x] T004 Implement Part 4 plain land-use zone gap notice (`"Land-use zones are available for parts of Bengaluru South only. Elsewhere the map shows boundaries and wards."`) on the Map page (`app/j/[id]/page.tsx`, `components/AreaExplorerClient.tsx`) and `Land use` subject page (`app/j/[id]/topics/[topic]/page.tsx`, `lib/plain-language.ts`), ensure gap notices appear only where relevant, capture `390 px` and `1280 px` screenshots of Setbacks and FAR at city level and for Bengaluru South, run full `pytest`, `vitest`, `npm run build`, `scripts/check_page_budgets.mjs`, and Playwright `e2e/` browser tests, and commit, push, and update `docs/progress.md` and the PR description <!-- R4 -->
 
 ## Execution Order
 

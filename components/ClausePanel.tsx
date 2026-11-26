@@ -190,7 +190,7 @@ export function ClausePanel({
               <React.Fragment key={clause.record_id ?? clause.clause_id}>
                 {showGroupHeader && (
                   <div className="flex items-center justify-between bg-[#efeee8] px-6 py-2 font-mono text-[10.5px] uppercase tracking-[0.14em] text-[#080909]">
-                    <span className="font-semibold">Topic: {topicGroup}</span>
+                    <span className="font-semibold">Subject: {topicGroup}</span>
                     {jurisdictionId && (
                       <Link
                         href={`/j/${jurisdictionId}/documents/${docId}`}

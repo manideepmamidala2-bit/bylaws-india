@@ -228,7 +228,10 @@ def test_part2_full_consolidated_documents_change_marks_akn_xml_and_incorporates
 
     # Verify quiet change mark on South City Corporation 2026 amendment
     rec_by_id = {r["clause_id"]: r for r in cons["records"]}
-    assert "Changed 2026, South City Corporation" == rec_by_id["bbl-2003:6.0(i)"]["change_note"]
+    assert (
+        "Changed for Bengaluru South City Corporation, 14 May 2026"
+        == rec_by_id["bbl-2003:6.0(i)"]["change_note"]
+    )
 
     # 4. Unobtained July 2025 amendment declared in declarations.json
     decls = validate_file(south_dir / "declarations.json", "declarations")

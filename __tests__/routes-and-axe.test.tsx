@@ -743,5 +743,32 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     expect(cSouthBbl.textContent ?? "").toContain("Table-2B below");
     await assertNoAxeViolations(cSouthBbl);
     uSouthBbl();
+
+    // 4. Part 4: Plain land-use zone gap notice on Map and Land use subject pages
+    const expectedGapLine =
+      "Land-use zones are available for parts of Bengaluru South only. Elsewhere the map shows boundaries and wards.";
+
+    const landUseUi = await TopicDetailPage({
+      params: Promise.resolve({
+        id: "in-ka-bengaluru",
+        topic: "land-use",
+      }),
+    });
+    const { container: cLandUse, unmount: uLandUse } = render(landUseUi);
+    expect(screen.getByTestId("land-use-zone-gap-notice").textContent).toBe(
+      expectedGapLine
+    );
+    await assertNoAxeViolations(cLandUse);
+    uLandUse();
+
+    const cityMapUi = await JurisdictionMapPage({
+      params: Promise.resolve({ id: "in-ka-bengaluru" }),
+    });
+    const { container: cCityMap, unmount: uCityMap } = render(cityMapUi);
+    expect(screen.getByTestId("map-zone-gap-notice").textContent).toBe(
+      expectedGapLine
+    );
+    await assertNoAxeViolations(cCityMap);
+    uCityMap();
   });
 });

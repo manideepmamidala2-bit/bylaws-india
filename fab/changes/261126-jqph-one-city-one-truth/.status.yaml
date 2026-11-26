@@ -6,8 +6,8 @@ change_type: feat
 issues: []
 progress:
     intake: done
-    apply: active
-    review: pending
+    apply: done
+    review: active
     hydrate: pending
     ship: pending
     review-pr: pending
@@ -30,10 +30,21 @@ confidence:
         disambiguation: 100.0
 stage_metrics:
     intake: {started_at: "2026-11-26T06:53:10Z", driver: fab-new, iterations: 1, completed_at: "2026-11-26T07:00:22Z"}
-    apply: {started_at: "2026-11-26T07:00:22Z", driver: fab-fff, iterations: 1}
+    apply: {started_at: "2026-11-26T07:00:22Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-26T08:56:15Z"}
+    review: {started_at: "2026-11-26T08:56:15Z", driver: fab-fff, iterations: 1}
 prs: []
 base_branch: main
 change_type_source: explicit
+true_impact:
+    added: 16257
+    deleted: 5840
+    net: 10417
+    tests:
+        added: 1614
+        deleted: 126
+        net: 1488
+    computed_at: "2026-11-26T08:56:15Z"
+    computed_at_stage: apply
 # base_branch: written by /git-branch or /fab-new when the change's branch is created (no placeholder here).
 # true_impact: lazily created on first stage-finish that computes it (no placeholder here).
-last_updated: 2026-11-26T07:02:25Z
+last_updated: 2026-11-26T08:56:15Z

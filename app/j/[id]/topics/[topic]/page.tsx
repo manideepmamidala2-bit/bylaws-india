@@ -491,7 +491,7 @@ export default async function TopicDetailPage({
           dMeta?.layer === "statute" ||
           dMeta?.layer === "orders"))
     ) {
-      if (whatAppliesToday.length < 10) {
+      if (whatAppliesToday.length < 7) {
         whatAppliesToday.push(node);
       } else {
         relatedProvisions.push(node);
@@ -524,8 +524,8 @@ export default async function TopicDetailPage({
 
   const totalOlderProvisionsCount = olderOrReplacedRules.length;
   const totalRelatedProvisionsCount = relatedProvisions.length;
-  const visibleOlderRules = olderOrReplacedRules.slice(0, 8);
-  const visibleRelatedProvisions = relatedProvisions.slice(0, 8);
+  const visibleOlderRules = olderOrReplacedRules.slice(0, 6);
+  const visibleRelatedProvisions = relatedProvisions.slice(0, 6);
 
   // Governing parameter table rows for this subject
   const paramKinds = subjectMeta.parameterKinds;
@@ -574,7 +574,7 @@ export default async function TopicDetailPage({
     docTitleById,
     docMetaById,
     subjectMeta.zoningGoverned
-  ).slice(0, 14);
+  ).slice(0, 8);
 
   // Determine whether any governing rule or provision on this subject differs for the selected City Corporation
   const corporationDiffCount = isChildCorporation
@@ -618,7 +618,7 @@ export default async function TopicDetailPage({
       const supMeta = docMetaById.get(dMeta.superseded_by_document);
       return formatReplacedByPlain(supMeta);
     }
-    if (dMeta?.layer === "municipal" && subjectMeta.zoningGoverned) {
+    if (dMeta?.layer === "municipal" && subjectMeta?.zoningGoverned) {
       return "Master plan rules apply instead (bye-law 1.4)";
     }
     if (vers.length > 1 && lastVer) {
