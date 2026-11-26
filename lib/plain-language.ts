@@ -290,15 +290,31 @@ export function getRelevantGapNoteForSubject(
   return "A Karnataka Gazette zoning amendment dated 18 July 2025 (referenced in later notifications) has not yet been obtained from official archives. Rules shown here reflect the 2007 Zoning Regulations and all obtained amendments through January 2026.";
 }
 
+export function formatLandUseZoneGapPlainLine(
+  partialZoneAreaName?: string | null
+): string {
+  const areaLabel = (partialZoneAreaName || "")
+    .replace(/\s*City Corporation\s*/i, "")
+    .trim();
+  if (areaLabel) {
+    return `Land-use zones are available for parts of ${areaLabel} only. Elsewhere the map shows boundaries and wards.`;
+  }
+  return "Land-use zones are available for processed map sheets only. Elsewhere the map shows boundaries and wards.";
+}
+
 const ZONE_CODE_PLAIN_LABELS: Record<string, string> = {
   "R-MAIN": "Residential (Main)",
   "R-MIX": "Residential (Mixed)",
-  "C-BIZ": "Commercial (Central / Business)",
+  "C-CENTRAL": "Commercial (Central)",
+  "C-BIZ": "Commercial (Business)",
   "C-AXES": "Mutation Corridors",
   "I-GEN": "Industrial (General)",
   "I-HITECH": "Industrial (Hi-Tech)",
   PSP: "Public and semi-public",
   "T-TRANS": "Traffic and transportation",
+  "DEV-PLAN-RES": "Residential development plan",
+  "DEV-PLAN-NONRES": "Non-residential development plan and flatted industries",
+  "INTEGRATED-TOWNSHIP": "Integrated township",
 };
 
 const AREA_CLASS_PLAIN_LABELS: Record<string, string> = {
@@ -316,6 +332,29 @@ const USE_PLAIN_LABELS: Record<string, string> = {
   industrial: "Industrial",
   public_semi_public: "Public and semi-public",
   traffic_transportation: "Traffic and transportation",
+  residential_development_plan: "Residential development plan",
+  non_residential_development_plan:
+    "Non-residential development plan and flatted industries",
+  integrated_township: "Integrated township",
+  multi_dwelling_units: "Multi-dwelling units",
+  star_hotels: "Star hotels",
+  lodging_hotels: "Lodging establishments, hotels and tourist homes",
+  office_buildings_non_residential_dp:
+    "Office buildings in non-residential development plan",
+  office_buildings: "Office buildings",
+  retail_business: "Retail business (shops, shopping complexes, malls)",
+  multiplex_shopping: "Multiplex integrated with shopping",
+  restaurants: "Restaurants and food establishments",
+  industrial_buildings: "Industrial buildings",
+  theaters_auditoriums: "Theatres and auditoriums",
+  wholesale_warehouse: "Wholesale and warehouse buildings",
+  hostels: "Hostels",
+  nursing_homes: "Nursing homes",
+  hospitals: "Hospitals",
+  kalyana_mantaps: "Kalyana mantaps and convention centres",
+  recreational_clubs: "Recreational clubs",
+  educational_buildings: "Educational buildings",
+  other_public_semi_public: "Other public and semi-public buildings",
 };
 
 export const PARAMETER_PLAIN_LABELS: Record<
@@ -682,6 +721,119 @@ export function formatHumanDate(isoDate: string | null | undefined): string {
   const monthName = MONTH_NAMES[monthIdx];
   if (!monthName || Number.isNaN(day)) return isoDate;
   return `${day} ${monthName} ${year}`;
+}
+
+export function formatMonthYearPlain(isoDate: string | null | undefined): string {
+  if (!isoDate) return "Amended";
+  const m = /^(\d{4})-(\d{2})/.exec(isoDate.trim());
+  if (!m) return isoDate;
+  const year = m[1];
+  const monthIdx = Number(m[2]) - 1;
+  const monthName = MONTH_NAMES[monthIdx];
+  if (!monthName) return year;
+  return `${monthName} ${year}`;
+}
+
+export function formatReplacedByPlain(
+  doc: Pick<
+    DocumentMetadata,
+    "doc_id" | "title" | "effective_from" | "notified_date"
+  > | null | undefined,
+  fallbackDate?: string | null
+): string {
+  const plainName = formatPlainDocumentTitle(doc);
+  const dt = doc?.effective_from || doc?.notified_date || fallbackDate;
+  const humanDate = dt ? formatHumanDate(dt) : null;
+  return humanDate
+    ? `Replaced by ${plainName}, ${humanDate}`
+    : `Replaced by ${plainName}`;
+}
+
+export interface SubjectBandContinuitySource {
+  docId: string;
+  docTitle: string;
+  date: string;
+  page: number;
+  pageLink: string;
+  ruleSummary: string;
+}
+
+export interface SubjectBandContinuityNotice {
+  id: string;
+  kind: "overlap" | "gap";
+  headline: string;
+  explanation: string;
+  sourceA: SubjectBandContinuitySource;
+  sourceB: SubjectBandContinuitySource;
+}
+
+export function computeSubjectBandContinuityNotices(
+  subjectSlug: string,
+  records: ReadonlyArray<ParameterRecord>,
+  docMetaById: ReadonlyMap<
+    string,
+    Pick<
+      DocumentMetadata,
+      "doc_id" | "title" | "effective_from" | "notified_date"
+    >
+  >
+): SubjectBandContinuityNotice[] {
+  const notices: SubjectBandContinuityNotice[] = [];
+  if (subjectSlug === "setbacks" || subjectSlug === "height") {
+    const lowRiseRec = records.find(
+      (r) =>
+        r.legal_status === "in_force" &&
+        !r.valid_to &&
+        r.conditions.building_height_m?.max === 12.0 &&
+        (r.conditions.building_height_m?.min === null ||
+          r.conditions.building_height_m?.min === undefined)
+    );
+    const highRiseRec = records.find(
+      (r) =>
+        r.legal_status === "in_force" &&
+        !r.valid_to &&
+        r.conditions.building_height_m?.min === 11.5
+    );
+    if (lowRiseRec && highRiseRec) {
+      const docA = docMetaById.get(lowRiseRec.source.doc_id);
+      const docB = docMetaById.get(highRiseRec.source.doc_id);
+      notices.push({
+        id: "setback-height-band-overlap-11.5-12",
+        kind: "overlap",
+        headline:
+          "Not settled: two rules apply — The current tables overlap between 11.5 m and 12 m.",
+        explanation:
+          "The January 2026 setback table (Table 8) covers buildings with total height up to 12 m, while the 2007 taller-building setback table (Table 9), still in force, starts above 11.5 m. Neither number has been adjusted here.",
+        sourceA: {
+          docId: lowRiseRec.source.doc_id,
+          docTitle: formatPlainDocumentTitle(docA, lowRiseRec.source.doc_id),
+          date: formatHumanDate(
+            docA?.effective_from ||
+              docA?.notified_date ||
+              lowRiseRec.valid_from
+          ),
+          page: lowRiseRec.source.page,
+          pageLink: lowRiseRec.source.page_link,
+          ruleSummary:
+            "Table 8 sets setbacks for buildings up to 12 m in height (excluding stilt floor).",
+        },
+        sourceB: {
+          docId: highRiseRec.source.doc_id,
+          docTitle: formatPlainDocumentTitle(docB, highRiseRec.source.doc_id),
+          date: formatHumanDate(
+            docB?.effective_from ||
+              docB?.notified_date ||
+              highRiseRec.valid_from
+          ),
+          page: highRiseRec.source.page,
+          pageLink: highRiseRec.source.page_link,
+          ruleSummary:
+            "Table 9 row 1 sets a 5 m setback on all sides for buildings above 11.5 m up to 15 m in height.",
+        },
+      });
+    }
+  }
+  return notices;
 }
 
 export function formatPlainInstrumentStatus(

@@ -1778,7 +1778,7 @@ amendment_links:
   - in-ka-bengaluru-central
   note: 'Clause 2 of No: BCCC/Com/PR/48/2026-27 (Bengaluru Central City Corporation,
     14-05-2026) omits Bye-law 3.10 (Exemption of ground rent).'
-- amending_clause: bccc-bbl-amend-2026-05:cl_3.10__item_i
+- amending_clause: bccc-bbl-amend-2026-05:item_i
   target_clause: bbl-2003:part_II__sec_6.0__item_i
   action: substitute
   effective_date: '2026-05-14'
@@ -2086,6 +2086,22 @@ amendment_links:
   note: Notification No. UDD 112 MNJ 2015 dated 29-09-2018 inserts Regulation 3.4(vi)
     Impact Zone Premium FAR (+1.0 FAR on roads >= 12 m), omits Regulation 3.16(ix),
     and inserts Appendix-IX.
+- amending_clause: rmp2015-zr-amend-2018-09:app_IX
+  target_clause: rmp2015-zr:chp_3__cl_3.16__item_ix
+  action: omit
+  effective_date: '2018-09-29'
+  confidence: high
+  verification: machine_checked
+  note: Notification No. UDD 112 MNJ 2015 dated 29-09-2018 Clause 2(B) omits Item no (ix)
+    under Regulation 3.16 (General Notes).
+- amending_clause: rmp2015-zr-amend-2018-09:app_IX
+  target_clause: rmp2015-zr:chp_3__cl_3.16A
+  action: omit
+  effective_date: '2018-09-29'
+  confidence: high
+  verification: machine_checked
+  note: Notification No. UDD 112 MNJ 2015 dated 29-09-2018 Clause 2(B) omits Item no (ix)
+    under Regulation 3.16 (General Notes).
 - amending_clause: rmp2015-zr-amend-2019-06:item_2_3
   target_clause: rmp2015-zr:chp_3__cl_3.4
   action: substitute
@@ -2097,6 +2113,59 @@ amendment_links:
     constructions shall be excluded from FAR computation, namely :-'
   note: Notification No. UDD 255 MNJ 2018 dated 19-06-2019 substitutes Regulation
     3.4 FAR exclusions (i)–(xvi) and inserts Regulation 3.4-A Height of Building.
+- amending_clause: rmp2015-zr-amend-2019-06:item_5__item_i
+  target_clause: rmp2015-zr:chp_3__cl_3.11__item_iii
+  action: substitute
+  effective_date: '2019-06-19'
+  confidence: high
+  verification: machine_checked
+  replacement_text: '“iii. A portico / porch may be permitted in the ground floor
+    within the setback. No access is permitted to the top of portico for using it
+    as a sit out. The size of cantilever portico is restricted to 3.0m X 4.50m. In
+    case of high rise buildings cantilever portico is allowed as per fire norms. The
+    portico when allowed shall have a clear open space of 1m from the boundary of
+    the property and in case of high rise buildings such portico should have a minimum
+    clear height of 5.5m and a vehicle passage width of 6m, if such portico or porch
+    projects into the mandatory driveway of 6m.”; and'
+  note: Notification No. UDD 255 MNJ 2018 dated 19-06-2019 Clause 3(5) substitutes
+    Regulation 3.11(iii) (Cantilever portico / porch in ground floor setback).
+- amending_clause: rmp2015-zr-amend-2019-06:item_5__item_iv
+  target_clause: rmp2015-zr:chp_3__cl_3.11__item_iv
+  action: substitute
+  effective_date: '2019-06-19'
+  confidence: high
+  verification: machine_checked
+  replacement_text: 'a. No balcony is allowed in the ground floor. b. Open Balcony
+    projection should not exceed 1/3*4 of the setback on that side subject to a maximum
+    of 1.20m in the first floor and maximum 1.75m beyond second floor whichever is
+    less. c. Balconies are not allowed in commercial Buildings, beyond setbacks.”'
+  note: Notification No. UDD 255 MNJ 2018 dated 19-06-2019 Clause 3(5) substitutes
+    Regulation 3.11(iv) (Balcony projections).
+- amending_clause: rmp2015-zr-amend-2019-06:item_6
+  target_clause: rmp2015-zr:chp_3__cl_3.12__item_ii
+  action: substitute
+  effective_date: '2019-06-19'
+  confidence: high
+  verification: machine_checked
+  replacement_text: '“(ii) For all the buildings with height of 15m and above, NOC
+    from Fire and Emergency Services Department in addition to NOC from Karnataka
+    State Pollution Control Board shall be furnished.”'
+  note: Notification No. UDD 255 MNJ 2018 dated 19-06-2019 Clause 3(6) substitutes
+    Regulation 3.12(ii) (Fire and Emergency Services NOC threshold lowered to 15 m
+    and above).
+- amending_clause: rmp2015-zr-amend-2019-06:item_7
+  target_clause: rmp2015-zr:chp_3__cl_3.16__item_vi
+  action: substitute
+  effective_date: '2019-06-19'
+  confidence: high
+  verification: machine_checked
+  replacement_text: '“vi. Mezzanine floor is permitted between any 2 floors in residential
+    buildings; the area of which is considered for calculation of FAR, subject to
+    a minimum area of 9.5 sqm and maximum of 1/3rd of the area of the respective floor.
+    The minimum height of Mezzanine floor shall be 2.75m, and shall not be used as
+    kitchen.”;'
+  note: Notification No. UDD 255 MNJ 2018 dated 19-06-2019 Clause 3(7)(i) substitutes
+    Regulation 3.16(vi) (Mezzanine floor in residential buildings).
 - amending_clause: rmp2015-zr-amend-2019-06:cl_4
   target_clause: rmp2015-zr:chp_6__cl_6.1
   action: modify
@@ -2208,6 +2277,25 @@ amendment_links:
     affected property to its original condition”.
   note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 Clause (2)(e)–(f) amends
     Regulation 3.9 Basement clauses (iii) and (x).
+- amending_clause: rmp2015-zr-amend-2026-01:item_e
+  target_clause: rmp2015-zr:chp_3__cl_3.9__item_iii
+  action: substitute
+  effective_date: '2026-01-05'
+  confidence: high
+  verification: machine_checked
+  replacement_text: “iii. The minimum setback for the basement in plots of area up
+    to 4000 sq.m shall be either the minimum setback required for the building as
+    per Table 8/Table 9 or 2.0m whichever is less. Safety of the neighbouring property
+    while construction of basement shall be taken care of by the owner. In case of
+    any damage or loss made to the neighbouring property the owner shall be liable
+    to set right the damage and to bring such neighbouring property to its original
+    condition. The property owner shall ensure the safety and structural integrity
+    of adjoining properties during the construction of the basement. In the event
+    of any damage or loss to neighbouring properties resulting from the basement construction,
+    the owner shall be solely responsible for repairing the damage and restoring the
+    affected property to its original condition”.
+  note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 Clause (2)(e) substitutes
+    Regulation 3.9(iii) (Basement minimum setback).
 - amending_clause: rmp2015-zr-amend-2026-01:item_a
   target_clause: rmp2015-zr:chp_3__cl_3.10
   action: modify
@@ -2218,6 +2306,52 @@ amendment_links:
     be substituted. - “2.0 m or setback whichever is less”
   note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 Clause (2)(g)–(h) amends
     Regulation 3.10 Ramps clauses (i), (iii), and (iv).
+- amending_clause: rmp2015-zr-amend-2026-01:item_a
+  target_clause: rmp2015-zr:chp_3__cl_3.10__item_i
+  action: substitute
+  effective_date: '2026-01-05'
+  confidence: high
+  verification: machine_checked
+  replacement_text: In clause (i) for the numerical and letter “2.0 m” following shall
+    be substituted. - “2.0 m or setback whichever is less”
+  note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 Clause (2)(g)(a) amends
+    Regulation 3.10(i) (Ramp clear gap of 2.0 m or setback whichever is less).
+- amending_clause: rmp2015-zr-amend-2026-01:cl_11
+  target_clause: rmp2015-zr:chp_4__cl_4.1__cl_4.1.2__item_b
+  action: substitute
+  effective_date: '2026-01-05'
+  confidence: high
+  verification: machine_checked
+  replacement_text: '“(b) if the road width is less than 9.0 m., then the maximum
+    height is restricted to 15.0m (including stilt floor) irrespective of the FAR
+    permissible”.'
+  note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 Clause (3)(a)(i) substitutes
+    Clause (b) under Regulation 4.1.2 after Table 10 (Residential Main height limit
+    on roads less than 9.0 m).
+- amending_clause: rmp2015-zr-amend-2026-01:item_ii
+  target_clause: rmp2015-zr:chp_4__cl_4.1__cl_4.1.2__item_c
+  action: substitute
+  effective_date: '2026-01-05'
+  confidence: high
+  verification: machine_checked
+  replacement_text: '“(c) In Ring III: on plot size above 360 sq.m and upto 750 sq.m
+    permitted. In Ring I, II & III: on plot size above 200 sq.m and below 360 sq.m
+    permitted. Provided, in Ring I & II on plots of size 360 sq.m and above, In all
+    the above cases minimum road width shall be 9.0 m.'
+  note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 Clause (3)(a)(ii) substitutes
+    Clause (c) under Regulation 4.1.2 after Table 10 (Multi-dwelling unit plot size
+    and road width rules across Rings I, II & III).
+- amending_clause: rmp2015-zr-amend-2026-01:item_2_2__item_b
+  target_clause: rmp2015-zr:chp_3__cl_3.1__tbl_8
+  action: substitute
+  effective_date: '2026-01-05'
+  confidence: high
+  verification: machine_checked
+  replacement_text: 'Table 8 and the entries thereunder shall be substituted as below:
+    Table 8: Setbacks for buildings with total height upto 12.0 m (excluding stilt
+    floor)'
+  note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 Clause (2)(b) substitutes
+    Table 8 (Setbacks for buildings with total height up to 12.0 m).
 - amending_clause: rmp2015-zr-amend-2026-01:item_ii
   target_clause: rmp2015-zr:chp_4__cl_4.5
   action: modify

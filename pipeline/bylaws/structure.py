@@ -496,6 +496,12 @@ def _match_structural_line(line: str) -> tuple[str, str, str] | None:
         if DATE_TOKEN_RE.match(number.split("(")[0]):
             return None
         rest = (sec_match.group("rest") or "").strip() or number
+        if re.search(
+            r";\s*Bye-?law\b|\bthe\s+entire\s+provision\s+shall\s+be\s+omitted\b",
+            rest,
+            re.IGNORECASE,
+        ):
+            return None
         return "clause", number, rest
 
     dec_match = DECIMAL_CLAUSE_RE.match(line)

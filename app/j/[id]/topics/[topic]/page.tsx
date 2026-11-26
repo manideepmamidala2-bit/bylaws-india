@@ -9,18 +9,26 @@ import {
   fetchResolution,
   getVisibleJurisdictions,
   type ClauseNode,
+  type DocumentMetadata,
   type ParameterRecord,
 } from "@/lib/data";
 import { TopNav } from "@/components/TopNav";
-import { CorporationSelector } from "@/components/CorporationSelector";
+import {
+  CorporationSelector,
+  formatPlainCorporationName,
+} from "@/components/CorporationSelector";
 import {
   CODE_SUBJECTS,
   PARAMETER_PLAIN_LABELS,
+  computeSubjectBandContinuityNotices,
   formatHumanDate,
+  formatLandUseZoneGapPlainLine,
+  formatMonthYearPlain,
   formatParameterConditionsPlain,
   formatParameterValuePlain,
   formatPlainDocumentTitle,
   formatPlainInstrumentStatus,
+  formatReplacedByPlain,
   getRelevantGapNoteForSubject,
   isPlausibleParameterRecord,
   resolveCodeSubject,
@@ -44,9 +52,11 @@ export async function generateStaticParams() {
       paramsList.push({ id: j.id, topic: s.slug });
     }
     for (const t of ds?.relations?.topics ?? []) {
-      if (!seenSlugs.has(t.id)) {
-        seenSlugs.add(t.id);
-        paramsList.push({ id: j.id, topic: t.id });
+      const resolved = resolveCodeSubject(t.id, ds?.relations?.topics);
+      const canonicalSlug = resolved?.slug ?? t.id;
+      if (!seenSlugs.has(canonicalSlug)) {
+        seenSlugs.add(canonicalSlug);
+        paramsList.push({ id: j.id, topic: canonicalSlug });
       }
     }
   }
@@ -60,17 +70,25 @@ interface CleanSubjectParameterRow {
   valuePlain: string;
   docId: string;
   docTitle: string;
+  validFrom: string;
+  validTo: string | null;
+  legalStatus: ParameterRecord["legal_status"];
   page: number;
   pageLink: string;
   rawRowHeader: string | null;
   rawCellText: string;
   tableLabel: string | null;
+  note: string | null;
+  statusLabel: string | null;
+  isCorporationSpecific: boolean;
   parameterIds: string[];
 }
 
 function buildDeduplicatedSubjectParameterRows(
   records: ReadonlyArray<ParameterRecord>,
-  docTitleById: ReadonlyMap<string, string>
+  docTitleById: ReadonlyMap<string, string>,
+  docMetaById: ReadonlyMap<string, DocumentMetadata>,
+  zoningGoverned: boolean
 ): CleanSubjectParameterRow[] {
   const plausible = records.filter(isPlausibleParameterRecord);
 
@@ -93,6 +111,29 @@ function buildDeduplicatedSubjectParameterRows(
     } else {
       nonGrouped.push(rec);
     }
+  }
+
+  function computeOlderStatusLabel(rec: ParameterRecord): string | null {
+    const dMeta = docMetaById.get(rec.source.doc_id);
+    if (zoningGoverned && dMeta?.layer === "municipal") {
+      return "Master plan rules apply instead (bye-law 1.4)";
+    }
+    if (rec.note && rec.note.startsWith("Replaced by")) {
+      return rec.note;
+    }
+    if (rec.legal_status === "superseded" || rec.valid_to) {
+      return rec.valid_to
+        ? `Replaced by a later amendment, ${formatHumanDate(rec.valid_to)}`
+        : "Replaced by a later amendment";
+    }
+    return null;
+  }
+
+  function isRecordCorporationSpecific(rec: ParameterRecord): boolean {
+    if ((rec.conditions.jurisdiction?.length ?? 0) > 0) {
+      return true;
+    }
+    return rec.source.doc_id.includes("-bbl-amend-2026");
   }
 
   const candidateRows: CleanSubjectParameterRow[] = [];
@@ -125,17 +166,23 @@ function buildDeduplicatedSubjectParameterRows(
       formatPlainDocumentTitle(null, first.source.doc_id);
 
     candidateRows.push({
-      key: `${ruleLabel}|${conditionsPlain}|${valuePlain}|${first.source.doc_id}|${first.source.page}`,
+      key: `${ruleLabel}|${conditionsPlain}|${valuePlain}|${first.source.doc_id}`,
       ruleLabel,
       conditionsPlain,
       valuePlain,
       docId: first.source.doc_id,
       docTitle,
+      validFrom: first.valid_from ?? "0000-00-00",
+      validTo: first.valid_to ?? null,
+      legalStatus: first.legal_status,
       page: first.source.page,
       pageLink: first.source.page_link,
       rawRowHeader: first.source.row_header ?? null,
       rawCellText: first.source.cell_text,
       tableLabel: first.source.table_id ?? null,
+      note: first.note ?? null,
+      statusLabel: computeOlderStatusLabel(first),
+      isCorporationSpecific: isRecordCorporationSpecific(first),
       parameterIds: group.map((g) => g.parameter_id),
     });
   }
@@ -152,17 +199,23 @@ function buildDeduplicatedSubjectParameterRows(
       formatPlainDocumentTitle(null, rec.source.doc_id);
 
     candidateRows.push({
-      key: `${ruleLabel}|${conditionsPlain}|${valuePlain}|${rec.source.doc_id}|${rec.source.page}`,
+      key: `${ruleLabel}|${conditionsPlain}|${valuePlain}|${rec.source.doc_id}`,
       ruleLabel,
       conditionsPlain,
       valuePlain,
       docId: rec.source.doc_id,
       docTitle,
+      validFrom: rec.valid_from ?? "0000-00-00",
+      validTo: rec.valid_to ?? null,
+      legalStatus: rec.legal_status,
       page: rec.source.page,
       pageLink: rec.source.page_link,
       rawRowHeader: rec.source.row_header ?? null,
       rawCellText: rec.source.cell_text,
       tableLabel: rec.source.table_id ?? null,
+      note: rec.note ?? null,
+      statusLabel: computeOlderStatusLabel(rec),
+      isCorporationSpecific: isRecordCorporationSpecific(rec),
       parameterIds: [rec.parameter_id],
     });
   }
@@ -177,25 +230,80 @@ function buildDeduplicatedSubjectParameterRows(
   return deduped;
 }
 
-function isDefinitionOrBareHeading(
+function isByeLaw14Node(
   node: ClauseNode,
-  subjectTopicId: string
+  docMetaById: ReadonlyMap<string, DocumentMetadata>
 ): boolean {
   const eid = (node.eid ?? "").toLowerCase();
-  if (eid.includes("toc") || eid.startsWith("pref_") || eid.startsWith("prea_")) {
+  const num = (node.number ?? "").trim();
+  const dMeta = docMetaById.get(node.doc_id ?? "");
+  return (
+    dMeta?.layer === "municipal" &&
+    dMeta?.role === "base" &&
+    (eid === "part_i__sec_1.0__cl_1.4" || eid.endsWith("__cl_1.4") || num === "1.4")
+  );
+}
+
+function isDefinitionNode(node: ClauseNode): boolean {
+  const eid = (node.eid ?? "").toLowerCase();
+  return (
+    node.type === "definition" ||
+    eid.includes("sec_definitions") ||
+    eid.includes("__def_") ||
+    eid.includes("__sec_2.0") ||
+    eid.startsWith("chp_1__cl_1.2") ||
+    Boolean(node.title && node.title.toLowerCase().includes("definition"))
+  );
+}
+
+function isExcludedNonContentOrBareHeading(node: ClauseNode): boolean {
+  const eid = (node.eid ?? "").toLowerCase();
+  if (
+    eid.includes("toc") ||
+    eid.startsWith("pref_") ||
+    eid.startsWith("prea_") ||
+    eid.startsWith("sig_") ||
+    node.type === "preface" ||
+    node.type === "preamble" ||
+    node.type === "signature_block" ||
+    node.type === "table_row"
+  ) {
     return true;
   }
-  if (subjectTopicId !== "definitions") {
-    if (
-      eid.includes("__sec_2.0") ||
-      eid.startsWith("chp_1__cl_1.2") ||
-      (node.title && node.title.toLowerCase().includes("definition"))
-    ) {
+  const vers = node.versions ?? [];
+  const activeContent =
+    vers.length > 1 && vers[vers.length - 1].content
+      ? vers[vers.length - 1].content ?? ""
+      : node.text ?? "";
+  const wordCount = activeContent.trim().split(/\s+/).filter(Boolean).length;
+  if (node.type !== "table" && wordCount < 5) {
+    return true;
+  }
+  return false;
+}
+
+function isNodeOmittedByAmendment(node: ClauseNode): boolean {
+  if (node.omitted) return true;
+  const vers = node.versions ?? [];
+  if (vers.length > 0 && vers[vers.length - 1].omitted) {
+    return true;
+  }
+  return false;
+}
+
+function isNodeCorporationSpecific(node: ClauseNode): boolean {
+  const docId = node.doc_id ?? "";
+  if (docId.includes("-bbl-amend-2026")) {
+    return true;
+  }
+  const vers = node.versions ?? [];
+  if (vers.length > 1) {
+    const lastSrc = vers[vers.length - 1].source_doc ?? "";
+    if (lastSrc.includes("-bbl-amend-2026")) {
       return true;
     }
   }
-  const wordCount = (node.text || "").trim().split(/\s+/).filter(Boolean).length;
-  if (node.type !== "table" && wordCount < 5) {
+  if (node.change_mark?.amending_doc?.includes("-bbl-amend-2026")) {
     return true;
   }
   return false;
@@ -218,8 +326,14 @@ export default async function TopicDetailPage({
     notFound();
   }
 
-  const { jurisdiction, documents, clauses, annotationsByDocId, relations } =
-    dataset;
+  const {
+    jurisdiction,
+    documents,
+    clauses,
+    annotationsByDocId,
+    amendments,
+    relations,
+  } = dataset;
   const subjectMeta = resolveCodeSubject(topic, relations.topics);
   if (!subjectMeta) {
     notFound();
@@ -231,16 +345,50 @@ export default async function TopicDetailPage({
     (allVisible.some((j) => j.parent === jurisdiction.id)
       ? jurisdiction.id
       : null);
+  const parentSummary = rootParentId
+    ? allVisible.find((j) => j.id === rootParentId)
+    : null;
+  const parentPlainName = parentSummary
+    ? formatPlainCorporationName(parentSummary.id, parentSummary.name)
+    : formatPlainCorporationName(jurisdiction.id, jurisdiction.name);
+  const isChildCorporation = Boolean(jurisdiction.parent);
+  const plainCorporationName = formatPlainCorporationName(
+    jurisdiction.id,
+    jurisdiction.name
+  );
   const gbaCorporations = rootParentId
     ? allVisible
         .filter((j) => j.id === rootParentId || j.parent === rootParentId)
         .map((j) => ({ id: j.id, name: j.name }))
     : [];
+  const partialZoneCorp = allVisible.find(
+    (j) =>
+      j.parent === rootParentId &&
+      j.releases.some(
+        (rel) =>
+          Boolean(rel.files?.planning_districts) && Boolean(rel.files?.zones)
+      )
+  );
+  const landUseZoneGapLine = formatLandUseZoneGapPlainLine(
+    partialZoneCorp?.name ?? null
+  );
 
   const docMetaById = new Map(documents.map((d) => [d.doc_id, d]));
   const docTitleById = new Map(
     documents.map((d) => [d.doc_id, formatPlainDocumentTitle(d)])
   );
+
+  // Map applied amending clauses (`amending_doc:amending_eid`) -> target base provisions (`target_doc:target_eid`)
+  // so standalone amending instructions do not duplicate the consolidated base provision.
+  const appliedTargetByAmendingKey = new Map<string, string>();
+  for (const eff of amendments.effects ?? []) {
+    if (eff.applied && eff.action !== "insert_after" && eff.action !== "insert_before") {
+      appliedTargetByAmendingKey.set(
+        `${eff.amending_doc}:${eff.amending_eid}`,
+        `${eff.target_doc}:${eff.target_eid}`
+      );
+    }
+  }
 
   // Collect all provisions tagged with `subjectMeta.topicId`
   const taggedNodeKeys = new Set<string>();
@@ -252,30 +400,64 @@ export default async function TopicDetailPage({
           !ann.target.eid.startsWith("prea_") &&
           !ann.target.eid.startsWith("sig_")
         ) {
-          taggedNodeKeys.add(`${docId}:${ann.target.eid}`);
+          const rawKey = `${docId}:${ann.target.eid}`;
+          const mappedTarget = appliedTargetByAmendingKey.get(rawKey);
+          taggedNodeKeys.add(mappedTarget ?? rawKey);
         }
       }
     }
   }
 
-  const taggedClauses: ClauseNode[] = clauses.filter(
+  const rawTaggedClauses: ClauseNode[] = clauses.filter(
     (c) =>
       !c.superseded_by &&
       !c.record_superseded_by &&
-      c.type !== "preface" &&
-      c.type !== "preamble" &&
-      c.type !== "signature_block" &&
-      c.type !== "table_row" &&
-      taggedNodeKeys.has(`${c.doc_id}:${c.eid}`)
+      taggedNodeKeys.has(`${c.doc_id}:${c.eid}`) &&
+      !appliedTargetByAmendingKey.has(`${c.doc_id}:${c.eid}`)
   );
+
+  // Prioritize primary subject chapters (e.g. Chapter 3 Setbacks `chp_3__cl_3.1*` on Setbacks)
+  const taggedClauses = [...rawTaggedClauses].sort((a, b) => {
+    const eidA = a.eid ?? "";
+    const eidB = b.eid ?? "";
+    if (subjectMeta.topicId === "setbacks") {
+      const aPrimary = eidA.startsWith("chp_3__cl_3.1") ? 0 : 1;
+      const bPrimary = eidB.startsWith("chp_3__cl_3.1") ? 0 : 1;
+      if (aPrimary !== bPrimary) return aPrimary - bPrimary;
+    }
+    if (isChildCorporation) {
+      const aCorp = isNodeCorporationSpecific(a) ? 0 : 1;
+      const bCorp = isNodeCorporationSpecific(b) ? 0 : 1;
+      if (aCorp !== bCorp) return aCorp - bCorp;
+    }
+    return 0;
+  });
 
   const whatAppliesToday: ClauseNode[] = [];
   const olderOrReplacedRules: ClauseNode[] = [];
   const relatedProvisions: ClauseNode[] = [];
 
   for (const node of taggedClauses) {
+    if (isExcludedNonContentOrBareHeading(node)) {
+      continue;
+    }
+
+    // Bye-law 1.4 is NEVER placed in "Older or replaced rules" and NEVER labelled replaced (Part 1.6)
+    if (isByeLaw14Node(node, docMetaById)) {
+      relatedProvisions.push(node);
+      continue;
+    }
+
+    // Definitions move to "Related provisions" (except on the Definitions subject itself) and are never labelled replaced unless replaced by a later instrument (Part 1.6 & 1.7)
+    if (subjectMeta.topicId !== "definitions" && isDefinitionNode(node)) {
+      relatedProvisions.push(node);
+      continue;
+    }
+
     const dMeta = docMetaById.get(node.doc_id ?? "");
+    const isOmitted = isNodeOmittedByAmendment(node);
     const isDraftOrSuperseded =
+      isOmitted ||
       node.legal_status === "draft" ||
       node.legal_status === "superseded" ||
       dMeta?.legal_status === "draft" ||
@@ -296,7 +478,8 @@ export default async function TopicDetailPage({
       continue;
     }
 
-    if (isDefinitionOrBareHeading(node, subjectMeta.topicId)) {
+    // Exclude standalone `table` nodes from the text provision list when clean parameter tables are already rendered above
+    if (node.type === "table" && subjectMeta.parameterKinds.length > 0) {
       relatedProvisions.push(node);
       continue;
     }
@@ -308,7 +491,7 @@ export default async function TopicDetailPage({
           dMeta?.layer === "statute" ||
           dMeta?.layer === "orders"))
     ) {
-      if (whatAppliesToday.length < 8) {
+      if (whatAppliesToday.length < 7) {
         whatAppliesToday.push(node);
       } else {
         relatedProvisions.push(node);
@@ -324,11 +507,15 @@ export default async function TopicDetailPage({
 
   // Sort older/replaced provisions newest first
   olderOrReplacedRules.sort((a, b) => {
+    const verA = (a.versions ?? [])[a.versions ? a.versions.length - 1 : 0];
+    const verB = (b.versions ?? [])[b.versions ? b.versions.length - 1 : 0];
     const dA =
+      verA?.valid_from ||
       docMetaById.get(a.doc_id ?? "")?.effective_from ||
       docMetaById.get(a.doc_id ?? "")?.notified_date ||
       "0000-00-00";
     const dB =
+      verB?.valid_from ||
       docMetaById.get(b.doc_id ?? "")?.effective_from ||
       docMetaById.get(b.doc_id ?? "")?.notified_date ||
       "0000-00-00";
@@ -338,7 +525,7 @@ export default async function TopicDetailPage({
   const totalOlderProvisionsCount = olderOrReplacedRules.length;
   const totalRelatedProvisionsCount = relatedProvisions.length;
   const visibleOlderRules = olderOrReplacedRules.slice(0, 6);
-  const visibleRelatedProvisions = relatedProvisions.slice(0, 8);
+  const visibleRelatedProvisions = relatedProvisions.slice(0, 6);
 
   // Governing parameter table rows for this subject
   const paramKinds = subjectMeta.parameterKinds;
@@ -352,22 +539,48 @@ export default async function TopicDetailPage({
   );
   const cleanParameterRows = buildDeduplicatedSubjectParameterRows(
     governingParamRecords,
-    docTitleById
+    docTitleById,
+    docMetaById,
+    subjectMeta.zoningGoverned
   );
 
-  // Older/superseded parameter rows for this subject
-  const olderParamRecords = (parametersPayload?.records ?? []).filter(
-    (r) =>
-      paramKinds.includes(r.parameter) &&
-      (r.legal_status !== "in_force" ||
-        Boolean(r.valid_to) ||
-        (subjectMeta.zoningGoverned &&
-          docMetaById.get(r.source.doc_id)?.layer === "municipal"))
+  // Band continuity & current-text overlap notices (e.g. 11.5 m to 12 m setback table overlap)
+  const bandContinuityNotices = computeSubjectBandContinuityNotices(
+    subjectMeta.slug,
+    governingParamRecords,
+    docMetaById
   );
+
+  // Older/superseded parameter rows for this subject (sorted newest first so 2007 replaced rows precede 2004 displaced rows)
+  const olderParamRecords = (parametersPayload?.records ?? [])
+    .filter(
+      (r) =>
+        paramKinds.includes(r.parameter) &&
+        (r.legal_status !== "in_force" ||
+          Boolean(r.valid_to) ||
+          (subjectMeta.zoningGoverned &&
+            docMetaById.get(r.source.doc_id)?.layer === "municipal"))
+    )
+    .sort((a, b) => {
+      const aReplaced = a.legal_status === "superseded" || Boolean(a.valid_to) ? 1 : 0;
+      const bReplaced = b.legal_status === "superseded" || Boolean(b.valid_to) ? 1 : 0;
+      if (aReplaced !== bReplaced) return bReplaced - aReplaced;
+      const dA = a.valid_to || a.valid_from || "0000-00-00";
+      const dB = b.valid_to || b.valid_from || "0000-00-00";
+      return dB.localeCompare(dA);
+    });
   const olderParameterRows = buildDeduplicatedSubjectParameterRows(
     olderParamRecords,
-    docTitleById
+    docTitleById,
+    docMetaById,
+    subjectMeta.zoningGoverned
   ).slice(0, 8);
+
+  // Determine whether any governing rule or provision on this subject differs for the selected City Corporation
+  const corporationDiffCount = isChildCorporation
+    ? cleanParameterRows.filter((r) => r.isCorporationSpecific).length +
+      whatAppliesToday.filter((n) => isNodeCorporationSpecific(n)).length
+    : 0;
 
   // Statutory authority quotes for "Why this rule applies"
   const byelaw14Step = (resolutionConfig?.steps ?? []).find(
@@ -385,38 +598,148 @@ export default async function TopicDetailPage({
     declarations
   );
 
+  function computeOlderProvisionReason(node: ClauseNode): string {
+    const dMeta = docMetaById.get(node.doc_id ?? "");
+    if (dMeta?.legal_status === "draft" || node.legal_status === "draft") {
+      return "Draft, not in force.";
+    }
+    const vers = node.versions ?? [];
+    const lastVer = vers.length > 0 ? vers[vers.length - 1] : null;
+    if (node.omitted || lastVer?.omitted) {
+      const amDocId =
+        lastVer?.source_doc || node.change_mark?.amending_doc || "";
+      const amMeta = docMetaById.get(amDocId);
+      return formatReplacedByPlain(
+        amMeta,
+        lastVer?.valid_from || node.change_mark?.effective_date
+      );
+    }
+    if (dMeta?.superseded_by_document) {
+      const supMeta = docMetaById.get(dMeta.superseded_by_document);
+      return formatReplacedByPlain(supMeta);
+    }
+    if (dMeta?.layer === "municipal" && subjectMeta?.zoningGoverned) {
+      return "Master plan rules apply instead (bye-law 1.4)";
+    }
+    if (vers.length > 1 && lastVer) {
+      const amMeta = docMetaById.get(lastVer.source_doc);
+      return formatReplacedByPlain(amMeta, lastVer.valid_from);
+    }
+    return "Replaced by a later amendment.";
+  }
+
   function renderProvisionRow(
     node: ClauseNode,
     options?: { olderReason?: string; compact?: boolean }
   ) {
-    const docId = node.doc_id ?? "";
-    const dMeta = docMetaById.get(docId);
+    const baseDocId = node.doc_id ?? "";
+    const baseDocMeta = docMetaById.get(baseDocId);
+    const vers = node.versions ?? [];
+    const hasAmendedVersion =
+      !options?.olderReason &&
+      vers.length > 1 &&
+      !vers[vers.length - 1].omitted &&
+      Boolean(vers[vers.length - 1].content) &&
+      vers[vers.length - 1].content !== "None";
+
+    const activeVer = hasAmendedVersion ? vers[vers.length - 1] : null;
+    const origVer = hasAmendedVersion ? vers[0] : null;
+
+    const citingDocId =
+      activeVer?.source_doc ||
+      (hasAmendedVersion ? node.change_mark?.amending_doc : null) ||
+      baseDocId;
+    const citingDocMeta = docMetaById.get(citingDocId) ?? baseDocMeta;
     const plainDocTitle =
-      docTitleById.get(docId) ?? formatPlainDocumentTitle(dMeta, docId);
-    const effDate = dMeta?.effective_from || dMeta?.notified_date;
-    const cit = node.citations?.[0];
-    const page = cit?.page ?? 1;
-    const pdfUrl = dMeta?.official_url || dMeta?.source_url || node.source_url;
-    const archiveUrl = dMeta?.retrieval?.archive_url || node.archive_url;
+      docTitleById.get(citingDocId) ??
+      formatPlainDocumentTitle(citingDocMeta, citingDocId);
+
+    const effDate =
+      citingDocMeta?.effective_from ||
+      citingDocMeta?.notified_date ||
+      activeVer?.valid_from ||
+      baseDocMeta?.effective_from ||
+      baseDocMeta?.notified_date;
+
+    const activeCit =
+      activeVer?.citations?.[0] ?? node.citations?.[0];
+    const page = activeCit?.page ?? 1;
+    const pdfUrl =
+      citingDocMeta?.official_url ||
+      citingDocMeta?.source_url ||
+      node.source_url;
+    const archiveUrl =
+      citingDocMeta?.retrieval?.archive_url || node.archive_url;
+
     const isCompact = Boolean(options?.compact);
+    const currentWording = activeVer?.content || node.text;
     const displayText = isCompact
-      ? truncateAtWordBoundary(node.text, 260)
-      : truncateAtWordBoundary(node.text, 440);
+      ? truncateAtWordBoundary(currentWording, 260)
+      : truncateAtWordBoundary(currentWording, 480);
+
+    const previousWording =
+      hasAmendedVersion
+        ? origVer?.content && origVer.content !== "None"
+          ? origVer.content
+          : node.change_mark?.original_text &&
+              node.change_mark.original_text !== "None"
+            ? node.change_mark.original_text
+            : node.text !== currentWording
+              ? node.text
+              : null
+        : null;
+    const origDocTitle =
+      docTitleById.get(baseDocId) ??
+      formatPlainDocumentTitle(baseDocMeta, baseDocId);
+    const origDate = formatHumanDate(
+      baseDocMeta?.effective_from || baseDocMeta?.notified_date
+    );
+    const origPage = origVer?.citations?.[0]?.page ?? node.citations?.[0]?.page ?? 1;
+
+    // Avoid repeating old body sentences inside the provision link title
+    const rawTitle = (node.heading || node.title || "").trim();
+    const showHeading =
+      Boolean(rawTitle) &&
+      rawTitle.length <= 60 &&
+      rawTitle.toLowerCase() !== (node.text || "").trim().toLowerCase() &&
+      rawTitle.toLowerCase() !== (previousWording || "").trim().toLowerCase();
+
+    const changedMonthYear = hasAmendedVersion
+      ? `Changed ${formatMonthYearPlain(effDate)}`
+      : null;
+    const isCorpDiffNode =
+      isChildCorporation && isNodeCorporationSpecific(node);
 
     return (
       <li
-        key={`${docId}:${node.eid}`}
+        key={`${baseDocId}:${node.eid}`}
         className="border-b border-[#c8ccc0] py-4 last:border-b-0"
       >
         <div className="flex flex-wrap items-baseline justify-between gap-2">
           <div className="flex flex-wrap items-baseline gap-2">
             <Link
-              href={`/j/${jurisdiction.id}/documents/${docId}#node-${node.eid}`}
+              href={`/j/${jurisdiction.id}/documents/${baseDocId}#node-${node.eid}`}
               className="font-mono text-sm font-semibold text-[#080909] underline decoration-[#080909] underline-offset-4"
             >
               {node.number || "Provision"}
-              {node.title ? ` · ${node.title}` : ""}
+              {showHeading ? ` · ${rawTitle}` : ""}
             </Link>
+            {isCorpDiffNode && (
+              <span
+                data-testid="corporation-diff-badge"
+                className="border border-[#080909] bg-[#efeee8] px-2 py-0.5 font-mono text-[10.5px] font-medium text-[#080909]"
+              >
+                In {plainCorporationName}
+              </span>
+            )}
+            {changedMonthYear && (
+              <span
+                data-testid="provision-changed-tag"
+                className="border border-[#c8ccc0] bg-[#efeee8] px-2 py-0.5 font-mono text-[10.5px] text-[#080909]"
+              >
+                {changedMonthYear}
+              </span>
+            )}
             <span className="font-mono text-xs text-[#5b5e56]">
               {plainDocTitle}
             </span>
@@ -438,7 +761,10 @@ export default async function TopicDetailPage({
         </div>
 
         {options?.olderReason && (
-          <div className="mt-1 font-mono text-xs text-[#5b5e56]">
+          <div
+            data-testid="older-rule-reason"
+            className="mt-1 font-mono text-xs text-[#5b5e56]"
+          >
             {options.olderReason}
           </div>
         )}
@@ -459,16 +785,16 @@ export default async function TopicDetailPage({
         {!isCompact && (
           <details className="mt-2">
             <summary className="inline-flex min-h-[44px] cursor-pointer items-center font-mono text-[11px] uppercase tracking-[0.12em] text-[#5b5e56] hover:text-[#080909]">
-              Details
+              {previousWording ? "Details & previous wording" : "Details"}
             </summary>
-            <div className="mt-1 space-y-1 border border-[#c8ccc0] bg-[#efeee8] p-3 font-mono text-xs text-[#5b5e56]">
+            <div className="mt-1 space-y-2 border border-[#c8ccc0] bg-[#efeee8] p-3 font-mono text-xs text-[#5b5e56]">
               <div>
-                Document:{" "}
+                Current source:{" "}
                 <span className="text-[#080909]">{plainDocTitle}</span> (
-                {dMeta ? formatPlainInstrumentStatus(dMeta) : "In force"})
-              </div>
-              <div>
-                Page: <span className="text-[#080909]">p. {page}</span>
+                {citingDocMeta
+                  ? formatPlainInstrumentStatus(citingDocMeta)
+                  : "In force"}
+                ) · p. {page}
                 {archiveUrl && (
                   <>
                     {" · "}
@@ -483,10 +809,23 @@ export default async function TopicDetailPage({
                   </>
                 )}
               </div>
+              {previousWording && (
+                <div
+                  data-testid="provision-previous-wording"
+                  className="border-t border-[#c8ccc0] pt-2"
+                >
+                  <div className="font-semibold text-[#080909]">
+                    Previous wording ({origDocTitle}, {origDate}, p. {origPage}):
+                  </div>
+                  <p className="dg-serif mt-1 text-xs text-[#171917]">
+                    {previousWording}
+                  </p>
+                </div>
+              )}
               <div>
                 Technical address:{" "}
                 <code className="text-[#080909]">
-                  {docId}:{node.eid}
+                  {baseDocId}:{node.eid}
                 </code>
               </div>
             </div>
@@ -505,7 +844,7 @@ export default async function TopicDetailPage({
       />
 
       <main className="mx-auto max-w-5xl space-y-12 px-5 py-10">
-        {/* 1. Heading and one plain sentence */}
+        {/* 1. Heading, one plain sentence, and corporation selector */}
         <header className="border-b border-[#c8ccc0] pb-6">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <Link
@@ -531,6 +870,35 @@ export default async function TopicDetailPage({
             {subjectMeta.summary}
           </p>
 
+          {isChildCorporation && (
+            <div
+              data-testid="corporation-layer-notice"
+              className="mt-3 space-y-1 border-l-2 border-[#080909] bg-[#efeee8] px-3 py-2 text-xs text-[#171917]"
+            >
+              <p className="font-mono text-xs font-medium text-[#080909]">
+                Showing {parentPlainName} rules, with differences for{" "}
+                {plainCorporationName}.
+              </p>
+              {corporationDiffCount === 0 && (
+                <p
+                  data-testid="corporation-no-differences"
+                  className="dg-serif text-xs text-[#5b5e56]"
+                >
+                  No differences for {plainCorporationName} on this subject.
+                </p>
+              )}
+            </div>
+          )}
+
+          {subjectMeta.slug === "land-use" && (
+            <p
+              data-testid="land-use-zone-gap-notice"
+              className="dg-serif mt-3 border-l-2 border-[#080909] bg-[#efeee8] px-3 py-2 text-sm text-[#171917]"
+            >
+              {landUseZoneGapLine}
+            </p>
+          )}
+
           <CorporationSelector
             currentId={jurisdiction.id}
             currentName={jurisdiction.name}
@@ -554,6 +922,51 @@ export default async function TopicDetailPage({
               What applies today
             </h2>
           </div>
+
+          {bandContinuityNotices.map((notice) => (
+            <div
+              key={notice.id}
+              data-testid="band-continuity-notice"
+              className="border border-[#080909] bg-[#efeee8] p-4"
+            >
+              <div className="dg-mono text-[#080909]">{notice.headline}</div>
+              <p className="dg-serif mt-1 text-sm leading-relaxed text-[#171917]">
+                {notice.explanation}
+              </p>
+              <ul className="mt-3 space-y-1.5 border-t border-[#c8ccc0] pt-2 font-mono text-xs text-[#171917]">
+                <li>
+                  <span className="font-semibold text-[#080909]">
+                    {notice.sourceA.docTitle}
+                  </span>{" "}
+                  ({notice.sourceA.date},{" "}
+                  <a
+                    href={notice.sourceA.pageLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline"
+                  >
+                    p. {notice.sourceA.page}
+                  </a>
+                  ): {notice.sourceA.ruleSummary}
+                </li>
+                <li>
+                  <span className="font-semibold text-[#080909]">
+                    {notice.sourceB.docTitle}
+                  </span>{" "}
+                  ({notice.sourceB.date},{" "}
+                  <a
+                    href={notice.sourceB.pageLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline"
+                  >
+                    p. {notice.sourceB.page}
+                  </a>
+                  ): {notice.sourceB.ruleSummary}
+                </li>
+              </ul>
+            </div>
+          ))}
 
           {cleanParameterRows.length > 0 && (
             <div className="space-y-3">
@@ -579,7 +992,16 @@ export default async function TopicDetailPage({
                     {cleanParameterRows.map((row) => (
                       <tr key={row.key}>
                         <td className="font-medium text-[#080909]">
-                          {row.ruleLabel}
+                          {isChildCorporation && row.isCorporationSpecific ? (
+                            <span>
+                              <strong className="font-mono text-xs">
+                                In {plainCorporationName}:
+                              </strong>{" "}
+                              {row.ruleLabel}
+                            </span>
+                          ) : (
+                            row.ruleLabel
+                          )}
                         </td>
                         <td className="text-[#171917]">{row.conditionsPlain}</td>
                         <td className="font-mono text-xs font-semibold text-[#080909]">
@@ -602,10 +1024,20 @@ export default async function TopicDetailPage({
                             <summary className="cursor-pointer font-mono text-[11px] uppercase tracking-[0.12em] text-[#5b5e56]">
                               Details
                             </summary>
-                            <span className="mt-1 block font-mono text-[10px] text-[#5b5e56]">
-                              {row.tableLabel ? `${row.tableLabel} · ` : ""}
-                              {row.rawRowHeader ? `${row.rawRowHeader} · ` : ""}
-                              {row.rawCellText} ({row.parameterIds[0]})
+                            <span className="mt-1 block space-y-1 font-mono text-[10px] text-[#5b5e56]">
+                              <span className="block">
+                                {row.tableLabel ? `${row.tableLabel} · ` : ""}
+                                {row.rawRowHeader ? `${row.rawRowHeader} · ` : ""}
+                                {row.rawCellText} ({row.parameterIds[0]})
+                              </span>
+                              {row.note && (
+                                <span
+                                  data-testid="parameter-row-note"
+                                  className="block text-[#080909]"
+                                >
+                                  {row.note}
+                                </span>
+                              )}
                             </span>
                           </details>
                         </td>
@@ -715,16 +1147,19 @@ export default async function TopicDetailPage({
                 {olderParameterRows.length > 0 && (
                   <div className="overflow-x-auto">
                     <div className="dg-mono mb-2 text-[#5b5e56]">
-                      Superseded or replaced table rows (
-                      {olderParameterRows.length})
+                      Older or replaced table rows ({olderParameterRows.length})
                     </div>
-                    <table className="dg-table">
+                    <table
+                      data-testid="older-parameter-table"
+                      className="dg-table"
+                    >
                       <thead>
                         <tr>
                           <th>Rule</th>
                           <th>Conditions</th>
                           <th>Value</th>
                           <th>Source &amp; page</th>
+                          <th>Status</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -746,6 +1181,9 @@ export default async function TopicDetailPage({
                                 p. {row.page}
                               </a>
                             </td>
+                            <td className="font-mono text-xs text-[#5b5e56]">
+                              {row.statusLabel}
+                            </td>
                           </tr>
                         ))}
                       </tbody>
@@ -755,20 +1193,12 @@ export default async function TopicDetailPage({
 
                 {visibleOlderRules.length > 0 && (
                   <ul className="border-t border-[#c8ccc0]">
-                    {visibleOlderRules.map((node) => {
-                      const dMeta = docMetaById.get(node.doc_id ?? "");
-                      const whyOlder =
-                        dMeta?.legal_status === "draft"
-                          ? "Draft, not in force."
-                          : dMeta?.layer === "municipal" &&
-                              subjectMeta.zoningGoverned
-                            ? "Replaced for this subject by the Master Plan Zoning Regulations under Bye-law 1.4."
-                            : "Replaced by a later amendment.";
-                      return renderProvisionRow(node, {
-                        olderReason: whyOlder,
+                    {visibleOlderRules.map((node) =>
+                      renderProvisionRow(node, {
+                        olderReason: computeOlderProvisionReason(node),
                         compact: true,
-                      });
-                    })}
+                      })
+                    )}
                   </ul>
                 )}
               </div>

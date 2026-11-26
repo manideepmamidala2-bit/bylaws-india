@@ -461,8 +461,13 @@ export function ClauseTree({
           const eid = clause.eid ?? clause.number;
           const nodeType = clause.type ?? "clause";
           const versions = clause.versions ?? [];
+          const hasCorporationChangeMark = Boolean(
+            clause.change_mark?.label?.startsWith("Changed for ")
+          );
+          const useConsolidatedWording =
+            viewMode === "consolidated" || hasCorporationChangeMark;
           const activeVer =
-            viewMode === "consolidated" && versions.length > 0
+            useConsolidatedWording && versions.length > 0
               ? asOfDate === "latest"
                 ? versions[versions.length - 1]
                 : versions.find(
@@ -472,33 +477,31 @@ export function ClauseTree({
                   ) ?? versions[versions.length - 1]
               : versions[0];
 
-          const consRecord =
-            viewMode === "consolidated"
-              ? consolidatedByClauseId.get(clause.clause_id)
-              : undefined;
-          const unconsRecord =
-            viewMode === "consolidated"
-              ? unconsolidatedByClauseId.get(clause.clause_id)
-              : undefined;
+          const consRecord = useConsolidatedWording
+            ? consolidatedByClauseId.get(clause.clause_id)
+            : undefined;
+          const unconsRecord = useConsolidatedWording
+            ? unconsolidatedByClauseId.get(clause.clause_id)
+            : undefined;
 
           const status: DisplayLegalStatus =
-            (viewMode === "consolidated" && activeVer?.legal_status
+            (useConsolidatedWording && activeVer?.legal_status
               ? activeVer.legal_status
               : clause.legal_status) ?? "status_unknown";
 
           const isAmendedVersion =
-            viewMode === "consolidated" &&
+            useConsolidatedWording &&
             (Boolean(activeVer?.effect_id) || Boolean(consRecord));
 
           const rawDisplayTitle =
-            (viewMode === "consolidated" && activeVer?.heading) ||
+            (useConsolidatedWording && activeVer?.heading) ||
             (consRecord ? consRecord.title : clause.heading ?? clause.title);
           const displayIntro =
-            viewMode === "consolidated" && activeVer
+            useConsolidatedWording && activeVer
               ? activeVer.intro
               : clause.intro;
           const displayContent =
-            viewMode === "consolidated" && activeVer?.content
+            useConsolidatedWording && activeVer?.content
               ? activeVer.content
               : consRecord
                 ? consRecord.text
@@ -1018,17 +1021,6 @@ export function ClauseTree({
                     Address: {eid} · Record:{" "}
                     {clause.record_id ?? clause.clause_id} ·{" "}
                     {clause.verification.replace("_", " ")}
-                    {jurisdictionId && clause.doc_id ? (
-                      <>
-                        {" · "}
-                        <a
-                          href={`/j/${jurisdictionId}/documents/${clause.doc_id}/${eid}`}
-                          className="text-[#080909] underline"
-                        >
-                          Local graph →
-                        </a>
-                      </>
-                    ) : null}
                   </div>
                 </div>
               </details>

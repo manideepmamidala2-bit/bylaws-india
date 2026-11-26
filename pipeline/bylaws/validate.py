@@ -921,7 +921,10 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
     qa_path.write_text("\n".join(qa_lines), encoding="utf-8")
 
     if config.visibility != "test":
-        write_parameter_reports_and_json(config, repo_root=root)
+        try:
+            write_parameter_reports_and_json(config, repo_root=root)
+        except ValueError as exc:
+            hard_failures.append(f"QA-Parameters (overlap check): {exc}")
         write_published_resolution_json(
             config,
             clause_trees=clause_trees,

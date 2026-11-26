@@ -16,15 +16,12 @@ import JurisdictionMapPage, {
 } from "@/app/j/[id]/page";
 import SourcesPage from "@/app/j/[id]/sources/page";
 import DocumentViewerPage from "@/app/j/[id]/documents/[doc]/page";
-import ClausesPage from "@/app/j/[id]/clauses/page";
 import TimelinePage from "@/app/j/[id]/timeline/page";
-import ReviewPage from "@/app/j/[id]/review/page";
 import DataReleasesPage from "@/app/data/page";
 import AboutPage from "@/app/about/page";
-import StructurePage from "@/app/structure/page";
 import TopicsIndexPage from "@/app/j/[id]/topics/page";
 import TopicDetailPage from "@/app/j/[id]/topics/[topic]/page";
-import ProvisionDetailPage from "@/app/j/[id]/documents/[doc]/[eid]/page";
+import nextConfig from "@/next.config";
 
 async function assertNoAxeViolations(container: HTMLElement) {
   const results = await axe.run(container, {
@@ -344,13 +341,6 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
 
     const routes: Array<{ label: string; renderFn: () => Promise<React.ReactElement> }> = [
       {
-        label: "Clauses",
-        renderFn: () =>
-          ClausesPage({
-            params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
-          }),
-      },
-      {
         label: "Timeline",
         renderFn: () =>
           TimelinePage({
@@ -358,15 +348,11 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
           }),
       },
       {
-        label: "Review",
+        label: "TopicsIndex",
         renderFn: () =>
-          ReviewPage({
+          TopicsIndexPage({
             params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
           }),
-      },
-      {
-        label: "Structure",
-        renderFn: () => StructurePage(),
       },
     ];
 
@@ -419,21 +405,6 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     await assertNoAxeViolations(aboutContainer);
     uAbout();
 
-    const structureUi = await StructurePage();
-    const { container: structureContainer, unmount: uStructure } =
-      render(structureUi);
-    expect(
-      screen.getByText(/How This Dataset Is Structured/i)
-    ).toBeInTheDocument();
-    expect(
-      screen.getAllByText(/Download graph\.graphml \(Gephi\)/i).length
-    ).toBeGreaterThan(0);
-    assertCleanPublicCopy(structureContainer.textContent ?? "", "Structure", {
-      allowDataEmDash: true,
-    });
-    await assertNoAxeViolations(structureContainer);
-    uStructure();
-
     const topicsUi = await TopicsIndexPage({
       params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
     });
@@ -464,19 +435,26 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     await assertNoAxeViolations(topicDetailContainer);
     uTopicDetail();
 
-    const provUi = await ProvisionDetailPage({
-      params: Promise.resolve({
-        id: "in-ka-bengaluru-south",
-        doc: "bbl-2003",
-        eid: "part_II__sec_6.0__item_i",
-      }),
-    });
-    const { container: provContainer, unmount: uProv } = render(provUi);
-    expect(
-      screen.getByText(/One-Hop Neighborhood Around bbl-2003:part_II__sec_6\.0__item_i/i)
-    ).toBeInTheDocument();
-    await assertNoAxeViolations(provContainer);
-    uProv();
+    // Verify Part 3 old-route removals and corporation-preserving redirects in next.config.ts
+    expect(typeof nextConfig.redirects).toBe("function");
+    const redirectRules = await nextConfig.redirects!();
+    const bySource = new Map(redirectRules.map((r) => [r.source, r]));
+    expect(bySource.get("/structure")?.destination).toBe(
+      "/about#how-this-is-built"
+    );
+    expect(bySource.get("/j/:id/review")?.destination).toBe("/j/:id");
+    expect(bySource.get("/j/:id/clauses")?.destination).toBe(
+      "/j/:id/sources"
+    );
+    expect(bySource.get("/j/:id/documents")?.destination).toBe(
+      "/j/:id/sources"
+    );
+    expect(bySource.get("/j/:id/documents/:doc/:eid")?.destination).toBe(
+      "/j/:id/documents/:doc#node-:eid"
+    );
+    expect(bySource.get("/j/:id/topics/building_height")?.destination).toBe(
+      "/j/:id/topics/height"
+    );
   });
 
   it("renders xx-test-fixture routes cleanly when SHOW_TEST_JURISDICTIONS=true with zero copy or axe violations", async () => {
@@ -604,5 +582,193 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     const plantedErrors = validateNonTestManifestSources(plantedManifest);
     expect(plantedErrors.length).toBeGreaterThan(0);
     expect(plantedErrors[0]).toMatch(/has local or non-http\(s\) source_url/);
+  });
+
+  it("renders Part 1 city-level truth on Setbacks and FAR (supersession, 3.1(ii)-(iii) current wording, deduplication, 11.5m-12m overlap, and Bye-law 1.4 label invariants)", async () => {
+    // 1. Setbacks at city level (`in-ka-bengaluru`)
+    const setbacksUi = await TopicDetailPage({
+      params: Promise.resolve({
+        id: "in-ka-bengaluru",
+        topic: "setbacks",
+      }),
+    });
+    const { container: cSetbacks, unmount: uSetbacks } = render(setbacksUi);
+
+    const whatAppliesSection = screen.getByTestId("what-applies-today-section");
+    const whatAppliesText = whatAppliesSection.textContent ?? "";
+
+    // Band continuity overlap notice between 11.5 m and 12 m
+    expect(screen.getByTestId("band-continuity-notice").textContent).toContain(
+      "The current tables overlap between 11.5 m and 12 m."
+    );
+
+    // Governing provisions 3.1(ii) and 3.1(iii) show January 2026 wording, "Changed January 2026", and previous 2007 wording in Details
+    expect(whatAppliesText).toContain(
+      "For all types of building with total height up to 12.0m, excluding the stilt floor, the setbacks shall be calculated as per Table 8."
+    );
+    expect(whatAppliesText).toContain(
+      "Table 9 shall be referred to buildings which are more than 12.0 m in total height"
+    );
+    expect(
+      screen.getAllByTestId("provision-changed-tag").map((el) => el.textContent)
+    ).toContain("Changed January 2026");
+    expect(
+      screen
+        .getAllByTestId("provision-previous-wording")
+        .some((el) => (el.textContent ?? "").includes("Up to 11.5 m height"))
+    ).toBe(true);
+
+    // Definitions never appear in "What applies today" on Setbacks
+    expect(whatAppliesText).not.toContain(
+      "Means the line up to which the plinth of a building may lawfully extend"
+    );
+
+    // Industrial (General) plots up to 500 m²: 12% / 8% in "What applies today"; 4.5 m moved to "Older or replaced rules"
+    const govTable = screen.getByTestId("subject-parameter-table");
+    const govRows = Array.from(govTable.querySelectorAll("tbody tr")).map(
+      (tr) => tr.textContent ?? ""
+    );
+    const igen500GovRows = govRows.filter((txt) =>
+      txt.includes("Industrial (General), plots up to 500 m²")
+    );
+    expect(
+      igen500GovRows.some((txt) => txt.includes("12% of plot depth"))
+    ).toBe(true);
+    expect(igen500GovRows.some((txt) => txt.includes("4.5 m"))).toBe(false);
+
+    // Older or replaced rules: 2007 Industrial (General) 4.5 m row is "Replaced by ...", bbl-2003 rules are "Master plan rules apply instead (bye-law 1.4)", and Bye-law 1.4 is NEVER in Older or replaced rules
+    const olderDetails = screen.getByTestId("older-or-replaced-rules");
+    const olderText = olderDetails.textContent ?? "";
+    expect(olderText).toContain("Industrial (General), plots up to 500 m²");
+    expect(olderText).toContain("Replaced by");
+    expect(olderText).toContain("Master plan rules apply instead (bye-law 1.4)");
+    expect(olderText).not.toContain(
+      "All mandatory Master Plan or Zonal Regulations regarding use"
+    );
+    expect(olderText).not.toContain("under Bye-law 1.4");
+
+    await assertNoAxeViolations(cSetbacks);
+    uSetbacks();
+
+    // 2. FAR at city level (`in-ka-bengaluru`)
+    const farUi = await TopicDetailPage({
+      params: Promise.resolve({
+        id: "in-ka-bengaluru",
+        topic: "far",
+      }),
+    });
+    const { container: cFar, unmount: uFar } = render(farUi);
+
+    const farGovTable = screen.getByTestId("subject-parameter-table");
+    const farGovRows = Array.from(
+      farGovTable.querySelectorAll("tbody tr")
+    ).map((tr) => tr.textContent ?? "");
+
+    // Traffic and Transportation up to 500 m² shown ONCE citing 2009, with earlier 2007 source in Details
+    const ttrans500Rows = farGovRows.filter((txt) =>
+      txt.includes("Traffic and transportation, plots up to 500 m²")
+    );
+    expect(ttrans500Rows).toHaveLength(1);
+    expect(ttrans500Rows[0]).toContain("Earlier source with identical value");
+
+    // Industrial (General) up to 500 m² shown ONCE citing 2026, with earlier 2007 source in Details
+    const igen500FarRows = farGovRows.filter((txt) =>
+      txt.includes("Industrial (General), plots up to 500 m²")
+    );
+    expect(igen500FarRows).toHaveLength(1);
+    expect(igen500FarRows[0]).toContain("Earlier source with identical value");
+
+    await assertNoAxeViolations(cFar);
+    uFar();
+
+    // 3. Part 2: Subject & Document pages with a City Corporation selected (`in-ka-bengaluru-south`)
+    const southFarUi = await TopicDetailPage({
+      params: Promise.resolve({
+        id: "in-ka-bengaluru-south",
+        topic: "far",
+      }),
+    });
+    const { container: cSouthFar, unmount: uSouthFar } = render(southFarUi);
+    expect(
+      screen.getByTestId("corporation-layer-notice").textContent
+    ).toContain(
+      "Showing Greater Bengaluru rules, with differences for Bengaluru South City Corporation."
+    );
+    expect(
+      screen.getByTestId("corporation-no-differences").textContent
+    ).toContain(
+      "No differences for Bengaluru South City Corporation on this subject."
+    );
+    await assertNoAxeViolations(cSouthFar);
+    uSouthFar();
+
+    const southApprovalsUi = await TopicDetailPage({
+      params: Promise.resolve({
+        id: "in-ka-bengaluru-south",
+        topic: "approvals-and-certificates",
+      }),
+    });
+    const { container: cSouthApp, unmount: uSouthApp } =
+      render(southApprovalsUi);
+    expect(
+      screen.getByTestId("corporation-layer-notice").textContent
+    ).toContain(
+      "Showing Greater Bengaluru rules, with differences for Bengaluru South City Corporation."
+    );
+    expect(
+      screen.queryByTestId("corporation-no-differences")
+    ).not.toBeInTheDocument();
+    expect(
+      screen
+        .getAllByTestId("corporation-diff-badge")
+        .some((el) =>
+          (el.textContent ?? "").includes(
+            "In Bengaluru South City Corporation"
+          )
+        )
+    ).toBe(true);
+    await assertNoAxeViolations(cSouthApp);
+    uSouthApp();
+
+    const southBblDocUi = await DocumentViewerPage({
+      params: Promise.resolve({
+        id: "in-ka-bengaluru-south",
+        doc: "bbl-2003",
+      }),
+    });
+    const { container: cSouthBbl, unmount: uSouthBbl } = render(southBblDocUi);
+    expect(cSouthBbl.textContent ?? "").toContain(
+      "Changed for Bengaluru South City Corporation, 14 May 2026"
+    );
+    expect(cSouthBbl.textContent ?? "").toContain("Table-2B below");
+    await assertNoAxeViolations(cSouthBbl);
+    uSouthBbl();
+
+    // 4. Part 4: Plain land-use zone gap notice on Map and Land use subject pages
+    const expectedGapLine =
+      "Land-use zones are available for parts of Bengaluru South only. Elsewhere the map shows boundaries and wards.";
+
+    const landUseUi = await TopicDetailPage({
+      params: Promise.resolve({
+        id: "in-ka-bengaluru",
+        topic: "land-use",
+      }),
+    });
+    const { container: cLandUse, unmount: uLandUse } = render(landUseUi);
+    expect(screen.getByTestId("land-use-zone-gap-notice").textContent).toBe(
+      expectedGapLine
+    );
+    await assertNoAxeViolations(cLandUse);
+    uLandUse();
+
+    const cityMapUi = await JurisdictionMapPage({
+      params: Promise.resolve({ id: "in-ka-bengaluru" }),
+    });
+    const { container: cCityMap, unmount: uCityMap } = render(cityMapUi);
+    expect(screen.getByTestId("map-zone-gap-notice").textContent).toBe(
+      expectedGapLine
+    );
+    await assertNoAxeViolations(cCityMap);
+    uCityMap();
   });
 });

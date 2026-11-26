@@ -94,7 +94,10 @@ def test_part1_graph_json_and_graphml_and_map_diagnosis_published() -> None:
     for req_type in ("contains", "defines", "uses_term", "refers_to", "in_register"):
         assert req_type in edge_types, f"Missing edge type '{req_type}' in graph.json"
 
-    assert (REPO_ROOT / "app" / "structure" / "page.tsx").is_file()
+    assert not (REPO_ROOT / "app" / "structure" / "page.tsx").is_file()
+    assert not (REPO_ROOT / "app" / "j" / "[id]" / "review" / "page.tsx").is_file()
+    assert not (REPO_ROOT / "app" / "j" / "[id]" / "documents" / "[doc]" / "[eid]" / "page.tsx").is_file()
+    assert (REPO_ROOT / "app" / "about" / "page.tsx").is_file()
     assert (REPO_ROOT / "e2e" / "map.spec.ts").is_file()
 
 
@@ -322,3 +325,114 @@ def test_part5_and_6_supporting_provisions_verified_overlays_4_sheets_and_zone_a
 
     docs_map = (REPO_ROOT / "docs" / "map.md").read_text(encoding="utf-8")
     assert "Legend-to-Regulation Zone Mapping Table" in docs_map
+
+
+def test_five_corporations_parity_and_single_source_inheritance() -> None:
+    """Part 2.6 Parity Check (CI): For any two of the 5 City Corporations, the set of shared documents, subjects, and shared provisions/parameters is identical, and every difference in content traces to a corporation-specific instrument."""
+    manifest = validate_file(REPO_ROOT / "public" / "data" / "manifest.json", "manifest")
+    jur_by_id = {j["id"]: j for j in manifest["jurisdictions"]}
+
+    corporations = [
+        ("in-ka-bengaluru-central", "bccc-bbl-amend-2026-05", "bccc-bbl-amend-2026-04-draft", "Bengaluru Central City Corporation"),
+        ("in-ka-bengaluru-north", "bncc-bbl-amend-2026-05", "bncc-bbl-amend-2026-04-draft", "Bengaluru North City Corporation"),
+        ("in-ka-bengaluru-south", "bscc-bbl-amend-2026-05", "bscc-bbl-amend-2026-04-draft", "Bengaluru South City Corporation"),
+        ("in-ka-bengaluru-east", "becc-bbl-amend-2026-05", "becc-bbl-amend-2026-04-draft", "Bengaluru East City Corporation"),
+        ("in-ka-bengaluru-west", "bwcc-bbl-amend-2026-05", "bwcc-bbl-amend-2026-04-draft", "Bengaluru West City Corporation"),
+    ]
+
+    shared_doc_sets: list[dict[str, str]] = []
+    topic_id_sets: list[list[str]] = []
+    shared_consolidated_maps: list[dict[str, str]] = []
+    parameter_signatures: list[list[tuple]] = []
+
+    for corp_id, final_doc_id, draft_doc_id, corp_name in corporations:
+        jm = jur_by_id[corp_id]
+        assert jm["parent"] == "in-ka-bengaluru"
+        rel = next(r for r in jm["releases"] if r["version"] == jm["latest_release"])
+        files = rel["files"]
+
+        # 1. Shared documents are referenced from `/data/in-ka-bengaluru/4.0.0/` and have identical SHA-256 digests across all 5 corporations
+        shared_docs = files.get("shared_documents") or {}
+        assert len(shared_docs) == 14
+        for s_doc_id, s_meta in shared_docs.items():
+            assert s_meta["clauses"].startswith("/data/in-ka-bengaluru/"), (
+                f"Shared doc {s_doc_id} in {corp_id} must reference parent Greater Bengaluru store"
+            )
+        shared_doc_sets.append({k: v["sha256"] for k, v in sorted(shared_docs.items())})
+
+        # Only the corporation's own 2026 amendment clause tree is stored under the corporation's release folder
+        corp_local_clauses = [
+            p for p in files["clauses"] if not p.startswith("/data/in-ka-bengaluru/")
+        ]
+        assert corp_local_clauses == [f"/data/{corp_id}/{jm['latest_release']}/{final_doc_id}.clauses.json"]
+
+        # 2. Subjects (`relations.json` topics) are identical across all 5 corporations
+        rel_dir = REPO_ROOT / "public" / "data" / corp_id / jm["latest_release"]
+        rels = json.loads((rel_dir / "relations.json").read_text(encoding="utf-8"))
+        topic_id_sets.append([t["id"] for t in rels["topics"]])
+
+        # 3. Consolidated records: shared `rmp2015-zr` + `bbl-2003:1.4` records are identical;
+        #    corporation-specific `bbl-2003` records (`3.8`, `3.9`, `3.10`, `6.0(i)`) trace to `final_doc_id` and carry `"Changed for <corporation>, 14 May 2026"`
+        cons = json.loads((rel_dir / "consolidated.json").read_text(encoding="utf-8"))
+        shared_cons: dict[str, str] = {}
+        for rec in cons["records"]:
+            applied = rec.get("amendments_applied") or []
+            if any(final_doc_id in a for a in applied):
+                assert f"Changed for {corp_name}, 14 May 2026" == rec.get("change_note"), (
+                    f"Expected 'Changed for {corp_name}, 14 May 2026' on {rec['clause_id']} in {corp_id}, got {rec.get('change_note')}"
+                )
+            else:
+                shared_cons[rec["clause_id"]] = rec["text"]
+        shared_consolidated_maps.append(shared_cons)
+
+        # 4. Non-map structured/registered documents in `documents.json`: every difference between corporations traces to an instrument scoped to that corporation
+        docs = json.loads((rel_dir / "documents.json").read_text(encoding="utf-8"))
+        non_map_docs = [
+            d
+            for d in docs
+            if d.get("instrument_type") != "map" and d.get("doc_type") != "map"
+        ]
+        shared_non_map_ids = set(shared_docs.keys()) | {
+            "rmp2015-zr-comp-2024-10-kn",
+            "rmp2015-zr-amend-2025-07",
+            "ktcda-amend-bill-2025",
+            "nbc-2016",
+        }
+        corp_prefix = final_doc_id.split("-")[0]
+        for d in non_map_docs:
+            if d["doc_id"] not in shared_non_map_ids:
+                assert d["doc_id"].startswith(f"{corp_prefix}-") or corp_name.lower() in d["title"].lower(), (
+                    f"Untraced document difference in {corp_id}: {d['doc_id']}"
+                )
+        corp_active_structured_ids = {
+            d["doc_id"]
+            for d in non_map_docs
+            if d["doc_id"] not in shared_non_map_ids
+            and d.get("acquisition_status") == "acquired"
+        }
+        assert corp_active_structured_ids == {final_doc_id, draft_doc_id}, (
+            f"Untraced structured document difference in {corp_id}: {corp_active_structured_ids}"
+        )
+
+        # 5. Parameters: all 5 corporations have identical shared parameter values and conditions
+        params = json.loads((rel_dir / "parameters.json").read_text(encoding="utf-8"))
+        sig_list = [
+            (
+                r["parameter"],
+                r["value"],
+                r["unit"],
+                r["legal_status"],
+                r["source"]["doc_id"],
+                r["source"]["eid"],
+            )
+            for r in params["records"]
+            if not (r["conditions"].get("jurisdiction") or [])
+        ]
+        parameter_signatures.append(sig_list)
+
+    # Assert pairwise equality across all 5 corporations
+    for idx in range(1, len(corporations)):
+        assert shared_doc_sets[idx] == shared_doc_sets[0]
+        assert topic_id_sets[idx] == topic_id_sets[0]
+        assert shared_consolidated_maps[idx] == shared_consolidated_maps[0]
+        assert parameter_signatures[idx] == parameter_signatures[0]

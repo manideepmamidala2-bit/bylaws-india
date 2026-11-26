@@ -14,6 +14,7 @@ import {
 import { TopNav } from "@/components/TopNav";
 import { CorporationSelector } from "@/components/CorporationSelector";
 import { AreaExplorerClient } from "@/components/AreaExplorerClient";
+import { formatLandUseZoneGapPlainLine } from "@/lib/plain-language";
 
 interface JurisdictionMapPageProps {
   params: Promise<{ id: string }>;
@@ -51,6 +52,17 @@ export default async function JurisdictionMapPage({
         (j) => j.id === rootParentId || j.parent === rootParentId
       )
     : [];
+  const partialZoneCorp = allVisible.find(
+    (j) =>
+      j.parent === rootParentId &&
+      j.releases.some(
+        (rel) =>
+          Boolean(rel.files?.planning_districts) && Boolean(rel.files?.zones)
+      )
+  );
+  const landUseZoneGapLine = formatLandUseZoneGapPlainLine(
+    partialZoneCorp?.name ?? null
+  );
 
   const {
     jurisdiction,
@@ -230,6 +242,14 @@ export default async function JurisdictionMapPage({
             Inspect official City Corporation and ward boundaries alongside
             georeferenced RMP 2015 Proposed Land Use zones.
           </p>
+          {rootParentId && (
+            <p
+              data-testid="map-zone-gap-notice"
+              className="dg-serif mt-3 border-l-2 border-[#080909] bg-[#efeee8] px-3 py-2 text-sm text-[#171917]"
+            >
+              {landUseZoneGapLine}
+            </p>
+          )}
 
           <CorporationSelector
             currentId={jurisdiction.id}

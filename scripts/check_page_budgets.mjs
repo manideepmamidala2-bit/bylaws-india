@@ -99,6 +99,19 @@ const FORBIDDEN_PRIMARY_LAYER_PATTERNS = [
     label: "Raw unit token",
     regex: /\b(sq_m|sq_ft)\b/,
   },
+  {
+    label: "Old-design marker",
+    regex:
+      /Structured Building Bylaws|Statutory Resolution Cards|Local Graph|Local Knowledge Graph|One-Hop Neighborhood|\btopic:/i,
+  },
+];
+
+const FORBIDDEN_ANYWHERE_HTML_PATTERNS = [
+  {
+    label: "Old-design marker",
+    regex:
+      /Structured Building Bylaws|Statutory Resolution Cards|Local Graph|Local Knowledge Graph|One-Hop Neighborhood|\btopic:[a-z_]+/i,
+  },
 ];
 
 for (const htmlPath of htmlFiles) {
@@ -126,6 +139,18 @@ for (const htmlPath of htmlFiles) {
       if (m) {
         violations.push(
           `${relRoute}: Primary layer outside <details> contains forbidden ${pat.label} (${JSON.stringify(m[0])})`
+        );
+      }
+    }
+    const visibleHtmlText = htmlText
+      .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, " ")
+      .replace(/<[^>]+>/g, " ");
+    for (const pat of FORBIDDEN_ANYWHERE_HTML_PATTERNS) {
+      const m = visibleHtmlText.match(pat.regex);
+      if (m) {
+        violations.push(
+          `${relRoute}: Built HTML contains forbidden ${pat.label} (${JSON.stringify(m[0])})`
         );
       }
     }

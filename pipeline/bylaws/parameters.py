@@ -379,7 +379,9 @@ def _infer_zone_and_use_from_eid(
         return ["R-MAIN"], ["residential"]
     if "cl_4.2__" in eid or eid.endswith("cl_4.2") or "residential (mixed)" in low_h:
         return ["R-MIX"], ["residential", "commercial"]
-    if "cl_4.3__" in eid or "cl_4.4__" in eid or "commercial (central)" in low_h or "commercial (business)" in low_h:
+    if "cl_4.3__" in eid or eid.endswith("__tbl_13") or "commercial (central)" in low_h:
+        return ["C-CENTRAL"], ["commercial"]
+    if "cl_4.4__" in eid or eid.endswith("__tbl_14") or "commercial (business)" in low_h:
         return ["C-BIZ"], ["commercial"]
     if "cl_4.5__" in eid or "cl_4.6__" in eid or "mutation corridors" in low_h:
         return ["C-AXES"], ["commercial", "residential"]
@@ -391,7 +393,69 @@ def _infer_zone_and_use_from_eid(
         return ["PSP"], ["public_semi_public"]
     if "cl_4.10__" in eid or eid.endswith("__tbl_19") or "traffic and transportation" in low_h:
         return ["T-TRANS"], ["traffic_transportation"]
+    if eid.endswith("__tbl_21") or "non - residential development plan" in low_h or "non-residential development plan" in low_h:
+        return ["DEV-PLAN-NONRES"], ["non_residential_development_plan"]
+    if eid.endswith("__tbl_20") or "residential development plan" in low_h:
+        return ["DEV-PLAN-RES"], ["residential_development_plan"]
+    if eid.endswith("__tbl_22") or "integrated township" in low_h:
+        return ["INTEGRATED-TOWNSHIP"], ["integrated_township"]
     return None, None
+
+
+def _infer_table_default_plot_interval(eid: str, heading: str = "") -> dict[str, Any] | None:
+    """Infer table-level plot area condition from table heading when individual rows only specify road width."""
+    low_h = heading.lower()
+    if eid.endswith("__tbl_12") or "up to 20000 sq m" in low_h:
+        return {"min": None, "max": 20000.0, "min_inclusive": True, "max_inclusive": True}
+    if eid.endswith("__tbl_14") or "up to 12000 sq.m" in low_h:
+        return {"min": None, "max": 12000.0, "min_inclusive": True, "max_inclusive": True}
+    if eid.endswith("__tbl_20") or "over 20,000sqm" in low_h:
+        return {"min": 20000.0, "max": None, "min_inclusive": False, "max_inclusive": True}
+    if eid.endswith("__tbl_21") or "over 12,000sqm" in low_h:
+        return {"min": 12000.0, "max": None, "min_inclusive": False, "max_inclusive": True}
+    if eid.endswith("__tbl_22") or "integrated township" in low_h:
+        return {"min": 40000.0, "max": None, "min_inclusive": False, "max_inclusive": True}
+    return None
+
+
+def _infer_parking_use_tags(use_cell: str) -> list[str]:
+    """Infer primary use category plus specific occupancy subtype for parking schedule rows."""
+    low = " ".join(use_cell.lower().split())
+    if "dwelling" in low:
+        return ["residential", "multi_dwelling_units"]
+    if "star hotel" in low:
+        return ["commercial", "star_hotels"]
+    if "lodging" in low or "tourist home" in low or ("hotel" in low and "star" not in low):
+        return ["commercial", "lodging_hotels"]
+    if "office" in low and "non residential development plan" in low:
+        return ["commercial", "office_buildings_non_residential_dp"]
+    if "office" in low or "govt" in low:
+        return ["commercial", "office_buildings"]
+    if "retail" in low or "shop" in low or "mall" in low:
+        return ["commercial", "retail_business"]
+    if "multiplex" in low:
+        return ["commercial", "multiplex_shopping"]
+    if "restaurant" in low or "food" in low:
+        return ["commercial", "restaurants"]
+    if "industrial" in low:
+        return ["industrial", "industrial_buildings"]
+    if "theater" in low or "auditorium" in low:
+        return ["public_semi_public", "theaters_auditoriums"]
+    if "wholesale" in low or "warehouse" in low:
+        return ["public_semi_public", "wholesale_warehouse"]
+    if "hostel" in low:
+        return ["public_semi_public", "hostels"]
+    if "nursing home" in low:
+        return ["public_semi_public", "nursing_homes"]
+    if "hospital" in low:
+        return ["public_semi_public", "hospitals"]
+    if "kalyana" in low or "convention" in low:
+        return ["public_semi_public", "kalyana_mantaps"]
+    if "recreational" in low or "club" in low:
+        return ["public_semi_public", "recreational_clubs"]
+    if "educational" in low:
+        return ["public_semi_public", "educational_buildings"]
+    return ["public_semi_public", "other_public_semi_public"]
 
 
 def _empty_conditions(
@@ -577,12 +641,38 @@ def extract_jurisdiction_parameters(
         jur_scope = applies_in if applies_in else None
 
         # Detect if this document's original setback Table 8 (`chp_3__cl_3.1__tbl_1`) was superseded by a 2026 amendment
-        has_2026_setback_amend = any(
-            d.legal_status == "in_force"
-            and doc.id in (d.amends or [])
-            and (d.effective_from or "").startswith("2026-01")
-            for d in config.documents
+        amend_2026_doc = next(
+            (
+                d
+                for d in config.documents
+                if d.legal_status == "in_force"
+                and doc.id in (d.amends or [])
+                and (d.effective_from or "").startswith("2026-01")
+            ),
+            None,
         )
+        has_2026_setback_amend = amend_2026_doc is not None
+        amend_2026_date = (
+            (amend_2026_doc.effective_from or amend_2026_doc.notified_date or "2026-01-20")
+            if amend_2026_doc is not None
+            else "2026-01-20"
+        )
+        amend_2026_note = (
+            "Replaced by Zoning Regulations Amendment (Setbacks, Basements and Industrial Norms), 20 January 2026"
+            if has_2026_setback_amend
+            else None
+        )
+        amend_2019_doc = next(
+            (
+                d
+                for d in config.documents
+                if d.legal_status == "in_force"
+                and doc.id in (d.amends or [])
+                and (d.effective_from or "").startswith("2019-06")
+            ),
+            None,
+        )
+        has_2019_zr_amend = amend_2019_doc is not None
 
         # 1. Extract parameters from structured table nodes
         for eid, node in sorted(by_eid.items()):
@@ -602,18 +692,19 @@ def extract_jurisdiction_parameters(
             bbox = cit.get("bbox")
             page_link = f"{pdf_url}#page={page}" if pdf_url else f"#page={page}"
 
-            zone_list, use_list = _infer_zone_and_use_from_eid(
-                eid,
-                str(node.get("heading") or node.get("title") or ""),
-            )
+            tbl_heading_str = str(node.get("heading") or node.get("title") or "")
+            zone_list, use_list = _infer_zone_and_use_from_eid(eid, tbl_heading_str)
+            table_default_plot_interval = _infer_table_default_plot_interval(eid, tbl_heading_str)
 
-            # Determine if this table is superseded (e.g. original chp_3__cl_3.1__tbl_8)
+            # Determine if this table is superseded (e.g. original chp_3__cl_3.1__tbl_8 or Mutation Corridors tbl_15)
             is_superseded_tbl8 = (
                 eid in {"chp_3__cl_3.1__tbl_1", "chp_3__cl_3.1__tbl_8"}
                 and has_2026_setback_amend
             )
-            tbl_valid_to = "2026-01-05" if is_superseded_tbl8 else None
-            tbl_status = "superseded" if is_superseded_tbl8 else str(doc.legal_status)
+            is_superseded_tbl15 = eid.endswith("__tbl_15") and has_2026_setback_amend
+            tbl_valid_to = amend_2026_date if (is_superseded_tbl8 or is_superseded_tbl15) else None
+            tbl_status = "superseded" if (is_superseded_tbl8 or is_superseded_tbl15) else str(doc.legal_status)
+            tbl_note = amend_2026_note if (is_superseded_tbl8 or is_superseded_tbl15) else None
 
             # Classify columns
             col_headers: list[str] = []
@@ -663,7 +754,9 @@ def extract_jurisdiction_parameters(
                     continue
 
                 # Identify row-level condition intervals (plot_area_m2, road_width_m, building_height_m, width/depth)
-                plot_interval: dict[str, Any] | None = None
+                plot_interval: dict[str, Any] | None = (
+                    dict(table_default_plot_interval) if table_default_plot_interval else None
+                )
                 road_interval: dict[str, Any] | None = None
                 height_interval: dict[str, Any] | None = None
                 depth_interval: dict[str, Any] | None = None
@@ -671,6 +764,7 @@ def extract_jurisdiction_parameters(
                 row_use = use_list
                 row_area_class = current_area_class
                 unexpressed: list[str] = list(fn_texts)
+                row_note: str | None = tbl_note
 
                 for c_idx, cell_val in enumerate(cells):
                     hdr_l = (col_headers[c_idx] if c_idx < len(col_headers) else "").lower()
@@ -720,6 +814,16 @@ def extract_jurisdiction_parameters(
                             )
                     elif "road width" in hdr_l:
                         road_interval = parse_numeric_interval(cell_val)
+                        # Apply June 2019 planning amendment (Clause 5, p. 8) substituting inclusive upper bounds in Tables 20, 21, 22
+                        if (
+                            has_2019_zr_amend
+                            and road_interval is not None
+                            and eid.endswith(("__tbl_20", "__tbl_21", "__tbl_22"))
+                            and road_interval.get("max_inclusive") is False
+                        ):
+                            road_interval = dict(road_interval)
+                            road_interval["max_inclusive"] = True
+                            row_note = "Amended by Zoning Regulations (Amendment) 2019 (19 June 2019), p. 8"
                     elif "height of" in hdr_l:
                         height_interval = parse_numeric_interval(cell_val)
                     elif "width/depth" in hdr_l:
@@ -745,7 +849,7 @@ def extract_jurisdiction_parameters(
 
                     non_env_kind = classify_non_envelope_row(
                         table_eid=eid,
-                        table_heading=str(node.get("heading") or node.get("title") or ""),
+                        table_heading=tbl_heading_str,
                         column_header=hdr,
                         row_header=row_header_str,
                         cell_text=cell_val,
@@ -796,12 +900,8 @@ def extract_jurisdiction_parameters(
                     elif ("left side" in hdr_l or "right side" in hdr_l) and ("width of site" in hdr_l or "setback" in hdr_l):
                         param_kinds.append(("setback_side_min_m", row_use, row_area_class))
                     elif "car parking" in hdr_l:
-                        use_cell = cells[1].lower() if len(cells) > 1 else ""
-                        inferred_use = ["residential"] if "dwelling" in use_cell else (
-                            ["commercial"] if any(x in use_cell for x in ("retail", "shop", "office", "hotel", "restaurant", "multiplex")) else (
-                                ["industrial"] if "industrial" in use_cell else ["public_semi_public"]
-                            )
-                        )
+                        use_cell = cells[1] if len(cells) > 1 else ""
+                        inferred_use = _infer_parking_use_tags(use_cell)
                         param_kinds.append(("parking_requirement", inferred_use, row_area_class))
                     elif hdr_l in {"residential", "commercial", "comercial"} and "part_III__sec_9.0__cl_9.2__tbl_4" in eid:
                         use_for_col = ["residential"] if "res" in hdr_l else ["commercial"]
@@ -835,6 +935,7 @@ def extract_jurisdiction_parameters(
                             valid_from=doc_valid_from,
                             valid_to=tbl_valid_to,
                             legal_status=tbl_status,
+                            note=row_note,
                             source={
                                 "doc_id": doc.id,
                                 "eid": r_eid,
@@ -1071,7 +1172,7 @@ def extract_jurisdiction_parameters(
                     method="clause_rule_parser",
                 )
 
-            # (d2) Original Note (b) in Residential Main (`chp_4__cl_4.1__cl_4.1.2__item_b`, p. 28): 11.5m or Stilt+GF+2 floors (superseded 2026-01-05)
+            # (d2) Original Note (b) in Residential Main (`chp_4__cl_4.1__cl_4.1.2__item_b`, p. 28): 11.5m or Stilt+GF+2 floors (superseded 2026-01-20)
             if "restricted to 11.5 meters or Stilt +GF+2 floors" in txt:
                 for p_kind, val, unit, c_txt in [
                     ("building_height_max_m", 11.5, "m", "11.5 meters"),
@@ -1096,8 +1197,9 @@ def extract_jurisdiction_parameters(
                         value_text=c_txt,
                         conditions=conds,
                         valid_from=doc_valid_from,
-                        valid_to="2026-01-05" if has_2026_setback_amend else None,
+                        valid_to=amend_2026_date if has_2026_setback_amend else None,
                         legal_status="superseded" if has_2026_setback_amend else "in_force",
+                        note=amend_2026_note if has_2026_setback_amend else None,
                         source={
                             "doc_id": doc.id,
                             "eid": eid,
@@ -1120,51 +1222,78 @@ def extract_jurisdiction_parameters(
                         method="clause_rule_parser",
                     )
 
-            # (d3) Low-rise Table 8 height cap (`cl_11.11.2025__item_a`, p. 1): 12.0m excluding stilt floor (or Table 9 above 12.0m)
-            if "building with total height up to 12.0m, excluding the stilt floor, the setbacks shall be calculated as per Table 8" in txt:
-                conds_h = _empty_conditions(
-                    jurisdiction=jur_scope,
-                    dependent=True,
-                    unexpressed=[
-                        "Buildings up to 12.0 m height (excluding stilt floor) use Table 8 setbacks; buildings above 12.0 m height (up to 50 m+ in Table 9) require progressive all-around setbacks (5.0 m to 16.0 m) and minimum 9.0 m / 12.0 m road width."
-                    ],
-                )
-                conds_h["plot_area_m2"] = {
-                    "min": 250.0,
-                    "max": 4000.0,
-                    "min_inclusive": False,
-                    "max_inclusive": True,
-                }
-                _add_record(
-                    parameter="building_height_max_m",
-                    value=12.0,
-                    unit="m",
-                    value_text="total height up to 12.0m, excluding the stilt floor (Table 8); above 12.0 m governed by Table 9 and FAR",
-                    conditions=conds_h,
-                    valid_from=doc_valid_from,
-                    valid_to=None,
-                    legal_status="in_force",
-                    source={
-                        "doc_id": doc.id,
-                        "eid": eid,
-                        "clause_id": str(node.get("clause_id") or f"{doc.id}:{eid}"),
-                        "table_eid": None,
-                        "table_id": "Regulation 3.1(ii)-(iii) (Substituted 2026-01)",
-                        "row_index": None,
-                        "col_index": None,
-                        "row_header": "Plot area above 250 sq.m",
-                        "column_header": "Building height threshold (Table 8 vs Table 9)",
-                        "cell_text": "total height up to 12.0m, excluding the stilt floor",
-                        "footnote_markers": ["ii", "iii"],
-                        "footnotes_text": [txt],
-                        "page": page,
-                        "bbox": bbox,
-                        "page_link": page_link,
-                        "official_url": pdf_url,
-                        "archive_url": arch_url,
-                    },
-                    method="clause_rule_parser",
-                )
+            # (d3) January 2026 substituted Table 15 Mutation Corridors (`item_ii`, p. 6): plot size up to 10,000 sq.m (substituted for 12,000 sq.m)
+            if "In regulation 4.5 MUTATION CORRIDORS, in table 15, plot size for sl.no.1 & 2" in txt:
+                mc_page = 6
+                mc_page_link = f"{pdf_url}#page={mc_page}" if pdf_url else f"#page={mc_page}"
+                mc_rows = [
+                    (
+                        0,
+                        "1 | All plot sizes up to 10000 sq.m (Road width up to 30 m)",
+                        {"min": None, "max": 30.0, "min_inclusive": True, "max_inclusive": True},
+                        55.0,
+                        "55%",
+                        2.75,
+                        "2.75",
+                    ),
+                    (
+                        1,
+                        "2 | All plot sizes up to 10000 sq.m (Road width above 30 m)",
+                        {"min": 30.0, "max": None, "min_inclusive": False, "max_inclusive": True},
+                        50.0,
+                        "50%",
+                        3.25,
+                        "3.25",
+                    ),
+                ]
+                for r_idx, r_lbl, rw_int, cov_v, cov_txt, far_v, far_txt in mc_rows:
+                    for p_kind, val, unit, c_txt, col_idx, col_hdr in [
+                        ("ground_coverage_max_pct", cov_v, "%", cov_txt, 2, "Plot Coverage (Max)"),
+                        ("far_base_max", far_v, "ratio", far_txt, 3, "FAR (Max)"),
+                    ]:
+                        conds_mc = _empty_conditions(
+                            zone=["C-AXES"],
+                            use=["commercial", "residential"],
+                            jurisdiction=jur_scope,
+                        )
+                        conds_mc["plot_area_m2"] = {
+                            "min": None,
+                            "max": 10000.0,
+                            "min_inclusive": True,
+                            "max_inclusive": True,
+                        }
+                        conds_mc["road_width_m"] = rw_int
+                        _add_record(
+                            parameter=p_kind,
+                            value=val,
+                            unit=unit,
+                            value_text=c_txt,
+                            conditions=conds_mc,
+                            valid_from=doc_valid_from,
+                            valid_to=None,
+                            legal_status="in_force",
+                            note="Substitutes 10,000 m² plot size limit for 12,000 m² in Table 15 (Mutation Corridors)",
+                            source={
+                                "doc_id": doc.id,
+                                "eid": eid,
+                                "clause_id": str(node.get("clause_id") or f"{doc.id}:{eid}"),
+                                "table_eid": "item_ii__tbl_15",
+                                "table_id": "Table 15: Mutation Corridors (Substituted 2026-01)",
+                                "row_index": r_idx,
+                                "col_index": col_idx,
+                                "row_header": r_lbl,
+                                "column_header": col_hdr,
+                                "cell_text": c_txt,
+                                "footnote_markers": [],
+                                "footnotes_text": [txt],
+                                "page": mc_page,
+                                "bbox": bbox,
+                                "page_link": mc_page_link,
+                                "official_url": pdf_url,
+                                "archive_url": arch_url,
+                            },
+                            method="clause_rule_parser",
+                        )
 
             # (d4) Ring III floors cap on 360-750 sq.m (`cl_11.11.2025__item_ii`, p. 5)
             if "In Ring III: on plot size above 360 sq.m and upto 750 sq.m" in txt:
@@ -1213,7 +1342,7 @@ def extract_jurisdiction_parameters(
                 )
 
             # (e) April 2025 Chapter 11 Table No.27 (`chp_11_2__prov_1`, p. 2): Premium FAR & TDR/DRC by road width
-            if eid == "chp_11_2__prov_1" and ">9, <=12" in txt:
+            if eid == "chp_11_2__prov_1" and ("Table No.27" in txt or ">9, <=12" in txt):
                 pfar_rows = [
                     (">9, <=12", {"min": 9.0, "max": 12.0, "min_inclusive": False, "max_inclusive": True}, 0.2, "0.2", 0.0, "NIL"),
                     (">12, <=18", {"min": 12.0, "max": 18.0, "min_inclusive": False, "max_inclusive": True}, 0.3, "0.3", 0.1, "0.1"),
@@ -1295,6 +1424,20 @@ def extract_jurisdiction_parameters(
                         method="table_rule_parser",
                     )
 
+    doc_meta_map = {d.id: d for d in config.documents}
+    records = _apply_table_supersession_and_deduplication(records, doc_meta_map)
+    for idx_rec, rec_item in enumerate(records, start=1):
+        rec_item["parameter_id"] = f"{config.id}:param_{idx_rec:04d}"
+
+    doc_layers = {d.id: str(d.layer) for d in config.documents}
+    overlap_report = check_parameter_overlaps(records, doc_layers)
+    if overlap_report["unexplained_overlaps"]:
+        first_ov = overlap_report["unexplained_overlaps"][0]
+        raise ValueError(
+            f"Unexplained parameter overlap in '{config.id}' on {first_ov['parameter']}: "
+            f"{first_ov['record_a']} vs {first_ov['record_b']} ({first_ov['reason']})"
+        )
+
     payload: dict[str, Any] = {
         "schema_version": "1.4",
         "jurisdiction": config.id,
@@ -1306,6 +1449,373 @@ def extract_jurisdiction_parameters(
     }
     validate_payload(payload, "parameters")
     return payload, mismatches
+
+
+MONTH_NAMES_PLAIN = (
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+)
+
+
+def _format_human_date_plain(iso_date: str | None) -> str:
+    if not iso_date:
+        return "Date not recorded"
+    m = re.match(r"^(\d{4})-(\d{2})-(\d{2})$", iso_date.strip())
+    if not m:
+        return iso_date
+    year, month_idx, day = int(m.group(1)), int(m.group(2)) - 1, int(m.group(3))
+    if 0 <= month_idx < 12:
+        return f"{day} {MONTH_NAMES_PLAIN[month_idx]} {year}"
+    return iso_date
+
+
+def _format_short_doc_label(doc_obj: Any, fallback_id: str) -> str:
+    if doc_obj is None:
+        return fallback_id
+    title = str(getattr(doc_obj, "title", "") or fallback_id).strip()
+    if "—" in title:
+        title = title.split("—", 1)[1].strip()
+    if title.isupper():
+        title = title.title()
+    return title
+
+
+def _interval_key(iv: dict[str, Any] | None) -> tuple[Any, ...]:
+    if not iv:
+        return (None, None, True, True)
+    return (
+        iv.get("min"),
+        iv.get("max"),
+        bool(iv.get("min_inclusive", True)),
+        bool(iv.get("max_inclusive", True)),
+    )
+
+
+def _condition_signature(rec: dict[str, Any]) -> tuple[Any, ...]:
+    c = rec.get("conditions") or {}
+    return (
+        rec.get("parameter"),
+        tuple(c.get("zone") or []),
+        tuple(c.get("use") or []),
+        tuple(c.get("area_class") or []),
+        tuple(c.get("jurisdiction") or []),
+        _interval_key(c.get("plot_area_m2")),
+        _interval_key(c.get("road_width_m")),
+        _interval_key(c.get("building_height_m")),
+        _interval_key(c.get("plot_depth_m")),
+        _interval_key(c.get("plot_width_m")),
+    )
+
+
+def _apply_table_supersession_and_deduplication(
+    records: list[dict[str, Any]],
+    doc_meta_map: dict[str, Any],
+) -> list[dict[str, Any]]:
+    """Apply chronological table/row supersession and collapse identical restated rows within each layer."""
+    # First collapse identical duplicate rows within the same table (e.g. Left Side and Right Side setback columns when both map to setback_side_min_m)
+    by_sig_and_layer: dict[tuple[str, tuple[Any, ...]], list[dict[str, Any]]] = {}
+    passthrough: list[dict[str, Any]] = []
+
+    for rec in records:
+        if rec.get("legal_status") != "in_force" or rec.get("valid_to") is not None:
+            passthrough.append(rec)
+            continue
+        doc_id = str((rec.get("source") or {}).get("doc_id") or "")
+        doc_obj = doc_meta_map.get(doc_id)
+        layer = str(getattr(doc_obj, "layer", "other") if doc_obj else "other")
+        sig = _condition_signature(rec)
+        by_sig_and_layer.setdefault((layer, sig), []).append(rec)
+
+    resolved: list[dict[str, Any]] = []
+    for group in by_sig_and_layer.values():
+        if len(group) == 1:
+            resolved.append(group[0])
+            continue
+
+        # Deduplicate exact same (doc_id, value, unit) first (e.g. Left Side & Right Side both 8% width)
+        dedup_same_doc: list[dict[str, Any]] = []
+        seen_doc_val: set[tuple[str, Any, Any]] = set()
+        for r in group:
+            d_key = (str(r["source"]["doc_id"]), r.get("value"), r.get("unit"))
+            if d_key not in seen_doc_val:
+                seen_doc_val.add(d_key)
+                dedup_same_doc.append(r)
+
+        if len(dedup_same_doc) == 1:
+            resolved.append(dedup_same_doc[0])
+            continue
+
+        # Sort chronologically by valid_from ascending so the latest instrument is last
+        dedup_same_doc.sort(key=lambda r: str(r.get("valid_from") or "0000-00-00"))
+        latest = dedup_same_doc[-1]
+        latest_doc_id = str(latest["source"]["doc_id"])
+        latest_doc = doc_meta_map.get(latest_doc_id)
+        latest_label = _format_short_doc_label(latest_doc, latest_doc_id)
+        latest_date_str = _format_human_date_plain(str(latest.get("valid_from") or ""))
+
+        earlier_restated_notes: list[str] = []
+        for earlier in dedup_same_doc[:-1]:
+            earlier_doc_id = str(earlier["source"]["doc_id"])
+            earlier_doc = doc_meta_map.get(earlier_doc_id)
+            earlier_label = _format_short_doc_label(earlier_doc, earlier_doc_id)
+            earlier_date_str = _format_human_date_plain(str(earlier.get("valid_from") or ""))
+            earlier_page = earlier["source"].get("page", 1)
+
+            if (earlier.get("value"), earlier.get("unit")) == (latest.get("value"), latest.get("unit")):
+                # Restated with identical value -> collapse into latest and record earlier source for Details
+                earlier_restated_notes.append(
+                    f"Earlier source with identical value: {earlier_label} ({earlier_date_str}), p. {earlier_page}"
+                )
+            else:
+                # Replaced by a different value in a later amendment -> move earlier record to superseded
+                earlier["legal_status"] = "superseded"
+                earlier["valid_to"] = latest.get("valid_from")
+                earlier["note"] = f"Replaced by {latest_label}, {latest_date_str}"
+                passthrough.append(earlier)
+
+        if earlier_restated_notes:
+            existing_note = str(latest.get("note") or "").strip()
+            combined_note = "; ".join(
+                ([existing_note] if existing_note else []) + earlier_restated_notes
+            )
+            latest["note"] = combined_note
+        resolved.append(latest)
+
+    return passthrough + resolved
+
+
+def _intervals_overlap(a: dict[str, Any] | None, b: dict[str, Any] | None) -> bool:
+    """Return True if two `NumericInterval` dicts have a non-empty intersection."""
+    if a is None or b is None:
+        return True
+    a_min = float("-inf") if a.get("min") is None else float(a["min"])
+    a_max = float("inf") if a.get("max") is None else float(a["max"])
+    b_min = float("-inf") if b.get("min") is None else float(b["min"])
+    b_max = float("inf") if b.get("max") is None else float(b["max"])
+
+    low = max(a_min, b_min)
+    high = min(a_max, b_max)
+    if low < high:
+        return True
+    if low > high:
+        return False
+
+    # Boundary point `low == high`: both intervals must include the endpoint
+    a_inc = (
+        bool(a.get("min_inclusive", True)) if low == a_min else True
+    ) and (
+        bool(a.get("max_inclusive", True)) if high == a_max else True
+    )
+    b_inc = (
+        bool(b.get("min_inclusive", True)) if low == b_min else True
+    ) and (
+        bool(b.get("max_inclusive", True)) if high == b_max else True
+    )
+    return a_inc and b_inc
+
+
+def check_parameter_overlaps(
+    records: list[dict[str, Any]],
+    doc_layers: dict[str, str] | None = None,
+) -> dict[str, list[dict[str, Any]]]:
+    """Check governing `in_force` records for overlapping conditions with different values."""
+    layers = doc_layers or {}
+    in_force = [
+        r
+        for r in records
+        if r.get("legal_status") == "in_force" and not r.get("valid_to")
+    ]
+    # On parameters governed by planning layer, only planning-layer records appear under "What applies today"
+    planning_params = {
+        str(r["parameter"])
+        for r in in_force
+        if layers.get(str(r["source"]["doc_id"]), "planning") == "planning"
+    }
+    governing = [
+        r
+        for r in in_force
+        if str(r["parameter"]) not in planning_params
+        or layers.get(str(r["source"]["doc_id"]), "planning") == "planning"
+    ]
+
+    not_settled: list[dict[str, Any]] = []
+    unexplained: list[dict[str, Any]] = []
+
+    for i in range(len(governing)):
+        r1 = governing[i]
+        c1 = r1.get("conditions") or {}
+        scope1 = (
+            r1.get("parameter"),
+            tuple(c1.get("zone") or []),
+            tuple(c1.get("use") or []),
+            tuple(c1.get("area_class") or []),
+            tuple(c1.get("jurisdiction") or []),
+        )
+        for j in range(i + 1, len(governing)):
+            r2 = governing[j]
+            c2 = r2.get("conditions") or {}
+            scope2 = (
+                r2.get("parameter"),
+                tuple(c2.get("zone") or []),
+                tuple(c2.get("use") or []),
+                tuple(c2.get("area_class") or []),
+                tuple(c2.get("jurisdiction") or []),
+            )
+            if scope1 != scope2:
+                continue
+            if (r1.get("value"), r1.get("unit")) == (r2.get("value"), r2.get("unit")):
+                continue
+            if all(
+                _intervals_overlap(c1.get(dim), c2.get(dim))
+                for dim in ("plot_area_m2", "road_width_m", "building_height_m", "plot_depth_m", "plot_width_m")
+            ):
+                bh1 = c1.get("building_height_m") or {}
+                bh2 = c2.get("building_height_m") or {}
+                # Known current-text overlap: 2026 Table 8 (<= 12.0 m) vs 2007 Table 9 (> 11.5 m up to 15.0 m)
+                is_height_11_5_12_overlap = (
+                    (bh1.get("max") == 12.0 and bh2.get("min") == 11.5)
+                    or (bh2.get("max") == 12.0 and bh1.get("min") == 11.5)
+                )
+                entry = {
+                    "parameter": r1["parameter"],
+                    "record_a": r1["parameter_id"],
+                    "record_b": r2["parameter_id"],
+                    "doc_a": r1["source"]["doc_id"],
+                    "page_a": r1["source"]["page"],
+                    "doc_b": r2["source"]["doc_id"],
+                    "page_b": r2["source"]["page"],
+                    "value_a": f"{r1['value']} {r1.get('unit') or ''}".strip(),
+                    "value_b": f"{r2['value']} {r2.get('unit') or ''}".strip(),
+                    "reason": (
+                        "The current tables overlap between 11.5 m and 12 m (Table 8 covers up to 12 m; Table 9 starts above 11.5 m)."
+                        if is_height_11_5_12_overlap
+                        else "Overlapping conditions with different values"
+                    ),
+                }
+                if is_height_11_5_12_overlap:
+                    not_settled.append(entry)
+                else:
+                    unexplained.append(entry)
+
+    return {
+        "not_settled_overlaps": not_settled,
+        "unexplained_overlaps": unexplained,
+    }
+
+
+def check_band_continuity(
+    records: list[dict[str, Any]],
+    doc_layers: dict[str, str] | None = None,
+) -> list[dict[str, Any]]:
+    """Report range gaps and overlaps between current governing tables (e.g. 11.5 m to 12 m setback height overlap)."""
+    layers = doc_layers or {}
+    in_force = [
+        r
+        for r in records
+        if r.get("legal_status") == "in_force" and not r.get("valid_to")
+    ]
+    planning_params = {
+        str(r["parameter"])
+        for r in in_force
+        if layers.get(str(r["source"]["doc_id"]), "planning") == "planning"
+    }
+    governing = [
+        r
+        for r in in_force
+        if str(r["parameter"]) not in planning_params
+        or layers.get(str(r["source"]["doc_id"]), "planning") == "planning"
+    ]
+
+    findings: list[dict[str, Any]] = []
+
+    # 1. Cross-table setback height band check (Table 8 <= 12.0 m vs Table 9 > 11.5 m)
+    low_rise_setbacks = [
+        r
+        for r in governing
+        if r["parameter"] == "setback_front_min_m"
+        and ((r["conditions"].get("building_height_m") or {}).get("max") == 12.0)
+    ]
+    high_rise_setbacks = [
+        r
+        for r in governing
+        if r["parameter"] == "setback_front_min_m"
+        and ((r["conditions"].get("building_height_m") or {}).get("min") == 11.5)
+    ]
+    if low_rise_setbacks and high_rise_setbacks:
+        lr = low_rise_setbacks[0]
+        hr = high_rise_setbacks[0]
+        findings.append(
+            {
+                "kind": "overlap",
+                "subject": "setbacks",
+                "dimension": "building_height_m",
+                "range": "11.5 m to 12 m",
+                "summary": "The current tables overlap between 11.5 m and 12 m.",
+                "source_a": f"{lr['source']['doc_id']} (p. {lr['source']['page']})",
+                "source_b": f"{hr['source']['doc_id']} (p. {hr['source']['page']})",
+            }
+        )
+
+    # 2. Within-table adjacent band continuity check
+    by_tbl_param: dict[tuple[str, str, str], list[dict[str, Any]]] = {}
+    for r in governing:
+        t_eid = str(r["source"].get("table_eid") or r["source"].get("table_id") or "")
+        if not t_eid:
+            continue
+        by_tbl_param.setdefault((str(r["source"]["doc_id"]), t_eid, str(r["parameter"])), []).append(r)
+
+    seen_gap_keys: set[tuple[str, str, str, float]] = set()
+    for (doc_id, t_eid, _param), group in sorted(by_tbl_param.items()):
+        for dim in ("plot_area_m2", "road_width_m", "building_height_m"):
+            ivs = [
+                r["conditions"].get(dim)
+                for r in group
+                if isinstance(r["conditions"].get(dim), dict)
+            ]
+            if len(ivs) < 2:
+                continue
+            # Sort by (min or 0, max or inf)
+            ivs_sorted = sorted(
+                ivs,
+                key=lambda x: (
+                    float(x["min"]) if x.get("min") is not None else 0.0,
+                    float(x["max"]) if x.get("max") is not None else float("inf"),
+                ),
+            )
+            for idx in range(len(ivs_sorted) - 1):
+                cur_iv = ivs_sorted[idx]
+                nxt_iv = ivs_sorted[idx + 1]
+                cur_max = cur_iv.get("max")
+                nxt_min = nxt_iv.get("min")
+                if cur_max is None or nxt_min is None:
+                    continue
+                if float(cur_max) == float(nxt_min) and not bool(cur_iv.get("max_inclusive", True)) and not bool(nxt_iv.get("min_inclusive", True)):
+                    gk = (doc_id, t_eid, dim, float(cur_max))
+                    if gk not in seen_gap_keys:
+                        seen_gap_keys.add(gk)
+                        findings.append(
+                            {
+                                "kind": "boundary_gap",
+                                "subject": "far",
+                                "dimension": dim,
+                                "range": f"{cur_max:g} m",
+                                "summary": f"Table `{t_eid}` in `{doc_id}` has `< {cur_max:g}` followed by `> {nxt_min:g}` (exact `{cur_max:g}` boundary point not included in either row).",
+                                "source_a": f"{doc_id} ({t_eid})",
+                                "source_b": f"{doc_id} ({t_eid})",
+                            }
+                        )
+
+    return findings
 
 
 def write_parameter_reports_and_json(
@@ -1330,6 +1840,10 @@ def write_parameter_reports_and_json(
         (pub_rel_dir / "parameters.json").write_text(params_text, encoding="utf-8")
 
     if config.visibility != "test":
+        doc_layers = {d.id: str(d.layer) for d in config.documents}
+        overlap_report = check_parameter_overlaps(payload["records"], doc_layers)
+        band_findings = check_band_continuity(payload["records"], doc_layers)
+
         # Write parameter-mismatches.md for owner review
         exclusions = [
             m
@@ -1342,12 +1856,27 @@ def write_parameter_reports_and_json(
             f"- **Total Parameter Records Extracted**: `{len(payload['records'])}`",
             f"- **Source Table Anomalies / Mismatches Flagged for Owner Review**: `{len(mismatches)}`",
             f"- **Plausibility Bounds Exclusions & Non-Envelope Reclassifications**: `{len(exclusions)}`",
+            f"- **Unexplained Governing Overlaps**: `{len(overlap_report['unexplained_overlaps'])}`",
+            f"- **Current-Text Band Overlaps / Boundary Gaps (Not Settled)**: `{len(band_findings)}`",
             "",
-            "## Plausibility Bounds Exclusions (For Owner Review)",
+            "## Current-Text Band Overlaps & Continuity Findings (For Owner Review)",
             "",
-            "| Record / Node | Document | Page | Printed Cell / Row Header | Reason Excluded / Reclassified |",
-            "|---|---|---:|---|---|",
+            "| Kind | Subject | Dimension | Range | Finding | Sources |",
+            "|---|---|---|---|---|---|",
         ]
+        for bf in band_findings:
+            mm_lines.append(
+                f"| `{bf['kind']}` | `{bf['subject']}` | `{bf['dimension']}` | `{bf['range']}` | {bf['summary']} | `{bf['source_a']}` vs `{bf['source_b']}` |"
+            )
+        mm_lines.extend(
+            [
+                "",
+                "## Plausibility Bounds Exclusions (For Owner Review)",
+                "",
+                "| Record / Node | Document | Page | Printed Cell / Row Header | Reason Excluded / Reclassified |",
+                "|---|---|---:|---|---|",
+            ]
+        )
         for m in exclusions:
             mm_lines.append(
                 f"| `{m['parameter_id']}` | `{m['doc_id']}` | p. {m['page']} | `{m['cell_text']}` | {m['issue']} |"

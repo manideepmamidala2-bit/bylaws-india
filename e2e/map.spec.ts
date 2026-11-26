@@ -119,7 +119,7 @@ test.describe("Bylaw One — Home, Subject, Document & Map E2E Suite", () => {
       });
     });
 
-    test(`renders Subject page clean table with units and conditions in words and no plot inputs on ${viewport.name}`, async ({
+    test(`renders Subject pages (Setbacks & FAR) at city level and for Bengaluru South with supersession, deduplication, band overlap notice, and corporation layer line on ${viewport.name}`, async ({
       page,
     }) => {
       await page.setViewportSize({
@@ -127,16 +127,19 @@ test.describe("Bylaw One — Home, Subject, Document & Map E2E Suite", () => {
         height: viewport.height,
       });
 
-      await page.goto("/j/in-ka-bengaluru-south/topics/setbacks", {
+      // 1. City-level Setbacks
+      await page.goto("/j/in-ka-bengaluru/topics/setbacks", {
         waitUntil: "domcontentloaded",
       });
-
       await expect(
         page.getByRole("heading", { name: "Setbacks" })
       ).toBeVisible();
       await expect(
         page.getByRole("heading", { name: "What applies today" })
       ).toBeVisible();
+      await expect(page.getByTestId("band-continuity-notice")).toContainText(
+        /The current tables overlap between 11\.5 m and 12 m\./i
+      );
 
       const paramTable = page.getByTestId("subject-parameter-table");
       await expect(paramTable).toBeVisible();
@@ -146,21 +149,57 @@ test.describe("Bylaw One — Home, Subject, Document & Map E2E Suite", () => {
       await expect(paramTable).toContainText(/6 m/);
       await expect(paramTable).toContainText(/12% of plot depth/);
 
-      // Older and related rules collapsed by default
       const olderDetails = page.getByTestId("older-or-replaced-rules");
       await expect(olderDetails).toBeVisible();
       expect(await olderDetails.getAttribute("open")).toBeNull();
-
-      // Zero plot inputs
       await expect(page.getByLabel(/Plot area/i)).toHaveCount(0);
 
       await page.screenshot({
-        path: `/tmp/opencode/subject-setbacks-${viewport.width}px.png`,
+        path: `/tmp/opencode/city-setbacks-${viewport.width}px.png`,
+        fullPage: false,
+      });
+
+      // 2. City-level FAR
+      await page.goto("/j/in-ka-bengaluru/topics/far", {
+        waitUntil: "domcontentloaded",
+      });
+      await expect(page.getByRole("heading", { name: "FAR" })).toBeVisible();
+      await page.screenshot({
+        path: `/tmp/opencode/city-far-${viewport.width}px.png`,
+        fullPage: false,
+      });
+
+      // 3. Bengaluru South Setbacks
+      await page.goto("/j/in-ka-bengaluru-south/topics/setbacks", {
+        waitUntil: "domcontentloaded",
+      });
+      await expect(page.getByTestId("corporation-layer-notice")).toContainText(
+        "Showing Greater Bengaluru rules, with differences for Bengaluru South City Corporation."
+      );
+      await expect(
+        page.getByTestId("corporation-no-differences")
+      ).toContainText(
+        "No differences for Bengaluru South City Corporation on this subject."
+      );
+      await page.screenshot({
+        path: `/tmp/opencode/corp-south-setbacks-${viewport.width}px.png`,
+        fullPage: false,
+      });
+
+      // 4. Bengaluru South FAR
+      await page.goto("/j/in-ka-bengaluru-south/topics/far", {
+        waitUntil: "domcontentloaded",
+      });
+      await expect(page.getByTestId("corporation-layer-notice")).toContainText(
+        "Showing Greater Bengaluru rules, with differences for Bengaluru South City Corporation."
+      );
+      await page.screenshot({
+        path: `/tmp/opencode/corp-south-far-${viewport.width}px.png`,
         fullPage: false,
       });
     });
 
-    test(`renders MapLibre canvas and serves .pmtiles with HTTP 206 without plot inputs on ${viewport.name}`, async ({
+    test(`renders MapLibre canvas, plain land-use zone gap notice, and serves .pmtiles with HTTP 206 without plot inputs on ${viewport.name}`, async ({
       page,
     }) => {
       await page.setViewportSize({
@@ -171,6 +210,10 @@ test.describe("Bylaw One — Home, Subject, Document & Map E2E Suite", () => {
       await page.goto("/j/in-ka-bengaluru-south", {
         waitUntil: "domcontentloaded",
       });
+
+      await expect(page.getByTestId("map-zone-gap-notice")).toHaveText(
+        "Land-use zones are available for parts of Bengaluru South only. Elsewhere the map shows boundaries and wards."
+      );
 
       const mapRegion = page.getByRole("region", {
         name: /MapLibre GL JS street map canvas/i,
