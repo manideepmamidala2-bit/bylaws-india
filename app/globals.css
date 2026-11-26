@@ -39,11 +39,12 @@ body {
 .dg-serif {
   font-family: var(--font-serif);
   color: var(--ink2);
+  max-width: 72ch;
 }
 
 .dg-pill {
   border: 1px solid var(--ink);
-  border-radius: 999px;
+  border-radius: 0;
   padding: 5px 13px;
   font-family: var(--font-mono);
   font-size: 10.5px;
@@ -60,7 +61,7 @@ body {
 }
 
 .dg-selected-row {
-  box-shadow: inset 3px 0 0 var(--accent);
+  border-left: 3px solid var(--accent);
   background-color: var(--panel);
 }
 
@@ -68,7 +69,7 @@ body {
   width: 6px;
   height: 6px;
   background-color: var(--accent);
-  border-radius: 999px;
+  border-radius: 0;
   display: inline-block;
   flex-shrink: 0;
 }

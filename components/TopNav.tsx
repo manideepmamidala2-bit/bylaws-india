@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
 import { SearchBar } from "./SearchBar";
 
@@ -22,79 +24,155 @@ interface TopNavProps {
   licence?: string;
 }
 
-export function TopNav({
-  jurisdictionId,
-  jurisdictionName,
-  active,
-  releaseVersion,
-  licence = "CC BY 4.0",
-}: TopNavProps) {
-  const jId = jurisdictionId;
+export function TopNav({ jurisdictionId, active }: TopNavProps) {
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const navItems: Array<{ key: NavSection; label: string; href: string }> = jId
-    ? [
-        { key: "map", label: "Map", href: `/j/${jId}` },
-        { key: "sources", label: "Sources", href: `/j/${jId}/sources` },
-        { key: "documents", label: "Documents", href: `/j/${jId}/clauses` },
-        { key: "topics", label: "Rules by subject", href: `/j/${jId}/topics` },
-        { key: "timeline", label: "Timeline", href: `/j/${jId}/timeline` },
-        { key: "review", label: "Review", href: `/j/${jId}/review` },
-        { key: "structure", label: "Structure", href: "/structure" },
-        { key: "data", label: "Data", href: "/data" },
-        { key: "about", label: "About", href: "/about" },
-      ]
-    : [
-        { key: "home", label: "Overview", href: "/" },
-        { key: "structure", label: "Structure", href: "/structure" },
-        { key: "data", label: "Data", href: "/data" },
-        { key: "about", label: "About", href: "/about" },
-      ];
+  const targetJurId =
+    jurisdictionId && jurisdictionId !== "xx-test-fixture"
+      ? jurisdictionId
+      : "in-ka-bengaluru";
+
+  const navItems: Array<{
+    key: "code" | "changed" | "about";
+    label: string;
+    href: string;
+    isCurrent: boolean;
+  }> = [
+    {
+      key: "code",
+      label: "The code",
+      href: `/j/${targetJurId}/topics`,
+      isCurrent: active === "topics" || active === "documents",
+    },
+    {
+      key: "changed",
+      label: "What changed",
+      href: `/j/${targetJurId}/timeline`,
+      isCurrent: active === "timeline",
+    },
+    {
+      key: "about",
+      label: "About",
+      href: "/about",
+      isCurrent: active === "about" || active === "structure",
+    },
+  ];
 
   return (
     <header
-      className="flex flex-wrap items-center justify-between gap-4 border-b border-[#080909] bg-[#f5f3ed] px-6 py-3"
+      className="border-b border-[#c8ccc0] bg-[#f5f3ed] text-[#080909]"
       role="banner"
     >
-      <div className="flex items-center gap-4">
+      <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-5 py-2.5">
         <Link
           href="/"
-          className="font-mono text-[11px] font-medium uppercase tracking-[0.15em] text-[#080909] no-underline"
+          className="inline-flex min-h-[44px] items-center text-lg font-semibold tracking-tight text-[#080909] no-underline"
         >
-          Structured Building Bylaws
+          Bylaw One
         </Link>
-        {jurisdictionName && (
-          <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-[#5b5e56]">
-            / {jurisdictionName}
-          </span>
-        )}
-      </div>
 
-      <nav aria-label="Primary navigation" className="flex flex-wrap items-center gap-6">
-        {navItems.map((item) => {
-          const isCurrent = active === item.key;
-          return (
-            <Link
-              key={item.key}
-              href={item.href}
-              aria-current={isCurrent ? "page" : undefined}
-              className={`font-mono text-[11px] uppercase tracking-[0.14em] no-underline ${
-                isCurrent
-                  ? "border-b border-[#080909] pb-0.5 font-medium text-[#080909]"
-                  : "text-[#5b5e56] hover:text-[#080909]"
-              }`}
+        <div className="flex items-center gap-2 md:gap-6">
+          <nav
+            aria-label="Primary navigation"
+            className="hidden items-center gap-7 md:flex"
+          >
+            {navItems.map((item) => (
+              <Link
+                key={item.key}
+                href={item.href}
+                aria-current={item.isCurrent ? "page" : undefined}
+                className={`inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] no-underline ${
+                  item.isCurrent
+                    ? "border-b-2 border-[#ff6b52] font-medium text-[#080909]"
+                    : "text-[#5b5e56] hover:text-[#080909]"
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          <button
+            type="button"
+            data-testid="header-search-toggle"
+            aria-label="Search all documents"
+            aria-expanded={searchOpen}
+            onClick={() => setSearchOpen((prev) => !prev)}
+            className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center border border-transparent text-[#080909] hover:border-[#c8ccc0] hover:bg-[#efeee8]"
+          >
+            <svg
+              aria-hidden="true"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="square"
             >
-              {item.label}
-            </Link>
-          );
-        })}
-      </nav>
+              <circle cx="11" cy="11" r="7" />
+              <path d="M20 20l-3.5-3.5" />
+            </svg>
+          </button>
 
-      <div className="flex flex-wrap items-center gap-4">
-        <SearchBar jurisdictionId={jId} />
-        <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-[#5b5e56]">
-          {releaseVersion ? `Release ${releaseVersion} · ${licence}` : licence}
+          <button
+            type="button"
+            data-testid="header-menu-toggle"
+            aria-label="Menu"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((prev) => !prev)}
+            className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center border border-[#c8ccc0] bg-[#f5f3ed] font-mono text-[11px] uppercase tracking-[0.12em] text-[#080909] md:hidden"
+          >
+            {menuOpen ? "Close" : "Menu"}
+          </button>
         </div>
       </div>
+
+      {menuOpen && (
+        <nav
+          aria-label="Mobile navigation"
+          data-testid="mobile-nav-menu"
+          className="border-t border-[#c8ccc0] bg-[#efeee8] px-5 py-2 md:hidden"
+        >
+          <ul className="divide-y divide-[#c8ccc0]">
+            {navItems.map((item) => (
+              <li key={item.key}>
+                <Link
+                  href={item.href}
+                  aria-current={item.isCurrent ? "page" : undefined}
+                  onClick={() => setMenuOpen(false)}
+                  className={`flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] no-underline ${
+                    item.isCurrent
+                      ? "border-l-2 border-[#ff6b52] pl-3 font-medium text-[#080909]"
+                      : "text-[#080909]"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+
+      {searchOpen && (
+        <div
+          data-testid="header-search-panel"
+          className="border-t border-[#c8ccc0] bg-[#efeee8] px-5 py-3"
+        >
+          <div className="mx-auto flex max-w-5xl items-center justify-between gap-3">
+            <SearchBar jurisdictionId={targetJurId} autoFocus />
+            <button
+              type="button"
+              onClick={() => setSearchOpen(false)}
+              className="inline-flex min-h-[44px] items-center px-3 font-mono text-xs uppercase tracking-[0.12em] text-[#5b5e56] hover:text-[#080909]"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

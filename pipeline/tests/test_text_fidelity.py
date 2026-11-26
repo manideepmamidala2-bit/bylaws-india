@@ -4,10 +4,15 @@ from __future__ import annotations
 
 import copy
 import json
+import re
 from pathlib import Path
 
 from bylaws.config import load_jurisdiction_config
-from bylaws.fidelity import verify_jurisdiction_text_fidelity
+from bylaws.fidelity import (
+    _load_doc_page_token_sets,
+    extract_word_tokens,
+    verify_jurisdiction_text_fidelity,
+)
 from bylaws.root import resolve_repo_root
 
 
@@ -171,3 +176,54 @@ def test_ocr_corrections_unreadable_markers_and_gazette_headers_stripped() -> No
     assert "| OCR corrections applied (`ocr_status: corrected`) |" in qa_md
     assert "| Unreadable source fragments marked (`[unreadable in source]`) |" in qa_md
     assert "| Untraceable provision text failures | 0 | PASS |" in qa_md
+
+
+def test_home_page_far_story_excerpts_pass_verbatim_fidelity() -> None:
+    """Every quoted legal excerpt in the 5-step FAR story on the home page matches its cited structured provision and source page verbatim."""
+    repo_root = resolve_repo_root()
+    cfg = load_jurisdiction_config("in-ka-bengaluru")
+    trees = _load_clause_trees("in-ka-bengaluru", repo_root)
+
+    page_tsx = (repo_root / "app" / "page.tsx").read_text(encoding="utf-8")
+    quote_matches = dict(
+        re.findall(r'const\s+(s[1-5]Quote)\s*=\s*"([^"]+)";', page_tsx)
+    )
+    assert len(quote_matches) == 5, f"Expected 5 FAR story quotes in app/page.tsx, found {list(quote_matches)}"
+
+    expected_sources = [
+        ("s1Quote", "bbl-2003", "part_III__sec_9.0__cl_9.2", "bbl-2003", 21),
+        ("s2Quote", "rmp2015-zr", "chp_4__cl_4.1__cl_4.1.1", "rmp2015-zr", 28),
+        ("s3Quote", "bbl-2003", "part_I__sec_1.0__cl_1.4", "ka-model-bbl-2017", 2),
+        ("s4Quote", "rmp2015-zr-amend-2025-04", "chp_11_2", "rmp2015-zr-amend-2025-04", 2),
+        ("s5Quote", "rmp2015-zr-amend-2025-04", "chp_11_2__note_2", "rmp2015-zr-amend-2025-04", 3),
+    ]
+
+    for var_name, tree_doc_id, eid, page_doc_id, page_num in expected_sources:
+        excerpt = quote_matches[var_name]
+        tree = trees[tree_doc_id]
+        node = next(
+            (c for c in tree["clauses"] if c["eid"] == eid),
+            None,
+        )
+        assert node is not None, f"Missing node {tree_doc_id}:{eid}"
+        norm_node_txt = " ".join(str(node.get("text") or "").split())
+        norm_excerpt = " ".join(excerpt.split())
+        assert norm_excerpt in norm_node_txt, (
+            f"{var_name} is not a verbatim substring of {tree_doc_id}:{eid}"
+        )
+
+        page_sets = _load_doc_page_token_sets(
+            page_doc_id,
+            cfg.id,
+            parent_id=cfg.parent,
+            repo_root=repo_root,
+        )
+        valid_tokens: set[str] = set()
+        for p in (page_num - 1, page_num, page_num + 1):
+            valid_tokens |= page_sets.get(p, set())
+        missing = [
+            w for w in extract_word_tokens(excerpt) if w not in valid_tokens
+        ]
+        assert not missing, (
+            f"{var_name} ({page_doc_id} p.{page_num}) has words not on source page: {missing}"
+        )
