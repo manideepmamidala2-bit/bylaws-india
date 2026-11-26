@@ -99,7 +99,10 @@ def test_published_parameters_json_validates_and_matches_page_images() -> None:
         for r in records
         if r["parameter"] == "ground_coverage_max_pct"
         and r["source"]["doc_id"] == "rmp2015-zr"
-        and r["source"]["eid"] == "chp_4__cl_4.1__cl_4.1.3__tbl_1__row_2"
+        and r["source"]["eid"] in {
+            "chp_4__cl_4.1__cl_4.1.3__tbl_10__row_2",
+            "chp_4__cl_4.1__cl_4.1.3__tbl_1__row_2",
+        }
     ]
     assert len(r_main_cov) == 1
     assert r_main_cov[0]["value"] == 65.0
@@ -117,7 +120,10 @@ def test_published_parameters_json_validates_and_matches_page_images() -> None:
         for r in records
         if r["parameter"] == "far_base_max"
         and r["source"]["doc_id"] == "rmp2015-zr"
-        and r["source"]["eid"] == "chp_4__cl_4.1__cl_4.1.3__tbl_1__row_2"
+        and r["source"]["eid"] in {
+            "chp_4__cl_4.1__cl_4.1.3__tbl_10__row_2",
+            "chp_4__cl_4.1__cl_4.1.3__tbl_1__row_2",
+        }
     ]
     assert len(r_main_far) == 1
     assert r_main_far[0]["value"] == 2.25

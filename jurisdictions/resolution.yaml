@@ -1,7 +1,7 @@
 schema_version: "1.4"
 jurisdiction: in-ka-bengaluru
 derived: true
-notice: "Derived from the official documents by this project. Confirm with the planning authority or a qualified professional before relying on it."
+notice: "Worked out from the official documents by this site. Confirm with the planning authority or a qualified professional."
 instrument_families:
   zoning_regulations:
     - rmp2015-zr
@@ -40,8 +40,8 @@ steps:
     parameters_governed: null
     authority:
       doc_id: rmp2015-zr-amend-2026-01
-      eid: cl_11.11.2025
-      clause_id: "rmp2015-zr-amend-2026-01:11.11.2025"
+      eid: prea_1
+      clause_id: "rmp2015-zr-amend-2026-01:preamble"
       page: 1
       quote: "inviting objections and suggestions from all persons likely to be affected thereby within thirty days from the date of its publication in the official Gazette."
       official_url: "https://updates.bbmp.gov.in/v1/api/file/948358478137-Setback%20Notification.pdf"
@@ -101,7 +101,7 @@ steps:
       eid: part_I__sec_1.0__cl_1.4
       clause_id: "bbl-2003:1.4"
       page: 2
-      quote: "all mandatory Master Plan or Zonal Regulations regarding use, land use, coverage, FAR, setback or open space, height, number of stories, number of dwelling units, and parking standards for various categories of buildings, including all amendments or modifications made therein from time to time, apply mutatis mutandis as part of these Bye-laws."
+      quote: "All mandatory Master Plan or Zonal Regulations regarding use, land use, coverage, FAR, setback or open space, height, number of stories, number of dwelling units, parking standards etc. for various categories of buildings including modification therein made from time to time shall be applicable mutatis mutandis in these Bye-Laws under this clause."
       official_url: "https://site.bbmp.gov.in/PDF/Bangalore-Building-Byelaws-%202003.pdf"
     verification: machine_checked
 
@@ -114,8 +114,8 @@ steps:
     parameters_governed: null
     authority:
       doc_id: rmp2015-zr-amend-2026-01
-      eid: cl_11.11.2025__item_3
-      clause_id: "rmp2015-zr-amend-2026-01:1(3)"
+      eid: item_3
+      clause_id: "rmp2015-zr-amend-2026-01:(3)"
       page: 1
       quote: "They shall come into force from the date of their final publication in the official Gazette."
       official_url: "https://updates.bbmp.gov.in/v1/api/file/948358478137-Setback%20Notification.pdf"
