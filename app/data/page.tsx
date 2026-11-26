@@ -70,7 +70,7 @@ export default async function DataReleasesPage() {
               >
                 <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-[#c8ccc0] pb-4">
                   <div>
-                    <div className="dg-mono">{j.id}</div>
+                    <div className="dg-mono text-[#5b5e56]">Jurisdiction</div>
                     <h2 className="mt-1 text-2xl font-semibold text-[#080909]">
                       {j.name}
                     </h2>
@@ -252,82 +252,89 @@ export default async function DataReleasesPage() {
                 </div>
 
                 {decl && (
-                  <div className="mt-6 grid grid-cols-1 gap-4 border-t border-[#c8ccc0] pt-4 text-xs md:grid-cols-2">
-                    <div className="space-y-3">
-                      {decl.known_gaps && decl.known_gaps.length > 0 && (
+                  <details className="mt-6 border-t border-[#c8ccc0] pt-4 text-xs">
+                    <summary className="cursor-pointer font-mono text-xs uppercase tracking-[0.12em] text-[#5b5e56] underline">
+                      Details · Coverage notes, unobtainable scans &amp;
+                      declarations
+                    </summary>
+                    <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+                      <div className="space-y-3">
+                        {decl.known_gaps && decl.known_gaps.length > 0 && (
+                          <div>
+                            <h3 className="dg-mono text-[#080909]">
+                              Coverage Notes ({decl.known_gaps.length})
+                            </h3>
+                            {decl.known_gaps.map((kg, kIdx) => (
+                              <div
+                                key={`${kg.doc_id}-${kIdx}`}
+                                className="mt-1 border-l-2 border-[#080909] pl-3"
+                              >
+                                <div className="font-mono text-xs font-semibold">
+                                  {kg.doc_id}
+                                </div>
+                                <p className="dg-serif text-xs text-[#171917]">
+                                  {kg.description}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
                         <div>
                           <h3 className="dg-mono text-[#080909]">
-                            Coverage Notes ({decl.known_gaps.length})
+                            Not Modelled ({decl.not_modelled.length})
                           </h3>
-                          {decl.known_gaps.map((kg, kIdx) => (
+                          <ul className="dg-serif mt-2 list-disc space-y-1 pl-5 text-sm text-[#171917]">
+                            {decl.not_modelled.map((nm, idx) => (
+                              <li key={idx}>{nm}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div className="space-y-3">
+                        <div>
+                          <h3 className="dg-mono text-[#080909]">
+                            Contested Status (
+                            {decl.contested_status?.length ?? 0})
+                          </h3>
+                          {(decl.contested_status ?? []).map((cs) => (
                             <div
-                              key={`${kg.doc_id}-${kIdx}`}
+                              key={cs.doc_id}
                               className="mt-1 border-l-2 border-[#080909] pl-3"
                             >
                               <div className="font-mono text-xs font-semibold">
-                                {kg.doc_id}
+                                {cs.title} (Status not confirmed)
                               </div>
-                              <p className="dg-serif text-xs text-[#171917]">
-                                {kg.description}
+                              <p className="dg-serif text-xs text-[#5b5e56]">
+                                {cs.conflicting_evidence.join(" ")}
                               </p>
                             </div>
                           ))}
                         </div>
-                      )}
 
-                      <div>
-                        <h3 className="dg-mono text-[#080909]">
-                          Not Modelled ({decl.not_modelled.length})
-                        </h3>
-                        <ul className="dg-serif mt-2 list-disc space-y-1 pl-5 text-sm text-[#171917]">
-                          {decl.not_modelled.map((nm, idx) => (
-                            <li key={idx}>{nm}</li>
+                        <div>
+                          <h3 className="dg-mono text-[#080909]">
+                            Unobtainable Scans (
+                            {decl.unobtainable_documents?.length ?? 0})
+                          </h3>
+                          {(decl.unobtainable_documents ?? []).map((ud) => (
+                            <div
+                              key={ud.id}
+                              className="mt-1 border-l-2 border-[#c8ccc0] pl-3"
+                            >
+                              <div className="font-mono text-xs font-semibold">
+                                {ud.id}: {ud.title}
+                              </div>
+                              <p className="dg-serif text-xs text-[#5b5e56]">
+                                {ud.reason}
+                              </p>
+                            </div>
                           ))}
-                        </ul>
+                        </div>
                       </div>
                     </div>
-
-                    <div className="space-y-3">
-                      <div>
-                        <h3 className="dg-mono text-[#080909]">
-                          Contested Status ({decl.contested_status?.length ?? 0})
-                        </h3>
-                        {(decl.contested_status ?? []).map((cs) => (
-                          <div
-                            key={cs.doc_id}
-                            className="mt-1 border-l-2 border-[#080909] pl-3"
-                          >
-                            <div className="font-mono text-xs font-semibold">
-                              {cs.title} (Status not confirmed)
-                            </div>
-                            <p className="dg-serif text-xs text-[#5b5e56]">
-                              {cs.conflicting_evidence.join(" ")}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-
-                      <div>
-                        <h3 className="dg-mono text-[#080909]">
-                          Unobtainable Scans (
-                          {decl.unobtainable_documents?.length ?? 0})
-                        </h3>
-                        {(decl.unobtainable_documents ?? []).map((ud) => (
-                          <div
-                            key={ud.id}
-                            className="mt-1 border-l-2 border-[#c8ccc0] pl-3"
-                          >
-                            <div className="font-mono text-xs font-semibold">
-                              {ud.id}: {ud.title}
-                            </div>
-                            <p className="dg-serif text-xs text-[#5b5e56]">
-                              {ud.reason}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+                  </details>
                 )}
               </section>
             );

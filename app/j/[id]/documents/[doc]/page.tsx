@@ -10,11 +10,14 @@ import {
   type ClauseNode,
 } from "@/lib/data";
 import { TopNav } from "@/components/TopNav";
+import { CorporationSelector } from "@/components/CorporationSelector";
 import { ClauseTree } from "@/components/ClauseTree";
 import {
   formatHumanDate,
+  formatPlainDocumentTitle,
   formatPlainInstrumentStatus,
   formatPlainLayerLabel,
+  formatPlainWhatChangedSummary,
 } from "@/lib/plain-language";
 
 interface DocumentPageProps {
@@ -79,8 +82,8 @@ export default async function DocumentViewerPage({
           active="documents"
         />
         <main className="mx-auto max-w-5xl px-6 py-10">
-          <header className="border-b border-[#080909] pb-6">
-            <div className="dg-mono">Document · {jurisdiction.id}</div>
+          <header className="border-b border-[#c8ccc0] pb-6">
+            <div className="dg-mono">Document</div>
             <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909]">
               {jurisdiction.name}
             </h1>
@@ -226,6 +229,16 @@ export default async function DocumentViewerPage({
   }
 
   const originUrl = docMeta.official_url || docMeta.source_url;
+  const plainDocTitle = formatPlainDocumentTitle(docMeta);
+  const plainSummary =
+    docMeta.summary_by_site || formatPlainWhatChangedSummary(docMeta);
+  const relevantGaps = (declarations.known_gaps ?? []).filter(
+    (g) =>
+      g.doc_id === doc &&
+      !g.description.includes("04-03-2026") &&
+      !g.description.toLowerCase().includes("draft") &&
+      !g.description.toLowerCase().includes("zero extracted clauses")
+  );
 
   return (
     <div className="min-h-screen bg-[#f5f3ed] text-[#080909]">
@@ -237,43 +250,48 @@ export default async function DocumentViewerPage({
         licence={release.licence}
       />
 
-      <main className="mx-auto max-w-5xl px-6 py-8">
-        <div className="mb-4">
+      <main className="mx-auto max-w-5xl px-5 py-8">
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+          <Link
+            href={`/j/${jurisdiction.id}/topics`}
+            className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] text-[#5b5e56] no-underline hover:text-[#080909]"
+          >
+            ← The code
+          </Link>
           <Link
             href={`/j/${jurisdiction.id}/sources`}
-            className="font-mono text-xs uppercase tracking-[0.12em] text-[#5b5e56] underline hover:text-[#080909]"
+            className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] text-[#5b5e56] underline hover:text-[#080909]"
           >
-            Back to Source Register ({jurisdiction.name})
+            Sources
           </Link>
         </div>
 
-        <header className="mb-6 border border-[#080909] bg-[#efeee8] p-6">
+        <header className="mb-6 border-b border-[#c8ccc0] pb-6">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <span className="dg-mono">
-              {displayDate} · {formatPlainLayerLabel(docMeta.layer)}
+            <span className="dg-mono text-[#5b5e56]">
+              {docMeta.issuing_authority} · {displayDate} ·{" "}
+              {formatPlainLayerLabel(docMeta.layer)}
             </span>
-            <div className="flex items-center gap-2">
-              <span className="border border-[#080909] bg-[#f5f3ed] px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-[#080909]">
-                {plainStatus}
-              </span>
-            </div>
+            <span className="border border-[#080909] bg-[#efeee8] px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-[#080909]">
+              {plainStatus}
+            </span>
           </div>
 
           <h1 className="mt-2 text-2xl font-semibold tracking-tight text-[#080909] sm:text-3xl">
-            {docMeta.title}
+            {plainDocTitle}
           </h1>
 
-          {docMeta.summary_by_site && (
+          {plainSummary && (
             <p className="dg-serif mt-2 text-sm text-[#171917]">
-              <strong className="font-mono text-[10.5px] uppercase tracking-[0.08em] text-[#080909]">
-                In short (by this site):{" "}
+              <strong className="font-mono text-[10.5px] uppercase tracking-[0.08em] text-[#5b5e56]">
+                In short, by this site:{" "}
               </strong>
-              {docMeta.summary_by_site}
+              {plainSummary}
             </p>
           )}
 
           {docMeta.notes_by_site && docMeta.notes_by_site.length > 0 && (
-            <div className="mt-3 space-y-1 border-l-2 border-[#080909] bg-[#f5f3ed] px-3 py-2 text-xs text-[#171917]">
+            <div className="mt-3 space-y-1 border-l-2 border-[#080909] bg-[#efeee8] px-3 py-2 text-xs text-[#171917]">
               <div className="dg-mono text-[9.5px] text-[#080909]">
                 Note by this site
               </div>
@@ -285,52 +303,62 @@ export default async function DocumentViewerPage({
             </div>
           )}
 
+          <CorporationSelector
+            currentId={jurisdiction.id}
+            currentName={jurisdiction.name}
+            pathSuffix={`/documents/${doc}`}
+            corporations={gbaCorporations}
+          />
+
           <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-[#c8ccc0] pt-3 text-xs">
-            <div className="flex flex-wrap items-center gap-4 font-mono text-[11px] text-[#080909]">
+            <div className="flex flex-wrap items-center gap-4 font-mono text-xs text-[#080909]">
               {originUrl && originUrl.startsWith("http") && (
                 <a
                   href={originUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="underline"
+                  className="inline-flex min-h-[44px] items-center underline"
                 >
-                  Official Origin ↗
+                  Official PDF ↗
                 </a>
               )}
-              {docMeta.retrieval?.archive_url &&
-                docMeta.retrieval.archive_url.startsWith("http") && (
-                  <a
-                    href={docMeta.retrieval.archive_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline"
-                  >
-                    Wayback Snapshot ↗
-                  </a>
-                )}
             </div>
 
             <details className="text-xs">
-              <summary className="cursor-pointer font-mono text-[10px] uppercase tracking-[0.12em] text-[#5b5e56] underline">
-                Technical details
+              <summary className="inline-flex min-h-[44px] cursor-pointer items-center font-mono text-[11px] uppercase tracking-[0.12em] text-[#5b5e56] underline">
+                Details
               </summary>
-              <dl className="mt-2 grid grid-cols-1 gap-3 border border-[#c8ccc0] bg-[#f5f3ed] p-3 text-xs sm:grid-cols-3">
+              <dl className="mt-2 grid grid-cols-1 gap-3 border border-[#c8ccc0] bg-[#efeee8] p-3 text-xs sm:grid-cols-3">
                 <div>
-                  <dt className="dg-mono text-[10px]">Issuing Authority</dt>
-                  <dd className="text-[#171917]">{docMeta.issuing_authority}</dd>
+                  <dt className="dg-mono text-[10px]">Official title</dt>
+                  <dd className="text-[#171917]">{docMeta.title}</dd>
                 </div>
                 <div>
                   <dt className="dg-mono text-[10px]">Notification / Gazette</dt>
                   <dd className="font-mono text-[#080909]">
-                    {docMeta.notification_number ?? "Not recorded"}
+                    {docMeta.notification_number ?? "Not recorded"} (
+                    <code>{docMeta.doc_id}</code>)
                   </dd>
                 </div>
                 <div>
-                  <dt className="dg-mono text-[10px]">Notified / Effective</dt>
+                  <dt className="dg-mono text-[10px]">Archive &amp; Checksum</dt>
                   <dd className="font-mono text-[#080909]">
-                    {docMeta.notified_date ?? "Not recorded"} /{" "}
-                    {docMeta.effective_from ?? "Not in force"}
-                    {docMeta.sha256 ? ` · SHA-256: ${docMeta.sha256.slice(0, 12)}…` : ""}
+                    {docMeta.retrieval?.archive_url &&
+                    docMeta.retrieval.archive_url.startsWith("http") ? (
+                      <a
+                        href={docMeta.retrieval.archive_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline"
+                      >
+                        Wayback Snapshot ↗
+                      </a>
+                    ) : (
+                      "Archive not recorded"
+                    )}
+                    {docMeta.sha256
+                      ? ` · SHA-256: ${docMeta.sha256.slice(0, 12)}…`
+                      : ""}
                   </dd>
                 </div>
               </dl>
@@ -338,61 +366,20 @@ export default async function DocumentViewerPage({
           </div>
         </header>
 
-        {docMeta.role === "base" &&
-          docMeta.layer === "municipal" &&
-          gbaCorporations.length > 1 && (
-            <section
-              aria-label="Corporation consolidated view selector"
-              className="mb-6 border border-[#080909] bg-[#efeee8] p-4"
-            >
-              <div className="dg-mono text-[10.5px] text-[#080909]">
-                Corporation-Specific Consolidated View · 2026 Building (Amendment) Bye-laws
-              </div>
-              <p className="dg-serif mt-1 text-xs text-[#171917]">
-                Each City Corporation issued its own Building (Amendment)
-                Bye-laws, 2026 (in force 14 May 2026, omitting Bye-laws
-                3.8–3.10 and substituting Bye-law 6.0(i) with Table-2A to
-                Table-2D). Select a corporation to view its consolidated
-                version:
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2 font-mono text-[11px] uppercase tracking-[0.12em]">
-                {gbaCorporations.map((corp) => {
-                  const isCurrent = corp.id === jurisdiction.id;
-                  return (
-                    <Link
-                      key={corp.id}
-                      href={`/j/${corp.id}/documents/${doc}`}
-                      aria-current={isCurrent ? "page" : undefined}
-                      className={
-                        isCurrent
-                          ? "border border-[#080909] bg-[#080909] px-2.5 py-1.5 text-[#f5f3ed] no-underline"
-                          : "border border-[#080909] bg-[#f5f3ed] px-2.5 py-1.5 text-[#080909] no-underline hover:bg-[#e5e6de]"
-                      }
-                    >
-                      {corp.name}
-                    </Link>
-                  );
-                })}
-              </div>
-            </section>
-          )}
-
-        {(declarations.known_gaps ?? [])
-          .filter((g) => g.doc_id === doc)
-          .map((gap, gIdx) => (
-            <section
-              key={`gap-${gIdx}`}
-              aria-label="Document coverage notice"
-              className="mb-6 border border-[#080909] bg-[#efeee8] p-4"
-            >
-              <div className="dg-mono text-[10.5px] text-[#080909]">
-                Coverage Notice · Original Wording (v1)
-              </div>
-              <p className="dg-serif mt-1 text-sm text-[#171917]">
-                {gap.description}
-              </p>
-            </section>
-          ))}
+        {relevantGaps.map((gap, gIdx) => (
+          <section
+            key={`gap-${gIdx}`}
+            aria-label="Document coverage notice"
+            className="mb-6 border-l-2 border-[#080909] bg-[#efeee8] p-4"
+          >
+            <div className="dg-mono text-[10.5px] text-[#5b5e56]">
+              Known gap affecting this document
+            </div>
+            <p className="dg-serif mt-1 text-sm text-[#171917]">
+              {gap.description}
+            </p>
+          </section>
+        ))}
 
         {hasCitedReferenceTable ? (
           <section
@@ -453,20 +440,25 @@ export default async function DocumentViewerPage({
                         </td>
                         <td>{cp.topic ?? "Not specified"}</td>
                         <td className="font-mono text-xs">
-                          <div className="flex flex-wrap gap-2">
-                            {cp.cited_by.map((cid) => {
-                              const citingDoc = cid.split(":")[0];
-                              return (
-                                <Link
-                                  key={cid}
-                                  href={`/j/${jurisdiction.id}/documents/${citingDoc}`}
-                                  className="underline"
-                                >
-                                  {cid}
-                                </Link>
-                              );
-                            })}
-                          </div>
+                          <details>
+                            <summary className="cursor-pointer underline">
+                              {cp.cited_by.length} citing provision(s)
+                            </summary>
+                            <div className="mt-1 flex flex-wrap gap-2">
+                              {cp.cited_by.map((cid) => {
+                                const citingDoc = cid.split(":")[0];
+                                return (
+                                  <Link
+                                    key={cid}
+                                    href={`/j/${jurisdiction.id}/documents/${citingDoc}`}
+                                    className="underline"
+                                  >
+                                    {cid}
+                                  </Link>
+                                );
+                              })}
+                            </div>
+                          </details>
                         </td>
                         <td className="text-xs">
                           {cp.where_to_obtain ?? "Not specified"}
@@ -488,8 +480,8 @@ export default async function DocumentViewerPage({
             </h2>
             <p className="dg-serif mt-2 max-w-2xl text-sm text-[#171917]">
               This instrument is recorded in the legal source register for{" "}
-              {jurisdiction.name} but has not yet been structured into a clause
-              tree in Release v{release.version}.
+              {jurisdiction.name} but its full provision tree is not held on
+              this site.
             </p>
           </section>
         ) : (

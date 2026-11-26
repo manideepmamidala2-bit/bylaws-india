@@ -104,137 +104,146 @@ export function ReviewPanel({
         />
       </div>
 
-      {geoLayers.length > 0 && (
-        <div className="overflow-x-auto">
-          <div className="dg-mono mb-2">Registered Geospatial Layers</div>
-          <table className="dg-table">
-            <thead>
-              <tr>
-                <th>Layer ID</th>
-                <th>Kind</th>
-                <th>Method</th>
-                <th>Accuracy (m)</th>
-                <th>Derived</th>
-                <th>Features</th>
-              </tr>
-            </thead>
-            <tbody>
-              {geoLayers.map((lyr) => (
-                <tr key={lyr.layer_id}>
-                  <td className="font-mono text-xs">{lyr.layer_id}</td>
-                  <td className="font-mono text-xs">{lyr.kind}</td>
-                  <td>{lyr.method}</td>
-                  <td className="font-mono text-xs">
-                    {lyr.accuracy_m !== null
-                      ? `±${lyr.accuracy_m} m`
-                      : "Not measured"}
-                  </td>
-                  <td className="font-mono text-xs">
-                    {lyr.derived ? "Yes (Derived)" : "Official"}
-                  </td>
-                  <td className="font-mono text-xs">
-                    {lyr.feature_count ?? "0"}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+      <details className="border-t border-[#c8ccc0] pt-4">
+        <summary className="cursor-pointer font-mono text-xs uppercase tracking-[0.12em] text-[#5b5e56] underline">
+          Details · Registered geospatial layers &amp; polygon provenance
+        </summary>
 
-      {displayZones.length === 0 ? (
-        <p className="py-4 text-sm text-[#5b5e56]">
-          No zones available for review.
-        </p>
-      ) : (
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <div className="max-h-[420px] divide-y divide-[#c8ccc0] overflow-y-auto border border-[#080909]">
-            {displayZones.slice(0, 60).map((zone) => {
-              const props = zone.properties;
-              const isSelected =
-                selectedFeature?.properties.zone_id === props.zone_id;
-              const versionNum = props.record_version ?? 1;
-              return (
-                <button
-                  key={props.record_id ?? props.zone_id}
-                  type="button"
-                  onClick={() => setSelectedZoneId(props.zone_id)}
-                  className={`flex w-full items-center justify-between px-4 py-3 text-left text-sm ${
-                    isSelected
-                      ? "dg-selected-row font-semibold"
-                      : "bg-[#f5f3ed] hover:bg-[#efeee8]"
-                  }`}
-                >
-                  <div>
-                    <div className="font-mono text-xs text-[#080909]">
-                      {props.zone_code} · {props.zone_id}
-                      {versionNum > 1 ? ` · v${versionNum}` : ""}
-                    </div>
-                    <div className="dg-serif text-sm text-[#171917]">
-                      {props.zone_label}
-                    </div>
-                    <div className="font-mono text-[10px] text-[#5b5e56]">
-                      {props.planning_district
-                        ? `District ${props.planning_district} · `
-                        : ""}
-                      {props.sheet ? `${props.sheet} · ` : ""}
-                      {Math.round(props.area_sq_m).toLocaleString()} m²
-                    </div>
+        <div className="mt-4 space-y-6">
+          {geoLayers.length > 0 && (
+            <div className="overflow-x-auto">
+              <div className="dg-mono mb-2">Registered Geospatial Layers</div>
+              <table className="dg-table">
+                <thead>
+                  <tr>
+                    <th>Layer ID</th>
+                    <th>Kind</th>
+                    <th>Method</th>
+                    <th>Accuracy (m)</th>
+                    <th>Derived</th>
+                    <th>Features</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {geoLayers.map((lyr) => (
+                    <tr key={lyr.layer_id}>
+                      <td className="font-mono text-xs">{lyr.layer_id}</td>
+                      <td className="font-mono text-xs">{lyr.kind}</td>
+                      <td>{lyr.method}</td>
+                      <td className="font-mono text-xs">
+                        {lyr.accuracy_m !== null
+                          ? `±${lyr.accuracy_m} m`
+                          : "Not measured"}
+                      </td>
+                      <td className="font-mono text-xs">
+                        {lyr.derived ? "Yes (Derived)" : "Official"}
+                      </td>
+                      <td className="font-mono text-xs">
+                        {lyr.feature_count ?? "0"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {displayZones.length === 0 ? (
+            <p className="py-4 text-sm text-[#5b5e56]">
+              No zones available for review.
+            </p>
+          ) : (
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+              <div className="max-h-[420px] divide-y divide-[#c8ccc0] overflow-y-auto border border-[#080909]">
+                {displayZones.slice(0, 60).map((zone) => {
+                  const props = zone.properties;
+                  const isSelected =
+                    selectedFeature?.properties.zone_id === props.zone_id;
+                  const versionNum = props.record_version ?? 1;
+                  return (
+                    <button
+                      key={props.record_id ?? props.zone_id}
+                      type="button"
+                      onClick={() => setSelectedZoneId(props.zone_id)}
+                      className={`flex w-full items-center justify-between px-4 py-3 text-left text-sm ${
+                        isSelected
+                          ? "dg-selected-row font-semibold"
+                          : "bg-[#f5f3ed] hover:bg-[#efeee8]"
+                      }`}
+                    >
+                      <div>
+                        <div className="font-mono text-xs text-[#080909]">
+                          {props.zone_code} · {props.zone_id}
+                          {versionNum > 1 ? ` · v${versionNum}` : ""}
+                        </div>
+                        <div className="dg-serif text-sm text-[#171917]">
+                          {props.zone_label}
+                        </div>
+                        <div className="font-mono text-[10px] text-[#5b5e56]">
+                          {props.planning_district
+                            ? `District ${props.planning_district} · `
+                            : ""}
+                          {props.sheet ? `${props.sheet} · ` : ""}
+                          {Math.round(props.area_sq_m).toLocaleString()} m²
+                        </div>
+                      </div>
+                      <span className="border border-[#080909] px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#080909]">
+                        {props.verification.replace(/_/g, " ")}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {selectedFeature && (
+                <div className="space-y-4 border border-[#080909] bg-[#efeee8] p-4">
+                  <div className="dg-mono">
+                    Selected Zone Provenance · Overlay Opacity {opacity}%
                   </div>
-                  <span className="border border-[#080909] px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#080909]">
-                    {props.verification.replace(/_/g, " ")}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+                  <dl className="grid grid-cols-2 gap-2 text-xs">
+                    <div>
+                      <dt className="dg-mono text-[10px]">Record ID</dt>
+                      <dd className="font-mono text-[#080909]">
+                        {selectedFeature.properties.record_id}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="dg-mono text-[10px]">Extraction Method</dt>
+                      <dd className="font-mono text-[#080909]">
+                        {selectedFeature.properties.extraction_method}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="dg-mono text-[10px]">Source Map</dt>
+                      <dd className="font-mono text-[#080909]">
+                        {selectedFeature.properties.source_map}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="dg-mono text-[10px]">Georef Run</dt>
+                      <dd className="font-mono text-[#080909]">
+                        {typeof selectedFeature.properties.georef_run ===
+                        "string"
+                          ? selectedFeature.properties.georef_run
+                          : `${selectedFeature.properties.georef_run.target_crs} (${selectedFeature.properties.georef_run.gcp_count} GCPs · RMSE ${selectedFeature.properties.georef_run.rmse_m} m · LOO ${selectedFeature.properties.georef_run.loo_rmse_m} m)`}
+                      </dd>
+                    </div>
+                  </dl>
 
-          {selectedFeature && (
-            <div className="space-y-4 border border-[#080909] bg-[#efeee8] p-4">
-              <div className="dg-mono">
-                Selected Zone Provenance · Overlay Opacity {opacity}%
-              </div>
-              <dl className="grid grid-cols-2 gap-2 text-xs">
-                <div>
-                  <dt className="dg-mono text-[10px]">Record ID</dt>
-                  <dd className="font-mono text-[#080909]">
-                    {selectedFeature.properties.record_id}
-                  </dd>
+                  <div>
+                    <div className="dg-mono mb-1 text-[10px]">
+                      Override YAML Snippet
+                    </div>
+                    <pre className="overflow-x-auto border border-[#080909] bg-[#f5f3ed] p-3 font-mono text-xs text-[#080909]">
+                      {yamlSnippet}
+                    </pre>
+                  </div>
                 </div>
-                <div>
-                  <dt className="dg-mono text-[10px]">Extraction Method</dt>
-                  <dd className="font-mono text-[#080909]">
-                    {selectedFeature.properties.extraction_method}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="dg-mono text-[10px]">Source Map</dt>
-                  <dd className="font-mono text-[#080909]">
-                    {selectedFeature.properties.source_map}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="dg-mono text-[10px]">Georef Run</dt>
-                  <dd className="font-mono text-[#080909]">
-                    {typeof selectedFeature.properties.georef_run === "string"
-                      ? selectedFeature.properties.georef_run
-                      : `${selectedFeature.properties.georef_run.target_crs} (${selectedFeature.properties.georef_run.gcp_count} GCPs · RMSE ${selectedFeature.properties.georef_run.rmse_m} m · LOO ${selectedFeature.properties.georef_run.loo_rmse_m} m)`}
-                  </dd>
-                </div>
-              </dl>
-
-              <div>
-                <div className="dg-mono mb-1 text-[10px]">
-                  Override YAML Snippet
-                </div>
-                <pre className="overflow-x-auto border border-[#080909] bg-[#f5f3ed] p-3 font-mono text-xs text-[#080909]">
-                  {yamlSnippet}
-                </pre>
-              </div>
+              )}
             </div>
           )}
         </div>
-      )}
+      </details>
     </section>
   );
 }

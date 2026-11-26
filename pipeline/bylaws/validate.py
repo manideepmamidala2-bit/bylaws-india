@@ -657,6 +657,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
             d
             for d in config.documents
             if getattr(d, "acquisition_status", "acquired") == "not_found"
+            and d.legal_status == "in_force"
             and doc.id in (d.amends or [])
         ]
         for unobt in unobtained_amends_for_base:

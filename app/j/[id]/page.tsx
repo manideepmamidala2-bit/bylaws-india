@@ -12,6 +12,7 @@ import {
   type ZoneGeometry,
 } from "@/lib/data";
 import { TopNav } from "@/components/TopNav";
+import { CorporationSelector } from "@/components/CorporationSelector";
 import { AreaExplorerClient } from "@/components/AreaExplorerClient";
 
 interface JurisdictionMapPageProps {
@@ -77,10 +78,10 @@ export default async function JurisdictionMapPage({
           active="map"
         />
         <main className="mx-auto w-full max-w-6xl px-6 py-10">
-          <header className="border-b border-[#080909] pb-6">
-            <div className="dg-mono">{jurisdiction.id} · Map</div>
+          <header className="border-b border-[#c8ccc0] pb-6">
+            <div className="dg-mono">Map</div>
             <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909]">
-              {jurisdiction.name}
+              Map · {jurisdiction.name}
             </h1>
           </header>
           <section
@@ -209,85 +210,46 @@ export default async function JurisdictionMapPage({
         <span>{accuracyMessage}</span>
       </div>
 
-      <div className="border-b border-[#080909] bg-[#f5f3ed] px-6 py-5">
-        <div className="dg-mono">
-          {jurisdiction.aliases && jurisdiction.aliases.length > 0
-            ? jurisdiction.aliases.slice(0, 5).join(" · ")
-            : "Map & Plot Building Code"}
-        </div>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909] sm:text-4xl">
-          {jurisdiction.name}
-        </h1>
-        {gbaJurisdictions.length > 1 && (
-          <div
-            aria-label="City corporation selector"
-            className="mt-3 flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em]"
-          >
-            <span className="text-[#5b5e56]">Corporation View:</span>
-            {gbaJurisdictions.map((j) => {
-              const isCurrent = j.id === jurisdiction.id;
-              return (
-                <Link
-                  key={j.id}
-                  href={`/j/${j.id}`}
-                  aria-current={isCurrent ? "page" : undefined}
-                  className={
-                    isCurrent
-                      ? "border border-[#080909] bg-[#080909] px-2.5 py-1 text-[#f5f3ed] no-underline"
-                      : "border border-[#080909] bg-[#efeee8] px-2.5 py-1 text-[#080909] no-underline hover:bg-[#e5e6de]"
-                  }
-                >
-                  {j.name}
-                </Link>
-              );
-            })}
+      <div className="border-b border-[#c8ccc0] bg-[#f5f3ed] px-5 py-5">
+        <div className="mx-auto max-w-6xl">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <span className="dg-mono text-[#5b5e56]">
+              Official boundaries, wards &amp; land-use zones
+            </span>
+            <Link
+              href={`/j/${jurisdiction.id}/topics`}
+              className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] text-[#080909] underline decoration-[#080909] underline-offset-4"
+            >
+              ← Back to the code
+            </Link>
           </div>
-        )}
-        <div className="mt-3 flex flex-wrap gap-6 font-mono text-[11px] uppercase tracking-[0.12em] text-[#5b5e56]">
-          <span>
-            Sources{" "}
-            <strong className="font-semibold text-[#080909]">
-              {inForceDocsCount} in force · {draftDocsCount} draft ·{" "}
-              {documents.length} total
-            </strong>
-          </span>
-          <span>
-            Clauses{" "}
-            <strong className="font-semibold text-[#080909]">
-              {activeClauses.length}
-            </strong>
-          </span>
-          <span>
-            Zones{" "}
-            <strong className="font-semibold text-[#080909]">
-              {activeZonesCount}
-            </strong>
-          </span>
-          <span>
-            Amendment links{" "}
-            <strong className="font-semibold text-[#080909]">
-              {amendments.links.length}
-            </strong>
-          </span>
-        </div>
-      </div>
+          <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909] sm:text-4xl">
+            Map · {jurisdiction.name}
+          </h1>
+          <p className="dg-serif mt-2 text-base text-[#171917]">
+            Inspect official City Corporation and ward boundaries alongside
+            georeferenced RMP 2015 Proposed Land Use zones.
+          </p>
 
-      <div className="border-b border-[#c8ccc0] bg-[#efeee8] px-6 py-2.5 text-xs text-[#5b5e56]">
-        <span className="mr-2 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[#080909]">
-          COVERAGE &amp; DECLARATIONS
-        </span>
-        <span className="dg-serif text-sm text-[#171917]">
-          {declarations.known_gaps && declarations.known_gaps.length > 0
-            ? `${declarations.known_gaps[0].description} `
-            : ""}
-          Not modelled: {declarations.not_modelled.join("; ") || "None"}.
-          {declarations.contested_status &&
-          declarations.contested_status.length > 0
-            ? ` Contested status (${declarations.contested_status.length}): ${declarations.contested_status
-                .map((c) => `${c.title} (status not confirmed)`)
-                .join(", ")}.`
-            : ""}
-        </span>
+          <CorporationSelector
+            currentId={jurisdiction.id}
+            currentName={jurisdiction.name}
+            pathSuffix=""
+            corporations={gbaJurisdictions}
+          />
+
+          <details className="mt-3 text-xs text-[#5b5e56]">
+            <summary className="inline-flex min-h-[44px] cursor-pointer items-center font-mono text-[11px] uppercase tracking-[0.12em] text-[#5b5e56] underline">
+              Details · Map coverage &amp; declarations ({activeZonesCount}{" "}
+              zones, {inForceDocsCount} in-force sources, {draftDocsCount} draft,{" "}
+              {activeClauses.length} provisions, {amendments.links.length}{" "}
+              amendment links)
+            </summary>
+            <div className="mt-2 border border-[#c8ccc0] bg-[#efeee8] p-3 text-xs text-[#171917]">
+              {declarations.not_modelled.join(" ")}
+            </div>
+          </details>
+        </div>
       </div>
 
       <main className="flex flex-1 flex-col">

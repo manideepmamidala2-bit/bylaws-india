@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { fetchJurisdictionDataset, fetchManifest } from "@/lib/data";
 import { TopNav } from "@/components/TopNav";
 import { StatusBadge } from "@/components/StatusBadge";
+import { formatPlainDocumentTitle } from "@/lib/plain-language";
 
 interface ProvisionPageProps {
   params: Promise<{ id: string; doc: string; eid: string }>;
@@ -167,6 +168,7 @@ export default async function ProvisionDetailPage({
   const firstCit = node.citations?.[0];
   const pdfUrl =
     node.official_url || docMeta.official_url || docMeta.source_url;
+  const plainDocTitle = formatPlainDocumentTitle(docMeta, doc);
 
   return (
     <div className="min-h-screen bg-[#f5f3ed] text-[#080909]">
@@ -191,15 +193,15 @@ export default async function ProvisionDetailPage({
             href={`/j/${jurisdiction.id}/documents/${doc}`}
             className="underline"
           >
-            {doc}
+            {plainDocTitle}
           </Link>{" "}
-          / <span className="text-[#080909]">{resolvedEid}</span>
+          / <span className="text-[#080909]">Provision {node.native_number ?? node.number}</span>
         </nav>
 
         <header className="border border-[#080909] bg-[#efeee8] p-6">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="dg-mono">
-              {doc}:{resolvedEid} · {node.type ?? "clause"}
+              {plainDocTitle} · {node.type ?? "clause"}
             </span>
             <div className="flex items-center gap-2">
               {firstCit && pdfUrl && (
@@ -238,173 +240,180 @@ export default async function ProvisionDetailPage({
               ))}
             </div>
           )}
-        </header>
 
-        {/* Version History */}
-        {node.versions && node.versions.length > 0 && (
-          <section
-            aria-label="Provision version history"
-            className="border border-[#080909] bg-[#f5f3ed] p-6"
-          >
-            <div className="dg-mono mb-2">
-              1 · Version History ({node.versions.length})
-            </div>
-            <div className="space-y-3">
-              {node.versions.map((ver) => (
-                <div
-                  key={ver.version_id}
-                  className="border border-[#c8ccc0] bg-[#efeee8] p-3"
+          <details className="mt-4 border-t border-[#c8ccc0] pt-3">
+            <summary className="cursor-pointer font-mono text-xs uppercase tracking-[0.12em] text-[#5b5e56]">
+              Details · Version history &amp; local graph ({neighbors.length})
+            </summary>
+
+            <div className="mt-4 space-y-6">
+              <div className="font-mono text-xs text-[#5b5e56]">
+                Address: <code>{doc}:{resolvedEid}</code>
+              </div>
+
+              {node.versions && node.versions.length > 0 && (
+                <section
+                  aria-label="Provision version history"
+                  className="border border-[#080909] bg-[#f5f3ed] p-4"
                 >
-                  <div className="font-mono text-xs font-semibold">
-                    {ver.version_id} · From {ver.valid_from ?? "Original"} to{" "}
-                    {ver.valid_to ?? "Present"} · Source: {ver.source_doc}:
-                    {ver.source_eid}
+                  <div className="dg-mono mb-2">
+                    1 · Version History ({node.versions.length})
                   </div>
-                  <p className="dg-serif mt-1 text-sm text-[#171917]">
-                    {ver.content || ver.heading}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
+                  <div className="space-y-3">
+                    {node.versions.map((ver) => (
+                      <div
+                        key={ver.version_id}
+                        className="border border-[#c8ccc0] bg-[#efeee8] p-3"
+                      >
+                        <div className="font-mono text-xs font-semibold">
+                          {ver.version_id} · From{" "}
+                          {ver.valid_from ?? "Original"} to{" "}
+                          {ver.valid_to ?? "Present"} · Source:{" "}
+                          {ver.source_doc}:{ver.source_eid}
+                        </div>
+                        <p className="dg-serif mt-1 text-sm text-[#171917]">
+                          {ver.content || ver.heading}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
 
-        {/* Local Neighborhood Graph + Accessible Connection List */}
-        <section
-          aria-label="Local provision neighborhood graph"
-          className="border border-[#080909] bg-[#efeee8] p-6"
-        >
-          <div className="dg-mono mb-1">
-            2 · Local Knowledge Graph &amp; Accessible Connections (
-            {neighbors.length})
-          </div>
-          <h2 className="text-xl font-semibold text-[#080909]">
-            One-Hop Neighborhood Around {doc}:{resolvedEid}
-          </h2>
-          <p className="dg-serif mt-1 text-sm text-[#171917]">
-            Solid ink lines show structural containment, defined terms,
-            cross-references, and amendments; dashed ink lines highlight
-            cross-document differences or conflicts.
-          </p>
-
-          <div className="mt-4 grid grid-cols-1 gap-6 lg:grid-cols-2">
-            {/* SVG Local Graph */}
-            <div className="border border-[#080909] bg-[#f5f3ed] p-4">
-              <svg
-                viewBox="0 0 420 320"
-                className="h-auto w-full"
-                role="img"
-                aria-label={`Local neighborhood graph for ${doc}:${resolvedEid}`}
+              <section
+                aria-label="Local provision neighborhood graph"
+                className="border border-[#080909] bg-[#f5f3ed] p-4"
               >
-                {neighbors.slice(0, 8).map((nb, idx, arr) => {
-                  const angle = (2 * Math.PI * idx) / Math.max(1, arr.length);
-                  const nx = Math.round(210 + 135 * Math.cos(angle));
-                  const ny = Math.round(160 + 110 * Math.sin(angle));
-                  return (
-                    <g key={nb.key}>
-                      <line
-                        x1={210}
-                        y1={160}
-                        x2={nx}
-                        y2={ny}
-                        stroke="#080909"
-                        strokeWidth={nb.isConflict ? 1.8 : 1.2}
-                        strokeDasharray={nb.isConflict ? "4 3" : undefined}
-                      />
+                <div className="dg-mono mb-1">
+                  2 · Local Knowledge Graph &amp; Accessible Connections (
+                  {neighbors.length})
+                </div>
+                <h2 className="text-lg font-semibold text-[#080909]">
+                  One-Hop Neighborhood Around {doc}:{resolvedEid}
+                </h2>
+                <div className="mt-4 grid grid-cols-1 gap-6 lg:grid-cols-2">
+                  <div className="border border-[#080909] bg-[#f5f3ed] p-4">
+                    <svg
+                      viewBox="0 0 420 320"
+                      className="h-auto w-full"
+                      role="img"
+                      aria-label={`Local neighborhood graph for ${doc}:${resolvedEid}`}
+                    >
+                      {neighbors.slice(0, 8).map((nb, idx, arr) => {
+                        const angle =
+                          (2 * Math.PI * idx) / Math.max(1, arr.length);
+                        const nx = Math.round(210 + 135 * Math.cos(angle));
+                        const ny = Math.round(160 + 110 * Math.sin(angle));
+                        return (
+                          <g key={nb.key}>
+                            <line
+                              x1={210}
+                              y1={160}
+                              x2={nx}
+                              y2={ny}
+                              stroke="#080909"
+                              strokeWidth={nb.isConflict ? 1.8 : 1.2}
+                              strokeDasharray={nb.isConflict ? "4 3" : undefined}
+                            />
+                            <rect
+                              x={nx - 58}
+                              y={ny - 16}
+                              width={116}
+                              height={32}
+                              fill="#efeee8"
+                              stroke="#080909"
+                              strokeDasharray={nb.isConflict ? "3 2" : undefined}
+                            />
+                            <text
+                              x={nx}
+                              y={ny - 2}
+                              textAnchor="middle"
+                              fontSize="8.5"
+                              fontFamily="monospace"
+                              fill="#5b5e56"
+                            >
+                              {nb.edgeKind}
+                            </text>
+                            <text
+                              x={nx}
+                              y={ny + 10}
+                              textAnchor="middle"
+                              fontSize="9"
+                              fontFamily="monospace"
+                              fontWeight="bold"
+                              fill="#080909"
+                            >
+                              {nb.label.slice(0, 18)}
+                            </text>
+                          </g>
+                        );
+                      })}
                       <rect
-                        x={nx - 58}
-                        y={ny - 16}
-                        width={116}
-                        height={32}
-                        fill="#efeee8"
+                        x={145}
+                        y={138}
+                        width={130}
+                        height={44}
+                        fill="#080909"
                         stroke="#080909"
-                        strokeDasharray={nb.isConflict ? "3 2" : undefined}
                       />
                       <text
-                        x={nx}
-                        y={ny - 2}
+                        x={210}
+                        y={156}
                         textAnchor="middle"
-                        fontSize="8.5"
+                        fontSize="9.5"
                         fontFamily="monospace"
-                        fill="#5b5e56"
+                        fill="#f5f3ed"
                       >
-                        {nb.edgeKind}
+                        {doc}
                       </text>
                       <text
-                        x={nx}
-                        y={ny + 10}
+                        x={210}
+                        y={171}
                         textAnchor="middle"
-                        fontSize="9"
+                        fontSize="10.5"
                         fontFamily="monospace"
                         fontWeight="bold"
-                        fill="#080909"
+                        fill="#f5f3ed"
                       >
-                        {nb.label.slice(0, 18)}
+                        {resolvedEid.slice(0, 18)}
                       </text>
-                    </g>
-                  );
-                })}
-                <rect
-                  x={145}
-                  y={138}
-                  width={130}
-                  height={44}
-                  fill="#080909"
-                  stroke="#080909"
-                />
-                <text
-                  x={210}
-                  y={156}
-                  textAnchor="middle"
-                  fontSize="9.5"
-                  fontFamily="monospace"
-                  fill="#f5f3ed"
-                >
-                  {doc}
-                </text>
-                <text
-                  x={210}
-                  y={171}
-                  textAnchor="middle"
-                  fontSize="10.5"
-                  fontFamily="monospace"
-                  fontWeight="bold"
-                  fill="#f5f3ed"
-                >
-                  {resolvedEid.slice(0, 18)}
-                </text>
-              </svg>
-            </div>
+                    </svg>
+                  </div>
 
-            {/* Accessible Plain List of Connections */}
-            <div className="border border-[#080909] bg-[#f5f3ed] p-4">
-              <div className="dg-mono mb-2 text-[10.5px] text-[#080909]">
-                Accessible Connection List ({neighbors.length})
-              </div>
-              {neighbors.length === 0 ? (
-                <p className="text-xs text-[#5b5e56]">
-                  No direct neighbor links recorded for this provision.
-                </p>
-              ) : (
-                <ul className="divide-y divide-[#c8ccc0] font-mono text-xs">
-                  {neighbors.map((nb) => (
-                    <li
-                      key={nb.key}
-                      className="flex items-center justify-between gap-2 py-2"
-                    >
-                      <span className="uppercase text-[#5b5e56]">
-                        {nb.edgeKind}
-                      </span>
-                      <Link href={nb.href} className="font-semibold underline">
-                        {nb.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              )}
+                  <div className="border border-[#080909] bg-[#f5f3ed] p-4">
+                    <div className="dg-mono mb-2 text-[10.5px] text-[#080909]">
+                      Accessible Connection List ({neighbors.length})
+                    </div>
+                    {neighbors.length === 0 ? (
+                      <p className="text-xs text-[#5b5e56]">
+                        No direct neighbor links recorded for this provision.
+                      </p>
+                    ) : (
+                      <ul className="divide-y divide-[#c8ccc0] font-mono text-xs">
+                        {neighbors.map((nb) => (
+                          <li
+                            key={nb.key}
+                            className="flex items-center justify-between gap-2 py-2"
+                          >
+                            <span className="uppercase text-[#5b5e56]">
+                              {nb.edgeKind}
+                            </span>
+                            <Link
+                              href={nb.href}
+                              className="font-semibold underline"
+                            >
+                              {nb.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+              </section>
             </div>
-          </div>
-        </section>
+          </details>
+        </header>
       </main>
     </div>
   );

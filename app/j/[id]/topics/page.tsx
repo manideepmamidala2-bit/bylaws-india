@@ -7,6 +7,8 @@ import {
   getVisibleJurisdictions,
 } from "@/lib/data";
 import { TopNav } from "@/components/TopNav";
+import { CorporationSelector } from "@/components/CorporationSelector";
+import { CODE_SUBJECTS } from "@/lib/plain-language";
 
 interface TopicsPageProps {
   params: Promise<{ id: string }>;
@@ -29,7 +31,7 @@ export default async function TopicsIndexPage({ params }: TopicsPageProps) {
     notFound();
   }
 
-  const { jurisdiction, release, annotationsByDocId, relations } = dataset;
+  const { jurisdiction, relations } = dataset;
   const allVisible = getVisibleJurisdictions(manifest);
   const rootParentId =
     jurisdiction.parent ??
@@ -42,223 +44,125 @@ export default async function TopicsIndexPage({ params }: TopicsPageProps) {
       )
     : [];
 
-  const topics = relations?.topics ?? [];
-  const allRelations = relations?.relations ?? [];
   const succession = relations?.succession ?? [];
 
-  // Count provisions tagged per topic per document
-  const countsByTopicDoc: Record<string, Record<string, number>> = {};
-  for (const [docId, anns] of Object.entries(annotationsByDocId)) {
-    for (const ann of anns) {
-      if (ann.kind === "topic") {
-        const tId = ann.value;
-        countsByTopicDoc[tId] = countsByTopicDoc[tId] ?? {};
-        countsByTopicDoc[tId][docId] = (countsByTopicDoc[tId][docId] ?? 0) + 1;
-      }
-    }
-  }
-
   return (
-    <div className="min-h-screen bg-[#f5f3ed] text-[#080909]">
+    <div className="bg-[#f5f3ed] text-[#080909]">
       <TopNav
         jurisdictionId={jurisdiction.id}
         jurisdictionName={jurisdiction.name}
         active="topics"
-        releaseVersion={release?.version}
-        licence={release?.licence}
       />
 
-      <main className="mx-auto max-w-6xl space-y-8 px-6 py-8">
-        <header className="border-b border-[#080909] pb-6">
-          <div className="dg-mono">
-            Rules by Subject · Regulatory Topics &amp; Cross-Document Relations
-          </div>
-          <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909]">
-            Rules by Subject
+      <main className="mx-auto max-w-5xl space-y-12 px-5 py-10">
+        <header className="border-b border-[#c8ccc0] pb-6">
+          <div className="dg-mono text-[#5b5e56]">The code</div>
+          <h1 className="mt-2 text-3xl font-semibold tracking-tight text-[#080909] md:text-4xl">
+            The code, by subject.
           </h1>
-          <p className="dg-serif mt-2 max-w-3xl text-base text-[#171917]">
-            See what applies today on each building subject across the master
+          <p className="dg-serif mt-3 text-base leading-relaxed text-[#171917]">
+            Each subject brings together what applies today across the master
             plan zoning regulations, building bye-laws, and corporation
-            amendments, along with former and current statutory authorities.
+            amendments, with every figure traced to its official page.
           </p>
 
-          {gbaCorporations.length > 1 && (
-            <div
-              aria-label="Corporation topics selector"
-              className="mt-4 flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em]"
-            >
-              <span className="text-[#5b5e56]">Corporation:</span>
-              {gbaCorporations.map((corp) => {
-                const isCurrent = corp.id === jurisdiction.id;
-                return (
-                  <Link
-                    key={corp.id}
-                    href={`/j/${corp.id}/topics`}
-                    aria-current={isCurrent ? "page" : undefined}
-                    className={
-                      isCurrent
-                        ? "border border-[#080909] bg-[#080909] px-2.5 py-1 text-[#f5f3ed] no-underline"
-                        : "border border-[#080909] bg-[#efeee8] px-2.5 py-1 text-[#080909] no-underline hover:bg-[#e5e6de]"
-                    }
-                  >
-                    {corp.name}
-                  </Link>
-                );
-              })}
-            </div>
-          )}
+          <CorporationSelector
+            currentId={jurisdiction.id}
+            currentName={jurisdiction.name}
+            pathSuffix="/topics"
+            corporations={gbaCorporations}
+          />
         </header>
 
-        {/* Topics Grid */}
-        <section aria-label="Regulatory topics">
-          <div className="dg-mono mb-3">
-            1 · Regulatory Topics ({topics.length})
-          </div>
-          {topics.length === 0 ? (
-            <p className="text-sm text-[#5b5e56]">
-              No topic index published for this jurisdiction yet.
-            </p>
-          ) : (
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {topics.map((topic) => {
-                const byDoc = countsByTopicDoc[topic.id] ?? {};
-                const totalProvisions = Object.values(byDoc).reduce(
-                  (a, b) => a + b,
-                  0
-                );
-                const topicRels = allRelations.filter(
-                  (r) => r.topic === topic.id
-                );
-                const diffCount = topicRels.filter(
-                  (r) =>
-                    r.kind === "definition_differs" ||
-                    r.kind === "numeric_differs" ||
-                    r.kind === "corporation_differs"
-                ).length;
-                const precCount = topicRels.filter(
-                  (r) => r.kind === "precedence"
-                ).length;
+        <section aria-label="Subjects of the building code">
+          <ul
+            data-testid="topics-subject-list"
+            className="divide-y divide-[#c8ccc0] border-y border-[#c8ccc0]"
+          >
+            {CODE_SUBJECTS.map((subj, idx) => (
+              <li
+                key={subj.slug}
+                className="flex flex-col justify-between gap-2 py-5 md:flex-row md:items-baseline md:gap-6"
+              >
+                <div className="space-y-1">
+                  <div className="flex items-baseline gap-3">
+                    <span className="dg-mono text-[#5b5e56]">
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                    <Link
+                      href={`/j/${jurisdiction.id}/topics/${subj.slug}`}
+                      className="text-xl font-semibold text-[#080909] underline decoration-[#c8ccc0] underline-offset-4 hover:decoration-[#080909]"
+                    >
+                      {subj.title}
+                    </Link>
+                  </div>
+                  <p className="dg-serif text-sm leading-relaxed text-[#171917]">
+                    {subj.summary}
+                  </p>
+                </div>
 
-                return (
-                  <article
-                    key={topic.id}
-                    className="flex flex-col justify-between border border-[#080909] bg-[#f5f3ed] p-5"
+                <div className="flex shrink-0 items-center gap-4">
+                  {subj.hasMapLink && (
+                    <Link
+                      href={`/j/${jurisdiction.id}`}
+                      className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] text-[#5b5e56] underline decoration-[#c8ccc0] underline-offset-4 hover:text-[#080909]"
+                    >
+                      Open map
+                    </Link>
+                  )}
+                  <Link
+                    href={`/j/${jurisdiction.id}/topics/${subj.slug}`}
+                    className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] text-[#080909] underline decoration-[#080909] underline-offset-4"
                   >
-                    <div>
-                      <div className="flex flex-wrap items-center justify-between gap-2">
-                        <span className="dg-mono text-[10px] text-[#5b5e56]">
-                          Subject
-                        </span>
-                        <div className="flex flex-wrap gap-1.5 font-mono text-[10px] uppercase tracking-[0.12em]">
-                          <span className="border border-[#080909] bg-[#efeee8] px-2 py-0.5">
-                            {totalProvisions} provisions
-                          </span>
-                          {diffCount > 0 && (
-                            <span className="border border-dashed border-[#080909] bg-[#efeee8] px-2 py-0.5 font-semibold">
-                              {diffCount} differences
-                            </span>
-                          )}
-                          {precCount > 0 && (
-                            <span className="border border-[#080909] bg-[#efeee8] px-2 py-0.5">
-                              {precCount} precedence
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                      <h2 className="mt-2 text-lg font-semibold text-[#080909]">
-                        <Link
-                          href={`/j/${jurisdiction.id}/topics/${topic.id}`}
-                          className="underline hover:text-[#5b5e56]"
-                        >
-                          {topic.label}
-                        </Link>
-                      </h2>
-                      <p className="dg-serif mt-1 text-sm text-[#171917]">
-                        {topic.description}
-                      </p>
-                    </div>
-
-                    <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-[#c8ccc0] pt-3 font-mono text-[11px]">
-                      <div className="text-[#5b5e56]">
-                        Across{" "}
-                        <strong className="text-[#080909]">
-                          {Object.keys(byDoc).length}
-                        </strong>{" "}
-                        instrument(s)
-                      </div>
-                      <Link
-                        href={`/j/${jurisdiction.id}/topics/${topic.id}`}
-                        className="border border-[#080909] bg-[#080909] px-2.5 py-1 uppercase tracking-[0.12em] text-[#f5f3ed] no-underline"
-                      >
-                        What Applies Today →
-                      </Link>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-          )}
+                    What applies today →
+                  </Link>
+                </div>
+              </li>
+            ))}
+          </ul>
         </section>
 
-        {/* Institution Succession Table */}
         {succession.length > 0 && (
-          <section
-            aria-label="Institution succession"
-            className="border border-[#080909] bg-[#efeee8] p-6"
-          >
-            <div className="dg-mono mb-2">
-              2 · Statutory Institution &amp; Office Succession
-            </div>
-            <h2 className="text-xl font-semibold text-[#080909]">
-              Former Authorities &amp; Current Successor Bodies in{" "}
-              {jurisdiction.name}
-            </h2>
-            <p className="dg-serif mt-1 max-w-3xl text-sm text-[#171917]">
-              Provisions in older instruments that name predecessor municipal or
-              planning bodies are displayed verbatim alongside their statutory
-              successor under the enabling municipal governance statute:
-            </p>
-            <div className="mt-4 overflow-x-auto">
-              <table className="dg-table">
-                <thead>
-                  <tr>
-                    <th>Predecessor Body / Office</th>
-                    <th>Now ({jurisdiction.name})</th>
-                    <th>Effective Date</th>
-                    <th>Enacting Instrument &amp; Quoted Evidence</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {succession.map((s) => (
-                    <tr key={s.id}>
-                      <td className="font-mono text-xs font-medium">
-                        {s.old_body}
-                      </td>
-                      <td className="font-mono text-xs font-semibold">
-                        now: {s.new_body}
-                      </td>
-                      <td className="font-mono text-xs">{s.effective_date}</td>
-                      <td className="text-xs">
-                        <div className="font-semibold">{s.instrument_title}</div>
-                        <div className="dg-serif mt-1 italic text-[#171917]">
-                          &ldquo;{s.quoted_evidence}&rdquo;
-                        </div>
-                        {s.source_url && s.source_url.startsWith("http") && (
-                          <a
-                            href={s.source_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="mt-1 inline-block font-mono text-[10.5px] underline"
-                          >
-                            Source PDF ↗
-                          </a>
-                        )}
-                      </td>
+          <section aria-label="Statutory authority succession">
+            <details className="border-y border-[#c8ccc0] py-4">
+              <summary className="flex min-h-[44px] cursor-pointer items-center justify-between font-mono text-xs uppercase tracking-[0.12em] text-[#5b5e56] hover:text-[#080909]">
+                <span>
+                  Details · Former and current statutory authorities (
+                  {succession.length})
+                </span>
+              </summary>
+              <div className="mt-4 overflow-x-auto">
+                <table className="dg-table">
+                  <thead>
+                    <tr>
+                      <th>Former body</th>
+                      <th>Current body</th>
+                      <th>Effective date</th>
+                      <th>Quoted statutory authority</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody>
+                    {succession.map((s) => (
+                      <tr key={s.id}>
+                        <td className="font-mono text-xs">{s.old_body}</td>
+                        <td className="font-mono text-xs font-medium">
+                          {s.new_body}
+                        </td>
+                        <td className="font-mono text-xs">
+                          {s.effective_date}
+                        </td>
+                        <td className="text-xs">
+                          <div className="font-medium">{s.instrument_title}</div>
+                          <div className="dg-serif mt-1 italic text-[#171917]">
+                            &ldquo;{s.quoted_evidence}&rdquo;
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </details>
           </section>
         )}
       </main>
