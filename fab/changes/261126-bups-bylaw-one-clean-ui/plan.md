@@ -142,45 +142,51 @@ All pages MUST be designed for `390 px` phone viewports first (then `1280 px` de
 
 ### Functional Completeness
 
-- [ ] A-001 R1: `pipeline/bylaws/parameters.py` enforces plausibility bounds per parameter kind, converts hectare intervals (`"Upto 0.40 Hectares"` → `4,000 m²`), reclassifies/excludes non-FAR rows (deviation tolerances, compounding fees, premium FAR price rows), and keeps sentence parking values as text, with tests in `pipeline/tests/test_parameters_and_relations.py`
-- [ ] A-002 R2: The site is named **Bylaw One** throughout (`app/layout.tsx`, wordmark, Open Graph metadata, favicon `app/icon.svg`, page titles) with descriptor `"Bengaluru's building rules. One code."` and dg2n tokens (`#f5f3ed`, `#efeee8`, `#080909`, `#5b5e56`, `#c8ccc0`, `#ff6b52` never used for text)
-- [ ] A-003 R3: Primary-layer copy outside `<details>` contains zero internal IDs, enum names, schema/release internals, or raw unit tokens (`sq_m`), enforced by CI in `pipeline/tests/test_release_and_copy_consistency.py`
-- [ ] A-004 R4: Header displays `"Bylaw One"`, three items (**The code**, **What changed**, **About**), and search trigger (collapsing on `390 px` phones with `>= 44 px` tap targets), and footer links to `Sources`, `Map`, `Data and downloads`, `Licence`, and `How this is built`
-- [ ] A-005 R5: Home page (`/`) renders Hero (with computed document/body counts), `01 / The problem` (with convergence illustration), `02 / Follow one rule: FAR` (5 steps: 2004, 2007, 2017, 2025, Today with verbatim excerpts verified by `test_text_fidelity.py` and working page links), `03 / The code, by subject` (11 subjects), `04 / Recently changed`, FAQ, and `"Read. Trace. Compare."` closing, with no map and no plot inputs
-- [ ] A-006 R6: Subject pages (`/j/[id]/topics/[topic]`) open with **What applies today** as clean deduplicated tables with units (`m`, `m²`, `%`), conditions in words, and `"p. N"` page links (raw row text only inside Details), followed by **Why this rule applies**, collapsed **Older or replaced rules**, collapsed **Related provisions**, and relevant-only gap notes
-- [ ] A-007 R7: Document pages render in law order with number + verbatim text first, Details on tap, no `"Read provisions"` link for unstructured documents, and no 4 March 2026 South draft notice on in-force documents; What changed and Sources are ordered newest first; Map shows area/ward/corporation/zone only; About includes `#how-this-is-built`, `#licence`, and full FAQ
-- [ ] A-008 R8: Phone-first (`390 px` and `1280 px`) layout, `axe-core` WCAG AA checks, page budgets (`<= 300 KB` HTML, `<= 1.5 MB` JS+data), CI language check, excerpt fidelity check, and Playwright browser tests pass
+- [x] A-001 R1: `pipeline/bylaws/parameters.py` enforces plausibility bounds per parameter kind, converts hectare intervals (`"Upto 0.40 Hectares"` → `4,000 m²`), reclassifies/excludes non-FAR rows (deviation tolerances, compounding fees, premium FAR price rows), and keeps sentence parking values as text, with tests in `pipeline/tests/test_parameters_and_relations.py`
+- [x] A-002 R2: The site is named **Bylaw One** throughout (`app/layout.tsx`, wordmark, Open Graph metadata, favicon `app/icon.svg`, page titles) with descriptor `"Bengaluru's building rules. One code."` and dg2n tokens (`#f5f3ed`, `#efeee8`, `#080909`, `#5b5e56`, `#c8ccc0`, `#ff6b52` never used for text)
+- [x] A-003 R3: Primary-layer copy outside `<details>` contains zero internal IDs, enum names, schema/release internals, or raw unit tokens (`sq_m`), enforced by CI in `pipeline/tests/test_release_and_copy_consistency.py`
+- [x] A-004 R4: Header displays `"Bylaw One"`, three items (**The code**, **What changed**, **About**), and search trigger (collapsing on `390 px` phones with `>= 44 px` tap targets), and footer links to `Sources`, `Map`, `Data and downloads`, `Licence`, and `How this is built`
+- [x] A-005 R5: Home page (`/`) renders Hero (with computed document/body counts), `01 / The problem` (with convergence illustration), `02 / Follow one rule: FAR` (5 steps: 2004, 2007, 2017, 2025, Today with verbatim excerpts verified by `test_text_fidelity.py` and working page links), `03 / The code, by subject` (11 subjects), `04 / Recently changed`, FAQ, and `"Read. Trace. Compare."` closing, with no map and no plot inputs
+- [x] A-006 R6: Subject pages (`/j/[id]/topics/[topic]`) open with **What applies today** as clean deduplicated tables with units (`m`, `m²`, `%`), conditions in words, and `"p. N"` page links (raw row text only inside Details), followed by **Why this rule applies**, collapsed **Older or replaced rules**, collapsed **Related provisions**, and relevant-only gap notes
+- [x] A-007 R7: Document pages render in law order with number + verbatim text first, Details on tap, no `"Read provisions"` link for unstructured documents, and no 4 March 2026 South draft notice on in-force documents; What changed and Sources are ordered newest first; Map shows area/ward/corporation/zone only; About includes `#how-this-is-built`, `#licence`, and full FAQ
+- [x] A-008 R8: Phone-first (`390 px` and `1280 px`) layout, `axe-core` WCAG AA checks, page budgets (`<= 300 KB` HTML, `<= 1.5 MB` JS+data), CI language check, excerpt fidelity check, and Playwright browser tests pass
 
 ### Behavioral Correctness
 
-- [ ] A-009 R1: No out-of-bounds parameter value or `0.4 m²` hectare misread is displayed in any subject table or home FAR table, and any excluded out-of-bounds values are documented for owner review
-- [ ] A-010 R5: Every quoted legal excerpt in the 5-step FAR story on the home page is verified verbatim against its cited source page by `pipeline/tests/test_text_fidelity.py`
+- [x] A-009 R1: No out-of-bounds parameter value or `0.4 m²` hectare misread is displayed in any subject table or home FAR table, and any excluded out-of-bounds values are documented for owner review
+- [x] A-010 R5: Every quoted legal excerpt in the 5-step FAR story on the home page is verified verbatim against its cited source page by `pipeline/tests/test_text_fidelity.py`
 
 ### Removal Verification
 
-- [ ] A-011 R7: Plot calculator cards, plot area/road width inputs, and plot answers are removed from Home, Map, Subject, and Document pages while `pipeline/bylaws/resolver.py` and `lib/resolver.ts` and their unit tests remain in the repository and pass
+- [x] A-011 R7: Plot calculator cards, plot area/road width inputs, and plot answers are removed from Home, Map, Subject, and Document pages while `pipeline/bylaws/resolver.py` and `lib/resolver.ts` and their unit tests remain in the repository and pass
 
 ### Scenario Coverage
 
-- [ ] A-012 R5: Playwright browser tests verify the home page 5-step FAR story (steps 1–5, verbatim excerpts, working page links), a subject page clean table with units, a document page provision expansion, and the absence of plot inputs across pages
-- [ ] A-013 R1: `pytest pipeline/tests/test_parameters_and_relations.py` verifies hectare conversion, plausibility bounds, non-FAR row exclusion, and sentence parking values against source tables
+- [x] A-012 R5: Playwright browser tests verify the home page 5-step FAR story (steps 1–5, verbatim excerpts, working page links), a subject page clean table with units, a document page provision expansion, and the absence of plot inputs across pages
+- [x] A-013 R1: `pytest pipeline/tests/test_parameters_and_relations.py` verifies hectare conversion, plausibility bounds, non-FAR row exclusion, and sentence parking values against source tables
 
 ### Edge Cases & Error Handling
 
-- [ ] A-014 R5: The 5-step FAR story works without JavaScript as a semantic ordered list (`<ol>`) and stacks vertically on `390 px` phones while supporting keyboard navigation and reduced motion
-- [ ] A-015 R7: Instruments whose text is not held (`structured: false` or `reference_only`) never show a `"Read provisions"` link, and draft notices never appear on in-force documents
+- [x] A-014 R5: The 5-step FAR story works without JavaScript as a semantic ordered list (`<ol>`) and stacks vertically on `390 px` phones while supporting keyboard navigation and reduced motion
+- [x] A-015 R7: Instruments whose text is not held (`structured: false` or `reference_only`) never show a `"Read provisions"` link, and draft notices never appear on in-force documents
 
 ### Code Quality
 
-- [ ] A-016 Pattern consistency: New code follows naming and structural patterns of surrounding code
-- [ ] A-017 No unnecessary duplication: Existing utilities in `lib/plain-language.ts`, `lib/data.ts`, and `pipeline/bylaws/` are reused where applicable
-- [ ] A-018 Readability and maintainability: Components and parser helpers remain focused and readable without god functions (`>50 lines` without clear reason) or magic numbers without named constants (`fab/project/code-quality.md`)
+- [x] A-016 Pattern consistency: New code follows naming and structural patterns of surrounding code
+- [x] A-017 No unnecessary duplication: Existing utilities in `lib/plain-language.ts`, `lib/data.ts`, and `pipeline/bylaws/` are reused where applicable
+- [x] A-018 Readability and maintainability: Components and parser helpers remain focused and readable without god functions (`>50 lines` without clear reason) or magic numbers without named constants (`fab/project/code-quality.md`)
 
 ## Notes
 
 - Check items as you review: `- [x]`
 - All acceptance items must pass before `/fab-continue` (hydrate)
 - If an item is not applicable, mark checked and prefix with **N/A**: `- [x] A-NNN **N/A**: {reason}`
+
+## Deletion Candidates
+
+- `components/PlotCard.tsx` — Standalone Plot Card UI component no longer imported by any route or component after removing plot inputs and plot answers from view (while `pipeline/bylaws/resolver.py` and `lib/resolver.ts` remain in the repository per `docs/plans/bylaw-one-clean-ui-plan.md` §8).
+- `app/j/[id]/page.tsx:33-39,270-283` and `components/AreaExplorerClient.tsx:35-37` — Optional `parametersPayload`, `resolutionConfig`, and `consolidatedPayload` props passed to `AreaExplorerClient` that are no longer consumed after removing `PlotCard` from the map sidebar.
+- `TopNavProps.jurisdictionName`, `TopNavProps.releaseVersion`, and `TopNavProps.licence` in `components/TopNav.tsx:21-25` — Optional props retained for call-site compatibility that are no longer rendered in the simplified 3-item header.
 
 ## Assumptions
 
