@@ -74,13 +74,19 @@ SECTION_PREFIX_RE = re.compile(
 )
 
 DECIMAL_CLAUSE_RE = re.compile(
-    r"^(?P<number>[A-Z]?\d+(?:\.\d+)+(?:\([0-9A-Za-z.]+\))?[A-Z]?)\)?\.?\s+"
+    r"^(?P<number>(?:[IVXLCDM]+-|[A-Z])?\d+(?:\.\d+)+(?:\([0-9A-Za-z.]+\))?[A-Z]?)\)?\.?\s+"
     r"(?P<rest>[A-Za-z'\"\u201c\u2018(\u0c80-\u0cff].+)$"
 )
 
 INT_CLAUSE_RE = re.compile(
-    r"^(?P<number>\d{1,3}(?:-[A-Z]|[A-Z])?)[.)]\s+(?P<rest>[A-Za-z'\"\u201c\u2018(\u0c80-\u0cff].+)$"
+    r"^(?P<number>(?:[IVXLCDM]+-\d{1,3}|\d{1,3}(?:-[A-Z]|[A-Z])?)[.)]?)\s+(?P<rest>[A-Za-z'\"\u201c\u2018(\u0c80-\u0cff].+)$"
 )
+
+CONTINUATION_WORD_RE = re.compile(
+    r"^(?:and|or|to|of|in|by|at|on|as|with|from|along|below|above|wherever|whichever)\b"
+)
+
+COLUMN_NUMBERS_ONLY_RE = re.compile(r"^\(\d+\)(?:\s*\(\d+\))*$")
 
 SUB_ITEM_RE = re.compile(
     r"^(?:\((?P<subnum>[a-z]{1,2}|[ivxlcdm]+|\d+)\)|(?P<bare_sub>[a-z]|[ivxlcdm]{1,4})\)|(?P<dot_roman>i|ii|iii|iv|v|vi|vii|viii|ix|x|xi|xii)\.)\s+(?P<rest>.+)$"
@@ -492,7 +498,7 @@ def _match_structural_line(line: str) -> tuple[str, str, str] | None:
         number = dec_match.group("number")
         rest = dec_match.group("rest").strip()
         base_num_str = number.split("(")[0]
-        if DATE_TOKEN_RE.match(base_num_str):
+        if DATE_TOKEN_RE.match(base_num_str) or CONTINUATION_WORD_RE.match(rest):
             return None
         base_parts = base_num_str.split(".")
         is_float_measurement = len(base_parts) == 2 and base_parts[1] == "00"
@@ -505,9 +511,16 @@ def _match_structural_line(line: str) -> tuple[str, str, str] | None:
 
     int_match = INT_CLAUSE_RE.match(line)
     if int_match:
-        number = int_match.group("number")
+        raw_num = int_match.group("number")
+        has_punct = raw_num.endswith((".", ")"))
+        number = raw_num.rstrip(".)")
         rest = int_match.group("rest").strip()
-        if not MEASUREMENT_UNIT_RE.match(rest):
+        is_roman_sched_num = "-" in number and number.split("-", 1)[0].isalpha()
+        if (
+            (has_punct or is_roman_sched_num)
+            and not CONTINUATION_WORD_RE.match(rest)
+            and not MEASUREMENT_UNIT_RE.match(rest)
+        ):
             return "int_clause", number, rest
 
     sub_match = SUB_ITEM_RE.match(line)
@@ -518,6 +531,8 @@ def _match_structural_line(line: str) -> tuple[str, str, str] | None:
             or sub_match.group("dot_roman")
         )
         rest = sub_match.group("rest").strip()
+        if COLUMN_NUMBERS_ONLY_RE.match(rest):
+            return None
         return "subitem", subnum, rest
 
     return None
@@ -644,6 +659,7 @@ def build_clause_tree_from_parse_result(
     seen_numbers: Counter[str] = Counter()
 
     current: dict[str, Any] | None = None
+    current_notification_eid: str | None = None
     current_container_eid: str | None = None
     current_section_node: dict[str, Any] | None = None
     current_clause_node: dict[str, Any] | None = None
@@ -813,6 +829,8 @@ def build_clause_tree_from_parse_result(
                 eid, uniq_num = _allocate_unique_eid_and_number(
                     None, kind, number, number
                 )
+                is_notif_part = kind == "part" and str(number).startswith("NOTIFICATION")
+                container_parent = None if is_notif_part else current_notification_eid
                 node_dict = {
                     "eid": eid,
                     "native_number": number,
@@ -821,7 +839,7 @@ def build_clause_tree_from_parse_result(
                     "heading": rest,
                     "title": rest,
                     "level": 1,
-                    "parent_eid": None,
+                    "parent_eid": container_parent,
                     "children": [],
                     "intro_parts": [],
                     "content_parts": [rest],
@@ -831,9 +849,13 @@ def build_clause_tree_from_parse_result(
                     "ocr_corrections": list(block_ocr_corrections),
                     "has_unreadable": block_has_unreadable,
                 }
+                if container_parent and container_parent in nodes_by_eid:
+                    nodes_by_eid[container_parent]["children"].append(eid)
                 raw_nodes.append(node_dict)
                 nodes_by_eid[eid] = node_dict
                 current = node_dict
+                if is_notif_part:
+                    current_notification_eid = eid
                 current_container_eid = eid
                 current_section_node = None
                 current_clause_node = None
@@ -927,6 +949,8 @@ def build_clause_tree_from_parse_result(
                             parent_eid = cand["eid"]
                             level = min(4, int(cand["level"]) + 1)
                             break
+                        if cand.get("eid") == current_container_eid:
+                            break
                 elif len(parts) == 2:
                     if (
                         current_section_node is not None
@@ -942,6 +966,8 @@ def build_clause_tree_from_parse_result(
                             parent_eid = cand["eid"]
                             level = min(4, int(cand["level"]) + 1)
                             matched_parent = True
+                            break
+                        if cand.get("eid") == current_container_eid:
                             break
                     if (
                         not matched_parent
@@ -962,6 +988,14 @@ def build_clause_tree_from_parse_result(
                     node_type = "section"
                 else:
                     node_type = "clause"
+
+                while (
+                    parent_eid
+                    and len(parent_eid.split("__")) > 4
+                    and parent_eid in nodes_by_eid
+                    and nodes_by_eid[parent_eid].get("parent_eid")
+                ):
+                    parent_eid = str(nodes_by_eid[parent_eid]["parent_eid"])
 
                 eid, uniq_num = _allocate_unique_eid_and_number(
                     parent_eid, node_type, number, number
@@ -1047,6 +1081,14 @@ def build_clause_tree_from_parse_result(
                     parent_eid = current_container_eid
                     scoped_number = f"({subnum})"
                     level = 2
+
+                while (
+                    parent_eid
+                    and len(parent_eid.split("__")) > 4
+                    and parent_eid in nodes_by_eid
+                    and nodes_by_eid[parent_eid].get("parent_eid")
+                ):
+                    parent_eid = str(nodes_by_eid[parent_eid]["parent_eid"])
 
                 title, body = _split_title_and_body(rest)
                 def_info = _extract_defined_term(body, title)
@@ -1173,6 +1215,44 @@ def build_clause_tree_from_parse_result(
             nodes_by_eid[eid] = node_dict
             current = node_dict
 
+    # Deduplicate any provisions in the same document that have identical (parent_eid, native_number, normalized_text)
+    deduped_raw_nodes: list[dict[str, Any]] = []
+    seen_scoped_key: dict[tuple[str | None, str, str], dict[str, Any]] = {}
+    reparent_eid_map: dict[str, str] = {}
+    for item in raw_nodes:
+        if item.get("parent_eid") in reparent_eid_map:
+            item["parent_eid"] = reparent_eid_map[str(item["parent_eid"])]
+        intro_s = " ".join(p.strip() for p in item.get("intro_parts", []) if p.strip()).strip()
+        content_s = " ".join(p.strip() for p in item.get("content_parts", []) if p.strip()).strip()
+        wrap_s = " ".join(p.strip() for p in item.get("wrap_up_parts", []) if p.strip()).strip()
+        comb_s = " ".join(p for p in (intro_s, content_s, wrap_s) if p).strip() or str(item.get("heading") or "")
+        norm_txt = re.sub(r"[^a-z0-9]+", " ", comb_s.lower()).strip()
+        nat_num = str(item.get("native_number") or "").strip()
+        p_eid = item.get("parent_eid")
+        if nat_num and norm_txt:
+            s_key = (p_eid, nat_num, norm_txt)
+            if s_key in seen_scoped_key:
+                existing_node = seen_scoped_key[s_key]
+                existing_node["blocks"].extend(item.get("blocks") or [])
+                existing_node["ocr_corrections"].extend(item.get("ocr_corrections") or [])
+                if item.get("has_unreadable"):
+                    existing_node["has_unreadable"] = True
+                for ch_eid in item.get("children") or []:
+                    if ch_eid not in existing_node["children"]:
+                        existing_node["children"].append(ch_eid)
+                reparent_eid_map[str(item["eid"])] = str(existing_node["eid"])
+                continue
+            seen_scoped_key[s_key] = item
+        deduped_raw_nodes.append(item)
+
+    if reparent_eid_map:
+        for item in deduped_raw_nodes:
+            if item.get("children"):
+                item["children"] = [
+                    ch for ch in item["children"] if ch not in reparent_eid_map
+                ]
+    raw_nodes = deduped_raw_nodes
+
     commencement_date = doc.effective_from or doc.notified_date
     is_amendment_doc = doc.role == "amendment" or doc.doc_type in {"amendment", "notification"}
     clauses_out: list[dict[str, Any]] = []
@@ -1188,6 +1268,26 @@ def build_clause_tree_from_parse_result(
         intro_str = " ".join(p.strip() for p in item.get("intro_parts", []) if p.strip()).strip() or None
         content_str = " ".join(p.strip() for p in item.get("content_parts", []) if p.strip()).strip() or None
         wrap_up_str = " ".join(p.strip() for p in item.get("wrap_up_parts", []) if p.strip()).strip() or None
+
+        raw_heading = item.get("heading")
+        if (
+            raw_heading
+            and content_str
+            and content_str.strip() == str(raw_heading).strip()
+            and item["type"]
+            in {
+                "clause",
+                "subclause",
+                "item",
+                "paragraph",
+                "proviso",
+                "explanation",
+                "note",
+                "definition",
+            }
+        ):
+            raw_heading = None
+            item["heading"] = None
 
         combined_text_parts = [p for p in (intro_str, content_str, wrap_up_str) if p]
         full_text = " ".join(combined_text_parts).strip() or str(item.get("heading") or eid)
@@ -1387,6 +1487,13 @@ def build_clause_tree_from_parse_result(
 
         if target_clause is None:
             continue
+
+        while (
+            len(str(target_clause["eid"]).split("__")) > 4
+            and target_clause.get("parent_eid")
+            and str(target_clause["parent_eid"]) in out_by_eid
+        ):
+            target_clause = out_by_eid[str(target_clause["parent_eid"])]
 
         cid = str(target_clause["clause_id"])
         parent_eid = str(target_clause["eid"])

@@ -493,9 +493,34 @@ def build_document_annotations(tree_payload: dict[str, Any]) -> dict[str, Any]:
                             }
                         )
 
-        # 4. Topic & Quantity annotations (Schema 1.4 / 09b)
+        # 4. Topic & Quantity annotations (Schema 1.4 / 09b; Part 3: exclude non-content nodes)
         node_heading_str = str(node.get("heading") or "")
-        if compiled_topics and len(active_nodes) <= 2500 and candidate_fields:
+        is_non_content_node = (
+            node_type
+            in {
+                "preface",
+                "preamble",
+                "signature_block",
+                "part",
+                "chapter",
+                "schedule",
+                "annexure",
+                "appendix",
+                "form",
+            }
+            or eid.startswith(("pref_", "prea_", "sig_", "part_", "chp_"))
+            and "__" not in eid
+            or "TABLE OF CONTENTS" in node_heading_str.upper()
+            or "INDEX" == node_heading_str.strip().upper()
+            or (
+                node_heading_str
+                and str(node.get("content") or "").strip() == node_heading_str.strip()
+                and len(node_heading_str.strip()) <= 60
+                and not node.get("intro")
+                and not node.get("wrap_up")
+            )
+        )
+        if not is_non_content_node and compiled_topics and len(active_nodes) <= 2500 and candidate_fields:
             first_field_name, first_field_text = candidate_fields[0]
             matched_topics: set[str] = set()
             if node_type == "definition" or node.get("defines_normalised"):
@@ -610,12 +635,13 @@ def build_document_annotations(tree_payload: dict[str, Any]) -> dict[str, Any]:
                 if a.get("kind") == "provision_type" and (a.get("target") or {}).get("eid") == eid
             }
             is_excluded_from_zones = (
-                is_def_or_child
-                or node_type in {"preamble", "definition"}
+                is_non_content_node
+                or is_def_or_child
+                or node_type in {"preface", "preamble", "signature_block", "definition"}
                 or bool(node.get("defines"))
                 or bool(node.get("defines_normalised"))
                 or bool(node_prov_types & {"commencement", "scope", "definition"})
-                or eid.startswith(("prea_", "part_I__sec_1.0", "part_I__sec_2.0", "sec_DEFINITIONS", "chp_1"))
+                or eid.startswith(("pref_", "prea_", "sig_", "part_I__sec_1.0", "part_I__sec_2.0", "sec_DEFINITIONS", "chp_1"))
             )
             if not is_excluded_from_zones:
                 matched_zones: set[str] = set()
