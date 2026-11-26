@@ -55,7 +55,7 @@ export default async function AboutPage() {
           <div className="dg-mono text-[#080909]">Current Status</div>
           <h2 className="mt-1 text-lg font-semibold text-[#080909]">
             {primary?.latest_release
-              ? `Release ${primary.latest_release} published — all checks are machine checks`
+              ? `Release ${primary.latest_release} published; all checks are machine checks`
               : "Consolidated building code published"}
           </h2>
           <p className="dg-serif mt-2 text-sm leading-relaxed text-[#171917]">

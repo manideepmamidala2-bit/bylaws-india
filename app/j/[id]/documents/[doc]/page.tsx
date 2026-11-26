@@ -10,8 +10,12 @@ import {
   type ClauseNode,
 } from "@/lib/data";
 import { TopNav } from "@/components/TopNav";
-import { StatusBadge } from "@/components/StatusBadge";
 import { ClauseTree } from "@/components/ClauseTree";
+import {
+  formatHumanDate,
+  formatPlainInstrumentStatus,
+  formatPlainLayerLabel,
+} from "@/lib/plain-language";
 
 interface DocumentPageProps {
   params: Promise<{ id: string; doc: string }>;
@@ -103,7 +107,17 @@ export default async function DocumentViewerPage({
     notFound();
   }
 
-  const isReferenceOnly = docMeta.text_rights?.mode === "reference_only";
+  const iType = docMeta.instrument_type ?? "instrument";
+  const isNonTextInstrument =
+    iType === "compilation" || iType === "map" || iType === "bill";
+  const isReferenceOnly =
+    docMeta.text_rights?.mode === "reference_only" || isNonTextInstrument;
+  const hasCitedReferenceTable =
+    isReferenceOnly && (docMeta.cited_provisions?.length ?? 0) > 0;
+  const plainStatus = formatPlainInstrumentStatus(docMeta);
+  const displayDate = formatHumanDate(
+    docMeta.effective_from || docMeta.notified_date
+  );
   const allDocClauses: ClauseNode[] = clauses
     .filter((c) => c.doc_id === doc)
     .map((c) => {
@@ -236,14 +250,12 @@ export default async function DocumentViewerPage({
         <header className="mb-6 border border-[#080909] bg-[#efeee8] p-6">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="dg-mono">
-              {docMeta.doc_id} · {docMeta.layer} ·{" "}
-              {docMeta.doc_type ?? docMeta.role}
+              {displayDate} · {formatPlainLayerLabel(docMeta.layer)}
             </span>
             <div className="flex items-center gap-2">
-              <span className="border border-[#080909] bg-[#f5f3ed] px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-[#080909]">
-                {isReferenceOnly ? "REFERENCE ONLY" : "FULL TEXT"}
+              <span className="border border-[#080909] bg-[#f5f3ed] px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-[#080909]">
+                {plainStatus}
               </span>
-              <StatusBadge status={docMeta.legal_status} />
             </div>
           </div>
 
@@ -251,57 +263,79 @@ export default async function DocumentViewerPage({
             {docMeta.title}
           </h1>
 
-          <dl className="mt-4 grid grid-cols-1 gap-3 border-t border-[#c8ccc0] pt-3 text-xs sm:grid-cols-4">
-            <div>
-              <dt className="dg-mono text-[10px]">Issuing Authority</dt>
-              <dd className="text-[#171917]">{docMeta.issuing_authority}</dd>
+          {docMeta.summary_by_site && (
+            <p className="dg-serif mt-2 text-sm text-[#171917]">
+              <strong className="font-mono text-[10.5px] uppercase tracking-[0.08em] text-[#080909]">
+                In short (by this site):{" "}
+              </strong>
+              {docMeta.summary_by_site}
+            </p>
+          )}
+
+          {docMeta.notes_by_site && docMeta.notes_by_site.length > 0 && (
+            <div className="mt-3 space-y-1 border-l-2 border-[#080909] bg-[#f5f3ed] px-3 py-2 text-xs text-[#171917]">
+              <div className="dg-mono text-[9.5px] text-[#080909]">
+                Note by this site
+              </div>
+              {docMeta.notes_by_site.map((noteTxt, nIdx) => (
+                <p key={nIdx} className="dg-serif">
+                  {noteTxt}
+                </p>
+              ))}
             </div>
-            <div>
-              <dt className="dg-mono text-[10px]">Notification / Gazette</dt>
-              <dd className="font-mono text-[#080909]">
-                {docMeta.notification_number ?? "Not recorded"}
-              </dd>
-            </div>
-            <div>
-              <dt className="dg-mono text-[10px]">Notified / Effective</dt>
-              <dd className="font-mono text-[#080909]">
-                {docMeta.notified_date ?? "Not recorded"} /{" "}
-                {docMeta.effective_from ?? "Not in force"}
-              </dd>
-            </div>
-            <div>
-              <dt className="dg-mono text-[10px]">Origin &amp; Checksum</dt>
-              <dd className="font-mono text-[11px] text-[#080909]">
-                {originUrl && originUrl.startsWith("http") ? (
+          )}
+
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-[#c8ccc0] pt-3 text-xs">
+            <div className="flex flex-wrap items-center gap-4 font-mono text-[11px] text-[#080909]">
+              {originUrl && originUrl.startsWith("http") && (
+                <a
+                  href={originUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline"
+                >
+                  Official Origin ↗
+                </a>
+              )}
+              {docMeta.retrieval?.archive_url &&
+                docMeta.retrieval.archive_url.startsWith("http") && (
                   <a
-                    href={originUrl}
+                    href={docMeta.retrieval.archive_url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="underline"
                   >
-                    Official Origin ↗
+                    Wayback Snapshot ↗
                   </a>
-                ) : (
-                  "Staged source"
                 )}
-                {docMeta.retrieval?.archive_url &&
-                  docMeta.retrieval.archive_url.startsWith("http") && (
-                    <>
-                      {" · "}
-                      <a
-                        href={docMeta.retrieval.archive_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="underline"
-                      >
-                        Wayback Snapshot ↗
-                      </a>
-                    </>
-                  )}
-                {docMeta.sha256 ? ` · ${docMeta.sha256.slice(0, 12)}…` : ""}
-              </dd>
             </div>
-          </dl>
+
+            <details className="text-xs">
+              <summary className="cursor-pointer font-mono text-[10px] uppercase tracking-[0.12em] text-[#5b5e56] underline">
+                Technical details
+              </summary>
+              <dl className="mt-2 grid grid-cols-1 gap-3 border border-[#c8ccc0] bg-[#f5f3ed] p-3 text-xs sm:grid-cols-3">
+                <div>
+                  <dt className="dg-mono text-[10px]">Issuing Authority</dt>
+                  <dd className="text-[#171917]">{docMeta.issuing_authority}</dd>
+                </div>
+                <div>
+                  <dt className="dg-mono text-[10px]">Notification / Gazette</dt>
+                  <dd className="font-mono text-[#080909]">
+                    {docMeta.notification_number ?? "Not recorded"}
+                  </dd>
+                </div>
+                <div>
+                  <dt className="dg-mono text-[10px]">Notified / Effective</dt>
+                  <dd className="font-mono text-[#080909]">
+                    {docMeta.notified_date ?? "Not recorded"} /{" "}
+                    {docMeta.effective_from ?? "Not in force"}
+                    {docMeta.sha256 ? ` · SHA-256: ${docMeta.sha256.slice(0, 12)}…` : ""}
+                  </dd>
+                </div>
+              </dl>
+            </details>
+          </div>
         </header>
 
         {docMeta.role === "base" &&
@@ -360,7 +394,7 @@ export default async function DocumentViewerPage({
             </section>
           ))}
 
-        {isReferenceOnly ? (
+        {hasCitedReferenceTable ? (
           <section
             aria-label="Reference-only standard metadata and cited provisions"
             className="space-y-6 border border-[#080909] bg-[#f5f3ed] p-6"

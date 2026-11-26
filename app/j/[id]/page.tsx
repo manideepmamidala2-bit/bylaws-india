@@ -183,15 +183,12 @@ export default async function JurisdictionMapPage({
   const officialBoundaryLayer =
     geoLayers?.layers.find((l) => l.layer_id === "wards") ??
     geoLayers?.layers.find((l) => l.kind === "official_boundary");
-  const accuracyMessage = masterPlanLayer
-    ? `${masterPlanLayer.method}${
-        masterPlanLayer.accuracy_m !== null
-          ? ` (±${masterPlanLayer.accuracy_m} m)`
-          : ""
-      } · Source: ${masterPlanLayer.source} · Confirm a plot's zone with the planning authority.`
-    : officialBoundaryLayer
-      ? `Boundaries from ${officialBoundaryLayer.source} · Confirm a plot's ward and zone with the planning authority.`
-      : "Zones loaded from published master plan layer · Confirm a plot's zone with the planning authority.";
+  const accuracyMessage =
+    masterPlanLayer && masterPlanLayer.accuracy_m !== null
+      ? `Zone boundaries are within about ${masterPlanLayer.accuracy_m} m of street centre-lines; confirm a plot's zone with the planning authority.`
+      : officialBoundaryLayer
+        ? "Official corporation and ward boundaries published; confirm a plot's ward and zone with the planning authority."
+        : "Zones loaded from published master plan layer; confirm a plot's zone with the planning authority.";
 
   return (
     <div className="flex min-h-screen flex-col bg-[#f5f3ed] text-[#080909]">
@@ -214,10 +211,9 @@ export default async function JurisdictionMapPage({
 
       <div className="border-b border-[#080909] bg-[#f5f3ed] px-6 py-5">
         <div className="dg-mono">
-          {jurisdiction.id}
           {jurisdiction.aliases && jurisdiction.aliases.length > 0
-            ? ` · ${jurisdiction.aliases.slice(0, 5).join(" · ")}`
-            : ""}
+            ? jurisdiction.aliases.slice(0, 5).join(" · ")
+            : "Map & Plot Building Code"}
         </div>
         <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909] sm:text-4xl">
           {jurisdiction.name}

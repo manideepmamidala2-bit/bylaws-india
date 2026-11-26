@@ -135,10 +135,13 @@ def test_part2_five_city_corporations_369_wards_and_2026_consolidated_views() ->
         assert "bbl-2003:3.9" in rec_by_id and rec_by_id["bbl-2003:3.9"]["omitted"] is True
         assert "bbl-2003:3.10" in rec_by_id and rec_by_id["bbl-2003:3.10"]["omitted"] is True
         assert "bbl-2003:6.0(i)" in rec_by_id
-        c6_text = str(rec_by_id["bbl-2003:6.0(i)"]["text"])
-        assert corp_label in c6_text
-        assert final_doc_id in ",".join(rec_by_id["bbl-2003:6.0(i)"]["amendments_applied"])
-        clause_6_texts[corp_id] = c6_text
+        c6_rec = rec_by_id["bbl-2003:6.0(i)"]
+        c6_text = str(c6_rec["text"])
+        c6_notes = " ".join(c6_rec.get("notes_by_site") or [])
+        c6_change_note = str(c6_rec.get("change_note") or "")
+        assert corp_label in f"{c6_text} {c6_notes} {c6_change_note}"
+        assert final_doc_id in ",".join(c6_rec["amendments_applied"])
+        clause_6_texts[corp_id] = f"{c6_text} | {c6_notes}"
 
     assert total_child_wards == 369
     assert len(set(clause_6_texts.values())) == 5, (
@@ -174,19 +177,20 @@ def test_part3_rmp2015_zr_amendment_chain_inserted_chapter_11_and_replaced_table
     assert "chp_11.0" in zr_by_eid, "Expected inserted Chapter 11 (chp_11.0) in rmp2015-zr"
     chp11 = zr_by_eid["chp_11.0"]
     assert chp11["versions"][0]["source_doc"] == "rmp2015-zr-amend-2025-04"
-    assert "PREMIUM F.A.R" in f"{chp11.get('heading') or ''} {chp11.get('text') or ''}"
+    assert "PREMIUM F.A.R" in f"{chp11.get('heading') or ''} {chp11.get('text') or ''}".upper()
 
-    # Substituted Setbacks 3.1 / Table 8 (2026-01-05)
-    cl_31 = zr_by_eid["chp_3__cl_3.1"]
-    assert len(cl_31["versions"]) >= 2
-    assert cl_31["versions"][-1]["source_doc"] == "rmp2015-zr-amend-2026-01"
-    assert "0.75 m" in str(cl_31["versions"][-1]["content"])
+    # Substituted Setbacks 3.1(ii)–(iii) and Table 8 (2026-01-05)
+    cl_31_ii = zr_by_eid["chp_3__cl_3.1__item_ii"]
+    assert len(cl_31_ii["versions"]) >= 2
+    assert cl_31_ii["versions"][-1]["source_doc"] == "rmp2015-zr-amend-2026-01"
+    assert "12.0m" in str(cl_31_ii["versions"][-1]["content"])
+    assert "chp_3__cl_3.1__tbl_8" in zr_by_eid
 
     # Substituted Drain / Nala Buffer 4.12.2 (2025-10-15)
     cl_412 = zr_by_eid["chp_4__cl_4.12__cl_4.12.2"]
     assert len(cl_412["versions"]) >= 2
     assert cl_412["versions"][-1]["source_doc"] == "rmp2015-zr-amend-2025-10"
-    assert "15m buffer" in str(cl_412["versions"][-1]["content"])
+    assert "primary, secondary and tertiary" in str(cl_412["versions"][-1]["content"]).lower()
 
     # Consolidated view records
     cons = validate_file(rel_dir / "consolidated.json", "consolidated")

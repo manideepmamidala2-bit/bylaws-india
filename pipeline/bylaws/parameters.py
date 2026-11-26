@@ -362,7 +362,7 @@ def extract_jurisdiction_parameters(
         for eid, node in sorted(by_eid.items()):
             if node.get("type") != "table" or not node.get("table_meta"):
                 continue
-            if doc.id == "rmp2015-zr-amend-2026-01" and eid.endswith("__tbl_8"):
+            if doc.role == "amendment" and eid.endswith("__tbl_8"):
                 # Extracted in step 2(a) below with the explicit <= 12.0 m building_height_m condition
                 continue
             meta = node["table_meta"]

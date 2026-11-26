@@ -671,7 +671,7 @@ export function ZoneMap({
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
         <div>
           <div className="dg-mono">
-            Vector Street Map &amp; Official GBA Boundaries (EPSG:4326)
+            Street Map &amp; Official Boundaries
           </div>
           <h2 className="mt-0.5 text-lg font-semibold text-[#080909]">
             Official Boundaries, Wards &amp; Land-Use Zones
@@ -944,16 +944,15 @@ export function ZoneMap({
         </div>
       </div>
 
-      {/* Plain accuracy notice when a georeferenced land-use sheet is published (07-one-land-use-sheet.md §5) */}
+      {/* One honest measured accuracy figure in plain words (Part 6) */}
       {sheetOverlay && (
         <p
           role="status"
           className="dg-serif mt-3 border border-[#080909] bg-[#efeee8] px-3 py-2 text-sm text-[#171917]"
         >
           Zones traced from the RMP 2015 Proposed Land Use sheet{" "}
-          <span className="font-semibold">{sheetOverlay.sheet}</span> (Planning
-          District {sheetOverlay.planning_district}), placed using the
-          sheet&apos;s printed UTM Zone 43N grid; measured placement error about{" "}
+          <span className="font-semibold">{sheetOverlay.sheet}</span>; within
+          about{" "}
           <span className="font-mono">
             {Math.max(
               1,
@@ -963,11 +962,8 @@ export function ZoneMap({
             )}{" "}
             m
           </span>{" "}
-          (printed-grid affine RMSE{" "}
-          <span className="font-mono">
-            {Number(sheetOverlay.rmse_m).toFixed(3)} m
-          </span>
-          ). Derived by this project, not an official publication.
+          of street centre-lines. Derived by this project, not an official
+          publication.
         </p>
       )}
 
@@ -982,111 +978,7 @@ export function ZoneMap({
         </p>
       )}
 
-      {/* Interactive Ward Inspector (06-real-map-foundation.md §3) */}
-      {sortedWards.length > 0 && (
-        <div
-          role="region"
-          aria-label="Official ward boundary inspector"
-          className="mt-4 border border-[#080909] bg-[#efeee8] p-4"
-        >
-          <div className="flex flex-wrap items-end justify-between gap-3">
-            <div className="min-w-[260px] flex-1">
-              <label
-                htmlFor="ward-inspector-select"
-                className="dg-mono block text-[10.5px] text-[#080909]"
-              >
-                Inspect Official Ward ({sortedWards.length} Wards in Corporation)
-              </label>
-              <select
-                id="ward-inspector-select"
-                value={selectedWardId ?? ""}
-                onChange={(e) => setSelectedWardId(e.target.value || null)}
-                className="mt-1.5 w-full border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 font-mono text-xs text-[#080909]"
-              >
-                {sortedWards.map((w) => {
-                  const wid = String(
-                    w.properties?.ward_id ?? w.properties?.ward_no ?? ""
-                  );
-                  const wname = String(w.properties?.ward_name ?? "");
-                  const zname = String(
-                    w.properties?.zone_name ?? w.properties?.zone ?? ""
-                  );
-                  return (
-                    <option key={wid} value={wid}>
-                      Ward {wid} · {wname} ({zname})
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-
-            {wardsSourceHref && (
-              <a
-                href={wardsSourceHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.12em] text-[#080909] underline"
-              >
-                Official GBA Ward Delimitation Source ↗
-              </a>
-            )}
-          </div>
-
-          {selectedWardFeature && (
-            <dl className="mt-3 grid grid-cols-1 gap-3 border-t border-[#c8ccc0] pt-3 text-xs sm:grid-cols-4">
-              <div>
-                <dt className="dg-mono text-[10px]">Ward No. &amp; Name</dt>
-                <dd className="mt-0.5 font-semibold text-[#080909]">
-                  Ward{" "}
-                  {String(
-                    selectedWardFeature.properties?.ward_id ??
-                      selectedWardFeature.properties?.ward_no ??
-                      ""
-                  )}{" "}
-                  · {String(selectedWardFeature.properties?.ward_name ?? "")}
-                  {selectedWardFeature.properties?.ward_name_kn
-                    ? ` (${String(selectedWardFeature.properties.ward_name_kn)})`
-                    : ""}
-                </dd>
-              </div>
-              <div>
-                <dt className="dg-mono text-[10px]">GBA Zone</dt>
-                <dd className="mt-0.5 font-mono text-[#080909]">
-                  {String(selectedWardFeature.properties?.zone ?? "")}
-                  {selectedWardFeature.properties?.zone_name
-                    ? ` · ${String(selectedWardFeature.properties.zone_name)}`
-                    : ""}
-                </dd>
-              </div>
-              <div>
-                <dt className="dg-mono text-[10px]">Assembly Constituency</dt>
-                <dd className="mt-0.5 text-[#171917]">
-                  {String(
-                    selectedWardFeature.properties?.Assembly ??
-                      selectedWardFeature.properties?.ac ??
-                      "Not specified"
-                  )}
-                </dd>
-              </div>
-              <div>
-                <dt className="dg-mono text-[10px]">Source Attribution</dt>
-                <dd className="mt-0.5 font-mono text-[11px]">
-                  <a
-                    href={wardsSourceHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#080909] underline"
-                  >
-                    GBA Final Delimitation (Nov 2025) ↗
-                  </a>
-                </dd>
-              </div>
-            </dl>
-          )}
-        </div>
-      )}
-
-      {/* Zone Legend & Selector Pills (when land-use zones exist) */}
+      {/* Zone Legend & Selector Pills (plain legend names in primary layer) */}
       {legendItems.length > 0 && (
         <div
           role="group"
@@ -1103,44 +995,157 @@ export function ZoneMap({
                 onClick={() => onSelectZone(item.zone_code)}
                 className={`dg-pill ${isSelected ? "dg-pill-active" : ""}`}
               >
-                {item.zone_code} · {item.zone_label}
-                {item.maxVersion > 1 ? ` · v${item.maxVersion}` : ""}
+                {item.zone_label}
               </button>
             );
           })}
         </div>
       )}
 
-      {/* Layer Metadata & Accuracy Table */}
-      {geoLayers.length > 0 && (
-        <div className="mt-4 border-t border-[#c8ccc0] pt-3">
-          <div className="dg-mono mb-2">
-            Published Geospatial Layers ({geoLayers.length})
-          </div>
-          <div className="grid grid-cols-1 gap-2 text-xs sm:grid-cols-2">
-            {geoLayers.map((layer) => (
-              <div
-                key={layer.layer_id}
-                className="border border-[#c8ccc0] bg-[#efeee8] px-3 py-2"
-              >
-                <div className="flex items-center justify-between gap-2 font-mono text-[10.5px]">
-                  <span className="font-semibold text-[#080909]">
-                    {layer.title}
-                  </span>
-                  <span className="uppercase text-[#5b5e56]">
-                    {layer.derived ? "Derived" : "Official"}
-                    {layer.accuracy_m !== null
-                      ? ` · ±${layer.accuracy_m}m`
-                      : ""}
-                  </span>
+      {/* About this map expander: all technical details, ward inspector, and layer metadata */}
+      {(sortedWards.length > 0 || geoLayers.length > 0) && (
+        <details
+          data-testid="about-this-map-expander"
+          className="mt-4 border border-[#080909] bg-[#efeee8] p-4"
+        >
+          <summary className="cursor-pointer font-mono text-xs font-semibold uppercase tracking-[0.12em] text-[#080909]">
+            About this map
+          </summary>
+
+          {sortedWards.length > 0 && (
+            <div
+              role="region"
+              aria-label="Official ward boundary inspector"
+              className="mt-3 border-t border-[#c8ccc0] pt-3"
+            >
+              <div className="flex flex-wrap items-end justify-between gap-3">
+                <div className="min-w-[260px] flex-1">
+                  <label
+                    htmlFor="ward-inspector-select"
+                    className="dg-mono block text-[10.5px] text-[#080909]"
+                  >
+                    Inspect Official Ward ({sortedWards.length} Wards in Corporation)
+                  </label>
+                  <select
+                    id="ward-inspector-select"
+                    value={selectedWardId ?? ""}
+                    onChange={(e) => setSelectedWardId(e.target.value || null)}
+                    className="mt-1.5 w-full border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 font-mono text-xs text-[#080909]"
+                  >
+                    {sortedWards.map((w) => {
+                      const wid = String(
+                        w.properties?.ward_id ?? w.properties?.ward_no ?? ""
+                      );
+                      const wname = String(w.properties?.ward_name ?? "");
+                      const zname = String(
+                        w.properties?.zone_name ?? w.properties?.zone ?? ""
+                      );
+                      return (
+                        <option key={wid} value={wid}>
+                          Ward {wid} · {wname} ({zname})
+                        </option>
+                      );
+                    })}
+                  </select>
                 </div>
-                <p className="dg-serif mt-0.5 text-xs text-[#5b5e56]">
-                  {layer.method}
-                </p>
+
+                {wardsSourceHref && (
+                  <a
+                    href={wardsSourceHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.12em] text-[#080909] underline"
+                  >
+                    Official GBA Ward Delimitation Source ↗
+                  </a>
+                )}
               </div>
-            ))}
-          </div>
-        </div>
+
+              {selectedWardFeature && (
+                <dl className="mt-3 grid grid-cols-1 gap-3 border-t border-[#c8ccc0] pt-3 text-xs sm:grid-cols-4">
+                  <div>
+                    <dt className="dg-mono text-[10px]">Ward No. &amp; Name</dt>
+                    <dd className="mt-0.5 font-semibold text-[#080909]">
+                      Ward{" "}
+                      {String(
+                        selectedWardFeature.properties?.ward_id ??
+                          selectedWardFeature.properties?.ward_no ??
+                          ""
+                      )}{" "}
+                      · {String(selectedWardFeature.properties?.ward_name ?? "")}
+                      {selectedWardFeature.properties?.ward_name_kn
+                        ? ` (${String(selectedWardFeature.properties.ward_name_kn)})`
+                        : ""}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="dg-mono text-[10px]">GBA Zone</dt>
+                    <dd className="mt-0.5 font-mono text-[#080909]">
+                      {String(selectedWardFeature.properties?.zone ?? "")}
+                      {selectedWardFeature.properties?.zone_name
+                        ? ` · ${String(selectedWardFeature.properties.zone_name)}`
+                        : ""}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="dg-mono text-[10px]">Assembly Constituency</dt>
+                    <dd className="mt-0.5 text-[#171917]">
+                      {String(
+                        selectedWardFeature.properties?.Assembly ??
+                          selectedWardFeature.properties?.ac ??
+                          "Not specified"
+                      )}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="dg-mono text-[10px]">Source Attribution</dt>
+                    <dd className="mt-0.5 font-mono text-[11px]">
+                      <a
+                        href={wardsSourceHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#080909] underline"
+                      >
+                        GBA Final Delimitation (Nov 2025) ↗
+                      </a>
+                    </dd>
+                  </div>
+                </dl>
+              )}
+            </div>
+          )}
+
+          {geoLayers.length > 0 && (
+            <div className="mt-4 border-t border-[#c8ccc0] pt-3">
+              <div className="dg-mono mb-2">
+                Published Geospatial Layers ({geoLayers.length})
+              </div>
+              <div className="grid grid-cols-1 gap-2 text-xs sm:grid-cols-2">
+                {geoLayers.map((layer) => (
+                  <div
+                    key={layer.layer_id}
+                    className="border border-[#c8ccc0] bg-[#f5f3ed] px-3 py-2"
+                  >
+                    <div className="flex items-center justify-between gap-2 font-mono text-[10.5px]">
+                      <span className="font-semibold text-[#080909]">
+                        {layer.title}
+                      </span>
+                      <span className="uppercase text-[#5b5e56]">
+                        {layer.derived ? "Derived" : "Official"}
+                        {layer.accuracy_m !== null
+                          ? ` · within about ${layer.accuracy_m} m`
+                          : ""}
+                      </span>
+                    </div>
+                    <p className="dg-serif mt-0.5 text-xs text-[#5b5e56]">
+                      {layer.method}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </details>
       )}
     </section>
   );

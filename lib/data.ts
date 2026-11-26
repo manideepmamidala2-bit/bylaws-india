@@ -242,7 +242,7 @@ export function getPrimaryPublicJurisdiction(
     visible.find(
       (j) =>
         j.visibility !== "test" &&
-        j.id === "in-ka-bengaluru-south" &&
+        j.releases.some((rel) => isWithdrawnRelease(rel)) &&
         Boolean(j.latest_release)
     ) ??
     visible.find((j) => j.visibility !== "test" && Boolean(j.latest_release)) ??

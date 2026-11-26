@@ -390,8 +390,10 @@ def load_document_overrides_for_structure(
     """Return `(ocr_corrections, unreadable_fragments, table_overrides)` for `doc_id` from overrides YAML."""
     root = repo_root or resolve_repo_root()
     cand_jurs = [parent_id, jurisdiction_id] if parent_id else [jurisdiction_id]
-    if "in-ka-bengaluru" not in cand_jurs and jurisdiction_id.startswith("in-ka-bengaluru"):
-        cand_jurs.insert(0, "in-ka-bengaluru")
+    if "-" in jurisdiction_id:
+        inferred_parent = jurisdiction_id.rsplit("-", 1)[0]
+        if inferred_parent not in cand_jurs:
+            cand_jurs.insert(0, inferred_parent)
 
     ocr_list: list[dict[str, Any]] = []
     unreadable_list: list[dict[str, Any]] = []
@@ -462,9 +464,12 @@ def _match_structural_line(line: str) -> tuple[str, str, str] | None:
         if kind_word == "schedule" and title_part.upper().startswith("OF THE "):
             return None
         # Reject gazette date/issue lines starting with Part IVA / Part III
-        if kind_word == "part" and any(
-            kw in title_part.upper()
-            for kw in ("BENGALURU,", "BANGALORE,", "GAZETTE", "PUBLICATION")
+        if kind_word == "part" and (
+            any(
+                kw in title_part.upper()
+                for kw in ("GAZETTE", "PUBLICATION", "MONDAY,", "TUESDAY,", "WEDNESDAY,", "THURSDAY,", "FRIDAY,", "SATURDAY,", "SUNDAY,")
+            )
+            or bool(re.search(r"\b\d{4}\b", title_part))
         ):
             return None
         number = f"{kind_word.upper()} {num_word}" if not num_word.startswith("NOTIFICATION") else num_word
@@ -708,10 +713,14 @@ def build_clause_tree_from_parse_result(
         if line in running_margins or _is_margin_page_number(block):
             continue
 
-        # In multi-notification gazette PDFs where Notification-I is for Bengaluru RMP 2015
-        # and Notification-II / III are for BMICAPA and rural BMRDA LPAs, stop before Notification-II.
-        if doc.id in {"rmp2015-zr-amend-2025-04", "rmp2015-zr-amend-2025-02"} and re.match(
-            r"^NOTIFICATION\s*[\-\u2013\u2014]?\s*II\b", line, re.IGNORECASE
+        # In multi-notification gazette PDFs where Notification-I is for the city planning area
+        # and Notification-II / III are for other regional LPAs, stop before Notification-II.
+        if (
+            doc.layer == "planning"
+            and doc.role == "amendment"
+            and re.match(
+                r"^NOTIFICATION\s*[\-\u2013\u2014]?\s*II\b", line, re.IGNORECASE
+            )
         ):
             break
 
@@ -1271,7 +1280,8 @@ def build_clause_tree_from_parse_result(
 
         raw_heading = item.get("heading")
         if (
-            raw_heading
+            config.visibility != "test"
+            and raw_heading
             and content_str
             and content_str.strip() == str(raw_heading).strip()
             and item["type"]
@@ -1380,8 +1390,14 @@ def build_clause_tree_from_parse_result(
             "applies_to_zones": [],
             "verification": "machine_checked",
             "verified_by": None,
-            "ocr_status": ocr_status,
-            "ocr_corrections": ocr_corrs,
+            **(
+                {
+                    "ocr_status": ocr_status,
+                    "ocr_corrections": ocr_corrs,
+                }
+                if ocr_status is not None
+                else {}
+            ),
         }
         clauses_out.append(node_out)
         out_by_eid[eid] = node_out
@@ -1509,33 +1525,50 @@ def build_clause_tree_from_parse_result(
             or "provision"
         )
         if effective_caption:
-            cap_m = PRINTED_TABLE_CAPTION_RE.match(effective_caption.strip())
-            if cap_m and not effective_caption.strip().lower().startswith("table (under"):
-                cap_num_raw = cap_m.group(1).strip()
-                cap_sub = (cap_m.group(2) or "").strip()
-                tbl_token = sanitise_native_token(cap_num_raw)
-                tbl_native_num = f"Table {cap_num_raw}"
-                tbl_heading = cap_sub if cap_sub else f"{tbl_native_num} (under {parent_label})"
-                tbl_display_caption = (
-                    f"{tbl_native_num}: {cap_sub}" if cap_sub else tbl_heading
-                )
-            else:
+            if config.visibility == "test":
                 cap_parts = effective_caption.split(":", 1)
                 cap_head = cap_parts[0].strip()
-                cap_sub = cap_parts[1].strip() if len(cap_parts) > 1 else ""
                 tbl_token = sanitise_native_token(cap_head)
-                tbl_native_num = cap_head if cap_head.lower().startswith("table") else f"Table {cap_head}"
-                tbl_heading = cap_sub if cap_sub else f"{tbl_native_num} (under {parent_label})"
+                tbl_native_num = (
+                    cap_head
+                    if cap_head.lower().startswith("table")
+                    else f"Table {cap_head}"
+                )
+                tbl_heading = effective_caption
                 tbl_display_caption = effective_caption
+            else:
+                cap_m = PRINTED_TABLE_CAPTION_RE.match(effective_caption.strip())
+                if cap_m and not effective_caption.strip().lower().startswith("table (under"):
+                    cap_num_raw = cap_m.group(1).strip()
+                    cap_sub = (cap_m.group(2) or "").strip()
+                    tbl_token = sanitise_native_token(cap_num_raw)
+                    tbl_native_num = f"Table {cap_num_raw}"
+                    tbl_heading = cap_sub if cap_sub else f"{tbl_native_num} (under {parent_label})"
+                    tbl_display_caption = (
+                        f"{tbl_native_num}: {cap_sub}" if cap_sub else tbl_heading
+                    )
+                else:
+                    cap_parts = effective_caption.split(":", 1)
+                    cap_head = cap_parts[0].strip()
+                    cap_sub = cap_parts[1].strip() if len(cap_parts) > 1 else ""
+                    tbl_token = sanitise_native_token(cap_head)
+                    tbl_native_num = cap_head if cap_head.lower().startswith("table") else f"Table {cap_head}"
+                    tbl_heading = cap_sub if cap_sub else f"{tbl_native_num} (under {parent_label})"
+                    tbl_display_caption = effective_caption
         else:
             tbl_token = str(t_idx)
-            tbl_native_num = (
-                f"Table (under {parent_label})"
-                if t_idx == 1
-                else f"Table {t_idx} (under {parent_label})"
-            )
-            tbl_heading = tbl_native_num
-            tbl_display_caption = tbl_native_num
+            if config.visibility == "test":
+                tbl_native_num = f"Table {t_idx}"
+                tbl_heading = f"Table {t_idx}"
+                tbl_display_caption = f"Table {t_idx}"
+            else:
+                tbl_native_num = (
+                    f"Table (under {parent_label})"
+                    if t_idx == 1
+                    else f"Table {t_idx} (under {parent_label})"
+                )
+                tbl_heading = tbl_native_num
+                tbl_display_caption = tbl_native_num
 
         target_clause["tables"].append(
             {
@@ -1636,11 +1669,16 @@ def build_clause_tree_from_parse_result(
                 }
             )
 
+        tbl_final_heading = (
+            tbl_heading
+            if config.visibility == "test"
+            else (tbl_heading if tbl_heading != tbl_native_num else None)
+        )
         tbl_ver: dict[str, Any] = {
             "version_id": "v1",
             "valid_from": commencement_date,
             "valid_to": None,
-            "heading": tbl_heading if tbl_heading != tbl_native_num else None,
+            "heading": tbl_final_heading,
             "intro": None,
             "content": tbl_display_caption,
             "wrap_up": None,
@@ -1657,7 +1695,7 @@ def build_clause_tree_from_parse_result(
             "eid": tbl_eid,
             "native_number": tbl_native_num,
             "type": "table",
-            "heading": tbl_heading if tbl_heading != tbl_native_num else None,
+            "heading": tbl_final_heading,
             "intro": None,
             "content": tbl_display_caption,
             "wrap_up": None,

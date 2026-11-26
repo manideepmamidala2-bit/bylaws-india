@@ -16,7 +16,7 @@ from bylaws.structure import (
 
 EDITORIAL_INSERTION_RE = re.compile(
     r"\[Amended\s*\(|\[Modified\s*\("
-    r"|published on the official GBA/BBMP Building Plan Approval System"
+    r"|published on the official [A-Z/]+ Building Plan Approval System"
     r"|up to 15% setback and coverage deviation;\s*up to 15% FAR deviation"
     r"|Plot up to 60 sq\.m \(All uses\):\s*Front 0\.75 m",
     re.IGNORECASE,

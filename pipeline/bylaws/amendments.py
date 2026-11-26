@@ -229,7 +229,7 @@ def _apply_effect_to_target_tree(
             "citations": amending_citations or copy.deepcopy(target_node.get("citations") or []),
             "legal_status": "in_force",
             "omitted": False,
-            "notes_by_site": [site_note] if site_note else [],
+            **({"notes_by_site": [site_note]} if site_note else {}),
         }
         versions.append(new_ver)
         target_node["versions"] = versions
@@ -319,7 +319,7 @@ def _apply_effect_to_target_tree(
             "citations": amending_citations,
             "legal_status": "in_force",
             "omitted": False,
-            "notes_by_site": [site_note] if site_note else [],
+            **({"notes_by_site": [site_note]} if site_note else {}),
         }
         inserted_node: dict[str, Any] = {
             "eid": new_eid,
@@ -360,7 +360,7 @@ def _apply_effect_to_target_tree(
             "applies_to_zones": list(target_node.get("applies_to_zones") or []),
             "verification": "machine_checked",
             "verified_by": None,
-            "notes_by_site": [site_note] if site_note else [],
+            **({"notes_by_site": [site_note]} if site_note else {}),
             **(
                 {
                     "omitted": False,

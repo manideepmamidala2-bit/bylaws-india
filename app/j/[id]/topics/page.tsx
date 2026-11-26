@@ -71,10 +71,10 @@ export default async function TopicsIndexPage({ params }: TopicsPageProps) {
       <main className="mx-auto max-w-6xl space-y-8 px-6 py-8">
         <header className="border-b border-[#080909] pb-6">
           <div className="dg-mono">
-            Rules by Subject, Relations &amp; Authorities
+            Rules by Subject · Regulatory Topics &amp; Cross-Document Relations
           </div>
           <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909]">
-            Rules by Subject &amp; Cross-Document Relations
+            Rules by Subject
           </h1>
           <p className="dg-serif mt-2 max-w-3xl text-base text-[#171917]">
             See what applies today on each building subject across the master
@@ -179,20 +179,18 @@ export default async function TopicsIndexPage({ params }: TopicsPageProps) {
                     </div>
 
                     <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-[#c8ccc0] pt-3 font-mono text-[11px]">
-                      <div className="flex flex-wrap gap-2 text-[#5b5e56]">
-                        {Object.entries(byDoc)
-                          .slice(0, 4)
-                          .map(([dId, cnt]) => (
-                            <span key={dId}>
-                              {dId}: <strong className="text-[#080909]">{cnt}</strong>
-                            </span>
-                          ))}
+                      <div className="text-[#5b5e56]">
+                        Across{" "}
+                        <strong className="text-[#080909]">
+                          {Object.keys(byDoc).length}
+                        </strong>{" "}
+                        instrument(s)
                       </div>
                       <Link
                         href={`/j/${jurisdiction.id}/topics/${topic.id}`}
                         className="border border-[#080909] bg-[#080909] px-2.5 py-1 uppercase tracking-[0.12em] text-[#f5f3ed] no-underline"
                       >
-                        Compare Provisions →
+                        What Applies Today →
                       </Link>
                     </div>
                   </article>

@@ -409,7 +409,7 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
       screen.getByText(/About Structured Building Bylaws/i)
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/Release 1\.0\.0 withdrawn; real acquisition under way/i)
+      screen.getByText(/all checks are machine checks/i)
     ).toBeInTheDocument();
     assertCleanPublicCopy(aboutContainer.textContent ?? "", "About");
     await assertNoAxeViolations(aboutContainer);

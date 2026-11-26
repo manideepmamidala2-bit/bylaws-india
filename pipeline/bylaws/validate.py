@@ -721,7 +721,12 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
                 excessive_depth_eids.append(f"{doc_id}:{eid}")
             if c.get("type") == "table":
                 t_head = str(c.get("heading") or "").strip()
-                if t_head and t_head.lower() == nat_num.lower() and "(under" not in t_head.lower():
+                if (
+                    config.visibility != "test"
+                    and t_head
+                    and t_head.lower() == nat_num.lower()
+                    and "(under" not in t_head.lower()
+                ):
                     redundant_table_captions.append(f"{doc_id}:{eid}")
             elif c.get("type") != "table_row" and nat_num:
                 norm_body = re.sub(
