@@ -42,11 +42,21 @@ def _load_clause_trees(jurisdiction_id: str, repo_root: Path) -> dict[str, dict]
 
 
 def test_all_bengaluru_provisions_pass_page_text_fidelity() -> None:
-    """Every structured provision across Greater Bengaluru and the 5 City Corporations traces to its cited page(s) or a recorded correction."""
+    """Every structured provision across Greater Bengaluru and all 5 City Corporations traces to its cited page(s) or a recorded correction, and all 5 corporations' 2026 amendments pass structure gates."""
+    import re
+
     repo_root = resolve_repo_root()
-    for jid in (
-        "in-ka-bengaluru",
-        "in-ka-bengaluru-south",
+    date_token_re = re.compile(
+        r"\d{1,2}[./-]\d{1,2}[./-]\d{2,4}|\d{4}[./-]\d{1,2}[./-]\d{1,2}"
+    )
+
+    for jid, amend_doc_id in (
+        ("in-ka-bengaluru", None),
+        ("in-ka-bengaluru-central", "bccc-bbl-amend-2026-05"),
+        ("in-ka-bengaluru-north", "bncc-bbl-amend-2026-05"),
+        ("in-ka-bengaluru-south", "bscc-bbl-amend-2026-05"),
+        ("in-ka-bengaluru-east", "becc-bbl-amend-2026-05"),
+        ("in-ka-bengaluru-west", "bwcc-bbl-amend-2026-05"),
     ):
         cfg = load_jurisdiction_config(jid)
         trees = _load_clause_trees(jid, repo_root)
@@ -60,6 +70,32 @@ def test_all_bengaluru_provisions_pass_page_text_fidelity() -> None:
         assert report["failures"] == [], (
             f"Text fidelity failures in {jid}: {report['failures'][:5]}"
         )
+
+        # Verify equal treatment of each corporation's 2026 amendment (Part 2.5)
+        if amend_doc_id is not None:
+            assert amend_doc_id in trees, f"Missing {amend_doc_id} in {jid}"
+            am_tree = trees[amend_doc_id]
+            active_nodes = [
+                c
+                for c in am_tree["clauses"]
+                if not c.get("superseded_by") and not c.get("record_superseded_by")
+            ]
+            assert len(active_nodes) == 45, (
+                f"{amend_doc_id} should have 45 active nodes, got {len(active_nodes)}"
+            )
+            seen_eids: set[str] = set()
+            for node in active_nodes:
+                eid = str(node["eid"])
+                nat_num = str(node.get("native_number") or "")
+                assert eid not in seen_eids, f"Duplicate eid {eid} in {amend_doc_id}"
+                seen_eids.add(eid)
+                assert not date_token_re.search(eid), f"Date-shaped eid {eid} in {amend_doc_id}"
+                assert not date_token_re.search(nat_num), (
+                    f"Date-shaped native_number {nat_num} in {amend_doc_id}"
+                )
+                assert len(eid.split("__")) <= 6, (
+                    f"Excessive depth on {amend_doc_id}:{eid}"
+                )
 
 
 def test_fidelity_verifier_is_falsifiable_on_editorial_or_invented_words() -> None:

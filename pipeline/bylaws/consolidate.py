@@ -23,18 +23,52 @@ SUBSTITUTED_QUOTE_RE = re.compile(
 )
 
 
+MONTH_NAMES_MARK = (
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+)
+
+
+def _format_human_date_mark(iso_date: str | None) -> str:
+    if not iso_date:
+        return "2026"
+    m = re.match(r"^(\d{4})-(\d{2})-(\d{2})$", iso_date.strip())
+    if not m:
+        return iso_date[:4] or iso_date
+    year, month_idx, day = int(m.group(1)), int(m.group(2)) - 1, int(m.group(3))
+    if 0 <= month_idx < 12:
+        return f"{day} {MONTH_NAMES_MARK[month_idx]} {year}"
+    return str(year)
+
+
 def format_change_mark_label(
     amending_doc_id: str,
     valid_from: str | None,
     jurisdiction_name: str = "",
     amending_doc_title: str = "",
 ) -> str:
-    """Build a quiet change mark label such as `'Changed 2026, South City Corporation'`."""
+    """Build a quiet change mark label such as `'Changed for <Corporation>, 14 May 2026'`."""
     year = (valid_from or "")[:4] or "Amended"
+    human_date = _format_human_date_mark(valid_from)
     title_lower = f"{amending_doc_title} {jurisdiction_name}".lower()
     for direction in ("South", "North", "Central", "East", "West"):
         if f"{direction.lower()} city corporation" in title_lower and "bbl-amend" in amending_doc_id:
-            return f"Changed {year}, {direction} City Corporation"
+            corp_label = (
+                jurisdiction_name.strip()
+                if "city corporation" in jurisdiction_name.lower()
+                else f"{direction} City Corporation"
+            )
+            return f"Changed for {corp_label}, {human_date}"
     if "zr-amend" in amending_doc_id:
         return f"Changed {year}, Zoning Regulations Amendment"
     if amending_doc_title:

@@ -607,6 +607,45 @@ export async function fetchParameters(
     return null;
   }
   try {
+    // When a child City Corporation is requested, load shared parameters once from the parent release
+    // and layer only corporation-specific (`conditions.jurisdiction`) records on top.
+    if (found.jurisdiction.parent) {
+      const parentFound = findJurisdictionRelease(
+        manifest,
+        found.jurisdiction.parent
+      );
+      if (parentFound?.release?.files?.parameters) {
+        const [parentPayload, childPayload] = await Promise.all([
+          readPublishedJson<JurisdictionParameters>(
+            parentFound.release.files.parameters
+          ),
+          readPublishedJson<JurisdictionParameters>(
+            found.release.files.parameters
+          ).catch(() => null),
+        ]);
+        const sharedRecords = parentPayload.records.filter(
+          (r) =>
+            !r.conditions.jurisdiction ||
+            r.conditions.jurisdiction.length === 0 ||
+            r.conditions.jurisdiction.includes(jurisdictionId)
+        );
+        const corpDiffRecords = (childPayload?.records ?? []).filter(
+          (r) =>
+            Boolean(r.conditions.jurisdiction?.length) &&
+            r.conditions.jurisdiction?.includes(jurisdictionId)
+        );
+        const existingIds = new Set(sharedRecords.map((r) => r.parameter_id));
+        const merged = [
+          ...sharedRecords,
+          ...corpDiffRecords.filter((r) => !existingIds.has(r.parameter_id)),
+        ];
+        return {
+          ...parentPayload,
+          jurisdiction: jurisdictionId,
+          records: merged,
+        };
+      }
+    }
     return await readPublishedJson<JurisdictionParameters>(
       found.release.files.parameters
     );
@@ -951,6 +990,8 @@ export async function fetchJurisdictionDataset(
       docMeta?.source_url;
     for (const c of tree.clauses) {
       let hydratedVersions = c.versions;
+      let hydratedChangeMark = c.change_mark;
+      let hydratedOmitted = c.omitted;
       const targetEffects = c.eid
         ? appliedEffectsByTarget.get(`${tree.doc_id}:${c.eid}`)
         : undefined;
@@ -990,6 +1031,25 @@ export async function fetchJurisdictionDataset(
               legal_status: "in_force",
               omitted: mEff.action === "omit",
             });
+            const isCorpEffect = Boolean(
+              jurisdiction.parent &&
+                (mEff.applies_in?.includes(jurisdiction.id) ||
+                  mEff.amending_doc.includes("-bbl-amend-"))
+            );
+            hydratedOmitted = mEff.action === "omit";
+            hydratedChangeMark = {
+              label: isCorpEffect
+                ? `Changed for ${jurisdiction.name}, ${formatHumanDate(mEff.valid_from)}`
+                : `Changed in ${(mEff.valid_from ?? "2026").slice(0, 4)}`,
+              amending_doc: mEff.amending_doc,
+              amending_eid: mEff.amending_eid,
+              amending_clause_id: `${mEff.amending_doc}:${mEff.amending_eid}`,
+              effective_date: mEff.valid_from ?? "",
+              action: mEff.action,
+              original_text: c.versions?.[0]?.content ?? c.text,
+              original_heading: c.versions?.[0]?.heading ?? c.heading ?? null,
+              original_cells: c.versions?.[0]?.cells ?? c.cells ?? null,
+            };
           }
           hydratedVersions = baseVers;
         }
@@ -997,6 +1057,8 @@ export async function fetchJurisdictionDataset(
       clauses.push({
         ...c,
         versions: hydratedVersions,
+        change_mark: hydratedChangeMark,
+        omitted: hydratedOmitted,
         doc_id: tree.doc_id,
         doc_title: docMeta?.title ?? tree.doc_id,
         doc_layer: docMeta?.layer,

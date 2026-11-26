@@ -702,5 +702,68 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
 
     await assertNoAxeViolations(cFar);
     uFar();
+
+    // 3. Part 2: Subject & Document pages with a City Corporation selected (`in-ka-bengaluru-south`)
+    const southFarUi = await TopicDetailPage({
+      params: Promise.resolve({
+        id: "in-ka-bengaluru-south",
+        topic: "far",
+      }),
+    });
+    const { container: cSouthFar, unmount: uSouthFar } = render(southFarUi);
+    expect(
+      screen.getByTestId("corporation-layer-notice").textContent
+    ).toContain(
+      "Showing Greater Bengaluru rules, with differences for Bengaluru South City Corporation."
+    );
+    expect(
+      screen.getByTestId("corporation-no-differences").textContent
+    ).toContain(
+      "No differences for Bengaluru South City Corporation on this subject."
+    );
+    await assertNoAxeViolations(cSouthFar);
+    uSouthFar();
+
+    const southApprovalsUi = await TopicDetailPage({
+      params: Promise.resolve({
+        id: "in-ka-bengaluru-south",
+        topic: "approvals-and-certificates",
+      }),
+    });
+    const { container: cSouthApp, unmount: uSouthApp } =
+      render(southApprovalsUi);
+    expect(
+      screen.getByTestId("corporation-layer-notice").textContent
+    ).toContain(
+      "Showing Greater Bengaluru rules, with differences for Bengaluru South City Corporation."
+    );
+    expect(
+      screen.queryByTestId("corporation-no-differences")
+    ).not.toBeInTheDocument();
+    expect(
+      screen
+        .getAllByTestId("corporation-diff-badge")
+        .some((el) =>
+          (el.textContent ?? "").includes(
+            "In Bengaluru South City Corporation"
+          )
+        )
+    ).toBe(true);
+    await assertNoAxeViolations(cSouthApp);
+    uSouthApp();
+
+    const southBblDocUi = await DocumentViewerPage({
+      params: Promise.resolve({
+        id: "in-ka-bengaluru-south",
+        doc: "bbl-2003",
+      }),
+    });
+    const { container: cSouthBbl, unmount: uSouthBbl } = render(southBblDocUi);
+    expect(cSouthBbl.textContent ?? "").toContain(
+      "Changed for Bengaluru South City Corporation, 14 May 2026"
+    );
+    expect(cSouthBbl.textContent ?? "").toContain("Table-2B below");
+    await assertNoAxeViolations(cSouthBbl);
+    uSouthBbl();
   });
 });

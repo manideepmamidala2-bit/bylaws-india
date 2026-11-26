@@ -574,11 +574,10 @@ export default async function TopicDetailPage({
     subjectMeta.zoningGoverned
   ).slice(0, 14);
 
-  // Determine whether any rule or provision on this subject differs for the selected City Corporation
+  // Determine whether any governing rule or provision on this subject differs for the selected City Corporation
   const corporationDiffCount = isChildCorporation
     ? cleanParameterRows.filter((r) => r.isCorporationSpecific).length +
-      whatAppliesToday.filter((n) => isNodeCorporationSpecific(n)).length +
-      olderOrReplacedRules.filter((n) => isNodeCorporationSpecific(n)).length
+      whatAppliesToday.filter((n) => isNodeCorporationSpecific(n)).length
     : 0;
 
   // Statutory authority quotes for "Why this rule applies"
