@@ -130,10 +130,10 @@ export default async function AboutPage() {
 
           <div>
             <Link
-              href="/structure"
+              href="/data"
               className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] text-[#080909] underline decoration-[#080909] underline-offset-4"
             >
-              Inspect data model &amp; graph exports →
+              Inspect data &amp; downloads →
             </Link>
           </div>
         </section>

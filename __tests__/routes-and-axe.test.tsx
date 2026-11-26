@@ -16,15 +16,12 @@ import JurisdictionMapPage, {
 } from "@/app/j/[id]/page";
 import SourcesPage from "@/app/j/[id]/sources/page";
 import DocumentViewerPage from "@/app/j/[id]/documents/[doc]/page";
-import ClausesPage from "@/app/j/[id]/clauses/page";
 import TimelinePage from "@/app/j/[id]/timeline/page";
-import ReviewPage from "@/app/j/[id]/review/page";
 import DataReleasesPage from "@/app/data/page";
 import AboutPage from "@/app/about/page";
-import StructurePage from "@/app/structure/page";
 import TopicsIndexPage from "@/app/j/[id]/topics/page";
 import TopicDetailPage from "@/app/j/[id]/topics/[topic]/page";
-import ProvisionDetailPage from "@/app/j/[id]/documents/[doc]/[eid]/page";
+import nextConfig from "@/next.config";
 
 async function assertNoAxeViolations(container: HTMLElement) {
   const results = await axe.run(container, {
@@ -344,13 +341,6 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
 
     const routes: Array<{ label: string; renderFn: () => Promise<React.ReactElement> }> = [
       {
-        label: "Clauses",
-        renderFn: () =>
-          ClausesPage({
-            params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
-          }),
-      },
-      {
         label: "Timeline",
         renderFn: () =>
           TimelinePage({
@@ -358,15 +348,11 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
           }),
       },
       {
-        label: "Review",
+        label: "TopicsIndex",
         renderFn: () =>
-          ReviewPage({
+          TopicsIndexPage({
             params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
           }),
-      },
-      {
-        label: "Structure",
-        renderFn: () => StructurePage(),
       },
     ];
 
@@ -419,21 +405,6 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     await assertNoAxeViolations(aboutContainer);
     uAbout();
 
-    const structureUi = await StructurePage();
-    const { container: structureContainer, unmount: uStructure } =
-      render(structureUi);
-    expect(
-      screen.getByText(/How This Dataset Is Structured/i)
-    ).toBeInTheDocument();
-    expect(
-      screen.getAllByText(/Download graph\.graphml \(Gephi\)/i).length
-    ).toBeGreaterThan(0);
-    assertCleanPublicCopy(structureContainer.textContent ?? "", "Structure", {
-      allowDataEmDash: true,
-    });
-    await assertNoAxeViolations(structureContainer);
-    uStructure();
-
     const topicsUi = await TopicsIndexPage({
       params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
     });
@@ -464,19 +435,26 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     await assertNoAxeViolations(topicDetailContainer);
     uTopicDetail();
 
-    const provUi = await ProvisionDetailPage({
-      params: Promise.resolve({
-        id: "in-ka-bengaluru-south",
-        doc: "bbl-2003",
-        eid: "part_II__sec_6.0__item_i",
-      }),
-    });
-    const { container: provContainer, unmount: uProv } = render(provUi);
-    expect(
-      screen.getByText(/One-Hop Neighborhood Around bbl-2003:part_II__sec_6\.0__item_i/i)
-    ).toBeInTheDocument();
-    await assertNoAxeViolations(provContainer);
-    uProv();
+    // Verify Part 3 old-route removals and corporation-preserving redirects in next.config.ts
+    expect(typeof nextConfig.redirects).toBe("function");
+    const redirectRules = await nextConfig.redirects!();
+    const bySource = new Map(redirectRules.map((r) => [r.source, r]));
+    expect(bySource.get("/structure")?.destination).toBe(
+      "/about#how-this-is-built"
+    );
+    expect(bySource.get("/j/:id/review")?.destination).toBe("/j/:id");
+    expect(bySource.get("/j/:id/clauses")?.destination).toBe(
+      "/j/:id/sources"
+    );
+    expect(bySource.get("/j/:id/documents")?.destination).toBe(
+      "/j/:id/sources"
+    );
+    expect(bySource.get("/j/:id/documents/:doc/:eid")?.destination).toBe(
+      "/j/:id/documents/:doc#node-:eid"
+    );
+    expect(bySource.get("/j/:id/topics/building_height")?.destination).toBe(
+      "/j/:id/topics/height"
+    );
   });
 
   it("renders xx-test-fixture routes cleanly when SHOW_TEST_JURISDICTIONS=true with zero copy or axe violations", async () => {

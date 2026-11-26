@@ -25,6 +25,13 @@ FORBIDDEN_PUBLIC_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
         "Stale release notice",
         re.compile(r"Two base documents published|pending in PR", re.IGNORECASE),
     ),
+    (
+        "Old-design marker",
+        re.compile(
+            r"Structured Building Bylaws|Statutory Resolution Cards|Local Graph|Local Knowledge Graph|One-Hop Neighborhood|\btopic:[a-z_]+",
+            re.IGNORECASE,
+        ),
+    ),
 )
 
 
@@ -160,3 +167,23 @@ def test_built_html_primary_layer_language_check_outside_details() -> None:
             assert m is None, (
                 f"{rel} primary layer outside <details> contains {label}: {m.group(0)!r}"
             )
+        # Old-design check (Part 3.4): fail even inside <details> if old-design markers appear anywhere in visible HTML
+        raw_html = html_path.read_text(encoding="utf-8")
+        visible_all = re.sub(
+            r"<[^>]+>",
+            " ",
+            re.sub(
+                r"<(script|style)\b[^>]*>[\s\S]*?</\1>",
+                " ",
+                raw_html,
+                flags=re.IGNORECASE,
+            ),
+        )
+        old_design_re = re.compile(
+            r"Structured Building Bylaws|Statutory Resolution Cards|Local Graph|Local Knowledge Graph|One-Hop Neighborhood|\btopic:[a-z_]+",
+            re.IGNORECASE,
+        )
+        m_old = old_design_re.search(visible_all)
+        assert m_old is None, (
+            f"{rel} built HTML contains forbidden old-design marker: {m_old.group(0)!r}"
+        )

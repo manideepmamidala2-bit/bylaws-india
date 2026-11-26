@@ -1021,17 +1021,6 @@ export function ClauseTree({
                     Address: {eid} · Record:{" "}
                     {clause.record_id ?? clause.clause_id} ·{" "}
                     {clause.verification.replace("_", " ")}
-                    {jurisdictionId && clause.doc_id ? (
-                      <>
-                        {" · "}
-                        <a
-                          href={`/j/${jurisdictionId}/documents/${clause.doc_id}/${eid}`}
-                          className="text-[#080909] underline"
-                        >
-                          Local graph →
-                        </a>
-                      </>
-                    ) : null}
                   </div>
                 </div>
               </details>

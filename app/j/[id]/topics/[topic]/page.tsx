@@ -52,9 +52,11 @@ export async function generateStaticParams() {
       paramsList.push({ id: j.id, topic: s.slug });
     }
     for (const t of ds?.relations?.topics ?? []) {
-      if (!seenSlugs.has(t.id)) {
-        seenSlugs.add(t.id);
-        paramsList.push({ id: j.id, topic: t.id });
+      const resolved = resolveCodeSubject(t.id, ds?.relations?.topics);
+      const canonicalSlug = resolved?.slug ?? t.id;
+      if (!seenSlugs.has(canonicalSlug)) {
+        seenSlugs.add(canonicalSlug);
+        paramsList.push({ id: j.id, topic: canonicalSlug });
       }
     }
   }

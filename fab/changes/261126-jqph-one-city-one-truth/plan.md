@@ -94,7 +94,7 @@ The Map page (`app/j/[id]/page.tsx`, `components/AreaExplorerClient.tsx`) and th
 
 ### Phase 3: Part 3 — One Site, One Design & Redirects
 
-- [ ] T003 Implement Part 3 removal of old-design routes (`app/j/[id]/documents/[doc]/[eid]/page.tsx`, `app/j/[id]/review/page.tsx`, `components/ReviewPanel.tsx`, `app/structure/page.tsx`, and legacy `/j/[id]/clauses` / `/j/[id]/documents` dumps), configure corporation-preserving redirects for all old addresses and legacy topic slugs in `next.config.ts`, remove any remaining `"Structured Building Bylaws"`, `"Statutory Resolution Cards"`, `"Local Graph"`, and `"topic:"` strings from UI components/pages, and add the CI old-design and redirect checks in `pipeline/tests/test_release_and_copy_consistency.py`, `scripts/check_page_budgets.mjs`, and `__tests__/`, then commit, push, and update `docs/progress.md` and the PR description <!-- R3 -->
+- [x] T003 Implement Part 3 removal of old-design routes (`app/j/[id]/documents/[doc]/[eid]/page.tsx`, `app/j/[id]/review/page.tsx`, `components/ReviewPanel.tsx`, `app/structure/page.tsx`, and legacy `/j/[id]/clauses` / `/j/[id]/documents` dumps), configure corporation-preserving redirects for all old addresses and legacy topic slugs in `next.config.ts`, remove any remaining `"Structured Building Bylaws"`, `"Statutory Resolution Cards"`, `"Local Graph"`, and `"topic:"` strings from UI components/pages, and add the CI old-design and redirect checks in `pipeline/tests/test_release_and_copy_consistency.py`, `scripts/check_page_budgets.mjs`, and `__tests__/`, then commit, push, and update `docs/progress.md` and the PR description <!-- R3 -->
 
 ### Phase 4: Part 4 — Plain Map/Land-Use Gap Notice, Screenshots & Final Verification
 

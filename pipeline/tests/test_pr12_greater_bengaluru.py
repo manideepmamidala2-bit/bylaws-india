@@ -94,7 +94,10 @@ def test_part1_graph_json_and_graphml_and_map_diagnosis_published() -> None:
     for req_type in ("contains", "defines", "uses_term", "refers_to", "in_register"):
         assert req_type in edge_types, f"Missing edge type '{req_type}' in graph.json"
 
-    assert (REPO_ROOT / "app" / "structure" / "page.tsx").is_file()
+    assert not (REPO_ROOT / "app" / "structure" / "page.tsx").is_file()
+    assert not (REPO_ROOT / "app" / "j" / "[id]" / "review" / "page.tsx").is_file()
+    assert not (REPO_ROOT / "app" / "j" / "[id]" / "documents" / "[doc]" / "[eid]" / "page.tsx").is_file()
+    assert (REPO_ROOT / "app" / "about" / "page.tsx").is_file()
     assert (REPO_ROOT / "e2e" / "map.spec.ts").is_file()
 
 
