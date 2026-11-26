@@ -1,4 +1,11 @@
-import type { DocumentMetadata } from "@/lib/data";
+import type {
+  DocumentMetadata,
+  JurisdictionDeclarations,
+  NumericInterval,
+  ParameterConditions,
+  ParameterRecord,
+  TopicDefinition,
+} from "@/lib/data";
 
 const MONTH_NAMES = [
   "January",
@@ -14,6 +21,546 @@ const MONTH_NAMES = [
   "November",
   "December",
 ];
+
+export const PLAUSIBILITY_BOUNDS: Record<
+  Exclude<ParameterRecord["parameter"], "parking_requirement">,
+  readonly [number, number]
+> = {
+  far_base_max: [0.25, 5.0],
+  far_premium_additional_max: [0.05, 2.0],
+  tdr_receivable_max: [0.0, 2.0],
+  ground_coverage_max_pct: [5.0, 100.0],
+  setback_front_min_m: [0.0, 30.0],
+  setback_rear_min_m: [0.0, 30.0],
+  setback_side_min_m: [0.0, 30.0],
+  building_height_max_m: [3.0, 250.0],
+  floors_max: [1.0, 60.0],
+};
+
+export const SETBACK_PCT_BOUNDS: readonly [number, number] = [1.0, 50.0];
+export const PARKING_M2_BOUNDS: readonly [number, number] = [5.0, 1000.0];
+const MIN_PLAUSIBLE_PLOT_AREA_M2 = 5.0;
+
+export interface CodeSubjectMeta {
+  slug: string;
+  topicId: string;
+  title: string;
+  summary: string;
+  parameterKinds: Array<ParameterRecord["parameter"]>;
+  zoningGoverned: boolean;
+  whyAppliesLine: string;
+  hasMapLink?: boolean;
+}
+
+export const CODE_SUBJECTS: readonly CodeSubjectMeta[] = [
+  {
+    slug: "land-use",
+    topicId: "land_use",
+    title: "Land use",
+    summary:
+      "What may be built in Residential, Commercial, Industrial, Public and Semi-Public, and Traffic zones across Rings I, II and III.",
+    parameterKinds: [],
+    zoningGoverned: true,
+    whyAppliesLine:
+      "Bye-law 1.4 hands land use and permissible uses in each zone to the master plan zoning regulations.",
+    hasMapLink: true,
+  },
+  {
+    slug: "ground-coverage",
+    topicId: "ground_coverage",
+    title: "Ground coverage",
+    summary:
+      "How much of a plot's area may be covered by the building footprint, by zone and plot size.",
+    parameterKinds: ["ground_coverage_max_pct"],
+    zoningGoverned: true,
+    whyAppliesLine:
+      "Bye-law 1.4 hands maximum ground coverage to the master plan zoning regulations and their in-force amendments.",
+  },
+  {
+    slug: "far",
+    topicId: "far",
+    title: "FAR",
+    summary:
+      "Total floor area allowed relative to plot size, including base FAR by zone and road width, premium FAR, and transferable development rights.",
+    parameterKinds: [
+      "far_base_max",
+      "far_premium_additional_max",
+      "tdr_receivable_max",
+    ],
+    zoningGoverned: true,
+    whyAppliesLine:
+      "Bye-law 1.4 hands floor area ratio (FAR) to the master plan zoning regulations, read with the April 2025 premium FAR chapter.",
+  },
+  {
+    slug: "setbacks",
+    topicId: "setbacks",
+    title: "Setbacks",
+    summary:
+      "Open space required at the front, rear and sides of a building, by plot size and building height.",
+    parameterKinds: [
+      "setback_front_min_m",
+      "setback_rear_min_m",
+      "setback_side_min_m",
+    ],
+    zoningGoverned: true,
+    whyAppliesLine:
+      "Bye-law 1.4 hands setbacks to the master plan zoning regulations, governed today by the January 2026 setback tables for low-rise buildings and Table 9 for taller buildings.",
+  },
+  {
+    slug: "height",
+    topicId: "building_height",
+    title: "Height",
+    summary:
+      "Maximum building height, number of floors, road-width caps, and high-rise thresholds.",
+    parameterKinds: ["building_height_max_m", "floors_max"],
+    zoningGoverned: true,
+    whyAppliesLine:
+      "Bye-law 1.4 hands maximum building height and number of floors to the master plan zoning regulations and their January 2026 amendments.",
+  },
+  {
+    slug: "parking",
+    topicId: "parking",
+    title: "Parking",
+    summary:
+      "Minimum car and two-wheeler parking spaces, visitor parking, and ramp rules by building use.",
+    parameterKinds: ["parking_requirement"],
+    zoningGoverned: true,
+    whyAppliesLine:
+      "Bye-law 1.4 hands parking requirements to the master plan zoning regulations (Chapter 8, Table 23 and the June 2019 metro-corridor amendment).",
+  },
+  {
+    slug: "basements-and-stilts",
+    topicId: "basements_stilts",
+    title: "Basements and stilts",
+    summary:
+      "When basements, cellars and stilt parking floors are allowed, their height and setback rules, and permitted uses.",
+    parameterKinds: [],
+    zoningGoverned: true,
+    whyAppliesLine:
+      "Master plan zoning regulations (as amended in January 2026) and building bye-laws govern basement levels, ramps, and stilt floor height.",
+  },
+  {
+    slug: "projections-and-open-spaces",
+    topicId: "projections_open_spaces",
+    title: "Projections and open spaces",
+    summary:
+      "Balconies, chajjas, canopies, staircases in setbacks, courtyards, and buffer zones around lakes and drains.",
+    parameterKinds: [],
+    zoningGoverned: true,
+    whyAppliesLine:
+      "Master plan zoning regulations (including the October 2025 drain buffer notification) and building bye-laws govern open spaces, projections, and water-body buffers.",
+  },
+  {
+    slug: "approvals-and-certificates",
+    topicId: "approvals_certificates",
+    title: "Approvals and certificates",
+    summary:
+      "Plan sanction, commencement certificate, occupancy certificate, khata rules, and corporation compounding schedules.",
+    parameterKinds: [],
+    zoningGoverned: false,
+    whyAppliesLine:
+      "The Greater Bengaluru Governance Act 2024, the Building Bye-laws 2003 (as amended in May 2026 for each City Corporation), and the February 2025 khata order govern plan sanction and occupancy certificates.",
+  },
+  {
+    slug: "fire-safety",
+    topicId: "fire_safety",
+    title: "Fire safety",
+    summary:
+      "Fire driveways, exits, staircases, refuge areas, Fire Force clearance, rainwater harvesting, and solar norms.",
+    parameterKinds: [],
+    zoningGoverned: false,
+    whyAppliesLine:
+      "Building Bye-laws 2003 and master plan high-rise fire protection rules govern exits, fire driveways, and safety clearances.",
+  },
+  {
+    slug: "definitions",
+    topicId: "definitions",
+    title: "Definitions",
+    summary:
+      "What the terms used in the building bye-laws, master plan zoning regulations, and governance Act mean.",
+    parameterKinds: [],
+    zoningGoverned: false,
+    whyAppliesLine:
+      "Each instrument defines the terms used within it; where a zoning parameter is governed by the master plan under Bye-law 1.4, the master plan definition applies to that parameter.",
+  },
+];
+
+const EXTRA_TOPIC_SUBJECTS: Record<string, CodeSubjectMeta> = {
+  plot_size_frontage: {
+    slug: "plot-size-and-frontage",
+    topicId: "plot_size_frontage",
+    title: "Plot size and frontage",
+    summary:
+      "Minimum plot area, frontage, and subdivision rules for residential, commercial, and group development sites.",
+    parameterKinds: [],
+    zoningGoverned: true,
+    whyAppliesLine:
+      "Bye-law 1.4 hands plot size and frontage thresholds for development to the master plan zoning regulations.",
+  },
+  road_width: {
+    slug: "road-width",
+    topicId: "road_width",
+    title: "Road width and access",
+    summary:
+      "How road width is measured, minimum road widths for apartments and commercial buildings, and intersection splays.",
+    parameterKinds: [],
+    zoningGoverned: true,
+    whyAppliesLine:
+      "Master plan zoning regulations and building bye-laws govern road width measurement and access requirements.",
+  },
+  deviations_regularisation: {
+    slug: "deviations-and-compounding",
+    topicId: "deviations_regularisation",
+    title: "Deviations and compounding",
+    summary:
+      "Condonable limits of construction deviation and compounding fee schedules under the May 2026 City Corporation amendments.",
+    parameterKinds: [],
+    zoningGoverned: false,
+    whyAppliesLine:
+      "The May 2026 City Corporation Building (Amendment) Bye-laws set maximum condonable deviation limits and compounding fee tables inside each corporation.",
+  },
+};
+
+export function resolveCodeSubject(
+  slugOrTopicId: string,
+  fallbackTopics?: ReadonlyArray<TopicDefinition>
+): CodeSubjectMeta | null {
+  const direct = CODE_SUBJECTS.find(
+    (s) => s.slug === slugOrTopicId || s.topicId === slugOrTopicId
+  );
+  if (direct) return direct;
+
+  const extra = Object.values(EXTRA_TOPIC_SUBJECTS).find(
+    (s) => s.slug === slugOrTopicId || s.topicId === slugOrTopicId
+  );
+  if (extra) return extra;
+
+  const foundTopic = fallbackTopics?.find((t) => t.id === slugOrTopicId);
+  if (foundTopic) {
+    return {
+      slug: foundTopic.id.replace(/_/g, "-"),
+      topicId: foundTopic.id,
+      title: foundTopic.label,
+      summary: foundTopic.description,
+      parameterKinds: [],
+      zoningGoverned: false,
+      whyAppliesLine:
+        "Governed by the in-force master plan zoning regulations and municipal building bye-laws.",
+    };
+  }
+  return null;
+}
+
+const ZONING_AFFECTED_SUBJECT_SLUGS = new Set([
+  "land-use",
+  "ground-coverage",
+  "far",
+  "setbacks",
+  "height",
+  "parking",
+  "basements-and-stilts",
+  "projections-and-open-spaces",
+  "plot-size-and-frontage",
+  "road-width",
+]);
+
+export function getRelevantGapNoteForSubject(
+  subjectSlug: string,
+  declarations?: JurisdictionDeclarations | null
+): string | null {
+  const subj = resolveCodeSubject(subjectSlug);
+  const canonicalSlug = subj?.slug ?? subjectSlug;
+  if (!ZONING_AFFECTED_SUBJECT_SLUGS.has(canonicalSlug)) {
+    return null;
+  }
+  const hasMissingJuly2025 =
+    !declarations ||
+    (declarations.unobtainable_documents ?? []).some(
+      (u) =>
+        u.notified_date?.startsWith("2025-07") ||
+        u.title?.toLowerCase().includes("july 2025") ||
+        u.gazette_reference?.includes("85 MNJ 2025")
+    ) ||
+    (declarations.known_gaps ?? []).some((g) =>
+      g.description.toLowerCase().includes("18 july 2025")
+    );
+
+  if (!hasMissingJuly2025) {
+    return null;
+  }
+  return "A Karnataka Gazette zoning amendment dated 18 July 2025 (referenced in later notifications) has not yet been obtained from official archives. Rules shown here reflect the 2007 Zoning Regulations and all obtained amendments through January 2026.";
+}
+
+const ZONE_CODE_PLAIN_LABELS: Record<string, string> = {
+  "R-MAIN": "Residential (Main)",
+  "R-MIX": "Residential (Mixed)",
+  "C-BIZ": "Commercial (Central / Business)",
+  "C-AXES": "Mutation Corridors",
+  "I-GEN": "Industrial (General)",
+  "I-HITECH": "Industrial (Hi-Tech)",
+  PSP: "Public and semi-public",
+  "T-TRANS": "Traffic and transportation",
+};
+
+const AREA_CLASS_PLAIN_LABELS: Record<string, string> = {
+  intensely_developed: "Intensely developed area (Area A)",
+  moderately_developed: "Moderately developed area (Area B)",
+  sparsely_developed: "Sparsely developed area (Area C)",
+  ring_i: "Ring I",
+  ring_ii: "Ring II",
+  ring_iii: "Ring III",
+};
+
+const USE_PLAIN_LABELS: Record<string, string> = {
+  residential: "Residential",
+  commercial: "Commercial",
+  industrial: "Industrial",
+  public_semi_public: "Public and semi-public",
+  traffic_transportation: "Traffic and transportation",
+};
+
+export const PARAMETER_PLAIN_LABELS: Record<
+  ParameterRecord["parameter"],
+  string
+> = {
+  ground_coverage_max_pct: "Maximum ground coverage",
+  far_base_max: "Base FAR",
+  far_premium_additional_max: "Premium FAR (additional)",
+  tdr_receivable_max: "Transferable development rights (TDR)",
+  setback_front_min_m: "Front setback",
+  setback_rear_min_m: "Rear setback",
+  setback_side_min_m: "Side setback",
+  building_height_max_m: "Maximum building height",
+  floors_max: "Maximum floors",
+  parking_requirement: "Parking requirement",
+};
+
+function formatNumberPlain(n: number): string {
+  if (Number.isInteger(n)) {
+    return n.toLocaleString("en-IN");
+  }
+  return Number(n.toFixed(2)).toLocaleString("en-IN");
+}
+
+export function formatNumericIntervalPlain(
+  interval: NumericInterval | null | undefined,
+  nounPrefix: string,
+  unit: string
+): string | null {
+  if (!interval) return null;
+  const { min, max, min_inclusive, max_inclusive } = interval;
+  if ((min === null || min === undefined) && max !== null && max !== undefined) {
+    const verb = max_inclusive === false ? "below" : "up to";
+    return `${nounPrefix} ${verb} ${formatNumberPlain(max)} ${unit}`;
+  }
+  if (min !== null && min !== undefined && max !== null && max !== undefined) {
+    const lowWord = min_inclusive ? "from" : "above";
+    const highWord =
+      max_inclusive === false ? "below" : min_inclusive ? "to" : "up to";
+    return `${nounPrefix} ${lowWord} ${formatNumberPlain(min)} ${highWord} ${formatNumberPlain(max)} ${unit}`;
+  }
+  if (min !== null && min !== undefined && (max === null || max === undefined)) {
+    if (min_inclusive) {
+      return `${nounPrefix} ${formatNumberPlain(min)} ${unit} and above`;
+    }
+    return `${nounPrefix} above ${formatNumberPlain(min)} ${unit}`;
+  }
+  return null;
+}
+
+export function cleanTableRowHeader(rawHeader: string | null | undefined): string {
+  if (!rawHeader) return "";
+  const parts = rawHeader
+    .split("|")
+    .map((p) => p.trim())
+    .filter(Boolean);
+  const withoutIndex =
+    parts.length > 1 && /^\d+\.?$/.test(parts[0]) ? parts.slice(1) : parts;
+  return formatPlainQuantity(withoutIndex.join(" — "));
+}
+
+export function formatParameterConditionsPlain(
+  conditions: ParameterConditions | null | undefined,
+  record?: Pick<ParameterRecord, "parameter" | "source">
+): string {
+  if (!conditions) return "All plots in scope";
+  const parts: string[] = [];
+
+  if (conditions.zone && conditions.zone.length > 0) {
+    const zLabels = conditions.zone.map(
+      (z) => ZONE_CODE_PLAIN_LABELS[z] ?? z
+    );
+    parts.push(zLabels.join(", "));
+  } else if (conditions.use && conditions.use.length > 0) {
+    const uLabels = conditions.use.map(
+      (u) => USE_PLAIN_LABELS[u.toLowerCase()] ?? u
+    );
+    parts.push(uLabels.join(", "));
+  }
+
+  if (conditions.area_class && conditions.area_class.length > 0) {
+    const aLabels = conditions.area_class.map(
+      (a) => AREA_CLASS_PLAIN_LABELS[a] ?? a
+    );
+    parts.push(aLabels.join(", "));
+  }
+
+  const plotStr = formatNumericIntervalPlain(
+    conditions.plot_area_m2,
+    parts.length === 0 ? "Plots" : "plots",
+    "m²"
+  );
+  if (plotStr) parts.push(plotStr);
+
+  const roadStr = formatNumericIntervalPlain(
+    conditions.road_width_m,
+    parts.length === 0 ? "Roads" : "roads",
+    "m"
+  );
+  if (roadStr) parts.push(roadStr);
+
+  const heightStr = formatNumericIntervalPlain(
+    conditions.building_height_m,
+    parts.length === 0 ? "Building height" : "building height",
+    "m"
+  );
+  if (heightStr) parts.push(heightStr);
+
+  const depthStr = formatNumericIntervalPlain(
+    conditions.plot_depth_m,
+    parts.length === 0 ? "Plot depth or width" : "plot depth or width",
+    "m"
+  );
+  if (depthStr && !plotStr) {
+    parts.push(depthStr);
+  }
+
+  if (record?.parameter === "parking_requirement" && record.source?.row_header) {
+    const cat = cleanTableRowHeader(record.source.row_header);
+    if (cat) {
+      return cat;
+    }
+  }
+
+  if (parts.length === 0 && record?.source?.row_header) {
+    const cleaned = cleanTableRowHeader(record.source.row_header);
+    if (cleaned) return cleaned;
+  }
+
+  return parts.length > 0 ? parts.join(", ") : "General rule";
+}
+
+export function isPlausibleParameterValue(
+  parameter: ParameterRecord["parameter"],
+  value: number | string | null | undefined,
+  unit?: string | null,
+  conditions?: ParameterConditions | null
+): boolean {
+  if (value === null || value === undefined) return false;
+
+  if (conditions?.plot_area_m2) {
+    const { min, max } = conditions.plot_area_m2;
+    if (typeof min === "number" && min > 0 && min < MIN_PLAUSIBLE_PLOT_AREA_M2) {
+      return false;
+    }
+    if (typeof max === "number" && max > 0 && max < MIN_PLAUSIBLE_PLOT_AREA_M2) {
+      return false;
+    }
+  }
+
+  if (parameter === "parking_requirement") {
+    if (typeof value === "number") {
+      return value >= PARKING_M2_BOUNDS[0] && value <= PARKING_M2_BOUNDS[1];
+    }
+    return typeof value === "string" && value.trim().length > 0;
+  }
+
+  if (typeof value !== "number" || Number.isNaN(value)) {
+    return false;
+  }
+
+  if (
+    (parameter === "setback_front_min_m" ||
+      parameter === "setback_rear_min_m" ||
+      parameter === "setback_side_min_m") &&
+    (unit === "pct_of_plot_depth" || unit === "pct_of_plot_width" || unit === "%")
+  ) {
+    return value >= SETBACK_PCT_BOUNDS[0] && value <= SETBACK_PCT_BOUNDS[1];
+  }
+
+  const bounds = PLAUSIBILITY_BOUNDS[parameter];
+  if (!bounds) return true;
+  return value >= bounds[0] && value <= bounds[1];
+}
+
+export function isPlausibleParameterRecord(record: ParameterRecord): boolean {
+  return isPlausibleParameterValue(
+    record.parameter,
+    record.value,
+    record.unit,
+    record.conditions
+  );
+}
+
+export function formatParameterValuePlain(record: ParameterRecord): string {
+  const { parameter, value, unit, value_text } = record;
+  if (parameter === "parking_requirement") {
+    if (typeof value === "number" && unit === "m2_per_car_space") {
+      return `1 car space per ${formatNumberPlain(value)} m² of floor area`;
+    }
+    return formatPlainQuantity(String(value_text || value || "").trim());
+  }
+
+  if (typeof value !== "number") {
+    return formatPlainQuantity(String(value_text || value || "").trim());
+  }
+
+  if (parameter === "ground_coverage_max_pct") {
+    return `${formatNumberPlain(value)}%`;
+  }
+  if (parameter === "far_base_max") {
+    return formatNumberPlain(value);
+  }
+  if (parameter === "far_premium_additional_max") {
+    if (unit === "multiple_of_base_far") {
+      return `${Math.round(value * 100)}% of base FAR (${formatNumberPlain(value)}×)`;
+    }
+    return formatNumberPlain(value);
+  }
+  if (parameter === "tdr_receivable_max") {
+    if (value === 0) return "None (0)";
+    if (unit === "multiple_of_base_far") {
+      return `${Math.round(value * 100)}% of base FAR (${formatNumberPlain(value)}×)`;
+    }
+    return formatNumberPlain(value);
+  }
+  if (
+    parameter === "setback_front_min_m" ||
+    parameter === "setback_rear_min_m" ||
+    parameter === "setback_side_min_m"
+  ) {
+    if (unit === "pct_of_plot_depth") {
+      return `${formatNumberPlain(value)}% of plot depth`;
+    }
+    if (unit === "pct_of_plot_width") {
+      return `${formatNumberPlain(value)}% of plot width`;
+    }
+    if (value === 0) {
+      return "0 m";
+    }
+    if (value_text.toLowerCase().includes("on any one side")) {
+      return `${formatNumberPlain(value)} m (on one side)`;
+    }
+    return `${formatNumberPlain(value)} m`;
+  }
+  if (parameter === "building_height_max_m") {
+    return `${formatNumberPlain(value)} m`;
+  }
+  if (parameter === "floors_max") {
+    return `${formatNumberPlain(value)} floors`;
+  }
+  return `${formatNumberPlain(value)}${unit ? ` ${unit}` : ""}`;
+}
 
 export function formatHumanDate(isoDate: string | null | undefined): string {
   if (!isoDate) return "Date not recorded";
@@ -70,6 +617,37 @@ export function formatPlainInstrumentStatus(
   return "In force";
 }
 
+export function formatPlainInstrumentType(
+  doc: Pick<DocumentMetadata, "instrument_type" | "role" | "layer">
+): string {
+  const iType = doc.instrument_type ?? "instrument";
+  if (iType === "compilation") return "Compilation";
+  if (iType === "map") return "Map";
+  if (iType === "bill") return "Bill";
+  if (iType === "order" || doc.layer === "orders") return "Order";
+  if (doc.layer === "statute") return "Act";
+  if (doc.role === "amendment") return "Amendment";
+  if (doc.layer === "state_rules") return "Notification";
+  return "Regulation";
+}
+
+export function isDocumentTextHeld(
+  doc: Pick<
+    DocumentMetadata,
+    "structured" | "acquisition_status" | "text_rights" | "clauses_count"
+  >
+): boolean {
+  if (doc.structured === false) return false;
+  if (doc.acquisition_status && doc.acquisition_status !== "acquired") {
+    return false;
+  }
+  if (doc.text_rights?.mode === "reference_only") return false;
+  if (typeof doc.clauses_count === "number" && doc.clauses_count <= 0) {
+    return false;
+  }
+  return true;
+}
+
 export function formatPlainLayerLabel(layer: string | null | undefined): string {
   switch (layer) {
     case "planning":
@@ -77,7 +655,7 @@ export function formatPlainLayerLabel(layer: string | null | undefined): string 
     case "municipal":
       return "Municipal building bye-laws";
     case "state_rules":
-      return "State rules & notifications";
+      return "State rules and notifications";
     case "statute":
       return "State Act";
     case "orders":
@@ -93,9 +671,14 @@ export function formatPlainLayerLabel(layer: string | null | undefined): string 
 
 export function formatPlainQuantity(raw: string): string {
   return raw
-    .replace(/\bsq_m\b/g, "m²")
-    .replace(/\bsq_ft\b/g, "sq ft")
-    .replace(/\bpercent\b/g, "%");
+    .replace(/\bsq_m\b/gi, "m²")
+    .replace(/\bsq\.?\s*m(?:trs?\.?|ts?\.?)?\b/gi, "m²")
+    .replace(/\b(\d+(?:\.\d+)?)sqm\b/gi, "$1 m²")
+    .replace(/\bm2\b/gi, "m²")
+    .replace(/\bsq_ft\b/gi, "sq ft")
+    .replace(/\bpercent\b/gi, "%")
+    .replace(/\bpct\b/gi, "%")
+    .replace(/\bmtrs?\.?\b/gi, "m");
 }
 
 export function sortDocumentsMostRecentFirst<

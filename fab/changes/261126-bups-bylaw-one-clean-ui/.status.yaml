@@ -31,9 +31,10 @@ confidence:
 stage_metrics:
     intake: {started_at: "2026-11-26T04:12:16Z", driver: fab-new, iterations: 1, completed_at: "2026-11-26T04:19:10Z"}
     apply: {started_at: "2026-11-26T04:19:10Z", driver: fab-fff, iterations: 1}
-prs: []
+prs:
+    - https://github.com/manideepmamidala2-bit/bylaws-india/pull/17
 change_type_source: explicit
 base_branch: main
 # base_branch: written by /git-branch or /fab-new when the change's branch is created (no placeholder here).
 # true_impact: lazily created on first stage-finish that computes it (no placeholder here).
-last_updated: 2026-11-26T04:21:05Z
+last_updated: 2026-11-26T04:24:56Z
