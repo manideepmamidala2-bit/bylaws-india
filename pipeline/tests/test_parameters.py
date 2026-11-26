@@ -382,19 +382,44 @@ def test_part1_table_and_provision_supersession_dedup_and_band_continuity() -> N
     assert cl_31_iii["versions"][-1]["citations"][0]["page"] == 2
     assert "more than 11.5 m in height" in cl_31_iii["versions"][0]["content"]
 
-    # 5. Overlap check & band continuity check: 0 unexplained overlaps; 11.5 m to 12 m setback height overlap detected
-    ov = check_parameter_overlaps(records, doc_layers)
-    assert len(ov["unexplained_overlaps"]) == 0
-    assert len(ov["not_settled_overlaps"]) >= 1
-    assert any("11.5 m and 12 m" in item["reason"] for item in ov["not_settled_overlaps"])
+    # 5. Applicability rules (Part 4): 3.1(ii) and 3.1(iii) settle the 11.5 m to 12 m setback height band,
+    #    so `not_settled_overlaps` is empty when applicability_rules are present, whereas a constructed overlap
+    #    with no applicability rule (`applicability_rules=[]`) is still reported as `not_settled`.
+    app_rules = params_payload.get("applicability_rules") or []
+    assert len(app_rules) == 1
+    assert app_rules[0]["rule_id"] == "setback-height-table8-vs-table9"
+    assert app_rules[0]["plain_explanation"] == (
+        "Buildings up to 12 m use Table 8; taller buildings use Table 9 (clauses 3.1(ii) and (iii), January 2026)."
+    )
+    assert len(app_rules[0]["authorities"]) == 2
+    assert app_rules[0]["authorities"][0]["clause_number"] == "3.1(ii)"
+    assert app_rules[0]["authorities"][0]["page"] == 2
+    assert app_rules[0]["authorities"][1]["clause_number"] == "3.1(iii)"
+    assert app_rules[0]["authorities"][1]["page"] == 2
 
-    bands = check_band_continuity(records, doc_layers)
+    ov_settled = check_parameter_overlaps(records, doc_layers, applicability_rules=app_rules)
+    assert len(ov_settled["unexplained_overlaps"]) == 0
+    assert len(ov_settled["not_settled_overlaps"]) == 0
+    assert len(ov_settled["settled_by_applicability"]) >= 1
+
+    bands_settled = check_band_continuity(records, doc_layers, applicability_rules=app_rules)
+    assert not any(
+        b["kind"] == "overlap" and b["subject"] == "setbacks"
+        for b in bands_settled
+    )
+
+    # Constructed overlap with NO applicability clause is still flagged as "not settled"
+    ov_unsettled = check_parameter_overlaps(records, doc_layers, applicability_rules=[])
+    assert len(ov_unsettled["not_settled_overlaps"]) >= 1
+    assert any("11.5 m and 12 m" in item["reason"] for item in ov_unsettled["not_settled_overlaps"])
+
+    bands_unsettled = check_band_continuity(records, doc_layers, applicability_rules=[])
     assert any(
         b["kind"] == "overlap"
         and b["subject"] == "setbacks"
         and b["range"] == "11.5 m to 12 m"
         and "The current tables overlap between 11.5 m and 12 m." in b["summary"]
-        for b in bands
+        for b in bands_unsettled
     )
 
     # Falsifiability check: planting an unexplained conflicting in_force record must fail check_parameter_overlaps

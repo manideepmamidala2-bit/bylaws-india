@@ -4,13 +4,12 @@
 - **Source Table Anomalies / Mismatches Flagged for Owner Review**: `22`
 - **Plausibility Bounds Exclusions & Non-Envelope Reclassifications**: `18`
 - **Unexplained Governing Overlaps**: `0`
-- **Current-Text Band Overlaps / Boundary Gaps (Not Settled)**: `2`
+- **Current-Text Band Overlaps / Boundary Gaps (Not Settled)**: `1`
 
 ## Current-Text Band Overlaps & Continuity Findings (For Owner Review)
 
 | Kind | Subject | Dimension | Range | Finding | Sources |
 |---|---|---|---|---|---|
-| `overlap` | `setbacks` | `building_height_m` | `11.5 m to 12 m` | The current tables overlap between 11.5 m and 12 m. | `rmp2015-zr-amend-2026-01 (p. 2)` vs `rmp2015-zr (p. 21)` |
 | `boundary_gap` | `far` | `road_width_m` | `9 m` | Table `chp_4__cl_4.4__cl_4.4.3__tbl_14` in `rmp2015-zr` has `< 9` followed by `> 9` (exact `9` boundary point not included in either row). | `rmp2015-zr (chp_4__cl_4.4__cl_4.4.3__tbl_14)` vs `rmp2015-zr (chp_4__cl_4.4__cl_4.4.3__tbl_14)` |
 
 ## Plausibility Bounds Exclusions (For Owner Review)

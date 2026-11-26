@@ -686,11 +686,19 @@ export default async function TopicDetailPage({
     subjectMeta.zoningGoverned
   );
 
-  // Band continuity & current-text overlap notices (e.g. 11.5 m to 12 m setback table overlap)
+  // Band continuity & current-text overlap notices (only when no in-force applicability clause decides)
+  const subjectApplicabilityRules = (
+    parametersPayload?.applicability_rules ?? []
+  ).filter(
+    (ar) =>
+      ar.subject === subjectMeta.slug ||
+      (subjectMeta.slug === "height" && ar.dimension === "building_height_m")
+  );
   const bandContinuityNotices = computeSubjectBandContinuityNotices(
     subjectMeta.slug,
     governingParamRecords,
-    docMetaById
+    docMetaById,
+    parametersPayload?.applicability_rules
   );
 
   // Older/superseded parameter rows for this subject (sorted newest first so 2007 replaced rows precede 2004 displaced rows)
@@ -1168,7 +1176,18 @@ export default async function TopicDetailPage({
                             row.ruleLabel
                           )}
                         </td>
-                        <td className="text-[#171917]">{row.conditionsPlain}</td>
+                        <td className="text-[#171917]">
+                          <div>{row.conditionsPlain}</div>
+                          {row.note &&
+                            row.note.includes("11.5 to 12 m is unreachable") && (
+                              <div
+                                data-testid="unreachable-band-note"
+                                className="mt-1 font-mono text-[11px] text-[#5b5e56]"
+                              >
+                                {row.note}
+                              </div>
+                            )}
+                        </td>
                         <td className="font-mono text-xs font-semibold text-[#080909]">
                           {row.valuePlain}
                         </td>
@@ -1248,6 +1267,15 @@ export default async function TopicDetailPage({
             </span>
             {subjectMeta.whyAppliesLine}
           </p>
+          {subjectApplicabilityRules.map((ar) => (
+            <p
+              key={ar.rule_id}
+              data-testid="applicability-rule-line"
+              className="dg-serif mt-2 text-base text-[#080909]"
+            >
+              {ar.plain_explanation}
+            </p>
+          ))}
 
           <details
             data-testid="why-this-rule-applies"
@@ -1257,6 +1285,40 @@ export default async function TopicDetailPage({
               Read quoted statutory authority
             </summary>
             <div className="mt-3 space-y-4 border-t border-[#c8ccc0] pt-3 text-sm">
+              {subjectApplicabilityRules.map((ar) =>
+                ar.authorities.map((auth) => {
+                  const authDoc = docMetaById.get(auth.doc_id);
+                  const authTitle = formatPlainDocumentTitle(
+                    authDoc,
+                    auth.doc_id
+                  );
+                  const authDate = formatHumanDate(
+                    authDoc?.effective_from || authDoc?.notified_date
+                  );
+                  return (
+                    <div
+                      key={`${ar.rule_id}:${auth.clause_number}`}
+                      data-testid="applicability-rule-quote"
+                    >
+                      <div className="font-mono text-xs font-semibold text-[#080909]">
+                        Clause {auth.clause_number} — {authTitle} ({authDate},{" "}
+                        <a
+                          href={auth.page_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline"
+                        >
+                          p. {auth.page}
+                        </a>
+                        )
+                      </div>
+                      <blockquote className="dg-serif mt-1 border-l-2 border-[#080909] pl-3 italic text-[#171917]">
+                        &ldquo;{auth.quote}&rdquo;
+                      </blockquote>
+                    </div>
+                  );
+                })
+              )}
               {byelaw14Step && (
                 <div>
                   <div className="font-mono text-xs font-semibold text-[#080909]">

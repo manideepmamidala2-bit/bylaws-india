@@ -1272,6 +1272,7 @@ export interface JurisdictionParameters {
   jurisdiction: string;
   generated: ParametersGenerated;
   records: ParameterRecord[];
+  applicability_rules?: ApplicabilityRule[];
 }
 
 export interface ParametersGenerated {
@@ -1350,6 +1351,28 @@ export interface ParameterSource {
   page_link: string;
   official_url?: string | null;
   archive_url?: string | null;
+}
+
+export interface ApplicabilityRule {
+  rule_id: string;
+  subject: string;
+  dimension: string;
+  range_settled: string;
+  plain_explanation: string;
+  unreachable_band_note: string;
+  /**
+   * @minItems 1
+   */
+  authorities: [ApplicabilityAuthority, ...ApplicabilityAuthority[]];
+}
+
+export interface ApplicabilityAuthority {
+  doc_id: string;
+  eid: string;
+  clause_number: string;
+  quote: string;
+  page: number;
+  page_link: string;
 }
 
 /**

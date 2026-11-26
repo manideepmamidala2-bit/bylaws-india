@@ -23,9 +23,101 @@
       "items": {
         "$ref": "#/$defs/parameterRecord"
       }
+    },
+    "applicability_rules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/applicabilityRule"
+      }
     }
   },
   "$defs": {
+    "applicabilityAuthority": {
+      "type": "object",
+      "title": "ApplicabilityAuthority",
+      "additionalProperties": false,
+      "required": [
+        "doc_id",
+        "eid",
+        "clause_number",
+        "quote",
+        "page",
+        "page_link"
+      ],
+      "properties": {
+        "doc_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "eid": {
+          "type": "string",
+          "minLength": 1
+        },
+        "clause_number": {
+          "type": "string",
+          "minLength": 1
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 1
+        },
+        "page": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "page_link": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "applicabilityRule": {
+      "type": "object",
+      "title": "ApplicabilityRule",
+      "additionalProperties": false,
+      "required": [
+        "rule_id",
+        "subject",
+        "dimension",
+        "range_settled",
+        "plain_explanation",
+        "unreachable_band_note",
+        "authorities"
+      ],
+      "properties": {
+        "rule_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subject": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dimension": {
+          "type": "string",
+          "minLength": 1
+        },
+        "range_settled": {
+          "type": "string",
+          "minLength": 1
+        },
+        "plain_explanation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unreachable_band_note": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authorities": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/applicabilityAuthority"
+          }
+        }
+      }
+    },
     "parametersGenerated": {
       "type": "object",
       "title": "ParametersGenerated",

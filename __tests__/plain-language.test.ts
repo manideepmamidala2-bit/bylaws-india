@@ -242,16 +242,27 @@ describe("Bylaw One plain-language helpers & 11 code subjects", () => {
       ],
     ]);
 
-    const notices = computeSubjectBandContinuityNotices(
+    // Constructed overlap with no applicability rule -> shown as "Not settled"
+    const noticesUnsettled = computeSubjectBandContinuityNotices(
       "setbacks",
       [lowRiseRecord, highRiseRecord],
-      docMap
+      docMap,
+      []
     );
-    expect(notices).toHaveLength(1);
-    expect(notices[0].headline).toContain(
+    expect(noticesUnsettled).toHaveLength(1);
+    expect(noticesUnsettled[0].headline).toContain(
       "The current tables overlap between 11.5 m and 12 m"
     );
-    expect(notices[0].sourceA.page).toBe(2);
-    expect(notices[0].sourceB.page).toBe(21);
+    expect(noticesUnsettled[0].sourceA.page).toBe(2);
+    expect(noticesUnsettled[0].sourceB.page).toBe(21);
+
+    // When applicability rule (clauses 3.1(ii) and (iii)) settles 11.5 m to 12 m -> NOT shown as "Not settled"
+    const noticesSettled = computeSubjectBandContinuityNotices(
+      "setbacks",
+      [lowRiseRecord, highRiseRecord],
+      docMap,
+      [{ dimension: "building_height_m", range_settled: "11.5 m to 12 m" }]
+    );
+    expect(noticesSettled).toHaveLength(0);
   });
 });

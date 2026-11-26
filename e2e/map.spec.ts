@@ -137,8 +137,9 @@ test.describe("Bylaw One — Home, Subject, Document & Map E2E Suite", () => {
       await expect(
         page.getByRole("heading", { name: "What applies today" })
       ).toBeVisible();
-      await expect(page.getByTestId("band-continuity-notice")).toContainText(
-        /The current tables overlap between 11\.5 m and 12 m\./i
+      await expect(page.getByTestId("band-continuity-notice")).toHaveCount(0);
+      await expect(page.getByTestId("applicability-rule-line")).toContainText(
+        "Buildings up to 12 m use Table 8; taller buildings use Table 9 (clauses 3.1(ii) and (iii), January 2026)."
       );
 
       const paramTable = page.getByTestId("subject-parameter-table");

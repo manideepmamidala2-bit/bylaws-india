@@ -327,6 +327,25 @@ def verify_jurisdiction_text_fidelity(
                         "reason": f"Parameter row cell_text {src.get('cell_text')!r} not found on cited page {p_page} of {p_doc}",
                     }
                 )
+        for app_rule in params_payload.get("applicability_rules") or []:
+            for auth in app_rule.get("authorities") or []:
+                a_doc = str(auth.get("doc_id") or "")
+                a_page = int(auth.get("page") or 0)
+                a_quote = str(auth.get("quote") or "")
+                a_tokens = [w for w in extract_word_tokens(a_quote) if len(w) >= 2]
+                a_allowed = _get_doc_page_tokens(a_doc).get(a_page, set())
+                missing_a = [w for w in a_tokens if w not in a_allowed]
+                if missing_a:
+                    failures.append(
+                        {
+                            "doc_id": a_doc,
+                            "eid": str(auth.get("eid")),
+                            "version_id": "applicability_rule",
+                            "pages": [a_page],
+                            "differing_words": missing_a[:10],
+                            "reason": f"Applicability quote on {auth.get('clause_number')} not found on cited page {a_page} of {a_doc}",
+                        }
+                    )
 
     md_lines = [
         "## 7. Text Fidelity & OCR Audit (Part 2)",
