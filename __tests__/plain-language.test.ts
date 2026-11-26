@@ -134,19 +134,19 @@ describe("Bylaw One plain-language helpers & 11 code subjects", () => {
   });
 
   it("formats Changed [month year], Replaced by [plain name], [date], and detects the 11.5m-12m setback table band overlap", () => {
-    expect(formatMonthYearPlain("2026-01-20")).toBe("January 2026");
+    expect(formatMonthYearPlain("2026-01-05")).toBe("January 2026");
     expect(formatMonthYearPlain("2019-06-19")).toBe("June 2019");
 
     expect(
       formatReplacedByPlain({
         doc_id: "rmp2015-zr-amend-2026-01",
         title:
-          "Bengaluru and Greater Bengaluru Revised Master Plan-2015 Zonal Regulations (Amendment), 2025",
-        effective_from: "2026-01-20",
+          "GOVERNMENT OF KARNATAKA No. UDD 235 MNJ 2025(E) date: 05.01.2026 NOTIFICATION (Amendment to Zonal Regulations of Revised Master Plan-2015 of Bengaluru and Greater Bengaluru)",
+        effective_from: "2026-01-05",
         notified_date: "2026-01-05",
       })
     ).toBe(
-      "Replaced by Bengaluru and Greater Bengaluru Revised Master Plan-2015 Zonal Regulations (Amendment), 2025, 20 January 2026"
+      "Replaced by GOVERNMENT OF KARNATAKA No. UDD 235 MNJ 2025(E) date: 05.01.2026 NOTIFICATION (Amendment to Zonal Regulations of Revised Master Plan-2015 of Bengaluru and Greater Bengaluru), 5 January 2026"
     );
 
     expect(
@@ -170,7 +170,7 @@ describe("Bylaw One plain-language helpers & 11 code subjects", () => {
           max_inclusive: true,
         },
       },
-      valid_from: "2026-01-20",
+      valid_from: "2026-01-05",
       valid_to: null,
       legal_status: "in_force",
       source: {
@@ -225,8 +225,8 @@ describe("Bylaw One plain-language helpers & 11 code subjects", () => {
         {
           doc_id: "rmp2015-zr-amend-2026-01",
           title:
-            "Bengaluru and Greater Bengaluru Revised Master Plan-2015 Zonal Regulations (Amendment), 2025",
-          effective_from: "2026-01-20",
+            "GOVERNMENT OF KARNATAKA No. UDD 235 MNJ 2025(E) date: 05.01.2026 NOTIFICATION (Amendment to Zonal Regulations of Revised Master Plan-2015 of Bengaluru and Greater Bengaluru)",
+          effective_from: "2026-01-05",
           notified_date: "2026-01-05",
         },
       ],

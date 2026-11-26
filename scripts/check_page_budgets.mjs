@@ -124,7 +124,89 @@ const FORBIDDEN_ANYWHERE_HTML_PATTERNS = [
     regex:
       /Structured Building Bylaws|Statutory Resolution Cards|Local Graph|Local Knowledge Graph|One-Hop Neighborhood|\btopic:[a-z_]+/i,
   },
+  {
+    label: "Unregistered instrument name or date",
+    regex:
+      /20 January 2026|2026-01-20|Zoning Regulations Amendment \(Setbacks, Basements and Industrial Norms\)/i,
+  },
 ];
+
+const MONTH_NAMES = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+function formatHumanDateJs(isoDate) {
+  if (!isoDate) return "";
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(isoDate).trim());
+  if (!m) return String(isoDate);
+  const year = m[1];
+  const monthIdx = Number(m[2]) - 1;
+  const day = Number(m[3]);
+  const monthName = MONTH_NAMES[monthIdx];
+  if (!monthName || Number.isNaN(day)) return String(isoDate);
+  return `${day} ${monthName} ${year}`;
+}
+
+function toTitleCaseIfScreamingJs(title) {
+  const letters = title.replace(/[^a-zA-Z]/g, "");
+  if (!letters) return title;
+  const upperCount = title.replace(/[^A-Z]/g, "").length;
+  if (upperCount / letters.length < 0.7) {
+    return title;
+  }
+  const keepUpper = new Set(["FAR", "TDR", "DRC", "NOC", "RMP", "I", "II", "III", "IV"]);
+  return title
+    .split(/\s+/)
+    .map((word) => {
+      const clean = word.replace(/[^a-zA-Z0-9]/g, "");
+      if (keepUpper.has(clean.toUpperCase())) {
+        return word.toUpperCase();
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    })
+    .join(" ");
+}
+
+const registeredReplacedByLabels = new Set();
+const registeredPlainTitles = new Set();
+if (manifestObj) {
+  for (const j of manifestObj.jurisdictions || []) {
+    if (j.visibility === "test") continue;
+    const docsPath = path.join(
+      repoRoot,
+      "public",
+      "data",
+      j.id,
+      j.latest_release || "4.0.0",
+      "documents.json"
+    );
+    if (fs.existsSync(docsPath)) {
+      const docs = JSON.parse(fs.readFileSync(docsPath, "utf8"));
+      for (const d of docs) {
+        const plainTitle = toTitleCaseIfScreamingJs(String(d.title || "").trim());
+        const dt = formatHumanDateJs(d.effective_from || d.notified_date);
+        if (plainTitle) {
+          registeredPlainTitles.add(plainTitle);
+          if (dt) {
+            registeredReplacedByLabels.add(`Replaced by ${plainTitle}, ${dt}`);
+          }
+          registeredReplacedByLabels.add(`Replaced by ${plainTitle}`);
+        }
+      }
+    }
+  }
+}
 
 for (const htmlPath of htmlFiles) {
   const relRoute =
@@ -180,6 +262,26 @@ for (const htmlPath of htmlFiles) {
       if (m) {
         violations.push(
           `${relRoute}: Built HTML contains forbidden ${pat.label} (${JSON.stringify(m[0])})`
+        );
+      }
+    }
+
+    // Part 3.3 Name check (CI): verify every "Replaced by <name>, <date>" label in built HTML matches a registered instrument
+    const cleanNoComments = htmlText.replace(/<!--[\s\S]*?-->/g, "");
+    for (const repMatch of cleanNoComments.matchAll(
+      />(Replaced by [^<]+)</g
+    )) {
+      const repText = repMatch[1]
+        .replace(/&amp;/g, "&")
+        .replace(/\s+/g, " ")
+        .trim()
+        .replace(/\.$/, "");
+      if (
+        repText !== "Replaced by a later amendment" &&
+        !registeredReplacedByLabels.has(repText)
+      ) {
+        violations.push(
+          `${relRoute}: Name check failed — unregistered instrument reference ${JSON.stringify(repText)}`
         );
       }
     }

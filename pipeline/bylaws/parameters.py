@@ -653,13 +653,13 @@ def extract_jurisdiction_parameters(
         )
         has_2026_setback_amend = amend_2026_doc is not None
         amend_2026_date = (
-            (amend_2026_doc.effective_from or amend_2026_doc.notified_date or "2026-01-20")
+            (amend_2026_doc.effective_from or amend_2026_doc.notified_date or "2026-01-05")
             if amend_2026_doc is not None
-            else "2026-01-20"
+            else "2026-01-05"
         )
         amend_2026_note = (
-            "Replaced by Zoning Regulations Amendment (Setbacks, Basements and Industrial Norms), 20 January 2026"
-            if has_2026_setback_amend
+            f"Replaced by {_format_short_doc_label(amend_2026_doc, amend_2026_doc.id)}, {_format_human_date_plain(amend_2026_date)}"
+            if amend_2026_doc is not None
             else None
         )
         amend_2019_doc = next(
@@ -1172,7 +1172,7 @@ def extract_jurisdiction_parameters(
                     method="clause_rule_parser",
                 )
 
-            # (d2) Original Note (b) in Residential Main (`chp_4__cl_4.1__cl_4.1.2__item_b`, p. 28): 11.5m or Stilt+GF+2 floors (superseded 2026-01-20)
+            # (d2) Original Note (b) in Residential Main (`chp_4__cl_4.1__cl_4.1.2__item_b`, p. 28): 11.5m or Stilt+GF+2 floors (superseded 2026-01-05)
             if "restricted to 11.5 meters or Stilt +GF+2 floors" in txt:
                 for p_kind, val, unit, c_txt in [
                     ("building_height_max_m", 11.5, "m", "11.5 meters"),
@@ -1436,15 +1436,29 @@ def _format_human_date_plain(iso_date: str | None) -> str:
     return iso_date
 
 
+def _to_title_case_if_screaming(title: str) -> str:
+    letters = re.sub(r"[^a-zA-Z]", "", title)
+    if not letters:
+        return title
+    upper_count = len(re.sub(r"[^A-Z]", "", title))
+    if upper_count / len(letters) < 0.7:
+        return title
+    keep_upper = {"FAR", "TDR", "DRC", "NOC", "RMP", "I", "II", "III", "IV"}
+    out_words: list[str] = []
+    for word in title.split():
+        clean = re.sub(r"[^a-zA-Z0-9]", "", word)
+        if clean.upper() in keep_upper:
+            out_words.append(word.upper())
+        else:
+            out_words.append(word[:1].upper() + word[1:].lower())
+    return " ".join(out_words)
+
+
 def _format_short_doc_label(doc_obj: Any, fallback_id: str) -> str:
     if doc_obj is None:
         return fallback_id
     title = str(getattr(doc_obj, "title", "") or fallback_id).strip()
-    if "—" in title:
-        title = title.split("—", 1)[1].strip()
-    if title.isupper():
-        title = title.title()
-    return title
+    return _to_title_case_if_screaming(title)
 
 
 def _interval_key(iv: dict[str, Any] | None) -> tuple[Any, ...]:

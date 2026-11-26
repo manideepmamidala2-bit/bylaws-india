@@ -346,17 +346,18 @@ def _collect_release_artifacts(
         else:
             raw_clause_bytes = clause_path.read_bytes()
             artifacts[clause_filename] = raw_clause_bytes
-            tree_dict = json.loads(raw_clause_bytes.decode("utf-8"))
-            outline_dict, chapter_map = split_clause_tree_into_chapters(
-                tree_dict, effective_prefix
-            )
-            artifacts[outline_filename] = (
-                json.dumps(outline_dict, indent=2) + "\n"
-            ).encode("utf-8")
-            for ch_rel_path, ch_dict in chapter_map.items():
-                artifacts[ch_rel_path] = (
-                    json.dumps(ch_dict, indent=2) + "\n"
+            if config.visibility != "test":
+                tree_dict = json.loads(raw_clause_bytes.decode("utf-8"))
+                outline_dict, chapter_map = split_clause_tree_into_chapters(
+                    tree_dict, effective_prefix
+                )
+                artifacts[outline_filename] = (
+                    json.dumps(outline_dict, indent=2) + "\n"
                 ).encode("utf-8")
+                for ch_rel_path, ch_dict in chapter_map.items():
+                    artifacts[ch_rel_path] = (
+                        json.dumps(ch_dict, indent=2) + "\n"
+                    ).encode("utf-8")
             if ann_path.is_file():
                 artifacts[ann_filename] = ann_path.read_bytes()
 
@@ -364,10 +365,12 @@ def _collect_release_artifacts(
             in_force_annotation_files.append(ann_filename)
         if doc.legal_status == "draft":
             draft_clause_files.append(clause_filename)
-            draft_outlines.append(outline_filename)
+            if config.visibility != "test":
+                draft_outlines.append(outline_filename)
         else:
             in_force_clause_files.append(clause_filename)
-            in_force_outlines.append(outline_filename)
+            if config.visibility != "test":
+                in_force_outlines.append(outline_filename)
 
     for required_name in (
         "amendments.json",
@@ -543,7 +546,6 @@ def run_publish(
     files_entry: dict[str, Any] = {
         "documents": f"{url_prefix}/documents.json",
         "clauses": [_resolve_file_url(fname) for fname in in_force_clauses],
-        "outlines": [_resolve_file_url(fname) for fname in in_force_outlines],
         "annotations": [_resolve_file_url(fname) for fname in in_force_annotations],
         "amendments": f"{url_prefix}/amendments.json",
         "zones": f"{url_prefix}/zones.geojson",
@@ -552,6 +554,8 @@ def run_publish(
         "sources_csv": f"{url_prefix}/sources.csv",
         "review_images": [],
     }
+    if in_force_outlines:
+        files_entry["outlines"] = [_resolve_file_url(fname) for fname in in_force_outlines]
     if shared_documents:
         files_entry["shared_documents"] = shared_documents
     optional_file_keys = (

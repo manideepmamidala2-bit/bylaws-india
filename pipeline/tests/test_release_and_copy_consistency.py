@@ -187,3 +187,37 @@ def test_built_html_primary_layer_language_check_outside_details() -> None:
         assert m_old is None, (
             f"{rel} built HTML contains forbidden old-design marker: {m_old.group(0)!r}"
         )
+
+
+def test_part3_one_name_and_date_per_instrument_from_register() -> None:
+    """One Build, Correct Citations Part 3: Every instrument reference (`Replaced by <name>, <date>`) in `parameters.json` and built HTML pages takes its plain name and date from `documents.json`, and zero `20 January 2026` / `2026-01-20` references remain."""
+    from bylaws.parameters import _format_human_date_plain, _format_short_doc_label
+
+    manifest = json.loads((PUBLIC_DATA_DIR / "manifest.json").read_text(encoding="utf-8"))
+    public_jurs = [j for j in manifest["jurisdictions"] if j.get("visibility") != "test"]
+
+    registered_replaced_labels: set[str] = set()
+    for jur in public_jurs:
+        rel_dir = PUBLIC_DATA_DIR / jur["id"] / str(jur["latest_release"])
+        docs = json.loads((rel_dir / "documents.json").read_text(encoding="utf-8"))
+        for d in docs:
+            plain_title = _format_short_doc_label(type("DocObj", (), {"title": d.get("title")})(), d["doc_id"])
+            dt = _format_human_date_plain(d.get("effective_from") or d.get("notified_date"))
+            registered_replaced_labels.add(f"Replaced by {plain_title}, {dt}")
+            registered_replaced_labels.add(f"Replaced by {plain_title}")
+
+    for jur in public_jurs:
+        rel_dir = PUBLIC_DATA_DIR / jur["id"] / str(jur["latest_release"])
+        params_text = (rel_dir / "parameters.json").read_text(encoding="utf-8")
+        assert "20 January 2026" not in params_text, f"Stale '20 January 2026' in {jur['id']} parameters.json"
+        assert "2026-01-20" not in params_text, f"Stale '2026-01-20' in {jur['id']} parameters.json"
+        assert "Setbacks, Basements and Industrial Norms" not in params_text
+
+        params = json.loads(params_text)
+        for rec in params["records"]:
+            note = str(rec.get("note") or "").strip()
+            if note.startswith("Replaced by "):
+                assert note in registered_replaced_labels, (
+                    f"Unregistered instrument reference in {jur['id']} {rec['parameter_id']}: {note!r}"
+                )
+
