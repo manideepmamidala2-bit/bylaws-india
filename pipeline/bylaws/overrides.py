@@ -400,6 +400,19 @@ def run_apply_overrides(config: JurisdictionConfig, *, repo_root: Path | None = 
                 node = node_by_eid.get(t_eid)
                 if node is None:
                     continue
+                if node.get("type") in {
+                    "preface",
+                    "preamble",
+                    "signature_block",
+                    "definition",
+                    "part",
+                    "chapter",
+                    "schedule",
+                    "annexure",
+                    "appendix",
+                    "form",
+                } or str(node.get("eid") or "").startswith(("pref_", "prea_", "sig_")):
+                    continue
                 cid = str(node["clause_id"])
                 z_codes = list(dict.fromkeys(zp[0] for zp in z_pairs))
                 existing_z = list(node.get("applies_to_zones") or [])

@@ -126,6 +126,11 @@ class DocumentConfig(BaseModel):
         ]
         | None
     ) = None
+    instrument_type: (
+        Literal["instrument", "compilation", "map", "bill", "order"] | None
+    ) = "instrument"
+    summary_by_site: str | None = None
+    notes_by_site: list[constr(min_length=1)] | None = None
     layer: Literal[
         "statute",
         "state_rules",
@@ -444,6 +449,11 @@ class DocumentMetadata(BaseModel):
         ]
         | None
     ) = None
+    instrument_type: (
+        Literal["instrument", "compilation", "map", "bill", "order"] | None
+    ) = "instrument"
+    summary_by_site: str | None = None
+    notes_by_site: list[constr(min_length=1)] | None = None
     layer: Literal[
         "statute",
         "state_rules",
@@ -557,6 +567,17 @@ class NodeVersion(BaseModel):
         "in_force", "draft", "superseded", "withdrawn", "status_unknown"
     ]
     omitted: bool | None = False
+    notes_by_site: list[constr(min_length=1)] | None = []
+
+
+class OcrCorrection(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    original_text: constr(min_length=1)
+    corrected_text: constr(min_length=1)
+    page: conint(ge=1)
+    reason: constr(min_length=1)
 
 
 class ClauseOutlineEntry(BaseModel):
@@ -734,6 +755,45 @@ class MultiPolygonGeometry(BaseModel):
     coordinates: list[Coordinate] = Field(..., min_length=1)
 
 
+class UnreadableFragmentOverride(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    doc_id: constr(min_length=1)
+    page: conint(ge=1)
+    raw_fragment: constr(min_length=1)
+    replacement: str | None = "[unreadable in source]"
+    reason: constr(min_length=1)
+
+
+class TableOverride(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    doc_id: constr(min_length=1)
+    page: conint(ge=1)
+    table_id: constr(min_length=1)
+    target_eid: str | None = None
+    caption: constr(min_length=1)
+    headers: list[str]
+    rows: list[list[str]]
+    footnotes: list[str] | None = None
+    strip_block_fragments: list[str] | None = None
+    reason: constr(min_length=1)
+
+
+class OcrCorrectionOverride(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    doc_id: constr(min_length=1)
+    eid: str | None = None
+    page: conint(ge=1)
+    original_text: constr(min_length=1)
+    corrected_text: constr(min_length=1)
+    reason: constr(min_length=1)
+
+
 class ClauseFix(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -758,6 +818,14 @@ class ClauseFix(BaseModel):
         "language",
         "cross_references",
         "tables",
+        "summary_by_site",
+        "notes_by_site",
+        "ocr_status",
+        "ocr_corrections",
+        "type",
+        "table_meta",
+        "cells",
+        "children",
     ]
     value: Any
     reason: constr(min_length=1)
@@ -868,6 +936,9 @@ class JurisdictionOverrides(BaseModel):
     zone_fixes: list[ZoneFix] | None = None
     map_curations: list[MapCuration] | None = None
     amendment_links: list[AmendmentLinkOverride] | None = None
+    ocr_corrections: list[OcrCorrectionOverride] | None = None
+    unreadable_fragments: list[UnreadableFragmentOverride] | None = None
+    table_overrides: list[TableOverride] | None = None
 
 
 class KnownGap(BaseModel):
@@ -1120,6 +1191,8 @@ class ConsolidatedClauseRecord(BaseModel):
     change_note: str | None = None
     original_text: str | None = None
     amending_clause_id: str | None = None
+    summary_by_site: str | None = None
+    notes_by_site: list[constr(min_length=1)] | None = []
 
 
 class UnconsolidatedClauseRecord(BaseModel):
@@ -1234,6 +1307,9 @@ class SuccessionEntry(BaseModel):
     instrument_title: str
     quoted_evidence: constr(min_length=1)
     source_url: constr(min_length=1)
+    status: Literal["confirmed", "not_confirmed"] | None = "confirmed"
+    page: conint(ge=1) | None = None
+    clause_eid: str | None = None
 
 
 class RelationEntry(BaseModel):
@@ -1268,6 +1344,8 @@ class RelationEntry(BaseModel):
     public_visible: bool | None = False
     measured_precision: confloat(ge=0.0, le=1.0) | None = None
     parameters_incorporated: list[str] | None = None
+    governing_doc: str | None = None
+    governing_value: str | None = None
 
 
 class JurisdictionRelations(BaseModel):
@@ -1501,6 +1579,10 @@ class ClauseNode(BaseModel):
     verified_by: str | None = None
     omitted: bool | None = False
     change_mark: ClauseChangeMark | None = None
+    summary_by_site: str | None = None
+    notes_by_site: list[constr(min_length=1)] | None = []
+    ocr_status: Literal["corrected", "unreadable_fragments"] | None = None
+    ocr_corrections: list[OcrCorrection] | None = Field([], validate_default=True)
 
 
 class ClauseTree(BaseModel):

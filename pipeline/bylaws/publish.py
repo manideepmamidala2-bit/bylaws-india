@@ -14,7 +14,10 @@ from typing import Any
 
 import click
 
-from bylaws.acquire import _build_unacquired_document_payload
+from bylaws.acquire import (
+    _build_unacquired_document_payload,
+    sync_raw_metadata_from_config,
+)
 from bylaws.config import JurisdictionConfig
 from bylaws.root import (
     get_deterministic_timestamp,
@@ -264,6 +267,8 @@ def _collect_release_artifacts(
     raw_dir = root / "data" / "raw" / config.id
     processed_dir = root / "data" / "processed" / config.id
     docs_dir = processed_dir / "documents"
+
+    sync_raw_metadata_from_config(config, repo_root=root)
 
     documents_list: list[dict[str, Any]] = []
     for doc in config.documents:

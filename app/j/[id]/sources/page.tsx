@@ -75,17 +75,16 @@ export default async function SourcesPage({ params }: SourcesPageProps) {
       <main className="mx-auto max-w-6xl px-6 py-8">
         <header className="mb-6 border-b border-[#080909] pb-6">
           <div className="dg-mono">
-            Source Register · {jurisdiction.id} · {documents.length} Instrument(s)
+            Source Register · {documents.length} Instrument(s) · Most Recent First
           </div>
           <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909]">
             {jurisdiction.name}: Legal Source Register
           </h1>
           <p className="dg-serif mt-2 max-w-3xl text-base text-[#171917]">
-            Statutes, statutory rules, master plan zoning regulations, municipal
-            building bye-laws, amendment notifications, government orders, and
-            reference standards governing construction in {jurisdiction.name},
-            with quoted status evidence, SHA-256 checksums, text rights, and
-            links to source documents.
+            Official statutes, master plan zoning regulations, building
+            bye-laws, amendment notifications, orders, maps, and compilations
+            ordered most recent first, with plain-language statuses and
+            tap-to-expand technical details.
           </p>
         </header>
 

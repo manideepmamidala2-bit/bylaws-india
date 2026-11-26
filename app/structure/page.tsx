@@ -1,11 +1,15 @@
 import React from "react";
 import Link from "next/link";
-import { fetchJurisdictionDataset, fetchManifest } from "@/lib/data";
+import {
+  fetchJurisdictionDataset,
+  fetchManifest,
+  getPrimaryPublicJurisdiction,
+} from "@/lib/data";
 import { TopNav } from "@/components/TopNav";
 
 export default async function StructurePage() {
   const manifest = await fetchManifest();
-  const primaryJurisdiction = manifest.jurisdictions[0];
+  const primaryJurisdiction = getPrimaryPublicJurisdiction(manifest);
   const dataset = primaryJurisdiction
     ? await fetchJurisdictionDataset(primaryJurisdiction.id)
     : null;
@@ -36,7 +40,8 @@ export default async function StructurePage() {
     }
   }
 
-  const releaseVer = dataset?.release?.version ?? "2.4.0";
+  const releaseVer =
+    dataset?.release?.version ?? primaryJurisdiction?.latest_release ?? "4.0.0";
   const jId = primaryJurisdiction?.id ?? "";
   const firstDocId = dataset?.documents[0]?.doc_id ?? "doc-1";
   const sampleChild = clausesList.find((c) => Boolean(c.parent_eid));
@@ -395,7 +400,7 @@ export default async function StructurePage() {
                 href={`/data/${jId}/${releaseVer}/relations.json`}
                 className="border border-[#080909] bg-[#f5f3ed] px-3 py-2 uppercase tracking-[0.12em] text-[#080909] no-underline hover:bg-[#e5e6de]"
               >
-                Download relations.json (Schema 1.4)
+                Download relations.json
               </a>
               <Link
                 href="/data"

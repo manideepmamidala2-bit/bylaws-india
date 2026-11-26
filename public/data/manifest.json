@@ -258,85 +258,85 @@
             "review_images": [],
             "shared_documents": {
               "bbl-2003": {
-                "sha256": "2e0f2b9c50664cd8500e99e0c4b8780828e53d7b794ace84a65ffab042ea8e98",
+                "sha256": "1482564895212b9061083901cc0549389786d7b6a78bc16757b71fe92582f278",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/bbl-2003.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/bbl-2003.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/bbl-2003.annotations.json"
               },
               "ka-model-bbl-2017": {
-                "sha256": "670cdbe9ef72d7187ad58999609fa73ea950d8ce4560538468447d57f04f1d95",
+                "sha256": "0c01dd784b9c35f333d9d75e62885e2942615e668ad05d9adc749a069166ec4c",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.annotations.json"
               },
               "rmp2015-zr": {
-                "sha256": "405de2bf891253d00b86cda9ed6ed2fb9b5e6488700d1632a2419df54e6f68a6",
+                "sha256": "c87e69533543e3220b190329bbe2e9f186086a15fc7d7f0a2cc8445c5120059f",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.annotations.json"
               },
               "rmp2015-zr-amend-2009-03": {
-                "sha256": "08ca14c56b786770b001f3c3fb3e014e140fd9a011801fdfb58e690a0ad4415f",
+                "sha256": "17979da1290caf5a00d5287f7ebe5f68f21b0ec28e0a5c859d38cade0bfa9d37",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.annotations.json"
               },
               "rmp2015-zr-amend-2015-03": {
-                "sha256": "4bd21b431ad209fcbf1dcc39b4088f075fca3943ce06ffdc9705e7baf22d05be",
+                "sha256": "68ec7620fc537772d072e215a2427f944943374964c798292fbf9477a0f43184",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.annotations.json"
               },
               "rmp2015-zr-amend-2018-09": {
-                "sha256": "776f411d60b76c3611afb4cce736e888a89fb82dbaa7a8f1ab5f2a286b251dd7",
+                "sha256": "78e987ed47acc06d1c15443be092a9871215dd5d143bab79156b6fe6c3fd66eb",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.annotations.json"
               },
               "rmp2015-zr-amend-2019-06": {
-                "sha256": "4b62dbd6498ae50557e7f02fd976403fb7cf917757488c4640b15122fac2d96c",
+                "sha256": "13cb580f52a15706bec98bb1cafe6111e77ea13405fa33ad465c75e29cc23d8e",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.annotations.json"
               },
               "rmp2015-zr-amend-2025-02": {
-                "sha256": "280ed08418234fe9e7f912b340c5a76526145d5660c78dc15628e132ec04d494",
+                "sha256": "4f3b231fd10529396db28f625d9dd991a67677b968b789790765cdf3f3cec119",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.annotations.json"
               },
               "rmp2015-zr-amend-2026-01": {
-                "sha256": "6281942c286bd21e0bcc770bf653575ba0e7308a85cc9867be3a7e0441590a97",
+                "sha256": "1700e0ef623b966bf26358abbfff08cbd169e2ae0f08b1263dce70cb723c1afc",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.annotations.json"
               },
               "udd-1107-mnu-2018-draft": {
-                "sha256": "570031f5119dc2a186bdad7309c5312de51b47b9191c7bed1436ccec02e9d200",
+                "sha256": "5e8d7f637c5a0f019c016b49df6a98bc6a47ef07491d7c802297bb3418dd4e09",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.annotations.json"
               },
               "rmp2015-zr-amend-2025-04": {
-                "sha256": "310b46dbe0b4c83838b8bdab980873aa1d59b4f2311c8fb9a4597e2e1223327d",
+                "sha256": "8da0c7d942cd2abf453cae855abe25a31662b57105d0ef646db6b2de28e884b1",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.annotations.json"
               },
               "rmp2015-zr-amend-2025-10": {
-                "sha256": "1dbd151403aadc3e0135b6b8dd628a5db05861101158eb225d9810a19a85e360",
+                "sha256": "c9c67c6781fc7d457df223c1e38747b0ea5b4072dcf7a367368fe9c899c22338",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.annotations.json"
               },
               "gbga-2024": {
-                "sha256": "696122529e1ca500e731eaf7cf9782fa434ca285d959fc21aefac990cee1004f",
+                "sha256": "52d0eb45ab1fdd6cb6bc441b0646008d10c8839b4542d835deada7278a7b5e54",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/gbga-2024.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/gbga-2024.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/gbga-2024.annotations.json"
               },
               "udd-200-mnu-2025-khata": {
-                "sha256": "cf412e07e9637761d840b935520fb5cff9e2f2227c66e57dfe3572ad963bff2d",
+                "sha256": "4d7604256693594fe3e97454bdecb7ccda67a32ebd49d933ab13509bc0f94333",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.annotations.json"
@@ -453,85 +453,85 @@
             "review_images": [],
             "shared_documents": {
               "bbl-2003": {
-                "sha256": "2e0f2b9c50664cd8500e99e0c4b8780828e53d7b794ace84a65ffab042ea8e98",
+                "sha256": "1482564895212b9061083901cc0549389786d7b6a78bc16757b71fe92582f278",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/bbl-2003.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/bbl-2003.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/bbl-2003.annotations.json"
               },
               "ka-model-bbl-2017": {
-                "sha256": "670cdbe9ef72d7187ad58999609fa73ea950d8ce4560538468447d57f04f1d95",
+                "sha256": "0c01dd784b9c35f333d9d75e62885e2942615e668ad05d9adc749a069166ec4c",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.annotations.json"
               },
               "rmp2015-zr": {
-                "sha256": "405de2bf891253d00b86cda9ed6ed2fb9b5e6488700d1632a2419df54e6f68a6",
+                "sha256": "c87e69533543e3220b190329bbe2e9f186086a15fc7d7f0a2cc8445c5120059f",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.annotations.json"
               },
               "rmp2015-zr-amend-2009-03": {
-                "sha256": "08ca14c56b786770b001f3c3fb3e014e140fd9a011801fdfb58e690a0ad4415f",
+                "sha256": "17979da1290caf5a00d5287f7ebe5f68f21b0ec28e0a5c859d38cade0bfa9d37",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.annotations.json"
               },
               "rmp2015-zr-amend-2015-03": {
-                "sha256": "4bd21b431ad209fcbf1dcc39b4088f075fca3943ce06ffdc9705e7baf22d05be",
+                "sha256": "68ec7620fc537772d072e215a2427f944943374964c798292fbf9477a0f43184",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.annotations.json"
               },
               "rmp2015-zr-amend-2018-09": {
-                "sha256": "776f411d60b76c3611afb4cce736e888a89fb82dbaa7a8f1ab5f2a286b251dd7",
+                "sha256": "78e987ed47acc06d1c15443be092a9871215dd5d143bab79156b6fe6c3fd66eb",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.annotations.json"
               },
               "rmp2015-zr-amend-2019-06": {
-                "sha256": "4b62dbd6498ae50557e7f02fd976403fb7cf917757488c4640b15122fac2d96c",
+                "sha256": "13cb580f52a15706bec98bb1cafe6111e77ea13405fa33ad465c75e29cc23d8e",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.annotations.json"
               },
               "rmp2015-zr-amend-2025-02": {
-                "sha256": "280ed08418234fe9e7f912b340c5a76526145d5660c78dc15628e132ec04d494",
+                "sha256": "4f3b231fd10529396db28f625d9dd991a67677b968b789790765cdf3f3cec119",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.annotations.json"
               },
               "rmp2015-zr-amend-2026-01": {
-                "sha256": "6281942c286bd21e0bcc770bf653575ba0e7308a85cc9867be3a7e0441590a97",
+                "sha256": "1700e0ef623b966bf26358abbfff08cbd169e2ae0f08b1263dce70cb723c1afc",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.annotations.json"
               },
               "udd-1107-mnu-2018-draft": {
-                "sha256": "570031f5119dc2a186bdad7309c5312de51b47b9191c7bed1436ccec02e9d200",
+                "sha256": "5e8d7f637c5a0f019c016b49df6a98bc6a47ef07491d7c802297bb3418dd4e09",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.annotations.json"
               },
               "rmp2015-zr-amend-2025-04": {
-                "sha256": "310b46dbe0b4c83838b8bdab980873aa1d59b4f2311c8fb9a4597e2e1223327d",
+                "sha256": "8da0c7d942cd2abf453cae855abe25a31662b57105d0ef646db6b2de28e884b1",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.annotations.json"
               },
               "rmp2015-zr-amend-2025-10": {
-                "sha256": "1dbd151403aadc3e0135b6b8dd628a5db05861101158eb225d9810a19a85e360",
+                "sha256": "c9c67c6781fc7d457df223c1e38747b0ea5b4072dcf7a367368fe9c899c22338",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.annotations.json"
               },
               "gbga-2024": {
-                "sha256": "696122529e1ca500e731eaf7cf9782fa434ca285d959fc21aefac990cee1004f",
+                "sha256": "52d0eb45ab1fdd6cb6bc441b0646008d10c8839b4542d835deada7278a7b5e54",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/gbga-2024.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/gbga-2024.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/gbga-2024.annotations.json"
               },
               "udd-200-mnu-2025-khata": {
-                "sha256": "cf412e07e9637761d840b935520fb5cff9e2f2227c66e57dfe3572ad963bff2d",
+                "sha256": "4d7604256693594fe3e97454bdecb7ccda67a32ebd49d933ab13509bc0f94333",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.annotations.json"
@@ -809,85 +809,85 @@
             "review_images": [],
             "shared_documents": {
               "bbl-2003": {
-                "sha256": "2e0f2b9c50664cd8500e99e0c4b8780828e53d7b794ace84a65ffab042ea8e98",
+                "sha256": "1482564895212b9061083901cc0549389786d7b6a78bc16757b71fe92582f278",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/bbl-2003.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/bbl-2003.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/bbl-2003.annotations.json"
               },
               "ka-model-bbl-2017": {
-                "sha256": "670cdbe9ef72d7187ad58999609fa73ea950d8ce4560538468447d57f04f1d95",
+                "sha256": "0c01dd784b9c35f333d9d75e62885e2942615e668ad05d9adc749a069166ec4c",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.annotations.json"
               },
               "rmp2015-zr": {
-                "sha256": "405de2bf891253d00b86cda9ed6ed2fb9b5e6488700d1632a2419df54e6f68a6",
+                "sha256": "c87e69533543e3220b190329bbe2e9f186086a15fc7d7f0a2cc8445c5120059f",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.annotations.json"
               },
               "rmp2015-zr-amend-2009-03": {
-                "sha256": "08ca14c56b786770b001f3c3fb3e014e140fd9a011801fdfb58e690a0ad4415f",
+                "sha256": "17979da1290caf5a00d5287f7ebe5f68f21b0ec28e0a5c859d38cade0bfa9d37",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.annotations.json"
               },
               "rmp2015-zr-amend-2015-03": {
-                "sha256": "4bd21b431ad209fcbf1dcc39b4088f075fca3943ce06ffdc9705e7baf22d05be",
+                "sha256": "68ec7620fc537772d072e215a2427f944943374964c798292fbf9477a0f43184",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.annotations.json"
               },
               "rmp2015-zr-amend-2018-09": {
-                "sha256": "776f411d60b76c3611afb4cce736e888a89fb82dbaa7a8f1ab5f2a286b251dd7",
+                "sha256": "78e987ed47acc06d1c15443be092a9871215dd5d143bab79156b6fe6c3fd66eb",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.annotations.json"
               },
               "rmp2015-zr-amend-2019-06": {
-                "sha256": "4b62dbd6498ae50557e7f02fd976403fb7cf917757488c4640b15122fac2d96c",
+                "sha256": "13cb580f52a15706bec98bb1cafe6111e77ea13405fa33ad465c75e29cc23d8e",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.annotations.json"
               },
               "rmp2015-zr-amend-2025-02": {
-                "sha256": "280ed08418234fe9e7f912b340c5a76526145d5660c78dc15628e132ec04d494",
+                "sha256": "4f3b231fd10529396db28f625d9dd991a67677b968b789790765cdf3f3cec119",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.annotations.json"
               },
               "rmp2015-zr-amend-2026-01": {
-                "sha256": "6281942c286bd21e0bcc770bf653575ba0e7308a85cc9867be3a7e0441590a97",
+                "sha256": "1700e0ef623b966bf26358abbfff08cbd169e2ae0f08b1263dce70cb723c1afc",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.annotations.json"
               },
               "udd-1107-mnu-2018-draft": {
-                "sha256": "570031f5119dc2a186bdad7309c5312de51b47b9191c7bed1436ccec02e9d200",
+                "sha256": "5e8d7f637c5a0f019c016b49df6a98bc6a47ef07491d7c802297bb3418dd4e09",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.annotations.json"
               },
               "rmp2015-zr-amend-2025-04": {
-                "sha256": "310b46dbe0b4c83838b8bdab980873aa1d59b4f2311c8fb9a4597e2e1223327d",
+                "sha256": "8da0c7d942cd2abf453cae855abe25a31662b57105d0ef646db6b2de28e884b1",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.annotations.json"
               },
               "rmp2015-zr-amend-2025-10": {
-                "sha256": "1dbd151403aadc3e0135b6b8dd628a5db05861101158eb225d9810a19a85e360",
+                "sha256": "c9c67c6781fc7d457df223c1e38747b0ea5b4072dcf7a367368fe9c899c22338",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.annotations.json"
               },
               "gbga-2024": {
-                "sha256": "696122529e1ca500e731eaf7cf9782fa434ca285d959fc21aefac990cee1004f",
+                "sha256": "52d0eb45ab1fdd6cb6bc441b0646008d10c8839b4542d835deada7278a7b5e54",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/gbga-2024.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/gbga-2024.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/gbga-2024.annotations.json"
               },
               "udd-200-mnu-2025-khata": {
-                "sha256": "cf412e07e9637761d840b935520fb5cff9e2f2227c66e57dfe3572ad963bff2d",
+                "sha256": "4d7604256693594fe3e97454bdecb7ccda67a32ebd49d933ab13509bc0f94333",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.annotations.json"
@@ -1005,85 +1005,85 @@
             "review_images": [],
             "shared_documents": {
               "bbl-2003": {
-                "sha256": "2e0f2b9c50664cd8500e99e0c4b8780828e53d7b794ace84a65ffab042ea8e98",
+                "sha256": "1482564895212b9061083901cc0549389786d7b6a78bc16757b71fe92582f278",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/bbl-2003.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/bbl-2003.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/bbl-2003.annotations.json"
               },
               "ka-model-bbl-2017": {
-                "sha256": "670cdbe9ef72d7187ad58999609fa73ea950d8ce4560538468447d57f04f1d95",
+                "sha256": "0c01dd784b9c35f333d9d75e62885e2942615e668ad05d9adc749a069166ec4c",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.annotations.json"
               },
               "rmp2015-zr": {
-                "sha256": "405de2bf891253d00b86cda9ed6ed2fb9b5e6488700d1632a2419df54e6f68a6",
+                "sha256": "c87e69533543e3220b190329bbe2e9f186086a15fc7d7f0a2cc8445c5120059f",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.annotations.json"
               },
               "rmp2015-zr-amend-2009-03": {
-                "sha256": "08ca14c56b786770b001f3c3fb3e014e140fd9a011801fdfb58e690a0ad4415f",
+                "sha256": "17979da1290caf5a00d5287f7ebe5f68f21b0ec28e0a5c859d38cade0bfa9d37",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.annotations.json"
               },
               "rmp2015-zr-amend-2015-03": {
-                "sha256": "4bd21b431ad209fcbf1dcc39b4088f075fca3943ce06ffdc9705e7baf22d05be",
+                "sha256": "68ec7620fc537772d072e215a2427f944943374964c798292fbf9477a0f43184",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.annotations.json"
               },
               "rmp2015-zr-amend-2018-09": {
-                "sha256": "776f411d60b76c3611afb4cce736e888a89fb82dbaa7a8f1ab5f2a286b251dd7",
+                "sha256": "78e987ed47acc06d1c15443be092a9871215dd5d143bab79156b6fe6c3fd66eb",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.annotations.json"
               },
               "rmp2015-zr-amend-2019-06": {
-                "sha256": "4b62dbd6498ae50557e7f02fd976403fb7cf917757488c4640b15122fac2d96c",
+                "sha256": "13cb580f52a15706bec98bb1cafe6111e77ea13405fa33ad465c75e29cc23d8e",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.annotations.json"
               },
               "rmp2015-zr-amend-2025-02": {
-                "sha256": "280ed08418234fe9e7f912b340c5a76526145d5660c78dc15628e132ec04d494",
+                "sha256": "4f3b231fd10529396db28f625d9dd991a67677b968b789790765cdf3f3cec119",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.annotations.json"
               },
               "rmp2015-zr-amend-2026-01": {
-                "sha256": "6281942c286bd21e0bcc770bf653575ba0e7308a85cc9867be3a7e0441590a97",
+                "sha256": "1700e0ef623b966bf26358abbfff08cbd169e2ae0f08b1263dce70cb723c1afc",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.annotations.json"
               },
               "udd-1107-mnu-2018-draft": {
-                "sha256": "570031f5119dc2a186bdad7309c5312de51b47b9191c7bed1436ccec02e9d200",
+                "sha256": "5e8d7f637c5a0f019c016b49df6a98bc6a47ef07491d7c802297bb3418dd4e09",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.annotations.json"
               },
               "rmp2015-zr-amend-2025-04": {
-                "sha256": "310b46dbe0b4c83838b8bdab980873aa1d59b4f2311c8fb9a4597e2e1223327d",
+                "sha256": "8da0c7d942cd2abf453cae855abe25a31662b57105d0ef646db6b2de28e884b1",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.annotations.json"
               },
               "rmp2015-zr-amend-2025-10": {
-                "sha256": "1dbd151403aadc3e0135b6b8dd628a5db05861101158eb225d9810a19a85e360",
+                "sha256": "c9c67c6781fc7d457df223c1e38747b0ea5b4072dcf7a367368fe9c899c22338",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.annotations.json"
               },
               "gbga-2024": {
-                "sha256": "696122529e1ca500e731eaf7cf9782fa434ca285d959fc21aefac990cee1004f",
+                "sha256": "52d0eb45ab1fdd6cb6bc441b0646008d10c8839b4542d835deada7278a7b5e54",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/gbga-2024.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/gbga-2024.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/gbga-2024.annotations.json"
               },
               "udd-200-mnu-2025-khata": {
-                "sha256": "cf412e07e9637761d840b935520fb5cff9e2f2227c66e57dfe3572ad963bff2d",
+                "sha256": "4d7604256693594fe3e97454bdecb7ccda67a32ebd49d933ab13509bc0f94333",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.annotations.json"
@@ -1201,85 +1201,85 @@
             "review_images": [],
             "shared_documents": {
               "bbl-2003": {
-                "sha256": "2e0f2b9c50664cd8500e99e0c4b8780828e53d7b794ace84a65ffab042ea8e98",
+                "sha256": "1482564895212b9061083901cc0549389786d7b6a78bc16757b71fe92582f278",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/bbl-2003.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/bbl-2003.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/bbl-2003.annotations.json"
               },
               "ka-model-bbl-2017": {
-                "sha256": "670cdbe9ef72d7187ad58999609fa73ea950d8ce4560538468447d57f04f1d95",
+                "sha256": "0c01dd784b9c35f333d9d75e62885e2942615e668ad05d9adc749a069166ec4c",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/ka-model-bbl-2017.annotations.json"
               },
               "rmp2015-zr": {
-                "sha256": "405de2bf891253d00b86cda9ed6ed2fb9b5e6488700d1632a2419df54e6f68a6",
+                "sha256": "c87e69533543e3220b190329bbe2e9f186086a15fc7d7f0a2cc8445c5120059f",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr.annotations.json"
               },
               "rmp2015-zr-amend-2009-03": {
-                "sha256": "08ca14c56b786770b001f3c3fb3e014e140fd9a011801fdfb58e690a0ad4415f",
+                "sha256": "17979da1290caf5a00d5287f7ebe5f68f21b0ec28e0a5c859d38cade0bfa9d37",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2009-03.annotations.json"
               },
               "rmp2015-zr-amend-2015-03": {
-                "sha256": "4bd21b431ad209fcbf1dcc39b4088f075fca3943ce06ffdc9705e7baf22d05be",
+                "sha256": "68ec7620fc537772d072e215a2427f944943374964c798292fbf9477a0f43184",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2015-03.annotations.json"
               },
               "rmp2015-zr-amend-2018-09": {
-                "sha256": "776f411d60b76c3611afb4cce736e888a89fb82dbaa7a8f1ab5f2a286b251dd7",
+                "sha256": "78e987ed47acc06d1c15443be092a9871215dd5d143bab79156b6fe6c3fd66eb",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2018-09.annotations.json"
               },
               "rmp2015-zr-amend-2019-06": {
-                "sha256": "4b62dbd6498ae50557e7f02fd976403fb7cf917757488c4640b15122fac2d96c",
+                "sha256": "13cb580f52a15706bec98bb1cafe6111e77ea13405fa33ad465c75e29cc23d8e",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2019-06.annotations.json"
               },
               "rmp2015-zr-amend-2025-02": {
-                "sha256": "280ed08418234fe9e7f912b340c5a76526145d5660c78dc15628e132ec04d494",
+                "sha256": "4f3b231fd10529396db28f625d9dd991a67677b968b789790765cdf3f3cec119",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-02.annotations.json"
               },
               "rmp2015-zr-amend-2026-01": {
-                "sha256": "6281942c286bd21e0bcc770bf653575ba0e7308a85cc9867be3a7e0441590a97",
+                "sha256": "1700e0ef623b966bf26358abbfff08cbd169e2ae0f08b1263dce70cb723c1afc",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2026-01.annotations.json"
               },
               "udd-1107-mnu-2018-draft": {
-                "sha256": "570031f5119dc2a186bdad7309c5312de51b47b9191c7bed1436ccec02e9d200",
+                "sha256": "5e8d7f637c5a0f019c016b49df6a98bc6a47ef07491d7c802297bb3418dd4e09",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/udd-1107-mnu-2018-draft.annotations.json"
               },
               "rmp2015-zr-amend-2025-04": {
-                "sha256": "310b46dbe0b4c83838b8bdab980873aa1d59b4f2311c8fb9a4597e2e1223327d",
+                "sha256": "8da0c7d942cd2abf453cae855abe25a31662b57105d0ef646db6b2de28e884b1",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-04.annotations.json"
               },
               "rmp2015-zr-amend-2025-10": {
-                "sha256": "1dbd151403aadc3e0135b6b8dd628a5db05861101158eb225d9810a19a85e360",
+                "sha256": "c9c67c6781fc7d457df223c1e38747b0ea5b4072dcf7a367368fe9c899c22338",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/rmp2015-zr-amend-2025-10.annotations.json"
               },
               "gbga-2024": {
-                "sha256": "696122529e1ca500e731eaf7cf9782fa434ca285d959fc21aefac990cee1004f",
+                "sha256": "52d0eb45ab1fdd6cb6bc441b0646008d10c8839b4542d835deada7278a7b5e54",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/gbga-2024.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/gbga-2024.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/gbga-2024.annotations.json"
               },
               "udd-200-mnu-2025-khata": {
-                "sha256": "cf412e07e9637761d840b935520fb5cff9e2f2227c66e57dfe3572ad963bff2d",
+                "sha256": "4d7604256693594fe3e97454bdecb7ccda67a32ebd49d933ab13509bc0f94333",
                 "clauses": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.clauses.json",
                 "outline": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.outline.json",
                 "annotations": "/data/in-ka-bengaluru/4.0.0/udd-200-mnu-2025-khata.annotations.json"

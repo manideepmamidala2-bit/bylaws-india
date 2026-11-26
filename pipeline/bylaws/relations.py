@@ -29,34 +29,36 @@ TERM_CANONICAL_ALIASES: dict[str, str] = {
 INCORPORATED_PARAMETER_SPECS: tuple[tuple[str, str, tuple[str, ...]], ...] = (
     ("use, coverage, far, setbacks, height, floors, dwelling_units, parking", "hierarchy_applicability", ("chp_1", "sec_DEFINITIONS")),
     ("use", "land_use", ("chp_2", "chp_4__cl_4.1")),
-    ("coverage", "ground_coverage", ("chp_4__cl_4.1__cl_4.1.3__tbl_1", "chp_4__cl_4.2__cl_4.2.2__tbl_2")),
-    ("far", "far", ("chp_4__cl_4.1__cl_4.1.3__tbl_1", "chp_7__cl_7.1__cl_5__tbl_1")),
-    ("setbacks", "setbacks", ("chp_3__cl_3.1", "chp_3__cl_3.1__tbl_1", "chp_3__cl_3.4__tbl_1")),
-    ("height", "building_height", ("chp_3__cl_3.4__tbl_1", "chp_4__cl_4.1__cl_4.1.2__item_b")),
+    ("coverage", "ground_coverage", ("chp_4__cl_4.1__cl_4.1.3__tbl_10", "chp_4__cl_4.2__cl_4.2.2__tbl_12", "chp_4__cl_4.1__cl_4.1.3__tbl_1", "chp_4__cl_4.2__cl_4.2.2__tbl_2")),
+    ("far", "far", ("chp_4__cl_4.1__cl_4.1.3__tbl_10", "chp_7__cl_7.1__cl_5__tbl_20", "chp_4__cl_4.1__cl_4.1.3__tbl_1", "chp_7__cl_7.1__cl_5__tbl_1")),
+    ("setbacks", "setbacks", ("chp_3__cl_3.1", "chp_3__cl_3.1__tbl_8", "chp_3__cl_3.4__tbl_9", "chp_3__cl_3.1__tbl_1", "chp_3__cl_3.4__tbl_1")),
+    ("height", "building_height", ("chp_3__cl_3.4__tbl_9", "chp_3__cl_3.4__tbl_1", "chp_4__cl_4.1__cl_4.1.2__item_b")),
     ("floors", "building_height", ("chp_4__cl_4.1__cl_4.1.2__item_b",)),
     ("dwelling_units", "plot_size_frontage", ("chp_4__cl_4.1__cl_4.1.2__item_c",)),
-    ("parking", "parking", ("chp_8", "chp_8__tbl_1")),
-    ("tdr", "tdr_premium_far", ("chp_10", "chp_11.0")),
+    ("parking", "parking", ("chp_8", "chp_8__tbl_23", "chp_8__tbl_1")),
+    ("tdr", "tdr_premium_far", ("chp_10", "chp_11_2", "chp_11.0")),
 )
 
 
 def _active_node_text(node: dict[str, Any]) -> str:
     versions = list(node.get("versions") or [])
-    if versions:
-        last_v = versions[-1]
-        parts = [
-            str(last_v.get(k) or "").strip()
-            for k in ("heading", "intro", "content", "wrap_up")
-            if last_v.get(k)
-        ]
-        if parts:
-            return " — ".join(parts)
-    parts = [
-        str(node.get(k) or "").strip()
-        for k in ("heading", "intro", "content", "wrap_up", "text")
-        if node.get(k)
+    src = versions[-1] if versions else node
+    raw_parts = [
+        str(src.get(k) or "").strip()
+        for k in ("heading", "intro", "content", "wrap_up")
+        if src.get(k)
     ]
-    return " — ".join(dict.fromkeys(p for p in parts if p)) or str(node.get("eid") or "")
+    deduped: list[str] = []
+    for p in raw_parts:
+        if not p:
+            continue
+        if any(p.lower() in existing.lower() for existing in deduped):
+            continue
+        deduped = [ex for ex in deduped if ex.lower() not in p.lower()]
+        deduped.append(p)
+    if deduped:
+        return " — ".join(deduped)
+    return str(node.get("text") or node.get("eid") or "")
 
 
 def _is_applicable_in_jurisdiction(doc: Any) -> bool:

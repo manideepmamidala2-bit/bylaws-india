@@ -1,15 +1,15 @@
 # Parameter Extraction & Table Cell Cross-Check Report (`in-ka-bengaluru-central`)
 
-- **Total Parameter Records Extracted**: `322`
+- **Total Parameter Records Extracted**: `369`
 - **Source Table Anomalies / Mismatches Flagged for Owner Review**: `4`
 
 ## Flagged Source Table Anomalies & Mismatches
 
 | Record / Node | Document | Page | Printed Cell / Row Header | Observation for Owner Review |
 |---|---|---:|---|---|
-| `rmp2015-zr:chp_4__cl_4.10__cl_4.10.3__tbl_1__row_2` | `rmp2015-zr` | p. 38 | `Up to 1000` | Source table prints `Up to 1000` directly below `Up to 500` without `Above 500`; normalised interval min to `500.0`. |
-| `rmp2015-zr:chp_4__cl_4.5__cl_4.5.3__tbl_1__row_2` | `rmp2015-zr` | p. 33 | `sq.m` | Multi-row merged cell `'All plot sizes up to 12000 sq.m'` split `'sq.m'` into row 2 in PDF table extraction; linked to `[0, 12000]` m² interval. |
-| `rmp2015-zr:chp_4__cl_4.9__cl_4.9.3__tbl_1__row_2` | `rmp2015-zr` | p. 37 | `Up to 1000` | Source table prints `Up to 1000` directly below `Up to 500` without `Above 500`; normalised interval min to `500.0`. |
+| `rmp2015-zr:chp_4__cl_4.10__cl_4.10.3__tbl_19__row_2` | `rmp2015-zr` | p. 38 | `Up to 1000` | Source table prints `Up to 1000` directly below `Up to 500` without `Above 500`; normalised interval min to `500.0`. |
+| `rmp2015-zr:chp_4__cl_4.5__cl_4.5.3__tbl_15__row_2` | `rmp2015-zr` | p. 33 | `sq.m` | Multi-row merged cell `'All plot sizes up to 12000 sq.m'` split `'sq.m'` into row 2 in PDF table extraction; linked to `[0, 12000]` m² interval. |
+| `rmp2015-zr:chp_4__cl_4.9__cl_4.9.3__tbl_18__row_2` | `rmp2015-zr` | p. 37 | `Up to 1000` | Source table prints `Up to 1000` directly below `Up to 500` without `Above 500`; normalised interval min to `500.0`. |
 | `in-ka-bengaluru-central:param_0297` | `rmp2015-zr` | p. 28 | `Stilt +GF+2 floors` | Record `in-ka-bengaluru-central:param_0297` parsed numeric value `3.0` not found literally in cell_text `Stilt +GF+2 floors`. |
 
 ## Additional Statutory Notes Flagged During Page-Image Inspection

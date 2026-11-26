@@ -110,6 +110,18 @@
         "source_url": {
           "type": "string",
           "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": ["confirmed", "not_confirmed"],
+          "default": "confirmed"
+        },
+        "page": {
+          "type": ["integer", "null"],
+          "minimum": 1
+        },
+        "clause_eid": {
+          "type": ["string", "null"]
         }
       }
     },
@@ -218,6 +230,14 @@
           "items": {
             "type": "string"
           },
+          "default": null
+        },
+        "governing_doc": {
+          "type": ["string", "null"],
+          "default": null
+        },
+        "governing_value": {
+          "type": ["string", "null"],
           "default": null
         }
       }

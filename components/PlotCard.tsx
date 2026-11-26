@@ -423,62 +423,116 @@ export function PlotCard({
                     ))}
                   </div>
                 ) : (
-                  <div className="mt-1 flex flex-wrap items-center justify-between gap-2 text-xs text-[#5b5e56]">
-                    <span className="dg-serif">
+                  <div className="mt-1 space-y-1 text-xs text-[#5b5e56]">
+                    <div className="dg-serif">
                       {outcome.resolution_step?.title ?? outcome.plain_reason}
-                    </span>
-                    {src && (
-                      <div className="flex flex-wrap items-center gap-2 font-mono text-[10.5px]">
-                        <Link
-                          href={`/j/${jurisdictionId}/documents/${src.doc_id}#node-${src.table_eid ?? src.eid}`}
-                          className="text-[#080909] underline"
-                        >
-                          Read provision
-                        </Link>
-                        {src.page_link && src.page_link.startsWith("http") && (
-                          <a
-                            href={src.page_link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-[#080909] underline"
-                          >
-                            p. {src.page} ↗
-                          </a>
+                    </div>
+                    <details
+                      data-testid={`plot-answer-details-${paramKey}`}
+                      className="pt-0.5"
+                    >
+                      <summary className="cursor-pointer font-mono text-[10px] uppercase tracking-[0.12em] text-[#080909] underline">
+                        Details, source page &amp; other provisions
+                      </summary>
+                      <div className="mt-1.5 space-y-1.5 border-l-2 border-[#080909] bg-[#efeee8] px-3 py-2 text-xs text-[#171917]">
+                        {src && (
+                          <div>
+                            <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#5b5e56]">
+                              Source table row:{" "}
+                            </span>
+                            <strong>{gov?.value_text}</strong>
+                            {src.row_header ? ` (${src.row_header})` : ""}
+                            {src.column_header ? ` · ${src.column_header}` : ""}
+                            {src.table_id ? ` · ${src.table_id}` : ""}
+                          </div>
+                        )}
+                        {gov?.conditions?.dependent &&
+                          (gov.conditions.unexpressed_conditions?.length ?? 0) > 0 && (
+                            <div>
+                              <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#5b5e56]">
+                                Depends on conditions:{" "}
+                              </span>
+                              <span>
+                                {(
+                                  gov.conditions.unexpressed_conditions ?? []
+                                ).join(" ")}
+                              </span>
+                            </div>
+                          )}
+                        {outcome.resolution_step?.authority?.quote && (
+                          <div className="dg-serif italic text-[#080909]">
+                            &ldquo;{outcome.resolution_step.authority.quote}&rdquo;
+                          </div>
+                        )}
+                        {src && (
+                          <div className="flex flex-wrap items-center gap-3 font-mono text-[10.5px]">
+                            <Link
+                              href={`/j/${jurisdictionId}/documents/${src.doc_id}#node-${src.table_eid ?? src.eid}`}
+                              className="text-[#080909] underline"
+                            >
+                              Read provision
+                            </Link>
+                            {src.page_link && src.page_link.startsWith("http") && (
+                              <a
+                                href={src.page_link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-[#080909] underline"
+                              >
+                                Official PDF p. {src.page} ↗
+                              </a>
+                            )}
+                            {src.archive_url &&
+                              src.archive_url.startsWith("http") && (
+                                <a
+                                  href={`${src.archive_url}#page=${src.page}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-[#5b5e56] underline hover:text-[#080909]"
+                                >
+                                  Archive p. {src.page} ↗
+                                </a>
+                              )}
+                          </div>
+                        )}
+                        {outcome.other_applicable_records.length > 0 && (
+                          <div className="border-t border-[#c8ccc0] pt-1.5">
+                            <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#080909]">
+                              Other provisions that also apply (
+                              {outcome.other_applicable_records.length}):
+                            </div>
+                            <div className="mt-1 space-y-1">
+                              {outcome.other_applicable_records
+                                .slice(0, 3)
+                                .map((alt, idx) => (
+                                  <div
+                                    key={idx}
+                                    className="flex flex-wrap items-baseline justify-between gap-2"
+                                  >
+                                    <span>
+                                      <strong>{alt.record.value_text}</strong> —{" "}
+                                      {alt.reason_not_chosen}
+                                    </span>
+                                    {alt.record.source.page_link.startsWith(
+                                      "http"
+                                    ) && (
+                                      <a
+                                        href={alt.record.source.page_link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="font-mono text-[10px] underline"
+                                      >
+                                        p. {alt.record.source.page} ↗
+                                      </a>
+                                    )}
+                                  </div>
+                                ))}
+                            </div>
+                          </div>
                         )}
                       </div>
-                    )}
+                    </details>
                   </div>
-                )}
-
-                {/* Concise Resolution Card for superseded / other applicable provisions */}
-                {outcome.other_applicable_records.length > 0 && (
-                  <details className="mt-1">
-                    <summary className="cursor-pointer font-mono text-[10px] text-[#5b5e56] underline">
-                      Resolution: why this governs over{" "}
-                      {outcome.other_applicable_records.length} other provision(s)
-                    </summary>
-                    <div className="mt-1 space-y-1 border-l-2 border-[#c8ccc0] bg-[#efeee8] px-2.5 py-1.5 text-xs">
-                      {outcome.other_applicable_records.slice(0, 3).map((alt, idx) => (
-                        <div key={idx} className="flex flex-wrap items-baseline justify-between gap-2">
-                          <span>
-                            Other rule:{" "}
-                            <strong>{alt.record.value_text}</strong> —{" "}
-                            {alt.reason_not_chosen}
-                          </span>
-                          {alt.record.source.page_link.startsWith("http") && (
-                            <a
-                              href={alt.record.source.page_link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="font-mono text-[10px] underline"
-                            >
-                              p. {alt.record.source.page} ↗
-                            </a>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </details>
                 )}
               </div>
             );
@@ -492,8 +546,8 @@ export function PlotCard({
         aria-label="Derived work confirmation notice"
         className="dg-serif mt-3 border-t border-[#080909] pt-2.5 text-xs text-[#171917]"
       >
-        Derived from the official documents by this project. Confirm with the
-        planning authority or a qualified professional before relying on it.
+        Worked out from the official documents by this site. Confirm with the
+        planning authority or a qualified professional.
       </p>
     </section>
   );

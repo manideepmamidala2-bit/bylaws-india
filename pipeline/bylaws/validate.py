@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import random
+import re
 import statistics
 from collections import Counter
 from pathlib import Path
@@ -12,9 +13,13 @@ from typing import Any
 import click
 import pypdfium2 as pdfium
 
-from bylaws.acquire import _build_unacquired_document_payload
+from bylaws.acquire import (
+    _build_unacquired_document_payload,
+    sync_raw_metadata_from_config,
+)
 from bylaws.annotations import AnnotationSpanError, validate_annotations_against_tree
 from bylaws.config import JurisdictionConfig
+from bylaws.fidelity import verify_jurisdiction_text_fidelity
 from bylaws.graph import write_jurisdiction_graph_files
 from bylaws.parameters import write_parameter_reports_and_json
 from bylaws.parsers.base import ParsedBlock
@@ -434,6 +439,8 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
     schema_checks_run: list[str] = []
     hard_failures: list[str] = []
 
+    sync_raw_metadata_from_config(config, repo_root=root)
+
     doc_metas: dict[str, dict[str, Any]] = {}
     for doc in config.documents:
         meta_path = raw_dir / f"{doc.id}.meta.json"
@@ -635,6 +642,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
         has_unstructured_for_this_base = any(
             getattr(d, "structured", None) is False
             and getattr(d, "acquisition_status", "acquired") == "acquired"
+            and getattr(d, "instrument_type", "instrument") == "instrument"
             and doc.id in (d.amends or [])
             for d in config.documents
         )
@@ -690,6 +698,85 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
     if draft_refs_from_in_force:
         hard_failures.append(
             f"QA-9 (draft referenced from in_force): {draft_refs_from_in_force}"
+        )
+
+    # QA Check 10 (Part 3): No date-shaped clause numbers, max depth <= 6, provision uniqueness, meaningful table captions
+    date_token_re = re.compile(
+        r"\d{1,2}[./-]\d{1,2}[./-]\d{2,4}|\d{4}[./-]\d{1,2}[./-]\d{1,2}"
+    )
+    date_number_eids: list[str] = []
+    excessive_depth_eids: list[str] = []
+    duplicate_provision_eids: list[str] = []
+    redundant_table_captions: list[str] = []
+    for doc_id, tree in sorted(clause_trees.items()):
+        seen_scoped_prov: dict[tuple[str | None, str, str], str] = {}
+        for c in tree.get("clauses", []):
+            if c.get("superseded_by") is not None or c.get("record_superseded_by") is not None:
+                continue
+            eid = str(c.get("eid") or "")
+            nat_num = str(c.get("native_number") or "").strip()
+            if date_token_re.search(eid) or date_token_re.search(nat_num):
+                date_number_eids.append(f"{doc_id}:{eid}")
+            if len(eid.split("__")) > 6:
+                excessive_depth_eids.append(f"{doc_id}:{eid}")
+            if c.get("type") == "table":
+                t_head = str(c.get("heading") or "").strip()
+                if (
+                    config.visibility != "test"
+                    and t_head
+                    and t_head.lower() == nat_num.lower()
+                    and "(under" not in t_head.lower()
+                ):
+                    redundant_table_captions.append(f"{doc_id}:{eid}")
+            elif c.get("type") != "table_row" and nat_num:
+                norm_body = re.sub(
+                    r"[^a-z0-9]+", " ", str(c.get("text") or "").lower()
+                ).strip()
+                if norm_body:
+                    p_key = (c.get("parent_eid"), nat_num, norm_body)
+                    if p_key in seen_scoped_prov:
+                        duplicate_provision_eids.append(
+                            f"{doc_id}:{eid} == {seen_scoped_prov[p_key]}"
+                        )
+                    else:
+                        seen_scoped_prov[p_key] = eid
+    if date_number_eids or excessive_depth_eids or duplicate_provision_eids or redundant_table_captions:
+        hard_failures.append(
+            f"QA-10 (Part 3 structure): date_eids={date_number_eids[:5]}, "
+            f"deep_eids={excessive_depth_eids[:5]}, "
+            f"dup_provs={duplicate_provision_eids[:5]}, "
+            f"redundant_tables={redundant_table_captions[:5]}"
+        )
+
+    # QA Check 11 (Part 3): Non-content nodes excluded from topics and zones
+    non_content_topic_or_zone: list[str] = []
+    for doc_id, ann_doc in sorted(annotation_docs.items()):
+        for ann in ann_doc.get("annotations", []):
+            if ann.get("kind") in {"topic", "zone_applicability"}:
+                t_eid = str((ann.get("target") or {}).get("eid") or "")
+                if t_eid.startswith(("pref_", "prea_", "sig_")):
+                    non_content_topic_or_zone.append(f"{doc_id}:{t_eid} ({ann.get('kind')})")
+    if non_content_topic_or_zone:
+        hard_failures.append(
+            f"QA-11 (non-content tagged to topic/zone): {non_content_topic_or_zone[:5]}"
+        )
+
+    # QA Check 12 (Part 4): Explicit instrument types; compilations/maps/bills never structured or full_text
+    invalid_instrument_types: list[str] = []
+    for doc in config.documents:
+        itype = getattr(doc, "instrument_type", None)
+        if itype not in {"instrument", "compilation", "map", "bill", "order"}:
+            invalid_instrument_types.append(f"{doc.id}: missing/invalid instrument_type={itype}")
+        elif itype in {"compilation", "map", "bill"}:
+            if doc.id in clause_trees:
+                invalid_instrument_types.append(f"{doc.id} ({itype}) must not be structured")
+            if doc.text_rights and doc.text_rights.mode == "full_text":
+                invalid_instrument_types.append(f"{doc.id} ({itype}) must not have text_rights.mode='full_text'")
+            if itype in {"compilation", "bill"} and doc.legal_status == "in_force":
+                invalid_instrument_types.append(f"{doc.id} ({itype}) must not have legal_status='in_force'")
+    if invalid_instrument_types:
+        hard_failures.append(
+            f"QA-12 (Part 4 instrument types): {invalid_instrument_types[:5]}"
         )
 
     # Build and validate declarations.json
@@ -779,10 +866,23 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
         else clause_trees
     )
 
+    fidelity_report: dict[str, Any] | None = None
+    if config.visibility != "test":
+        fidelity_report = verify_jurisdiction_text_fidelity(
+            config,
+            clause_trees,
+            repo_root=root,
+        )
+        if fidelity_report["failures"]:
+            sample_f = fidelity_report["failures"][:5]
+            hard_failures.append(
+                f"QA-Fidelity: {len(fidelity_report['failures'])} provision(s) failed text fidelity: {sample_f}"
+            )
+
     qa_lines = [
         f"# Quality Assurance Report — `{config.id}` ({config.name})",
         "",
-        "## 1. Schema v1.3 Validation",
+        "## 1. Schema v1.4 Validation",
         "",
         *[f"- {line}" for line in schema_checks_run],
         "",
@@ -799,6 +899,9 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
         f"| 7 | Unresolved cross-references | {'WARN' if unresolved_refs else 'PASS'} | {len(unresolved_refs)} unresolved ({'; '.join(unresolved_refs) if unresolved_refs else 'none'}) |",
         f"| 8 | Low-confidence amendment links | {'WARN' if low_confidence_links else 'PASS'} | {len(low_confidence_links)} low-confidence link(s) |",
         f"| 9 | Drafts referenced from `in_force` clauses | {'FAIL' if draft_refs_from_in_force else 'PASS'} | {len(draft_refs_from_in_force)} draft reference(s) |",
+        f"| 10 | Structure gates (no date clause numbers, depth <= 6, uniqueness, table captions) | {'FAIL' if (date_number_eids or excessive_depth_eids or duplicate_provision_eids or redundant_table_captions) else 'PASS'} | Date tokens: {len(date_number_eids)}; Depth > 6: {len(excessive_depth_eids)}; Duplicates: {len(duplicate_provision_eids)}; Redundant table labels: {len(redundant_table_captions)} |",
+        f"| 11 | Non-content excluded from topics and zones | {'FAIL' if non_content_topic_or_zone else 'PASS'} | {len(non_content_topic_or_zone)} non-content topic/zone tag(s) |",
+        f"| 12 | Explicit `instrument_type` & status/text-rights invariants | {'FAIL' if invalid_instrument_types else 'PASS'} | {len(config.documents) - len(invalid_instrument_types)}/{len(config.documents)} valid |",
         "",
         "## 3. Declarations Summary",
         "",
@@ -811,6 +914,7 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
         *_build_stratified_self_check_section(stratified_trees, raw_dir),
         *_build_applied_effects_self_check_section(amendments_data, clause_trees, raw_dir),
         *_build_annotation_quality_summary_section(clause_trees, annotation_docs),
+        *(fidelity_report["markdown_section"] if fidelity_report else []),
     ]
     qa_path = reports_dir / "qa.md"
     qa_path.write_text("\n".join(qa_lines), encoding="utf-8")

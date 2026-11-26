@@ -1,0 +1,395 @@
+schema_version: "1.4"
+
+ocr_corrections:
+  - doc_id: rmp2015-zr
+    page: 3
+    original_text: "M inimum distance between any building"
+    corrected_text: "Minimum distance between any building"
+    reason: "Split initial letter 'M inimum' in PDF text layer verified against rendered page 3 image"
+
+  - doc_id: rmp2015-zr-amend-2026-01
+    page: 2
+    original_text: "(to be read with clause 8.1 (a) {ili))."
+    corrected_text: "(to be read with clause 8.1 (a) (iii))."
+    reason: "OCR misread of Roman numeral '(iii)' as '{ili))' verified against rendered page 2 image"
+
+  - doc_id: rmp2015-zr-amend-2026-01
+    page: 2
+    original_text: "building height shall be12.0m excluding"
+    corrected_text: "building height shall be 12.0m excluding"
+    reason: "Missing space in 'be12.0m' verified against rendered page 2 image"
+
+  - doc_id: rmp2015-zr-amend-2026-01
+    page: 3
+    original_text: "iy addition to car lift."
+    corrected_text: "in addition to car lift."
+    reason: "OCR misread of 'in' as 'iy' verified against rendered page 3 image"
+
+  - doc_id: rmp2015-zr-amend-2026-01
+    page: 5
+    original_text: "after clause {ii)"
+    corrected_text: "after clause (ii)"
+    reason: "OCR misread of opening parenthesis '(' as '{' verified against rendered page 5 image"
+
+  - doc_id: rmp2015-zr-amend-2026-01
+    page: 6
+    original_text: "In Ring I, I & ITI: on plot size above 200 sq.m"
+    corrected_text: "In Ring I, II & III: on plot size above 200 sq.m"
+    reason: "OCR misread of Roman numerals 'II & III' as 'I & ITI' verified against rendered page 6 image"
+
+  - doc_id: rmp2015-zr-amend-2026-01
+    page: 6
+    original_text: "Govgérnor of Karnataka"
+    corrected_text: "Governor of Karnataka"
+    reason: "OCR misread of 'Governor' across signature stroke verified against rendered page 6 image"
+
+  - doc_id: rmp2015-zr-amend-2026-01
+    page: 6
+    original_text: "Uyban Development Department."
+    corrected_text: "Urban Development Department."
+    reason: "OCR misread of 'Urban' across signature stroke verified against rendered page 6 image"
+
+  - doc_id: rmp2015-zr-amend-2009-03
+    page: 1
+    original_text: "Kamataka Government Secretariat,"
+    corrected_text: "Karnataka Government Secretariat,"
+    reason: "OCR misread of 'rn' as 'm' in 'Karnataka' verified against rendered page 1 image"
+
+  - doc_id: rmp2015-zr-amend-2009-03
+    page: 1
+    original_text: "And_ whereas, the objections. and suggestions are eceived in"
+    corrected_text: "And whereas, the objections and suggestions are received in"
+    reason: "OCR misread of 'received' as 'eceived' along horizontal scan fold line verified against page 1 image"
+
+  - doc_id: rmp2015-zr-amend-2009-03
+    page: 2
+    original_text: "Main land use category: T4(for MLCP, refer note ne"
+    corrected_text: "Main land use category: T4 (for MLCP, refer note below)"
+    reason: "OCR corruption of 'below)' along horizontal scan fold line verified against rendered page 2 image"
+
+  - doc_id: rmp2015-zr-amend-2009-03
+    page: 2
+    original_text: "y '  *Ancillary land uses? R;U2,C3;1-3  ** *"
+    corrected_text: "Ancillary land uses: R, U2, C3, I-3"
+    reason: "OCR corruption of 'Ancillary land uses: R, U2, C3, I-3' along horizontal scan fold line verified against page 2 image"
+
+  - doc_id: rmp2015-zr-amend-2009-03
+    page: 2
+    original_text: "and shall not exceed a"
+    corrected_text: "and shall not exceed 20%"
+    reason: "OCR misread of bold '20%' as 'a' verified against rendered page 2 image"
+
+  - doc_id: rmp2015-zr-amend-2009-03
+    page: 2
+    original_text: "e Ifthe road width abutting the land is less that 12m, then J-2, U2 or"
+    corrected_text: "If the road width abutting the land is less than 12m, then I-2, U2 or"
+    reason: "OCR misread of 'If the ... less than 12m, then I-2' verified against rendered page 2 image"
+
+  - doc_id: rmp2015-zr-amend-2015-03
+    page: 1
+    original_text: "9) “The ancillary’ usage Shall be: pentnitted i in residential main"
+    corrected_text: "2) The ancillary usage shall be permitted in residential main"
+    reason: "OCR misread of item '2)' as '9)' and 'permitted' as 'pentnitted' verified against rendered page 1 image"
+
+  - doc_id: rmp2015-zr-amend-2015-03
+    page: 1
+    original_text: "“3y In Ring No.3, ‘the’ ancillary usages may be permitted"
+    corrected_text: "3) In Ring No.3, the ancillary usages may be permitted"
+    reason: "OCR misread of item '3)' as '“3y' verified against rendered page 1 image"
+
+  - doc_id: rmp2015-zr-amend-2019-06
+    page: 6
+    original_text: "Qix) Ducts; _"
+    corrected_text: "(ix) Ducts;"
+    reason: "OCR misread of '(ix)' as 'Qix)' verified against rendered page 6 image"
+
+  - doc_id: rmp2015-zr-amend-2019-06
+    page: 6
+    original_text: "(ij) Swimming pools and toilets"
+    corrected_text: "(xi) Swimming pools and toilets"
+    reason: "OCR misread of '(xi)' as '(ij)' verified against rendered page 6 image"
+
+  - doc_id: rmp2015-zr-amend-2019-06
+    page: 6
+    original_text: "(xin) Escalators;"
+    corrected_text: "(xiii) Escalators;"
+    reason: "OCR misread of '(xiii)' as '(xin)' verified against rendered page 6 image"
+
+  - doc_id: rmp2015-zr-amend-2019-06
+    page: 7
+    original_text: "“vi. Mezzanine floor is permitted between any 2*floors in'residenrttial butichngs;"
+    corrected_text: "“vi. Mezzanine floor is permitted between any 2 floors in residential buildings;"
+    reason: "OCR misread of '2 floors in residential buildings' verified against rendered page 7 image"
+
+  - doc_id: rmp2015-zr-amend-2019-06
+    page: 7
+    original_text: "shall not be used as kotchen.”;"
+    corrected_text: "shall not be used as kitchen.”;"
+    reason: "OCR misread of 'kitchen' as 'kotchen' verified against rendered page 7 image"
+
+  - doc_id: rmp2015-zr-amend-2019-06
+    page: 8
+    original_text: "95% of the total land area."
+    corrected_text: "55% of the total land area."
+    reason: "OCR misread of '55%' as '95%' in Regulation 6.1(e) verified against rendered page 8 image"
+
+  - doc_id: rmp2015-zr-amend-2019-06
+    page: 8
+    original_text: "5S. Amendment of Chapter 7.-"
+    corrected_text: "5. Amendment of Chapter 7.-"
+    reason: "OCR misread of clause number '5.' as '5S.' verified against rendered page 8 image"
+
+  - doc_id: ka-model-bbl-2017
+    page: 12
+    original_text: "PROCEDURAL REQUIREM ENTS FOR OBTAINING"
+    corrected_text: "PROCEDURAL REQUIREMENTS FOR OBTAINING"
+    reason: "Split word 'REQUIREM ENTS' in PDF text layer verified against page 12"
+
+  - doc_id: ka-model-bbl-2017
+    page: 12
+    original_text: "sanction under Sectio n 17 of Karnataka Town"
+    corrected_text: "sanction under Section 17 of Karnataka Town"
+    reason: "Split word 'Sectio n' in PDF text layer verified against page 12"
+
+  - doc_id: ka-model-bbl-2017
+    page: 138
+    original_text: "PROCEDURAL REQUIREM ENTS FOR OBTAINING"
+    corrected_text: "PROCEDURAL REQUIREMENTS FOR OBTAINING"
+    reason: "Split word 'REQUIREM ENTS' in PDF text layer verified against page 138"
+
+  - doc_id: ka-model-bbl-2017
+    page: 138
+    original_text: "sanction under Sectio n 17 of Karnataka Town"
+    corrected_text: "sanction under Section 17 of Karnataka Town"
+    reason: "Split word 'Sectio n' in PDF text layer verified against page 138"
+
+  - doc_id: udd-1107-mnu-2018-draft
+    page: 5
+    original_text: "38 Bye-1aw Illegal refund of security deposit No.a.1.s(2) 39 ByeJaw No.5.1"
+    corrected_text: "38 Bye-law No. 4.1.5(2) Illegal refund of security deposit 39 Bye-law No. 5.1"
+    reason: "OCR misread of 'Bye-law No. 4.1.5(2)' and 'Bye-law' in embedded scan OCR on page 5"
+
+  - doc_id: udd-1107-mnu-2018-draft
+    page: 5
+    original_text: "40 ByeJaw Failure of the owner in No.s.2(i)"
+    corrected_text: "40 Bye-law No. 5.2(i) Failure of the owner in"
+    reason: "OCR misread of 'Bye-law No. 5.2(i)' in embedded scan OCR on page 5"
+
+  - doc_id: udd-1107-mnu-2018-draft
+    page: 5
+    original_text: "42 ByeJaw Failure of holding inspections No.s.3(iii)"
+    corrected_text: "42 Bye-law No. 5.3(iii) Failure of holding inspections"
+    reason: "OCR misread of 'Bye-law No. 5.3(iii)' in embedded scan OCR on page 5"
+
+  - doc_id: udd-1107-mnu-2018-draft
+    page: 6
+    original_text: "49 ByeJaw No.6"
+    corrected_text: "49 Bye-law No. 6"
+    reason: "OCR misread of 'Bye-law No. 6' in embedded scan OCR on page 6"
+
+  - doc_id: udd-1107-mnu-2018-draft
+    page: 6
+    original_text: "violation of ByeJaw No.7. 1"
+    corrected_text: "violation of Bye-law No. 7.1"
+    reason: "OCR misread of 'Bye-law No. 7.1' in embedded scan OCR on page 6"
+
+unreadable_fragments:
+  - doc_id: rmp2015-zr-amend-2026-01
+    page: 1
+    raw_fragment: "LL Dhl"
+    replacement: "[unreadable in source]"
+    reason: "Handwritten signature/initial scribble at bottom of page 1 is illegible in source scan"
+
+  - doc_id: rmp2015-zr-amend-2026-01
+    page: 2
+    raw_fragment: "SOMA"
+    replacement: "[unreadable in source]"
+    reason: "Handwritten signature/initial scribble at bottom of page 2 is illegible in source scan"
+
+  - doc_id: rmp2015-zr-amend-2026-01
+    page: 5
+    raw_fragment: "Ms ~ fh ."
+    replacement: "[unreadable in source]"
+    reason: "Handwritten signature/initial scribble at bottom of page 5 is illegible in source scan"
+
+  - doc_id: rmp2015-zr-amend-2009-03
+    page: 1
+    raw_fragment: "enon ode"
+    replacement: "[unreadable in source]"
+    reason: "Faint bottom-margin stamp/continuation mark on page 1 is illegible in source scan"
+
+  - doc_id: rmp2015-zr-amend-2009-03
+    page: 1
+    raw_fragment: "TF PE RSS"
+    replacement: "[unreadable in source]"
+    reason: "Faint bottom-margin stamp/continuation mark on page 1 is illegible in source scan"
+
+  - doc_id: udd-1107-mnu-2018-draft
+    page: 1
+    raw_fragment: "{arJ-wa Port-lUA 'ed'l6d..rg,"
+    replacement: "[unreadable in source]"
+    reason: "Corrupted embedded OCR of bilingual gazette header on page 1"
+
+  - doc_id: udd-1107-mnu-2018-draft
+    page: 1
+    raw_fragment: "dmewd@ % eodddaan td$neDdd) aded ura$ dgd I do. osLo ( ll*,.,*, arga.sira"
+    replacement: "[unreadable in source]"
+    reason: "Corrupted embedded OCR of Kannada masthead on page 1"
+
+table_overrides:
+  - doc_id: rmp2015-zr-amend-2026-01
+    page: 2
+    table_id: "p2_t8"
+    caption: "Table 8: Setbacks for buildings with total height upto 12.0 m (excluding stilt floor)"
+    headers:
+      - "Sl. no."
+      - "Site Area (in Sq.m)"
+      - "Front Side Setback (in m)"
+      - "Rear Side Setback (in m)"
+      - "Left Side Setback (in m)"
+      - "Right Side Setback (in m)"
+    rows:
+      - ["1", "Up to 60", "0.75", "-", "0.60 m on any one side", "0.60 m on any one side"]
+      - ["2", "Above 60 upto 150", "0.90", "0.70", "0.70 m on any one side", "0.70 m on any one side"]
+      - ["3", "Above 150 upto 250", "1.0", "0.80", "0.80", "0.80"]
+      - ["4", "Above 250 upto 4000", "12% of the depth of site", "8% of the depth of site", "8% of the width of site", "8% of the width of site"]
+    footnotes:
+      - "(i) For plot area up to 4000.0 sq.m"
+      - "(ii) For plot area above 4000 sq.m: minimum setback of 5.0m on all sides shall be insisted."
+    strip_block_fragments:
+      - "Setbacks (in m)"
+      - "Side | Right Side"
+      - "0.60 m on any one"
+      - "0.70 0.70 m on any one"
+      - "(in Sq.m)"
+    reason: "Transcribed verbatim from rendered PDF page 2 image of Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026"
+
+  - doc_id: rmp2015-zr-amend-2026-01
+    page: 5
+    table_id: "p5_t1"
+    caption: "Table (under Regulation 3.10(iv) — Entry and Exit Ramps)"
+    headers:
+      - "Sl. no."
+      - "Number of parking"
+      - "Minimum clear width & No. of Entry & Exit Ramps"
+    rows:
+      - ["1", "Up to 25", "3.5 m wide, 01ramp"]
+      - ["2", "Up to 200", "3.5 m wide, 02 ramps or 6 m wide, 01 ramp"]
+      - ["3", "Up to 400", "3.5 m wide, 04ramps or 6 m wide, 02 ramps"]
+      - ["4", "Up to 800", "3.5 m wide, 06 ramps or 6 m wide, 03 ramps"]
+      - ["5", "Above 800", "3.5 m wide, 08 ramps or 6 m wide, 04 ramps"]
+    strip_block_fragments:
+      - "Number of parking Minimum clear width & No."
+      - "of Entry & Exit Ramps"
+      - "6 m wide, 01 ramp"
+      - "3.5 m wide, O04ramps or"
+      - "6 m wide, 02 ramps"
+      - "6 m wide, 03 ramps"
+      - "3.5 m wide, 08 ramps or"
+      - "6 m wide, 04 ramps"
+    reason: "Transcribed verbatim from rendered PDF page 5 image of Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026"
+
+  - doc_id: rmp2015-zr-amend-2026-01
+    page: 6
+    table_id: "p6_t16"
+    caption: "Table 16: Industrial I (General)"
+    headers:
+      - "Sl no"
+      - "Size of the plot (sq.m)"
+      - "Ground cover"
+      - "FAR"
+      - "Setback Front"
+      - "Setback Rear and sides"
+    rows:
+      - ["1", "Upto 500", "75%", "1.50", "12% of depth of site", "8% of the depth/width of site"]
+      - ["2", "Above 500 upto 1000", "60%", "1.25", "4.50", "4.50"]
+      - ["3", "Above 1000 upto 3000", "50%", "1.00", "6.00", "6.00"]
+      - ["4", "Above 3000", "45%", "1.00", "10.00", "8.00"]
+    strip_block_fragments:
+      - "Size of the | Ground Setback"
+      - "plot (sq.m) cover Rear | Rear and sides | Rear and sides"
+      - "upto 1000."
+      - "-4—TAbove 3000 1.00 _| 10.00"
+      - "12% 8% the"
+      - "depth ef depth/ width of"
+      - "site site”"
+      - "Above 1000 | 50%"
+      - "upto 3000"
+      - "ent"
+      - "exam"
+    reason: "Transcribed verbatim from rendered PDF page 6 image of Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026"
+
+  - doc_id: rmp2015-zr-amend-2009-03
+    page: 3
+    table_id: "p3_t19"
+    caption: "Table 19: FAR and Ground Coverage in Traffic and Transportation."
+    headers:
+      - "Sl. No."
+      - "Size of the Plot (sq.m)"
+      - "Ground cover"
+      - "FAR"
+      - "Setbacks"
+    rows:
+      - ["1", "Up to 500", "60%", "1.00", "Refer Table.8 or Table.9"]
+      - ["2", "Above 500 upto 1000", "55%", "1.25", "Refer Table.8 or Table.9"]
+      - ["3", "Above 1000 upto 2000", "50%", "1.50", "Refer Table.8 or Table.9"]
+      - ["4", "Above 2000", "45%", "1.50", "Refer Table.8 or Table.9"]
+    strip_block_fragments:
+      - "Size of the Plot (sq.m) | Ground | FAR"
+      - "Up to 500 00"
+      - "Above 500 upto 1000"
+      - "Above 1000 upto 2000 Table.9"
+    reason: "Transcribed verbatim from rendered PDF page 3 image of Notification No. UDD 93 MNJ 2008 dated 02-03-2009"
+
+  - doc_id: rmp2015-zr-amend-2015-03
+    page: 1
+    table_id: "p1_t1"
+    caption: "Table 1: Permissible land use in Residential category."
+    headers:
+      - "Sl. No."
+      - "Permissible uses"
+    rows:
+      - ["1)", "Plotted residential developments"]
+      - ["2)", "Villas, semi detached houses"]
+      - ["3)", "Apartments, Hostels, Dharmashala"]
+      - ["4)", "Multi Dwelling Housing, Service Apartments."]
+      - ["5)", "Group Housing [Development Plans]"]
+      - ["6)", "Bus bays, Auto stand, Bus shelters information kiosk"]
+      - ["7)", "Metro stations, parking areas"]
+      - ["8)", "Multi level car parking as part of residential apartments to cater the needs of residents only"]
+    strip_block_fragments:
+      - "1) Plotted residential developments"
+      - "2) Villas, semi. detached houses"
+      - "3) Apartments, Hostels, Dharmashala"
+      - ".. -4).. Multi Dwelling Housing"
+      - "5) Group Housing {Development Plans]"
+      - ".6) Bus bays, Auto stand"
+      - "7} Metro stations, parking areas"
+      - "8) Multi level car parking as part of residential apartments"
+      - ": of residents only"
+    reason: "Transcribed verbatim from rendered PDF page 1 image of Notification No. UDD 105 MNJ 2008 dated 20-03-2015"
+
+  - doc_id: rmp2015-zr-amend-2019-06
+    page: 8
+    table_id: "p8_t23"
+    caption: "Table 23: Parking requirements (Serial Nos. 7 and 8)"
+    headers:
+      - "Sl. No."
+      - "Type of use"
+      - "One car parking of 2.5m x 5.5m each shall be provided for every"
+    rows:
+      - ["7", "For star hotels", "for every 2 Rooms plus 1 car parking for every 75sqm of remaining built up area for visitors and part thereof (FAR area to be considered)."]
+      - ["8", "Office buildings in Non Residential Development Plan (Govt/Semi-Govt. IT, BT and Pvt)", "75sqm along 1 KM on either side of the metro corridors. 50sqm of floor area, in the areas other than metro corridors."]
+    strip_block_fragments:
+      - "for every 2 Rooms plus 1 car parking for every"
+      - "7S5sqm of remaining built up area for visitors and"
+      - "part thereof (FAR area to be considered)."
+      - "75sqm along 1 KM on either side of the metro"
+      - "50sqm of floor area, in the areas other than metro"
+      - "For star hotels"
+      - "Office buildings in"
+      - "Non Residential"
+      - "Development Plan"
+      - "(Govt/Semi-Govt. IT,"
+      - "BT and Pvt"
+    reason: "Transcribed verbatim from rendered PDF page 8 image of Notification No. UDD 255 MNJ 2018 dated 19-06-2019"

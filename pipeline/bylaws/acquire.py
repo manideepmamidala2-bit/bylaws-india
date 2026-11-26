@@ -300,6 +300,12 @@ def _acquire_single_document(
         meta_payload["retrieval"] = retrieval_record
     if doc.doc_type is not None:
         meta_payload["doc_type"] = doc.doc_type
+    if getattr(doc, "instrument_type", None) is not None:
+        meta_payload["instrument_type"] = doc.instrument_type
+    if getattr(doc, "summary_by_site", None) is not None:
+        meta_payload["summary_by_site"] = doc.summary_by_site
+    if getattr(doc, "notes_by_site", None):
+        meta_payload["notes_by_site"] = list(doc.notes_by_site or [])
     if doc.notification_number is not None:
         meta_payload["notification_number"] = doc.notification_number
     if doc.gazette_reference is not None:
@@ -372,6 +378,12 @@ def _build_unacquired_document_payload(
     }
     if doc.doc_type is not None:
         payload["doc_type"] = doc.doc_type
+    if getattr(doc, "instrument_type", None) is not None:
+        payload["instrument_type"] = doc.instrument_type
+    if getattr(doc, "summary_by_site", None) is not None:
+        payload["summary_by_site"] = doc.summary_by_site
+    if getattr(doc, "notes_by_site", None):
+        payload["notes_by_site"] = list(doc.notes_by_site or [])
     if doc.notification_number is not None:
         payload["notification_number"] = doc.notification_number
     if doc.gazette_reference is not None:
@@ -400,6 +412,116 @@ def _build_unacquired_document_payload(
         ]
     validate_payload(payload, "document", source=f"register:{doc.id}")
     return payload
+
+
+def sync_raw_metadata_from_config(
+    config: JurisdictionConfig, *, repo_root: Path | None = None
+) -> dict[str, dict[str, Any]]:
+    """Synchronize `<doc_id>.meta.json` and `register/documents.json` with `config.documents` without network calls."""
+    root = repo_root or resolve_repo_root()
+    raw_dir = root / "data" / "raw" / config.id
+    raw_dir.mkdir(parents=True, exist_ok=True)
+    is_test_jur = config.visibility == "test"
+
+    register_entries: list[dict[str, Any]] = []
+    by_id: dict[str, dict[str, Any]] = {}
+    for doc in config.documents:
+        acq_status = getattr(doc, "acquisition_status", None) or "acquired"
+        meta_path = raw_dir / f"{doc.id}.meta.json"
+        if acq_status in {"pending", "not_found"} or not meta_path.is_file():
+            if acq_status in {"pending", "not_found"}:
+                entry = _build_unacquired_document_payload(doc, config.id)
+                register_entries.append(entry)
+                by_id[doc.id] = entry
+            continue
+
+        existing = json.loads(meta_path.read_text(encoding="utf-8"))
+        is_ref_only = doc.text_rights is not None and doc.text_rights.mode == "reference_only"
+        evidence_payload: dict[str, Any] = {"url": doc.status_evidence.url}
+        if doc.status_evidence.quoted_line is not None:
+            evidence_payload["quoted_line"] = doc.status_evidence.quoted_line
+        if doc.status_evidence.description is not None:
+            evidence_payload["description"] = doc.status_evidence.description
+
+        updated: dict[str, Any] = {
+            "schema_version": "1.4",
+            "doc_id": doc.id,
+            "title": doc.title,
+            "issuing_authority": doc.issuing_authority,
+            "layer": doc.layer,
+            "role": _resolve_doc_role(doc),
+            "legal_status": doc.legal_status,
+            "acquisition_status": "reference_only" if is_ref_only else acq_status,
+            "status_evidence": evidence_payload,
+            "licence_or_terms": doc.licence_or_terms,
+            "notified_date": doc.notified_date,
+            "effective_from": doc.effective_from,
+            "amends": list(doc.amends or []),
+            "supersedes": list(doc.supersedes or []),
+            "source_url": doc.source_url,
+            "retrieved_at": existing.get("retrieved_at") or get_deterministic_timestamp(),
+            "sha256": existing.get("sha256"),
+            "bytes": existing.get("bytes"),
+            "page_count": existing.get("page_count"),
+            "is_scanned": existing.get("is_scanned"),
+        }
+        if existing.get("retrieval") is not None:
+            updated["retrieval"] = existing["retrieval"]
+        elif getattr(doc, "retrieval", None) is not None and doc.retrieval is not None:
+            updated["retrieval"] = doc.retrieval.model_dump(mode="json")
+        if doc.doc_type is not None:
+            updated["doc_type"] = doc.doc_type
+        if getattr(doc, "instrument_type", None) is not None:
+            updated["instrument_type"] = doc.instrument_type
+        if getattr(doc, "summary_by_site", None) is not None:
+            updated["summary_by_site"] = doc.summary_by_site
+        if getattr(doc, "notes_by_site", None):
+            updated["notes_by_site"] = list(doc.notes_by_site or [])
+        if doc.notification_number is not None:
+            updated["notification_number"] = doc.notification_number
+        if doc.gazette_reference is not None:
+            updated["gazette_reference"] = doc.gazette_reference
+        if doc.superseded_by_document is not None:
+            updated["superseded_by_document"] = doc.superseded_by_document
+        if getattr(doc, "applies_in", None):
+            updated["applies_in"] = list(doc.applies_in or [])
+        if not is_test_jur:
+            updated["applies_to_jurisdiction"] = _resolve_applies_to_jurisdiction(
+                doc, config.id
+            )
+        if doc.text_rights is not None:
+            updated["text_rights"] = {
+                "mode": doc.text_rights.mode,
+                "reason": doc.text_rights.reason,
+            }
+        if doc.languages is not None:
+            updated["languages"] = list(doc.languages)
+        if doc.official_url is not None:
+            updated["official_url"] = doc.official_url
+        if doc.mirror_urls is not None:
+            updated["mirror_urls"] = list(doc.mirror_urls)
+        if existing.get("copies"):
+            updated["copies"] = existing["copies"]
+        if doc.cited_provisions is not None:
+            updated["cited_provisions"] = [
+                cp.model_dump(exclude_none=True) for cp in doc.cited_provisions
+            ]
+
+        validate_payload(updated, "document", source=str(meta_path))
+        meta_path.write_text(json.dumps(updated, indent=2) + "\n", encoding="utf-8")
+        register_entries.append(updated)
+        by_id[doc.id] = updated
+
+    public_data_dir = root / "public" / "data"
+    if not is_test_jur and public_data_dir.is_dir() and register_entries:
+        reg_dir = public_data_dir / config.id / "register"
+        reg_dir.mkdir(parents=True, exist_ok=True)
+        reg_file = reg_dir / "documents.json"
+        reg_file.write_text(
+            json.dumps(register_entries, indent=2) + "\n",
+            encoding="utf-8",
+        )
+    return by_id
 
 
 def run_acquire(config: JurisdictionConfig, *, repo_root: Path | None = None) -> None:

@@ -491,7 +491,7 @@ export function ClauseTree({
             viewMode === "consolidated" &&
             (Boolean(activeVer?.effect_id) || Boolean(consRecord));
 
-          const displayTitle =
+          const rawDisplayTitle =
             (viewMode === "consolidated" && activeVer?.heading) ||
             (consRecord ? consRecord.title : clause.heading ?? clause.title);
           const displayIntro =
@@ -504,6 +504,26 @@ export function ClauseTree({
               : consRecord
                 ? consRecord.text
                 : clause.content ?? (!displayIntro ? clause.text : null);
+          const displayTitle =
+            rawDisplayTitle &&
+            displayContent &&
+            (displayContent.trim().toLowerCase() ===
+              rawDisplayTitle.trim().toLowerCase() ||
+              displayContent
+                .trim()
+                .toLowerCase()
+                .startsWith(rawDisplayTitle.trim().toLowerCase()))
+              ? null
+              : rawDisplayTitle;
+          const siteNotes = Array.from(
+            new Set([
+              ...(clause.notes_by_site ?? []),
+              ...(viewMode === "consolidated"
+                ? activeVer?.notes_by_site ?? []
+                : []),
+            ])
+          );
+          const ocrCorrections = clause.ocr_corrections ?? [];
           const displayWrapUp =
             viewMode === "consolidated" && activeVer
               ? activeVer.wrap_up
@@ -530,8 +550,13 @@ export function ClauseTree({
           );
           const firstPage = validPages[0] ?? null;
 
-          const targetAmendments =
-            amendmentsByTarget.get(clause.clause_id) ?? [];
+          const targetAmendments = [
+            ...(amendmentsByTarget.get(clause.clause_id) ?? []),
+          ].sort((a, b) =>
+            String(b.effective_date ?? "").localeCompare(
+              String(a.effective_date ?? "")
+            )
+          );
           const unappliedEffects = (effectsByTargetEid.get(eid) ?? []).filter(
             (e) => !e.applied
           );
@@ -541,7 +566,11 @@ export function ClauseTree({
             (clause.record_id?.includes("@v")
               ? Number(clause.record_id.split("@v")[1]) || 1
               : 1);
-          const priorVersions = historyByClauseId.get(clause.clause_id) ?? [];
+          const priorVersions = [
+            ...(historyByClauseId.get(clause.clause_id) ?? []),
+          ].sort(
+            (a, b) => (b.record_version ?? 1) - (a.record_version ?? 1)
+          );
           const hasVersionHistory =
             recordVersion > 1 ||
             Boolean(clause.record_supersedes || clause.supersedes) ||
@@ -596,13 +625,18 @@ export function ClauseTree({
                       {provTypeAnn.value}
                     </span>
                   )}
+                  {clause.ocr_status === "corrected" && (
+                    <span className="border border-[#080909] bg-[#efeee8] px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#080909]">
+                      Corrected OCR
+                    </span>
+                  )}
                   {(isAmendedVersion || clause.change_mark) && (
                     <span className="border border-[#080909] bg-[#efeee8] px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#080909]">
                       {clause.change_mark?.label
                         ? clause.change_mark.label
                         : jurisdictionName
                           ? `Changed ${(activeVer?.valid_from ?? consRecord?.as_of_date ?? "").slice(0, 4)}, ${jurisdictionName}`
-                          : `Changed ${activeVer?.valid_from ?? consRecord?.as_of_date}`}
+                          : `Changed in ${(activeVer?.valid_from ?? consRecord?.as_of_date ?? "").slice(0, 4)}`}
                     </span>
                   )}
                   {clause.language === "kn" && (
@@ -872,6 +906,35 @@ export function ClauseTree({
                 </div>
               )}
 
+              {siteNotes.length > 0 && (
+                <div className="mt-2 space-y-1 border-l-2 border-[#080909] bg-[#efeee8] px-3 py-2 text-xs text-[#171917]">
+                  <div className="font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#080909]">
+                    Note by this site
+                  </div>
+                  {siteNotes.map((noteTxt, nIdx) => (
+                    <p key={nIdx} className="dg-serif">
+                      {noteTxt}
+                    </p>
+                  ))}
+                </div>
+              )}
+
+              {ocrCorrections.length > 0 && (
+                <details className="mt-2 border-l-2 border-[#5b5e56] bg-[#efeee8] px-3 py-1.5 text-xs">
+                  <summary className="cursor-pointer font-mono text-[10px] uppercase tracking-[0.12em] text-[#080909]">
+                    Corrected OCR ({ocrCorrections.length}) — tap to view original scan text
+                  </summary>
+                  <ul className="mt-1 space-y-1 font-mono text-[11px] text-[#171917]">
+                    {ocrCorrections.map((oc, oIdx) => (
+                      <li key={oIdx}>
+                        Original (p. {oc.page}): &ldquo;{oc.original_text}&rdquo; →{" "}
+                        <strong>&ldquo;{oc.corrected_text}&rdquo;</strong> ({oc.reason})
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              )}
+
               <div className="mt-3 flex flex-wrap items-center justify-between gap-2 font-mono text-[10.5px] uppercase tracking-[0.12em] text-[#5b5e56]">
                 <span>
                   {validPages.length > 0 ? (
@@ -918,6 +981,17 @@ export function ClauseTree({
                     <span className="ml-2 text-[10px] normal-case text-[#5b5e56]">
                       Address: {eid} · Record: {clause.record_id ?? clause.clause_id} ·{" "}
                       {clause.verification.replace("_", " ")}
+                      {jurisdictionId && clause.doc_id ? (
+                        <>
+                          {" · "}
+                          <a
+                            href={`/j/${jurisdictionId}/documents/${clause.doc_id}/${eid}`}
+                            className="underline text-[#080909]"
+                          >
+                            Local graph →
+                          </a>
+                        </>
+                      ) : null}
                     </span>
                   </details>
                 </div>

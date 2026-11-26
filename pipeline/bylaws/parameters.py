@@ -183,22 +183,26 @@ def parse_cell_value_and_unit(
     return val, ( "%" if has_pct else (header_unit or "unit")), False
 
 
-def _infer_zone_and_use_from_eid(eid: str) -> tuple[list[str] | None, list[str] | None]:
-    if "cl_4.1__" in eid or eid.endswith("cl_4.1"):
+def _infer_zone_and_use_from_eid(
+    eid: str,
+    heading: str = "",
+) -> tuple[list[str] | None, list[str] | None]:
+    low_h = heading.lower()
+    if "cl_4.1__" in eid or eid.endswith("cl_4.1") or "residential (main)" in low_h:
         return ["R-MAIN"], ["residential"]
-    if "cl_4.2__" in eid or eid.endswith("cl_4.2"):
+    if "cl_4.2__" in eid or eid.endswith("cl_4.2") or "residential (mixed)" in low_h:
         return ["R-MIX"], ["residential", "commercial"]
-    if "cl_4.3__" in eid or "cl_4.4__" in eid:
+    if "cl_4.3__" in eid or "cl_4.4__" in eid or "commercial (central)" in low_h or "commercial (business)" in low_h:
         return ["C-BIZ"], ["commercial"]
-    if "cl_4.5__" in eid or "cl_4.6__" in eid:
+    if "cl_4.5__" in eid or "cl_4.6__" in eid or "mutation corridors" in low_h:
         return ["C-AXES"], ["commercial", "residential"]
-    if "cl_4.7__" in eid:
+    if "cl_4.7__" in eid or eid.endswith("__tbl_16") or "industrial (general)" in low_h or "industrial i (general)" in low_h:
         return ["I-GEN"], ["industrial"]
-    if "cl_4.8__" in eid:
+    if "cl_4.8__" in eid or eid.endswith("__tbl_17") or "hi-tech" in low_h:
         return ["I-HITECH"], ["industrial", "commercial"]
-    if "cl_4.9__" in eid:
+    if "cl_4.9__" in eid or eid.endswith("__tbl_18") or "public and semi" in low_h:
         return ["PSP"], ["public_semi_public"]
-    if "cl_4.10__" in eid:
+    if "cl_4.10__" in eid or eid.endswith("__tbl_19") or "traffic and transportation" in low_h:
         return ["T-TRANS"], ["traffic_transportation"]
     return None, None
 
@@ -358,6 +362,9 @@ def extract_jurisdiction_parameters(
         for eid, node in sorted(by_eid.items()):
             if node.get("type") != "table" or not node.get("table_meta"):
                 continue
+            if doc.role == "amendment" and eid.endswith("__tbl_8"):
+                # Extracted in step 2(a) below with the explicit <= 12.0 m building_height_m condition
+                continue
             meta = node["table_meta"]
             cols = meta.get("columns") or []
             row_eids = meta.get("rows") or []
@@ -369,10 +376,16 @@ def extract_jurisdiction_parameters(
             bbox = cit.get("bbox")
             page_link = f"{pdf_url}#page={page}" if pdf_url else f"#page={page}"
 
-            zone_list, use_list = _infer_zone_and_use_from_eid(eid)
+            zone_list, use_list = _infer_zone_and_use_from_eid(
+                eid,
+                str(node.get("heading") or node.get("title") or ""),
+            )
 
-            # Determine if this table is superseded (e.g. original chp_3__cl_3.1__tbl_1)
-            is_superseded_tbl8 = eid == "chp_3__cl_3.1__tbl_1" and has_2026_setback_amend
+            # Determine if this table is superseded (e.g. original chp_3__cl_3.1__tbl_8)
+            is_superseded_tbl8 = (
+                eid in {"chp_3__cl_3.1__tbl_1", "chp_3__cl_3.1__tbl_8"}
+                and has_2026_setback_amend
+            )
             tbl_valid_to = "2026-01-05" if is_superseded_tbl8 else None
             tbl_status = "superseded" if is_superseded_tbl8 else str(doc.legal_status)
 
@@ -538,7 +551,7 @@ def extract_jurisdiction_parameters(
                             )
                         )
                         param_kinds.append(("parking_requirement", inferred_use, row_area_class))
-                    elif hdr_l in {"residential", "commercial", "comercial"} and "part_III__sec_9.0__cl_9.2__tbl_3" in eid:
+                    elif hdr_l in {"residential", "commercial", "comercial"} and "part_III__sec_9.0__cl_9.2__tbl_4" in eid:
                         use_for_col = ["residential"] if "res" in hdr_l else ["commercial"]
                         p_kind = "ground_coverage_max_pct" if "%" in cell_val else "far_base_max"
                         param_kinds.append((p_kind, use_for_col, row_area_class))
@@ -593,6 +606,8 @@ def extract_jurisdiction_parameters(
 
         # 2. Extract parameters from structured 2025–2026 amendment provisions (Jan 2026 Table 8 Setbacks, Height rules, Apr 2025 Ch 11 Table No.27 Premium FAR & TDR)
         for eid, node in sorted(by_eid.items()):
+            if node.get("type") in {"table", "table_row"}:
+                continue
             txt = str(node.get("text") or "")
             cit = (node.get("citations") or [{}])[0]
             page = int(cit.get("page") or 1)

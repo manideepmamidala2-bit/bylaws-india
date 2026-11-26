@@ -13,13 +13,15 @@ import {
   resolvePlotParameters,
 } from "@/lib/resolver";
 
-const southDir = path.join(
+const southBaseDir = path.join(
   process.cwd(),
   "public",
   "data",
-  "in-ka-bengaluru-south",
-  "4.0.0"
+  "in-ka-bengaluru-south"
 );
+const southDir = fs.existsSync(path.join(southBaseDir, "5.0.0", "parameters.json"))
+  ? path.join(southBaseDir, "5.0.0")
+  : path.join(southBaseDir, "4.0.0");
 
 function readJson<T>(filename: string): T {
   return JSON.parse(
@@ -76,7 +78,7 @@ describe("Part 4 — Deterministic Browser Plot Resolver & Jayanagar Worked Targ
 
     expect(result.derived).toBe(true);
     expect(result.notice).toContain(
-      "Derived from the official documents by this project. Confirm with the planning authority or a qualified professional before relying on it."
+      "Worked out from the official documents by this site. Confirm with the planning authority or a qualified professional."
     );
 
     const cov = result.parameters.ground_coverage_max_pct;

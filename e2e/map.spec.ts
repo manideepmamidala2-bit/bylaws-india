@@ -65,7 +65,7 @@ test.describe("Map Page — PMTiles HTTP 206 Range & Non-Blank Canvas (08b §1)"
     });
   }
 
-  test("renders document page with per-chapter outline within <= 300 KB HTML budget", async ({
+  test("renders document page with per-chapter outline within <= 300 KB HTML budget and expands a provision on tap", async ({
     page,
   }) => {
     const resp = await page.goto(
@@ -85,9 +85,15 @@ test.describe("Map Page — PMTiles HTTP 206 Range & Non-Blank Canvas (08b §1)"
     await expect(
       page.getByRole("complementary", { name: /Document outline navigation/i })
     ).toBeVisible();
+
+    const firstDetailsSummary = page
+      .locator("details summary", { hasText: /^Details$/ })
+      .first();
+    await firstDetailsSummary.click();
+    await expect(page.getByText(/Address:/i).first()).toBeVisible();
   });
 
-  test("renders map-first home and resolves Jayanagar 600 m² / 15 m road plot card answers", async ({
+  test("renders map-first home and resolves Jayanagar 600 m² / 15 m road plot card answers with tap-to-expand details", async ({
     page,
   }) => {
     await page.goto("/", { waitUntil: "domcontentloaded" });
@@ -105,7 +111,13 @@ test.describe("Map Page — PMTiles HTTP 206 Range & Non-Blank Canvas (08b §1)"
     await expect(plotCard).toContainText(/65%/i);
     await expect(plotCard).toContainText(/2\.25/i);
     await expect(plotCard).toContainText(
-      /Derived from the official documents by this project/i
+      /Worked out from the official documents by this site\. Confirm with the planning authority or a qualified professional\./i
     );
+
+    const covDetails = plotCard.getByTestId(
+      "plot-answer-details-ground_coverage_max_pct"
+    );
+    await covDetails.locator("summary").click();
+    await expect(covDetails).toContainText(/Source table row:/i);
   });
 });

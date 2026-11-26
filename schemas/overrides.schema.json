@@ -46,9 +46,144 @@
       "items": {
         "$ref": "#/$defs/amendmentLinkOverride"
       }
+    },
+    "ocr_corrections": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ocrCorrectionOverride"
+      }
+    },
+    "unreadable_fragments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/unreadableFragmentOverride"
+      }
+    },
+    "table_overrides": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/tableOverride"
+      }
     }
   },
   "$defs": {
+    "unreadableFragmentOverride": {
+      "type": "object",
+      "title": "UnreadableFragmentOverride",
+      "additionalProperties": false,
+      "required": ["doc_id", "page", "raw_fragment", "reason"],
+      "properties": {
+        "doc_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "page": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "raw_fragment": {
+          "type": "string",
+          "minLength": 1
+        },
+        "replacement": {
+          "type": "string",
+          "default": "[unreadable in source]"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "tableOverride": {
+      "type": "object",
+      "title": "TableOverride",
+      "additionalProperties": false,
+      "required": ["doc_id", "page", "table_id", "caption", "headers", "rows", "reason"],
+      "properties": {
+        "doc_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "page": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "table_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target_eid": {
+          "type": ["string", "null"]
+        },
+        "caption": {
+          "type": "string",
+          "minLength": 1
+        },
+        "headers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "footnotes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "strip_block_fragments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "ocrCorrectionOverride": {
+      "type": "object",
+      "title": "OcrCorrectionOverride",
+      "additionalProperties": false,
+      "required": ["doc_id", "page", "original_text", "corrected_text", "reason"],
+      "properties": {
+        "doc_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "eid": {
+          "type": ["string", "null"]
+        },
+        "page": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "original_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "corrected_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
     "clauseFix": {
       "type": "object",
       "title": "ClauseFix",
@@ -79,7 +214,15 @@
             "effective_from",
             "language",
             "cross_references",
-            "tables"
+            "tables",
+            "summary_by_site",
+            "notes_by_site",
+            "ocr_status",
+            "ocr_corrections",
+            "type",
+            "table_meta",
+            "cells",
+            "children"
           ]
         },
         "value": {},

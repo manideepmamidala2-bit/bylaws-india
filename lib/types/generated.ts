@@ -120,6 +120,9 @@ export interface DocumentConfig {
     | "circular"
     | "map"
     | "standard_reference";
+  instrument_type?: "instrument" | "compilation" | "map" | "bill" | "order";
+  summary_by_site?: string | null;
+  notes_by_site?: string[];
   layer:
     "statute" | "state_rules" | "planning" | "municipal" | "orders" | "overlay" | "national_reference" | "boundary";
   legal_status: "in_force" | "draft" | "superseded" | "withdrawn" | "status_unknown";
@@ -334,6 +337,9 @@ export interface DocumentMetadata {
     | "circular"
     | "map"
     | "standard_reference";
+  instrument_type?: "instrument" | "compilation" | "map" | "bill" | "order";
+  summary_by_site?: string | null;
+  notes_by_site?: string[];
   layer:
     "statute" | "state_rules" | "planning" | "municipal" | "orders" | "overlay" | "national_reference" | "boundary";
   role: "base" | "amendment" | "regulation" | "boundary" | "reference";
@@ -512,6 +518,10 @@ export interface ClauseNode {
   verified_by?: string | null;
   omitted?: boolean;
   change_mark?: ClauseChangeMark | null;
+  summary_by_site?: string | null;
+  notes_by_site?: string[];
+  ocr_status?: "corrected" | "unreadable_fragments" | null;
+  ocr_corrections?: OcrCorrection[];
 }
 
 export interface TableMeta {
@@ -555,6 +565,7 @@ export interface NodeVersion {
   citations: ClauseCitation[];
   legal_status: "in_force" | "draft" | "superseded" | "withdrawn" | "status_unknown";
   omitted?: boolean;
+  notes_by_site?: string[];
 }
 
 export interface ClauseCitation {
@@ -586,6 +597,13 @@ export interface ClauseChangeMark {
   original_text?: string | null;
   original_heading?: string | null;
   original_cells?: string[] | null;
+}
+
+export interface OcrCorrection {
+  original_text: string;
+  corrected_text: string;
+  page: number;
+  reason: string;
 }
 
 /**
@@ -727,6 +745,9 @@ export interface JurisdictionOverrides {
   zone_fixes?: ZoneFix[];
   map_curations?: MapCuration[];
   amendment_links?: AmendmentLinkOverride[];
+  ocr_corrections?: OcrCorrectionOverride[];
+  unreadable_fragments?: UnreadableFragmentOverride[];
+  table_overrides?: TableOverride[];
 }
 
 export interface ClauseFix {
@@ -749,7 +770,15 @@ export interface ClauseFix {
     | "effective_from"
     | "language"
     | "cross_references"
-    | "tables";
+    | "tables"
+    | "summary_by_site"
+    | "notes_by_site"
+    | "ocr_status"
+    | "ocr_corrections"
+    | "type"
+    | "table_meta"
+    | "cells"
+    | "children";
   value: unknown;
   reason: string;
 }
@@ -823,6 +852,36 @@ export interface AmendmentLinkOverride {
   verification: "unverified" | "machine_checked" | "human_verified";
   note?: string | null;
   replacement_text?: string | null;
+}
+
+export interface OcrCorrectionOverride {
+  doc_id: string;
+  eid?: string | null;
+  page: number;
+  original_text: string;
+  corrected_text: string;
+  reason: string;
+}
+
+export interface UnreadableFragmentOverride {
+  doc_id: string;
+  page: number;
+  raw_fragment: string;
+  replacement?: string;
+  reason: string;
+}
+
+export interface TableOverride {
+  doc_id: string;
+  page: number;
+  table_id: string;
+  target_eid?: string | null;
+  caption: string;
+  headers: string[];
+  rows: string[][];
+  footnotes?: string[];
+  strip_block_fragments?: string[];
+  reason: string;
 }
 
 /**
@@ -1056,6 +1115,8 @@ export interface ConsolidatedClauseRecord {
   change_note?: string | null;
   original_text?: string | null;
   amending_clause_id?: string | null;
+  summary_by_site?: string | null;
+  notes_by_site?: string[];
 }
 
 export interface ConsolidatedClauseTable {
@@ -1160,6 +1221,9 @@ export interface SuccessionEntry {
   instrument_title: string;
   quoted_evidence: string;
   source_url: string;
+  status?: "confirmed" | "not_confirmed";
+  page?: number | null;
+  clause_eid?: string | null;
 }
 
 export interface RelationEntry {
@@ -1190,6 +1254,8 @@ export interface RelationEntry {
   public_visible?: boolean;
   measured_precision?: number | null;
   parameters_incorporated?: string[] | null;
+  governing_doc?: string | null;
+  governing_value?: string | null;
 }
 
 /**

@@ -7,8 +7,13 @@ import {
   type ClauseNode,
 } from "@/lib/data";
 import { TopNav } from "@/components/TopNav";
-import { StatusBadge } from "@/components/StatusBadge";
 import { ClauseTree } from "@/components/ClauseTree";
+import {
+  formatHumanDate,
+  formatPlainInstrumentStatus,
+  formatPlainLayerLabel,
+  sortDocumentsMostRecentFirst,
+} from "@/lib/plain-language";
 
 interface ClausesPageProps {
   params: Promise<{ id: string }>;
@@ -123,15 +128,15 @@ export default async function ClausesPage({ params }: ClausesPageProps) {
       <main className="mx-auto max-w-6xl px-6 py-8">
         <header className="mb-6 border-b border-[#080909] pb-6">
           <div className="dg-mono">
-            Structured Documents &amp; Clauses · {jurisdiction.id}
+            Structured Documents &amp; Clauses
           </div>
           <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909]">
             {jurisdiction.name}: Documents &amp; Clauses
           </h1>
           <p className="dg-serif mt-2 max-w-3xl text-base text-[#171917]">
-            Select any legal instrument below to read its complete structured
-            document (with Original and As-Amended derived views), or filter
-            across all structured clauses below.
+            Select any legal instrument below (ordered most recent first) to
+            read its complete text in the law&apos;s own order, or filter across
+            structured provisions below.
           </p>
         </header>
 
@@ -154,11 +159,20 @@ export default async function ClausesPage({ params }: ClausesPageProps) {
           className="mb-8 border border-[#080909] bg-[#efeee8] p-5"
         >
           <div className="dg-mono mb-3">
-            Instruments in Release v{release.version} ({documents.length})
+            Instruments · Most Recent First ({documents.length})
           </div>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {documents.map((doc) => {
-              const isRef = doc.text_rights?.mode === "reference_only";
+            {sortDocumentsMostRecentFirst(documents).map((doc) => {
+              const iType = doc.instrument_type ?? "instrument";
+              const isRef =
+                doc.text_rights?.mode === "reference_only" ||
+                iType === "compilation" ||
+                iType === "map" ||
+                iType === "bill";
+              const plainStatus = formatPlainInstrumentStatus(doc);
+              const dateStr = formatHumanDate(
+                doc.effective_from || doc.notified_date
+              );
               return (
                 <Link
                   key={doc.doc_id}
@@ -166,19 +180,29 @@ export default async function ClausesPage({ params }: ClausesPageProps) {
                   className="flex flex-col justify-between border border-[#080909] bg-[#f5f3ed] p-3.5 no-underline hover:bg-[#e5e6de]"
                 >
                   <div>
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="font-mono text-xs font-semibold text-[#080909]">
-                        {doc.doc_id}
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <span className="font-mono text-[11px] text-[#5b5e56]">
+                        {dateStr}
                       </span>
-                      <StatusBadge status={doc.legal_status} />
+                      <span className="border border-[#080909] bg-[#efeee8] px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-[#080909]">
+                        {plainStatus}
+                      </span>
                     </div>
-                    <div className="mt-1 text-sm font-medium text-[#080909]">
+                    <div className="mt-1.5 text-sm font-semibold text-[#080909]">
                       {doc.title}
                     </div>
+                    {doc.summary_by_site && (
+                      <p className="dg-serif mt-1.5 text-xs text-[#171917]">
+                        <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-[#5b5e56]">
+                          In short (by this site):{" "}
+                        </span>
+                        {doc.summary_by_site}
+                      </p>
+                    )}
                   </div>
                   <div className="mt-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.12em] text-[#5b5e56]">
-                    <span>{doc.layer}</span>
-                    <span>{isRef ? "Reference only" : "Full text"}</span>
+                    <span>{formatPlainLayerLabel(doc.layer)}</span>
+                    <span>{isRef ? "Reference" : "Read provisions →"}</span>
                   </div>
                 </Link>
               );

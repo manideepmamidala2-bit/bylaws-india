@@ -235,6 +235,18 @@
         },
         "amending_clause_id": {
           "type": ["string", "null"]
+        },
+        "summary_by_site": {
+          "type": ["string", "null"],
+          "default": null
+        },
+        "notes_by_site": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "default": []
         }
       }
     },
