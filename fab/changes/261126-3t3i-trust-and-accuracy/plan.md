@@ -109,7 +109,7 @@ Both `pipeline/bylaws/resolver.py` and `lib/resolver.ts` MUST remove the `3:2` p
 
 ### Phase 4: Part 4 — Honest Relations, Labelling Sheet & Precision Rule
 
-- [ ] T004 Update `pipeline/bylaws/relations.py` and `schemas/relations.schema.json` to mark non-structural relation kinds (`cross_document_reference`, `definition_differs`, `precedence`) as `"not_yet_reviewed"` (`"not yet reviewed"`), enforce the `>= 0.8` labelled-precision rule from `docs/review/relations-labelling.md`, regenerate `docs/review/relations-labelling.md` with both provisions, their page numbers, and an unfilled verdict column, show `"Checked by rule, not yet by a person"` inside `Details` for public relations in `app/j/[id]/topics/[topic]/page.tsx` and `components/ClauseTree.tsx`, update `docs/progress.md`, and commit + push <!-- R4 -->
+- [x] T004 Update `pipeline/bylaws/relations.py` and `schemas/relations.schema.json` to mark non-structural relation kinds (`cross_document_reference`, `definition_differs`, `precedence`) as `"not_yet_reviewed"` (`"not yet reviewed"`), enforce the `>= 0.8` labelled-precision rule from `docs/review/relations-labelling.md`, regenerate `docs/review/relations-labelling.md` with both provisions, their page numbers, and an unfilled verdict column, show `"Checked by rule, not yet by a person"` inside `Details` for public relations in `app/j/[id]/topics/[topic]/page.tsx` and `components/ClauseTree.tsx`, update `docs/progress.md`, and commit + push <!-- R4 -->
 
 ### Phase 5: Part 5 — Honest Resolver Without Assumed Dimensions & Final Verification
 

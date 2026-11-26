@@ -1206,6 +1206,7 @@ export interface ClauseZoneTagEntry {
 export interface JurisdictionRelations {
   schema_version: "1.4";
   jurisdiction: string;
+  public_visibility_rule?: string | null;
   topics: TopicDefinition[];
   succession: SuccessionEntry[];
   relations: RelationEntry[];
@@ -1248,6 +1249,8 @@ export interface RelationEntry {
   from_eid: string;
   to_doc: string;
   to_eid: string;
+  from_page?: number | null;
+  to_page?: number | null;
   topic?: string | null;
   parameter?: string | null;
   from_span: string;
@@ -1256,7 +1259,8 @@ export interface RelationEntry {
   applies_in?: string[];
   method: "rule" | "embedding" | "hybrid";
   confidence: number;
-  status: "candidate" | "confirmed" | "rejected" | "human_verified";
+  status: "candidate" | "confirmed" | "not_yet_reviewed" | "rejected" | "human_verified";
+  review_note?: string | null;
   note?: string | null;
   public_visible?: boolean;
   measured_precision?: number | null;

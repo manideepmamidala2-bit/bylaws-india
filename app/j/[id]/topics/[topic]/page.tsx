@@ -1040,7 +1040,8 @@ export default async function TopicDetailPage({
                 Technical address:{" "}
                 <code className="text-[#080909]">
                   {baseDocId}:{node.eid}
-                </code>
+                </code>{" "}
+                · Checked by rule, not yet by a person
               </div>
             </div>
           </details>
@@ -1332,6 +1333,9 @@ export default async function TopicDetailPage({
               Read quoted statutory authority
             </summary>
             <div className="mt-3 space-y-4 border-t border-[#c8ccc0] pt-3 text-sm">
+              <div className="font-mono text-xs text-[#5b5e56]">
+                Checked by rule, not yet by a person
+              </div>
               {subjectApplicabilityRules.map((ar) =>
                 ar.authorities.map((auth) => {
                   const authDoc = docMetaById.get(auth.doc_id);

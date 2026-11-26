@@ -1334,6 +1334,8 @@ class RelationEntry(BaseModel):
     from_eid: constr(min_length=1)
     to_doc: constr(min_length=1)
     to_eid: constr(min_length=1)
+    from_page: conint(ge=1) | None = None
+    to_page: conint(ge=1) | None = None
     topic: str | None = None
     parameter: str | None = None
     from_span: constr(min_length=1)
@@ -1342,7 +1344,10 @@ class RelationEntry(BaseModel):
     applies_in: list[str] | None = None
     method: Literal["rule", "embedding", "hybrid"]
     confidence: confloat(ge=0.0, le=1.0)
-    status: Literal["candidate", "confirmed", "rejected", "human_verified"]
+    status: Literal[
+        "candidate", "confirmed", "not_yet_reviewed", "rejected", "human_verified"
+    ]
+    review_note: str | None = None
     note: str | None = None
     public_visible: bool | None = False
     measured_precision: confloat(ge=0.0, le=1.0) | None = None
@@ -1357,6 +1362,7 @@ class JurisdictionRelations(BaseModel):
     )
     schema_version: Literal["1.4"]
     jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    public_visibility_rule: str | None = None
     topics: list[TopicDefinition]
     succession: list[SuccessionEntry]
     relations: list[RelationEntry]
