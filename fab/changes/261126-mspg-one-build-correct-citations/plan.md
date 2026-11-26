@@ -116,42 +116,47 @@ The pipeline (`pipeline/bylaws/amendments.py`, `pipeline/bylaws/consolidate.py`,
 
 ### Functional Completeness
 
-- [ ] A-001 R1: Root cause of the stale Greater Bengaluru view is documented in `docs/progress.md` and the PR description, and the city view and all five corporation views are generated in one step from one dataset with a single matching `dataset_id`.
-- [ ] A-002 R1: Shared-content CI check and same-build `dataset_id` CI check run in `pytest` and `scripts/check_page_budgets.mjs`, verifying identical shared parameter rows and governing provisions between `in-ka-bengaluru` and all five City Corporations.
-- [ ] A-003 R2: Every amended provision (`3.1(ii)`, `3.1(iii)`, `3.9(iii)`, `3.10(i)`, `4.1.2(b)`, `4.1.2(c)`, and corporation `bbl-2003` amendments) cites the amending instrument's exact PDF page where its wording appears, while its previous wording in Details cites the original document and page.
-- [ ] A-004 R2: CI citation check (`pipeline/bylaws/fidelity.py`, `pipeline/tests/test_text_fidelity.py`) verifies that every quoted provision wording, parameter table row, applicability/resolution quote, and home-page excerpt appears on its exact cited page of its cited document.
-- [ ] A-005 R3: Every reference to an instrument across published JSON and built HTML pages takes its plain name and date from the source register, `"20 January 2026"` (`2026-01-20`) is resolved to the registered `5 January 2026` notification, and the CI name/date check passes.
-- [ ] A-006 R4: `applicability_rules` are recorded in `parameters.json` (with `3.1(ii)` and `3.1(iii)` quotes and citations), the Setbacks `11.5 to 12 m` band is explained in one line under `"Why this rule applies"` with quote on tap and a small note on `Table 9`'s `11.5–12 m` band, and `"Not settled"` is shown only when no in-force clause decides.
-- [ ] A-007 R5: Bye-law `6.0(i)` shows each City Corporation's May 2026 wording tagged `"Changed May 2026, [corporation]"` with previous wording on tap and May 2026 page citation, shows the 2003 wording on Greater Bengaluru with `"Each City Corporation changed this rule in May 2026. Choose a corporation to see its wording."`, and `"Master plan rules apply instead (bye-law 1.4)"` appears only on Bye-law `1.4` subjects (enforced in CI).
+- [x] A-001 R1: Root cause of the stale Greater Bengaluru view is documented in `docs/progress.md` and the PR description, and the city view and all five corporation views are generated in one step from one dataset with a single matching `dataset_id`.
+- [x] A-002 R1: Shared-content CI check and same-build `dataset_id` CI check run in `pytest` and `scripts/check_page_budgets.mjs`, verifying identical shared parameter rows and governing provisions between `in-ka-bengaluru` and all five City Corporations.
+- [x] A-003 R2: Every amended provision (`3.1(ii)`, `3.1(iii)`, `3.9(iii)`, `3.10(i)`, `4.1.2(b)`, `4.1.2(c)`, and corporation `bbl-2003` amendments) cites the amending instrument's exact PDF page where its wording appears, while its previous wording in Details cites the original document and page.
+- [x] A-004 R2: CI citation check (`pipeline/bylaws/fidelity.py`, `pipeline/tests/test_text_fidelity.py`) verifies that every quoted provision wording, parameter table row, applicability/resolution quote, and home-page excerpt appears on its exact cited page of its cited document.
+- [x] A-005 R3: Every reference to an instrument across published JSON and built HTML pages takes its plain name and date from the source register, `"20 January 2026"` (`2026-01-20`) is resolved to the registered `5 January 2026` notification, and the CI name/date check passes.
+- [x] A-006 R4: `applicability_rules` are recorded in `parameters.json` (with `3.1(ii)` and `3.1(iii)` quotes and citations), the Setbacks `11.5 to 12 m` band is explained in one line under `"Why this rule applies"` with quote on tap and a small note on `Table 9`'s `11.5–12 m` band, and `"Not settled"` is shown only when no in-force clause decides.
+- [x] A-007 R5: Bye-law `6.0(i)` shows each City Corporation's May 2026 wording tagged `"Changed May 2026, [corporation]"` with previous wording on tap and May 2026 page citation, shows the 2003 wording on Greater Bengaluru with `"Each City Corporation changed this rule in May 2026. Choose a corporation to see its wording."`, and `"Master plan rules apply instead (bye-law 1.4)"` appears only on Bye-law `1.4` subjects (enforced in CI).
 
 ### Behavioral Correctness
 
-- [ ] A-008 R1: `/j/in-ka-bengaluru/topics/setbacks` shows the 2007 industrial row (`4.5 m`) under **Older or replaced rules**, `3.1(ii)` in its January 2026 wording, and no `"Replaced"` label on Bye-law `1.4`.
-- [ ] A-009 R2: On Setbacks (`/j/[id]/topics/setbacks`), `3.1(ii)` and `3.1(iii)` link to `p. 2` of the 5 January 2026 notification (not `p. 20`), and `3.10(i)` links to `p. 3` (not `p. 24`).
-- [ ] A-010 R4: The false `"Not settled: two rules apply — The current tables overlap between 11.5 m and 12 m."` warning is no longer displayed on `/j/[id]/topics/setbacks` or `/j/[id]/topics/height`.
-- [ ] A-011 R5: In Bengaluru North (`/j/in-ka-bengaluru-north/...`) and the other four corporations, Bye-law `6.0(i)` does not display the 2003 `"within 5% of…"` text as current wording and does not carry `"Master plan rules apply instead (bye-law 1.4)"`.
+- [x] A-008 R1: `/j/in-ka-bengaluru/topics/setbacks` shows the 2007 industrial row (`4.5 m`) under **Older or replaced rules**, `3.1(ii)` in its January 2026 wording, and no `"Replaced"` label on Bye-law `1.4`.
+- [x] A-009 R2: On Setbacks (`/j/[id]/topics/setbacks`), `3.1(ii)` and `3.1(iii)` link to `p. 2` of the 5 January 2026 notification (not `p. 20`), and `3.10(i)` links to `p. 3` (not `p. 24`).
+- [x] A-010 R4: The false `"Not settled: two rules apply — The current tables overlap between 11.5 m and 12 m."` warning is no longer displayed on `/j/[id]/topics/setbacks` or `/j/[id]/topics/height`.
+- [x] A-011 R5: In Bengaluru North (`/j/in-ka-bengaluru-north/...`) and the other four corporations, Bye-law `6.0(i)` does not display the 2003 `"within 5% of…"` text as current wording and does not carry `"Master plan rules apply instead (bye-law 1.4)"`.
 
 ### Scenario Coverage
 
-- [ ] A-012 R2: Unit tests verify that `3.1(ii)`, `3.1(iii)`, and `3.10(i)` cite the January 2026 notification at the exact pages where their text appears and that a synthetic wrong-page citation fails `verify_jurisdiction_text_fidelity`.
-- [ ] A-013 R4: Unit tests verify both that the setbacks `11.5 to 12 m` band is settled by `3.1(ii)`/`3.1(iii)` (not shown as `"not settled"`) and that a constructed overlap with no applicability clause is still flagged as `"not settled"`.
-- [ ] A-014 R5: Unit and E2E tests verify `6.0(i)` wording across Greater Bengaluru and all five City Corporations and verify the CI Bye-law `1.4` label check.
+- [x] A-012 R2: Unit tests verify that `3.1(ii)`, `3.1(iii)`, and `3.10(i)` cite the January 2026 notification at the exact pages where their text appears and that a synthetic wrong-page citation fails `verify_jurisdiction_text_fidelity`.
+- [x] A-013 R4: Unit tests verify both that the setbacks `11.5 to 12 m` band is settled by `3.1(ii)`/`3.1(iii)` (not shown as `"not settled"`) and that a constructed overlap with no applicability clause is still flagged as `"not settled"`.
+- [x] A-014 R5: Unit and E2E tests verify `6.0(i)` wording across Greater Bengaluru and all five City Corporations and verify the CI Bye-law `1.4` label check.
 
 ### Edge Cases & Error Handling
 
-- [ ] A-015 R3: Any un-registered instrument name or date injected into a `Replaced by …` note or HTML page causes the CI name check to fail deterministically.
+- [x] A-015 R3: Any un-registered instrument name or date injected into a `Replaced by …` note or HTML page causes the CI name check to fail deterministically.
 
 ### Code Quality
 
-- [ ] A-016 Pattern consistency: New code follows naming, typing, and R1 (zero jurisdiction hard-coding) conventions of surrounding pipeline and Next.js code.
-- [ ] A-017 No unnecessary duplication: Shared plain-title, date, and applicability formatting utilities are reused cleanly across modules without magic strings or God functions.
-- [ ] A-018 Readability, composition, and test-alongside: Functions remain focused and composable, all schemas/codegen (`make generate`), `pytest`, `vitest` + `axe-core`, page budgets (`scripts/check_page_budgets.mjs`), and Playwright browser tests pass.
+- [x] A-016 Pattern consistency: New code follows naming, typing, and R1 (zero jurisdiction hard-coding) conventions of surrounding pipeline and Next.js code.
+- [x] A-017 No unnecessary duplication: Shared plain-title, date, and applicability formatting utilities are reused cleanly across modules without magic strings or God functions.
+- [x] A-018 Readability, composition, and test-alongside: Functions remain focused and composable, all schemas/codegen (`make generate`), `pytest`, `vitest` + `axe-core`, page budgets (`scripts/check_page_budgets.mjs`), and Playwright browser tests pass.
 
 ## Notes
 
 - Check items as you review: `- [x]`
 - All acceptance items must pass before `/fab-continue` (hydrate)
 - If an item is not applicable, mark checked and prefix with **N/A**: `- [x] A-NNN **N/A**: {reason}`
+
+## Deletion Candidates
+
+- `pipeline/bylaws/parameters.py:78-81` (`TABLE8_INLINE_ROW_RE`) — Unused regex constant left over from inline Table 8 prose parsing before structured Table 8 extraction.
+- `lib/data.ts:352-362` (`formatHumanDate`) — Duplicates `formatHumanDate` in `lib/plain-language.ts:714-724`; `lib/data.ts` can import or re-export the shared helper from `lib/plain-language.ts`.
 
 ## Assumptions
 
