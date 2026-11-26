@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import json
 import re
-from pathlib import Path
 
 from bylaws.config import load_jurisdiction_config
 from bylaws.root import resolve_repo_root
@@ -15,6 +14,17 @@ DATE_TOKEN_RE = re.compile(
 )
 
 
+def _resolve_docs_dir_or_published(jurisdiction_id: str):
+    repo_root = resolve_repo_root()
+    proc_docs = repo_root / "data" / "processed" / jurisdiction_id / "documents"
+    if proc_docs.is_dir() and any(proc_docs.glob("*.clauses.json")):
+        return proc_docs, repo_root / "data" / "processed" / jurisdiction_id
+    cfg = load_jurisdiction_config(jurisdiction_id)
+    ver = str(cfg.release_version or "4.0.0")
+    pub_dir = repo_root / "public" / "data" / jurisdiction_id / ver
+    return pub_dir, pub_dir
+
+
 def test_dates_never_parsed_as_clause_numbers_and_clause_17_not_duplicated() -> None:
     """Date-shaped tokens never match as clause numbers, and `rmp2015-zr-amend-2025-04` has zero date nodes and one Clause 17."""
     assert _match_structural_line("11.11.2025 Whereas the draft notification") is None
@@ -22,8 +32,7 @@ def test_dates_never_parsed_as_clause_numbers_and_clause_17_not_duplicated() -> 
     assert _match_structural_line("28.10.2017 Notification No. UDD 14 TTP 2017") is None
     assert _match_structural_line("Clause 11.11.2025: Some text") is None
 
-    repo_root = resolve_repo_root()
-    docs_dir = repo_root / "data/processed/in-ka-bengaluru/documents"
+    docs_dir, _ = _resolve_docs_dir_or_published("in-ka-bengaluru")
     for p in sorted(docs_dir.glob("*.clauses.json")):
         doc_id = p.name.removesuffix(".clauses.json")
         tree = json.loads(p.read_text(encoding="utf-8"))
@@ -53,8 +62,7 @@ def test_dates_never_parsed_as_clause_numbers_and_clause_17_not_duplicated() -> 
 
 def test_sibling_list_items_max_depth_6_and_provision_uniqueness() -> None:
     """Same-level list items attach as siblings, no provision `eid` exceeds depth 6, and no duplicate provisions exist."""
-    repo_root = resolve_repo_root()
-    docs_dir = repo_root / "data/processed/in-ka-bengaluru/documents"
+    docs_dir, _ = _resolve_docs_dir_or_published("in-ka-bengaluru")
 
     for p in sorted(docs_dir.glob("*.clauses.json")):
         doc_id = p.name.removesuffix(".clauses.json")
@@ -66,7 +74,6 @@ def test_sibling_list_items_max_depth_6_and_provision_uniqueness() -> None:
             eid = str(c["eid"])
             depth = len(eid.split("__"))
             assert depth <= 6, f"Node {doc_id}:{eid} exceeds max depth 6 (depth={depth})"
-            # Verify no runaway sibling nesting like item_a__item_b__item_c
             assert "__item_a__item_b" not in eid, f"Runaway sibling nesting in {doc_id}:{eid}"
             assert "__item_i__item_ii" not in eid, f"Runaway sibling nesting in {doc_id}:{eid}"
 
@@ -83,8 +90,7 @@ def test_sibling_list_items_max_depth_6_and_provision_uniqueness() -> None:
 
 def test_meaningful_table_captions_and_non_content_excluded_from_topics_and_zones() -> None:
     """Tables carry printed captions or 'Table (under <provision>)', and non-content nodes are excluded from topics and zones."""
-    repo_root = resolve_repo_root()
-    docs_dir = repo_root / "data/processed/in-ka-bengaluru-south/documents"
+    docs_dir, south_dir = _resolve_docs_dir_or_published("in-ka-bengaluru-south")
 
     for p in sorted(docs_dir.glob("*.clauses.json")):
         doc_id = p.name.removesuffix(".clauses.json")
@@ -111,9 +117,7 @@ def test_meaningful_table_captions_and_non_content_excluded_from_topics_and_zone
                     f"Non-content node {doc_id}:{t_eid} tagged with {ann['kind']}={ann.get('value')}"
                 )
 
-    tags_doc = json.loads(
-        (repo_root / "data/processed/in-ka-bengaluru-south/clause-zone-tags.json").read_text(encoding="utf-8")
-    )
+    tags_doc = json.loads((south_dir / "clause-zone-tags.json").read_text(encoding="utf-8"))
     for tag in tags_doc.get("tags", []):
         cid = str(tag.get("clause_id") or "")
         local_id = cid.split(":", 1)[-1]
@@ -124,7 +128,6 @@ def test_meaningful_table_captions_and_non_content_excluded_from_topics_and_zone
 
 def test_part4_instrument_types_model_bbl_2017_quotes_and_succession_evidence() -> None:
     """Every register entry has an explicit instrument_type, ka-model-bbl-2017 explains bye-law 1.4 with quotes, and succession.yaml rows are backed by statutory quotes."""
-    repo_root = resolve_repo_root()
     cfg = load_jurisdiction_config("in-ka-bengaluru-south")
     by_id = {d.id: d for d in cfg.documents}
 
@@ -157,9 +160,8 @@ def test_part4_instrument_types_model_bbl_2017_quotes_and_succession_evidence() 
     assert ka_2017.notes_by_site and len(ka_2017.notes_by_site) >= 3
 
     # Succession rows backed by real statutory succession quotes and matching dates
-    relations = json.loads(
-        (repo_root / "data/processed/in-ka-bengaluru-south/relations.json").read_text(encoding="utf-8")
-    )
+    _, south_dir = _resolve_docs_dir_or_published("in-ka-bengaluru-south")
+    relations = json.loads((south_dir / "relations.json").read_text(encoding="utf-8"))
     succ_rows = relations.get("succession") or []
     assert len(succ_rows) >= 3
     for row in succ_rows:

@@ -12,11 +12,28 @@ from bylaws.root import resolve_repo_root
 
 
 def _load_clause_trees(jurisdiction_id: str, repo_root: Path) -> dict[str, dict]:
+    cfg = load_jurisdiction_config(jurisdiction_id)
     docs_dir = repo_root / "data" / "processed" / jurisdiction_id / "documents"
     trees: dict[str, dict] = {}
-    for p in sorted(docs_dir.glob("*.clauses.json")):
-        doc_id = p.name.removesuffix(".clauses.json")
-        trees[doc_id] = json.loads(p.read_text(encoding="utf-8"))
+    if docs_dir.is_dir():
+        for p in sorted(docs_dir.glob("*.clauses.json")):
+            doc_id = p.name.removesuffix(".clauses.json")
+            trees[doc_id] = json.loads(p.read_text(encoding="utf-8"))
+    if trees:
+        return trees
+
+    # Fallback in CI where `public/data/` is pulled from storage and `data/processed/` is gitignored
+    ver = str(cfg.release_version or "4.0.0")
+    cand_dirs = [repo_root / "public" / "data" / jurisdiction_id / ver]
+    if cfg.parent:
+        cand_dirs.append(repo_root / "public" / "data" / cfg.parent / ver)
+    for d in cand_dirs:
+        if not d.is_dir():
+            continue
+        for p in sorted(d.glob("*.clauses.json")):
+            doc_id = p.name.removesuffix(".clauses.json")
+            if doc_id not in trees:
+                trees[doc_id] = json.loads(p.read_text(encoding="utf-8"))
     return trees
 
 
@@ -63,12 +80,8 @@ def test_fidelity_verifier_is_falsifiable_on_editorial_or_invented_words() -> No
 def test_editorial_insertions_moved_to_notes_by_site_and_table_3_1_restored() -> None:
     """`bbl-2003` bye-laws `6.0(i)` and `1.4` contain only verbatim text with notes in `notes_by_site`, and `rmp2015-zr` 3.1 has a real table node."""
     repo_root = resolve_repo_root()
-    bbl_south = json.loads(
-        (
-            repo_root
-            / "data/processed/in-ka-bengaluru-south/documents/bbl-2003.clauses.json"
-        ).read_text(encoding="utf-8")
-    )
+    south_trees = _load_clause_trees("in-ka-bengaluru-south", repo_root)
+    bbl_south = south_trees["bbl-2003"]
     by_eid_bbl = {c["eid"]: c for c in bbl_south["clauses"]}
 
     cl_1_4 = by_eid_bbl["part_I__sec_1.0__cl_1.4"]
@@ -84,12 +97,7 @@ def test_editorial_insertions_moved_to_notes_by_site_and_table_3_1_restored() ->
         assert "Notification No: BSCC/Com/PR" not in v_txt
     assert cl_6_0_i.get("notes_by_site"), "Expected notes_by_site on bbl-2003 6.0(i)"
 
-    rmp = json.loads(
-        (
-            repo_root
-            / "data/processed/in-ka-bengaluru-south/documents/rmp2015-zr.clauses.json"
-        ).read_text(encoding="utf-8")
-    )
+    rmp = south_trees["rmp2015-zr"]
     by_eid_rmp = {c["eid"]: c for c in rmp["clauses"]}
     cl_3_1 = by_eid_rmp["chp_3__cl_3.1"]
     assert "Plot up to 60 sq.m (All uses): Front 0.75 m" not in cl_3_1["text"]
@@ -99,12 +107,7 @@ def test_editorial_insertions_moved_to_notes_by_site_and_table_3_1_restored() ->
     assert tbl_8["table_meta"] is not None
     assert len(tbl_8["children"]) >= 3
 
-    amend_2026 = json.loads(
-        (
-            repo_root
-            / "data/processed/in-ka-bengaluru-south/documents/rmp2015-zr-amend-2026-01.clauses.json"
-        ).read_text(encoding="utf-8")
-    )
+    amend_2026 = south_trees["rmp2015-zr-amend-2026-01"]
     by_eid_a26 = {c["eid"]: c for c in amend_2026["clauses"]}
     assert "item_2_2__item_b__tbl_8" in by_eid_a26
     a26_tbl8 = by_eid_a26["item_2_2__item_b__tbl_8"]

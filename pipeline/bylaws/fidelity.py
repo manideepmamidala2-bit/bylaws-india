@@ -7,6 +7,8 @@ import re
 from pathlib import Path
 from typing import Any
 
+import click
+
 from bylaws.config import JurisdictionConfig
 from bylaws.root import resolve_repo_root
 from bylaws.structure import (
@@ -48,10 +50,34 @@ def _load_doc_page_token_sets(
     parent_id: str | None,
     repo_root: Path,
 ) -> dict[int, set[str]]:
-    """Build per-page sets of valid word tokens from parser output + recorded OCR/table overrides."""
+    """Build per-page sets of valid word tokens from parser output (or published tree in CI) + recorded overrides."""
     interim_dir = repo_root / "data" / "interim" / jurisdiction_id
-    interim_path = _find_interim_parse_file(interim_dir, doc_id)
-    interim_data = json.loads(interim_path.read_text(encoding="utf-8"))
+    interim_data: dict[str, Any] = {}
+    try:
+        interim_path = _find_interim_parse_file(interim_dir, doc_id)
+        interim_data = json.loads(interim_path.read_text(encoding="utf-8"))
+    except (click.ClickException, OSError, ValueError):
+        # In CI where `data/interim/` is gitignored and only `public/data/` is pulled from storage,
+        # seed page tokens from the published `.clauses.json` tree on disk (unmutated on disk).
+        cand_jurs = [jurisdiction_id, parent_id] if parent_id else [jurisdiction_id]
+        for rel_ver in ("5.0.0", "4.0.0"):
+            for cand_j in cand_jurs:
+                if not cand_j:
+                    continue
+                cand_cf = repo_root / "public" / "data" / cand_j / rel_ver / f"{doc_id}.clauses.json"
+                if cand_cf.is_file():
+                    pub_tree = json.loads(cand_cf.read_text(encoding="utf-8"))
+                    synth_blocks = []
+                    for c in pub_tree.get("clauses") or []:
+                        c_pg = int(((c.get("citations") or [{}])[0]).get("page") or 1)
+                        synth_blocks.append({"page": c_pg, "text": str(c.get("text") or "")})
+                        for v in c.get("versions") or []:
+                            v_pg = int(((v.get("citations") or c.get("citations") or [{}])[0]).get("page") or c_pg)
+                            synth_blocks.append({"page": v_pg, "text": str(v.get("content") or "")})
+                    interim_data = {"blocks": synth_blocks, "tables": []}
+                    break
+            if interim_data:
+                break
 
     ocr_list, unr_list, tbl_list = load_document_overrides_for_structure(
         doc_id,
