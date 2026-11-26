@@ -142,6 +142,7 @@ documents:
   instrument_type: instrument
   summary_by_site: Principal municipal building bye-laws for Bengaluru (plan sanction,
     licences, construction norms, occupancy certificates, and deviations).
+  plain_title: Building Bye-laws 2003
 - id: ka-model-bbl-2017
   title: Karnataka Municipalities Model Building Bye-Laws, 2017
   issuing_authority: URBAN DEVELOPMENT SECRETARIAT, Government of Karnataka
@@ -254,6 +255,7 @@ documents:
     from the 2017 text alone; however, the May 2026 City Corporation Building (Amendment)
     Bye-laws expressly amend the 2003 Building Bye-laws, confirming the 2003 Bye-laws
     remained the operative code.
+  plain_title: Notification UDD 14 TTP 2017 (Model Building Bye-laws)
 - id: rmp2015-zr
   title: Revised Master Plan 2015 BANGALORE 2007 Volume – III ZONING OF LANDUSE AND
     REGULATIONS
@@ -309,6 +311,7 @@ documents:
   instrument_type: instrument
   summary_by_site: Master Plan 2015 Zoning Regulations governing land-use zones, ground
     coverage, Floor Area Ratio (FAR), setbacks, height, and parking across Bengaluru.
+  plain_title: Master Plan Zoning Regulations 2007
 - id: rmp2015-zr-amend-2009-03
   title: Notification No.UDD 93 MNJ 2008 dated 2-3-2009 (4.10 Traffic and Transportation
     (T&T) Zone Uses Amendment)
@@ -363,6 +366,7 @@ documents:
   summary_by_site: March 2009 zoning amendment adding metro station 150 m buffer FAR
     (3.16(ix)) and revising Traffic and Transportation (T&T) zone rules and Table
     19.
+  plain_title: Zoning amendment (Traffic and Transportation)
 - id: rmp2015-zr-amend-2015-03
   title: 'URBAN DEVELOPMENT SECRETARIAT NOTIFICATION No: UDD 105 MNJ 2008, Bangalore,
     Dated:20/03/2015'
@@ -418,6 +422,7 @@ documents:
   instrument_type: instrument
   summary_by_site: March 2015 zoning amendment restricting commercial uses on roads
     under 40 ft (12 m) in Residential zones and updating Table 1, 4.1.2, and 4.2.2.
+  plain_title: Zoning amendment (Commercial uses in residential zones)
 - id: rmp2015-zr-amend-2018-09
   title: Zoning Regulations of Bengaluru of the Revised Master Plan-2015 (Amendment)
     Regulations 2018
@@ -473,6 +478,7 @@ documents:
   instrument_type: instrument
   summary_by_site: September 2018 zoning amendment inserting Regulation 3.4(vi) Impact
     Zone Premium FAR (+1.0 FAR on roads >= 12 m) and omitting Regulation 3.16(ix).
+  plain_title: Zoning amendment (Impact Zone FAR)
 - id: rmp2015-zr-amend-2019-06
   title: Zoning Regulations of Bengaluru of the Revised Master Plan-2015 (Amendment)
     Regulations, 2019
@@ -530,6 +536,7 @@ documents:
   summary_by_site: June 2019 zoning amendment updating apartment/non-residential definitions,
     FAR exclusions (3.4), building height exemptions (3.4-A), balconies, tree planting,
     residential subdivision earmarking (55%), and hotel/office parking (Table 23).
+  plain_title: Zoning amendment (Development Plan and Parking)
 - id: rmp2015-zr-comp-2024-10-kn
   title: Revising the amendments in the regulations in BBMP revised Mahayojane 2015
     (Kannada Compilation)
@@ -582,6 +589,7 @@ documents:
     Regulations published by BBMP as a finding aid (not structured; English instruments
     used).
   structured: false
+  plain_title: RMP 2015 Zoning Regulations (2024 Kannada compilation)
 - id: rmp2015-zr-amend-2025-02
   title: GOVERNMENT OF KARNATAKA No. UDD 78 MNJ 2024 (E) Dated:21.02.2025 NOTIFICATION-1
     & NOTIFICATION-II (Premium F.A.R Amendment to Zonal Regulations of Revised Master
@@ -639,6 +647,7 @@ documents:
   instrument_type: instrument
   summary_by_site: February 2025 Premium FAR notification (withdrawn and replaced
     with effect from 25-02-2025 by the April 2025 final notification).
+  plain_title: Draft zoning amendment (Premium FAR)
 - id: rmp2015-zr-amend-2026-01
   title: 'GOVERNMENT OF KARNATAKA No. UDD 235 MNJ 2025(E) date: 05.01.2026 NOTIFICATION
     (Amendment to Zonal Regulations of Revised Master Plan-2015 of Bengaluru and Greater
@@ -698,6 +707,7 @@ documents:
   summary_by_site: January 2026 final notification replacing Setbacks Table 8 (up
     to 12 m / 15 m height) and amending basement, car-lift/ramp, residential height/apartment,
     mutation corridor, and industrial (Table 16) rules.
+  plain_title: Zoning amendment
 - id: rmp2015-zr-amend-2025-07
   title: Gazette Notification (July 2025) - Bengaluru Master Plan 2015 Zoning Regulations
     Amendments
@@ -729,6 +739,7 @@ documents:
   instrument_type: instrument
   summary_by_site: July 2025 zoning amendment notification listed on OpenCity that
     could not be obtained from official or archival sources.
+  plain_title: Zoning amendment (July 2025)
 - id: bscc-bbl-amend-2026
   title: Bengaluru South City Corporation Building (Amendment) Bye-laws 2026 (04-03-2026)
   issuing_authority: Bengaluru South City Corporation / Greater Bengaluru Authority
@@ -760,6 +771,7 @@ documents:
   mirror_urls: []
   source_url: https://data.opencity.in/dataset/bbmp-building-byelaws/resource/d37c7718-8c24-4da7-86a0-d19b974fb8a9/download/bscc-10125.pdf
   instrument_type: instrument
+  plain_title: Draft Bengaluru South Building (Amendment) Bye-laws (March 2026)
 - id: udd-1107-mnu-2018-draft
   title: Draft Notification No. UDD 1107 MNU 2015 — Punishments under Section 321-B
     of K.M.C. Act, 1976 and Building Bye-laws, 2003
@@ -817,6 +829,7 @@ documents:
   instrument_type: instrument
   summary_by_site: November 2018 draft notification proposing penalties under Section
     321-B of the KMC Act, 1976 (draft only, not in force).
+  plain_title: Draft Building Bye-laws amendment (Section 321-B)
 - id: rmp2015-pd-index
   title: BDA Revised Master Plan 2015 — Planning Districts Index Map (47 Planning
     Districts)
@@ -867,6 +880,7 @@ documents:
   instrument_type: map
   summary_by_site: Official BDA Revised Master Plan 2015 index map of the 47 Planning
     Districts.
+  plain_title: RMP 2015 Planning Districts Index Map
 - id: rmp2015-plu-pd-210
   title: 'BDA Revised Master Plan 2015 — Proposed Land Use Map: Planning District
     2.10 (Jayanagar, Maps a & b)'
@@ -917,6 +931,7 @@ documents:
   instrument_type: map
   summary_by_site: Official BDA RMP 2015 Proposed Land Use map sheets (a) and (b)
     for Planning District 2.10 (Jayanagar).
+  plain_title: RMP 2015 Land Use Map (Planning District 2.10 Jayanagar)
 - id: bscc-bbl-amend-2026-05
   title: Bengaluru South City Corporation — Bengaluru City Corporation Building (Amendment)
     Bye-laws, 2026 (Final Gazette Notification)
@@ -980,6 +995,7 @@ documents:
   summary_by_site: May 2026 final Building (Amendment) Bye-laws for Bengaluru South
     City Corporation omitting ground rent (3.8–3.10) and substituting deviation compounding
     rules (6.0(i) and Tables 2A–2D).
+  plain_title: Bengaluru South Building (Amendment) Bye-laws 2026
 - id: bscc-bbl-amend-2026-04-draft
   title: Bengaluru South City Corporation — Draft Bengaluru City Corporation Building
     (Amendment) Bye-laws, 2026 (01-04-2026)
@@ -1040,6 +1056,7 @@ documents:
   instrument_type: instrument
   summary_by_site: April 2026 draft Building (Amendment) Bye-laws for Bengaluru South
     City Corporation (replaced by the 14 May 2026 final notification).
+  plain_title: Draft Bengaluru South Building (Amendment) Bye-laws 2026
 - id: rmp2015-zr-amend-2025-04
   title: 'Notification No. UDD 78 MNJ 2024 (E) (02-04-2025) — Insertion of Chapter
     11: Premium F.A.R Granted by Levy of Premium Charges (Final Notification)'
@@ -1097,6 +1114,7 @@ documents:
   instrument_type: instrument
   summary_by_site: April 2025 final notification inserting Chapter 11 (Premium FAR
     of 20%, 40%, or 60% of base FAR by road width).
+  plain_title: Zoning amendment (Premium FAR)
 - id: rmp2015-zr-amend-2025-10
   title: Notification No. UDD 468 MNJ 2025(E) (15-10-2025) — Revised Master Plan 2015
     Zonal Regulations Amendment (Storm Water Drain / Nala Buffer Zones)
@@ -1151,6 +1169,7 @@ documents:
   instrument_type: instrument
   summary_by_site: October 2025 final notification setting storm water drain (nala)
     buffers (15 m primary, 10 m secondary, 5 m tertiary) and lake buffer rules.
+  plain_title: Zoning amendment (Drain buffer zones)
 - id: gbga-2024
   title: The Greater Bengaluru Governance Act, 2024 (Karnataka Act No. 36 of 2025)
     — Building & Bye-law Provisions (Chapter XVII & Chapter XXII)
@@ -1207,6 +1226,7 @@ documents:
   summary_by_site: The Greater Bengaluru Governance Act, 2024 (Karnataka Act 36 of
     2025) establishing the Greater Bengaluru Authority and the City Corporations;
     Chapters XVII and XXII govern building regulation and bye-laws.
+  plain_title: Greater Bengaluru Governance Act 2024
 - id: udd-200-mnu-2025-khata
   title: Government Order No. UDD 200 MNU 2025 (25-07-2025) — Regulation of Issuance
     of A and B Khata and Building Plan Approvals in Greater Bengaluru Area
@@ -1261,6 +1281,7 @@ documents:
   instrument_type: order
   summary_by_site: July 2025 Government Order governing A and B Khata issuance and
     building plan approvals in the Greater Bengaluru Area.
+  plain_title: Khata and Building Plan Approval Order
 - id: ktcda-amend-bill-2025
   title: The Karnataka Tank Conservation and Development Authority (Amendment) Bill,
     2025 (L.A. Bill No. 33 of 2025 — Graded Lake Buffer Zones)
@@ -1315,6 +1336,7 @@ documents:
   instrument_type: bill
   summary_by_site: Legislative Assembly Bill No. 33 of 2025 proposing graded lake
     buffer zones under the KTCDA Act, 2014 (bill only; enactment not confirmed).
+  plain_title: Tank Conservation and Development Authority (Amendment) Bill 2025
 - id: rmp2015-plu-pd-211
   title: BDA Revised Master Plan 2015 — Proposed Land Use Map for Planning District
     2.11 (Banashankari), maps (a) and (b)
@@ -1365,6 +1387,7 @@ documents:
   instrument_type: map
   summary_by_site: Official BDA RMP 2015 Proposed Land Use map sheets (a) and (b)
     for Planning District 2.11 (Banashankari).
+  plain_title: RMP 2015 Land Use Map (Planning District 2.11 Banashankari)
 amendment_links:
 - amending_clause: bscc-bbl-amend-2026-05:cl_2
   target_clause: bbl-2003:part_II__sec_3.0__cl_3.8

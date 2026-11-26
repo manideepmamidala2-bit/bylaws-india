@@ -184,6 +184,7 @@ function toTitleCaseIfScreamingJs(title) {
 
 const registeredReplacedByLabels = new Set();
 const registeredPlainTitles = new Set();
+const fullOfficialTitlesDisallowedOutsideDetails = new Set();
 if (manifestObj) {
   for (const j of manifestObj.jurisdictions || []) {
     if (j.visibility === "test") continue;
@@ -198,7 +199,10 @@ if (manifestObj) {
     if (fs.existsSync(docsPath)) {
       const docs = JSON.parse(fs.readFileSync(docsPath, "utf8"));
       for (const d of docs) {
-        const plainTitle = toTitleCaseIfScreamingJs(String(d.title || "").trim());
+        const rawOfficialTitle = String(d.title || "").trim();
+        const plainTitle =
+          String(d.plain_title || "").trim() ||
+          toTitleCaseIfScreamingJs(rawOfficialTitle);
         const dt = formatHumanDateJs(d.effective_from || d.notified_date);
         if (plainTitle) {
           registeredPlainTitles.add(plainTitle);
@@ -206,6 +210,13 @@ if (manifestObj) {
             registeredReplacedByLabels.add(`Replaced by ${plainTitle}, ${dt}`);
           }
           registeredReplacedByLabels.add(`Replaced by ${plainTitle}`);
+        }
+        if (
+          rawOfficialTitle &&
+          d.plain_title &&
+          rawOfficialTitle !== String(d.plain_title).trim()
+        ) {
+          fullOfficialTitlesDisallowedOutsideDetails.add(rawOfficialTitle);
         }
       }
     }
@@ -299,7 +310,8 @@ for (const htmlPath of htmlFiles) {
       }
     }
 
-    // Part 3.3 Name check (CI): verify every "Replaced by <name>, <date>" label in built HTML matches a registered instrument
+    // Part 3.2 & 3.3 Name check (CI): verify every "Replaced by <name>, <date>" label in built HTML matches a registered plain instrument name,
+    // and fail if any full official title appears outside `<details>` or `<header data-testid="document-page-header">`.
     for (const repMatch of cleanNoComments.matchAll(
       />(Replaced by [^<]+)</g
     )) {
@@ -314,6 +326,29 @@ for (const htmlPath of htmlFiles) {
       ) {
         violations.push(
           `${relRoute}: Name check failed — unregistered instrument reference ${JSON.stringify(repText)}`
+        );
+      }
+    }
+
+    const htmlWithoutDocHeader = htmlText.replace(
+      /<header\b[^>]*data-testid="document-page-header"[^>]*>[\s\S]*?<\/header>/gi,
+      " "
+    );
+    const primaryOutsideDetailsAndDocHeader = stripDetailsAndTags(
+      htmlWithoutDocHeader
+    )
+      .replace(/&amp;/g, "&")
+      .replace(/&#x27;/g, "'")
+      .replace(/\s+/g, " ")
+      .trim();
+    for (const officialTitle of fullOfficialTitlesDisallowedOutsideDetails) {
+      const normOfficial = officialTitle.replace(/\s+/g, " ").trim();
+      if (
+        normOfficial.length >= 20 &&
+        primaryOutsideDetailsAndDocHeader.includes(normOfficial)
+      ) {
+        violations.push(
+          `${relRoute}: Name check failed — full official title ${JSON.stringify(normOfficial)} appeared outside Details or document page header`
         );
       }
     }

@@ -201,14 +201,44 @@ def test_part3_one_name_and_date_per_instrument_from_register() -> None:
     public_jurs = [j for j in manifest["jurisdictions"] if j.get("visibility") != "test"]
 
     registered_replaced_labels: set[str] = set()
+    disallowed_full_titles: set[str] = set()
     for jur in public_jurs:
         rel_dir = PUBLIC_DATA_DIR / jur["id"] / str(jur["latest_release"])
         docs = json.loads((rel_dir / "documents.json").read_text(encoding="utf-8"))
         for d in docs:
-            plain_title = _format_short_doc_label(type("DocObj", (), {"title": d.get("title")})(), d["doc_id"])
+            plain_title = _format_short_doc_label(
+                type("DocObj", (), {"title": d.get("title"), "plain_title": d.get("plain_title")})(),
+                d["doc_id"],
+            )
             dt = _format_human_date_plain(d.get("effective_from") or d.get("notified_date"))
             registered_replaced_labels.add(f"Replaced by {plain_title}, {dt}")
             registered_replaced_labels.add(f"Replaced by {plain_title}")
+            raw_title = str(d.get("title") or "").strip()
+            if raw_title and d.get("plain_title") and raw_title != str(d["plain_title"]).strip():
+                disallowed_full_titles.add(" ".join(raw_title.split()))
+
+    next_app_dir = REPO_ROOT / ".next" / "server" / "app"
+    if next_app_dir.is_dir():
+        for html_path in sorted(next_app_dir.rglob("*.html")):
+            rel = html_path.relative_to(next_app_dir).as_posix()
+            if "xx-test-fixture" in rel or "_not-found" in rel:
+                continue
+            raw_html = html_path.read_text(encoding="utf-8")
+            no_doc_header = re.sub(
+                r'<header\b[^>]*data-testid="document-page-header"[^>]*>[\s\S]*?</header>',
+                " ",
+                raw_html,
+                flags=re.IGNORECASE,
+            )
+            primary_txt = (
+                " ".join(_strip_details_and_tags(no_doc_header).split())
+                .replace("&amp;", "&")
+                .replace("&#x27;", "'")
+            )
+            for full_t in disallowed_full_titles:
+                assert full_t not in primary_txt, (
+                    f"{rel} contains full official title outside Details/header: {full_t!r}"
+                )
 
     for jur in public_jurs:
         rel_dir = PUBLIC_DATA_DIR / jur["id"] / str(jur["latest_release"])

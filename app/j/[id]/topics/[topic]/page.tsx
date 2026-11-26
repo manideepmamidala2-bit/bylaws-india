@@ -70,6 +70,8 @@ interface CleanSubjectParameterRow {
   valuePlain: string;
   docId: string;
   docTitle: string;
+  docDate: string;
+  officialTitle: string | null;
   validFrom: string;
   validTo: string | null;
   legalStatus: ParameterRecord["legal_status"];
@@ -161,9 +163,13 @@ function buildDeduplicatedSubjectParameterRows(
       first
     );
     const valuePlain = formatParameterValuePlain(first);
+    const dMeta = docMetaById.get(first.source.doc_id);
     const docTitle =
       docTitleById.get(first.source.doc_id) ??
-      formatPlainDocumentTitle(null, first.source.doc_id);
+      formatPlainDocumentTitle(dMeta, first.source.doc_id);
+    const docDate = formatHumanDate(
+      first.valid_from || dMeta?.effective_from || dMeta?.notified_date
+    );
 
     candidateRows.push({
       key: `${ruleLabel}|${conditionsPlain}|${valuePlain}|${first.source.doc_id}`,
@@ -172,6 +178,8 @@ function buildDeduplicatedSubjectParameterRows(
       valuePlain,
       docId: first.source.doc_id,
       docTitle,
+      docDate,
+      officialTitle: dMeta?.title ?? null,
       validFrom: first.valid_from ?? "0000-00-00",
       validTo: first.valid_to ?? null,
       legalStatus: first.legal_status,
@@ -194,9 +202,13 @@ function buildDeduplicatedSubjectParameterRows(
       rec
     );
     const valuePlain = formatParameterValuePlain(rec);
+    const dMeta = docMetaById.get(rec.source.doc_id);
     const docTitle =
       docTitleById.get(rec.source.doc_id) ??
-      formatPlainDocumentTitle(null, rec.source.doc_id);
+      formatPlainDocumentTitle(dMeta, rec.source.doc_id);
+    const docDate = formatHumanDate(
+      rec.valid_from || dMeta?.effective_from || dMeta?.notified_date
+    );
 
     candidateRows.push({
       key: `${ruleLabel}|${conditionsPlain}|${valuePlain}|${rec.source.doc_id}`,
@@ -205,6 +217,8 @@ function buildDeduplicatedSubjectParameterRows(
       valuePlain,
       docId: rec.source.doc_id,
       docTitle,
+      docDate,
+      officialTitle: dMeta?.title ?? null,
       validFrom: rec.valid_from ?? "0000-00-00",
       validTo: rec.valid_to ?? null,
       legalStatus: rec.legal_status,
@@ -1003,6 +1017,12 @@ export default async function TopicDetailPage({
                   </>
                 )}
               </div>
+              {citingDocMeta?.title && citingDocMeta.title !== plainDocTitle && (
+                <div>
+                  Official title:{" "}
+                  <span className="text-[#171917]">{citingDocMeta.title}</span>
+                </div>
+              )}
               {previousWording && (
                 <div
                   data-testid="provision-previous-wording"
@@ -1217,8 +1237,10 @@ export default async function TopicDetailPage({
                           {row.valuePlain}
                         </td>
                         <td className="font-mono text-xs">
-                          <span className="text-[#5b5e56]">{row.docTitle}</span>
-                          {" · "}
+                          <span className="text-[#5b5e56]">
+                            {row.docTitle}, {row.docDate}
+                          </span>
+                          {", "}
                           <a
                             href={row.pageLink}
                             target="_blank"
@@ -1426,7 +1448,7 @@ export default async function TopicDetailPage({
                               {row.valuePlain}
                             </td>
                             <td className="font-mono text-xs">
-                              {row.docTitle} ·{" "}
+                              {row.docTitle}, {row.docDate},{" "}
                               <a
                                 href={row.pageLink}
                                 target="_blank"

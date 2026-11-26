@@ -314,12 +314,12 @@ def test_home_page_far_story_excerpts_pass_verbatim_fidelity() -> None:
             "given below.",
         ),
         (
-            "Step 2 (2007 RMP 2015 4.1.1)",
+            "Step 2 (2007 RMP 2015 Table 10)",
             "rmp2015-zr",
-            "chp_4__cl_4.1__cl_4.1.1",
+            "chp_4__cl_4.1__cl_4.1.3__tbl_10",
             "rmp2015-zr",
             28,
-            "The areas of the city which have predominantly residential land use pattern",
+            "Table 10: FAR and Ground Coverage in Residential (Main)",
             None,
         ),
         (
@@ -386,6 +386,25 @@ def test_home_page_far_story_excerpts_pass_verbatim_fidelity() -> None:
         ]
         assert not missing, (
             f"{step_label} ({page_doc_id} p.{page_num}) has words not on source page: {missing}"
+        )
+
+    if built_html_txt is not None:
+        # Part 3.3 & 3.4: verify 2017 and 2007 attributions and notes on built home page
+        assert (
+            "Building Bye-laws 2003, bye-law 1.4 (inserted by notification UDD 14 TTP 2017, 28 October 2017)"
+            in built_html_txt
+        )
+        assert (
+            "This notification also issued the Model Building Bye-laws, which do not otherwise apply in Bengaluru."
+            in built_html_txt
+        )
+        assert "/j/in-ka-bengaluru/documents/bbl-2003#node-part_I__sec_1.0__cl_1.4" in built_html_txt
+        assert "/j/in-ka-bengaluru/documents/ka-model-bbl-2017#node-chp_1__item_3" in built_html_txt
+        assert (
+            "Shown from Table 10&#x27;s own caption and column headings on p. 28"
+            in built_html_txt
+            or "Shown from Table 10's own caption and column headings on p. 28"
+            in built_html_txt
         )
 
 

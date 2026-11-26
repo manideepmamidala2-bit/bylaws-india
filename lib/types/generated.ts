@@ -108,6 +108,7 @@ export interface ContestedStatusConfig {
 export interface DocumentConfig {
   id: string;
   title: string;
+  plain_title?: string | null;
   issuing_authority: string;
   doc_type?:
     | "act"
@@ -325,6 +326,7 @@ export interface DocumentMetadata {
   schema_version: "1.4";
   doc_id: string;
   title: string;
+  plain_title?: string | null;
   issuing_authority: string;
   doc_type?:
     | "act"

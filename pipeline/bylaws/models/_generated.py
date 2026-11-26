@@ -110,6 +110,7 @@ class DocumentConfig(BaseModel):
     )
     id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     title: constr(min_length=1)
+    plain_title: str | None = None
     issuing_authority: constr(min_length=1)
     doc_type: (
         Literal[
@@ -433,6 +434,7 @@ class DocumentMetadata(BaseModel):
     schema_version: Literal["1.4"]
     doc_id: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     title: constr(min_length=1)
+    plain_title: str | None = None
     issuing_authority: constr(min_length=1)
     doc_type: (
         Literal[

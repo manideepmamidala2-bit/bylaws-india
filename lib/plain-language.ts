@@ -658,9 +658,17 @@ function toTitleCaseIfScreaming(title: string): string {
 }
 
 export function formatPlainDocumentTitle(
-  doc: Pick<DocumentMetadata, "doc_id" | "title"> | null | undefined,
+  doc:
+    | (Pick<DocumentMetadata, "doc_id" | "title"> & {
+        plain_title?: string | null;
+      })
+    | null
+    | undefined,
   fallbackId?: string
 ): string {
+  if (doc?.plain_title && doc.plain_title.trim().length > 0) {
+    return doc.plain_title.trim();
+  }
   if (doc?.title) {
     return toTitleCaseIfScreaming(doc.title.trim());
   }
@@ -772,10 +780,15 @@ export function formatMonthYearPlain(isoDate: string | null | undefined): string
 }
 
 export function formatReplacedByPlain(
-  doc: Pick<
-    DocumentMetadata,
-    "doc_id" | "title" | "effective_from" | "notified_date"
-  > | null | undefined,
+  doc:
+    | (Pick<
+        DocumentMetadata,
+        "doc_id" | "title" | "effective_from" | "notified_date"
+      > & {
+        plain_title?: string | null;
+      })
+    | null
+    | undefined,
   fallbackDate?: string | null
 ): string {
   const plainName = formatPlainDocumentTitle(doc);

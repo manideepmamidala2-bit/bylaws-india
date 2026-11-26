@@ -300,6 +300,8 @@ def _acquire_single_document(
         meta_payload["retrieval"] = retrieval_record
     if doc.doc_type is not None:
         meta_payload["doc_type"] = doc.doc_type
+    if getattr(doc, "plain_title", None):
+        meta_payload["plain_title"] = doc.plain_title
     if getattr(doc, "instrument_type", None) is not None:
         meta_payload["instrument_type"] = doc.instrument_type
     if getattr(doc, "summary_by_site", None) is not None:
@@ -378,6 +380,8 @@ def _build_unacquired_document_payload(
     }
     if doc.doc_type is not None:
         payload["doc_type"] = doc.doc_type
+    if getattr(doc, "plain_title", None):
+        payload["plain_title"] = doc.plain_title
     if getattr(doc, "instrument_type", None) is not None:
         payload["instrument_type"] = doc.instrument_type
     if getattr(doc, "summary_by_site", None) is not None:
@@ -471,6 +475,8 @@ def sync_raw_metadata_from_config(
             updated["retrieval"] = doc.retrieval.model_dump(mode="json")
         if doc.doc_type is not None:
             updated["doc_type"] = doc.doc_type
+        if getattr(doc, "plain_title", None):
+            updated["plain_title"] = doc.plain_title
         if getattr(doc, "instrument_type", None) is not None:
             updated["instrument_type"] = doc.instrument_type
         if getattr(doc, "summary_by_site", None) is not None:

@@ -1463,6 +1463,9 @@ def _to_title_case_if_screaming(title: str) -> str:
 def _format_short_doc_label(doc_obj: Any, fallback_id: str) -> str:
     if doc_obj is None:
         return fallback_id
+    plain_title = str(getattr(doc_obj, "plain_title", "") or "").strip()
+    if plain_title:
+        return plain_title
     title = str(getattr(doc_obj, "title", "") or fallback_id).strip()
     return _to_title_case_if_screaming(title)
 

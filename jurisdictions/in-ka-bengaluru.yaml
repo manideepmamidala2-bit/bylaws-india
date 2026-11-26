@@ -124,6 +124,7 @@ documents:
   instrument_type: instrument
   summary_by_site: Principal municipal building bye-laws for Bengaluru (plan sanction,
     licences, construction norms, occupancy certificates, and deviations).
+  plain_title: Building Bye-laws 2003
 - id: ka-model-bbl-2017
   title: Karnataka Municipalities Model Building Bye-Laws, 2017
   issuing_authority: URBAN DEVELOPMENT SECRETARIAT, Government of Karnataka
@@ -236,6 +237,7 @@ documents:
     from the 2017 text alone; however, the May 2026 City Corporation Building (Amendment)
     Bye-laws expressly amend the 2003 Building Bye-laws, confirming the 2003 Bye-laws
     remained the operative code.
+  plain_title: Notification UDD 14 TTP 2017 (Model Building Bye-laws)
 - id: rmp2015-zr
   title: Revised Master Plan 2015 BANGALORE 2007 Volume – III ZONING OF LANDUSE AND
     REGULATIONS
@@ -291,6 +293,7 @@ documents:
   instrument_type: instrument
   summary_by_site: Master Plan 2015 Zoning Regulations governing land-use zones, ground
     coverage, Floor Area Ratio (FAR), setbacks, height, and parking across Bengaluru.
+  plain_title: Master Plan Zoning Regulations 2007
 - id: rmp2015-zr-amend-2009-03
   title: Notification No.UDD 93 MNJ 2008 dated 2-3-2009 (4.10 Traffic and Transportation
     (T&T) Zone Uses Amendment)
@@ -345,6 +348,7 @@ documents:
   summary_by_site: March 2009 zoning amendment adding metro station 150 m buffer FAR
     (3.16(ix)) and revising Traffic and Transportation (T&T) zone rules and Table
     19.
+  plain_title: Zoning amendment (Traffic and Transportation)
 - id: rmp2015-zr-amend-2015-03
   title: 'URBAN DEVELOPMENT SECRETARIAT NOTIFICATION No: UDD 105 MNJ 2008, Bangalore,
     Dated:20/03/2015'
@@ -400,6 +404,7 @@ documents:
   instrument_type: instrument
   summary_by_site: March 2015 zoning amendment restricting commercial uses on roads
     under 40 ft (12 m) in Residential zones and updating Table 1, 4.1.2, and 4.2.2.
+  plain_title: Zoning amendment (Commercial uses in residential zones)
 - id: rmp2015-zr-amend-2018-09
   title: Zoning Regulations of Bengaluru of the Revised Master Plan-2015 (Amendment)
     Regulations 2018
@@ -455,6 +460,7 @@ documents:
   instrument_type: instrument
   summary_by_site: September 2018 zoning amendment inserting Regulation 3.4(vi) Impact
     Zone Premium FAR (+1.0 FAR on roads >= 12 m) and omitting Regulation 3.16(ix).
+  plain_title: Zoning amendment (Impact Zone FAR)
 - id: rmp2015-zr-amend-2019-06
   title: Zoning Regulations of Bengaluru of the Revised Master Plan-2015 (Amendment)
     Regulations, 2019
@@ -512,6 +518,7 @@ documents:
   summary_by_site: June 2019 zoning amendment updating apartment/non-residential definitions,
     FAR exclusions (3.4), building height exemptions (3.4-A), balconies, tree planting,
     residential subdivision earmarking (55%), and hotel/office parking (Table 23).
+  plain_title: Zoning amendment (Development Plan and Parking)
 - id: rmp2015-zr-comp-2024-10-kn
   title: Revising the amendments in the regulations in BBMP revised Mahayojane 2015
     (Kannada Compilation)
@@ -564,6 +571,7 @@ documents:
     Regulations published by BBMP as a finding aid (not structured; English instruments
     used).
   structured: false
+  plain_title: RMP 2015 Zoning Regulations (2024 Kannada compilation)
 - id: rmp2015-zr-amend-2025-02
   title: GOVERNMENT OF KARNATAKA No. UDD 78 MNJ 2024 (E) Dated:21.02.2025 NOTIFICATION-1
     & NOTIFICATION-II (Premium F.A.R Amendment to Zonal Regulations of Revised Master
@@ -621,6 +629,7 @@ documents:
   instrument_type: instrument
   summary_by_site: February 2025 Premium FAR notification (withdrawn and replaced
     with effect from 25-02-2025 by the April 2025 final notification).
+  plain_title: Draft zoning amendment (Premium FAR)
 - id: rmp2015-zr-amend-2026-01
   title: 'GOVERNMENT OF KARNATAKA No. UDD 235 MNJ 2025(E) date: 05.01.2026 NOTIFICATION
     (Amendment to Zonal Regulations of Revised Master Plan-2015 of Bengaluru and Greater
@@ -680,6 +689,7 @@ documents:
   summary_by_site: January 2026 final notification replacing Setbacks Table 8 (up
     to 12 m / 15 m height) and amending basement, car-lift/ramp, residential height/apartment,
     mutation corridor, and industrial (Table 16) rules.
+  plain_title: Zoning amendment
 - id: rmp2015-zr-amend-2025-07
   title: Gazette Notification (July 2025) - Bengaluru Master Plan 2015 Zoning Regulations
     Amendments
@@ -711,6 +721,7 @@ documents:
   instrument_type: instrument
   summary_by_site: July 2025 zoning amendment notification listed on OpenCity that
     could not be obtained from official or archival sources.
+  plain_title: Zoning amendment (July 2025)
 - id: udd-1107-mnu-2018-draft
   title: Draft Notification No. UDD 1107 MNU 2015 — Punishments under Section 321-B
     of K.M.C. Act, 1976 and Building Bye-laws, 2003
@@ -768,6 +779,7 @@ documents:
   instrument_type: instrument
   summary_by_site: November 2018 draft notification proposing penalties under Section
     321-B of the KMC Act, 1976 (draft only, not in force).
+  plain_title: Draft Building Bye-laws amendment (Section 321-B)
 - id: rmp2015-pd-index
   title: BDA Revised Master Plan 2015 — Planning Districts Index Map (47 Planning
     Districts)
@@ -818,6 +830,7 @@ documents:
   instrument_type: map
   summary_by_site: Official BDA Revised Master Plan 2015 index map of the 47 Planning
     Districts.
+  plain_title: RMP 2015 Planning Districts Index Map
 - id: bccc-bbl-amend-2026-05
   title: Bengaluru Central City Corporation — Bengaluru City Corporation Building
     (Amendment) Bye-laws, 2026 (Final Gazette Notification)
@@ -881,6 +894,7 @@ documents:
   summary_by_site: May 2026 final Building (Amendment) Bye-laws for Bengaluru Central
     City Corporation omitting ground rent (3.8–3.10) and substituting deviation compounding
     rules (6.0(i) and Tables 2A–2D).
+  plain_title: Bengaluru Central Building (Amendment) Bye-laws 2026
 - id: bccc-bbl-amend-2026-04-draft
   title: Bengaluru Central City Corporation — Draft Bengaluru City Corporation Building
     (Amendment) Bye-laws, 2026 (01-04-2026)
@@ -941,6 +955,7 @@ documents:
   instrument_type: instrument
   summary_by_site: April 2026 draft Building (Amendment) Bye-laws for Bengaluru Central
     City Corporation (replaced by the 14 May 2026 final notification).
+  plain_title: Draft Bengaluru Central Building (Amendment) Bye-laws 2026
 - id: bncc-bbl-amend-2026-05
   title: Bengaluru North City Corporation — Bengaluru City Corporation Building (Amendment)
     Bye-laws, 2026 (Final Gazette Notification)
@@ -1004,6 +1019,7 @@ documents:
   summary_by_site: May 2026 final Building (Amendment) Bye-laws for Bengaluru North
     City Corporation omitting ground rent (3.8–3.10) and substituting deviation compounding
     rules (6.0(i) and Tables 2A–2D).
+  plain_title: Bengaluru North Building (Amendment) Bye-laws 2026
 - id: bncc-bbl-amend-2026-04-draft
   title: Bengaluru North City Corporation — Draft Bengaluru City Corporation Building
     (Amendment) Bye-laws, 2026 (01-04-2026)
@@ -1064,6 +1080,7 @@ documents:
   instrument_type: instrument
   summary_by_site: April 2026 draft Building (Amendment) Bye-laws for Bengaluru North
     City Corporation (replaced by the 14 May 2026 final notification).
+  plain_title: Draft Bengaluru North Building (Amendment) Bye-laws 2026
 - id: bscc-bbl-amend-2026-05
   title: Bengaluru South City Corporation — Bengaluru City Corporation Building (Amendment)
     Bye-laws, 2026 (Final Gazette Notification)
@@ -1127,6 +1144,7 @@ documents:
   summary_by_site: May 2026 final Building (Amendment) Bye-laws for Bengaluru South
     City Corporation omitting ground rent (3.8–3.10) and substituting deviation compounding
     rules (6.0(i) and Tables 2A–2D).
+  plain_title: Bengaluru South Building (Amendment) Bye-laws 2026
 - id: bscc-bbl-amend-2026-04-draft
   title: Bengaluru South City Corporation — Draft Bengaluru City Corporation Building
     (Amendment) Bye-laws, 2026 (01-04-2026)
@@ -1187,6 +1205,7 @@ documents:
   instrument_type: instrument
   summary_by_site: April 2026 draft Building (Amendment) Bye-laws for Bengaluru South
     City Corporation (replaced by the 14 May 2026 final notification).
+  plain_title: Draft Bengaluru South Building (Amendment) Bye-laws 2026
 - id: becc-bbl-amend-2026-05
   title: Bengaluru East City Corporation — Bengaluru City Corporation Building (Amendment)
     Bye-laws, 2026 (Final Gazette Notification)
@@ -1250,6 +1269,7 @@ documents:
   summary_by_site: May 2026 final Building (Amendment) Bye-laws for Bengaluru East
     City Corporation omitting ground rent (3.8–3.10) and substituting deviation compounding
     rules (6.0(i) and Tables 2A–2D).
+  plain_title: Bengaluru East Building (Amendment) Bye-laws 2026
 - id: becc-bbl-amend-2026-04-draft
   title: Bengaluru East City Corporation — Draft Bengaluru City Corporation Building
     (Amendment) Bye-laws, 2026 (01-04-2026)
@@ -1310,6 +1330,7 @@ documents:
   instrument_type: instrument
   summary_by_site: April 2026 draft Building (Amendment) Bye-laws for Bengaluru East
     City Corporation (replaced by the 14 May 2026 final notification).
+  plain_title: Draft Bengaluru East Building (Amendment) Bye-laws 2026
 - id: bwcc-bbl-amend-2026-05
   title: Bengaluru West City Corporation — Bengaluru City Corporation Building (Amendment)
     Bye-laws, 2026 (Final Gazette Notification)
@@ -1373,6 +1394,7 @@ documents:
   summary_by_site: May 2026 final Building (Amendment) Bye-laws for Bengaluru West
     City Corporation omitting ground rent (3.8–3.10) and substituting deviation compounding
     rules (6.0(i) and Tables 2A–2D).
+  plain_title: Bengaluru West Building (Amendment) Bye-laws 2026
 - id: bwcc-bbl-amend-2026-04-draft
   title: Bengaluru West City Corporation — Draft Bengaluru City Corporation Building
     (Amendment) Bye-laws, 2026 (01-04-2026)
@@ -1433,6 +1455,7 @@ documents:
   instrument_type: instrument
   summary_by_site: April 2026 draft Building (Amendment) Bye-laws for Bengaluru West
     City Corporation (replaced by the 14 May 2026 final notification).
+  plain_title: Draft Bengaluru West Building (Amendment) Bye-laws 2026
 - id: rmp2015-zr-amend-2025-04
   title: 'Notification No. UDD 78 MNJ 2024 (E) (02-04-2025) — Insertion of Chapter
     11: Premium F.A.R Granted by Levy of Premium Charges (Final Notification)'
@@ -1490,6 +1513,7 @@ documents:
   instrument_type: instrument
   summary_by_site: April 2025 final notification inserting Chapter 11 (Premium FAR
     of 20%, 40%, or 60% of base FAR by road width).
+  plain_title: Zoning amendment (Premium FAR)
 - id: rmp2015-zr-amend-2025-10
   title: Notification No. UDD 468 MNJ 2025(E) (15-10-2025) — Revised Master Plan 2015
     Zonal Regulations Amendment (Storm Water Drain / Nala Buffer Zones)
@@ -1544,6 +1568,7 @@ documents:
   instrument_type: instrument
   summary_by_site: October 2025 final notification setting storm water drain (nala)
     buffers (15 m primary, 10 m secondary, 5 m tertiary) and lake buffer rules.
+  plain_title: Zoning amendment (Drain buffer zones)
 - id: gbga-2024
   title: The Greater Bengaluru Governance Act, 2024 (Karnataka Act No. 36 of 2025)
     — Building & Bye-law Provisions (Chapter XVII & Chapter XXII)
@@ -1600,6 +1625,7 @@ documents:
   summary_by_site: The Greater Bengaluru Governance Act, 2024 (Karnataka Act 36 of
     2025) establishing the Greater Bengaluru Authority and the City Corporations;
     Chapters XVII and XXII govern building regulation and bye-laws.
+  plain_title: Greater Bengaluru Governance Act 2024
 - id: udd-200-mnu-2025-khata
   title: Government Order No. UDD 200 MNU 2025 (25-07-2025) — Regulation of Issuance
     of A and B Khata and Building Plan Approvals in Greater Bengaluru Area
@@ -1654,6 +1680,7 @@ documents:
   instrument_type: order
   summary_by_site: July 2025 Government Order governing A and B Khata issuance and
     building plan approvals in the Greater Bengaluru Area.
+  plain_title: Khata and Building Plan Approval Order
 - id: ktcda-amend-bill-2025
   title: The Karnataka Tank Conservation and Development Authority (Amendment) Bill,
     2025 (L.A. Bill No. 33 of 2025 — Graded Lake Buffer Zones)
@@ -1708,6 +1735,7 @@ documents:
   instrument_type: bill
   summary_by_site: Legislative Assembly Bill No. 33 of 2025 proposing graded lake
     buffer zones under the KTCDA Act, 2014 (bill only; enactment not confirmed).
+  plain_title: Tank Conservation and Development Authority (Amendment) Bill 2025
 amendment_links:
 - amending_clause: ka-model-bbl-2017:chp_1__item_3
   target_clause: bbl-2003:part_I__sec_1.0__cl_1.3
@@ -2092,16 +2120,16 @@ amendment_links:
   effective_date: '2018-09-29'
   confidence: high
   verification: machine_checked
-  note: Notification No. UDD 112 MNJ 2015 dated 29-09-2018 Clause 2(B) omits Item no (ix)
-    under Regulation 3.16 (General Notes).
+  note: Notification No. UDD 112 MNJ 2015 dated 29-09-2018 Clause 2(B) omits Item
+    no (ix) under Regulation 3.16 (General Notes).
 - amending_clause: rmp2015-zr-amend-2018-09:app_IX
   target_clause: rmp2015-zr:chp_3__cl_3.16A
   action: omit
   effective_date: '2018-09-29'
   confidence: high
   verification: machine_checked
-  note: Notification No. UDD 112 MNJ 2015 dated 29-09-2018 Clause 2(B) omits Item no (ix)
-    under Regulation 3.16 (General Notes).
+  note: Notification No. UDD 112 MNJ 2015 dated 29-09-2018 Clause 2(B) omits Item
+    no (ix) under Regulation 3.16 (General Notes).
 - amending_clause: rmp2015-zr-amend-2019-06:item_2_3
   target_clause: rmp2015-zr:chp_3__cl_3.4
   action: substitute
@@ -2119,14 +2147,14 @@ amendment_links:
   effective_date: '2019-06-19'
   confidence: high
   verification: machine_checked
-  replacement_text: '“iii. A portico / porch may be permitted in the ground floor
-    within the setback. No access is permitted to the top of portico for using it
-    as a sit out. The size of cantilever portico is restricted to 3.0m X 4.50m. In
-    case of high rise buildings cantilever portico is allowed as per fire norms. The
-    portico when allowed shall have a clear open space of 1m from the boundary of
-    the property and in case of high rise buildings such portico should have a minimum
-    clear height of 5.5m and a vehicle passage width of 6m, if such portico or porch
-    projects into the mandatory driveway of 6m.”; and'
+  replacement_text: “iii. A portico / porch may be permitted in the ground floor within
+    the setback. No access is permitted to the top of portico for using it as a sit
+    out. The size of cantilever portico is restricted to 3.0m X 4.50m. In case of
+    high rise buildings cantilever portico is allowed as per fire norms. The portico
+    when allowed shall have a clear open space of 1m from the boundary of the property
+    and in case of high rise buildings such portico should have a minimum clear height
+    of 5.5m and a vehicle passage width of 6m, if such portico or porch projects into
+    the mandatory driveway of 6m.”; and
   note: Notification No. UDD 255 MNJ 2018 dated 19-06-2019 Clause 3(5) substitutes
     Regulation 3.11(iii) (Cantilever portico / porch in ground floor setback).
 - amending_clause: rmp2015-zr-amend-2019-06:item_5__item_iv
@@ -2135,10 +2163,10 @@ amendment_links:
   effective_date: '2019-06-19'
   confidence: high
   verification: machine_checked
-  replacement_text: 'a. No balcony is allowed in the ground floor. b. Open Balcony
+  replacement_text: a. No balcony is allowed in the ground floor. b. Open Balcony
     projection should not exceed 1/3*4 of the setback on that side subject to a maximum
     of 1.20m in the first floor and maximum 1.75m beyond second floor whichever is
-    less. c. Balconies are not allowed in commercial Buildings, beyond setbacks.”'
+    less. c. Balconies are not allowed in commercial Buildings, beyond setbacks.”
   note: Notification No. UDD 255 MNJ 2018 dated 19-06-2019 Clause 3(5) substitutes
     Regulation 3.11(iv) (Balcony projections).
 - amending_clause: rmp2015-zr-amend-2019-06:item_6
@@ -2147,9 +2175,9 @@ amendment_links:
   effective_date: '2019-06-19'
   confidence: high
   verification: machine_checked
-  replacement_text: '“(ii) For all the buildings with height of 15m and above, NOC
+  replacement_text: “(ii) For all the buildings with height of 15m and above, NOC
     from Fire and Emergency Services Department in addition to NOC from Karnataka
-    State Pollution Control Board shall be furnished.”'
+    State Pollution Control Board shall be furnished.”
   note: Notification No. UDD 255 MNJ 2018 dated 19-06-2019 Clause 3(6) substitutes
     Regulation 3.12(ii) (Fire and Emergency Services NOC threshold lowered to 15 m
     and above).
@@ -2159,11 +2187,11 @@ amendment_links:
   effective_date: '2019-06-19'
   confidence: high
   verification: machine_checked
-  replacement_text: '“vi. Mezzanine floor is permitted between any 2 floors in residential
+  replacement_text: “vi. Mezzanine floor is permitted between any 2 floors in residential
     buildings; the area of which is considered for calculation of FAR, subject to
     a minimum area of 9.5 sqm and maximum of 1/3rd of the area of the respective floor.
     The minimum height of Mezzanine floor shall be 2.75m, and shall not be used as
-    kitchen.”;'
+    kitchen.”;
   note: Notification No. UDD 255 MNJ 2018 dated 19-06-2019 Clause 3(7)(i) substitutes
     Regulation 3.16(vi) (Mezzanine floor in residential buildings).
 - amending_clause: rmp2015-zr-amend-2019-06:cl_4
@@ -2322,9 +2350,8 @@ amendment_links:
   effective_date: '2026-01-05'
   confidence: high
   verification: machine_checked
-  replacement_text: '“(b) if the road width is less than 9.0 m., then the maximum
-    height is restricted to 15.0m (including stilt floor) irrespective of the FAR
-    permissible”.'
+  replacement_text: “(b) if the road width is less than 9.0 m., then the maximum height
+    is restricted to 15.0m (including stilt floor) irrespective of the FAR permissible”.
   note: Notification No. UDD 235 MNJ 2025(E) dated 05-01-2026 Clause (3)(a)(i) substitutes
     Clause (b) under Regulation 4.1.2 after Table 10 (Residential Main height limit
     on roads less than 9.0 m).

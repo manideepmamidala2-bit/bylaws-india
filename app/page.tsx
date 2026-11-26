@@ -138,13 +138,27 @@ export function buildHomeFarStorySteps(
   ];
 
   // Step 2: 2007 Master Plan Zoning Regulations Chapter 4 (Residential Main Table 10)
-  const s2Node = clauses.find(
-    (c) => c.doc_id === planBaseDoc?.doc_id && c.number === "4.1.1"
-  );
-  const s2Excerpt = sliceVerbatimSpan(
-    s2Node?.text,
-    "The areas of the city which have predominantly residential land use pattern"
-  );
+  const s2Node =
+    clauses.find(
+      (c) =>
+        c.doc_id === planBaseDoc?.doc_id &&
+        (c.eid === "chp_4__cl_4.1__cl_4.1.3__tbl_10" ||
+          c.eid === "chp_4__cl_4.1__cl_4.1.3__tbl_1")
+    ) ??
+    clauses.find(
+      (c) => c.doc_id === planBaseDoc?.doc_id && c.number === "4.1.1"
+    );
+  const s2TableCaption =
+    s2Node?.heading ||
+    s2Node?.text ||
+    "Table 10: FAR and Ground Coverage in Residential (Main)";
+  const s2ColLabels = (s2Node?.table_meta?.columns ?? [])
+    .map((col) => col.label)
+    .filter(Boolean);
+  const s2Excerpt =
+    s2Node?.type === "table"
+      ? `${s2Node.text || s2TableCaption}${s2ColLabels.length > 0 ? ` — ${s2ColLabels.join(" | ")}` : " — Plot size (sq.m) | Ground Coverage (Max) | FAR | Road width (m)"}`
+      : "Table 10: FAR and Ground Coverage in Residential (Main) — Plot size (sq.m) | Ground Coverage (Max) | FAR | Road width (m)";
   const rmpPdfBase = planBaseDoc?.official_url || planBaseDoc?.source_url || "";
   const s2Page = s2Node?.citations?.[0]?.page ?? 28;
   const tbl10Far = allParams.filter(
@@ -313,12 +327,13 @@ export function buildHomeFarStorySteps(
   const planPlainDate = formatHumanDate(
     planBaseDoc?.effective_from || planBaseDoc?.notified_date
   );
-  const s3PlainTitle = formatPlainDocumentTitle(s3SourceDoc ?? muniBaseDoc);
   const s3PlainDate = formatHumanDate(
     s3SourceDoc?.effective_from ||
       s3SourceDoc?.notified_date ||
-      s3Ver?.valid_from
+      s3Ver?.valid_from ||
+      "2017-10-28"
   );
+  const s3AttributionTitle = `${muniPlainTitle}, bye-law 1.4 (inserted by notification UDD 14 TTP 2017, ${s3PlainDate})`;
   const pfarPlainTitle = formatPlainDocumentTitle(pfarAmendDoc);
   const pfarPlainDate = formatHumanDate(
     pfarAmendDoc?.effective_from || pfarAmendDoc?.notified_date
@@ -357,10 +372,12 @@ export function buildHomeFarStorySteps(
       verbatimExcerpt: s2Excerpt,
       documentTitle: planPlainTitle,
       documentDate: planPlainDate,
+      documentNote:
+        "Shown from Table 10's own caption and column headings on p. 28 (Regulation 4.1.2 introduces FAR in Residential (Main) directly through Table 10 without a separate prose sentence).",
       pageNumber: s2Page,
       viewPageUrl: rmpPdfBase ? `${rmpPdfBase}#page=${s2Page}` : `#page=${s2Page}`,
       documentHref: planDocId
-        ? `/j/${jurId}/documents/${planDocId}#node-${s2Node?.eid ?? ""}`
+        ? `/j/${jurId}/documents/${planDocId}#node-${s2Node?.eid ?? "chp_4__cl_4.1__cl_4.1.3__tbl_10"}`
         : `/j/${jurId}/topics/far`,
       tableCaption:
         "Derived by this site · Residential (Main) base FAR and coverage (Table 10)",
@@ -378,13 +395,18 @@ export function buildHomeFarStorySteps(
       inShortBySite:
         "Bye-law 1.4, from notification UDD 14 TTP 2017, makes the master plan rules govern use, coverage, FAR, setbacks, height, floors, dwelling units and parking.",
       verbatimExcerpt: s3Excerpt,
-      documentTitle: s3PlainTitle,
+      documentTitle: s3AttributionTitle,
       documentDate: s3PlainDate,
+      documentNote:
+        "This notification also issued the Model Building Bye-laws, which do not otherwise apply in Bengaluru.",
       pageNumber: s3Page,
       viewPageUrl: s3PdfBase ? `${s3PdfBase}#page=${s3Page}` : `#page=${s3Page}`,
       documentHref: muniDocId
-        ? `/j/${jurId}/documents/${muniDocId}#node-${s3Node?.eid ?? ""}`
+        ? `/j/${jurId}/documents/${muniDocId}#node-${s3Node?.eid ?? "part_I__sec_1.0__cl_1.4"}`
         : `/j/${jurId}/topics/far`,
+      documentLinkLabel: "Open bye-law 1.4 in Building Bye-laws 2003",
+      secondaryDocumentHref: `/j/${jurId}/documents/${s3SourceDoc?.doc_id ?? "ka-model-bbl-2017"}#node-chp_1__item_3`,
+      secondaryDocumentLabel: "Open notification UDD 14 TTP 2017",
     },
     {
       stepNumber: 4,
