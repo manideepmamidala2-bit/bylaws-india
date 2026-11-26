@@ -713,6 +713,12 @@ def verify_jurisdiction_text_fidelity(
             last_v = vers[-1] if vers else c_node
             s_doc = str(last_v.get("source_doc") or d_id)
             v_cits = last_v.get("citations") or c_node.get("citations") or []
+            am_cid = str(c_rec.get("amending_clause_id") or "")
+            orig_txt = str(c_rec.get("original_text") or "").strip()
+            if am_cid and am_cid in by_cid and s_doc == d_id and orig_txt and c_txt != orig_txt:
+                am_doc_id, am_node = by_cid[am_cid]
+                s_doc = am_doc_id
+                v_cits = am_node.get("citations") or v_cits
             c_pages = [int(c["page"]) for c in v_cits if isinstance(c.get("page"), int)]
             doc_page_map = _get_doc_page_tokens(s_doc)
             if not c_pages or any(p not in doc_page_map for p in c_pages):
