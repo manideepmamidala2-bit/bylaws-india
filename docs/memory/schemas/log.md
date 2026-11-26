@@ -3,6 +3,7 @@
 
 ## 2026-11-26
 - **Update** [data-contracts](/schemas/data-contracts.md) — one-city-one-truth (jqph)
+- **Update** [data-contracts](/schemas/data-contracts.md) — Unify Greater Bengaluru and 5 City Corporation views into one dataset build with shared-content and same-build CI checks, propagate amending-instrument page citations, enforce single register-driven instrument names and dates, record applicability_rules for 3.1(ii)-(iii), and display corporation-specific May 2026 wording for bye-law 6.0(i). (mspg)
 - **Update** [data-contracts](/schemas/data-contracts.md) — Enforce verbatim provision text fidelity in CI, repair structure depth/uniqueness/date-tokens, add explicit instrument types and quoted 2017/GBGA relationships, and deliver a plain-language progressive-disclosure site (ucy1)
 
 ## 2026-11-23
