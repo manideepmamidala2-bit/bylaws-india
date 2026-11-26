@@ -1,0 +1,378 @@
+{
+  "schema_version": "1.4",
+  "jurisdiction": "xx-test-fixture",
+  "generated": {
+    "pipeline_version": "0.1.0",
+    "generated_at": "2026-11-23T00:00:00Z"
+  },
+  "records": [
+    {
+      "parameter_id": "xx-test-fixture:param_0001",
+      "parameter": "setback_front_min_m",
+      "value": 1.5,
+      "unit": "m",
+      "value_text": "1.5",
+      "conditions": {
+        "plot_area_m2": {
+          "min": null,
+          "max": 240.0,
+          "min_inclusive": true,
+          "max_inclusive": true
+        },
+        "plot_depth_m": null,
+        "plot_width_m": null,
+        "road_width_m": null,
+        "building_height_m": null,
+        "zone": null,
+        "area_class": null,
+        "use": null,
+        "jurisdiction": null,
+        "unexpressed_conditions": [
+          "Corner plots in Z1 require an additional 0.5 m splay."
+        ],
+        "dependent": true
+      },
+      "valid_from": "2020-02-01",
+      "valid_to": null,
+      "legal_status": "in_force",
+      "source": {
+        "doc_id": "fixture-base-2020",
+        "eid": "chp_II__cl_2.1__tbl_2.1__row_1",
+        "clause_id": "fixture-base-2020:chp_II__cl_2.1__tbl_2.1__row_1",
+        "table_eid": "chp_II__cl_2.1__tbl_2.1",
+        "table_id": "Table 2.1: Minimum Setbacks by Plot Size",
+        "row_index": 0,
+        "col_index": 2,
+        "row_header": "Z1* | Up to 240",
+        "column_header": "Front Setback - Minimum",
+        "cell_text": "1.5",
+        "footnote_markers": [
+          "*"
+        ],
+        "footnotes_text": [
+          "Corner plots in Z1 require an additional 0.5 m splay."
+        ],
+        "page": 1,
+        "bbox": [
+          0.0528,
+          0.2445,
+          0.9476,
+          0.3305
+        ],
+        "page_link": "https://example.org/gazette/2020-01-15.pdf#page=1",
+        "official_url": "https://example.org/gazette/2020-01-15.pdf",
+        "archive_url": null
+      },
+      "derived": true,
+      "method": "table_rule_parser",
+      "confidence": 0.95,
+      "verification": "machine_checked",
+      "note": null
+    },
+    {
+      "parameter_id": "xx-test-fixture:param_0002",
+      "parameter": "far_base_max",
+      "value": 1.75,
+      "unit": "ratio",
+      "value_text": "1.75",
+      "conditions": {
+        "plot_area_m2": {
+          "min": null,
+          "max": 240.0,
+          "min_inclusive": true,
+          "max_inclusive": true
+        },
+        "plot_depth_m": null,
+        "plot_width_m": null,
+        "road_width_m": null,
+        "building_height_m": null,
+        "zone": null,
+        "area_class": null,
+        "use": null,
+        "jurisdiction": null,
+        "unexpressed_conditions": [
+          "Corner plots in Z1 require an additional 0.5 m splay."
+        ],
+        "dependent": true
+      },
+      "valid_from": "2020-02-01",
+      "valid_to": null,
+      "legal_status": "in_force",
+      "source": {
+        "doc_id": "fixture-base-2020",
+        "eid": "chp_II__cl_2.1__tbl_2.1__row_1",
+        "clause_id": "fixture-base-2020:chp_II__cl_2.1__tbl_2.1__row_1",
+        "table_eid": "chp_II__cl_2.1__tbl_2.1",
+        "table_id": "Table 2.1: Minimum Setbacks by Plot Size",
+        "row_index": 0,
+        "col_index": 3,
+        "row_header": "Z1* | Up to 240",
+        "column_header": "Max FAR - Permissible",
+        "cell_text": "1.75",
+        "footnote_markers": [
+          "*"
+        ],
+        "footnotes_text": [
+          "Corner plots in Z1 require an additional 0.5 m splay."
+        ],
+        "page": 1,
+        "bbox": [
+          0.0528,
+          0.2445,
+          0.9476,
+          0.3305
+        ],
+        "page_link": "https://example.org/gazette/2020-01-15.pdf#page=1",
+        "official_url": "https://example.org/gazette/2020-01-15.pdf",
+        "archive_url": null
+      },
+      "derived": true,
+      "method": "table_rule_parser",
+      "confidence": 0.95,
+      "verification": "machine_checked",
+      "note": null
+    },
+    {
+      "parameter_id": "xx-test-fixture:param_0003",
+      "parameter": "setback_front_min_m",
+      "value": 3.0,
+      "unit": "m",
+      "value_text": "3.0",
+      "conditions": {
+        "plot_area_m2": {
+          "min": 240.0,
+          "max": null,
+          "min_inclusive": false,
+          "max_inclusive": true
+        },
+        "plot_depth_m": null,
+        "plot_width_m": null,
+        "road_width_m": null,
+        "building_height_m": null,
+        "zone": null,
+        "area_class": null,
+        "use": null,
+        "jurisdiction": null,
+        "unexpressed_conditions": [
+          "Corner plots in Z1 require an additional 0.5 m splay."
+        ],
+        "dependent": true
+      },
+      "valid_from": "2020-02-01",
+      "valid_to": null,
+      "legal_status": "in_force",
+      "source": {
+        "doc_id": "fixture-base-2020",
+        "eid": "chp_II__cl_2.1__tbl_2.1__row_2",
+        "clause_id": "fixture-base-2020:chp_II__cl_2.1__tbl_2.1__row_2",
+        "table_eid": "chp_II__cl_2.1__tbl_2.1",
+        "table_id": "Table 2.1: Minimum Setbacks by Plot Size",
+        "row_index": 1,
+        "col_index": 2,
+        "row_header": "Z1 | Above 240",
+        "column_header": "Front Setback - Minimum",
+        "cell_text": "3.0",
+        "footnote_markers": [
+          "*"
+        ],
+        "footnotes_text": [
+          "Corner plots in Z1 require an additional 0.5 m splay."
+        ],
+        "page": 1,
+        "bbox": [
+          0.0528,
+          0.2445,
+          0.9476,
+          0.3305
+        ],
+        "page_link": "https://example.org/gazette/2020-01-15.pdf#page=1",
+        "official_url": "https://example.org/gazette/2020-01-15.pdf",
+        "archive_url": null
+      },
+      "derived": true,
+      "method": "table_rule_parser",
+      "confidence": 0.95,
+      "verification": "machine_checked",
+      "note": null
+    },
+    {
+      "parameter_id": "xx-test-fixture:param_0004",
+      "parameter": "far_base_max",
+      "value": 2.25,
+      "unit": "ratio",
+      "value_text": "2.25",
+      "conditions": {
+        "plot_area_m2": {
+          "min": 240.0,
+          "max": null,
+          "min_inclusive": false,
+          "max_inclusive": true
+        },
+        "plot_depth_m": null,
+        "plot_width_m": null,
+        "road_width_m": null,
+        "building_height_m": null,
+        "zone": null,
+        "area_class": null,
+        "use": null,
+        "jurisdiction": null,
+        "unexpressed_conditions": [
+          "Corner plots in Z1 require an additional 0.5 m splay."
+        ],
+        "dependent": true
+      },
+      "valid_from": "2020-02-01",
+      "valid_to": null,
+      "legal_status": "in_force",
+      "source": {
+        "doc_id": "fixture-base-2020",
+        "eid": "chp_II__cl_2.1__tbl_2.1__row_2",
+        "clause_id": "fixture-base-2020:chp_II__cl_2.1__tbl_2.1__row_2",
+        "table_eid": "chp_II__cl_2.1__tbl_2.1",
+        "table_id": "Table 2.1: Minimum Setbacks by Plot Size",
+        "row_index": 1,
+        "col_index": 3,
+        "row_header": "Z1 | Above 240",
+        "column_header": "Max FAR - Permissible",
+        "cell_text": "2.25",
+        "footnote_markers": [
+          "*"
+        ],
+        "footnotes_text": [
+          "Corner plots in Z1 require an additional 0.5 m splay."
+        ],
+        "page": 1,
+        "bbox": [
+          0.0528,
+          0.2445,
+          0.9476,
+          0.3305
+        ],
+        "page_link": "https://example.org/gazette/2020-01-15.pdf#page=1",
+        "official_url": "https://example.org/gazette/2020-01-15.pdf",
+        "archive_url": null
+      },
+      "derived": true,
+      "method": "table_rule_parser",
+      "confidence": 0.95,
+      "verification": "machine_checked",
+      "note": null
+    },
+    {
+      "parameter_id": "xx-test-fixture:param_0005",
+      "parameter": "setback_front_min_m",
+      "value": 3.0,
+      "unit": "m",
+      "value_text": "3.0",
+      "conditions": {
+        "plot_area_m2": null,
+        "plot_depth_m": null,
+        "plot_width_m": null,
+        "road_width_m": null,
+        "building_height_m": null,
+        "zone": null,
+        "area_class": null,
+        "use": null,
+        "jurisdiction": null,
+        "unexpressed_conditions": [
+          "Corner plots in Z1 require an additional 0.5 m splay."
+        ],
+        "dependent": true
+      },
+      "valid_from": "2020-02-01",
+      "valid_to": null,
+      "legal_status": "in_force",
+      "source": {
+        "doc_id": "fixture-base-2020",
+        "eid": "chp_II__cl_2.1__tbl_2.1__row_3",
+        "clause_id": "fixture-base-2020:chp_II__cl_2.1__tbl_2.1__row_3",
+        "table_eid": "chp_II__cl_2.1__tbl_2.1",
+        "table_id": "Table 2.1: Minimum Setbacks by Plot Size",
+        "row_index": 2,
+        "col_index": 2,
+        "row_header": "Z2 | All plots",
+        "column_header": "Front Setback - Minimum",
+        "cell_text": "3.0",
+        "footnote_markers": [
+          "*"
+        ],
+        "footnotes_text": [
+          "Corner plots in Z1 require an additional 0.5 m splay."
+        ],
+        "page": 1,
+        "bbox": [
+          0.0528,
+          0.2445,
+          0.9476,
+          0.3305
+        ],
+        "page_link": "https://example.org/gazette/2020-01-15.pdf#page=1",
+        "official_url": "https://example.org/gazette/2020-01-15.pdf",
+        "archive_url": null
+      },
+      "derived": true,
+      "method": "table_rule_parser",
+      "confidence": 0.95,
+      "verification": "machine_checked",
+      "note": null
+    },
+    {
+      "parameter_id": "xx-test-fixture:param_0006",
+      "parameter": "far_base_max",
+      "value": 2.5,
+      "unit": "ratio",
+      "value_text": "2.50",
+      "conditions": {
+        "plot_area_m2": null,
+        "plot_depth_m": null,
+        "plot_width_m": null,
+        "road_width_m": null,
+        "building_height_m": null,
+        "zone": null,
+        "area_class": null,
+        "use": null,
+        "jurisdiction": null,
+        "unexpressed_conditions": [
+          "Corner plots in Z1 require an additional 0.5 m splay."
+        ],
+        "dependent": true
+      },
+      "valid_from": "2020-02-01",
+      "valid_to": null,
+      "legal_status": "in_force",
+      "source": {
+        "doc_id": "fixture-base-2020",
+        "eid": "chp_II__cl_2.1__tbl_2.1__row_3",
+        "clause_id": "fixture-base-2020:chp_II__cl_2.1__tbl_2.1__row_3",
+        "table_eid": "chp_II__cl_2.1__tbl_2.1",
+        "table_id": "Table 2.1: Minimum Setbacks by Plot Size",
+        "row_index": 2,
+        "col_index": 3,
+        "row_header": "Z2 | All plots",
+        "column_header": "Max FAR - Permissible",
+        "cell_text": "2.50",
+        "footnote_markers": [
+          "*"
+        ],
+        "footnotes_text": [
+          "Corner plots in Z1 require an additional 0.5 m splay."
+        ],
+        "page": 1,
+        "bbox": [
+          0.0528,
+          0.2445,
+          0.9476,
+          0.3305
+        ],
+        "page_link": "https://example.org/gazette/2020-01-15.pdf#page=1",
+        "official_url": "https://example.org/gazette/2020-01-15.pdf",
+        "archive_url": null
+      },
+      "derived": true,
+      "method": "table_rule_parser",
+      "confidence": 0.95,
+      "verification": "machine_checked",
+      "note": null
+    }
+  ]
+}

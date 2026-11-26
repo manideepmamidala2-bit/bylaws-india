@@ -16,11 +16,24 @@ interface SearchRecord {
   pu: string;
 }
 
-export function SearchBar({ jurisdictionId }: { jurisdictionId?: string }) {
+export function SearchBar({
+  jurisdictionId,
+  autoFocus = false,
+}: {
+  jurisdictionId?: string;
+  autoFocus?: boolean;
+}) {
   const [query, setQuery] = useState("");
   const [records, setRecords] = useState<SearchRecord[] | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (autoFocus && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [autoFocus]);
 
   useEffect(() => {
     const handleClickOutside = (ev: MouseEvent) => {
@@ -78,11 +91,12 @@ export function SearchBar({ jurisdictionId }: { jurisdictionId?: string }) {
   }, [records, terms]);
 
   return (
-    <div ref={containerRef} className="relative min-w-[210px] max-w-xs flex-1">
+    <div ref={containerRef} className="relative w-full max-w-md">
       <label htmlFor="global-pagefind-search" className="sr-only">
         Search across all building code documents
       </label>
       <input
+        ref={inputRef}
         id="global-pagefind-search"
         type="search"
         value={query}
@@ -95,17 +109,17 @@ export function SearchBar({ jurisdictionId }: { jurisdictionId?: string }) {
           setIsOpen(true);
           void ensureIndexLoaded();
         }}
-        placeholder="Search all documents (FAR, setback, parking...)"
-        className="w-full border border-[#080909] bg-[#f5f3ed] px-2.5 py-1 font-mono text-xs text-[#080909] placeholder:text-[#5b5e56]"
+        placeholder="Search all documents (FAR, setbacks, parking...)"
+        className="min-h-[44px] w-full border border-[#080909] bg-[#f5f3ed] px-3 py-2 font-mono text-xs text-[#080909] placeholder:text-[#5b5e56]"
       />
       {isOpen && terms.length > 0 && (
         <div
           role="region"
           aria-label="Cross-document search results"
-          className="absolute right-0 z-50 mt-1 max-h-96 w-[360px] overflow-y-auto border border-[#080909] bg-[#f5f3ed] p-2 shadow-lg sm:w-[440px]"
+          className="absolute right-0 left-0 z-50 mt-1 max-h-96 overflow-y-auto border border-[#080909] bg-[#f5f3ed] p-3"
         >
           <div className="mb-1.5 flex items-center justify-between border-b border-[#c8ccc0] pb-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#5b5e56]">
-            <span>Pagefind Cross-Document Index</span>
+            <span>All documents</span>
             <span>{matches.length} result(s)</span>
           </div>
           {matches.length === 0 ? (
@@ -135,7 +149,7 @@ export function SearchBar({ jurisdictionId }: { jurisdictionId?: string }) {
                           rel="noopener noreferrer"
                           className="shrink-0 font-mono text-[10px] text-[#5b5e56] underline"
                         >
-                          p. {m.p} ↗
+                          p. {m.p}
                         </a>
                       )}
                     </div>

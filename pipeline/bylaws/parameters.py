@@ -13,9 +13,29 @@ from bylaws.root import get_deterministic_timestamp, resolve_repo_root
 from bylaws.schema_validator import validate_payload
 
 NUMBER_TOKEN_RE = r"\d+(?:,\d+)*(?:\.\d+)?"
+UNIT_TOKEN_RE = r"(?:sq\.?\s*m(?:trs?)?|m2|m(?:trs?)?|hectares?|ha)"
+
+PLAUSIBILITY_BOUNDS: dict[str, tuple[float, float]] = {
+    "far_base_max": (0.25, 5.0),
+    "far_premium_additional_max": (0.05, 2.0),
+    "tdr_receivable_max": (0.0, 2.0),
+    "ground_coverage_max_pct": (5.0, 100.0),
+    "setback_front_min_m": (0.0, 30.0),
+    "setback_rear_min_m": (0.0, 30.0),
+    "setback_side_min_m": (0.0, 30.0),
+    "building_height_max_m": (3.0, 250.0),
+    "floors_max": (1.0, 60.0),
+}
+SETBACK_PCT_BOUNDS: tuple[float, float] = (1.0, 50.0)
+PARKING_M2_BOUNDS: tuple[float, float] = (5.0, 1000.0)
+MIN_PLAUSIBLE_PLOT_AREA_M2: float = 5.0
 
 RANGE_ABOVE_UPTO_RE = re.compile(
-    rf"(?:above|over|more\s+than|exceeding|>)\s*(?P<min>{NUMBER_TOKEN_RE})\s*(?:sq\.?\s*m(?:trs?)?|m2|m(?:trs?)?)?\s*(?:and\s+)?(?:up\s*to|upto|to|<=|<)\s*(?P<max>{NUMBER_TOKEN_RE})",
+    rf"(?:above|over|more\s+than|exceeding|>)\s*(?P<min>{NUMBER_TOKEN_RE})\s*{UNIT_TOKEN_RE}?\s*(?:and\s+)?(?:up\s*to|upto|to|<=|<)\s*(?P<max>{NUMBER_TOKEN_RE})",
+    re.IGNORECASE,
+)
+RANGE_BETWEEN_RE = re.compile(
+    rf"between\s+(?P<min>{NUMBER_TOKEN_RE})\s*{UNIT_TOKEN_RE}?\s*(?:&|and|to)\s*(?P<max>{NUMBER_TOKEN_RE})",
     re.IGNORECASE,
 )
 RANGE_GT_LE_SYMBOL_RE = re.compile(
@@ -23,7 +43,7 @@ RANGE_GT_LE_SYMBOL_RE = re.compile(
     re.IGNORECASE,
 )
 RANGE_INCLUSIVE_TO_RE = re.compile(
-    rf"^(?:from\s+)?(?P<min>{NUMBER_TOKEN_RE})\s*(?:sq\.?\s*m(?:trs?)?|m2|m(?:trs?)?)?\s+to\s+(?P<max>{NUMBER_TOKEN_RE})",
+    rf"^(?:from\s+)?(?P<min>{NUMBER_TOKEN_RE})\s*{UNIT_TOKEN_RE}?\s+to\s+(?P<max>{NUMBER_TOKEN_RE})",
     re.IGNORECASE,
 )
 RANGE_UP_TO_RE = re.compile(
@@ -35,19 +55,24 @@ RANGE_LESS_THAN_RE = re.compile(
     re.IGNORECASE,
 )
 RANGE_AND_ABOVE_RE = re.compile(
-    rf"(?P<min>{NUMBER_TOKEN_RE})\s*(?:sq\.?\s*m(?:trs?)?|m2|m(?:trs?)?)?\s+and\s+(?:above|more|over)|>=\s*(?P<min2>{NUMBER_TOKEN_RE})",
+    rf"(?P<min>{NUMBER_TOKEN_RE})\s*{UNIT_TOKEN_RE}?\s+and\s+(?:above|more|over)|>=\s*(?P<min2>{NUMBER_TOKEN_RE})",
     re.IGNORECASE,
 )
 RANGE_ABOVE_ONLY_RE = re.compile(
     rf"(?:above|over|more\s+than|exceeding|>)\s*(?P<min>{NUMBER_TOKEN_RE})",
     re.IGNORECASE,
 )
+HECTARE_UNIT_RE = re.compile(r"\b(?:hectares?|ha)\b", re.IGNORECASE)
 SINGLE_NUMERIC_RE = re.compile(
     rf"(?P<val>{NUMBER_TOKEN_RE})\s*(?P<pct>%)?",
     re.IGNORECASE,
 )
 PCT_OF_DIM_RE = re.compile(
-    rf"(?P<val>{NUMBER_TOKEN_RE})\s*%\s*of\s+(?:the\s+)?(?P<dim>depth|width)",
+    rf"(?P<val>{NUMBER_TOKEN_RE})\s*%\s*of\s+(?:the\s+)?(?P<dim>depth(?:/width)?|width)",
+    re.IGNORECASE,
+)
+SIMPLE_PARKING_SQM_RE = re.compile(
+    rf"^(?P<val>{NUMBER_TOKEN_RE})\s*sq\.?\s*m(?:trs?\.?)?\s+of\s+(?:office\s+|auditorium\s+)?floor\s+(?:area|space)(?:[\s.,]*(?:including\s+[a-z\s,&.]+)?)?$",
     re.IGNORECASE,
 )
 TABLE8_INLINE_ROW_RE = re.compile(
@@ -61,78 +86,236 @@ def parse_clean_float(raw: str) -> float:
     return float(raw.replace(",", "").strip())
 
 
+def _scale_interval_if_hectares(interval: dict[str, Any] | None, text: str) -> dict[str, Any] | None:
+    """Convert hectare bounds (`1 hectare = 10,000 m²`) to square metres (`m²`)."""
+    if interval is None or not HECTARE_UNIT_RE.search(text):
+        return interval
+    scaled = dict(interval)
+    if scaled.get("min") is not None:
+        scaled["min"] = round(float(scaled["min"]) * 10000.0, 4)
+    if scaled.get("max") is not None:
+        scaled["max"] = round(float(scaled["max"]) * 10000.0, 4)
+    return scaled
+
+
 def parse_numeric_interval(text: str) -> dict[str, Any] | None:
-    """Parse range phrasing ('Up to X', 'Above X up to Y', 'Less than X', 'Above X') into a `NumericInterval`."""
+    """Parse range phrasing ('Up to X', 'Above X up to Y', 'Between X & Y', 'Less than X', 'Above X') into a `NumericInterval`."""
     cleaned = " ".join(text.strip().split())
     if not cleaned:
         return None
 
     m_sym = RANGE_GT_LE_SYMBOL_RE.search(cleaned)
     if m_sym:
-        return {
-            "min": parse_clean_float(m_sym.group("min")),
-            "max": parse_clean_float(m_sym.group("max")),
-            "min_inclusive": False,
-            "max_inclusive": m_sym.group("op") == "<=",
-        }
+        return _scale_interval_if_hectares(
+            {
+                "min": parse_clean_float(m_sym.group("min")),
+                "max": parse_clean_float(m_sym.group("max")),
+                "min_inclusive": False,
+                "max_inclusive": m_sym.group("op") == "<=",
+            },
+            cleaned,
+        )
 
     m_between = RANGE_ABOVE_UPTO_RE.search(cleaned)
     if m_between:
         max_inc = "<" not in cleaned or "<=" in cleaned
-        return {
-            "min": parse_clean_float(m_between.group("min")),
-            "max": parse_clean_float(m_between.group("max")),
-            "min_inclusive": False,
-            "max_inclusive": max_inc,
-        }
+        return _scale_interval_if_hectares(
+            {
+                "min": parse_clean_float(m_between.group("min")),
+                "max": parse_clean_float(m_between.group("max")),
+                "min_inclusive": False,
+                "max_inclusive": max_inc,
+            },
+            cleaned,
+        )
+
+    m_bw = RANGE_BETWEEN_RE.search(cleaned)
+    if m_bw:
+        return _scale_interval_if_hectares(
+            {
+                "min": parse_clean_float(m_bw.group("min")),
+                "max": parse_clean_float(m_bw.group("max")),
+                "min_inclusive": False,
+                "max_inclusive": True,
+            },
+            cleaned,
+        )
 
     m_to = RANGE_INCLUSIVE_TO_RE.search(cleaned)
     if m_to:
-        return {
-            "min": parse_clean_float(m_to.group("min")),
-            "max": parse_clean_float(m_to.group("max")),
-            "min_inclusive": True,
-            "max_inclusive": True,
-        }
+        return _scale_interval_if_hectares(
+            {
+                "min": parse_clean_float(m_to.group("min")),
+                "max": parse_clean_float(m_to.group("max")),
+                "min_inclusive": True,
+                "max_inclusive": True,
+            },
+            cleaned,
+        )
 
     m_upto = RANGE_UP_TO_RE.search(cleaned)
     if m_upto:
-        return {
-            "min": None,
-            "max": parse_clean_float(m_upto.group("max")),
-            "min_inclusive": True,
-            "max_inclusive": True,
-        }
+        return _scale_interval_if_hectares(
+            {
+                "min": None,
+                "max": parse_clean_float(m_upto.group("max")),
+                "min_inclusive": True,
+                "max_inclusive": True,
+            },
+            cleaned,
+        )
 
     m_lt = RANGE_LESS_THAN_RE.search(cleaned)
     if m_lt:
-        return {
-            "min": None,
-            "max": parse_clean_float(m_lt.group("max")),
-            "min_inclusive": True,
-            "max_inclusive": False,
-        }
+        return _scale_interval_if_hectares(
+            {
+                "min": None,
+                "max": parse_clean_float(m_lt.group("max")),
+                "min_inclusive": True,
+                "max_inclusive": False,
+            },
+            cleaned,
+        )
 
     m_ge = RANGE_AND_ABOVE_RE.search(cleaned)
     if m_ge:
         raw_min = m_ge.group("min") or m_ge.group("min2")
-        return {
-            "min": parse_clean_float(raw_min),
-            "max": None,
-            "min_inclusive": True,
-            "max_inclusive": True,
-        }
+        return _scale_interval_if_hectares(
+            {
+                "min": parse_clean_float(raw_min),
+                "max": None,
+                "min_inclusive": True,
+                "max_inclusive": True,
+            },
+            cleaned,
+        )
 
     m_gt = RANGE_ABOVE_ONLY_RE.search(cleaned)
     if m_gt:
-        return {
-            "min": parse_clean_float(m_gt.group("min")),
-            "max": None,
-            "min_inclusive": False,
-            "max_inclusive": True,
-        }
+        return _scale_interval_if_hectares(
+            {
+                "min": parse_clean_float(m_gt.group("min")),
+                "max": None,
+                "min_inclusive": False,
+                "max_inclusive": True,
+            },
+            cleaned,
+        )
 
     return None
+
+
+def classify_non_envelope_row(
+    *,
+    table_eid: str,
+    table_heading: str,
+    column_header: str,
+    row_header: str,
+    cell_text: str,
+) -> str | None:
+    """Identify table rows/columns that are deviation tolerances, compounding-fee rates, or premium FAR price schedules rather than building-envelope FAR/coverage parameters."""
+    col_l = column_header.lower()
+    tbl_l = table_heading.lower()
+    row_l = row_header.lower()
+    cell_l = cell_text.lower()
+
+    if (
+        "compounding fee" in col_l
+        or "condoning deviation" in col_l
+        or "compounding fee" in tbl_l
+        or table_eid.endswith("__tbl_2C")
+    ):
+        return "compounding_fee_rate"
+
+    if (
+        "deviation" in col_l
+        or "deviation" in tbl_l
+        or "deviation" in cell_l
+        or table_eid.endswith(("__tbl_2A", "__tbl_2B", "__tbl_2D"))
+    ):
+        return "deviation_tolerance"
+
+    if (
+        "notional land" in col_l
+        or "gv of developed land" in col_l
+        or "premium f.a.r charges" in row_l
+        or "per square meter rate" in row_l
+        or "lower floor cap" in row_l
+        or "final price for additional" in row_l
+        or table_eid == "chp_11_2__cl_11__tbl_1"
+    ):
+        return "premium_far_price_schedule"
+
+    if "shall be granted by" in col_l or table_eid == "chp_11_2__item_ii__tbl_1":
+        return "prose_fragment"
+
+    return None
+
+
+def check_parameter_plausibility(
+    parameter: str,
+    value: float | str | None,
+    unit: str | None = None,
+    conditions: dict[str, Any] | None = None,
+) -> tuple[bool, str | None]:
+    """Validate `value` and `conditions` against plausibility bounds for `parameter`."""
+    if value is None:
+        return False, "Missing parameter value (`None`)."
+
+    if conditions:
+        pa = conditions.get("plot_area_m2")
+        if isinstance(pa, dict):
+            for bound_key in ("min", "max"):
+                b_val = pa.get(bound_key)
+                if isinstance(b_val, (int, float)) and 0.0 < float(b_val) < MIN_PLAUSIBLE_PLOT_AREA_M2:
+                    return (
+                        False,
+                        f"Plot area condition `{bound_key}={b_val} m²` is below minimum plausible plot area `{MIN_PLAUSIBLE_PLOT_AREA_M2} m²`.",
+                    )
+
+    if parameter == "parking_requirement":
+        if isinstance(value, (int, float)):
+            lo, hi = PARKING_M2_BOUNDS
+            if not (lo <= float(value) <= hi):
+                return (
+                    False,
+                    f"Parking floor-area ratio `{value}` outside plausible bounds `[{lo}, {hi}] m²`.",
+                )
+            return True, None
+        if isinstance(value, str) and value.strip():
+            return True, None
+        return False, "Empty parking requirement text."
+
+    if not isinstance(value, (int, float)):
+        return (
+            False,
+            f"Non-numeric value `{value!r}` for numeric parameter `{parameter}`.",
+        )
+
+    num_val = float(value)
+    if parameter in {"setback_front_min_m", "setback_rear_min_m", "setback_side_min_m"} and unit in {
+        "pct_of_plot_depth",
+        "pct_of_plot_width",
+        "%",
+    }:
+        lo, hi = SETBACK_PCT_BOUNDS
+        if not (lo <= num_val <= hi):
+            return (
+                False,
+                f"Percentage setback `{num_val}%` outside plausible bounds `[{lo}%, {hi}%]`.",
+            )
+        return True, None
+
+    bounds = PLAUSIBILITY_BOUNDS.get(parameter)
+    if bounds is not None:
+        lo, hi = bounds
+        if not (lo <= num_val <= hi):
+            return (
+                False,
+                f"Value `{num_val}` for `{parameter}` outside plausible bounds `[{lo}, {hi}]`.",
+            )
+
+    return True, None
 
 
 def parse_cell_value_and_unit(
@@ -148,14 +331,18 @@ def parse_cell_value_and_unit(
         return 0.0, "ratio", False
 
     if parameter == "parking_requirement":
-        m_sqm = re.search(rf"(?P<val>{NUMBER_TOKEN_RE})\s*sq\.?\s*m", txt, re.IGNORECASE)
-        if m_sqm and "more than" not in txt.lower():
-            return parse_clean_float(m_sqm.group("val")), "m2_per_car_space", ("plus" in txt.lower())
+        m_simple = SIMPLE_PARKING_SQM_RE.match(txt)
+        if m_simple:
+            return parse_clean_float(m_simple.group("val")), "m2_per_car_space", False
         return txt, "rule_text", True
 
     m_pct_dim = PCT_OF_DIM_RE.search(txt)
     if m_pct_dim:
-        dim = m_pct_dim.group("dim").lower()
+        raw_dim = m_pct_dim.group("dim").lower()
+        if "depth/width" in raw_dim:
+            dim = "width" if parameter == "setback_side_min_m" else "depth"
+        else:
+            dim = raw_dim
         return parse_clean_float(m_pct_dim.group("val")), f"pct_of_plot_{dim}", False
 
     if "refer table" in txt.lower() or "as per existing" in txt.lower():
@@ -284,6 +471,28 @@ def extract_jurisdiction_parameters(
         nonlocal seq
         if value is None or not str(value_text).strip():
             return
+
+        is_plausible, plaus_err = check_parameter_plausibility(
+            parameter,
+            value,
+            unit,
+            conditions,
+        )
+        if not is_plausible:
+            mismatches.append(
+                {
+                    "parameter_id": f"{source['doc_id']}:{source['eid']}",
+                    "doc_id": source["doc_id"],
+                    "eid": source["eid"],
+                    "page": source["page"],
+                    "cell_text": str(value_text).strip(),
+                    "row_header": source.get("row_header"),
+                    "category": "plausibility_excluded",
+                    "issue": f"[Excluded by plausibility bounds] {plaus_err}",
+                }
+            )
+            return
+
         seq += 1
         rec: dict[str, Any] = {
             "parameter_id": f"{config.id}:param_{seq:04d}",
@@ -312,6 +521,7 @@ def extract_jurisdiction_parameters(
                     "page": source["page"],
                     "cell_text": rec["value_text"],
                     "row_header": source.get("row_header"),
+                    "category": "cell_text_mismatch",
                     "issue": mismatch_note,
                 }
             )
@@ -332,6 +542,22 @@ def extract_jurisdiction_parameters(
             continue
 
         tree_path = docs_dir / f"{doc.id}.clauses.json"
+        if not tree_path.is_file() and getattr(config, "parent", None):
+            parent_cand = root / "data" / "processed" / str(config.parent) / "documents" / f"{doc.id}.clauses.json"
+            if parent_cand.is_file():
+                tree_path = parent_cand
+        if not tree_path.is_file():
+            cand_jurs = [config.id, getattr(config, "parent", None)]
+            for rel_ver in (str(config.release_version), "5.0.0", "4.0.0"):
+                for cand_j in cand_jurs:
+                    if not cand_j:
+                        continue
+                    pub_cand = root / "public" / "data" / str(cand_j) / rel_ver / f"{doc.id}.clauses.json"
+                    if pub_cand.is_file():
+                        tree_path = pub_cand
+                        break
+                if tree_path.is_file():
+                    break
         if not tree_path.is_file():
             continue
         tree: dict[str, Any] = json.loads(tree_path.read_text(encoding="utf-8"))
@@ -516,6 +742,32 @@ def extract_jurisdiction_parameters(
                     hdr = col_headers[c_idx]
                     hdr_l = hdr.lower()
                     u_hdr = col_units[c_idx]
+
+                    non_env_kind = classify_non_envelope_row(
+                        table_eid=eid,
+                        table_heading=str(node.get("heading") or node.get("title") or ""),
+                        column_header=hdr,
+                        row_header=row_header_str,
+                        cell_text=cell_val,
+                    )
+                    if non_env_kind is not None:
+                        if any(k in hdr_l for k in ("far", "f.a.r", "coverage", "ground cover")):
+                            mismatches.append(
+                                {
+                                    "parameter_id": f"{doc.id}:{r_eid}",
+                                    "doc_id": doc.id,
+                                    "eid": r_eid,
+                                    "page": page,
+                                    "cell_text": cell_val,
+                                    "row_header": row_header_str,
+                                    "category": "reclassified_non_envelope",
+                                    "issue": (
+                                        f"[Reclassified as `{non_env_kind}` — excluded from building-envelope FAR/coverage] "
+                                        f"Column `{hdr}` in `{eid}`."
+                                    ),
+                                }
+                            )
+                        continue
 
                     param_kinds: list[tuple[str, list[str] | None, list[str] | None]] = []
                     if any(k in hdr_l for k in ("ground coverage", "ground cover", "coverage", "plot coverage")):
@@ -1070,21 +1322,45 @@ def write_parameter_reports_and_json(
 
     payload, mismatches = extract_jurisdiction_parameters(config, repo_root=root)
     params_path = processed_dir / "parameters.json"
-    params_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    params_text = json.dumps(payload, indent=2) + "\n"
+    params_path.write_text(params_text, encoding="utf-8")
+
+    pub_rel_dir = root / "public" / "data" / config.id / str(config.release_version)
+    if pub_rel_dir.is_dir():
+        (pub_rel_dir / "parameters.json").write_text(params_text, encoding="utf-8")
 
     if config.visibility != "test":
         # Write parameter-mismatches.md for owner review
+        exclusions = [
+            m
+            for m in mismatches
+            if m.get("category") in {"plausibility_excluded", "reclassified_non_envelope"}
+        ]
         mm_lines = [
             f"# Parameter Extraction & Table Cell Cross-Check Report (`{config.id}`)",
             "",
             f"- **Total Parameter Records Extracted**: `{len(payload['records'])}`",
             f"- **Source Table Anomalies / Mismatches Flagged for Owner Review**: `{len(mismatches)}`",
+            f"- **Plausibility Bounds Exclusions & Non-Envelope Reclassifications**: `{len(exclusions)}`",
             "",
-            "## Flagged Source Table Anomalies & Mismatches",
+            "## Plausibility Bounds Exclusions (For Owner Review)",
             "",
-            "| Record / Node | Document | Page | Printed Cell / Row Header | Observation for Owner Review |",
+            "| Record / Node | Document | Page | Printed Cell / Row Header | Reason Excluded / Reclassified |",
             "|---|---|---:|---|---|",
         ]
+        for m in exclusions:
+            mm_lines.append(
+                f"| `{m['parameter_id']}` | `{m['doc_id']}` | p. {m['page']} | `{m['cell_text']}` | {m['issue']} |"
+            )
+        mm_lines.extend(
+            [
+                "",
+                "## Flagged Source Table Anomalies & Mismatches",
+                "",
+                "| Record / Node | Document | Page | Printed Cell / Row Header | Observation for Owner Review |",
+                "|---|---|---:|---|---|",
+            ]
+        )
         for m in mismatches:
             mm_lines.append(
                 f"| `{m['parameter_id']}` | `{m['doc_id']}` | p. {m['page']} | `{m['cell_text']}` | {m['issue']} |"

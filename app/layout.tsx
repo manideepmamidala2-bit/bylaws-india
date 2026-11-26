@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { fetchManifest, getVisibleJurisdictions } from "@/lib/data";
+import { Footer } from "@/components/Footer";
 import "./globals.css";
 
 const interTight = localFont({
@@ -35,23 +37,49 @@ const jetbrainsMono = localFont({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Structured Building Bylaws",
-  description:
-    "Curated, versioned, machine-readable public dataset and regulatory viewer for municipal building bylaws and master plan zoning.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const manifest = await fetchManifest().catch(() => null);
+  const visible = manifest ? getVisibleJurisdictions(manifest) : [];
+  const rootJur =
+    visible.find((j) => visible.some((child) => child.parent === j.id)) ??
+    visible[0];
+  const cityLabel = rootJur?.aliases?.[0] ?? rootJur?.name ?? "City";
+  const desc = `${cityLabel}'s building rules. One code.`;
 
-export default function RootLayout({
+  return {
+    title: "Bylaw One",
+    description: desc,
+    openGraph: {
+      title: "Bylaw One",
+      description: desc,
+      type: "website",
+    },
+  };
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const manifest = await fetchManifest().catch(() => null);
+  const visible = manifest ? getVisibleJurisdictions(manifest) : [];
+  const rootJur =
+    visible.find((j) => visible.some((child) => child.parent === j.id)) ??
+    visible[0];
+
   return (
     <html
       lang="en"
       className={`${interTight.variable} ${sourceSerif.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="min-h-screen antialiased">{children}</body>
+      <body
+        data-default-jurisdiction={rootJur?.id ?? ""}
+        className="flex min-h-screen flex-col antialiased"
+      >
+        <div className="flex-1">{children}</div>
+        <Footer jurisdictionId={rootJur?.id} />
+      </body>
     </html>
   );
 }

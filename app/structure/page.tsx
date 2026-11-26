@@ -150,139 +150,174 @@ export default async function StructurePage() {
           </div>
         </section>
 
-        {/* 2. Static SVG Model Diagram */}
-        <section
-          aria-label="Knowledge graph model diagram"
-          className="border border-[#080909] bg-[#f5f3ed] p-6"
-        >
-          <div className="dg-mono mb-2">2 · Node Kinds &amp; Link Kinds</div>
-          <h2 className="text-xl font-semibold text-[#080909]">
-            Graph Schema Diagram
-          </h2>
-          <div className="mt-4 overflow-x-auto border border-[#c8ccc0] bg-[#efeee8] p-4">
-            <svg
-              viewBox="0 0 820 220"
-              role="img"
-              aria-label="Diagram showing Register, Document, Provision, Definition, Term, and Amendment nodes connected by in_register, contains, defines, uses_term, refers_to, and amends edges"
-              className="h-auto w-full max-w-4xl font-mono text-[11px]"
-            >
-              <rect x="20" y="25" width="130" height="44" fill="#f5f3ed" stroke="#080909" strokeWidth="1.5" />
-              <text x="85" y="51" textAnchor="middle" fill="#080909">Source Register</text>
+        {/* 2. Static SVG Model Diagram & Technical Details */}
+        <details className="border border-[#080909] bg-[#f5f3ed] p-6">
+          <summary className="cursor-pointer font-mono text-xs uppercase tracking-[0.12em] text-[#080909] underline">
+            Details · Graph Schema Diagram, Edge Examples &amp; Node Breakdown
+          </summary>
 
-              <rect x="220" y="25" width="140" height="44" fill="#f5f3ed" stroke="#080909" strokeWidth="1.5" />
-              <text x="290" y="51" textAnchor="middle" fill="#080909">Document</text>
+          <div className="mt-6 space-y-8">
+            <section aria-label="Knowledge graph model diagram">
+              <div className="dg-mono mb-2">2 · Node Kinds &amp; Link Kinds</div>
+              <h2 className="text-xl font-semibold text-[#080909]">
+                Graph Schema Diagram
+              </h2>
+              <div className="mt-4 overflow-x-auto border border-[#c8ccc0] bg-[#efeee8] p-4">
+                <svg
+                  viewBox="0 0 820 220"
+                  role="img"
+                  aria-label="Diagram showing Register, Document, Provision, Definition, Term, and Amendment nodes"
+                  className="h-auto w-full max-w-4xl font-mono text-[11px]"
+                >
+                  <rect x="20" y="25" width="130" height="44" fill="#f5f3ed" stroke="#080909" strokeWidth="1.5" />
+                  <text x="85" y="51" textAnchor="middle" fill="#080909">Source Register</text>
 
-              <rect x="440" y="25" width="150" height="44" fill="#f5f3ed" stroke="#080909" strokeWidth="1.5" />
-              <text x="515" y="51" textAnchor="middle" fill="#080909">Provision / Table</text>
+                  <rect x="220" y="25" width="140" height="44" fill="#f5f3ed" stroke="#080909" strokeWidth="1.5" />
+                  <text x="290" y="51" textAnchor="middle" fill="#080909">Document</text>
 
-              <rect x="660" y="25" width="140" height="44" fill="#f5f3ed" stroke="#080909" strokeWidth="1.5" />
-              <text x="730" y="51" textAnchor="middle" fill="#080909">Child / Row</text>
+                  <rect x="440" y="25" width="150" height="44" fill="#f5f3ed" stroke="#080909" strokeWidth="1.5" />
+                  <text x="515" y="51" textAnchor="middle" fill="#080909">Provision / Table</text>
 
-              <rect x="440" y="140" width="150" height="44" fill="#f5f3ed" stroke="#080909" strokeWidth="1.5" />
-              <text x="515" y="166" textAnchor="middle" fill="#080909">Definition Node</text>
+                  <rect x="660" y="25" width="140" height="44" fill="#f5f3ed" stroke="#080909" strokeWidth="1.5" />
+                  <text x="730" y="51" textAnchor="middle" fill="#080909">Child / Row</text>
 
-              <rect x="660" y="140" width="140" height="44" fill="#f5f3ed" stroke="#080909" strokeWidth="1.5" />
-              <text x="730" y="166" textAnchor="middle" fill="#080909">Defined Term</text>
+                  <rect x="440" y="140" width="150" height="44" fill="#f5f3ed" stroke="#080909" strokeWidth="1.5" />
+                  <text x="515" y="166" textAnchor="middle" fill="#080909">Definition Node</text>
 
-              <rect x="220" y="140" width="140" height="44" fill="#f5f3ed" stroke="#080909" strokeWidth="1.5" />
-              <text x="290" y="166" textAnchor="middle" fill="#080909">Amending Clause</text>
+                  <rect x="660" y="140" width="140" height="44" fill="#f5f3ed" stroke="#080909" strokeWidth="1.5" />
+                  <text x="730" y="166" textAnchor="middle" fill="#080909">Defined Term</text>
 
-              <line x1="220" y1="47" x2="150" y2="47" stroke="#080909" strokeWidth="1.2" />
-              <text x="185" y="40" textAnchor="middle" fill="#5b5e56">in_register</text>
+                  <rect x="220" y="140" width="140" height="44" fill="#f5f3ed" stroke="#080909" strokeWidth="1.5" />
+                  <text x="290" y="166" textAnchor="middle" fill="#080909">Amending Clause</text>
 
-              <line x1="360" y1="47" x2="440" y2="47" stroke="#080909" strokeWidth="1.2" />
-              <text x="400" y="40" textAnchor="middle" fill="#5b5e56">contains</text>
+                  <line x1="220" y1="47" x2="150" y2="47" stroke="#080909" strokeWidth="1.2" />
+                  <text x="185" y="40" textAnchor="middle" fill="#5b5e56">in_register</text>
 
-              <line x1="590" y1="47" x2="660" y2="47" stroke="#080909" strokeWidth="1.2" />
-              <text x="625" y="40" textAnchor="middle" fill="#5b5e56">contains</text>
+                  <line x1="360" y1="47" x2="440" y2="47" stroke="#080909" strokeWidth="1.2" />
+                  <text x="400" y="40" textAnchor="middle" fill="#5b5e56">contains</text>
 
-              <line x1="515" y1="69" x2="515" y2="140" stroke="#080909" strokeWidth="1.2" strokeDasharray="4 2" />
-              <text x="565" y="108" textAnchor="middle" fill="#5b5e56">uses_term / refers_to</text>
+                  <line x1="590" y1="47" x2="660" y2="47" stroke="#080909" strokeWidth="1.2" />
+                  <text x="625" y="40" textAnchor="middle" fill="#5b5e56">contains</text>
 
-              <line x1="590" y1="162" x2="660" y2="162" stroke="#080909" strokeWidth="1.2" />
-              <text x="625" y="155" textAnchor="middle" fill="#5b5e56">defines</text>
+                  <line x1="515" y1="69" x2="515" y2="140" stroke="#080909" strokeWidth="1.2" strokeDasharray="4 2" />
+                  <text x="565" y="108" textAnchor="middle" fill="#5b5e56">uses_term / refers_to</text>
 
-              <line x1="360" y1="155" x2="440" y2="69" stroke="#080909" strokeWidth="1.2" />
-              <text x="380" y="108" textAnchor="middle" fill="#5b5e56">amends</text>
-            </svg>
+                  <line x1="590" y1="162" x2="660" y2="162" stroke="#080909" strokeWidth="1.2" />
+                  <text x="625" y="155" textAnchor="middle" fill="#5b5e56">defines</text>
+
+                  <line x1="360" y1="155" x2="440" y2="69" stroke="#080909" strokeWidth="1.2" />
+                  <text x="380" y="108" textAnchor="middle" fill="#5b5e56">amends</text>
+                </svg>
+              </div>
+            </section>
+
+            {/* 3. Edge Types with Real Examples */}
+            <section aria-label="Link kinds and real examples">
+              <div className="dg-mono mb-2">3 · Link Types &amp; Real Examples</div>
+              <h2 className="text-xl font-semibold text-[#080909]">
+                How Nodes Connect
+              </h2>
+              <div className="mt-4 overflow-x-auto">
+                <table className="dg-table">
+                  <thead>
+                    <tr>
+                      <th>Edge Type</th>
+                      <th>Meaning</th>
+                      <th>Real Dataset Example</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="font-mono text-xs font-semibold">contains</td>
+                      <td>Parent structural container to child provision or row</td>
+                      <td className="font-mono text-xs">
+                        {sampleChild
+                          ? `${sampleChild.doc_id}:${sampleChild.parent_eid} → ${sampleChild.doc_id}:${sampleChild.eid}`
+                          : `${firstDocId}:sec_1 → ${firstDocId}:sec_1__cl_1`}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="font-mono text-xs font-semibold">defines</td>
+                      <td>Definition provision to the normalised term it defines</td>
+                      <td className="font-mono text-xs">
+                        {sampleDef
+                          ? `${sampleDef.doc_id}:${sampleDef.eid} → term:${sampleDef.doc_id}:${sampleDef.defines_normalised}`
+                          : `${firstDocId}:def_1 → term:${firstDocId}:term`}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="font-mono text-xs font-semibold">uses_term</td>
+                      <td>Provision using a defined term (first occurrence) to its definition</td>
+                      <td className="font-mono text-xs">
+                        {sampleTermUse
+                          ? `${firstDocId}:${sampleTermUse.target.eid} → ${firstDocId}:${sampleTermUse.value}`
+                          : `${firstDocId}:cl_1 → ${firstDocId}:def_1`}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="font-mono text-xs font-semibold">refers_to</td>
+                      <td>Provision citing another clause, table, schedule, or Act</td>
+                      <td className="font-mono text-xs">
+                        {sampleRef
+                          ? `${firstDocId}:${sampleRef.target.eid} → ${sampleRef.value}`
+                          : `${firstDocId}:cl_2 → ${firstDocId}:tbl_1`}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="font-mono text-xs font-semibold">amends / amended_by</td>
+                      <td>Amending instruction to target provision (with dated effect)</td>
+                      <td className="font-mono text-xs">
+                        {sampleEff
+                          ? `${sampleEff.amending_doc}:${sampleEff.amending_eid} → ${sampleEff.target_doc}:${sampleEff.target_eid} (${sampleEff.effect_id})`
+                          : `${firstDocId}:cl_1 → ${firstDocId}:cl_2`}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="font-mono text-xs font-semibold">in_register</td>
+                      <td>Document to its verified jurisdiction source register entry</td>
+                      <td className="font-mono text-xs">
+                        doc:{firstDocId} → register:{jId}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="border border-[#080909] bg-[#f5f3ed] p-4">
+                <div className="dg-mono mb-2 text-[10.5px] text-[#080909]">
+                  Provisions by Node Type
+                </div>
+                <ul className="space-y-1 font-mono text-xs">
+                  {Object.entries(byNodeKind)
+                    .sort((a, b) => b[1] - a[1])
+                    .map(([k, cnt]) => (
+                      <li key={k} className="flex justify-between">
+                        <span>{k}</span>
+                        <strong>{cnt}</strong>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+              <div className="border border-[#080909] bg-[#f5f3ed] p-4">
+                <div className="dg-mono mb-2 text-[10.5px] text-[#080909]">
+                  Annotations by Kind (Confidence &ge; 0.8)
+                </div>
+                <ul className="space-y-1 font-mono text-xs">
+                  {Object.entries(byAnnKind)
+                    .sort((a, b) => b[1] - a[1])
+                    .map(([k, cnt]) => (
+                      <li key={k} className="flex justify-between">
+                        <span>{k}</span>
+                        <strong>{cnt}</strong>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            </div>
           </div>
-        </section>
-
-        {/* 3. Edge Types with Real Examples */}
-        <section
-          aria-label="Link kinds and real examples"
-          className="border border-[#080909] bg-[#f5f3ed] p-6"
-        >
-          <div className="dg-mono mb-2">3 · Link Types &amp; Real Examples</div>
-          <h2 className="text-xl font-semibold text-[#080909]">
-            How Nodes Connect
-          </h2>
-          <div className="mt-4 overflow-x-auto">
-            <table className="dg-table">
-              <thead>
-                <tr>
-                  <th>Edge Type</th>
-                  <th>Meaning</th>
-                  <th>Real Dataset Example</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="font-mono text-xs font-semibold">contains</td>
-                  <td>Parent structural container to child provision or row</td>
-                  <td className="font-mono text-xs">
-                    {sampleChild
-                      ? `${sampleChild.doc_id}:${sampleChild.parent_eid} → ${sampleChild.doc_id}:${sampleChild.eid}`
-                      : `${firstDocId}:sec_1 → ${firstDocId}:sec_1__cl_1`}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="font-mono text-xs font-semibold">defines</td>
-                  <td>Definition provision to the normalised term it defines</td>
-                  <td className="font-mono text-xs">
-                    {sampleDef
-                      ? `${sampleDef.doc_id}:${sampleDef.eid} → term:${sampleDef.doc_id}:${sampleDef.defines_normalised}`
-                      : `${firstDocId}:def_1 → term:${firstDocId}:term`}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="font-mono text-xs font-semibold">uses_term</td>
-                  <td>Provision using a defined term (first occurrence) to its definition</td>
-                  <td className="font-mono text-xs">
-                    {sampleTermUse
-                      ? `${firstDocId}:${sampleTermUse.target.eid} → ${firstDocId}:${sampleTermUse.value}`
-                      : `${firstDocId}:cl_1 → ${firstDocId}:def_1`}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="font-mono text-xs font-semibold">refers_to</td>
-                  <td>Provision citing another clause, table, schedule, or Act</td>
-                  <td className="font-mono text-xs">
-                    {sampleRef
-                      ? `${firstDocId}:${sampleRef.target.eid} → ${sampleRef.value}`
-                      : `${firstDocId}:cl_2 → ${firstDocId}:tbl_1`}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="font-mono text-xs font-semibold">amends / amended_by</td>
-                  <td>Amending instruction to target provision (with dated effect)</td>
-                  <td className="font-mono text-xs">
-                    {sampleEff
-                      ? `${sampleEff.amending_doc}:${sampleEff.amending_eid} → ${sampleEff.target_doc}:${sampleEff.target_eid} (${sampleEff.effect_id})`
-                      : `${firstDocId}:cl_1 → ${firstDocId}:cl_2`}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="font-mono text-xs font-semibold">in_register</td>
-                  <td>Document to its verified jurisdiction source register entry</td>
-                  <td className="font-mono text-xs">
-                    doc:{firstDocId} → register:{jId}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
+        </details>
 
         {/* 4. Live Counts & Downloads */}
         <section
@@ -319,39 +354,6 @@ export default async function StructurePage() {
               <div className="mt-1 font-mono text-2xl font-semibold">
                 {effectsList.length}
               </div>
-            </div>
-          </div>
-
-          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div className="border border-[#080909] bg-[#f5f3ed] p-4">
-              <div className="dg-mono mb-2 text-[10.5px] text-[#080909]">
-                Provisions by Node Type
-              </div>
-              <ul className="space-y-1 font-mono text-xs">
-                {Object.entries(byNodeKind)
-                  .sort((a, b) => b[1] - a[1])
-                  .map(([k, cnt]) => (
-                    <li key={k} className="flex justify-between">
-                      <span>{k}</span>
-                      <strong>{cnt}</strong>
-                    </li>
-                  ))}
-              </ul>
-            </div>
-            <div className="border border-[#080909] bg-[#f5f3ed] p-4">
-              <div className="dg-mono mb-2 text-[10.5px] text-[#080909]">
-                Annotations by Kind (Confidence &ge; 0.8)
-              </div>
-              <ul className="space-y-1 font-mono text-xs">
-                {Object.entries(byAnnKind)
-                  .sort((a, b) => b[1] - a[1])
-                  .map(([k, cnt]) => (
-                    <li key={k} className="flex justify-between">
-                      <span>{k}</span>
-                      <strong>{cnt}</strong>
-                    </li>
-                  ))}
-              </ul>
             </div>
           </div>
 

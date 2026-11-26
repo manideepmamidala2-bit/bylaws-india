@@ -37,10 +37,8 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
           active="review"
         />
         <main className="mx-auto max-w-6xl px-6 py-10">
-          <header className="border-b border-[#080909] pb-6">
-            <div className="dg-mono">
-              Zoning Map Review · {jurisdiction.id}
-            </div>
+          <header className="border-b border-[#c8ccc0] pb-6">
+            <div className="dg-mono">Zoning Map Review</div>
             <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909]">
               {jurisdiction.name}: Zoning Map Review
             </h1>

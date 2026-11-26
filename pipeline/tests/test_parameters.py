@@ -4,7 +4,13 @@ from __future__ import annotations
 
 from bylaws.annotations import QUANTITY_SPAN_RE, _normalise_quantity
 from bylaws.config import load_jurisdiction_config
-from bylaws.parameters import parse_cell_value_and_unit, parse_numeric_interval
+from bylaws.parameters import (
+    PLAUSIBILITY_BOUNDS,
+    check_parameter_plausibility,
+    classify_non_envelope_row,
+    parse_cell_value_and_unit,
+    parse_numeric_interval,
+)
 from bylaws.root import resolve_repo_root
 from bylaws.schema_validator import validate_file
 
@@ -12,7 +18,7 @@ REPO_ROOT = resolve_repo_root()
 
 
 def test_range_parser_and_comma_number_parsing() -> None:
-    """Range parser accurately handles all table phrasing and comma-separated numbers like `'10,000 sq. mtrs'`."""
+    """Range parser accurately handles all table phrasing, hectare conversion (`1 ha = 10,000 m²`), and comma-separated numbers like `'10,000 sq. mtrs'`."""
     assert parse_numeric_interval("Up to 360") == {
         "min": None,
         "max": 360.0,
@@ -49,6 +55,25 @@ def test_range_parser_and_comma_number_parsing() -> None:
         "min_inclusive": False,
         "max_inclusive": True,
     }
+    # Hectare conversion: 0.40 Hectares -> 4000.0 m², 0.80 Hectares -> 8000.0 m²
+    assert parse_numeric_interval("Upto 0.40 Hectares") == {
+        "min": None,
+        "max": 4000.0,
+        "min_inclusive": True,
+        "max_inclusive": True,
+    }
+    assert parse_numeric_interval("Between 0.40 & 0.80 Hectares") == {
+        "min": 4000.0,
+        "max": 8000.0,
+        "min_inclusive": False,
+        "max_inclusive": True,
+    }
+    assert parse_numeric_interval("Above 0.80 Hectares") == {
+        "min": 8000.0,
+        "max": None,
+        "min_inclusive": False,
+        "max_inclusive": True,
+    }
 
     # Verify QUANTITY_SPAN_RE + _normalise_quantity never misreads "10,000 sq. mtrs" as "0"
     m = QUANTITY_SPAN_RE.search("Plots measuring 10,000 sq. mtrs and above")
@@ -60,6 +85,66 @@ def test_range_parser_and_comma_number_parsing() -> None:
     assert val == 65.0
     assert unit == "%"
     assert dep is False
+
+    # Parking: pure floor-area ratio vs. sentence rule
+    p_val, p_unit, p_dep = parse_cell_value_and_unit("50 sq. mtr. of floor area", "parking_requirement")
+    assert p_val == 50.0
+    assert p_unit == "m2_per_car_space"
+    assert p_dep is False
+
+    s_val, s_unit, s_dep = parse_cell_value_and_unit(
+        "a) Dwelling Unit measuring 100 to 150 Sq.Mtrs b) 100 Sq.Mtrs and Part thereof beyond 150 Sq.Mtrs",
+        "parking_requirement",
+    )
+    assert isinstance(s_val, str)
+    assert s_unit == "rule_text"
+    assert s_dep is True
+
+
+def test_plausibility_bounds_and_non_far_reclassification() -> None:
+    """Plausibility bounds reject out-of-range values and non-FAR rows (deviations, compounding fees, premium FAR prices) are excluded."""
+    assert PLAUSIBILITY_BOUNDS["far_base_max"] == (0.25, 5.0)
+    assert check_parameter_plausibility("far_base_max", 2.25, "ratio") == (True, None)
+    assert check_parameter_plausibility("far_base_max", 15.0, "ratio")[0] is False
+    assert check_parameter_plausibility("far_base_max", 50.0, "ratio")[0] is False
+    assert check_parameter_plausibility("far_base_max", 10000.0, "ratio")[0] is False
+    assert check_parameter_plausibility(
+        "far_base_max",
+        2.0,
+        "ratio",
+        {"plot_area_m2": {"min": None, "max": 0.4, "min_inclusive": True, "max_inclusive": True}},
+    )[0] is False
+
+    assert (
+        classify_non_envelope_row(
+            table_eid="cl_4__tbl_2B",
+            table_heading="Table 2B",
+            column_header="Maximum Deviation allowed in FAR",
+            row_header="1. | All buildings of height below 15 m",
+            cell_text="15 %",
+        )
+        == "deviation_tolerance"
+    )
+    assert (
+        classify_non_envelope_row(
+            table_eid="cl_4__tbl_2C",
+            table_heading="Table 2C",
+            column_header="Rate of Compounding fee for Condoning Deviation of FAR",
+            row_header="1 | Residential",
+            cell_text="3%",
+        )
+        == "compounding_fee_rate"
+    )
+    assert (
+        classify_non_envelope_row(
+            table_eid="chp_11_2__cl_11__tbl_1",
+            table_heading="Table 1",
+            column_header="Value of the Notional Land for additional 10000 sq.m to be constructed using Premium FAR = 4000 x GV of Developed Land",
+            row_header="Premium F.A.R charges = 50% of GV of the Notional Land",
+            cell_text="Premium F.A.R charges = 50% of GV of the Notional Land (4000 sq.m)",
+        )
+        == "premium_far_price_schedule"
+    )
 
 
 def test_published_parameters_json_validates_and_matches_page_images() -> None:
@@ -92,6 +177,37 @@ def test_published_parameters_json_validates_and_matches_page_images() -> None:
         assert rec["verification"] != "human_verified"
         assert rec["source"]["doc_id"] != "ka-model-bbl-2017"
         assert rec["unit"] not in {"Max", "Min"}
+        ok, err = check_parameter_plausibility(
+            rec["parameter"],
+            rec["value"],
+            rec["unit"],
+            rec["conditions"],
+        )
+        assert ok is True, f"{rec['parameter_id']} failed plausibility check: {err}"
+        assert rec["source"]["table_eid"] not in {
+            "cl_4__tbl_2B",
+            "cl_4__tbl_2C",
+            "chp_11_2__cl_11__tbl_1",
+            "chp_11_2__item_ii__tbl_1",
+        }
+
+    # Confirm Hectare-to-m² conversion in bbl-2003 Table 9 (Group Housing)
+    tbl9_recs = [
+        r
+        for r in records
+        if r["source"]["doc_id"] == "bbl-2003"
+        and r["source"]["table_eid"] == "part_III__sec_12.0__cl_12.2__tbl_9"
+        and r["parameter"] == "far_base_max"
+    ]
+    assert len(tbl9_recs) == 3
+    assert tbl9_recs[0]["conditions"]["plot_area_m2"]["max"] == 4000.0
+    assert tbl9_recs[1]["conditions"]["plot_area_m2"] == {
+        "min": 4000.0,
+        "max": 8000.0,
+        "min_inclusive": False,
+        "max_inclusive": True,
+    }
+    assert tbl9_recs[2]["conditions"]["plot_area_m2"]["min"] == 8000.0
 
     # Confirm exact PDF page-image values from rmp2015-zr p. 28 (Table 10 Row 2: 360-1000 sq.m, 12-18 m road)
     r_main_cov = [

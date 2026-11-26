@@ -34,8 +34,8 @@ export default async function SourcesPage({ params }: SourcesPageProps) {
           active="sources"
         />
         <main className="mx-auto max-w-6xl px-6 py-10">
-          <header className="border-b border-[#080909] pb-6">
-            <div className="dg-mono">Source Register · {jurisdiction.id}</div>
+          <header className="border-b border-[#c8ccc0] pb-6">
+            <div className="dg-mono">Sources</div>
             <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909]">
               {jurisdiction.name}: Legal Source Register
             </h1>

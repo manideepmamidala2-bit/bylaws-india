@@ -11,4 +11,4 @@ description: "Two-half local Python pipeline and read-only Next.js web applicati
 
 | File | Description |
 |------|-------------|
-| [overview](overview.md) | Two-half local Python pipeline and read-only Next.js web application architecture, Unified Schema 1.4, machine-enforced provision text fidelity, structure depth/uniqueness/date-token gates, explicit instrument types, parameter extraction, 6-step statutory plot resolver, plain-language progressive-disclosure UI, Rules R1–R16, and Release 4.0.0. |
+| [overview](overview.md) | Two-half local Python pipeline and Bylaw One read-only Next.js web application architecture, Unified Schema 1.4, machine-enforced provision and home FAR excerpt text fidelity, parameter plausibility bounds and hectare normalization, 6-step statutory plot resolver, narrative home page and clean subject tables, Rules R1–R16, and Release 4.0.0. |

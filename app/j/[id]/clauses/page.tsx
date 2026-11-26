@@ -10,8 +10,11 @@ import { TopNav } from "@/components/TopNav";
 import { ClauseTree } from "@/components/ClauseTree";
 import {
   formatHumanDate,
+  formatPlainDocumentTitle,
   formatPlainInstrumentStatus,
   formatPlainLayerLabel,
+  formatPlainWhatChangedSummary,
+  isDocumentTextHeld,
   sortDocumentsMostRecentFirst,
 } from "@/lib/plain-language";
 
@@ -40,7 +43,6 @@ export default async function ClausesPage({ params }: ClausesPageProps) {
     clauses,
     amendments,
     consolidated,
-    declarations,
   } = dataset;
 
   if (!release) {
@@ -52,10 +54,8 @@ export default async function ClausesPage({ params }: ClausesPageProps) {
           active="documents"
         />
         <main className="mx-auto max-w-6xl px-6 py-10">
-          <header className="border-b border-[#080909] pb-6">
-            <div className="dg-mono">
-              Structured Documents · {jurisdiction.id}
-            </div>
+          <header className="border-b border-[#c8ccc0] pb-6">
+            <div className="dg-mono">Structured Documents</div>
             <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909]">
               {jurisdiction.name}: Documents &amp; Clauses
             </h1>
@@ -126,88 +126,86 @@ export default async function ClausesPage({ params }: ClausesPageProps) {
       />
 
       <main className="mx-auto max-w-6xl px-6 py-8">
-        <header className="mb-6 border-b border-[#080909] pb-6">
-          <div className="dg-mono">
-            Structured Documents &amp; Clauses
-          </div>
+        <header className="mb-6 border-b border-[#c8ccc0] pb-6">
+          <div className="dg-mono text-[#5b5e56]">Documents</div>
           <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909]">
-            {jurisdiction.name}: Documents &amp; Clauses
+            Official Documents in {jurisdiction.name}
           </h1>
           <p className="dg-serif mt-2 max-w-3xl text-base text-[#171917]">
-            Select any legal instrument below (ordered most recent first) to
-            read its complete text in the law&apos;s own order, or filter across
-            structured provisions below.
+            Select any instrument below (ordered most recent first) to read its
+            provisions in the law&apos;s own order.
           </p>
         </header>
 
-        {declarations.known_gaps && declarations.known_gaps.length > 0 && (
-          <section
-            aria-label="Coverage notice"
-            className="mb-6 border border-[#080909] bg-[#efeee8] p-4"
-          >
-            <div className="dg-mono text-[10.5px] text-[#080909]">
-              Coverage Notice · Release v{release.version}
-            </div>
-            <p className="dg-serif mt-1 text-sm text-[#171917]">
-              {declarations.known_gaps[0].description}
-            </p>
-          </section>
-        )}
-
         <section
           aria-label="Structured document directory"
-          className="mb-8 border border-[#080909] bg-[#efeee8] p-5"
+          className="mb-8 border-y border-[#c8ccc0] py-4"
         >
-          <div className="dg-mono mb-3">
-            Instruments · Most Recent First ({documents.length})
+          <div className="dg-mono mb-4 text-[#5b5e56]">
+            Instruments · Most recent first ({documents.length})
           </div>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="divide-y divide-[#c8ccc0]">
             {sortDocumentsMostRecentFirst(documents).map((doc) => {
-              const iType = doc.instrument_type ?? "instrument";
-              const isRef =
-                doc.text_rights?.mode === "reference_only" ||
-                iType === "compilation" ||
-                iType === "map" ||
-                iType === "bill";
+              const textHeld = isDocumentTextHeld(doc);
               const plainStatus = formatPlainInstrumentStatus(doc);
               const dateStr = formatHumanDate(
                 doc.effective_from || doc.notified_date
               );
+              const plainTitle = formatPlainDocumentTitle(doc);
+              const summary =
+                doc.summary_by_site || formatPlainWhatChangedSummary(doc);
               return (
-                <Link
+                <li
                   key={doc.doc_id}
-                  href={`/j/${jurisdiction.id}/documents/${doc.doc_id}`}
-                  className="flex flex-col justify-between border border-[#080909] bg-[#f5f3ed] p-3.5 no-underline hover:bg-[#e5e6de]"
+                  className="flex flex-col justify-between gap-2 py-4 md:flex-row md:items-baseline md:gap-6"
                 >
-                  <div>
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <span className="font-mono text-[11px] text-[#5b5e56]">
-                        {dateStr}
-                      </span>
-                      <span className="border border-[#080909] bg-[#efeee8] px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-[#080909]">
+                  <div className="space-y-1">
+                    <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-[#5b5e56]">
+                      <span>{dateStr}</span>
+                      <span>·</span>
+                      <span>{formatPlainLayerLabel(doc.layer)}</span>
+                      <span>·</span>
+                      <span className="font-semibold text-[#080909]">
                         {plainStatus}
                       </span>
                     </div>
-                    <div className="mt-1.5 text-sm font-semibold text-[#080909]">
-                      {doc.title}
-                    </div>
-                    {doc.summary_by_site && (
-                      <p className="dg-serif mt-1.5 text-xs text-[#171917]">
-                        <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-[#5b5e56]">
-                          In short (by this site):{" "}
-                        </span>
-                        {doc.summary_by_site}
-                      </p>
+                    <h2 className="text-lg font-semibold text-[#080909]">
+                      {textHeld ? (
+                        <Link
+                          href={`/j/${jurisdiction.id}/documents/${doc.doc_id}`}
+                          className="text-[#080909] underline decoration-[#c8ccc0] underline-offset-4 hover:decoration-[#080909]"
+                        >
+                          {plainTitle}
+                        </Link>
+                      ) : (
+                        plainTitle
+                      )}
+                    </h2>
+                    <p className="dg-serif text-sm text-[#171917]">
+                      <span className="dg-mono mr-2 text-[#5b5e56]">
+                        In short, by this site:
+                      </span>
+                      {summary}
+                    </p>
+                  </div>
+                  <div className="shrink-0 font-mono text-xs uppercase tracking-[0.12em]">
+                    {textHeld ? (
+                      <Link
+                        href={`/j/${jurisdiction.id}/documents/${doc.doc_id}`}
+                        className="inline-flex min-h-[44px] items-center text-[#080909] underline decoration-[#080909] underline-offset-4"
+                      >
+                        Read provisions →
+                      </Link>
+                    ) : (
+                      <span className="inline-flex min-h-[44px] items-center text-[#5b5e56]">
+                        Text not held on site
+                      </span>
                     )}
                   </div>
-                  <div className="mt-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.12em] text-[#5b5e56]">
-                    <span>{formatPlainLayerLabel(doc.layer)}</span>
-                    <span>{isRef ? "Reference" : "Read provisions →"}</span>
-                  </div>
-                </Link>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </section>
 
         <ClauseTree

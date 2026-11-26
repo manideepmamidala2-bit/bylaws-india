@@ -5,8 +5,11 @@ import Link from "next/link";
 import type { DocumentMetadata } from "@/lib/data";
 import {
   formatHumanDate,
+  formatPlainDocumentTitle,
   formatPlainInstrumentStatus,
   formatPlainLayerLabel,
+  formatPlainWhatChangedSummary,
+  isDocumentTextHeld,
   sortDocumentsMostRecentFirst,
 } from "@/lib/plain-language";
 
@@ -89,7 +92,10 @@ export function SourcesFilterClient({
       iType === "compilation" || iType === "map" || iType === "bill";
     const isRefOnly =
       doc.text_rights?.mode === "reference_only" || isNonTextType;
-    const isStructured = structuredSet.has(doc.doc_id) && !isNonTextType;
+    const isStructured =
+      structuredSet.has(doc.doc_id) &&
+      !isNonTextType &&
+      isDocumentTextHeld(doc);
     const originUrl = doc.official_url || doc.source_url;
     const archiveUrl = doc.retrieval?.archive_url ?? null;
     const acqStatus = doc.acquisition_status ?? "acquired";
@@ -98,6 +104,9 @@ export function SourcesFilterClient({
     const displayDate = formatHumanDate(
       doc.effective_from || doc.notified_date
     );
+    const plainTitle = formatPlainDocumentTitle(doc);
+    const summaryText =
+      doc.summary_by_site || formatPlainWhatChangedSummary(doc);
 
     return (
       <article key={doc.doc_id} className="p-5">
@@ -129,17 +138,15 @@ export function SourcesFilterClient({
         </div>
 
         <h2 className="mt-1.5 text-lg font-semibold tracking-tight text-[#080909]">
-          {doc.title}
+          {plainTitle}
         </h2>
 
-        {doc.summary_by_site && (
-          <p className="dg-serif mt-1.5 text-sm text-[#171917]">
-            <strong className="font-mono text-[10.5px] uppercase tracking-[0.08em] text-[#080909]">
-              In short (by this site):{" "}
-            </strong>
-            {doc.summary_by_site}
-          </p>
-        )}
+        <p className="dg-serif mt-1.5 text-sm text-[#171917]">
+          <strong className="font-mono text-[10.5px] uppercase tracking-[0.08em] text-[#5b5e56]">
+            In short, by this site:{" "}
+          </strong>
+          {summaryText}
+        </p>
 
         {doc.notes_by_site && doc.notes_by_site.length > 0 && (
           <div className="mt-2 space-y-1 border-l-2 border-[#080909] bg-[#efeee8] px-3 py-2 text-xs text-[#171917]">
@@ -180,14 +187,16 @@ export function SourcesFilterClient({
                 Read Structured Document →
               </Link>
             )}
-            {!isStructured && isRefOnly && (doc.cited_provisions?.length ?? 0) > 0 && (
-              <Link
-                href={`/j/${jurisdictionId}/documents/${doc.doc_id}`}
-                className="font-medium text-[#080909] underline underline-offset-3"
-              >
-                View Reference &amp; Citing Clauses →
-              </Link>
-            )}
+            {!isStructured &&
+              isRefOnly &&
+              (doc.cited_provisions?.length ?? 0) > 0 && (
+                <Link
+                  href={`/j/${jurisdictionId}/documents/${doc.doc_id}`}
+                  className="font-medium text-[#080909] underline underline-offset-3"
+                >
+                  View Reference &amp; Citing Clauses →
+                </Link>
+              )}
             {originUrl && originUrl.startsWith("http") && (
               <a
                 href={originUrl}
@@ -198,23 +207,17 @@ export function SourcesFilterClient({
                 Official Origin ↗
               </a>
             )}
-            {archiveUrl && archiveUrl.startsWith("http") && (
-              <a
-                href={archiveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#5b5e56] underline underline-offset-3 hover:text-[#080909]"
-              >
-                Wayback Snapshot ↗
-              </a>
-            )}
           </div>
 
           <details className="text-xs normal-case">
             <summary className="cursor-pointer font-mono text-[10px] uppercase tracking-[0.12em] text-[#5b5e56] underline">
-              Technical details
+              Details
             </summary>
             <div className="mt-2 space-y-1.5 border border-[#c8ccc0] bg-[#efeee8] p-3 text-xs text-[#171917]">
+              <div>
+                <strong>Official title:</strong> {doc.title} (
+                <code>{doc.doc_id}</code>)
+              </div>
               <div>
                 <strong>Authority:</strong> {doc.issuing_authority}
                 {doc.notification_number
@@ -226,6 +229,19 @@ export function SourcesFilterClient({
                 · <strong>Effective:</strong>{" "}
                 {doc.effective_from ?? "Not in force"}
               </div>
+              {archiveUrl && archiveUrl.startsWith("http") && (
+                <div>
+                  <strong>Archive copy:</strong>{" "}
+                  <a
+                    href={archiveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline"
+                  >
+                    Wayback Snapshot ↗
+                  </a>
+                </div>
+              )}
               {(doc.status_evidence.quoted_line ||
                 doc.status_evidence.description) && (
                 <div>
@@ -331,8 +347,8 @@ export function SourcesFilterClient({
         >
           <div>
             <div className="dg-mono text-[10.5px] text-[#080909]">
-              Register Only · Excluded from Active Definitions, Relations,
-              Parameters &amp; Plot Answers
+              Register Only · Excluded from Active Definitions, Relations &amp;
+              Parameters
             </div>
             <h3 className="mt-1 text-lg font-semibold text-[#080909]">
               In force elsewhere, not applicable here

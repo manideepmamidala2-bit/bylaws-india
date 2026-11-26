@@ -39,7 +39,6 @@ const MAX_INLINE_ANNOTATIONS = 8;
 
 export function ClauseTree({
   jurisdictionId = "",
-  jurisdictionName = "",
   clauses,
   outline = [],
   totalClausesCount,
@@ -592,13 +591,13 @@ export function ClauseTree({
                 : "";
 
           return (
-            <details
+            <article
               key={clause.record_id ?? clause.clause_id}
               id={`node-${eid}`}
-              open
+              data-testid={`provision-item-${eid}`}
               className={`p-4 ${indentClass} ${specialTypeClass}`}
             >
-              <summary className="flex cursor-pointer flex-wrap items-center justify-between gap-2 font-medium text-[#080909]">
+              <div className="flex flex-wrap items-center justify-between gap-2 font-medium text-[#080909]">
                 <span className="flex flex-wrap items-center gap-2">
                   <span className="font-mono text-xs">
                     {clause.native_number ?? clause.number}
@@ -625,30 +624,20 @@ export function ClauseTree({
                       {provTypeAnn.value}
                     </span>
                   )}
-                  {clause.ocr_status === "corrected" && (
-                    <span className="border border-[#080909] bg-[#efeee8] px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#080909]">
-                      Corrected OCR
-                    </span>
-                  )}
-                  {(isAmendedVersion || clause.change_mark) && (
+                  {(isAmendedVersion ||
+                    clause.change_mark ||
+                    targetAmendments.length > 0) && (
                     <span className="border border-[#080909] bg-[#efeee8] px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#080909]">
                       {clause.change_mark?.label
                         ? clause.change_mark.label
-                        : jurisdictionName
-                          ? `Changed ${(activeVer?.valid_from ?? consRecord?.as_of_date ?? "").slice(0, 4)}, ${jurisdictionName}`
-                          : `Changed in ${(activeVer?.valid_from ?? consRecord?.as_of_date ?? "").slice(0, 4)}`}
-                    </span>
-                  )}
-                  {clause.language === "kn" && (
-                    <span className="border border-[#080909] px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#080909]">
-                      KN · Verbatim
+                        : `Changed in ${(activeVer?.valid_from ?? consRecord?.as_of_date ?? targetAmendments[0]?.effective_date ?? "2026").slice(0, 4)}`}
                     </span>
                   )}
                   {(!defaultStatus || status !== defaultStatus) && (
                     <StatusBadge status={status} />
                   )}
                 </span>
-              </summary>
+              </div>
 
               {displayIntro && (
                 <p
@@ -819,220 +808,231 @@ export function ClauseTree({
                       </span>
                     );
                   })}
-                  {linkAnns.length > MAX_INLINE_ANNOTATIONS && (
-                    <span className="text-[#5b5e56]">
-                      +{linkAnns.length - MAX_INLINE_ANNOTATIONS} more
-                    </span>
-                  )}
                 </div>
               )}
 
-              {isAmendedVersion && (
-                <div className="mt-2 border-l-2 border-[#080909] bg-[#efeee8] px-3 py-2 text-xs">
-                  <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#080909]">
-                    Changed by{" "}
-                    {activeVer?.source_doc ? (
-                      jurisdictionId ? (
-                        <a
-                          href={`/j/${jurisdictionId}/documents/${activeVer.source_doc}#node-${activeVer.source_eid ?? ""}`}
-                          className="font-semibold underline"
-                        >
-                          {activeVer.source_doc}:{activeVer.source_eid}
-                        </a>
-                      ) : (
-                        `${activeVer.source_doc}:${activeVer.source_eid}`
-                      )
-                    ) : (
-                      consRecord?.amendments_applied.join(", ")
+              {validPages.length === 0 && (
+                <div className="mt-2 font-mono text-[10.5px] uppercase tracking-[0.12em] text-[#5b5e56]">
+                  No source page recorded
+                </div>
+              )}
+
+              {/* Tap a provision: Details with page link, archive link, version history (newest first), site notes, references, address */}
+              <details
+                data-testid={`provision-details-${eid}`}
+                className="mt-3 border-t border-[#e5e6de] pt-2"
+              >
+                <summary className="inline-flex min-h-[44px] cursor-pointer items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-[#5b5e56] hover:text-[#080909]">
+                  <span>Details</span>
+                  {firstPage !== null && <span>· p. {firstPage}</span>}
+                </summary>
+
+                <div className="mt-2 space-y-3 border border-[#c8ccc0] bg-[#efeee8] p-3 text-xs">
+                  <div className="flex flex-wrap items-center justify-between gap-2 font-mono text-[11px] text-[#5b5e56]">
+                    {validPages.length > 0 && (
+                      <span>
+                        Pages: {validPages.join(", ")}
+                        {clause.effective_from &&
+                        clause.effective_from !== defaultEffectiveDate
+                          ? ` · Effective ${clause.effective_from}`
+                          : ""}
+                      </span>
                     )}
-                    , from {activeVer?.valid_from ?? consRecord?.as_of_date} ·{" "}
-                    Derived by this project, not an official publication
-                    {activeVer?.citations?.[0]?.page ? (
+                    <div className="flex flex-wrap items-center gap-3">
+                      {firstPage !== null &&
+                        sourceHref &&
+                        sourceHref.startsWith("http") && (
+                          <a
+                            href={`${sourceHref}#page=${firstPage}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#080909] underline"
+                          >
+                            View source p. {firstPage}
+                          </a>
+                        )}
+                      {firstPage !== null &&
+                        clause.archive_url &&
+                        clause.archive_url.startsWith("http") && (
+                          <a
+                            href={`${clause.archive_url}#page=${firstPage}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#5b5e56] underline hover:text-[#080909]"
+                          >
+                            Archive p. {firstPage} ↗
+                          </a>
+                        )}
+                    </div>
+                  </div>
+
+                  {siteNotes.length > 0 && (
+                    <div className="space-y-1 border-l-2 border-[#080909] bg-[#f5f3ed] px-3 py-2 text-xs text-[#171917]">
+                      <div className="font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#080909]">
+                        Note by this site
+                      </div>
+                      {siteNotes.map((noteTxt, nIdx) => (
+                        <p key={nIdx} className="dg-serif">
+                          {noteTxt}
+                        </p>
+                      ))}
+                    </div>
+                  )}
+
+                  {ocrCorrections.length > 0 && (
+                    <div className="border-l-2 border-[#5b5e56] bg-[#f5f3ed] px-3 py-1.5 text-xs">
+                      <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#080909]">
+                        Corrected OCR ({ocrCorrections.length})
+                      </div>
+                      <ul className="mt-1 space-y-1 font-mono text-[11px] text-[#171917]">
+                        {ocrCorrections.map((oc, oIdx) => (
+                          <li key={oIdx}>
+                            Original (p. {oc.page}): &ldquo;{oc.original_text}
+                            &rdquo; → <strong>&ldquo;{oc.corrected_text}&rdquo;</strong> (
+                            {oc.reason})
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {isAmendedVersion && (
+                    <div className="border-l-2 border-[#080909] bg-[#f5f3ed] px-3 py-2 text-xs">
+                      <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#080909]">
+                        Changed by{" "}
+                        {activeVer?.source_doc ? (
+                          jurisdictionId ? (
+                            <a
+                              href={`/j/${jurisdictionId}/documents/${activeVer.source_doc}#node-${activeVer.source_eid ?? ""}`}
+                              className="font-semibold underline"
+                            >
+                              {activeVer.source_doc}:{activeVer.source_eid}
+                            </a>
+                          ) : (
+                            `${activeVer.source_doc}:${activeVer.source_eid}`
+                          )
+                        ) : (
+                          consRecord?.amendments_applied.join(", ")
+                        )}
+                        , from {activeVer?.valid_from ?? consRecord?.as_of_date} ·{" "}
+                        Derived by this project, not an official publication
+                        {activeVer?.citations?.[0]?.page ? (
+                          <>
+                            {" · "}
+                            <span>
+                              Amending source p. {activeVer.citations[0].page}
+                            </span>
+                          </>
+                        ) : null}
+                      </div>
+                      {versions.length > 1 && versions[0]?.content && (
+                        <div className="mt-1 text-xs text-[#5b5e56]">
+                          Original wording ({eid}): &ldquo;{versions[0].content}
+                          &rdquo;
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {unconsRecord && (
+                    <div className="border border-dashed border-[#080909] bg-[#f5f3ed] px-3 py-2 font-mono text-[10.5px] text-[#080909]">
+                      Unconsolidated: {unconsRecord.reason}
+                    </div>
+                  )}
+
+                  {unappliedEffects.map((eff) => (
+                    <div
+                      key={eff.effect_id}
+                      className="border border-dashed border-[#080909] bg-[#f5f3ed] px-3 py-2 font-mono text-[10.5px] text-[#080909]"
+                    >
+                      Unapplied effect ({eff.effect_id}, {eff.action}):{" "}
+                      {eff.unapplied_reason ?? "Low confidence"}
+                    </div>
+                  ))}
+
+                  {targetAmendments.length > 0 && (
+                    <div className="space-y-2">
+                      {targetAmendments.map((lnk, lIdx) => {
+                        const amendingClause =
+                          allClausesLookup[lnk.amending_clause];
+                        return (
+                          <div
+                            key={`${lnk.amending_clause}-${lIdx}`}
+                            className="border-l-2 border-[#080909] pl-3"
+                          >
+                            <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#5b5e56]">
+                              Amending clause: {lnk.amending_clause} ·{" "}
+                              {lnk.action.replace("_", " ")}
+                              {lnk.effective_date
+                                ? ` · ${lnk.effective_date}`
+                                : ""}
+                            </div>
+                            {amendingClause && (
+                              <p className="dg-serif mt-0.5 text-sm text-[#5b5e56]">
+                                {amendingClause.text}
+                              </p>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {hasVersionHistory && (
+                    <div
+                      data-testid={`tree-record-version-history-${clause.clause_id}`}
+                      className="border-t border-[#c8ccc0] pt-2 text-xs text-[#5b5e56]"
+                    >
+                      <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#080909]">
+                        v{recordVersion} · corrected from v
+                        {Math.max(1, recordVersion - 1)} (record version history)
+                      </div>
+                      <div className="mt-1.5 space-y-1.5 bg-[#f5f3ed] p-2">
+                        {clause.record_change_reason && (
+                          <p className="font-mono text-[10px] text-[#080909]">
+                            Correction note: {clause.record_change_reason}
+                          </p>
+                        )}
+                        {priorVersions.map((pv) => (
+                          <div
+                            key={pv.record_id}
+                            className="border-t border-[#c8ccc0] pt-1 text-xs"
+                          >
+                            <div className="font-mono text-[10px] text-[#5b5e56]">
+                              Prior record {pv.record_id} (v
+                              {pv.record_version ?? 1})
+                            </div>
+                            <div className="font-medium text-[#080909]">
+                              {pv.title}
+                            </div>
+                            <p className="dg-serif text-xs text-[#5b5e56]">
+                              {pv.text}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="border-t border-[#c8ccc0] pt-2 font-mono text-[10px] text-[#5b5e56]">
+                    Address: {eid} · Record:{" "}
+                    {clause.record_id ?? clause.clause_id} ·{" "}
+                    {clause.verification.replace("_", " ")}
+                    {jurisdictionId && clause.doc_id ? (
                       <>
                         {" · "}
-                        <span>
-                          Amending source p. {activeVer.citations[0].page}
-                        </span>
+                        <a
+                          href={`/j/${jurisdictionId}/documents/${clause.doc_id}/${eid}`}
+                          className="text-[#080909] underline"
+                        >
+                          Local graph →
+                        </a>
                       </>
                     ) : null}
                   </div>
-                  {versions.length > 1 && versions[0]?.content && (
-                    <div className="mt-1 text-xs text-[#5b5e56]">
-                      Original wording ({eid}): &ldquo;{versions[0].content}
-                      &rdquo;
-                    </div>
-                  )}
                 </div>
-              )}
-
-              {unconsRecord && (
-                <div className="mt-2 border border-dashed border-[#080909] bg-[#efeee8] px-3 py-2 font-mono text-[10.5px] text-[#080909]">
-                  Unconsolidated: {unconsRecord.reason}
-                </div>
-              )}
-
-              {unappliedEffects.map((eff) => (
-                <div
-                  key={eff.effect_id}
-                  className="mt-2 border border-dashed border-[#080909] bg-[#efeee8] px-3 py-2 font-mono text-[10.5px] text-[#080909]"
-                >
-                  Unapplied effect ({eff.effect_id}, {eff.action}):{" "}
-                  {eff.unapplied_reason ?? "Low confidence"}
-                </div>
-              ))}
-
-              {targetAmendments.length > 0 && (
-                <div className="mt-3 space-y-2">
-                  {targetAmendments.map((lnk, lIdx) => {
-                    const amendingClause = allClausesLookup[lnk.amending_clause];
-                    return (
-                      <div
-                        key={`${lnk.amending_clause}-${lIdx}`}
-                        className="border-l-2 border-[#080909] pl-3"
-                      >
-                        <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#5b5e56]">
-                          Amending clause: {lnk.amending_clause} ·{" "}
-                          {lnk.action.replace("_", " ")}
-                          {lnk.effective_date ? ` · ${lnk.effective_date}` : ""}
-                        </div>
-                        {amendingClause && (
-                          <p className="dg-serif mt-0.5 text-sm text-[#5b5e56]">
-                            {amendingClause.text}
-                          </p>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-
-              {siteNotes.length > 0 && (
-                <div className="mt-2 space-y-1 border-l-2 border-[#080909] bg-[#efeee8] px-3 py-2 text-xs text-[#171917]">
-                  <div className="font-mono text-[9.5px] uppercase tracking-[0.12em] text-[#080909]">
-                    Note by this site
-                  </div>
-                  {siteNotes.map((noteTxt, nIdx) => (
-                    <p key={nIdx} className="dg-serif">
-                      {noteTxt}
-                    </p>
-                  ))}
-                </div>
-              )}
-
-              {ocrCorrections.length > 0 && (
-                <details className="mt-2 border-l-2 border-[#5b5e56] bg-[#efeee8] px-3 py-1.5 text-xs">
-                  <summary className="cursor-pointer font-mono text-[10px] uppercase tracking-[0.12em] text-[#080909]">
-                    Corrected OCR ({ocrCorrections.length}) — tap to view original scan text
-                  </summary>
-                  <ul className="mt-1 space-y-1 font-mono text-[11px] text-[#171917]">
-                    {ocrCorrections.map((oc, oIdx) => (
-                      <li key={oIdx}>
-                        Original (p. {oc.page}): &ldquo;{oc.original_text}&rdquo; →{" "}
-                        <strong>&ldquo;{oc.corrected_text}&rdquo;</strong> ({oc.reason})
-                      </li>
-                    ))}
-                  </ul>
-                </details>
-              )}
-
-              <div className="mt-3 flex flex-wrap items-center justify-between gap-2 font-mono text-[10.5px] uppercase tracking-[0.12em] text-[#5b5e56]">
-                <span>
-                  {validPages.length > 0 ? (
-                    <>
-                      Pages: {validPages.join(", ")}
-                      {clause.effective_from &&
-                      clause.effective_from !== defaultEffectiveDate
-                        ? ` · Effective ${clause.effective_from}`
-                        : ""}
-                    </>
-                  ) : (
-                    "No source page recorded"
-                  )}
-                </span>
-                <div className="flex flex-wrap items-center gap-3">
-                  {firstPage !== null &&
-                    sourceHref &&
-                    sourceHref.startsWith("http") && (
-                      <a
-                        href={`${sourceHref}#page=${firstPage}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[#080909] underline underline-offset-3"
-                      >
-                        View source p. {firstPage}
-                      </a>
-                    )}
-                  {firstPage !== null &&
-                    clause.archive_url &&
-                    clause.archive_url.startsWith("http") && (
-                      <a
-                        href={`${clause.archive_url}#page=${firstPage}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[#5b5e56] underline underline-offset-3 hover:text-[#080909]"
-                      >
-                        Archive p. {firstPage} ↗
-                      </a>
-                    )}
-                  <details className="inline-block">
-                    <summary className="cursor-pointer text-[10px] text-[#5b5e56] underline">
-                      Details
-                    </summary>
-                    <span className="ml-2 text-[10px] normal-case text-[#5b5e56]">
-                      Address: {eid} · Record: {clause.record_id ?? clause.clause_id} ·{" "}
-                      {clause.verification.replace("_", " ")}
-                      {jurisdictionId && clause.doc_id ? (
-                        <>
-                          {" · "}
-                          <a
-                            href={`/j/${jurisdictionId}/documents/${clause.doc_id}/${eid}`}
-                            className="underline text-[#080909]"
-                          >
-                            Local graph →
-                          </a>
-                        </>
-                      ) : null}
-                    </span>
-                  </details>
-                </div>
-              </div>
-
-              {hasVersionHistory && (
-                <details
-                  data-testid={`tree-record-version-history-${clause.clause_id}`}
-                  className="mt-2 border-t border-[#e5e6de] pt-1.5 text-xs text-[#5b5e56]"
-                >
-                  <summary className="cursor-pointer font-mono text-[10px] uppercase tracking-[0.12em] text-[#080909]">
-                    v{recordVersion} · corrected from v
-                    {Math.max(1, recordVersion - 1)} (record version history)
-                  </summary>
-                  <div className="mt-1.5 space-y-1.5 bg-[#efeee8] p-2">
-                    {clause.record_change_reason && (
-                      <p className="font-mono text-[10px] text-[#080909]">
-                        Correction note: {clause.record_change_reason}
-                      </p>
-                    )}
-                    {priorVersions.map((pv) => (
-                      <div
-                        key={pv.record_id}
-                        className="border-t border-[#c8ccc0] pt-1 text-xs"
-                      >
-                        <div className="font-mono text-[10px] text-[#5b5e56]">
-                          Prior record {pv.record_id} (v
-                          {pv.record_version ?? 1})
-                        </div>
-                        <div className="font-medium text-[#080909]">
-                          {pv.title}
-                        </div>
-                        <p className="dg-serif text-xs text-[#5b5e56]">
-                          {pv.text}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </details>
-              )}
-            </details>
+              </details>
+            </article>
           );
         })}
       </div>

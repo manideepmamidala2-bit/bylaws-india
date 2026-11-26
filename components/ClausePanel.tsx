@@ -268,41 +268,12 @@ export function ClausePanel({
                     </div>
                   )}
 
-                  {targetAmendments.map((lnk, lIdx) => {
-                    const amendingNode = clauseTextById.get(lnk.amending_clause);
-                    return (
-                      <div
-                        key={`${lnk.amending_clause}-${lIdx}`}
-                        className="mt-2.5 border-l-2 border-[#080909] pl-3"
-                      >
-                        <div className="font-mono text-[9.5px] uppercase tracking-[0.14em] text-[#5b5e56]">
-                          {lnk.amending_clause} · {lnk.action.replace("_", " ")}
-                          {lnk.effective_date ? ` · ${lnk.effective_date}` : ""}
-                        </div>
-                        {amendingNode && (
-                          <p className="dg-serif mt-0.5 text-[13px] text-[#5b5e56]">
-                            {amendingNode.text}
-                          </p>
-                        )}
-                      </div>
-                    );
-                  })}
-
-                  {quotedReason && (
-                    <div className="mt-2 border-l border-[#c8ccc0] pl-2.5 font-mono text-[10px] text-[#5b5e56]">
-                      Tag basis: &ldquo;{quotedReason}&rdquo;
-                    </div>
-                  )}
-
                   <div className="mt-2.5 flex flex-wrap items-center justify-between gap-2 font-mono text-[10.5px] uppercase tracking-[0.12em] text-[#5b5e56]">
                     <span>
                       {firstPage === null ? (
                         "No source page recorded"
                       ) : (
-                        <>
-                          p. {validPages.join(", ")}
-                          {hasVersionHistory ? ` · v${recordVersion}` : ""}
-                        </>
+                        <>p. {validPages.join(", ")}</>
                       )}
                     </span>
                     <div className="flex flex-wrap items-center gap-3">
@@ -318,26 +289,49 @@ export function ClausePanel({
                             View source p. {firstPage}
                           </a>
                         )}
-                      {firstPage !== null &&
-                        clause.archive_url &&
-                        clause.archive_url.startsWith("http") && (
-                          <a
-                            href={`${clause.archive_url}#page=${firstPage}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-[#5b5e56] underline underline-offset-3 hover:text-[#080909]"
-                          >
-                            Archive p. {firstPage} ↗
-                          </a>
-                        )}
                       <details className="inline-block">
                         <summary className="cursor-pointer text-[10px] text-[#5b5e56] underline">
                           Details
                         </summary>
-                        <span className="ml-2 text-[10px] normal-case text-[#5b5e56]">
-                          {clause.record_id ?? clause.clause_id} ·{" "}
-                          {clause.verification.replace("_", " ")}
-                        </span>
+                        <div className="mt-1 space-y-1.5 border border-[#c8ccc0] bg-[#efeee8] p-2 text-[10px] normal-case text-[#5b5e56]">
+                          <div>
+                            {clause.record_id ?? clause.clause_id} ·{" "}
+                            {clause.verification.replace("_", " ")}
+                            {firstPage !== null &&
+                            clause.archive_url &&
+                            clause.archive_url.startsWith("http") ? (
+                              <>
+                                {" · "}
+                                <a
+                                  href={`${clause.archive_url}#page=${firstPage}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="underline"
+                                >
+                                  Archive p. {firstPage} ↗
+                                </a>
+                              </>
+                            ) : null}
+                          </div>
+                          {quotedReason && (
+                            <div>Tag basis: &ldquo;{quotedReason}&rdquo;</div>
+                          )}
+                          {targetAmendments.map((lnk, lIdx) => {
+                            const amendingNode = clauseTextById.get(
+                              lnk.amending_clause
+                            );
+                            return (
+                              <div key={`${lnk.amending_clause}-${lIdx}`}>
+                                {lnk.amending_clause} ·{" "}
+                                {lnk.action.replace("_", " ")}
+                                {lnk.effective_date
+                                  ? ` · ${lnk.effective_date}`
+                                  : ""}
+                                {amendingNode ? `: ${amendingNode.text}` : ""}
+                              </div>
+                            );
+                          })}
+                        </div>
                       </details>
                     </div>
                   </div>

@@ -7,7 +7,11 @@ import json
 from pathlib import Path
 
 from bylaws.config import load_jurisdiction_config
-from bylaws.fidelity import verify_jurisdiction_text_fidelity
+from bylaws.fidelity import (
+    _load_doc_page_token_sets,
+    extract_word_tokens,
+    verify_jurisdiction_text_fidelity,
+)
 from bylaws.root import resolve_repo_root
 
 
@@ -171,3 +175,106 @@ def test_ocr_corrections_unreadable_markers_and_gazette_headers_stripped() -> No
     assert "| OCR corrections applied (`ocr_status: corrected`) |" in qa_md
     assert "| Unreadable source fragments marked (`[unreadable in source]`) |" in qa_md
     assert "| Untraceable provision text failures | 0 | PASS |" in qa_md
+
+
+def test_home_page_far_story_excerpts_pass_verbatim_fidelity() -> None:
+    """Every quoted legal excerpt in the 5-step FAR story on the home page matches its cited structured provision and source page verbatim."""
+    repo_root = resolve_repo_root()
+    cfg = load_jurisdiction_config("in-ka-bengaluru")
+    trees = _load_clause_trees("in-ka-bengaluru", repo_root)
+
+    def _slice_span(full_txt: str, start_anchor: str, end_anchor: str | None = None) -> str:
+        norm = " ".join(full_txt.split())
+        s_idx = norm.find(start_anchor)
+        assert s_idx != -1, f"Missing start anchor {start_anchor!r}"
+        if not end_anchor:
+            return norm[s_idx:].strip()
+        e_idx = norm.find(end_anchor, s_idx)
+        assert e_idx != -1, f"Missing end anchor {end_anchor!r}"
+        return norm[s_idx : e_idx + len(end_anchor)].strip()
+
+    expected_steps = [
+        (
+            "Step 1 (2004 BBL 2003 9.2)",
+            "bbl-2003",
+            "part_III__sec_9.0__cl_9.2",
+            "bbl-2003",
+            21,
+            "The set backs required on all the sides of building/s",
+            "given below.",
+        ),
+        (
+            "Step 2 (2007 RMP 2015 4.1.1)",
+            "rmp2015-zr",
+            "chp_4__cl_4.1__cl_4.1.1",
+            "rmp2015-zr",
+            28,
+            "The areas of the city which have predominantly residential land use pattern",
+            None,
+        ),
+        (
+            "Step 3 (2017 Bye-law 1.4)",
+            "bbl-2003",
+            "part_I__sec_1.0__cl_1.4",
+            "ka-model-bbl-2017",
+            2,
+            "All mandatory Master Plan or Zonal Regulations",
+            None,
+        ),
+        (
+            "Step 4 (2025 Chapter 11 Premium FAR)",
+            "rmp2015-zr-amend-2025-04",
+            "chp_11_2",
+            "rmp2015-zr-amend-2025-04",
+            2,
+            "The Premium F.A.R by levy of premium charges is the additional F.A.R granted",
+            "regulation 2 below.",
+        ),
+        (
+            "Step 5 (Today Note 2 Combined FAR Cap)",
+            "rmp2015-zr-amend-2025-04",
+            "chp_11_2__note_2",
+            "rmp2015-zr-amend-2025-04",
+            3,
+            "The maximum additional FAR allowed for a given building site",
+            None,
+        ),
+    ]
+
+    built_index_html = repo_root / ".next" / "server" / "app" / "index.html"
+    built_html_txt = (
+        built_index_html.read_text(encoding="utf-8")
+        if built_index_html.is_file()
+        else None
+    )
+
+    for step_label, tree_doc_id, eid, page_doc_id, page_num, s_anchor, e_anchor in expected_steps:
+        tree = trees[tree_doc_id]
+        node = next(
+            (c for c in tree["clauses"] if c["eid"] == eid),
+            None,
+        )
+        assert node is not None, f"Missing node {tree_doc_id}:{eid}"
+        excerpt = _slice_span(str(node.get("text") or ""), s_anchor, e_anchor)
+        assert len(excerpt) > 40
+
+        if built_html_txt is not None:
+            assert s_anchor in built_html_txt, (
+                f"{step_label} anchor {s_anchor!r} missing from built index.html"
+            )
+
+        page_sets = _load_doc_page_token_sets(
+            page_doc_id,
+            cfg.id,
+            parent_id=cfg.parent,
+            repo_root=repo_root,
+        )
+        valid_tokens: set[str] = set()
+        for p in (page_num - 1, page_num, page_num + 1):
+            valid_tokens |= page_sets.get(p, set())
+        missing = [
+            w for w in extract_word_tokens(excerpt) if w not in valid_tokens
+        ]
+        assert not missing, (
+            f"{step_label} ({page_doc_id} p.{page_num}) has words not on source page: {missing}"
+        )

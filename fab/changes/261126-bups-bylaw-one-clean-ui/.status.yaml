@@ -1,0 +1,54 @@
+id: bups
+name: 261126-bups-bylaw-one-clean-ui
+created: 2026-11-26T04:12:16Z
+created_by: manideepmamidala2-bit
+change_type: feat
+issues: []
+progress:
+    intake: done
+    apply: done
+    review: done
+    hydrate: done
+    ship: done
+    review-pr: pending
+plan:
+    generated: true
+    task_count: 7
+    acceptance_count: 18
+    acceptance_completed: 18
+confidence:
+    certain: 8
+    confident: 0
+    tentative: 0
+    unresolved: 0
+    score: 5.0
+    fuzzy: true
+    dimensions:
+        signal: 99.4
+        reversibility: 91.3
+        competence: 95.0
+        disambiguation: 99.4
+stage_metrics:
+    intake: {started_at: "2026-11-26T04:12:16Z", driver: fab-new, iterations: 1, completed_at: "2026-11-26T04:19:10Z"}
+    apply: {started_at: "2026-11-26T04:19:10Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-26T05:50:38Z"}
+    review: {started_at: "2026-11-26T05:50:38Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-26T06:02:58Z"}
+    hydrate: {started_at: "2026-11-26T06:02:58Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-26T06:14:05Z"}
+    ship: {started_at: "2026-11-26T06:14:05Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-26T06:15:22Z"}
+prs:
+    - https://github.com/manideepmamidala2-bit/bylaws-india/pull/17
+change_type_source: explicit
+base_branch: main
+true_impact:
+    added: 14078
+    deleted: 4633
+    net: 9445
+    tests:
+        added: 1007
+        deleted: 83
+        net: 924
+    computed_at: "2026-11-26T06:15:22Z"
+    computed_at_stage: ship
+summary: Bylaw One clean interface, 5-step verbatim FAR home page, 3-item header, clean subject parameter tables, standalone map without plot inputs, and parameter plausibility bounds / hectare normalization / non-FAR exclusion
+# base_branch: written by /git-branch or /fab-new when the change's branch is created (no placeholder here).
+# true_impact: lazily created on first stage-finish that computes it (no placeholder here).
+last_updated: 2026-11-26T06:15:22Z

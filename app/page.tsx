@@ -5,16 +5,33 @@ import {
   fetchJurisdictionDataset,
   fetchManifest,
   fetchParameters,
-  fetchResolution,
   getVisibleJurisdictions,
   isWithdrawnRelease,
-  slimParametersForSsr,
+  type ClauseNode,
+  type DocumentMetadata,
+  type JurisdictionParameters,
   type JurisdictionSummary,
   type ReleaseManifest,
-  type ZoneGeometry,
 } from "@/lib/data";
 import { TopNav } from "@/components/TopNav";
-import { AreaExplorerClient } from "@/components/AreaExplorerClient";
+import {
+  FarStoryStepper,
+  type FarStoryStep,
+  type FarStoryTableRow,
+} from "@/components/FarStoryStepper";
+import {
+  CODE_SUBJECTS,
+  computeHeroDocumentAndBodyCounts,
+  formatHumanDate,
+  formatParameterConditionsPlain,
+  formatParameterValuePlain,
+  formatPlainDocumentTitle,
+  formatPlainInstrumentStatus,
+  formatPlainWhatChangedSummary,
+  isDocumentTextHeld,
+  isPlausibleParameterRecord,
+  sortDocumentsMostRecentFirst,
+} from "@/lib/plain-language";
 
 export interface HomePageProps {
   manifest: ReleaseManifest;
@@ -39,284 +56,833 @@ function hasPublishedRelease(item: JurisdictionSummary): boolean {
   return item.releases.some((rel) => !isWithdrawnRelease(rel));
 }
 
-export default async function JurisdictionPickerPage() {
+function sliceVerbatimSpan(
+  fullText: string | undefined | null,
+  startAnchor: string,
+  endAnchor?: string
+): string | null {
+  if (!fullText) return null;
+  const normalized = fullText.replace(/\s+/g, " ").trim();
+  const sIdx = normalized.indexOf(startAnchor);
+  if (sIdx === -1) return normalized;
+  if (!endAnchor) return normalized.slice(sIdx).trim();
+  const eIdx = normalized.indexOf(endAnchor, sIdx);
+  if (eIdx === -1) return normalized.slice(sIdx).trim();
+  return normalized.slice(sIdx, eIdx + endAnchor.length).trim();
+}
+
+export function buildHomeFarStorySteps(
+  clauses: ReadonlyArray<ClauseNode>,
+  documents: ReadonlyArray<DocumentMetadata>,
+  parametersPayload: JurisdictionParameters | null,
+  jurId: string
+): FarStoryStep[] {
+  const docById = new Map(documents.map((d) => [d.doc_id, d]));
+  const allParams = (parametersPayload?.records ?? []).filter(
+    isPlausibleParameterRecord
+  );
+
+  const muniBaseDoc = documents.find(
+    (d) => d.role === "base" && d.layer === "municipal"
+  );
+  const planBaseDoc = documents.find(
+    (d) => d.role === "base" && d.layer === "planning"
+  );
+  const pfarAmendDoc = documents.find(
+    (d) =>
+      d.role === "amendment" &&
+      d.layer === "planning" &&
+      (d.effective_from ?? "").startsWith("2025-04")
+  );
+
+  // Step 1: 2004 Municipal Building Bye-laws 2003 (Bye-law 9.2)
+  const s1Node = clauses.find(
+    (c) => c.doc_id === muniBaseDoc?.doc_id && c.number === "9.2"
+  );
+  const s1Excerpt = sliceVerbatimSpan(
+    s1Node?.text,
+    "The set backs required on all the sides of building/s",
+    "given below."
+  );
+  const bblPdfBase = muniBaseDoc?.official_url || muniBaseDoc?.source_url || "";
+  const s1Page = s1Node?.citations?.[0]?.page ?? 21;
+  const s1Rows: FarStoryTableRow[] = [
+    {
+      condition: "Plots up to 240 m² (Intensely developed area)",
+      values: ["65%", "0.75", "1.00"],
+      sourceLabel: "Table 6",
+      pageNumber: 23,
+      pageLink: bblPdfBase ? `${bblPdfBase}#page=23` : "#page=23",
+    },
+    {
+      condition: "Plots above 240 up to 500 m² (Intensely developed area)",
+      values: ["60%", "0.75", "1.00"],
+      sourceLabel: "Table 6",
+      pageNumber: 23,
+      pageLink: bblPdfBase ? `${bblPdfBase}#page=23` : "#page=23",
+    },
+    {
+      condition: "Plots above 500 up to 750 m² (Intensely developed area)",
+      values: ["60%", "1.00", "1.25"],
+      sourceLabel: "Table 6",
+      pageNumber: 23,
+      pageLink: bblPdfBase ? `${bblPdfBase}#page=23` : "#page=23",
+    },
+    {
+      condition: "Plots above 1,000 m² (Intensely developed area)",
+      values: ["60%", "1.25", "1.50"],
+      sourceLabel: "Table 6",
+      pageNumber: 23,
+      pageLink: bblPdfBase ? `${bblPdfBase}#page=23` : "#page=23",
+    },
+  ];
+
+  // Step 2: 2007 Master Plan Zoning Regulations Chapter 4 (Residential Main Table 10)
+  const s2Node = clauses.find(
+    (c) => c.doc_id === planBaseDoc?.doc_id && c.number === "4.1.1"
+  );
+  const s2Excerpt = sliceVerbatimSpan(
+    s2Node?.text,
+    "The areas of the city which have predominantly residential land use pattern"
+  );
+  const rmpPdfBase = planBaseDoc?.official_url || planBaseDoc?.source_url || "";
+  const s2Page = s2Node?.citations?.[0]?.page ?? 28;
+  const tbl10Far = allParams.filter(
+    (r) =>
+      r.source.doc_id === planBaseDoc?.doc_id &&
+      r.parameter === "far_base_max" &&
+      (r.source.table_eid === "chp_4__cl_4.1__cl_4.1.3__tbl_10" ||
+        r.source.table_eid === "chp_4__cl_4.1__cl_4.1.3__tbl_1")
+  );
+  const tbl10CovByRow = new Map<number, string>();
+  for (const r of allParams) {
+    if (
+      r.source.doc_id === planBaseDoc?.doc_id &&
+      r.parameter === "ground_coverage_max_pct" &&
+      (r.source.table_eid === "chp_4__cl_4.1__cl_4.1.3__tbl_10" ||
+        r.source.table_eid === "chp_4__cl_4.1__cl_4.1.3__tbl_1") &&
+      typeof r.source.row_index === "number"
+    ) {
+      tbl10CovByRow.set(r.source.row_index, formatParameterValuePlain(r));
+    }
+  }
+  const s2Rows: FarStoryTableRow[] =
+    tbl10Far.length > 0
+      ? tbl10Far.map((r) => ({
+          condition: formatParameterConditionsPlain(r.conditions, r),
+          values: [
+            tbl10CovByRow.get(r.source.row_index ?? -1) ?? "—",
+            formatParameterValuePlain(r),
+          ],
+          sourceLabel: "Table 10",
+          pageNumber: r.source.page,
+          pageLink: r.source.page_link,
+        }))
+      : [
+          {
+            condition:
+              "Residential (Main), plots above 360 up to 1,000 m², roads above 12 up to 18 m",
+            values: ["65%", "2.25"],
+            sourceLabel: "Table 10",
+            pageNumber: 28,
+            pageLink: rmpPdfBase ? `${rmpPdfBase}#page=28` : "#page=28",
+          },
+        ];
+
+  // Step 3: 2017 Bye-law 1.4
+  const s3Node = clauses.find(
+    (c) => c.doc_id === muniBaseDoc?.doc_id && c.number === "1.4"
+  );
+  const s3Excerpt = s3Node?.text ? s3Node.text.replace(/\s+/g, " ").trim() : null;
+  const s3Ver = s3Node?.versions?.[0];
+  const s3SourceDoc = s3Ver?.source_doc ? docById.get(s3Ver.source_doc) : null;
+  const s3PdfBase =
+    s3SourceDoc?.official_url || s3SourceDoc?.source_url || bblPdfBase;
+  const s3Page = s3Ver?.citations?.[0]?.page ?? s3Node?.citations?.[0]?.page ?? 2;
+
+  // Step 4: 2025 Premium FAR Chapter 11
+  const s4Node = clauses.find(
+    (c) => c.doc_id === pfarAmendDoc?.doc_id && c.eid === "chp_11_2"
+  );
+  const s4Excerpt = sliceVerbatimSpan(
+    s4Node?.text,
+    "The Premium F.A.R by levy of premium charges is the additional F.A.R granted",
+    "regulation 2 below."
+  );
+  const pfarPdfBase =
+    pfarAmendDoc?.official_url || pfarAmendDoc?.source_url || "";
+  const s4Page = s4Node?.citations?.[0]?.page ?? 2;
+  const pfarRecs = allParams.filter(
+    (r) =>
+      r.source.doc_id === pfarAmendDoc?.doc_id &&
+      r.parameter === "far_premium_additional_max"
+  );
+  const tdrByRow = new Map<number, string>();
+  for (const r of allParams) {
+    if (
+      r.source.doc_id === pfarAmendDoc?.doc_id &&
+      r.parameter === "tdr_receivable_max" &&
+      typeof r.source.row_index === "number"
+    ) {
+      tdrByRow.set(r.source.row_index, formatParameterValuePlain(r));
+    }
+  }
+  const s4Rows: FarStoryTableRow[] =
+    pfarRecs.length > 0
+      ? pfarRecs.map((r) => ({
+          condition: formatParameterConditionsPlain(r.conditions, r),
+          values: [
+            formatParameterValuePlain(r),
+            tdrByRow.get(r.source.row_index ?? -1) ?? "None (0)",
+          ],
+          sourceLabel: "Table 27",
+          pageNumber: r.source.page,
+          pageLink: r.source.page_link,
+        }))
+      : [
+          {
+            condition: "Roads above 9 up to 12 m",
+            values: ["20% of base FAR (0.2×)", "None (0)"],
+            sourceLabel: "Table 27",
+            pageNumber: 2,
+            pageLink: pfarPdfBase ? `${pfarPdfBase}#page=2` : "#page=2",
+          },
+          {
+            condition: "Roads above 12 up to 18 m",
+            values: ["30% of base FAR (0.3×)", "10% of base FAR (0.1×)"],
+            sourceLabel: "Table 27",
+            pageNumber: 2,
+            pageLink: pfarPdfBase ? `${pfarPdfBase}#page=2` : "#page=2",
+          },
+          {
+            condition: "Roads above 18 m",
+            values: ["40% of base FAR (0.4×)", "20% of base FAR (0.2×)"],
+            sourceLabel: "Table 27",
+            pageNumber: 2,
+            pageLink: pfarPdfBase ? `${pfarPdfBase}#page=2` : "#page=2",
+          },
+        ];
+
+  // Step 5: Today. What applies.
+  const s5Node = clauses.find(
+    (c) => c.doc_id === pfarAmendDoc?.doc_id && c.eid === "chp_11_2__note_2"
+  );
+  const s5Excerpt = s5Node?.text ? s5Node.text.replace(/\s+/g, " ").trim() : null;
+  const s5Page = s5Node?.citations?.[0]?.page ?? 3;
+  const s5Rows: FarStoryTableRow[] = [
+    {
+      condition: "Base FAR (by zone, plot size and road width)",
+      values: [
+        "1.0 to 3.25",
+        "Master Plan Zoning Regulations (via Bye-law 1.4)",
+      ],
+      sourceLabel: "Chapter 4",
+      pageNumber: 28,
+      pageLink: rmpPdfBase ? `${rmpPdfBase}#page=28` : "#page=28",
+    },
+    {
+      condition: "Premium FAR (on roads above 9 m)",
+      values: [
+        "Up to 20% to 40% of base FAR",
+        "April 2025 Chapter 11 Amendment",
+      ],
+      sourceLabel: "Table 27",
+      pageNumber: 2,
+      pageLink: pfarPdfBase ? `${pfarPdfBase}#page=2` : "#page=2",
+    },
+    {
+      condition: "Transferable development rights (TDR)",
+      values: [
+        "Up to 10% to 20% alongside Premium FAR (60% combined cap)",
+        "April 2025 Chapter 11 Amendment",
+      ],
+      sourceLabel: "Note 2",
+      pageNumber: 3,
+      pageLink: pfarPdfBase ? `${pfarPdfBase}#page=3` : "#page=3",
+    },
+  ];
+
+  const muniDocId = muniBaseDoc?.doc_id ?? "";
+  const planDocId = planBaseDoc?.doc_id ?? "";
+  const pfarDocId = pfarAmendDoc?.doc_id ?? "";
+
+  return [
+    {
+      stepNumber: 1,
+      heading: "2004. The bye-laws set FAR.",
+      inShortBySite:
+        "The Building Bye-laws 2003 (in operation from 5 June 2004) set FAR in their own tables (bye-law 9.2, Tables 4 to 6).",
+      verbatimExcerpt: s1Excerpt,
+      documentTitle: `${formatPlainDocumentTitle(muniBaseDoc)} (Bye-law 9.2)`,
+      documentDate: "5 June 2004",
+      pageNumber: s1Page,
+      viewPageUrl: bblPdfBase ? `${bblPdfBase}#page=${s1Page}` : `#page=${s1Page}`,
+      documentHref: muniDocId
+        ? `/j/${jurId}/documents/${muniDocId}#node-${s1Node?.eid ?? ""}`
+        : `/j/${jurId}/topics/far`,
+      tableCaption:
+        "Derived by this site · Sample rows from 2003 Bye-laws Table 6 (replaced for FAR in 2017)",
+      tableHeaders: [
+        "Plot condition",
+        "Coverage",
+        "Residential FAR",
+        "Commercial FAR",
+        "Source",
+      ],
+      tableRows: s1Rows,
+    },
+    {
+      stepNumber: 2,
+      heading: "2007. The master plan sets FAR by zone.",
+      inShortBySite:
+        "The Master Plan Zoning Regulations set FAR by zone, plot size and road width (Chapter 4, Table 10).",
+      verbatimExcerpt: s2Excerpt,
+      documentTitle: `${formatPlainDocumentTitle(planBaseDoc)} (Chapter 4)`,
+      documentDate: "25 June 2007",
+      pageNumber: s2Page,
+      viewPageUrl: rmpPdfBase ? `${rmpPdfBase}#page=${s2Page}` : `#page=${s2Page}`,
+      documentHref: planDocId
+        ? `/j/${jurId}/documents/${planDocId}#node-${s2Node?.eid ?? ""}`
+        : `/j/${jurId}/topics/far`,
+      tableCaption:
+        "Derived by this site · Residential (Main) base FAR and coverage (Table 10)",
+      tableHeaders: [
+        "Zone, plot size and road width",
+        "Coverage",
+        "Base FAR",
+        "Source",
+      ],
+      tableRows: s2Rows,
+    },
+    {
+      stepNumber: 3,
+      heading: "2017. The bye-laws hand FAR to the master plan.",
+      inShortBySite:
+        "Bye-law 1.4, from notification UDD 14 TTP 2017, makes the master plan rules govern use, coverage, FAR, setbacks, height, floors, dwelling units and parking.",
+      verbatimExcerpt: s3Excerpt,
+      documentTitle:
+        "Building Bye-Laws 2003 — Bye-law 1.4 (from Notification UDD 14 TTP 2017)",
+      documentDate: "28 October 2017",
+      pageNumber: s3Page,
+      viewPageUrl: s3PdfBase ? `${s3PdfBase}#page=${s3Page}` : `#page=${s3Page}`,
+      documentHref: muniDocId
+        ? `/j/${jurId}/documents/${muniDocId}#node-${s3Node?.eid ?? ""}`
+        : `/j/${jurId}/topics/far`,
+    },
+    {
+      stepNumber: 4,
+      heading: "2025. Premium FAR is added.",
+      inShortBySite:
+        "The premium FAR chapter (Chapter 11, notified 2 April 2025) allows extra FAR on payment, by road width.",
+      verbatimExcerpt: s4Excerpt,
+      documentTitle:
+        "Master Plan Zoning Regulations (Amendment) — Chapter 11 Premium FAR",
+      documentDate: "2 April 2025",
+      pageNumber: s4Page,
+      viewPageUrl: pfarPdfBase
+        ? `${pfarPdfBase}#page=${s4Page}`
+        : `#page=${s4Page}`,
+      documentHref: pfarDocId
+        ? `/j/${jurId}/documents/${pfarDocId}#node-${s4Node?.eid ?? ""}`
+        : `/j/${jurId}/topics/far`,
+      tableCaption:
+        "Derived by this site · Allowable Premium FAR and TDR by road width (Table 27)",
+      tableHeaders: [
+        "Road width",
+        "Premium FAR",
+        "TDR alongside Premium FAR",
+        "Source",
+      ],
+      tableRows: s4Rows,
+    },
+    {
+      stepNumber: 5,
+      heading: "Today. What applies.",
+      inShortBySite:
+        "Base FAR from the zoning table, with premium FAR and TDR on top, each from its own source.",
+      verbatimExcerpt: s5Excerpt,
+      documentTitle:
+        "Master Plan Zoning Regulations — Chapter 11, Note 2 (Combined FAR Cap)",
+      documentDate: "2 April 2025",
+      pageNumber: s5Page,
+      viewPageUrl: pfarPdfBase
+        ? `${pfarPdfBase}#page=${s5Page}`
+        : `#page=${s5Page}`,
+      documentHref: `/j/${jurId}/topics/far`,
+      tableCaption: "Derived by this site · How FAR rules combine today",
+      tableHeaders: [
+        "Component",
+        "Allowance",
+        "Governing instrument",
+        "Source",
+      ],
+      tableRows: s5Rows,
+    },
+  ];
+}
+
+export default async function HomePage() {
   const { visibleJurisdictions } = await getHomePageProps();
-  const primaryJurisdiction =
-    visibleJurisdictions.find((j) =>
-      j.releases.some((rel) => isWithdrawnRelease(rel))
-    ) ?? visibleJurisdictions[0];
   const parentJurisdiction =
     visibleJurisdictions.find((j) =>
       visibleJurisdictions.some((child) => child.parent === j.id)
-    ) ?? primaryJurisdiction;
-  const childCorporations = parentJurisdiction
-    ? visibleJurisdictions.filter((j) => j.parent === parentJurisdiction.id)
-    : [];
-  const withdrawnRelease = primaryJurisdiction?.releases.find((rel) =>
-    isWithdrawnRelease(rel)
-  );
+    ) ?? visibleJurisdictions[0];
+
+  const targetJurId = parentJurisdiction?.id ?? "";
+  const cityLabel =
+    parentJurisdiction?.aliases?.[0] ?? parentJurisdiction?.name ?? "City";
+  const regionLabel =
+    parentJurisdiction?.aliases?.[2] ?? parentJurisdiction?.name ?? "City";
 
   const hasActiveDataset =
-    primaryJurisdiction && hasPublishedRelease(primaryJurisdiction);
-  const [primaryDecl, dataset, parametersPayload, resolutionConfig] =
-    hasActiveDataset
-      ? await Promise.all([
-          fetchDeclarations(primaryJurisdiction.id).catch(() => null),
-          fetchJurisdictionDataset(primaryJurisdiction.id).catch(() => null),
-          fetchParameters(primaryJurisdiction.id).catch(() => null),
-          fetchResolution(primaryJurisdiction.id).catch(() => null),
-        ])
-      : [null, null, null, null];
+    parentJurisdiction && hasPublishedRelease(parentJurisdiction);
 
-  const primaryGapNote = primaryDecl?.known_gaps?.[0]?.description ?? null;
+  const [declarations, dataset, parametersPayload] = hasActiveDataset
+    ? await Promise.all([
+        fetchDeclarations(targetJurId).catch(() => null),
+        fetchJurisdictionDataset(targetJurId).catch(() => null),
+        fetchParameters(targetJurId).catch(() => null),
+      ])
+    : [null, null, null];
 
-  const emptyPoly = {
-    type: "Polygon",
-    coordinates: [],
-  } as unknown as ZoneGeometry;
-  const stripFc = (fc: NonNullable<typeof dataset>["boundary"] | null) =>
-    fc
-      ? {
-          ...fc,
-          features: fc.features.slice(0, 72).map((f) => {
-            const p = { ...(f.properties ?? {}) };
-            delete p.source_attribution;
-            delete p.verification_note;
-            delete p.georef_run;
-            return {
-              ...f,
-              properties: p,
-              geometry: emptyPoly,
-            };
-          }),
-        }
-      : null;
-  const seenZoneCode = new Set<string>();
-  const ssrZones = (dataset?.zones.features ?? [])
-    .filter((z) => {
-      const k = z.properties.zone_code;
-      if (seenZoneCode.has(k) && seenZoneCode.size >= 12) return false;
-      seenZoneCode.add(k);
-      return true;
-    })
-    .slice(0, 12)
-    .map((z) => ({ ...z, geometry: emptyPoly }));
-  const ssrClauses = (dataset?.clauses ?? [])
-    .filter(
-      (c) =>
-        c.applies_to_zones &&
-        c.applies_to_zones.length > 0 &&
-        c.type !== "table_row"
+  const allDocuments = dataset?.documents ?? [];
+  const { documentCount, bodyCount } =
+    computeHeroDocumentAndBodyCounts(allDocuments);
+
+  const farSteps = buildHomeFarStorySteps(
+    dataset?.clauses ?? [],
+    allDocuments,
+    parametersPayload,
+    targetJurId
+  );
+
+  const inForceSorted = sortDocumentsMostRecentFirst(
+    allDocuments.filter(
+      (d) =>
+        d.legal_status === "in_force" &&
+        d.acquisition_status !== "not_found" &&
+        d.applies_to_jurisdiction?.status !== "no" &&
+        (d.instrument_type ?? "instrument") !== "map" &&
+        (d.instrument_type ?? "instrument") !== "compilation"
     )
-    .slice(0, 14)
-    .map((c) => ({
-      ...c,
-      text: c.text.slice(0, 260),
-      content: null,
-      intro: null,
-      wrap_up: null,
-      children: [],
-      cross_references: [],
-      tables: [],
-      versions: undefined,
-      citations: (c.citations ?? []).slice(0, 1).map((cit) => ({
-        doc_id: cit.doc_id,
-        page: cit.page,
-        bbox: null,
-        text_excerpt: "",
-      })),
-    }));
+  );
+
+  const recentChanges: DocumentMetadata[] = [];
+  let seenMay2026CorpAmend = false;
+  for (const doc of inForceSorted) {
+    if (doc.doc_id.endsWith("-bbl-amend-2026-05")) {
+      if (seenMay2026CorpAmend) continue;
+      seenMay2026CorpAmend = true;
+    }
+    recentChanges.push(doc);
+    if (recentChanges.length >= 5) break;
+  }
+
+  const convergenceItems = [
+    {
+      year: "May 2026",
+      label: "City Corporation Building (Amendment) Bye-laws",
+    },
+    {
+      year: "Jan 2026",
+      label: "Master Plan Setbacks, Basements and Ramps Amendment",
+    },
+    {
+      year: "Oct 2025",
+      label: "Master Plan Storm-Water Drain Buffer Notification",
+    },
+    {
+      year: "Jul 2025",
+      label: "Government Order on Property Records and Plan Approval",
+    },
+    {
+      year: "May 2025",
+      label: "Municipal Governance Act 2024 (Chapter XVII)",
+    },
+    {
+      year: "Apr 2025",
+      label: "Master Plan Chapter 11 Premium FAR and TDR Notification",
+    },
+    {
+      year: "Oct 2017",
+      label: "Notification UDD 14 TTP 2017 (Bye-law 1.4 incorporation)",
+    },
+    {
+      year: "Jun 2007",
+      label: "Revised Master Plan Zoning Regulations",
+    },
+    {
+      year: "Jun 2004",
+      label: "Municipal Building Bye-Laws 2003",
+    },
+  ];
+
+  const missingItems = (declarations?.not_modelled ?? []).map((nm) =>
+    nm.replace(/\s*\([A-Z0-9\s-]+\)/g, "")
+  );
 
   return (
-    <div className="min-h-screen bg-[#f5f3ed] text-[#080909]">
-      <TopNav
-        jurisdictionId={primaryJurisdiction?.id ?? parentJurisdiction?.id}
-        jurisdictionName={primaryJurisdiction?.name ?? parentJurisdiction?.name}
-        active="home"
-        releaseVersion={
-          primaryJurisdiction?.latest_release ??
-          parentJurisdiction?.latest_release ??
-          undefined
-        }
-      />
+    <div className="bg-[#f5f3ed] text-[#080909]">
+      <TopNav jurisdictionId={targetJurId} active="home" />
 
-      {/* One-line introduction + Full-width above-the-fold Map & Plot Card (Part 5) */}
-      <div className="border-b border-[#080909] bg-[#efeee8] px-6 py-2.5">
-        <p className="dg-serif text-sm text-[#080909]">
-          Find what may be built on a plot from the consolidated building
-          bye-laws and master plan zoning regulations, with every answer traced
-          to the official text and page.
-        </p>
-      </div>
-
-      {dataset && dataset.release && (
+      <main className="mx-auto max-w-5xl px-5">
+        {/* Hero */}
         <section
-          aria-label="Above-the-fold interactive map and plot resolver"
-          className="w-full border-b border-[#080909]"
+          aria-labelledby="hero-heading"
+          className="border-b border-[#c8ccc0] py-14 md:py-20"
         >
-          <AreaExplorerClient
-            jurisdictionId={dataset.jurisdiction.id}
-            corporationName={dataset.jurisdiction.name}
-            releaseVersion={dataset.release.version}
-            zones={ssrZones}
-            clauses={ssrClauses}
-            amendmentLinks={dataset.amendments.links.slice(0, 12)}
-            clauseZoneTags={(dataset.clauseZoneTags?.tags ?? []).slice(0, 30)}
-            boundary={stripFc(dataset.boundary)}
-            gbaZones={stripFc(dataset.gbaZones)}
-            wards={stripFc(dataset.wards)}
-            planningDistricts={stripFc(dataset.planningDistricts)}
-            overlays={stripFc(dataset.overlays)}
-            geoLayers={dataset.geoLayers?.layers ?? []}
-            parametersPayload={slimParametersForSsr(parametersPayload)}
-            resolutionConfig={resolutionConfig}
-            consolidatedPayload={
-              dataset.consolidated
-                ? {
-                    ...dataset.consolidated,
-                    documents: undefined,
-                    records: dataset.consolidated.records
-                      .slice(0, 8)
-                      .map((r) => ({ ...r, tables: [] })),
-                  }
-                : null
-            }
-          />
-        </section>
-      )}
-
-      <main className="mx-auto max-w-6xl px-6 py-8">
-        <header className="border-b border-[#080909] pb-6">
-          <div className="dg-mono">
-            Open Regulatory Dataset · CC BY 4.0 Data · Apache-2.0 Code
+          <div className="dg-mono text-[#5b5e56]">
+            Bylaw One · {regionLabel}
           </div>
-          <h1 className="mt-1 text-3xl font-semibold tracking-tight text-[#080909]">
-            Structured Building Bylaws
-          </h1>
-          <p className="dg-serif mt-2 max-w-3xl text-sm leading-relaxed text-[#171917]">
-            Consolidated municipal building bye-laws, master plan zoning
-            regulations, and georeferenced land-use maps.
-          </p>
-        </header>
-
-        {parentJurisdiction && childCorporations.length > 0 && (
-          <section
-            aria-label="City corporation picker"
-            className="mt-6 border border-[#080909] bg-[#efeee8] p-5"
+          <h1
+            id="hero-heading"
+            className="mt-3 max-w-3xl text-4xl font-semibold tracking-tight text-[#080909] md:text-5xl"
           >
-            <div className="dg-mono">
-              {parentJurisdiction.name} · {childCorporations.length} City
-              Corporations
-            </div>
-            <h2 className="mt-1 text-lg font-semibold tracking-tight text-[#080909]">
-              Select a City Corporation
-            </h2>
-            <p className="dg-serif mt-1 max-w-3xl text-sm text-[#171917]">
-              Base building bye-laws and zoning regulations are shared across{" "}
-              {parentJurisdiction.name}, while each City Corporation has its own
-              2026 Building (Amendment) Bye-laws.
-            </p>
-            <div className="mt-3 flex flex-wrap gap-2 font-mono text-xs uppercase tracking-[0.12em]">
-              <Link
-                href={`/j/${parentJurisdiction.id}`}
-                className="border border-[#080909] bg-[#080909] px-3 py-1.5 text-[#f5f3ed] no-underline"
-              >
-                All Corporations Map ({parentJurisdiction.name})
-              </Link>
-              {childCorporations.map((corp) => (
-                <Link
-                  key={corp.id}
-                  href={`/j/${corp.id}`}
-                  className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 text-[#080909] no-underline hover:bg-[#e5e6de]"
-                >
-                  {corp.name}
-                </Link>
-              ))}
-            </div>
-          </section>
-        )}
-
-        <section
-          aria-label="Project status"
-          className="mt-6 border border-[#080909] bg-[#efeee8] p-5"
-        >
-          <div className="dg-mono">Current Status</div>
-          <h2 className="mt-1 text-lg font-semibold tracking-tight text-[#080909]">
-            {primaryJurisdiction && withdrawnRelease
-              ? `Release ${withdrawnRelease.version} for ${primaryJurisdiction.name} withdrawn; consolidated dataset published`
-              : "Consolidated dataset and source register"}
-          </h2>
-          <p className="dg-serif mt-1 max-w-3xl text-sm leading-relaxed text-[#171917]">
-            {primaryJurisdiction && withdrawnRelease
-              ? `The initial release (${withdrawnRelease.version}) for ${primaryJurisdiction.name} has been withdrawn (${withdrawnRelease.withdrawn_reason}). Verified source documents, consolidated texts, and parameters are published below.`
-              : "Verified source documents, consolidated texts, and parameters are published below."}
+            {cityLabel}&apos;s building rules. One code.
+          </h1>
+          <p
+            data-testid="hero-subline"
+            className="dg-serif mt-4 max-w-2xl text-lg leading-relaxed text-[#171917]"
+          >
+            {documentCount} official documents from {bodyCount} bodies, joined
+            into one readable code. Every rule traced to its page.
           </p>
-          {primaryGapNote && (
-            <p className="dg-serif mt-2 max-w-3xl border-l-2 border-[#080909] pl-3 text-xs text-[#080909]">
-              {primaryGapNote}
-            </p>
-          )}
+
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <Link
+              href={`/j/${targetJurId}/topics`}
+              className="inline-flex min-h-[44px] items-center border border-[#080909] bg-[#080909] px-5 py-2.5 font-mono text-xs uppercase tracking-[0.12em] text-[#f5f3ed] no-underline hover:bg-[#171917]"
+            >
+              Read the code
+            </Link>
+            <Link
+              href={`/j/${targetJurId}/timeline`}
+              className="inline-flex min-h-[44px] items-center border border-[#080909] bg-[#f5f3ed] px-5 py-2.5 font-mono text-xs uppercase tracking-[0.12em] text-[#080909] no-underline hover:bg-[#efeee8]"
+            >
+              What changed recently
+            </Link>
+          </div>
         </section>
 
-        <section aria-label="Available jurisdictions" className="mt-6">
-          <div className="dg-mono mb-3">
-            Jurisdictions ({visibleJurisdictions.length})
-          </div>
+        {/* 01 / The problem */}
+        <section
+          aria-labelledby="section-01-heading"
+          className="border-b border-[#c8ccc0] py-14 md:py-16"
+        >
+          <div className="dg-mono text-[#5b5e56]">01 / The problem</div>
+          <h2
+            id="section-01-heading"
+            className="mt-2 text-2xl font-semibold tracking-tight text-[#080909] md:text-3xl"
+          >
+            Many sources. One building.
+          </h2>
+          <p className="dg-serif mt-3 text-base leading-relaxed text-[#171917]">
+            The rules for one building sit in bye-laws, master plan regulations,
+            amendments, corporation notices and state law. They overlap and
+            sometimes disagree.
+          </p>
 
-          {visibleJurisdictions.length === 0 ? (
-            <p className="text-sm text-[#5b5e56]">
-              No jurisdictions published in manifest.
-            </p>
-          ) : (
-            <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {visibleJurisdictions.map((item) => {
-                const isPublished = hasPublishedRelease(item);
-                return (
+          {/* Quiet convergence illustration */}
+          <figure
+            aria-label="Illustration of official documents converging into one code"
+            className="mt-8 border border-[#c8ccc0] bg-[#efeee8] p-5"
+          >
+            <figcaption className="dg-mono mb-4 text-[#5b5e56]">
+              Illustration · Official sources in force (newest first) converging
+              into one code
+            </figcaption>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-[1fr_auto_220px] md:items-center">
+              <ul className="divide-y divide-[#c8ccc0] border border-[#c8ccc0] bg-[#f5f3ed]">
+                {convergenceItems.map((item) => (
                   <li
-                    key={item.id}
-                    className="border border-[#080909] bg-[#f5f3ed] p-4"
+                    key={`${item.year}-${item.label}`}
+                    className="flex items-baseline justify-between gap-4 px-3.5 py-2 text-xs"
                   >
-                    <div className="flex flex-wrap items-baseline justify-between gap-2">
-                      <h2 className="text-base font-semibold text-[#080909]">
-                        {item.name}
-                      </h2>
-                      <span className="border border-[#080909] bg-[#efeee8] px-2 py-0.5 font-mono text-xs text-[#080909]">
-                        {isPublished
-                          ? `v${item.latest_release}`
-                          : "No data published yet"}
-                      </span>
-                    </div>
-                    <div className="mt-3 flex flex-wrap gap-2 font-mono text-[11px] uppercase tracking-[0.12em]">
-                      <Link
-                        href={`/j/${item.id}`}
-                        className="border border-[#080909] bg-[#080909] px-2.5 py-1 text-[#f5f3ed] no-underline"
-                      >
-                        Map
-                      </Link>
-                      <Link
-                        href={`/j/${item.id}/sources`}
-                        className="border border-[#080909] bg-[#f5f3ed] px-2.5 py-1 text-[#080909] no-underline hover:bg-[#efeee8]"
-                      >
-                        Sources
-                      </Link>
-                      <Link
-                        href={`/j/${item.id}/clauses`}
-                        className="border border-[#080909] bg-[#f5f3ed] px-2.5 py-1 text-[#080909] no-underline hover:bg-[#efeee8]"
-                      >
-                        Documents
-                      </Link>
-                      <Link
-                        href={`/j/${item.id}/timeline`}
-                        className="border border-[#080909] bg-[#f5f3ed] px-2.5 py-1 text-[#080909] no-underline hover:bg-[#efeee8]"
-                      >
-                        Timeline
-                      </Link>
-                    </div>
+                    <span className="text-[#080909]">{item.label}</span>
+                    <span className="shrink-0 font-mono text-[11px] text-[#5b5e56]">
+                      {item.year}
+                    </span>
                   </li>
-                );
-              })}
-            </ul>
-          )}
+                ))}
+              </ul>
+              <div
+                aria-hidden="true"
+                className="hidden font-mono text-sm text-[#5b5e56] md:block"
+              >
+                ───►
+              </div>
+              <div className="border border-[#080909] border-l-4 border-l-[#ff6b52] bg-[#f5f3ed] p-4">
+                <div className="dg-mono text-[#5b5e56]">Joined by subject</div>
+                <div className="mt-1 text-base font-semibold text-[#080909]">
+                  Bylaw One
+                </div>
+                <p className="mt-1 text-xs text-[#5b5e56]">
+                  What applies today, why it governs, and the exact official
+                  page.
+                </p>
+              </div>
+            </div>
+          </figure>
+        </section>
+
+        {/* 02 / Follow one rule: FAR */}
+        <section
+          aria-labelledby="section-02-heading"
+          className="border-b border-[#c8ccc0] py-14 md:py-16"
+        >
+          <div className="dg-mono text-[#5b5e56]">02 / Follow one rule</div>
+          <h2
+            id="section-02-heading"
+            className="mt-2 text-2xl font-semibold tracking-tight text-[#080909] md:text-3xl"
+          >
+            How FAR came to be what it is today.
+          </h2>
+          <p className="dg-serif mt-3 text-base leading-relaxed text-[#171917]">
+            Floor area ratio (FAR) sets how much total floor space may be built
+            relative to a plot&apos;s area. Tracing that single rule shows how five
+            instruments across twenty-two years fit together.
+          </p>
+
+          <div className="mt-8">
+            <FarStoryStepper steps={farSteps} />
+          </div>
+        </section>
+
+        {/* 03 / The code, by subject */}
+        <section
+          aria-labelledby="section-03-heading"
+          className="border-b border-[#c8ccc0] py-14 md:py-16"
+        >
+          <div className="dg-mono text-[#5b5e56]">
+            03 / The code, by subject
+          </div>
+          <h2
+            id="section-03-heading"
+            className="mt-2 text-2xl font-semibold tracking-tight text-[#080909] md:text-3xl"
+          >
+            The code, by subject.
+          </h2>
+          <p className="dg-serif mt-3 text-base leading-relaxed text-[#171917]">
+            Each subject brings together the governing rule today, the reason it
+            prevails, and every source table and provision.
+          </p>
+
+          <ul
+            data-testid="home-subject-list"
+            className="mt-8 divide-y divide-[#c8ccc0] border-y border-[#c8ccc0]"
+          >
+            {CODE_SUBJECTS.map((subj, idx) => (
+              <li
+                key={subj.slug}
+                className="flex flex-col justify-between gap-2 py-4 md:flex-row md:items-baseline md:gap-6"
+              >
+                <div className="space-y-1">
+                  <div className="flex items-baseline gap-3">
+                    <span className="dg-mono text-[#5b5e56]">
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                    <Link
+                      href={`/j/${targetJurId}/topics/${subj.slug}`}
+                      className="text-lg font-semibold text-[#080909] underline decoration-[#c8ccc0] underline-offset-4 hover:decoration-[#080909]"
+                    >
+                      {subj.title}
+                    </Link>
+                  </div>
+                  <p className="dg-serif text-sm text-[#171917]">
+                    {subj.summary}
+                  </p>
+                </div>
+
+                <div className="flex shrink-0 items-center gap-4">
+                  {subj.hasMapLink && (
+                    <Link
+                      href={`/j/${targetJurId}`}
+                      className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] text-[#5b5e56] underline decoration-[#c8ccc0] underline-offset-4 hover:text-[#080909]"
+                    >
+                      Open map
+                    </Link>
+                  )}
+                  <Link
+                    href={`/j/${targetJurId}/topics/${subj.slug}`}
+                    className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] text-[#080909] underline decoration-[#080909] underline-offset-4"
+                  >
+                    Read {subj.title} →
+                  </Link>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* 04 / Recently changed */}
+        <section
+          aria-labelledby="section-04-heading"
+          className="border-b border-[#c8ccc0] py-14 md:py-16"
+        >
+          <div className="dg-mono text-[#5b5e56]">04 / Recently changed</div>
+          <h2
+            id="section-04-heading"
+            className="mt-2 text-2xl font-semibold tracking-tight text-[#080909] md:text-3xl"
+          >
+            What changed recently.
+          </h2>
+          <p className="dg-serif mt-3 text-base leading-relaxed text-[#171917]">
+            The newest in-force amendments, notifications, and enactments
+            affecting buildings in {cityLabel}.
+          </p>
+
+          <ul
+            data-testid="home-recently-changed"
+            className="mt-8 divide-y divide-[#c8ccc0] border-y border-[#c8ccc0]"
+          >
+            {recentChanges.map((doc) => {
+              const effDate = doc.effective_from || doc.notified_date;
+              const isMay2026Corp = doc.doc_id.endsWith("-bbl-amend-2026-05");
+              const title = isMay2026Corp
+                ? "Five City Corporations Building (Amendment) Bye-laws 2026 (Central, North, South, East, West)"
+                : formatPlainDocumentTitle(doc);
+              const summary = isMay2026Corp
+                ? "Amends Bye-law 6.0(i), Schedule-IV, and Tables 2A–2D for compounding and occupancy rules across each of the five City Corporations."
+                : formatPlainWhatChangedSummary(doc);
+              const textHeld = isDocumentTextHeld(doc);
+
+              return (
+                <li key={doc.doc_id} className="py-5">
+                  <div className="flex flex-wrap items-baseline justify-between gap-2">
+                    <span className="dg-mono text-[#5b5e56]">
+                      {formatHumanDate(effDate)} ·{" "}
+                      {formatPlainInstrumentStatus(doc)}
+                    </span>
+                    {textHeld && (
+                      <Link
+                        href={`/j/${targetJurId}/documents/${doc.doc_id}`}
+                        className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] text-[#080909] underline decoration-[#080909] underline-offset-4"
+                      >
+                        Open document →
+                      </Link>
+                    )}
+                  </div>
+                  <h3 className="mt-1 text-lg font-semibold text-[#080909]">
+                    {textHeld ? (
+                      <Link
+                        href={`/j/${targetJurId}/documents/${doc.doc_id}`}
+                        className="text-[#080909] no-underline hover:underline"
+                      >
+                        {title}
+                      </Link>
+                    ) : (
+                      title
+                    )}
+                  </h3>
+                  <div className="mt-2">
+                    <span className="dg-mono mr-2 text-[#5b5e56]">
+                      In short, by this site:
+                    </span>
+                    <span className="dg-serif text-sm text-[#171917]">
+                      {summary}
+                    </span>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+
+          <div className="mt-6">
+            <Link
+              href={`/j/${targetJurId}/timeline`}
+              className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] text-[#080909] underline decoration-[#080909] underline-offset-4"
+            >
+              All changes →
+            </Link>
+          </div>
+        </section>
+
+        {/* Questions people ask */}
+        <section
+          aria-labelledby="faq-heading"
+          className="border-b border-[#c8ccc0] py-14 md:py-16"
+        >
+          <div className="dg-mono text-[#5b5e56]">Questions people ask</div>
+          <h2
+            id="faq-heading"
+            className="mt-2 text-2xl font-semibold tracking-tight text-[#080909] md:text-3xl"
+          >
+            How this site works.
+          </h2>
+
+          <div className="mt-6 divide-y divide-[#c8ccc0] border-y border-[#c8ccc0]">
+            <details className="py-3">
+              <summary className="flex min-h-[44px] cursor-pointer items-center justify-between font-medium text-[#080909]">
+                <span>Is this official?</span>
+              </summary>
+              <p className="dg-serif mt-2 pb-2 text-sm leading-relaxed text-[#171917]">
+                No. Bylaw One is an independent reference worked out from
+                official Gazette notifications, master plan regulations,
+                municipal building bye-laws, and state Acts. Every provision
+                links directly to the official PDF page and an archived copy so
+                you can verify it against the government publication.
+              </p>
+            </details>
+
+            <details className="py-3">
+              <summary className="flex min-h-[44px] cursor-pointer items-center justify-between font-medium text-[#080909]">
+                <span>Where does the text come from?</span>
+              </summary>
+              <p className="dg-serif mt-2 pb-2 text-sm leading-relaxed text-[#171917]">
+                Every instrument is acquired from official Gazette, development
+                authority, or municipal publications, verified by cryptographic
+                checksum, and preserved in the Internet Archive. A machine
+                fidelity check verifies that every provision and excerpt matches
+                the extracted text of its cited source page.
+              </p>
+            </details>
+
+            <details className="py-3">
+              <summary className="flex min-h-[44px] cursor-pointer items-center justify-between font-medium text-[#080909]">
+                <span>What happens when rules disagree?</span>
+              </summary>
+              <p className="dg-serif mt-2 pb-2 text-sm leading-relaxed text-[#171917]">
+                The site applies a stated six-step statutory order and shows
+                both the governing rule and the older or replaced rules. Under
+                Bye-law 1.4 (from Notification UDD 14 TTP 2017), the Master Plan
+                Zoning Regulations and their later in-force amendments govern
+                land use, coverage, FAR, setbacks, height, floors, dwelling
+                units, and parking.
+              </p>
+            </details>
+
+            <details className="py-3">
+              <summary className="flex min-h-[44px] cursor-pointer items-center justify-between font-medium text-[#080909]">
+                <span>What is missing?</span>
+              </summary>
+              <ul className="dg-serif mt-2 list-disc space-y-1.5 pb-2 pl-5 text-sm leading-relaxed text-[#171917]">
+                {missingItems.map((item, i) => (
+                  <li key={i}>{item}</li>
+                ))}
+              </ul>
+            </details>
+          </div>
+        </section>
+
+        {/* Closing */}
+        <section
+          aria-labelledby="closing-heading"
+          className="py-16 text-left md:py-20"
+        >
+          <h2
+            id="closing-heading"
+            className="text-3xl font-semibold tracking-tight text-[#080909] md:text-4xl"
+          >
+            Read. Trace. Compare.
+          </h2>
+          <div className="mt-6">
+            <Link
+              href={`/j/${targetJurId}/topics`}
+              className="inline-flex min-h-[44px] items-center border border-[#080909] bg-[#080909] px-6 py-2.5 font-mono text-xs uppercase tracking-[0.12em] text-[#f5f3ed] no-underline hover:bg-[#171917]"
+            >
+              Read the code
+            </Link>
+          </div>
         </section>
       </main>
     </div>
