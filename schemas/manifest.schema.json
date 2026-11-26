@@ -11,6 +11,11 @@
       "type": "string",
       "const": "1.4"
     },
+    "dataset_id": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "description": "Deterministic content-addressed build identifier across all public jurisdiction releases in this manifest."
+    },
     "jurisdictions": {
       "type": "array",
       "items": {
@@ -247,6 +252,10 @@
         "version": {
           "type": "string",
           "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "dataset_id": {
+          "type": ["string", "null"],
+          "minLength": 1
         },
         "status": {
           "type": "string",

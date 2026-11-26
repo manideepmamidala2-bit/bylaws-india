@@ -436,3 +436,61 @@ def test_five_corporations_parity_and_single_source_inheritance() -> None:
         assert topic_id_sets[idx] == topic_id_sets[0]
         assert shared_consolidated_maps[idx] == shared_consolidated_maps[0]
         assert parameter_signatures[idx] == parameter_signatures[0]
+
+
+def test_part1_one_build_dataset_id_and_shared_content_parity() -> None:
+    """One Build, Correct Citations Part 1: Manifest and all public releases share one `dataset_id`, and shared parameter records and provisions are byte-for-byte identical between Greater Bengaluru (`in-ka-bengaluru`) and all 5 City Corporations."""
+    manifest = validate_file(REPO_ROOT / "public" / "data" / "manifest.json", "manifest")
+    dataset_id = manifest.get("dataset_id")
+    assert isinstance(dataset_id, str) and dataset_id.startswith("ds-") and len(dataset_id) == 15
+
+    public_jurs = [j for j in manifest["jurisdictions"] if j.get("visibility") != "test"]
+    assert len(public_jurs) == 6
+    for jm in public_jurs:
+        rel = next(r for r in jm["releases"] if r["version"] == jm["latest_release"])
+        assert rel.get("dataset_id") == dataset_id, (
+            f"Release {jm['id']}@{rel['version']} dataset_id {rel.get('dataset_id')} != manifest {dataset_id}"
+        )
+
+    parent_dir = _get_latest_parent_release_dir()
+    parent_params = json.loads((parent_dir / "parameters.json").read_text(encoding="utf-8"))["records"]
+    parent_shared_params = [
+        r for r in parent_params if not (r["conditions"].get("jurisdiction") or [])
+    ]
+    assert len(parent_shared_params) >= 300
+    for r in parent_shared_params:
+        assert r["parameter_id"].startswith("in-ka-bengaluru:param_")
+
+    parent_cons = json.loads((parent_dir / "consolidated.json").read_text(encoding="utf-8"))["records"]
+    parent_rmp_cons = {
+        r["clause_id"]: (r["text"], r.get("change_note"), tuple(r.get("amendments_applied") or []))
+        for r in parent_cons
+        if r["doc_id"] == "rmp2015-zr"
+    }
+
+    for corp_id in (
+        "in-ka-bengaluru-central",
+        "in-ka-bengaluru-north",
+        "in-ka-bengaluru-south",
+        "in-ka-bengaluru-east",
+        "in-ka-bengaluru-west",
+    ):
+        corp_dir = REPO_ROOT / "public" / "data" / corp_id / "4.0.0"
+        corp_params = json.loads((corp_dir / "parameters.json").read_text(encoding="utf-8"))["records"]
+        corp_shared_params = [
+            r for r in corp_params if not (r["conditions"].get("jurisdiction") or [])
+        ]
+        assert corp_shared_params == parent_shared_params, (
+            f"Shared parameter records in {corp_id} differ from parent in-ka-bengaluru"
+        )
+
+        corp_cons = json.loads((corp_dir / "consolidated.json").read_text(encoding="utf-8"))["records"]
+        corp_rmp_cons = {
+            r["clause_id"]: (r["text"], r.get("change_note"), tuple(r.get("amendments_applied") or []))
+            for r in corp_cons
+            if r["doc_id"] == "rmp2015-zr"
+        }
+        assert corp_rmp_cons == parent_rmp_cons, (
+            f"Shared rmp2015-zr consolidated records in {corp_id} differ from parent in-ka-bengaluru"
+        )
+

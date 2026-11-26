@@ -869,6 +869,10 @@ def run_validate(config: JurisdictionConfig, *, repo_root: Path | None = None) -
 
     fidelity_report: dict[str, Any] | None = None
     if config.visibility != "test":
+        try:
+            write_parameter_reports_and_json(config, repo_root=root)
+        except ValueError as exc:
+            hard_failures.append(f"QA-Parameters (overlap check): {exc}")
         fidelity_report = verify_jurisdiction_text_fidelity(
             config,
             clause_trees,

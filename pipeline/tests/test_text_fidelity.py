@@ -314,3 +314,71 @@ def test_home_page_far_story_excerpts_pass_verbatim_fidelity() -> None:
         assert not missing, (
             f"{step_label} ({page_doc_id} p.{page_num}) has words not on source page: {missing}"
         )
+
+
+def test_part2_amended_provisions_cite_amending_instrument_page_and_preserve_previous_wording_citation() -> None:
+    """One Build, Correct Citations Part 2: 3.1(ii), 3.1(iii), 3.10(i), 4.1.2(b), 4.1.2(c), 4.5, and 4.7 cite `rmp2015-zr-amend-2026-01` at the exact page where their wording appears (`p. 2`, `p. 2`, `p. 5`, `p. 5`, `p. 6`, `p. 6`, `p. 6`), while previous wording keeps its original `rmp2015-zr` citation (`p. 20`, `p. 24`, etc.), and every parameter table row is verified on its cited page."""
+    import re
+
+    repo_root = resolve_repo_root()
+    cfg = load_jurisdiction_config("in-ka-bengaluru")
+    trees = _load_clause_trees("in-ka-bengaluru", repo_root)
+    report = verify_jurisdiction_text_fidelity(cfg, trees, repo_root=repo_root)
+    assert report["parameter_rows_checked"] >= 300
+    assert report["failures"] == []
+
+    rmp_by_eid = {c["eid"]: c for c in trees["rmp2015-zr"]["clauses"]}
+
+    expected_amended_pages = [
+        ("chp_3__cl_3.1__item_ii", "rmp2015-zr-amend-2026-01", 2, 20, "12.0m"),
+        ("chp_3__cl_3.1__item_iii", "rmp2015-zr-amend-2026-01", 2, 20, "Table 9 shall be referred"),
+        ("chp_3__cl_3.9__item_iii", "rmp2015-zr-amend-2026-01", 3, 23, "minimum setback for the basement"),
+        ("chp_3__cl_3.10__item_i", "rmp2015-zr-amend-2026-01", 5, 24, "2.0 m or setback whichever is less"),
+        ("chp_4__cl_4.1__cl_4.1.2__item_b", "rmp2015-zr-amend-2026-01", 5, 28, "less than 9.0 m"),
+        ("chp_4__cl_4.1__cl_4.1.2__item_c", "rmp2015-zr-amend-2026-01", 6, 28, "Ring III"),
+        ("chp_4__cl_4.5", "rmp2015-zr-amend-2026-01", 6, 33, "10000 sq.m"),
+        ("chp_4__cl_4.7", "rmp2015-zr-amend-2026-01", 6, 35, "INDUSTRIAL I (GENERAL)"),
+    ]
+
+    for eid, exp_am_doc, exp_am_page, exp_orig_page, exp_phrase in expected_amended_pages:
+        node = rmp_by_eid[eid]
+        vers = node["versions"]
+        assert len(vers) >= 2, f"Expected >=2 versions on rmp2015-zr:{eid}"
+        v_orig = vers[0]
+        v_curr = vers[-1]
+        assert v_orig["source_doc"] == "rmp2015-zr"
+        assert v_orig["citations"][0]["page"] == exp_orig_page, (
+            f"Expected original citation page {exp_orig_page} on rmp2015-zr:{eid}, got {v_orig['citations']}"
+        )
+        assert v_curr["source_doc"] == exp_am_doc
+        assert v_curr["citations"][0]["page"] == exp_am_page, (
+            f"Expected amending citation page {exp_am_page} on rmp2015-zr:{eid}, got {v_curr['citations']}"
+        )
+        assert exp_phrase.lower() in str(v_curr["content"]).lower()
+
+    # Also verify built HTML for both city and North Setbacks pages
+    for jur_id in ("in-ka-bengaluru", "in-ka-bengaluru-north"):
+        setbacks_html_path = (
+            repo_root / ".next" / "server" / "app" / "j" / jur_id / "topics" / "setbacks.html"
+        )
+        if setbacks_html_path.is_file():
+            raw_html = setbacks_html_path.read_text(encoding="utf-8")
+            clean_html = re.sub(r"<!--[\s\S]*?-->", "", raw_html)
+            for target_eid, exp_page, exp_orig in (
+                ("chp_3__cl_3.1__item_ii", 2, 20),
+                ("chp_3__cl_3.1__item_iii", 2, 20),
+                ("chp_3__cl_3.10__item_i", 5, 24),
+            ):
+                m = re.search(
+                    rf"#node-{re.escape(target_eid)}(?:(?!<li\b)[\s\S])*?Technical address:\s*<code[^>]*>rmp2015-zr:{re.escape(target_eid)}</code>",
+                    clean_html,
+                )
+                assert m is not None, f"Missing {target_eid} on {jur_id} Setbacks HTML"
+                block = m.group(0)
+                assert f"#page={exp_page}" in block, (
+                    f"Expected #page={exp_page} on {target_eid} in {jur_id} Setbacks HTML"
+                )
+                assert f"p. {exp_orig}):" in block, (
+                    f"Expected previous wording p. {exp_orig} on {target_eid} in {jur_id} Setbacks HTML"
+                )
+

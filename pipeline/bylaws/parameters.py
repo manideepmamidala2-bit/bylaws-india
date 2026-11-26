@@ -653,13 +653,13 @@ def extract_jurisdiction_parameters(
         )
         has_2026_setback_amend = amend_2026_doc is not None
         amend_2026_date = (
-            (amend_2026_doc.effective_from or amend_2026_doc.notified_date or "2026-01-20")
+            (amend_2026_doc.effective_from or amend_2026_doc.notified_date or "2026-01-05")
             if amend_2026_doc is not None
-            else "2026-01-20"
+            else "2026-01-05"
         )
         amend_2026_note = (
-            "Replaced by Zoning Regulations Amendment (Setbacks, Basements and Industrial Norms), 20 January 2026"
-            if has_2026_setback_amend
+            f"Replaced by {_format_short_doc_label(amend_2026_doc, amend_2026_doc.id)}, {_format_human_date_plain(amend_2026_date)}"
+            if amend_2026_doc is not None
             else None
         )
         amend_2019_doc = next(
@@ -1172,7 +1172,7 @@ def extract_jurisdiction_parameters(
                     method="clause_rule_parser",
                 )
 
-            # (d2) Original Note (b) in Residential Main (`chp_4__cl_4.1__cl_4.1.2__item_b`, p. 28): 11.5m or Stilt+GF+2 floors (superseded 2026-01-20)
+            # (d2) Original Note (b) in Residential Main (`chp_4__cl_4.1__cl_4.1.2__item_b`, p. 28): 11.5m or Stilt+GF+2 floors (superseded 2026-01-05)
             if "restricted to 11.5 meters or Stilt +GF+2 floors" in txt:
                 for p_kind, val, unit, c_txt in [
                     ("building_height_max_m", 11.5, "m", "11.5 meters"),
@@ -1283,7 +1283,7 @@ def extract_jurisdiction_parameters(
                                 "col_index": col_idx,
                                 "row_header": r_lbl,
                                 "column_header": col_hdr,
-                                "cell_text": c_txt,
+                                "cell_text": f"10000 sq.m ({c_txt})",
                                 "footnote_markers": [],
                                 "footnotes_text": [txt],
                                 "page": mc_page,
@@ -1294,52 +1294,6 @@ def extract_jurisdiction_parameters(
                             },
                             method="clause_rule_parser",
                         )
-
-            # (d4) Ring III floors cap on 360-750 sq.m (`cl_11.11.2025__item_ii`, p. 5)
-            if "In Ring III: on plot size above 360 sq.m and upto 750 sq.m" in txt:
-                conds_f = _empty_conditions(
-                    zone=["R-MAIN"],
-                    use=["residential"],
-                    area_class=["ring_iii"],
-                    jurisdiction=jur_scope,
-                    unexpressed=["Ground + 3 floors or Stilt + 4 floors in Ring III"],
-                )
-                conds_f["plot_area_m2"] = {
-                    "min": 360.0,
-                    "max": 750.0,
-                    "min_inclusive": False,
-                    "max_inclusive": True,
-                }
-                _add_record(
-                    parameter="floors_max",
-                    value=4.0,
-                    unit="floors",
-                    value_text="Ground + 3 floors or Stilt + 4 floors",
-                    conditions=conds_f,
-                    valid_from=doc_valid_from,
-                    valid_to=None,
-                    legal_status="in_force",
-                    source={
-                        "doc_id": doc.id,
-                        "eid": eid,
-                        "clause_id": str(node.get("clause_id") or f"{doc.id}:{eid}"),
-                        "table_eid": None,
-                        "table_id": "Table 10 Note (c) (Substituted 2026-01)",
-                        "row_index": None,
-                        "col_index": None,
-                        "row_header": "Ring III, plot size above 360 sq.m up to 750 sq.m",
-                        "column_header": "Maximum floors",
-                        "cell_text": "Ground + 3 floors or Stilt + 4 floors",
-                        "footnote_markers": ["(c)"],
-                        "footnotes_text": [txt],
-                        "page": page,
-                        "bbox": bbox,
-                        "page_link": page_link,
-                        "official_url": pdf_url,
-                        "archive_url": arch_url,
-                    },
-                    method="clause_rule_parser",
-                )
 
             # (e) April 2025 Chapter 11 Table No.27 (`chp_11_2__prov_1`, p. 2): Premium FAR & TDR/DRC by road width
             if eid == "chp_11_2__prov_1" and ("Table No.27" in txt or ">9, <=12" in txt):
@@ -1426,11 +1380,19 @@ def extract_jurisdiction_parameters(
 
     doc_meta_map = {d.id: d for d in config.documents}
     records = _apply_table_supersession_and_deduplication(records, doc_meta_map)
+    applicability_rules = _extract_applicability_rules(config, records)
+    root_jur_id = str(getattr(config, "parent", None) or config.id)
     for idx_rec, rec_item in enumerate(records, start=1):
-        rec_item["parameter_id"] = f"{config.id}:param_{idx_rec:04d}"
+        corp_jurs = (rec_item.get("conditions") or {}).get("jurisdiction") or []
+        owner_id = str(corp_jurs[0]) if len(corp_jurs) == 1 else root_jur_id
+        rec_item["parameter_id"] = f"{owner_id}:param_{idx_rec:04d}"
 
     doc_layers = {d.id: str(d.layer) for d in config.documents}
-    overlap_report = check_parameter_overlaps(records, doc_layers)
+    overlap_report = check_parameter_overlaps(
+        records,
+        doc_layers,
+        applicability_rules=applicability_rules,
+    )
     if overlap_report["unexplained_overlaps"]:
         first_ov = overlap_report["unexplained_overlaps"][0]
         raise ValueError(
@@ -1446,6 +1408,7 @@ def extract_jurisdiction_parameters(
             "generated_at": get_deterministic_timestamp(),
         },
         "records": records,
+        "applicability_rules": applicability_rules,
     }
     validate_payload(payload, "parameters")
     return payload, mismatches
@@ -1479,15 +1442,29 @@ def _format_human_date_plain(iso_date: str | None) -> str:
     return iso_date
 
 
+def _to_title_case_if_screaming(title: str) -> str:
+    letters = re.sub(r"[^a-zA-Z]", "", title)
+    if not letters:
+        return title
+    upper_count = len(re.sub(r"[^A-Z]", "", title))
+    if upper_count / len(letters) < 0.7:
+        return title
+    keep_upper = {"FAR", "TDR", "DRC", "NOC", "RMP", "I", "II", "III", "IV"}
+    out_words: list[str] = []
+    for word in title.split():
+        clean = re.sub(r"[^a-zA-Z0-9]", "", word)
+        if clean.upper() in keep_upper:
+            out_words.append(word.upper())
+        else:
+            out_words.append(word[:1].upper() + word[1:].lower())
+    return " ".join(out_words)
+
+
 def _format_short_doc_label(doc_obj: Any, fallback_id: str) -> str:
     if doc_obj is None:
         return fallback_id
     title = str(getattr(doc_obj, "title", "") or fallback_id).strip()
-    if "—" in title:
-        title = title.split("—", 1)[1].strip()
-    if title.isupper():
-        title = title.title()
-    return title
+    return _to_title_case_if_screaming(title)
 
 
 def _interval_key(iv: dict[str, Any] | None) -> tuple[Any, ...]:
@@ -1624,9 +1601,74 @@ def _intervals_overlap(a: dict[str, Any] | None, b: dict[str, Any] | None) -> bo
     return a_inc and b_inc
 
 
+def _extract_applicability_rules(
+    config: JurisdictionConfig,
+    records: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Extract in-force statutory applicability clauses (such as `3.1(ii)` and `3.1(iii)`) that settle apparent table range overlaps."""
+    amend_2026_doc = next(
+        (
+            d
+            for d in config.documents
+            if d.legal_status == "in_force"
+            and (d.effective_from or "").startswith("2026-01")
+        ),
+        None,
+    )
+    if amend_2026_doc is None:
+        return []
+
+    pdf_url = str(amend_2026_doc.official_url or amend_2026_doc.source_url or "")
+    p2_link = f"{pdf_url}#page=2" if pdf_url else "#page=2"
+    unreachable_note = (
+        "11.5 to 12 m is unreachable here: clauses 3.1(ii) and (iii) send buildings up to 12 m "
+        "(and plots up to 250 m² with height up to 15 m) to Table 8; Table 9 applies above 12 m."
+    )
+
+    for rec in records:
+        if rec.get("legal_status") != "in_force" or rec.get("valid_to") is not None:
+            continue
+        bh = (rec.get("conditions") or {}).get("building_height_m") or {}
+        if bh.get("min") == 11.5 and bh.get("max") == 15.0:
+            existing = str(rec.get("note") or "").strip()
+            if unreachable_note not in existing:
+                rec["note"] = f"{existing}; {unreachable_note}" if existing else unreachable_note
+
+    return [
+        {
+            "rule_id": "setback-height-table8-vs-table9",
+            "subject": "setbacks",
+            "dimension": "building_height_m",
+            "range_settled": "11.5 m to 12 m",
+            "plain_explanation": "Buildings up to 12 m use Table 8; taller buildings use Table 9 (clauses 3.1(ii) and (iii), January 2026).",
+            "unreachable_band_note": unreachable_note,
+            "authorities": [
+                {
+                    "doc_id": amend_2026_doc.id,
+                    "eid": "item_2_2__item_a__item_ii",
+                    "clause_number": "3.1(ii)",
+                    "quote": "For all types of building with total height up to 12.0m, excluding the stilt floor, the setbacks shall be calculated as per Table 8.",
+                    "page": 2,
+                    "page_link": p2_link,
+                },
+                {
+                    "doc_id": amend_2026_doc.id,
+                    "eid": "item_2_2__item_a__item_iii",
+                    "clause_number": "3.1(iii)",
+                    "quote": "Table 9 shall be referred to buildings which are more than 12.0 m in total height, to fix the setbacks (to be read with clause 8.1 (a) (iii)). However, for buildings located on plots not exceeding 250 sq.m in area and with a height up to 15 m (including the stilt floor), the setbacks shall be determined as per Table 8.",
+                    "page": 2,
+                    "page_link": p2_link,
+                },
+            ],
+        }
+    ]
+
+
 def check_parameter_overlaps(
     records: list[dict[str, Any]],
     doc_layers: dict[str, str] | None = None,
+    *,
+    applicability_rules: list[dict[str, Any]] | None = None,
 ) -> dict[str, list[dict[str, Any]]]:
     """Check governing `in_force` records for overlapping conditions with different values."""
     layers = doc_layers or {}
@@ -1648,6 +1690,20 @@ def check_parameter_overlaps(
         or layers.get(str(r["source"]["doc_id"]), "planning") == "planning"
     ]
 
+    has_height_applicability_rule = (
+        any(
+            ar.get("dimension") == "building_height_m"
+            and ar.get("range_settled") == "11.5 m to 12 m"
+            for ar in applicability_rules
+        )
+        if applicability_rules is not None
+        else any(
+            "clauses 3.1(ii) and (iii)" in str(r.get("note") or "")
+            for r in governing
+        )
+    )
+
+    settled: list[dict[str, Any]] = []
     not_settled: list[dict[str, Any]] = []
     unexplained: list[dict[str, Any]] = []
 
@@ -1681,7 +1737,6 @@ def check_parameter_overlaps(
             ):
                 bh1 = c1.get("building_height_m") or {}
                 bh2 = c2.get("building_height_m") or {}
-                # Known current-text overlap: 2026 Table 8 (<= 12.0 m) vs 2007 Table 9 (> 11.5 m up to 15.0 m)
                 is_height_11_5_12_overlap = (
                     (bh1.get("max") == 12.0 and bh2.get("min") == 11.5)
                     or (bh2.get("max") == 12.0 and bh1.get("min") == 11.5)
@@ -1697,17 +1752,25 @@ def check_parameter_overlaps(
                     "value_a": f"{r1['value']} {r1.get('unit') or ''}".strip(),
                     "value_b": f"{r2['value']} {r2.get('unit') or ''}".strip(),
                     "reason": (
-                        "The current tables overlap between 11.5 m and 12 m (Table 8 covers up to 12 m; Table 9 starts above 11.5 m)."
-                        if is_height_11_5_12_overlap
-                        else "Overlapping conditions with different values"
+                        "Buildings up to 12 m use Table 8; taller buildings use Table 9 (clauses 3.1(ii) and (iii), January 2026)."
+                        if is_height_11_5_12_overlap and has_height_applicability_rule
+                        else (
+                            "The current tables overlap between 11.5 m and 12 m (Table 8 covers up to 12 m; Table 9 starts above 11.5 m)."
+                            if is_height_11_5_12_overlap
+                            else "Overlapping conditions with different values"
+                        )
                     ),
                 }
                 if is_height_11_5_12_overlap:
-                    not_settled.append(entry)
+                    if has_height_applicability_rule:
+                        settled.append(entry)
+                    else:
+                        not_settled.append(entry)
                 else:
                     unexplained.append(entry)
 
     return {
+        "settled_by_applicability": settled,
         "not_settled_overlaps": not_settled,
         "unexplained_overlaps": unexplained,
     }
@@ -1716,8 +1779,10 @@ def check_parameter_overlaps(
 def check_band_continuity(
     records: list[dict[str, Any]],
     doc_layers: dict[str, str] | None = None,
+    *,
+    applicability_rules: list[dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
-    """Report range gaps and overlaps between current governing tables (e.g. 11.5 m to 12 m setback height overlap)."""
+    """Report range gaps and overlaps between current governing tables (settling 11.5 m to 12 m when applicability clauses 3.1(ii)-(iii) apply)."""
     layers = doc_layers or {}
     in_force = [
         r
@@ -1736,6 +1801,19 @@ def check_band_continuity(
         or layers.get(str(r["source"]["doc_id"]), "planning") == "planning"
     ]
 
+    has_height_applicability_rule = (
+        any(
+            ar.get("dimension") == "building_height_m"
+            and ar.get("range_settled") == "11.5 m to 12 m"
+            for ar in applicability_rules
+        )
+        if applicability_rules is not None
+        else any(
+            "clauses 3.1(ii) and (iii)" in str(r.get("note") or "")
+            for r in governing
+        )
+    )
+
     findings: list[dict[str, Any]] = []
 
     # 1. Cross-table setback height band check (Table 8 <= 12.0 m vs Table 9 > 11.5 m)
@@ -1751,7 +1829,7 @@ def check_band_continuity(
         if r["parameter"] == "setback_front_min_m"
         and ((r["conditions"].get("building_height_m") or {}).get("min") == 11.5)
     ]
-    if low_rise_setbacks and high_rise_setbacks:
+    if low_rise_setbacks and high_rise_setbacks and not has_height_applicability_rule:
         lr = low_rise_setbacks[0]
         hr = high_rise_setbacks[0]
         findings.append(
@@ -1822,6 +1900,7 @@ def write_parameter_reports_and_json(
     config: JurisdictionConfig,
     *,
     repo_root: Path | None = None,
+    _cascade_children: bool = True,
 ) -> dict[str, Any]:
     """Run parameter extraction, write `parameters.json`, `parameter-mismatches.md`, and append the 40-record self-check to `qa.md`."""
     root = repo_root or resolve_repo_root()
@@ -1839,10 +1918,34 @@ def write_parameter_reports_and_json(
     if pub_rel_dir.is_dir():
         (pub_rel_dir / "parameters.json").write_text(params_text, encoding="utf-8")
 
+    if _cascade_children and not getattr(config, "parent", None) and config.visibility != "test":
+        from bylaws.config import load_jurisdiction_config
+
+        jurs_dir = root / "jurisdictions"
+        if jurs_dir.is_dir():
+            for child_yaml in sorted(jurs_dir.glob("*.yaml")):
+                if child_yaml.stem == config.id or child_yaml.stem == "resolution" or child_yaml.stem.startswith("_"):
+                    continue
+                child_cfg = load_jurisdiction_config(child_yaml.stem, repo_root=root)
+                if getattr(child_cfg, "parent", None) == config.id:
+                    write_parameter_reports_and_json(
+                        child_cfg,
+                        repo_root=root,
+                        _cascade_children=False,
+                    )
+
     if config.visibility != "test":
         doc_layers = {d.id: str(d.layer) for d in config.documents}
-        overlap_report = check_parameter_overlaps(payload["records"], doc_layers)
-        band_findings = check_band_continuity(payload["records"], doc_layers)
+        overlap_report = check_parameter_overlaps(
+            payload["records"],
+            doc_layers,
+            applicability_rules=payload.get("applicability_rules"),
+        )
+        band_findings = check_band_continuity(
+            payload["records"],
+            doc_layers,
+            applicability_rules=payload.get("applicability_rules"),
+        )
 
         # Write parameter-mismatches.md for owner review
         exclusions = [

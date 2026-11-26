@@ -346,17 +346,18 @@ def _collect_release_artifacts(
         else:
             raw_clause_bytes = clause_path.read_bytes()
             artifacts[clause_filename] = raw_clause_bytes
-            tree_dict = json.loads(raw_clause_bytes.decode("utf-8"))
-            outline_dict, chapter_map = split_clause_tree_into_chapters(
-                tree_dict, effective_prefix
-            )
-            artifacts[outline_filename] = (
-                json.dumps(outline_dict, indent=2) + "\n"
-            ).encode("utf-8")
-            for ch_rel_path, ch_dict in chapter_map.items():
-                artifacts[ch_rel_path] = (
-                    json.dumps(ch_dict, indent=2) + "\n"
+            if config.visibility != "test":
+                tree_dict = json.loads(raw_clause_bytes.decode("utf-8"))
+                outline_dict, chapter_map = split_clause_tree_into_chapters(
+                    tree_dict, effective_prefix
+                )
+                artifacts[outline_filename] = (
+                    json.dumps(outline_dict, indent=2) + "\n"
                 ).encode("utf-8")
+                for ch_rel_path, ch_dict in chapter_map.items():
+                    artifacts[ch_rel_path] = (
+                        json.dumps(ch_dict, indent=2) + "\n"
+                    ).encode("utf-8")
             if ann_path.is_file():
                 artifacts[ann_filename] = ann_path.read_bytes()
 
@@ -364,10 +365,12 @@ def _collect_release_artifacts(
             in_force_annotation_files.append(ann_filename)
         if doc.legal_status == "draft":
             draft_clause_files.append(clause_filename)
-            draft_outlines.append(outline_filename)
+            if config.visibility != "test":
+                draft_outlines.append(outline_filename)
         else:
             in_force_clause_files.append(clause_filename)
-            in_force_outlines.append(outline_filename)
+            if config.visibility != "test":
+                in_force_outlines.append(outline_filename)
 
     for required_name in (
         "amendments.json",
@@ -450,6 +453,35 @@ def _trigger_deploy_hook(hook_url: str) -> None:
         raise click.ClickException(f"Failed to trigger VERCEL_DEPLOY_HOOK_URL: {exc}") from exc
 
 
+def _compute_manifest_dataset_id(
+    jurisdictions: list[dict[str, Any]],
+    public_data_dir: Path,
+    current_jur_id: str,
+    current_rel_ver: str,
+    current_sha256sums_bytes: bytes,
+) -> str:
+    """Compute a deterministic `dataset_id` (`ds-<12-hex>`) across all public releases in the manifest."""
+    hasher = hashlib.sha256()
+    public_entries = [
+        j for j in jurisdictions if j.get("visibility", "public") != "test"
+    ]
+    if not public_entries:
+        public_entries = list(jurisdictions)
+    for j in sorted(public_entries, key=lambda x: str(x.get("id") or "")):
+        j_id = str(j.get("id") or "")
+        lat_ver = str(j.get("latest_release") or "")
+        if not j_id or not lat_ver:
+            continue
+        if j_id == current_jur_id and lat_ver == current_rel_ver:
+            sha_bytes = current_sha256sums_bytes
+        else:
+            sha_file = public_data_dir / j_id / lat_ver / "SHA256SUMS"
+            sha_bytes = sha_file.read_bytes() if sha_file.is_file() else b""
+        hasher.update(f"{j_id}@{lat_ver}:".encode())
+        hasher.update(sha_bytes)
+    return f"ds-{hasher.hexdigest()[:12]}"
+
+
 def run_publish(
     config: JurisdictionConfig,
     *,
@@ -457,6 +489,7 @@ def run_publish(
     target: str | None = None,
     release_version: str | None = None,
     repo_root: Path | None = None,
+    _cascade_children: bool = True,
 ) -> None:
     """Publish processed jurisdiction datasets and update manifest.json safely."""
     resolved_version = (
@@ -513,7 +546,6 @@ def run_publish(
     files_entry: dict[str, Any] = {
         "documents": f"{url_prefix}/documents.json",
         "clauses": [_resolve_file_url(fname) for fname in in_force_clauses],
-        "outlines": [_resolve_file_url(fname) for fname in in_force_outlines],
         "annotations": [_resolve_file_url(fname) for fname in in_force_annotations],
         "amendments": f"{url_prefix}/amendments.json",
         "zones": f"{url_prefix}/zones.geojson",
@@ -522,6 +554,8 @@ def run_publish(
         "sources_csv": f"{url_prefix}/sources.csv",
         "review_images": [],
     }
+    if in_force_outlines:
+        files_entry["outlines"] = [_resolve_file_url(fname) for fname in in_force_outlines]
     if shared_documents:
         files_entry["shared_documents"] = shared_documents
     optional_file_keys = (
@@ -623,9 +657,24 @@ def run_publish(
     if existing_register_docs:
         jurisdiction_manifest_entry["register_documents"] = existing_register_docs
 
+    all_jurisdictions = [*other_jurisdictions, jurisdiction_manifest_entry]
+    dataset_id = _compute_manifest_dataset_id(
+        all_jurisdictions,
+        public_data_dir,
+        config.id,
+        release_version,
+        all_release_files["SHA256SUMS"],
+    )
+    for j_entry in all_jurisdictions:
+        if j_entry.get("visibility", "public") != "test" or len(all_jurisdictions) == 1:
+            for rel_obj in j_entry.get("releases") or []:
+                if isinstance(rel_obj, dict) and rel_obj.get("status") != "withdrawn":
+                    rel_obj["dataset_id"] = dataset_id
+
     manifest_payload: dict[str, Any] = {
         "schema_version": "1.4",
-        "jurisdictions": [*other_jurisdictions, jurisdiction_manifest_entry],
+        "dataset_id": dataset_id,
+        "jurisdictions": all_jurisdictions,
     }
     validate_payload(manifest_payload, "manifest", source=str(manifest_path))
 
@@ -651,6 +700,24 @@ def run_publish(
             f"[publish:local] Published {len(all_release_files)} file(s) to "
             f"'{release_dir.relative_to(root)}' and updated '{manifest_path.relative_to(root)}'."
         )
+        if _cascade_children and not getattr(config, "parent", None) and config.visibility != "test":
+            from bylaws.config import load_jurisdiction_config
+
+            jurs_dir = root / "jurisdictions"
+            if jurs_dir.is_dir():
+                for child_yaml in sorted(jurs_dir.glob("*.yaml")):
+                    if child_yaml.stem == config.id or child_yaml.stem == "resolution" or child_yaml.stem.startswith("_"):
+                        continue
+                    child_cfg = load_jurisdiction_config(child_yaml.stem, repo_root=root)
+                    if getattr(child_cfg, "parent", None) == config.id:
+                        run_publish(
+                            child_cfg,
+                            dry_run=dry_run,
+                            target=target,
+                            release_version=release_version,
+                            repo_root=root,
+                            _cascade_children=False,
+                        )
         return
 
     blob_token = os.environ.get("BLOB_READ_WRITE_TOKEN", "").strip()

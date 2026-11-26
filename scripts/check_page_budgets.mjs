@@ -74,6 +74,18 @@ let maxHtmlRoute = "";
 let maxTotalObserved = 0;
 let maxTotalRoute = "";
 
+const manifestJsonPath = path.join(repoRoot, "public", "data", "manifest.json");
+const manifestObj = fs.existsSync(manifestJsonPath)
+  ? JSON.parse(fs.readFileSync(manifestJsonPath, "utf8"))
+  : null;
+const expectedDatasetId = manifestObj?.dataset_id || "";
+if (!/^ds-[0-9a-f]{12}$/.test(expectedDatasetId)) {
+  violations.push(
+    `public/data/manifest.json: Missing or invalid dataset_id (${JSON.stringify(expectedDatasetId)})`
+  );
+}
+const observedDatasetIds = new Set();
+
 const FORBIDDEN_PRIMARY_LAYER_PATTERNS = [
   { label: "PR number reference", regex: /\bPR\s+0?\d+\b/ },
   {
@@ -112,7 +124,89 @@ const FORBIDDEN_ANYWHERE_HTML_PATTERNS = [
     regex:
       /Structured Building Bylaws|Statutory Resolution Cards|Local Graph|Local Knowledge Graph|One-Hop Neighborhood|\btopic:[a-z_]+/i,
   },
+  {
+    label: "Unregistered instrument name or date",
+    regex:
+      /20 January 2026|2026-01-20|Zoning Regulations Amendment \(Setbacks, Basements and Industrial Norms\)/i,
+  },
 ];
+
+const MONTH_NAMES = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+function formatHumanDateJs(isoDate) {
+  if (!isoDate) return "";
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(isoDate).trim());
+  if (!m) return String(isoDate);
+  const year = m[1];
+  const monthIdx = Number(m[2]) - 1;
+  const day = Number(m[3]);
+  const monthName = MONTH_NAMES[monthIdx];
+  if (!monthName || Number.isNaN(day)) return String(isoDate);
+  return `${day} ${monthName} ${year}`;
+}
+
+function toTitleCaseIfScreamingJs(title) {
+  const letters = title.replace(/[^a-zA-Z]/g, "");
+  if (!letters) return title;
+  const upperCount = title.replace(/[^A-Z]/g, "").length;
+  if (upperCount / letters.length < 0.7) {
+    return title;
+  }
+  const keepUpper = new Set(["FAR", "TDR", "DRC", "NOC", "RMP", "I", "II", "III", "IV"]);
+  return title
+    .split(/\s+/)
+    .map((word) => {
+      const clean = word.replace(/[^a-zA-Z0-9]/g, "");
+      if (keepUpper.has(clean.toUpperCase())) {
+        return word.toUpperCase();
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    })
+    .join(" ");
+}
+
+const registeredReplacedByLabels = new Set();
+const registeredPlainTitles = new Set();
+if (manifestObj) {
+  for (const j of manifestObj.jurisdictions || []) {
+    if (j.visibility === "test") continue;
+    const docsPath = path.join(
+      repoRoot,
+      "public",
+      "data",
+      j.id,
+      j.latest_release || "4.0.0",
+      "documents.json"
+    );
+    if (fs.existsSync(docsPath)) {
+      const docs = JSON.parse(fs.readFileSync(docsPath, "utf8"));
+      for (const d of docs) {
+        const plainTitle = toTitleCaseIfScreamingJs(String(d.title || "").trim());
+        const dt = formatHumanDateJs(d.effective_from || d.notified_date);
+        if (plainTitle) {
+          registeredPlainTitles.add(plainTitle);
+          if (dt) {
+            registeredReplacedByLabels.add(`Replaced by ${plainTitle}, ${dt}`);
+          }
+          registeredReplacedByLabels.add(`Replaced by ${plainTitle}`);
+        }
+      }
+    }
+  }
+}
 
 for (const htmlPath of htmlFiles) {
   const relRoute =
@@ -129,6 +223,23 @@ for (const htmlPath of htmlFiles) {
     !relRoute.includes("xx-test-fixture") &&
     !relRoute.includes("_not-found")
   ) {
+    const dsMatches = [...htmlText.matchAll(/data-dataset-id="([^"]*)"/g)].map(
+      (m) => m[1]
+    );
+    if (dsMatches.length === 0) {
+      violations.push(
+        `${relRoute}: Same-build check failed — missing data-dataset-id attribute`
+      );
+    } else {
+      for (const dsVal of dsMatches) {
+        observedDatasetIds.add(dsVal);
+        if (expectedDatasetId && dsVal !== expectedDatasetId) {
+          violations.push(
+            `${relRoute}: Same-build check failed — page data-dataset-id ${JSON.stringify(dsVal)} !== manifest dataset_id ${JSON.stringify(expectedDatasetId)}`
+          );
+        }
+      }
+    }
     if (!primaryLayerText.includes("Bylaw One")) {
       violations.push(
         `${relRoute}: Missing 'Bylaw One' wordmark in built HTML`
@@ -151,6 +262,54 @@ for (const htmlPath of htmlFiles) {
       if (m) {
         violations.push(
           `${relRoute}: Built HTML contains forbidden ${pat.label} (${JSON.stringify(m[0])})`
+        );
+      }
+    }
+
+    const cleanNoComments = htmlText.replace(/<!--[\s\S]*?-->/g, "");
+
+    // Part 5.3 Label check (CI): "Master plan rules apply instead (bye-law 1.4)" may only appear on provisions tagged to Bye-law 1.4 subjects
+    const BYELAW_1_4_ALLOWED_ROUTE_RE =
+      /^\/j\/[a-z0-9-]+\/topics\/(?:land-use|ground-coverage|far|setbacks|projections-and-open-spaces|height|parking)$/;
+    if (cleanNoComments.includes("Master plan rules apply instead (bye-law 1.4)")) {
+      if (!BYELAW_1_4_ALLOWED_ROUTE_RE.test(relRoute)) {
+        violations.push(
+          `${relRoute}: Label check failed — 'Master plan rules apply instead (bye-law 1.4)' appeared on a page outside Bye-law 1.4 subjects`
+        );
+      }
+      for (const liMatch of cleanNoComments.matchAll(
+        /<li\b[^>]*data-technical-address="([^"]+)"[^>]*>([\s\S]*?)<\/li>/g
+      )) {
+        const addr = liMatch[1];
+        const liBody = liMatch[2];
+        if (
+          liBody.includes("Master plan rules apply instead (bye-law 1.4)") &&
+          (addr === "bbl-2003:part_II__sec_6.0__item_i" ||
+            addr.toLowerCase().includes("part_ii__") ||
+            addr.toLowerCase().includes("part_v__"))
+        ) {
+          violations.push(
+            `${relRoute}: Label check failed — 'Master plan rules apply instead (bye-law 1.4)' appeared on non-Bye-law-1.4 provision ${addr}`
+          );
+        }
+      }
+    }
+
+    // Part 3.3 Name check (CI): verify every "Replaced by <name>, <date>" label in built HTML matches a registered instrument
+    for (const repMatch of cleanNoComments.matchAll(
+      />(Replaced by [^<]+)</g
+    )) {
+      const repText = repMatch[1]
+        .replace(/&amp;/g, "&")
+        .replace(/\s+/g, " ")
+        .trim()
+        .replace(/\.$/, "");
+      if (
+        repText !== "Replaced by a later amendment" &&
+        !registeredReplacedByLabels.has(repText)
+      ) {
+        violations.push(
+          `${relRoute}: Name check failed — unregistered instrument reference ${JSON.stringify(repText)}`
         );
       }
     }
@@ -181,8 +340,141 @@ for (const htmlPath of htmlFiles) {
   }
 }
 
+if (observedDatasetIds.size > 1) {
+  violations.push(
+    `Same-build check failed — multiple dataset_id values found across built pages: ${JSON.stringify([...observedDatasetIds])}`
+  );
+}
+
+// Part 1.3 Shared-content check (CI): compare shared parameter rows and shared provisions
+// between the Greater Bengaluru city view and all 5 City Corporation views across every subject.
+const cityTopicsDir = path.join(
+  nextServerAppDir,
+  "j",
+  "in-ka-bengaluru",
+  "topics"
+);
+const childCorporations = [
+  "in-ka-bengaluru-central",
+  "in-ka-bengaluru-north",
+  "in-ka-bengaluru-south",
+  "in-ka-bengaluru-east",
+  "in-ka-bengaluru-west",
+];
+const CORP_AMENDED_BASE_ADDRESSES = new Set([
+  "bbl-2003:part_II__sec_6.0__item_i",
+  "bbl-2003:part_II__sec_3.0__cl_3.8",
+  "bbl-2003:part_II__sec_3.0__cl_3.9",
+  "bbl-2003:part_II__sec_3.0__cl_3.10",
+]);
+
+function normalizeJurLinks(fragment) {
+  return fragment
+    .replace(/\/j\/in-ka-bengaluru(?:-[a-z]+)?\//g, "/j/<JUR>/")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function extractSharedParameterRowsFromSubjectHtml(html) {
+  const rows = [];
+  const tableMatches = html.matchAll(
+    /<table\b[^>]*data-testid="(?:subject-parameter-table|older-parameter-table)"[^>]*>([\s\S]*?)<\/table>/g
+  );
+  for (const tm of tableMatches) {
+    const tbodyMatch = tm[1].match(/<tbody>([\s\S]*?)<\/tbody>/);
+    if (!tbodyMatch) continue;
+    for (const trMatch of tbodyMatch[1].matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/g)) {
+      const trHtml = trMatch[1];
+      if (trHtml.includes('data-testid="corporation-diff-badge"')) {
+        continue;
+      }
+      rows.push(normalizeJurLinks(trHtml));
+    }
+  }
+  return rows;
+}
+
+function extractSharedProvisionsFromSubjectHtml(html) {
+  const map = new Map();
+  const commentStripped = html.replace(/<!--[\s\S]*?-->/g, "");
+  for (const liMatch of commentStripped.matchAll(
+    /<li\b[^>]*data-technical-address="([^"]+)"[^>]*>([\s\S]*?)<\/li>/g
+  )) {
+    const addr = (liMatch[1] || "").trim();
+    const liHtml = liMatch[2];
+    if (!addr) continue;
+    if (
+      CORP_AMENDED_BASE_ADDRESSES.has(addr) ||
+      addr.includes("-bbl-amend-2026")
+    ) {
+      continue;
+    }
+    map.set(addr, normalizeJurLinks(liHtml));
+  }
+  return map;
+}
+
+let sharedChecksCount = 0;
+if (fs.existsSync(cityTopicsDir)) {
+  const subjectFiles = fs
+    .readdirSync(cityTopicsDir)
+    .filter((f) => f.endsWith(".html"))
+    .sort();
+  for (const sFile of subjectFiles) {
+    const slug = sFile.replace(/\.html$/, "");
+    const cityHtml = fs.readFileSync(path.join(cityTopicsDir, sFile), "utf8");
+    const cityParamRows = extractSharedParameterRowsFromSubjectHtml(cityHtml);
+    const cityProvs = extractSharedProvisionsFromSubjectHtml(cityHtml);
+
+    for (const corpId of childCorporations) {
+      const corpPath = path.join(nextServerAppDir, "j", corpId, "topics", sFile);
+      if (!fs.existsSync(corpPath)) {
+        violations.push(
+          `Shared-content check failed — missing subject page /j/${corpId}/topics/${slug}`
+        );
+        continue;
+      }
+      const corpHtml = fs.readFileSync(corpPath, "utf8");
+      const corpParamRows = extractSharedParameterRowsFromSubjectHtml(corpHtml);
+      const corpProvs = extractSharedProvisionsFromSubjectHtml(corpHtml);
+      sharedChecksCount += 1;
+
+      if (cityParamRows.length !== corpParamRows.length) {
+        violations.push(
+          `Shared-content check failed on /j/${corpId}/topics/${slug}: shared parameter row count ${corpParamRows.length} !== city view ${cityParamRows.length}`
+        );
+      } else {
+        for (let i = 0; i < cityParamRows.length; i++) {
+          if (cityParamRows[i] !== corpParamRows[i]) {
+            violations.push(
+              `Shared-content check failed on /j/${corpId}/topics/${slug}: shared parameter row #${i + 1} differs from Greater Bengaluru city view`
+            );
+            break;
+          }
+        }
+      }
+
+      const cityAddrs = [...cityProvs.keys()];
+      const corpAddrs = [...corpProvs.keys()];
+      if (JSON.stringify(cityAddrs) !== JSON.stringify(corpAddrs)) {
+        violations.push(
+          `Shared-content check failed on /j/${corpId}/topics/${slug}: shared provision list ${JSON.stringify(corpAddrs)} !== city view ${JSON.stringify(cityAddrs)}`
+        );
+      } else {
+        for (const addr of cityAddrs) {
+          if (cityProvs.get(addr) !== corpProvs.get(addr)) {
+            violations.push(
+              `Shared-content check failed on /j/${corpId}/topics/${slug}: shared provision ${addr} content differs between city view and ${corpId}`
+            );
+          }
+        }
+      }
+    }
+  }
+}
+
 console.log(
-  `[check_page_budgets] Checked ${htmlFiles.length} built HTML routes: ` +
+  `[check_page_budgets] Checked ${htmlFiles.length} built HTML routes (dataset_id=${expectedDatasetId}, shared-content pairs=${sharedChecksCount}): ` +
     `max HTML = ${(maxHtmlObserved / 1024).toFixed(1)} KB (${maxHtmlRoute || "/"}) [budget <= 300 KB], ` +
     `max initial JS+data = ${(maxTotalObserved / (1024 * 1024)).toFixed(2)} MB (${maxTotalRoute || "/"}) [budget <= 1.50 MB].`
 );

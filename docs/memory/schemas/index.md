@@ -11,4 +11,4 @@ description: "Versioned Draft 2020-12 JSON Schema contracts for jurisdiction con
 
 | File | Description |
 |------|-------------|
-| [data-contracts](data-contracts.md) | Fifteen Unified Schema 1.4 Draft 2020-12 JSON Schema contracts including explicit instrument_type, stand-off notes/summaries, ocr_corrections, table_overrides, parameters.schema.json with supersession notes, plausibility bounds, and overlap checks, resolution.schema.json, and codegen. |
+| [data-contracts](data-contracts.md) | Fifteen Unified Schema 1.4 Draft 2020-12 JSON Schema contracts including explicit instrument_type, stand-off notes/summaries, ocr_corrections, table_overrides, parameters.schema.json with applicability_rules and plausibility bounds, manifest dataset_id, resolution.schema.json, and codegen. |

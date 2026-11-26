@@ -1,0 +1,53 @@
+id: mspg
+name: 261126-mspg-one-build-correct-citations
+created: 2026-11-26T10:09:41Z
+created_by: manideepmamidala2-bit
+change_type: fix
+issues: []
+progress:
+    intake: done
+    apply: done
+    review: done
+    hydrate: done
+    ship: done
+    review-pr: pending
+plan:
+    generated: true
+    task_count: 5
+    acceptance_count: 18
+    acceptance_completed: 18
+confidence:
+    certain: 5
+    confident: 0
+    tentative: 0
+    unresolved: 0
+    score: 5.0
+    fuzzy: true
+    dimensions:
+        signal: 100.0
+        reversibility: 91.0
+        competence: 95.0
+        disambiguation: 100.0
+stage_metrics:
+    intake: {started_at: "2026-11-26T10:09:41Z", driver: fab-new, iterations: 1, completed_at: "2026-11-26T10:19:13Z"}
+    apply: {started_at: "2026-11-26T10:19:13Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-26T11:43:56Z"}
+    review: {started_at: "2026-11-26T11:43:56Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-26T11:50:27Z"}
+    hydrate: {started_at: "2026-11-26T11:50:27Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-26T11:55:44Z"}
+    ship: {started_at: "2026-11-26T11:55:44Z", driver: fab-fff, iterations: 1, completed_at: "2026-11-26T11:57:02Z"}
+prs:
+    - https://github.com/manideepmamidala2-bit/bylaws-india/pull/19
+base_branch: main
+true_impact:
+    added: 2757
+    deleted: 701
+    net: 2056
+    tests:
+        added: 305
+        deleted: 23
+        net: 282
+    computed_at: "2026-11-26T11:57:02Z"
+    computed_at_stage: ship
+summary: Unify Greater Bengaluru and 5 City Corporation views into one dataset build with shared-content and same-build CI checks, propagate amending-instrument page citations, enforce single register-driven instrument names and dates, record applicability_rules for 3.1(ii)-(iii), and display corporation-specific May 2026 wording for bye-law 6.0(i).
+# base_branch: written by /git-branch or /fab-new when the change's branch is created (no placeholder here).
+# true_impact: lazily created on first stage-finish that computes it (no placeholder here).
+last_updated: 2026-11-26T11:57:02Z

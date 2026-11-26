@@ -17,6 +17,18 @@ const parentDocsPath = path.join(
   "4.0.0",
   "documents.json"
 );
+const parentParamsPath = path.join(
+  publicDataDir,
+  "in-ka-bengaluru",
+  "4.0.0",
+  "parameters.json"
+);
+const northParamsPath = path.join(
+  publicDataDir,
+  "in-ka-bengaluru-north",
+  "4.0.0",
+  "parameters.json"
+);
 const southRegisterPath = path.join(
   publicDataDir,
   "in-ka-bengaluru-south",
@@ -30,12 +42,32 @@ const south230Path = path.join(
   "documents.json"
 );
 
-if (
-  fs.existsSync(pmtilesPath) &&
-  fs.existsSync(parentDocsPath) &&
-  fs.existsSync(southRegisterPath) &&
-  fs.existsSync(south230Path)
-) {
+function isExistingDataConsistent() {
+  if (
+    !fs.existsSync(pmtilesPath) ||
+    !fs.existsSync(parentDocsPath) ||
+    !fs.existsSync(parentParamsPath) ||
+    !fs.existsSync(northParamsPath) ||
+    !fs.existsSync(southRegisterPath) ||
+    !fs.existsSync(south230Path)
+  ) {
+    return false;
+  }
+  try {
+    const parentParams = JSON.parse(fs.readFileSync(parentParamsPath, "utf8"));
+    const northParams = JSON.parse(fs.readFileSync(northParamsPath, "utf8"));
+    const pRecs = parentParams.records || [];
+    const nRecs = northParams.records || [];
+    if (pRecs.length === 0 || pRecs.length !== nRecs.length) {
+      return false;
+    }
+    return pRecs[0]?.parameter_id === nRecs[0]?.parameter_id;
+  } catch {
+    return false;
+  }
+}
+
+if (isExistingDataConsistent()) {
   process.exit(0);
 }
 

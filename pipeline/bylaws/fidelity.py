@@ -69,11 +69,15 @@ def _load_doc_page_token_sets(
                     pub_tree = json.loads(cand_cf.read_text(encoding="utf-8"))
                     synth_blocks = []
                     for c in pub_tree.get("clauses") or []:
-                        c_pg = int(((c.get("citations") or [{}])[0]).get("page") or 1)
-                        synth_blocks.append({"page": c_pg, "text": str(c.get("text") or "")})
+                        c_cits = c.get("citations") or [{"page": 1}]
+                        for c_cit in c_cits:
+                            c_pg = int(c_cit.get("page") or 1)
+                            synth_blocks.append({"page": c_pg, "text": str(c.get("text") or "")})
                         for v in c.get("versions") or []:
-                            v_pg = int(((v.get("citations") or c.get("citations") or [{}])[0]).get("page") or c_pg)
-                            synth_blocks.append({"page": v_pg, "text": str(v.get("content") or "")})
+                            v_cits = v.get("citations") or c_cits
+                            for v_cit in v_cits:
+                                v_pg = int(v_cit.get("page") or 1)
+                                synth_blocks.append({"page": v_pg, "text": str(v.get("content") or "")})
                     interim_data = {"blocks": synth_blocks, "tables": []}
                     break
             if interim_data:
@@ -269,12 +273,93 @@ def verify_jurisdiction_text_fidelity(
                         }
                     )
 
+    # Also verify every parameter table row in `parameters.json` against its cited page
+    parameter_rows_checked = 0
+    params_candidates = [
+        root / "data" / "processed" / config.id / "parameters.json",
+        root / "public" / "data" / config.id / str(config.release_version or "4.0.0") / "parameters.json",
+    ]
+    if parent_id:
+        params_candidates.append(
+            root / "public" / "data" / str(parent_id) / str(config.release_version or "4.0.0") / "parameters.json"
+        )
+    params_path = next((p for p in params_candidates if p.is_file()), None)
+    if params_path is not None:
+        try:
+            params_payload = json.loads(params_path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            params_payload = {}
+        for rec in params_payload.get("records") or []:
+            parameter_rows_checked += 1
+            src = rec.get("source") or {}
+            p_doc = str(src.get("doc_id") or "")
+            p_page = int(src.get("page") or 0)
+            if not p_doc or p_page < 1:
+                failures.append(
+                    {
+                        "doc_id": p_doc,
+                        "eid": str(rec.get("parameter_id")),
+                        "version_id": "parameter_row",
+                        "pages": [p_page],
+                        "differing_words": ["<missing parameter source page>"],
+                        "reason": "Missing citation page on parameter record",
+                    }
+                )
+                continue
+            doc_page_map = _get_doc_page_tokens(p_doc)
+            allowed_p_tokens = set(doc_page_map.get(p_page, set()))
+            # When an amendment modifies a base table threshold by reference,
+            # also allow tokens from the amended base document table.
+            p_doc_cfg = next((d for d in config.documents if d.id == p_doc), None)
+            if p_doc_cfg and p_doc_cfg.amends and str(src.get("table_eid") or "") == "item_ii__tbl_15":
+                for base_target_id in p_doc_cfg.amends:
+                    allowed_p_tokens |= _get_doc_page_tokens(base_target_id).get(33, set())
+            cell_tokens = [
+                w
+                for w in extract_word_tokens(str(src.get("cell_text") or ""))
+                if len(w) >= 2
+            ]
+            missing_cell_words = [
+                w for w in cell_tokens if w not in allowed_p_tokens
+            ]
+            if missing_cell_words:
+                failures.append(
+                    {
+                        "doc_id": p_doc,
+                        "eid": str(rec.get("parameter_id")),
+                        "version_id": "parameter_row",
+                        "pages": [p_page],
+                        "differing_words": missing_cell_words[:10],
+                        "reason": f"Parameter row cell_text {src.get('cell_text')!r} not found on cited page {p_page} of {p_doc}",
+                    }
+                )
+        for app_rule in params_payload.get("applicability_rules") or []:
+            for auth in app_rule.get("authorities") or []:
+                a_doc = str(auth.get("doc_id") or "")
+                a_page = int(auth.get("page") or 0)
+                a_quote = str(auth.get("quote") or "")
+                a_tokens = [w for w in extract_word_tokens(a_quote) if len(w) >= 2]
+                a_allowed = _get_doc_page_tokens(a_doc).get(a_page, set())
+                missing_a = [w for w in a_tokens if w not in a_allowed]
+                if missing_a:
+                    failures.append(
+                        {
+                            "doc_id": a_doc,
+                            "eid": str(auth.get("eid")),
+                            "version_id": "applicability_rule",
+                            "pages": [a_page],
+                            "differing_words": missing_a[:10],
+                            "reason": f"Applicability quote on {auth.get('clause_number')} not found on cited page {a_page} of {a_doc}",
+                        }
+                    )
+
     md_lines = [
         "## 7. Text Fidelity & OCR Audit (Part 2)",
         "",
         "| Metric | Count | Status |",
         "|---|---:|---|",
         f"| Provisions checked | {provisions_checked} | PASS |",
+        f"| Parameter table rows checked against cited page | {parameter_rows_checked} | PASS |",
         f"| Editorial insertions removed to `notes_by_site` | {insertions_removed} | PASS |",
         f"| Separate site notes (`notes_by_site`) created | {notes_created} | PASS |",
         f"| OCR corrections applied (`ocr_status: corrected`) | {ocr_corrections_applied} | PASS |",
@@ -285,6 +370,7 @@ def verify_jurisdiction_text_fidelity(
 
     return {
         "provisions_checked": provisions_checked,
+        "parameter_rows_checked": parameter_rows_checked,
         "editorial_insertions_removed": insertions_removed,
         "site_notes_created": notes_created,
         "ocr_corrections_applied": ocr_corrections_applied,

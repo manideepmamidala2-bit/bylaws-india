@@ -404,22 +404,22 @@
     </edge>
     <edge id="e_30" source="fixture-base-2020:chp_II__cl_2.1" target="fixture-base-2020:chp_I__cl_1.1">
       <data key="type">refers_to</data>
-      <data key="evidence">fixture-base-2020:ann_9</data>
+      <data key="evidence">fixture-base-2020:ann_8</data>
       <data key="confidence">0.95</data>
     </edge>
     <edge id="e_31" source="fixture-base-2020:chp_II__cl_2.1" target="fixture-base-2020:chp_II__cl_2.1__tbl_2.1">
       <data key="type">refers_to</data>
-      <data key="evidence">fixture-base-2020:ann_10</data>
+      <data key="evidence">fixture-base-2020:ann_9</data>
       <data key="confidence">0.95</data>
     </edge>
     <edge id="e_32" source="fixture-base-2020:chp_II__cl_2.2" target="fixture-base-2020:chp_II__cl_2.1">
       <data key="type">refers_to</data>
-      <data key="evidence">fixture-base-2020:ann_18</data>
+      <data key="evidence">fixture-base-2020:ann_17</data>
       <data key="confidence">0.95</data>
     </edge>
     <edge id="e_33" source="fixture-base-2020:chp_II__cl_2.2" target="fixture-base-2020:chp_I__def_1.2">
       <data key="type">uses_term</data>
-      <data key="evidence">fixture-base-2020:ann_19</data>
+      <data key="evidence">fixture-base-2020:ann_18</data>
       <data key="confidence">0.95</data>
     </edge>
     <edge id="e_34" source="fixture-amend-2024:cl_2" target="fixture-base-2020:chp_II__cl_2.2">
@@ -487,65 +487,65 @@
       <data key="evidence">plot area</data>
       <data key="confidence">0.9</data>
     </edge>
-    <edge id="e_47" source="fixture-base-2020:chp_II" target="topic:setbacks">
-      <data key="type">tagged_topic</data>
-      <data key="evidence">Setbacks</data>
-      <data key="confidence">0.9</data>
-    </edge>
-    <edge id="e_48" source="fixture-base-2020:chp_II__cl_2.1" target="topic:setbacks">
+    <edge id="e_47" source="fixture-base-2020:chp_II__cl_2.1" target="topic:setbacks">
       <data key="type">tagged_topic</data>
       <data key="evidence">setbacks</data>
       <data key="confidence">0.9</data>
     </edge>
-    <edge id="e_49" source="fixture-base-2020:chp_II__cl_2.1__item_a" target="topic:setbacks">
+    <edge id="e_48" source="fixture-base-2020:chp_II__cl_2.1__item_a" target="topic:setbacks">
       <data key="type">tagged_topic</data>
       <data key="evidence">setback</data>
       <data key="confidence">0.9</data>
     </edge>
-    <edge id="e_50" source="fixture-base-2020:chp_II__cl_2.1__item_b" target="topic:setbacks">
+    <edge id="e_49" source="fixture-base-2020:chp_II__cl_2.1__item_b" target="topic:setbacks">
       <data key="type">tagged_topic</data>
       <data key="evidence">setbacks</data>
       <data key="confidence">0.9</data>
     </edge>
-    <edge id="e_51" source="fixture-base-2020:chp_II__cl_2.1__prov_1" target="topic:setbacks">
+    <edge id="e_50" source="fixture-base-2020:chp_II__cl_2.1__prov_1" target="topic:setbacks">
       <data key="type">tagged_topic</data>
       <data key="evidence">setback</data>
       <data key="confidence">0.9</data>
     </edge>
-    <edge id="e_52" source="fixture-base-2020:chp_II__cl_2.1__expl_1" target="topic:setbacks">
+    <edge id="e_51" source="fixture-base-2020:chp_II__cl_2.1__expl_1" target="topic:setbacks">
       <data key="type">tagged_topic</data>
       <data key="evidence">Setback</data>
       <data key="confidence">0.9</data>
     </edge>
-    <edge id="e_53" source="fixture-base-2020:chp_II__cl_2.2" target="topic:far">
+    <edge id="e_52" source="fixture-base-2020:chp_II__cl_2.2" target="topic:far">
       <data key="type">tagged_topic</data>
       <data key="evidence">Floor Area Ratio</data>
       <data key="confidence">0.9</data>
     </edge>
-    <edge id="e_54" source="fixture-base-2020:chp_II__cl_2.2" target="topic:building_height">
+    <edge id="e_53" source="fixture-base-2020:chp_II__cl_2.2" target="topic:building_height">
       <data key="type">tagged_topic</data>
       <data key="evidence">No residential building i</data>
       <data key="confidence">0.95</data>
     </edge>
-    <edge id="e_55" source="fixture-base-2020:chp_II__cl_2.2" target="topic:road_width">
+    <edge id="e_54" source="fixture-base-2020:chp_II__cl_2.2" target="topic:road_width">
       <data key="type">tagged_topic</data>
       <data key="evidence">road width</data>
       <data key="confidence">0.9</data>
     </edge>
-    <edge id="e_56" source="fixture-base-2020:chp_II__cl_2.2A" target="topic:fire_safety">
+    <edge id="e_55" source="fixture-base-2020:chp_II__cl_2.2A" target="topic:fire_safety">
       <data key="type">tagged_topic</data>
       <data key="evidence">solar</data>
       <data key="confidence">0.9</data>
     </edge>
-    <edge id="e_57" source="fixture-base-2020:chp_II__cl_2.1__tbl_2.1" target="topic:setbacks">
-      <data key="type">tagged_topic</data>
-      <data key="evidence">Setbacks</data>
-      <data key="confidence">0.9</data>
+    <edge id="e_56" source="fixture-amend-2024:cl_2" target="fixture-base-2020:chp_II__cl_2.2">
+      <data key="type">amends</data>
+      <data key="evidence">Amendment of Clause 2.2 — For clause 2.2, the following shall be substituted: &#x27;2.2 Maximum Building Height: No residenti</data>
+      <data key="confidence">0.95</data>
     </edge>
-    <edge id="e_58" source="fixture-base-2020:chp_II__cl_2.1__tbl_2.1" target="topic:plot_size_frontage">
-      <data key="type">tagged_topic</data>
-      <data key="evidence">Plot Size</data>
-      <data key="confidence">0.9</data>
+    <edge id="e_57" source="fixture-amend-2024:cl_3" target="fixture-base-2020:chp_II__cl_2.2">
+      <data key="type">amends</data>
+      <data key="evidence">Insertion after Clause 2.2 — After clause 2.2, the following clause shall be inserted: &#x27;2.2A Solar Rooftop Structures: E</data>
+      <data key="confidence">0.95</data>
+    </edge>
+    <edge id="e_58" source="fixture-amend-2024:cl_4" target="fixture-base-2020:chp_II__cl_2.3">
+      <data key="type">amends</data>
+      <data key="evidence">Omission of Clause 2.3 — Clause 2.3 shall be omitted.</data>
+      <data key="confidence">0.95</data>
     </edge>
     <edge id="e_59" source="fixture-amend-2024:cl_2" target="fixture-base-2020:chp_II__cl_2.2">
       <data key="type">cross_document_reference</data>

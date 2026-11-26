@@ -305,6 +305,24 @@ export function buildHomeFarStorySteps(
   const muniDocId = muniBaseDoc?.doc_id ?? "";
   const planDocId = planBaseDoc?.doc_id ?? "";
   const pfarDocId = pfarAmendDoc?.doc_id ?? "";
+  const muniPlainTitle = formatPlainDocumentTitle(muniBaseDoc);
+  const muniPlainDate = formatHumanDate(
+    muniBaseDoc?.effective_from || muniBaseDoc?.notified_date
+  );
+  const planPlainTitle = formatPlainDocumentTitle(planBaseDoc);
+  const planPlainDate = formatHumanDate(
+    planBaseDoc?.effective_from || planBaseDoc?.notified_date
+  );
+  const s3PlainTitle = formatPlainDocumentTitle(s3SourceDoc ?? muniBaseDoc);
+  const s3PlainDate = formatHumanDate(
+    s3SourceDoc?.effective_from ||
+      s3SourceDoc?.notified_date ||
+      s3Ver?.valid_from
+  );
+  const pfarPlainTitle = formatPlainDocumentTitle(pfarAmendDoc);
+  const pfarPlainDate = formatHumanDate(
+    pfarAmendDoc?.effective_from || pfarAmendDoc?.notified_date
+  );
 
   return [
     {
@@ -313,8 +331,8 @@ export function buildHomeFarStorySteps(
       inShortBySite:
         "The Building Bye-laws 2003 (in operation from 5 June 2004) set FAR in their own tables (bye-law 9.2, Tables 4 to 6).",
       verbatimExcerpt: s1Excerpt,
-      documentTitle: `${formatPlainDocumentTitle(muniBaseDoc)} (Bye-law 9.2)`,
-      documentDate: "5 June 2004",
+      documentTitle: muniPlainTitle,
+      documentDate: muniPlainDate,
       pageNumber: s1Page,
       viewPageUrl: bblPdfBase ? `${bblPdfBase}#page=${s1Page}` : `#page=${s1Page}`,
       documentHref: muniDocId
@@ -337,8 +355,8 @@ export function buildHomeFarStorySteps(
       inShortBySite:
         "The Master Plan Zoning Regulations set FAR by zone, plot size and road width (Chapter 4, Table 10).",
       verbatimExcerpt: s2Excerpt,
-      documentTitle: `${formatPlainDocumentTitle(planBaseDoc)} (Chapter 4)`,
-      documentDate: "25 June 2007",
+      documentTitle: planPlainTitle,
+      documentDate: planPlainDate,
       pageNumber: s2Page,
       viewPageUrl: rmpPdfBase ? `${rmpPdfBase}#page=${s2Page}` : `#page=${s2Page}`,
       documentHref: planDocId
@@ -360,9 +378,8 @@ export function buildHomeFarStorySteps(
       inShortBySite:
         "Bye-law 1.4, from notification UDD 14 TTP 2017, makes the master plan rules govern use, coverage, FAR, setbacks, height, floors, dwelling units and parking.",
       verbatimExcerpt: s3Excerpt,
-      documentTitle:
-        "Building Bye-Laws 2003 — Bye-law 1.4 (from Notification UDD 14 TTP 2017)",
-      documentDate: "28 October 2017",
+      documentTitle: s3PlainTitle,
+      documentDate: s3PlainDate,
       pageNumber: s3Page,
       viewPageUrl: s3PdfBase ? `${s3PdfBase}#page=${s3Page}` : `#page=${s3Page}`,
       documentHref: muniDocId
@@ -375,9 +392,8 @@ export function buildHomeFarStorySteps(
       inShortBySite:
         "The premium FAR chapter (Chapter 11, notified 2 April 2025) allows extra FAR on payment, by road width.",
       verbatimExcerpt: s4Excerpt,
-      documentTitle:
-        "Master Plan Zoning Regulations (Amendment) — Chapter 11 Premium FAR",
-      documentDate: "2 April 2025",
+      documentTitle: pfarPlainTitle,
+      documentDate: pfarPlainDate,
       pageNumber: s4Page,
       viewPageUrl: pfarPdfBase
         ? `${pfarPdfBase}#page=${s4Page}`
@@ -401,9 +417,8 @@ export function buildHomeFarStorySteps(
       inShortBySite:
         "Base FAR from the zoning table, with premium FAR and TDR on top, each from its own source.",
       verbatimExcerpt: s5Excerpt,
-      documentTitle:
-        "Master Plan Zoning Regulations — Chapter 11, Note 2 (Combined FAR Cap)",
-      documentDate: "2 April 2025",
+      documentTitle: pfarPlainTitle,
+      documentDate: pfarPlainDate,
       pageNumber: s5Page,
       viewPageUrl: pfarPdfBase
         ? `${pfarPdfBase}#page=${s5Page}`
@@ -478,44 +493,19 @@ export default async function HomePage() {
     if (recentChanges.length >= 5) break;
   }
 
-  const convergenceItems = [
-    {
-      year: "May 2026",
-      label: "City Corporation Building (Amendment) Bye-laws",
-    },
-    {
-      year: "Jan 2026",
-      label: "Master Plan Setbacks, Basements and Ramps Amendment",
-    },
-    {
-      year: "Oct 2025",
-      label: "Master Plan Storm-Water Drain Buffer Notification",
-    },
-    {
-      year: "Jul 2025",
-      label: "Government Order on Property Records and Plan Approval",
-    },
-    {
-      year: "May 2025",
-      label: "Municipal Governance Act 2024 (Chapter XVII)",
-    },
-    {
-      year: "Apr 2025",
-      label: "Master Plan Chapter 11 Premium FAR and TDR Notification",
-    },
-    {
-      year: "Oct 2017",
-      label: "Notification UDD 14 TTP 2017 (Bye-law 1.4 incorporation)",
-    },
-    {
-      year: "Jun 2007",
-      label: "Revised Master Plan Zoning Regulations",
-    },
-    {
-      year: "Jun 2004",
-      label: "Municipal Building Bye-Laws 2003",
-    },
-  ];
+  const convergenceItems: Array<{ year: string; label: string }> = [];
+  let seenConvergenceMay2026 = false;
+  for (const doc of inForceSorted) {
+    if (doc.doc_id.endsWith("-bbl-amend-2026-05")) {
+      if (seenConvergenceMay2026) continue;
+      seenConvergenceMay2026 = true;
+    }
+    convergenceItems.push({
+      year: formatHumanDate(doc.effective_from || doc.notified_date),
+      label: formatPlainDocumentTitle(doc),
+    });
+    if (convergenceItems.length >= 9) break;
+  }
 
   const missingItems = (declarations?.not_modelled ?? []).map((nm) =>
     nm.replace(/\s*\([A-Z0-9\s-]+\)/g, "")

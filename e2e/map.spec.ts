@@ -137,8 +137,9 @@ test.describe("Bylaw One — Home, Subject, Document & Map E2E Suite", () => {
       await expect(
         page.getByRole("heading", { name: "What applies today" })
       ).toBeVisible();
-      await expect(page.getByTestId("band-continuity-notice")).toContainText(
-        /The current tables overlap between 11\.5 m and 12 m\./i
+      await expect(page.getByTestId("band-continuity-notice")).toHaveCount(0);
+      await expect(page.getByTestId("applicability-rule-line")).toContainText(
+        "Buildings up to 12 m use Table 8; taller buildings use Table 9 (clauses 3.1(ii) and (iii), January 2026)."
       );
 
       const paramTable = page.getByTestId("subject-parameter-table");
@@ -152,10 +153,45 @@ test.describe("Bylaw One — Home, Subject, Document & Map E2E Suite", () => {
       const olderDetails = page.getByTestId("older-or-replaced-rules");
       await expect(olderDetails).toBeVisible();
       expect(await olderDetails.getAttribute("open")).toBeNull();
+      const cityDatasetId = await page.locator("main").getAttribute("data-dataset-id");
+      expect(cityDatasetId).toMatch(/^ds-[0-9a-f]{12}$/);
+
+      // Part 1.5: 3.1(ii) in January 2026 wording, 2007 industrial row under replaced rules, no Replaced label on bye-law 1.4
+      await expect(page.getByTestId("governing-provisions-list")).toContainText(
+        /height up to 12\.0m, excluding the stilt floor, the setbacks shall be calculated as per Table 8/i
+      );
+      await olderDetails.locator("summary").click();
+      await expect(page.getByTestId("older-parameter-table")).toContainText(
+        /Industrial \(General\), plots up to 500 m²/i
+      );
+      await expect(page.getByTestId("older-parameter-table")).toContainText(
+        /4\.5 m/
+      );
+      await expect(olderDetails).not.toContainText(/1\.4\b.*Replaced/i);
+      await olderDetails.locator("summary").click();
       await expect(page.getByLabel(/Plot area/i)).toHaveCount(0);
 
       await page.screenshot({
         path: `/tmp/opencode/city-setbacks-${viewport.width}px.png`,
+        fullPage: false,
+      });
+
+      // 1b. Bengaluru North Setbacks (same dataset_id, shared content parity)
+      await page.goto("/j/in-ka-bengaluru-north/topics/setbacks", {
+        waitUntil: "domcontentloaded",
+      });
+      const northDatasetId = await page.locator("main").getAttribute("data-dataset-id");
+      expect(northDatasetId).toBe(cityDatasetId);
+      await expect(page.getByTestId("corporation-layer-notice")).toContainText(
+        "Showing Greater Bengaluru rules, with differences for Bengaluru North City Corporation."
+      );
+      await expect(
+        page.getByTestId("corporation-no-differences")
+      ).toContainText(
+        "No differences for Bengaluru North City Corporation on this subject."
+      );
+      await page.screenshot({
+        path: `/tmp/opencode/corp-north-setbacks-${viewport.width}px.png`,
         fullPage: false,
       });
 

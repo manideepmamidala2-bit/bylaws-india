@@ -517,8 +517,16 @@ export function ClauseTree({
                 .startsWith(rawDisplayTitle.trim().toLowerCase()))
               ? null
               : rawDisplayTitle;
+          const isCityByeLaw60i =
+            eid === "part_II__sec_6.0__item_i" &&
+            versions.length <= 1 &&
+            !clause.change_mark;
+          const cityByeLaw60iNote = isCityByeLaw60i
+            ? "Each City Corporation changed this rule in May 2026. Choose a corporation to see its wording."
+            : null;
           const siteNotes = Array.from(
             new Set([
+              ...(cityByeLaw60iNote ? [cityByeLaw60iNote] : []),
               ...(clause.notes_by_site ?? []),
               ...(viewMode === "consolidated"
                 ? activeVer?.notes_by_site ?? []
@@ -657,6 +665,15 @@ export function ClauseTree({
                   className="dg-serif mt-2 whitespace-pre-line text-[15px] leading-[1.52] text-[#171917]"
                 >
                   {displayContent}
+                </p>
+              )}
+
+              {cityByeLaw60iNote && (
+                <p
+                  data-testid="city-byelaw-60i-note"
+                  className="dg-serif mt-2 border-l-2 border-[#c8ccc0] bg-[#efeee8] px-3 py-2 text-xs text-[#171917]"
+                >
+                  {cityByeLaw60iNote}
                 </p>
               )}
 

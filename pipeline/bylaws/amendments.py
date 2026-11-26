@@ -124,7 +124,12 @@ def _parse_quoted_node_payload(
     content = rest
     if ":" in rest:
         head_part, tail_part = rest.split(":", 1)
-        if len(head_part.split()) <= 10 and tail_part.strip():
+        cleaned_head = head_part.lstrip("“\"'‘ ")
+        if (
+            len(head_part.split()) <= 10
+            and tail_part.strip()
+            and not cleaned_head.startswith("(")
+        ):
             heading = head_part.strip()
             content = tail_part.strip()
 
@@ -188,6 +193,53 @@ def _load_clause_tree(docs_dir: Path, doc_id: str, parent_docs_dir: Path | None 
     return data
 
 
+def _refine_amending_citations_for_content(
+    amending_doc: str,
+    amending_citations: list[dict[str, Any]],
+    content_text: str,
+    *,
+    jurisdiction_id: str,
+    parent_id: str | None,
+    repo_root: Path,
+) -> list[dict[str, Any]]:
+    """When an amending node spans multiple pages, narrow or order `amending_citations` so `citations[0]` is the exact page where `content_text` appears."""
+    if len(amending_citations) <= 1 or not content_text.strip():
+        return amending_citations
+    try:
+        from bylaws.fidelity import _load_doc_page_token_sets, extract_word_tokens
+
+        page_map = _load_doc_page_token_sets(
+            amending_doc,
+            jurisdiction_id,
+            parent_id=parent_id,
+            repo_root=repo_root,
+        )
+        words = [w for w in extract_word_tokens(content_text) if len(w) >= 2]
+        if not words:
+            return amending_citations
+        exact_single_pages = [
+            cit
+            for cit in amending_citations
+            if isinstance(cit.get("page"), int)
+            and all(w in page_map.get(int(cit["page"]), set()) for w in words)
+        ]
+        if exact_single_pages:
+            return exact_single_pages
+        scored = sorted(
+            amending_citations,
+            key=lambda cit: sum(
+                1
+                for w in words
+                if isinstance(cit.get("page"), int)
+                and w in page_map.get(int(cit["page"]), set())
+            ),
+            reverse=True,
+        )
+        return scored
+    except (OSError, ValueError, click.ClickException):
+        return amending_citations
+
+
 def _apply_effect_to_target_tree(
     target_tree: dict[str, Any],
     target_node: dict[str, Any],
@@ -196,6 +248,9 @@ def _apply_effect_to_target_tree(
     *,
     jurisdiction_name: str = "",
     amending_doc_title: str = "",
+    jurisdiction_id: str = "",
+    parent_id: str | None = None,
+    repo_root: Path | None = None,
 ) -> None:
     """Apply a high-confidence `effect` to `target_tree` by updating or inserting node `versions`."""
     action = str(effect["action"])
@@ -218,19 +273,32 @@ def _apply_effect_to_target_tree(
         if versions:
             versions[-1]["valid_to"] = valid_from
         new_node_info = (effect.get("new_nodes") or [{}])[0]
+        new_content = new_node_info.get("content") or target_node.get("content")
+        refined_cits = (
+            _refine_amending_citations_for_content(
+                amending_doc,
+                amending_citations,
+                str(new_content or ""),
+                jurisdiction_id=jurisdiction_id or str(target_tree.get("jurisdiction") or ""),
+                parent_id=parent_id,
+                repo_root=repo_root or resolve_repo_root(),
+            )
+            if amending_citations
+            else copy.deepcopy(target_node.get("citations") or [])
+        )
         new_ver: dict[str, Any] = {
             "version_id": f"v{len(versions) + 1}",
             "valid_from": valid_from,
             "valid_to": None,
             "heading": new_node_info.get("heading") or target_node.get("heading"),
             "intro": new_node_info.get("intro"),
-            "content": new_node_info.get("content") or target_node.get("content"),
+            "content": new_content,
             "wrap_up": new_node_info.get("wrap_up"),
             "cells": target_node.get("cells"),
             "source_doc": amending_doc,
             "source_eid": amending_eid,
             "effect_id": effect_id,
-            "citations": amending_citations or copy.deepcopy(target_node.get("citations") or []),
+            "citations": refined_cits,
             "legal_status": "in_force",
             "omitted": False,
             **({"notes_by_site": [site_note]} if site_note else {}),
@@ -411,7 +479,12 @@ def _apply_effect_to_target_tree(
                     break
 
 
-def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None) -> None:
+def run_amendments(
+    config: JurisdictionConfig,
+    *,
+    repo_root: Path | None = None,
+    _cascade_children: bool = True,
+) -> None:
     """Detect and link amendment instructions, build Layer 3 `effects` and node `versions`, and consolidate."""
     root = repo_root or resolve_repo_root()
     processed_dir = root / "data" / "processed" / config.id
@@ -805,6 +878,9 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
                         amending_node_ov,
                         jurisdiction_name=config.name,
                         amending_doc_title=(amending_doc_cfg.title if amending_doc_cfg else ""),
+                        jurisdiction_id=config.id,
+                        parent_id=str(parent_id) if parent_id else None,
+                        repo_root=root,
                     )
                     effect_entry_ov.pop("site_note", None)
                     modified_doc_ids.add(target_doc_id)
@@ -855,3 +931,16 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
         f"[amendments] Linked {len(links)} amendment instruction(s) ({len(effects)} effect(s)) "
         f"and consolidated {len(consolidated_payload['records'])} clause(s) for '{config.id}'."
     )
+    if _cascade_children and not getattr(config, "parent", None) and config.visibility != "test":
+        jurs_dir = root / "jurisdictions"
+        if jurs_dir.is_dir():
+            for child_yaml in sorted(jurs_dir.glob("*.yaml")):
+                if child_yaml.stem == config.id or child_yaml.stem == "resolution" or child_yaml.stem.startswith("_"):
+                    continue
+                child_cfg = load_jurisdiction_config(child_yaml.stem, repo_root=root)
+                if getattr(child_cfg, "parent", None) == config.id:
+                    run_amendments(
+                        child_cfg,
+                        repo_root=root,
+                        _cascade_children=False,
+                    )

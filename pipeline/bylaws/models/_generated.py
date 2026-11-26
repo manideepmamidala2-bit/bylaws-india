@@ -1118,6 +1118,7 @@ class ReleaseEntry(BaseModel):
         extra="forbid",
     )
     version: constr(pattern=r"^\d+\.\d+\.\d+$")
+    dataset_id: constr(min_length=1) | None = None
     status: Literal["published", "withdrawn"] | None = "published"
     withdrawn_reason: str | None = None
     released_at: constr(min_length=10)
@@ -1359,6 +1360,31 @@ class JurisdictionRelations(BaseModel):
     relations: list[RelationEntry]
 
 
+class ApplicabilityAuthority(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    doc_id: constr(min_length=1)
+    eid: constr(min_length=1)
+    clause_number: constr(min_length=1)
+    quote: constr(min_length=1)
+    page: conint(ge=1)
+    page_link: constr(min_length=1)
+
+
+class ApplicabilityRule(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    rule_id: constr(min_length=1)
+    subject: constr(min_length=1)
+    dimension: constr(min_length=1)
+    range_settled: constr(min_length=1)
+    plain_explanation: constr(min_length=1)
+    unreachable_band_note: constr(min_length=1)
+    authorities: list[ApplicabilityAuthority] = Field(..., min_length=1)
+
+
 class ParametersGenerated(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -1459,6 +1485,7 @@ class JurisdictionParameters(BaseModel):
     jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     generated: ParametersGenerated
     records: list[ParameterRecord]
+    applicability_rules: list[ApplicabilityRule] | None = None
 
 
 class ResolutionAuthority(BaseModel):
@@ -1648,6 +1675,10 @@ class ReleaseManifest(BaseModel):
         extra="forbid",
     )
     schema_version: Literal["1.4"]
+    dataset_id: constr(min_length=1) | None = Field(
+        None,
+        description="Deterministic content-addressed build identifier across all public jurisdiction releases in this manifest.",
+    )
     jurisdictions: list[JurisdictionManifest]
 
 

@@ -597,9 +597,17 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     const whatAppliesSection = screen.getByTestId("what-applies-today-section");
     const whatAppliesText = whatAppliesSection.textContent ?? "";
 
-    // Band continuity overlap notice between 11.5 m and 12 m
-    expect(screen.getByTestId("band-continuity-notice").textContent).toContain(
-      "The current tables overlap between 11.5 m and 12 m."
+    // Part 4: 11.5 m to 12 m setback height band is settled by 3.1(ii)-(iii), NOT shown as "Not settled",
+    // and explained in one line under "Why this rule applies" with verbatim quotes on tap and unreachable-band note on Table 9
+    expect(screen.queryByTestId("band-continuity-notice")).not.toBeInTheDocument();
+    expect(screen.getByTestId("applicability-rule-line").textContent).toBe(
+      "Buildings up to 12 m use Table 8; taller buildings use Table 9 (clauses 3.1(ii) and (iii), January 2026)."
+    );
+    expect(
+      screen.getAllByTestId("applicability-rule-quote").length
+    ).toBeGreaterThanOrEqual(2);
+    expect(screen.getByTestId("unreachable-band-note").textContent).toContain(
+      "11.5 to 12 m is unreachable here"
     );
 
     // Governing provisions 3.1(ii) and 3.1(iii) show January 2026 wording, "Changed January 2026", and previous 2007 wording in Details

@@ -776,10 +776,25 @@ export function computeSubjectBandContinuityNotices(
       DocumentMetadata,
       "doc_id" | "title" | "effective_from" | "notified_date"
     >
-  >
+  >,
+  applicabilityRules?: ReadonlyArray<{
+    dimension?: string | null;
+    range_settled?: string | null;
+  }> | null
 ): SubjectBandContinuityNotice[] {
   const notices: SubjectBandContinuityNotice[] = [];
   if (subjectSlug === "setbacks" || subjectSlug === "height") {
+    const settledByApplicability =
+      applicabilityRules !== undefined && applicabilityRules !== null
+        ? applicabilityRules.some(
+            (ar) =>
+              ar.dimension === "building_height_m" &&
+              ar.range_settled === "11.5 m to 12 m"
+          )
+        : records.some((r) =>
+            (r.note ?? "").includes("clauses 3.1(ii) and (iii)")
+          );
+
     const lowRiseRec = records.find(
       (r) =>
         r.legal_status === "in_force" &&
@@ -794,7 +809,7 @@ export function computeSubjectBandContinuityNotices(
         !r.valid_to &&
         r.conditions.building_height_m?.min === 11.5
     );
-    if (lowRiseRec && highRiseRec) {
+    if (lowRiseRec && highRiseRec && !settledByApplicability) {
       const docA = docMetaById.get(lowRiseRec.source.doc_id);
       const docB = docMetaById.get(highRiseRec.source.doc_id);
       notices.push({

@@ -187,3 +187,115 @@ def test_built_html_primary_layer_language_check_outside_details() -> None:
         assert m_old is None, (
             f"{rel} built HTML contains forbidden old-design marker: {m_old.group(0)!r}"
         )
+
+
+def test_part3_one_name_and_date_per_instrument_from_register() -> None:
+    """One Build, Correct Citations Part 3: Every instrument reference (`Replaced by <name>, <date>`) in `parameters.json` and built HTML pages takes its plain name and date from `documents.json`, and zero `20 January 2026` / `2026-01-20` references remain."""
+    from bylaws.parameters import _format_human_date_plain, _format_short_doc_label
+
+    manifest = json.loads((PUBLIC_DATA_DIR / "manifest.json").read_text(encoding="utf-8"))
+    public_jurs = [j for j in manifest["jurisdictions"] if j.get("visibility") != "test"]
+
+    registered_replaced_labels: set[str] = set()
+    for jur in public_jurs:
+        rel_dir = PUBLIC_DATA_DIR / jur["id"] / str(jur["latest_release"])
+        docs = json.loads((rel_dir / "documents.json").read_text(encoding="utf-8"))
+        for d in docs:
+            plain_title = _format_short_doc_label(type("DocObj", (), {"title": d.get("title")})(), d["doc_id"])
+            dt = _format_human_date_plain(d.get("effective_from") or d.get("notified_date"))
+            registered_replaced_labels.add(f"Replaced by {plain_title}, {dt}")
+            registered_replaced_labels.add(f"Replaced by {plain_title}")
+
+    for jur in public_jurs:
+        rel_dir = PUBLIC_DATA_DIR / jur["id"] / str(jur["latest_release"])
+        params_text = (rel_dir / "parameters.json").read_text(encoding="utf-8")
+        assert "20 January 2026" not in params_text, f"Stale '20 January 2026' in {jur['id']} parameters.json"
+        assert "2026-01-20" not in params_text, f"Stale '2026-01-20' in {jur['id']} parameters.json"
+        assert "Setbacks, Basements and Industrial Norms" not in params_text
+
+        params = json.loads(params_text)
+        for rec in params["records"]:
+            note = str(rec.get("note") or "").strip()
+            if note.startswith("Replaced by "):
+                assert note in registered_replaced_labels, (
+                    f"Unregistered instrument reference in {jur['id']} {rec['parameter_id']}: {note!r}"
+                )
+
+
+def test_part5_byelaw_6_0_i_corporation_wording_and_byelaw_1_4_label_check() -> None:
+    """One Build, Correct Citations Part 5: In each corporation view, bye-law 6.0(i) shows that corporation's May 2026 wording tagged 'Changed May 2026, [corporation]' with previous wording on tap and citation to p. 2 of the amendment; on Greater Bengaluru, 6.0(i) shows the 2003 wording with 'Each City Corporation changed this rule in May 2026. Choose a corporation to see its wording.'; and 'Master plan rules apply instead (bye-law 1.4)' appears only on Bye-law 1.4 subjects."""
+    next_app_dir = REPO_ROOT / ".next" / "server" / "app"
+    if not next_app_dir.is_dir():
+        return
+
+    allowed_byelaw14_slugs = {
+        "land-use",
+        "ground-coverage",
+        "far",
+        "setbacks",
+        "projections-and-open-spaces",
+        "height",
+        "parking",
+    }
+
+    for html_path in sorted(next_app_dir.rglob("*.html")):
+        rel = html_path.relative_to(next_app_dir).as_posix()
+        clean_html = re.sub(r"<!--[\s\S]*?-->", "", html_path.read_text(encoding="utf-8"))
+        if "Master plan rules apply instead (bye-law 1.4)" in clean_html:
+            m_topic = re.match(r"^j/[a-z0-9-]+/topics/([a-z0-9-]+)\.html$", rel)
+            assert m_topic is not None and m_topic.group(1) in allowed_byelaw14_slugs, (
+                f"Label check failed: 'Master plan rules apply instead (bye-law 1.4)' found on non-Bye-law-1.4 route {rel}"
+            )
+            for li_m in re.finditer(
+                r'<li\b[^>]*data-technical-address="([^"]+)"[^>]*>([\s\S]*?)</li>',
+                clean_html,
+            ):
+                addr, body = li_m.group(1), li_m.group(2)
+                if "Master plan rules apply instead (bye-law 1.4)" in body:
+                    assert addr != "bbl-2003:part_II__sec_6.0__item_i"
+                    assert not addr.lower().startswith("bbl-2003:part_ii__")
+                    assert not addr.lower().startswith("bbl-2003:part_v__")
+
+    # Verify Greater Bengaluru view of 6.0(i)
+    city_setbacks = re.sub(
+        r"<!--[\s\S]*?-->",
+        "",
+        (next_app_dir / "j" / "in-ka-bengaluru" / "topics" / "setbacks.html").read_text(encoding="utf-8"),
+    )
+    m_city_60i = re.search(
+        r'<li\b[^>]*data-technical-address="bbl-2003:part_II__sec_6\.0__item_i"[^>]*>([\s\S]*?)</li>',
+        city_setbacks,
+    )
+    assert m_city_60i is not None
+    city_60i_html = m_city_60i.group(1)
+    assert "within 5% of" in city_60i_html
+    assert "Each City Corporation changed this rule in May 2026. Choose a corporation to see its wording." in city_60i_html
+    assert "Master plan rules apply instead" not in city_60i_html
+
+    # Verify each of the 5 City Corporations shows its May 2026 wording for 6.0(i)
+    for corp_id, corp_name in (
+        ("in-ka-bengaluru-central", "Bengaluru Central City Corporation"),
+        ("in-ka-bengaluru-north", "Bengaluru North City Corporation"),
+        ("in-ka-bengaluru-south", "Bengaluru South City Corporation"),
+        ("in-ka-bengaluru-east", "Bengaluru East City Corporation"),
+        ("in-ka-bengaluru-west", "Bengaluru West City Corporation"),
+    ):
+        corp_setbacks = re.sub(
+            r"<!--[\s\S]*?-->",
+            "",
+            (next_app_dir / "j" / corp_id / "topics" / "setbacks.html").read_text(encoding="utf-8"),
+        )
+        m_corp_60i = re.search(
+            r'<li\b[^>]*data-technical-address="bbl-2003:part_II__sec_6\.0__item_i"[^>]*>([\s\S]*?)</li>',
+            corp_setbacks,
+        )
+        assert m_corp_60i is not None, f"Missing 6.0(i) on {corp_id} Setbacks HTML"
+        corp_60i_html = m_corp_60i.group(1)
+        assert "Table-2B below" in corp_60i_html
+        assert f"Changed May 2026, {corp_name}" in corp_60i_html
+        assert "#page=2" in corp_60i_html
+        assert "Previous wording (" in corp_60i_html
+        assert "within 5% of" in corp_60i_html
+        assert "Master plan rules apply instead" not in corp_60i_html
+
+
