@@ -1,6 +1,6 @@
 # Parameter Extraction & Table Cell Cross-Check Report (`in-ka-bengaluru`)
 
-- **Total Parameter Records Extracted**: `314`
+- **Total Parameter Records Extracted**: `313`
 - **Source Table Anomalies / Mismatches Flagged for Owner Review**: `76`
 - **Plausibility Bounds Exclusions & Non-Envelope Reclassifications**: `72`
 - **Unexplained Governing Overlaps**: `0`

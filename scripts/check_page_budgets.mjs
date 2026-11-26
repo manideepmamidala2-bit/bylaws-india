@@ -266,12 +266,12 @@ function extractSharedParameterRowsFromSubjectHtml(html) {
 
 function extractSharedProvisionsFromSubjectHtml(html) {
   const map = new Map();
-  for (const liMatch of html.matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/g)) {
-    const liHtml = liMatch[1];
-    const codeMatch = liHtml.match(
-      /Technical address:\s*<!--\s*-->\s*<code[^>]*>([^<]+)<\/code>|Technical address:\s*<code[^>]*>([^<]+)<\/code>/
-    );
-    const addr = (codeMatch?.[1] || codeMatch?.[2] || "").trim();
+  const commentStripped = html.replace(/<!--[\s\S]*?-->/g, "");
+  for (const liMatch of commentStripped.matchAll(
+    /<li\b[^>]*data-technical-address="([^"]+)"[^>]*>([\s\S]*?)<\/li>/g
+  )) {
+    const addr = (liMatch[1] || "").trim();
+    const liHtml = liMatch[2];
     if (!addr) continue;
     if (
       CORP_AMENDED_BASE_ADDRESSES.has(addr) ||

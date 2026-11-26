@@ -619,7 +619,7 @@
 | 46 | `rmp2015-zr-amend-2026-01:eff_46` | `rmp2015-zr-amend-2026-01:item_a` | p. 5 (`1238x1761`) | `rmp2015-zr:chp_3__cl_3.10` | `modify_text` | `2026-01-05` | `Yes` | `In clause (i) for the numerical and letter “2.0 m” following shall be ` | PASS |
 | 47 | `rmp2015-zr-amend-2026-01:eff_47` | `rmp2015-zr-amend-2026-01:item_a` | p. 5 (`1238x1761`) | `rmp2015-zr:chp_3__cl_3.10__item_i` | `substitute` | `2026-01-05` | `Yes` | `In clause (i) for the numerical and letter “2.0 m” following shall be ` | PASS |
 | 48 | `rmp2015-zr-amend-2026-01:eff_48` | `rmp2015-zr-amend-2026-01:cl_11` | p. 5 (`1238x1761`) | `rmp2015-zr:chp_4__cl_4.1__cl_4.1.2__item_b` | `substitute` | `2026-01-05` | `Yes` | `“(b) if the road width is less than 9.0 m., then the maximum height is` | PASS |
-| 49 | `rmp2015-zr-amend-2026-01:eff_49` | `rmp2015-zr-amend-2026-01:item_ii` | p. 5 (`1238x1761`) | `rmp2015-zr:chp_4__cl_4.1__cl_4.1.2__item_c` | `substitute` | `2026-01-05` | `Yes` | `on plot size above 360 sq.m and upto 750 sq.m permitted. In Ring I, II` | PASS |
+| 49 | `rmp2015-zr-amend-2026-01:eff_49` | `rmp2015-zr-amend-2026-01:item_ii` | p. 5 (`1238x1761`) | `rmp2015-zr:chp_4__cl_4.1__cl_4.1.2__item_c` | `substitute` | `2026-01-05` | `Yes` | `“(c) In Ring III: on plot size above 360 sq.m and upto 750 sq.m apartm` | PASS |
 | 50 | `rmp2015-zr-amend-2026-01:eff_50` | `rmp2015-zr-amend-2026-01:item_2_2__item_b` | p. 2 (`1244x1767`) | `rmp2015-zr:chp_3__cl_3.1__tbl_8` | `substitute` | `2026-01-05` | `Yes` | `Table 8 and the entries thereunder shall be substituted as below: Tabl` | PASS |
 | 51 | `rmp2015-zr-amend-2026-01:eff_51` | `rmp2015-zr-amend-2026-01:item_ii` | p. 5 (`1238x1761`) | `rmp2015-zr:chp_4__cl_4.5` | `modify_text` | `2026-01-05` | `Yes` | `In regulation 4.5 MUTATION CORRIDORS, in table 15, plot size for sl.no` | PASS |
 | 52 | `rmp2015-zr-amend-2026-01:eff_52` | `rmp2015-zr-amend-2026-01:item_ii` | p. 5 (`1238x1761`) | `rmp2015-zr:chp_4__cl_4.7` | `modify_text` | `2026-01-05` | `Yes` | `In regulation 4.7 INDUSTRIAL I (GENERAL), table 16 shall be substitute` | PASS |
@@ -658,6 +658,7 @@
 | Metric | Count | Status |
 |---|---:|---|
 | Provisions checked | 6495 | PASS |
+| Parameter table rows checked against cited page | 313 | PASS |
 | Editorial insertions removed to `notes_by_site` | 26 | PASS |
 | Separate site notes (`notes_by_site`) created | 27 | PASS |
 | OCR corrections applied (`ocr_status: corrected`) | 25 | PASS |

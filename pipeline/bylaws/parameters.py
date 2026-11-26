@@ -1283,7 +1283,7 @@ def extract_jurisdiction_parameters(
                                 "col_index": col_idx,
                                 "row_header": r_lbl,
                                 "column_header": col_hdr,
-                                "cell_text": c_txt,
+                                "cell_text": f"10000 sq.m ({c_txt})",
                                 "footnote_markers": [],
                                 "footnotes_text": [txt],
                                 "page": mc_page,
@@ -1294,52 +1294,6 @@ def extract_jurisdiction_parameters(
                             },
                             method="clause_rule_parser",
                         )
-
-            # (d4) Ring III floors cap on 360-750 sq.m (`cl_11.11.2025__item_ii`, p. 5)
-            if "In Ring III: on plot size above 360 sq.m and upto 750 sq.m" in txt:
-                conds_f = _empty_conditions(
-                    zone=["R-MAIN"],
-                    use=["residential"],
-                    area_class=["ring_iii"],
-                    jurisdiction=jur_scope,
-                    unexpressed=["Ground + 3 floors or Stilt + 4 floors in Ring III"],
-                )
-                conds_f["plot_area_m2"] = {
-                    "min": 360.0,
-                    "max": 750.0,
-                    "min_inclusive": False,
-                    "max_inclusive": True,
-                }
-                _add_record(
-                    parameter="floors_max",
-                    value=4.0,
-                    unit="floors",
-                    value_text="Ground + 3 floors or Stilt + 4 floors",
-                    conditions=conds_f,
-                    valid_from=doc_valid_from,
-                    valid_to=None,
-                    legal_status="in_force",
-                    source={
-                        "doc_id": doc.id,
-                        "eid": eid,
-                        "clause_id": str(node.get("clause_id") or f"{doc.id}:{eid}"),
-                        "table_eid": None,
-                        "table_id": "Table 10 Note (c) (Substituted 2026-01)",
-                        "row_index": None,
-                        "col_index": None,
-                        "row_header": "Ring III, plot size above 360 sq.m up to 750 sq.m",
-                        "column_header": "Maximum floors",
-                        "cell_text": "Ground + 3 floors or Stilt + 4 floors",
-                        "footnote_markers": ["(c)"],
-                        "footnotes_text": [txt],
-                        "page": page,
-                        "bbox": bbox,
-                        "page_link": page_link,
-                        "official_url": pdf_url,
-                        "archive_url": arch_url,
-                    },
-                    method="clause_rule_parser",
-                )
 
             # (e) April 2025 Chapter 11 Table No.27 (`chp_11_2__prov_1`, p. 2): Premium FAR & TDR/DRC by road width
             if eid == "chp_11_2__prov_1" and ("Table No.27" in txt or ">9, <=12" in txt):

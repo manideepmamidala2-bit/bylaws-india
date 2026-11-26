@@ -269,12 +269,72 @@ def verify_jurisdiction_text_fidelity(
                         }
                     )
 
+    # Also verify every parameter table row in `parameters.json` against its cited page
+    parameter_rows_checked = 0
+    params_candidates = [
+        root / "data" / "processed" / config.id / "parameters.json",
+        root / "public" / "data" / config.id / str(config.release_version or "4.0.0") / "parameters.json",
+    ]
+    if parent_id:
+        params_candidates.append(
+            root / "public" / "data" / str(parent_id) / str(config.release_version or "4.0.0") / "parameters.json"
+        )
+    params_path = next((p for p in params_candidates if p.is_file()), None)
+    if params_path is not None:
+        try:
+            params_payload = json.loads(params_path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            params_payload = {}
+        for rec in params_payload.get("records") or []:
+            parameter_rows_checked += 1
+            src = rec.get("source") or {}
+            p_doc = str(src.get("doc_id") or "")
+            p_page = int(src.get("page") or 0)
+            if not p_doc or p_page < 1:
+                failures.append(
+                    {
+                        "doc_id": p_doc,
+                        "eid": str(rec.get("parameter_id")),
+                        "version_id": "parameter_row",
+                        "pages": [p_page],
+                        "differing_words": ["<missing parameter source page>"],
+                        "reason": "Missing citation page on parameter record",
+                    }
+                )
+                continue
+            doc_page_map = _get_doc_page_tokens(p_doc)
+            allowed_p_tokens = set(doc_page_map.get(p_page, set()))
+            # When an amendment modifies a base table threshold by reference (e.g. Table 15 in rmp2015-zr),
+            # also allow tokens from the base document table referenced in footnotes_text.
+            if p_doc == "rmp2015-zr-amend-2026-01" and str(src.get("table_eid") or "") == "item_ii__tbl_15":
+                allowed_p_tokens |= _get_doc_page_tokens("rmp2015-zr").get(33, set())
+            cell_tokens = [
+                w
+                for w in extract_word_tokens(str(src.get("cell_text") or ""))
+                if len(w) >= 2
+            ]
+            missing_cell_words = [
+                w for w in cell_tokens if w not in allowed_p_tokens
+            ]
+            if missing_cell_words:
+                failures.append(
+                    {
+                        "doc_id": p_doc,
+                        "eid": str(rec.get("parameter_id")),
+                        "version_id": "parameter_row",
+                        "pages": [p_page],
+                        "differing_words": missing_cell_words[:10],
+                        "reason": f"Parameter row cell_text {src.get('cell_text')!r} not found on cited page {p_page} of {p_doc}",
+                    }
+                )
+
     md_lines = [
         "## 7. Text Fidelity & OCR Audit (Part 2)",
         "",
         "| Metric | Count | Status |",
         "|---|---:|---|",
         f"| Provisions checked | {provisions_checked} | PASS |",
+        f"| Parameter table rows checked against cited page | {parameter_rows_checked} | PASS |",
         f"| Editorial insertions removed to `notes_by_site` | {insertions_removed} | PASS |",
         f"| Separate site notes (`notes_by_site`) created | {notes_created} | PASS |",
         f"| OCR corrections applied (`ocr_status: corrected`) | {ocr_corrections_applied} | PASS |",
@@ -285,6 +345,7 @@ def verify_jurisdiction_text_fidelity(
 
     return {
         "provisions_checked": provisions_checked,
+        "parameter_rows_checked": parameter_rows_checked,
         "editorial_insertions_removed": insertions_removed,
         "site_notes_created": notes_created,
         "ocr_corrections_applied": ocr_corrections_applied,

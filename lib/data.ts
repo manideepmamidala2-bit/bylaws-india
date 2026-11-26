@@ -981,6 +981,18 @@ export async function fetchJurisdictionDataset(
   }
 
   const allTrees = [...clauseTrees, ...draftClauseTrees];
+  const amendingNodeByKey = new Map<string, GeneratedClauseNode>();
+  for (const tree of allTrees) {
+    for (const c of tree.clauses) {
+      if (c.eid) {
+        amendingNodeByKey.set(`${tree.doc_id}:${c.eid}`, c);
+      }
+      if (c.number) {
+        amendingNodeByKey.set(`${tree.doc_id}:${c.number}`, c);
+      }
+    }
+  }
+
   const clauses: ClauseNode[] = [];
   for (const tree of allTrees) {
     const docMeta = docById.get(tree.doc_id);
@@ -999,13 +1011,27 @@ export async function fetchJurisdictionDataset(
         const existingEffIds = new Set(
           (c.versions ?? []).map((v) => v.effect_id).filter(Boolean)
         );
+        const existingSourcePairs = new Set(
+          (c.versions ?? [])
+            .filter((v) => v.source_doc && v.source_eid)
+            .map((v) => `${v.source_doc}:${v.source_eid}`)
+        );
         const missingEffects = targetEffects.filter(
-          (e) => !existingEffIds.has(e.effect_id)
+          (e) =>
+            !existingEffIds.has(e.effect_id) &&
+            !existingSourcePairs.has(`${e.amending_doc}:${e.amending_eid}`)
         );
         if (missingEffects.length > 0) {
           const baseVers = [...(c.versions ?? [])];
           for (const mEff of missingEffects) {
             const firstPayload = mEff.new_nodes?.[0];
+            const amNode = amendingNodeByKey.get(
+              `${mEff.amending_doc}:${mEff.amending_eid}`
+            );
+            const amCitations =
+              amNode?.citations && amNode.citations.length > 0
+                ? amNode.citations
+                : c.citations ?? [];
             if (baseVers.length > 0 && !baseVers[baseVers.length - 1].valid_to) {
               baseVers[baseVers.length - 1] = {
                 ...baseVers[baseVers.length - 1],
@@ -1027,7 +1053,7 @@ export async function fetchJurisdictionDataset(
               source_doc: mEff.amending_doc,
               source_eid: mEff.amending_eid,
               effect_id: mEff.effect_id,
-              citations: c.citations ?? [],
+              citations: amCitations,
               legal_status: "in_force",
               omitted: mEff.action === "omit",
             });

@@ -874,6 +874,7 @@ export default async function TopicDetailPage({
     return (
       <li
         key={`${baseDocId}:${node.eid}`}
+        data-technical-address={`${baseDocId}:${node.eid}`}
         className="border-b border-[#c8ccc0] py-4 last:border-b-0"
       >
         <div className="flex flex-wrap items-baseline justify-between gap-2">
@@ -934,7 +935,7 @@ export default async function TopicDetailPage({
           {displayText}
         </p>
 
-        {!isCompact && effectiveNotes.length > 0 && (
+        {effectiveNotes.length > 0 && (
           <div className="mt-3 border-l-2 border-[#c8ccc0] bg-[#efeee8] px-3 py-2 text-xs text-[#171917]">
             <span className="dg-mono mr-2 text-[#5b5e56]">
               In short, by this site:
@@ -943,7 +944,7 @@ export default async function TopicDetailPage({
           </div>
         )}
 
-        {!isCompact && (
+        {(!isCompact || Boolean(previousWording)) && (
           <details className="mt-2">
             <summary className="inline-flex min-h-[44px] cursor-pointer items-center font-mono text-[11px] uppercase tracking-[0.12em] text-[#5b5e56] hover:text-[#080909]">
               {previousWording ? "Details & previous wording" : "Details"}
