@@ -1537,7 +1537,7 @@ def _apply_table_supersession_and_deduplication(
         by_sig_and_layer.setdefault((layer, sig), []).append(rec)
 
     resolved: list[dict[str, Any]] = []
-    for (_layer, _sig), group in by_sig_and_layer.items():
+    for group in by_sig_and_layer.values():
         if len(group) == 1:
             resolved.append(group[0])
             continue

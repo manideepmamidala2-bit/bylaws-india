@@ -440,20 +440,17 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
             seen_cfg_link_keys.add(k_lnk)
             effective_cfg_links.append(d_lnk)
 
-    if parent_id:
-        try:
-            parent_cfg = load_jurisdiction_config(str(parent_id), repo_root=root)
-            for p_lnk in getattr(parent_cfg, "amendment_links", None) or []:
-                d_lnk = p_lnk.model_dump() if hasattr(p_lnk, "model_dump") else dict(p_lnk)
-                app_in = d_lnk.get("applies_in") or []
-                if app_in and config.id not in app_in:
-                    continue
-                k_lnk = (str(d_lnk.get("amending_clause") or ""), str(d_lnk.get("target_clause") or ""))
-                if k_lnk not in seen_cfg_link_keys:
-                    seen_cfg_link_keys.add(k_lnk)
-                    effective_cfg_links.append(d_lnk)
-        except Exception:
-            pass
+    if parent_id and (root / "jurisdictions" / f"{parent_id}.yaml").exists():
+        parent_cfg = load_jurisdiction_config(str(parent_id), repo_root=root)
+        for p_lnk in getattr(parent_cfg, "amendment_links", None) or []:
+            d_lnk = p_lnk.model_dump() if hasattr(p_lnk, "model_dump") else dict(p_lnk)
+            app_in = d_lnk.get("applies_in") or []
+            if app_in and config.id not in app_in:
+                continue
+            k_lnk = (str(d_lnk.get("amending_clause") or ""), str(d_lnk.get("target_clause") or ""))
+            if k_lnk not in seen_cfg_link_keys:
+                seen_cfg_link_keys.add(k_lnk)
+                effective_cfg_links.append(d_lnk)
 
     declarative_doc_ids = {
         str(lnk.get("amending_clause") or "").split(":", 1)[0]
