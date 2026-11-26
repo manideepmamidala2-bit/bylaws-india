@@ -97,12 +97,12 @@ steps:
       - floors_max
       - parking_requirement
     authority:
-      doc_id: bbl-2003
-      eid: part_I__sec_1.0__cl_1.4
-      clause_id: "bbl-2003:1.4"
+      doc_id: ka-model-bbl-2017
+      eid: chp_1__item_3
+      clause_id: "bbl-2003:1.4 (inserted by UDD 14 TTP 2017)"
       page: 2
       quote: "All mandatory Master Plan or Zonal Regulations regarding use, land use, coverage, FAR, setback or open space, height, number of stories, number of dwelling units, parking standards etc. for various categories of buildings including modification therein made from time to time shall be applicable mutatis mutandis in these Bye-Laws under this clause."
-      official_url: "https://site.bbmp.gov.in/PDF/Bangalore-Building-Byelaws-%202003.pdf"
+      official_url: "https://bpas.bbmpgov.in/BPAMSClient4/Downloads/Bye%20laws%20and%20Zoning%20Regulations/Model%20Building%20Byelaws%20Notification%20No.%20UDD%2014%20TTP%202017%20(P-4)%20Bengaluru,%20Dated%2028-10-2017%20.pdf"
     verification: machine_checked
 
   - step_number: 5

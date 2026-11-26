@@ -142,6 +142,24 @@ Tracks the 11-PR remediation series defined in [`docs/plans/pr-series/00-overvie
 | **Part 4** | "Not settled" only when it is | ✅ Complete | Added `applicability_rules` to `schemas/parameters.schema.json` and `pipeline/bylaws/parameters.py` recording `3.1(ii)` and `3.1(iii)` (`rmp2015-zr-amend-2026-01`, p. 2) with verbatim quotes and citations; updated `check_parameter_overlaps`, `check_band_continuity`, `computeSubjectBandContinuityNotices`, and `app/j/[id]/topics/[topic]/page.tsx` so the settled `11.5 m`–`12 m` setback height band is explained in one line under `"Why this rule applies"` (`"Buildings up to 12 m use Table 8; taller buildings use Table 9 (clauses 3.1(ii) and (iii), January 2026)."`) with verbatim quotes on tap and a small unreachable-band note on `Table 9`'s `above 11.5 up to 15 m` row instead of `"Not settled"`; and verified in `test_parameters.py` and `plain-language.test.ts` that a constructed overlap with no applicability rule is still flagged as `"Not settled"` |
 | **Part 5** | Corporation wording for bye-law 6.0(i) | ✅ Complete | Linked and displayed each City Corporation's May 2026 substituted wording for Bye-law `6.0(i)` (`{bccc,bncc,bscc,becc,bwcc}-bbl-amend-2026-05`, `p. 2`) tagged `"Changed May 2026, [corporation]"` with the 2003 previous wording (`"within 5% of..."`, `p. 18`) on tap; displayed the 2003 wording on Greater Bengaluru with `"Each City Corporation changed this rule in May 2026. Choose a corporation to see its wording."`; removed `"Master plan rules apply instead (bye-law 1.4)"` from `6.0(i)` and restricted that label strictly to Bye-law `1.4` subjects (`land-use`, `ground-coverage`, `far`, `setbacks`, `projections-and-open-spaces`, `height`, `parking`) enforced in CI (`scripts/check_page_budgets.mjs` and `test_part5_byelaw_6_0_i_corporation_wording_and_byelaw_1_4_label_check`); captured `390 px` and `1280 px` screenshots of Setbacks in Greater Bengaluru and North views; and verified all `168` pytest tests, `19` Vitest + `axe-core` tests, `243` built HTML routes, and `7` Playwright E2E tests pass |
 
+---
+
+## Bylaw One: Trust and Accuracy (`docs/plans/trust-and-accuracy-plan.md` — Parts 1–5)
+
+- **Baseline Release**: `4.0.0`
+- **Active Change**: `261126-3t3i-trust-and-accuracy`
+- **Scope**: Strictly existing repository data and the existing **Bylaw One** (`dg2n`) design; zero new acquisition, zero new features, never invent or rewrite legal text.
+
+### Part-by-Part Status
+
+| Part | Title | Status | Notes |
+|------|-------|--------|-------|
+| **Part 1** | A citation check that can fail | ✅ Complete | Stored extracted per-page text and PDF SHA-256 checksum for all `29` acquired Bengaluru instruments (`882` pages) and `4` fixture instruments (`5` pages; `887` pages total across `33` instruments, `596 KB` gzipped) in versioned `data/page_text/*.pages.json.gz`; updated `pipeline/bylaws/fidelity.py` to read page text **only** from `data/page_text/` (plus recorded overrides), removed the `.clauses.json` fallback and `p-1`/`p+1` neighbor-page padding, enforced failure (not skip) on missing page text or SHA-256 mismatch, audited and fixed `8` citation issues discovered against stored page text (`bbl-2003:part_III__sec_17.0` spanning `pp. 36–37`, `4` `rmp2015-zr-amend-2026-01` `item_ii__tbl_15` parameter rows on `p. 6` referencing `55%/2.75/50%/3.25` from `rmp2015-zr` `p. 33`, `resolution.yaml` Step 4 citing `bbl-2003` `p. 2` instead of `ka-model-bbl-2017` `p. 2`, and `3` `consolidated.json` `insert_after` anchor records `bbl-2003:1.3`, `rmp2015-zr:3.16`, `rmp2015-zr:CHAPTER 10`), and added planted-fault tests in `pipeline/tests/test_text_fidelity.py` |
+| **Part 2** | Correct the map | 🔄 In Progress | Replace `0.0032 m` claim with verification-report-generated street offset figures (`~8 m` median, `~21 m` 90th percentile), move grid-fit RMSE into `Details`, rebuild `/j/[id]` in the Bylaw One design, and link `Map` from the footer and `Land use` |
+| **Part 3** | Plain names and correct attributions | ⏳ Pending | Use plain register names in all source cells and labels with a CI check; fix home-page 2017 (`Step 3`) and 2007 (`Step 2`) attributions and quotes |
+| **Part 4** | Relations shown honestly | ⏳ Pending | Show only structurally confirmed relation kinds publicly with `"Checked by rule, not yet by a person"` in `Details`; mark other kinds `"not yet reviewed"`; keep 60-item `docs/review/relations-labelling.md` ready with page numbers; record `0.8` precision rule |
+| **Part 5** | Resolver honesty (no interface change) | ⏳ Pending | Return `"needs depth/width/height"` instead of assuming `3:2` plot or `11.5 m` height; distinguish `"No limit in the law for this case"` from `"Not covered by our data yet"`; test on the 4 review plots |
+
 
 
 

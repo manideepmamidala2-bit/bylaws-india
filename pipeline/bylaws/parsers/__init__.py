@@ -54,11 +54,13 @@ def run_parse_stage(
     interim_dir = root / "data" / "interim" / config.id
     interim_dir.mkdir(parents=True, exist_ok=True)
 
+    from bylaws.fidelity import build_and_write_stored_page_text
     from bylaws.structure import is_structurable_document
 
     parsed_count = 0
     for doc in config.documents:
         if not is_structurable_document(doc):
+            build_and_write_stored_page_text(doc, config, repo_root=root)
             continue
         pdf_path = raw_dir / f"{doc.id}.pdf"
         if not pdf_path.is_file():
@@ -88,6 +90,7 @@ def run_parse_stage(
                 encoding="utf-8",
             )
             md_out.write_text(result.markdown, encoding="utf-8")
+        build_and_write_stored_page_text(doc, config, repo_root=root)
         parsed_count += 1
 
     click.echo(

@@ -1283,7 +1283,7 @@ def extract_jurisdiction_parameters(
                                 "col_index": col_idx,
                                 "row_header": r_lbl,
                                 "column_header": col_hdr,
-                                "cell_text": f"10000 sq.m ({c_txt})",
+                                "cell_text": "10000 sq.m",
                                 "footnote_markers": [],
                                 "footnotes_text": [txt],
                                 "page": mc_page,
