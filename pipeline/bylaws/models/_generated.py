@@ -1530,18 +1530,6 @@ class ResolutionStep(BaseModel):
     verification: Literal["unverified", "machine_checked", "human_verified"]
 
 
-class StatutoryResolutionConfig(BaseModel):
-    model_config = ConfigDict(
-        extra="forbid",
-    )
-    schema_version: Literal["1.4"]
-    jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
-    derived: Literal[True]
-    notice: constr(min_length=1)
-    instrument_families: dict[str, list[constr(min_length=1)]]
-    steps: list[ResolutionStep] = Field(..., min_length=6)
-
-
 class ClauseNode(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -1688,6 +1676,41 @@ class ReleaseManifest(BaseModel):
         description="Deterministic content-addressed build identifier across all public jurisdiction releases in this manifest.",
     )
     jurisdictions: list[JurisdictionManifest]
+
+
+class NoLimitInLawRule(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    rule_id: constr(min_length=1)
+    parameters: list[constr(min_length=1)] = Field(..., min_length=1)
+    zones: list[str] | None = None
+    uses: list[str] | None = None
+    min_plot_area_m2: float | None = None
+    min_plot_area_inclusive: bool | None = False
+    max_plot_area_m2: float | None = None
+    max_plot_area_inclusive: bool | None = True
+    min_road_width_m: float | None = None
+    min_road_width_inclusive: bool | None = True
+    max_road_width_m: float | None = None
+    max_road_width_inclusive: bool | None = True
+    plain_reason: constr(min_length=1)
+    authority: ResolutionAuthority
+
+
+class StatutoryResolutionConfig(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    schema_version: Literal["1.4"]
+    jurisdiction: constr(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    derived: Literal[True]
+    notice: constr(min_length=1)
+    instrument_families: dict[str, list[constr(min_length=1)]]
+    steps: list[ResolutionStep] = Field(..., min_length=6)
+    no_limit_in_law_rules: list[NoLimitInLawRule] | None = Field(
+        [], validate_default=True
+    )
 
 
 class BylawsSchemaBundle(

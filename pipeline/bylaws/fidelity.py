@@ -649,6 +649,41 @@ def verify_jurisdiction_text_fidelity(
                         "reason": f"Resolution step {step.get('step_number')} quote not found on cited page {r_page_int} of {r_doc}",
                     }
                 )
+        for nl_rule in res_raw.get("no_limit_in_law_rules") or []:
+            auth = nl_rule.get("authority") or {}
+            nl_doc = auth.get("doc_id")
+            nl_page = auth.get("page")
+            nl_quote = auth.get("quote")
+            if not nl_doc or not nl_quote:
+                continue
+            nl_page_int = int(nl_page or 0)
+            doc_page_map = _get_doc_page_tokens(str(nl_doc))
+            if nl_page_int not in doc_page_map:
+                failures.append(
+                    {
+                        "doc_id": str(nl_doc),
+                        "eid": str(auth.get("eid") or nl_rule.get("rule_id")),
+                        "version_id": "no_limit_in_law_rule",
+                        "pages": [nl_page_int],
+                        "differing_words": [f"<missing page {nl_page_int}>"],
+                        "reason": f"Missing stored page text for no_limit_in_law rule {nl_rule.get('rule_id')}",
+                    }
+                )
+                continue
+            nl_tokens = [w for w in extract_word_tokens(str(nl_quote)) if len(w) >= 3 and not w.isdigit()]
+            nl_allowed = doc_page_map[nl_page_int]
+            missing_nl = [w for w in nl_tokens if w not in nl_allowed]
+            if missing_nl:
+                failures.append(
+                    {
+                        "doc_id": str(nl_doc),
+                        "eid": str(auth.get("eid") or nl_rule.get("rule_id")),
+                        "version_id": "no_limit_in_law_rule",
+                        "pages": [nl_page_int],
+                        "differing_words": missing_nl[:10],
+                        "reason": f"no_limit_in_law rule {nl_rule.get('rule_id')} quote not found on cited page {nl_page_int} of {nl_doc}",
+                    }
+                )
 
     # Also verify `consolidated.json` records against stored page text
     cons_candidates = [

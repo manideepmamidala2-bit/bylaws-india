@@ -309,3 +309,144 @@ def test_part4_relations_labelling_sheet_has_60_items(tmp_path: Path) -> None:
             assert rel_item["public_visible"] is False
             assert rel_item["status"] == "not_yet_reviewed"
             assert rel_item["review_note"] == "Not yet reviewed"
+
+
+def test_part5_resolver_honesty_across_four_review_plots() -> None:
+    """Trust and Accuracy Part 5: Resolver returns `needs depth`/`needs width`/`needs height` instead of assuming 3:2 plot or 11.5 m building, and distinguishes `'No limit in the law for this case'` (with citation) from `'Not covered by our data yet'` across the four review plots."""
+    cfg = load_jurisdiction_config("in-ka-bengaluru-south")
+    ver = str(cfg.release_version)
+    south_dir = REPO_ROOT / "public" / "data" / "in-ka-bengaluru-south" / ver
+    params_payload = json.loads((south_dir / "parameters.json").read_text(encoding="utf-8"))
+    res_config = json.loads((south_dir / "resolution.json").read_text(encoding="utf-8"))
+
+    # Review Plot 1: 600 m² on a 15 m road in Residential (Main) (`R-MAIN`)
+    p1_no_dims = resolve_plot_parameters(
+        parameters_payload=params_payload,
+        resolution_config=res_config,
+        corporation_id="in-ka-bengaluru-south",
+        zone_code="R-MAIN",
+        plot_area_m2=600.0,
+        road_width_m=15.0,
+        use="residential",
+    )
+    assert p1_no_dims["inputs"]["plot_depth_m"] is None
+    assert p1_no_dims["inputs"]["plot_width_m"] is None
+    assert p1_no_dims["inputs"]["building_height_m"] is None
+    assert p1_no_dims["parameters"]["setback_front_min_m"]["status"] == "needs_depth"
+    assert "needs depth" in p1_no_dims["parameters"]["setback_front_min_m"]["display_value"]
+    assert p1_no_dims["parameters"]["setback_rear_min_m"]["status"] == "needs_depth"
+    assert "needs depth" in p1_no_dims["parameters"]["setback_rear_min_m"]["display_value"]
+    assert p1_no_dims["parameters"]["setback_side_min_m"]["status"] == "needs_width"
+    assert "needs width" in p1_no_dims["parameters"]["setback_side_min_m"]["display_value"]
+    assert p1_no_dims["parameters"]["building_height_max_m"]["status"] == "no_limit_in_law"
+    assert p1_no_dims["parameters"]["building_height_max_m"]["display_value"] == "No limit in the law for this case"
+    assert p1_no_dims["parameters"]["building_height_max_m"]["no_limit_authority"]["doc_id"] == "rmp2015-zr-amend-2026-01"
+    assert p1_no_dims["parameters"]["building_height_max_m"]["no_limit_authority"]["page"] == 5
+    assert p1_no_dims["parameters"]["floors_max"]["status"] == "no_limit_in_law"
+
+    # With height=10.0 m provided but depth/width still omitted -> returns exact "needs depth" / "needs width"
+    p1_with_height = resolve_plot_parameters(
+        parameters_payload=params_payload,
+        resolution_config=res_config,
+        corporation_id="in-ka-bengaluru-south",
+        zone_code="R-MAIN",
+        plot_area_m2=600.0,
+        road_width_m=15.0,
+        building_height_m=10.0,
+        use="residential",
+    )
+    assert p1_with_height["parameters"]["setback_front_min_m"]["display_value"] == "needs depth"
+    assert p1_with_height["parameters"]["setback_rear_min_m"]["display_value"] == "needs depth"
+    assert p1_with_height["parameters"]["setback_side_min_m"]["display_value"] == "needs width"
+
+    # Review Plot 2: 150 m² on a 9 m road in Residential (Main) (`R-MAIN`)
+    p2_no_dims = resolve_plot_parameters(
+        parameters_payload=params_payload,
+        resolution_config=res_config,
+        corporation_id="in-ka-bengaluru-south",
+        zone_code="R-MAIN",
+        plot_area_m2=150.0,
+        road_width_m=9.0,
+        use="residential",
+    )
+    assert p2_no_dims["parameters"]["ground_coverage_max_pct"]["value"] == 75.0
+    assert p2_no_dims["parameters"]["far_base_max"]["value"] == 1.75
+    assert p2_no_dims["parameters"]["far_premium_additional_max"]["status"] == "no_limit_in_law"
+    assert p2_no_dims["parameters"]["far_premium_additional_max"]["display_value"] == "No limit in the law for this case"
+    assert p2_no_dims["parameters"]["far_premium_additional_max"]["no_limit_authority"]["doc_id"] == "rmp2015-zr-amend-2025-04"
+    assert p2_no_dims["parameters"]["tdr_receivable_max"]["status"] == "no_limit_in_law"
+    assert p2_no_dims["parameters"]["building_height_max_m"]["status"] == "resolved"
+    assert p2_no_dims["parameters"]["building_height_max_m"]["value"] == 12.0
+    assert p2_no_dims["parameters"]["floors_max"]["status"] == "no_limit_in_law"
+    assert p2_no_dims["parameters"]["setback_front_min_m"]["status"] == "needs_height"
+    assert p2_no_dims["parameters"]["setback_front_min_m"]["display_value"] == "needs height"
+
+    p2_with_height = resolve_plot_parameters(
+        parameters_payload=params_payload,
+        resolution_config=res_config,
+        corporation_id="in-ka-bengaluru-south",
+        zone_code="R-MAIN",
+        plot_area_m2=150.0,
+        road_width_m=9.0,
+        building_height_m=10.0,
+        use="residential",
+    )
+    assert p2_with_height["parameters"]["setback_front_min_m"]["value"] == 0.9
+    assert p2_with_height["parameters"]["setback_rear_min_m"]["value"] == 0.7
+    assert p2_with_height["parameters"]["setback_side_min_m"]["value"] == 0.7
+
+    # Review Plot 3: 3,000 m² commercial (`C-BIZ`) on a 24 m road
+    p3_no_dims = resolve_plot_parameters(
+        parameters_payload=params_payload,
+        resolution_config=res_config,
+        corporation_id="in-ka-bengaluru-south",
+        zone_code="C-BIZ",
+        plot_area_m2=3000.0,
+        road_width_m=24.0,
+        use="commercial",
+    )
+    assert p3_no_dims["parameters"]["ground_coverage_max_pct"]["value"] == 45.0
+    assert p3_no_dims["parameters"]["far_base_max"]["value"] == 2.5
+    assert p3_no_dims["parameters"]["far_premium_additional_max"]["value"] == 0.4
+    assert p3_no_dims["parameters"]["tdr_receivable_max"]["value"] == 0.2
+    assert p3_no_dims["parameters"]["setback_front_min_m"]["status"] == "needs_depth"
+    assert "needs depth" in p3_no_dims["parameters"]["setback_front_min_m"]["display_value"]
+    assert p3_no_dims["parameters"]["building_height_max_m"]["status"] == "no_limit_in_law"
+    assert p3_no_dims["parameters"]["building_height_max_m"]["no_limit_authority"]["doc_id"] == "rmp2015-zr"
+    assert p3_no_dims["parameters"]["building_height_max_m"]["no_limit_authority"]["page"] == 32
+    assert p3_no_dims["parameters"]["floors_max"]["status"] == "no_limit_in_law"
+
+    # Review Plot 4: 6,000 m² industrial (`I-GEN`) on an 18 m road
+    p4 = resolve_plot_parameters(
+        parameters_payload=params_payload,
+        resolution_config=res_config,
+        corporation_id="in-ka-bengaluru-south",
+        zone_code="I-GEN",
+        plot_area_m2=6000.0,
+        road_width_m=18.0,
+        use="industrial",
+    )
+    assert p4["parameters"]["ground_coverage_max_pct"]["value"] == 45.0
+    assert p4["parameters"]["far_base_max"]["value"] == 1.0
+    assert p4["parameters"]["setback_front_min_m"]["value"] == 10.0
+    assert p4["parameters"]["setback_rear_min_m"]["value"] == 8.0
+    assert p4["parameters"]["setback_side_min_m"]["value"] == 8.0
+    assert p4["parameters"]["building_height_max_m"]["status"] == "no_limit_in_law"
+    assert p4["parameters"]["building_height_max_m"]["no_limit_authority"]["doc_id"] == "rmp2015-zr-amend-2026-01"
+    assert p4["parameters"]["building_height_max_m"]["no_limit_authority"]["page"] == 6
+    assert p4["parameters"]["floors_max"]["status"] == "no_limit_in_law"
+
+    # Unknown zone -> returns "not_covered_by_data" ("Not covered by our data yet")
+    p_unknown = resolve_plot_parameters(
+        parameters_payload=params_payload,
+        resolution_config=res_config,
+        corporation_id="in-ka-bengaluru-south",
+        zone_code="unknown",
+        plot_area_m2=600.0,
+        road_width_m=15.0,
+        use="residential",
+    )
+    assert p_unknown["parameters"]["ground_coverage_max_pct"]["status"] == "not_covered_by_data"
+    assert p_unknown["parameters"]["ground_coverage_max_pct"]["display_value"] == "Not covered by our data yet"
+    assert p_unknown["parameters"]["far_base_max"]["status"] == "not_covered_by_data"
+    assert p_unknown["parameters"]["far_base_max"]["display_value"] == "Not covered by our data yet"

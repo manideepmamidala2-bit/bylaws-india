@@ -230,9 +230,8 @@ export default async function JurisdictionMapPage({
             Map · {plainCorpName}
           </h1>
           <p className="dg-serif mt-2 text-base leading-relaxed text-[#171917]">
-            Official City Corporation and ward boundaries across Greater
-            Bengaluru, with master plan land-use zones where map sheets have
-            been processed.
+            Official City Corporation and ward boundaries, with master plan
+            land-use zones where map sheets have been processed.
           </p>
 
           {rootParentId && (

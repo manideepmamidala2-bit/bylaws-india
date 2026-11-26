@@ -75,7 +75,8 @@ export function buildHomeFarStorySteps(
   clauses: ReadonlyArray<ClauseNode>,
   documents: ReadonlyArray<DocumentMetadata>,
   parametersPayload: JurisdictionParameters | null,
-  jurId: string
+  jurId: string,
+  cityLabel = "this city"
 ): FarStoryStep[] {
   const docById = new Map(documents.map((d) => [d.doc_id, d]));
   const allParams = (parametersPayload?.records ?? []).filter(
@@ -334,6 +335,7 @@ export function buildHomeFarStorySteps(
       "2017-10-28"
   );
   const s3AttributionTitle = `${muniPlainTitle}, bye-law 1.4 (inserted by notification UDD 14 TTP 2017, ${s3PlainDate})`;
+  const s3NotifDocId = s3SourceDoc?.doc_id ?? s3Ver?.source_doc ?? "";
   const pfarPlainTitle = formatPlainDocumentTitle(pfarAmendDoc);
   const pfarPlainDate = formatHumanDate(
     pfarAmendDoc?.effective_from || pfarAmendDoc?.notified_date
@@ -397,15 +399,16 @@ export function buildHomeFarStorySteps(
       verbatimExcerpt: s3Excerpt,
       documentTitle: s3AttributionTitle,
       documentDate: s3PlainDate,
-      documentNote:
-        "This notification also issued the Model Building Bye-laws, which do not otherwise apply in Bengaluru.",
+      documentNote: `This notification also issued the Model Building Bye-laws, which do not otherwise apply in ${cityLabel}.`,
       pageNumber: s3Page,
       viewPageUrl: s3PdfBase ? `${s3PdfBase}#page=${s3Page}` : `#page=${s3Page}`,
       documentHref: muniDocId
         ? `/j/${jurId}/documents/${muniDocId}#node-${s3Node?.eid ?? "part_I__sec_1.0__cl_1.4"}`
         : `/j/${jurId}/topics/far`,
       documentLinkLabel: "Open bye-law 1.4 in Building Bye-laws 2003",
-      secondaryDocumentHref: `/j/${jurId}/documents/${s3SourceDoc?.doc_id ?? "ka-model-bbl-2017"}#node-chp_1__item_3`,
+      secondaryDocumentHref: s3NotifDocId
+        ? `/j/${jurId}/documents/${s3NotifDocId}#node-${s3Ver?.source_eid ?? "chp_1__item_3"}`
+        : undefined,
       secondaryDocumentLabel: "Open notification UDD 14 TTP 2017",
     },
     {
@@ -490,7 +493,8 @@ export default async function HomePage() {
     dataset?.clauses ?? [],
     allDocuments,
     parametersPayload,
-    targetJurId
+    targetJurId,
+    cityLabel
   );
 
   const inForceSorted = sortDocumentsMostRecentFirst(

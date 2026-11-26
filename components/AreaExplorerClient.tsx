@@ -138,7 +138,7 @@ export function AreaExplorerClient({
               {selectedZoneLabel ||
                 (activeZones.length > 0
                   ? "Click a zone on the map"
-                  : "Available for parts of Bengaluru South only")}
+                  : "Available for processed map sheets only")}
             </dd>
           </div>
         </dl>

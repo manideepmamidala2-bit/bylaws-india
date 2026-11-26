@@ -173,4 +173,113 @@ describe("Part 4 — Deterministic Browser Plot Resolver & Jayanagar Worked Targ
       "Not settled: two rules apply"
     );
   });
+
+  it("returns 'needs depth/width/height' without assuming dimensions and distinguishes 'No limit in the law for this case' from 'Not covered by our data yet' across the four review plots", () => {
+    const parametersPayload = readJson<JurisdictionParameters>("parameters.json");
+    const resolutionConfig = readJson<StatutoryResolutionConfig>("resolution.json");
+
+    // 1. 600 m² on 15 m road in Residential (Main) without depth/width/height
+    const p1 = resolvePlotParameters({
+      parametersPayload,
+      resolutionConfig,
+      corporationId: "in-ka-bengaluru-south",
+      zoneCode: "R-MAIN",
+      plotAreaM2: 600,
+      roadWidthM: 15,
+      use: "residential",
+    });
+    expect(p1.inputs.plot_depth_m).toBeNull();
+    expect(p1.inputs.plot_width_m).toBeNull();
+    expect(p1.inputs.building_height_m).toBeNull();
+    expect(p1.parameters.setback_front_min_m.status).toBe("needs_depth");
+    expect(p1.parameters.setback_front_min_m.display_value).toContain(
+      "needs depth"
+    );
+    expect(p1.parameters.setback_rear_min_m.status).toBe("needs_depth");
+    expect(p1.parameters.setback_side_min_m.status).toBe("needs_width");
+    expect(p1.parameters.setback_side_min_m.display_value).toContain(
+      "needs width"
+    );
+    expect(p1.parameters.building_height_max_m.status).toBe("no_limit_in_law");
+    expect(p1.parameters.building_height_max_m.display_value).toBe(
+      "No limit in the law for this case"
+    );
+    expect(
+      p1.parameters.building_height_max_m.no_limit_authority?.doc_id
+    ).toBe("rmp2015-zr-amend-2026-01");
+    expect(p1.parameters.building_height_max_m.no_limit_authority?.page).toBe(5);
+    expect(p1.parameters.floors_max.status).toBe("no_limit_in_law");
+
+    // 2. 150 m² on 9 m road in Residential (Main)
+    const p2 = resolvePlotParameters({
+      parametersPayload,
+      resolutionConfig,
+      corporationId: "in-ka-bengaluru-south",
+      zoneCode: "R-MAIN",
+      plotAreaM2: 150,
+      roadWidthM: 9,
+      use: "residential",
+    });
+    expect(p2.parameters.ground_coverage_max_pct.value).toBe(75);
+    expect(p2.parameters.far_base_max.value).toBe(1.75);
+    expect(p2.parameters.far_premium_additional_max.status).toBe(
+      "no_limit_in_law"
+    );
+    expect(p2.parameters.tdr_receivable_max.status).toBe("no_limit_in_law");
+    expect(p2.parameters.building_height_max_m.value).toBe(12);
+    expect(p2.parameters.floors_max.status).toBe("no_limit_in_law");
+    expect(p2.parameters.setback_front_min_m.status).toBe("needs_height");
+    expect(p2.parameters.setback_front_min_m.display_value).toBe("needs height");
+
+    // 3. 3,000 m² commercial (`C-BIZ`) on 24 m road
+    const p3 = resolvePlotParameters({
+      parametersPayload,
+      resolutionConfig,
+      corporationId: "in-ka-bengaluru-south",
+      zoneCode: "C-BIZ",
+      plotAreaM2: 3000,
+      roadWidthM: 24,
+      use: "commercial",
+    });
+    expect(p3.parameters.ground_coverage_max_pct.value).toBe(45);
+    expect(p3.parameters.far_base_max.value).toBe(2.5);
+    expect(p3.parameters.setback_front_min_m.status).toBe("needs_depth");
+    expect(p3.parameters.building_height_max_m.status).toBe("no_limit_in_law");
+    expect(p3.parameters.floors_max.status).toBe("no_limit_in_law");
+
+    // 4. 6,000 m² industrial (`I-GEN`) on 18 m road
+    const p4 = resolvePlotParameters({
+      parametersPayload,
+      resolutionConfig,
+      corporationId: "in-ka-bengaluru-south",
+      zoneCode: "I-GEN",
+      plotAreaM2: 6000,
+      roadWidthM: 18,
+      use: "industrial",
+    });
+    expect(p4.parameters.ground_coverage_max_pct.value).toBe(45);
+    expect(p4.parameters.far_base_max.value).toBe(1);
+    expect(p4.parameters.setback_front_min_m.value).toBe(10);
+    expect(p4.parameters.setback_rear_min_m.value).toBe(8);
+    expect(p4.parameters.setback_side_min_m.value).toBe(8);
+    expect(p4.parameters.building_height_max_m.status).toBe("no_limit_in_law");
+    expect(p4.parameters.floors_max.status).toBe("no_limit_in_law");
+
+    // 5. Unknown zone -> "not_covered_by_data" ("Not covered by our data yet")
+    const pUnknown = resolvePlotParameters({
+      parametersPayload,
+      resolutionConfig,
+      corporationId: "in-ka-bengaluru-south",
+      zoneCode: "unknown",
+      plotAreaM2: 600,
+      roadWidthM: 15,
+      use: "residential",
+    });
+    expect(pUnknown.parameters.ground_coverage_max_pct.status).toBe(
+      "not_covered_by_data"
+    );
+    expect(pUnknown.parameters.ground_coverage_max_pct.display_value).toBe(
+      "Not covered by our data yet"
+    );
+  });
 });

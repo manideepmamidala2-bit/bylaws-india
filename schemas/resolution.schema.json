@@ -47,9 +47,89 @@
       "items": {
         "$ref": "#/$defs/resolutionStep"
       }
+    },
+    "no_limit_in_law_rules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/noLimitInLawRule"
+      },
+      "default": []
     }
   },
   "$defs": {
+    "noLimitInLawRule": {
+      "type": "object",
+      "title": "NoLimitInLawRule",
+      "additionalProperties": false,
+      "required": ["rule_id", "parameters", "plain_reason", "authority"],
+      "properties": {
+        "rule_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parameters": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "zones": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string"
+          },
+          "default": null
+        },
+        "uses": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string"
+          },
+          "default": null
+        },
+        "min_plot_area_m2": {
+          "type": ["number", "null"],
+          "default": null
+        },
+        "min_plot_area_inclusive": {
+          "type": "boolean",
+          "default": false
+        },
+        "max_plot_area_m2": {
+          "type": ["number", "null"],
+          "default": null
+        },
+        "max_plot_area_inclusive": {
+          "type": "boolean",
+          "default": true
+        },
+        "min_road_width_m": {
+          "type": ["number", "null"],
+          "default": null
+        },
+        "min_road_width_inclusive": {
+          "type": "boolean",
+          "default": true
+        },
+        "max_road_width_m": {
+          "type": ["number", "null"],
+          "default": null
+        },
+        "max_road_width_inclusive": {
+          "type": "boolean",
+          "default": true
+        },
+        "plain_reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority": {
+          "$ref": "#/$defs/resolutionAuthority"
+        }
+      }
+    },
     "resolutionAuthority": {
       "type": "object",
       "title": "ResolutionAuthority",

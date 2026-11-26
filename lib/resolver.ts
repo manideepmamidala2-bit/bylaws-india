@@ -48,9 +48,28 @@ export interface ExcludedParameterRecord {
   excluded_at_step: number;
 }
 
+export type ResolvedParameterStatus =
+  | "resolved"
+  | "not_settled"
+  | "needs_depth"
+  | "needs_width"
+  | "needs_height"
+  | "no_limit_in_law"
+  | "not_covered_by_data"
+  | "no_applicable_rule";
+
+export interface NoLimitAuthority {
+  doc_id: string | null;
+  eid: string | null;
+  clause_id: string | null;
+  page: number | null;
+  quote: string | null;
+  official_url?: string | null;
+}
+
 export interface ResolvedParameterOutcome {
   parameter: ParameterRecord["parameter"];
-  status: "resolved" | "not_settled" | "no_applicable_rule";
+  status: ResolvedParameterStatus;
   value: number | string | null;
   unit: string | null;
   value_text?: string;
@@ -59,6 +78,7 @@ export interface ResolvedParameterOutcome {
   display_value: string;
   governing_record: ParameterRecord | null;
   resolution_step: ResolutionStep | null;
+  no_limit_authority?: NoLimitAuthority | null;
   plain_reason: string;
   other_applicable_records: ExcludedParameterRecord[];
   tied_records: ParameterRecord[];
@@ -97,9 +117,9 @@ export interface PlotResolutionResult {
     zone_code: string;
     plot_area_m2: number;
     road_width_m: number;
-    plot_depth_m: number;
-    plot_width_m: number;
-    building_height_m: number;
+    plot_depth_m: number | null;
+    plot_width_m: number | null;
+    building_height_m: number | null;
     use: string;
     as_of_date: string;
   };
@@ -301,9 +321,95 @@ function findInstrumentFamily(
   return "other";
 }
 
+interface NoLimitRule {
+  rule_id: string;
+  parameters: string[];
+  zones?: string[] | null;
+  uses?: string[] | null;
+  min_plot_area_m2?: number | null;
+  min_plot_area_inclusive?: boolean;
+  max_plot_area_m2?: number | null;
+  max_plot_area_inclusive?: boolean;
+  min_road_width_m?: number | null;
+  min_road_width_inclusive?: boolean;
+  max_road_width_m?: number | null;
+  max_road_width_inclusive?: boolean;
+  plain_reason: string;
+  authority: NoLimitAuthority;
+}
+
+function matchNoLimitInLawRule(options: {
+  paramName: string;
+  zoneCode: string;
+  use: string;
+  plotAreaM2: number;
+  roadWidthM: number;
+  noLimitRules: ReadonlyArray<NoLimitRule>;
+}): NoLimitRule | null {
+  const { paramName, zoneCode, use, plotAreaM2, roadWidthM, noLimitRules } =
+    options;
+  for (const rule of noLimitRules) {
+    if (!rule.parameters.includes(paramName)) continue;
+    if (
+      rule.zones &&
+      rule.zones.length > 0 &&
+      (zoneCode === "unknown" || !rule.zones.includes(zoneCode))
+    ) {
+      continue;
+    }
+    if (
+      rule.uses &&
+      rule.uses.length > 0 &&
+      !rule.uses.map((u) => u.toLowerCase()).includes(use.toLowerCase())
+    ) {
+      continue;
+    }
+    if (rule.min_plot_area_m2 !== null && rule.min_plot_area_m2 !== undefined) {
+      const inc = rule.min_plot_area_inclusive ?? false;
+      if (
+        (inc && plotAreaM2 < rule.min_plot_area_m2) ||
+        (!inc && plotAreaM2 <= rule.min_plot_area_m2)
+      ) {
+        continue;
+      }
+    }
+    if (rule.max_plot_area_m2 !== null && rule.max_plot_area_m2 !== undefined) {
+      const inc = rule.max_plot_area_inclusive ?? true;
+      if (
+        (inc && plotAreaM2 > rule.max_plot_area_m2) ||
+        (!inc && plotAreaM2 >= rule.max_plot_area_m2)
+      ) {
+        continue;
+      }
+    }
+    if (rule.min_road_width_m !== null && rule.min_road_width_m !== undefined) {
+      const inc = rule.min_road_width_inclusive ?? true;
+      if (
+        (inc && roadWidthM < rule.min_road_width_m) ||
+        (!inc && roadWidthM <= rule.min_road_width_m)
+      ) {
+        continue;
+      }
+    }
+    if (rule.max_road_width_m !== null && rule.max_road_width_m !== undefined) {
+      const inc = rule.max_road_width_inclusive ?? true;
+      if (
+        (inc && roadWidthM > rule.max_road_width_m) ||
+        (!inc && roadWidthM >= rule.max_road_width_m)
+      ) {
+        continue;
+      }
+    }
+    return rule;
+  }
+  return null;
+}
+
 export function resolvePlotParameters(options: {
   parametersPayload: JurisdictionParameters;
-  resolutionConfig: StatutoryResolutionConfig;
+  resolutionConfig: StatutoryResolutionConfig & {
+    no_limit_in_law_rules?: NoLimitRule[];
+  };
   corporationId: string;
   zoneCode: string;
   plotAreaM2: number;
@@ -343,19 +449,8 @@ export function resolvePlotParameters(options: {
   const zoningGoverned = new Set(
     stepsById.get("zoning_governs_via_byelaw_1_4")?.parameters_governed ?? []
   );
-
-  const inferredDepth =
-    plotDepthM !== null && plotDepthM !== undefined
-      ? plotDepthM
-      : Math.round(Math.sqrt(plotAreaM2 * 1.5) * 100) / 100;
-  const inferredWidth =
-    plotWidthM !== null && plotWidthM !== undefined
-      ? plotWidthM
-      : Math.round((plotAreaM2 / Math.max(1, inferredDepth)) * 100) / 100;
-  const effHeight =
-    buildingHeightM !== null && buildingHeightM !== undefined
-      ? buildingHeightM
-      : 11.5;
+  const noLimitRules: ReadonlyArray<NoLimitRule> =
+    resolutionConfig.no_limit_in_law_rules ?? [];
 
   const resolvedByParam = {} as Record<
     ParameterRecord["parameter"],
@@ -383,9 +478,27 @@ export function resolvePlotParameters(options: {
       }
       if (!intervalMatches(conds.plot_area_m2, plotAreaM2)) continue;
       if (!intervalMatches(conds.road_width_m, roadWidthM)) continue;
-      if (!intervalMatches(conds.building_height_m, effHeight)) continue;
-      if (!intervalMatches(conds.plot_depth_m, inferredDepth)) continue;
-      if (!intervalMatches(conds.plot_width_m, inferredWidth)) continue;
+      if (
+        buildingHeightM !== null &&
+        buildingHeightM !== undefined &&
+        !intervalMatches(conds.building_height_m, buildingHeightM)
+      ) {
+        continue;
+      }
+      if (
+        plotDepthM !== null &&
+        plotDepthM !== undefined &&
+        !intervalMatches(conds.plot_depth_m, plotDepthM)
+      ) {
+        continue;
+      }
+      if (
+        plotWidthM !== null &&
+        plotWidthM !== undefined &&
+        !intervalMatches(conds.plot_width_m, plotWidthM)
+      ) {
+        continue;
+      }
       matching.push(rec);
     }
 
@@ -447,14 +560,18 @@ export function resolvePlotParameters(options: {
 
     // Step 4: Zoning regulations govern via bye-law 1.4
     const step4 = stepsById.get("zoning_governs_via_byelaw_1_4");
-    if (step4 && zoningGoverned.has(paramName)) {
+    if (
+      step4 &&
+      zoningGoverned.has(paramName) &&
+      (families.zoning_regulations?.length ?? 0) > 0
+    ) {
       const zrRecs = activePool.filter(
         (r) =>
           findInstrumentFamily(r.source.doc_id, families) ===
           "zoning_regulations"
       );
       const nonZrRecs = activePool.filter((r) => !zrRecs.includes(r));
-      if (zrRecs.length > 0 && nonZrRecs.length > 0) {
+      if (nonZrRecs.length > 0) {
         for (const r of nonZrRecs) {
           otherRecords.push({
             record: r,
@@ -508,7 +625,14 @@ export function resolvePlotParameters(options: {
         activePool = zoneSpecific;
       }
 
-      if (activePool.length > 1) {
+      const hasUnfilteredHeightBands =
+        (buildingHeightM === null || buildingHeightM === undefined) &&
+        activePool.some(
+          (r) =>
+            r.conditions.building_height_m !== null &&
+            r.conditions.building_height_m !== undefined
+        );
+      if (activePool.length > 1 && !hasUnfilteredHeightBands) {
         const famsInPool = new Set(
           activePool.map((r) => findInstrumentFamily(r.source.doc_id, families))
         );
@@ -555,6 +679,60 @@ export function resolvePlotParameters(options: {
       }
     }
 
+    const needsD =
+      (plotDepthM === null || plotDepthM === undefined) &&
+      activePool.some(
+        (r) =>
+          r.unit === "pct_of_plot_depth" ||
+          (r.conditions.plot_depth_m !== null &&
+            r.conditions.plot_depth_m !== undefined)
+      );
+    const needsW =
+      (plotWidthM === null || plotWidthM === undefined) &&
+      activePool.some(
+        (r) =>
+          r.unit === "pct_of_plot_width" ||
+          (r.conditions.plot_width_m !== null &&
+            r.conditions.plot_width_m !== undefined)
+      );
+    const needsH =
+      (buildingHeightM === null || buildingHeightM === undefined) &&
+      activePool.some(
+        (r) =>
+          r.conditions.building_height_m !== null &&
+          r.conditions.building_height_m !== undefined
+      );
+
+    if (activePool.length > 0 && (needsD || needsW || needsH)) {
+      const neededLabels: string[] = [];
+      if (needsD) neededLabels.push("depth");
+      if (needsW) neededLabels.push("width");
+      if (needsH) neededLabels.push("height");
+      const primaryStatus: ResolvedParameterStatus = needsD
+        ? "needs_depth"
+        : needsW
+          ? "needs_width"
+          : "needs_height";
+      const displayNeeded = `needs ${neededLabels.join(" and ")}`;
+      const sampleRec = activePool[0];
+      resolvedByParam[paramName] = {
+        parameter: paramName,
+        status: primaryStatus,
+        value: activePool.length === 1 ? sampleRec.value : null,
+        unit: activePool.length === 1 ? sampleRec.unit : null,
+        value_text: displayNeeded,
+        computed_value: null,
+        computed_unit: null,
+        display_value: displayNeeded,
+        governing_record: activePool.length === 1 ? sampleRec : null,
+        resolution_step: stepsById.get(decidingStepId) ?? null,
+        plain_reason: `Rule depends on plot ${neededLabels.join(" and ")}, which was not provided.`,
+        other_applicable_records: otherRecords,
+        tied_records: [],
+      };
+      continue;
+    }
+
     const uniqueByVal: ParameterRecord[] = [];
     const seenValKeys = new Set<string>();
     for (const r of activePool) {
@@ -566,21 +744,51 @@ export function resolvePlotParameters(options: {
     }
 
     if (uniqueByVal.length === 0) {
-      resolvedByParam[paramName] = {
-        parameter: paramName,
-        status: "no_applicable_rule",
-        value: null,
-        unit: null,
-        computed_value: null,
-        computed_unit: null,
-        display_value: "No rule matched plot inputs",
-        governing_record: null,
-        resolution_step: null,
-        plain_reason:
-          "No matching rule found for the given zone, plot area, and road width.",
-        other_applicable_records: otherRecords,
-        tied_records: [],
-      };
+      const noLimitMatch = matchNoLimitInLawRule({
+        paramName,
+        zoneCode,
+        use,
+        plotAreaM2,
+        roadWidthM,
+        noLimitRules,
+      });
+      if (noLimitMatch) {
+        const auth = noLimitMatch.authority;
+        resolvedByParam[paramName] = {
+          parameter: paramName,
+          status: "no_limit_in_law",
+          value: null,
+          unit: null,
+          value_text: "No limit in the law for this case",
+          computed_value: null,
+          computed_unit: null,
+          display_value: "No limit in the law for this case",
+          governing_record: null,
+          resolution_step: null,
+          no_limit_authority: auth,
+          plain_reason: `No limit in the law for this case — ${noLimitMatch.plain_reason} (${auth.doc_id}, p. ${auth.page}: "${auth.quote}").`,
+          other_applicable_records: otherRecords,
+          tied_records: [],
+        };
+      } else {
+        resolvedByParam[paramName] = {
+          parameter: paramName,
+          status: "not_covered_by_data",
+          value: null,
+          unit: null,
+          value_text: "Not covered by our data yet",
+          computed_value: null,
+          computed_unit: null,
+          display_value: "Not covered by our data yet",
+          governing_record: null,
+          resolution_step: null,
+          no_limit_authority: null,
+          plain_reason:
+            "Not covered by our data yet for the given zone, use, plot area, and road width.",
+          other_applicable_records: otherRecords,
+          tied_records: [],
+        };
+      }
       continue;
     }
 
@@ -606,14 +814,22 @@ export function resolvePlotParameters(options: {
           compVal = Math.round((rawVal / 100) * plotAreaM2 * 100) / 100;
           compUnit = "m2_max_footprint";
           displayVal = `${rawVal}% (up to ${compVal} m² footprint)`;
-        } else if (rawUnit === "pct_of_plot_depth") {
-          compVal = Math.round((rawVal / 100) * inferredDepth * 100) / 100;
+        } else if (
+          rawUnit === "pct_of_plot_depth" &&
+          plotDepthM !== null &&
+          plotDepthM !== undefined
+        ) {
+          compVal = Math.round((rawVal / 100) * plotDepthM * 100) / 100;
           compUnit = "m";
-          displayVal = `${compVal} m (${rawVal}% of ${inferredDepth} m plot depth)`;
-        } else if (rawUnit === "pct_of_plot_width") {
-          compVal = Math.round((rawVal / 100) * inferredWidth * 100) / 100;
+          displayVal = `${compVal} m (${rawVal}% of ${plotDepthM} m plot depth)`;
+        } else if (
+          rawUnit === "pct_of_plot_width" &&
+          plotWidthM !== null &&
+          plotWidthM !== undefined
+        ) {
+          compVal = Math.round((rawVal / 100) * plotWidthM * 100) / 100;
           compUnit = "m";
-          displayVal = `${compVal} m (${rawVal}% of ${inferredWidth} m plot width)`;
+          displayVal = `${compVal} m (${rawVal}% of ${plotWidthM} m plot width)`;
         } else if (rawUnit === "multiple_of_base_far") {
           if (baseFarNumeric !== null) {
             compVal = Math.round(rawVal * baseFarNumeric * 1000) / 1000;
@@ -698,9 +914,9 @@ export function resolvePlotParameters(options: {
       zone_code: zoneCode,
       plot_area_m2: plotAreaM2,
       road_width_m: roadWidthM,
-      plot_depth_m: inferredDepth,
-      plot_width_m: inferredWidth,
-      building_height_m: effHeight,
+      plot_depth_m: plotDepthM ?? null,
+      plot_width_m: plotWidthM ?? null,
+      building_height_m: buildingHeightM ?? null,
       use,
       as_of_date: asOfDate,
     },

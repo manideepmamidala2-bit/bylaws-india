@@ -330,12 +330,17 @@ for (const htmlPath of htmlFiles) {
       }
     }
 
-    const htmlWithoutDocHeader = htmlText.replace(
-      /<header\b[^>]*data-testid="document-page-header"[^>]*>[\s\S]*?<\/header>/gi,
-      " "
-    );
+    const htmlWithoutDocHeaderAndVerbatimBody = htmlText
+      .replace(
+        /<header\b[^>]*data-testid="document-page-header"[^>]*>[\s\S]*?<\/header>/gi,
+        " "
+      )
+      .replace(
+        /<article\b[^>]*data-testid="provision-item-[^"]*"[^>]*>[\s\S]*?<\/article>/gi,
+        " "
+      );
     const primaryOutsideDetailsAndDocHeader = stripDetailsAndTags(
-      htmlWithoutDocHeader
+      htmlWithoutDocHeaderAndVerbatimBody
     )
       .replace(/&amp;/g, "&")
       .replace(/&#x27;/g, "'")

@@ -1405,6 +1405,7 @@ export interface StatutoryResolutionConfig {
     ResolutionStep,
     ...ResolutionStep[]
   ];
+  no_limit_in_law_rules?: NoLimitInLawRule[];
 }
 
 export interface ResolutionStep {
@@ -1432,4 +1433,24 @@ export interface ResolutionAuthority {
   page: number | null;
   quote: string | null;
   official_url?: string | null;
+}
+
+export interface NoLimitInLawRule {
+  rule_id: string;
+  /**
+   * @minItems 1
+   */
+  parameters: [string, ...string[]];
+  zones?: string[] | null;
+  uses?: string[] | null;
+  min_plot_area_m2?: number | null;
+  min_plot_area_inclusive?: boolean;
+  max_plot_area_m2?: number | null;
+  max_plot_area_inclusive?: boolean;
+  min_road_width_m?: number | null;
+  min_road_width_inclusive?: boolean;
+  max_road_width_m?: number | null;
+  max_road_width_inclusive?: boolean;
+  plain_reason: string;
+  authority: ResolutionAuthority;
 }

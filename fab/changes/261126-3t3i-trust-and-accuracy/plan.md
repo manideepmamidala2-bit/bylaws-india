@@ -113,7 +113,7 @@ Both `pipeline/bylaws/resolver.py` and `lib/resolver.ts` MUST remove the `3:2` p
 
 ### Phase 5: Part 5 — Honest Resolver Without Assumed Dimensions & Final Verification
 
-- [ ] T005 Update `pipeline/bylaws/resolver.py` and `lib/resolver.ts` to remove assumed `3:2` plot dimensions and `11.5 m` height defaults, return `"needs depth"`, `"needs width"`, or `"needs height"` when missing, distinguish `"No limit in the law for this case"` (with citation and quote) from `"Not covered by our data yet"`, add tests for the four review plots in `pipeline/tests/test_resolver.py` and `__tests__/resolver.test.ts`, capture 390 px and 1280 px screenshots, run full pytest/vitest/build/budget/Playwright suites, update `docs/progress.md` and the PR description, and commit + push <!-- R5 -->
+- [x] T005 Update `pipeline/bylaws/resolver.py` and `lib/resolver.ts` to remove assumed `3:2` plot dimensions and `11.5 m` height defaults, return `"needs depth"`, `"needs width"`, or `"needs height"` when missing, distinguish `"No limit in the law for this case"` (with citation and quote) from `"Not covered by our data yet"`, add tests for the four review plots in `pipeline/tests/test_resolver.py` and `__tests__/resolver.test.ts`, capture 390 px and 1280 px screenshots, run full pytest/vitest/build/budget/Playwright suites, update `docs/progress.md` and the PR description, and commit + push <!-- R5 -->
 
 ## Execution Order
 

@@ -230,8 +230,14 @@ def test_part3_one_name_and_date_per_instrument_from_register() -> None:
                 raw_html,
                 flags=re.IGNORECASE,
             )
+            no_verbatim_provisions = re.sub(
+                r'<article\b[^>]*data-testid="provision-item-[^"]*"[^>]*>[\s\S]*?</article>',
+                " ",
+                no_doc_header,
+                flags=re.IGNORECASE,
+            )
             primary_txt = (
-                " ".join(_strip_details_and_tags(no_doc_header).split())
+                " ".join(_strip_details_and_tags(no_verbatim_provisions).split())
                 .replace("&amp;", "&")
                 .replace("&#x27;", "'")
             )
