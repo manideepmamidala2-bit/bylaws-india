@@ -41,6 +41,18 @@ const south230Path = path.join(
   "2.3.0",
   "documents.json"
 );
+const southResolutionPath = path.join(
+  publicDataDir,
+  "in-ka-bengaluru-south",
+  "4.0.0",
+  "resolution.json"
+);
+const southRelationsPath = path.join(
+  publicDataDir,
+  "in-ka-bengaluru-south",
+  "4.0.0",
+  "relations.json"
+);
 
 function isExistingDataConsistent() {
   if (
@@ -49,16 +61,31 @@ function isExistingDataConsistent() {
     !fs.existsSync(parentParamsPath) ||
     !fs.existsSync(northParamsPath) ||
     !fs.existsSync(southRegisterPath) ||
-    !fs.existsSync(south230Path)
+    !fs.existsSync(south230Path) ||
+    !fs.existsSync(southResolutionPath) ||
+    !fs.existsSync(southRelationsPath)
   ) {
     return false;
   }
   try {
     const parentParams = JSON.parse(fs.readFileSync(parentParamsPath, "utf8"));
     const northParams = JSON.parse(fs.readFileSync(northParamsPath, "utf8"));
+    const southResolution = JSON.parse(
+      fs.readFileSync(southResolutionPath, "utf8")
+    );
+    const southRelations = JSON.parse(
+      fs.readFileSync(southRelationsPath, "utf8")
+    );
     const pRecs = parentParams.records || [];
     const nRecs = northParams.records || [];
     if (pRecs.length === 0 || pRecs.length !== nRecs.length) {
+      return false;
+    }
+    if (
+      !Array.isArray(southResolution.no_limit_in_law_rules) ||
+      southResolution.no_limit_in_law_rules.length === 0 ||
+      !southRelations.public_visibility_rule
+    ) {
       return false;
     }
     return pRecs[0]?.parameter_id === nRecs[0]?.parameter_id;
