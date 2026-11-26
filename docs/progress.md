@@ -99,5 +99,24 @@ Tracks the 11-PR remediation series defined in [`docs/plans/pr-series/00-overvie
 | **T006** | Document pages, What changed, Sources, Map (plot features removed), and About | ✅ Complete | Updated Document pages (law-order provisions with closed-by-default `"Details"`, removed 4 March 2026 South draft notice from in-force documents, omitted `"Read provisions"` links where text is not held), What changed (`WhatChangedClient.tsx` with type and corporation filters), Sources, standalone Map (area/ward/corporation/zone summary without plot inputs/answers), and About (`#how-this-is-built`, `#licence`, verification, and full FAQ) |
 | **T007** | CI language check, page budgets, Vitest, Playwright browser tests & screenshots | ✅ Complete | Verified all 162 `pytest` tests (including `test_r1_no_hardcoding.py`, `test_text_fidelity.py`, `test_release_and_copy_consistency.py`, `test_parameters.py`, `test_parameters_and_relations.py`, `test_resolver.py`), 17 Vitest + `axe-core` tests, 319 built HTML routes (`max HTML = 283.8 KB <= 300 KB`, `max initial JS+data = 0.65 MB <= 1.50 MB`, 0 primary-layer language violations), and 7 Playwright E2E browser tests at `390 px` and `1280 px` |
 
+---
+
+## Bylaw One: One City, One Truth (`docs/plans/one-city-one-truth-plan.md` — Parts 1–4)
+
+- **Baseline Release**: `4.0.0`
+- **Baseline Commit**: `29e7f6b` (`Update ship status and record PR URL`)
+- **Active Change**: `261126-jqph-one-city-one-truth`
+- **Scope**: Strictly existing repository data and the existing **Bylaw One** (`dg2n`) design; zero new acquisition; never invent or rewrite legal text.
+
+### Part-by-Part Status
+
+| Part | Title | Status | Notes |
+|------|-------|--------|-------|
+| **Part 1** | "What applies today" made true (city level) | ✅ Complete | Applied chronological table and row supersession in `parameters.py` (`Table 8` 2007 setbacks, `Table 15` 2007 Mutation Corridors `12,000 m²`, `Table 16` 2007 Row 1 `4.5 m` Industrial General setback, `Table 10 Note (b)` 2007 `11.5 m` height & `3 floors`, `Table 23` 2007 Star Hotels parking moved to `"Older or replaced rules"` with `"Replaced by [plain name], [date]"`), collapsed identical restated rows (`2009` vs `2007` Traffic & Transportation FAR/coverage; `2026` vs `2007` Industrial General FAR/coverage/>500 m² setbacks) to show once citing the latest source with earlier sources in Details, applied consolidated provision wording on subject pages (`3.1(ii)`, `3.1(iii)`, `3.9(iii)`, `3.10(i)`, `4.1.2(b)`, `4.1.2(c)`, `3.11(iii)`, `3.11(iv)`, `3.12(ii)`, `3.16(vi)`) with `"Changed [month year]"` tags and previous wording in Details, added CI overlap and band continuity checks (`check_parameter_overlaps`, `check_band_continuity`) surfacing the `11.5 m`–`12 m` setback height-band overlap plainly, fixed `"Replaced"` vs `"Master plan rules apply instead (bye-law 1.4)"` labels (never placing Bye-law `1.4` in replaced rules), excluded definitions/TOCs/headings from governing provision lists, and verified with falsifiable unit and component tests |
+| **Part 2** | One city code, corporations as a thin layer | 🔄 In Progress | Single-source Greater Bengaluru shared rules, thin corporation layers, 5-corporation 2026 amendment fidelity/structure/parity checks |
+| **Part 3** | One site, one design | ⏳ Pending | Remove old-design routes, rebuild corporation pages from Bylaw One templates, redirect old addresses, CI old-design check |
+| **Part 4** | Map and gaps stated plainly | ⏳ Pending | State land-use zone gap plainly on Map & Land use page, capture screenshots, run full CI/E2E suite |
+
+
 
 

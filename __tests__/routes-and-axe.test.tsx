@@ -605,4 +605,102 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     expect(plantedErrors.length).toBeGreaterThan(0);
     expect(plantedErrors[0]).toMatch(/has local or non-http\(s\) source_url/);
   });
+
+  it("renders Part 1 city-level truth on Setbacks and FAR (supersession, 3.1(ii)-(iii) current wording, deduplication, 11.5m-12m overlap, and Bye-law 1.4 label invariants)", async () => {
+    // 1. Setbacks at city level (`in-ka-bengaluru`)
+    const setbacksUi = await TopicDetailPage({
+      params: Promise.resolve({
+        id: "in-ka-bengaluru",
+        topic: "setbacks",
+      }),
+    });
+    const { container: cSetbacks, unmount: uSetbacks } = render(setbacksUi);
+
+    const whatAppliesSection = screen.getByTestId("what-applies-today-section");
+    const whatAppliesText = whatAppliesSection.textContent ?? "";
+
+    // Band continuity overlap notice between 11.5 m and 12 m
+    expect(screen.getByTestId("band-continuity-notice").textContent).toContain(
+      "The current tables overlap between 11.5 m and 12 m."
+    );
+
+    // Governing provisions 3.1(ii) and 3.1(iii) show January 2026 wording, "Changed January 2026", and previous 2007 wording in Details
+    expect(whatAppliesText).toContain(
+      "For all types of building with total height up to 12.0m, excluding the stilt floor, the setbacks shall be calculated as per Table 8."
+    );
+    expect(whatAppliesText).toContain(
+      "Table 9 shall be referred to buildings which are more than 12.0 m in total height"
+    );
+    expect(
+      screen.getAllByTestId("provision-changed-tag").map((el) => el.textContent)
+    ).toContain("Changed January 2026");
+    expect(
+      screen
+        .getAllByTestId("provision-previous-wording")
+        .some((el) => (el.textContent ?? "").includes("Up to 11.5 m height"))
+    ).toBe(true);
+
+    // Definitions never appear in "What applies today" on Setbacks
+    expect(whatAppliesText).not.toContain(
+      "Means the line up to which the plinth of a building may lawfully extend"
+    );
+
+    // Industrial (General) plots up to 500 m²: 12% / 8% in "What applies today"; 4.5 m moved to "Older or replaced rules"
+    const govTable = screen.getByTestId("subject-parameter-table");
+    const govRows = Array.from(govTable.querySelectorAll("tbody tr")).map(
+      (tr) => tr.textContent ?? ""
+    );
+    const igen500GovRows = govRows.filter((txt) =>
+      txt.includes("Industrial (General), plots up to 500 m²")
+    );
+    expect(
+      igen500GovRows.some((txt) => txt.includes("12% of plot depth"))
+    ).toBe(true);
+    expect(igen500GovRows.some((txt) => txt.includes("4.5 m"))).toBe(false);
+
+    // Older or replaced rules: 2007 Industrial (General) 4.5 m row is "Replaced by ...", bbl-2003 rules are "Master plan rules apply instead (bye-law 1.4)", and Bye-law 1.4 is NEVER in Older or replaced rules
+    const olderDetails = screen.getByTestId("older-or-replaced-rules");
+    const olderText = olderDetails.textContent ?? "";
+    expect(olderText).toContain("Industrial (General), plots up to 500 m²");
+    expect(olderText).toContain("Replaced by");
+    expect(olderText).toContain("Master plan rules apply instead (bye-law 1.4)");
+    expect(olderText).not.toContain(
+      "All mandatory Master Plan or Zonal Regulations regarding use"
+    );
+    expect(olderText).not.toContain("under Bye-law 1.4");
+
+    await assertNoAxeViolations(cSetbacks);
+    uSetbacks();
+
+    // 2. FAR at city level (`in-ka-bengaluru`)
+    const farUi = await TopicDetailPage({
+      params: Promise.resolve({
+        id: "in-ka-bengaluru",
+        topic: "far",
+      }),
+    });
+    const { container: cFar, unmount: uFar } = render(farUi);
+
+    const farGovTable = screen.getByTestId("subject-parameter-table");
+    const farGovRows = Array.from(
+      farGovTable.querySelectorAll("tbody tr")
+    ).map((tr) => tr.textContent ?? "");
+
+    // Traffic and Transportation up to 500 m² shown ONCE citing 2009, with earlier 2007 source in Details
+    const ttrans500Rows = farGovRows.filter((txt) =>
+      txt.includes("Traffic and transportation, plots up to 500 m²")
+    );
+    expect(ttrans500Rows).toHaveLength(1);
+    expect(ttrans500Rows[0]).toContain("Earlier source with identical value");
+
+    // Industrial (General) up to 500 m² shown ONCE citing 2026, with earlier 2007 source in Details
+    const igen500FarRows = farGovRows.filter((txt) =>
+      txt.includes("Industrial (General), plots up to 500 m²")
+    );
+    expect(igen500FarRows).toHaveLength(1);
+    expect(igen500FarRows[0]).toContain("Earlier source with identical value");
+
+    await assertNoAxeViolations(cFar);
+    uFar();
+  });
 });

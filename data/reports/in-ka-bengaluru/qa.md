@@ -600,18 +600,29 @@
 | 27 | `rmp2015-zr-amend-2015-03:eff_27` | `rmp2015-zr-amend-2015-03:cl_1` | p. 1 (`1233x1843`) | `rmp2015-zr:chp_4__cl_4.1__cl_4.1.2` | `substitute` | `2015-03-20` | `Yes` | `No commercial activity of whatsoever nature shall be allowed*in reside` | PASS |
 | 28 | `rmp2015-zr-amend-2015-03:eff_28` | `rmp2015-zr-amend-2015-03:item_i_2` | p. 3 (`1234x1844`) | `rmp2015-zr:chp_4__cl_4.2__cl_4.2.2` | `substitute` | `2015-03-20` | `Yes` | `In Ring-III . e Main land use category - R e Ancillary land use catego` | PASS |
 | 29 | `rmp2015-zr-amend-2018-09:eff_29` | `rmp2015-zr-amend-2018-09:cl_3.4__item_ii` | p. 1 (`1240x1755`) | `rmp2015-zr:chp_3__cl_3.4` | `modify_text` | `2018-09-29` | `Yes` | `Impact Zone as defined in the Karnataka Planning Authority Rules, 1965` | PASS |
-| 30 | `rmp2015-zr-amend-2019-06:eff_30` | `rmp2015-zr-amend-2019-06:item_2_3` | p. 6 (`1240x1754`) | `rmp2015-zr:chp_3__cl_3.4` | `substitute` | `2019-06-19` | `Yes` | `For regulation 3.4 and the entries relating thereto, the following sha` | PASS |
-| 31 | `rmp2015-zr-amend-2019-06:eff_31` | `rmp2015-zr-amend-2019-06:cl_4` | p. 7 (`1240x1754`) | `rmp2015-zr:chp_6__cl_6.1` | `modify_text` | `2019-06-19` | `Yes` | `Amendment of Chapter 6.- In chapter 6 of the said regulations, in regu` | PASS |
-| 32 | `rmp2015-zr-amend-2019-06:eff_32` | `rmp2015-zr-amend-2019-06:item_1_3` | p. 8 (`1240x1754`) | `rmp2015-zr:chp_7__cl_7.1` | `modify_text` | `2019-06-19` | `Yes` | `in regulation 7.1, in the Table-20, for the words and figures “Less th` | PASS |
-| 33 | `rmp2015-zr-amend-2025-02:eff_33` | `rmp2015-zr-amend-2025-02:chp_11` | p. 1 (`1275x1651`) | `rmp2015-zr:chp_10` | `insert_after` | `2025-02-21` | `No` | `Amending instrument 'rmp2015-zr-amend-2025-02' has status 'draft'.` | PASS |
-| 34 | `rmp2015-zr-amend-2025-04:eff_34` | `rmp2015-zr-amend-2025-04:chp_11_2` | p. 2 (`1275x1651`) | `rmp2015-zr:chp_10` | `insert_after` | `2025-04-02` | `Yes` | `The Premium F.A.R by levy of premium charges is the additional F.A.R g` | PASS |
-| 35 | `rmp2015-zr-amend-2025-10:eff_35` | `rmp2015-zr-amend-2025-10:item_3__item_ii` | p. 2 (`1275x1651`) | `rmp2015-zr:chp_4__cl_4.12__cl_4.12.2` | `substitute` | `2025-10-15` | `Yes` | `- The buffer to be maintained around the lake (as per revenue records)` | PASS |
-| 36 | `rmp2015-zr-amend-2026-01:eff_36` | `rmp2015-zr-amend-2026-01:item_2_2__item_a__item_ii` | p. 2 (`1244x1767`) | `rmp2015-zr:chp_3__cl_3.1__item_ii` | `substitute` | `2026-01-05` | `Yes` | `For all types of building with total height up to 12.0m, excluding the` | PASS |
-| 37 | `rmp2015-zr-amend-2026-01:eff_37` | `rmp2015-zr-amend-2026-01:item_2_2__item_a__item_iii` | p. 2 (`1244x1767`) | `rmp2015-zr:chp_3__cl_3.1__item_iii` | `substitute` | `2026-01-05` | `Yes` | `Table 9 shall be referred to buildings which are more than 12.0 m in t` | PASS |
-| 38 | `rmp2015-zr-amend-2026-01:eff_38` | `rmp2015-zr-amend-2026-01:item_e` | p. 3 (`1250x1773`) | `rmp2015-zr:chp_3__cl_3.9` | `modify_text` | `2026-01-05` | `Yes` | `“iii. The minimum setback for the basement in plots of area up to 4000` | PASS |
-| 39 | `rmp2015-zr-amend-2026-01:eff_39` | `rmp2015-zr-amend-2026-01:item_a` | p. 5 (`1238x1761`) | `rmp2015-zr:chp_3__cl_3.10` | `modify_text` | `2026-01-05` | `Yes` | `In clause (i) for the numerical and letter “2.0 m” following shall be ` | PASS |
-| 40 | `rmp2015-zr-amend-2026-01:eff_40` | `rmp2015-zr-amend-2026-01:item_ii` | p. 5 (`1238x1761`) | `rmp2015-zr:chp_4__cl_4.5` | `modify_text` | `2026-01-05` | `Yes` | `In regulation 4.5 MUTATION CORRIDORS, in table 15, plot size for sl.no` | PASS |
-| 41 | `rmp2015-zr-amend-2026-01:eff_41` | `rmp2015-zr-amend-2026-01:item_ii` | p. 5 (`1238x1761`) | `rmp2015-zr:chp_4__cl_4.7` | `modify_text` | `2026-01-05` | `Yes` | `In regulation 4.7 INDUSTRIAL I (GENERAL), table 16 shall be substitute` | PASS |
+| 30 | `rmp2015-zr-amend-2018-09:eff_30` | `rmp2015-zr-amend-2018-09:app_IX` | p. 2 (`1240x1755`) | `rmp2015-zr:chp_3__cl_3.16__item_ix` | `omit` | `2018-09-29` | `Yes` | `Applied` | PASS |
+| 31 | `rmp2015-zr-amend-2018-09:eff_31` | `rmp2015-zr-amend-2018-09:app_IX` | p. 2 (`1240x1755`) | `rmp2015-zr:chp_3__cl_3.16A` | `omit` | `2018-09-29` | `Yes` | `Applied` | PASS |
+| 32 | `rmp2015-zr-amend-2019-06:eff_32` | `rmp2015-zr-amend-2019-06:item_2_3` | p. 6 (`1240x1754`) | `rmp2015-zr:chp_3__cl_3.4` | `substitute` | `2019-06-19` | `Yes` | `For regulation 3.4 and the entries relating thereto, the following sha` | PASS |
+| 33 | `rmp2015-zr-amend-2019-06:eff_33` | `rmp2015-zr-amend-2019-06:item_5__item_i` | p. 7 (`1240x1754`) | `rmp2015-zr:chp_3__cl_3.11__item_iii` | `substitute` | `2019-06-19` | `Yes` | `“iii. A portico / porch may be permitted in the ground floor within th` | PASS |
+| 34 | `rmp2015-zr-amend-2019-06:eff_34` | `rmp2015-zr-amend-2019-06:item_5__item_iv` | p. 7 (`1240x1754`) | `rmp2015-zr:chp_3__cl_3.11__item_iv` | `substitute` | `2019-06-19` | `Yes` | `a. No balcony is allowed in the ground floor. b. Open Balcony projecti` | PASS |
+| 35 | `rmp2015-zr-amend-2019-06:eff_35` | `rmp2015-zr-amend-2019-06:item_6` | p. 7 (`1240x1754`) | `rmp2015-zr:chp_3__cl_3.12__item_ii` | `substitute` | `2019-06-19` | `Yes` | `“(ii) For all the buildings with height of 15m and above, NOC from Fir` | PASS |
+| 36 | `rmp2015-zr-amend-2019-06:eff_36` | `rmp2015-zr-amend-2019-06:item_7` | p. 7 (`1240x1754`) | `rmp2015-zr:chp_3__cl_3.16__item_vi` | `substitute` | `2019-06-19` | `Yes` | `“vi. Mezzanine floor is permitted between any 2 floors in residential ` | PASS |
+| 37 | `rmp2015-zr-amend-2019-06:eff_37` | `rmp2015-zr-amend-2019-06:cl_4` | p. 7 (`1240x1754`) | `rmp2015-zr:chp_6__cl_6.1` | `modify_text` | `2019-06-19` | `Yes` | `Amendment of Chapter 6.- In chapter 6 of the said regulations, in regu` | PASS |
+| 38 | `rmp2015-zr-amend-2019-06:eff_38` | `rmp2015-zr-amend-2019-06:item_1_3` | p. 8 (`1240x1754`) | `rmp2015-zr:chp_7__cl_7.1` | `modify_text` | `2019-06-19` | `Yes` | `in regulation 7.1, in the Table-20, for the words and figures “Less th` | PASS |
+| 39 | `rmp2015-zr-amend-2025-02:eff_39` | `rmp2015-zr-amend-2025-02:chp_11` | p. 1 (`1275x1651`) | `rmp2015-zr:chp_10` | `insert_after` | `2025-02-21` | `No` | `Amending instrument 'rmp2015-zr-amend-2025-02' has status 'draft'.` | PASS |
+| 40 | `rmp2015-zr-amend-2025-04:eff_40` | `rmp2015-zr-amend-2025-04:chp_11_2` | p. 2 (`1275x1651`) | `rmp2015-zr:chp_10` | `insert_after` | `2025-04-02` | `Yes` | `The Premium F.A.R by levy of premium charges is the additional F.A.R g` | PASS |
+| 41 | `rmp2015-zr-amend-2025-10:eff_41` | `rmp2015-zr-amend-2025-10:item_3__item_ii` | p. 2 (`1275x1651`) | `rmp2015-zr:chp_4__cl_4.12__cl_4.12.2` | `substitute` | `2025-10-15` | `Yes` | `- The buffer to be maintained around the lake (as per revenue records)` | PASS |
+| 42 | `rmp2015-zr-amend-2026-01:eff_42` | `rmp2015-zr-amend-2026-01:item_2_2__item_a__item_ii` | p. 2 (`1244x1767`) | `rmp2015-zr:chp_3__cl_3.1__item_ii` | `substitute` | `2026-01-05` | `Yes` | `For all types of building with total height up to 12.0m, excluding the` | PASS |
+| 43 | `rmp2015-zr-amend-2026-01:eff_43` | `rmp2015-zr-amend-2026-01:item_2_2__item_a__item_iii` | p. 2 (`1244x1767`) | `rmp2015-zr:chp_3__cl_3.1__item_iii` | `substitute` | `2026-01-05` | `Yes` | `Table 9 shall be referred to buildings which are more than 12.0 m in t` | PASS |
+| 44 | `rmp2015-zr-amend-2026-01:eff_44` | `rmp2015-zr-amend-2026-01:item_e` | p. 3 (`1250x1773`) | `rmp2015-zr:chp_3__cl_3.9` | `modify_text` | `2026-01-05` | `Yes` | `“iii. The minimum setback for the basement in plots of area up to 4000` | PASS |
+| 45 | `rmp2015-zr-amend-2026-01:eff_45` | `rmp2015-zr-amend-2026-01:item_e` | p. 3 (`1250x1773`) | `rmp2015-zr:chp_3__cl_3.9__item_iii` | `substitute` | `2026-01-05` | `Yes` | `“iii. The minimum setback for the basement in plots of area up to 4000` | PASS |
+| 46 | `rmp2015-zr-amend-2026-01:eff_46` | `rmp2015-zr-amend-2026-01:item_a` | p. 5 (`1238x1761`) | `rmp2015-zr:chp_3__cl_3.10` | `modify_text` | `2026-01-05` | `Yes` | `In clause (i) for the numerical and letter “2.0 m” following shall be ` | PASS |
+| 47 | `rmp2015-zr-amend-2026-01:eff_47` | `rmp2015-zr-amend-2026-01:item_a` | p. 5 (`1238x1761`) | `rmp2015-zr:chp_3__cl_3.10__item_i` | `substitute` | `2026-01-05` | `Yes` | `In clause (i) for the numerical and letter “2.0 m” following shall be ` | PASS |
+| 48 | `rmp2015-zr-amend-2026-01:eff_48` | `rmp2015-zr-amend-2026-01:cl_11` | p. 5 (`1238x1761`) | `rmp2015-zr:chp_4__cl_4.1__cl_4.1.2__item_b` | `substitute` | `2026-01-05` | `Yes` | `“(b) if the road width is less than 9.0 m., then the maximum height is` | PASS |
+| 49 | `rmp2015-zr-amend-2026-01:eff_49` | `rmp2015-zr-amend-2026-01:item_ii` | p. 5 (`1238x1761`) | `rmp2015-zr:chp_4__cl_4.1__cl_4.1.2__item_c` | `substitute` | `2026-01-05` | `Yes` | `on plot size above 360 sq.m and upto 750 sq.m permitted. In Ring I, II` | PASS |
+| 50 | `rmp2015-zr-amend-2026-01:eff_50` | `rmp2015-zr-amend-2026-01:item_2_2__item_b` | p. 2 (`1244x1767`) | `rmp2015-zr:chp_3__cl_3.1__tbl_8` | `substitute` | `2026-01-05` | `Yes` | `Table 8 and the entries thereunder shall be substituted as below: Tabl` | PASS |
+| 51 | `rmp2015-zr-amend-2026-01:eff_51` | `rmp2015-zr-amend-2026-01:item_ii` | p. 5 (`1238x1761`) | `rmp2015-zr:chp_4__cl_4.5` | `modify_text` | `2026-01-05` | `Yes` | `In regulation 4.5 MUTATION CORRIDORS, in table 15, plot size for sl.no` | PASS |
+| 52 | `rmp2015-zr-amend-2026-01:eff_52` | `rmp2015-zr-amend-2026-01:item_ii` | p. 5 (`1238x1761`) | `rmp2015-zr:chp_4__cl_4.7` | `modify_text` | `2026-01-05` | `Yes` | `In regulation 4.7 INDUSTRIAL I (GENERAL), table 16 shall be substitute` | PASS |
 
 ## 6. Annotation Quality Summary (`08b` §2)
 
@@ -647,8 +658,8 @@
 | Metric | Count | Status |
 |---|---:|---|
 | Provisions checked | 6504 | PASS |
-| Editorial insertions removed to `notes_by_site` | 17 | PASS |
-| Separate site notes (`notes_by_site`) created | 18 | PASS |
+| Editorial insertions removed to `notes_by_site` | 26 | PASS |
+| Separate site notes (`notes_by_site`) created | 27 | PASS |
 | OCR corrections applied (`ocr_status: corrected`) | 25 | PASS |
 | Unreadable source fragments marked (`[unreadable in source]`) | 6 | PASS |
 | Untraceable provision text failures | 0 | PASS |
@@ -659,43 +670,43 @@
 
 | # | Parameter ID | Parameter | Value & Unit | Printed Cell Text | Source (`doc_id:eid`, Page) | Page-Image Check |
 |---:|---|---|---|---|---|---|
-| 1 | `in-ka-bengaluru:param_0001` | `ground_coverage_max_pct` | `60.0 %` | `60%` | `bbl-2003:part_III__sec_12.0__cl_12.2__tbl_9__row_2` (p. 31) | PASS (`machine_checked`) |
-| 2 | `in-ka-bengaluru:param_0002` | `far_base_max` | `2.0 ratio` | `2.00` | `bbl-2003:part_III__sec_12.0__cl_12.2__tbl_9__row_2` (p. 31) | PASS (`machine_checked`) |
-| 3 | `in-ka-bengaluru:param_0003` | `ground_coverage_max_pct` | `60.0 %` | `60%` | `bbl-2003:part_III__sec_12.0__cl_12.2__tbl_9__row_3` (p. 31) | PASS (`machine_checked`) |
-| 4 | `in-ka-bengaluru:param_0004` | `far_base_max` | `2.25 ratio` | `2.25` | `bbl-2003:part_III__sec_12.0__cl_12.2__tbl_9__row_3` (p. 31) | PASS (`machine_checked`) |
-| 5 | `in-ka-bengaluru:param_0005` | `ground_coverage_max_pct` | `60.0 %` | `60%` | `bbl-2003:part_III__sec_12.0__cl_12.2__tbl_9__row_4` (p. 31) | PASS (`machine_checked`) |
-| 6 | `in-ka-bengaluru:param_0006` | `far_base_max` | `2.5 ratio` | `2.50` | `bbl-2003:part_III__sec_12.0__cl_12.2__tbl_9__row_4` (p. 31) | PASS (`machine_checked`) |
-| 7 | `in-ka-bengaluru:param_0007` | `ground_coverage_max_pct` | `75.0 %` | `75%` | `bbl-2003:part_III__sec_13.0__cl_13.2__tbl_10__row_2` (p. 32) | PASS (`machine_checked`) |
-| 8 | `in-ka-bengaluru:param_0008` | `far_base_max` | `1.0 ratio` | `1.00` | `bbl-2003:part_III__sec_13.0__cl_13.2__tbl_10__row_2` (p. 32) | PASS (`machine_checked`) |
-| 9 | `in-ka-bengaluru:param_0009` | `ground_coverage_max_pct` | `50.0 %` | `50%` | `bbl-2003:part_III__sec_13.0__cl_13.2__tbl_10__row_3` (p. 32) | PASS (`machine_checked`) |
-| 10 | `in-ka-bengaluru:param_0010` | `far_base_max` | `0.75 ratio` | `0.75` | `bbl-2003:part_III__sec_13.0__cl_13.2__tbl_10__row_3` (p. 32) | PASS (`machine_checked`) |
-| 11 | `in-ka-bengaluru:param_0011` | `ground_coverage_max_pct` | `50.0 %` | `50%` | `bbl-2003:part_III__sec_13.0__cl_13.2__tbl_10__row_4` (p. 32) | PASS (`machine_checked`) |
-| 12 | `in-ka-bengaluru:param_0012` | `far_base_max` | `0.75 ratio` | `0.75` | `bbl-2003:part_III__sec_13.0__cl_13.2__tbl_10__row_4` (p. 32) | PASS (`machine_checked`) |
-| 13 | `in-ka-bengaluru:param_0013` | `ground_coverage_max_pct` | `40.0 %` | `40%` | `bbl-2003:part_III__sec_13.0__cl_13.2__tbl_10__row_5` (p. 32) | PASS (`machine_checked`) |
-| 14 | `in-ka-bengaluru:param_0014` | `far_base_max` | `0.75 ratio` | `0.75` | `bbl-2003:part_III__sec_13.0__cl_13.2__tbl_10__row_5` (p. 32) | PASS (`machine_checked`) |
-| 15 | `in-ka-bengaluru:param_0015` | `ground_coverage_max_pct` | `40.0 %` | `40%` | `bbl-2003:part_III__sec_13.0__cl_13.2__tbl_10__row_6` (p. 32) | PASS (`machine_checked`) |
-| 16 | `in-ka-bengaluru:param_0016` | `far_base_max` | `0.5 ratio` | `0.50` | `bbl-2003:part_III__sec_13.0__cl_13.2__tbl_10__row_6` (p. 32) | PASS (`machine_checked`) |
-| 17 | `in-ka-bengaluru:param_0017` | `ground_coverage_max_pct` | `35.0 %` | `35%` | `bbl-2003:part_III__sec_13.0__cl_13.2__tbl_10__row_7` (p. 32) | PASS (`machine_checked`) |
-| 18 | `in-ka-bengaluru:param_0018` | `far_base_max` | `0.5 ratio` | `0.50` | `bbl-2003:part_III__sec_13.0__cl_13.2__tbl_10__row_7` (p. 32) | PASS (`machine_checked`) |
-| 19 | `in-ka-bengaluru:param_0019` | `parking_requirement` | `25 seats of accommodation subject to a minimum of 20 15 seats of accommodation subject to a minimum of 10 rule_text` | `25 seats of accommodation subject to a minimum of 20 15 seat` | `bbl-2003:part_III__sec_16.0__tbl_13__row_1` (p. 36) | PASS (`machine_checked`) |
-| 20 | `in-ka-bengaluru:param_0020` | `parking_requirement` | `50.0 m2_per_car_space` | `50 sq. mtr. of floor area` | `bbl-2003:part_III__sec_16.0__tbl_13__row_2` (p. 36) | PASS (`machine_checked`) |
-| 21 | `in-ka-bengaluru:param_0021` | `parking_requirement` | `150.0 m2_per_car_space` | `150 sq. mtr of floor area plus 1 lorry parking space measuri` | `bbl-2003:part_III__sec_16.0__tbl_13__row_3` (p. 36) | PASS (`machine_checked`) |
-| 22 | `in-ka-bengaluru:param_0022` | `parking_requirement` | `25.0 m2_per_car_space` | `25 sq.mtr. of floor area including hall, dining room, pantry` | `bbl-2003:part_III__sec_16.0__tbl_13__row_4` (p. 36) | PASS (`machine_checked`) |
-| 23 | `in-ka-bengaluru:param_0023` | `parking_requirement` | `4 rooms rule_text` | `4 rooms` | `bbl-2003:part_III__sec_16.0__tbl_13__row_5` (p. 36) | PASS (`machine_checked`) |
-| 24 | `in-ka-bengaluru:param_0024` | `parking_requirement` | `50.0 m2_per_car_space` | `50sq.mtrs. of office floor space.` | `bbl-2003:part_III__sec_16.0__tbl_13__row_6` (p. 36) | PASS (`machine_checked`) |
-| 25 | `in-ka-bengaluru:param_0025` | `parking_requirement` | `10 rooms rule_text` | `10 rooms` | `bbl-2003:part_III__sec_16.0__tbl_13__row_7` (p. 36) | PASS (`machine_checked`) |
-| 26 | `in-ka-bengaluru:param_0026` | `parking_requirement` | `100.0 m2_per_car_space` | `100 sq.mtr. of floor area plus 1 lorry space measuring 4 x 8` | `bbl-2003:part_III__sec_16.0__tbl_13__row_8` (p. 36) | PASS (`machine_checked`) |
-| 27 | `in-ka-bengaluru:param_0027` | `parking_requirement` | `4 beds rule_text` | `4 beds` | `bbl-2003:part_III__sec_16.0__tbl_13__row_9` (p. 36) | PASS (`machine_checked`) |
-| 28 | `in-ka-bengaluru:param_0028` | `parking_requirement` | `150.0 m2_per_car_space` | `a) Dwelling Unit measuring 100 to 150 Sq.Mtrs b) 100 Sq.Mtrs` | `bbl-2003:part_III__sec_16.0__tbl_13__row_10` (p. 36) | PASS (`machine_checked`) |
-| 29 | `in-ka-bengaluru:param_0029` | `parking_requirement` | `50.0 m2_per_car_space` | `a) 2 Dwelling units measuring 50 Sq.Mtrs or less. b) Dwellin` | `bbl-2003:part_III__sec_16.0__tbl_13__row_11` (p. 36) | PASS (`machine_checked`) |
-| 30 | `in-ka-bengaluru:param_0030` | `parking_requirement` | `10.0 m2_per_car_space` | `10 sq.mtr. of auditorium floor area` | `bbl-2003:part_III__sec_16.0__tbl_13__row_12` (p. 36) | PASS (`machine_checked`) |
-| 31 | `in-ka-bengaluru:param_0031` | `parking_requirement` | `50.0 m2_per_car_space` | `50 sq.mtr. of floor area` | `bbl-2003:part_III__sec_16.0__tbl_13__row_13` (p. 36) | PASS (`machine_checked`) |
-| 32 | `in-ka-bengaluru:param_0032` | `parking_requirement` | `200.0 m2_per_car_space` | `200 sq.mtr. of floor area` | `bbl-2003:part_III__sec_16.0__tbl_13__row_14` (p. 36) | PASS (`machine_checked`) |
-| 33 | `in-ka-bengaluru:param_0033` | `parking_requirement` | `100.0 m2_per_car_space` | `100 sq. mtr. Of floor area` | `bbl-2003:part_III__sec_16.0__tbl_13__row_15` (p. 36) | PASS (`machine_checked`) |
-| 34 | `in-ka-bengaluru:param_0034` | `ground_coverage_max_pct` | `25.0 %` | `25%` | `bbl-2003:part_III__sec_9.0__cl_9.10__cl_9.10.4__tbl_1__row_1` (p. 28) | PASS (`machine_checked`) |
-| 35 | `in-ka-bengaluru:param_0035` | `ground_coverage_max_pct` | `33.33 %` | `33.33%` | `bbl-2003:part_III__sec_9.0__cl_9.10__cl_9.10.4__tbl_1__row_2` (p. 28) | PASS (`machine_checked`) |
-| 36 | `in-ka-bengaluru:param_0036` | `ground_coverage_max_pct` | `33.33 %` | `33.33%` | `bbl-2003:part_III__sec_9.0__cl_9.10__cl_9.10.4__tbl_1__row_3` (p. 28) | PASS (`machine_checked`) |
-| 37 | `in-ka-bengaluru:param_0037` | `ground_coverage_max_pct` | `30.0 %` | `30%` | `bbl-2003:part_III__sec_9.0__cl_9.10__cl_9.10.4__tbl_1__row_4` (p. 28) | PASS (`machine_checked`) |
-| 38 | `in-ka-bengaluru:param_0038` | `ground_coverage_max_pct` | `25.0 %` | `25%` | `bbl-2003:part_III__sec_9.0__cl_9.10__cl_9.10.4__tbl_1__row_5` (p. 28) | PASS (`machine_checked`) |
-| 39 | `in-ka-bengaluru:param_0039` | `setback_front_min_m` | `4.5 m` | `4.5` | `bbl-2003:part_III__sec_9.0__cl_9.2__tbl_5__row_1` (p. 23) | PASS (`machine_checked`) |
-| 40 | `in-ka-bengaluru:param_0040` | `setback_rear_min_m` | `4.5 m` | `4.5` | `bbl-2003:part_III__sec_9.0__cl_9.2__tbl_5__row_1` (p. 23) | PASS (`machine_checked`) |
+| 1 | `in-ka-bengaluru:param_0001` | `setback_side_min_m` | `1.0 m` | `1.0 m` | `rmp2015-zr:chp_3__cl_3.1__tbl_8__row_1` (p. 20) | PASS (`machine_checked`) |
+| 2 | `in-ka-bengaluru:param_0002` | `setback_side_min_m` | `0.0 m` | `0` | `rmp2015-zr:chp_3__cl_3.1__tbl_8__row_1` (p. 20) | PASS (`machine_checked`) |
+| 3 | `in-ka-bengaluru:param_0003` | `setback_front_min_m` | `1.0 m` | `1.0 m` | `rmp2015-zr:chp_3__cl_3.1__tbl_8__row_1` (p. 20) | PASS (`machine_checked`) |
+| 4 | `in-ka-bengaluru:param_0004` | `setback_rear_min_m` | `0.0 m` | `0` | `rmp2015-zr:chp_3__cl_3.1__tbl_8__row_1` (p. 20) | PASS (`machine_checked`) |
+| 5 | `in-ka-bengaluru:param_0005` | `setback_side_min_m` | `1.0 m` | `1.0 mon all sides` | `rmp2015-zr:chp_3__cl_3.1__tbl_8__row_2` (p. 20) | PASS (`machine_checked`) |
+| 6 | `in-ka-bengaluru:param_0006` | `setback_side_min_m` | `1.0 m` | `1.0 mon all sides` | `rmp2015-zr:chp_3__cl_3.1__tbl_8__row_2` (p. 20) | PASS (`machine_checked`) |
+| 7 | `in-ka-bengaluru:param_0007` | `setback_front_min_m` | `1.0 m` | `1.0 mon all sides` | `rmp2015-zr:chp_3__cl_3.1__tbl_8__row_2` (p. 20) | PASS (`machine_checked`) |
+| 8 | `in-ka-bengaluru:param_0008` | `setback_rear_min_m` | `1.0 m` | `1.0 mon all sides` | `rmp2015-zr:chp_3__cl_3.1__tbl_8__row_2` (p. 20) | PASS (`machine_checked`) |
+| 9 | `in-ka-bengaluru:param_0009` | `setback_side_min_m` | `8.0 pct_of_plot_width` | `8%` | `rmp2015-zr:chp_3__cl_3.1__tbl_8__row_3` (p. 20) | PASS (`machine_checked`) |
+| 10 | `in-ka-bengaluru:param_0010` | `setback_side_min_m` | `8.0 pct_of_plot_width` | `8%` | `rmp2015-zr:chp_3__cl_3.1__tbl_8__row_3` (p. 20) | PASS (`machine_checked`) |
+| 11 | `in-ka-bengaluru:param_0011` | `setback_front_min_m` | `12.0 pct_of_plot_depth` | `12%` | `rmp2015-zr:chp_3__cl_3.1__tbl_8__row_3` (p. 20) | PASS (`machine_checked`) |
+| 12 | `in-ka-bengaluru:param_0012` | `setback_rear_min_m` | `8.0 pct_of_plot_depth` | `8%` | `rmp2015-zr:chp_3__cl_3.1__tbl_8__row_3` (p. 20) | PASS (`machine_checked`) |
+| 13 | `in-ka-bengaluru:param_0013` | `far_base_max` | `2.75 ratio` | `2.75` | `rmp2015-zr:chp_4__cl_4.5__cl_4.5.3__tbl_15__row_1` (p. 33) | PASS (`machine_checked`) |
+| 14 | `in-ka-bengaluru:param_0014` | `ground_coverage_max_pct` | `55.0 %` | `55%` | `rmp2015-zr:chp_4__cl_4.5__cl_4.5.3__tbl_15__row_1` (p. 33) | PASS (`machine_checked`) |
+| 15 | `in-ka-bengaluru:param_0015` | `far_base_max` | `3.25 ratio` | `3.25` | `rmp2015-zr:chp_4__cl_4.5__cl_4.5.3__tbl_15__row_2` (p. 33) | PASS (`machine_checked`) |
+| 16 | `in-ka-bengaluru:param_0016` | `ground_coverage_max_pct` | `50.0 %` | `50%` | `rmp2015-zr:chp_4__cl_4.5__cl_4.5.3__tbl_15__row_2` (p. 33) | PASS (`machine_checked`) |
+| 17 | `in-ka-bengaluru:param_0017` | `building_height_max_m` | `11.5 m` | `11.5 meters` | `rmp2015-zr:chp_4__cl_4.1__cl_4.1.2__item_b` (p. 28) | PASS (`machine_checked`) |
+| 18 | `in-ka-bengaluru:param_0018` | `floors_max` | `3.0 floors` | `Stilt +GF+2 floors` | `rmp2015-zr:chp_4__cl_4.1__cl_4.1.2__item_b` (p. 28) | PASS (`machine_checked`) |
+| 19 | `in-ka-bengaluru:param_0019` | `parking_requirement` | `a) Dwelling Unit measuring 100 to 150 Sq.Mtrs b) 100 Sq.Mtrs and Part thereof beyond 150 Sq.Mtrs. rule_text` | `a) Dwelling Unit measuring 100 to 150 Sq.Mtrs b) 100 Sq.Mtrs` | `bbl-2003:part_III__sec_16.0__tbl_13__row_10` (p. 36) | PASS (`machine_checked`) |
+| 20 | `in-ka-bengaluru:param_0020` | `ground_coverage_max_pct` | `25.0 %` | `25%` | `bbl-2003:part_III__sec_9.0__cl_9.10__cl_9.10.4__tbl_1__row_1` (p. 28) | PASS (`machine_checked`) |
+| 21 | `in-ka-bengaluru:param_0021` | `ground_coverage_max_pct` | `33.33 %` | `33.33%` | `bbl-2003:part_III__sec_9.0__cl_9.10__cl_9.10.4__tbl_1__row_2` (p. 28) | PASS (`machine_checked`) |
+| 22 | `in-ka-bengaluru:param_0022` | `far_base_max` | `0.75 ratio` | `0.75` | `bbl-2003:part_III__sec_9.0__cl_9.2__tbl_6__row_2` (p. 24) | PASS (`machine_checked`) |
+| 23 | `in-ka-bengaluru:param_0023` | `far_base_max` | `0.75 ratio` | `0.75` | `bbl-2003:part_III__sec_9.0__cl_9.2__tbl_6__row_3` (p. 24) | PASS (`machine_checked`) |
+| 24 | `in-ka-bengaluru:param_0024` | `far_base_max` | `1.0 ratio` | `1.00` | `bbl-2003:part_III__sec_9.0__cl_9.2__tbl_6__row_4` (p. 24) | PASS (`machine_checked`) |
+| 25 | `in-ka-bengaluru:param_0025` | `far_base_max` | `1.0 ratio` | `1.00` | `bbl-2003:part_III__sec_9.0__cl_9.2__tbl_6__row_5` (p. 24) | PASS (`machine_checked`) |
+| 26 | `in-ka-bengaluru:param_0026` | `far_base_max` | `1.25 ratio` | `1.25` | `bbl-2003:part_III__sec_9.0__cl_9.2__tbl_6__row_6` (p. 24) | PASS (`machine_checked`) |
+| 27 | `in-ka-bengaluru:param_0027` | `far_base_max` | `1.0 ratio` | `1.00` | `bbl-2003:part_III__sec_9.0__cl_9.2__tbl_6__row_8` (p. 24) | PASS (`machine_checked`) |
+| 28 | `in-ka-bengaluru:param_0028` | `far_base_max` | `1.25 ratio` | `1.25` | `bbl-2003:part_III__sec_9.0__cl_9.2__tbl_6__row_9` (p. 24) | PASS (`machine_checked`) |
+| 29 | `in-ka-bengaluru:param_0029` | `far_base_max` | `1.25 ratio` | `1.25` | `bbl-2003:part_III__sec_9.0__cl_9.2__tbl_6__row_10` (p. 24) | PASS (`machine_checked`) |
+| 30 | `in-ka-bengaluru:param_0030` | `far_base_max` | `1.5 ratio` | `1.50` | `bbl-2003:part_III__sec_9.0__cl_9.2__tbl_6__row_11` (p. 24) | PASS (`machine_checked`) |
+| 31 | `in-ka-bengaluru:param_0031` | `far_base_max` | `1.75 ratio` | `1.75` | `bbl-2003:part_III__sec_9.0__cl_9.2__tbl_6__row_12` (p. 24) | PASS (`machine_checked`) |
+| 32 | `in-ka-bengaluru:param_0032` | `far_base_max` | `1.0 ratio` | `1.00` | `bbl-2003:part_III__sec_9.0__cl_9.2__tbl_6__row_14` (p. 24) | PASS (`machine_checked`) |
+| 33 | `in-ka-bengaluru:param_0033` | `far_base_max` | `1.25 ratio` | `1.25` | `bbl-2003:part_III__sec_9.0__cl_9.2__tbl_6__row_15` (p. 24) | PASS (`machine_checked`) |
+| 34 | `in-ka-bengaluru:param_0034` | `far_base_max` | `1.5 ratio` | `1.50` | `bbl-2003:part_III__sec_9.0__cl_9.2__tbl_6__row_16` (p. 24) | PASS (`machine_checked`) |
+| 35 | `in-ka-bengaluru:param_0035` | `far_base_max` | `1.5 ratio` | `1.50` | `bbl-2003:part_III__sec_9.0__cl_9.2__tbl_6__row_17` (p. 24) | PASS (`machine_checked`) |
+| 36 | `in-ka-bengaluru:param_0036` | `far_base_max` | `1.75 ratio` | `1.75` | `bbl-2003:part_III__sec_9.0__cl_9.2__tbl_6__row_17` (p. 24) | PASS (`machine_checked`) |
+| 37 | `in-ka-bengaluru:param_0037` | `far_base_max` | `2.0 ratio` | `2.00` | `bbl-2003:part_III__sec_9.0__cl_9.2__tbl_6__row_18` (p. 24) | PASS (`machine_checked`) |
+| 38 | `in-ka-bengaluru:param_0038` | `setback_front_min_m` | `4.5 m` | `4.50` | `rmp2015-zr:chp_4__cl_4.7__cl_4.7.3__tbl_16__row_1` (p. 35) | PASS (`machine_checked`) |
+| 39 | `in-ka-bengaluru:param_0039` | `setback_rear_min_m` | `4.5 m` | `4.50` | `rmp2015-zr:chp_4__cl_4.7__cl_4.7.3__tbl_16__row_1` (p. 35) | PASS (`machine_checked`) |
+| 40 | `in-ka-bengaluru:param_0040` | `setback_side_min_m` | `4.5 m` | `4.50` | `rmp2015-zr:chp_4__cl_4.7__cl_4.7.3__tbl_16__row_1` (p. 35) | PASS (`machine_checked`) |

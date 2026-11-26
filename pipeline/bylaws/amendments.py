@@ -12,7 +12,7 @@ import click
 import yaml
 
 from bylaws.annotations import build_document_annotations
-from bylaws.config import JurisdictionConfig
+from bylaws.config import JurisdictionConfig, load_jurisdiction_config
 from bylaws.consolidate import format_change_mark_label, run_consolidate
 from bylaws.root import resolve_repo_root
 from bylaws.schema_validator import validate_file, validate_payload
@@ -172,8 +172,12 @@ def _reset_clause_tree_versions(tree: dict[str, Any]) -> None:
     tree["clauses"] = base_clauses
 
 
-def _load_clause_tree(docs_dir: Path, doc_id: str) -> dict[str, Any]:
+def _load_clause_tree(docs_dir: Path, doc_id: str, parent_docs_dir: Path | None = None) -> dict[str, Any]:
     path = docs_dir / f"{doc_id}.clauses.json"
+    if not path.is_file() and parent_docs_dir is not None:
+        parent_cand = parent_docs_dir / f"{doc_id}.clauses.json"
+        if parent_cand.is_file():
+            path = parent_cand
     if not path.is_file():
         raise click.ClickException(
             f"Clause tree file not found for document '{doc_id}': {path}. "
@@ -420,9 +424,40 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
     effects: list[dict[str, Any]] = []
     effect_seq = 0
 
+    parent_id = getattr(config, "parent", None)
+    parent_docs_dir = (
+        root / "data" / "processed" / str(parent_id) / "documents"
+        if parent_id
+        else None
+    )
+
+    effective_cfg_links: list[dict[str, Any]] = []
+    seen_cfg_link_keys: set[tuple[str, str]] = set()
+    for cfg_lnk in getattr(config, "amendment_links", None) or []:
+        d_lnk = cfg_lnk.model_dump() if hasattr(cfg_lnk, "model_dump") else dict(cfg_lnk)
+        k_lnk = (str(d_lnk.get("amending_clause") or ""), str(d_lnk.get("target_clause") or ""))
+        if k_lnk not in seen_cfg_link_keys:
+            seen_cfg_link_keys.add(k_lnk)
+            effective_cfg_links.append(d_lnk)
+
+    if parent_id:
+        try:
+            parent_cfg = load_jurisdiction_config(str(parent_id), repo_root=root)
+            for p_lnk in getattr(parent_cfg, "amendment_links", None) or []:
+                d_lnk = p_lnk.model_dump() if hasattr(p_lnk, "model_dump") else dict(p_lnk)
+                app_in = d_lnk.get("applies_in") or []
+                if app_in and config.id not in app_in:
+                    continue
+                k_lnk = (str(d_lnk.get("amending_clause") or ""), str(d_lnk.get("target_clause") or ""))
+                if k_lnk not in seen_cfg_link_keys:
+                    seen_cfg_link_keys.add(k_lnk)
+                    effective_cfg_links.append(d_lnk)
+        except Exception:
+            pass
+
     declarative_doc_ids = {
-        str(getattr(lnk, "amending_clause", "") or "").split(":", 1)[0]
-        for lnk in (getattr(config, "amendment_links", None) or [])
+        str(lnk.get("amending_clause") or "").split(":", 1)[0]
+        for lnk in effective_cfg_links
     }
 
     for doc in config.documents:
@@ -442,13 +477,13 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
             continue
 
         if doc.id not in loaded_trees:
-            loaded_trees[doc.id] = _load_clause_tree(docs_dir, doc.id)
+            loaded_trees[doc.id] = _load_clause_tree(docs_dir, doc.id, parent_docs_dir)
         amend_tree = loaded_trees[doc.id]
 
         target_doc_ids = list(doc.amends)
         for target_doc_id in target_doc_ids:
             if target_doc_id not in loaded_trees:
-                loaded_trees[target_doc_id] = _load_clause_tree(docs_dir, target_doc_id)
+                loaded_trees[target_doc_id] = _load_clause_tree(docs_dir, target_doc_id, parent_docs_dir)
 
         for clause in amend_tree.get("clauses", []):
             if clause.get("superseded_by") is not None or clause.get("record_superseded_by") is not None:
@@ -571,9 +606,7 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
     # Also process declarative amendment_links from config.amendment_links and data/overrides/<jurisdiction>/*.yaml
     overrides_dir = root / "data" / "overrides" / config.id
     doc_by_id = {d.id: d for d in config.documents}
-    declarative_links: list[dict[str, Any]] = []
-    for cfg_lnk in getattr(config, "amendment_links", None) or []:
-        declarative_links.append(cfg_lnk.model_dump() if hasattr(cfg_lnk, "model_dump") else dict(cfg_lnk))
+    declarative_links: list[dict[str, Any]] = list(effective_cfg_links)
     if overrides_dir.is_dir():
         override_files = sorted(overrides_dir.glob("*.yaml")) + sorted(overrides_dir.glob("*.yml"))
         for ov_path in override_files:
@@ -594,9 +627,9 @@ def run_amendments(config: JurisdictionConfig, *, repo_root: Path | None = None)
                 amending_doc_id, amending_token = amending_ref.split(":", 1)
                 target_doc_id, target_token = target_ref.split(":", 1)
                 if amending_doc_id not in loaded_trees:
-                    loaded_trees[amending_doc_id] = _load_clause_tree(docs_dir, amending_doc_id)
+                    loaded_trees[amending_doc_id] = _load_clause_tree(docs_dir, amending_doc_id, parent_docs_dir)
                 if target_doc_id not in loaded_trees:
-                    loaded_trees[target_doc_id] = _load_clause_tree(docs_dir, target_doc_id)
+                    loaded_trees[target_doc_id] = _load_clause_tree(docs_dir, target_doc_id, parent_docs_dir)
 
                 amend_tree_ov = loaded_trees[amending_doc_id]
                 target_tree_ov = loaded_trees[target_doc_id]

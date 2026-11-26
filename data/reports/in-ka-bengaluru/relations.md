@@ -4,27 +4,27 @@
 
 | Relation Kind | Total Count | Public Visible | Confirmed |
 |---|---:|---|---:|
-| `amends` | 17 | Yes (`measured_precision = 1.0`) | 17 |
+| `amends` | 28 | Yes (`measured_precision = 1.0`) | 28 |
 | `incorporates` | 19 | Yes (`measured_precision = 1.0`) | 19 |
 | `corporation_differs` | 16 | Yes (`measured_precision = 1.0`) | 16 |
-| `cross_document_reference` | 37 | Hidden (`pending owner precision >= 0.8`) | 37 |
+| `cross_document_reference` | 48 | Hidden (`pending owner precision >= 0.8`) | 48 |
 | `definition_differs` | 12 | Hidden (`pending owner precision >= 0.8`) | 12 |
 | `precedence` | 11 | Hidden (`pending owner precision >= 0.8`) | 11 |
-| **Total** | **112** | — | **112** |
+| **Total** | **134** | — | **134** |
 
 ## 2. Statutory Precedence Relations (Quoted Law Spans)
 
 | ID | From Provision | To Provision | Topic | Quoted Statutory Precedence Span |
 |---|---|---|---|---|
-| `rel_102` | `gbga-2024:chp_XVIII__cl_317` | `bbl-2003:part_I__sec_1.0` | `hierarchy_applicability` | not inconsistent with the Act or rules made there under |
-| `rel_103` | `gbga-2024:chp_XVIII__cl_318` | `bbl-2003:part_III__sec_12.0__cl_12.1__item_vi` | `projections_open_spaces` | not inconsistent with this Act and the rules made thereunder for,- (i) regulating the payments from the City Corporation fund |
-| `rel_104` | `gbga-2024:chp_XVIII__item_5` | `bbl-2003:part_I__sec_1.0` | `hierarchy_applicability` | notwithstanding anything contained in section 318 |
-| `rel_105` | `gbga-2024:chp_XVII__cl_223` | `bbl-2003:part_I__sec_1.0` | `hierarchy_applicability` | in conformity with the provisions of the Karnataka Town and Country Planning Act, 1961 |
-| `rel_106` | `gbga-2024:chp_XVII__cl_238` | `bbl-2003:part_I__sec_1.0` | `hierarchy_applicability` | Notwithstanding anything contained in this Act or any rule or bye-law made there under, the construction of, or any addition to any building of public entertainment or any addition thereto, shall n |
-| `rel_107` | `gbga-2024:chp_XVII__cl_249` | `bbl-2003:part_II__sec_3.0__cl_3.10__note_1` | `deviations_regularisation` | Notwithstanding anything contained in this Act, when construction of any building is completed in contravention of the provisions of this Chapter and the building bye-laws, the Commissioner may reg |
-| `rel_108` | `gbga-2024:chp_XVII__item_10` | `bbl-2003:part_I__sec_1.0` | `hierarchy_applicability` | Notwithstanding anything contained in this chapter, the Commissioner shall have the power to order for the stoppage of any construction which in his opinion endangers the public health, human life |
-| `rel_109` | `gbga-2024:chp_XVII__item_2_4` | `bbl-2003:part_I__sec_1.0` | `hierarchy_applicability` | in conformity with the Act, the master plan and building bye-laws, may grant permission to undertake construction or if the application does not confirm to the Act, master plan and building bye-laws, rej |
-| `rel_110` | `gbga-2024:chp_XVII__prov_1` | `bbl-2003:part_I__sec_1.0` | `hierarchy_applicability` | Notwithstanding anything contained in this act no licence or permission shall be necessary for the Bengaluru Metropolitan Transport City Corporation in respect of the fixation or erection of posts |
-| `rel_111` | `rmp2015-zr:chp_11.0` | `bbl-2003:part_I__sec_1.0` | `hierarchy_applicability` | over and above the ordinarily permissible F |
-| `rel_112` | `rmp2015-zr-amend-2025-04:chp_11_2` | `bbl-2003:part_I__sec_1.0` | `hierarchy_applicability` | over and above the ordinarily permissible F |
+| `rel_124` | `gbga-2024:chp_XVIII__cl_317` | `bbl-2003:part_I__sec_1.0` | `hierarchy_applicability` | not inconsistent with the Act or rules made there under |
+| `rel_125` | `gbga-2024:chp_XVIII__cl_318` | `bbl-2003:part_III__sec_12.0__cl_12.1__item_vi` | `projections_open_spaces` | not inconsistent with this Act and the rules made thereunder for,- (i) regulating the payments from the City Corporation fund |
+| `rel_126` | `gbga-2024:chp_XVIII__item_5` | `bbl-2003:part_I__sec_1.0` | `hierarchy_applicability` | notwithstanding anything contained in section 318 |
+| `rel_127` | `gbga-2024:chp_XVII__cl_223` | `bbl-2003:part_I__sec_1.0` | `hierarchy_applicability` | in conformity with the provisions of the Karnataka Town and Country Planning Act, 1961 |
+| `rel_128` | `gbga-2024:chp_XVII__cl_238` | `bbl-2003:part_I__sec_1.0` | `hierarchy_applicability` | Notwithstanding anything contained in this Act or any rule or bye-law made there under, the construction of, or any addition to any building of public entertainment or any addition thereto, shall n |
+| `rel_129` | `gbga-2024:chp_XVII__cl_249` | `bbl-2003:part_II__sec_3.0__cl_3.10__note_1` | `deviations_regularisation` | Notwithstanding anything contained in this Act, when construction of any building is completed in contravention of the provisions of this Chapter and the building bye-laws, the Commissioner may reg |
+| `rel_130` | `gbga-2024:chp_XVII__item_10` | `bbl-2003:part_I__sec_1.0` | `hierarchy_applicability` | Notwithstanding anything contained in this chapter, the Commissioner shall have the power to order for the stoppage of any construction which in his opinion endangers the public health, human life |
+| `rel_131` | `gbga-2024:chp_XVII__item_2_4` | `bbl-2003:part_I__sec_1.0` | `hierarchy_applicability` | in conformity with the Act, the master plan and building bye-laws, may grant permission to undertake construction or if the application does not confirm to the Act, master plan and building bye-laws, rej |
+| `rel_132` | `gbga-2024:chp_XVII__prov_1` | `bbl-2003:part_I__sec_1.0` | `hierarchy_applicability` | Notwithstanding anything contained in this act no licence or permission shall be necessary for the Bengaluru Metropolitan Transport City Corporation in respect of the fixation or erection of posts |
+| `rel_133` | `rmp2015-zr:chp_11.0` | `bbl-2003:part_I__sec_1.0` | `hierarchy_applicability` | over and above the ordinarily permissible F |
+| `rel_134` | `rmp2015-zr-amend-2025-04:chp_11_2` | `bbl-2003:part_I__sec_1.0` | `hierarchy_applicability` | over and above the ordinarily permissible F |
 

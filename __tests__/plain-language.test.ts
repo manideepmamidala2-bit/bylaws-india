@@ -1,13 +1,17 @@
 import { describe, expect, it } from "vitest";
 import {
   CODE_SUBJECTS,
+  computeSubjectBandContinuityNotices,
+  formatLandUseZoneGapPlainLine,
+  formatMonthYearPlain,
   formatParameterConditionsPlain,
   formatParameterValuePlain,
+  formatReplacedByPlain,
   getRelevantGapNoteForSubject,
   isPlausibleParameterValue,
   resolveCodeSubject,
 } from "@/lib/plain-language";
-import type { ParameterRecord } from "@/lib/data";
+import type { DocumentMetadata, ParameterRecord } from "@/lib/data";
 
 describe("Bylaw One plain-language helpers & 11 code subjects", () => {
   it("defines the 11 canonical code subjects in exact plan order", () => {
@@ -127,5 +131,127 @@ describe("Bylaw One plain-language helpers & 11 code subjects", () => {
     expect(getRelevantGapNoteForSubject("setbacks")).toContain("18 July 2025");
     expect(getRelevantGapNoteForSubject("fire-safety")).toBeNull();
     expect(getRelevantGapNoteForSubject("definitions")).toBeNull();
+  });
+
+  it("formats Changed [month year], Replaced by [plain name], [date], and detects the 11.5m-12m setback table band overlap", () => {
+    expect(formatMonthYearPlain("2026-01-20")).toBe("January 2026");
+    expect(formatMonthYearPlain("2019-06-19")).toBe("June 2019");
+
+    expect(
+      formatReplacedByPlain({
+        doc_id: "rmp2015-zr-amend-2026-01",
+        title:
+          "Bengaluru and Greater Bengaluru Revised Master Plan-2015 Zonal Regulations (Amendment), 2025",
+        effective_from: "2026-01-20",
+        notified_date: "2026-01-05",
+      })
+    ).toBe(
+      "Replaced by Bengaluru and Greater Bengaluru Revised Master Plan-2015 Zonal Regulations (Amendment), 2025, 20 January 2026"
+    );
+
+    expect(
+      formatLandUseZoneGapPlainLine("Bengaluru South City Corporation")
+    ).toBe(
+      "Land-use zones are available for parts of Bengaluru South only. Elsewhere the map shows boundaries and wards."
+    );
+
+    const lowRiseRecord: ParameterRecord = {
+      parameter_id: "test:low",
+      parameter: "setback_front_min_m",
+      value: 12,
+      unit: "pct_of_plot_depth",
+      value_text: "12% of the depth of site",
+      conditions: {
+        dependent: false,
+        building_height_m: {
+          min: null,
+          max: 12.0,
+          min_inclusive: true,
+          max_inclusive: true,
+        },
+      },
+      valid_from: "2026-01-20",
+      valid_to: null,
+      legal_status: "in_force",
+      source: {
+        doc_id: "rmp2015-zr-amend-2026-01",
+        eid: "item_2_2__item_b",
+        clause_id: "rmp2015-zr-amend-2026-01:item_2_2__item_b",
+        cell_text: "12% of the depth of site",
+        page: 2,
+        page_link: "#page=2",
+      },
+      derived: true,
+      method: "table_rule_parser",
+      confidence: 0.95,
+      verification: "machine_checked",
+    };
+
+    const highRiseRecord: ParameterRecord = {
+      ...lowRiseRecord,
+      parameter_id: "test:high",
+      value: 5.0,
+      unit: "m",
+      value_text: "5.0 m",
+      conditions: {
+        dependent: false,
+        building_height_m: {
+          min: 11.5,
+          max: 15.0,
+          min_inclusive: false,
+          max_inclusive: true,
+        },
+      },
+      valid_from: "2007-06-25",
+      source: {
+        doc_id: "rmp2015-zr",
+        eid: "chp_3__cl_3.4__tbl_9",
+        clause_id: "rmp2015-zr:chp_3__cl_3.4__tbl_9",
+        cell_text: "5.0 m",
+        page: 21,
+        page_link: "#page=21",
+      },
+    };
+
+    const docMap = new Map<
+      string,
+      Pick<
+        DocumentMetadata,
+        "doc_id" | "title" | "effective_from" | "notified_date"
+      >
+    >([
+      [
+        "rmp2015-zr-amend-2026-01",
+        {
+          doc_id: "rmp2015-zr-amend-2026-01",
+          title:
+            "Bengaluru and Greater Bengaluru Revised Master Plan-2015 Zonal Regulations (Amendment), 2025",
+          effective_from: "2026-01-20",
+          notified_date: "2026-01-05",
+        },
+      ],
+      [
+        "rmp2015-zr",
+        {
+          doc_id: "rmp2015-zr",
+          title:
+            "Revised Master Plan 2015 Volume III Zoning of Landuse and Regulations",
+          effective_from: "2007-06-25",
+          notified_date: "2007-06-22",
+        },
+      ],
+    ]);
+
+    const notices = computeSubjectBandContinuityNotices(
+      "setbacks",
+      [lowRiseRecord, highRiseRecord],
+      docMap
+    );
+    expect(notices).toHaveLength(1);
+    expect(notices[0].headline).toContain(
+      "The current tables overlap between 11.5 m and 12 m"
+    );
+    expect(notices[0].sourceA.page).toBe(2);
+    expect(notices[0].sourceB.page).toBe(21);
   });
 });

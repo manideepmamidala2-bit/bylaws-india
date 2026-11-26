@@ -6,6 +6,8 @@ from bylaws.annotations import QUANTITY_SPAN_RE, _normalise_quantity
 from bylaws.config import load_jurisdiction_config
 from bylaws.parameters import (
     PLAUSIBILITY_BOUNDS,
+    check_band_continuity,
+    check_parameter_overlaps,
     check_parameter_plausibility,
     classify_non_envelope_row,
     parse_cell_value_and_unit,
@@ -283,3 +285,123 @@ def test_published_parameters_json_validates_and_matches_page_images() -> None:
     )
     assert "Parameter Records 40-Item Page-Image Self-Check (Part 3)" in qa_text
     assert "| 40 |" in qa_text
+
+
+def test_part1_table_and_provision_supersession_dedup_and_band_continuity() -> None:
+    """Part 1: Industrial (General) setbacks/FAR supersession, Traffic & Transportation FAR deduplication, 3.1(ii)-(iii) consolidated wording, and 11.5m-12m band continuity check."""
+    import copy
+    import json
+
+    city_cfg = load_jurisdiction_config("in-ka-bengaluru")
+    ver = str(city_cfg.release_version)
+    city_dir = REPO_ROOT / "public" / "data" / "in-ka-bengaluru" / ver
+    params_payload = validate_file(city_dir / "parameters.json", "parameters")
+    records = params_payload["records"]
+    doc_layers = {d.id: str(d.layer) for d in city_cfg.documents}
+
+    # 1. Industrial (General) setbacks up to 500 m²:
+    #    - Only the Jan 2026 notification (12% depth front, 8% depth rear, 8% width side, p. 6) is in_force
+    #    - The 2007 rmp2015-zr 4.5 m rule (p. 35) is superseded with "Replaced by ..."
+    igen_500_front_in_force = [
+        r
+        for r in records
+        if r["parameter"] == "setback_front_min_m"
+        and r["legal_status"] == "in_force"
+        and not r.get("valid_to")
+        and r["conditions"].get("zone") == ["I-GEN"]
+        and (r["conditions"].get("plot_area_m2") or {}).get("max") == 500.0
+    ]
+    assert len(igen_500_front_in_force) == 1
+    assert igen_500_front_in_force[0]["source"]["doc_id"] == "rmp2015-zr-amend-2026-01"
+    assert igen_500_front_in_force[0]["source"]["page"] == 6
+    assert igen_500_front_in_force[0]["value"] == 12.0
+    assert igen_500_front_in_force[0]["unit"] == "pct_of_plot_depth"
+
+    igen_500_front_superseded = [
+        r
+        for r in records
+        if r["parameter"] == "setback_front_min_m"
+        and r["legal_status"] == "superseded"
+        and r["conditions"].get("zone") == ["I-GEN"]
+        and (r["conditions"].get("plot_area_m2") or {}).get("max") == 500.0
+    ]
+    assert len(igen_500_front_superseded) == 1
+    assert igen_500_front_superseded[0]["source"]["doc_id"] == "rmp2015-zr"
+    assert igen_500_front_superseded[0]["value"] == 4.5
+    assert str(igen_500_front_superseded[0].get("note") or "").startswith("Replaced by ")
+
+    # 2. Industrial (General) FAR: shown once per plot-area band under governing rules, citing Jan 2026 (p. 6) with 2007 source in note
+    igen_far_in_force = [
+        r
+        for r in records
+        if r["parameter"] == "far_base_max"
+        and r["legal_status"] == "in_force"
+        and not r.get("valid_to")
+        and r["conditions"].get("zone") == ["I-GEN"]
+    ]
+    assert len(igen_far_in_force) == 4
+    assert [r["value"] for r in igen_far_in_force] == [1.5, 1.25, 1.0, 1.0]
+    for r in igen_far_in_force:
+        assert r["source"]["doc_id"] == "rmp2015-zr-amend-2026-01"
+        assert r["source"]["page"] == 6
+        assert "Earlier source with identical value" in str(r.get("note") or "")
+        assert "p. 35" in str(r.get("note") or "")
+
+    # 3. Traffic and Transportation FAR: shown once per plot-area band under governing rules, citing March 2009 (p. 3) with 2007 source in note
+    ttrans_far_in_force = [
+        r
+        for r in records
+        if r["parameter"] == "far_base_max"
+        and r["legal_status"] == "in_force"
+        and not r.get("valid_to")
+        and r["conditions"].get("zone") == ["T-TRANS"]
+    ]
+    assert len(ttrans_far_in_force) == 4
+    assert [r["value"] for r in ttrans_far_in_force] == [1.0, 1.25, 1.5, 1.5]
+    for r in ttrans_far_in_force:
+        assert r["source"]["doc_id"] == "rmp2015-zr-amend-2009-03"
+        assert r["source"]["page"] == 3
+        assert "Earlier source with identical value" in str(r.get("note") or "")
+        assert "p. 38" in str(r.get("note") or "")
+
+    # 4. Setbacks clauses 3.1(ii) and 3.1(iii) in rmp2015-zr have consolidated 2026 wording in versions[-1] citing rmp2015-zr-amend-2026-01 p. 2
+    zr_tree = json.loads((city_dir / "rmp2015-zr.clauses.json").read_text(encoding="utf-8"))
+    by_eid = {c["eid"]: c for c in zr_tree["clauses"]}
+    cl_31_ii = by_eid["chp_3__cl_3.1__item_ii"]
+    cl_31_iii = by_eid["chp_3__cl_3.1__item_iii"]
+
+    assert len(cl_31_ii["versions"]) == 2
+    assert "total height up to 12.0m" in cl_31_ii["versions"][-1]["content"]
+    assert cl_31_ii["versions"][-1]["source_doc"] == "rmp2015-zr-amend-2026-01"
+    assert cl_31_ii["versions"][-1]["citations"][0]["page"] == 2
+    assert "Up to 11.5 m height" in cl_31_ii["versions"][0]["content"]
+
+    assert len(cl_31_iii["versions"]) == 2
+    assert "more than 12.0 m in total height" in cl_31_iii["versions"][-1]["content"]
+    assert cl_31_iii["versions"][-1]["source_doc"] == "rmp2015-zr-amend-2026-01"
+    assert cl_31_iii["versions"][-1]["citations"][0]["page"] == 2
+    assert "more than 11.5 m in height" in cl_31_iii["versions"][0]["content"]
+
+    # 5. Overlap check & band continuity check: 0 unexplained overlaps; 11.5 m to 12 m setback height overlap detected
+    ov = check_parameter_overlaps(records, doc_layers)
+    assert len(ov["unexplained_overlaps"]) == 0
+    assert len(ov["not_settled_overlaps"]) >= 1
+    assert any("11.5 m and 12 m" in item["reason"] for item in ov["not_settled_overlaps"])
+
+    bands = check_band_continuity(records, doc_layers)
+    assert any(
+        b["kind"] == "overlap"
+        and b["subject"] == "setbacks"
+        and b["range"] == "11.5 m to 12 m"
+        and "The current tables overlap between 11.5 m and 12 m." in b["summary"]
+        for b in bands
+    )
+
+    # Falsifiability check: planting an unexplained conflicting in_force record must fail check_parameter_overlaps
+    planted = copy.deepcopy(records)
+    clone = copy.deepcopy(ttrans_far_in_force[0])
+    clone["parameter_id"] = "planted:conflict"
+    clone["value"] = 2.75
+    planted.append(clone)
+    ov_bad = check_parameter_overlaps(planted, doc_layers)
+    assert len(ov_bad["unexplained_overlaps"]) == 1
