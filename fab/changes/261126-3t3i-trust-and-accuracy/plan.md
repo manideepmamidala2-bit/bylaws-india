@@ -124,45 +124,51 @@ Both `pipeline/bylaws/resolver.py` and `lib/resolver.ts` MUST remove the `3:2` p
 
 ### Functional Completeness
 
-- [ ] A-001 R1: Stored page text with PDF SHA-256 checksum exists in `data/page_text/` for every acquired instrument, and `verify_jurisdiction_text_fidelity` in `pipeline/bylaws/fidelity.py` reads only from that stored page text (plus recorded overrides) and verifies checksums against the source register.
-- [ ] A-002 R2: The map page (`/j/[id]`) displays `"Zone boundaries are approximate: typically about 8 m from street centre-lines, and within about 21 m in 9 out of 10 places."` generated from the verification report's median and 90th-percentile values, places the `0.0032 m` grid-fit error inside `Details` as the sheet-fitting error, is rebuilt in the Bylaw One design stating `"Land-use zones are available for parts of Bengaluru South only."`, and is linked from the footer on every page and from the `Land use` subject page.
-- [ ] A-003 R3: Every source cell, replaced-rule label, `"Changed"` tag, and timeline item uses the instrument's plain register name and date, full official titles appear only in `Details` and on document page headers, the 2017 home-page step attributes its quote to `"Building Bye-laws 2003, bye-law 1.4 (inserted by notification UDD 14 TTP 2017, 28 October 2017)"` with links to both and the one-line Model Building Bye-laws note, and the 2007 home-page step quotes verbatim words introducing FAR / Table 10's caption from `rmp2015-zr` p. 28.
-- [ ] A-004 R4: Only structurally confirmed relation kinds (`amends`, `incorporates`, `corporation_differs`) are shown publicly (`public_visible: true`), all other kinds are marked `"not_yet_reviewed"` and hidden until their labelled precision in `docs/review/relations-labelling.md` reaches at least `0.8`, the 60-item labelling sheet in `docs/review/relations-labelling.md` shows both provisions, their pages, and an unfilled verdict column, and every public relation shows `"Checked by rule, not yet by a person"` inside `Details`.
-- [ ] A-005 R5: `pipeline/bylaws/resolver.py` and `lib/resolver.ts` return `"needs depth"`, `"needs width"`, or `"needs height"` when a rule depends on an omitted dimension, distinguish `"No limit in the law for this case"` (with citation) from `"Not covered by our data yet"`, and remain hidden from the website.
+- [x] A-001 R1: Stored page text with PDF SHA-256 checksum exists in `data/page_text/` for every acquired instrument, and `verify_jurisdiction_text_fidelity` in `pipeline/bylaws/fidelity.py` reads only from that stored page text (plus recorded overrides) and verifies checksums against the source register.
+- [x] A-002 R2: The map page (`/j/[id]`) displays `"Zone boundaries are approximate: typically about 8 m from street centre-lines, and within about 21 m in 9 out of 10 places."` generated from the verification report's median and 90th-percentile values, places the `0.0032 m` grid-fit error inside `Details` as the sheet-fitting error, is rebuilt in the Bylaw One design stating `"Land-use zones are available for parts of Bengaluru South only."`, and is linked from the footer on every page and from the `Land use` subject page.
+- [x] A-003 R3: Every source cell, replaced-rule label, `"Changed"` tag, and timeline item uses the instrument's plain register name and date, full official titles appear only in `Details` and on document page headers, the 2017 home-page step attributes its quote to `"Building Bye-laws 2003, bye-law 1.4 (inserted by notification UDD 14 TTP 2017, 28 October 2017)"` with links to both and the one-line Model Building Bye-laws note, and the 2007 home-page step quotes verbatim words introducing FAR / Table 10's caption from `rmp2015-zr` p. 28.
+- [x] A-004 R4: Only structurally confirmed relation kinds (`amends`, `incorporates`, `corporation_differs`) are shown publicly (`public_visible: true`), all other kinds are marked `"not_yet_reviewed"` and hidden until their labelled precision in `docs/review/relations-labelling.md` reaches at least `0.8`, the 60-item labelling sheet in `docs/review/relations-labelling.md` shows both provisions, their pages, and an unfilled verdict column, and every public relation shows `"Checked by rule, not yet by a person"` inside `Details`.
+- [x] A-005 R5: `pipeline/bylaws/resolver.py` and `lib/resolver.ts` return `"needs depth"`, `"needs width"`, or `"needs height"` when a rule depends on an omitted dimension, distinguish `"No limit in the law for this case"` (with citation) from `"Not covered by our data yet"`, and remain hidden from the website.
 
 ### Behavioral Correctness
 
-- [ ] A-006 R1: Planted-fault tests that (a) alter one word in a published provision and (b) change one cited page number both fail `verify_jurisdiction_text_fidelity` in CI, and missing stored page text or a mismatched PDF checksum fails rather than skips.
-- [ ] A-007 R2: CI (`scripts/check_page_budgets.mjs` and `pipeline/tests/test_release_and_copy_consistency.py`) verifies that the map accuracy text is derived from the verification report's median and 90th-percentile values and fails if `"0.0032 m"` appears in the primary layer or if accuracy numbers are hard-coded in UI components.
-- [ ] A-008 R3: CI (`scripts/check_page_budgets.mjs` and `pipeline/tests/test_release_and_copy_consistency.py`) fails if any full official gazette title appears outside `<details>` or document page headers, and `pipeline/tests/test_text_fidelity.py` verifies every home-page quote against stored page text.
+- [x] A-006 R1: Planted-fault tests that (a) alter one word in a published provision and (b) change one cited page number both fail `verify_jurisdiction_text_fidelity` in CI, and missing stored page text or a mismatched PDF checksum fails rather than skips.
+- [x] A-007 R2: CI (`scripts/check_page_budgets.mjs` and `pipeline/tests/test_release_and_copy_consistency.py`) verifies that the map accuracy text is derived from the verification report's median and 90th-percentile values and fails if `"0.0032 m"` appears in the primary layer or if accuracy numbers are hard-coded in UI components.
+- [x] A-008 R3: CI (`scripts/check_page_budgets.mjs` and `pipeline/tests/test_release_and_copy_consistency.py`) fails if any full official gazette title appears outside `<details>` or document page headers, and `pipeline/tests/test_text_fidelity.py` verifies every home-page quote against stored page text.
 
 ### Removal Verification
 
-- [ ] A-009 R1: The `.clauses.json` page-token synthesis fallback in `pipeline/bylaws/fidelity.py` is completely removed.
-- [ ] A-010 R5: The `inferred_depth`, `inferred_width` (`3:2` plot ratio), and `eff_height = 11.5` defaults in `pipeline/bylaws/resolver.py` and `lib/resolver.ts` are completely removed.
+- [x] A-009 R1: The `.clauses.json` page-token synthesis fallback in `pipeline/bylaws/fidelity.py` is completely removed.
+- [x] A-010 R5: The `inferred_depth`, `inferred_width` (`3:2` plot ratio), and `eff_height = 11.5` defaults in `pipeline/bylaws/resolver.py` and `lib/resolver.ts` are completely removed.
 
 ### Scenario Coverage
 
-- [ ] A-011 R5: Unit tests in `pipeline/tests/test_resolver.py` and `__tests__/resolver.test.ts` verify the four review plots (`600 m²` on a `15 m` road in `Residential (Main)`; `150 m²` on a `9 m` road; `3,000 m²` commercial on a `24 m` road; `6,000 m²` industrial on an `18 m` road) both with and without depth/width/height for `"needs depth/width/height"` and for `"No limit in the law for this case"` vs. `"Not covered by our data yet"`.
-- [ ] A-012 R2: Playwright browser tests, WCAG AA accessibility checks at `390 px` and `1280 px`, and page weight budgets (`HTML <= 300 KB`, `initial JS + data <= 1.5 MB`) pass across all routes including `/`, `/j/in-ka-bengaluru`, `/j/in-ka-bengaluru-south`, and `/j/in-ka-bengaluru/topics/land-use`.
+- [x] A-011 R5: Unit tests in `pipeline/tests/test_resolver.py` and `__tests__/resolver.test.ts` verify the four review plots (`600 m²` on a `15 m` road in `Residential (Main)`; `150 m²` on a `9 m` road; `3,000 m²` commercial on a `24 m` road; `6,000 m²` industrial on an `18 m` road) both with and without depth/width/height for `"needs depth/width/height"` and for `"No limit in the law for this case"` vs. `"Not covered by our data yet"`.
+- [x] A-012 R2: Playwright browser tests, WCAG AA accessibility checks at `390 px` and `1280 px`, and page weight budgets (`HTML <= 300 KB`, `initial JS + data <= 1.5 MB`) pass across all routes including `/`, `/j/in-ka-bengaluru`, `/j/in-ka-bengaluru-south`, and `/j/in-ka-bengaluru/topics/land-use`.
 
 ### Edge Cases & Error Handling
 
-- [ ] A-013 R1: Calling `verify_jurisdiction_text_fidelity` when a cited page number is out of range or absent from `data/page_text/<doc_id>.pages.json.gz` records a failure (`"Missing stored page text"`) rather than skipping the provision or parameter row.
-- [ ] A-014 R4: Computing labelled precision from `docs/review/relations-labelling.md` when verdicts are unfilled returns `None` (`< 0.8`) and keeps non-structural relation kinds (`cross_document_reference`, `definition_differs`, `precedence`) hidden (`public_visible: false`).
+- [x] A-013 R1: Calling `verify_jurisdiction_text_fidelity` when a cited page number is out of range or absent from `data/page_text/<doc_id>.pages.json.gz` records a failure (`"Missing stored page text"`) rather than skipping the provision or parameter row.
+- [x] A-014 R4: Computing labelled precision from `docs/review/relations-labelling.md` when verdicts are unfilled returns `None` (`< 0.8`) and keeps non-structural relation kinds (`cross_document_reference`, `definition_differs`, `precedence`) hidden (`public_visible: false`).
 
 ### Code Quality
 
-- [ ] A-015 Pattern consistency: New code follows naming and structural patterns of surrounding Python (`pipeline/bylaws/`) and TypeScript (`app/`, `components/`, `lib/`) code, including Rule R1 (zero jurisdiction hard-coding in code).
-- [ ] A-016 No unnecessary duplication: Existing utilities in `lib/plain-language.ts`, `pipeline/bylaws/fidelity.py`, and `pipeline/bylaws/parameters.py` are reused where applicable.
-- [ ] A-017 Readability and maintainability: Functions remain focused (`<= 50` lines where practical) with named constants instead of magic numbers or strings (`fab/project/code-quality.md`).
-- [ ] A-018 Single-source codegen: `scripts/generate_models.py --check` (`pipeline/bylaws/models/_generated.py` and `lib/types/generated.ts`) produces zero git diff against `schemas/*.schema.json`.
+- [x] A-015 Pattern consistency: New code follows naming and structural patterns of surrounding Python (`pipeline/bylaws/`) and TypeScript (`app/`, `components/`, `lib/`) code, including Rule R1 (zero jurisdiction hard-coding in code).
+- [x] A-016 No unnecessary duplication: Existing utilities in `lib/plain-language.ts`, `pipeline/bylaws/fidelity.py`, and `pipeline/bylaws/parameters.py` are reused where applicable.
+- [x] A-017 Readability and maintainability: Functions remain focused (`<= 50` lines where practical) with named constants instead of magic numbers or strings (`fab/project/code-quality.md`).
+- [x] A-018 Single-source codegen: `scripts/generate_models.py --check` (`pipeline/bylaws/models/_generated.py` and `lib/types/generated.ts`) produces zero git diff against `schemas/*.schema.json`.
 
 ## Notes
 
 - Check items as you review: `- [x]`
 - All acceptance items must pass before `/fab-continue` (hydrate)
 - If an item is not applicable, mark checked and prefix with **N/A**: `- [x] A-NNN **N/A**: {reason}`
+
+## Deletion Candidates
+
+- `components/ClausePanel.tsx` — Legacy zone-clause sidebar component no longer rendered by `components/AreaExplorerClient.tsx` or any `app/` route after the Part 2 map page rebuild (referenced only in `__tests__/clause-fallbacks.test.tsx`).
+- `components/AreaExplorerClient.tsx:24-26,33-35` (`AreaExplorerClientProps` optional fields `clauses`, `amendmentLinks`, `clauseZoneTags`, `parametersPayload`, `resolutionConfig`, `consolidatedPayload`) — Unused optional props retained on `AreaExplorerClientProps` after removing `ClausePanel` and plot resolver cards from the map view.
+- `lib/resolver.ts:59` (`"no_applicable_rule"` in `ResolvedParameterStatus`) — Superseded status literal retained in the TypeScript union after `resolvePlotParameters` replaced `"no_applicable_rule"` with `"no_limit_in_law"` and `"not_covered_by_data"`.
 
 ## Assumptions
 
