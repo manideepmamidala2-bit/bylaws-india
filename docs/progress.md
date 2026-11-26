@@ -77,4 +77,27 @@ Tracks the 11-PR remediation series defined in [`docs/plans/pr-series/00-overvie
 | **Part 5** | The numbers as data (tables as data with intervals, parameter records with conditions & cell sources, 6-step resolution rules, pipeline/browser resolver, worked Jayanagar case, 40-record self-check) | ✅ Complete | Extracted cell-sourced parameter records (`parameters.json`) across all 10 parameter kinds (coverage, base FAR, premium FAR, TDR, front/rear/side setbacks, height, floors, and parking) with numeric intervals, zone/use/ring conditions (`dependent: true` for unexpressed conditions), and cell provenance; verified all 6 ordered resolution steps and verbatim quotes in `jurisdictions/resolution.yaml` against repaired structured text; verified both Python (`bylaws resolve`) and TypeScript (`lib/resolver.ts`) resolvers against source tables including the worked Jayanagar `600 m²` / `15 m` road `Residential (Main)` plot (`65%` coverage, `2.25` base FAR, Jan 2026 Table 8 setbacks `12%` depth / `8%` depth / `8%` width, `+0.675` Premium FAR, `+0.225` TDR); and recorded the 40-record page-image self-check in `qa.md` |
 | **Part 6** | A simple site for non-experts (map-first home with "About this map" expander, plot card with plain answers & tap-to-expand, most-recent-first lists, law-order documents, "Rules by subject" showing what applies today first, language rules, budgets & browser tests in CI) | ✅ Complete | Renamed `"Topics"` to `"Rules by subject"` in `TopNav.tsx`; moved technical map details, CRS codes, ward inspector, and layer metadata behind the `"About this map"` expander (`data-testid="about-this-map-expander"`) on `ZoneMap.tsx` while stating one honest measured accuracy figure (`"within about 8 m of street centre-lines"`) in plain words; updated `PlotCard.tsx` with plain answers, tap-to-expand details (`plot-answer-details-*`), and the exact one-line disclaimer (`"Worked out from the official documents by this site. Confirm with the planning authority or a qualified professional."`); ordered Documents list (`/j/[id]/documents` & `/j/[id]/clauses`), Sources (`/j/[id]/sources`), Timeline (`/j/[id]/timeline`), and provision version/amendment history most-recent-first while keeping law order inside documents (`ClauseTree.tsx`) with `notes_by_site` and `ocr_corrections`; restructured `/j/[id]/topics/[topic]` to show `"1 · What Applies Today"` first with governing parameter values, non-truncated Resolution cards, and collapsed `"Older or replaced rules"` and `"Related provisions"`; and verified all 277 built HTML routes pass page budgets (`max HTML = 284.0 KB <= 300 KB`, `max initial JS+data = 0.65 MB <= 1.50 MB`), 152 pytest tests, 13 Vitest + axe-core tests, and 4 Playwright E2E tests |
 
+---
+
+## Bylaw One: Clean Interface and New Home Page (`docs/plans/bylaw-one-clean-ui-plan.md`)
+
+- **Baseline Release**: `4.0.0`
+- **Baseline Commit**: `874005b` (`fix(tests): check consolidated.json notes_by_site for 6.0(i) when parent shared bbl-2003 is loaded in CI`)
+- **Active Change**: `261126-bups-bylaw-one-clean-ui`
+- **Naming & Domain Note**: Site renamed to **Bylaw One** (`"Bengaluru's building rules. One code."`). Current repository and domain (`bylaws-india.vercel.app`) are retained for now; **a domain and trademark check for "Bylaw One" is pending**.
+- **Scope**: Interface and presentation in the `dg2n.com` style; minimum data fixes in `pipeline/bylaws/parameters.py` (plausibility bounds, hectare-to-`m²` conversion, non-FAR row reclassification, sentence parking values); never invent or rewrite legal text.
+
+### Task Status (`T001`–`T007`)
+
+| Task | Section | Status | Notes |
+|------|---------|--------|-------|
+| **T001** | Minimum data fixes (`parameters.py`, plausibility bounds, hectare conversion, non-FAR reclassification, parking sentences) | 🔄 In Progress | Updating `pipeline/bylaws/parameters.py`, `parameters.json`, and `data/reports/*/parameter-mismatches.md` |
+| **T002** | Plain-language helpers & 11 subjects (`lib/plain-language.ts`) | ⏳ Pending | Condition formatting in words, plausibility guard, 11 subjects |
+| **T003** | Rename to Bylaw One, dg2n tokens, 3-item Header, Footer & CorporationSelector | ⏳ Pending | `app/layout.tsx`, `app/globals.css`, `app/icon.svg`, `TopNav.tsx`, `Footer.tsx`, `CorporationSelector.tsx` |
+| **T004** | Home page & 5-step verbatim FAR story (`app/page.tsx`, `FarStoryStepper.tsx`, `test_text_fidelity.py`) | ⏳ Pending | Hero, `01 / The problem`, `02 / Follow one rule: FAR` (2004, 2007, 2017, 2025, Today), `03 / The code, by subject`, `04 / Recently changed`, FAQ, `"Read. Trace. Compare."` |
+| **T005** | The code: Subject index & Subject pages (`/j/[id]/topics`, `/j/[id]/topics/[topic]`) | ⏳ Pending | Clean `"What applies today"` tables with units and plain conditions, `"Why this rule applies"`, collapsed older/related rules |
+| **T006** | Document pages, What changed, Sources, Map (plot features removed), and About | ⏳ Pending | Law-order provisions with Details on tap, removed South draft notice from in-force docs, Map without plot inputs/answers |
+| **T007** | CI language check, page budgets, Vitest, Playwright browser tests & screenshots | ⏳ Pending | Full CI verification at `390 px` and `1280 px` |
+
+
 
