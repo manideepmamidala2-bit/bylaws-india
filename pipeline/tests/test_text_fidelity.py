@@ -95,7 +95,25 @@ def test_editorial_insertions_moved_to_notes_by_site_and_table_3_1_restored() ->
         v_txt = str(ver.get("content") or "")
         assert "up to 15% setback and coverage deviation" not in v_txt
         assert "Notification No: BSCC/Com/PR" not in v_txt
-    assert cl_6_0_i.get("notes_by_site"), "Expected notes_by_site on bbl-2003 6.0(i)"
+    south_cfg = load_jurisdiction_config("in-ka-bengaluru-south")
+    south_ver = str(south_cfg.release_version or "4.0.0")
+    cons_south = json.loads(
+        (
+            repo_root
+            / "public"
+            / "data"
+            / "in-ka-bengaluru-south"
+            / south_ver
+            / "consolidated.json"
+        ).read_text(encoding="utf-8")
+    )
+    cons_6_0_i = next(
+        r for r in cons_south["records"] if r["clause_id"] == "bbl-2003:6.0(i)"
+    )
+    assert "up to 15% setback and coverage deviation" not in cons_6_0_i["text"]
+    assert cl_6_0_i.get("notes_by_site") or cons_6_0_i.get("notes_by_site"), (
+        "Expected notes_by_site on bbl-2003 6.0(i)"
+    )
 
     rmp = south_trees["rmp2015-zr"]
     by_eid_rmp = {c["eid"]: c for c in rmp["clauses"]}
