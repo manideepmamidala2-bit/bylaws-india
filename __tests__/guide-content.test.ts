@@ -5,6 +5,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import axe from "axe-core";
 import { describe, expect, it } from "vitest";
 import GuidePage from "@/app/guide/page";
+import GuideSlidesPage from "@/app/guide/slides/page";
 import {
   countWords,
   interpolateGuidePlaceholders,
@@ -255,6 +256,43 @@ describe("Part 2 — Guide Content as Source Files, Generated Figures, Mermaid D
     expect(
       screen.getByTestId("start-slides-see-it-working")
     ).toHaveAttribute("href", "/guide/slides#slide-see-it-working");
+
+    const results = await axe.run(container, {
+      rules: {
+        region: { enabled: false },
+      },
+    });
+    expect(results.violations).toHaveLength(0);
+    unmount();
+  });
+
+  it("renders /guide/slides with reveal.js deck, keyboard navigation, speaker view presenter notes, section jump strip, and passes axe-core WCAG 2.2 AA", async () => {
+    const ui = await GuideSlidesPage();
+    const { container, unmount } = render(ui);
+
+    expect(screen.getByTestId("guide-slides-deck")).toBeInTheDocument();
+    expect(screen.getByTestId("slides-counter")).toHaveTextContent(
+      /Slide 1 \/ 24/
+    );
+
+    // Click Next -> advances to Slide 2
+    fireEvent.click(screen.getByTestId("slides-next-btn"));
+    expect(screen.getByTestId("slides-counter")).toHaveTextContent(
+      /Slide 2 \/ 24/
+    );
+
+    // Toggle Speaker view -> shows presenter notes
+    fireEvent.click(screen.getByTestId("slides-speaker-view-btn"));
+    expect(screen.getByTestId("guide-speaker-view-panel")).toBeInTheDocument();
+    expect(
+      (screen.getByTestId("speaker-view-notes-text").textContent ?? "").length
+    ).toBeGreaterThan(50);
+
+    // Jump to "08 · The launch" section
+    fireEvent.click(screen.getByTestId("slides-jump-section-the-launch"));
+    expect(screen.getByTestId("speaker-view-notes-text")).toHaveTextContent(
+      /public launch takes place in Bengaluru in the last week of January 2027/i
+    );
 
     const results = await axe.run(container, {
       rules: {

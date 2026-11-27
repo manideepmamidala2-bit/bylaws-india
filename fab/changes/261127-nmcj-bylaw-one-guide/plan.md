@@ -80,7 +80,7 @@ A build script (`scripts/build_guide_bundle.mjs`) MUST generate `public/bylaw-on
 ### Phase 3: Reading Mode `/guide` & Slide Mode `/guide/slides` (Parts 3 & 4)
 
 - [x] T003 Implement `/guide` reading mode in `app/guide/page.tsx` and `components/GuideReaderClient.tsx` with sticky contents, 5 audience entry points (`college`, `student`, `practitioner`, `developer`, `partner-funder`), inline SVG diagrams, responsive screenshots, `"Present"` / `"Start from section"` buttons, and `"Download guide (single file)"` button, verify page budgets and `axe-core` accessibility, update `docs/progress.md`, commit, and push Part 3 <!-- R3 -->
-- [ ] T004 Implement `/guide/slides` in `app/guide/slides/page.tsx` and `components/GuideSlidesClient.tsx` using `reveal.js` with one slide per section summary (`<= 40 words`), dedicated diagram and screenshot slides, presenter notes / speaker view, keyboard & fullscreen navigation, `#slide-<slug>` deep-linking from `/guide`, and Bylaw One styling (`#f5f3ed` paper, `#080909` ink, `#ff6b52` current-item accent), update `docs/progress.md`, commit, and push Part 4 <!-- R4 -->
+- [x] T004 Implement `/guide/slides` in `app/guide/slides/page.tsx` and `components/GuideSlidesClient.tsx` using `reveal.js` with one slide per section summary (`<= 40 words`), dedicated diagram and screenshot slides, presenter notes / speaker view, keyboard & fullscreen navigation, `#slide-<slug>` deep-linking from `/guide`, and Bylaw One styling (`#f5f3ed` paper, `#080909` ink, `#ff6b52` current-item accent), update `docs/progress.md`, commit, and push Part 4 <!-- R4 -->
 
 ### Phase 4: Single-File Offline Bundle & End-to-End Verification (Part 5)
 
