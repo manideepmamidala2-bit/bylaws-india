@@ -46,6 +46,9 @@ test.describe("Bylaw One — Home, Subject, Document & Map E2E Suite", () => {
           mobileNav.getByRole("link", { name: "The code" })
         ).toBeVisible();
         await expect(
+          mobileNav.getByRole("link", { name: "Map" })
+        ).toBeVisible();
+        await expect(
           mobileNav.getByRole("link", { name: "What changed" })
         ).toBeVisible();
         await expect(
@@ -58,6 +61,9 @@ test.describe("Bylaw One — Home, Subject, Document & Map E2E Suite", () => {
         });
         await expect(
           primaryNav.getByRole("link", { name: "The code" })
+        ).toBeVisible();
+        await expect(
+          primaryNav.getByRole("link", { name: "Map" })
         ).toBeVisible();
         await expect(
           primaryNav.getByRole("link", { name: "What changed" })

@@ -7,27 +7,39 @@ import type {
   GenericFeatureCollection,
   GenericGeoJSONFeature,
   GeoLayerEntry,
+  ProcessedSheetMetadata,
   ZoneFeature,
   ZoneGeometry,
 } from "@/lib/data";
-import { buildDg2nMapStyle } from "@/lib/map-style";
+import { buildProtomapsLightStyle } from "@/lib/map-style";
 import {
   formatMapSheetFitErrorDetail,
   formatMapZoneAccuracyPlainLine,
 } from "@/lib/plain-language";
+import {
+  createPlaceMiniSearch,
+  searchPlacesWithMiniSearch,
+  type PlaceIndexEntry,
+  type PlaceIndexPayload,
+} from "@/lib/place-search";
 
-interface ZoneMapProps {
+export interface ZoneMapProps {
   jurisdictionId?: string;
+  zonesSourceJurisdictionId?: string;
   releaseVersion?: string;
   zones: ZoneFeature[];
   selectedZoneCode: string | null;
   onSelectZone: (zoneCode: string) => void;
+  onSelectPlaceEntry?: (entry: PlaceIndexEntry) => void;
+  initialPlaces?: PlaceIndexEntry[];
+  flyToTarget?: { lat: number; lng: number; zoom: number } | null;
   boundary?: GenericFeatureCollection | null;
   gbaZones?: GenericFeatureCollection | null;
   wards?: GenericFeatureCollection | null;
   planningDistricts?: GenericFeatureCollection | null;
   overlays?: GenericFeatureCollection | null;
   geoLayers?: GeoLayerEntry[];
+  processedSheets?: ProcessedSheetMetadata[];
   showDrafts?: boolean;
   onToggleDrafts?: (next: boolean) => void;
   initialShowSheetOverlay?: boolean;
@@ -42,7 +54,9 @@ interface Bounds {
   maxLat: number;
 }
 
-function collectPointsFromGeometry(geom: ZoneGeometry): Array<[number, number]> {
+function collectPointsFromGeometry(
+  geom: ZoneGeometry
+): Array<[number, number]> {
   const pts: Array<[number, number]> = [];
   if (geom.type === "Polygon") {
     for (const ring of geom.coordinates) {
@@ -111,36 +125,68 @@ function computeBounds(
   };
 }
 
+function buildDiagonalHatchPattern(): {
+  width: number;
+  height: number;
+  data: Uint8Array;
+} {
+  const size = 16;
+  const data = new Uint8Array(size * size * 4);
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
+      const idx = (y * size + x) * 4;
+      const onDiag = (x + y) % 8 === 0 || (x + y) % 8 === 1;
+      if (onDiag) {
+        data[idx] = 140;
+        data[idx + 1] = 142;
+        data[idx + 2] = 134;
+        data[idx + 3] = 115;
+      } else {
+        data[idx] = 239;
+        data[idx + 1] = 238;
+        data[idx + 2] = 232;
+        data[idx + 3] = 45;
+      }
+    }
+  }
+  return { width: size, height: size, data };
+}
+
 let pmtilesProtocolRegistered = false;
 
 export function ZoneMap({
   jurisdictionId = "",
+  zonesSourceJurisdictionId,
   releaseVersion = "4.0.0",
   zones,
   selectedZoneCode,
   onSelectZone,
+  onSelectPlaceEntry,
+  initialPlaces = [],
+  flyToTarget = null,
   boundary = null,
   gbaZones = null,
   wards = null,
   planningDistricts = null,
   overlays = null,
   geoLayers = [],
+  processedSheets = [],
   showDrafts = false,
   onToggleDrafts,
   initialShowSheetOverlay = false,
   sheetOverlayOpacity,
   onChangeSheetOverlayOpacity,
 }: ZoneMapProps) {
-  // On by default: corporation and wards (06-real-map-foundation.md §3)
-  const [showStreetsLayer, setShowStreetsLayer] = useState(true);
-  const [showBoundaryLayer, setShowBoundaryLayer] = useState(true);
-  const [showGbaZonesLayer, setShowGbaZonesLayer] = useState(false);
+  // Part 2.2 Layer switch in plain words: Land-use zones, Wards, Corporations, Planning districts, Original map sheets
+  const [showZonesLayer, setShowZonesLayer] = useState(true);
   const [showWardsLayer, setShowWardsLayer] = useState(true);
+  const [showBoundaryLayer, setShowBoundaryLayer] = useState(true);
   const [showPlanningDistrictsLayer, setShowPlanningDistrictsLayer] =
     useState(true);
-  const [showZonesLayer, setShowZonesLayer] = useState(true);
   const [showOverlaysLayer, setShowOverlaysLayer] = useState(true);
   const [placeWardQuery, setPlaceWardQuery] = useState("");
+  const [placesList, setPlacesList] =
+    useState<PlaceIndexEntry[]>(initialPlaces);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [webglError, setWebglError] = useState<string | null>(null);
   const [showSheetOverlay, setShowSheetOverlay] = useState<boolean>(() => {
@@ -153,13 +199,41 @@ export function ZoneMap({
     }
     return false;
   });
-  const [internalOverlayOpacity, setInternalOverlayOpacity] = useState(65);
+  const [internalOverlayOpacity, setInternalOverlayOpacity] = useState(70);
   const effectiveOverlayOpacity =
     sheetOverlayOpacity ?? internalOverlayOpacity;
   const handleOverlayOpacityChange = (val: number) => {
     setInternalOverlayOpacity(val);
     onChangeSheetOverlayOpacity?.(val);
   };
+
+  // Load place-index.json on client if not already provided
+  useEffect(() => {
+    if (initialPlaces.length > 0) {
+      setPlacesList(initialPlaces);
+      return;
+    }
+    if (!jurisdictionId) return;
+    let cancelled = false;
+    fetch(`/data/${jurisdictionId}/place-index.json`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((payload: PlaceIndexPayload | null) => {
+        if (!cancelled && payload?.places?.length) {
+          setPlacesList(payload.places);
+        }
+      })
+      .catch(() => {
+        // Ignore in offline/unit test environments
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [initialPlaces, jurisdictionId]);
+
+  const miniSearch = useMemo(
+    () => createPlaceMiniSearch(placesList),
+    [placesList]
+  );
 
   const sortedWards = useMemo(() => {
     const feats = [...(wards?.features ?? [])];
@@ -215,7 +289,7 @@ export function ZoneMap({
     wardsLayerMeta?.external_url ||
     (wardsLayerMeta?.source?.startsWith("http")
       ? wardsLayerMeta.source
-      : "https://gba.karnataka.gov.in/gba-corporations-delimitation-2025/index.html");
+      : null);
 
   const zonesLayerMeta = useMemo(
     () =>
@@ -225,7 +299,37 @@ export function ZoneMap({
       ),
     [geoLayers]
   );
-  const sheetOverlay = zonesLayerMeta?.sheet_overlay ?? null;
+  const fallbackSheetOverlay = zonesLayerMeta?.sheet_overlay ?? null;
+
+  const effectiveSheets: ProcessedSheetMetadata[] = useMemo(() => {
+    if (processedSheets.length > 0) return processedSheets;
+    if (
+      fallbackSheetOverlay &&
+      fallbackSheetOverlay.bounds_wgs84?.length === 4
+    ) {
+      return [
+        {
+          sheetId: fallbackSheetOverlay.sheet || "sheet-1",
+          sheetLabel: fallbackSheetOverlay.sheet || "Original sheet",
+          planningDistrict: fallbackSheetOverlay.planning_district || "",
+          imageUrl: fallbackSheetOverlay.image_url,
+          boundsWgs84:
+            fallbackSheetOverlay.bounds_wgs84 as unknown as ProcessedSheetMetadata["boundsWgs84"],
+          roadSegmentCount: null,
+          roadMedianOffsetM:
+            fallbackSheetOverlay.road_median_offset_m ?? null,
+          roadP90OffsetM: fallbackSheetOverlay.road_p90_offset_m ?? null,
+          gridFitRmseM: fallbackSheetOverlay.rmse_m ?? null,
+          looRmseM: fallbackSheetOverlay.loo_rmse_m ?? null,
+        },
+      ];
+    }
+    return [];
+  }, [fallbackSheetOverlay, processedSheets]);
+
+  const [selectedSheetId, setSelectedSheetId] = useState<string>(
+    effectiveSheets[0]?.sheetId ?? "all"
+  );
 
   const legendItems = useMemo(() => {
     const byCode = new Map<
@@ -260,9 +364,10 @@ export function ZoneMap({
     onSelectZoneRef.current = onSelectZone;
   }, [onSelectZone]);
 
+  const effectiveZonesJurId = zonesSourceJurisdictionId || jurisdictionId;
   const pmtilesUrl =
     process.env.NEXT_PUBLIC_PMTILES_URL?.trim() ||
-    `/data/${jurisdictionId}/basemap.pmtiles`;
+    `/data/${effectiveZonesJurId}/basemap.pmtiles`;
 
   const hasCoords = (fc?: GenericFeatureCollection | null) =>
     Boolean(
@@ -275,15 +380,15 @@ export function ZoneMap({
     Array.isArray(activeZones[0].geometry?.coordinates) &&
     activeZones[0].geometry.coordinates.length > 0;
   const relBase = `/data/${jurisdictionId}/${releaseVersion}`;
+  const zonesRelBase = `/data/${effectiveZonesJurId}/${releaseVersion}`;
 
   useEffect(() => {
     const container = mapContainerRef.current;
     if (!container) return;
 
-    // Guard headless jsdom environments where WebGL context is not implemented
     if (
       typeof window === "undefined" ||
-      typeof navigator !== "undefined" && /jsdom/i.test(navigator.userAgent)
+      (typeof navigator !== "undefined" && /jsdom/i.test(navigator.userAgent))
     ) {
       return;
     }
@@ -305,7 +410,7 @@ export function ZoneMap({
 
       const map = new maplibregl.Map({
         container,
-        style: buildDg2nMapStyle(resolvedUrl),
+        style: buildProtomapsLightStyle(resolvedUrl, window.location.origin),
         bounds: [bounds.minLon, bounds.minLat, bounds.maxLon, bounds.maxLat],
         fitBoundsOptions: { padding: 24 },
         attributionControl: false,
@@ -317,6 +422,15 @@ export function ZoneMap({
       mapInstanceRef.current = map;
 
       map.on("load", () => {
+        // Strict bottom-to-top layer order (Part 2.2):
+        // 1. Base map without labels (already in style below protomaps-labels-anchor)
+        // 2. Land-use zones (60% opacity, zone codes from zoom 15) + optional Original map sheets
+        // 3. Light diagonal hatch over areas without land-use data ("Land-use data not yet available")
+        // 4. Planning district outlines
+        // 5. Ward boundaries (ward names from zoom 13)
+        // 6. Corporation boundaries
+        // 7. Derived overlays (lake buffers) as dashed outlines labelled "derived"
+        // 8. Base map labels on top (above protomaps-labels-anchor)
         const beforeLabelId = map.getLayer("protomaps-labels-anchor")
           ? "protomaps-labels-anchor"
           : undefined;
@@ -328,149 +442,42 @@ export function ZoneMap({
           );
         }
 
-        if (boundary && boundary.features.length > 0) {
-          map.addSource("gba-corporation", {
-            type: "geojson",
-            data: hasCoords(boundary)
-              ? (boundary as unknown as GeoJSON.FeatureCollection)
-              : `${window.location.origin}${relBase}/boundary.geojson`,
+        if (!map.hasImage("diagonal-hatch")) {
+          const hatch = buildDiagonalHatchPattern();
+          map.addImage("diagonal-hatch", hatch);
+        }
+
+        // Original map sheets (Part 2.5): MapLibre image source per processed sheet
+        for (const sheet of effectiveSheets) {
+          const srcId = `rmp-sheet-src-${sheet.sheetId}`;
+          const lyrId = `rmp-sheet-layer-${sheet.sheetId}`;
+          const imgUrl =
+            sheet.imageUrl.startsWith("http://") ||
+            sheet.imageUrl.startsWith("https://")
+              ? sheet.imageUrl
+              : `${window.location.origin}${sheet.imageUrl}`;
+          map.addSource(srcId, {
+            type: "image",
+            url: imgUrl,
+            coordinates: sheet.boundsWgs84,
           });
           map.addLayer(
             {
-              id: "gba-corporation-line",
-              type: "line",
-              source: "gba-corporation",
+              id: lyrId,
+              type: "raster",
+              source: srcId,
               layout: {
-                visibility: showBoundaryLayer ? "visible" : "none",
+                visibility: showSheetOverlay ? "visible" : "none",
               },
               paint: {
-                "line-color": "#080909",
-                "line-width": 2.4,
+                "raster-opacity": effectiveOverlayOpacity / 100,
               },
             },
             beforeLabelId
           );
         }
 
-        if (gbaZones && gbaZones.features.length > 0) {
-          map.addSource("gba-zones", {
-            type: "geojson",
-            data: hasCoords(gbaZones)
-              ? (gbaZones as unknown as GeoJSON.FeatureCollection)
-              : `${window.location.origin}${relBase}/gba-zones.geojson`,
-          });
-          map.addLayer({
-            id: "gba-zones-line",
-            type: "line",
-            source: "gba-zones",
-            layout: {
-              visibility: showGbaZonesLayer ? "visible" : "none",
-            },
-            paint: {
-              "line-color": "#080909",
-              "line-dasharray": [4, 2],
-              "line-width": 1.8,
-            },
-          });
-        }
-
-        if (wards && wards.features.length > 0) {
-          map.addSource("gba-wards", {
-            type: "geojson",
-            data: hasCoords(wards)
-              ? (wards as unknown as GeoJSON.FeatureCollection)
-              : `${window.location.origin}${relBase}/wards.geojson`,
-          });
-          map.addLayer({
-            id: "gba-wards-fill",
-            type: "fill",
-            source: "gba-wards",
-            layout: {
-              visibility: showWardsLayer ? "visible" : "none",
-            },
-            paint: {
-              "fill-color": "#efeee8",
-              "fill-opacity": 0.28,
-            },
-          });
-          map.addLayer({
-            id: "gba-wards-line",
-            type: "line",
-            source: "gba-wards",
-            layout: {
-              visibility: showWardsLayer ? "visible" : "none",
-            },
-            paint: {
-              "line-color": "#5b5e56",
-              "line-width": 1.0,
-            },
-          });
-
-          map.on(
-            "click",
-            "gba-wards-fill",
-            (ev: maplibregl.MapLayerMouseEvent) => {
-              const clicked = ev.features?.[0];
-              const wid =
-                clicked?.properties?.ward_id ?? clicked?.properties?.ward_no;
-              if (wid !== undefined && wid !== null) {
-                setSelectedWardId(String(wid));
-              }
-            }
-          );
-        }
-
-        if (planningDistricts && planningDistricts.features.length > 0) {
-          map.addSource("planning-districts", {
-            type: "geojson",
-            data: hasCoords(planningDistricts)
-              ? (planningDistricts as unknown as GeoJSON.FeatureCollection)
-              : `${window.location.origin}${relBase}/planning-districts.geojson`,
-          });
-          map.addLayer({
-            id: "planning-districts-line",
-            type: "line",
-            source: "planning-districts",
-            layout: {
-              visibility: showPlanningDistrictsLayer ? "visible" : "none",
-            },
-            paint: {
-              "line-color": "#080909",
-              "line-dasharray": [6, 3],
-              "line-width": 2.0,
-            },
-          });
-        }
-
-        if (sheetOverlay && sheetOverlay.bounds_wgs84?.length === 4) {
-          const imgUrl =
-            sheetOverlay.image_url.startsWith("http://") ||
-            sheetOverlay.image_url.startsWith("https://")
-              ? sheetOverlay.image_url
-              : `${window.location.origin}${sheetOverlay.image_url}`;
-          map.addSource("rmp-sheet-overlay", {
-            type: "image",
-            url: imgUrl,
-            coordinates: sheetOverlay.bounds_wgs84 as unknown as [
-              [number, number],
-              [number, number],
-              [number, number],
-              [number, number]
-            ],
-          });
-          map.addLayer({
-            id: "rmp-sheet-overlay-layer",
-            type: "raster",
-            source: "rmp-sheet-overlay",
-            layout: {
-              visibility: showSheetOverlay ? "visible" : "none",
-            },
-            paint: {
-              "raster-opacity": effectiveOverlayOpacity / 100,
-            },
-          });
-        }
-
+        // Layer 2: Land-use zones in official RMP 2015 legend colours, 60% opacity; zone codes from zoom 15
         if (activeZones.length > 0) {
           map.addSource("master-plan-zones", {
             type: "geojson",
@@ -479,7 +486,7 @@ export function ZoneMap({
                   type: "FeatureCollection",
                   features: activeZones,
                 } as unknown as GeoJSON.FeatureCollection)
-              : `${window.location.origin}${relBase}/zones.geojson`,
+              : `${window.location.origin}${zonesRelBase}/zones.geojson`,
           });
           map.addLayer(
             {
@@ -515,7 +522,7 @@ export function ZoneMap({
                   "#adb5bd",
                   "#efeee8",
                 ],
-                "fill-opacity": 0.42,
+                "fill-opacity": 0.6,
               },
             },
             beforeLabelId
@@ -527,11 +534,30 @@ export function ZoneMap({
               source: "master-plan-zones",
               layout: {
                 visibility: showZonesLayer ? "visible" : "none",
-                "line-Sort-Key": 1,
-              } as unknown as maplibregl.LineLayerSpecification["layout"],
+              },
               paint: {
                 "line-color": "#080909",
-                "line-width": 1.1,
+                "line-width": 0.9,
+              },
+            },
+            beforeLabelId
+          );
+          map.addLayer(
+            {
+              id: "master-plan-zones-label",
+              type: "symbol",
+              source: "master-plan-zones",
+              minzoom: 15,
+              layout: {
+                visibility: showZonesLayer ? "visible" : "none",
+                "text-field": ["get", "zone_code"],
+                "text-font": ["Noto Sans Medium"],
+                "text-size": 11,
+              },
+              paint: {
+                "text-color": "#080909",
+                "text-halo-color": "#f5f3ed",
+                "text-halo-width": 1.2,
               },
             },
             beforeLabelId
@@ -546,6 +572,219 @@ export function ZoneMap({
                 onSelectZoneRef.current(zCode);
               }
             }
+          );
+        }
+
+        // Layer 3: Light diagonal hatch over areas without land-use data, labelled "Land-use data not yet available"
+        map.addSource("uncovered-landuse", {
+          type: "geojson",
+          data: `${window.location.origin}/data/${jurisdictionId}/uncovered-area.geojson`,
+        });
+        map.addLayer(
+          {
+            id: "uncovered-landuse-hatch",
+            type: "fill",
+            source: "uncovered-landuse",
+            filter: ["==", ["get", "kind"], "uncovered_hatch"],
+            layout: {
+              visibility: showZonesLayer ? "visible" : "none",
+            },
+            paint: {
+              "fill-pattern": "diagonal-hatch",
+              "fill-opacity": 0.45,
+            },
+          },
+          beforeLabelId
+        );
+        map.addLayer(
+          {
+            id: "uncovered-landuse-label",
+            type: "symbol",
+            source: "uncovered-landuse",
+            filter: ["==", ["get", "kind"], "uncovered_label"],
+            layout: {
+              visibility: showZonesLayer ? "visible" : "none",
+              "text-field": "Land-use data not yet available",
+              "text-font": ["Noto Sans Italic"],
+              "text-size": 11,
+            },
+            paint: {
+              "text-color": "#5b5e56",
+              "text-halo-color": "#f5f3ed",
+              "text-halo-width": 1.4,
+            },
+          },
+          beforeLabelId
+        );
+
+        // Layer 4: Planning district outlines
+        if (planningDistricts && planningDistricts.features.length > 0) {
+          map.addSource("planning-districts", {
+            type: "geojson",
+            data: hasCoords(planningDistricts)
+              ? (planningDistricts as unknown as GeoJSON.FeatureCollection)
+              : `${window.location.origin}${relBase}/planning-districts.geojson`,
+          });
+          map.addLayer(
+            {
+              id: "planning-districts-line",
+              type: "line",
+              source: "planning-districts",
+              layout: {
+                visibility: showPlanningDistrictsLayer ? "visible" : "none",
+              },
+              paint: {
+                "line-color": "#080909",
+                "line-dasharray": [6, 3],
+                "line-width": 2.0,
+              },
+            },
+            beforeLabelId
+          );
+        }
+
+        // Layer 5: Ward boundaries; ward names from zoom 13
+        if (wards && wards.features.length > 0) {
+          map.addSource("gba-wards", {
+            type: "geojson",
+            data: hasCoords(wards)
+              ? (wards as unknown as GeoJSON.FeatureCollection)
+              : `${window.location.origin}${relBase}/wards.geojson`,
+          });
+          map.addLayer(
+            {
+              id: "gba-wards-fill",
+              type: "fill",
+              source: "gba-wards",
+              layout: {
+                visibility: showWardsLayer ? "visible" : "none",
+              },
+              paint: {
+                "fill-color": "#efeee8",
+                "fill-opacity": 0.08,
+              },
+            },
+            beforeLabelId
+          );
+          map.addLayer(
+            {
+              id: "gba-wards-line",
+              type: "line",
+              source: "gba-wards",
+              layout: {
+                visibility: showWardsLayer ? "visible" : "none",
+              },
+              paint: {
+                "line-color": "#5b5e56",
+                "line-width": 1.1,
+              },
+            },
+            beforeLabelId
+          );
+          map.addLayer(
+            {
+              id: "gba-wards-label",
+              type: "symbol",
+              source: "gba-wards",
+              minzoom: 13,
+              layout: {
+                visibility: showWardsLayer ? "visible" : "none",
+                "text-field": ["get", "ward_name"],
+                "text-font": ["Noto Sans Regular"],
+                "text-size": 11,
+              },
+              paint: {
+                "text-color": "#171917",
+                "text-halo-color": "#f5f3ed",
+                "text-halo-width": 1.2,
+              },
+            },
+            beforeLabelId
+          );
+
+          map.on(
+            "click",
+            "gba-wards-fill",
+            (ev: maplibregl.MapLayerMouseEvent) => {
+              const clicked = ev.features?.[0];
+              const wid =
+                clicked?.properties?.ward_id ?? clicked?.properties?.ward_no;
+              if (wid !== undefined && wid !== null) {
+                setSelectedWardId(String(wid));
+              }
+            }
+          );
+        }
+
+        // Layer 6: Corporation boundaries
+        if (boundary && boundary.features.length > 0) {
+          map.addSource("gba-corporation", {
+            type: "geojson",
+            data: hasCoords(boundary)
+              ? (boundary as unknown as GeoJSON.FeatureCollection)
+              : `${window.location.origin}${relBase}/boundary.geojson`,
+          });
+          map.addLayer(
+            {
+              id: "gba-corporation-line",
+              type: "line",
+              source: "gba-corporation",
+              layout: {
+                visibility: showBoundaryLayer ? "visible" : "none",
+              },
+              paint: {
+                "line-color": "#080909",
+                "line-width": 2.4,
+              },
+            },
+            beforeLabelId
+          );
+        }
+
+        // Layer 7: Derived overlays (lake buffers) as dashed outlines labelled "derived"
+        if (overlays && overlays.features.length > 0) {
+          map.addSource("derived-overlays", {
+            type: "geojson",
+            data: hasCoords(overlays)
+              ? (overlays as unknown as GeoJSON.FeatureCollection)
+              : `${window.location.origin}${zonesRelBase}/overlays.geojson`,
+          });
+          map.addLayer(
+            {
+              id: "derived-overlays-line",
+              type: "line",
+              source: "derived-overlays",
+              layout: {
+                visibility: showOverlaysLayer ? "visible" : "none",
+              },
+              paint: {
+                "line-color": "#0b5c8f",
+                "line-dasharray": [4, 3],
+                "line-width": 1.6,
+              },
+            },
+            beforeLabelId
+          );
+          map.addLayer(
+            {
+              id: "derived-overlays-label",
+              type: "symbol",
+              source: "derived-overlays",
+              minzoom: 14,
+              layout: {
+                visibility: showOverlaysLayer ? "visible" : "none",
+                "symbol-placement": "line",
+                "text-field": "derived",
+                "text-font": ["Noto Sans Italic"],
+                "text-size": 10,
+              },
+              paint: {
+                "text-color": "#0b5c8f",
+                "text-halo-color": "#f5f3ed",
+                "text-halo-width": 1,
+              },
+            },
+            beforeLabelId
           );
         }
       });
@@ -573,38 +812,65 @@ export function ZoneMap({
     wards,
   ]);
 
+  // Fly map when flyToTarget changes
+  useEffect(() => {
+    const map = mapInstanceRef.current;
+    if (!map || !flyToTarget) return;
+    try {
+      map.flyTo({
+        center: [flyToTarget.lng, flyToTarget.lat],
+        zoom: flyToTarget.zoom,
+      });
+    } catch {
+      // Ignore in test environments
+    }
+  }, [flyToTarget]);
+
   // Synchronize layer visibility toggles and sheet overlay opacity with MapLibre instance
   useEffect(() => {
     const map = mapInstanceRef.current;
     if (!map || !map.isStyleLoaded()) return;
     const syncVis = (layerId: string, visible: boolean) => {
       if (map.getLayer(layerId)) {
-        map.setLayoutProperty(layerId, "visibility", visible ? "visible" : "none");
+        map.setLayoutProperty(
+          layerId,
+          "visibility",
+          visible ? "visible" : "none"
+        );
       }
     };
-    syncVis("roads-minor", showStreetsLayer);
-    syncVis("roads-medium", showStreetsLayer);
-    syncVis("roads-major", showStreetsLayer);
-    syncVis("gba-corporation-line", showBoundaryLayer);
-    syncVis("gba-zones-line", showGbaZonesLayer);
-    syncVis("gba-wards-fill", showWardsLayer);
-    syncVis("gba-wards-line", showWardsLayer);
-    syncVis("planning-districts-line", showPlanningDistrictsLayer);
-    syncVis("rmp-sheet-overlay-layer", showSheetOverlay);
     syncVis("master-plan-zones-fill", showZonesLayer);
     syncVis("master-plan-zones-line", showZonesLayer);
-    if (map.getLayer("rmp-sheet-overlay-layer")) {
-      map.setPaintProperty(
-        "rmp-sheet-overlay-layer",
-        "raster-opacity",
-        effectiveOverlayOpacity / 100
-      );
+    syncVis("master-plan-zones-label", showZonesLayer);
+    syncVis("uncovered-landuse-hatch", showZonesLayer);
+    syncVis("uncovered-landuse-label", showZonesLayer);
+    syncVis("planning-districts-line", showPlanningDistrictsLayer);
+    syncVis("gba-wards-fill", showWardsLayer);
+    syncVis("gba-wards-line", showWardsLayer);
+    syncVis("gba-wards-label", showWardsLayer);
+    syncVis("gba-corporation-line", showBoundaryLayer);
+    syncVis("derived-overlays-line", showOverlaysLayer);
+    syncVis("derived-overlays-label", showOverlaysLayer);
+
+    for (const sheet of effectiveSheets) {
+      const lyrId = `rmp-sheet-layer-${sheet.sheetId}`;
+      const isTargetSheet =
+        selectedSheetId === "all" || selectedSheetId === sheet.sheetId;
+      syncVis(lyrId, showSheetOverlay && isTargetSheet);
+      if (map.getLayer(lyrId)) {
+        map.setPaintProperty(
+          lyrId,
+          "raster-opacity",
+          effectiveOverlayOpacity / 100
+        );
+      }
     }
   }, [
     effectiveOverlayOpacity,
-    showStreetsLayer,
+    effectiveSheets,
+    selectedSheetId,
     showBoundaryLayer,
-    showGbaZonesLayer,
+    showOverlaysLayer,
     showPlanningDistrictsLayer,
     showSheetOverlay,
     showWardsLayer,
@@ -633,52 +899,81 @@ export function ZoneMap({
   const handleMyLocation = () => {
     if (typeof navigator !== "undefined" && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
         mapInstanceRef.current?.flyTo({
-          center: [pos.coords.longitude, pos.coords.latitude],
+          center: [lng, lat],
           zoom: 15,
         });
       });
     }
   };
 
-  const matchingWardsForSearch = useMemo(() => {
-    const q = placeWardQuery.trim().toLowerCase();
+  const searchResults = useMemo(() => {
+    const q = placeWardQuery.trim();
     if (!q) return [];
+    const msMatches = searchPlacesWithMiniSearch(miniSearch, q, 8);
+    if (msMatches.length > 0) return msMatches;
+    // Fallback substring match against loaded wards if place-index.json is still loading
+    const lower = q.toLowerCase();
     return sortedWards
       .filter((w) => {
         const wid = String(
           w.properties?.ward_id ?? w.properties?.ward_no ?? ""
         ).toLowerCase();
         const wname = String(w.properties?.ward_name ?? "").toLowerCase();
-        const zname = String(
-          w.properties?.zone_name ?? w.properties?.zone ?? ""
-        ).toLowerCase();
-        const ac = String(
-          w.properties?.Assembly ?? w.properties?.ac ?? ""
-        ).toLowerCase();
-        return (
-          wid === q ||
-          `ward ${wid}` === q ||
-          wname.includes(q) ||
-          zname.includes(q) ||
-          ac.includes(q)
-        );
+        return wid === lower || `ward ${wid}` === lower || wname.includes(lower);
       })
-      .slice(0, 8);
-  }, [placeWardQuery, sortedWards]);
+      .slice(0, 8)
+      .map((w) => {
+        const wid = String(w.properties?.ward_id ?? w.properties?.ward_no ?? "");
+        const wname = String(w.properties?.ward_name ?? "");
+        return {
+          id: `ward-${wid}`,
+          name: `Ward ${wid} · ${wname}`,
+          kind: "ward" as const,
+          categoryLabel: "Ward",
+          lat: (bounds.minLat + bounds.maxLat) / 2,
+          lng: (bounds.minLon + bounds.maxLon) / 2,
+          corporationId: jurisdictionId,
+          corporationName: jurisdictionId,
+          wardNumber: wid,
+          wardName: wname,
+          planningDistrict: null,
+          zoneCode: activeZones[0]?.properties.zone_code ?? null,
+          zoneLabel: activeZones[0]?.properties.zone_label ?? null,
+        };
+      });
+  }, [
+    activeZones,
+    bounds.maxLat,
+    bounds.maxLon,
+    bounds.minLat,
+    bounds.minLon,
+    jurisdictionId,
+    miniSearch,
+    placeWardQuery,
+    sortedWards,
+  ]);
+
+  const activeSheetMeta = useMemo(
+    () =>
+      effectiveSheets.find((s) => s.sheetId === selectedSheetId) ??
+      effectiveSheets[0] ??
+      null,
+    [effectiveSheets, selectedSheetId]
+  );
 
   return (
     <section
       aria-label="Interactive zoning and official boundary map"
-      className="flex flex-col border-b border-[#080909] bg-[#f5f3ed] p-6"
+      className="flex flex-col border border-[#080909] bg-[#f5f3ed] p-5"
     >
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
         <div>
-          <div className="dg-mono">
-            Street Map &amp; Official Boundaries
-          </div>
+          <div className="dg-mono">Street Map &amp; Official Boundaries</div>
           <h2 className="mt-0.5 text-lg font-semibold text-[#080909]">
-            Official Boundaries, Wards &amp; Land-Use Zones
+            Find rules by place, ward or zone
           </h2>
         </div>
 
@@ -686,13 +981,13 @@ export function ZoneMap({
           <div
             role="group"
             aria-label="Keyboard map navigation controls"
-            className="flex items-center gap-1"
+            className="flex flex-wrap items-center gap-1"
           >
             <button
               type="button"
               onClick={handleZoomIn}
               aria-label="Zoom in map"
-              className="border border-[#080909] bg-[#f5f3ed] px-2.5 py-1 font-mono text-xs text-[#080909] hover:bg-[#efeee8]"
+              className="min-h-[36px] min-w-[36px] border border-[#080909] bg-[#f5f3ed] px-2.5 py-1 font-mono text-xs text-[#080909] hover:bg-[#efeee8] focus:outline-2 focus:outline-[#080909]"
             >
               +
             </button>
@@ -700,14 +995,14 @@ export function ZoneMap({
               type="button"
               onClick={handleZoomOut}
               aria-label="Zoom out map"
-              className="border border-[#080909] bg-[#f5f3ed] px-2.5 py-1 font-mono text-xs text-[#080909] hover:bg-[#efeee8]"
+              className="min-h-[36px] min-w-[36px] border border-[#080909] bg-[#f5f3ed] px-2.5 py-1 font-mono text-xs text-[#080909] hover:bg-[#efeee8] focus:outline-2 focus:outline-[#080909]"
             >
               -
             </button>
             <button
               type="button"
               onClick={handleResetView}
-              className="border border-[#080909] bg-[#f5f3ed] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#080909] hover:bg-[#efeee8]"
+              className="min-h-[36px] border border-[#080909] bg-[#f5f3ed] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#080909] hover:bg-[#efeee8] focus:outline-2 focus:outline-[#080909]"
             >
               Reset View
             </button>
@@ -715,17 +1010,18 @@ export function ZoneMap({
               type="button"
               onClick={handleToggleFullscreen}
               aria-label="Full screen map"
-              className="border border-[#080909] bg-[#f5f3ed] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#080909] hover:bg-[#efeee8]"
+              className="min-h-[36px] border border-[#080909] bg-[#f5f3ed] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#080909] hover:bg-[#efeee8] focus:outline-2 focus:outline-[#080909]"
             >
               {isFullscreen ? "Exit Full Screen" : "Full Screen"}
             </button>
             <button
               type="button"
+              data-testid="map-my-location-btn"
               onClick={handleMyLocation}
               aria-label="My location"
-              className="border border-[#080909] bg-[#f5f3ed] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#080909] hover:bg-[#efeee8]"
+              className="min-h-[36px] border border-[#080909] bg-[#f5f3ed] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#080909] hover:bg-[#efeee8] focus:outline-2 focus:outline-[#080909]"
             >
-              My Location
+              My location
             </button>
           </div>
 
@@ -740,184 +1036,222 @@ export function ZoneMap({
               <span>Include Drafts</span>
             </label>
           )}
-
-          {selectedZoneCode && (
-            <button
-              type="button"
-              onClick={() => onSelectZone("")}
-              className="dg-pill"
-            >
-              Clear selection ({selectedZoneCode})
-            </button>
-          )}
         </div>
       </div>
 
-      {/* Local Place & Ward Search (Part 5: no external geocoding service) */}
+      {/* Part 2.3 Place search with MiniSearch */}
       <div className="mb-3">
         <label
           htmlFor="map-place-ward-search"
-          className="dg-mono block text-[10px] text-[#080909]"
+          className="dg-mono block text-[10.5px] text-[#080909]"
         >
-          Search by place name, neighbourhood, or ward name/number
+          Search by place, neighbourhood, road, landmark, or ward
         </label>
         <input
           id="map-place-ward-search"
+          data-testid="map-place-search-input"
           type="search"
           value={placeWardQuery}
           onChange={(e) => setPlaceWardQuery(e.target.value)}
-          placeholder="Search place name, neighbourhood, or ward number..."
-          className="mt-1 w-full border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 font-mono text-xs text-[#080909]"
+          placeholder="Search place name, neighbourhood, major road, or ward..."
+          className="mt-1 min-h-[44px] w-full border border-[#080909] bg-[#f5f3ed] px-3 py-2 font-mono text-xs text-[#080909] focus:outline-2 focus:outline-[#080909]"
         />
-        {matchingWardsForSearch.length > 0 && (
+        {searchResults.length > 0 && (
           <ul
             aria-label="Place and ward search suggestions"
+            data-testid="map-place-search-results"
             className="mt-1 divide-y divide-[#c8ccc0] border border-[#080909] bg-[#f5f3ed] font-mono text-xs"
           >
-            {matchingWardsForSearch.map((w, wIdx) => {
-              const wid = String(
-                w.properties?.ward_id ?? w.properties?.ward_no ?? ""
-              );
-              const wname = String(w.properties?.ward_name ?? "");
-              const zname = String(
-                w.properties?.zone_name ?? w.properties?.zone ?? ""
-              );
-              const corpKey = String(
-                w.properties?.Corporation ?? w.properties?.Corporatio ?? wIdx
-              );
-              return (
-                <li key={`${corpKey}-${wid}-${wname}`}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSelectedWardId(wid);
-                      setPlaceWardQuery("");
-                    }}
-                    className="flex w-full items-center justify-between px-3 py-1.5 text-left text-[#080909] hover:bg-[#efeee8]"
-                  >
-                    <span>
-                      <strong>{wname}</strong> · Ward {wid}
-                    </span>
-                    <span className="text-[10.5px] text-[#5b5e56]">{zname}</span>
-                  </button>
-                </li>
-              );
-            })}
+            {searchResults.map((entry) => (
+              <li key={entry.id}>
+                <button
+                  type="button"
+                  data-testid={`place-search-result-${entry.id}`}
+                  onClick={() => {
+                    if (entry.wardNumber) {
+                      setSelectedWardId(entry.wardNumber);
+                    }
+                    if (entry.zoneCode) {
+                      onSelectZone(entry.zoneCode);
+                    }
+                    onSelectPlaceEntry?.(entry);
+                    mapInstanceRef.current?.flyTo({
+                      center: [entry.lng, entry.lat],
+                      zoom: 15,
+                    });
+                    setPlaceWardQuery("");
+                  }}
+                  className="flex min-h-[44px] w-full flex-wrap items-center justify-between gap-2 px-3 py-2 text-left text-[#080909] hover:bg-[#efeee8] focus:outline-2 focus:outline-[#080909]"
+                >
+                  <span>
+                    <strong>{entry.name}</strong>
+                    {entry.wardName && entry.kind !== "ward"
+                      ? ` · Ward ${entry.wardNumber ?? ""} ${entry.wardName}`
+                      : ""}
+                  </span>
+                  <span className="text-[10.5px] text-[#5b5e56]">
+                    {entry.categoryLabel}
+                    {entry.zoneCode ? ` · ${entry.zoneLabel} (${entry.zoneCode})` : ""}
+                  </span>
+                </button>
+              </li>
+            ))}
           </ul>
         )}
       </div>
 
-      {/* Layer Toggles (Streets, Land-use zones, Wards, Corporations, Original sheet overlay) */}
+      {/* Part 2.2 Layer switch in plain words: Land-use zones, Wards, Corporations, Planning districts, Original map sheets */}
       <div
         role="group"
-        aria-label="Map layer toggles"
+        aria-label="Map layer switch"
+        data-testid="map-layer-switch"
         className="mb-3 flex flex-wrap items-center gap-4 border border-[#c8ccc0] bg-[#efeee8] px-3 py-2 font-mono text-[10.5px] uppercase tracking-[0.12em] text-[#080909]"
       >
         <span className="font-semibold">Layers:</span>
-        <label className="flex cursor-pointer items-center gap-1.5">
+        <label className="flex min-h-[36px] cursor-pointer items-center gap-1.5">
           <input
             type="checkbox"
-            checked={showStreetsLayer}
-            onChange={(e) => setShowStreetsLayer(e.target.checked)}
-            className="h-3 w-3 accent-[#080909]"
+            checked={showZonesLayer}
+            onChange={(e) => setShowZonesLayer(e.target.checked)}
+            className="h-3.5 w-3.5 accent-[#080909]"
           />
-          <span>Streets</span>
+          <span>Land-use zones</span>
         </label>
-        <label className="flex cursor-pointer items-center gap-1.5">
-          <input
-            type="checkbox"
-            checked={showBoundaryLayer}
-            onChange={(e) => setShowBoundaryLayer(e.target.checked)}
-            className="h-3 w-3 accent-[#080909]"
-          />
-          <span>Corporation ({boundary?.features?.length ?? 0})</span>
-        </label>
-        <label className="flex cursor-pointer items-center gap-1.5">
-          <input
-            type="checkbox"
-            checked={showGbaZonesLayer}
-            onChange={(e) => setShowGbaZonesLayer(e.target.checked)}
-            className="h-3 w-3 accent-[#080909]"
-          />
-          <span>GBA Zones ({gbaZones?.features?.length ?? 0})</span>
-        </label>
-        <label className="flex cursor-pointer items-center gap-1.5">
+        <label className="flex min-h-[36px] cursor-pointer items-center gap-1.5">
           <input
             type="checkbox"
             checked={showWardsLayer}
             onChange={(e) => setShowWardsLayer(e.target.checked)}
-            className="h-3 w-3 accent-[#080909]"
+            className="h-3.5 w-3.5 accent-[#080909]"
           />
-          <span>Wards ({wards?.features?.length ?? 0})</span>
+          <span>Wards</span>
         </label>
-        {planningDistricts && planningDistricts.features.length > 0 && (
-          <label className="flex cursor-pointer items-center gap-1.5">
-            <input
-              type="checkbox"
-              checked={showPlanningDistrictsLayer}
-              onChange={(e) => setShowPlanningDistrictsLayer(e.target.checked)}
-              className="h-3 w-3 accent-[#080909]"
-            />
-            <span>
-              Planning Districts ({planningDistricts.features.length})
-            </span>
-          </label>
-        )}
-        {activeZones.length > 0 && (
-          <label className="flex cursor-pointer items-center gap-1.5">
-            <input
-              type="checkbox"
-              checked={showZonesLayer}
-              onChange={(e) => setShowZonesLayer(e.target.checked)}
-              className="h-3 w-3 accent-[#080909]"
-            />
-            <span>Land-Use Zones ({activeZones.length})</span>
-          </label>
-        )}
-        {sheetOverlay && (
-          <>
-            <label className="flex cursor-pointer items-center gap-1.5">
-              <input
-                type="checkbox"
-                checked={showSheetOverlay}
-                onChange={(e) => setShowSheetOverlay(e.target.checked)}
-                className="h-3 w-3 accent-[#080909]"
-              />
-              <span>Sheet Overlay: {sheetOverlay.sheet}</span>
-            </label>
-            <div className="flex items-center gap-2 border-l border-[#c8ccc0] pl-3">
-              <label
-                htmlFor="map-sheet-opacity"
-                className="text-[10px] text-[#080909]"
-              >
-                Sheet Opacity: {effectiveOverlayOpacity}%
-              </label>
-              <input
-                id="map-sheet-opacity"
-                type="range"
-                min={0}
-                max={100}
-                value={effectiveOverlayOpacity}
-                onChange={(e) =>
-                  handleOverlayOpacityChange(Number(e.target.value))
-                }
-                className="w-24 accent-[#080909]"
-              />
-            </div>
-          </>
-        )}
+        <label className="flex min-h-[36px] cursor-pointer items-center gap-1.5">
+          <input
+            type="checkbox"
+            checked={showBoundaryLayer}
+            onChange={(e) => setShowBoundaryLayer(e.target.checked)}
+            className="h-3.5 w-3.5 accent-[#080909]"
+          />
+          <span>Corporations</span>
+        </label>
+        <label className="flex min-h-[36px] cursor-pointer items-center gap-1.5">
+          <input
+            type="checkbox"
+            checked={showPlanningDistrictsLayer}
+            onChange={(e) => setShowPlanningDistrictsLayer(e.target.checked)}
+            className="h-3.5 w-3.5 accent-[#080909]"
+          />
+          <span>Planning districts</span>
+        </label>
+        <label className="flex min-h-[36px] cursor-pointer items-center gap-1.5">
+          <input
+            type="checkbox"
+            data-testid="toggle-original-map-sheets"
+            checked={showSheetOverlay}
+            onChange={(e) => setShowSheetOverlay(e.target.checked)}
+            className="h-3.5 w-3.5 accent-[#080909]"
+          />
+          <span>Original map sheets</span>
+        </label>
         {overlays && overlays.features.length > 0 && (
-          <label className="flex cursor-pointer items-center gap-1.5">
+          <label className="flex min-h-[36px] cursor-pointer items-center gap-1.5">
             <input
               type="checkbox"
               checked={showOverlaysLayer}
               onChange={(e) => setShowOverlaysLayer(e.target.checked)}
-              className="h-3 w-3 accent-[#080909]"
+              className="h-3.5 w-3.5 accent-[#080909]"
             />
-            <span>Derived Overlays ({overlays.features.length})</span>
+            <span>Lake buffers (derived)</span>
           </label>
         )}
       </div>
+
+      {/* Part 2.5 Original map sheets selector, opacity slider (0 to 100%), and per-sheet accuracy */}
+      {effectiveSheets.length > 0 && (
+        <div
+          data-testid="map-sheets-panel"
+          className="mb-3 border border-[#c8ccc0] bg-[#efeee8] p-3 text-xs"
+        >
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <label
+                htmlFor="map-sheet-select"
+                className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-[#080909]"
+              >
+                Original map sheet:
+              </label>
+              <select
+                id="map-sheet-select"
+                data-testid="map-sheet-select"
+                value={selectedSheetId}
+                onChange={(e) => {
+                  setSelectedSheetId(e.target.value);
+                  setShowSheetOverlay(true);
+                }}
+                className="min-h-[36px] border border-[#080909] bg-[#f5f3ed] px-2.5 py-1 font-mono text-xs text-[#080909]"
+              >
+                <option value="all">
+                  All processed sheets ({effectiveSheets.length})
+                </option>
+                {effectiveSheets.map((s) => (
+                  <option key={s.sheetId} value={s.sheetId}>
+                    {s.sheetLabel}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <label
+                htmlFor="map-sheet-opacity"
+                className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-[#080909]"
+              >
+                Sheet opacity: {effectiveOverlayOpacity}%
+              </label>
+              <input
+                id="map-sheet-opacity"
+                data-testid="map-sheet-opacity-slider"
+                type="range"
+                min={0}
+                max={100}
+                value={effectiveOverlayOpacity}
+                onChange={(e) => {
+                  handleOverlayOpacityChange(Number(e.target.value));
+                  if (!showSheetOverlay) setShowSheetOverlay(true);
+                }}
+                className="w-28 accent-[#080909]"
+              />
+            </div>
+          </div>
+
+          {activeSheetMeta && (
+            <details className="mt-2 border-t border-[#c8ccc0] pt-2">
+              <summary className="inline-flex min-h-[36px] cursor-pointer items-center font-mono text-[10.5px] uppercase tracking-[0.1em] text-[#5b5e56] underline hover:text-[#080909]">
+                Sheet details &amp; measured placement accuracy (
+                {effectiveSheets.length} sheets)
+              </summary>
+              <ul className="mt-2 space-y-1.5 text-xs text-[#171917]">
+                {effectiveSheets.map((s) => (
+                  <li key={s.sheetId} className="dg-serif">
+                    <strong>{s.sheetLabel}</strong>:{" "}
+                    {formatMapZoneAccuracyPlainLine(
+                      s.roadMedianOffsetM,
+                      s.roadP90OffsetM
+                    )}{" "}
+                    <span className="font-mono text-[11px] text-[#5b5e56]">
+                      {formatMapSheetFitErrorDetail(
+                        s.gridFitRmseM,
+                        s.looRmseM
+                      )}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )}
+        </div>
+      )}
 
       {/* MapLibre GL JS + PMTiles Canvas */}
       <div className="relative w-full border border-[#080909] bg-[#efeee8]">
@@ -927,12 +1261,8 @@ export function ZoneMap({
             className="border-b border-[#080909] bg-[#efeee8] p-4 font-mono text-xs text-[#080909]"
           >
             Interactive WebGL map rendering is unavailable in this browser (
-            {webglError}). Use the Ward and Zone selector controls below or
-            download the GeoJSON layers directly from{" "}
-            <a href="/data" className="underline">
-              /data
-            </a>
-            .
+            {webglError}). Use the Place search, Ward selector, or Browse by
+            ward page.
           </div>
         )}
         <div
@@ -944,41 +1274,15 @@ export function ZoneMap({
         />
         <div
           aria-label="Map attribution"
+          data-testid="map-attribution"
           className="flex flex-wrap items-center justify-between gap-2 border-t border-[#c8ccc0] bg-[#f5f3ed] px-3 py-1.5 font-mono text-[10px] text-[#5b5e56]"
         >
-          <span>© OpenStreetMap contributors · Protomaps</span>
-          <span>Scale: 100 m – 1 km · Protomaps Light Style (Labels Above Zones)</span>
+          <span>Protomaps © OpenStreetMap (OpenStreetMap contributors)</span>
+          <span>Land-use zones at 60% opacity · Labels on top</span>
         </div>
       </div>
 
-      {/* One honest measured accuracy figure in plain words (Part 2) */}
-      {sheetOverlay && (
-        <p
-          role="status"
-          className="dg-serif mt-3 border border-[#c8ccc0] bg-[#efeee8] px-3 py-2 text-sm text-[#171917]"
-        >
-          Zones traced from the RMP 2015 Proposed Land Use sheet{" "}
-          <span className="font-semibold">{sheetOverlay.sheet}</span>.{" "}
-          {formatMapZoneAccuracyPlainLine(
-            sheetOverlay.road_median_offset_m,
-            sheetOverlay.road_p90_offset_m
-          )}{" "}
-          Derived by this project, not an official publication.
-        </p>
-      )}
-
-      {/* Plain line when no land-use zones are published yet (06-real-map-foundation.md §3) */}
-      {activeZones.length === 0 && (
-        <p
-          role="status"
-          className="dg-serif mt-3 border border-[#c8ccc0] bg-[#efeee8] px-3 py-2 text-sm text-[#171917]"
-        >
-          No master plan land-use zones are published yet; showing official
-          corporation, GBA zone, and ward boundaries.
-        </p>
-      )}
-
-      {/* Zone Legend & Selector Pills (plain legend names in primary layer) */}
+      {/* Zone Legend & Selector Pills */}
       {legendItems.length > 0 && (
         <div
           role="group"
@@ -993,16 +1297,18 @@ export function ZoneMap({
                 type="button"
                 aria-pressed={isSelected}
                 onClick={() => onSelectZone(item.zone_code)}
-                className={`dg-pill ${isSelected ? "dg-pill-active" : ""}`}
+                className={`dg-pill focus:outline-2 focus:outline-[#080909] ${
+                  isSelected ? "dg-pill-active" : ""
+                }`}
               >
-                {item.zone_label}
+                {item.zone_label} ({item.zone_code})
               </button>
             );
           })}
         </div>
       )}
 
-      {/* About this map expander: all technical details, ward inspector, and layer metadata */}
+      {/* About this map expander */}
       {(sortedWards.length > 0 || geoLayers.length > 0) && (
         <details
           data-testid="about-this-map-expander"
@@ -1024,7 +1330,7 @@ export function ZoneMap({
                     htmlFor="ward-inspector-select"
                     className="dg-mono block text-[10.5px] text-[#080909]"
                   >
-                    Inspect Official Ward ({sortedWards.length} Wards in Corporation)
+                    Inspect Official Ward ({sortedWards.length} Wards)
                   </label>
                   <select
                     id="ward-inspector-select"
@@ -1061,13 +1367,13 @@ export function ZoneMap({
                     rel="noopener noreferrer"
                     className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.12em] text-[#080909] underline"
                   >
-                    Official GBA Ward Delimitation Source ↗
+                    Official Ward Delimitation Source ↗
                   </a>
                 )}
               </div>
 
               {selectedWardFeature && (
-                <dl className="mt-3 grid grid-cols-1 gap-3 border-t border-[#c8ccc0] pt-3 text-xs sm:grid-cols-4">
+                <dl className="mt-3 grid grid-cols-1 gap-3 border-t border-[#c8ccc0] pt-3 text-xs sm:grid-cols-3">
                   <div>
                     <dt className="dg-mono text-[10px]">Ward No. &amp; Name</dt>
                     <dd className="mt-0.5 font-semibold text-[#080909]">
@@ -1077,14 +1383,12 @@ export function ZoneMap({
                           selectedWardFeature.properties?.ward_no ??
                           ""
                       )}{" "}
-                      · {String(selectedWardFeature.properties?.ward_name ?? "")}
-                      {selectedWardFeature.properties?.ward_name_kn
-                        ? ` (${String(selectedWardFeature.properties.ward_name_kn)})`
-                        : ""}
+                      ·{" "}
+                      {String(selectedWardFeature.properties?.ward_name ?? "")}
                     </dd>
                   </div>
                   <div>
-                    <dt className="dg-mono text-[10px]">GBA Zone</dt>
+                    <dt className="dg-mono text-[10px]">Zone</dt>
                     <dd className="mt-0.5 font-mono text-[#080909]">
                       {String(selectedWardFeature.properties?.zone ?? "")}
                       {selectedWardFeature.properties?.zone_name
@@ -1093,26 +1397,15 @@ export function ZoneMap({
                     </dd>
                   </div>
                   <div>
-                    <dt className="dg-mono text-[10px]">Assembly Constituency</dt>
+                    <dt className="dg-mono text-[10px]">
+                      Assembly Constituency
+                    </dt>
                     <dd className="mt-0.5 text-[#171917]">
                       {String(
                         selectedWardFeature.properties?.Assembly ??
                           selectedWardFeature.properties?.ac ??
                           "Not specified"
                       )}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="dg-mono text-[10px]">Source Attribution</dt>
-                    <dd className="mt-0.5 font-mono text-[11px]">
-                      <a
-                        href={wardsSourceHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[#080909] underline"
-                      >
-                        GBA Final Delimitation (Nov 2025) ↗
-                      </a>
                     </dd>
                   </div>
                 </dl>
@@ -1125,14 +1418,6 @@ export function ZoneMap({
               <div className="dg-mono mb-2">
                 Published Geospatial Layers ({geoLayers.length})
               </div>
-              {sheetOverlay && (
-                <p className="mb-2 font-mono text-xs text-[#5b5e56]">
-                  {formatMapSheetFitErrorDetail(
-                    sheetOverlay.rmse_m,
-                    sheetOverlay.loo_rmse_m
-                  )}
-                </p>
-              )}
               <div className="grid grid-cols-1 gap-2 text-xs sm:grid-cols-2">
                 {geoLayers.map((layer) => (
                   <div
@@ -1145,11 +1430,6 @@ export function ZoneMap({
                       </span>
                       <span className="uppercase text-[#5b5e56]">
                         {layer.derived ? "Derived" : "Official"}
-                        {layer.sheet_overlay?.road_median_offset_m
-                          ? ` · street offset ~${Math.round(layer.sheet_overlay.road_median_offset_m)} m (p90 ~${Math.round(layer.sheet_overlay.road_p90_offset_m ?? layer.sheet_overlay.road_median_offset_m)} m)`
-                          : layer.accuracy_m !== null
-                            ? ` · within about ${layer.accuracy_m} m`
-                            : ""}
                       </span>
                     </div>
                     <p className="dg-serif mt-0.5 text-xs text-[#5b5e56]">

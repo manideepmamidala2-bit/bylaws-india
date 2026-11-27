@@ -372,7 +372,39 @@ def run_apply_overrides(config: JurisdictionConfig, *, repo_root: Path | None = 
                 modified_ann_docs.add(doc_id)
                 applied_count += 1
 
-    # 6. Populate `applies_to_zones` and `clause-zone-tags.json` from `zone_applicability` annotations (PR 11 §2)
+    # 6. Apply human_verifications (two-Match threshold & mismatch review items, Part 4.3)
+    all_human_verifs: list[dict[str, Any]] = []
+    for _, override_data in parsed_override_files:
+        for hv in override_data.get("human_verifications") or []:
+            all_human_verifs.append(dict(hv))
+    if all_human_verifs:
+        from bylaws.verify_records import apply_human_verifications_to_records
+
+        params_path = processed_dir / "parameters.json"
+        params_payload = (
+            json.loads(params_path.read_text(encoding="utf-8"))
+            if params_path.is_file()
+            else None
+        )
+        hv_res = apply_human_verifications_to_records(
+            config,
+            all_human_verifs,
+            clause_trees=clause_trees,
+            parameters_payload=params_payload,
+            zones_payload=zones_payload,
+            repo_root=root,
+        )
+        modified_docs.update(hv_res["modified_docs"])
+        if hv_res["zones_modified"]:
+            zones_modified = True
+        if hv_res["params_modified"] and params_payload is not None:
+            validate_payload(params_payload, "parameters", source=str(params_path))
+            params_path.write_text(
+                json.dumps(params_payload, indent=2) + "\n", encoding="utf-8"
+            )
+        applied_count += int(hv_res["promoted_count"])
+
+    # 7. Populate `applies_to_zones` and `clause-zone-tags.json` from `zone_applicability` annotations (PR 11 §2)
     if config.visibility != "test":
         seen_tagged_pairs = {
             (str(t["clause_id"]), str(t.get("zone_code") or ""))

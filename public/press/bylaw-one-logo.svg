@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 72" width="360" height="72" role="img" aria-label="Bylaw One">
+  <rect width="360" height="72" fill="#f5f3ed" stroke="#080909" stroke-width="2" />
+  <rect x="14" y="14" width="10" height="44" fill="#ff6b52" />
+  <text x="38" y="45" font-family="system-ui, -apple-system, sans-serif" font-size="30" font-weight="700" fill="#080909" letter-spacing="-0.5">Bylaw One</text>
+</svg>

@@ -10,6 +10,7 @@ import {
 } from "@/lib/data";
 import { TopNav } from "@/components/TopNav";
 import { computeHeroDocumentAndBodyCounts } from "@/lib/plain-language";
+import { getSiteConfig } from "@/lib/site-config";
 
 export default async function AboutPage() {
   const manifest = await fetchManifest();
@@ -38,6 +39,7 @@ export default async function AboutPage() {
   const issuingAuthorities = Array.from(
     new Set((dataset?.documents ?? []).map((d) => d.issuing_authority))
   );
+  const siteCfg = getSiteConfig();
 
   return (
     <div className="min-h-screen bg-[#f5f3ed] text-[#080909]">
@@ -47,7 +49,10 @@ export default async function AboutPage() {
         active="about"
       />
 
-      <main className="mx-auto max-w-5xl space-y-14 px-5 py-10">
+      <main
+        data-dataset-id={dataset?.release?.dataset_id ?? manifest.dataset_id ?? ""}
+        className="mx-auto max-w-5xl space-y-14 px-5 py-10"
+      >
         {/* Header */}
         <header className="border-b border-[#c8ccc0] pb-8">
           <div className="dg-mono text-[#5b5e56]">About</div>
@@ -318,6 +323,47 @@ export default async function AboutPage() {
               ))}
             </ul>
           </details>
+        </section>
+
+        {/* 06 / Who runs Bylaw One */}
+        <section
+          id="who-runs-bylaw-one"
+          aria-labelledby="who-runs-heading"
+          data-testid="who-runs-bylaw-one"
+          className="space-y-4 border-t border-[#c8ccc0] pt-12"
+        >
+          <div className="dg-mono text-[#5b5e56]">
+            06 / Who runs Bylaw One
+          </div>
+          <h2
+            id="who-runs-heading"
+            className="text-2xl font-semibold tracking-tight text-[#080909]"
+          >
+            Stewardship &amp; permanent openness.
+          </h2>
+          <p className="dg-serif text-base leading-relaxed text-[#171917]">
+            Bylaw One is run by <strong>{siteCfg.organisationName}</strong>.
+            Every release follows five principles: open code and open data,
+            every rule and number traced to its official page, verbatim legal
+            text never rewritten, derived values explicitly labelled, and clear
+            notice that this site is an open reference rather than legal advice.
+          </p>
+          <p className="dg-serif text-base leading-relaxed text-[#171917]">
+            Everything released by Bylaw One — both source code (Apache-2.0) and
+            structured datasets, maps, and verifications (CC BY 4.0) — stays
+            open permanently. Colleges, practitioners, and civic groups can{" "}
+            <Link href="/join" className="text-[#080909] underline">
+              join the partner and advisory network
+            </Link>{" "}
+            or{" "}
+            <a
+              href={`mailto:${siteCfg.contactEmail}`}
+              className="text-[#080909] underline"
+            >
+              contact {siteCfg.contactEmail}
+            </a>
+            .
+          </p>
         </section>
       </main>
     </div>

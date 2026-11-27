@@ -1,0 +1,4 @@
+title = "Bylaw One Gitleaks Configuration"
+
+[extend]
+useDefault = true

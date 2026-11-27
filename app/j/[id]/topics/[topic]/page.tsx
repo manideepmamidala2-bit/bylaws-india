@@ -1,4 +1,5 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -20,6 +21,7 @@ import {
 import {
   CODE_SUBJECTS,
   PARAMETER_PLAIN_LABELS,
+  computeNewestInForceInstrumentDate,
   computeSubjectBandContinuityNotices,
   formatHumanDate,
   formatLandUseZoneGapPlainLine,
@@ -34,6 +36,7 @@ import {
   resolveCodeSubject,
   truncateAtWordBoundary,
 } from "@/lib/plain-language";
+import { ReportProblemLink } from "@/components/ReportProblemLink";
 
 interface TopicDetailPageProps {
   params: Promise<{ id: string; topic: string }>;
@@ -63,6 +66,27 @@ export async function generateStaticParams() {
   return paramsList;
 }
 
+export async function generateMetadata({
+  params,
+}: TopicDetailPageProps): Promise<Metadata> {
+  const { id, topic } = await params;
+  const subj = resolveCodeSubject(topic);
+  const title = `${subj?.title ?? topic} · Bylaw One`;
+  const desc =
+    subj?.summary ?? `Governing rules and exact page citations for ${topic}.`;
+  return {
+    title,
+    description: desc,
+    openGraph: {
+      title,
+      description: desc,
+      images: [
+        `/api/og?title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent(desc)}&kicker=${encodeURIComponent(`Bylaw One · ${id}`)}`,
+      ],
+    },
+  };
+}
+
 interface CleanSubjectParameterRow {
   key: string;
   ruleLabel: string;
@@ -84,6 +108,29 @@ interface CleanSubjectParameterRow {
   statusLabel: string | null;
   isCorporationSpecific: boolean;
   parameterIds: string[];
+  verificationLabel: string | null;
+}
+
+function formatRecordVerificationsCredit(rec: {
+  verification?: string | null;
+  verified_by?: string | null;
+  verifications?: ReadonlyArray<{
+    verifier_name: string;
+    institution: string;
+    verified_at: string;
+    verdict: string;
+  }> | null;
+}): string | null {
+  if (rec.verification !== "human_verified") return null;
+  const matches = (rec.verifications ?? []).filter(
+    (v) => v.verdict === "match"
+  );
+  if (matches.length > 0) {
+    return `Verified by ${matches
+      .map((v) => `${v.verifier_name}, ${v.institution}, ${v.verified_at}`)
+      .join("; ")}`;
+  }
+  return rec.verified_by ?? "Verified by a person";
 }
 
 function buildDeduplicatedSubjectParameterRows(
@@ -192,6 +239,7 @@ function buildDeduplicatedSubjectParameterRows(
       statusLabel: computeOlderStatusLabel(first),
       isCorporationSpecific: isRecordCorporationSpecific(first),
       parameterIds: group.map((g) => g.parameter_id),
+      verificationLabel: formatRecordVerificationsCredit(first),
     });
   }
 
@@ -231,6 +279,7 @@ function buildDeduplicatedSubjectParameterRows(
       statusLabel: computeOlderStatusLabel(rec),
       isCorporationSpecific: isRecordCorporationSpecific(rec),
       parameterIds: [rec.parameter_id],
+      verificationLabel: formatRecordVerificationsCredit(rec),
     });
   }
 
@@ -699,11 +748,11 @@ export default async function TopicDetailPage({
   const totalRelatedProvisionsCount = relatedProvisions.length;
   const visibleOlderRules = [
     ...corpOlderRules,
-    ...sharedOlderRules.slice(0, 6),
+    ...sharedOlderRules.slice(0, 3),
   ];
   const visibleRelatedProvisions = [
     ...corpRelatedProvisions,
-    ...sharedRelatedProvisions.slice(0, 6),
+    ...sharedRelatedProvisions.slice(0, 3),
   ];
 
   // Governing parameter table rows for this subject
@@ -761,7 +810,7 @@ export default async function TopicDetailPage({
     docTitleById,
     docMetaById,
     subjectMeta.zoningGoverned
-  ).slice(0, 8);
+  ).slice(0, 7);
 
   // Determine whether any governing rule or provision on this subject differs for the selected City Corporation
   const corporationDiffCount = isChildCorporation
@@ -1041,7 +1090,14 @@ export default async function TopicDetailPage({
                 <code className="text-[#080909]">
                   {baseDocId}:{node.eid}
                 </code>{" "}
-                · Checked by rule, not yet by a person
+                ·{" "}
+                {formatRecordVerificationsCredit(node) ??
+                  "Checked by rule, not yet by a person"}
+              </div>
+              <div className="pt-1">
+                <ReportProblemLink
+                  pagePath={`/j/${jurisdiction.id}/topics/${subjectMeta?.slug ?? ""}`}
+                />
               </div>
             </div>
           </details>
@@ -1082,9 +1138,19 @@ export default async function TopicDetailPage({
             )}
           </div>
 
-          <h1 className="mt-2 text-3xl font-semibold tracking-tight text-[#080909] md:text-4xl">
-            {subjectMeta.title}
-          </h1>
+          <div className="mt-2 flex flex-wrap items-baseline justify-between gap-2">
+            <h1 className="text-3xl font-semibold tracking-tight text-[#080909] md:text-4xl">
+              {subjectMeta.title}
+            </h1>
+            {computeNewestInForceInstrumentDate(documents) && (
+              <span
+                data-testid="current-as-of-date"
+                className="font-mono text-xs uppercase tracking-[0.12em] text-[#5b5e56]"
+              >
+                Current as of {computeNewestInForceInstrumentDate(documents)}
+              </span>
+            )}
+          </div>
           <p className="dg-serif mt-2 text-base leading-relaxed text-[#171917]">
             {subjectMeta.summary}
           </p>
@@ -1193,7 +1259,12 @@ export default async function TopicDetailPage({
                 Derived by this site · Governing table values (
                 {cleanParameterRows.length} distinct rules)
               </div>
-              <div className="overflow-x-auto">
+              <div
+                tabIndex={0}
+                role="region"
+                aria-label={`${subjectMeta.title} governing rules table`}
+                className="overflow-x-auto"
+              >
                 <table
                   data-testid="subject-parameter-table"
                   className="dg-table"
@@ -1257,21 +1328,34 @@ export default async function TopicDetailPage({
                               Details
                             </summary>
                             <span className="mt-1 block space-y-1 font-mono text-[10px] text-[#5b5e56]">
-                              <span className="block">
-                                {row.tableLabel ? `${row.tableLabel} · ` : ""}
-                                {row.rawRowHeader ? `${row.rawRowHeader} · ` : ""}
-                                {row.rawCellText} ({row.parameterIds[0]})
-                              </span>
-                              {row.note && (
-                                <span
-                                  data-testid="parameter-row-note"
-                                  className="block text-[#080909]"
-                                >
-                                  {row.note}
+                                <span className="block">
+                                  {row.tableLabel ? `${row.tableLabel} · ` : ""}
+                                  {row.rawRowHeader ? `${row.rawRowHeader} · ` : ""}
+                                  {row.rawCellText} ({row.parameterIds[0]})
                                 </span>
-                              )}
-                            </span>
-                          </details>
+                                {row.verificationLabel && (
+                                  <span
+                                    data-testid="parameter-verified-by"
+                                    className="block font-semibold text-[#080909]"
+                                  >
+                                    {row.verificationLabel}
+                                  </span>
+                                )}
+                                {row.note && (
+                                  <span
+                                    data-testid="parameter-row-note"
+                                    className="block text-[#080909]"
+                                  >
+                                    {row.note}
+                                  </span>
+                                )}
+                                <span className="block pt-1">
+                                  <ReportProblemLink
+                                    pagePath={`/j/${jurisdiction.id}/topics/${subjectMeta.slug}`}
+                                  />
+                                </span>
+                              </span>
+                            </details>
                         </td>
                       </tr>
                     ))}

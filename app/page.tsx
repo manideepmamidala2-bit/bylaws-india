@@ -22,6 +22,7 @@ import {
 import {
   CODE_SUBJECTS,
   computeHeroDocumentAndBodyCounts,
+  computeNewestInForceInstrumentDate,
   formatHumanDate,
   formatParameterConditionsPlain,
   formatParameterValuePlain,
@@ -462,13 +463,22 @@ export function buildHomeFarStorySteps(
 }
 
 export default async function HomePage() {
-  const { visibleJurisdictions } = await getHomePageProps();
+  const { manifest, visibleJurisdictions } = await getHomePageProps();
   const parentJurisdiction =
     visibleJurisdictions.find((j) =>
       visibleJurisdictions.some((child) => child.parent === j.id)
     ) ?? visibleJurisdictions[0];
 
   const targetJurId = parentJurisdiction?.id ?? "";
+  const partialZoneCorp = visibleJurisdictions.find(
+    (j) =>
+      j.parent === targetJurId &&
+      j.releases.some(
+        (rel) =>
+          Boolean(rel.files?.planning_districts) && Boolean(rel.files?.zones)
+      )
+  );
+  const mapTargetJurId = partialZoneCorp?.id ?? targetJurId;
   const cityLabel =
     parentJurisdiction?.aliases?.[0] ?? parentJurisdiction?.name ?? "City";
   const regionLabel =
@@ -488,6 +498,7 @@ export default async function HomePage() {
   const allDocuments = dataset?.documents ?? [];
   const { documentCount, bodyCount } =
     computeHeroDocumentAndBodyCounts(allDocuments);
+  const currentAsOfDate = computeNewestInForceInstrumentDate(allDocuments);
 
   const farSteps = buildHomeFarStorySteps(
     dataset?.clauses ?? [],
@@ -541,14 +552,27 @@ export default async function HomePage() {
     <div className="bg-[#f5f3ed] text-[#080909]">
       <TopNav jurisdictionId={targetJurId} active="home" />
 
-      <main className="mx-auto max-w-5xl px-5">
+      <main
+        data-dataset-id={dataset?.release?.dataset_id ?? manifest.dataset_id ?? ""}
+        className="mx-auto max-w-5xl px-5"
+      >
         {/* Hero */}
         <section
           aria-labelledby="hero-heading"
           className="border-b border-[#c8ccc0] py-14 md:py-20"
         >
-          <div className="dg-mono text-[#5b5e56]">
-            Bylaw One · {regionLabel}
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <div className="dg-mono text-[#5b5e56]">
+              Bylaw One · {regionLabel}
+            </div>
+            {currentAsOfDate && (
+              <span
+                data-testid="current-as-of-date"
+                className="font-mono text-xs uppercase tracking-[0.12em] text-[#5b5e56]"
+              >
+                Current as of {currentAsOfDate}
+              </span>
+            )}
           </div>
           <h1
             id="hero-heading"
@@ -563,6 +587,18 @@ export default async function HomePage() {
             {documentCount} official documents from {bodyCount} bodies, joined
             into one readable code. Every rule traced to its page.
           </p>
+          <p
+            data-testid="hero-pilot-line"
+            className="dg-serif mt-3 max-w-2xl text-base text-[#080909]"
+          >
+            <Link
+              href="/pilot"
+              className="text-[#080909] underline decoration-[#080909] underline-offset-4 hover:decoration-2"
+            >
+              A working pilot for {cityLabel}. Built in the open. Looking for
+              partners.
+            </Link>
+          </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link
@@ -570,6 +606,13 @@ export default async function HomePage() {
               className="inline-flex min-h-[44px] items-center border border-[#080909] bg-[#080909] px-5 py-2.5 font-mono text-xs uppercase tracking-[0.12em] text-[#f5f3ed] no-underline hover:bg-[#171917]"
             >
               Read the code
+            </Link>
+            <Link
+              href={`/j/${mapTargetJurId}`}
+              data-testid="hero-find-rules-by-place"
+              className="inline-flex min-h-[44px] items-center border border-[#080909] bg-[#f5f3ed] px-5 py-2.5 font-mono text-xs uppercase tracking-[0.12em] text-[#080909] no-underline hover:bg-[#efeee8]"
+            >
+              Find rules by place
             </Link>
             <Link
               href={`/j/${targetJurId}/timeline`}

@@ -32,7 +32,7 @@ export function TopNav({ jurisdictionId, active }: TopNavProps) {
   const prefix = targetJurId ? `/j/${targetJurId}` : "";
 
   const navItems: Array<{
-    key: "code" | "changed" | "about";
+    key: "code" | "map" | "changed" | "about";
     label: string;
     href: string;
     isCurrent: boolean;
@@ -42,6 +42,12 @@ export function TopNav({ jurisdictionId, active }: TopNavProps) {
       label: "The code",
       href: prefix ? `${prefix}/topics` : "/data",
       isCurrent: active === "topics" || active === "documents",
+    },
+    {
+      key: "map",
+      label: "Map",
+      href: prefix || "/data",
+      isCurrent: active === "map",
     },
     {
       key: "changed",

@@ -50,8 +50,13 @@ Per **Rule R4 (Permissive Licensing)**, every direct dependency in `pipeline/pyp
 
 | Package | SPDX Licence | Purpose |
 |---------|--------------|---------|
+| `@mapbox/vector-tile` | `BSD-3-Clause` | Mapbox Vector Tile decoding for build-time PMTiles place-name extraction |
+| `@protomaps/basemaps` | `BSD-3-Clause` | Official Protomaps `light` flavor MapLibre GL style layers |
+| `@vercel/analytics` | `Apache-2.0` | Cookieless Vercel Web Analytics with zero personal data collection |
 | `maplibre-gl` | `BSD-3-Clause` | Interactive WebGL vector map rendering engine |
+| `minisearch` | `MIT` | Lightweight fuzzy and prefix client-side place and ward search engine |
 | `next` | `MIT` | React App Router framework |
+| `pbf` | `BSD-3-Clause` | Protocol Buffer decoder used with `@mapbox/vector-tile` |
 | `pmtiles` | `BSD-3-Clause` | Single-file HTTP byte-range vector tile protocol for Protomaps basemaps |
 | `react` | `MIT` | UI component library |
 | `react-dom` | `MIT` | DOM renderer for React |
@@ -66,6 +71,7 @@ Per **Rule R4 (Permissive Licensing)**, every direct dependency in `pipeline/pyp
 | `@testing-library/jest-dom` | `MIT` | DOM assertion matchers for Vitest |
 | `@testing-library/react` | `MIT` | React component testing utilities |
 | `@types/node` | `MIT` | TypeScript definitions for Node.js |
+| `@types/pbf` | `MIT` | TypeScript definitions for `pbf` |
 | `@types/react` | `MIT` | TypeScript definitions for React |
 | `@types/react-dom` | `MIT` | TypeScript definitions for React DOM |
 | `@vitejs/plugin-react` | `MIT` | Vite React plugin for Vitest |

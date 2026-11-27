@@ -1,16 +1,20 @@
 cff-version: 1.2.0
-title: "Structured Building Bylaws"
-message: "If you use this software or dataset, please cite it using the metadata from this file."
+title: "Bylaw One: Open, Page-Traced Building Rules and Zoning Dataset"
+message: "If you use Bylaw One software or datasets, please cite it using the metadata from this file."
 type: dataset
 authors:
-  - name: "Structured Building Bylaws Contributors"
+  - name: "Bylaw One Contributors"
 repository-code: "https://github.com/manideepmamidala2-bit/bylaws-india"
+url: "https://bylaws-india.vercel.app"
 license: Apache-2.0
-version: "0.1.0"
-date-released: "2026-11-23"
+version: "4.0.0"
+date-released: "2026-11-26"
 keywords:
   - building-bylaws
-  - zoning
+  - zoning-regulations
+  - bengaluru
   - india
   - urban-planning
+  - legal-informatics
   - open-data
+

@@ -582,6 +582,17 @@ class OcrCorrection(BaseModel):
     reason: constr(min_length=1)
 
 
+class PersonVerificationEntry(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    verifier_name: constr(min_length=1)
+    institution: constr(min_length=1)
+    verified_at: constr(min_length=1)
+    verdict: Literal["match", "mismatch", "cant_tell"]
+    note: str | None = None
+
+
 class ClauseOutlineEntry(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -757,6 +768,20 @@ class MultiPolygonGeometry(BaseModel):
     coordinates: list[Coordinate] = Field(..., min_length=1)
 
 
+class HumanVerificationOverride(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    task_id: str | None = None
+    record_id: constr(min_length=1)
+    record_kind: Literal["provision", "parameter", "zone"]
+    verifier_name: constr(min_length=1)
+    institution: constr(min_length=1)
+    verified_at: constr(min_length=1)
+    verdict: Literal["match", "mismatch", "cant_tell"]
+    note: str | None = None
+
+
 class UnreadableFragmentOverride(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -815,6 +840,7 @@ class ClauseFix(BaseModel):
         "parent_eid",
         "verification",
         "verified_by",
+        "verifications",
         "legal_status",
         "effective_from",
         "language",
@@ -941,6 +967,7 @@ class JurisdictionOverrides(BaseModel):
     ocr_corrections: list[OcrCorrectionOverride] | None = None
     unreadable_fragments: list[UnreadableFragmentOverride] | None = None
     table_overrides: list[TableOverride] | None = None
+    human_verifications: list[HumanVerificationOverride] | None = None
 
 
 class KnownGap(BaseModel):
@@ -1115,6 +1142,15 @@ class ReleaseDrafts(BaseModel):
     outlines: list[constr(min_length=1)] | None = None
 
 
+class ReleaseVerifierCredit(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    verifier_name: constr(min_length=1)
+    institution: constr(min_length=1)
+    verified_count: conint(ge=1) | None = 1
+
+
 class ReleaseEntry(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -1131,6 +1167,7 @@ class ReleaseEntry(BaseModel):
     files: ReleaseFiles | None
     drafts: ReleaseDrafts | None
     changelog: str
+    verifiers: list[ReleaseVerifierCredit] | None = Field([], validate_default=True)
 
 
 class ConsolidatedGenerated(BaseModel):
@@ -1401,6 +1438,17 @@ class ParametersGenerated(BaseModel):
     generated_at: constr(min_length=10)
 
 
+class ParameterVerificationEntry(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    verifier_name: constr(min_length=1)
+    institution: constr(min_length=1)
+    verified_at: constr(min_length=1)
+    verdict: Literal["match", "mismatch", "cant_tell"]
+    note: str | None = None
+
+
 class NumericInterval(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -1482,6 +1530,10 @@ class ParameterRecord(BaseModel):
     method: Literal["table_rule_parser", "clause_rule_parser", "override_curated"]
     confidence: confloat(ge=0.0, le=1.0)
     verification: Literal["unverified", "machine_checked", "human_verified"]
+    verified_by: str | None = None
+    verifications: list[ParameterVerificationEntry] | None = Field(
+        [], validate_default=True
+    )
     note: str | None = None
 
 
@@ -1600,6 +1652,9 @@ class ClauseNode(BaseModel):
     applies_to_zones: list[constr(min_length=1)]
     verification: Literal["unverified", "machine_checked", "human_verified"]
     verified_by: str | None = None
+    verifications: list[PersonVerificationEntry] | None = Field(
+        [], validate_default=True
+    )
     omitted: bool | None = False
     change_mark: ClauseChangeMark | None = None
     summary_by_site: str | None = None

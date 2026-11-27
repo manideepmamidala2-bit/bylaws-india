@@ -1,11 +1,21 @@
 # Project root marker for Structured Building Bylaws (resolved by pipeline/bylaws/root.py)
 [project]
 name = "bylaws-india"
-schema_version = "1.3"
+schema_version = "1.4"
 schemas_dir = "schemas"
 jurisdictions_dir = "jurisdictions"
 data_dir = "data"
 public_data_dir = "public/data"
+
+[contact]
+# Owner placeholder: set the public contact email before making the repository public
+email = "contact@example.org"
+
+[organisation]
+# Owner placeholder: set the steward organisation name before launch
+name = "[Owner's Organisation]"
+github_repo = "https://github.com/manideepmamidala2-bit/bylaws-india"
+site_url = "https://bylaws-india.vercel.app"
 
 [provenance]
 pdf_creator_producer_denylist = [

@@ -34,7 +34,13 @@ from bylaws import (
     structure as structure_mod,
 )
 from bylaws import (
+    tasks as tasks_mod,
+)
+from bylaws import (
     validate as validate_mod,
+)
+from bylaws import (
+    verify_records as verify_records_mod,
 )
 from bylaws.config import (
     ConfigValidationError,
@@ -355,6 +361,101 @@ def run_all_cmd(
             ) from exc
 
     click.echo(f"[run-all] Completed all 8 stages for '{config.id}'.")
+
+
+@main.group("tasks")
+def tasks_group() -> None:
+    """Create and manage workshop verification task sets."""
+
+
+@tasks_group.command("create")
+@require_jurisdiction_option
+@click.option(
+    "--count",
+    "count",
+    type=int,
+    required=True,
+    help="Number of verification tasks to select.",
+)
+@click.option(
+    "--subject",
+    "subject",
+    type=str,
+    required=True,
+    help="Subject slug or topic ID (e.g. far, setbacks, ground-coverage).",
+)
+@click.option(
+    "--seed",
+    "seed",
+    type=int,
+    required=True,
+    help="Deterministic random seed for task sampling.",
+)
+@click.option(
+    "--task-set-id",
+    "task_set_id",
+    type=str,
+    default=None,
+    help="Optional custom task-set identifier.",
+)
+@click.option(
+    "--output-dir",
+    "output_dir",
+    type=click.Path(file_okay=False, dir_okay=True, path_type=str),
+    default=None,
+    help="Optional output directory for .html, .csv, and .json artifacts.",
+)
+def tasks_create_cmd(
+    jurisdiction: str,
+    count: int,
+    subject: str,
+    seed: int,
+    task_set_id: str | None,
+    output_dir: str | None,
+) -> None:
+    """Create a printable HTML task sheet, CSV, and JSON manifest for a workshop."""
+    from pathlib import Path
+
+    config = _load_or_abort(jurisdiction)
+    out_path = Path(output_dir).resolve() if output_dir else None
+    res = tasks_mod.create_verification_task_set(
+        config,
+        count=count,
+        subject=subject,
+        seed=seed,
+        task_set_id=task_set_id,
+        output_dir=out_path,
+    )
+    click.echo(
+        f"[tasks:create] Created task set '{res['task_set_id']}' ({res['count']} tasks) -> "
+        f"HTML: {res['html_path']}, CSV: {res['csv_path']}, JSON: {res['json_path']}"
+    )
+
+
+@main.group("verify")
+def verify_group() -> None:
+    """Import and inspect workshop verification responses."""
+
+
+@verify_group.command("import")
+@click.argument(
+    "csv_file",
+    type=click.Path(exists=True, file_okay=True, dir_okay=False, path_type=str),
+)
+@require_jurisdiction_option
+def verify_import_cmd(csv_file: str, jurisdiction: str) -> None:
+    """Import a completed workshop verification CSV into overrides (two-Match threshold)."""
+    from pathlib import Path
+
+    config = _load_or_abort(jurisdiction)
+    res = verify_records_mod.import_verifications_csv(
+        config,
+        Path(csv_file).resolve(),
+    )
+    click.echo(
+        f"[verify:import] Imported {res['imported_count']} verification(s) for '{config.id}' "
+        f"(promoted to human_verified: {res['promoted_count']}, open review items: {res['mismatch_count']})."
+    )
 
 
 if __name__ == "__main__":

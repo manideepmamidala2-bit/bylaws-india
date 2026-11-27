@@ -1,12 +1,15 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   fetchJurisdictionDataset,
   fetchManifest,
   fetchMapVerificationMetrics,
+  fetchParameters,
   getVisibleJurisdictions,
   partitionClauseVersions,
+  readPublishedJson,
   type ZoneGeometry,
 } from "@/lib/data";
 import { TopNav } from "@/components/TopNav";
@@ -16,10 +19,17 @@ import {
 } from "@/components/CorporationSelector";
 import { AreaExplorerClient } from "@/components/AreaExplorerClient";
 import {
+  computeNewestInForceInstrumentDate,
   formatLandUseZoneGapPlainLine,
   formatMapSheetFitErrorDetail,
   formatMapZoneAccuracyPlainLine,
+  formatMapZoneCoveragePlainLine,
 } from "@/lib/plain-language";
+import {
+  buildZoneRulesSummaryMap,
+  extractByelaw14GovernanceInfo,
+} from "@/lib/zone-rules";
+import type { PlaceIndexPayload } from "@/lib/place-search";
 
 interface JurisdictionMapPageProps {
   params: Promise<{ id: string }>;
@@ -32,13 +42,35 @@ export async function generateStaticParams() {
   return manifest.jurisdictions.map((j) => ({ id: j.id }));
 }
 
+export async function generateMetadata({
+  params,
+}: JurisdictionMapPageProps): Promise<Metadata> {
+  const { id } = await params;
+  const dataset = await fetchJurisdictionDataset(id).catch(() => null);
+  const name = dataset?.jurisdiction.name ?? id;
+  const title = `Map · ${name} · Bylaw One`;
+  const desc = `Interactive map of official boundaries, wards, and master plan land-use zones with governing rules by zone for ${name}.`;
+  return {
+    title,
+    description: desc,
+    openGraph: {
+      title,
+      description: desc,
+      images: [
+        `/api/og?title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent(desc)}`,
+      ],
+    },
+  };
+}
+
 export default async function JurisdictionMapPage({
   params,
 }: JurisdictionMapPageProps) {
   const { id } = await params;
-  const [dataset, manifest] = await Promise.all([
+  const [dataset, manifest, parametersPayload] = await Promise.all([
     fetchJurisdictionDataset(id),
     fetchManifest(),
+    fetchParameters(id),
   ]);
   if (!dataset) {
     notFound();
@@ -49,6 +81,9 @@ export default async function JurisdictionMapPage({
     (allVisible.some((j) => j.parent === dataset.jurisdiction.id)
       ? dataset.jurisdiction.id
       : null);
+  const parentJurisdiction = rootParentId
+    ? allVisible.find((j) => j.id === rootParentId) ?? null
+    : null;
   const gbaJurisdictions = rootParentId
     ? allVisible.filter(
         (j) => j.id === rootParentId || j.parent === rootParentId
@@ -62,12 +97,31 @@ export default async function JurisdictionMapPage({
           Boolean(rel.files?.planning_districts) && Boolean(rel.files?.zones)
       )
   );
+
+  const fallbackZoneDataset =
+    dataset.zones.features.length === 0 &&
+    partialZoneCorp &&
+    partialZoneCorp.id !== id
+      ? await fetchJurisdictionDataset(partialZoneCorp.id).catch(() => null)
+      : null;
+
   const landUseZoneGapLine = formatLandUseZoneGapPlainLine(
     partialZoneCorp?.name ?? null
   );
   const verificationMetrics = await fetchMapVerificationMetrics(
     id,
-    partialZoneCorp?.id ?? null
+    partialZoneCorp?.id ?? null,
+    rootParentId
+  );
+
+  const regionName =
+    parentJurisdiction?.aliases?.[2] ??
+    parentJurisdiction?.name ??
+    dataset.jurisdiction.name;
+  const coverageStatement = formatMapZoneCoveragePlainLine(
+    verificationMetrics?.coveragePctOfParent ?? null,
+    regionName,
+    partialZoneCorp?.name ?? null
   );
 
   const {
@@ -83,13 +137,32 @@ export default async function JurisdictionMapPage({
     planningDistricts,
     overlays,
     geoLayers,
+    clauseZoneTags,
     declarations,
   } = dataset;
+
+  const effectiveZones =
+    zones.features.length > 0
+      ? zones
+      : fallbackZoneDataset?.zones ?? zones;
+  const effectiveOverlays =
+    (overlays?.features?.length ?? 0) > 0
+      ? overlays
+      : fallbackZoneDataset?.overlays ?? overlays;
+  const effectiveClauseZoneTags =
+    (clauseZoneTags?.tags?.length ?? 0) > 0
+      ? clauseZoneTags?.tags ?? []
+      : fallbackZoneDataset?.clauseZoneTags?.tags ?? [];
+  const zonesSourceJurisdictionId =
+    zones.features.length > 0
+      ? jurisdiction.id
+      : partialZoneCorp?.id ?? jurisdiction.id;
 
   const plainCorpName = formatPlainCorporationName(
     jurisdiction.id,
     jurisdiction.name
   );
+  const currentAsOfDate = computeNewestInForceInstrumentDate(documents);
 
   if (!release) {
     return (
@@ -130,9 +203,43 @@ export default async function JurisdictionMapPage({
   const draftDocsCount = documents.filter(
     (d) => d.legal_status === "draft"
   ).length;
-  const activeZonesCount = zones.features.filter(
+  const activeZonesCount = effectiveZones.features.filter(
     (z) => !z.properties.superseded_by && !z.properties.record_superseded_by
   ).length;
+
+  const zoneCodesWithLabels = new Map<string, string>();
+  for (const z of effectiveZones.features) {
+    if (!z.properties.superseded_by && !z.properties.record_superseded_by) {
+      zoneCodesWithLabels.set(z.properties.zone_code, z.properties.zone_label);
+    }
+  }
+
+  const corpNameById = new Map<string, string>(
+    allVisible.map((j) => [j.id, formatPlainCorporationName(j.id, j.name)])
+  );
+
+  const zoneRulesByCode = buildZoneRulesSummaryMap({
+    jurisdictionId: jurisdiction.id,
+    zoneCodesWithLabels,
+    parameterRecords: parametersPayload?.records ?? [],
+    clauseZoneTags: effectiveClauseZoneTags,
+    clauses: activeClauses,
+    documents,
+    corpNameById,
+  });
+
+  const byelaw14Info = extractByelaw14GovernanceInfo(
+    activeClauses,
+    documents,
+    jurisdiction.id
+  );
+
+  const placeIndexPayload = await readPublishedJson<PlaceIndexPayload>(
+    `/data/${jurisdiction.id}/place-index.json`
+  ).catch(() => null);
+  const ssrInitialPlaces = (placeIndexPayload?.places ?? [])
+    .filter((p) => p.kind === "locality" && p.zoneCode)
+    .slice(0, 12);
 
   // Strip heavy vertex coordinate arrays from SSR props so HTML stays <= 300 KB;
   // ZoneMap loads the full GeoJSON geometry on the client from /data/<id>/<version>/*.geojson.
@@ -158,7 +265,7 @@ export default async function JurisdictionMapPage({
         }
       : null;
   const seenZoneCode = new Set<string>();
-  const ssrZoneFeatures = zones.features
+  const ssrZoneFeatures = effectiveZones.features
     .filter((z) => {
       const k = z.properties.zone_code;
       if (seenZoneCode.has(k) && seenZoneCode.size >= 12) return false;
@@ -208,7 +315,7 @@ export default async function JurisdictionMapPage({
 
       <main
         data-dataset-id={release.dataset_id ?? manifest.dataset_id ?? ""}
-        className="mx-auto max-w-5xl space-y-10 px-5 py-10"
+        className="mx-auto max-w-6xl space-y-8 px-5 py-10"
       >
         <header className="border-b border-[#c8ccc0] pb-6">
           <div className="flex flex-wrap items-center justify-between gap-2">
@@ -218,29 +325,53 @@ export default async function JurisdictionMapPage({
             >
               ← The code, by subject
             </Link>
-            <Link
-              href={`/j/${jurisdiction.id}/topics/land-use`}
-              className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] text-[#080909] underline decoration-[#080909] underline-offset-4"
-            >
-              Land use rules →
-            </Link>
+            <div className="flex flex-wrap items-center gap-4">
+              <Link
+                href={`/j/${jurisdiction.id}/wards`}
+                data-testid="browse-by-ward-link"
+                className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] text-[#080909] underline decoration-[#080909] underline-offset-4"
+              >
+                Browse by ward (without map) →
+              </Link>
+              <Link
+                href={`/j/${jurisdiction.id}/topics/land-use`}
+                className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] text-[#080909] underline decoration-[#080909] underline-offset-4"
+              >
+                Land use rules →
+              </Link>
+            </div>
           </div>
 
-          <h1 className="mt-2 text-3xl font-semibold tracking-tight text-[#080909] md:text-4xl">
-            Map · {plainCorpName}
-          </h1>
+          <div className="mt-2 flex flex-wrap items-baseline justify-between gap-2">
+            <h1 className="text-3xl font-semibold tracking-tight text-[#080909] md:text-4xl">
+              Map · {plainCorpName}
+            </h1>
+            {currentAsOfDate && (
+              <span
+                data-testid="current-as-of-date"
+                className="font-mono text-xs uppercase tracking-[0.12em] text-[#5b5e56]"
+              >
+                Current as of {currentAsOfDate}
+              </span>
+            )}
+          </div>
           <p className="dg-serif mt-2 text-base leading-relaxed text-[#171917]">
             Official City Corporation and ward boundaries, with master plan
-            land-use zones where map sheets have been processed.
+            land-use zones and governing rules by zone where map sheets have
+            been processed.
           </p>
 
           {rootParentId && (
-            <p
-              data-testid="map-zone-gap-notice"
-              className="dg-serif mt-3 border-l-2 border-[#080909] bg-[#efeee8] px-3 py-2 text-sm text-[#171917]"
-            >
-              {landUseZoneGapLine}
-            </p>
+            <div className="mt-3 space-y-2 border-l-2 border-[#080909] bg-[#efeee8] px-3 py-2 text-sm text-[#171917]">
+              <p data-testid="map-zone-gap-notice" className="dg-serif">
+                {landUseZoneGapLine}
+              </p>
+              {coverageStatement && (
+                <p data-testid="map-coverage-statement" className="dg-serif">
+                  {coverageStatement}
+                </p>
+              )}
+            </div>
           )}
 
           <div
@@ -305,6 +436,7 @@ export default async function JurisdictionMapPage({
 
         <AreaExplorerClient
           jurisdictionId={jurisdiction.id}
+          zonesSourceJurisdictionId={zonesSourceJurisdictionId}
           corporationName={jurisdiction.name}
           releaseVersion={release.version}
           zones={ssrZoneFeatures}
@@ -312,8 +444,12 @@ export default async function JurisdictionMapPage({
           gbaZones={stripFc(gbaZones)}
           wards={stripFc(wards)}
           planningDistricts={stripFc(planningDistricts)}
-          overlays={stripFc(overlays)}
+          overlays={stripFc(effectiveOverlays)}
           geoLayers={geoLayers?.layers ?? []}
+          processedSheets={verificationMetrics?.sheets ?? []}
+          initialPlaces={ssrInitialPlaces}
+          zoneRulesByCode={zoneRulesByCode}
+          byelaw14Info={byelaw14Info}
         />
       </main>
     </div>

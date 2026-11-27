@@ -1,31 +1,37 @@
-# Contributing to Structured Building Bylaws
+# Contributing to Bylaw One
 
-Contributions to improve clause extraction accuracy, amendment linking, zone boundary verification, and jurisdiction coverage are welcome.
+Contributions from colleges, students, practising architects, planners, engineers, lawyers, and civic data groups to improve provision extraction accuracy, amendment linking, zone boundary verification, and city coverage are welcome.
 
-## 1. Reporting Errors in Clause Text or Zoning Maps
+## 1. Reporting a Problem with a Rule or Suggesting a Source
 
-If you find an extraction defect, wrong clause hierarchy, missing amendment link, or inaccurate zone polygon:
+- **Report a problem with a rule**: Click **Report a problem** on any provision or rule row on the website, or open the [Report a problem with a rule](.github/ISSUE_TEMPLATE/report-problem-with-a-rule.yml) GitHub Issue Form with the site link, what is wrong, and the official PDF page that shows the rule.
+- **Suggest a source**: Open the [Suggest a source](.github/ISSUE_TEMPLATE/suggest-a-source.yml) GitHub Issue Form with the instrument title, date, and official link.
+- **Join the pilot**: Open the [Join the pilot](.github/ISSUE_TEMPLATE/join-the-pilot.yml) GitHub Issue Form or see `/join` on the website.
 
-1. Open a GitHub Issue describing the jurisdiction ID, document ID, clause number (or `zone_id`), and the discrepancy against the official gazette PDF or planning map.
-2. Include the page number in the source PDF so reviewers can verify the citation directly.
+## 2. Workshop Verification by People (`bylaws tasks` & `bylaws verify`)
 
-## 2. Proposing a Data Override (`data/overrides/<jurisdiction>/`)
+Students and practitioners in workshops can verify provisions and table values against the official PDF pages without running a server:
+
+1. Generate a verification task set:
+   ```bash
+   cd pipeline
+   uv run bylaws tasks create --jurisdiction <id> --count 20 --subject far --seed 1
+   ```
+2. Complete the tasks in the browser at `/verify/<task-set>`, entering your name and institution, and export the `.csv` file.
+3. Import completed CSV files into `data/overrides/<jurisdiction>/verifications.yaml`:
+   ```bash
+   cd pipeline
+   uv run bylaws verify import <path-to.csv> --jurisdiction <id>
+   ```
+   A record becomes `"Verified by a person"` (`human_verified`) only after at least two independent `Match` verdicts; any `Mismatch` opens a review item.
+
+## 3. Proposing a Data Override (`data/overrides/<jurisdiction>/`)
 
 Per **Rule R6 (Deterministic Reproducibility)**, generated files in `data/processed/` and `public/data/` are never hand-edited. All manual corrections and verifications are stored in `data/overrides/<jurisdiction>/*.yaml` and validated against `schemas/overrides.schema.json`.
 
-Per **Rule R9 (Immutable Verified Records)**, any override targeting a record already marked `verification: human_verified` will automatically create a new versioned record (`@v2`, `@v3`, etc.) that supersedes the prior verified record rather than overwriting it in place.
+Per **Rule R9 (Immutable Verified Records)**, any override targeting a record already marked `verification: human_verified` automatically creates a new versioned record (`@v2`, `@v3`, etc.) that supersedes the prior verified record rather than overwriting it in place.
 
-To submit a correction or verification:
-
-1. Edit or add a YAML override entry under `data/overrides/<jurisdiction>/overrides.yaml` (`clause_fixes`, `zone_tags`, `zone_fixes`, or `map_curations`) with a clear `reason`.
-2. Run the pipeline for the target jurisdiction:
-   ```bash
-   cd pipeline
-   uv run bylaws run-all --jurisdiction <id>
-   ```
-3. Inspect the updated QA report in `data/reports/<jurisdiction>/qa.md`.
-
-## 3. Running Checks Before Opening a Pull Request
+## 4. Running Checks Before Opening a Pull Request
 
 From the repository root:
 
@@ -34,7 +40,7 @@ From the repository root:
 make generate
 git diff --exit-code
 
-# Run Python pipeline linter and tests (including R1 and R4 checks)
+# Run Python pipeline linter and tests (including R1, R4, and text fidelity checks)
 cd pipeline && uv run ruff check . && uv run pytest -v
 
 # Run Next.js web application checks
@@ -42,10 +48,12 @@ npm run lint
 npm run typecheck
 npm test
 npm run build
+npm run check-budgets
 ```
 
-## 4. Licensing of Contributions
+## 5. Licensing of Contributions
 
-By submitting a pull request, you agree that:
+By submitting a pull request or verification file, you agree that:
 - Code contributions are licensed under the **Apache License 2.0** (`LICENSE`).
-- Data, override, and documentation contributions are licensed under **CC BY 4.0** (`LICENSE-DATA.md`).
+- Data, override, verification, and documentation contributions are licensed under **CC BY 4.0** (`LICENSE-DATA.md`), with named credit in release metadata for workshop and partner verifiers.
+

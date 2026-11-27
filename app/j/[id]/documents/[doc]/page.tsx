@@ -1,4 +1,5 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -12,6 +13,7 @@ import {
 import { TopNav } from "@/components/TopNav";
 import { CorporationSelector } from "@/components/CorporationSelector";
 import { ClauseTree } from "@/components/ClauseTree";
+import { LegislationJsonLd } from "@/components/LegislationJsonLd";
 import {
   formatHumanDate,
   formatPlainDocumentTitle,
@@ -36,6 +38,28 @@ export async function generateStaticParams() {
     }
   }
   return paramsList;
+}
+
+export async function generateMetadata({
+  params,
+}: DocumentPageProps): Promise<Metadata> {
+  const { id, doc } = await params;
+  const docs = await fetchDocuments(id).catch(() => []);
+  const dMeta = docs.find((d) => d.doc_id === doc);
+  const plainTitle = formatPlainDocumentTitle(dMeta, doc);
+  const title = `${plainTitle} · Bylaw One`;
+  const desc = dMeta?.title ?? `Structured provisions and page citations for ${plainTitle}.`;
+  return {
+    title,
+    description: desc,
+    openGraph: {
+      title,
+      description: desc,
+      images: [
+        `/api/og?title=${encodeURIComponent(plainTitle)}&subtitle=${encodeURIComponent(desc)}`,
+      ],
+    },
+  };
 }
 
 export default async function DocumentViewerPage({
@@ -160,7 +184,7 @@ export default async function DocumentViewerPage({
       continue;
     }
     if (
-      initialNonRowSet.size < 22 &&
+      initialNonRowSet.size < 18 &&
       ((c.versions?.length ?? 0) > 1 ||
         Boolean(c.versions?.[0]?.effect_id) ||
         (c.amended_by?.length ?? 0) > 0 ||
@@ -254,7 +278,19 @@ export default async function DocumentViewerPage({
         licence={release.licence}
       />
 
-      <main className="mx-auto max-w-5xl px-5 py-8">
+      <LegislationJsonLd
+        jurisdictionId={jurisdiction.id}
+        jurisdictionName={jurisdiction.name}
+        document={docMeta}
+        clauses={docClauses}
+        amendmentLinks={docAmendmentLinks}
+        allDocuments={documents}
+      />
+
+      <main
+        data-dataset-id={release.dataset_id ?? manifest.dataset_id ?? ""}
+        className="mx-auto max-w-5xl px-5 py-8"
+      >
         <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
           <Link
             href={`/j/${jurisdiction.id}/topics`}

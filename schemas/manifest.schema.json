@@ -233,6 +233,27 @@
         }
       }
     },
+    "releaseVerifierCredit": {
+      "type": "object",
+      "title": "ReleaseVerifierCredit",
+      "additionalProperties": false,
+      "required": ["verifier_name", "institution"],
+      "properties": {
+        "verifier_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "institution": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verified_count": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 1
+        }
+      }
+    },
     "releaseEntry": {
       "type": "object",
       "title": "ReleaseEntry",
@@ -299,6 +320,13 @@
         },
         "changelog": {
           "type": "string"
+        },
+        "verifiers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/releaseVerifierCredit"
+          },
+          "default": []
         }
       }
     }

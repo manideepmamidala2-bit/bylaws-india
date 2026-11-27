@@ -14,11 +14,24 @@ import JurisdictionPickerPage, { getHomePageProps } from "@/app/page";
 import JurisdictionMapPage, {
   generateStaticParams as generateMapParams,
 } from "@/app/j/[id]/page";
+import BrowseByWardPage from "@/app/j/[id]/wards/page";
+import {
+  createPlaceMiniSearch,
+  formatMapUrlHash,
+  parseMapUrlHash,
+  searchPlacesWithMiniSearch,
+} from "@/lib/place-search";
 import SourcesPage from "@/app/j/[id]/sources/page";
 import DocumentViewerPage from "@/app/j/[id]/documents/[doc]/page";
 import TimelinePage from "@/app/j/[id]/timeline/page";
 import DataReleasesPage from "@/app/data/page";
 import AboutPage from "@/app/about/page";
+import UseWithAiPage from "@/app/use-with-ai/page";
+import VerifyTaskSetPage from "@/app/verify/[taskSet]/page";
+import PilotPage from "@/app/pilot/page";
+import ChecksPage from "@/app/checks/page";
+import JoinPage from "@/app/join/page";
+import PressPage from "@/app/press/page";
 import TopicsIndexPage from "@/app/j/[id]/topics/page";
 import TopicDetailPage from "@/app/j/[id]/topics/[topic]/page";
 import nextConfig from "@/next.config";
@@ -298,37 +311,58 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     await assertNoAxeViolations(unstructContainer);
     uUnstruct();
 
-    // Map page renders official GBA Corporation (1), GBA Zones (2), Wards (72), Planning Districts (1), Land-Use Zones (868), and Sheet Overlay toggle + plain-words accuracy notice
+    // Map page renders Protomaps © OpenStreetMap attribution, plain-words layer switch, Place Card with 6 rule groups, sheet overlay opacity, and coverage/accuracy statements
     const mapUi = await JurisdictionMapPage({
       params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
     });
     const { container: mapContainer, unmount: uMap } = render(mapUi);
     expect(
-      screen.getByText(/© OpenStreetMap contributors · Protomaps/i)
+      screen.getByText(/Protomaps © OpenStreetMap/i)
     ).toBeInTheDocument();
     expect(
-      screen.getAllByText(
-        /Zones traced from the RMP 2015 Proposed Land Use sheet/i
-      ).length
-    ).toBeGreaterThan(0);
+      screen.getByTestId("map-coverage-statement")
+    ).toHaveTextContent(
+      /Land-use zones cover 1\.5% of Greater Bengaluru, in parts of Bengaluru South\./i
+    );
     expect(
       screen.getByRole("checkbox", {
-        name: /Sheet Overlay: 2\.10 Jayanagar map \(b\)/i,
+        name: /^Land-use zones$/i,
+      })
+    ).toBeChecked();
+    expect(
+      screen.getByRole("checkbox", {
+        name: /^Wards$/i,
+      })
+    ).toBeChecked();
+    expect(
+      screen.getByRole("checkbox", {
+        name: /^Corporations$/i,
+      })
+    ).toBeChecked();
+    expect(
+      screen.getByRole("checkbox", {
+        name: /^Planning districts$/i,
+      })
+    ).toBeChecked();
+    expect(
+      screen.getByRole("checkbox", {
+        name: /^Original map sheets$/i,
       })
     ).toBeInTheDocument();
     expect(
-      screen.getByLabelText(/Sheet Opacity: 65%/i)
+      screen.getByLabelText(/Sheet opacity: 70%/i)
     ).toBeInTheDocument();
-    const corpCheckbox = screen.getByRole("checkbox", {
-      name: /Corporation \(1\)/i,
-    });
-    const wardsCheckbox = screen.getByRole("checkbox", {
-      name: /Wards \(72\)/i,
-    });
-    expect(corpCheckbox).toBeChecked();
-    expect(wardsCheckbox).toBeChecked();
+    expect(screen.getByTestId("place-card")).toBeInTheDocument();
+    expect(screen.getByTestId("place-card-group-uses")).toBeInTheDocument();
+    expect(screen.getByTestId("place-card-group-far")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("place-card-group-ground-coverage")
+    ).toBeInTheDocument();
+    expect(screen.getByTestId("place-card-group-setbacks")).toBeInTheDocument();
+    expect(screen.getByTestId("place-card-group-height")).toBeInTheDocument();
+    expect(screen.getByTestId("place-card-group-parking")).toBeInTheDocument();
     const wardSelect = screen.getByLabelText(
-      /Inspect Official Ward \(72 Wards in Corporation\)/i
+      /Inspect Official Ward \(72 Wards\)/i
     );
     fireEvent.change(wardSelect, { target: { value: "11" } });
     expect(screen.getAllByText(/Jayanagar East/i).length).toBeGreaterThan(0);
@@ -749,8 +783,114 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
       "Changed for Bengaluru South City Corporation, 14 May 2026"
     );
     expect(cSouthBbl.textContent ?? "").toContain("Table-2B below");
+    const jsonLdEl = cSouthBbl.querySelector(
+      'script[data-testid="legislation-json-ld"]'
+    );
+    expect(jsonLdEl).not.toBeNull();
+    const jsonLdObj = JSON.parse(jsonLdEl?.textContent ?? "{}");
+    expect(jsonLdObj["@context"]).toBe("https://schema.org");
+    expect(jsonLdObj["@type"]).toBe("Legislation");
+    expect(jsonLdObj.legislationIdentifier).toBeTruthy();
+    expect(jsonLdObj.legislationDate).toBeTruthy();
+    expect(jsonLdObj.legislationJurisdiction).toContain(
+      "Bengaluru South City Corporation"
+    );
+    expect(jsonLdObj.legislationLegalForce).toBe("https://schema.org/InForce");
+    expect(Array.isArray(jsonLdObj.legislationChanges)).toBe(true);
+    expect(jsonLdObj.isPartOf).toBeTruthy();
+    expect(jsonLdObj.url).toMatch(/^https?:\/\//);
+    expect(Array.isArray(jsonLdObj.hasPart)).toBe(true);
     await assertNoAxeViolations(cSouthBbl);
     uSouthBbl();
+
+    const useAiUi = await UseWithAiPage();
+    const { container: cUseAi, unmount: uUseAi } = render(useAiUi);
+    expect(cUseAi.textContent ?? "").toContain("Use Bylaw One with AI");
+    expect(cUseAi.textContent ?? "").toContain("/llms.txt");
+    expect(cUseAi.textContent ?? "").toContain("local agent engine is coming");
+    await assertNoAxeViolations(cUseAi);
+    uUseAi();
+
+    const verifyUi = await VerifyTaskSetPage({
+      params: Promise.resolve({ taskSet: "bengaluru-pilot-sample" }),
+    });
+    const { container: cVerify, unmount: uVerify } = render(verifyUi);
+    expect(cVerify.textContent ?? "").toContain(
+      "Verify rules against official pages"
+    );
+    fireEvent.change(screen.getByTestId("verifier-name-input"), {
+      target: { value: "Asha Rao" },
+    });
+    fireEvent.change(screen.getByTestId("verifier-institution-input"), {
+      target: { value: "RV College of Architecture" },
+    });
+    fireEvent.click(screen.getByTestId("verdict-match-task-001"));
+    expect(
+      screen.getByTestId("verify-progress-counter").textContent
+    ).toContain("1 of");
+    fireEvent.click(screen.getByTestId("export-verifications-csv-btn"));
+    expect(
+      screen.getByTestId("exported-csv-preview").textContent
+    ).toContain("Asha Rao,RV College of Architecture");
+    await assertNoAxeViolations(cVerify);
+    uVerify();
+
+    // Part 5: Pilot, Checks, Join, and Press pages render generated numbers and pass axe-core
+    const pilotUi = await PilotPage();
+    const { container: cPilot, unmount: uPilot } = render(pilotUi);
+    expect(screen.getByTestId("metric-documents").textContent).toBe("16");
+    expect(screen.getByTestId("metric-corporations").textContent).toBe("5");
+    expect(screen.getByTestId("metric-wards").textContent).toBe("369");
+    expect(screen.getByTestId("metric-map-coverage").textContent).toBe("1.5%");
+    expect(screen.getByTestId("metric-human-verified").textContent).toBe("0");
+    expect(screen.getByTestId("current-as-of-date").textContent).toContain(
+      "Current as of 14 May 2026"
+    );
+    await assertNoAxeViolations(cPilot);
+    uPilot();
+
+    const checksUi = await ChecksPage();
+    const { container: cChecks, unmount: uChecks } = render(checksUi);
+    expect(screen.getByTestId("checks-total-human-verified").textContent).toBe(
+      "0"
+    );
+    expect(screen.getByTestId("checks-total-open-review").textContent).toBe(
+      "0"
+    );
+    expect(
+      Number(
+        (screen.getByTestId("checks-total-machine-checked").textContent ?? "0")
+          .replace(/,/g, "")
+      )
+    ).toBeGreaterThan(5000);
+    await assertNoAxeViolations(cChecks);
+    uChecks();
+
+    const joinUi = await JoinPage();
+    const { container: cJoin, unmount: uJoin } = render(joinUi);
+    expect(screen.getByTestId("join-section-colleges")).toBeInTheDocument();
+    expect(screen.getByTestId("join-section-students")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("join-section-practitioners")
+    ).toBeInTheDocument();
+    expect(screen.getByTestId("join-section-civic")).toBeInTheDocument();
+    expect(screen.getByTestId("join-the-pilot-form-link")).toHaveAttribute(
+      "href",
+      expect.stringContaining("template=join-the-pilot.yml")
+    );
+    await assertNoAxeViolations(cJoin);
+    uJoin();
+
+    const pressUi = await PressPage();
+    const { container: cPress, unmount: uPress } = render(pressUi);
+    expect(
+      screen.getByTestId("press-description-paragraph").textContent
+    ).toContain("16 in-force building acts");
+    expect(
+      screen.getByTestId("press-description-paragraph").textContent
+    ).toContain("369 wards");
+    await assertNoAxeViolations(cPress);
+    uPress();
 
     // 4. Part 4: Plain land-use zone gap notice on Map and Land use subject pages
     const expectedGapLine =
@@ -778,5 +918,57 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     );
     await assertNoAxeViolations(cCityMap);
     uCityMap();
+
+    // 5. Browse by ward page (/j/[id]/wards) and MiniSearch + URL hash round-trip
+    const wardsUi = await BrowseByWardPage({
+      params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
+    });
+    const { container: cWards, unmount: uWards } = render(wardsUi);
+    expect(
+      screen.getByTestId("browse-by-ward-directory")
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId("browse-by-ward-zone-rules")
+    ).toBeInTheDocument();
+    expect(cWards.textContent ?? "").toContain("Jayanagar East");
+    expect(cWards.textContent ?? "").toContain("Residential (Main) (R-MAIN)");
+    await assertNoAxeViolations(cWards);
+    uWards();
+
+    const hashStr = formatMapUrlHash({
+      lat: 12.9279,
+      lng: 77.5831,
+      zoom: 15,
+      place: "Jayanagar",
+    });
+    expect(hashStr).toBe("#12.9279,77.5831,15,Jayanagar");
+    const parsedHash = parseMapUrlHash(hashStr);
+    expect(parsedHash).toEqual({
+      lat: 12.9279,
+      lng: 77.5831,
+      zoom: 15,
+      place: "Jayanagar",
+    });
+
+    const ms = createPlaceMiniSearch([
+      {
+        id: "p1",
+        name: "Jayanagar 4th Block",
+        kind: "locality",
+        categoryLabel: "Neighbourhood",
+        lat: 12.92657,
+        lng: 77.5835,
+        corporationId: "in-ka-bengaluru-south",
+        corporationName: "Bengaluru South City Corporation",
+        wardNumber: "8",
+        wardName: "Tilak Nagara",
+        planningDistrict: "2.10 · Jayanagar",
+        zoneCode: "R-MAIN",
+        zoneLabel: "Residential (Main)",
+      },
+    ]);
+    const hits = searchPlacesWithMiniSearch(ms, "Jayanag");
+    expect(hits).toHaveLength(1);
+    expect(hits[0].zoneCode).toBe("R-MAIN");
   });
 });

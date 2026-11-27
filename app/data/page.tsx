@@ -38,7 +38,10 @@ export default async function DataReleasesPage() {
         releaseVersion={primary?.latest_release ?? undefined}
       />
 
-      <main className="mx-auto max-w-6xl px-6 py-8">
+      <main
+        data-dataset-id={manifest.dataset_id ?? ""}
+        className="mx-auto max-w-6xl px-6 py-8"
+      >
         <header className="mb-8 border-b border-[#080909] pb-6">
           <div className="dg-mono">
             Open Data Releases · Release v{primary?.latest_release ?? "4.0.0"} · CC BY 4.0
@@ -47,12 +50,37 @@ export default async function DataReleasesPage() {
             Dataset Releases, Checksums &amp; Declarations
           </h1>
           <p className="dg-serif mt-2 max-w-3xl text-base text-[#171917]">
-            Download versioned regulatory bundles, verify file integrity against
+            Download versioned regulatory bundles, Frictionless Data Packages,
+            and static JSON API endpoints, verify file integrity against
             published SHA-256 checksums, and inspect declared coverage and gaps.
-            All verification checks in this dataset are automated machine checks
-            against the source PDFs and page images; nothing is presented as
-            verified by a person.
           </p>
+          <div className="mt-4 flex flex-wrap gap-3 font-mono text-xs uppercase tracking-[0.12em]">
+            <a
+              href="/data/datapackage.json"
+              data-testid="download-datapackage-link"
+              className="border border-[#080909] bg-[#080909] px-3 py-1.5 text-[#f5f3ed] no-underline"
+            >
+              Frictionless Data Package (datapackage.json)
+            </a>
+            <a
+              href="/api/v1/openapi.json"
+              className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 text-[#080909] no-underline"
+            >
+              JSON API (OpenAPI 3.1)
+            </a>
+            <a
+              href="/llms.txt"
+              className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 text-[#080909] no-underline"
+            >
+              llms.txt
+            </a>
+            <a
+              href="/updates.xml"
+              className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 text-[#080909] no-underline"
+            >
+              Atom Feed (updates.xml)
+            </a>
+          </div>
         </header>
 
         <div className="space-y-8">

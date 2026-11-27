@@ -1,0 +1,40 @@
+name: "Suggest a source"
+description: "Suggest an official Gazette notification, building bye-law amendment, circular, or planning map."
+title: "[Source suggestion]: "
+labels: ["source-suggestion"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Suggest an official legal instrument or map that decides what can be built on a plot or what a building must comply with to be approved and occupied.
+  - type: input
+    id: jurisdiction
+    attributes:
+      label: "City, corporation, or authority"
+      description: "Which city, municipal corporation, or planning authority does this source apply to?"
+      placeholder: "For example: Greater Bengaluru / Bengaluru South City Corporation / BDA"
+    validations:
+      required: true
+  - type: input
+    id: instrument_title
+    attributes:
+      label: "Instrument title, notification number, and date"
+      description: "Give the official title, Gazette notification number, and date of issue."
+      placeholder: "For example: Notification No. UDD 235 MNJ 2025(E), dated 5 January 2026"
+    validations:
+      required: true
+  - type: input
+    id: official_link
+    attributes:
+      label: "Official link or archived copy"
+      description: "Paste the URL to the official government PDF or Internet Archive snapshot."
+      placeholder: "https://..."
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: "What this source changes or covers"
+      description: "Briefly note which subjects, clauses, tables, or map sheets this instrument affects."
+    validations:
+      required: false

@@ -415,6 +415,7 @@ const CORP_AMENDED_BASE_ADDRESSES = new Set([
 function normalizeJurLinks(fragment) {
   return fragment
     .replace(/\/j\/in-ka-bengaluru(?:-[a-z]+)?\//g, "/j/<JUR>/")
+    .replace(/%2Fj%2Fin-ka-bengaluru(?:-[a-z]+)?%2F/gi, "%2Fj%2F<JUR>%2F")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -590,6 +591,23 @@ for (const srcDir of ["app", "components", "lib"]) {
         `${path.relative(repoRoot, tsFile)}: Map accuracy check failed — hard-coded accuracy figure ${JSON.stringify(hardCodedMatch[0])} found in source`
       );
     }
+  }
+}
+
+// Part 5 CI generated-numbers check: verify /pilot, /checks, and /press source files do not hard-code dataset counts
+for (const relSrc of [
+  "app/pilot/page.tsx",
+  "app/checks/page.tsx",
+  "app/press/page.tsx",
+]) {
+  const fullSrc = path.join(repoRoot, relSrc);
+  if (!fs.existsSync(fullSrc)) continue;
+  const txt = fs.readFileSync(fullSrc, "utf8");
+  const hardNum = txt.match(/\b(?:5,341|5341|1,276|1276|369|271|313)\b/);
+  if (hardNum) {
+    violations.push(
+      `${relSrc}: Generated-numbers check failed — hand-typed dataset figure ${JSON.stringify(hardNum[0])} found in page source`
+    );
   }
 }
 

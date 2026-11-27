@@ -64,9 +64,60 @@
       "items": {
         "$ref": "#/$defs/tableOverride"
       }
+    },
+    "human_verifications": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/humanVerificationOverride"
+      }
     }
   },
   "$defs": {
+    "humanVerificationOverride": {
+      "type": "object",
+      "title": "HumanVerificationOverride",
+      "additionalProperties": false,
+      "required": [
+        "record_id",
+        "record_kind",
+        "verifier_name",
+        "institution",
+        "verified_at",
+        "verdict"
+      ],
+      "properties": {
+        "task_id": {
+          "type": ["string", "null"]
+        },
+        "record_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "record_kind": {
+          "type": "string",
+          "enum": ["provision", "parameter", "zone"]
+        },
+        "verifier_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "institution": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verified_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verdict": {
+          "type": "string",
+          "enum": ["match", "mismatch", "cant_tell"]
+        },
+        "note": {
+          "type": ["string", "null"]
+        }
+      }
+    },
     "unreadableFragmentOverride": {
       "type": "object",
       "title": "UnreadableFragmentOverride",
@@ -210,6 +261,7 @@
             "parent_eid",
             "verification",
             "verified_by",
+            "verifications",
             "legal_status",
             "effective_from",
             "language",

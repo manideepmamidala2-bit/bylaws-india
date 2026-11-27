@@ -1,0 +1,38 @@
+{
+  "title": "Bylaw One: Open, Page-Traced Building Rules and Zoning Dataset (Bengaluru Pilot)",
+  "upload_type": "dataset",
+  "description": "Structured, page-traced municipal building bye-laws, master plan zoning regulations, dated amendments, condition-bearing parameter records, statutory resolution rules, and georeferenced land-use map layers for Bengaluru, India.",
+  "license": "CC-BY-4.0",
+  "version": "4.0.0",
+  "publication_date": "2026-11-26",
+  "Access_right": "open",
+  "access_right": "open",
+  "language": "eng",
+  "creators": [
+    {
+      "name": "Bylaw One Contributors",
+      "affiliation": "[Owner's Organisation]"
+    }
+  ],
+  "keywords": [
+    "building bylaws",
+    "zoning regulations",
+    "Bengaluru",
+    "India",
+    "urban planning",
+    "open data",
+    "legal informatics"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/manideepmamidala2-bit/bylaws-india",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://bylaws-india.vercel.app",
+      "relation": "isIdenticalTo",
+      "scheme": "url"
+    }
+  ]
+}

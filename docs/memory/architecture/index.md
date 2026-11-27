@@ -11,4 +11,4 @@ description: "Two-half local Python pipeline and read-only Next.js web applicati
 
 | File | Description |
 |------|-------------|
-| [overview](overview.md) | Two-half Python pipeline and Bylaw One Next.js web architecture, Unified Schema 1.4, stored PDF page-text fidelity verification, report-driven map accuracy, plain register names, honest relations and resolver outcomes, Rules R1–R16, and Release 4.0.0. |
+| [overview](overview.md) | Two-half Python pipeline and Bylaw One launch-ready pilot architecture, Unified Schema 1.4, gitleaks CI and governance, 8-layer Protomaps/MapLibre map with MiniSearch place index and Place Card zone rules, static machine/AI endpoints (/llms.txt, .md mirrors, /api/v1/ OpenAPI 3.1, Legislation JSON-LD, datapackage.json, /updates.xml), two-verifier workshop flow, pilot/checks/join/press pages, partner kit, WCAG 2.2 AA and Lighthouse CI, Rules R1–R16, and Release 4.0.0. |

@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/react";
 import { fetchManifest, getVisibleJurisdictions } from "@/lib/data";
 import { Footer } from "@/components/Footer";
+import { getSiteConfig } from "@/lib/site-config";
 import "./globals.css";
 
 const interTight = localFont({
@@ -45,14 +47,24 @@ export async function generateMetadata(): Promise<Metadata> {
     visible[0];
   const cityLabel = rootJur?.aliases?.[0] ?? rootJur?.name ?? "City";
   const desc = `${cityLabel}'s building rules. One code.`;
+  const siteCfg = getSiteConfig();
 
   return {
+    metadataBase: new URL(siteCfg.siteUrl),
     title: "Bylaw One",
     description: desc,
     openGraph: {
       title: "Bylaw One",
       description: desc,
       type: "website",
+      images: [
+        {
+          url: `/api/og?title=${encodeURIComponent(`${cityLabel}'s building rules. One code.`)}`,
+          width: 1200,
+          height: 630,
+          alt: "Bylaw One",
+        },
+      ],
     },
   };
 }
@@ -81,6 +93,7 @@ export default async function RootLayout({
       >
         <div className="flex-1">{children}</div>
         <Footer jurisdictionId={rootJur?.id} />
+        <Analytics />
       </body>
     </html>
   );
