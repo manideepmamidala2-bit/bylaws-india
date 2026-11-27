@@ -160,6 +160,27 @@ Tracks the 11-PR remediation series defined in [`docs/plans/pr-series/00-overvie
 | **Part 4** | Relations shown honestly | ✅ Complete | Kept only structurally confirmed relation kinds (`amends`: `29`, `incorporates`: `19`, `corporation_differs`: `15`; `63` public relations total) public (`public_visible: true`, `review_note: "Checked by rule, not yet by a person"`), marked all other kinds (`cross_document_reference`: `48`, `definition_differs`: `12`, `precedence`: `11`; `71` hidden relations total) as `status: "not_yet_reviewed"` (`review_note: "Not yet reviewed"`, `public_visible: false`), implemented `compute_labelled_precision_by_kind` and `is_relation_kind_public` (`>= 0.8` threshold) in `pipeline/bylaws/relations.py`, regenerated `docs/review/relations-labelling.md` (`60` unfilled items showing both provisions, their `From Page` / `To Page` numbers, excerpts, and the verdict column), and displayed `"Checked by rule, not yet by a person"` inside `Details` on subject and document pages |
 | **Part 5** | Resolver honesty (no interface change) | ✅ Complete | Removed assumed `3:2` plot dimensions (`inferred_depth`, `inferred_width`) and `11.5 m` building height defaults from `pipeline/bylaws/resolver.py` and `lib/resolver.ts`; returned `"needs depth"`, `"needs width"`, or `"needs height"` (`status: "needs_depth" | "needs_width" | "needs_height"`) when a rule depends on an omitted dimension; added `no_limit_in_law_rules` to `schemas/resolution.schema.json` and `jurisdictions/resolution.yaml` (verified against stored page text in `pipeline/bylaws/fidelity.py`) to distinguish `"No limit in the law for this case"` (`status: "no_limit_in_law"`, with citation and quote) from `"Not covered by our data yet"` (`status: "not_covered_by_data"`); verified all four review plots (`600 m²` R-MAIN on `15 m` road, `150 m²` R-MAIN on `9 m` road, `3,000 m²` commercial on `24 m` road, `6,000 m²` industrial on `18 m` road) in `pipeline/tests/test_resolver.py` and `__tests__/resolver.test.ts`; captured `390 px` and `1280 px` screenshots of the map page, subject source column, and home steps 2 and 3; and verified all `172` pytest tests, `20` Vitest + `axe-core` tests, `243` built HTML routes (`max HTML = 282.4 KB <= 300 KB`, `max initial JS+data = 0.63 MB <= 1.50 MB`), and `7` Playwright E2E tests pass |
 
+---
+
+## Bylaw One: Bengaluru Pilot, Launch-Ready Website (`docs/plans/bengaluru-pilot-launch-plan.md` — Parts 1–7)
+
+- **Baseline Release**: `4.0.0`
+- **Active Change**: `261126-h24h-bengaluru-pilot-launch`
+- **Target**: Launch-ready public pilot for Bengaluru (for colleges, practitioners, and the press) using only the Section 2 tool stack (`maplibre-gl`, `@protomaps/basemaps` `light`, `pmtiles` + `@mapbox/vector-tile`, `minisearch`, MapLibre `image` source, `gitleaks`, Vercel Web Analytics, `next/og`).
+
+### Part-by-Part Status
+
+| Part | Title | Status | Notes |
+|------|-------|--------|-------|
+| **Part 1** | Ready to open the repository | ✅ Complete | Scanned full git history (`129` commits, `547.77 MB`) with `gitleaks v8.24.2` (`0` leaks found) and added `gitleaks` to `.github/workflows/ci.yml` + `.gitleaks.toml`; centralized `contact.email` and `organisation.name` placeholders in `bylaws.toml`, `pipeline/bylaws/config.py`, and `lib/site-config.ts`; updated `README.md`, `LICENSE` (Apache-2.0), `LICENSE-DATA.md` (CC BY 4.0 with attribution), `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md` (Contributor Covenant 2.1), `CITATION.cff`, and added `SECURITY.md`, `GOVERNANCE.md`, `.zenodo.json`, and GitHub Issue Forms (`report-problem-with-a-rule.yml`, `suggest-a-source.yml`, `join-the-pilot.yml`, `config.yml`) |
+| **Part 2** | The map, rebuilt with existing data | ⏳ Pending | — |
+| **Part 3** | Readable by machines and AI | ⏳ Pending | — |
+| **Part 4** | Verification by people (for workshops) | ⏳ Pending | — |
+| **Part 5** | Pilot, trust and joining | ⏳ Pending | — |
+| **Part 6** | Partner documents (in `docs/partners/`) | ⏳ Pending | — |
+| **Part 7** | Quality and sharing | ⏳ Pending | — |
+
+
 
 
 

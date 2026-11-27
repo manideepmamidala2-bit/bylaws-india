@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: "About the Bengaluru Pilot"
+    url: "https://bylaws-india.vercel.app/pilot"
+    about: "Read what works today, what is missing, and what comes next."
+  - name: "Join the Pilot (Colleges, Students, Practitioners, Civic Groups)"
+    url: "https://bylaws-india.vercel.app/join"
+    about: "Learn about college workshops, verification internships, and partner MoUs."

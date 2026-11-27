@@ -26,7 +26,7 @@ Examples of unacceptable behavior include:
 
 ## Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by opening a confidential report with the repository maintainers on GitHub. All complaints will be reviewed and investigated promptly and fairly.
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at the email configured in `bylaws.toml` (`[contact].email`, currently placeholder `contact@example.org`) or by opening a confidential report with the repository maintainers on GitHub. All complaints will be reviewed and investigated promptly and fairly.
 
 ## Attribution
 

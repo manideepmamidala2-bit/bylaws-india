@@ -1,0 +1,41 @@
+name: "Join the pilot"
+description: "Partner with Bylaw One as a college, student, practitioner, or civic/data group."
+title: "[Join the pilot]: "
+labels: ["pilot-partner"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We are partnering with colleges, students, practitioners, and civic groups for the **Bengaluru Pilot**. See `/join` and `docs/partners/` for workshop kits, internships, and the free college MoU.
+  - type: input
+    id: name
+    attributes:
+      label: "Your name"
+      placeholder: "Full name"
+    validations:
+      required: true
+  - type: input
+    id: organisation
+    attributes:
+      label: "College, practice, or organisation"
+      placeholder: "Department / College / Firm / Civic group"
+    validations:
+      required: true
+  - type: dropdown
+    id: role
+    attributes:
+      label: "I am joining as a"
+      options:
+        - "College / Faculty"
+        - "Student"
+        - "Practitioner (Architect / Planner / Engineer / Lawyer)"
+        - "Civic or data group"
+    validations:
+      required: true
+  - type: textarea
+    id: how_to_join
+    attributes:
+      label: "How would you like to take part?"
+      description: "Tell us if you are interested in a one-day workshop, semester MoU, 60–120 hour verification internship, reviewing rules in your field, or contributing sources and maps."
+    validations:
+      required: true

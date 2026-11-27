@@ -1,0 +1,40 @@
+name: "Report a problem with a rule"
+description: "Report an inaccurate value, wrong citation page, outdated provision, or map boundary issue on Bylaw One."
+title: "[Rule problem]: "
+labels: ["rule-problem"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping keep **Bylaw One** accurate. Every rule on the site must match the official Gazette or authority publication page.
+  - type: input
+    id: site_link
+    attributes:
+      label: "Link on Bylaw One"
+      description: "Paste the URL of the subject page, document provision, or map place card where you saw the problem."
+      placeholder: "https://bylaws-india.vercel.app/j/in-ka-bengaluru/topics/far"
+    validations:
+      required: true
+  - type: textarea
+    id: what_is_wrong
+    attributes:
+      label: "What is wrong"
+      description: "Describe what appears inaccurate, incomplete, or superseded in plain words."
+      placeholder: "For example: Table 10 row 3 shows 2.25 FAR, or this provision was amended by a later notification."
+    validations:
+      required: true
+  - type: input
+    id: official_page
+    attributes:
+      label: "Official page that shows it"
+      description: "Cite the official PDF link, instrument name, and page number that shows the correct text or number."
+      placeholder: "For example: RMP 2015 Zoning Regulations, page 28 (https://...#page=28)"
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: "Additional context (optional)"
+      description: "Any other details that help verify the fix."
+    validations:
+      required: false

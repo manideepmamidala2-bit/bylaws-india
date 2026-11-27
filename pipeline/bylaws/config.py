@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import tomllib
 from pathlib import Path
 from typing import Any
 
@@ -47,8 +48,26 @@ __all__ = [
     "UnreadDocumentConfig",
     "ZoningMapConfig",
     "load_jurisdiction_config",
+    "load_site_config",
     "validate_jurisdiction_dict",
 ]
+
+
+def load_site_config(repo_root: Path | None = None) -> dict[str, str]:
+    """Load site-wide contact and organisation settings from `bylaws.toml`."""
+    effective_root = repo_root or resolve_repo_root()
+    toml_path = effective_root / "bylaws.toml"
+    raw = tomllib.loads(toml_path.read_text(encoding="utf-8")) if toml_path.is_file() else {}
+    contact = raw.get("contact") if isinstance(raw.get("contact"), dict) else {}
+    organisation = raw.get("organisation") if isinstance(raw.get("organisation"), dict) else {}
+    return {
+        "contact_email": str(contact.get("email") or "contact@example.org").strip(),
+        "organisation_name": str(organisation.get("name") or "[Owner's Organisation]").strip(),
+        "github_repo": str(
+            organisation.get("github_repo") or "https://github.com/manideepmamidala2-bit/bylaws-india"
+        ).strip(),
+        "site_url": str(organisation.get("site_url") or "https://bylaws-india.vercel.app").strip(),
+    }
 
 
 def validate_jurisdiction_dict(
