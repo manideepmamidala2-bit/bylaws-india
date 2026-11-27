@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import {
-  fetchDeclarations,
   fetchJurisdictionDataset,
   fetchManifest,
   fetchParameters,
@@ -14,6 +13,7 @@ import {
   type ReleaseManifest,
 } from "@/lib/data";
 import { TopNav } from "@/components/TopNav";
+import { computeDatasetPilotMetrics } from "@/lib/pilot-metrics";
 import {
   FarStoryStepper,
   type FarStoryStep,
@@ -449,7 +449,9 @@ export function buildHomeFarStorySteps(
       viewPageUrl: pfarPdfBase
         ? `${pfarPdfBase}#page=${s5Page}`
         : `#page=${s5Page}`,
-      documentHref: `/j/${jurId}/topics/far`,
+      documentHref: pfarDocId
+        ? `/j/${jurId}/documents/${pfarDocId}#node-${s5Node?.eid ?? "chp_11_2__note_2"}`
+        : `/j/${jurId}/topics/far`,
       tableCaption: "Derived by this site · How FAR rules combine today",
       tableHeaders: [
         "Component",
@@ -470,15 +472,6 @@ export default async function HomePage() {
     ) ?? visibleJurisdictions[0];
 
   const targetJurId = parentJurisdiction?.id ?? "";
-  const partialZoneCorp = visibleJurisdictions.find(
-    (j) =>
-      j.parent === targetJurId &&
-      j.releases.some(
-        (rel) =>
-          Boolean(rel.files?.planning_districts) && Boolean(rel.files?.zones)
-      )
-  );
-  const mapTargetJurId = partialZoneCorp?.id ?? targetJurId;
   const cityLabel =
     parentJurisdiction?.aliases?.[0] ?? parentJurisdiction?.name ?? "City";
   const regionLabel =
@@ -487,18 +480,22 @@ export default async function HomePage() {
   const hasActiveDataset =
     parentJurisdiction && hasPublishedRelease(parentJurisdiction);
 
-  const [declarations, dataset, parametersPayload] = hasActiveDataset
+  const [pilotMetrics, dataset, parametersPayload] = hasActiveDataset
     ? await Promise.all([
-        fetchDeclarations(targetJurId).catch(() => null),
+        computeDatasetPilotMetrics().catch(() => null),
         fetchJurisdictionDataset(targetJurId).catch(() => null),
         fetchParameters(targetJurId).catch(() => null),
       ])
     : [null, null, null];
 
   const allDocuments = dataset?.documents ?? [];
-  const { documentCount, bodyCount } =
+  const { documentCount: rawDocCount, bodyCount: rawBodyCount } =
     computeHeroDocumentAndBodyCounts(allDocuments);
-  const currentAsOfDate = computeNewestInForceInstrumentDate(allDocuments);
+  const documentCount = pilotMetrics?.inForceDocumentsCount ?? rawDocCount;
+  const bodyCount = pilotMetrics?.issuingBodiesCount ?? rawBodyCount;
+  const currentAsOfDate =
+    pilotMetrics?.currentAsOfDate ??
+    computeNewestInForceInstrumentDate(allDocuments);
 
   const farSteps = buildHomeFarStorySteps(
     dataset?.clauses ?? [],
@@ -543,10 +540,6 @@ export default async function HomePage() {
     });
     if (convergenceItems.length >= 9) break;
   }
-
-  const missingItems = (declarations?.not_modelled ?? []).map((nm) =>
-    nm.replace(/\s*\([A-Z0-9\s-]+\)/g, "")
-  );
 
   return (
     <div className="bg-[#f5f3ed] text-[#080909]">
@@ -608,17 +601,11 @@ export default async function HomePage() {
               Read the code
             </Link>
             <Link
-              href={`/j/${mapTargetJurId}`}
+              href={`/j/${targetJurId}`}
               data-testid="hero-find-rules-by-place"
               className="inline-flex min-h-[44px] items-center border border-[#080909] bg-[#f5f3ed] px-5 py-2.5 font-mono text-xs uppercase tracking-[0.12em] text-[#080909] no-underline hover:bg-[#efeee8]"
             >
               Find rules by place
-            </Link>
-            <Link
-              href={`/j/${targetJurId}/timeline`}
-              className="inline-flex min-h-[44px] items-center border border-[#080909] bg-[#f5f3ed] px-5 py-2.5 font-mono text-xs uppercase tracking-[0.12em] text-[#080909] no-underline hover:bg-[#efeee8]"
-            >
-              What changed recently
             </Link>
           </div>
         </section>
@@ -744,29 +731,12 @@ export default async function HomePage() {
                       href={`/j/${targetJurId}/topics/${subj.slug}`}
                       className="text-lg font-semibold text-[#080909] underline decoration-[#c8ccc0] underline-offset-4 hover:decoration-[#080909]"
                     >
-                      {subj.title}
+                      {subj.title} →
                     </Link>
                   </div>
                   <p className="dg-serif text-sm text-[#171917]">
                     {subj.summary}
                   </p>
-                </div>
-
-                <div className="flex shrink-0 items-center gap-4">
-                  {subj.hasMapLink && (
-                    <Link
-                      href={`/j/${targetJurId}`}
-                      className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] text-[#5b5e56] underline decoration-[#c8ccc0] underline-offset-4 hover:text-[#080909]"
-                    >
-                      Open map
-                    </Link>
-                  )}
-                  <Link
-                    href={`/j/${targetJurId}/topics/${subj.slug}`}
-                    className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] text-[#080909] underline decoration-[#080909] underline-offset-4"
-                  >
-                    Read {subj.title} →
-                  </Link>
                 </div>
               </li>
             ))}
@@ -812,22 +782,14 @@ export default async function HomePage() {
                       {formatHumanDate(effDate)} ·{" "}
                       {formatPlainInstrumentStatus(doc)}
                     </span>
-                    {textHeld && (
-                      <Link
-                        href={`/j/${targetJurId}/documents/${doc.doc_id}`}
-                        className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] text-[#080909] underline decoration-[#080909] underline-offset-4"
-                      >
-                        Open document →
-                      </Link>
-                    )}
                   </div>
                   <h3 className="mt-1 text-lg font-semibold text-[#080909]">
                     {textHeld ? (
                       <Link
                         href={`/j/${targetJurId}/documents/${doc.doc_id}`}
-                        className="text-[#080909] no-underline hover:underline"
+                        className="text-[#080909] underline decoration-[#c8ccc0] underline-offset-4 hover:decoration-[#080909]"
                       >
-                        {title}
+                        {title} →
                       </Link>
                     ) : (
                       title
@@ -914,11 +876,21 @@ export default async function HomePage() {
               <summary className="flex min-h-[44px] cursor-pointer items-center justify-between font-medium text-[#080909]">
                 <span>What is missing?</span>
               </summary>
-              <ul className="dg-serif mt-2 list-disc space-y-1.5 pb-2 pl-5 text-sm leading-relaxed text-[#171917]">
-                {missingItems.map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
-              </ul>
+              <p className="dg-serif mt-2 pb-2 text-sm leading-relaxed text-[#171917]">
+                Land-use zone polygons currently cover{" "}
+                {pilotMetrics?.processedSheetsLabel ?? "4 sheets"} in parts of{" "}
+                {pilotMetrics?.partialZoneAreaLabel ?? cityLabel} (
+                {pilotMetrics?.mapCoveragePct ?? 1.5}% of {regionLabel}), the
+                July 2025 zoning amendment is not yet obtained from public
+                sources, and supporting fire, TDR, and aviation instruments are
+                listed by reference.{" "}
+                <Link
+                  href="/pilot#what-is-missing"
+                  className="text-[#080909] underline"
+                >
+                  See the full list of declared gaps on the Pilot page →
+                </Link>
+              </p>
             </details>
           </div>
         </section>

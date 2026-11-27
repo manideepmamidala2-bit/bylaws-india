@@ -402,14 +402,7 @@ export default async function BrowseByWardPage({
                           </div>
                           {grp.lines.length === 0 ? (
                             <p className="dg-serif mt-1.5 text-xs text-[#5b5e56]">
-                              See{" "}
-                              <Link
-                                href={grp.subjectHref}
-                                className="text-[#080909] underline"
-                              >
-                                {grp.title}
-                              </Link>
-                              .
+                              General {grp.title.toLowerCase()} rules apply.
                             </p>
                           ) : (
                             <div className="mt-1.5 text-xs">
@@ -435,15 +428,16 @@ export default async function BrowseByWardPage({
                         </section>
                       ))}
                     </div>
-                    <div className="mt-3 pt-2">
-                      <ReportProblemLink
-                        pagePath={`/j/${dataset.jurisdiction.id}/wards`}
-                      />
-                    </div>
                   </>
                 )}
               </article>
             ))}
+          </div>
+
+          <div className="pt-2">
+            <ReportProblemLink
+              pagePath={`/j/${dataset.jurisdiction.id}/wards`}
+            />
           </div>
         </section>
       </main>

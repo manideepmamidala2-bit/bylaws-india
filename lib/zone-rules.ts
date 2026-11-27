@@ -220,7 +220,7 @@ export function buildZoneRulesSummaryMap(params: {
       ZONE_CODE_LABELS_FALLBACK[zoneCode] ??
       zoneCode;
     const subjectHrefFor = (slug: string) =>
-      `/j/${jurisdictionId}/topics/${slug}`;
+      `/j/${jurisdictionId}/topics/${slug}?zone=${encodeURIComponent(zoneCode)}`;
     const allowedUses = ZONE_TO_USE_CATEGORIES[zoneCode] ?? [];
 
     // 1. Uses group (from clause-zone-tags.json)

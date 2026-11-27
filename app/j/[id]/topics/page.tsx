@@ -93,29 +93,12 @@ export default async function TopicsIndexPage({ params }: TopicsPageProps) {
                       href={`/j/${jurisdiction.id}/topics/${subj.slug}`}
                       className="text-xl font-semibold text-[#080909] underline decoration-[#c8ccc0] underline-offset-4 hover:decoration-[#080909]"
                     >
-                      {subj.title}
+                      {subj.title} →
                     </Link>
                   </div>
                   <p className="dg-serif text-sm leading-relaxed text-[#171917]">
                     {subj.summary}
                   </p>
-                </div>
-
-                <div className="flex shrink-0 items-center gap-4">
-                  {subj.hasMapLink && (
-                    <Link
-                      href={`/j/${jurisdiction.id}`}
-                      className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] text-[#5b5e56] underline decoration-[#c8ccc0] underline-offset-4 hover:text-[#080909]"
-                    >
-                      Open map
-                    </Link>
-                  )}
-                  <Link
-                    href={`/j/${jurisdiction.id}/topics/${subj.slug}`}
-                    className="inline-flex min-h-[44px] items-center font-mono text-xs uppercase tracking-[0.12em] text-[#080909] underline decoration-[#080909] underline-offset-4"
-                  >
-                    What applies today →
-                  </Link>
                 </div>
               </li>
             ))}

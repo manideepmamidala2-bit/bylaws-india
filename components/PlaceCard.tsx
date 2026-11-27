@@ -176,12 +176,6 @@ export function PlaceCard({
           <h3 className="text-base font-semibold text-[#080909]">
             Rules for this zone
           </h3>
-          <Link
-            href={`/j/${jurisdictionId}/wards`}
-            className="inline-flex min-h-[44px] items-center font-mono text-[11px] uppercase tracking-[0.12em] text-[#080909] underline decoration-[#080909] underline-offset-4"
-          >
-            Browse by ward →
-          </Link>
         </div>
 
         {/* One line on why zoning regulations govern these subjects (bye-law 1.4), with quote on tap */}
@@ -272,14 +266,8 @@ export function PlaceCard({
 
                 {group.lines.length === 0 ? (
                   <p className="dg-serif mt-1 text-xs text-[#5b5e56]">
-                    See the{" "}
-                    <Link
-                      href={group.subjectHref}
-                      className="text-[#080909] underline"
-                    >
-                      {group.title} subject page
-                    </Link>{" "}
-                    for general rules.
+                    General {group.title.toLowerCase()} rules apply on the{" "}
+                    {group.title.toLowerCase()} subject page.
                   </p>
                 ) : (
                   <ul className="mt-2 space-y-2">
@@ -289,12 +277,9 @@ export function PlaceCard({
                         className="border-t border-[#efeee8] pt-2 first:border-t-0 first:pt-0"
                       >
                         <div className="flex flex-wrap items-baseline justify-between gap-2 text-xs">
-                          <Link
-                            href={line.subjectHref}
-                            className="dg-serif inline-flex min-h-[26px] items-center font-medium text-[#080909] underline decoration-[#c8ccc0] underline-offset-4 hover:decoration-[#080909]"
-                          >
+                          <span className="dg-serif inline-flex min-h-[26px] items-center font-medium text-[#080909]">
                             {line.rulePlain}
-                          </Link>
+                          </span>
                           <span className="font-mono text-xs font-semibold text-[#080909]">
                             {line.valuePlain}
                           </span>

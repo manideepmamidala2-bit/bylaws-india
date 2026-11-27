@@ -22,6 +22,14 @@ export interface AutomatedCheckSummary {
   status: "PASS";
 }
 
+export function formatPluralCount(
+  count: number,
+  singular: string,
+  plural = `${singular}s`
+): string {
+  return `${count} ${count === 1 ? singular : plural}`;
+}
+
 export interface DatasetPilotMetrics {
   datasetId: string;
   releaseVersion: string;
@@ -43,6 +51,7 @@ export interface DatasetPilotMetrics {
   wardsCount: number;
   activeZonesCount: number;
   processedSheetsCount: number;
+  processedSheetsLabel: string;
   mapCoveragePct: number;
   roadMedianOffsetM: number;
   roadP90OffsetM: number;
@@ -163,7 +172,16 @@ export async function computeDatasetPilotMetrics(): Promise<DatasetPilotMetrics>
     activeZones.filter((z) => z.properties.verification === "machine_checked")
       .length;
 
-  const processedSheetsCount = mapMetrics?.sheets?.length ?? 0;
+  const distinctZoneSourceMaps = new Set(
+    activeZones
+      .map((z) => z.properties.source_map)
+      .filter((s): s is string => Boolean(s))
+  );
+  const processedSheetsCount =
+    (mapMetrics?.sheets?.length ?? 0) > 0
+      ? mapMetrics!.sheets.length
+      : distinctZoneSourceMaps.size;
+  const processedSheetsLabel = formatPluralCount(processedSheetsCount, "sheet");
   const mapCoveragePct = mapMetrics?.coveragePctOfParent ?? 1.5;
   const roadMedianOffsetM = Math.round(mapMetrics?.roadMedianOffsetM ?? 8);
   const roadP90OffsetM = Math.round(mapMetrics?.roadP90OffsetM ?? 21);
@@ -215,7 +233,7 @@ export async function computeDatasetPilotMetrics(): Promise<DatasetPilotMetrics>
       title: "Map street centre-line offset and printed-grid fit",
       guarantees:
         "Measures georeferenced master plan sheets against printed UTM grid crosshairs and independent OpenStreetMap road centre-lines.",
-      latestResult: `~${roadMedianOffsetM} m median street offset (~${roadP90OffsetM} m 90th-percentile across ${roadSegmentCount} road segments; ${processedSheetsCount} sheets)`,
+      latestResult: `~${roadMedianOffsetM} m median street offset (~${roadP90OffsetM} m 90th-percentile across ${roadSegmentCount} road segments; ${processedSheetsLabel})`,
       status: "PASS",
     },
     {
@@ -252,16 +270,48 @@ export async function computeDatasetPilotMetrics(): Promise<DatasetPilotMetrics>
     },
   ];
 
-  const missingItems = (declarations?.not_modelled ?? []).map((nm) =>
-    nm.replace(/\s*\([A-Z0-9\s-]+\)/g, "")
+  const rawNotModelled = (declarations?.not_modelled ?? []).map((nm) =>
+    nm
+      .replace(/\s*\([A-Z0-9\s-]+\)/g, "")
+      .replace(/\b\d+\s+sheets?\b/i, processedSheetsLabel)
   );
-  const unobtainableItems = (declarations?.unobtainable_documents ?? []).map(
+  const rawUnobtainable = (declarations?.unobtainable_documents ?? []).map(
     (u) => ({
       id: u.id,
       title: u.title,
       reason: u.reason,
     })
   );
+
+  // Deduplicate unobtainable documents against `not_modelled` so the July 2025 amendment appears only once.
+  const unobtainableItems = rawUnobtainable.filter((u) => {
+    const monthYearMatch =
+      /(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}/i.exec(
+        `${u.title} ${u.reason}`
+      );
+    if (monthYearMatch) {
+      const token = monthYearMatch[0].toLowerCase();
+      if (rawNotModelled.some((nm) => nm.toLowerCase().includes(token))) {
+        return false;
+      }
+    }
+    return !rawNotModelled.some((nm) =>
+      nm.toLowerCase().includes(u.title.toLowerCase())
+    );
+  });
+
+  const seenGapNormalized = new Set<string>();
+  const missingItems: string[] = [];
+  for (const item of [
+    ...rawNotModelled,
+    ...unobtainableItems.map((u) => `${u.title}: ${u.reason}`),
+  ]) {
+    const norm = item.toLowerCase().replace(/\s+/g, " ").trim();
+    if (!seenGapNormalized.has(norm)) {
+      seenGapNormalized.add(norm);
+      missingItems.push(item);
+    }
+  }
 
   return {
     datasetId: manifest.dataset_id ?? "",
@@ -284,6 +334,7 @@ export async function computeDatasetPilotMetrics(): Promise<DatasetPilotMetrics>
     wardsCount,
     activeZonesCount: activeZones.length,
     processedSheetsCount,
+    processedSheetsLabel,
     mapCoveragePct,
     roadMedianOffsetM,
     roadP90OffsetM,

@@ -180,6 +180,25 @@ Tracks the 11-PR remediation series defined in [`docs/plans/pr-series/00-overvie
 | **Part 6** | Partner documents (in `docs/partners/`) | ✅ Complete | Authored all six partner documents in `docs/partners/`: `offer.md` (one-page college offer), `workshop-kit.md` (one-day 5-session workshop outline, materials list, facilitator notes, certificate template), `internship.md` (60 to 120-hour verification internship outline with weekly tasks and outputs), `mou-template.md` (free, non-exclusive semester MoU covering activities, roles, open licences, credit, term, and exit), `charter.md` (purpose, 5 principles, decision-making, permanent openness), and `demo-script.md` (5-minute live demo script) |
 | **Part 7** | Quality and sharing | ✅ Complete | Added per-page Open Graph social images using `next/og` (`app/opengraph-image.tsx` and `app/api/og/route.tsx`), `app/sitemap.ts` (`/sitemap.xml`), `app/robots.ts` (`/robots.txt`), `app/not-found.tsx` (friendly `404`), and cookieless Vercel Web Analytics (`@vercel/analytics/react` in `app/layout.tsx`); added `scripts/check_lighthouse.mjs` (`performance=96..100 >= 70`, `accessibility=100 >= 95` on Home, Map, Subject, and Document pages under mobile emulation) and `e2e/pilot-launch.spec.ts` verifying WCAG 2.2 AA across all pages and capturing `390 px` and `1280 px` screenshots; verified all `180` pytest tests, `20` Vitest + `axe-core` tests, `255` built HTML routes (`max HTML = 297.8 KB <= 300 KB`, `max initial JS+data = 0.62 MB <= 1.50 MB`), and `12` Playwright E2E browser tests pass |
 
+---
+
+## Bylaw One: The Guide, and One Job per Page (`docs/plans/bylaw-one-guide-plan.md` — Parts 1–5)
+
+- **Baseline Release**: `4.0.0`
+- **Active Change**: `261127-nmcj-bylaw-one-guide`
+- **Target**: Build the three-form Bylaw One Guide (`/guide` reading mode, `/guide/slides` `reveal.js` slide mode with speaker view, and `bylaw-one-guide.html` single-file offline bundle `<= 10 MB`) from a single source in `content/guide/`, and enforce one job per page across the site.
+
+### Part-by-Part Status
+
+| Part | Title | Status | Notes |
+|---|---|---|---|
+| **Part 1** | One job per page (`docs/site-map.md`, single navigation config, no duplicate links, unified map address, deduplicated gaps, consistent figures, CI checks) | ✅ Complete | Wrote `docs/site-map.md`; created `lib/navigation.ts` driving `TopNav.tsx` (`The code`, `Map`, `What changed`, `About`) and `Footer.tsx` (`Guide`, `Pilot`, `How we check`, `Use with AI`, `Join`, `Press`, `Sources`, `Data and downloads`, `Licence`) with zero overlap; routed both header `Map` and hero `"Find rules by place"` to `/j/in-ka-bengaluru`; removed duplicate links inside cards on Home, What changed, Topics index, Press, Use with AI, Browse by ward, and Place Card; deduplicated `declarations.json` gaps on `/pilot` (July 2025 amendment appears once) with a short summary + link on `/` and no duplicate FAQ on `/about`; preserved `data/reports/` in `.vercelignore` and unified `processedSheetsLabel` (`4 sheets`) across all pages; and added CI link and figure consistency checks in `scripts/check_site_consistency.mjs` and `__tests__/site-consistency.test.ts` |
+| **Part 2** | Guide content as source files (`content/guide/`, generated placeholders, Mermaid diagrams, Playwright screenshots) | 🔄 In Progress | Pending |
+| **Part 3** | Reading mode (`/guide`) | ⏳ Pending | Pending |
+| **Part 4** | Slide mode (`/guide/slides`) | ⏳ Pending | Pending |
+| **Part 5** | Single-file offline download (`bylaw-one-guide.html`) | ⏳ Pending | Pending |
+
+
 
 
 

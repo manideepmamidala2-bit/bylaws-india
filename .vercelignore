@@ -16,3 +16,4 @@
 /vitest.setup.ts
 !/public/data/
 !/app/data/
+!/data/reports/
