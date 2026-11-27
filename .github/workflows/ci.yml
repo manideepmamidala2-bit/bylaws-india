@@ -117,6 +117,7 @@ jobs:
           node scripts/build_place_index.mjs
           node scripts/build_machine_readable.mjs
           node scripts/build_search.mjs
+          node scripts/build_guide_bundle.mjs
 
       - name: Run ESLint
         run: npm run lint
@@ -141,3 +142,9 @@ jobs:
 
       - name: Run Playwright browser tests (PMTiles 206 range, non-blank map, document page, plot flow)
         run: npx playwright test
+
+      - name: Upload single-file offline guide (bylaw-one-guide.html) & attach to GitHub release
+        uses: actions/upload-artifact@v4
+        with:
+          name: bylaw-one-guide-html
+          path: public/bylaw-one-guide.html

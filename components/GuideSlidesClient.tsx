@@ -116,6 +116,7 @@ export function GuideSlidesClient({
         if (cancelled || !revealDeckElRef.current) return;
         const deck = new Reveal(revealDeckElRef.current, {
           embedded: true,
+          disableLayout: true,
           controls: false,
           progress: false,
           slideNumber: false,
@@ -322,7 +323,7 @@ export function GuideSlidesClient({
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-1">
         <div
           ref={revealDeckElRef}
-          className="reveal border-2 border-[#080909] bg-[#f5f3ed] p-6 md:p-12"
+          className="reveal relative overflow-hidden border-2 border-[#080909] bg-[#f5f3ed] p-6 md:p-12"
         >
           <div className="slides">
             {slides.map((slide, idx) => {

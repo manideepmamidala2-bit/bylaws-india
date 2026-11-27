@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/ensure_data.mjs && node scripts/build_place_index.mjs && node scripts/build_machine_readable.mjs && node scripts/build_search.mjs",
+    "prebuild": "node scripts/ensure_data.mjs && node scripts/build_place_index.mjs && node scripts/build_machine_readable.mjs && node scripts/build_search.mjs && node scripts/build_guide_bundle.mjs",
     "build": "next build",
     "check-budgets": "node scripts/check_page_budgets.mjs && node scripts/check_site_consistency.mjs",
     "check-consistency": "node scripts/check_site_consistency.mjs",
@@ -12,7 +12,7 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "pretest": "node scripts/ensure_data.mjs && node scripts/build_place_index.mjs && node scripts/build_machine_readable.mjs",
+    "pretest": "node scripts/ensure_data.mjs && node scripts/build_place_index.mjs && node scripts/build_machine_readable.mjs && node scripts/build_guide_bundle.mjs",
     "test": "vitest run",
     "test:e2e": "playwright test",
     "generate": "cd pipeline && uv run python ../scripts/generate_models.py"

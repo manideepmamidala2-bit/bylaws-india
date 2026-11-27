@@ -84,7 +84,7 @@ A build script (`scripts/build_guide_bundle.mjs`) MUST generate `public/bylaw-on
 
 ### Phase 4: Single-File Offline Bundle & End-to-End Verification (Part 5)
 
-- [ ] T005 Implement `scripts/build_guide_bundle.mjs` to build `public/bylaw-one-guide.html` (`<= 10 MB`) with both reading and slide modes, inlined CSS, JS, subset WOFF2 fonts, SVG diagrams, and base64 screenshots (zero network requests), link it on `/data` (`app/data/page.tsx`) and in `.github/workflows/ci.yml`, add Playwright tests in `e2e/guide.spec.ts` testing `/guide`, `/guide/slides`, and `bylaw-one-guide.html` with network disabled, capture final PR screenshots, update `docs/progress.md` and the PR body, commit, and push Part 5 <!-- R5 -->
+- [x] T005 Implement `scripts/build_guide_bundle.mjs` to build `public/bylaw-one-guide.html` (`<= 10 MB`) with both reading and slide modes, inlined CSS, JS, subset WOFF2 fonts, SVG diagrams, and base64 screenshots (zero network requests), link it on `/data` (`app/data/page.tsx`) and in `.github/workflows/ci.yml`, add Playwright tests in `e2e/guide.spec.ts` testing `/guide`, `/guide/slides`, and `bylaw-one-guide.html` with network disabled, capture final PR screenshots, update `docs/progress.md` and the PR body, commit, and push Part 5 <!-- R5 -->
 
 ## Execution Order
 

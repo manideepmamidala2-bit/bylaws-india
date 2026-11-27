@@ -56,9 +56,17 @@ export default async function DataReleasesPage() {
           </p>
           <div className="mt-4 flex flex-wrap gap-3 font-mono text-xs uppercase tracking-[0.12em]">
             <a
+              href="/bylaw-one-guide.html"
+              download="bylaw-one-guide.html"
+              data-testid="download-offline-guide-link"
+              className="border border-[#080909] bg-[#080909] px-3 py-1.5 text-[#f5f3ed] no-underline"
+            >
+              Offline Guide — Single File (bylaw-one-guide.html)
+            </a>
+            <a
               href="/data/datapackage.json"
               data-testid="download-datapackage-link"
-              className="border border-[#080909] bg-[#080909] px-3 py-1.5 text-[#f5f3ed] no-underline"
+              className="border border-[#080909] bg-[#f5f3ed] px-3 py-1.5 text-[#080909] no-underline"
             >
               Frictionless Data Package (datapackage.json)
             </a>
