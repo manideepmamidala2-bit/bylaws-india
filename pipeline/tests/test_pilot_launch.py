@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import gzip
 import json
+import re
 import shutil
 import subprocess
 import tomllib
@@ -480,6 +481,45 @@ def test_part4_verification_workflow_tasks_create_verify_import_and_two_match_ru
     )
     assert len(credits) == 2
     assert {c["verifier_name"] for c in credits} == {"Asha Rao", "Kiran Kumar"}
+
+
+def test_part5_pilot_checks_join_press_about_report_problem_and_generated_numbers() -> None:
+    """Part 5: Verify Home pilot callout, /pilot, /checks, /join, /press, Who runs Bylaw One on /about, Report a problem links, Current as of dates, and no hand-typed dataset numbers."""
+    home_txt = (REPO_ROOT / "app" / "page.tsx").read_text(encoding="utf-8")
+    assert "A working pilot for" in home_txt
+    assert "Built in the open. Looking for" in home_txt
+    assert "Find rules by place" in home_txt
+    assert "Current as of" in home_txt
+
+    about_txt = (REPO_ROOT / "app" / "about" / "page.tsx").read_text(encoding="utf-8")
+    assert "Who runs Bylaw One" in about_txt
+    assert "open permanently" in about_txt
+    assert "siteCfg.organisationName" in about_txt
+
+    for page_rel in (
+        "app/pilot/page.tsx",
+        "app/checks/page.tsx",
+        "app/join/page.tsx",
+        "app/press/page.tsx",
+    ):
+        p = REPO_ROOT / page_rel
+        assert p.is_file(), f"Missing Part 5 page: {page_rel}"
+        txt = p.read_text(encoding="utf-8")
+        assert re.search(r"\b(?:5,341|5341|1,276|1276|369|271|313)\b", txt) is None, (
+            f"{page_rel} contains hand-typed dataset figure"
+        )
+
+    join_txt = (REPO_ROOT / "app" / "join" / "page.tsx").read_text(encoding="utf-8")
+    for sec in ("Colleges", "Students", "Practitioners", "Civic and data groups"):
+        assert sec in join_txt
+    assert "60 to 120 hours" in join_txt
+
+    press_txt = (REPO_ROOT / "app" / "press" / "page.tsx").read_text(encoding="utf-8")
+    assert "/press/bylaw-one-logo.svg" in press_txt
+    assert "/press/bylaw-one-mark.svg" in press_txt
+    assert (REPO_ROOT / "public" / "press" / "bylaw-one-logo.svg").is_file()
+    assert (REPO_ROOT / "public" / "press" / "bylaw-one-mark.svg").is_file()
+
 
 
 

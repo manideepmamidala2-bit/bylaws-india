@@ -593,6 +593,23 @@ for (const srcDir of ["app", "components", "lib"]) {
   }
 }
 
+// Part 5 CI generated-numbers check: verify /pilot, /checks, and /press source files do not hard-code dataset counts
+for (const relSrc of [
+  "app/pilot/page.tsx",
+  "app/checks/page.tsx",
+  "app/press/page.tsx",
+]) {
+  const fullSrc = path.join(repoRoot, relSrc);
+  if (!fs.existsSync(fullSrc)) continue;
+  const txt = fs.readFileSync(fullSrc, "utf8");
+  const hardNum = txt.match(/\b(?:5,341|5341|1,276|1276|369|271|313)\b/);
+  if (hardNum) {
+    violations.push(
+      `${relSrc}: Generated-numbers check failed — hand-typed dataset figure ${JSON.stringify(hardNum[0])} found in page source`
+    );
+  }
+}
+
 console.log(
   `[check_page_budgets] Checked ${htmlFiles.length} built HTML routes (dataset_id=${expectedDatasetId}, shared-content pairs=${sharedChecksCount}): ` +
     `max HTML = ${(maxHtmlObserved / 1024).toFixed(1)} KB (${maxHtmlRoute || "/"}) [budget <= 300 KB], ` +

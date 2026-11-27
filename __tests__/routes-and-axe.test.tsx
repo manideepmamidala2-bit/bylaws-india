@@ -28,6 +28,10 @@ import DataReleasesPage from "@/app/data/page";
 import AboutPage from "@/app/about/page";
 import UseWithAiPage from "@/app/use-with-ai/page";
 import VerifyTaskSetPage from "@/app/verify/[taskSet]/page";
+import PilotPage from "@/app/pilot/page";
+import ChecksPage from "@/app/checks/page";
+import JoinPage from "@/app/join/page";
+import PressPage from "@/app/press/page";
 import TopicsIndexPage from "@/app/j/[id]/topics/page";
 import TopicDetailPage from "@/app/j/[id]/topics/[topic]/page";
 import nextConfig from "@/next.config";
@@ -830,6 +834,63 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     ).toContain("Asha Rao,RV College of Architecture");
     await assertNoAxeViolations(cVerify);
     uVerify();
+
+    // Part 5: Pilot, Checks, Join, and Press pages render generated numbers and pass axe-core
+    const pilotUi = await PilotPage();
+    const { container: cPilot, unmount: uPilot } = render(pilotUi);
+    expect(screen.getByTestId("metric-documents").textContent).toBe("16");
+    expect(screen.getByTestId("metric-corporations").textContent).toBe("5");
+    expect(screen.getByTestId("metric-wards").textContent).toBe("369");
+    expect(screen.getByTestId("metric-map-coverage").textContent).toBe("1.5%");
+    expect(screen.getByTestId("metric-human-verified").textContent).toBe("0");
+    expect(screen.getByTestId("current-as-of-date").textContent).toContain(
+      "Current as of 14 May 2026"
+    );
+    await assertNoAxeViolations(cPilot);
+    uPilot();
+
+    const checksUi = await ChecksPage();
+    const { container: cChecks, unmount: uChecks } = render(checksUi);
+    expect(screen.getByTestId("checks-total-human-verified").textContent).toBe(
+      "0"
+    );
+    expect(screen.getByTestId("checks-total-open-review").textContent).toBe(
+      "0"
+    );
+    expect(
+      Number(
+        (screen.getByTestId("checks-total-machine-checked").textContent ?? "0")
+          .replace(/,/g, "")
+      )
+    ).toBeGreaterThan(5000);
+    await assertNoAxeViolations(cChecks);
+    uChecks();
+
+    const joinUi = await JoinPage();
+    const { container: cJoin, unmount: uJoin } = render(joinUi);
+    expect(screen.getByTestId("join-section-colleges")).toBeInTheDocument();
+    expect(screen.getByTestId("join-section-students")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("join-section-practitioners")
+    ).toBeInTheDocument();
+    expect(screen.getByTestId("join-section-civic")).toBeInTheDocument();
+    expect(screen.getByTestId("join-the-pilot-form-link")).toHaveAttribute(
+      "href",
+      expect.stringContaining("template=join-the-pilot.yml")
+    );
+    await assertNoAxeViolations(cJoin);
+    uJoin();
+
+    const pressUi = await PressPage();
+    const { container: cPress, unmount: uPress } = render(pressUi);
+    expect(
+      screen.getByTestId("press-description-paragraph").textContent
+    ).toContain("16 in-force building acts");
+    expect(
+      screen.getByTestId("press-description-paragraph").textContent
+    ).toContain("369 wards");
+    await assertNoAxeViolations(cPress);
+    uPress();
 
     // 4. Part 4: Plain land-use zone gap notice on Map and Land use subject pages
     const expectedGapLine =
