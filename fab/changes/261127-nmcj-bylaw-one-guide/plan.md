@@ -96,42 +96,46 @@ A build script (`scripts/build_guide_bundle.mjs`) MUST generate `public/bylaw-on
 
 ### Functional Completeness
 
-- [ ] A-001 R1: `docs/site-map.md` exists and lists every route with its purpose in one line.
-- [ ] A-002 R1: Header (`TopNav.tsx`) and footer (`Footer.tsx`) read from one navigation config (`lib/navigation.ts`), and no destination appears in both header and footer.
-- [ ] A-003 R1: No page body links to the same destination more than twice, duplicate links/buttons within cards are removed, `"Map"` and `"Find rules by place"` resolve to the same route (`/j/in-ka-bengaluru`), gaps from `declarations.json` are deduplicated and listed in full only on `/pilot`, and every repeated figure comes from one generated value (`4 sheets` everywhere).
-- [ ] A-004 R2: `content/guide/` contains all sections from Section 5's outline with slide summaries (`<= 40 words`), presenter notes, and reading versions, generated `{{placeholder}}` figures from release data, 6 Mermaid SVG diagrams, and 12 Playwright screenshots (`1280 px` and `390 px`).
-- [ ] A-005 R3: `/guide` renders in reading mode in the Bylaw One design with a sticky contents list, 5 audience entry points (`college`, `student`, `practitioner`, `developer`, `partner or funder`), inline diagrams, screenshots, and `"Present"` and `"Download guide (single file)"` buttons.
-- [ ] A-006 R4: `/guide/slides` renders with `reveal.js`, keyboard navigation, fullscreen, speaker view / presenter notes, `"Start from section"` deep-linking, and the Bylaw One look (`#f5f3ed` paper, `#080909` ink, `Inter Tight` headings, `#ff6b52` accent for current item only).
-- [ ] A-007 R5: `public/bylaw-one-guide.html` (`<= 10 MB`) is generated at build time with both reading mode and slide mode, all CSS/JS/fonts/SVGs/screenshots inlined, release/dataset/date metadata on the title page, linked from `/guide` and `/data`, and attached to releases.
+- [x] A-001 R1: `docs/site-map.md` exists and lists every route with its purpose in one line.
+- [x] A-002 R1: Header (`TopNav.tsx`) and footer (`Footer.tsx`) read from one navigation config (`lib/navigation.ts`), and no destination appears in both header and footer.
+- [x] A-003 R1: No page body links to the same destination more than twice, duplicate links/buttons within cards are removed, `"Map"` and `"Find rules by place"` resolve to the same route (`/j/in-ka-bengaluru`), gaps from `declarations.json` are deduplicated and listed in full only on `/pilot`, and every repeated figure comes from one generated value (`4 sheets` everywhere).
+- [x] A-004 R2: `content/guide/` contains all sections from Section 5's outline with slide summaries (`<= 40 words`), presenter notes, and reading versions, generated `{{placeholder}}` figures from release data, 6 Mermaid SVG diagrams, and 12 Playwright screenshots (`1280 px` and `390 px`).
+- [x] A-005 R3: `/guide` renders in reading mode in the Bylaw One design with a sticky contents list, 5 audience entry points (`college`, `student`, `practitioner`, `developer`, `partner or funder`), inline diagrams, screenshots, and `"Present"` and `"Download guide (single file)"` buttons.
+- [x] A-006 R4: `/guide/slides` renders with `reveal.js`, keyboard navigation, fullscreen, speaker view / presenter notes, `"Start from section"` deep-linking, and the Bylaw One look (`#f5f3ed` paper, `#080909` ink, `Inter Tight` headings, `#ff6b52` accent for current item only).
+- [x] A-007 R5: `public/bylaw-one-guide.html` (`<= 10 MB`) is generated at build time with both reading mode and slide mode, all CSS/JS/fonts/SVGs/screenshots inlined, release/dataset/date metadata on the title page, linked from `/guide` and `/data`, and attached to releases.
 
 ### Behavioral Correctness
 
-- [ ] A-008 R1: `scripts/check_site_consistency.mjs` runs in CI and fails the build if a destination appears in both header and footer, if a page body links the same destination more than twice, or if a repeated figure differs across pages.
-- [ ] A-009 R2: All narrative, principles, roles, layered packs, agent engine, college/student/practitioner offers, one-day workshop, launch timeline, and sustainability content follow Section 6's content brief, and unbuilt features (agent engine, packs, installers) are described strictly as **planned** with no unbuilt install steps.
-- [ ] A-010 R2: No legal text is invented or rewritten anywhere in the guide, and all quoted provisions pass the text fidelity / citation check.
+- [x] A-008 R1: `scripts/check_site_consistency.mjs` runs in CI and fails the build if a destination appears in both header and footer, if a page body links the same destination more than twice, or if a repeated figure differs across pages.
+- [x] A-009 R2: All narrative, principles, roles, layered packs, agent engine, college/student/practitioner offers, one-day workshop, launch timeline, and sustainability content follow Section 6's content brief, and unbuilt features (agent engine, packs, installers) are described strictly as **planned** with no unbuilt install steps.
+- [x] A-010 R2: No legal text is invented or rewritten anywhere in the guide, and all quoted provisions pass the text fidelity / citation check.
 
 ### Scenario Coverage
 
-- [ ] A-011 R5: Playwright test (`e2e/guide.spec.ts`) opens `bylaw-one-guide.html` with network disabled and verifies that both reading mode and slide mode work with zero network requests.
-- [ ] A-012 R3: `/guide` and `/guide/slides` pass `axe-core` WCAG 2.2 AA accessibility checks and `scripts/check_page_budgets.mjs` page weight budgets.
+- [x] A-011 R5: Playwright test (`e2e/guide.spec.ts`) opens `bylaw-one-guide.html` with network disabled and verifies that both reading mode and slide mode work with zero network requests.
+- [x] A-012 R3: `/guide` and `/guide/slides` pass `axe-core` WCAG 2.2 AA accessibility checks and `scripts/check_page_budgets.mjs` page weight budgets.
 
 ### Edge Cases & Error Handling
 
-- [ ] A-013 R1: Singular/plural formatting for sheet counts (`1 sheet` vs `4 sheets`) and deduplication of the July 2025 amendment across `unobtainable_documents` and `not_modelled` handle both single and multi-item arrays cleanly.
-- [ ] A-014 R2: `lib/guide.ts` throws an explicit error at build/test time if any `{{placeholder}}` token in `content/guide/*.md` is unknown or unreplaced, or if any slide summary exceeds 40 words.
+- [x] A-013 R1: Singular/plural formatting for sheet counts (`1 sheet` vs `4 sheets`) and deduplication of the July 2025 amendment across `unobtainable_documents` and `not_modelled` handle both single and multi-item arrays cleanly.
+- [x] A-014 R2: `lib/guide.ts` throws an explicit error at build/test time if any `{{placeholder}}` token in `content/guide/*.md` is unknown or unreplaced, or if any slide summary exceeds 40 words.
 
 ### Code Quality
 
-- [ ] A-015 Pattern consistency: New code follows naming and structural patterns of surrounding TypeScript/Next.js and Node build script files.
-- [ ] A-016 No unnecessary duplication: Existing utilities (`computeDatasetPilotMetrics`, `getSiteConfig`, `lib/data.ts`) are reused rather than duplicated.
-- [ ] A-017 Readability and maintainability: Functions remain focused and modular (`lib/navigation.ts`, `lib/guide.ts`, `components/GuideReaderClient.tsx`, `components/GuideSlidesClient.tsx`).
-- [ ] A-018 No magic strings or numbers: Generated dataset figures and configuration values come from `computeDatasetPilotMetrics()` and `getSiteConfig()` rather than hardcoded literals.
+- [x] A-015 Pattern consistency: New code follows naming and structural patterns of surrounding TypeScript/Next.js and Node build script files.
+- [x] A-016 No unnecessary duplication: Existing utilities (`computeDatasetPilotMetrics`, `getSiteConfig`, `lib/data.ts`) are reused rather than duplicated.
+- [x] A-017 Readability and maintainability: Functions remain focused and modular (`lib/navigation.ts`, `lib/guide.ts`, `components/GuideReaderClient.tsx`, `components/GuideSlidesClient.tsx`).
+- [x] A-018 No magic strings or numbers: Generated dataset figures and configuration values come from `computeDatasetPilotMetrics()` and `getSiteConfig()` rather than hardcoded literals.
 
 ## Notes
 
 - Check items as you review: `- [x]`
 - All acceptance items must pass before `/fab-continue` (hydrate)
 - If an item is not applicable, mark checked and prefix with **N/A**: `- [x] A-NNN **N/A**: {reason}`
+
+## Deletion Candidates
+
+- `components/TopNav.tsx:12-15` (`TopNavProps.jurisdictionName`, `TopNavProps.releaseVersion`, `TopNavProps.licence`) — Unused optional props on `TopNavProps` that `TopNav` neither destructures nor renders now that header links derive solely from `getHeaderNavItems(targetJurId, active)` in `lib/navigation.ts`.
 
 ## Assumptions
 

@@ -12,6 +12,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { spawn } from "node:child_process";
 import { chromium } from "@playwright/test";
+import {
+  interpolatePlaceholders as interpolate,
+  loadGuidePlaceholdersFromDisk,
+} from "./guide_placeholders.mjs";
 
 const repoRoot = process.cwd();
 const guideDir = path.join(repoRoot, "content", "guide");
@@ -20,148 +24,6 @@ const screenshotsOutDir = path.join(repoRoot, "public", "guide", "screenshots");
 
 fs.mkdirSync(diagramsOutDir, { recursive: true });
 fs.mkdirSync(screenshotsOutDir, { recursive: true });
-
-function computePlaceholdersFromPublishedData() {
-  const manifest = JSON.parse(
-    fs.readFileSync(
-      path.join(repoRoot, "public", "data", "manifest.json"),
-      "utf8"
-    )
-  );
-  const visible = manifest.jurisdictions.filter((j) => j.visibility !== "test");
-  const parentJur =
-    visible.find((j) => visible.some((c) => c.parent === j.id)) || visible[0];
-  const childCorps = visible.filter((j) => j.parent === parentJur.id);
-  const ver = parentJur.latest_release || "4.0.0";
-  const parentDataDir = path.join(
-    repoRoot,
-    "public",
-    "data",
-    parentJur.id,
-    ver
-  );
-  const southDataDir = path.join(
-    repoRoot,
-    "public",
-    "data",
-    "in-ka-bengaluru-south",
-    ver
-  );
-
-  const docs = JSON.parse(
-    fs.readFileSync(path.join(parentDataDir, "documents.json"), "utf8")
-  );
-  const inForceDocs = docs.filter(
-    (d) =>
-      d.legal_status === "in_force" &&
-      d.acquisition_status !== "not_found" &&
-      d.applies_to_jurisdiction?.status !== "no" &&
-      (d.instrument_type ?? "instrument") !== "map" &&
-      (d.instrument_type ?? "instrument") !== "compilation"
-  );
-  const bodies = new Set();
-  for (const d of inForceDocs) {
-    const p = (d.issuing_authority || "")
-      .split(/[/,]/)
-      .map((s) => s.trim().toLowerCase())
-      .find(Boolean);
-    if (p) bodies.add(p);
-  }
-
-  let provisionsCount = 0;
-  let machineCheckedProvs = 0;
-  let humanVerifiedProvs = 0;
-  const parentRel = parentJur.releases.find((r) => r.version === ver);
-  for (const clRel of [
-    ...(parentRel.files?.clauses || []),
-    ...(parentRel.drafts?.clauses || []),
-  ]) {
-    const clPath = path.join(repoRoot, "public", clRel.replace(/^\/+/, ""));
-    if (!fs.existsSync(clPath)) continue;
-    const tree = JSON.parse(fs.readFileSync(clPath, "utf8"));
-    for (const c of tree.clauses || []) {
-      if (c.superseded_by || c.record_superseded_by) continue;
-      if (c.type === "table_row") continue;
-      provisionsCount += 1;
-      if (c.verification === "machine_checked") machineCheckedProvs += 1;
-      if (c.verification === "human_verified") humanVerifiedProvs += 1;
-    }
-  }
-
-  const paramsPayload = JSON.parse(
-    fs.readFileSync(path.join(parentDataDir, "parameters.json"), "utf8")
-  );
-  const allParams = paramsPayload.records || [];
-  const activeParams = allParams.filter(
-    (r) => r.legal_status === "in_force" && !r.valid_to
-  );
-  const machineCheckedParams = allParams.filter(
-    (r) => r.verification === "machine_checked"
-  ).length;
-  const humanVerifiedParams = allParams.filter(
-    (r) => r.verification === "human_verified"
-  ).length;
-
-  const wardsFc = JSON.parse(
-    fs.readFileSync(path.join(parentDataDir, "wards.geojson"), "utf8")
-  );
-  const zonesFc = JSON.parse(
-    fs.readFileSync(path.join(southDataDir, "zones.geojson"), "utf8")
-  );
-  const activeZones = (zonesFc.features || []).filter(
-    (z) => !z.properties?.superseded_by && !z.properties?.record_superseded_by
-  );
-  const machineCheckedZones = activeZones.filter(
-    (z) => z.properties?.verification === "machine_checked"
-  ).length;
-  const humanVerifiedZones = activeZones.filter(
-    (z) => z.properties?.verification === "human_verified"
-  ).length;
-  const sheetsSet = new Set(
-    activeZones.map((z) => z.properties?.source_map).filter(Boolean)
-  );
-  const sheetsCount = sheetsSet.size || 4;
-
-  const totalMachineChecked =
-    machineCheckedProvs + machineCheckedParams + machineCheckedZones;
-  const totalHumanVerified =
-    humanVerifiedProvs + humanVerifiedParams + humanVerifiedZones;
-
-  return {
-    city: parentJur.aliases?.[0] || "Bengaluru",
-    region: parentJur.aliases?.[2] || "Greater Bengaluru",
-    state: "Karnataka",
-    partial_zone_area: "Bengaluru South",
-    documents_in_force: String(inForceDocs.length),
-    registered_sources: String(docs.length),
-    issuing_bodies: String(bodies.size),
-    provisions: provisionsCount.toLocaleString("en-IN"),
-    rules_as_data: "271",
-    total_parameters: String(allParams.length),
-    corporations: String(childCorps.length),
-    wards: String(wardsFc.features.length),
-    active_zones: activeZones.length.toLocaleString("en-IN"),
-    processed_sheets:
-      sheetsCount === 1 ? "1 sheet" : `${sheetsCount} sheets`,
-    processed_sheets_count: String(sheetsCount),
-    map_coverage_pct: "1.5%",
-    road_median_offset_m: "8 m",
-    road_p90_offset_m: "21 m",
-    verified_by_people: String(totalHumanVerified),
-    machine_checked: totalMachineChecked.toLocaleString("en-IN"),
-    checks_per_build: "10",
-    current_as_of: "14 May 2026",
-    release_version: ver,
-    dataset_id: manifest.dataset_id || "",
-  };
-}
-
-function interpolate(str, placeholders) {
-  return str.replace(/\{\{([a-z0-9_]+)\}\}/gi, (_m, k) => {
-    const key = String(k).toLowerCase();
-    return key in placeholders ? placeholders[key] : _m;
-  });
-}
 
 async function renderMermaidDiagrams(browser, assetsJson, placeholders) {
   const mermaidScriptPath = path.join(
@@ -358,7 +220,7 @@ async function main() {
     return;
   }
 
-  const placeholders = computePlaceholdersFromPublishedData();
+  const placeholders = loadGuidePlaceholdersFromDisk(repoRoot);
   const browser = await chromium.launch({ headless: true });
 
   try {
