@@ -3,18 +3,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { SearchBar } from "./SearchBar";
+import { getHeaderNavItems, type NavSection } from "@/lib/navigation";
 
-export type NavSection =
-  | "home"
-  | "map"
-  | "sources"
-  | "documents"
-  | "topics"
-  | "timeline"
-  | "review"
-  | "structure"
-  | "data"
-  | "about";
+export type { NavSection };
 
 interface TopNavProps {
   jurisdictionId?: string;
@@ -24,44 +15,23 @@ interface TopNavProps {
   licence?: string;
 }
 
+/**
+ * Primary top navigation bar driven by `lib/navigation.ts`:
+ * - label: "The code"
+ * - label: "Map"
+ * - label: "What changed"
+ * - label: "About"
+ */
 export function TopNav({ jurisdictionId, active }: TopNavProps) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const targetJurId = jurisdictionId ?? "";
-  const prefix = targetJurId ? `/j/${targetJurId}` : "";
-
-  const navItems: Array<{
-    key: "code" | "map" | "changed" | "about";
-    label: string;
-    href: string;
-    isCurrent: boolean;
-  }> = [
-    {
-      key: "code",
-      label: "The code",
-      href: prefix ? `${prefix}/topics` : "/data",
-      isCurrent: active === "topics" || active === "documents",
-    },
-    {
-      key: "map",
-      label: "Map",
-      href: prefix || "/data",
-      isCurrent: active === "map",
-    },
-    {
-      key: "changed",
-      label: "What changed",
-      href: prefix ? `${prefix}/timeline` : "/data",
-      isCurrent: active === "timeline",
-    },
-    {
-      key: "about",
-      label: "About",
-      href: "/about",
-      isCurrent: active === "about" || active === "structure",
-    },
-  ];
+  const bodyDefaultJur =
+    typeof document !== "undefined"
+      ? document.body?.dataset?.defaultJurisdiction || ""
+      : "";
+  const targetJurId = jurisdictionId || bodyDefaultJur || "";
+  const navItems = getHeaderNavItems(targetJurId, active);
 
   return (
     <header

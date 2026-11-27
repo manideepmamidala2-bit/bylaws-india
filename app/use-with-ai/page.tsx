@@ -96,17 +96,10 @@ export default async function UseWithAiPage() {
                 1 · Point your AI at llms.txt
               </div>
               <p className="dg-serif mt-2 text-sm leading-relaxed text-[#171917]">
-                Give your AI assistant{" "}
-                <a href="/llms.txt" className="font-mono underline">
-                  /llms.txt
-                </a>{" "}
-                for a compact directory of the site, coverage, and citation
-                rules, or{" "}
-                <a href="/llms-full.txt" className="font-mono underline">
-                  /llms-full.txt
-                </a>{" "}
-                for every subject&apos;s &ldquo;What applies today&rdquo; in one
-                Markdown file.
+                Give your AI assistant <code>/llms.txt</code> for a compact
+                directory of the site, coverage, and citation rules, or{" "}
+                <code>/llms-full.txt</code> for every subject&apos;s &ldquo;What
+                applies today&rdquo; in one Markdown file.
               </p>
               <div className="mt-4 flex flex-wrap gap-3 font-mono text-xs">
                 <a

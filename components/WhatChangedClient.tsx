@@ -184,14 +184,7 @@ export function WhatChangedClient({
 
               <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
                 <div className="flex flex-wrap items-center gap-4 font-mono text-xs uppercase tracking-[0.12em]">
-                  {textHeld ? (
-                    <Link
-                      href={`/j/${jurisdictionId}/documents/${doc.doc_id}`}
-                      className="inline-flex min-h-[44px] items-center text-[#080909] underline decoration-[#080909] underline-offset-4"
-                    >
-                      Open document →
-                    </Link>
-                  ) : originUrl && originUrl.startsWith("http") ? (
+                  {originUrl && originUrl.startsWith("http") ? (
                     <a
                       href={originUrl}
                       target="_blank"

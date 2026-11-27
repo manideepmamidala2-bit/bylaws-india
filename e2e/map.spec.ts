@@ -123,15 +123,17 @@ test.describe("Bylaw One — Home, Subject, Document & Map E2E Suite", () => {
         page.getByRole("heading", { name: /Read\. Trace\. Compare\./i })
       ).toBeVisible();
       const footer = page.getByRole("contentinfo");
+      await expect(footer.getByRole("link", { name: "Guide" })).toBeVisible();
+      await expect(footer.getByRole("link", { name: "Pilot" })).toBeVisible();
+      await expect(
+        footer.getByRole("link", { name: "How we check" })
+      ).toBeVisible();
       await expect(footer.getByRole("link", { name: "Sources" })).toBeVisible();
-      await expect(footer.getByRole("link", { name: "Map" })).toBeVisible();
       await expect(
         footer.getByRole("link", { name: "Data and downloads" })
       ).toBeVisible();
       await expect(footer.getByRole("link", { name: "Licence" })).toBeVisible();
-      await expect(
-        footer.getByRole("link", { name: "How this is built" })
-      ).toBeVisible();
+      await expect(footer.getByRole("link", { name: "Map" })).toHaveCount(0);
 
       // Zero map canvas and zero plot inputs on Home
       await expect(

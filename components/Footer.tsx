@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { getFooterNavItems } from "@/lib/navigation";
 
 interface FooterProps {
   jurisdictionId?: string;
@@ -23,20 +24,7 @@ export function Footer({ jurisdictionId }: FooterProps) {
       ? document.body?.dataset?.defaultJurisdiction || ""
       : "";
   const targetJurId = matchedJur || jurisdictionId || bodyDefaultJur || "";
-  const prefix = targetJurId ? `/j/${targetJurId}` : "";
-
-  const footerLinks = [
-    { label: "Pilot", href: "/pilot" },
-    { label: "How we check", href: "/checks" },
-    { label: "Join", href: "/join" },
-    { label: "Use with AI", href: "/use-with-ai" },
-    { label: "Press", href: "/press" },
-    { label: "Sources", href: prefix ? `${prefix}/sources` : "/data" },
-    { label: "Map", href: prefix || "/data" },
-    { label: "Data and downloads", href: "/data" },
-    { label: "Licence", href: "/about#licence" },
-    { label: "How this is built", href: "/about#how-this-is-built" },
-  ];
+  const footerLinks = getFooterNavItems(targetJurId);
 
   return (
     <footer

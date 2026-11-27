@@ -4,14 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/ensure_data.mjs && node scripts/build_place_index.mjs && node scripts/build_machine_readable.mjs && node scripts/build_search.mjs",
+    "prebuild": "node scripts/ensure_data.mjs && node scripts/build_place_index.mjs && node scripts/build_machine_readable.mjs && node scripts/build_search.mjs && node scripts/build_guide_bundle.mjs",
     "build": "next build",
-    "check-budgets": "node scripts/check_page_budgets.mjs",
+    "check-budgets": "node scripts/check_page_budgets.mjs && node scripts/check_site_consistency.mjs",
+    "check-consistency": "node scripts/check_site_consistency.mjs",
     "check-lighthouse": "node scripts/check_lighthouse.mjs",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "pretest": "node scripts/ensure_data.mjs && node scripts/build_place_index.mjs && node scripts/build_machine_readable.mjs",
+    "pretest": "node scripts/ensure_data.mjs && node scripts/build_place_index.mjs && node scripts/build_machine_readable.mjs && node scripts/build_guide_bundle.mjs",
     "test": "vitest run",
     "test:e2e": "playwright test",
     "generate": "cd pipeline && uv run python ../scripts/generate_models.py"
@@ -21,12 +22,14 @@
     "@protomaps/basemaps": "^5.7.2",
     "@vercel/analytics": "^2.0.1",
     "maplibre-gl": "^6.19.0",
+    "mermaid": "^12.3.0",
     "minisearch": "^7.2.0",
     "next": "^15.3.0",
     "pbf": "^5.2.0",
     "pmtiles": "^4.5.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "reveal.js": "^6.0.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",

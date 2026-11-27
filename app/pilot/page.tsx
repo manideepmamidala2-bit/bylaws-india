@@ -189,7 +189,7 @@ export default async function PilotPage() {
                 </div>
                 <div className="mt-1 text-xs text-[#5b5e56]">
                   of {m.regionLabel} ({m.activeZonesCount.toLocaleString("en-IN")}{" "}
-                  zone polygons across {m.processedSheetsCount} sheets)
+                  zone polygons across {m.processedSheetsLabel})
                 </div>
               </dd>
             </div>
@@ -223,11 +223,7 @@ export default async function PilotPage() {
                   {m.checksPerBuildCount}
                 </div>
                 <div className="mt-1 text-xs text-[#5b5e56]">
-                  automated CI verification suites (
-                  <Link href="/checks" className="underline">
-                    How we check
-                  </Link>
-                  )
+                  automated CI verification suites
                 </div>
               </dd>
             </div>
@@ -236,6 +232,7 @@ export default async function PilotPage() {
 
         {/* 02 / What is missing */}
         <section
+          id="what-is-missing"
           aria-labelledby="what-is-missing-heading"
           data-testid="pilot-what-is-missing"
           className="space-y-4 border-b border-[#c8ccc0] pb-12"
@@ -256,27 +253,10 @@ export default async function PilotPage() {
             </Link>
             :
           </p>
-          <ul className="dg-serif list-disc space-y-2 pl-5 text-sm leading-relaxed text-[#171917]">
-            <li>
-              Land-use zones currently cover {m.processedSheetsCount} processed
-              master plan sheets in parts of {m.partialZoneAreaLabel} (
-              {m.mapCoveragePct}% of {m.regionLabel}); uncovered areas are
-              marked on the map with a diagonal hatch (&ldquo;Land-use data not
-              yet available&rdquo;).
-            </li>
-            {m.unobtainableItems.map((u) => (
-              <li key={u.id}>
-                {u.reason}
-                <details className="mt-1">
-                  <summary className="cursor-pointer font-mono text-[11px] uppercase tracking-[0.1em] text-[#5b5e56] underline">
-                    Details
-                  </summary>
-                  <div className="mt-1 font-mono text-xs text-[#5b5e56]">
-                    {u.title} (<code>{u.id}</code>)
-                  </div>
-                </details>
-              </li>
-            ))}
+          <ul
+            data-testid="pilot-missing-items-list"
+            className="dg-serif list-disc space-y-2 pl-5 text-sm leading-relaxed text-[#171917]"
+          >
             {m.missingItems.map((item, idx) => (
               <li key={idx}>{item}</li>
             ))}

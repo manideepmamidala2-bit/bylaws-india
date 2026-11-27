@@ -15,7 +15,7 @@ export default async function NotFoundPage() {
     visible.find((j) => visible.some((child) => child.parent === j.id)) ??
     primary;
   const targetJurId = rootJur?.id ?? primary?.id ?? "";
-  const mapJurId = primary?.id ?? targetJurId;
+  const mapJurId = targetJurId;
 
   return (
     <div className="min-h-screen bg-[#f5f3ed] text-[#080909]">

@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import {
-  fetchDeclarations,
   fetchJurisdictionDataset,
   fetchManifest,
   getPrimaryPublicJurisdiction,
@@ -9,32 +8,36 @@ import {
   isWithdrawnRelease,
 } from "@/lib/data";
 import { TopNav } from "@/components/TopNav";
+import { computeDatasetPilotMetrics } from "@/lib/pilot-metrics";
 import { computeHeroDocumentAndBodyCounts } from "@/lib/plain-language";
 import { getSiteConfig } from "@/lib/site-config";
 
 export default async function AboutPage() {
-  const manifest = await fetchManifest();
+  const [manifest, pilotMetrics] = await Promise.all([
+    fetchManifest(),
+    computeDatasetPilotMetrics().catch(() => null),
+  ]);
   const visible = getVisibleJurisdictions(manifest);
   const primary = getPrimaryPublicJurisdiction(manifest);
   const rootJur =
     visible.find((j) => visible.some((child) => child.parent === j.id)) ??
     primary;
-  const cityLabel = rootJur?.aliases?.[0] ?? rootJur?.name ?? "City";
+  const cityLabel =
+    pilotMetrics?.cityLabel ?? rootJur?.aliases?.[0] ?? rootJur?.name ?? "City";
   const withdrawnRelease = visible
     .flatMap((j) => j.releases)
     .find((rel) => isWithdrawnRelease(rel));
 
-  const targetJurId = rootJur?.id ?? primary?.id ?? "";
-  const [dataset, declarations] = targetJurId
-    ? await Promise.all([
-        fetchJurisdictionDataset(targetJurId),
-        fetchDeclarations(targetJurId).catch(() => null),
-      ])
-    : [null, null];
+  const targetJurId =
+    pilotMetrics?.parentJurisdictionId ?? rootJur?.id ?? primary?.id ?? "";
+  const dataset = targetJurId
+    ? await fetchJurisdictionDataset(targetJurId)
+    : null;
 
-  const { documentCount, bodyCount } = computeHeroDocumentAndBodyCounts(
-    dataset?.documents ?? []
-  );
+  const { documentCount: rawDocCount, bodyCount: rawBodyCount } =
+    computeHeroDocumentAndBodyCounts(dataset?.documents ?? []);
+  const documentCount = pilotMetrics?.inForceDocumentsCount ?? rawDocCount;
+  const bodyCount = pilotMetrics?.issuingBodiesCount ?? rawBodyCount;
 
   const issuingAuthorities = Array.from(
     new Set((dataset?.documents ?? []).map((d) => d.issuing_authority))
@@ -50,7 +53,12 @@ export default async function AboutPage() {
       />
 
       <main
-        data-dataset-id={dataset?.release?.dataset_id ?? manifest.dataset_id ?? ""}
+        data-dataset-id={
+          pilotMetrics?.datasetId ??
+          dataset?.release?.dataset_id ??
+          manifest.dataset_id ??
+          ""
+        }
         className="mx-auto max-w-5xl space-y-14 px-5 py-10"
       >
         {/* Header */}
@@ -60,20 +68,64 @@ export default async function AboutPage() {
             About Bylaw One
           </h1>
           <p className="dg-serif mt-3 text-base leading-relaxed text-[#171917]">
-            Bylaw One gathers {cityLabel}&apos;s scattered building rules (
-            {documentCount} in-force instruments from {bodyCount} statutory
-            bodies) into one readable code, with every rule traced to its
-            official page and overlaps resolved openly.
+            Who runs Bylaw One, the principles behind every release, how{" "}
+            {cityLabel}&apos;s {documentCount} in-force instruments from{" "}
+            {bodyCount} statutory bodies are structured into one code, and the
+            open licences governing the project.
           </p>
         </header>
 
-        {/* 01 / How this is built */}
+        {/* 01 / Who runs Bylaw One */}
+        <section
+          id="who-runs-bylaw-one"
+          aria-labelledby="who-runs-heading"
+          data-testid="who-runs-bylaw-one"
+          className="space-y-4 border-b border-[#c8ccc0] pb-12"
+        >
+          <div className="dg-mono text-[#5b5e56]">
+            01 / Who runs Bylaw One
+          </div>
+          <h2
+            id="who-runs-heading"
+            className="text-2xl font-semibold tracking-tight text-[#080909]"
+          >
+            Stewardship &amp; permanent openness.
+          </h2>
+          <p className="dg-serif text-base leading-relaxed text-[#171917]">
+            Bylaw One is run by <strong>{siteCfg.organisationName}</strong>.
+            Every release follows six principles: the law&apos;s words exactly
+            as printed with nothing added inside legal text, every rule traced
+            to its official page with an archived copy, anything worked out by
+            this site explicitly labelled as derived, disagreements settled by a
+            stated statutory order with both rules kept visible, clear notice
+            that this site is not legal advice, and permanent openness of all
+            released code and data.
+          </p>
+          <p className="dg-serif text-base leading-relaxed text-[#171917]">
+            Everything released by Bylaw One — both source code (Apache-2.0) and
+            structured datasets, maps, and verifications (CC BY 4.0) — stays
+            open permanently. Colleges, practitioners, and civic groups can{" "}
+            <Link href="/join" className="text-[#080909] underline">
+              join the partner and advisory network
+            </Link>{" "}
+            or{" "}
+            <a
+              href={`mailto:${siteCfg.contactEmail}`}
+              className="text-[#080909] underline"
+            >
+              contact {siteCfg.contactEmail}
+            </a>
+            .
+          </p>
+        </section>
+
+        {/* 02 / How this is built */}
         <section
           id="how-this-is-built"
           aria-labelledby="how-built-heading"
           className="space-y-6 border-b border-[#c8ccc0] pb-12"
         >
-          <div className="dg-mono text-[#5b5e56]">01 / How this is built</div>
+          <div className="dg-mono text-[#5b5e56]">02 / How this is built</div>
           <h2
             id="how-built-heading"
             className="text-2xl font-semibold tracking-tight text-[#080909]"
@@ -143,13 +195,13 @@ export default async function AboutPage() {
           </div>
         </section>
 
-        {/* 02 / How disagreements are handled */}
+        {/* 03 / How disagreements are handled */}
         <section
           aria-labelledby="disagreements-heading"
           className="space-y-4 border-b border-[#c8ccc0] pb-12"
         >
           <div className="dg-mono text-[#5b5e56]">
-            02 / How disagreements are handled
+            03 / How disagreements are handled
           </div>
           <h2
             id="disagreements-heading"
@@ -185,6 +237,10 @@ export default async function AboutPage() {
               Under Bye-law 1.4 (from Notification UDD 14 TTP 2017), the Master
               Plan Zoning Regulations govern land use, coverage, FAR, setbacks,
               height, number of storeys, number of dwelling units, and parking.
+              (The 2017 Model Building Bye-laws issued under the Municipalities
+              Act 1964 apply to smaller municipalities, whereas the 2003
+              Building Bye-laws and May 2026 City Corporation amendments remain
+              the municipal bye-laws in force here.)
             </li>
             <li>
               <strong>Later in-force amendment wins:</strong> Within the same
@@ -199,93 +255,28 @@ export default async function AboutPage() {
           </ol>
         </section>
 
-        {/* 03 / Verification */}
+        {/* 04 / Verification */}
         <section
           aria-labelledby="verification-heading"
           className="space-y-4 border-b border-[#c8ccc0] pb-12"
         >
-          <div className="dg-mono text-[#5b5e56]">03 / Verification</div>
+          <div className="dg-mono text-[#5b5e56]">04 / Verification</div>
           <h2
             id="verification-heading"
             className="text-2xl font-semibold tracking-tight text-[#080909]"
           >
-            All checks are machine checks.
+            All checks are machine checks until verified by two people.
           </h2>
           <p className="dg-serif text-base leading-relaxed text-[#171917]">
-            All checks in this dataset are automated machine checks against the
-            source PDFs and page images; nothing on this site is presented as
-            verified by a person. Every provision is tested against the parser
-            text of its cited source page, and every table value is checked
-            against parameter plausibility bounds.
+            Automated machine checks verify every provision against the stored
+            parser text of its cited source page and check every table value
+            against parameter plausibility bounds; a record is marked verified
+            by a person only after at least two independent workshop verifiers
+            confirm a Match against the official PDF page.
             {withdrawnRelease
               ? ` An earlier demonstration release was withdrawn (${withdrawnRelease.withdrawn_reason}).`
               : ""}
           </p>
-        </section>
-
-        {/* 04 / Questions people ask (Full FAQ) */}
-        <section
-          aria-labelledby="full-faq-heading"
-          className="space-y-4 border-b border-[#c8ccc0] pb-12"
-        >
-          <div className="dg-mono text-[#5b5e56]">04 / Questions people ask</div>
-          <h2
-            id="full-faq-heading"
-            className="text-2xl font-semibold tracking-tight text-[#080909]"
-          >
-            Frequently asked questions.
-          </h2>
-
-          <div className="divide-y divide-[#c8ccc0] border-y border-[#c8ccc0]">
-            <details className="py-3" open>
-              <summary className="flex min-h-[44px] cursor-pointer items-center justify-between font-medium text-[#080909]">
-                <span>Is this official?</span>
-              </summary>
-              <p className="dg-serif mt-2 pb-2 text-sm leading-relaxed text-[#171917]">
-                No. Bylaw One is worked out from the official documents, each
-                linked to its government PDF and an archived snapshot. It is not
-                an official government publication.
-              </p>
-            </details>
-
-            <details className="py-3">
-              <summary className="flex min-h-[44px] cursor-pointer items-center justify-between font-medium text-[#080909]">
-                <span>Where does the text come from?</span>
-              </summary>
-              <p className="dg-serif mt-2 pb-2 text-sm leading-relaxed text-[#171917]">
-                Every provision is extracted from official Gazette, development
-                authority, and municipal PDFs. No legal text is rewritten or
-                invented; site summaries are always labelled &ldquo;In short, by
-                this site&rdquo;.
-              </p>
-            </details>
-
-            <details className="py-3">
-              <summary className="flex min-h-[44px] cursor-pointer items-center justify-between font-medium text-[#080909]">
-                <span>What is missing?</span>
-              </summary>
-              <ul className="dg-serif mt-2 list-disc space-y-1.5 pb-2 pl-5 text-sm leading-relaxed text-[#171917]">
-                {(declarations?.not_modelled ?? []).map((nm, idx) => (
-                  <li key={idx}>{nm.replace(/\s*\([A-Z0-9\s-]+\)/g, "")}</li>
-                ))}
-              </ul>
-            </details>
-
-            <details className="py-3">
-              <summary className="flex min-h-[44px] cursor-pointer items-center justify-between font-medium text-[#080909]">
-                <span>Do the 2017 Model Building Bye-laws apply here?</span>
-              </summary>
-              <p className="dg-serif mt-2 pb-2 text-sm leading-relaxed text-[#171917]">
-                The 2017 Model Building Bye-laws were issued under the
-                Municipalities Act 1964 for smaller municipalities, whereas the
-                2003 Building Bye-laws (and the May 2026 City Corporation
-                amendments) remain the municipal bye-laws in force. Clause 1(3)
-                of Notification UDD 14 TTP 2017 is published on the official
-                building plan approval portal as Bye-law 1.4, routing zoning
-                parameters to the Master Plan.
-              </p>
-            </details>
-          </div>
         </section>
 
         {/* 05 / Licences */}
@@ -323,47 +314,6 @@ export default async function AboutPage() {
               ))}
             </ul>
           </details>
-        </section>
-
-        {/* 06 / Who runs Bylaw One */}
-        <section
-          id="who-runs-bylaw-one"
-          aria-labelledby="who-runs-heading"
-          data-testid="who-runs-bylaw-one"
-          className="space-y-4 border-t border-[#c8ccc0] pt-12"
-        >
-          <div className="dg-mono text-[#5b5e56]">
-            06 / Who runs Bylaw One
-          </div>
-          <h2
-            id="who-runs-heading"
-            className="text-2xl font-semibold tracking-tight text-[#080909]"
-          >
-            Stewardship &amp; permanent openness.
-          </h2>
-          <p className="dg-serif text-base leading-relaxed text-[#171917]">
-            Bylaw One is run by <strong>{siteCfg.organisationName}</strong>.
-            Every release follows five principles: open code and open data,
-            every rule and number traced to its official page, verbatim legal
-            text never rewritten, derived values explicitly labelled, and clear
-            notice that this site is an open reference rather than legal advice.
-          </p>
-          <p className="dg-serif text-base leading-relaxed text-[#171917]">
-            Everything released by Bylaw One — both source code (Apache-2.0) and
-            structured datasets, maps, and verifications (CC BY 4.0) — stays
-            open permanently. Colleges, practitioners, and civic groups can{" "}
-            <Link href="/join" className="text-[#080909] underline">
-              join the partner and advisory network
-            </Link>{" "}
-            or{" "}
-            <a
-              href={`mailto:${siteCfg.contactEmail}`}
-              className="text-[#080909] underline"
-            >
-              contact {siteCfg.contactEmail}
-            </a>
-            .
-          </p>
         </section>
       </main>
     </div>

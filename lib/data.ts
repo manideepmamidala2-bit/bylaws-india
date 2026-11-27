@@ -242,6 +242,12 @@ export function getPrimaryPublicJurisdiction(
     visible.find(
       (j) =>
         j.visibility !== "test" &&
+        Boolean(j.latest_release) &&
+        visible.some((child) => child.parent === j.id)
+    ) ??
+    visible.find(
+      (j) =>
+        j.visibility !== "test" &&
         j.releases.some((rel) => isWithdrawnRelease(rel)) &&
         Boolean(j.latest_release)
     ) ??
@@ -1331,16 +1337,34 @@ export async function fetchMapVerificationMetrics(
         (l) => l.kind === "master_plan_zone" && l.sheet_overlay
       );
       const ov = mpLayer?.sheet_overlay;
+      const distinctSourceMaps = Array.from(
+        new Set(
+          (ds?.zones?.features ?? [])
+            .map((f) => f.properties?.source_map)
+            .filter((s): s is string => Boolean(s))
+        )
+      );
       if (ov && ov.road_median_offset_m && ov.road_p90_offset_m) {
-        return {
-          sheetLabel: ov.sheet ?? null,
-          roadMedianOffsetM: ov.road_median_offset_m,
-          roadP90OffsetM: ov.road_p90_offset_m,
-          roadSegmentCount: null,
-          gridFitRmseM: ov.rmse_m ?? null,
-          looRmseM: ov.loo_rmse_m ?? null,
-          sheets:
-            ov.bounds_wgs84 && ov.bounds_wgs84.length === 4
+        const fallbackSheets: ProcessedSheetMetadata[] =
+          distinctSourceMaps.length > 0 &&
+          ov.bounds_wgs84 &&
+          ov.bounds_wgs84.length === 4
+            ? distinctSourceMaps.map((smId) => ({
+                sheetId: smId,
+                sheetLabel: ov.image_url?.endsWith(`/${smId}.png`)
+                  ? (ov.sheet ?? smId)
+                  : smId,
+                planningDistrict: ov.planning_district ?? "",
+                imageUrl: `/data/${candId}/sheets/${smId}.png`,
+                boundsWgs84:
+                  ov.bounds_wgs84 as unknown as ProcessedSheetMetadata["boundsWgs84"],
+                roadSegmentCount: null,
+                roadMedianOffsetM: ov.road_median_offset_m ?? null,
+                roadP90OffsetM: ov.road_p90_offset_m ?? null,
+                gridFitRmseM: ov.rmse_m ?? null,
+                looRmseM: ov.loo_rmse_m ?? null,
+              }))
+            : ov.bounds_wgs84 && ov.bounds_wgs84.length === 4
               ? [
                   {
                     sheetId: ov.sheet ?? "sheet-1",
@@ -1356,7 +1380,15 @@ export async function fetchMapVerificationMetrics(
                     looRmseM: ov.loo_rmse_m ?? null,
                   },
                 ]
-              : [],
+              : [];
+        return {
+          sheetLabel: ov.sheet ?? null,
+          roadMedianOffsetM: ov.road_median_offset_m,
+          roadP90OffsetM: ov.road_p90_offset_m,
+          roadSegmentCount: null,
+          gridFitRmseM: ov.rmse_m ?? null,
+          looRmseM: ov.loo_rmse_m ?? null,
+          sheets: fallbackSheets,
           zonedAreaSqKm: null,
           parentBoundaryAreaSqKm: null,
           coveragePctOfParent: null,

@@ -100,14 +100,12 @@ export default async function PressPage() {
                 data-testid={`press-screenshot-${shot.id}`}
                 className="border border-[#080909] bg-[#efeee8] p-4"
               >
-                <a href={shot.src} target="_blank" rel="noopener noreferrer">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={shot.src}
-                    alt={shot.title}
-                    className="h-44 w-full border border-[#c8ccc0] bg-[#f5f3ed] object-cover object-top"
-                  />
-                </a>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={shot.src}
+                  alt={shot.title}
+                  className="h-44 w-full border border-[#c8ccc0] bg-[#f5f3ed] object-cover object-top"
+                />
                 <figcaption className="mt-3 space-y-1">
                   <div className="font-mono text-xs font-semibold text-[#080909]">
                     {shot.title}
