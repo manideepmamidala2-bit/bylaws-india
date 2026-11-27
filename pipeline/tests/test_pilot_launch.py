@@ -521,5 +521,53 @@ def test_part5_pilot_checks_join_press_about_report_problem_and_generated_number
     assert (REPO_ROOT / "public" / "press" / "bylaw-one-mark.svg").is_file()
 
 
+def test_part6_partner_documents_in_docs_partners() -> None:
+    """Part 6: Verify all 6 partner documents exist in `docs/partners/` with required content."""
+    expected_docs = {
+        "offer.md": ("One-Page Offer", "MoU", "CC BY 4.0"),
+        "workshop-kit.md": (
+            "Session 1",
+            "Session 2",
+            "Session 3",
+            "Session 4",
+            "Session 5",
+            "Materials Checklist",
+            "Facilitator Notes",
+            "Certificate Template Text",
+        ),
+        "internship.md": ("60", "120", "Week 1", "Week 2", "Week 3", "Week 4"),
+        "mou-template.md": (
+            "MEMORANDUM OF UNDERSTANDING",
+            "Apache License 2.0",
+            "CC BY 4.0",
+            "Non-Exclusive",
+            "Exit",
+        ),
+        "charter.md": (
+            "Purpose",
+            "Verbatim Law",
+            "Derived Values",
+            "Not Legal Advice",
+            "Permanent Openness",
+        ),
+        "demo-script.md": (
+            "Minute 1",
+            "Minute 2",
+            "Minute 3",
+            "Minute 4",
+            "Minute 5",
+            "Use with AI",
+        ),
+    }
+    partners_dir = REPO_ROOT / "docs" / "partners"
+    for filename, required_tokens in expected_docs.items():
+        p = partners_dir / filename
+        assert p.is_file(), f"Missing partner document: docs/partners/{filename}"
+        content = p.read_text(encoding="utf-8")
+        for token in required_tokens:
+            assert token in content, f"docs/partners/{filename} missing '{token}'"
+
+
+
 
 
