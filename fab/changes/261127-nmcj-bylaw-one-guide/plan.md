@@ -75,7 +75,7 @@ A build script (`scripts/build_guide_bundle.mjs`) MUST generate `public/bylaw-on
 
 ### Phase 2: Guide Source Content, Diagrams & Screenshots (Part 2)
 
-- [ ] T002 Install `reveal.js` and `mermaid` (recording licences in `docs/dependencies.md`), write the 12 guide source files in `content/guide/00-opening.md` through `11-contact-and-citing.md` using the Section 6 content brief and `{{placeholder}}` tokens, implement `lib/guide.ts` and `scripts/build_guide_assets.mjs` to generate the 6 Mermaid SVG diagrams (`public/guide/diagrams/*.svg`) and 12 Playwright screenshots at `1280 px` and `390 px` (`public/guide/screenshots/*.png`), add unit tests in `__tests__/guide-content.test.ts`, update `docs/progress.md`, commit, and push Part 2 <!-- R2 -->
+- [x] T002 Install `reveal.js` and `mermaid` (recording licences in `docs/dependencies.md`), write the 12 guide source files in `content/guide/00-opening.md` through `11-contact-and-citing.md` using the Section 6 content brief and `{{placeholder}}` tokens, implement `lib/guide.ts` and `scripts/build_guide_assets.mjs` to generate the 6 Mermaid SVG diagrams (`public/guide/diagrams/*.svg`) and 12 Playwright screenshots at `1280 px` and `390 px` (`public/guide/screenshots/*.png`), add unit tests in `__tests__/guide-content.test.ts`, update `docs/progress.md`, commit, and push Part 2 <!-- R2 -->
 
 ### Phase 3: Reading Mode `/guide` & Slide Mode `/guide/slides` (Parts 3 & 4)
 

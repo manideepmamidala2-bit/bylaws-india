@@ -124,18 +124,27 @@ def is_licence_allowed(
     """Validate `(package_name, licence_str)` against the Rule R4 allowlist and written exceptions."""
     pkg_lower = package_name.strip().lower()
     cleaned = (licence_str or "").strip()
+
+    # Check if covered by a written exception in docs/dependencies.md:
+    # - Allows documented packages whose upstream package.json omitted the `license` field
+    #   when `node_modules/<pkg>/license` is verified MIT in `docs/dependencies.md` (`khroma`).
+    # - Allows dual-licensed `OR` packages (`EPL-2.0 OR GPL-3.0-or-later`) when the non-GPL
+    #   alternative (`EPL-2.0`) is explicitly elected in `docs/dependencies.md` (`elkjs`).
+    if pkg_lower in documented_exceptions:
+        expected_lic = documented_exceptions[pkg_lower].lower()
+        if not cleaned and expected_lic in ALLOWED_PERMISSIVE_TOKENS:
+            return True, "ok (written exception for missing package.json license field)"
+        if expected_lic in cleaned.lower() and (
+            not STRICTLY_DISALLOWED_RE.search(cleaned) or " or " in cleaned.lower()
+        ):
+            return True, "ok (written exception)"
+
     if not cleaned or cleaned.upper() == "UNKNOWN":
         return False, f"{package_name}: missing or UNKNOWN licence"
 
     # Reject GPL / AGPL / non-commercial unconditionally (note: LGPL does not match `\bGPL\b`)
     if STRICTLY_DISALLOWED_RE.search(cleaned):
         return False, f"{package_name}: strictly disallowed licence '{cleaned}'"
-
-    # Check if covered by a written exception in docs/dependencies.md
-    if pkg_lower in documented_exceptions:
-        expected_lic = documented_exceptions[pkg_lower].lower()
-        if expected_lic in cleaned.lower():
-            return True, "ok (written exception)"
 
     # Split compound expressions like "(MIT OR Apache-2.0)", "BSD-3-Clause AND MIT", "BSD-3-Clause, Apache-2.0, dependency licenses"
     normalized = cleaned

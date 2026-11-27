@@ -1,0 +1,205 @@
+{
+  "audiences": [
+    {
+      "id": "college",
+      "label": "I'm from a college",
+      "roleTitle": "Colleges & faculties",
+      "summary": "Functional semester MoUs with one-day workshops, faculty sessions, 60–120 hour supervised internships, citable releases, and the state-steward role.",
+      "sectionIds": [
+        "opening",
+        "why-this-exists",
+        "see-it-working",
+        "the-movement",
+        "take-part",
+        "the-launch",
+        "contact-and-citing"
+      ]
+    },
+    {
+      "id": "student",
+      "label": "I'm a student",
+      "roleTitle": "Students",
+      "summary": "Learn to read city building rules and verify AI answers against official gazette pages; earn 60–120 hour internship credit, certificates, and named credit in releases.",
+      "sectionIds": [
+        "opening",
+        "why-this-exists",
+        "see-it-working",
+        "principles",
+        "take-part",
+        "the-launch",
+        "contact-and-citing"
+      ]
+    },
+    {
+      "id": "practitioner",
+      "label": "I'm a practitioner",
+      "roleTitle": "Architects, planners, engineers & lawyers",
+      "summary": "See what applies today by subject and by place on the map with exact PDF page links, review rules in your field, and get early access to the planned agent engine.",
+      "sectionIds": [
+        "opening",
+        "see-it-working",
+        "how-its-built",
+        "principles",
+        "take-part",
+        "whats-missing-and-next",
+        "contact-and-citing"
+      ]
+    },
+    {
+      "id": "developer",
+      "label": "I'm a developer",
+      "roleTitle": "Developers & technical contributors",
+      "summary": "Explore the two-half Python/Next.js architecture, 15 JSON Schemas, static /api/v1/ and llms.txt endpoints, and the planned TypeScript agent engine and layered packs.",
+      "sectionIds": [
+        "opening",
+        "how-its-built",
+        "principles",
+        "the-movement",
+        "for-developers",
+        "whats-missing-and-next",
+        "contact-and-citing"
+      ]
+    },
+    {
+      "id": "partner-funder",
+      "label": "I'm a partner or funder",
+      "roleTitle": "Civic partners, sponsors & funders",
+      "summary": "Review the collective state-steward model, the January 2027 launch timeline, sustainability options around permanently open data, and pilot-year success measures.",
+      "sectionIds": [
+        "opening",
+        "why-this-exists",
+        "the-movement",
+        "take-part",
+        "the-launch",
+        "sustainability",
+        "whats-missing-and-next",
+        "contact-and-citing"
+      ]
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "sources-to-one-code",
+      "sectionId": "opening",
+      "title": "Official sources converging into one code",
+      "caption": "{{documents_in_force}} in-force instruments from {{issuing_bodies}} statutory bodies joined by subject and by place in Bylaw One.",
+      "slideSummary": "{{documents_in_force}} official instruments from {{issuing_bodies}} bodies converge into one open, cited code with {{provisions}} provisions and {{rules_as_data}} rules as data.",
+      "presenterNotes": "This diagram shows the convergence at the heart of Bylaw One: state Acts, municipal building bye-laws, master plan zoning regulations, dated gazette amendments, and five City Corporation notifications all feed into one open, cited code.",
+      "mermaid": "flowchart LR\n  A[\"State Acts & Orders\"] --> F[\"Bylaw One · One Code ({{documents_in_force}} in-force docs)\"]\n  B[\"Building Bye-laws 2003\"] --> F\n  C[\"Master Plan Zoning Regulations\"] --> F\n  D[\"Dated Gazette Amendments (2009–2026)\"] --> F\n  E[\"{{corporations}} City Corporation Amendments (May 2026)\"] --> F\n  F --> G[\"By subject ({{rules_as_data}} rules as data)\"]\n  F --> H[\"By place ({{wards}} wards · {{active_zones}} zones)\"]"
+    },
+    {
+      "id": "how-a-rule-travels",
+      "sectionId": "see-it-working",
+      "title": "How a rule travels (2004 → 2007 → 2017 → 2025 → today)",
+      "caption": "Tracing Floor Area Ratio (FAR) across twenty-two years and five instruments, with every step linked to its exact official PDF page.",
+      "slideSummary": "How FAR travels across five instruments (2004 → 2007 → 2017 → 2025 → today), with every step traced to its official page.",
+      "presenterNotes": "Follow how a single rule — Floor Area Ratio — travels across twenty-two years: 2004 Bye-laws Table 6, 2007 Master Plan Table 10, 2017 Bye-law 1.4 handing FAR to the Master Plan, April 2025 Chapter 11 adding Premium FAR and TDR, and what applies today.",
+      "mermaid": "flowchart LR\n  S1[\"2004 · Bye-laws 9.2 (Table 6, p. 21)\"] --> S2[\"2007 · Master Plan Ch. 4 (Table 10, p. 28)\"]\n  S2 --> S3[\"2017 · Bye-law 1.4 Hand-off (UDD 14 TTP 2017, p. 2)\"]\n  S3 --> S4[\"2025 · Premium FAR Ch. 11 (Table 27, p. 2)\"]\n  S4 --> S5[\"Today · Base FAR + Premium FAR + TDR (Note 2, p. 3)\"]"
+    },
+    {
+      "id": "data-layers",
+      "sectionId": "how-its-built",
+      "title": "The five data layers (sources → structure → rules as data → resolution → site)",
+      "caption": "From immutable official PDFs and SHA-256 digests to structured provisions, parameter records, six-step statutory resolution, and static web/AI endpoints.",
+      "slideSummary": "Five data layers turn official PDFs into structured provisions, condition-bearing parameter rows, six-step statutory resolution, and static web and AI views.",
+      "presenterNotes": "Every instrument passes through five data layers: (1) Sources with SHA-256 and Wayback snapshots, (2) Structure with {{provisions}} provisions and separate site notes, (3) Rules as data with {{rules_as_data}} active parameter rows, (4) Six-step statutory resolution, and (5) Static web, map, and AI endpoints.",
+      "mermaid": "flowchart LR\n  L1[\"1. Sources ({{registered_sources}} PDFs + SHA-256 + Wayback)\"] --> L2[\"2. Structure ({{provisions}} provisions + tables)\"]\n  L2 --> L3[\"3. Rules as data ({{rules_as_data}} active parameter rows)\"]\n  L3 --> L4[\"4. Resolution (6-step statutory order)\"]\n  L4 --> L5[\"5. Site, Map & AI (/llms.txt · .md · /api/v1/)\"]"
+    },
+    {
+      "id": "checks-pipeline",
+      "sectionId": "how-its-built",
+      "title": "The checks pipeline ({{checks_per_build}} automatic build checks + workshop verification)",
+      "caption": "Every build runs {{checks_per_build}} automated verification suites; records reach person-verified status only after two independent workshop Match verdicts.",
+      "slideSummary": "Every build runs {{checks_per_build}} automated checks against stored PDF page text and bounds; two independent human Match verdicts promote a record to person-verified.",
+      "presenterNotes": "Trust comes from two verification levels: Level 1 runs {{checks_per_build}} automated checks on every build (text fidelity against stored PDF page text, hierarchy depth, parameter plausibility, band continuity, 5-corporation parity, map street-offset, provenance, plain language, licences, and WCAG AA budgets). Level 2 requires two independent workshop Match verdicts and zero Mismatches.",
+      "mermaid": "flowchart LR\n  A[\"Stored PDF Page Text & Schemas\"] --> B[\"Level 1 · {{checks_per_build}} Automatic Build Checks ({{machine_checked}} records)\"]\n  B --> C[\"Workshop Task Set (/verify/<task-set>)\"]\n  C --> D{\"2+ Independent Match & 0 Mismatch?\"}\n  D -->|\"Yes\"| E[\"Level 2 · Verified by a Person ({{verified_by_people}} records)\"]\n  D -->|\"Mismatch\"| F[\"Open Review Item (verification-review.md)\"]"
+    },
+    {
+      "id": "layered-packs",
+      "sectionId": "the-movement",
+      "title": "Layered data packs: national → state → city (planned)",
+      "caption": "Planned pack architecture storing shared text once and recording whether each higher-tier rule is adopted, adopted with changes, or reference only.",
+      "slideSummary": "Planned layered packs (national → state → city) store shared text once and record whether each rule is adopted, adopted with changes, or reference only.",
+      "presenterNotes": "This diagram shows the planned layered pack architecture. National model codes and standards sit at the top, state Acts and model bye-laws sit in the middle, and city/corporation rules sit at the bottom. Each link explicitly states adopted, adopted with changes, or reference only.",
+      "mermaid": "flowchart TD\n  N[\"National Pack (Planned) · NBC 2016 & Aviation Reference\"] -->|\"Reference only (Rule R13)\"| S[\"State Pack (Planned) · State Acts, Master Plan & Model Rules\"]\n  S -->|\"Adopted / Adopted with changes (e.g. Bye-law 1.4)\"| C[\"City Pack (Planned) · {{city}} & {{corporations}} City Corporations\"]\n  S -->|\"Reference only (where not adopted by city)\"| C"
+    },
+    {
+      "id": "agent-engine-four-doors",
+      "sectionId": "for-developers",
+      "title": "The planned local agent engine and its four doors",
+      "caption": "Planned TypeScript engine running locally on the user's machine over downloadable packs, exposing MCP, CLI, Agent Skill, and open data files.",
+      "slideSummary": "The planned local TypeScript agent engine runs on the user's machine and exposes four doors: local MCP server, CLI, Agent Skill, and open data files.",
+      "presenterNotes": "Here are the four doors of the planned local TypeScript agent engine: Door 1 is a local MCP server for Claude, Cursor, VS Code, Gemini CLI, and Codex; Door 2 is a command-line tool; Door 3 is an Agent Skill teaching the four honesty rules; and Door 4 is the open data files themselves.",
+      "mermaid": "flowchart TB\n  P[\"Local Data Packs (Planned) + Offline Keyword & Meaning Search\"] --> E[\"Bylaw One Local Agent Engine in TypeScript (Planned)\"]\n  E --> D1[\"Door 1 · Local MCP Server (Claude, Cursor, VS Code, Gemini CLI, Codex)\"]\n  E --> D2[\"Door 2 · Command Line (bylaws CLI for any agent)\"]\n  E --> D3[\"Door 3 · Agent Skill (Cite page · Label derived · Ask plot details · Confirm)\"]\n  P --> D4[\"Door 4 · Open Data Files (JSON · GeoJSON · Markdown · CC BY 4.0)\"]"
+    }
+  ],
+  "screenshots": [
+    {
+      "id": "home-hero",
+      "sectionId": "opening",
+      "title": "Home page hero & problem convergence",
+      "caption": "The doorway to Bylaw One at 1280 px desktop and 390 px mobile viewports, showing generated document and body counts and the current-as-of date.",
+      "slideSummary": "The Home page states the problem in one picture and gives one doorway to the code and the map.",
+      "presenterNotes": "On the home page hero, visitors immediately see how {{documents_in_force}} official documents from {{issuing_bodies}} bodies converge into one readable code, current as of {{current_as_of}}, with direct entry to Read the code and Find rules by place.",
+      "route": "/",
+      "desktopSrc": "/guide/screenshots/home-hero-1280.png",
+      "mobileSrc": "/guide/screenshots/home-hero-390.png"
+    },
+    {
+      "id": "far-story",
+      "sectionId": "see-it-working",
+      "title": "Follow one rule: the five-step FAR story",
+      "caption": "Interactive stepper tracing Floor Area Ratio from 2004 to today with verbatim quotes, derived sample tables, and official PDF #page=N links.",
+      "slideSummary": "The five-step FAR story traces one rule across twenty-two years with verbatim quotes and direct PDF page links.",
+      "presenterNotes": "This screenshot shows the five-step FAR stepper on the home page: each step pairs a one-sentence plain summary ('In short, by this site') with the verbatim gazette excerpt ('From the official text') and a working link to the exact PDF page.",
+      "route": "/",
+      "selector": "[data-testid=\"far-story-stepper\"]",
+      "desktopSrc": "/guide/screenshots/far-story-1280.png",
+      "mobileSrc": "/guide/screenshots/far-story-390.png"
+    },
+    {
+      "id": "subject-far",
+      "sectionId": "see-it-working",
+      "title": "Subject page: What applies today (FAR)",
+      "caption": "The FAR subject page opening with deduplicated governing parameter tables, plain-word conditions, normal units, and exact source page links.",
+      "slideSummary": "Every subject page opens with What applies today — deduplicated parameter tables and consolidated provisions with page citations.",
+      "presenterNotes": "On the FAR subject page, What applies today comes first: clean parameter rows with conditions in plain words, values in normal units, and a page link on every row, followed by Why this rule applies and collapsed Older or replaced rules.",
+      "route": "/j/in-ka-bengaluru/topics/far",
+      "desktopSrc": "/guide/screenshots/subject-far-1280.png",
+      "mobileSrc": "/guide/screenshots/subject-far-390.png"
+    },
+    {
+      "id": "map-place-card",
+      "sectionId": "see-it-working",
+      "title": "Interactive map & Place Card with rules by zone",
+      "caption": "8-layer Protomaps/MapLibre map with MiniSearch place lookup and the Place Card showing governing rules across 6 groups for the selected zone.",
+      "slideSummary": "The interactive map and Place Card show Corporation, Ward, Planning district, Land-use zone, and governing rules across six groups.",
+      "presenterNotes": "Searching a neighbourhood on the map opens the Place Card — as a side panel on desktop and a bottom sheet on phones — showing the Corporation, Ward, Planning district, Land-use zone, and the rules for that zone across Uses, FAR, Ground coverage, Setbacks, Height, and Parking.",
+      "route": "/j/in-ka-bengaluru-south",
+      "desktopSrc": "/guide/screenshots/map-place-card-1280.png",
+      "mobileSrc": "/guide/screenshots/map-place-card-390.png"
+    },
+    {
+      "id": "verify-task",
+      "sectionId": "see-it-working",
+      "title": "Workshop verification task (/verify/bengaluru-pilot-sample)",
+      "caption": "Side-by-side browser verification task sheet where workshop participants check records against official PDF pages and export CSV verdicts.",
+      "slideSummary": "The browser Verify page lets students and practitioners check rules against official PDF pages and export CSV verdicts with zero server dependency.",
+      "presenterNotes": "During a college workshop, students open `/verify/bengaluru-pilot-sample`, click 'Open official page' to inspect the cited PDF page, mark Match, Mismatch, or Can't tell, and export their signed CSV file.",
+      "route": "/verify/bengaluru-pilot-sample",
+      "desktopSrc": "/guide/screenshots/verify-task-1280.png",
+      "mobileSrc": "/guide/screenshots/verify-task-390.png"
+    },
+    {
+      "id": "pilot-page",
+      "sectionId": "whats-missing-and-next",
+      "title": "The Pilot page: live numbers, declared gaps & roadmap",
+      "caption": "Generated pilot status metrics, the single deduplicated list of coverage gaps from declarations.json, and the four-step roadmap.",
+      "slideSummary": "The Pilot page shows live generated metrics, the full deduplicated list of declared gaps, and the roadmap from {{city}} to {{state}} and beyond.",
+      "presenterNotes": "The Pilot page brings together all eight live generated metrics, the single deduplicated list of what is not covered yet from `declarations.json`, and the four-step roadmap.",
+      "route": "/pilot",
+      "desktopSrc": "/guide/screenshots/pilot-page-1280.png",
+      "mobileSrc": "/guide/screenshots/pilot-page-390.png"
+    }
+  ]
+}

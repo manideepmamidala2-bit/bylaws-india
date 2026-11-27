@@ -54,12 +54,14 @@ Per **Rule R4 (Permissive Licensing)**, every direct dependency in `pipeline/pyp
 | `@protomaps/basemaps` | `BSD-3-Clause` | Official Protomaps `light` flavor MapLibre GL style layers |
 | `@vercel/analytics` | `Apache-2.0` | Cookieless Vercel Web Analytics with zero personal data collection |
 | `maplibre-gl` | `BSD-3-Clause` | Interactive WebGL vector map rendering engine |
+| `mermaid` | `MIT` | Declarative architecture, rule-trail, and pipeline diagram rendering (`v12.3.0`) |
 | `minisearch` | `MIT` | Lightweight fuzzy and prefix client-side place and ward search engine |
 | `next` | `MIT` | React App Router framework |
 | `pbf` | `BSD-3-Clause` | Protocol Buffer decoder used with `@mapbox/vector-tile` |
 | `pmtiles` | `BSD-3-Clause` | Single-file HTTP byte-range vector tile protocol for Protomaps basemaps |
 | `react` | `MIT` | UI component library |
 | `react-dom` | `MIT` | DOM renderer for React |
+| `reveal.js` | `MIT` | HTML presentation and speaker-notes slide deck engine for `/guide/slides` and the offline guide (`v6.0.2`) |
 
 ### Development Dependencies (`devDependencies`)
 
@@ -107,6 +109,8 @@ Per Rule R4 ("LGPL only with a written exception"), the following runtime/dev li
 | `@img/sharp-win32-arm64` | `Apache-2.0 AND LGPL-3.0-or-later` | Unmodified transitive `libvips` shared library binary pulled by Next.js `sharp`. |
 | `@img/sharp-win32-ia32` | `Apache-2.0 AND LGPL-3.0-or-later` | Unmodified transitive `libvips` shared library binary pulled by Next.js `sharp`. |
 | `@img/sharp-win32-x64` | `Apache-2.0 AND LGPL-3.0-or-later` | Unmodified transitive `libvips` shared library binary pulled by Next.js `sharp`. |
+| `elkjs` | `EPL-2.0` | Unmodified transitive layout library pulled by `mermaid` (`EPL-2.0 OR GPL-3.0-or-later` dual licence; elected strictly under Eclipse Public License 2.0 `EPL-2.0`, never `GPL-3.0-or-later`). |
+| `khroma` | `MIT` | Unmodified transitive CSS colour helper pulled by `mermaid`; MIT licence verified in `node_modules/khroma/license` and `node_modules/khroma/readme.md` (upstream `package.json` omitted the `"license"` key). |
 
 ## 4. Evaluated Libraries & Tooling Decisions (PR 12 / `08b`)
 
