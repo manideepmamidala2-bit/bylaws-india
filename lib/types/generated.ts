@@ -518,6 +518,7 @@ export interface ClauseNode {
   applies_to_zones: string[];
   verification: "unverified" | "machine_checked" | "human_verified";
   verified_by?: string | null;
+  verifications?: PersonVerificationEntry[];
   omitted?: boolean;
   change_mark?: ClauseChangeMark | null;
   summary_by_site?: string | null;
@@ -587,6 +588,14 @@ export interface ClauseTable {
   headers: string[];
   rows: string[][];
   page: number;
+}
+
+export interface PersonVerificationEntry {
+  verifier_name: string;
+  institution: string;
+  verified_at: string;
+  verdict: "match" | "mismatch" | "cant_tell";
+  note?: string | null;
 }
 
 export interface ClauseChangeMark {
@@ -750,6 +759,7 @@ export interface JurisdictionOverrides {
   ocr_corrections?: OcrCorrectionOverride[];
   unreadable_fragments?: UnreadableFragmentOverride[];
   table_overrides?: TableOverride[];
+  human_verifications?: HumanVerificationOverride[];
 }
 
 export interface ClauseFix {
@@ -768,6 +778,7 @@ export interface ClauseFix {
     | "parent_eid"
     | "verification"
     | "verified_by"
+    | "verifications"
     | "legal_status"
     | "effective_from"
     | "language"
@@ -884,6 +895,17 @@ export interface TableOverride {
   footnotes?: string[];
   strip_block_fragments?: string[];
   reason: string;
+}
+
+export interface HumanVerificationOverride {
+  task_id?: string | null;
+  record_id: string;
+  record_kind: "provision" | "parameter" | "zone";
+  verifier_name: string;
+  institution: string;
+  verified_at: string;
+  verdict: "match" | "mismatch" | "cant_tell";
+  note?: string | null;
 }
 
 /**
@@ -1029,6 +1051,7 @@ export interface ReleaseEntry {
   files: ReleaseFiles | null;
   drafts: ReleaseDrafts | null;
   changelog: string;
+  verifiers?: ReleaseVerifierCredit[];
 }
 
 export interface ReleaseFiles {
@@ -1069,6 +1092,12 @@ export interface ReleaseFiles {
 export interface ReleaseDrafts {
   clauses: string[];
   outlines?: string[];
+}
+
+export interface ReleaseVerifierCredit {
+  verifier_name: string;
+  institution: string;
+  verified_count?: number;
 }
 
 /**
@@ -1311,6 +1340,8 @@ export interface ParameterRecord {
   method: "table_rule_parser" | "clause_rule_parser" | "override_curated";
   confidence: number;
   verification: "unverified" | "machine_checked" | "human_verified";
+  verified_by?: string | null;
+  verifications?: ParameterVerificationEntry[];
   note?: string | null;
 }
 
@@ -1357,6 +1388,14 @@ export interface ParameterSource {
   page_link: string;
   official_url?: string | null;
   archive_url?: string | null;
+}
+
+export interface ParameterVerificationEntry {
+  verifier_name: string;
+  institution: string;
+  verified_at: string;
+  verdict: "match" | "mismatch" | "cant_tell";
+  note?: string | null;
 }
 
 export interface ApplicabilityRule {

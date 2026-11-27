@@ -134,6 +134,34 @@
         }
       }
     },
+    "parameterVerificationEntry": {
+      "type": "object",
+      "title": "ParameterVerificationEntry",
+      "additionalProperties": false,
+      "required": ["verifier_name", "institution", "verified_at", "verdict"],
+      "properties": {
+        "verifier_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "institution": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verified_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verdict": {
+          "type": "string",
+          "enum": ["match", "mismatch", "cant_tell"]
+        },
+        "note": {
+          "type": ["string", "null"],
+          "default": null
+        }
+      }
+    },
     "numericInterval": {
       "type": "object",
       "title": "NumericInterval",
@@ -431,6 +459,17 @@
         "verification": {
           "type": "string",
           "enum": ["unverified", "machine_checked", "human_verified"]
+        },
+        "verified_by": {
+          "type": ["string", "null"],
+          "default": null
+        },
+        "verifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/parameterVerificationEntry"
+          },
+          "default": []
         },
         "note": {
           "type": ["string", "null"],

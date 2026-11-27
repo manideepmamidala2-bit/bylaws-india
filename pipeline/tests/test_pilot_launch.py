@@ -306,3 +306,180 @@ def test_part3_machine_and_ai_readability_llms_md_api_jsonld_datapackage_and_ato
     assert "local agent engine is coming" in use_ai_txt
 
 
+def test_part4_verification_workflow_tasks_create_verify_import_and_two_match_rule(
+    tmp_path: Path,
+) -> None:
+    """Part 4: Test `bylaws tasks create`, `bylaws verify import`, the two-independent-Match threshold, duplicate-verifier rejection, Mismatch review items, and release verifier credits end to end."""
+    from click.testing import CliRunner
+
+    from bylaws.cli import main
+    from bylaws.config import load_jurisdiction_config
+    from bylaws.verify_records import (
+        collect_verified_contributors_for_jurisdiction,
+        evaluate_record_verifications,
+        import_verifications_csv,
+    )
+
+    runner = CliRunner()
+    out_dir = tmp_path / "tasks_out"
+    res = runner.invoke(
+        main,
+        [
+            "tasks",
+            "create",
+            "--jurisdiction",
+            "xx-test-fixture",
+            "--count",
+            "4",
+            "--subject",
+            "setbacks",
+            "--seed",
+            "7",
+            "--task-set-id",
+            "fixture-test-set",
+            "--output-dir",
+            str(out_dir),
+        ],
+    )
+    assert res.exit_code == 0, res.output
+    assert (out_dir / "fixture-test-set.html").is_file()
+    assert (out_dir / "fixture-test-set.csv").is_file()
+    assert (out_dir / "fixture-test-set.json").is_file()
+
+    # Clean up temporary public/data/tasks/fixture-test-set.json
+    pub_temp_json = REPO_ROOT / "public" / "data" / "tasks" / "fixture-test-set.json"
+    if pub_temp_json.is_file():
+        pub_temp_json.unlink()
+
+    # Verify sample task set exists in public/data/tasks/bengaluru-pilot-sample.json
+    sample_json_path = (
+        REPO_ROOT / "public" / "data" / "tasks" / "bengaluru-pilot-sample.json"
+    )
+    assert sample_json_path.is_file()
+    sample_payload = json.loads(sample_json_path.read_text(encoding="utf-8"))
+    assert sample_payload["count"] >= 5
+    assert all(
+        "#page=" in t["official_page_url"] for t in sample_payload["tasks"]
+    )
+
+    # Test 1: Single Match verdict leaves record machine_checked
+    ev_one = evaluate_record_verifications(
+        [
+            {
+                "verifier_name": "Asha Rao",
+                "institution": "RV College of Architecture",
+                "verified_at": "2026-11-26",
+                "verdict": "match",
+            }
+        ]
+    )
+    assert ev_one["verification"] == "machine_checked"
+    assert ev_one["verified_by"] is None
+
+    # Test 2: Duplicate Match from same verifier + institution does NOT promote
+    ev_dup = evaluate_record_verifications(
+        [
+            {
+                "verifier_name": "Asha Rao",
+                "institution": "RV College of Architecture",
+                "verified_at": "2026-11-26",
+                "verdict": "match",
+            },
+            {
+                "verifier_name": "asha rao",
+                "institution": "rv college of architecture",
+                "verified_at": "2026-11-27",
+                "verdict": "match",
+            },
+        ]
+    )
+    assert ev_dup["verification"] == "machine_checked"
+    assert ev_dup["independent_match_count"] == 1
+
+    # Test 3: Two independent Match verdicts promote record to human_verified
+    ev_two = evaluate_record_verifications(
+        [
+            {
+                "verifier_name": "Asha Rao",
+                "institution": "RV College of Architecture",
+                "verified_at": "2026-11-26",
+                "verdict": "match",
+            },
+            {
+                "verifier_name": "Kiran Kumar",
+                "institution": "BMS School of Architecture",
+                "verified_at": "2026-11-26",
+                "verdict": "match",
+            },
+        ]
+    )
+    assert ev_two["verification"] == "human_verified"
+    assert (
+        ev_two["verified_by"]
+        == "Verified by Asha Rao, RV College of Architecture, 2026-11-26; Kiran Kumar, BMS School of Architecture, 2026-11-26"
+    )
+
+    # Test 4: Any Mismatch blocks human_verified even when 2 Match verdicts exist
+    ev_mismatch = evaluate_record_verifications(
+        [
+            {
+                "verifier_name": "Asha Rao",
+                "institution": "RV College of Architecture",
+                "verified_at": "2026-11-26",
+                "verdict": "match",
+            },
+            {
+                "verifier_name": "Kiran Kumar",
+                "institution": "BMS School of Architecture",
+                "verified_at": "2026-11-26",
+                "verdict": "match",
+            },
+            {
+                "verifier_name": "Meera Nair",
+                "institution": "CEPT University",
+                "verified_at": "2026-11-26",
+                "verdict": "mismatch",
+                "note": "Page 28 shows 2.25, not 2.50",
+            },
+        ]
+    )
+    assert ev_mismatch["verification"] == "machine_checked"
+    assert ev_mismatch["has_mismatch"] is True
+
+    # Test 5: End-to-end CSV import in isolated repo root
+    fake_root = tmp_path / "fake_repo"
+    (fake_root / "schemas").mkdir(parents=True)
+    for schema_file in (REPO_ROOT / "schemas").glob("*.schema.json"):
+        shutil.copy2(schema_file, fake_root / "schemas" / schema_file.name)
+    (fake_root / "bylaws.toml").write_text(
+        (REPO_ROOT / "bylaws.toml").read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    cfg = load_jurisdiction_config("xx-test-fixture")
+    csv_file = tmp_path / "workshop-export.csv"
+    csv_file.write_text(
+        "task_id,record_id,record_kind,verdict,note,verifier_name,institution,verified_at\n"
+        "task-001,fixture-base-2020:chp_II__cl_2.1,provision,match,,Asha Rao,RV College of Architecture,2026-11-26\n"
+        "task-001,fixture-base-2020:chp_II__cl_2.1,provision,match,,Kiran Kumar,BMS School of Architecture,2026-11-26\n"
+        "task-002,fixture-base-2020:chp_II__cl_2.2,provision,mismatch,Height differs on page 2,Meera Nair,CEPT University,2026-11-26\n",
+        encoding="utf-8",
+    )
+    imp_res = import_verifications_csv(cfg, csv_file, repo_root=fake_root)
+    assert imp_res["imported_count"] == 3
+    assert imp_res["promoted_count"] == 1
+    assert imp_res["mismatch_count"] == 1
+    review_md = (
+        fake_root / "data" / "reports" / "xx-test-fixture" / "verification-review.md"
+    ).read_text(encoding="utf-8")
+    assert "OPEN REVIEW ITEM" in review_md
+    assert "Height differs on page 2" in review_md
+    assert "Verified by Asha Rao, RV College of Architecture, 2026-11-26" in review_md
+
+    credits = collect_verified_contributors_for_jurisdiction(
+        cfg, repo_root=fake_root
+    )
+    assert len(credits) == 2
+    assert {c["verifier_name"] for c in credits} == {"Asha Rao", "Kiran Kumar"}
+
+
+

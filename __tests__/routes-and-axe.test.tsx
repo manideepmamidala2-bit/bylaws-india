@@ -27,6 +27,7 @@ import TimelinePage from "@/app/j/[id]/timeline/page";
 import DataReleasesPage from "@/app/data/page";
 import AboutPage from "@/app/about/page";
 import UseWithAiPage from "@/app/use-with-ai/page";
+import VerifyTaskSetPage from "@/app/verify/[taskSet]/page";
 import TopicsIndexPage from "@/app/j/[id]/topics/page";
 import TopicDetailPage from "@/app/j/[id]/topics/[topic]/page";
 import nextConfig from "@/next.config";
@@ -805,6 +806,30 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     expect(cUseAi.textContent ?? "").toContain("local agent engine is coming");
     await assertNoAxeViolations(cUseAi);
     uUseAi();
+
+    const verifyUi = await VerifyTaskSetPage({
+      params: Promise.resolve({ taskSet: "bengaluru-pilot-sample" }),
+    });
+    const { container: cVerify, unmount: uVerify } = render(verifyUi);
+    expect(cVerify.textContent ?? "").toContain(
+      "Verify rules against official pages"
+    );
+    fireEvent.change(screen.getByTestId("verifier-name-input"), {
+      target: { value: "Asha Rao" },
+    });
+    fireEvent.change(screen.getByTestId("verifier-institution-input"), {
+      target: { value: "RV College of Architecture" },
+    });
+    fireEvent.click(screen.getByTestId("verdict-match-task-001"));
+    expect(
+      screen.getByTestId("verify-progress-counter").textContent
+    ).toContain("1 of");
+    fireEvent.click(screen.getByTestId("export-verifications-csv-btn"));
+    expect(
+      screen.getByTestId("exported-csv-preview").textContent
+    ).toContain("Asha Rao,RV College of Architecture");
+    await assertNoAxeViolations(cVerify);
+    uVerify();
 
     // 4. Part 4: Plain land-use zone gap notice on Map and Land use subject pages
     const expectedGapLine =

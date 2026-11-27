@@ -536,7 +536,21 @@ def run_publish(
     parent_id = getattr(config, "parent", None)
     parent_prefix = f"/data/{parent_id}/{release_version}" if parent_id else url_prefix
     released_at = get_deterministic_timestamp()
-    changelog = f"Release {release_version} for {config.name}."
+    from bylaws.verify_records import collect_verified_contributors_for_jurisdiction
+
+    verifiers_list = collect_verified_contributors_for_jurisdiction(
+        config, repo_root=root
+    )
+    if verifiers_list:
+        verifier_credits_str = "; ".join(
+            f"{v['verifier_name']} ({v['institution']})" for v in verifiers_list
+        )
+        changelog = (
+            f"Release {release_version} for {config.name}. "
+            f"Verified by: {verifier_credits_str}."
+        )
+    else:
+        changelog = f"Release {release_version} for {config.name}."
 
     def _resolve_file_url(fname: str) -> str:
         if fname in artifacts:
@@ -603,6 +617,7 @@ def run_publish(
         "files": files_entry,
         "drafts": drafts_entry,
         "changelog": changelog,
+        "verifiers": verifiers_list,
     }
 
     public_data_dir = root / "public" / "data"

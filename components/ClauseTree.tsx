@@ -12,6 +12,7 @@ import type {
   DisplayLegalStatus,
   UnconsolidatedClauseRecord,
 } from "@/lib/data";
+import { ReportProblemLink } from "./ReportProblemLink";
 import { partitionClauseVersions } from "@/lib/data";
 import { StatusBadge } from "./StatusBadge";
 
@@ -1034,12 +1035,33 @@ export function ClauseTree({
                     </div>
                   )}
 
-                  <div className="border-t border-[#c8ccc0] pt-2 font-mono text-[10px] text-[#5b5e56]">
-                    Address: {eid} · Record:{" "}
-                    {clause.record_id ?? clause.clause_id} ·{" "}
-                    {clause.verification === "machine_checked"
-                      ? "Checked by rule, not yet by a person (machine checked)"
-                      : clause.verification.replace("_", " ")}
+                  <div className="flex flex-wrap items-center justify-between gap-2 border-t border-[#c8ccc0] pt-2 font-mono text-[10px] text-[#5b5e56]">
+                    <div>
+                      Address: {eid} · Record:{" "}
+                      {clause.record_id ?? clause.clause_id} ·{" "}
+                      {clause.verification === "human_verified"
+                        ? clause.verifications && clause.verifications.length > 0
+                          ? `Verified by ${clause.verifications
+                              .filter((v) => v.verdict === "match")
+                              .map(
+                                (v) =>
+                                  `${v.verifier_name}, ${v.institution}, ${v.verified_at}`
+                              )
+                              .join("; ")}`
+                          : clause.verified_by || "human verified"
+                        : clause.verification === "machine_checked"
+                          ? "Checked by rule, not yet by a person (machine checked)"
+                          : clause.verification.replace("_", " ")}
+                    </div>
+                    <ReportProblemLink
+                      pagePath={`/j/${jurisdictionId}/documents/${clause.doc_id ?? ""}#node-${eid}`}
+                      ruleSummary={`${clause.number || eid}: ${(clause.heading || clause.text || "").slice(0, 70)}`}
+                      officialPageUrl={
+                        firstPage !== null && sourceHref
+                          ? `${sourceHref}#page=${firstPage}`
+                          : undefined
+                      }
+                    />
                   </div>
                 </div>
               </details>
