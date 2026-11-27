@@ -14,6 +14,13 @@ import JurisdictionPickerPage, { getHomePageProps } from "@/app/page";
 import JurisdictionMapPage, {
   generateStaticParams as generateMapParams,
 } from "@/app/j/[id]/page";
+import BrowseByWardPage from "@/app/j/[id]/wards/page";
+import {
+  createPlaceMiniSearch,
+  formatMapUrlHash,
+  parseMapUrlHash,
+  searchPlacesWithMiniSearch,
+} from "@/lib/place-search";
 import SourcesPage from "@/app/j/[id]/sources/page";
 import DocumentViewerPage from "@/app/j/[id]/documents/[doc]/page";
 import TimelinePage from "@/app/j/[id]/timeline/page";
@@ -298,37 +305,58 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     await assertNoAxeViolations(unstructContainer);
     uUnstruct();
 
-    // Map page renders official GBA Corporation (1), GBA Zones (2), Wards (72), Planning Districts (1), Land-Use Zones (868), and Sheet Overlay toggle + plain-words accuracy notice
+    // Map page renders Protomaps © OpenStreetMap attribution, plain-words layer switch, Place Card with 6 rule groups, sheet overlay opacity, and coverage/accuracy statements
     const mapUi = await JurisdictionMapPage({
       params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
     });
     const { container: mapContainer, unmount: uMap } = render(mapUi);
     expect(
-      screen.getByText(/© OpenStreetMap contributors · Protomaps/i)
+      screen.getByText(/Protomaps © OpenStreetMap/i)
     ).toBeInTheDocument();
     expect(
-      screen.getAllByText(
-        /Zones traced from the RMP 2015 Proposed Land Use sheet/i
-      ).length
-    ).toBeGreaterThan(0);
+      screen.getByTestId("map-coverage-statement")
+    ).toHaveTextContent(
+      /Land-use zones cover 1\.5% of Greater Bengaluru, in parts of Bengaluru South\./i
+    );
     expect(
       screen.getByRole("checkbox", {
-        name: /Sheet Overlay: 2\.10 Jayanagar map \(b\)/i,
+        name: /^Land-use zones$/i,
+      })
+    ).toBeChecked();
+    expect(
+      screen.getByRole("checkbox", {
+        name: /^Wards$/i,
+      })
+    ).toBeChecked();
+    expect(
+      screen.getByRole("checkbox", {
+        name: /^Corporations$/i,
+      })
+    ).toBeChecked();
+    expect(
+      screen.getByRole("checkbox", {
+        name: /^Planning districts$/i,
+      })
+    ).toBeChecked();
+    expect(
+      screen.getByRole("checkbox", {
+        name: /^Original map sheets$/i,
       })
     ).toBeInTheDocument();
     expect(
-      screen.getByLabelText(/Sheet Opacity: 65%/i)
+      screen.getByLabelText(/Sheet opacity: 70%/i)
     ).toBeInTheDocument();
-    const corpCheckbox = screen.getByRole("checkbox", {
-      name: /Corporation \(1\)/i,
-    });
-    const wardsCheckbox = screen.getByRole("checkbox", {
-      name: /Wards \(72\)/i,
-    });
-    expect(corpCheckbox).toBeChecked();
-    expect(wardsCheckbox).toBeChecked();
+    expect(screen.getByTestId("place-card")).toBeInTheDocument();
+    expect(screen.getByTestId("place-card-group-uses")).toBeInTheDocument();
+    expect(screen.getByTestId("place-card-group-far")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("place-card-group-ground-coverage")
+    ).toBeInTheDocument();
+    expect(screen.getByTestId("place-card-group-setbacks")).toBeInTheDocument();
+    expect(screen.getByTestId("place-card-group-height")).toBeInTheDocument();
+    expect(screen.getByTestId("place-card-group-parking")).toBeInTheDocument();
     const wardSelect = screen.getByLabelText(
-      /Inspect Official Ward \(72 Wards in Corporation\)/i
+      /Inspect Official Ward \(72 Wards\)/i
     );
     fireEvent.change(wardSelect, { target: { value: "11" } });
     expect(screen.getAllByText(/Jayanagar East/i).length).toBeGreaterThan(0);
@@ -778,5 +806,57 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
     );
     await assertNoAxeViolations(cCityMap);
     uCityMap();
+
+    // 5. Browse by ward page (/j/[id]/wards) and MiniSearch + URL hash round-trip
+    const wardsUi = await BrowseByWardPage({
+      params: Promise.resolve({ id: "in-ka-bengaluru-south" }),
+    });
+    const { container: cWards, unmount: uWards } = render(wardsUi);
+    expect(
+      screen.getByTestId("browse-by-ward-directory")
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId("browse-by-ward-zone-rules")
+    ).toBeInTheDocument();
+    expect(cWards.textContent ?? "").toContain("Jayanagar East");
+    expect(cWards.textContent ?? "").toContain("Residential (Main) (R-MAIN)");
+    await assertNoAxeViolations(cWards);
+    uWards();
+
+    const hashStr = formatMapUrlHash({
+      lat: 12.9279,
+      lng: 77.5831,
+      zoom: 15,
+      place: "Jayanagar",
+    });
+    expect(hashStr).toBe("#12.9279,77.5831,15,Jayanagar");
+    const parsedHash = parseMapUrlHash(hashStr);
+    expect(parsedHash).toEqual({
+      lat: 12.9279,
+      lng: 77.5831,
+      zoom: 15,
+      place: "Jayanagar",
+    });
+
+    const ms = createPlaceMiniSearch([
+      {
+        id: "p1",
+        name: "Jayanagar 4th Block",
+        kind: "locality",
+        categoryLabel: "Neighbourhood",
+        lat: 12.92657,
+        lng: 77.5835,
+        corporationId: "in-ka-bengaluru-south",
+        corporationName: "Bengaluru South City Corporation",
+        wardNumber: "8",
+        wardName: "Tilak Nagara",
+        planningDistrict: "2.10 · Jayanagar",
+        zoneCode: "R-MAIN",
+        zoneLabel: "Residential (Main)",
+      },
+    ]);
+    const hits = searchPlacesWithMiniSearch(ms, "Jayanag");
+    expect(hits).toHaveLength(1);
+    expect(hits[0].zoneCode).toBe("R-MAIN");
   });
 });

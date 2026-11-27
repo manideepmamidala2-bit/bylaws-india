@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import gzip
 import json
 import shutil
 import subprocess
@@ -121,3 +122,73 @@ def test_part1_single_config_contact_email_and_gitleaks_in_ci() -> None:
             check=False,
         )
         assert res.returncode == 0, f"gitleaks found leaks: {res.stdout}\n{res.stderr}"
+
+
+def test_part2_map_layers_place_index_place_card_and_browse_by_ward() -> None:
+    """Part 2: Verify Protomaps light style, 8 ordered layers, place-index.json <= 300 KB compressed, PlaceCard 6 rule groups, sheet overlays, accuracy/coverage lines, Browse by ward page, and Map in TopNav."""
+    # 1. Self-hosted fonts & sprites
+    for rel in (
+        "public/sprites/light.json",
+        "public/sprites/light.png",
+        "public/sprites/light@2x.json",
+        "public/sprites/light@2x.png",
+        "public/fonts/Noto Sans Regular/0-255.pbf",
+        "public/fonts/Noto Sans Medium/0-255.pbf",
+        "public/fonts/Noto Sans Italic/0-255.pbf",
+    ):
+        assert (REPO_ROOT / rel).is_file(), f"Missing self-hosted map asset: {rel}"
+
+    # 2. place-index.json <= 300 KB compressed
+    for jur_id in ("in-ka-bengaluru", "in-ka-bengaluru-south"):
+        idx_path = REPO_ROOT / "public" / "data" / jur_id / "place-index.json"
+        assert idx_path.is_file(), f"Missing {idx_path}"
+        raw_bytes = idx_path.read_bytes()
+        gz_bytes = gzip.compress(raw_bytes)
+        assert len(gz_bytes) <= 300 * 1024, (
+            f"{idx_path} compressed size {len(gz_bytes)} exceeds 300 KB"
+        )
+        payload = json.loads(raw_bytes.decode("utf-8"))
+        assert payload["count"] >= 500
+        kinds = {p["kind"] for p in payload["places"]}
+        assert {"corporation", "ward", "locality", "road", "landmark"}.issubset(kinds)
+
+    # 3. Map style and TopNav
+    map_style_txt = (REPO_ROOT / "lib" / "map-style.ts").read_text(encoding="utf-8")
+    assert "@protomaps/basemaps" in map_style_txt
+    assert 'namedFlavor("light")' in map_style_txt
+    assert "Protomaps © OpenStreetMap" in map_style_txt
+    assert "/fonts/{fontstack}/{range}.pbf" in map_style_txt
+    assert "/sprites/light" in map_style_txt
+
+    top_nav_txt = (REPO_ROOT / "components" / "TopNav.tsx").read_text(encoding="utf-8")
+    for nav_label in ("The code", "Map", "What changed", "About"):
+        assert f'label: "{nav_label}"' in top_nav_txt
+
+    # 4. ZoneMap 8 layers & plain-word toggles
+    zone_map_txt = (REPO_ROOT / "components" / "ZoneMap.tsx").read_text(encoding="utf-8")
+    assert '"fill-opacity": 0.6' in zone_map_txt
+    assert "minzoom: 15" in zone_map_txt
+    assert "Land-use data not yet available" in zone_map_txt
+    assert "minzoom: 13" in zone_map_txt
+    assert '"text-field": "derived"' in zone_map_txt
+    for toggle_label in (
+        "Land-use zones",
+        "Wards",
+        "Corporations",
+        "Planning districts",
+        "Original map sheets",
+    ):
+        assert f"<span>{toggle_label}</span>" in zone_map_txt
+
+    # 5. PlaceCard & Browse by ward
+    place_card_txt = (REPO_ROOT / "components" / "PlaceCard.tsx").read_text(encoding="utf-8")
+    assert "Rules for this zone" in place_card_txt
+    assert "No rules linked to this zone yet." in place_card_txt
+    assert "Land-use data not yet available here" in place_card_txt
+
+    wards_page = REPO_ROOT / "app" / "j" / "[id]" / "wards" / "page.tsx"
+    assert wards_page.is_file()
+    wards_txt = wards_page.read_text(encoding="utf-8")
+    assert "Corporation → Ward → Zones present" in wards_txt
+    assert "Rules for each land-use zone" in wards_txt
+

@@ -1123,6 +1123,24 @@ export async function fetchJurisdictionDataset(
   };
 }
 
+export interface ProcessedSheetMetadata {
+  sheetId: string;
+  sheetLabel: string;
+  planningDistrict: string;
+  imageUrl: string;
+  boundsWgs84: [
+    [number, number],
+    [number, number],
+    [number, number],
+    [number, number]
+  ];
+  roadSegmentCount: number | null;
+  roadMedianOffsetM: number | null;
+  roadP90OffsetM: number | null;
+  gridFitRmseM: number | null;
+  looRmseM: number | null;
+}
+
 export interface MapVerificationMetrics {
   sheetLabel: string | null;
   roadMedianOffsetM: number | null;
@@ -1130,11 +1148,75 @@ export interface MapVerificationMetrics {
   roadSegmentCount: number | null;
   gridFitRmseM: number | null;
   looRmseM: number | null;
+  sheets: ProcessedSheetMetadata[];
+  zonedAreaSqKm: number | null;
+  parentBoundaryAreaSqKm: number | null;
+  coveragePctOfParent: number | null;
+}
+
+function parseProcessedSheetsFromReport(
+  mdText: string
+): ProcessedSheetMetadata[] {
+  const sheets: ProcessedSheetMetadata[] = [];
+  const sectionParts = mdText.split(/^### Sheet `/m).slice(1);
+  for (const part of sectionParts) {
+    const headerMatch = /^([^`]+)`(?:\s*\(Planning District `([^`]+)`\))?/.exec(
+      part
+    );
+    if (!headerMatch) continue;
+    const sheetLabel = headerMatch[1].trim();
+    const planningDistrict = (headerMatch[2] || "").trim();
+    const rmseMatch =
+      /\*\*Affine Fit RMSE\*\*:\s*\*\*`([0-9.]+)\s*m`\*\*/.exec(part);
+    const looMatch =
+      /\*\*Leave-One-Out \(LOO\) Cross-Validation RMSE\*\*:\s*\*\*`([0-9.]+)\s*m`\*\*/.exec(
+        part
+      );
+    const roadMatch =
+      /OpenStreetMap Roads[^:]*:\s*`(\d+)`\s*vector road segments compared;\s*\*\*Median offset:\s*`([0-9.]+)\s*m`\*\*,\s*\*\*90th-percentile \(`p90`\) offset:\s*`([0-9.]+)\s*m`\*\*/.exec(
+        part
+      );
+    const overlayMatch =
+      /\*\*Rendered Sheet Image Overlay\*\*:\s*`([^`]+)`\s*\(WGS 84 corners:\s*`(\[\[[\s\S]*?\]\])`\)/.exec(
+        part
+      );
+    if (!overlayMatch) continue;
+    const imageUrl = overlayMatch[1].trim();
+    let boundsWgs84: ProcessedSheetMetadata["boundsWgs84"] | null = null;
+    try {
+      const parsed = JSON.parse(overlayMatch[2]);
+      if (Array.isArray(parsed) && parsed.length === 4) {
+        boundsWgs84 = parsed as ProcessedSheetMetadata["boundsWgs84"];
+      }
+    } catch {
+      boundsWgs84 = null;
+    }
+    if (!boundsWgs84) continue;
+    const fileBase =
+      imageUrl
+        .split("/")
+        .pop()
+        ?.replace(/\.[a-z0-9]+$/i, "") || sheetLabel;
+    sheets.push({
+      sheetId: fileBase,
+      sheetLabel,
+      planningDistrict,
+      imageUrl,
+      boundsWgs84,
+      roadSegmentCount: roadMatch ? Number(roadMatch[1]) : null,
+      roadMedianOffsetM: roadMatch ? Number(roadMatch[2]) : null,
+      roadP90OffsetM: roadMatch ? Number(roadMatch[3]) : null,
+      gridFitRmseM: rmseMatch ? Number(rmseMatch[1]) : null,
+      looRmseM: looMatch ? Number(looMatch[1]) : null,
+    });
+  }
+  return sheets;
 }
 
 export async function fetchMapVerificationMetrics(
   jurisdictionId: string,
-  fallbackJurisdictionId?: string | null
+  fallbackJurisdictionId?: string | null,
+  parentJurisdictionId?: string | null
 ): Promise<MapVerificationMetrics | null> {
   const candidateIds = [
     jurisdictionId,
@@ -1143,9 +1225,40 @@ export async function fetchMapVerificationMetrics(
       : []),
   ];
 
-  if (typeof window === "undefined") {
-    const fs = await import("node:fs/promises");
-    const path = await import("node:path");
+  let parentBoundaryAreaSqKm: number | null = null;
+
+  if (
+    typeof process !== "undefined" &&
+    typeof process.getBuiltinModule === "function"
+  ) {
+    const fs = process.getBuiltinModule(
+      "fs/promises"
+    ) as typeof import("fs/promises");
+    const path = process.getBuiltinModule("path") as typeof import("path");
+
+    const parentCand = parentJurisdictionId || jurisdictionId;
+    try {
+      const parentReport = await fs.readFile(
+        path.join(
+          process.cwd(),
+          "data",
+          "reports",
+          parentCand,
+          "map-verification.md"
+        ),
+        "utf8"
+      );
+      const areaMatch =
+        /\*\*Corporation Boundary Area \(`boundary\.geojson`\)\*\*:\s*([0-9.]+)\s*sq\.km/.exec(
+          parentReport
+        );
+      if (areaMatch) {
+        parentBoundaryAreaSqKm = Number(areaMatch[1]);
+      }
+    } catch {
+      // ignore
+    }
+
     for (const candId of candidateIds) {
       const reportPath = path.join(
         process.cwd(),
@@ -1156,6 +1269,7 @@ export async function fetchMapVerificationMetrics(
       );
       try {
         const mdText = await fs.readFile(reportPath, "utf8");
+        const sheets = parseProcessedSheetsFromReport(mdText);
         const sheetMatch = /### Sheet `([^`]+)`/.exec(mdText);
         const rmseMatch =
           /\*\*Affine Fit RMSE\*\*:\s*\*\*`([0-9.]+)\s*m`\*\*/.exec(mdText);
@@ -1167,6 +1281,29 @@ export async function fetchMapVerificationMetrics(
           /OpenStreetMap Roads[^:]*:\s*`(\d+)`\s*vector road segments compared;\s*\*\*Median offset:\s*`([0-9.]+)\s*m`\*\*,\s*\*\*90th-percentile \(`p90`\) offset:\s*`([0-9.]+)\s*m`\*\*/.exec(
             mdText
           );
+
+        // Sum Clipped Area from Section 4 table or zones.geojson
+        let zonedAreaSqKm = 0;
+        for (const areaM of mdText.matchAll(/\|\s*([0-9.]+)\s*sq\.km\s*\|\s*PASS/g)) {
+          zonedAreaSqKm += Number(areaM[1]);
+        }
+        if (zonedAreaSqKm <= 0) {
+          try {
+            const zFc = await fetchZones(candId);
+            const sqM = zFc.features.reduce(
+              (acc, f) => acc + (Number(f.properties?.area_sq_m) || 0),
+              0
+            );
+            zonedAreaSqKm = sqM / 1e6;
+          } catch {
+            zonedAreaSqKm = 0;
+          }
+        }
+        const coveragePctOfParent =
+          parentBoundaryAreaSqKm && parentBoundaryAreaSqKm > 0 && zonedAreaSqKm > 0
+            ? Number(((zonedAreaSqKm / parentBoundaryAreaSqKm) * 100).toFixed(1))
+            : null;
+
         if (roadMatch) {
           return {
             sheetLabel: sheetMatch ? sheetMatch[1] : null,
@@ -1175,6 +1312,10 @@ export async function fetchMapVerificationMetrics(
             roadP90OffsetM: Number(roadMatch[3]),
             gridFitRmseM: rmseMatch ? Number(rmseMatch[1]) : null,
             looRmseM: looMatch ? Number(looMatch[1]) : null,
+            sheets,
+            zonedAreaSqKm: zonedAreaSqKm > 0 ? Number(zonedAreaSqKm.toFixed(2)) : null,
+            parentBoundaryAreaSqKm,
+            coveragePctOfParent,
           };
         }
       } catch {
@@ -1198,6 +1339,27 @@ export async function fetchMapVerificationMetrics(
           roadSegmentCount: null,
           gridFitRmseM: ov.rmse_m ?? null,
           looRmseM: ov.loo_rmse_m ?? null,
+          sheets:
+            ov.bounds_wgs84 && ov.bounds_wgs84.length === 4
+              ? [
+                  {
+                    sheetId: ov.sheet ?? "sheet-1",
+                    sheetLabel: ov.sheet ?? "Sheet 1",
+                    planningDistrict: ov.planning_district ?? "",
+                    imageUrl: ov.image_url,
+                    boundsWgs84:
+                      ov.bounds_wgs84 as unknown as ProcessedSheetMetadata["boundsWgs84"],
+                    roadSegmentCount: null,
+                    roadMedianOffsetM: ov.road_median_offset_m ?? null,
+                    roadP90OffsetM: ov.road_p90_offset_m ?? null,
+                    gridFitRmseM: ov.rmse_m ?? null,
+                    looRmseM: ov.loo_rmse_m ?? null,
+                  },
+                ]
+              : [],
+          zonedAreaSqKm: null,
+          parentBoundaryAreaSqKm: null,
+          coveragePctOfParent: null,
         };
       }
     } catch {

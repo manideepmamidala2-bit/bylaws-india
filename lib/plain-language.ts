@@ -302,6 +302,58 @@ export function formatLandUseZoneGapPlainLine(
   return "Land-use zones are available for processed map sheets only. Elsewhere the map shows boundaries and wards.";
 }
 
+export function formatMapZoneCoveragePlainLine(
+  coveragePct: number | null | undefined,
+  regionName?: string | null,
+  partialAreaName?: string | null
+): string | null {
+  if (
+    typeof coveragePct !== "number" ||
+    Number.isNaN(coveragePct) ||
+    coveragePct <= 0
+  ) {
+    return null;
+  }
+  const pctStr = Number(coveragePct.toFixed(1)).toString();
+  const regionLabel = (regionName || "the city")
+    .replace(/\s*\([^)]*\)\s*/g, "")
+    .trim();
+  const partLabel = (partialAreaName || "processed areas")
+    .replace(/\s*City Corporation\s*/i, "")
+    .trim();
+  return `Land-use zones cover ${pctStr}% of ${regionLabel}, in parts of ${partLabel}.`;
+}
+
+export function computeNewestInForceInstrumentDate(
+  documents: ReadonlyArray<
+    Pick<
+      DocumentMetadata,
+      | "legal_status"
+      | "acquisition_status"
+      | "applies_to_jurisdiction"
+      | "instrument_type"
+      | "effective_from"
+      | "notified_date"
+      | "doc_id"
+    >
+  >
+): string | null {
+  const sorted = sortDocumentsMostRecentFirst(
+    documents.filter(
+      (d) =>
+        d.legal_status === "in_force" &&
+        d.acquisition_status !== "not_found" &&
+        d.applies_to_jurisdiction?.status !== "no" &&
+        (d.instrument_type ?? "instrument") !== "map" &&
+        (d.instrument_type ?? "instrument") !== "compilation"
+    )
+  );
+  const newest = sorted[0];
+  if (!newest) return null;
+  const iso = newest.effective_from || newest.notified_date;
+  return iso ? formatHumanDate(iso) : null;
+}
+
 export function formatMapZoneAccuracyPlainLine(
   roadMedianOffsetM: number | null | undefined,
   roadP90OffsetM: number | null | undefined
