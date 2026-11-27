@@ -25,7 +25,7 @@ Why do colleges, students, practitioners, and civic groups take part? For colleg
 - **Faculty:** publishable research and thesis material; citable releases.
 - **Practitioners:** hours saved finding which rule applies; early access to the planned agent engine; a voice in what comes next.
 - **Civic and data groups:** a shared, open, cited source.
-- **How credit works:** A record becomes `Verified by a person` (`human_verified`) only after at least two independent verifiers record a `Match` verdict with zero `Mismatch` verdicts. Every verifier's name, institution, and date are shown on the provision (`Details`) and listed in `manifest.json` and `datapackage.json`.
+- **How credit works:** A record becomes `Verified by a person` only after at least two independent verifiers record a `Match` verdict with zero `Mismatch` verdicts. Every verifier's name, institution, and date are shown on the provision (`Details`) and listed in `manifest.json` and `datapackage.json`.
 
 ### The workshop (one day)
 

@@ -1,7 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import zlib from "node:zlib";
+import { fireEvent, render, screen } from "@testing-library/react";
+import axe from "axe-core";
 import { describe, expect, it } from "vitest";
+import GuidePage from "@/app/guide/page";
 import {
   countWords,
   interpolateGuidePlaceholders,
@@ -215,5 +218,50 @@ describe("Part 2 — Guide Content as Source Files, Generated Figures, Mermaid D
     for (const word of quotedWords) {
       expect(page21Text).toContain(word);
     }
+  });
+
+  it("renders /guide in reading mode with sticky contents, 5 audience entry points, Present and Download buttons, and passes axe-core WCAG 2.2 AA", async () => {
+    const ui = await GuidePage();
+    const { container, unmount } = render(ui);
+
+    expect(
+      screen.getByRole("heading", { name: "The Bylaw One Guide" })
+    ).toBeInTheDocument();
+    expect(screen.getByTestId("guide-present-btn")).toHaveAttribute(
+      "href",
+      "/guide/slides"
+    );
+    expect(screen.getByTestId("guide-download-btn")).toHaveAttribute(
+      "href",
+      "/bylaw-one-guide.html"
+    );
+    expect(screen.getByTestId("guide-sticky-contents")).toBeInTheDocument();
+
+    for (const audId of [
+      "college",
+      "student",
+      "practitioner",
+      "developer",
+      "partner-funder",
+    ]) {
+      expect(screen.getByTestId(`audience-btn-${audId}`)).toBeInTheDocument();
+    }
+
+    fireEvent.click(screen.getByTestId("audience-btn-college"));
+    expect(screen.getByTestId("audience-selected-path")).toHaveTextContent(
+      /Recommended path for: Colleges & faculties/i
+    );
+
+    expect(
+      screen.getByTestId("start-slides-see-it-working")
+    ).toHaveAttribute("href", "/guide/slides#slide-see-it-working");
+
+    const results = await axe.run(container, {
+      rules: {
+        region: { enabled: false },
+      },
+    });
+    expect(results.violations).toHaveLength(0);
+    unmount();
   });
 });
