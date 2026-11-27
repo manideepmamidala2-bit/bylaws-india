@@ -26,6 +26,11 @@ export function Footer({ jurisdictionId }: FooterProps) {
   const prefix = targetJurId ? `/j/${targetJurId}` : "";
 
   const footerLinks = [
+    { label: "Pilot", href: "/pilot" },
+    { label: "How we check", href: "/checks" },
+    { label: "Join", href: "/join" },
+    { label: "Use with AI", href: "/use-with-ai" },
+    { label: "Press", href: "/press" },
     { label: "Sources", href: prefix ? `${prefix}/sources` : "/data" },
     { label: "Map", href: prefix || "/data" },
     { label: "Data and downloads", href: "/data" },

@@ -12,6 +12,7 @@ import {
 import { TopNav } from "@/components/TopNav";
 import { CorporationSelector } from "@/components/CorporationSelector";
 import { ClauseTree } from "@/components/ClauseTree";
+import { LegislationJsonLd } from "@/components/LegislationJsonLd";
 import {
   formatHumanDate,
   formatPlainDocumentTitle,
@@ -254,7 +255,19 @@ export default async function DocumentViewerPage({
         licence={release.licence}
       />
 
-      <main className="mx-auto max-w-5xl px-5 py-8">
+      <LegislationJsonLd
+        jurisdictionId={jurisdiction.id}
+        jurisdictionName={jurisdiction.name}
+        document={docMeta}
+        clauses={docClauses}
+        amendmentLinks={docAmendmentLinks}
+        allDocuments={documents}
+      />
+
+      <main
+        data-dataset-id={release.dataset_id ?? manifest.dataset_id ?? ""}
+        className="mx-auto max-w-5xl px-5 py-8"
+      >
         <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
           <Link
             href={`/j/${jurisdiction.id}/topics`}

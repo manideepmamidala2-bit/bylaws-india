@@ -7,6 +7,7 @@ import json
 import shutil
 import subprocess
 import tomllib
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 import yaml
@@ -191,4 +192,117 @@ def test_part2_map_layers_place_index_place_card_and_browse_by_ward() -> None:
     wards_txt = wards_page.read_text(encoding="utf-8")
     assert "Corporation → Ward → Zones present" in wards_txt
     assert "Rules for each land-use zone" in wards_txt
+
+
+def test_part3_machine_and_ai_readability_llms_md_api_jsonld_datapackage_and_atom() -> None:
+    """Part 3: Verify llms.txt, llms-full.txt, .md mirrors, /api/v1/ with OpenAPI 3.1, schema.org/Legislation JSON-LD, Frictionless datapackage.json, Atom feed /updates.xml, and /use-with-ai."""
+    # 1. llms.txt and llms-full.txt
+    llms_txt = (REPO_ROOT / "public" / "llms.txt").read_text(encoding="utf-8")
+    assert "Bylaw One" in llms_txt
+    assert "Rules Any AI Must Follow" in llms_txt
+    assert "Cite the exact page" in llms_txt
+    assert "Label derived values" in llms_txt
+    assert "Ask for missing plot details" in llms_txt
+    assert "Confirm with the authority" in llms_txt
+
+    llms_full = (REPO_ROOT / "public" / "llms-full.txt").read_text(encoding="utf-8")
+    assert "What Applies Today" in llms_full
+    for subject_heading in (
+        "# Land use",
+        "# Ground coverage",
+        "# FAR",
+        "# Setbacks",
+        "# Height",
+        "# Parking",
+    ):
+        assert subject_heading in llms_full
+
+    # 2. Markdown .md mirrors for documents, subjects, and provisions
+    doc_md = REPO_ROOT / "public" / "j" / "in-ka-bengaluru" / "documents" / "bbl-2003.md"
+    subj_md = REPO_ROOT / "public" / "j" / "in-ka-bengaluru" / "topics" / "far.md"
+    prov_md = (
+        REPO_ROOT
+        / "public"
+        / "j"
+        / "in-ka-bengaluru"
+        / "documents"
+        / "bbl-2003"
+        / "part_I__sec_1.0__cl_1.4.md"
+    )
+    assert doc_md.is_file() and "## Provisions" in doc_md.read_text(encoding="utf-8")
+    assert subj_md.is_file() and "## 1. What Applies Today" in subj_md.read_text(encoding="utf-8")
+    assert prov_md.is_file() and "## Verbatim Text" in prov_md.read_text(encoding="utf-8")
+
+    # 3. Static JSON API (/api/v1/) & OpenAPI 3.1
+    openapi = json.loads(
+        (REPO_ROOT / "public" / "api" / "v1" / "openapi.json").read_text(encoding="utf-8")
+    )
+    assert openapi["openapi"] == "3.1.0"
+    for endpoint in (
+        "documents.json",
+        "provisions.json",
+        "subjects.json",
+        "parameters.json",
+        "zones.json",
+        "sources.json",
+    ):
+        assert f"/api/v1/{endpoint}" in openapi["paths"]
+        payload = json.loads(
+            (REPO_ROOT / "public" / "api" / "v1" / endpoint).read_text(encoding="utf-8")
+        )
+        assert payload["count"] == len(payload["records"])
+        assert payload["count"] > 0, f"/api/v1/{endpoint} has 0 records"
+        sample = payload["records"][0]
+        assert "citation" in sample and "status" in sample
+        assert "doc_id" in sample["citation"] and "page" in sample["citation"]
+        assert "legal_status" in sample["status"] and "verification" in sample["status"]
+
+    # 4. schema.org Legislation JSON-LD component
+    jsonld_comp = (REPO_ROOT / "components" / "LegislationJsonLd.tsx").read_text(
+        encoding="utf-8"
+    )
+    for field in (
+        "https://schema.org",
+        "Legislation",
+        "legislationIdentifier",
+        "legislationDate",
+        "legislationJurisdiction",
+        "legislationLegalForce",
+        "legislationChanges",
+        "isPartOf",
+    ):
+        assert field in jsonld_comp
+
+    # 5. Frictionless Data Package
+    dp = json.loads(
+        (REPO_ROOT / "public" / "data" / "datapackage.json").read_text(encoding="utf-8")
+    )
+    assert dp["profile"] == "data-package"
+    assert len(dp["resources"]) >= 8
+    assert len(dp["licenses"]) >= 2
+    assert len(dp["sources"]) >= 10
+    assert len(dp["contributors"]) >= 1
+
+    # 6. Atom 1.0 feed at /updates.xml
+    updates_xml = (REPO_ROOT / "public" / "updates.xml").read_text(encoding="utf-8")
+    root = ET.fromstring(updates_xml)
+    atom_ns = "{http://www.w3.org/2005/Atom}"
+    assert root.tag == f"{atom_ns}feed"
+    entries = root.findall(f"{atom_ns}entry")
+    assert len(entries) >= 20
+    dates = [
+        (e.find(f"{atom_ns}updated").text or "")
+        for e in entries
+        if e.find(f"{atom_ns}updated") is not None
+    ]
+    assert dates == sorted(dates, reverse=True), "Atom feed entries must be newest first"
+
+    # 7. Use with AI page
+    use_ai_page = REPO_ROOT / "app" / "use-with-ai" / "page.tsx"
+    assert use_ai_page.is_file()
+    use_ai_txt = use_ai_page.read_text(encoding="utf-8")
+    assert "/llms.txt" in use_ai_txt
+    assert "/api/v1/openapi.json" in use_ai_txt
+    assert "local agent engine is coming" in use_ai_txt
+
 

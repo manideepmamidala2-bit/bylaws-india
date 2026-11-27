@@ -26,6 +26,7 @@ import DocumentViewerPage from "@/app/j/[id]/documents/[doc]/page";
 import TimelinePage from "@/app/j/[id]/timeline/page";
 import DataReleasesPage from "@/app/data/page";
 import AboutPage from "@/app/about/page";
+import UseWithAiPage from "@/app/use-with-ai/page";
 import TopicsIndexPage from "@/app/j/[id]/topics/page";
 import TopicDetailPage from "@/app/j/[id]/topics/[topic]/page";
 import nextConfig from "@/next.config";
@@ -777,8 +778,33 @@ describe("PR 01 — Contain Production: Server Filtering, Withdrawn Release 1.0.
       "Changed for Bengaluru South City Corporation, 14 May 2026"
     );
     expect(cSouthBbl.textContent ?? "").toContain("Table-2B below");
+    const jsonLdEl = cSouthBbl.querySelector(
+      'script[data-testid="legislation-json-ld"]'
+    );
+    expect(jsonLdEl).not.toBeNull();
+    const jsonLdObj = JSON.parse(jsonLdEl?.textContent ?? "{}");
+    expect(jsonLdObj["@context"]).toBe("https://schema.org");
+    expect(jsonLdObj["@type"]).toBe("Legislation");
+    expect(jsonLdObj.legislationIdentifier).toBeTruthy();
+    expect(jsonLdObj.legislationDate).toBeTruthy();
+    expect(jsonLdObj.legislationJurisdiction).toContain(
+      "Bengaluru South City Corporation"
+    );
+    expect(jsonLdObj.legislationLegalForce).toBe("https://schema.org/InForce");
+    expect(Array.isArray(jsonLdObj.legislationChanges)).toBe(true);
+    expect(jsonLdObj.isPartOf).toBeTruthy();
+    expect(jsonLdObj.url).toMatch(/^https?:\/\//);
+    expect(Array.isArray(jsonLdObj.hasPart)).toBe(true);
     await assertNoAxeViolations(cSouthBbl);
     uSouthBbl();
+
+    const useAiUi = await UseWithAiPage();
+    const { container: cUseAi, unmount: uUseAi } = render(useAiUi);
+    expect(cUseAi.textContent ?? "").toContain("Use Bylaw One with AI");
+    expect(cUseAi.textContent ?? "").toContain("/llms.txt");
+    expect(cUseAi.textContent ?? "").toContain("local agent engine is coming");
+    await assertNoAxeViolations(cUseAi);
+    uUseAi();
 
     // 4. Part 4: Plain land-use zone gap notice on Map and Land use subject pages
     const expectedGapLine =

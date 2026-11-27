@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
       "public/data/**/*",
       "./public/pagefind/**/*",
       "public/pagefind/**/*",
+      "./public/api/**/*",
+      "public/api/**/*",
+      "./public/j/**/*",
+      "public/j/**/*",
     ],
   },
   async headers() {
@@ -115,6 +119,20 @@ const nextConfig: NextConfig = {
     ];
   },
   async rewrites() {
+    const mdAfterFiles = [
+      {
+        source: "/j/:id/documents/:doc/:eid.md",
+        destination: "/api/markdown?kind=provision&id=:id&doc=:doc&eid=:eid",
+      },
+      {
+        source: "/j/:id/documents/:doc.md",
+        destination: "/api/markdown?kind=document&id=:id&doc=:doc",
+      },
+      {
+        source: "/j/:id/topics/:topic.md",
+        destination: "/api/markdown?kind=topic&id=:id&topic=:topic",
+      },
+    ];
     if (process.env.VERCEL === "1") {
       return {
         beforeFiles: [
@@ -123,7 +141,7 @@ const nextConfig: NextConfig = {
             destination: "/data/in-ka-bengaluru-south/basemap.pmtiles",
           },
         ],
-        afterFiles: [],
+        afterFiles: mdAfterFiles,
         fallback: [],
       };
     }
@@ -134,7 +152,7 @@ const nextConfig: NextConfig = {
           destination: "/api/range/data/:path*.pmtiles",
         },
       ],
-      afterFiles: [],
+      afterFiles: mdAfterFiles,
       fallback: [],
     };
   },

@@ -16,11 +16,17 @@ data/raw/
 data/interim/
 data/processed/
 
-# Published non-fixture datasets, PMTiles, and static search index (served via range storage / prebuild)
+# Published non-fixture datasets, PMTiles, and static search/machine-readable artifacts (built via prebuild)
 public/data/in-ka-bengaluru/
 public/data/in-ka-bengaluru-*/
 public/data/**/*.pmtiles
+public/data/datapackage.json
 public/pagefind/
+public/api/
+public/j/
+public/llms.txt
+public/llms-full.txt
+public/updates.xml
 
 # Python / uv
 __pycache__/

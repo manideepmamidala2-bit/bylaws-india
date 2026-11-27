@@ -88,6 +88,7 @@ jobs:
         run: |
           node scripts/ensure_data.mjs
           node scripts/build_place_index.mjs
+          node scripts/build_machine_readable.mjs
           node scripts/build_search.mjs
 
       - name: Run full pytest suite (schemas, CLI, R1, R4, provenance, golden snapshots)
@@ -114,6 +115,7 @@ jobs:
         run: |
           node scripts/ensure_data.mjs
           node scripts/build_place_index.mjs
+          node scripts/build_machine_readable.mjs
           node scripts/build_search.mjs
 
       - name: Run ESLint
