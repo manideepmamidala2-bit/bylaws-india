@@ -272,13 +272,13 @@ export function buildZoneRulesSummaryMap(params: {
           ? clause.change_mark.label
           : null,
       });
-      if (useLines.length >= 4) break;
+      if (useLines.length >= 2) break;
     }
 
     const toParamLines = (
       recs: ParameterRecord[],
       subjectSlug: string,
-      maxItems = 5
+      maxItems = 3
     ): ZoneRuleLine[] => {
       const seenSig = new Set<string>();
       const out: ZoneRuleLine[] = [];
@@ -326,7 +326,7 @@ export function buildZoneRulesSummaryMap(params: {
     const farLines = toParamLines(
       [...baseFarRecs, ...extraFarRecs],
       "far",
-      6
+      3
     );
 
     // 3. Ground coverage group
@@ -335,7 +335,7 @@ export function buildZoneRulesSummaryMap(params: {
         r.parameter === "ground_coverage_max_pct" &&
         r.conditions.zone?.includes(zoneCode)
     );
-    const covLines = toParamLines(covRecs, "ground-coverage", 5);
+    const covLines = toParamLines(covRecs, "ground-coverage", 3);
 
     // 4. Setbacks group
     const zoneSetbackRecs = activeParams.filter(
@@ -360,7 +360,7 @@ export function buildZoneRulesSummaryMap(params: {
     const setbackLines = toParamLines(
       [...zoneSetbackRecs, ...generalSetbackRecs],
       "setbacks",
-      5
+      3
     );
 
     // 5. Height group
@@ -373,7 +373,7 @@ export function buildZoneRulesSummaryMap(params: {
             zoneCode !== "G-PARK" &&
             zoneCode !== "G-LAKE"))
     );
-    const heightLines = toParamLines(zoneHeightRecs, "height", 4);
+    const heightLines = toParamLines(zoneHeightRecs, "height", 2);
 
     // 6. Parking group
     const parkingRecs = activeParams.filter(
@@ -385,7 +385,7 @@ export function buildZoneRulesSummaryMap(params: {
               allowedUses.includes(u.toLowerCase())
             )))
     );
-    const parkingLines = toParamLines(parkingRecs, "parking", 4);
+    const parkingLines = toParamLines(parkingRecs, "parking", 2);
 
     const linesByKey: Record<ZoneRuleGroupKey, ZoneRuleLine[]> = {
       uses: useLines,
