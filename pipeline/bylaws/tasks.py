@@ -34,6 +34,19 @@ SUBJECT_PARAMETER_MAP: dict[str, tuple[str, ...]] = {
     "parking": ("parking_requirement",),
 }
 
+PARAMETER_PLAIN_LABELS: dict[str, str] = {
+    "ground_coverage_max_pct": "Maximum ground coverage",
+    "far_base_max": "Base FAR",
+    "far_premium_additional_max": "Premium FAR (additional)",
+    "tdr_receivable_max": "Transferable development rights (TDR)",
+    "setback_front_min_m": "Front setback",
+    "setback_rear_min_m": "Rear setback",
+    "setback_side_min_m": "Side setback",
+    "building_height_max_m": "Maximum building height",
+    "floors_max": "Maximum floors",
+    "parking_requirement": "Parking requirement",
+}
+
 SUBJECT_TOPIC_ID_MAP: dict[str, str] = {
     "land-use": "land_use",
     "land_use": "land_use",
@@ -289,10 +302,14 @@ def create_verification_task_set(
         arch_link = f"{arch_base}#page={page}" if arch_base and "#page=" not in arch_base else (arch_base or None)
         row_hdr = str(src.get("row_header") or "").strip()
         col_hdr = str(src.get("column_header") or "").strip()
-        label = f"{rec.get('parameter')} · {row_hdr}" if row_hdr else str(rec.get("parameter"))
+        param_plain = PARAMETER_PLAIN_LABELS.get(
+            str(rec.get("parameter") or ""), str(rec.get("parameter") or "Rule")
+        )
+        label = f"{param_plain} · {row_hdr}" if row_hdr else param_plain
         if col_hdr:
             label = f"{label} ({col_hdr})"
-        val_str = f"{rec.get('value_text')} (value: {rec.get('value')} {rec.get('unit') or ''})".strip()
+        raw_unit = str(rec.get("unit") or "").replace("sq_m", "m²").replace("pct_of_plot_depth", "% of plot depth").replace("pct_of_plot_width", "% of plot width").replace("m2_per_car_space", "m² per car space")
+        val_str = f"{rec.get('value_text')} (value: {rec.get('value')} {raw_unit})".strip()
         candidates.append(
             {
                 "record_id": str(rec["parameter_id"]),

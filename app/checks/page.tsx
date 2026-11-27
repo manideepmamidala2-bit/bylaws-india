@@ -1,7 +1,25 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { TopNav } from "@/components/TopNav";
 import { computeDatasetPilotMetrics } from "@/lib/pilot-metrics";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const m = await computeDatasetPilotMetrics();
+  const title = "How we check · Bylaw One";
+  const desc = `${m.checksPerBuildCount} automatic verification suites on every build plus double-keyed workshop verification.`;
+  return {
+    title,
+    description: desc,
+    openGraph: {
+      title,
+      description: desc,
+      images: [
+        `/api/og?title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent(desc)}`,
+      ],
+    },
+  };
+}
 
 export default async function ChecksPage() {
   const m = await computeDatasetPilotMetrics();
@@ -146,7 +164,12 @@ export default async function ChecksPage() {
             Every automatic check that runs on each build.
           </h2>
 
-          <div className="overflow-x-auto">
+          <div
+            tabIndex={0}
+            role="region"
+            aria-label="Automatic build checks table"
+            className="overflow-x-auto"
+          >
             <table className="dg-table">
               <thead>
                 <tr>

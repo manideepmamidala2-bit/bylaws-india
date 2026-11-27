@@ -323,25 +323,11 @@ export default async function BrowseByWardPage({
                     <summary className="inline-flex min-h-[44px] cursor-pointer items-center font-mono text-xs uppercase tracking-[0.1em] text-[#080909] underline">
                       All {wardsList.length} wards in {corpTitle}
                     </summary>
-                    <ul className="mt-2 grid grid-cols-1 gap-2 border-t border-[#c8ccc0] pt-3 text-xs sm:grid-cols-2 md:grid-cols-3">
-                      {wardsList.map((w) => (
-                        <li
-                          key={w.id}
-                          className="border border-[#c8ccc0] bg-[#f5f3ed] px-3 py-2"
-                        >
-                          <div className="font-semibold text-[#080909]">
-                            Ward {w.wardNumber} · {w.wardName}
-                          </div>
-                          <div className="mt-1 font-mono text-[11px] text-[#5b5e56]">
-                            {w.zonesPresent && w.zonesPresent.length > 0
-                              ? w.zonesPresent
-                                  .map((z) => `${z.zoneLabel} (${z.zoneCode})`)
-                                  .join(", ")
-                              : "Land-use data not yet available here"}
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
+                    <p className="dg-serif mt-2 border-t border-[#c8ccc0] pt-3 text-xs leading-relaxed text-[#171917]">
+                      {wardsList
+                        .map((w) => `Ward ${w.wardNumber} (${w.wardName})`)
+                        .join(" · ")}
+                    </p>
                   </details>
                 </div>
               );
@@ -395,75 +381,66 @@ export default async function BrowseByWardPage({
                     No rules linked to this zone yet.
                   </p>
                 ) : (
-                  <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-                    {zSummary.groups.map((grp) => (
-                      <section
-                        key={grp.key}
-                        aria-label={`${zSummary.zoneLabel} ${grp.title}`}
-                        className="border border-[#c8ccc0] bg-[#f5f3ed] p-3"
-                      >
-                        <div className="flex items-baseline justify-between gap-2 border-b border-[#c8ccc0] pb-1.5">
-                          <h4 className="font-mono text-xs font-semibold uppercase tracking-[0.1em] text-[#080909]">
-                            {grp.title}
-                          </h4>
-                          <Link
-                            href={grp.subjectHref}
-                            className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-[#080909] underline"
-                          >
-                            {grp.title} subject →
-                          </Link>
-                        </div>
-                        {grp.lines.length === 0 ? (
-                          <p className="dg-serif mt-2 text-xs text-[#5b5e56]">
-                            See the{" "}
+                  <>
+                    <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2">
+                      {zSummary.groups.map((grp) => (
+                        <section
+                          key={grp.key}
+                          aria-label={`${zSummary.zoneLabel} ${grp.title}`}
+                          className="border border-[#c8ccc0] bg-[#f5f3ed] p-3"
+                        >
+                          <div className="flex items-baseline justify-between gap-2 border-b border-[#c8ccc0] pb-1">
+                            <h4 className="font-mono text-xs font-semibold uppercase tracking-[0.1em] text-[#080909]">
+                              {grp.title}
+                            </h4>
                             <Link
                               href={grp.subjectHref}
-                              className="text-[#080909] underline"
+                              className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-[#080909] underline"
                             >
-                              {grp.title} subject page
+                              {grp.title} →
                             </Link>
-                            .
-                          </p>
-                        ) : (
-                          <ul className="mt-2 space-y-2">
-                            {grp.lines.map((line) => (
-                              <li key={line.id} className="text-xs">
-                                <div className="flex flex-wrap items-baseline justify-between gap-2">
-                                  <Link
-                                    href={line.subjectHref}
-                                    className="dg-serif font-medium text-[#080909] underline decoration-[#c8ccc0] underline-offset-4 hover:decoration-[#080909]"
-                                  >
-                                    {line.rulePlain}
-                                  </Link>
-                                  <span className="font-mono font-semibold text-[#080909]">
-                                    {line.valuePlain}
-                                  </span>
-                                </div>
-                                <div className="mt-0.5 flex flex-wrap items-center justify-between gap-2 font-mono text-[10.5px] text-[#5b5e56]">
-                                  <span>
-                                    {line.sourceDocTitle} ·{" "}
-                                    <a
-                                      href={line.pageLink}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="text-[#080909] underline"
-                                    >
-                                      p. {line.pageNumber} ↗
-                                    </a>
-                                  </span>
-                                  <ReportProblemLink
-                                    pagePath={`/j/${dataset.jurisdiction.id}/wards`}
-                                    ruleSummary={`${zSummary.zoneLabel} ${line.rulePlain}: ${line.valuePlain}`}
-                                    officialPageUrl={line.pageLink}
-                                  />
-                                </div>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </section>
-                    ))}
-                  </div>
+                          </div>
+                          {grp.lines.length === 0 ? (
+                            <p className="dg-serif mt-1.5 text-xs text-[#5b5e56]">
+                              See{" "}
+                              <Link
+                                href={grp.subjectHref}
+                                className="text-[#080909] underline"
+                              >
+                                {grp.title}
+                              </Link>
+                              .
+                            </p>
+                          ) : (
+                            <div className="mt-1.5 text-xs">
+                              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                                <span className="dg-serif text-[#080909]">
+                                  {grp.lines[0].rulePlain}
+                                </span>
+                                <span className="font-mono font-semibold text-[#080909]">
+                                  {grp.lines[0].valuePlain}
+                                </span>
+                              </div>
+                              <div className="mt-0.5 font-mono text-[10.5px] text-[#5b5e56]">
+                                {grp.lines[0].sourceDocTitle} ·{" "}
+                                <a
+                                  href={grp.lines[0].pageLink}
+                                  className="text-[#080909] underline"
+                                >
+                                  p. {grp.lines[0].pageNumber} ↗
+                                </a>
+                              </div>
+                            </div>
+                          )}
+                        </section>
+                      ))}
+                    </div>
+                    <div className="mt-3 pt-2">
+                      <ReportProblemLink
+                        pagePath={`/j/${dataset.jurisdiction.id}/wards`}
+                      />
+                    </div>
+                  </>
                 )}
               </article>
             ))}

@@ -1,5 +1,18 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Use with AI · Bylaw One",
+  description:
+    "How to use Bylaw One with AI today via llms.txt, Markdown pages, and the OpenAPI 3.1 JSON API.",
+  openGraph: {
+    title: "Use with AI · Bylaw One",
+    description:
+      "How to use Bylaw One with AI today via llms.txt, Markdown pages, and the OpenAPI 3.1 JSON API.",
+    images: ["/api/og?title=Use%20Bylaw%20One%20with%20AI"],
+  },
+};
 import {
   fetchJurisdictionDataset,
   fetchManifest,
@@ -119,29 +132,29 @@ export default async function UseWithAiPage() {
                 Every subject, document, and provision page has a clean Markdown
                 version at the same path ending in <code>.md</code>:
               </p>
-              <ul className="mt-3 space-y-1.5 font-mono text-xs text-[#080909]">
+              <ul className="mt-3 space-y-2 font-mono text-xs text-[#080909]">
                 <li>
                   <a
                     href={`/j/${targetJurId}/topics/far.md`}
-                    className="underline"
+                    className="inline-flex min-h-[28px] items-center underline"
                   >
-                    /j/{targetJurId}/topics/far.md
+                    FAR subject in Markdown (.md)
                   </a>
                 </li>
                 <li>
                   <a
                     href={`/j/${targetJurId}/topics/setbacks.md`}
-                    className="underline"
+                    className="inline-flex min-h-[28px] items-center underline"
                   >
-                    /j/{targetJurId}/topics/setbacks.md
+                    Setbacks subject in Markdown (.md)
                   </a>
                 </li>
                 <li>
                   <a
                     href={`/j/${targetJurId}/documents/${firstDocId}.md`}
-                    className="underline"
+                    className="inline-flex min-h-[28px] items-center underline"
                   >
-                    /j/{targetJurId}/documents/{firstDocId}.md
+                    Document in Markdown (.md)
                   </a>
                 </li>
               </ul>
@@ -154,39 +167,60 @@ export default async function UseWithAiPage() {
               <p className="dg-serif mt-2 text-sm leading-relaxed text-[#171917]">
                 Query structured records at <code>/api/v1/</code>, described by
                 an OpenAPI 3.1 specification (
-                <a href="/api/v1/openapi.json" className="font-mono underline">
+                <a
+                  href="/api/v1/openapi.json"
+                  className="inline-flex min-h-[28px] items-center font-mono underline"
+                >
                   /api/v1/openapi.json
                 </a>
                 ):
               </p>
-              <ul className="mt-3 space-y-1 font-mono text-xs text-[#080909]">
+              <ul className="mt-3 space-y-1.5 font-mono text-xs text-[#080909]">
                 <li>
-                  <a href="/api/v1/documents.json" className="underline">
+                  <a
+                    href="/api/v1/documents.json"
+                    className="inline-flex min-h-[28px] items-center underline"
+                  >
                     /api/v1/documents.json
                   </a>
                 </li>
                 <li>
-                  <a href="/api/v1/provisions.json" className="underline">
+                  <a
+                    href="/api/v1/provisions.json"
+                    className="inline-flex min-h-[28px] items-center underline"
+                  >
                     /api/v1/provisions.json
                   </a>
                 </li>
                 <li>
-                  <a href="/api/v1/subjects.json" className="underline">
+                  <a
+                    href="/api/v1/subjects.json"
+                    className="inline-flex min-h-[28px] items-center underline"
+                  >
                     /api/v1/subjects.json
                   </a>
                 </li>
                 <li>
-                  <a href="/api/v1/parameters.json" className="underline">
+                  <a
+                    href="/api/v1/parameters.json"
+                    className="inline-flex min-h-[28px] items-center underline"
+                  >
                     /api/v1/parameters.json
                   </a>
                 </li>
                 <li>
-                  <a href="/api/v1/zones.json" className="underline">
+                  <a
+                    href="/api/v1/zones.json"
+                    className="inline-flex min-h-[28px] items-center underline"
+                  >
                     /api/v1/zones.json
                   </a>
                 </li>
                 <li>
-                  <a href="/api/v1/sources.json" className="underline">
+                  <a
+                    href="/api/v1/sources.json"
+                    className="inline-flex min-h-[28px] items-center underline"
+                  >
                     /api/v1/sources.json
                   </a>
                 </li>

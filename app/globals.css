@@ -98,3 +98,25 @@ body {
   padding: 6px 8px;
   color: var(--ink2);
 }
+
+.dg-report-links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.dg-report-links a {
+  display: inline-flex;
+  min-height: 26px;
+  align-items: center;
+  text-decoration: underline;
+  color: var(--muted);
+}
+
+.dg-report-links a:hover {
+  color: var(--ink);
+}

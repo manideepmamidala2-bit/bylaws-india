@@ -349,6 +349,7 @@ export function ClauseTree({
         {showOutline && outlineCount > 0 && (
           <aside
             aria-label="Document outline navigation"
+            tabIndex={0}
             className="max-h-[680px] overflow-y-auto border border-[#080909] bg-[#efeee8] p-3 lg:col-span-3"
           >
             <div className="dg-mono mb-2 flex items-center justify-between border-b border-[#c8ccc0] pb-1.5 text-[10px] text-[#080909]">
@@ -689,7 +690,12 @@ export function ClauseTree({
 
               {/* Layer 1 Structured Table Node */}
               {nodeType === "table" && clause.table_meta && (
-                <div className="mt-3 overflow-x-auto">
+                <div
+                  tabIndex={0}
+                  role="region"
+                  aria-label={clause.heading || clause.title || "Regulation table"}
+                  className="mt-3 overflow-x-auto"
+                >
                   {clause.table_meta.extraction === "failed" ? (
                     <div className="border border-dashed border-[#080909] bg-[#efeee8] p-3 font-mono text-xs text-[#080909]">
                       Table extraction gap:{" "}
@@ -754,7 +760,13 @@ export function ClauseTree({
               {nodeType !== "table" &&
                 clause.children?.every((chEid) => byEid.get(chEid)?.type !== "table") &&
                 displayTables.map((table) => (
-                  <div key={table.table_id} className="mt-3 overflow-x-auto">
+                  <div
+                    key={table.table_id}
+                    tabIndex={0}
+                    role="region"
+                    aria-label={table.caption || "Regulation table"}
+                    className="mt-3 overflow-x-auto"
+                  >
                     {table.caption && (
                       <p className="mb-1 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-[#080909]">
                         {table.caption}

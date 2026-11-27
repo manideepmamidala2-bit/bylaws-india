@@ -415,6 +415,7 @@ const CORP_AMENDED_BASE_ADDRESSES = new Set([
 function normalizeJurLinks(fragment) {
   return fragment
     .replace(/\/j\/in-ka-bengaluru(?:-[a-z]+)?\//g, "/j/<JUR>/")
+    .replace(/%2Fj%2Fin-ka-bengaluru(?:-[a-z]+)?%2F/gi, "%2Fj%2F<JUR>%2F")
     .replace(/\s+/g, " ")
     .trim();
 }

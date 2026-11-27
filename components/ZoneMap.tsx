@@ -1277,7 +1277,7 @@ export function ZoneMap({
           data-testid="map-attribution"
           className="flex flex-wrap items-center justify-between gap-2 border-t border-[#c8ccc0] bg-[#f5f3ed] px-3 py-1.5 font-mono text-[10px] text-[#5b5e56]"
         >
-          <span>Protomaps © OpenStreetMap</span>
+          <span>Protomaps © OpenStreetMap (OpenStreetMap contributors)</span>
           <span>Land-use zones at 60% opacity · Labels on top</span>
         </div>
       </div>

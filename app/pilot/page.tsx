@@ -1,7 +1,25 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { TopNav } from "@/components/TopNav";
 import { computeDatasetPilotMetrics } from "@/lib/pilot-metrics";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const m = await computeDatasetPilotMetrics();
+  const title = `The ${m.cityLabel} Pilot · Bylaw One`;
+  const desc = `What works today (${m.inForceDocumentsCount} documents, ${m.provisionsCount} provisions, ${m.activeParametersCount} rules as data, ${m.wardsCount} wards), what is missing, and how to join.`;
+  return {
+    title,
+    description: desc,
+    openGraph: {
+      title,
+      description: desc,
+      images: [
+        `/api/og?title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent(desc)}`,
+      ],
+    },
+  };
+}
 
 export default async function PilotPage() {
   const m = await computeDatasetPilotMetrics();
@@ -248,7 +266,15 @@ export default async function PilotPage() {
             </li>
             {m.unobtainableItems.map((u) => (
               <li key={u.id}>
-                <strong>{u.title}:</strong> {u.reason}
+                {u.reason}
+                <details className="mt-1">
+                  <summary className="cursor-pointer font-mono text-[11px] uppercase tracking-[0.1em] text-[#5b5e56] underline">
+                    Details
+                  </summary>
+                  <div className="mt-1 font-mono text-xs text-[#5b5e56]">
+                    {u.title} (<code>{u.id}</code>)
+                  </div>
+                </details>
               </li>
             ))}
             {m.missingItems.map((item, idx) => (

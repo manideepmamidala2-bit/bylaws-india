@@ -1,7 +1,20 @@
 import React from "react";
+import type { Metadata } from "next";
 import { TopNav } from "@/components/TopNav";
 import { computeDatasetPilotMetrics } from "@/lib/pilot-metrics";
 import { getSiteConfig } from "@/lib/site-config";
+
+export const metadata: Metadata = {
+  title: "Press kit · Bylaw One",
+  description:
+    "Description, product screenshots, SVG logos, and contact details for Bylaw One.",
+  openGraph: {
+    title: "Press kit · Bylaw One",
+    description:
+      "Description, product screenshots, SVG logos, and contact details for Bylaw One.",
+    images: ["/api/og?title=Press%20kit%20%C2%B7%20Bylaw%20One"],
+  },
+};
 
 export default async function PressPage() {
   const m = await computeDatasetPilotMetrics();

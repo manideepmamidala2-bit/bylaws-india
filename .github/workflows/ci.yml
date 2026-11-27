@@ -136,5 +136,8 @@ jobs:
       - name: Install Playwright Chromium browser
         run: npx playwright install --with-deps chromium
 
+      - name: Run Lighthouse mobile performance (>= 70) and accessibility (>= 95) checks
+        run: npm run check-lighthouse
+
       - name: Run Playwright browser tests (PMTiles 206 range, non-blank map, document page, plot flow)
         run: npx playwright test

@@ -568,6 +568,35 @@ def test_part6_partner_documents_in_docs_partners() -> None:
             assert token in content, f"docs/partners/{filename} missing '{token}'"
 
 
+def test_part7_quality_og_sitemap_robots_404_analytics_and_lighthouse() -> None:
+    """Part 7: Verify next/og social images, sitemap.ts, robots.ts, not-found.tsx, Vercel Web Analytics in layout.tsx, and Lighthouse CI check."""
+    for rel in (
+        "app/opengraph-image.tsx",
+        "app/api/og/route.tsx",
+        "app/sitemap.ts",
+        "app/robots.ts",
+        "app/not-found.tsx",
+        "scripts/check_lighthouse.mjs",
+        "e2e/pilot-launch.spec.ts",
+    ):
+        assert (REPO_ROOT / rel).is_file(), f"Missing Part 7 file: {rel}"
+
+    layout_txt = (REPO_ROOT / "app" / "layout.tsx").read_text(encoding="utf-8")
+    assert "@vercel/analytics/react" in layout_txt
+    assert "<Analytics />" in layout_txt
+
+    og_txt = (REPO_ROOT / "app" / "opengraph-image.tsx").read_text(encoding="utf-8")
+    assert "next/og" in og_txt and "ImageResponse" in og_txt
+
+    lh_txt = (REPO_ROOT / "scripts" / "check_lighthouse.mjs").read_text(encoding="utf-8")
+    assert "MIN_PERFORMANCE_SCORE = 70" in lh_txt
+    assert "MIN_ACCESSIBILITY_SCORE = 95" in lh_txt
+
+    ci_txt = (REPO_ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
+    assert "npm run check-lighthouse" in ci_txt
+
+
+
 
 
 

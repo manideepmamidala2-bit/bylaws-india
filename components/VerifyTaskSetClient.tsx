@@ -19,7 +19,6 @@ export interface VerificationTaskItem {
 }
 
 export interface VerificationTaskSetPayload {
-  schema_version: string;
   task_set_id: string;
   jurisdiction: string;
   jurisdiction_name: string;
@@ -300,13 +299,17 @@ export function VerifyTaskSetClient({ taskSet }: VerifyTaskSetClientProps) {
         </div>
 
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-[#c8ccc0] pt-4">
-          <div className="font-mono text-xs text-[#5b5e56]">
-            Import command:{" "}
-            <code className="text-[#080909]">
-              bylaws verify import {taskSet.task_set_id}-verifications.csv
-              --jurisdiction {taskSet.jurisdiction}
-            </code>
-          </div>
+          <details className="font-mono text-xs text-[#5b5e56]">
+            <summary className="cursor-pointer uppercase tracking-[0.1em] underline">
+              Details · Maintainer import command
+            </summary>
+            <div className="mt-1">
+              <code className="text-[#080909]">
+                bylaws verify import {taskSet.task_set_id}-verifications.csv
+                --jurisdiction {taskSet.jurisdiction}
+              </code>
+            </div>
+          </details>
           <button
             type="button"
             data-testid="export-verifications-csv-btn"

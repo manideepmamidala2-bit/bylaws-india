@@ -1,4 +1,5 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -63,6 +64,27 @@ export async function generateStaticParams() {
     }
   }
   return paramsList;
+}
+
+export async function generateMetadata({
+  params,
+}: TopicDetailPageProps): Promise<Metadata> {
+  const { id, topic } = await params;
+  const subj = resolveCodeSubject(topic);
+  const title = `${subj?.title ?? topic} · Bylaw One`;
+  const desc =
+    subj?.summary ?? `Governing rules and exact page citations for ${topic}.`;
+  return {
+    title,
+    description: desc,
+    openGraph: {
+      title,
+      description: desc,
+      images: [
+        `/api/og?title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent(desc)}&kicker=${encodeURIComponent(`Bylaw One · ${id}`)}`,
+      ],
+    },
+  };
 }
 
 interface CleanSubjectParameterRow {
@@ -726,11 +748,11 @@ export default async function TopicDetailPage({
   const totalRelatedProvisionsCount = relatedProvisions.length;
   const visibleOlderRules = [
     ...corpOlderRules,
-    ...sharedOlderRules.slice(0, 6),
+    ...sharedOlderRules.slice(0, 3),
   ];
   const visibleRelatedProvisions = [
     ...corpRelatedProvisions,
-    ...sharedRelatedProvisions.slice(0, 6),
+    ...sharedRelatedProvisions.slice(0, 3),
   ];
 
   // Governing parameter table rows for this subject
@@ -788,7 +810,7 @@ export default async function TopicDetailPage({
     docTitleById,
     docMetaById,
     subjectMeta.zoningGoverned
-  ).slice(0, 8);
+  ).slice(0, 7);
 
   // Determine whether any governing rule or provision on this subject differs for the selected City Corporation
   const corporationDiffCount = isChildCorporation
@@ -1075,8 +1097,6 @@ export default async function TopicDetailPage({
               <div className="pt-1">
                 <ReportProblemLink
                   pagePath={`/j/${jurisdiction.id}/topics/${subjectMeta?.slug ?? ""}`}
-                  ruleSummary={`${node.number || node.eid} (${plainDocTitle})`}
-                  officialPageUrl={pdfUrl ? `${pdfUrl}#page=${page}` : undefined}
                 />
               </div>
             </div>
@@ -1239,7 +1259,12 @@ export default async function TopicDetailPage({
                 Derived by this site · Governing table values (
                 {cleanParameterRows.length} distinct rules)
               </div>
-              <div className="overflow-x-auto">
+              <div
+                tabIndex={0}
+                role="region"
+                aria-label={`${subjectMeta.title} governing rules table`}
+                className="overflow-x-auto"
+              >
                 <table
                   data-testid="subject-parameter-table"
                   className="dg-table"
@@ -1327,8 +1352,6 @@ export default async function TopicDetailPage({
                                 <span className="block pt-1">
                                   <ReportProblemLink
                                     pagePath={`/j/${jurisdiction.id}/topics/${subjectMeta.slug}`}
-                                    ruleSummary={`${row.ruleLabel} (${row.conditionsPlain}): ${row.valuePlain}`}
-                                    officialPageUrl={row.pageLink}
                                   />
                                 </span>
                               </span>

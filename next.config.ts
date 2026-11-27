@@ -116,6 +116,12 @@ const nextConfig: NextConfig = {
         destination: "/j/:id/topics/deviations-and-compounding",
         permanent: true,
       },
+      {
+        source: "/report-problem",
+        destination:
+          "https://github.com/manideepmamidala2-bit/bylaws-india/issues/new?template=report-problem-with-a-rule.yml",
+        permanent: false,
+      },
     ];
   },
   async rewrites() {

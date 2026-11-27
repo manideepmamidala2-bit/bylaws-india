@@ -1,7 +1,20 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { TopNav } from "@/components/TopNav";
 import { computeDatasetPilotMetrics } from "@/lib/pilot-metrics";
+
+export const metadata: Metadata = {
+  title: "Join the pilot · Bylaw One",
+  description:
+    "Partner with Bylaw One as a college, student, practitioner, or civic data group.",
+  openGraph: {
+    title: "Join the pilot · Bylaw One",
+    description:
+      "Partner with Bylaw One as a college, student, practitioner, or civic data group.",
+    images: ["/api/og?title=Join%20the%20pilot%20%C2%B7%20Bylaw%20One"],
+  },
+};
 import {
   buildJoinPilotIssueUrl,
   buildReportProblemIssueUrl,

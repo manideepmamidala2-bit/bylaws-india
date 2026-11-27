@@ -1,4 +1,5 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -39,6 +40,27 @@ export const dynamicParams = false;
 export async function generateStaticParams() {
   const manifest = await fetchManifest();
   return manifest.jurisdictions.map((j) => ({ id: j.id }));
+}
+
+export async function generateMetadata({
+  params,
+}: JurisdictionMapPageProps): Promise<Metadata> {
+  const { id } = await params;
+  const dataset = await fetchJurisdictionDataset(id).catch(() => null);
+  const name = dataset?.jurisdiction.name ?? id;
+  const title = `Map · ${name} · Bylaw One`;
+  const desc = `Interactive map of official boundaries, wards, and master plan land-use zones with governing rules by zone for ${name}.`;
+  return {
+    title,
+    description: desc,
+    openGraph: {
+      title,
+      description: desc,
+      images: [
+        `/api/og?title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent(desc)}`,
+      ],
+    },
+  };
 }
 
 export default async function JurisdictionMapPage({
@@ -215,7 +237,9 @@ export default async function JurisdictionMapPage({
   const placeIndexPayload = await readPublishedJson<PlaceIndexPayload>(
     `/data/${jurisdiction.id}/place-index.json`
   ).catch(() => null);
-  const ssrInitialPlaces = (placeIndexPayload?.places ?? []).slice(0, 120);
+  const ssrInitialPlaces = (placeIndexPayload?.places ?? [])
+    .filter((p) => p.kind === "locality" && p.zoneCode)
+    .slice(0, 12);
 
   // Strip heavy vertex coordinate arrays from SSR props so HTML stays <= 300 KB;
   // ZoneMap loads the full GeoJSON geometry on the client from /data/<id>/<version>/*.geojson.

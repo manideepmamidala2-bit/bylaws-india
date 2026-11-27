@@ -70,6 +70,7 @@ export function PlaceCard({
     <aside
       aria-label="Place card and rules for this zone"
       data-testid="place-card"
+      tabIndex={0}
       className="fixed inset-x-0 bottom-0 z-30 max-h-[58vh] overflow-y-auto border-t-2 border-[#080909] bg-[#f5f3ed] p-5 shadow-lg md:static md:z-auto md:max-h-none md:border md:border-[#080909] md:bg-[#efeee8] md:shadow-none"
     >
       <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-[#c8ccc0] pb-3">
@@ -290,7 +291,7 @@ export function PlaceCard({
                         <div className="flex flex-wrap items-baseline justify-between gap-2 text-xs">
                           <Link
                             href={line.subjectHref}
-                            className="dg-serif font-medium text-[#080909] underline decoration-[#c8ccc0] underline-offset-4 hover:decoration-[#080909]"
+                            className="dg-serif inline-flex min-h-[26px] items-center font-medium text-[#080909] underline decoration-[#c8ccc0] underline-offset-4 hover:decoration-[#080909]"
                           >
                             {line.rulePlain}
                           </Link>
@@ -305,7 +306,7 @@ export function PlaceCard({
                               href={line.pageLink}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-[#080909] underline"
+                              className="inline-flex min-h-[26px] items-center text-[#080909] underline"
                             >
                               p. {line.pageNumber} ↗
                             </a>
