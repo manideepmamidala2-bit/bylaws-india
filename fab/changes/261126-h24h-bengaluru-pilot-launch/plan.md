@@ -152,47 +152,54 @@ The web application MUST pass `axe-core` WCAG 2.2 AA across all pages, pass Ligh
 
 ### Functional Completeness
 
-- [ ] A-001 R1: `gitleaks` passes on the repository and is configured in `.github/workflows/ci.yml`; `README.md`, `LICENSE`, `LICENSE-DATA.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `GOVERNANCE.md`, `CITATION.cff`, `.zenodo.json`, and the 3 GitHub Issue Forms (`report-problem-with-a-rule.yml`, `suggest-a-source.yml`, `join-the-pilot.yml`) are in place, with `contact.email` and `organisation.name` sourced from config.
-- [ ] A-002 R2: The map page (`/j/[id]`) uses MapLibre GL JS + `@protomaps/basemaps` (`light` flavor) with self-hosted fonts/sprites, `"Protomaps © OpenStreetMap"` attribution, **Map** in `TopNav.tsx`, the 8 layers in strict bottom-to-top order (`60%` zone opacity, zoom 15 zone codes, uncovered diagonal hatch `"Land-use data not yet available"`, planning districts, zoom 13 ward names, corporations, dashed `"derived"` overlays, top labels), build-time `place-index.json` (`<= 300 KB` compressed) searched with `MiniSearch`, Place Card with 6 rule groups (`Uses`, `FAR`, `Ground coverage`, `Setbacks`, `Height`, `Parking`) and Bye-law 1.4 quote on tap, `#lat,lng,zoom,place` URL hash, MapLibre `image` sheet overlays with `0–100%` opacity slider and per-sheet accuracy, data-generated accuracy and coverage lines, and `/j/[id]/wards` ("Browse by ward").
-- [ ] A-003 R3: `/llms.txt`, `/llms-full.txt`, `.md` versions of every document, subject, and provision page, `/api/v1/` static JSON API (`documents`, `provisions`, `subjects`, `parameters`, `zones`, `sources`) with OpenAPI 3.1 `/api/v1/openapi.json`, `schema.org` `Legislation` JSON-LD on document and provision pages, Frictionless `datapackage.json`, `/updates.xml` Atom feed, and `/use-with-ai` are generated at build time and pass schema checks in CI.
-- [ ] A-004 R4: `bylaws tasks create`, `/verify/<task-set>` (with browser storage and CSV export), and `bylaws verify import <csv>` work end to end; a record requires two independent `Match` verdicts to become `human_verified` (`"Verified by [name], [institution], [date]"`), any `Mismatch` opens a review item, and verifiers are credited in release metadata/notes.
-- [ ] A-005 R5: Home pilot callout and `"Find rules by place"` link, `/pilot`, `/checks`, `/join`, `/press`, `"Who runs Bylaw One"` on `/about`, universal `"Report a problem"` links on every provision and rule row, and `"Current as of"` dates are rendered with every number generated from data and verified in CI.
-- [ ] A-006 R6: All six partner documents (`offer.md`, `workshop-kit.md`, `internship.md`, `mou-template.md`, `charter.md`, `demo-script.md`) exist in `docs/partners/`.
-- [ ] A-007 R7: All pages pass `axe-core` WCAG 2.2 AA; Home, Map, one Subject page, and one Document page pass Lighthouse mobile thresholds (`performance >= 70`, `accessibility >= 95`); `next/og` Open Graph images, `/sitemap.xml`, `/robots.txt`, friendly `404`, and cookieless Vercel Web Analytics are active; `docs/progress.md` and the draft PR description are complete with `390 px` and `1280 px` screenshots.
+- [x] A-001 R1: `gitleaks` passes on the repository and is configured in `.github/workflows/ci.yml`; `README.md`, `LICENSE`, `LICENSE-DATA.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `GOVERNANCE.md`, `CITATION.cff`, `.zenodo.json`, and the 3 GitHub Issue Forms (`report-problem-with-a-rule.yml`, `suggest-a-source.yml`, `join-the-pilot.yml`) are in place, with `contact.email` and `organisation.name` sourced from config.
+- [x] A-002 R2: The map page (`/j/[id]`) uses MapLibre GL JS + `@protomaps/basemaps` (`light` flavor) with self-hosted fonts/sprites, `"Protomaps © OpenStreetMap"` attribution, **Map** in `TopNav.tsx`, the 8 layers in strict bottom-to-top order (`60%` zone opacity, zoom 15 zone codes, uncovered diagonal hatch `"Land-use data not yet available"`, planning districts, zoom 13 ward names, corporations, dashed `"derived"` overlays, top labels), build-time `place-index.json` (`<= 300 KB` compressed) searched with `MiniSearch`, Place Card with 6 rule groups (`Uses`, `FAR`, `Ground coverage`, `Setbacks`, `Height`, `Parking`) and Bye-law 1.4 quote on tap, `#lat,lng,zoom,place` URL hash, MapLibre `image` sheet overlays with `0–100%` opacity slider and per-sheet accuracy, data-generated accuracy and coverage lines, and `/j/[id]/wards` ("Browse by ward").
+- [x] A-003 R3: `/llms.txt`, `/llms-full.txt`, `.md` versions of every document, subject, and provision page, `/api/v1/` static JSON API (`documents`, `provisions`, `subjects`, `parameters`, `zones`, `sources`) with OpenAPI 3.1 `/api/v1/openapi.json`, `schema.org` `Legislation` JSON-LD on document and provision pages, Frictionless `datapackage.json`, `/updates.xml` Atom feed, and `/use-with-ai` are generated at build time and pass schema checks in CI.
+- [x] A-004 R4: `bylaws tasks create`, `/verify/<task-set>` (with browser storage and CSV export), and `bylaws verify import <csv>` work end to end; a record requires two independent `Match` verdicts to become `human_verified` (`"Verified by [name], [institution], [date]"`), any `Mismatch` opens a review item, and verifiers are credited in release metadata/notes.
+- [x] A-005 R5: Home pilot callout and `"Find rules by place"` link, `/pilot`, `/checks`, `/join`, `/press`, `"Who runs Bylaw One"` on `/about`, universal `"Report a problem"` links on every provision and rule row, and `"Current as of"` dates are rendered with every number generated from data and verified in CI.
+- [x] A-006 R6: All six partner documents (`offer.md`, `workshop-kit.md`, `internship.md`, `mou-template.md`, `charter.md`, `demo-script.md`) exist in `docs/partners/`.
+- [x] A-007 R7: All pages pass `axe-core` WCAG 2.2 AA; Home, Map, one Subject page, and one Document page pass Lighthouse mobile thresholds (`performance >= 70`, `accessibility >= 95`); `next/og` Open Graph images, `/sitemap.xml`, `/robots.txt`, friendly `404`, and cookieless Vercel Web Analytics are active; `docs/progress.md` and the draft PR description are complete with `390 px` and `1280 px` screenshots.
 
 ### Behavioral Correctness
 
-- [ ] A-008 R2: Clicking a place or selecting a `MiniSearch` result on the map opens the Place Card showing governing rules for that zone with source page links and zero plot calculator inputs, and updates the URL hash `#lat,lng,zoom,place`.
-- [ ] A-009 R4: Importing a verification CSV with only one `Match` verdict does not mark a record `human_verified`, importing two independent `Match` verdicts marks it `human_verified` with verifier attribution, and importing a `Mismatch` verdict records a review item while keeping the record unpromoted.
+- [x] A-008 R2: Clicking a place or selecting a `MiniSearch` result on the map opens the Place Card showing governing rules for that zone with source page links and zero plot calculator inputs, and updates the URL hash `#lat,lng,zoom,place`.
+- [x] A-009 R4: Importing a verification CSV with only one `Match` verdict does not mark a record `human_verified`, importing two independent `Match` verdicts marks it `human_verified` with verifier attribution, and importing a `Mismatch` verdict records a review item while keeping the record unpromoted.
 
 ### Scenario Coverage
 
-- [ ] A-010 R2: Playwright browser tests (`e2e/`) cover place search → Place Card → rule link navigation, sheet overlay opacity slider interaction, `#lat,lng,zoom,place` hash restoration, and `/j/[id]/wards` browse-by-ward navigation.
-- [ ] A-011 R3: Automated tests in `pipeline/tests/test_pilot_launch.py` validate `/api/v1/openapi.json` (OpenAPI 3.1), `/api/v1/*.json` record citations/statuses, `schema.org` `Legislation` JSON-LD fields, `datapackage.json`, `/updates.xml` Atom feed, `/llms.txt`, `/llms-full.txt`, and `.md` page mirrors.
-- [ ] A-012 R4: End-to-end automated tests in `pipeline/tests/test_pilot_launch.py` and Playwright (`e2e/`) verify creating a task set, completing tasks in `/verify/<task-set>`, exporting CSV, importing via `bylaws verify import`, and rendering verifier credits.
-- [ ] A-013 R5: Automated tests verify that every number rendered on `/`, `/pilot`, `/checks`, and `/press` matches the published JSON datasets and that `"Current as of"` and `"Report a problem"` links are present.
+- [x] A-010 R2: Playwright browser tests (`e2e/`) cover place search → Place Card → rule link navigation, sheet overlay opacity slider interaction, `#lat,lng,zoom,place` hash restoration, and `/j/[id]/wards` browse-by-ward navigation.
+- [x] A-011 R3: Automated tests in `pipeline/tests/test_pilot_launch.py` validate `/api/v1/openapi.json` (OpenAPI 3.1), `/api/v1/*.json` record citations/statuses, `schema.org` `Legislation` JSON-LD fields, `datapackage.json`, `/updates.xml` Atom feed, `/llms.txt`, `/llms-full.txt`, and `.md` page mirrors.
+- [x] A-012 R4: End-to-end automated tests in `pipeline/tests/test_pilot_launch.py` and Playwright (`e2e/`) verify creating a task set, completing tasks in `/verify/<task-set>`, exporting CSV, importing via `bylaws verify import`, and rendering verifier credits.
+- [x] A-013 R5: Automated tests verify that every number rendered on `/`, `/pilot`, `/checks`, and `/press` matches the published JSON datasets and that `"Current as of"` and `"Report a problem"` links are present.
 
 ### Edge Cases & Error Handling
 
-- [ ] A-014 R2: Clicking a map location in a corporation or ward where land-use sheets have not yet been processed displays `"Land-use data not yet available here"` in the Place Card, and selecting a zone code with no linked rules displays `"No rules linked to this zone yet."`
-- [ ] A-015 R4: Submitting duplicate `Match` verdicts from the same verifier name and institution does not satisfy the two-independent-verifiers requirement for `human_verified`.
+- [x] A-014 R2: Clicking a map location in a corporation or ward where land-use sheets have not yet been processed displays `"Land-use data not yet available here"` in the Place Card, and selecting a zone code with no linked rules displays `"No rules linked to this zone yet."`
+- [x] A-015 R4: Submitting duplicate `Match` verdicts from the same verifier name and institution does not satisfy the two-independent-verifiers requirement for `human_verified`.
 
 ### Code Quality
 
-- [ ] A-016 Pattern consistency: New Python modules (`pipeline/bylaws/tasks.py`, `pipeline/bylaws/verify_records.py`) and Next.js components/routes follow existing project conventions, typing (`tsc --noEmit`, `ruff check`), and Rule R1 (zero hardcoded jurisdiction constants).
-- [ ] A-017 No unnecessary duplication: Shared plain-language formatting, dataset loading (`lib/data.ts`), and site config (`lib/site-config.ts`) utilities are reused across map, subject, pilot, checks, press, and machine-readable generators.
-- [ ] A-018 Readability and maintainability: Functions and components are modular and focused rather than monolithic god functions.
-- [ ] A-019 No magic strings or numbers: All dataset statistics, accuracy metrics, coverage percentages, and contact/organisation strings are derived from data or configuration rather than magic literals.
+- [x] A-016 Pattern consistency: New Python modules (`pipeline/bylaws/tasks.py`, `pipeline/bylaws/verify_records.py`) and Next.js components/routes follow existing project conventions, typing (`tsc --noEmit`, `ruff check`), and Rule R1 (zero hardcoded jurisdiction constants).
+- [x] A-017 No unnecessary duplication: Shared plain-language formatting, dataset loading (`lib/data.ts`), and site config (`lib/site-config.ts`) utilities are reused across map, subject, pilot, checks, press, and machine-readable generators.
+- [x] A-018 Readability and maintainability: Functions and components are modular and focused rather than monolithic god functions.
+- [x] A-019 No magic strings or numbers: All dataset statistics, accuracy metrics, coverage percentages, and contact/organisation strings are derived from data or configuration rather than magic literals.
 
 ### Security
 
-- [ ] A-020 R1: `gitleaks` scans the repository in CI, Rule R4 (`test_r4_licences.py`) verifies all newly added npm/Python dependencies use permissive licences, and `/verify/<task-set>` and Vercel Web Analytics transmit zero personal data or cookies.
+- [x] A-020 R1: `gitleaks` scans the repository in CI, Rule R4 (`test_r4_licences.py`) verifies all newly added npm/Python dependencies use permissive licences, and `/verify/<task-set>` and Vercel Web Analytics transmit zero personal data or cookies.
 
 ## Notes
 
 - Check items as you review: `- [x]`
 - All acceptance items must pass before `/fab-continue` (hydrate)
 - If an item is not applicable, mark checked and prefix with **N/A**: `- [x] A-NNN **N/A**: {reason}`
+
+## Deletion Candidates
+
+- `components/PlotCard.tsx` — Standalone Plot Card UI component superseded by `components/PlaceCard.tsx` now that the map displays zone rules without a plot calculator.
+- `components/ClausePanel.tsx` — Legacy zone-clause sidebar component superseded by `components/PlaceCard.tsx` and `lib/zone-rules.ts` (referenced only in `__tests__/clause-fallbacks.test.tsx`).
+- `components/AreaExplorerClient.tsx:35-37,48-50` (`AreaExplorerClientProps` optional fields `clauses`, `amendmentLinks`, `clauseZoneTags`, `parametersPayload`, `resolutionConfig`, `consolidatedPayload`) — Optional legacy props retained on `AreaExplorerClientProps` after `app/j/[id]/page.tsx` switched to passing pre-computed `zoneRulesByCode` and `byelaw14Info` for `PlaceCard`.
+- `lib/map-style.ts:58` (`buildDg2nMapStyle`) — Backwards-compatibility alias for `buildProtomapsLightStyle` with zero remaining call sites in `app/`, `components/`, or `lib/`.
 
 ## Assumptions
 
